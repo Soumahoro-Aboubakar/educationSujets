@@ -1,0 +1,45 @@
+
+# Dépendances Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Fichiers d'environnement (contiennent des données sensibles)
+.env
+.env.local
+.env.*.local
+
+# Build du frontend React
+frontend/build/
+frontend/dist/
+frontend/.pnp
+frontend/.pnp.js
+
+# Fichiers de log
+*.log
+
+# Dossiers d'upload utilisateurs
+backend/uploads/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers IDE et éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.tmp
+
+# Fichiers de test
+coverage/
+.nyc_output/
+
+# Dossiers temporaires
+tmp/
+temp/
