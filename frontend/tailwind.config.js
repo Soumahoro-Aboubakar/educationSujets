@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,14 +6,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#3B82F6',
-        secondary: '#10B981',
-        accent: '#F59E0B',
-        dark: '#1F2937',
-        light: '#F3F4F6',
+        primary: '#6366f1',
+        'primary-light': '#818cf8',
+        'primary-dark': '#4f46e5',
+        secondary: '#06b6d4',
+        accent: '#06b6d4',
+        dark: '#0f172a',
+        light: '#f8fafc',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      borderRadius: {
+        'xl': '12px',
+        '2xl': '16px',
+        '3xl': '24px',
       },
     },
   },
