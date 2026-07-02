@@ -37,6 +37,12 @@ const Navbar = () => {
       : []),
   ];
 
+  const isDashboardRoute = location.pathname.startsWith('/dashboard');
+
+  if (isDashboardRoute) {
+    return null;
+  }
+
   return (
     <>
       {/* ─── Desktop & Mobile Top Bar ─── */}

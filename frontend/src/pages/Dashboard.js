@@ -13,6 +13,7 @@ import {
   Chart as ChartJS, ArcElement, Tooltip, Legend,
   CategoryScale, LinearScale, BarElement, Title,
 } from 'chart.js';
+import CreatableSelect from '../components/CreatableSelect';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
@@ -96,6 +97,25 @@ const Dashboard = () => {
   ];
 
   // Rest of functions...
+  const handleCreateOption = async (fieldKey, dbKey, newName) => {
+    try {
+      const res = await axios.post(`/api/${dbKey}`, { name: newName });
+      const newEntity = res.data.data;
+      
+      setFiltersData(prev => ({
+        ...prev,
+        [dbKey]: [...prev[dbKey], newEntity]
+      }));
+      
+      setUploadData(prev => ({
+        ...prev,
+        [fieldKey]: newEntity._id
+      }));
+    } catch (error) {
+      console.error(`Erreur lors de la création de l'option ${fieldKey}:`, error);
+    }
+  };
+
   const handleUpload = async (e) => {
     e.preventDefault();
     setUploading(true);
@@ -423,27 +443,24 @@ const Dashboard = () => {
                       />
                     </div>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 z-20 relative">
                       {[
-                        { key: 'university', label: 'Université', options: filtersData.universities },
-                        { key: 'department', label: 'Département', options: filtersData.departments },
-                        { key: 'level', label: 'Niveau', options: filtersData.levels },
-                        { key: 'semester', label: 'Semestre', options: filtersData.semesters },
-                        { key: 'category', label: 'Catégorie', options: filtersData.categories },
+                        { key: 'university', dbKey: 'universities', label: 'Université', icon: MapPin, options: filtersData.universities },
+                        { key: 'department', dbKey: 'departments', label: 'Département', icon: Briefcase, options: filtersData.departments },
+                        { key: 'level', dbKey: 'levels', label: 'Niveau', icon: GraduationCap, options: filtersData.levels },
+                        { key: 'semester', dbKey: 'semesters', label: 'Semestre', icon: Calendar, options: filtersData.semesters },
+                        { key: 'category', dbKey: 'categories', label: 'Catégorie', icon: Layers, options: filtersData.categories },
                       ].map(field => (
-                        <div key={field.key}>
-                          <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1 mb-2 block">{field.label}</label>
-                          <select
-                            required
+                        <div key={field.key} className={field.key === 'category' ? 'sm:col-span-2' : ''}>
+                          <CreatableSelect
+                            label={field.label}
+                            options={field.options}
                             value={uploadData[field.key]}
-                            onChange={(e) => setUploadData({ ...uploadData, [field.key]: e.target.value })}
-                            className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-700 appearance-none focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all"
-                          >
-                            <option value="">Sélectionner</option>
-                            {field.options.map((opt) => (
-                              <option key={opt._id} value={opt._id}>{opt.name}</option>
-                            ))}
-                          </select>
+                            onChange={(val) => setUploadData({ ...uploadData, [field.key]: val })}
+                            onCreate={(newVal) => handleCreateOption(field.key, field.dbKey, newVal)}
+                            placeholder={`Sélectionner ou ajouter ${field.label.toLowerCase()}`}
+                            icon={field.icon}
+                          />
                         </div>
                       ))}
                     </div>

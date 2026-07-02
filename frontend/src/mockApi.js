@@ -315,6 +315,50 @@ const mockAdapter = (config) => {
         return;
       }
 
+      // POST static entities
+      const handleStaticPost = (entityList, dbKey) => {
+        const body = typeof data === 'string' ? JSON.parse(data) : data;
+        const name = body.name?.trim();
+        if (!name) {
+          reject({ response: { status: 400, data: { error: 'Nom requis' } } });
+          return;
+        }
+
+        // Case insensitive duplicate check
+        const existing = entityList.find(e => e.name.toLowerCase() === name.toLowerCase());
+        if (existing) {
+          resolve({ status: 200, data: { data: existing }, headers: {}, config });
+          return;
+        }
+
+        const newEntity = { _id: `${dbKey}_${Date.now()}`, name };
+        entityList.push(newEntity);
+        saveDB(`mock_${dbKey}`, entityList);
+
+        resolve({ status: 201, data: { data: newEntity }, headers: {}, config });
+      };
+
+      if (url === '/api/universities' && method === 'post') {
+        handleStaticPost(dbUniversities, 'universities');
+        return;
+      }
+      if (url === '/api/departments' && method === 'post') {
+        handleStaticPost(dbDepartments, 'departments');
+        return;
+      }
+      if (url === '/api/levels' && method === 'post') {
+        handleStaticPost(dbLevels, 'levels');
+        return;
+      }
+      if (url === '/api/semesters' && method === 'post') {
+        handleStaticPost(dbSemesters, 'semesters');
+        return;
+      }
+      if (url === '/api/categories' && method === 'post') {
+        handleStaticPost(dbCategories, 'categories');
+        return;
+      }
+
       // GET /api/documents (Public searchable list of APPROVED documents)
       if (url === '/api/documents' && method === 'get') {
         let filtered = dbDocuments.filter(d => d.status === 'approved');
