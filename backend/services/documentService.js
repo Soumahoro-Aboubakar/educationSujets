@@ -96,24 +96,79 @@ const listPublicDocuments = async (params = {}) => {
   const filters = buildDocumentFilters(params);
   let query = applyPopulate(Document.find(filters)).sort('-createdAt');
 
-  const limit = Number.parseInt(params.limit, 10);
-  const page = Number.parseInt(params.page, 10);
+  const limit = Number.parseInt(params.limit, 10) || 12;
+  const page = Number.parseInt(params.page, 10) || 1;
+  const skip = (page - 1) * limit;
 
-  if (Number.isFinite(limit) && limit > 0) {
-    const safePage = Number.isFinite(page) && page > 0 ? page : 1;
-    query = query.skip((safePage - 1) * limit).limit(limit);
-  }
+  query = query.skip(skip).limit(limit);
 
-  return query;
+  const [data, total] = await Promise.all([
+    query,
+    Document.countDocuments(filters),
+  ]);
+
+  return {
+    data,
+    pagination: {
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      limit,
+    },
+  };
 };
 
-const listUserDocuments = async (userId) => applyPopulate(
-  Document.find({ uploadedBy: userId }).sort('-createdAt')
-);
+const listUserDocuments = async (userId, params = {}) => {
+  const filters = { uploadedBy: userId };
+  let query = applyPopulate(Document.find(filters).sort('-createdAt'));
 
-const listPendingDocuments = async () => applyPopulate(
-  Document.find({ status: 'pending' }).sort('-createdAt')
-);
+  const limit = Number.parseInt(params.limit, 10) || 12;
+  const page = Number.parseInt(params.page, 10) || 1;
+  const skip = (page - 1) * limit;
+
+  query = query.skip(skip).limit(limit);
+
+  const [data, total] = await Promise.all([
+    query,
+    Document.countDocuments(filters),
+  ]);
+
+  return {
+    data,
+    pagination: {
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      limit,
+    },
+  };
+};
+
+const listPendingDocuments = async (params = {}) => {
+  const filters = { status: 'pending' };
+  let query = applyPopulate(Document.find(filters).sort('-createdAt'));
+
+  const limit = Number.parseInt(params.limit, 10) || 12;
+  const page = Number.parseInt(params.page, 10) || 1;
+  const skip = (page - 1) * limit;
+
+  query = query.skip(skip).limit(limit);
+
+  const [data, total] = await Promise.all([
+    query,
+    Document.countDocuments(filters),
+  ]);
+
+  return {
+    data,
+    pagination: {
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      limit,
+    },
+  };
+};
 
 const getAnalytics = async () => {
   const [totalDocuments, approvedDocuments, pendingDocuments, rejectedDocuments, totals] = await Promise.all([

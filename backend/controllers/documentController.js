@@ -20,8 +20,8 @@ const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
 
 exports.getDocuments = asyncHandler(async (req, res) => {
-  const documents = await listPublicDocuments(req.query);
-  sendSuccess(res, { data: documents, meta: { count: documents.length } });
+  const result = await listPublicDocuments(req.query);
+  sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
 });
 
 exports.getDocument = asyncHandler(async (req, res) => {
@@ -51,8 +51,8 @@ exports.deleteDocument = asyncHandler(async (req, res) => {
 });
 
 exports.getMyDocuments = asyncHandler(async (req, res) => {
-  const documents = await listUserDocuments(req.user._id);
-  sendSuccess(res, { data: documents, meta: { count: documents.length } });
+  const result = await listUserDocuments(req.user._id, req.query);
+  sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
 });
 
 exports.validateDocument = asyncHandler(async (req, res) => {
@@ -61,8 +61,8 @@ exports.validateDocument = asyncHandler(async (req, res) => {
 });
 
 exports.getPendingDocuments = asyncHandler(async (req, res) => {
-  const documents = await listPendingDocuments();
-  sendSuccess(res, { data: documents, meta: { count: documents.length } });
+  const result = await listPendingDocuments(req.query);
+  sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
 });
 
 exports.getAnalytics = asyncHandler(async (req, res) => {

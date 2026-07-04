@@ -29,6 +29,11 @@ const Dashboard = () => {
   const [documents, setDocuments] = useState([]);
   const [pendingDocs, setPendingDocs] = useState([]);
   const [analytics, setAnalytics] = useState(null);
+
+  const [myDocsPage, setMyDocsPage] = useState(1);
+  const [myDocsPagination, setMyDocsPagination] = useState(null);
+  const [pendingDocsPage, setPendingDocsPage] = useState(1);
+  const [pendingDocsPagination, setPendingDocsPagination] = useState(null);
   
   // Filters data
   const [filtersData, setFiltersData] = useState({
@@ -55,18 +60,57 @@ const Dashboard = () => {
     if (user) fetchDashboardData();
   }, [user]);
 
+  useEffect(() => {
+    if (user && !isFetching && myDocsPage > 1) {
+      fetchMyDocuments(myDocsPage);
+    } else if (user && !isFetching && myDocsPage === 1 && myDocsPagination) {
+      fetchMyDocuments(1);
+    }
+  }, [myDocsPage]);
+
+  useEffect(() => {
+    if (user && !isFetching && pendingDocsPage > 1 && (user?.role === 'admin' || user?.role === 'sub-admin')) {
+      fetchPendingDocuments(pendingDocsPage);
+    } else if (user && !isFetching && pendingDocsPage === 1 && pendingDocsPagination) {
+      fetchPendingDocuments(1);
+    }
+  }, [pendingDocsPage]);
+
+  const fetchMyDocuments = async (page) => {
+    try {
+      const res = await axios.get('/api/documents/my', { params: { page, limit: 12 } });
+      setDocuments(res.data.data);
+      setMyDocsPagination(res.data.meta?.pagination || null);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const fetchPendingDocuments = async (page) => {
+    try {
+      const res = await axios.get('/api/documents/pending', { params: { page, limit: 12 } });
+      setPendingDocs(res.data.data);
+      setPendingDocsPagination(res.data.meta?.pagination || null);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const fetchDashboardData = async () => {
     try {
       setIsFetching(true);
       const [docsRes, uniRes, deptRes, levelRes, semRes, catRes] = await Promise.all([
-        axios.get('/api/documents/my'),
+        axios.get('/api/documents/my', { params: { page: 1, limit: 12 } }),
         axios.get('/api/universities'),
         axios.get('/api/departments'),
         axios.get('/api/levels'),
         axios.get('/api/semesters'),
         axios.get('/api/categories'),
       ]);
+      
       setDocuments(docsRes.data.data);
+      setMyDocsPagination(docsRes.data.meta?.pagination || null);
+      
       setFiltersData({
         universities: uniRes.data.data,
         departments: deptRes.data.data,
@@ -76,8 +120,10 @@ const Dashboard = () => {
       });
 
       if (user?.role === 'admin' || user?.role === 'sub-admin') {
-        const pendingRes = await axios.get('/api/documents/pending');
+        const pendingRes = await axios.get('/api/documents/pending', { params: { page: 1, limit: 12 } });
         setPendingDocs(pendingRes.data.data);
+        setPendingDocsPagination(pendingRes.data.meta?.pagination || null);
+        
         if (user?.role === 'admin') {
           const analyticsRes = await axios.get('/api/documents/analytics');
           setAnalytics(analyticsRes.data.data);
@@ -126,8 +172,15 @@ const Dashboard = () => {
     try {
       setValidatingDocs(prev => ({ ...prev, [id]: status }));
       await axios.put(`/api/documents/${id}/validate`, { status });
+      // Remove doc from pending list
       setPendingDocs(prev => prev.filter(doc => doc._id !== id));
-      fetchDashboardData();
+      // Re-fetch appropriately
+      fetchMyDocuments(myDocsPage);
+      fetchPendingDocuments(pendingDocsPage);
+      if (user?.role === 'admin') {
+        const analyticsRes = await axios.get('/api/documents/analytics');
+        setAnalytics(analyticsRes.data.data);
+      }
     } catch (error) {
       console.error(`Erreur lors de la validation (${status}):`, error);
     } finally {
@@ -160,7 +213,8 @@ const Dashboard = () => {
       });
       await axios.post('/api/documents', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
       setUploadData({ title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null });
-      fetchDashboardData();
+      fetchMyDocuments(1);
+      setMyDocsPage(1);
       setActiveTab('documents');
     } catch (error) {
       console.error("Erreur lors de l'upload:", error);
@@ -462,6 +516,29 @@ const Dashboard = () => {
                   ))}
                 </div>
               )}
+              
+              {/* Pagination UI Mes Documents */}
+              {myDocsPagination && myDocsPagination.pages > 1 && (
+                <div className="flex items-center justify-center gap-4 mt-8">
+                  <button
+                    onClick={() => setMyDocsPage(p => Math.max(1, p - 1))}
+                    disabled={myDocsPage <= 1}
+                    className="px-4 py-2 bg-white rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-slate-50"
+                  >
+                    Précédent
+                  </button>
+                  <span className="text-sm font-medium text-slate-500">
+                    Page {myDocsPage} sur {myDocsPagination.pages}
+                  </span>
+                  <button
+                    onClick={() => setMyDocsPage(p => Math.min(myDocsPagination.pages, p + 1))}
+                    disabled={myDocsPage >= myDocsPagination.pages}
+                    className="px-4 py-2 bg-white rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-slate-50"
+                  >
+                    Suivant
+                  </button>
+                </div>
+              )}
             </motion.div>
           )}
 
@@ -618,6 +695,29 @@ const Dashboard = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+              )}
+              
+              {/* Pagination UI Pending Documents */}
+              {pendingDocsPagination && pendingDocsPagination.pages > 1 && (
+                <div className="flex items-center justify-center gap-4 mt-8">
+                  <button
+                    onClick={() => setPendingDocsPage(p => Math.max(1, p - 1))}
+                    disabled={pendingDocsPage <= 1}
+                    className="px-4 py-2 bg-white rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-slate-50"
+                  >
+                    Précédent
+                  </button>
+                  <span className="text-sm font-medium text-slate-500">
+                    Page {pendingDocsPage} sur {pendingDocsPagination.pages}
+                  </span>
+                  <button
+                    onClick={() => setPendingDocsPage(p => Math.min(pendingDocsPagination.pages, p + 1))}
+                    disabled={pendingDocsPage >= pendingDocsPagination.pages}
+                    className="px-4 py-2 bg-white rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-slate-50"
+                  >
+                    Suivant
+                  </button>
                 </div>
               )}
             </motion.div>

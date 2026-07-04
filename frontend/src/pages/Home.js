@@ -233,13 +233,13 @@ const DocumentCard = ({ doc, index }) => {
         {/* Footer */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span
+          {/* Footer <span
               className="flex items-center gap-1 text-xs font-medium"
               style={{ color: 'var(--color-text-muted)' }}
             >
               <Eye size={13} />
               {doc.views}
-            </span>
+            </span>*/}  
             <span
               className="flex items-center gap-1 text-xs font-medium"
               style={{ color: 'var(--color-text-muted)' }}
@@ -321,6 +321,8 @@ const Home = () => {
   const [filters, setFilters] = useState({ search: '' });
   const [loading, setLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState(null);
   const searchRef = useRef(null);
 
   // Active filter count (excluding search)
@@ -351,30 +353,22 @@ const Home = () => {
   const fetchDocuments = useCallback(async () => {
     try {
       setLoading(true);
-      const params = {};
+      const params = { page, limit: 12 };
+      if (filters.search) params.search = filters.search;
+
       FILTER_DEFINITIONS.forEach((def) => {
         if (filters[def.key]) params[def.key] = filters[def.key];
       });
 
       const res = await axios.get('/api/documents', { params });
-      let docs = res.data.data;
-
-      if (filters.search) {
-        const q = filters.search.toLowerCase();
-        docs = docs.filter(
-          (d) =>
-            d.title.toLowerCase().includes(q) ||
-            d.description?.toLowerCase().includes(q)
-        );
-      }
-
-      setDocuments(docs);
+      setDocuments(res.data.data);
+      setPagination(res.data.meta?.pagination || null);
     } catch (err) {
       console.error('Erreur chargement documents:', err);
     } finally {
       setLoading(false);
     }
-  }, [filters]);
+  }, [filters, page]);
 
   useEffect(() => {
     const timer = setTimeout(() => fetchDocuments(), 200);
@@ -383,12 +377,14 @@ const Home = () => {
 
   const handleFilterChange = (e) => {
     setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setPage(1);
   };
 
   const clearFilters = () => {
     const cleared = { search: filters.search };
     FILTER_DEFINITIONS.forEach((d) => (cleared[d.key] = ''));
     setFilters(cleared);
+    setPage(1);
   };
 
   return (
@@ -648,10 +644,10 @@ const Home = () => {
               >
                 Documents
               </h2>
-              {!loading && (
+              {!loading && pagination && (
                 <p className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
-                  {documents.length} résultat{documents.length !== 1 ? 's' : ''} trouvé
-                  {documents.length !== 1 ? 's' : ''}
+                  {pagination.total} résultat{pagination.total !== 1 ? 's' : ''} trouvé
+                  {pagination.total !== 1 ? 's' : ''}
                 </p>
               )}
             </div>
@@ -699,10 +695,48 @@ const Home = () => {
             </p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {documents.map((doc, idx) => (
-              <DocumentCard key={doc._id} doc={doc} index={idx} />
-            ))}
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {documents.map((doc, idx) => (
+                <DocumentCard key={doc._id} doc={doc} index={idx} />
+              ))}
+            </div>
+
+            {/* Pagination UI */}
+            {pagination && pagination.pages > 1 && (
+              <div className="flex items-center justify-center gap-4 mt-10">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={pagination.page <= 1}
+                  className="px-4 py-2 rounded-xl text-sm font-semibold transition-default disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    backgroundColor: 'var(--color-surface)',
+                    border: '1px solid var(--color-border)',
+                    color: 'var(--color-text-primary)'
+                  }}
+                >
+                  Précédent
+                </button>
+                <span
+                  className="text-sm font-medium"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  Page {pagination.page} sur {pagination.pages}
+                </span>
+                <button
+                  onClick={() => setPage((p) => Math.min(pagination.pages, p + 1))}
+                  disabled={pagination.page >= pagination.pages}
+                  className="px-4 py-2 rounded-xl text-sm font-semibold transition-default disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    backgroundColor: 'var(--color-surface)',
+                    border: '1px solid var(--color-border)',
+                    color: 'var(--color-text-primary)'
+                  }}
+                >
+                  Suivant
+                </button>
+              </div>
+            )}
           </div>
         )}
       </section>
