@@ -1,0 +1,281 @@
+Rôle
+
+Tu es un Software Architect Senior et Backend Engineer expert en Node.js, Express.js, PostgreSQL/MySQL, Cloud Storage (Cloudflare R2, Backblaze B2) et en conception d'API REST robustes.
+
+Ton objectif est de mettre à jour entièrement le backend existant afin qu'il soit parfaitement compatible avec la nouvelle version du frontend, sans casser les fonctionnalités existantes.
+
+Contexte
+
+Le frontend du projet a été entièrement repensé.
+
+Le backend actuel n'est plus synchronisé avec cette nouvelle interface.
+
+Avant toute modification :
+
+analyse entièrement la structure actuelle du projet backend ;
+analyse la nouvelle structure du frontend ;
+identifie toutes les incohérences entre les deux ;
+adapte le backend afin qu'il corresponde exactement aux nouvelles interfaces.
+
+Aucune route, modèle ou logique ne doit rester basée sur l'ancien frontend.
+
+Objectifs
+
+Le backend doit être mis à jour afin de prendre en compte les nouvelles fonctionnalités du dashboard ainsi que les nouvelles interfaces de l'application.
+
+Les modifications doivent concerner :
+
+les modèles de données
+les contrôleurs
+les services
+les routes
+la validation
+les middlewares
+les fichiers de configuration
+la documentation
+les variables d'environnement
+1. Mise à jour du Dashboard Client
+
+Analyse complètement le nouveau Dashboard Client.
+
+Mettre à jour :
+
+tous les Models
+tous les DTO si présents
+les Validators
+les Controllers
+les Services
+toutes les Routes REST
+
+Les nouvelles routes doivent refléter exactement les besoins du frontend.
+
+Supprimer les anciennes routes devenues inutiles.
+
+Créer les nouvelles routes nécessaires.
+
+2. Mise à jour de la page d'accueil
+
+La page d'accueil a changé.
+
+Les listes déroulantes ne sont plus statiques.
+
+Elles deviennent entièrement dynamiques.
+
+Par conséquent :
+
+Le backend doit fournir des API permettant de récupérer dynamiquement :
+
+Universités
+Départements
+Filières
+Niveaux
+Semestres
+Matières
+Types de documents
+Catégories
+Années
+Sessions
+et toute autre donnée utilisée dans les Select du frontend.
+
+Toutes ces données devront provenir de la base de données.
+
+Aucune liste codée en dur ne doit subsister.
+
+3. Refonte de l'Upload des documents
+
+Le système actuel d'upload doit être remplacé.
+
+Le backend devra utiliser un système de stockage objet.
+
+Deux fournisseurs devront être supportés :
+
+Cloudflare R2
+Backblaze B2
+
+Le système devra être entièrement abstrait.
+
+Créer une couche de service indépendante.
+
+Exemple :
+
+StorageProvider
+
+    upload()
+
+    delete()
+
+    get()
+
+    exists()
+
+    generateSignedUrl()
+
+
+Puis implémenter :
+
+CloudflareR2Storage
+
+BackblazeB2Storage
+
+Le reste du backend ne devra jamais connaître le fournisseur utilisé.
+
+Il devra uniquement appeler :
+
+StorageProvider
+4. Sélection du fournisseur via le fichier .env
+
+Le fournisseur utilisé doit être configurable.
+
+Exemple :
+
+STORAGE_PROVIDER=r2
+
+ou
+
+STORAGE_PROVIDER=b2
+
+Aucune modification du code ne doit être nécessaire pour changer de fournisseur.
+
+Un simple changement du fichier .env doit suffire.
+
+5. Upload des fichiers
+
+Le backend doit accepter :
+
+PDF
+DOC
+DOCX
+PPT
+PPTX
+Images
+ZIP
+autres formats autorisés
+
+Lors de l'upload :
+
+générer un nom unique ;
+conserver le nom d'origine comme métadonnée ;
+enregistrer toutes les informations nécessaires en base de données (nom, type MIME, taille, fournisseur de stockage, clé/chemin de stockage, auteur, date, etc.) ;
+valider les extensions et les types MIME autorisés ;
+gérer proprement les erreurs.
+6. Téléchargement sécurisé
+
+Les fichiers ne doivent jamais être accessibles directement.
+
+Le backend doit générer un lien signé (Signed URL) à durée limitée.
+
+Flux attendu :
+
+Utilisateur
+
+↓
+
+Backend
+
+↓
+
+Vérification des permissions
+
+↓
+
+Génération d'une URL signée
+
+↓
+
+Retour de l'URL temporaire
+
+↓
+
+Téléchargement
+
+Le lien doit expirer automatiquement.
+
+La durée d'expiration doit être configurable.
+
+Exemple :
+
+DOWNLOAD_URL_EXPIRATION=900
+
+(900 secondes = 15 minutes)
+
+Après expiration, le lien devient inutilisable.
+
+Aucun lien permanent ne doit être exposé.
+
+7. Sécurité
+
+Mettre en place :
+
+validation stricte des fichiers ;
+limitation de taille configurable ;
+protection contre les extensions interdites ;
+contrôle des permissions avant chaque téléchargement ;
+journalisation (logs) des uploads et téléchargements ;
+gestion centralisée des erreurs ;
+réponses API homogènes.
+8. Architecture
+
+Respecter une architecture propre et modulaire.
+
+Exemple :
+
+controllers/
+
+routes/
+
+models/
+
+middlewares/
+
+validators/
+
+services/
+
+storage/
+    StorageProvider
+    CloudflareR2Storage
+    BackblazeB2Storage
+
+config/
+
+utils/
+
+
+Le code doit respecter les principes :
+
+SOLID
+DRY
+KISS
+séparation claire des responsabilités
+facilement extensible
+9. Compatibilité
+
+Les nouvelles API doivent être totalement compatibles avec le frontend actuel.
+
+Avant de modifier une route, vérifier qu'elle est bien utilisée.
+
+Adapter les formats de réponse aux attentes du frontend.
+
+Ne conserver aucun code obsolète.
+
+10. Livrables attendus
+
+À la fin de la mise à jour :
+
+Backend entièrement synchronisé avec le nouveau frontend.
+Modèles de données mis à jour.
+Routes REST mises à jour.
+Contrôleurs et services adaptés.
+Système de stockage interchangeable (Cloudflare R2 / Backblaze B2).
+Upload sécurisé des documents.
+Téléchargement via URL signées temporaires.
+Configuration complète via .env.
+Documentation des nouvelles variables d'environnement.
+Code propre, modulaire, documenté et prêt pour la production.
+
+Consignes importantes :
+
+Ne fais aucune hypothèse sur la structure du frontend : analyse d'abord le code avant toute modification.
+Préserve la compatibilité avec les fonctionnalités existantes lorsqu'elles sont toujours utilisées.
+Si une incohérence est détectée entre le frontend et le backend, adapte le backend à la nouvelle logique métier.
+Fournis un code prêt pour la production, sécurisé, maintenable et facilement extensible, sans laisser de TODO ou d'implémentations partielles.

@@ -1,142 +1,90 @@
+# Education CI
 
-# Éducation CI
+Plateforme de partage et de consultation de documents pedagogiques avec frontend React et backend Express/MongoDB.
 
-Plateforme éducative complète pour le partage et la consultation de documents pédagogiques.
+## Stack technique
 
-## Stack Technique
+- Backend: Node.js, Express.js, MongoDB, JWT
+- Frontend: React.js, Tailwind CSS, React Router
+- Stockage de fichiers: Cloudflare R2 ou Backblaze B2 via une abstraction unique
 
-- **Backend** : Node.js, Express.js, MongoDB, JWT
-- **Frontend** : React.js, Tailwind CSS, React Router
-- **Base de données** : MongoDB
+## Fonctionnalites principales
 
-## Fonctionnalités
+- Recherche publique de documents approuves avec filtres dynamiques
+- Dashboard contributeur pour uploader et gerer ses documents
+- Validation des documents par sous-administrateur ou administrateur
+- Analytique globale pour administrateur
+- Upload securise en stockage objet avec URL signee temporaire au telechargement
 
-### Utilisateurs invités
-- Recherche multifiltre de documents (nom, université, département, niveau, semestre)
-- Consultation et téléchargement de documents sans connexion
+## Configuration du backend
 
-### Contributeurs
-- Inscription et connexion sécurisées
-- Espace personnel pour gérer ses documents
-- Upload, modification et suppression de documents
-- Suivi des statistiques de consultation
-
-### Sous-administrateurs
-- Validation des documents avant publication
-- Gestion des contributeurs
-
-### Administrateur principal
-- Tableau de bord analytique complet
-- Gestion globale des utilisateurs et des contenus
-- Visualisation des données (graphiques)
-
-## Installation
-
-### Prérequis
-- Node.js (v14+)
-- MongoDB (local ou Atlas)
-- npm ou yarn
-
-### Configuration du Backend
-
-1. Accédez au dossier backend :
+1. Installer les dependances:
 ```bash
 cd backend
-```
-
-2. Installez les dépendances :
-```bash
 npm install
 ```
 
-3. Créez un fichier `.env` à la racine du backend et configurez les variables d'environnement :
-```
-NODE_ENV=development
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/education-ci
-JWT_SECRET=votre_cle_secrete_jwt
-JWT_EXPIRE=30d
-JWT_REFRESH_SECRET=votre_cle_secrete_refresh
-EMAIL_HOST=smtp.example.com
-EMAIL_PORT=587
-EMAIL_USER=votre_email@example.com
-EMAIL_PASS=votre_mot_de_passe_email
-FRONTEND_URL=http://localhost:3000
+2. Copier le fichier d'exemple:
+```bash
+cp .env.example .env
 ```
 
-4. Démarrez le serveur backend :
+3. Renseigner au minimum:
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `JWT_REFRESH_SECRET`
+- `STORAGE_PROVIDER`
+- les variables du fournisseur choisi (`R2_*` ou `B2_*`)
+
+4. Demarrer le serveur:
 ```bash
 npm run dev
 ```
 
-### Configuration du Frontend
+## Variables d'environnement backend
 
-1. Accédez au dossier frontend :
-```bash
-cd frontend
-```
+- `PORT`: port HTTP du backend
+- `FRONTEND_URL`: liste d'origines autorisees separees par des virgules
+- `RATE_LIMIT_MAX`: nombre maximum de requetes par fenetre de 15 minutes
+- `JWT_SECRET`: secret du token d'acces
+- `JWT_EXPIRE`: duree de vie du token d'acces
+- `JWT_REFRESH_SECRET`: secret du refresh token
+- `JWT_REFRESH_EXPIRE`: duree de vie du refresh token
+- `JWT_COOKIE_EXPIRE`: duree de vie du cookie d'authentification en jours
+- `STORAGE_PROVIDER`: `r2` ou `b2`
+- `STORAGE_FOLDER`: prefixe de rangement des objets dans le bucket
+- `DOWNLOAD_URL_EXPIRATION`: duree de validite d'une URL signee en secondes
+- `MAX_FILE_SIZE`: taille maximale des uploads en octets
+- `ALLOWED_FILE_EXTENSIONS`: extensions autorisees separees par des virgules
+- `ALLOWED_FILE_MIME_TYPES`: types MIME autorises separes par des virgules
+- `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`, `R2_ENDPOINT`: configuration Cloudflare R2
+- `B2_APPLICATION_KEY_ID`, `B2_APPLICATION_KEY`, `B2_BUCKET_NAME`, `B2_REGION`, `B2_ENDPOINT`: configuration Backblaze B2
 
-2. Installez les dépendances :
-```bash
-npm install
-```
+## Contrats API utilises par le frontend
 
-3. Démarrez le serveur frontend :
-```bash
-npm start
-```
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `GET /api/documents`
+- `POST /api/documents`
+- `GET /api/documents/my`
+- `GET /api/documents/pending`
+- `GET /api/documents/analytics`
+- `GET /api/universities`
+- `POST /api/universities`
+- `GET /api/departments`
+- `POST /api/departments`
+- `GET /api/levels`
+- `POST /api/levels`
+- `GET /api/semesters`
+- `POST /api/semesters`
+- `GET /api/categories`
+- `POST /api/categories`
+- `GET /uploads/:fileName`: passerelle de compatibilite qui verifie les droits puis redirige vers une URL signee temporaire
 
-L'application sera accessible à l'adresse : http://localhost:3000
+## Notes d'architecture
 
-## Structure du Projet
-
-```
-education/
-├── backend/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── uploads/
-│   ├── .env
-│   ├── package.json
-│   └── server.js
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── pages/
-│   │   ├── App.js
-│   │   └── index.js
-│   ├── package.json
-│   └── tailwind.config.js
-└── README.md
-```
-
-## Utilisation
-
-### Création d'un administrateur
-Pour créer un compte administrateur, vous devrez modifier manuellement le rôle d'un utilisateur dans la base de données MongoDB :
-```javascript
-db.users.updateOne(
-  { email: "admin@example.com" },
-  { $set: { role: "admin" } }
-)
-```
-
-### Ajout de données de test
-Vous pouvez ajouter des universités, départements, niveaux, semestres et catégories via l'API REST ou en utilisant un outil comme MongoDB Compass.
-
-## Sécurité
-
-- Authentification JWT avec tokens d'accès et de rafraîchissement
-- Protection des routes par rôle
-- Hashage des mots de passe avec bcrypt
-- Validation des données entrantes
-
-## Licence
-
-MIT
+- Les fichiers ne sont plus exposes par dossier statique public.
+- Le backend stocke les metadonnees de chaque document en base.
+- Le provider de stockage est entierement interchangeable via `.env`.
+- Les listes utilisees par les selects du frontend proviennent toutes de la base de donnees.

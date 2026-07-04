@@ -11,6 +11,8 @@ yarn.lock
 .env
 .env.local
 .env.*.local
+keys.text
+.env.example
 
 # Build du frontend React
 frontend/build/

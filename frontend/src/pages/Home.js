@@ -116,6 +116,24 @@ const FilterSelect = ({ def, value, options, onChange }) => {
 
 /** Document card */
 const DocumentCard = ({ doc, index }) => {
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    if (downloading) return;
+    try {
+      setDownloading(true);
+      const res = await axios.get(`/api/documents/${doc._id}/download`);
+      const url = res.data.data.url;
+      window.open(url || `/uploads/${doc.file}`, '_blank');
+    } catch (err) {
+      console.error('Erreur lors du téléchargement:', err);
+      window.open(`/uploads/${doc.file}`, '_blank');
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -231,28 +249,35 @@ const DocumentCard = ({ doc, index }) => {
             </span>
           </div>
 
-          <a
-            href={`/uploads/${doc.file}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={handleDownload}
+            disabled={downloading}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-white transition-default"
             style={{
               background:
                 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))',
               boxShadow: '0 1px 3px rgba(99,102,241,.25)',
+              opacity: downloading ? 0.7 : 1,
+              cursor: downloading ? 'not-allowed' : 'pointer',
             }}
             onMouseEnter={(e) => {
+              if (downloading) return;
               e.currentTarget.style.transform = 'translateY(-1px)';
               e.currentTarget.style.boxShadow = '0 4px 14px rgba(99,102,241,.35)';
             }}
             onMouseLeave={(e) => {
+              if (downloading) return;
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.boxShadow = '0 1px 3px rgba(99,102,241,.25)';
             }}
           >
-            <Download size={13} />
-            Télécharger
-          </a>
+            {downloading ? (
+              <div className="w-3 h-3 border-2 border-white/50 border-t-white rounded-full animate-spin" />
+            ) : (
+              <Download size={13} />
+            )}
+            {downloading ? 'Chargement...' : 'Télécharger'}
+          </button>
         </div>
       </div>
     </motion.div>

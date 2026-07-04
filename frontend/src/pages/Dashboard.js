@@ -43,6 +43,9 @@ const Dashboard = () => {
     title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null
   });
   const [uploading, setUploading] = useState(false);
+  const [downloadingDocs, setDownloadingDocs] = useState({});
+  const [validatingDocs, setValidatingDocs] = useState({});
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     if (!loading && !user) navigate('/login');
@@ -54,6 +57,7 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
+      setIsFetching(true);
       const [docsRes, uniRes, deptRes, levelRes, semRes, catRes] = await Promise.all([
         axios.get('/api/documents/my'),
         axios.get('/api/universities'),
@@ -81,7 +85,9 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error('Erreur lors du chargement des données:', error);
-    }
+    } finally {
+      setIsFetching(false);
+    } 
   };
 
   const handleLogout = () => {
@@ -113,6 +119,34 @@ const Dashboard = () => {
       }));
     } catch (error) {
       console.error(`Erreur lors de la création de l'option ${fieldKey}:`, error);
+    }
+  };
+
+  const handleValidateDocument = async (id, status) => {
+    try {
+      setValidatingDocs(prev => ({ ...prev, [id]: status }));
+      await axios.put(`/api/documents/${id}/validate`, { status });
+      setPendingDocs(prev => prev.filter(doc => doc._id !== id));
+      fetchDashboardData();
+    } catch (error) {
+      console.error(`Erreur lors de la validation (${status}):`, error);
+    } finally {
+      setValidatingDocs(prev => ({ ...prev, [id]: null }));
+    }
+  };
+
+  const handleDownload = async (doc) => {
+    if (downloadingDocs[doc._id]) return;
+    try {
+      setDownloadingDocs(prev => ({ ...prev, [doc._id]: true }));
+      const res = await axios.get(`/api/documents/${doc._id}/download`);
+      const url = res.data.data.url;
+      window.open(url || `/uploads/${doc.file}`, '_blank');
+    } catch (err) {
+      console.error("Erreur lors de l'ouverture du document:", err);
+      window.open(`/uploads/${doc.file}`, '_blank');
+    } finally {
+      setDownloadingDocs(prev => ({ ...prev, [doc._id]: false }));
     }
   };
 
@@ -355,7 +389,27 @@ const Dashboard = () => {
                 </span>
               </div>
               
-              {documents.length === 0 ? (
+              {isFetching ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <div key={i} className="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm flex flex-col h-[200px] animate-pulse">
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-100" />
+                        <div className="w-20 h-6 bg-slate-100 rounded-lg" />
+                      </div>
+                      <div className="w-3/4 h-5 bg-slate-100 rounded mb-2" />
+                      <div className="w-1/2 h-4 bg-slate-100 rounded mb-4" />
+                      <div className="mt-auto pt-4 border-t border-slate-100 flex justify-between">
+                        <div className="w-16 h-4 bg-slate-100 rounded" />
+                        <div className="flex gap-2">
+                          <div className="w-9 h-9 bg-slate-100 rounded-xl" />
+                          <div className="w-9 h-9 bg-slate-100 rounded-xl" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : documents.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-20 px-4 bg-white rounded-3xl border border-dashed border-slate-300">
                   <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6">
                     <FileText className="h-8 w-8 text-slate-300" />
@@ -396,9 +450,9 @@ const Dashboard = () => {
                           <span>{doc.views || 0} vues</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <a href={`/uploads/${doc.file}`} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-xl bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                            <Eye size={16} />
-                          </a>
+                          <button onClick={() => handleDownload(doc)} disabled={downloadingDocs[doc._id]} className="w-9 h-9 rounded-xl bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-indigo-50 hover:text-indigo-600 transition-colors disabled:opacity-50">
+                            {downloadingDocs[doc._id] ? <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" /> : <Eye size={16} />}
+                          </button>
                           <button onClick={() => {/* Handle delete */}} className="w-9 h-9 rounded-xl bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors">
                             <Trash2 size={16} />
                           </button>
@@ -505,7 +559,26 @@ const Dashboard = () => {
                 <h2 className="text-2xl font-black text-slate-800 tracking-tight">Validation</h2>
               </div>
               
-              {pendingDocs.length === 0 ? (
+              {isFetching ? (
+                <div className="space-y-4">
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm flex flex-col md:flex-row gap-6 items-start md:items-center justify-between animate-pulse">
+                      <div className="flex items-start gap-4 flex-1 w-full">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-100 shrink-0" />
+                        <div className="flex-1 w-full space-y-2 mt-1">
+                          <div className="w-1/2 h-5 bg-slate-100 rounded" />
+                          <div className="w-3/4 h-4 bg-slate-100 rounded" />
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 w-full md:w-auto mt-4 md:mt-0">
+                        <div className="flex-1 md:flex-none w-24 h-11 bg-slate-100 rounded-xl" />
+                        <div className="flex-1 md:flex-none w-24 h-11 bg-slate-100 rounded-xl" />
+                        <div className="flex-1 md:flex-none w-24 h-11 bg-slate-100 rounded-xl" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : pendingDocs.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-slate-100">
                   <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mb-6">
                      <CheckCircle className="h-8 w-8 text-emerald-400" />
@@ -533,14 +606,14 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <div className="flex items-center gap-3 w-full md:w-auto mt-4 md:mt-0">
-                        <a href={`/uploads/${doc.file}`} target="_blank" rel="noopener noreferrer" className="flex-1 md:flex-none text-center px-5 py-3 rounded-xl bg-slate-50 text-slate-600 font-bold text-sm hover:bg-slate-100 transition-colors">
-                          Voir
-                        </a>
-                        <button className="flex-1 md:flex-none px-5 py-3 rounded-xl bg-rose-50 text-rose-600 font-bold text-sm hover:bg-rose-100 transition-colors">
-                          Rejeter
+                        <button onClick={() => handleDownload(doc)} disabled={downloadingDocs[doc._id]} className="flex-1 md:flex-none text-center px-5 py-3 rounded-xl bg-slate-50 text-slate-600 font-bold text-sm hover:bg-slate-100 transition-colors disabled:opacity-50 flex justify-center items-center">
+                          {downloadingDocs[doc._id] ? <div className="w-4 h-4 border-2 border-slate-600 border-t-transparent rounded-full animate-spin" /> : 'Voir'}
                         </button>
-                        <button className="flex-1 md:flex-none px-5 py-3 rounded-xl bg-emerald-50 text-emerald-600 font-bold text-sm hover:bg-emerald-100 transition-colors">
-                          Valider
+                        <button onClick={() => handleValidateDocument(doc._id, 'rejected')} disabled={validatingDocs[doc._id]} className="flex-1 md:flex-none px-5 py-3 rounded-xl bg-rose-50 text-rose-600 font-bold text-sm hover:bg-rose-100 transition-colors disabled:opacity-50 flex items-center justify-center">
+                          {validatingDocs[doc._id] === 'rejected' ? <div className="w-4 h-4 border-2 border-rose-600 border-t-transparent rounded-full animate-spin" /> : 'Rejeter'}
+                        </button>
+                        <button onClick={() => handleValidateDocument(doc._id, 'approved')} disabled={validatingDocs[doc._id]} className="flex-1 md:flex-none px-5 py-3 rounded-xl bg-emerald-50 text-emerald-600 font-bold text-sm hover:bg-emerald-100 transition-colors disabled:opacity-50 flex items-center justify-center">
+                          {validatingDocs[doc._id] === 'approved' ? <div className="w-4 h-4 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" /> : 'Valider'}
                         </button>
                       </div>
                     </div>
