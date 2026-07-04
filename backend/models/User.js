@@ -25,11 +25,11 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['contributor', 'sub-admin', 'admin'],
-    default: 'admin',
+    default: 'contributor',
   },
   isVerified: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   verificationToken: String,
   verificationExpire: Date,
