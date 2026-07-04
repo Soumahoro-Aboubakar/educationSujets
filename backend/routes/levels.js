@@ -1,16 +1,16 @@
-
 const express = require('express');
 const {
   getLevels,
   createLevel,
-  updateLevel,
-  deleteLevel,
 } = require('../controllers/levelController');
 const { protect, authorize } = require('../middleware/auth');
+const validate = require('../middleware/validate');
+const { createNameValidator } = require('../validators/taxonomyValidators');
 
 const router = express.Router();
 
-router.route('/').get(getLevels).post(protect, authorize('admin'), createLevel);
-router.route('/:id').put(protect, authorize('admin'), updateLevel).delete(protect, authorize('admin'), deleteLevel);
+router.route('/')
+  .get(getLevels)
+  .post(protect, authorize('contributor', 'sub-admin', 'admin'), createNameValidator, validate, createLevel);
 
 module.exports = router;

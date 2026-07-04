@@ -1,4 +1,3 @@
-
 const express = require('express');
 const {
   getDocuments,
@@ -10,23 +9,40 @@ const {
   validateDocument,
   getPendingDocuments,
   getAnalytics,
+  getDocumentDownloadUrl,
 } = require('../controllers/documentController');
-const { protect, authorize } = require('../middleware/auth');
+const { protect, authorize, optionalAuth } = require('../middleware/auth');
 const upload = require('../middleware/upload');
+const validate = require('../middleware/validate');
+const {
+  uploadDocumentValidator,
+  updateDocumentValidator,
+  validateDocumentStatusValidator,
+  documentIdParamValidator,
+  listDocumentsValidator,
+} = require('../validators/documentValidators');
 
 const router = express.Router();
 
-router.route('/').get(getDocuments).post(
-  protect,
-  authorize('contributor', 'sub-admin', 'admin'),
-  upload.single('file'),
-  createDocument
-);
+router.route('/')
+  .get(optionalAuth, listDocumentsValidator, validate, getDocuments)
+  .post(
+    protect,
+    authorize('contributor', 'sub-admin', 'admin'),
+    upload.single('file'),
+    uploadDocumentValidator,
+    validate,
+    createDocument
+  );
 
-router.route('/my').get(protect, getMyDocuments);
-router.route('/pending').get(protect, authorize('sub-admin', 'admin'), getPendingDocuments);
-router.route('/analytics').get(protect, authorize('admin'), getAnalytics);
-router.route('/:id').get(getDocument).put(protect, updateDocument).delete(protect, deleteDocument);
-router.route('/:id/validate').put(protect, authorize('sub-admin', 'admin'), validateDocument);
+router.get('/my', protect, getMyDocuments);
+router.get('/pending', protect, authorize('sub-admin', 'admin'), getPendingDocuments);
+router.get('/analytics', protect, authorize('admin'), getAnalytics);
+router.get('/:id/download', optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
+router.route('/:id')
+  .get(optionalAuth, documentIdParamValidator, validate, getDocument)
+  .put(protect, updateDocumentValidator, validate, updateDocument)
+  .delete(protect, documentIdParamValidator, validate, deleteDocument);
+router.put('/:id/validate', protect, authorize('sub-admin', 'admin'), validateDocumentStatusValidator, validate, validateDocument);
 
 module.exports = router;

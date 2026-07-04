@@ -1,69 +1,18 @@
-
 const University = require('../models/University');
+const { listEntities, createEntity } = require('../services/taxonomyService');
+const asyncHandler = require('../utils/asyncHandler');
+const { sendSuccess } = require('../utils/api');
 
-exports.getUniversities = async (req, res, next) => {
-  try {
-    const universities = await University.find();
-    res.status(200).json({
-      success: true,
-      data: universities,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+exports.getUniversities = asyncHandler(async (req, res) => {
+  const universities = await listEntities(University, { sort: 'name' });
+  sendSuccess(res, { data: universities });
+});
 
-exports.createUniversity = async (req, res, next) => {
-  try {
-    const university = await University.create(req.body);
-    res.status(201).json({
-      success: true,
-      data: university,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.updateUniversity = async (req, res, next) => {
-  try {
-    const university = await University.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-    if (!university) {
-      return res.status(404).json({
-        success: false,
-        error: `Université non trouvée avec l'id ${req.params.id}`,
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: university,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.deleteUniversity = async (req, res, next) => {
-  try {
-    const university = await University.findByIdAndDelete(req.params.id);
-    if (!university) {
-      return res.status(404).json({
-        success: false,
-        error: `Université non trouvée avec l'id ${req.params.id}`,
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: {},
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+exports.createUniversity = asyncHandler(async (req, res) => {
+  const { entity, created } = await createEntity(University, req.body);
+  sendSuccess(res, {
+    statusCode: created ? 201 : 200,
+    message: created ? 'Universite creee' : 'Universite deja existante',
+    data: entity,
+  });
+});

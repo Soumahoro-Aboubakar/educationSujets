@@ -1,16 +1,16 @@
-
 const express = require('express');
 const {
   getDepartments,
   createDepartment,
-  updateDepartment,
-  deleteDepartment,
 } = require('../controllers/departmentController');
 const { protect, authorize } = require('../middleware/auth');
+const validate = require('../middleware/validate');
+const { createNameValidator } = require('../validators/taxonomyValidators');
 
 const router = express.Router();
 
-router.route('/').get(getDepartments).post(protect, authorize('admin'), createDepartment);
-router.route('/:id').put(protect, authorize('admin'), updateDepartment).delete(protect, authorize('admin'), deleteDepartment);
+router.route('/')
+  .get(getDepartments)
+  .post(protect, authorize('contributor', 'sub-admin', 'admin'), createNameValidator, validate, createDepartment);
 
 module.exports = router;

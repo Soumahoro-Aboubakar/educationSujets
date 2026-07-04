@@ -1,32 +1,25 @@
-
 const multer = require('multer');
 const path = require('path');
+const { ALLOWED_EXTENSIONS, ALLOWED_MIME_TYPES, MAX_FILE_SIZE } = require('../config/allowedFiles');
+const AppError = require('../utils/errors');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  },
-});
+const fileFilter = (req, file, callback) => {
+  const extension = path.extname(file.originalname || '').toLowerCase();
+  const mimeType = (file.mimetype || '').toLowerCase();
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /pdf|doc|docx|ppt|pptx|xls|xlsx|zip|rar|jpg|jpeg|png/;
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = allowedTypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Erreur: Type de fichier non autorisé');
+  if (!ALLOWED_EXTENSIONS.includes(extension)) {
+    return callback(new AppError('Extension de fichier interdite', 400));
   }
+
+  if (!ALLOWED_MIME_TYPES.includes(mimeType)) {
+    return callback(new AppError('Type MIME de fichier non autorise', 400));
+  }
+
+  return callback(null, true);
 };
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 50 * 1024 * 1024 },
-  fileFilter: fileFilter,
+module.exports = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: MAX_FILE_SIZE },
+  fileFilter,
 });
-
-module.exports = upload;

@@ -1,30 +1,28 @@
-
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const crypto = require('crypto');
+const asyncHandler = require('../utils/asyncHandler');
+const AppError = require('../utils/errors');
+const { sendSuccess } = require('../utils/api');
 
 const sendTokenResponse = (user, statusCode, res) => {
   const token = user.getSignedJwtToken();
   const refreshToken = user.getRefreshToken();
-
-  const options = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
-
-  if (process.env.NODE_ENV === 'production') {
-    options.secure = true;
-  }
+  const cookieExpireDays = Number.parseInt(process.env.JWT_COOKIE_EXPIRE, 10) || 30;
 
   res
     .status(statusCode)
-    .cookie('token', token, options)
+    .cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      expires: new Date(Date.now() + cookieExpireDays * 24 * 60 * 60 * 1000),
+    })
     .json({
       success: true,
       token,
       refreshToken,
       user: {
+        _id: user._id,
         id: user._id,
         name: user.name,
         email: user.email,
@@ -34,94 +32,52 @@ const sendTokenResponse = (user, statusCode, res) => {
     });
 };
 
-exports.register = async (req, res, next) => {
-  try {
-    const { name, email, password } = req.body;
+exports.register = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+  const normalizedEmail = email.trim().toLowerCase();
 
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
+  const existingUser = await User.findOne({ email: normalizedEmail });
 
-    sendTokenResponse(user, 201, res);
-  } catch (error) {
-    next(error);
+  if (existingUser) {
+    throw new AppError('Cet email est deja utilise', 409);
   }
-};
 
-exports.login = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
+  const user = await User.create({
+    name: name.trim(),
+    email: normalizedEmail,
+    password,
+  });
 
-    if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        error: 'Veuillez fournir un email et un mot de passe',
-      });
-    }
+  sendTokenResponse(user, 201, res);
+});
 
-    const user = await User.findOne({ email }).select('+password');
+exports.login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const normalizedEmail = email.trim().toLowerCase();
+  const user = await User.findOne({ email: normalizedEmail }).select('+password');
 
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        error: 'Identifiants invalides',
-      });
-    }
-
-    const isMatch = await user.matchPassword(password);
-
-    if (!isMatch) {
-      return res.status(401).json({
-        success: false,
-        error: 'Identifiants invalides',
-      });
-    }
-
-    sendTokenResponse(user, 200, res);
-  } catch (error) {
-    next(error);
+  if (!user || !(await user.matchPassword(password))) {
+    throw new AppError('Identifiants invalides', 401);
   }
-};
 
-exports.getMe = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.user.id);
-    res.status(200).json({
-      success: true,
-      data: user,
-    });
-  } catch (error) {
-    next(error);
+  sendTokenResponse(user, 200, res);
+});
+
+exports.getMe = asyncHandler(async (req, res) => {
+  sendSuccess(res, { data: req.user });
+});
+
+exports.refreshToken = asyncHandler(async (req, res) => {
+  const decoded = jwt.verify(
+    req.body.refreshToken,
+    process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET
+  );
+
+  const user = await User.findById(decoded.id);
+
+  if (!user) {
+    throw new AppError('Utilisateur non trouve', 401);
   }
-};
 
-exports.refreshToken = async (req, res, next) => {
-  try {
-    const { refreshToken } = req.body;
-
-    if (!refreshToken) {
-      return res.status(400).json({
-        success: false,
-        error: 'Refresh token requis',
-      });
-    }
-
-    const jwt = require('jsonwebtoken');
-    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-
-    const user = await User.findById(decoded.id);
-
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        error: 'Utilisateur non trouvé',
-      });
-    }
-
-    sendTokenResponse(user, 200, res);
-  } catch (error) {
-    next(error);
-  }
-};
+  sendTokenResponse(user, 200, res);
+});

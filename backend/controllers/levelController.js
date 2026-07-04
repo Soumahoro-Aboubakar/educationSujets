@@ -1,69 +1,18 @@
-
 const Level = require('../models/Level');
+const { listEntities, createEntity } = require('../services/taxonomyService');
+const asyncHandler = require('../utils/asyncHandler');
+const { sendSuccess } = require('../utils/api');
 
-exports.getLevels = async (req, res, next) => {
-  try {
-    const levels = await Level.find().sort('order');
-    res.status(200).json({
-      success: true,
-      data: levels,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+exports.getLevels = asyncHandler(async (req, res) => {
+  const levels = await listEntities(Level, { sort: 'order name' });
+  sendSuccess(res, { data: levels });
+});
 
-exports.createLevel = async (req, res, next) => {
-  try {
-    const level = await Level.create(req.body);
-    res.status(201).json({
-      success: true,
-      data: level,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.updateLevel = async (req, res, next) => {
-  try {
-    const level = await Level.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-    if (!level) {
-      return res.status(404).json({
-        success: false,
-        error: `Niveau non trouvé avec l'id ${req.params.id}`,
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: level,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.deleteLevel = async (req, res, next) => {
-  try {
-    const level = await Level.findByIdAndDelete(req.params.id);
-    if (!level) {
-      return res.status(404).json({
-        success: false,
-        error: `Niveau non trouvé avec l'id ${req.params.id}`,
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: {},
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+exports.createLevel = asyncHandler(async (req, res) => {
+  const { entity, created } = await createEntity(Level, req.body, { orderField: 'order' });
+  sendSuccess(res, {
+    statusCode: created ? 201 : 200,
+    message: created ? 'Niveau cree' : 'Niveau deja existant',
+    data: entity,
+  });
+});

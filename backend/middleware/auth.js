@@ -1,44 +1,67 @@
-
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const asyncHandler = require('../utils/asyncHandler');
+const AppError = require('../utils/errors');
+const { extractToken } = require('../utils/request');
 
-exports.protect = async (req, res, next) => {
-  let token;
-
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1];
+const resolveUser = async (token) => {
+  if (!token) {
+    return null;
   }
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  return User.findById(decoded.id);
+};
+
+const protect = asyncHandler(async (req, res, next) => {
+  const token = extractToken(req);
 
   if (!token) {
-    return res.status(401).json({
-      success: false,
-      error: 'Non autorisé à accéder à cette route',
-    });
+    throw new AppError('Non autorise a acceder a cette ressource', 401);
   }
 
+  const user = await resolveUser(token);
+
+  if (!user) {
+    throw new AppError('Utilisateur introuvable ou session invalide', 401);
+  }
+
+  req.user = user;
+  next();
+});
+
+const optionalAuth = async (req, res, next) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decoded.id);
-    next();
+    const token = extractToken(req);
+
+    if (!token) {
+      req.user = null;
+      return next();
+    }
+
+    const user = await resolveUser(token);
+    req.user = user || null;
+    return next();
   } catch (error) {
-    return res.status(401).json({
-      success: false,
-      error: 'Non autorisé à accéder à cette route',
-    });
+    req.user = null;
+    return next();
   }
 };
 
-exports.authorize = (...roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      return res.status(403).json({
-        success: false,
-        error: `Le rôle ${req.user.role} n'est pas autorisé à accéder à cette route`,
-      });
-    }
-    next();
-  };
+const authorize = (...roles) => (req, res, next) => {
+  if (!req.user) {
+    return next(new AppError('Authentification requise', 401));
+  }
+
+  if (!roles.includes(req.user.role)) {
+    return next(new AppError(`Le role ${req.user.role} n'est pas autorise a acceder a cette ressource`, 403));
+  }
+
+  return next();
+};
+
+module.exports = {
+  protect,
+  optionalAuth,
+  authorize,
 };
