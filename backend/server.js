@@ -52,6 +52,26 @@ const server = app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
 
+const SELF_URL = process.env.SELF_URL; 
+const PING_INTERVAL = 2 * 60 * 1000; 
+
+if (SELF_URL) {
+  setInterval(async () => {
+    try {
+      const res = await fetch(`${SELF_URL}/api/health`);
+      console.log(`[self-ping] Status: ${res.status} - ${new Date().toISOString()}`);
+    } catch (err) {
+      console.error(`[self-ping] Échec: ${err.message}`);
+    }
+  }, PING_INTERVAL);
+
+  console.log(`[self-ping] Activé — ping toutes les 2 minutes vers ${SELF_URL}/api/health`);
+} else {
+  console.warn('[self-ping] SELF_URL non défini — auto-ping désactivé.');
+}
+
+
+
 process.on('unhandledRejection', (err) => {
   console.error(`Unhandled rejection: ${err.message}`);
   server.close(() => process.exit(1));
