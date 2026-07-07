@@ -17,6 +17,11 @@ class CloudflareR2Storage extends StorageProvider {
     const { r2 } = storageConfig;
     const requiredValues = ['accountId', 'accessKeyId', 'secretAccessKey', 'bucketName'];
 
+
+    console.log('accessKeyId length:', r2.accessKeyId?.length, JSON.stringify(r2.accessKeyId));
+console.log('secretAccessKey length:', r2.secretAccessKey?.length, JSON.stringify(r2.secretAccessKey));  
+
+
     for (const key of requiredValues) {
       if (!r2[key]) {
         throw new AppError(`Configuration Cloudflare R2 incomplete: ${key} manquant`, 500);
@@ -105,6 +110,9 @@ class CloudflareR2Storage extends StorageProvider {
       { expiresIn }
     );
   }
+
 }
+
+
 
 module.exports = CloudflareR2Storage;
