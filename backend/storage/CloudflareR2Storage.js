@@ -31,6 +31,8 @@ class CloudflareR2Storage extends StorageProvider {
         accessKeyId: r2.accessKeyId,
         secretAccessKey: r2.secretAccessKey,
       },
+       requestChecksumCalculation: 'WHEN_REQUIRED',
+       responseChecksumValidation: 'WHEN_REQUIRED',
     });
   }
 

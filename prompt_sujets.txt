@@ -1,0 +1,99 @@
+j'ai vais de soumettre des images , pdf , fichiers de sujets et pour chaque fichier tu me donnerais cette sortie structuré : | Label                 | Description                                                                                                                                                                                                                                                                                                                                                                               |  
+
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+| **Titre du document** | Saisissez un titre clair, précis et représentatif du contenu du document. Il doit permettre aux autres utilisateurs d'identifier rapidement la ressource. Exemple : *Épreuve de Mathématiques - Analyse 1 - Session 2025*.                                                                                                                                                                |
+
+| **Description**       | Résumez brièvement le contenu du document. Vous pouvez préciser les chapitres abordés, les objectifs, le type de document (cours, TD, examen, correction, mémoire, etc.) ainsi que toute information utile pour aider les autres utilisateurs à savoir si cette ressource répond à leurs besoins.                                                                                         |
+
+| **Université**        | Sélectionnez l'université à laquelle le document est rattaché. Si celle-ci n'existe pas encore dans la liste, vous pouvez l'ajouter afin d'enrichir la base de données et de faciliter les recherches futures.                                                                                                                                                                            |
+
+| **Département**       | Choisissez le département, la faculté, l'école ou la filière concernée par le document (par exemple : Informatique, Mathématiques, Génie Civil, Droit, Médecine, etc.). Si votre département n'est pas disponible, vous pouvez en créer un nouveau.                                                                                                                                       |
+
+| **Niveau**            | Indiquez le niveau d'études correspondant au document. Il peut s'agir d'une année universitaire (Licence 1, Master 2, BTS 2, Doctorat, etc.) ou de tout autre niveau pertinent selon l'établissement. Cette information permet de proposer des ressources adaptées au parcours de chaque étudiant.                                                                                        |
+
+| **Semestre**          | Précisez le semestre auquel le document est associé (Semestre 1, Semestre 2, Semestre 5, etc.). Cette information aide les étudiants à retrouver rapidement les documents correspondant à leur période d'étude.                                                                                                                                                                           |
+
+| **Catégorie**         | Choisissez la catégorie qui décrit le mieux votre document : cours, travaux dirigés (TD), travaux pratiques (TP), examens, corrections, mémoires, rapports de stage, exercices, fiches de révision, projets, présentations ou toute autre catégorie pertinente. Si la catégorie souhaitée n'existe pas, vous pouvez l'ajouter afin d'améliorer l'organisation des ressources disponibles. |     et voici quelques valeur enregistrement dont il faux puisé, s'il l'une des informations sur le fichier ne se trouve pas dans ce dataset, il faut le signaler  et je vais l'ajouté: const UNIVERSITIES = [
+  // Universités publiques
+  { name: 'Université Félix Houphouët-Boigny (Cocody, Abidjan)' },
+  { name: 'Université Nangui Abrogoua (Abobo-Adjamé, Abidjan)' },
+  { name: 'Université Alassane Ouattara (Bouaké)' },
+  { name: 'Université Jean Lorougnon Guédé (Daloa)' },
+  { name: 'Université Péléforo Gon Coulibaly (Korhogo)' },
+  { name: 'Université de Man (Man)' },
+  { name: 'Université Polytechnique de San-Pédro (San-Pédro)' },
+  { name: 'Université de Bondoukou (Bondoukou)' },
+  { name: 'Université Virtuelle de Côte d\'Ivoire - UVCI (Abidjan)' },
+
+  // Grandes écoles / Instituts publics
+  { name: 'INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro)' },
+  { name: 'ENSEA - École Nationale Supérieure de Statistique et d\'Économie Appliquée (Abidjan)' },
+  { name: 'ESATIC - École Supérieure Africaine des TIC (Abidjan)' },
+  { name: 'ENS - École Normale Supérieure (Abidjan)' },
+
+  // Universités privées principales
+  { name: 'UCAO - Université Catholique de l\'Afrique de l\'Ouest (Abidjan)' },
+  { name: 'UIGB - Université Internationale de Grand-Bassam (Grand-Bassam)' },
+  { name: 'UST-CI - Université des Sciences et Technologies de Côte d\'Ivoire (Abidjan)' },
+  { name: 'Université Nord-Sud (Abidjan)' },
+];
+
+const DEPARTMENTS = [
+  // UFR Sciences
+  { name: 'Sciences des Structures et de la Matière (SSMT)' },
+  { name: 'Mathématiques et Informatique (MI)' },
+  { name: 'Sciences Fondamentales et Appliquées (SFA)' },
+  { name: 'Sciences de la Terre et des Ressources Minières (STRM)' },
+  { name: 'Biosciences' },
+  { name: 'Sciences Médicales' },
+  { name: 'Odonto-Stomatologie' },
+  { name: 'Sciences Pharmaceutiques et Biologiques' },
+  { name: 'Sciences de la Nature' },
+
+  // Génie / Technique
+  { name: 'Génie Civil' },
+  { name: 'Génie Électrique et Électronique' },
+  { name: 'Génie Mécanique et Énergétique' },
+  { name: 'Génie Informatique' },
+  { name: 'Mines et Géologie' },
+  { name: 'Agronomie' },
+
+  // Sciences humaines, économiques et juridiques
+  { name: 'Sciences Économiques et de Gestion (SEG)' },
+  { name: 'Sciences Juridiques, Administratives et Politiques (SJAP)' },
+  { name: 'Sciences de l\'Homme et de la Société (SHS)' },
+  { name: 'Communication, Milieu et Société (CMS)' },
+  { name: 'Criminologie' },
+  { name: 'Langues, Littératures et Civilisations (LLC)' },
+  { name: 'Information, Communication et Arts (ICA)' },
+
+  // Autres filières professionnelles
+  { name: 'Sciences de l\'Éducation' },
+  { name: 'Statistique et Démographie' },
+  { name: 'Environnement' },
+];
+
+const LEVELS = [
+  { name: 'Licence 1', order: 1 },
+  { name: 'Licence 2', order: 2 },
+  { name: 'Licence 3', order: 3 },
+  { name: 'Master 1', order: 4 },
+  { name: 'Master 2', order: 5 },
+  { name: 'Doctorat', order: 6 },
+];
+
+const SEMESTERS = [
+  { name: 'Semestre 1', order: 1 },
+  { name: 'Semestre 2', order: 2 },
+];
+
+const CATEGORIES = [
+  { name: 'Cours' },
+  { name: 'Exercices / TD' },
+  { name: 'TP (Travaux Pratiques)' },
+  { name: "Sujets d'Examens" },
+  { name: 'Corrigés' },
+  { name: 'Fiches de Révision' },
+  { name: 'Annales / Sujets de Concours' },
+];
