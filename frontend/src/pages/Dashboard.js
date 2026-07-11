@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Search, SlidersHorizontal, LogOut, FileText, Upload,
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
-  MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User
+  MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User,
+  AlertTriangle, FileSearch
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -16,6 +17,12 @@ import {
 import CreatableSelect from '../components/CreatableSelect';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
+
+const EMPTY_UPLOAD_DATA = {
+  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null
+};
+
+const EMPTY_DUPLICATE_CHECK = { status: 'idle', matches: [], error: '' };
 
 const Dashboard = () => {
   const { user, loading, logout } = useContext(AuthContext);
@@ -44,13 +51,34 @@ const Dashboard = () => {
     university: '', department: '', level: '', semester: '', category: ''
   });
 
-  const [uploadData, setUploadData] = useState({
-    title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null
-  });
+  const [uploadData, setUploadData] = useState(EMPTY_UPLOAD_DATA);
   const [uploading, setUploading] = useState(false);
+  const [duplicateCheck, setDuplicateCheck] = useState(EMPTY_DUPLICATE_CHECK);
+  const [duplicateAcknowledged, setDuplicateAcknowledged] = useState(false);
   const [downloadingDocs, setDownloadingDocs] = useState({});
   const [validatingDocs, setValidatingDocs] = useState({});
   const [isFetching, setIsFetching] = useState(true);
+
+  const fetchDuplicateTitleMatches = useCallback(async (title) => {
+    const cleanTitle = title.trim();
+    if (cleanTitle.length < 3) return [];
+
+    const res = await axios.get('/api/documents/duplicates/title', {
+      params: { title: cleanTitle }
+    });
+
+    return res.data.data || [];
+  }, []);
+
+  const resetDuplicateCheck = () => {
+    setDuplicateCheck(EMPTY_DUPLICATE_CHECK);
+    setDuplicateAcknowledged(false);
+  };
+
+  const resetUploadForm = () => {
+    setUploadData(EMPTY_UPLOAD_DATA);
+    resetDuplicateCheck();
+  };
 
   useEffect(() => {
     if (!loading && !user) navigate('/login');
@@ -59,6 +87,42 @@ const Dashboard = () => {
   useEffect(() => {
     if (user) fetchDashboardData();
   }, [user]);
+
+  useEffect(() => {
+    const title = uploadData.title.trim();
+    setDuplicateAcknowledged(false);
+
+    if (activeTab !== 'upload' || title.length < 3) {
+      setDuplicateCheck(EMPTY_DUPLICATE_CHECK);
+      return undefined;
+    }
+
+    let cancelled = false;
+    const timeout = setTimeout(async () => {
+      setDuplicateCheck({ status: 'checking', matches: [], error: '' });
+
+      try {
+        const matches = await fetchDuplicateTitleMatches(title);
+        if (!cancelled) {
+          setDuplicateCheck({ status: 'checked', matches, error: '' });
+        }
+      } catch (error) {
+        console.error('Erreur lors de la comparaison du titre:', error);
+        if (!cancelled) {
+          setDuplicateCheck({
+            status: 'error',
+            matches: [],
+            error: 'Impossible de comparer ce titre pour le moment.'
+          });
+        }
+      }
+    }, 450);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+    };
+  }, [activeTab, uploadData.title, fetchDuplicateTitleMatches]);
 
   useEffect(() => {
     if (user && !isFetching && myDocsPage > 1) {
@@ -203,16 +267,38 @@ const Dashboard = () => {
     }
   };
 
+  const handleCancelUpload = () => {
+    resetUploadForm();
+  };
+
   const handleUpload = async (e) => {
     e.preventDefault();
     setUploading(true);
     try {
+      const duplicateMatches = await fetchDuplicateTitleMatches(uploadData.title);
+      if (duplicateMatches.length > 0 && !duplicateAcknowledged) {
+        setDuplicateCheck({ status: 'checked', matches: duplicateMatches, error: '' });
+        return;
+      }
+
       const formData = new FormData();
       Object.keys(uploadData).forEach(key => {
-        if (uploadData[key]) formData.append(key, uploadData[key]);
+        if (uploadData[key]) {
+          if (key === 'file') {
+            const file = uploadData[key];
+            // Normalize filename: remove accents and replace special chars/spaces with underscore
+            const cleanName = file.name
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .replace(/[^a-zA-Z0-9.\-]/g, '_');
+            formData.append(key, file, cleanName);
+          } else {
+            formData.append(key, uploadData[key]);
+          }
+        }
       });
       await axios.post('/api/documents', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-      setUploadData({ title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null });
+      resetUploadForm();
       fetchMyDocuments(1);
       setMyDocsPage(1);
       setActiveTab('documents');
@@ -222,6 +308,10 @@ const Dashboard = () => {
       setUploading(false);
     }
   };
+
+  const hasBlockingDuplicate = duplicateCheck.matches.length > 0 && !duplicateAcknowledged;
+  const uploadButtonDisabled =
+    uploading || duplicateCheck.status === 'checking' || hasBlockingDuplicate;
 
   if (loading) {
     return (
@@ -562,6 +652,113 @@ const Dashboard = () => {
                         placeholder="Ex: Épreuve de Mathématiques 2024"
                       />
                     </div>
+
+                    <AnimatePresence>
+                      {duplicateCheck.status === 'checking' && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          className="flex items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm font-bold text-sky-700"
+                        >
+                          <FileSearch size={18} />
+                          Comparaison du titre avec la base...
+                        </motion.div>
+                      )}
+
+                      {duplicateCheck.status === 'checked' && duplicateCheck.matches.length === 0 && uploadData.title.trim().length >= 3 && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          className="flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700"
+                        >
+                          <CheckCircle size={18} />
+                          Aucun titre similaire détecté.
+                        </motion.div>
+                      )}
+
+                      {duplicateCheck.status === 'error' && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-bold text-rose-600"
+                        >
+                          {duplicateCheck.error}
+                        </motion.div>
+                      )}
+
+                      {duplicateCheck.matches.length > 0 && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          className="rounded-2xl border border-amber-200 bg-amber-50/90 p-4 shadow-sm"
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
+                              <AlertTriangle size={20} />
+                            </div>
+                            <div>
+                              <h3 className="text-sm font-black text-amber-900">Document similaire détecté</h3>
+                              <p className="mt-1 text-xs font-semibold leading-5 text-amber-800/80">
+                                Vérifiez les titres existants avant de publier afin d'éviter un doublon.
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 space-y-2">
+                            {duplicateCheck.matches.map((match) => (
+                              <div key={match._id} className="flex flex-col gap-3 rounded-xl border border-amber-100 bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
+                                <div className="min-w-0">
+                                  <p className="line-clamp-1 text-sm font-black text-slate-900" title={match.title}>
+                                    {match.title}
+                                  </p>
+                                  <p className="mt-1 text-xs font-bold text-slate-500">
+                                    {match.university?.name || 'Université non précisée'} · {match.matchPercent}% similaire
+                                  </p>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => handleDownload(match)}
+                                  disabled={!match.canView || downloadingDocs[match._id]}
+                                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-4 py-2.5 text-xs font-black text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500"
+                                >
+                                  {downloadingDocs[match._id] ? (
+                                    <div className="h-4 w-4 rounded-full border-2 border-current border-t-transparent animate-spin" />
+                                  ) : (
+                                    <Eye size={15} />
+                                  )}
+                                  {match.canView ? 'Voir' : 'Non visible'}
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                            <button
+                              type="button"
+                              onClick={handleCancelUpload}
+                              className="inline-flex items-center justify-center rounded-xl border border-amber-200 bg-white px-4 py-3 text-sm font-black text-amber-800 transition hover:bg-amber-100"
+                            >
+                              Annuler l'envoi
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setDuplicateAcknowledged(true)}
+                              className={`inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-black transition ${
+                                duplicateAcknowledged
+                                  ? 'bg-emerald-600 text-white'
+                                  : 'bg-slate-950 text-white hover:bg-slate-800'
+                              }`}
+                            >
+                              {duplicateAcknowledged ? 'Différence confirmée' : 'Mon fichier est différent'}
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                     
                     <div>
                       <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1 mb-2 block">Description</label>
@@ -616,11 +813,15 @@ const Dashboard = () => {
                   </div>
 
                   <button
-                    type="submit" disabled={uploading}
+                    type="submit" disabled={uploadButtonDisabled}
                     className="w-full py-4 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-indigo-500/20 transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-70 disabled:pointer-events-none"
                   >
                     {uploading ? (
                       <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Envoi...</>
+                    ) : hasBlockingDuplicate ? (
+                      <><AlertTriangle size={18} /> Vérifiez le doublon détecté</>
+                    ) : duplicateCheck.status === 'checking' ? (
+                      <><FileSearch size={18} /> Vérification du titre...</>
                     ) : (
                       <><Upload size={18} /> Publier le Document</>
                     )}

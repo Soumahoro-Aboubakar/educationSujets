@@ -199,6 +199,56 @@ const populateDocument = (doc) => {
   };
 };
 
+const normalizeTitle = (value = '') =>
+  String(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
+
+const getTitleTokens = (value) =>
+  normalizeTitle(value).split(' ').filter((token) => token.length > 2);
+
+const getBigrams = (value) => {
+  const compact = normalizeTitle(value).replace(/\s+/g, '');
+  if (compact.length < 2) return compact ? [compact] : [];
+  return Array.from({ length: compact.length - 1 }, (_, index) => compact.slice(index, index + 2));
+};
+
+const getTitleSimilarity = (sourceTitle, candidateTitle) => {
+  const source = normalizeTitle(sourceTitle);
+  const candidate = normalizeTitle(candidateTitle);
+  if (!source || !candidate) return 0;
+  if (source === candidate) return 1;
+
+  const sourceTokens = getTitleTokens(source);
+  const candidateTokens = getTitleTokens(candidate);
+  const sharedTokens = sourceTokens.filter((token) => candidateTokens.includes(token));
+  const tokenScore = sourceTokens.length && candidateTokens.length
+    ? sharedTokens.length / Math.min(sourceTokens.length, candidateTokens.length)
+    : 0;
+  const sourceBigrams = getBigrams(source);
+  const candidateBigrams = getBigrams(candidate);
+  const sharedBigrams = sourceBigrams.filter((bigram) => candidateBigrams.includes(bigram));
+  const bigramScore = sourceBigrams.length && candidateBigrams.length
+    ? (2 * sharedBigrams.length) / (sourceBigrams.length + candidateBigrams.length)
+    : 0;
+  const containmentScore = source.includes(candidate) || candidate.includes(source)
+    ? Math.min(source.length, candidate.length) / Math.max(source.length, candidate.length)
+    : 0;
+
+  return Math.min(1, Math.max(tokenScore * 0.92, bigramScore, containmentScore));
+};
+
+const canViewDocument = (doc, currentUser) => (
+  doc.status === 'approved' ||
+  currentUser?.role === 'admin' ||
+  currentUser?.role === 'sub-admin' ||
+  doc.uploadedBy === currentUser?._id
+);
+
 // Implement Axios Mock Adapter
 const mockAdapter = (config) => {
   return new Promise((resolve, reject) => {
@@ -356,6 +406,37 @@ const mockAdapter = (config) => {
       }
       if (url === '/api/categories' && method === 'post') {
         handleStaticPost(dbCategories, 'categories');
+        return;
+      }
+
+      // GET /api/documents/duplicates/title
+      if (url === '/api/documents/duplicates/title' && method === 'get') {
+        const currentUser = getUserFromHeaders(headers);
+        if (!currentUser) {
+          reject({ response: { status: 401, data: { error: 'Non autorisé' } } });
+          return;
+        }
+
+        const title = params?.title || '';
+        const matches = dbDocuments
+          .map((doc) => {
+            const duplicateScore = Math.max(
+              getTitleSimilarity(title, doc.title),
+              getTitleSimilarity(title, doc.file)
+            );
+
+            return {
+              ...populateDocument(doc),
+              duplicateScore: Number(duplicateScore.toFixed(2)),
+              matchPercent: Math.round(duplicateScore * 100),
+              canView: canViewDocument(doc, currentUser)
+            };
+          })
+          .filter((doc) => doc.duplicateScore >= 0.68)
+          .sort((a, b) => b.duplicateScore - a.duplicateScore)
+          .slice(0, 5);
+
+        resolve({ status: 200, data: { success: true, data: matches, count: matches.length }, headers: {}, config });
         return;
       }
 
