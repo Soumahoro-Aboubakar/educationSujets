@@ -36,6 +36,13 @@ const documentIdParamValidator = [
   param('id').isMongoId().withMessage('Identifiant de document invalide'),
 ];
 
+const duplicateTitleValidator = [
+  query('title')
+    .trim()
+    .isLength({ min: 3, max: 200 })
+    .withMessage('Le titre a comparer doit contenir entre 3 et 200 caracteres'),
+];
+
 const listDocumentsValidator = [
   query('university').optional().isMongoId().withMessage('Filtre universite invalide'),
   query('department').optional().isMongoId().withMessage('Filtre departement invalide'),
@@ -51,5 +58,6 @@ module.exports = {
   updateDocumentValidator,
   validateDocumentStatusValidator,
   documentIdParamValidator,
+  duplicateTitleValidator,
   listDocumentsValidator,
 };

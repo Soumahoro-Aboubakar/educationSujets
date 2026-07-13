@@ -28,6 +28,64 @@ const applyPopulate = (query) => {
   return query;
 };
 
+const normalizeTitle = (value = '') =>
+  String(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
+
+const getTitleTokens = (value) =>
+  normalizeTitle(value)
+    .split(' ')
+    .filter((token) => token.length > 2);
+
+const getBigrams = (value) => {
+  const compact = normalizeTitle(value).replace(/\s+/g, '');
+  if (compact.length < 2) {
+    return compact ? [compact] : [];
+  }
+
+  return Array.from({ length: compact.length - 1 }, (_, index) =>
+    compact.slice(index, index + 2)
+  );
+};
+
+const getTitleSimilarity = (sourceTitle, candidateTitle) => {
+  const source = normalizeTitle(sourceTitle);
+  const candidate = normalizeTitle(candidateTitle);
+
+  if (!source || !candidate) {
+    return 0;
+  }
+
+  if (source === candidate) {
+    return 1;
+  }
+
+  const sourceTokens = getTitleTokens(source);
+  const candidateTokens = getTitleTokens(candidate);
+  const sharedTokens = sourceTokens.filter((token) => candidateTokens.includes(token));
+  const tokenScore = sourceTokens.length && candidateTokens.length
+    ? sharedTokens.length / Math.min(sourceTokens.length, candidateTokens.length)
+    : 0;
+
+  const sourceBigrams = getBigrams(source);
+  const candidateBigrams = getBigrams(candidate);
+  const sharedBigrams = sourceBigrams.filter((bigram) => candidateBigrams.includes(bigram));
+  const bigramScore = sourceBigrams.length && candidateBigrams.length
+    ? (2 * sharedBigrams.length) / (sourceBigrams.length + candidateBigrams.length)
+    : 0;
+
+  const containmentScore = source.includes(candidate) || candidate.includes(source)
+    ? Math.min(source.length, candidate.length) / Math.max(source.length, candidate.length)
+    : 0;
+
+  return Math.min(1, Math.max(tokenScore * 0.92, bigramScore, containmentScore));
+};
+
 const canAccessDocument = (document, user) => {
   if (document.status === 'approved') {
     return true;
@@ -37,7 +95,9 @@ const canAccessDocument = (document, user) => {
     return false;
   }
 
-  if (document.uploadedBy?._id?.toString?.() === user._id.toString()) {
+  const uploadedById = document.uploadedBy?._id || document.uploadedBy;
+
+  if (uploadedById?.toString?.() === user._id.toString()) {
     return true;
   }
 
@@ -70,6 +130,54 @@ const assertDocumentMutationAccess = (document, user) => {
 const getDocumentById = async (id) => applyPopulate(Document.findById(id));
 
 const getDocumentByStoredFileName = async (fileName) => applyPopulate(Document.findOne({ file: fileName }));
+
+const findDuplicateTitleCandidates = async (title, user) => {
+  const normalized = normalizeTitle(title);
+
+  if (normalized.length < 4) {
+    return [];
+  }
+
+  const documents = await Document.find({})
+    .select('title originalFileName status uploadedBy createdAt')
+    .sort('-createdAt')
+    .lean();
+
+  const rankedMatches = documents
+    .map((document) => {
+      const titleScore = getTitleSimilarity(title, document.title);
+      const fileScore = getTitleSimilarity(title, document.originalFileName);
+      const duplicateScore = Math.max(titleScore, fileScore);
+
+      return {
+        document,
+        duplicateScore: Number(duplicateScore.toFixed(2)),
+        matchPercent: Math.round(duplicateScore * 100),
+      };
+    })
+    .filter((match) => match.duplicateScore >= 0.68)
+    .sort((a, b) => b.duplicateScore - a.duplicateScore)
+    .slice(0, 5);
+
+  const documentsById = new Map(
+    (await applyPopulate(Document.find({ _id: { $in: rankedMatches.map((match) => match.document._id) } })))
+      .map((document) => [document._id.toString(), document])
+  );
+
+  return rankedMatches.map((match) => {
+    const populatedDocument = documentsById.get(match.document._id.toString());
+    const plainDocument = populatedDocument?.toObject
+      ? populatedDocument.toObject()
+      : match.document;
+
+    return {
+      ...plainDocument,
+      duplicateScore: match.duplicateScore,
+      matchPercent: match.matchPercent,
+      canView: canAccessDocument(populatedDocument || match.document, user),
+    };
+  });
+};
 
 const buildDocumentFilters = (params = {}) => {
   const filters = { status: 'approved' };
@@ -344,6 +452,7 @@ const incrementDocumentDownloads = async (documentId) => {
 module.exports = {
   getDocumentById,
   getDocumentByStoredFileName,
+  findDuplicateTitleCandidates,
   listPublicDocuments,
   listUserDocuments,
   listPendingDocuments,

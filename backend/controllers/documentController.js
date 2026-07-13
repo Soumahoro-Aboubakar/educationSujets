@@ -1,6 +1,7 @@
 const {
   getDocumentById,
   getDocumentByStoredFileName,
+  findDuplicateTitleCandidates,
   listPublicDocuments,
   listUserDocuments,
   listPendingDocuments,
@@ -22,6 +23,11 @@ const { sendSuccess } = require('../utils/api');
 exports.getDocuments = asyncHandler(async (req, res) => {
   const result = await listPublicDocuments(req.query);
   sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
+});
+
+exports.checkDuplicateTitle = asyncHandler(async (req, res) => {
+  const matches = await findDuplicateTitleCandidates(req.query.title, req.user);
+  sendSuccess(res, { data: matches, meta: { count: matches.length } });
 });
 
 exports.getDocument = asyncHandler(async (req, res) => {

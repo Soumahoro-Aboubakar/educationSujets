@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Download, User, LogOut, Home as HomeIcon, Menu, X, ChevronDown, LayoutDashboard } from 'lucide-react';
+import { BarChart3, BookOpen, Download, User, LogOut, Home as HomeIcon, Menu, X, ChevronDown, LayoutDashboard, Compass } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AuthContext from '../context/AuthContext';
 
@@ -67,6 +67,7 @@ const Navbar = () => {
     { to: '/', label: 'Accueil', icon: HomeIcon },
     { to: '/ressources', label: 'Ressources', icon: Download },
     { to: '/simulateur-admission', label: 'Simulateur', icon: BarChart3 },
+    { to: '/orientation-v2', label: 'Orientation V2', icon: Compass },
   ];
 
   const isDashboardRoute = location.pathname.startsWith('/dashboard');

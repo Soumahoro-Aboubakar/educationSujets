@@ -71,7 +71,7 @@ export const calculateInphbClassAverage = (subjectNotes) => {
     (INPHB_CLASS_WEIGHTS.seconde * seconde +
       INPHB_CLASS_WEIGHTS.premiere * premiere +
       INPHB_CLASS_WEIGHTS.terminale * terminale) /
-      weightTotal
+    weightTotal
   );
 };
 
@@ -85,7 +85,7 @@ export const calculateInphbSubjectMgm = (subjectNotes) => {
     mgm: round(
       (INPHB_MGM_WEIGHTS.classAverage * classAverage +
         INPHB_MGM_WEIGHTS.bac * bac) /
-        weightTotal
+      weightTotal
     ),
   };
 };

@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   getDocuments,
+  checkDuplicateTitle,
   getDocument,
   createDocument,
   updateDocument,
@@ -15,10 +16,11 @@ const { protect, authorize, optionalAuth } = require('../middleware/auth');
 const upload = require('../middleware/upload');
 const validate = require('../middleware/validate');
 const {
-  uploadDocumentValidator,
+  uploadDocumentValidator, 
   updateDocumentValidator,
   validateDocumentStatusValidator,
   documentIdParamValidator,
+  duplicateTitleValidator,
   listDocumentsValidator,
 } = require('../validators/documentValidators');
 
@@ -38,6 +40,7 @@ router.route('/')
 router.get('/my', protect, getMyDocuments);
 router.get('/pending', protect, authorize('sub-admin', 'admin'), getPendingDocuments);
 router.get('/analytics', protect, authorize('admin'), getAnalytics);
+router.get('/duplicates/title', protect, duplicateTitleValidator, validate, checkDuplicateTitle);
 router.get('/:id/download', optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
 router.route('/:id')
   .get(optionalAuth, documentIdParamValidator, validate, getDocument)
