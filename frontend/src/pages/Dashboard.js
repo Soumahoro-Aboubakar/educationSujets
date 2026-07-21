@@ -15,8 +15,10 @@ import {
   CategoryScale, LinearScale, BarElement, Title,
 } from 'chart.js';
 import CreatableSelect from '../components/CreatableSelect';
+import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
+import { usePdfWatermark } from '../hooks/usePdfWatermark';
 
 const EMPTY_UPLOAD_DATA = {
   title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null
@@ -59,6 +61,8 @@ const Dashboard = () => {
   const [validatingDocs, setValidatingDocs] = useState({});
   const [isFetching, setIsFetching] = useState(true);
 
+  const { processPdf, isProcessing: watermarking, progress: watermarkProgress, error: watermarkError, resetState: resetWatermark } = usePdfWatermark();
+
   const fetchDuplicateTitleMatches = useCallback(async (title) => {
     const cleanTitle = title.trim();
     if (cleanTitle.length < 3) return [];
@@ -78,6 +82,7 @@ const Dashboard = () => {
   const resetUploadForm = () => {
     setUploadData(EMPTY_UPLOAD_DATA);
     resetDuplicateCheck();
+    if (resetWatermark) resetWatermark();
   };
 
   useEffect(() => {
@@ -209,7 +214,8 @@ const Dashboard = () => {
     { id: 'documents', label: 'Mes documents', icon: FileText },
     { id: 'upload', label: 'Uploader', icon: Upload },
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'validate', label: 'Valider', icon: CheckCircle, badge: pendingDocs.length }] : []),
-    ...(user?.role === 'admin' ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
+    ...(user?.isSuperAdmin ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
+    ...(user?.isSuperAdmin ? [{ id: 'referentials', label: 'Gestion des référentiels', icon: Layers }] : []),
   ];
 
   // Rest of functions...
@@ -271,6 +277,22 @@ const Dashboard = () => {
     resetUploadForm();
   };
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.type === 'application/pdf') {
+        const watermarkedFile = await processPdf(file);
+        if (watermarkedFile) {
+          setUploadData(prev => ({ ...prev, file: watermarkedFile }));
+        } else {
+          setUploadData(prev => ({ ...prev, file: null }));
+        }
+      } else {
+        setUploadData(prev => ({ ...prev, file }));
+      }
+    }
+  };
+
   const handleUpload = async (e) => {
     e.preventDefault();
     setUploading(true);
@@ -311,7 +333,7 @@ const Dashboard = () => {
 
   const hasBlockingDuplicate = duplicateCheck.matches.length > 0 && !duplicateAcknowledged;
   const uploadButtonDisabled =
-    uploading || duplicateCheck.status === 'checking' || hasBlockingDuplicate;
+    uploading || duplicateCheck.status === 'checking' || hasBlockingDuplicate || watermarking;
 
   if (loading) {
     return (
@@ -796,20 +818,45 @@ const Dashboard = () => {
 
                   <div className="pt-2">
                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1 mb-2 block">Fichier (PDF, DOCX)</label>
-                    <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${uploadData.file ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'}`}>
+                    <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${uploadData.file ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'} ${watermarking ? 'opacity-70 pointer-events-none' : ''}`}>
                       <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-4 transition-colors ${uploadData.file ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 group-hover:text-indigo-500 group-hover:bg-indigo-50'}`}>
-                        {uploadData.file ? <CheckCircle size={28} /> : <Upload size={28} />}
+                        {watermarking ? (
+                          <div className="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
+                        ) : uploadData.file ? (
+                          <CheckCircle size={28} />
+                        ) : (
+                          <Upload size={28} />
+                        )}
                       </div>
-                      <span className={`text-sm font-bold ${uploadData.file ? 'text-indigo-700' : 'text-slate-600'}`}>
-                        {uploadData.file ? uploadData.file.name : 'Cliquez ou glissez-déposez un fichier'}
-                      </span>
-                      {!uploadData.file && <span className="text-xs font-medium text-slate-400 mt-2">Maximum 10MB</span>}
+                      
+                      {watermarking ? (
+                        <div className="flex flex-col items-center w-full max-w-[200px]">
+                          <span className="text-sm font-bold text-indigo-600 mb-2">Application du filigrane... {watermarkProgress}%</span>
+                          <div className="w-full bg-indigo-100 rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-indigo-600 h-1.5 rounded-full transition-all duration-300" style={{ width: `${watermarkProgress}%` }} />
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <span className={`text-sm font-bold text-center px-4 ${uploadData.file ? 'text-indigo-700' : 'text-slate-600'}`}>
+                            {uploadData.file ? uploadData.file.name : 'Cliquez ou glissez-déposez un fichier'}
+                          </span>
+                          {!uploadData.file && <span className="text-xs font-medium text-slate-400 mt-2">PDF (Filigrané auto) ou DOCX - Max 10MB</span>}
+                        </>
+                      )}
                       
                       <input
                         type="file" className="hidden" required
-                        onChange={(e) => setUploadData({ ...uploadData, file: e.target.files[0] })}
+                        accept=".pdf,.docx,.doc"
+                        onChange={handleFileChange}
+                        disabled={watermarking}
                       />
                     </label>
+                    {watermarkError && (
+                      <div className="mt-2 text-xs font-bold text-rose-500 flex items-center gap-1.5 ml-1">
+                        <AlertTriangle size={14} /> {watermarkError}
+                      </div>
+                    )}
                   </div>
 
                   <button
@@ -921,6 +968,12 @@ const Dashboard = () => {
                   </button>
                 </div>
               )}
+            </motion.div>
+          )}
+
+          {activeTab === 'referentials' && user?.isSuperAdmin && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+              <ReferentialAdminPanel />
             </motion.div>
           )}
 

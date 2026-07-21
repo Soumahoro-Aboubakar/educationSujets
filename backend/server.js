@@ -43,6 +43,7 @@ app.use('/api/levels', require('./routes/levels'));
 app.use('/api/semesters', require('./routes/semesters'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/referentials', require('./routes/referentials'));
 app.use('/uploads', require('./routes/uploads'));
 
 app.use(errorHandler);

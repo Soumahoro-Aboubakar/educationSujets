@@ -4,7 +4,8 @@ import {
   filterByAcademicEligibility,
   isAcademicallyEligible,
   calculateSocioEconomicScore,
-  calculateProfessionalScore
+  calculateProfessionalScore,
+  checkTargetedEligibility
 } from './filters';
 
 /**
@@ -197,6 +198,109 @@ export const runGeographicMode = (profile, region = null, ville = null) => {
   }
 
   return runAutopilotMode(profile, filters);
+};
+
+export const runFieldDiscoveryMode = (profile, fieldName, filters = {}) => {
+  const normalizedField = fieldName?.trim().toLowerCase();
+  const matches = applyAdvancedFilters(CATALOG, filters)
+    .filter(formation => formation.filiere.toLowerCase().includes(normalizedField))
+    .map(formation => {
+      const compatibilityScore = calculateGlobalCompatibilityScore(profile, formation);
+      const eligibility = checkTargetedEligibility(profile, formation);
+
+      return {
+        ...formation,
+        compatibilityScore,
+        admissionStatus: eligibility.isEligible ? 'ELIGIBLE' : 'INCONCLUSIVE',
+        criteriaSummary: {
+          isEligible: eligibility.isEligible,
+          reasons: eligibility.reasons
+        }
+      };
+    })
+    .sort((a, b) => b.compatibilityScore - a.compatibilityScore);
+
+  return {
+    field: fieldName,
+    matches,
+    total: matches.length
+  };
+};
+
+export const evaluateSchoolEligibility = (profile, schoolName, fieldName = null) => {
+  const normalizedSchool = (schoolName || '').trim().toLowerCase();
+  const normalizedField = (fieldName || '').trim().toLowerCase();
+
+  const schoolMatches = CATALOG.filter(formation => {
+    const establishmentName = formation.nomEtablissement.toLowerCase();
+    return establishmentName === normalizedSchool || establishmentName.includes(normalizedSchool);
+  });
+
+  const filtered = schoolMatches.filter(formation => {
+    if (!normalizedField) return true;
+    const formationField = formation.filiere.toLowerCase();
+    return formationField === normalizedField || formationField.includes(normalizedField);
+  });
+
+  const recommendation = filtered[0] || schoolMatches[0];
+
+  if (!recommendation) {
+    return {
+      verdict: 'NOT_ELIGIBLE',
+      schoolName,
+      fieldName,
+      matchedCriteria: [],
+      missingCriteria: [],
+      reasons: ['Aucune formation trouvée pour cet établissement.'],
+      alternatives: []
+    };
+  }
+  const eligibility = checkTargetedEligibility(profile, recommendation);
+  const matchedCriteria = [];
+  const missingCriteria = [];
+
+  if (profile.age <= recommendation.ageLimite) {
+    matchedCriteria.push(`Âge compatible (max ${recommendation.ageLimite} ans)`);
+  } else {
+    missingCriteria.push(`Âge au-dessus de la limite (${profile.age} > ${recommendation.ageLimite})`);
+  }
+
+  if (recommendation.conditions.bacsAcceptes.includes(profile.bacType)) {
+    matchedCriteria.push(`Série de bac acceptée (${profile.bacType})`);
+  } else {
+    missingCriteria.push(`Série de bac non acceptée (${profile.bacType})`);
+  }
+
+  Object.entries(recommendation.conditions.notesMinimales).forEach(([subject, minNote]) => {
+    const userNote = profile.notes?.[subject];
+    if (userNote !== undefined && userNote !== '' && userNote >= minNote) {
+      matchedCriteria.push(`Note suffisante en ${subject} (${userNote}/${minNote})`);
+    } else {
+      missingCriteria.push(`Note insuffisante en ${subject} (${userNote ?? 'N/A'}/${minNote})`);
+    }
+  });
+
+  const verdict = eligibility.isEligible ? 'ELIGIBLE' : (missingCriteria.length > 0 ? 'INCONCLUSIVE' : 'NOT_ELIGIBLE');
+  const alternatives = CATALOG.filter(formation =>
+    formation.filiere.toLowerCase().includes((fieldName || recommendation.filiere).toLowerCase()) &&
+    formation.nomEtablissement !== schoolName
+  )
+    .slice(0, 3)
+    .map(formation => ({
+      ...formation,
+      compatibilityScore: calculateGlobalCompatibilityScore(profile, formation)
+    }));
+
+  return {
+    verdict,
+    schoolName,
+    fieldName: recommendation.filiere,
+    matchedCriteria,
+    missingCriteria,
+    reasons: eligibility.reasons,
+    alternatives,
+    compatibilityScore: calculateGlobalCompatibilityScore(profile, recommendation)
+  };
 };
 
 /**

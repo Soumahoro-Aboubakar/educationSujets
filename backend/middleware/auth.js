@@ -60,8 +60,21 @@ const authorize = (...roles) => (req, res, next) => {
   return next();
 };
 
+const authorizeSuperAdmin = (req, res, next) => {
+  if (!req.user) {
+    return next(new AppError('Authentification requise', 401));
+  }
+
+  if (req.user.role !== 'admin' || !req.user.isSuperAdmin) {
+    return next(new AppError('Accès réservé au super administrateur', 403));
+  }
+
+  return next();
+};
+
 module.exports = {
   protect,
   optionalAuth,
   authorize,
+  authorizeSuperAdmin,
 };

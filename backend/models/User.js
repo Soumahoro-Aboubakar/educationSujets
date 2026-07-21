@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
     enum: ['contributor', 'sub-admin', 'admin'],
     default: 'contributor',
   },
+  isSuperAdmin: {
+    type: Boolean,
+    default: false,
+  },
   isVerified: {
     type: Boolean,
     default: false,
@@ -42,6 +46,10 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre('save', async function handlePasswordHash(next) {
+  if (this.role === 'admin') {
+    this.isSuperAdmin = true;
+  }
+
   if (!this.isModified('password')) {
     return next();
   }

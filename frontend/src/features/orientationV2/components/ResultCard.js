@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Landmark, GraduationCap, Clock, Wallet, Briefcase, Home, Users, TrendingUp } from 'lucide-react';
+import { Building2, Landmark, GraduationCap, Clock, Wallet } from 'lucide-react';
 import DetailModal from './DetailModal';
 
-const ResultCard = ({ item, type, onViewDetails }) => {
+const ResultCard = ({ item, type, onViewDetails, selectedCity }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   // Styles selon le type
@@ -69,7 +69,7 @@ const ResultCard = ({ item, type, onViewDetails }) => {
               <span className="font-bold text-[#0E1A2B]">{item.duree} ans</span>
             </div>
 
-            <div className="flex flex-col gap-1 rounded-lg bg-[#EDF2F7] p-2 lg:p-3">
+            <div className="hidden sm:flex flex-col gap-1 rounded-lg bg-[#EDF2F7] p-2 lg:p-3">
               <div className="flex items-center gap-1 text-[#8B96A6]">
                 <Wallet size={14} />
                 <span className="font-semibold">Coût</span>
@@ -108,16 +108,6 @@ const ResultCard = ({ item, type, onViewDetails }) => {
             )}
           </div>
 
-          {/* Taux employabilité (si pas rejeté) */}
-          {!isRejected && item.taux_employabilite && (
-            <div className="mb-4 flex items-center gap-2 rounded-lg bg-[#E8F5E9] px-3 py-2 text-xs lg:text-sm">
-              <TrendingUp size={16} className="text-[#1F7A54]" />
-              <span className="text-[#1F7A54]">
-                <strong>{item.taux_employabilite}%</strong> des diplômés employés
-              </span>
-            </div>
-          )}
-
           {/* Motif de rejet si applicable */}
           {isRejected && (
             <div className="mb-4 rounded-lg bg-[#F7E6E2] p-3 text-xs lg:text-sm font-medium text-[#B3392C]">
@@ -154,6 +144,7 @@ const ResultCard = ({ item, type, onViewDetails }) => {
         formation={item} 
         onClose={() => setIsModalOpen(false)} 
         compatibilityScore={item.compatibilityScore}
+        selectedCity={selectedCity}
       />
     </>
   );
