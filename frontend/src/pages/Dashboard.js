@@ -16,10 +16,10 @@ import {
 } from 'chart.js';
 import CreatableSelect from '../components/CreatableSelect';
 import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
-
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
+
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
 const EMPTY_UPLOAD_DATA = {
   title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null, documentType: 'sujet', correctionFor: ''
@@ -280,6 +280,22 @@ const Dashboard = () => {
     }
   };
 
+  const handleAddCorrection = (doc) => {
+    resetUploadForm();
+    setUploadData({
+      ...EMPTY_UPLOAD_DATA,
+      documentType: 'corrige',
+      correctionFor: doc._id,
+      title: `Corrigé - ${doc.title}`,
+      university: doc.university?._id || '',
+      department: doc.department?._id || '',
+      level: doc.level?._id || '',
+      semester: doc.semester?._id || '',
+      category: doc.category?._id || ''
+    });
+    setActiveTab('upload');
+  };
+
   const handleCancelUpload = () => {
     resetUploadForm();
   };
@@ -297,6 +313,37 @@ const Dashboard = () => {
       } else {
         setUploadData(prev => ({ ...prev, file }));
       }
+    }
+  };
+
+  const handleImagesChange = (e) => {
+    const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+    setImageFiles(prev => [...prev, ...files]);
+  };
+
+  const handleRemoveImage = (index) => {
+    setImageFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleGeneratePdfFromImagesBtn = async () => {
+    if (imageFiles.length === 0) return;
+    setIsGeneratingPdf(true);
+    setPdfGenerationProgress(0);
+    try {
+      const generatedPdf = await generatePdfFromImages(imageFiles, setPdfGenerationProgress);
+      const watermarkedFile = await processPdf(generatedPdf);
+      if (watermarkedFile) {
+        setUploadData(prev => ({ ...prev, file: watermarkedFile }));
+        setUploadMode('pdf');
+      } else {
+        setUploadData(prev => ({ ...prev, file: generatedPdf }));
+        setUploadMode('pdf');
+      }
+    } catch (error) {
+      console.error("Erreur lors de la génération du PDF", error);
+    } finally {
+      setIsGeneratingPdf(false);
+      setPdfGenerationProgress(0);
     }
   };
 
@@ -613,8 +660,27 @@ const Dashboard = () => {
                       </div>
                       
                       <div className="relative z-10 mb-4">
-                        <h3 className="text-lg font-bold text-slate-800 line-clamp-1 mb-1" title={doc.title}>{doc.title}</h3>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="text-lg font-bold text-slate-800 line-clamp-1" title={doc.title}>{doc.title}</h3>
+                          {doc.documentType === 'corrige' && (
+                            <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-[10px] font-black rounded-md uppercase tracking-wider">Corrigé</span>
+                          )}
+                        </div>
                         <p className="text-xs font-medium text-slate-500 flex items-center gap-1"><MapPin size={12}/> {doc.university?.name || 'Général'}</p>
+                        
+                        {doc.documentType === 'sujet' && (
+                          <div className="mt-2">
+                            {doc.correction ? (
+                              <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md">
+                                <CheckCircle size={12} /> Corrigé lié
+                              </span>
+                            ) : (
+                              <button onClick={() => handleAddCorrection(doc)} className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-2 py-1 rounded-md transition-colors">
+                                <LinkIcon size={12} /> Ajouter un corrigé
+                              </button>
+                            )}
+                          </div>
+                        )}
                       </div>
 
                       <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
@@ -665,8 +731,12 @@ const Dashboard = () => {
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
               <div className="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8 sm:p-10">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-black text-slate-800 mb-2">Uploader un Document</h2>
-                  <p className="text-sm font-medium text-slate-500">Partagez vos ressources avec la communauté. Veuillez remplir les détails consciencieusement.</p>
+                  <h2 className="text-2xl font-black text-slate-800 mb-2">
+                    {uploadData.documentType === 'corrige' ? 'Uploader un Corrigé' : 'Uploader un Document'}
+                  </h2>
+                  <p className="text-sm font-medium text-slate-500">
+                    {uploadData.documentType === 'corrige' ? `Corrigé pour : ${uploadData.title.replace('Corrigé - ', '')}` : 'Partagez vos ressources avec la communauté. Veuillez remplir les détails consciencieusement.'}
+                  </p>
                 </div>
                 
                 <form onSubmit={handleUpload} className="space-y-6">
@@ -824,9 +894,36 @@ const Dashboard = () => {
                   </div>
 
                   <div className="pt-2">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1 mb-2 block">Fichier (PDF, DOCX)</label>
-                    <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${uploadData.file ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'} ${watermarking ? 'opacity-70 pointer-events-none' : ''}`}>
-                      <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-4 transition-colors ${uploadData.file ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 group-hover:text-indigo-500 group-hover:bg-indigo-50'}`}>
+                    <div className="flex items-center gap-4 mb-4">
+                      <button
+                        type="button"
+                        onClick={() => setUploadMode('pdf')}
+                        className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${
+                          uploadMode === 'pdf'
+                            ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
+                            : 'border-slate-200 text-slate-500 hover:border-indigo-300 hover:bg-slate-50'
+                        }`}
+                      >
+                        <FileText size={18} className="mr-2" /> Uploader un PDF existant
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setUploadMode('images')}
+                        className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${
+                          uploadMode === 'images'
+                            ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
+                            : 'border-slate-200 text-slate-500 hover:border-indigo-300 hover:bg-slate-50'
+                        }`}
+                      >
+                        <ImageIcon size={18} className="mr-2" /> Créer un PDF via Images
+                      </button>
+                    </div>
+
+                    {uploadMode === 'pdf' ? (
+                      <>
+                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1 mb-2 block">Fichier (PDF, DOCX)</label>
+                        <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${uploadData.file ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'} ${watermarking ? 'opacity-70 pointer-events-none' : ''}`}>
+                          <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-4 transition-colors ${uploadData.file ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 group-hover:text-indigo-500 group-hover:bg-indigo-50'}`}>
                         {watermarking ? (
                           <div className="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
                         ) : uploadData.file ? (
@@ -858,11 +955,55 @@ const Dashboard = () => {
                         onChange={handleFileChange}
                         disabled={watermarking}
                       />
-                    </label>
-                    {watermarkError && (
-                      <div className="mt-2 text-xs font-bold text-rose-500 flex items-center gap-1.5 ml-1">
-                        <AlertTriangle size={14} /> {watermarkError}
-                      </div>
+                      </label>
+                      {watermarkError && (
+                        <div className="mt-2 text-xs font-bold text-rose-500 flex items-center gap-1.5 ml-1">
+                          <AlertTriangle size={14} /> {watermarkError}
+                        </div>
+                      )}
+                      </>
+                    ) : (
+                      <>
+                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1 mb-2 block">Images (JPEG, PNG)</label>
+                        <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${imageFiles.length > 0 ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'}`}>
+                          <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-4 transition-colors ${imageFiles.length > 0 ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 group-hover:text-indigo-500 group-hover:bg-indigo-50'}`}>
+                             <ImageIcon size={28} />
+                          </div>
+                          <span className={`text-sm font-bold text-center px-4 ${imageFiles.length > 0 ? 'text-indigo-700' : 'text-slate-600'}`}>
+                            {imageFiles.length > 0 ? `${imageFiles.length} image(s) sélectionnée(s)` : 'Cliquez ou glissez-déposez des images'}
+                          </span>
+                          <input type="file" multiple accept="image/jpeg,image/png" className="hidden" onChange={handleImagesChange} disabled={isGeneratingPdf} />
+                        </label>
+                        {imageFiles.length > 0 && (
+                          <div className="mt-4">
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {imageFiles.map((f, i) => (
+                                <div key={i} className="relative group rounded-lg overflow-hidden border border-slate-200 bg-white">
+                                  <div className="px-3 py-2 text-xs font-medium text-slate-700 truncate w-32">{f.name}</div>
+                                  <button type="button" onClick={() => handleRemoveImage(i)} className="absolute top-0 right-0 p-1 bg-rose-500 text-white rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <X size={12} />
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={handleGeneratePdfFromImagesBtn}
+                              disabled={isGeneratingPdf}
+                              className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-all disabled:opacity-70 flex justify-center items-center gap-2"
+                            >
+                              {isGeneratingPdf ? (
+                                <>
+                                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                  Génération {pdfGenerationProgress}%
+                                </>
+                              ) : (
+                                <>Générer et Filigraner le PDF</>
+                              )}
+                            </button>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
 

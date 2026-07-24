@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView, SafeAreaView, Modal, TouchableOpacity } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import {
   ArrowLeft, Download, Eye, FileText, Building2, GraduationCap,
@@ -38,6 +38,11 @@ const DocumentDetailScreen = () => {
   const { data: document = initialDocument } = useDocument(documentId);
   const { download, open, share, isDownloading, progress, isDownloaded, isInitializing } = useDownload(document);
 
+  const [showCorrectionModal, setShowCorrectionModal] = useState(false);
+
+  // Future check: const canDownloadCorrection = user?.isPremium;
+  const canDownloadCorrection = true;
+
   const fileConfig = getFileIcon(document?.fileType || document?.extension);
 
   if (!document) return null;
@@ -46,8 +51,24 @@ const DocumentDetailScreen = () => {
     if (isDownloaded) {
       open();
     } else {
-      download();
+      if (document.correction && document.correction.status === 'approved' && canDownloadCorrection) {
+        setShowCorrectionModal(true);
+      } else {
+        download();
+      }
     }
+  };
+
+  const handleDownloadSubjectOnly = () => {
+    setShowCorrectionModal(false);
+    download();
+  };
+
+  const handleDownloadCorrectionAlso = () => {
+    setShowCorrectionModal(false);
+    download(); // download subject
+    // Navigate to correction so they can download it
+    navigation.navigate('DocumentDetail', { documentId: document.correction._id });
   };
 
   return (
@@ -180,6 +201,38 @@ const DocumentDetailScreen = () => {
           style={styles.actionButton}
         />
       </View>
+
+      <Modal
+        visible={showCorrectionModal}
+        transparent={true}
+        animationType="fade"
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalIconBox}>
+              <Sparkles size={24} color={theme.colors.accent} />
+            </View>
+            <Text variant="h3" align="center" style={styles.modalTitle}>Corrigé disponible !</Text>
+            <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.modalText}>
+              Souhaitez-vous également télécharger le corrigé de ce document ?
+            </Text>
+            <View style={styles.modalActions}>
+              <Button
+                variant="primary"
+                title="Oui, voir le corrigé"
+                onPress={handleDownloadCorrectionAlso}
+                style={styles.modalButton}
+              />
+              <Button
+                variant="secondary"
+                title="Non, juste le sujet"
+                onPress={handleDownloadSubjectOnly}
+                style={styles.modalButton}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -351,6 +404,43 @@ const styles = StyleSheet.create({
   progressText: {
     marginBottom: theme.spacing.xs,
     textAlign: 'center',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: theme.spacing.lg,
+  },
+  modalContent: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.xl,
+    padding: theme.spacing.xl,
+    width: '100%',
+    alignItems: 'center',
+    ...theme.shadows.lg,
+  },
+  modalIconBox: {
+    width: 56,
+    height: 56,
+    borderRadius: theme.radius.full,
+    backgroundColor: theme.colors.accentWash,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: theme.spacing.md,
+  },
+  modalTitle: {
+    marginBottom: theme.spacing.sm,
+  },
+  modalText: {
+    marginBottom: theme.spacing.xl,
+  },
+  modalActions: {
+    width: '100%',
+    gap: theme.spacing.md,
+  },
+  modalButton: {
+    width: '100%',
   },
 });
 

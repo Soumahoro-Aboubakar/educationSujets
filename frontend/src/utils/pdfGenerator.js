@@ -17,7 +17,7 @@ export const generatePdfFromImages = async (images, onProgress) => {
   for (const file of images) {
     const imageBytes = await file.arrayBuffer();
     let image;
-    
+
     if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
       image = await pdfDoc.embedJpg(imageBytes);
     } else if (file.type === 'image/png') {
@@ -42,7 +42,7 @@ export const generatePdfFromImages = async (images, onProgress) => {
   }
 
   const pdfBytes = await pdfDoc.save();
-  
+
   if (onProgress) {
     onProgress(100);
   }
