@@ -18,6 +18,7 @@ const POPULATE_FIELDS = [
   { path: 'category', select: 'name icon' },
   { path: 'uploadedBy', select: 'name email role' },
   { path: 'validatedBy', select: 'name email role' },
+  { path: 'correction', select: '_id status' },
 ];
 
 const applyPopulate = (query) => {
@@ -190,11 +191,25 @@ const buildDocumentFilters = (params = {}) => {
   });
 
   if (params.search) {
-    filters.$or = [
-      { title: { $regex: params.search, $options: 'i' } },
-      { description: { $regex: params.search, $options: 'i' } },
-      { originalFileName: { $regex: params.search, $options: 'i' } },
-    ];
+    let searchQuery = params.search;
+    const correctionRegex = /\b(correction|corrigé|corrige)s?\b/i;
+    
+    if (correctionRegex.test(searchQuery)) {
+      filters.documentType = 'corrige';
+      searchQuery = searchQuery.replace(correctionRegex, '').replace(/\s+/g, ' ').trim();
+    } else {
+      filters.documentType = 'sujet';
+    }
+
+    if (searchQuery) {
+      filters.$or = [
+        { title: { $regex: searchQuery, $options: 'i' } },
+        { description: { $regex: searchQuery, $options: 'i' } },
+        { originalFileName: { $regex: searchQuery, $options: 'i' } },
+      ];
+    }
+  } else {
+    filters.documentType = 'sujet';
   }
 
   return filters;
@@ -343,6 +358,8 @@ const createDocument = async (payload, file, user) => {
     level: payload.level || null,
     semester: payload.semester || null,
     category: payload.category || null,
+    documentType: payload.documentType || 'sujet',
+    correctionFor: payload.correctionFor || null,
     uploadedBy: user._id,
     file: storedFileName,
     originalFileName: file.originalname,

@@ -47,8 +47,8 @@ const FILTER_DEFINITIONS = [
   },
   {
     key: 'semester',
-    label: 'Semestre',
-    placeholder: 'Tous les semestres',
+    label: 'Session',
+    placeholder: 'Toutes les sessions',
     icon: Calendar,
     endpoint: '/api/semesters',
   },
@@ -99,7 +99,7 @@ const FilterSelect = ({ def, value, options, onChange }) => {
         <option value="">{def.placeholder}</option>
         {options.map((opt) => (
           <option key={opt._id} value={opt._id}>
-            {opt.name}
+            {opt.displayName || opt.name}
           </option>
         ))}
       </select>
@@ -333,14 +333,42 @@ const Home = () => {
   useEffect(() => {
     const loadFilterOptions = async () => {
       try {
+        // Try to read cache first for instantaneous UI
+        try {
+          const cached = window.localStorage.getItem('filterOptions');
+          if (cached) {
+            setFilterOptions(JSON.parse(cached));
+          }
+        } catch (e) {
+          // ignore
+        }
+
+        // Fetch fresh data in background
         const results = await Promise.all(
           FILTER_DEFINITIONS.map((def) => axios.get(def.endpoint))
         );
         const opts = {};
         FILTER_DEFINITIONS.forEach((def, i) => {
-          opts[def.key] = results[i].data.data;
+          const items = results[i].data.data || [];
+          if (def.key === 'semester') {
+            opts[def.key] = items.map((it) => ({ ...it, displayName: (it.name || '').replace(/Semestre/gi, 'Session') }));
+          } else {
+            opts[def.key] = items;
+          }
         });
-        setFilterOptions(opts);
+
+        // Persist and update UI if changed
+        try {
+          const prevRaw = window.localStorage.getItem('filterOptions');
+          const prev = prevRaw ? JSON.parse(prevRaw) : null;
+          const changed = JSON.stringify(prev) !== JSON.stringify(opts);
+          if (changed) {
+            window.localStorage.setItem('filterOptions', JSON.stringify(opts));
+            setFilterOptions(opts);
+          }
+        } catch (e) {
+          setFilterOptions(opts);
+        }
       } catch (err) {
         console.error('Erreur chargement filtres:', err);
       }

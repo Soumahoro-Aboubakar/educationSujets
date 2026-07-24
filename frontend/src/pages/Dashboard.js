@@ -4,7 +4,7 @@ import {
   Search, SlidersHorizontal, LogOut, FileText, Upload,
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
   MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User,
-  AlertTriangle, FileSearch
+  AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -19,9 +19,10 @@ import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
+import { generatePdfFromImages } from '../utils/pdfGenerator';
 
 const EMPTY_UPLOAD_DATA = {
-  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null
+  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null, documentType: 'sujet', correctionFor: ''
 };
 
 const EMPTY_DUPLICATE_CHECK = { status: 'idle', matches: [], error: '' };
@@ -61,6 +62,11 @@ const Dashboard = () => {
   const [validatingDocs, setValidatingDocs] = useState({});
   const [isFetching, setIsFetching] = useState(true);
 
+  const [uploadMode, setUploadMode] = useState('pdf'); // 'pdf' or 'images'
+  const [imageFiles, setImageFiles] = useState([]);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [pdfGenerationProgress, setPdfGenerationProgress] = useState(0);
+
   const { processPdf, isProcessing: watermarking, progress: watermarkProgress, error: watermarkError, resetState: resetWatermark } = usePdfWatermark();
 
   const fetchDuplicateTitleMatches = useCallback(async (title) => {
@@ -82,6 +88,7 @@ const Dashboard = () => {
   const resetUploadForm = () => {
     setUploadData(EMPTY_UPLOAD_DATA);
     resetDuplicateCheck();
+    setImageFiles([]);
     if (resetWatermark) resetWatermark();
   };
 
@@ -510,7 +517,7 @@ const Dashboard = () => {
                     { key: 'university', icon: MapPin, label: 'Université', options: filtersData.universities },
                     { key: 'department', icon: Briefcase, label: 'Département', options: filtersData.departments },
                     { key: 'level', icon: GraduationCap, label: 'Niveau', options: filtersData.levels },
-                    { key: 'semester', icon: Calendar, label: 'Semestre', options: filtersData.semesters },
+                    { key: 'semester', icon: Calendar, label: 'Session', options: filtersData.semesters },
                     { key: 'category', icon: Layers, label: 'Catégorie', options: filtersData.categories },
                   ].map((filter) => (
                     <div key={filter.key} className="flex-1 min-w-[200px] flex flex-col gap-1.5">
@@ -523,9 +530,9 @@ const Dashboard = () => {
                         onChange={(e) => setActiveFilters({ ...activeFilters, [filter.key]: e.target.value })}
                         className="w-full px-4 py-2.5 rounded-xl bg-slate-50 text-sm font-medium text-slate-700 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 hover:bg-slate-100 transition-colors appearance-none"
                       >
-                        <option value="">Tous les {filter.label.toLowerCase()}s</option>
+                        <option value="">Tous les {filter.label.toLowerCase()}</option>
                         {filter.options.map((opt) => (
-                          <option key={opt._id} value={opt._id}>{opt.name}</option>
+                          <option key={opt._id} value={opt._id}>{opt.displayName || opt.name}</option>
                         ))}
                       </select>
                     </div>
@@ -798,7 +805,7 @@ const Dashboard = () => {
                         { key: 'university', dbKey: 'universities', label: 'Université', icon: MapPin, options: filtersData.universities },
                         { key: 'department', dbKey: 'departments', label: 'Département', icon: Briefcase, options: filtersData.departments },
                         { key: 'level', dbKey: 'levels', label: 'Niveau', icon: GraduationCap, options: filtersData.levels },
-                        { key: 'semester', dbKey: 'semesters', label: 'Semestre', icon: Calendar, options: filtersData.semesters },
+                        { key: 'semester', dbKey: 'semesters', label: 'Session', icon: Calendar, options: filtersData.semesters },
                         { key: 'category', dbKey: 'categories', label: 'Catégorie', icon: Layers, options: filtersData.categories },
                       ].map(field => (
                         <div key={field.key} className={field.key === 'category' ? 'sm:col-span-2' : ''}>

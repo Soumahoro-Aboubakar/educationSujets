@@ -19,6 +19,7 @@ frontend/build/
 frontend/dist/
 frontend/.pnp
 frontend/.pnp.js
+fatafalta/node_modules/
 
 # Fichiers de log
 *.log

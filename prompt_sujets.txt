@@ -12,7 +12,7 @@ j'ai vais de soumettre des images , pdf , fichiers de sujets et pour chaque fich
 
 | **Niveau**            | Indiquez le niveau d'études correspondant au document. Il peut s'agir d'une année universitaire (Licence 1, Master 2, BTS 2, Doctorat, etc.) ou de tout autre niveau pertinent selon l'établissement. Cette information permet de proposer des ressources adaptées au parcours de chaque étudiant.                                                                                        |
 
-| **Semestre**          | Précisez le semestre auquel le document est associé (Semestre 1, Semestre 2, Semestre 5, etc.). Cette information aide les étudiants à retrouver rapidement les documents correspondant à leur période d'étude.                                                                                                                                                                           |
+| **Session**          | Précisez la session à laquelle le document est associé (Session 1, Session 2, Session 5, etc.). Cette information aide les étudiants à retrouver rapidement les documents correspondant à leur période d'étude.                                                                                                                                                                           |
 
 | **Catégorie**         | Choisissez la catégorie qui décrit le mieux votre document : cours, travaux dirigés (TD), travaux pratiques (TP), examens, corrections, mémoires, rapports de stage, exercices, fiches de révision, projets, présentations ou toute autre catégorie pertinente. Si la catégorie souhaitée n'existe pas, vous pouvez l'ajouter afin d'améliorer l'organisation des ressources disponibles. |     et voici quelques valeur enregistrement dont il faux puisé, s'il l'une des informations sur le fichier ne se trouve pas dans ce dataset, il faut le signaler  et je vais l'ajouté: const UNIVERSITIES = [
   // Universités publiques
@@ -84,8 +84,8 @@ const LEVELS = [
 ];
 
 const SEMESTERS = [
-  { name: 'Semestre 1', order: 1 },
-  { name: 'Semestre 2', order: 2 },
+  { name: 'Session 1', order: 1 },
+  { name: 'Session 2', order: 2 },
 ];
 
 const CATEGORIES = [

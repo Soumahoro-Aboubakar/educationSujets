@@ -12,7 +12,7 @@ const uploadDocumentValidator = [
   objectIdField('university', 'Universite'),
   objectIdField('department', 'Departement'),
   objectIdField('level', 'Niveau'),
-  objectIdField('semester', 'Semestre'),
+  objectIdField('semester', 'Session'),
   objectIdField('category', 'Categorie'),
 ];
 
@@ -23,7 +23,7 @@ const updateDocumentValidator = [
   objectIdField('university', 'Universite'),
   objectIdField('department', 'Departement'),
   objectIdField('level', 'Niveau'),
-  objectIdField('semester', 'Semestre'),
+  objectIdField('semester', 'Session'),
   objectIdField('category', 'Categorie'),
 ];
 
@@ -47,7 +47,7 @@ const listDocumentsValidator = [
   query('university').optional().isMongoId().withMessage('Filtre universite invalide'),
   query('department').optional().isMongoId().withMessage('Filtre departement invalide'),
   query('level').optional().isMongoId().withMessage('Filtre niveau invalide'),
-  query('semester').optional().isMongoId().withMessage('Filtre semestre invalide'),
+  query('semester').optional().isMongoId().withMessage('Filtre session invalide'),
   query('category').optional().isMongoId().withMessage('Filtre categorie invalide'),
   query('page').optional().isInt({ min: 1 }).withMessage('Page invalide'),
   query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limite invalide'),

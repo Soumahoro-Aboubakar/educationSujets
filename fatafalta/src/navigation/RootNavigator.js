@@ -1,0 +1,27 @@
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TabNavigator from './TabNavigator';
+import DocumentDetailScreen from '../screens/DocumentDetailScreen';
+
+const Stack = createNativeStackNavigator();
+
+const RootNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen 
+        name="DocumentDetail" 
+        component={DocumentDetailScreen}
+        options={{
+          presentation: 'modal', // Use modal presentation for the detail screen
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export default RootNavigator;

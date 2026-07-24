@@ -97,6 +97,16 @@ const DocumentSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
+    documentType: {
+      type: String,
+      enum: ['sujet', 'corrige'],
+      default: 'sujet',
+    },
+    correctionFor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Document',
+      default: null,
+    },
     validatedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -109,8 +119,17 @@ const DocumentSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+DocumentSchema.virtual('correction', {
+  ref: 'Document',
+  localField: '_id',
+  foreignField: 'correctionFor',
+  justOne: true,
+});
 
 DocumentSchema.index({ status: 1, createdAt: -1 });
 DocumentSchema.index({ uploadedBy: 1, createdAt: -1 });

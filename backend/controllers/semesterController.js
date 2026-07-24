@@ -12,7 +12,7 @@ exports.createSemester = asyncHandler(async (req, res) => {
   const { entity, created } = await createEntity(Semester, req.body, { orderField: 'order' });
   sendSuccess(res, {
     statusCode: created ? 201 : 200,
-    message: created ? 'Semestre cree' : 'Semestre deja existant',
+    message: created ? 'Session creee' : 'Session deja existante',
     data: entity,
   });
 });

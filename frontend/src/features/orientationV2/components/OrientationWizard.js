@@ -95,7 +95,7 @@ export default function OrientationWizard() {
         default:
           return true;
       }
-    });
+    });       
 
     return matches.slice(0, displayLimit);
   }, [criteriaFilter, displayLimit, results?.matches]);
@@ -106,7 +106,7 @@ export default function OrientationWizard() {
     setProfile(p => ({ ...p, [key]: value }));
   };
 
-  const handleNoteChange = (subject, value) => {
+  const handleNoteChange = (subject, value) => { 
     const num = parseFloat(value);
     setProfile(p => ({
       ...p,

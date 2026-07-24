@@ -24,8 +24,8 @@ const INITIAL_LEVELS = [
 ];
 
 const INITIAL_SEMESTERS = [
-  { _id: 'sem1', name: 'Semestre 1' },
-  { _id: 'sem2', name: 'Semestre 2' }
+  { _id: 'sem1', name: 'Session 1' },
+  { _id: 'sem2', name: 'Session 2' }
 ];
 
 const INITIAL_CATEGORIES = [
@@ -63,7 +63,7 @@ const INITIAL_DOCUMENTS = [
   {
     _id: 'doc1',
     title: 'Examen Algèbre et Analyse L1 2025',
-    description: 'Sujet de l\'examen de fin de semestre 1 de mathématiques générales L1.',
+    description: 'Sujet de l\'examen de fin de session 1 de mathématiques générales L1.',
     university: 'uni1',
     department: 'dept2',
     level: 'level1',
@@ -179,7 +179,7 @@ const populateDocument = (doc) => {
   const university = dbUniversities.find(u => u._id === doc.university) || { _id: doc.university, name: 'Université inconnue' };
   const department = dbDepartments.find(d => d._id === doc.department) || { _id: doc.department, name: 'Département inconnu' };
   const level = dbLevels.find(l => l._id === doc.level) || { _id: doc.level, name: 'Niveau inconnu' };
-  const semester = dbSemesters.find(s => s._id === doc.semester) || { _id: doc.semester, name: 'Semestre inconnu' };
+  const semester = dbSemesters.find(s => s._id === doc.semester) || { _id: doc.semester, name: 'Session inconnue' };
   const category = dbCategories.find(c => c._id === doc.category) || { _id: doc.category, name: 'Catégorie inconnue' };
   const uploadedByUser = dbUsers.find(u => u._id === doc.uploadedBy) || { _id: doc.uploadedBy, name: 'Utilisateur anonyme' };
   

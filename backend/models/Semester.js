@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const SemesterSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Veuillez ajouter un semestre'],
+    required: [true, 'Veuillez ajouter une session'],
     trim: true,
   },
   normalizedName: {
