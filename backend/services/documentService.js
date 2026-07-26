@@ -369,7 +369,7 @@ const createDocument = async (payload, file, user) => {
     fileSize: file.size,
     storageKey,
     storageProvider: storageConfig.provider,
-    status: 'pending',
+    status: payload.metadataStatus === 'false' ? 'draft' : 'pending',
   });
 
   console.info(`[UPLOAD] user=${user._id} document=${document._id} file=${storedFileName} provider=${storageConfig.provider}`);

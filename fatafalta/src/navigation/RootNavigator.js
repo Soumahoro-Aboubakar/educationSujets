@@ -2,6 +2,8 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
 import DocumentDetailScreen from '../screens/DocumentDetailScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+import UploadScreen from '../screens/UploadScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,11 +15,19 @@ const RootNavigator = () => {
       }}
     >
       <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen 
         name="DocumentDetail" 
         component={DocumentDetailScreen}
         options={{
           presentation: 'modal', // Use modal presentation for the detail screen
+        }}
+      />
+      <Stack.Screen 
+        name="Upload" 
+        component={UploadScreen}
+        options={{
+          presentation: 'modal',
         }}
       />
     </Stack.Navigator>

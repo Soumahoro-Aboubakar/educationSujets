@@ -55,6 +55,22 @@ const Button = ({
     }
   };
 
+  const iconElement = (() => {
+    if (!icon) return null;
+    if (React.isValidElement(icon)) return icon;
+
+    const IconComponent = icon;
+    const isReactComponent =
+      typeof IconComponent === 'function' ||
+      (typeof IconComponent === 'object' && IconComponent !== null && IconComponent.$$typeof && IconComponent.render);
+
+    if (isReactComponent) {
+      return <IconComponent size={16} color={getTextColor()} />;
+    }
+
+    return icon;
+  })();
+
   const containerStyle = [
     styles.container,
     {
@@ -79,7 +95,7 @@ const Button = ({
         <ActivityIndicator color={getTextColor()} size="small" />
       ) : (
         <View style={styles.content}>
-          {icon && <View style={styles.iconContainer}>{icon}</View>}
+          {iconElement && <View style={styles.iconContainer}>{iconElement}</View>}
           {title && (
             <Text
               variant="bodyMedium"

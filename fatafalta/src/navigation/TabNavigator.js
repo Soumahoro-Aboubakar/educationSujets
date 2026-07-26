@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Library, Search, Download } from 'lucide-react-native';
+import { Library, Search, Download, LogIn, ShieldCheck } from 'lucide-react-native';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import DownloadsScreen from '../screens/DownloadsScreen';
+import AdminDraftsScreen from '../screens/AdminDraftsScreen';
+import LoginScreen from '../screens/LoginScreen';
+import AuthContext from '../context/AuthContext';
 import theme from '../theme/tokens';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const { isAuthenticated, isAdmin } = useContext(AuthContext);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -64,6 +69,26 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => <Download color={color} size={size} />,
         }}
       />
+      {!isAuthenticated && (
+        <Tab.Screen
+          name="LoginTab"
+          component={LoginScreen}
+          options={{
+            tabBarLabel: 'Connexion',
+            tabBarIcon: ({ color, size }) => <LogIn color={color} size={size} />,
+          }}
+        />
+      )}
+      {isAuthenticated && isAdmin() && (
+        <Tab.Screen
+          name="AdminTab"
+          component={AdminDraftsScreen}
+          options={{
+            tabBarLabel: 'Admin',
+            tabBarIcon: ({ color, size }) => <ShieldCheck color={color} size={size} />,
+          }}
+        />
+      )}
     </Tab.Navigator>
   );
 };

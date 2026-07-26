@@ -84,7 +84,7 @@ const DocumentSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['pending', 'approved', 'rejected'],
+      enum: ['draft', 'pending', 'approved', 'rejected'],
       default: 'pending',
     },
     views: {

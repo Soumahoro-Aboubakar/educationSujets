@@ -30,7 +30,7 @@ router.route('/')
   .get(optionalAuth, listDocumentsValidator, validate, getDocuments)
   .post(
     protect,
-    authorize('contributor', 'sub-admin', 'admin'),
+    authorize('admin'),
     upload.single('file'),
     uploadDocumentValidator,
     validate,
@@ -44,8 +44,8 @@ router.get('/duplicates/title', protect, duplicateTitleValidator, validate, chec
 router.get('/:id/download', optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
 router.route('/:id')
   .get(optionalAuth, documentIdParamValidator, validate, getDocument)
-  .put(protect, updateDocumentValidator, validate, updateDocument)
-  .delete(protect, documentIdParamValidator, validate, deleteDocument);
+  .put(protect, authorize('admin'), updateDocumentValidator, validate, updateDocument)
+  .delete(protect, authorize('admin'), documentIdParamValidator, validate, deleteDocument);
 router.put('/:id/validate', protect, authorize('sub-admin', 'admin'), validateDocumentStatusValidator, validate, validateDocument);
 
 module.exports = router;
