@@ -4,7 +4,7 @@ const DocumentSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, 'Veuillez ajouter un titre'],
+      required: function() { return this.status !== 'draft'; },
       trim: true,
     },
     description: {

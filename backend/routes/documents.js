@@ -9,6 +9,7 @@ const {
   getMyDocuments,
   validateDocument,
   getPendingDocuments,
+  getDraftDocuments,
   getAnalytics,
   getDocumentDownloadUrl,
 } = require('../controllers/documentController');
@@ -39,6 +40,7 @@ router.route('/')
 
 router.get('/my', protect, getMyDocuments);
 router.get('/pending', protect, authorize('sub-admin', 'admin'), getPendingDocuments);
+router.get('/drafts', protect, authorize('sub-admin', 'admin'), getDraftDocuments);
 router.get('/analytics', protect, authorize('admin'), getAnalytics);
 router.get('/duplicates/title', protect, duplicateTitleValidator, validate, checkDuplicateTitle);
 router.get('/:id/download', optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);

@@ -5,6 +5,7 @@ const {
   listPublicDocuments,
   listUserDocuments,
   listPendingDocuments,
+  listDraftDocuments,
   getAnalytics,
   createDocument,
   updateDocument,
@@ -68,6 +69,11 @@ exports.validateDocument = asyncHandler(async (req, res) => {
 
 exports.getPendingDocuments = asyncHandler(async (req, res) => {
   const result = await listPendingDocuments(req.query);
+  sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
+});
+
+exports.getDraftDocuments = asyncHandler(async (req, res) => {
+  const result = await listDraftDocuments(req.query);
   sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
 });
 

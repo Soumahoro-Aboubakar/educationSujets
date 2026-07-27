@@ -7,7 +7,11 @@ const objectIdField = (field, label) =>
     .withMessage(`${label} invalide`);
 
 const uploadDocumentValidator = [
-  body('title').trim().notEmpty().withMessage('Le titre est obligatoire'),
+  body('title').custom((value, { req }) => {
+    if (req.body.metadataStatus === 'false') return true;
+    if (!value || value.trim().length === 0) throw new Error('Le titre est obligatoire');
+    return true;
+  }),
   body('description').optional().isString().withMessage('La description doit etre une chaine de caracteres'),
   objectIdField('university', 'Universite'),
   objectIdField('department', 'Departement'),

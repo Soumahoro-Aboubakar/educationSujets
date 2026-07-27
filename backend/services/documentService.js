@@ -293,6 +293,32 @@ const listPendingDocuments = async (params = {}) => {
   };
 };
 
+const listDraftDocuments = async (params = {}) => {
+  const filters = { status: 'draft' };
+  let query = applyPopulate(Document.find(filters).sort('-createdAt'));
+
+  const limit = Number.parseInt(params.limit, 10) || 12;
+  const page = Number.parseInt(params.page, 10) || 1;
+  const skip = (page - 1) * limit;
+
+  query = query.skip(skip).limit(limit);
+
+  const [data, total] = await Promise.all([
+    query,
+    Document.countDocuments(filters),
+  ]);
+
+  return {
+    data,
+    pagination: {
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      limit,
+    },
+  };
+};
+
 const getAnalytics = async () => {
   const [totalDocuments, approvedDocuments, pendingDocuments, rejectedDocuments, totals] = await Promise.all([
     Document.countDocuments(),
@@ -473,6 +499,7 @@ module.exports = {
   listPublicDocuments,
   listUserDocuments,
   listPendingDocuments,
+  listDraftDocuments,
   getAnalytics,
   createDocument,
   updateDocument,

@@ -44,3 +44,17 @@ export const getDownloadUrl = async (id) => {
   const response = await api.get(`/api/documents/${id}/download`);
   return response.data.data;
 };
+
+/**
+ * Upload a new document
+ * @param {FormData} formData
+ * @returns {Promise<Object>}
+ */
+export const uploadDocument = async (formData) => {
+  const response = await api.post('/api/documents', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};

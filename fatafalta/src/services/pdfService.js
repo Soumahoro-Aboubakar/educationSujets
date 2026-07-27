@@ -5,9 +5,22 @@ import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import { decode } from 'base64-arraybuffer';
 
 const FATAFALTA_DIR = FileSystem.documentDirectory + 'fatafalta/';
-const MAX_DIMENSION = 2000; // px — au-delà, on redimensionne
-const JPEG_QUALITY = 0.82;
+// Seuil relevé : les photos de smartphones modernes font couramment 4000px+
+// sur le plus grand côté. Un seuil trop bas forçait un redimensionnement
+// quasi systématique et donc une perte de netteté sur (presque) toutes les images.
+const MAX_DIMENSION = 6000; // px — au-delà seulement, on redimensionne
+const JPEG_QUALITY = 0.98;
 const CONCURRENCY = 3; // images traitées en parallèle
+// DPI cible pour la mise en page du PDF : évite des pages "1 pixel = 1 point"
+// (72 DPI) qui donnent une impression de flou à l'impression/zoom, alors que
+// les pixels de l'image sont pourtant intacts.
+const TARGET_DPI = 200;
+
+// Taille maximale acceptée pour un PDF importé depuis l'appareil.
+// Au-delà, le chargement base64 + le parsing pdf-lib consomment trop de
+// mémoire pour Expo Go (et pour beaucoup d'appareils bas/moyen de gamme),
+// ce qui provoque un crash natif (OOM) plutôt qu'une erreur JS propre.
+export const MAX_IMPORTED_PDF_SIZE_BYTES = 25 * 1024 * 1024; // 25 Mo
 
 const initDirectory = async () => {
   try {
@@ -55,7 +68,32 @@ const mapWithConcurrency = async (items, limit, worker) => {
   return results;
 };
 
-// Prépare une image : redimensionne uniquement si nécessaire, encode en JPEG (plus rapide/léger que PNG)
+// Détecte le format réel d'une image à partir de ses octets magiques
+// (plus fiable que l'extension de l'URI, qui peut être absente/trompeuse
+// notamment sur les URIs de type content:// ou ph://).
+const detectImageFormat = (bytes) => {
+  const view = new Uint8Array(bytes);
+  if (view.length >= 3 && view[0] === 0xff && view[1] === 0xd8 && view[2] === 0xff) {
+    return 'jpg';
+  }
+  if (
+    view.length >= 8 &&
+    view[0] === 0x89 &&
+    view[1] === 0x50 &&
+    view[2] === 0x4e &&
+    view[3] === 0x47
+  ) {
+    return 'png';
+  }
+  return null; // format non reconnu directement -> il faudra passer par manipulateAsync
+};
+
+// Prépare une image :
+// - si elle est déjà dans les dimensions cibles ET dans un format supporté
+//   nativement (JPEG/PNG), on la lit telle quelle SANS réencodage, pour ne
+//   perdre aucune qualité.
+// - sinon (trop grande, ou format non reconnu type HEIC/WEBP), on passe par
+//   ImageManipulator pour redimensionner et/ou convertir en JPEG.
 const prepareImage = async (uri) => {
   let width, height;
   try {
@@ -66,6 +104,28 @@ const prepareImage = async (uri) => {
   }
 
   const needsResize = width && height && Math.max(width, height) > MAX_DIMENSION;
+
+  if (!needsResize) {
+    try {
+      const base64 = await withTimeout(
+        FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 }),
+        15000,
+        "Lecture de l'image trop longue"
+      );
+      const bytes = decode(base64);
+      const format = detectImageFormat(bytes);
+
+      if (format) {
+        // Image déjà dans un format exploitable et de taille correcte :
+        // on la garde bit-à-bit, aucune perte supplémentaire.
+        return { bytes, width, height, format };
+      }
+      // Format non reconnu (ex: HEIC/WEBP) -> on tombe dans le traitement
+      // via manipulateAsync ci-dessous pour obtenir un JPEG valide.
+    } catch (e) {
+      // En cas d'échec de lecture brute, on retente via manipulateAsync
+    }
+  }
 
   const actions = [];
   if (needsResize) {
@@ -93,20 +153,44 @@ const prepareImage = async (uri) => {
     bytes: decode(result.base64),
     width: result.width,
     height: result.height,
+    format: 'jpg',
   };
 };
 
 const applyWatermark = (page) => {
   const { width, height } = page.getSize();
-  page.drawText('fatafalta', {
-    x: width / 2 - 50,
-    y: height / 2,
-    size: 60,
+  const text = 'Fatafalta';
+  // Taille proportionnelle à la largeur pour être toujours grand
+  const size = width * 0.22;
+  // Approximation de la largeur du texte (caractères moyens * taille)
+  const textWidth = size * text.length * 0.55;
+
+  // Angle de la diagonale
+  const angle = Math.atan2(height, width) * (180 / Math.PI);
+
+  page.drawText(text, {
+    x: width / 2 - (textWidth / 2) * Math.cos(angle * Math.PI / 180),
+    y: height / 2 - (textWidth / 2) * Math.sin(angle * Math.PI / 180),
+    size: size,
     color: rgb(0.8, 0.8, 0.8),
-    opacity: 0.3,
-    rotate: degrees(-45),
+    opacity: 0.35,
+    rotate: degrees(angle),
   });
 };
+
+// Embarque l'image dans le PDF en respectant son format réel (JPEG ou PNG),
+// au lieu de forcer systématiquement embedJpg.
+const embedImage = async (pdfDoc, result) => {
+  if (result.format === 'png') {
+    return withTimeout(pdfDoc.embedPng(result.bytes), 10000, 'Embedding PNG took too long');
+  }
+  return withTimeout(pdfDoc.embedJpg(result.bytes), 10000, 'Embedding JPG took too long');
+};
+
+// Convertit des pixels en points PDF sur la base d'un DPI cible, pour avoir
+// des pages à taille physique cohérente (ex: proche d'un A4 pour un scan de
+// document) plutôt que des pages géantes calées 1 pixel = 1 point.
+const pixelsToPoints = (pixels) => (pixels / TARGET_DPI) * 72;
 
 export const generatePdfFromImages = async (imageUris, onProgress) => {
   await initDirectory();
@@ -142,13 +226,15 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
 
     let image;
     try {
-      image = await withTimeout(pdfDoc.embedJpg(result.bytes), 10000, 'Embedding JPG took too long');
+      image = await embedImage(pdfDoc, result);
     } catch (e) {
       console.warn("Échec d'insertion d'une image dans le PDF:", e);
       continue;
     }
 
-    const { width, height } = image.scale(1);
+    const { width: pxWidth, height: pxHeight } = image.scale(1);
+    const width = pixelsToPoints(pxWidth);
+    const height = pixelsToPoints(pxHeight);
     const page = pdfDoc.addPage([width, height]);
     page.drawImage(image, { x: 0, y: 0, width, height });
     applyWatermark(page);
@@ -178,4 +264,270 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
     name: outputFileName,
     mimeType: 'application/pdf',
   };
+};
+
+// Vérifie la taille du fichier AVANT toute lecture/décodage lourd.
+// C'est ce contrôle qui manquait : sans lui, un PDF de 50-100 Mo était
+// chargé intégralement en base64 puis en ArrayBuffer puis parsé par
+// pdf-lib, ce qui pouvait multiplier par 5-6x la consommation mémoire
+// et provoquer un crash natif (OOM) plutôt qu'une erreur JS gérable.
+  /*
+const assertImportedPdfSizeIsSafe = async (fileUri) => {
+  let info;
+  try {
+    info = await FileSystem.getInfoAsync(fileUri, { size: true });
+  } catch (e) {
+    throw new Error("Impossible de lire les informations du fichier PDF");
+  }
+
+  if (!info.exists) {
+    throw new Error('Le fichier sélectionné est introuvable');
+  }
+
+  if (typeof info.size === 'number' && info.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
+    const sizeMb = (info.size / (1024 * 1024)).toFixed(1);
+    const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+    throw new Error(
+      `Ce PDF est trop volumineux (${sizeMb} Mo, maximum ${maxMb} Mo). ` +
+      'Veuillez importer un fichier plus léger.'
+    );
+  }
+};*/
+
+const assertImportedPdfSizeIsSafe = async (fileUri) => {
+  let info;
+  try {
+    info = await FileSystem.getInfoAsync(fileUri, { size: true });
+  } catch (e) {
+    // Sur Android avec content://, getInfoAsync peut parfois échouer 
+    // sans pour autant empêcher readAsStringAsync de fonctionner.
+    console.warn("Impossible de lire les informations du fichier PDF via getInfoAsync:", e);
+    return; 
+  }
+
+  if (!info.exists) {
+    throw new Error('Le fichier sélectionné est introuvable');
+  }
+
+  if (typeof info.size === 'number' && info.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
+    const sizeMb = (info.size / (1024 * 1024)).toFixed(1);
+    const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+    throw new Error(
+      `Ce PDF est trop volumineux (${sizeMb} Mo, maximum ${maxMb} Mo). ` +
+      'Veuillez importer un fichier plus léger.'
+    );
+  }
+};
+
+
+// Bug Android/Expo connu (y compris en SDK 54, particulièrement sous Expo
+// Go) : accéder à l'URI de cache produite par expo-document-picker échoue
+// parfois avec "Location ... isn't readable" — que ce soit via
+// readAsStringAsync OU copyAsync — alors même que getInfoAsync confirme que
+// le fichier existe. Deux causes possibles :
+//  1) Race condition : la promesse du picker se résout avant que la copie
+//     native vers le cache ne soit totalement flushée sur disque.
+//  2) Restriction propre au sandbox d'Expo Go (host.exp.exponent), qui peut
+//     diverger d'un build autonome (dev client / APK) sur l'accès fichier.
+// On mitige (1) avec un court délai + une nouvelle tentative. Si l'échec
+// persiste, on le signale clairement : c'est probablement (2), qui ne se
+// corrige pas côté JS mais en testant sur un dev build.
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const copyPickedFileLocally = async (fileUri) => {
+  const localUri = `${FATAFALTA_DIR}import_${Date.now()}.pdf`;
+  const attempt = () =>
+    withTimeout(
+      FileSystem.copyAsync({ from: fileUri, to: localUri }),
+      20000,
+      'Copie du PDF trop longue'
+    );
+
+  try {
+    await attempt();
+    return localUri;
+  } catch (firstError) {
+    console.warn('Copie locale du PDF importé — échec (1ère tentative):', fileUri, firstError);
+  }
+
+  // Deuxième tentative après un court délai, au cas où il s'agissait d'une
+  // simple course entre la fin de la copie native du picker et notre accès.
+  await sleep(400);
+  try {
+    await attempt();
+    return localUri;
+  } catch (secondError) {
+    console.warn('Copie locale du PDF importé — échec (2e tentative):', fileUri, secondError);
+    throw new Error(
+      "Impossible d'accéder au fichier sélectionné, même après nouvelle tentative. " +
+      "Ce comportement est un problème connu d'Expo Go sur certains appareils/versions Android. " +
+      "Si le problème persiste, essayez de tester avec un development build (npx expo run:android) " +
+      "plutôt que dans Expo Go, ou sélectionnez le fichier depuis le stockage local plutôt que " +
+      "depuis une application/cloud tierce."
+    );
+  }
+};
+/*
+export const applyWatermarkToExistingPdf = async (fileUri) => {
+  await initDirectory();
+
+  // 1) Garde-fou de taille, avant toute opération coûteuse
+  await assertImportedPdfSizeIsSafe(fileUri);
+
+  // 2) Copie locale préalable (contournement du bug "isn't readable"),
+  //    puis lecture + décodage de cette copie. On isole `fileBase64` dans
+  //    son propre scope : une fois `decode()` exécuté, la chaîne base64
+  //    devient éligible au garbage collection dès que possible, au lieu
+  //    de rester vivante aussi longtemps que `pdfBytes`.
+  const localUri = await copyPickedFileLocally(fileUri);
+
+  let pdfBytes;
+  try {
+    pdfBytes = await (async () => {
+      const fileBase64 = await withTimeout(
+        FileSystem.readAsStringAsync(localUri, { encoding: FileSystem.EncodingType.Base64 }),
+        30000,
+        'Lecture du PDF trop longue'
+      );
+      return decode(fileBase64);
+    })();
+  } catch (e) {
+    console.warn('Lecture du PDF importé (copie locale) — erreur détaillée:', localUri, e);
+    throw new Error(`Impossible de lire le fichier PDF (${e.message || 'raison inconnue'})`);
+  } finally {
+    // Nettoyage de la copie temporaire, qu'elle ait réussi ou échoué à être lue.
+    FileSystem.deleteAsync(localUri, { idempotent: true }).catch(() => {});
+  }
+
+  // 3) Chargement pdf-lib. `updateMetadata: false` évite un travail de
+  //    ré-écriture de métadonnées inutile pour notre cas d'usage (simple
+  //    ajout d'un filigrane), ce qui réduit légèrement l'empreinte mémoire
+  //    et le temps de traitement.
+  let pdfDoc;
+  try {
+    pdfDoc = await withTimeout(
+      PDFDocument.load(pdfBytes, { updateMetadata: false }),
+      30000,
+      'Analyse du PDF trop longue'
+    );
+  } catch (e) {
+    throw new Error(
+      "Ce fichier n'a pas pu être ouvert : il est peut-être corrompu, protégé par mot de passe, ou dans un format non pris en charge."
+    );
+  } finally {
+    // On n'a plus besoin des octets bruts une fois le document chargé en
+    // mémoire par pdf-lib : on libère la référence pour aider le GC.
+    pdfBytes = null;
+  }
+
+  const pages = pdfDoc.getPages();
+
+  // Garde-fou supplémentaire : un très grand nombre de pages multiplie le
+  // travail de dessin de texte et la taille du document reconstruit.
+  const MAX_PAGES = 300;
+  if (pages.length > MAX_PAGES) {
+    throw new Error(
+      `Ce PDF contient trop de pages (${pages.length}, maximum ${MAX_PAGES}).`
+    );
+  }
+
+  for (const page of pages) {
+    applyWatermark(page);
+  }
+
+  const modifiedPdfBytes = await withTimeout(pdfDoc.saveAsBase64(), 30000, 'Sauvegarde du PDF trop longue');
+  const outputFileName = `fatafalta_doc_${Date.now()}.pdf`;
+  const outputUri = FATAFALTA_DIR + outputFileName;
+
+  await withTimeout(
+    FileSystem.writeAsStringAsync(outputUri, modifiedPdfBytes, { encoding: FileSystem.EncodingType.Base64 }),
+    20000,
+    'Écriture du PDF trop longue'
+  );
+
+  return {
+    uri: outputUri,
+    name: outputFileName,
+    mimeType: 'application/pdf',
+  };
+};
+*/
+
+
+export const applyWatermarkToExistingPdf = async (fileUri) => {
+  await initDirectory();
+
+  // 1) Garde-fou de taille, avant toute opération coûteuse
+  await assertImportedPdfSizeIsSafe(fileUri);
+
+  // 2) Lecture directe de l'URI (content:// ou file://) sans passer par copyAsync
+  let pdfBytes;
+  try {
+    pdfBytes = await (async () => {
+      const fileBase64 = await withTimeout(
+        FileSystem.readAsStringAsync(fileUri, { encoding: FileSystem.EncodingType.Base64 }),
+        30000,
+        'Lecture du PDF trop longue'
+      );
+      return decode(fileBase64);
+    })();
+  } catch (e) {
+    console.warn('Lecture du PDF importé — erreur détaillée:', fileUri, e);
+    throw new Error(`Impossible de lire le fichier PDF (${e.message || 'raison inconnue'})`);
+  }
+
+  // 3) Chargement pdf-lib.
+  let pdfDoc;
+  try {
+    pdfDoc = await withTimeout(
+      PDFDocument.load(pdfBytes, { updateMetadata: false }),
+      30000,
+      'Analyse du PDF trop longue'
+    );
+  } catch (e) {
+    throw new Error(
+      "Ce fichier n'a pas pu être ouvert : il est peut-être corrompu, protégé par mot de passe, ou dans un format non pris en charge."
+    );
+  } finally {
+    pdfBytes = null;
+  }
+
+  const pages = pdfDoc.getPages();
+
+  const MAX_PAGES = 300;
+  if (pages.length > MAX_PAGES) {
+    throw new Error(
+      `Ce PDF contient trop de pages (${pages.length}, maximum ${MAX_PAGES}).`
+    );
+  }
+
+  for (const page of pages) {
+    applyWatermark(page);
+  }
+
+  const modifiedPdfBytes = await withTimeout(pdfDoc.saveAsBase64(), 30000, 'Sauvegarde du PDF trop longue');
+  const outputFileName = `fatafalta_doc_${Date.now()}.pdf`;
+  const outputUri = FATAFALTA_DIR + outputFileName;
+
+  await withTimeout(
+    FileSystem.writeAsStringAsync(outputUri, modifiedPdfBytes, { encoding: FileSystem.EncodingType.Base64 }),
+    20000,
+    'Écriture du PDF trop longue'
+  );
+
+  return {
+    uri: outputUri,
+    name: outputFileName,
+    mimeType: 'application/pdf',
+  };
+};
+export const cleanTempDirectory = async () => {
+  try {
+    const dirInfo = await FileSystem.getInfoAsync(FATAFALTA_DIR);
+    if (dirInfo.exists) {
+      await FileSystem.deleteAsync(FATAFALTA_DIR, { idempotent: true });
+    }
+  } catch (e) {
+    console.warn("Erreur lors du nettoyage du dossier temporaire", e);
+  }
 };

@@ -123,7 +123,7 @@ const AdminDraftsScreen = ({ navigation }) => {
         ) : (
           <View style={styles.draftsList}>
             {drafts.map(draft => (
-              <Card key={draft.id} style={styles.draftCard}>
+              <Card key={draft._id || draft.id} style={styles.draftCard}>
                 <View style={styles.draftHeader}>
                   <View style={styles.draftInfo}>
                     <Text 
@@ -140,7 +140,7 @@ const AdminDraftsScreen = ({ navigation }) => {
                         color={theme.colors.textMuted}
                         style={{ marginLeft: 4 }}
                       >
-                        {formatDate(draft.savedAt)}
+                        {formatDate(draft.createdAt || draft.savedAt)}
                       </Text>
                     </View>
                   </View>
@@ -150,7 +150,7 @@ const AdminDraftsScreen = ({ navigation }) => {
                       color={theme.colors.textSecondary}
                       style={styles.completionText}
                     >
-                      {draft.metadataStatus ? '100%' : '~ 30%'}
+                      {draft.status !== 'draft' ? '100%' : '~ 30%'}
                     </Text>
                   </View>
                 </View>
@@ -172,25 +172,24 @@ const AdminDraftsScreen = ({ navigation }) => {
                     {draft.university && (
                       <View style={styles.metadataBadge}>
                         <Text variant="caption" color={theme.colors.primary}>
-                          {draft.university}
+                          {draft.university?.name || draft.university}
                         </Text>
                       </View>
                     )}
                     {draft.department && (
                       <View style={styles.metadataBadge}>
                         <Text variant="caption" color={theme.colors.primary}>
-                          {draft.department}
+                          {draft.department?.name || draft.department}
                         </Text>
                       </View>
                     )}
                   </View>
                 )}
 
-                {/* Actions */}
                 <View style={styles.draftActions}>
                   <TouchableOpacity
                     style={[styles.actionButton, styles.editButton]}
-                    onPress={() => handleEditDraft(draft.id)}
+                    onPress={() => handleEditDraft(draft._id || draft.id)}
                   >
                     <Edit size={16} color={theme.colors.primary} />
                     <Text 
@@ -204,7 +203,7 @@ const AdminDraftsScreen = ({ navigation }) => {
 
                   <TouchableOpacity
                     style={[styles.actionButton, styles.publishButton]}
-                    onPress={() => handleEditDraft(draft.id)}
+                    onPress={() => handleEditDraft(draft._id || draft.id)}
                   >
                     <Send size={16} color={theme.colors.textInverse} />
                     <Text 
@@ -218,7 +217,7 @@ const AdminDraftsScreen = ({ navigation }) => {
 
                   <TouchableOpacity
                     style={[styles.actionButton, styles.deleteButton]}
-                    onPress={() => handleDeleteDraft(draft.id)}
+                    onPress={() => handleDeleteDraft(draft._id || draft.id)}
                   >
                     <Trash2 size={16} color={theme.colors.error} />
                   </TouchableOpacity>

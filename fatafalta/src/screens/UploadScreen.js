@@ -27,7 +27,7 @@ import LockedFeatureScreen from './LockedFeatureScreen';
 import useMetadataOptions from '../hooks/useMetadataOptions';
 import useDrafts from '../hooks/useDrafts';
 import theme from '../theme/tokens';
-import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory } from '../services/pdfService';
+import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory,MAX_IMPORTED_PDF_SIZE_BYTES } from '../services/pdfService';
 import { uploadDocument } from '../services/documents';
 import ImageEditorModal from '../components/documents/ImageEditorModal';
 
@@ -169,7 +169,7 @@ const UploadScreen = ({ navigation, route }) => {
       setImages([...images, ...newImages]);
     }
   };
-
+/*
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: 'application/pdf',
@@ -179,8 +179,79 @@ const UploadScreen = ({ navigation, route }) => {
       const file = result.assets[0];
       await processExistingPDF(file.uri);
     }
+  }; */
+
+    const pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      type: 'application/pdf',
+      copyToCacheDirectory: false, // <-- TRÈS IMPORTANT : Mettre à false
+    });
+    
+    if (!result.canceled) {
+      const file = result.assets[0];
+
+      // Vérification précoce côté UI
+      if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+        const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+        Alert.alert(
+          'Fichier trop volumineux',
+          `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`
+        );
+        return;
+      }
+
+      await processExistingPDF(file.uri);
+    }
   };
 
+/*
+  const pickDocument = async () => {
+  let result = await DocumentPicker.getDocumentAsync({
+    type: 'application/pdf',
+    copyToCacheDirectory: true,
+  });
+  if (!result.canceled) {
+    const file = result.assets[0];
+
+    // Vérification précoce côté UI : évite même de lancer le traitement
+    // si le fichier est visiblement trop lourd. `applyWatermarkToExistingPdf`
+    // refait aussi le contrôle en interne (défense en profondeur), mais
+    // le faire ici permet un message immédiat sans passer par le state
+    // `isProcessing`.
+    if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+      const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+      Alert.alert(
+        'Fichier trop volumineux',
+        `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`
+      );
+      return;
+    }
+
+    await processExistingPDF(file.uri);
+  }
+};
+*/
+const processExistingPDF = async (fileUri) => {
+  setIsProcessing(true);
+  try {
+    const result = await applyWatermarkToExistingPdf(fileUri);
+    setPdfFile(result);
+    setPdfLocalUri(result.uri);
+    setPdfIntentUri(await getIntentUri(result.uri));
+    setPdfWebViewUri(isAndroid ? null : result.uri);
+    setStep('metadata');
+  } catch (e) {
+    console.error(e);
+    // On remonte le message précis (taille, fichier corrompu, etc.)
+    // plutôt qu'un message générique, pour que l'utilisateur comprenne
+    // pourquoi ça a échoué.
+    Alert.alert('Erreur', e.message || 'Erreur lors du traitement du PDF');
+  } finally {
+    setIsProcessing(false);
+  }
+};
   const removeImage = (index) => {
     setImages(images.filter((_, i) => i !== index));
   };
@@ -202,7 +273,7 @@ const UploadScreen = ({ navigation, route }) => {
       setIsProcessing(false);
     }
   };
-
+/*
   const processExistingPDF = async (fileUri) => {
     setIsProcessing(true);
     try {
@@ -219,7 +290,7 @@ const UploadScreen = ({ navigation, route }) => {
       setIsProcessing(false);
     }
   };
-
+*/
   // ─────────────────────────────────────────────────────────────
   // Validation & Submission
   // ─────────────────────────────────────────────────────────────
