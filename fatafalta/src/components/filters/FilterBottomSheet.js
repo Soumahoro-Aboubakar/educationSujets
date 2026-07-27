@@ -137,7 +137,7 @@ const FilterBottomSheet = React.forwardRef(({
               <X size={24} color={theme.colors.textPrimary} />
             </TouchableOpacity>
           </View>
-          
+
           <TouchableOpacity
             style={[
               styles.optionItem,

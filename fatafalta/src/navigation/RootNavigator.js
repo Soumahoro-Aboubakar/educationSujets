@@ -5,6 +5,7 @@ import DocumentDetailScreen from '../screens/DocumentDetailScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import UploadScreen from '../screens/UploadScreen';
 import EditDraftScreen from '../screens/EditDraftScreen';
+import CorrectionUploadScreen from '../screens/CorrectionUploadScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,13 @@ const RootNavigator = () => {
       <Stack.Screen 
         name="EditDraft" 
         component={EditDraftScreen}
+        options={{
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="CorrectionUpload"
+        component={CorrectionUploadScreen}
         options={{
           presentation: 'modal',
         }}

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const { v4: uuidv4 } = require('uuid');
+const mongoose = require('mongoose');
 const Document = require('../models/Document');
 const storageConfig = require('../config/storage');
 const getStorageProvider = require('../storage');
@@ -18,7 +19,7 @@ const POPULATE_FIELDS = [
   { path: 'category', select: 'name icon' },
   { path: 'uploadedBy', select: 'name email role' },
   { path: 'validatedBy', select: 'name email role' },
-  { path: 'correction', select: '_id status' },
+  { path: 'correction', select: '_id status originalFileName fileType extension mimeType fileSize documentType' },
 ];
 
 const applyPopulate = (query) => {
@@ -128,6 +129,31 @@ const assertDocumentMutationAccess = (document, user) => {
   }
 };
 
+/**
+ * Check delete permission:
+ * - admin (super admin) can delete any document
+ * - sub-admin can only delete documents they uploaded
+ */
+const assertDeleteAccess = (document, user) => {
+  if (!document) {
+    throw new AppError('Document non trouve', 404);
+  }
+
+  if (user.role === 'admin') {
+    return; // super admin can delete anything
+  }
+
+  if (user.role === 'sub-admin') {
+    const uploadedById = (document.uploadedBy?._id || document.uploadedBy).toString();
+    if (uploadedById !== user._id.toString()) {
+      throw new AppError('Vous ne pouvez supprimer que les documents que vous avez uploades', 403);
+    }
+    return;
+  }
+
+  throw new AppError('Vous n\'etes pas autorise a supprimer ce document', 403);
+};
+
 const getDocumentById = async (id) => applyPopulate(Document.findById(id));
 
 const getDocumentByStoredFileName = async (fileName) => applyPopulate(Document.findOne({ file: fileName }));
@@ -139,7 +165,7 @@ const findDuplicateTitleCandidates = async (title, user) => {
     return [];
   }
 
-  const documents = await Document.find({})
+  const documents = await Document.find({ isDeleted: { $ne: true } })
     .select('title originalFileName status uploadedBy createdAt')
     .sort('-createdAt')
     .lean();
@@ -181,7 +207,7 @@ const findDuplicateTitleCandidates = async (title, user) => {
 };
 
 const buildDocumentFilters = (params = {}) => {
-  const filters = { status: 'approved' };
+  const filters = { status: 'approved', isDeleted: { $ne: true } };
   const refFields = ['university', 'department', 'level', 'semester', 'category'];
 
   refFields.forEach((field) => {
@@ -242,7 +268,7 @@ const listPublicDocuments = async (params = {}) => {
 };
 
 const listUserDocuments = async (userId, params = {}) => {
-  const filters = { uploadedBy: userId };
+  const filters = { uploadedBy: userId, isDeleted: { $ne: true } };
   let query = applyPopulate(Document.find(filters).sort('-createdAt'));
 
   const limit = Number.parseInt(params.limit, 10) || 12;
@@ -268,7 +294,7 @@ const listUserDocuments = async (userId, params = {}) => {
 };
 
 const listPendingDocuments = async (params = {}) => {
-  const filters = { status: 'pending' };
+  const filters = { status: 'pending', isDeleted: { $ne: true } };
   let query = applyPopulate(Document.find(filters).sort('-createdAt'));
 
   const limit = Number.parseInt(params.limit, 10) || 12;
@@ -294,7 +320,7 @@ const listPendingDocuments = async (params = {}) => {
 };
 
 const listDraftDocuments = async (params = {}) => {
-  const filters = { status: 'draft' };
+  const filters = { status: 'draft', isDeleted: { $ne: true } };
   let query = applyPopulate(Document.find(filters).sort('-createdAt'));
 
   const limit = Number.parseInt(params.limit, 10) || 12;
@@ -320,11 +346,12 @@ const listDraftDocuments = async (params = {}) => {
 };
 
 const getAnalytics = async () => {
+  const notDeleted = { isDeleted: { $ne: true } };
   const [totalDocuments, approvedDocuments, pendingDocuments, rejectedDocuments, totals] = await Promise.all([
-    Document.countDocuments(),
-    Document.countDocuments({ status: 'approved' }),
-    Document.countDocuments({ status: 'pending' }),
-    Document.countDocuments({ status: 'rejected' }),
+    Document.countDocuments(notDeleted),
+    Document.countDocuments({ status: 'approved', ...notDeleted }),
+    Document.countDocuments({ status: 'pending', ...notDeleted }),
+    Document.countDocuments({ status: 'rejected', ...notDeleted }),
     Document.aggregate([
       {
         $group: {
@@ -359,9 +386,53 @@ const createStoragePayload = (file, userId) => {
   };
 };
 
+const assertCorrectionFile = (file) => {
+  const extension = path.extname(file.originalname || '').toLowerCase();
+  const mimeType = (file.mimetype || '').toLowerCase();
+
+  if (extension !== '.pdf' || mimeType !== 'application/pdf') {
+    throw new AppError('Le corrige doit etre un fichier PDF', 400);
+  }
+};
+
+const assertCorrectionTarget = async (correctionFor) => {
+  if (!correctionFor || !mongoose.Types.ObjectId.isValid(correctionFor)) {
+    throw new AppError('Document principal invalide', 400);
+  }
+
+  const subject = await Document.findById(correctionFor);
+
+  if (!subject) {
+    throw new AppError('Document principal introuvable', 404);
+  }
+
+  if (subject.documentType === 'corrige') {
+    throw new AppError('Un corrige ne peut pas recevoir un autre corrige', 400);
+  }
+
+  const existingCorrection = await Document.findOne({
+    documentType: 'corrige',
+    correctionFor: subject._id,
+  });
+
+  if (existingCorrection) {
+    throw new AppError('Ce document possede deja un corrige associe', 409);
+  }
+
+  return subject;
+};
+
 const createDocument = async (payload, file, user) => {
   if (!file) {
     throw new AppError('Aucun fichier a uploader', 400);
+  }
+
+  const documentType = payload.documentType === 'corrige' ? 'corrige' : 'sujet';
+  const isCorrection = documentType === 'corrige';
+
+  if (isCorrection) {
+    assertCorrectionFile(file);
+    await assertCorrectionTarget(payload.correctionFor);
   }
 
   const storageProvider = getStorageProvider();
@@ -376,16 +447,8 @@ const createDocument = async (payload, file, user) => {
     },
   });
 
-  const document = await Document.create({
-    title: payload.title?.trim(),
-    description: payload.description?.trim() || '',
-    university: payload.university || null,
-    department: payload.department || null,
-    level: payload.level || null,
-    semester: payload.semester || null,
-    category: payload.category || null,
-    documentType: payload.documentType || 'sujet',
-    correctionFor: payload.correctionFor || null,
+  const baseDocument = {
+    documentType,
     uploadedBy: user._id,
     file: storedFileName,
     originalFileName: file.originalname,
@@ -395,17 +458,45 @@ const createDocument = async (payload, file, user) => {
     fileSize: file.size,
     storageKey,
     storageProvider: storageConfig.provider,
-    status: payload.metadataStatus === 'false' ? 'draft' : 'pending',
-  });
+    isPremmuim: false,
+  };
+
+  const documentPayload = isCorrection
+    ? {
+      ...baseDocument,
+      correctionFor: payload.correctionFor,
+      status: 'approved',
+      validatedBy: user._id,
+      validatedAt: new Date(),
+    }
+    : {
+      ...baseDocument,
+      title: payload.title?.trim(),
+      description: payload.description?.trim() || '',
+      university: payload.university || null,
+      department: payload.department || null,
+      level: payload.level || null,
+      semester: payload.semester || null,
+      category: payload.category || null,
+      status: payload.metadataStatus === 'false' ? 'draft' : 'pending',
+    };
+
+  const document = await Document.create(documentPayload);
 
   console.info(`[UPLOAD] user=${user._id} document=${document._id} file=${storedFileName} provider=${storageConfig.provider}`);
-  console.log("Voici le log document : ", document);
   return getDocumentById(document._id);
 };
+
+const createCorrectionDocument = async (documentId, file, user) =>
+  createDocument({ documentType: 'corrige', correctionFor: documentId }, file, user);
 
 const updateDocument = async (documentId, payload, user) => {
   const document = await Document.findById(documentId);
   assertDocumentMutationAccess(document, user);
+
+  if (document.documentType === 'corrige') {
+    throw new AppError('Les metadonnees ne sont pas modifiables sur un corrige', 400);
+  }
 
   const fields = ['title', 'description', 'university', 'department', 'level', 'semester', 'category'];
 
@@ -436,7 +527,45 @@ const validateDocument = async (documentId, status, user) => {
 
 const deleteDocument = async (documentId, user) => {
   const document = await Document.findById(documentId);
-  assertDocumentMutationAccess(document, user);
+  assertDeleteAccess(document, user);
+
+  document.previousStatus = document.status;
+  document.isDeleted = true;
+  document.deletedAt = new Date();
+  document.deletedBy = user._id;
+  await document.save();
+
+  console.info(`[SOFT_DELETE] user=${user._id} document=${documentId} previousStatus=${document.previousStatus}`);
+};
+
+const restoreDocument = async (documentId) => {
+  const document = await Document.findById(documentId);
+
+  if (!document) {
+    throw new AppError('Document non trouve', 404);
+  }
+
+  if (!document.isDeleted) {
+    throw new AppError('Ce document n\'est pas dans la corbeille', 400);
+  }
+
+  document.status = document.previousStatus || 'pending';
+  document.isDeleted = false;
+  document.deletedAt = null;
+  document.deletedBy = null;
+  document.previousStatus = null;
+  await document.save();
+
+  console.info(`[RESTORE] document=${documentId} restoredStatus=${document.status}`);
+  return getDocumentById(document._id);
+};
+
+const permanentlyDeleteDocument = async (documentId) => {
+  const document = await Document.findById(documentId);
+
+  if (!document) {
+    throw new AppError('Document non trouve', 404);
+  }
 
   if (document.storageKey) {
     try {
@@ -447,8 +576,66 @@ const deleteDocument = async (documentId, user) => {
   }
 
   await document.deleteOne();
+  console.info(`[PERMANENT_DELETE] document=${documentId}`);
+};
 
-  console.info(`[DELETE] user=${user._id} document=${documentId}`);
+const listTrashedDocuments = async (params = {}) => {
+  const filters = { isDeleted: true };
+  let query = applyPopulate(
+    Document.find(filters)
+      .populate({ path: 'deletedBy', select: 'name email role' })
+      .sort('-deletedAt')
+  );
+
+  const limit = Number.parseInt(params.limit, 10) || 20;
+  const page = Number.parseInt(params.page, 10) || 1;
+  const skip = (page - 1) * limit;
+
+  query = query.skip(skip).limit(limit);
+
+  const [data, total] = await Promise.all([
+    query,
+    Document.countDocuments(filters),
+  ]);
+
+  return {
+    data,
+    pagination: {
+      total,
+      page,
+      pages: Math.ceil(total / limit),
+      limit,
+    },
+  };
+};
+
+const TRASH_RETENTION_DAYS = 6;
+
+const purgeExpiredTrash = async () => {
+  const cutoff = new Date(Date.now() - TRASH_RETENTION_DAYS * 24 * 60 * 60 * 1000);
+  const expiredDocuments = await Document.find({
+    isDeleted: true,
+    deletedAt: { $lte: cutoff },
+  });
+
+  if (expiredDocuments.length === 0) {
+    return { purged: 0 };
+  }
+
+  console.info(`[TRASH_PURGE] Found ${expiredDocuments.length} expired documents to purge`);
+
+  let purged = 0;
+  for (const doc of expiredDocuments) {
+    try {
+      await permanentlyDeleteDocument(doc._id);
+      purged += 1;
+    } catch (error) {
+      console.error(`[TRASH_PURGE_ERROR] document=${doc._id} error=${error.message}`);
+    }
+  }
+
+  console.info(`[TRASH_PURGE] Purged ${purged}/${expiredDocuments.length} documents`);
+  return { purged, total: expiredDocuments.length };
 };
 
 const buildDownloadPayload = async (document, user) => {
@@ -502,9 +689,14 @@ module.exports = {
   listDraftDocuments,
   getAnalytics,
   createDocument,
+  createCorrectionDocument,
   updateDocument,
   validateDocument,
   deleteDocument,
+  restoreDocument,
+  permanentlyDeleteDocument,
+  listTrashedDocuments,
+  purgeExpiredTrash,
   buildDownloadPayload,
   resolveLegacyLocalPath,
   incrementDocumentViews,

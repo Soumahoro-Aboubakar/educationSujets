@@ -1,16 +1,22 @@
 const mongoose = require('mongoose');
 
+const metadataDefault = function metadataDefault() {
+  return this.documentType === 'corrige' ? undefined : null;
+};
+
 const DocumentSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: function() { return this.status !== 'draft'; },
+      required: function() { return this.status !== 'draft' && this.documentType !== 'corrige'; },
       trim: true,
     },
     description: {
       type: String,
       trim: true,
-      default: '',
+      default: function descriptionDefault() {
+        return this.documentType === 'corrige' ? undefined : '';
+      },
     },
     file: {
       type: String,
@@ -55,27 +61,27 @@ const DocumentSchema = new mongoose.Schema(
     university: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'University',
-      default: null,
+      default: metadataDefault,
     },
     department: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Department',
-      default: null,
+      default: metadataDefault,
     },
     level: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Level',
-      default: null,
+      default: metadataDefault,
     },
     semester: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Semester',
-      default: null,
+      default: metadataDefault,
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',
-      default: null,
+      default: metadataDefault,
     },
     uploadedBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -97,6 +103,10 @@ const DocumentSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
+    isPremmuim: {
+      type: Boolean,
+      default: false,
+    },
     documentType: {
       type: String,
       enum: ['sujet', 'corrige'],
@@ -116,6 +126,25 @@ const DocumentSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    // ── Soft-delete / Corbeille ────────────────────
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    deletedAt: {
+      type: Date,
+      default: null,
+    },
+    deletedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
+    },
+    previousStatus: {
+      type: String,
+      enum: ['draft', 'pending', 'approved', 'rejected', null],
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -133,6 +162,7 @@ DocumentSchema.virtual('correction', {
 
 DocumentSchema.index({ status: 1, createdAt: -1 });
 DocumentSchema.index({ uploadedBy: 1, createdAt: -1 });
+DocumentSchema.index({ isDeleted: 1, deletedAt: 1 });
 DocumentSchema.index({ university: 1, department: 1, level: 1, semester: 1, category: 1 });
 DocumentSchema.index({ storageKey: 1 }, { unique: true, sparse: true });
 

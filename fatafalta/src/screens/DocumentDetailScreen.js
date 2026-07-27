@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Modal, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import {
   ArrowLeft, Download, Eye, FileText, Building2, GraduationCap,
@@ -15,12 +16,12 @@ import { getFileIcon } from '../utils/fileIcons';
 import { formatDate, formatFileSize } from '../utils/format';
 import theme from '../theme/tokens';
 
-const InfoRow = ({ icon: Icon, label, value }) => {
+const InfoRow = ({ icon: Icon, label, value, isLast }) => {
   if (!value) return null;
   return (
-    <View style={styles.infoRow}>
+    <View style={[styles.infoRow, isLast && styles.infoRowLast]}>
       <View style={styles.infoIcon}>
-        <Icon size={16} color={theme.colors.textMuted} />
+        <Icon size={16} color={theme.colors.textMuted} strokeWidth={2.2} />
       </View>
       <View style={styles.infoTextContainer}>
         <Text variant="caption" color={theme.colors.textMuted}>{label}</Text>
@@ -33,6 +34,7 @@ const InfoRow = ({ icon: Icon, label, value }) => {
 const DocumentDetailScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
   const { documentId, document: initialDocument } = route.params;
 
   const { data: document = initialDocument } = useDocument(documentId);
@@ -46,6 +48,9 @@ const DocumentDetailScreen = () => {
   const fileConfig = getFileIcon(document?.fileType || document?.extension);
 
   if (!document) return null;
+
+  const isCorrection = document.documentType === 'corrige';
+  const displayTitle = document.title || document.originalFileName || (isCorrection ? 'Corrigé' : 'Document PDF');
 
   const handleAction = () => {
     if (isDownloaded) {
@@ -72,7 +77,7 @@ const DocumentDetailScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
         <Button
           variant="ghost"
@@ -88,8 +93,8 @@ const DocumentDetailScreen = () => {
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.heroCard}>
-          <View style={[styles.iconBox, { backgroundColor: fileConfig.bgColor }]}> 
-            <FileText size={36} color={fileConfig.color} />
+          <View style={[styles.iconBox, { backgroundColor: fileConfig.bgColor }]}>
+            <FileText size={36} color={fileConfig.color} strokeWidth={1.8} />
           </View>
           <Badge
             label={fileConfig.label}
@@ -98,18 +103,18 @@ const DocumentDetailScreen = () => {
             style={styles.badge}
           />
           <Text variant="h2" align="center" style={styles.title}>
-            {document.title}
+            {displayTitle}
           </Text>
           <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.date}>
             Ajouté le {formatDate(document.createdAt)}
           </Text>
           <View style={styles.heroPills}>
             <View style={styles.pill}>
-              <Sparkles size={14} color={theme.colors.accent} />
+              <Sparkles size={14} color={theme.colors.accent} strokeWidth={2.2} />
               <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>Prêt mobile</Text>
             </View>
             <View style={styles.pill}>
-              <Download size={14} color={theme.colors.primary} />
+              <Download size={14} color={theme.colors.primary} strokeWidth={2.2} />
               <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>{document.downloads || 0} téléchargements</Text>
             </View>
           </View>
@@ -117,13 +122,17 @@ const DocumentDetailScreen = () => {
 
         <View style={styles.statsRow}>
           <View style={styles.statBox}>
-            <Download size={18} color={theme.colors.primary} />
+            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.primaryWash }]}>
+              <Download size={16} color={theme.colors.primary} strokeWidth={2.2} />
+            </View>
             <Text variant="h3" style={styles.statValue}>{document.downloads || 0}</Text>
             <Text variant="caption" color={theme.colors.textMuted}>Téléchargements</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statBox}>
-            <Eye size={18} color={theme.colors.accent} />
+            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.accentWash }]}>
+              <Eye size={16} color={theme.colors.accent} strokeWidth={2.2} />
+            </View>
             <Text variant="h3" style={styles.statValue}>{document.views || 0}</Text>
             <Text variant="caption" color={theme.colors.textMuted}>Vues</Text>
           </View>
@@ -132,7 +141,7 @@ const DocumentDetailScreen = () => {
         {isDownloaded ? (
           <View style={styles.successCard}>
             <View style={styles.successIcon}>
-              <CheckCircle2 size={22} color={theme.colors.success} />
+              <CheckCircle2 size={22} color={theme.colors.success} strokeWidth={2} />
             </View>
             <View style={{ flex: 1 }}>
               <Text variant="h3">Prêt à ouvrir</Text>
@@ -162,7 +171,7 @@ const DocumentDetailScreen = () => {
         {document.description ? (
           <View style={styles.section}>
             <Text variant="h3" style={styles.sectionTitle}>Description</Text>
-            <Text variant="body" color={theme.colors.textSecondary}>
+            <Text variant="body" color={theme.colors.textSecondary} style={styles.descriptionText}>
               {document.description}
             </Text>
           </View>
@@ -176,12 +185,12 @@ const DocumentDetailScreen = () => {
             <InfoRow icon={GraduationCap} label="Niveau" value={document.level?.name} />
             <InfoRow icon={Calendar} label="Session" value={document.semester?.displayName || document.semester?.name} />
             <InfoRow icon={FolderOpen} label="Catégorie" value={document.category?.name} />
-            <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} />
+            <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} isLast />
           </View>
         </View>
       </ScrollView>
 
-      <View style={styles.actionBar}>
+      <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.lg) }]}>
         {isDownloading && (
           <View style={styles.progressContainer}>
             <Text variant="caption" color={theme.colors.primary} style={styles.progressText}>
@@ -193,7 +202,7 @@ const DocumentDetailScreen = () => {
 
         <Button
           variant={isDownloaded ? 'secondary' : 'accent'}
-          title={isDownloaded ? 'Ouvrir le PDF' : 'Télécharger le PDF'}
+          title={isDownloaded ? (isCorrection ? 'Ouvrir le corrigé' : 'Ouvrir le PDF') : (isCorrection ? 'Télécharger le corrigé' : 'Télécharger le PDF')}
           icon={isDownloaded ? <FileText size={18} color={theme.colors.primary} /> : <Download size={18} color={theme.colors.textInverse} />}
           onPress={handleAction}
           loading={isInitializing}
@@ -210,7 +219,7 @@ const DocumentDetailScreen = () => {
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalIconBox}>
-              <Sparkles size={24} color={theme.colors.accent} />
+              <Sparkles size={24} color={theme.colors.accent} strokeWidth={2} />
             </View>
             <Text variant="h3" align="center" style={styles.modalTitle}>Corrigé disponible !</Text>
             <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.modalText}>
@@ -271,7 +280,11 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.lg,
     borderWidth: 1,
     borderColor: theme.colors.borderLight,
-    ...theme.shadows.md,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.06,
+    shadowRadius: 16,
+    elevation: 3,
   },
   iconBox: {
     width: 72,
@@ -286,6 +299,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: theme.spacing.xs,
+    letterSpacing: -0.3,
   },
   date: {
     marginBottom: theme.spacing.md,
@@ -299,13 +313,14 @@ const styles = StyleSheet.create({
   pill: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: theme.spacing.xs,
     backgroundColor: theme.colors.primaryWash,
     borderRadius: theme.radius.full,
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.xs,
   },
   pillText: {
-    marginLeft: theme.spacing.xs,
+    marginLeft: 2,
   },
   statsRow: {
     flexDirection: 'row',
@@ -313,18 +328,31 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.lg,
     padding: theme.spacing.lg,
     marginBottom: theme.spacing.lg,
-    ...theme.shadows.sm,
+    borderWidth: 1,
+    borderColor: theme.colors.borderLight,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 1,
   },
   statBox: {
     flex: 1,
     alignItems: 'center',
+  },
+  statIconWrap: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: theme.spacing.xs,
   },
   statDivider: {
     width: 1,
     backgroundColor: theme.colors.borderLight,
   },
   statValue: {
-    marginTop: theme.spacing.xs,
     marginBottom: 2,
   },
   successCard: {
@@ -343,6 +371,7 @@ const styles = StyleSheet.create({
   successText: {
     marginTop: 4,
     marginBottom: theme.spacing.md,
+    lineHeight: 19,
   },
   quickActions: {
     flexDirection: 'row',
@@ -357,18 +386,30 @@ const styles = StyleSheet.create({
   sectionTitle: {
     marginBottom: theme.spacing.md,
   },
+  descriptionText: {
+    lineHeight: 21,
+  },
   infoCard: {
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radius.lg,
-    padding: theme.spacing.md,
-    ...theme.shadows.sm,
+    paddingHorizontal: theme.spacing.md,
+    borderWidth: 1,
+    borderColor: theme.colors.borderLight,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 1,
   },
   infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: theme.spacing.sm,
+    paddingVertical: theme.spacing.sm + 2,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.borderLight,
+  },
+  infoRowLast: {
+    borderBottomWidth: 0,
   },
   infoIcon: {
     width: 36,
@@ -390,10 +431,13 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     paddingHorizontal: theme.spacing.lg,
     paddingTop: theme.spacing.md,
-    paddingBottom: theme.spacing.xl, // Safe area approx
     borderTopWidth: 1,
     borderTopColor: theme.colors.borderLight,
-    ...theme.shadows.lg,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 8,
   },
   actionButton: {
     width: '100%',
@@ -407,7 +451,7 @@ const styles = StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(15, 23, 42, 0.55)',
     justifyContent: 'center',
     alignItems: 'center',
     padding: theme.spacing.lg,
@@ -418,7 +462,11 @@ const styles = StyleSheet.create({
     padding: theme.spacing.xl,
     width: '100%',
     alignItems: 'center',
-    ...theme.shadows.lg,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.18,
+    shadowRadius: 24,
+    elevation: 10,
   },
   modalIconBox: {
     width: 56,
@@ -434,6 +482,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: theme.spacing.xl,
+    lineHeight: 21,
   },
   modalActions: {
     width: '100%',

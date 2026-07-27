@@ -27,7 +27,7 @@ import LockedFeatureScreen from './LockedFeatureScreen';
 import useMetadataOptions from '../hooks/useMetadataOptions';
 import useDrafts from '../hooks/useDrafts';
 import theme from '../theme/tokens';
-import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory,MAX_IMPORTED_PDF_SIZE_BYTES } from '../services/pdfService';
+import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory, MAX_IMPORTED_PDF_SIZE_BYTES } from '../services/pdfService';
 import { uploadDocument, updateDocumentMetadata, validateDocumentStatus, getDownloadUrl } from '../services/documents';
 import ImageEditorModal from '../components/documents/ImageEditorModal';
 
@@ -155,7 +155,7 @@ const UploadScreen = ({ navigation, route }) => {
     setLevel(draft.level || null);
     setSemester(draft.semester?._id || draft.semester || null);
     setCategory(draft.category?._id || draft.category || null);
-    
+
     // Create a mock pdfFile for UI preview
     setPdfFile(draft.pdfFile || {
       name: draft.originalFileName || draft.file || 'Document PDF',
@@ -190,24 +190,24 @@ const UploadScreen = ({ navigation, route }) => {
       setImages([...images, ...newImages]);
     }
   };
-/*
-  const pickDocument = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
-      type: 'application/pdf',
-      copyToCacheDirectory: true,
-    });
-    if (!result.canceled) {
-      const file = result.assets[0];
-      await processExistingPDF(file.uri);
-    }
-  }; */
-
+  /*
     const pickDocument = async () => {
+      let result = await DocumentPicker.getDocumentAsync({
+        type: 'application/pdf',
+        copyToCacheDirectory: true,
+      });
+      if (!result.canceled) {
+        const file = result.assets[0];
+        await processExistingPDF(file.uri);
+      }
+    }; */
+
+  const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: 'application/pdf',
       copyToCacheDirectory: false, // <-- TRÈS IMPORTANT : Mettre à false
     });
-    
+
     if (!result.canceled) {
       const file = result.assets[0];
 
@@ -226,53 +226,53 @@ const UploadScreen = ({ navigation, route }) => {
     }
   };
 
-/*
-  const pickDocument = async () => {
-  let result = await DocumentPicker.getDocumentAsync({
-    type: 'application/pdf',
-    copyToCacheDirectory: true,
-  });
-  if (!result.canceled) {
-    const file = result.assets[0];
-
-    // Vérification précoce côté UI : évite même de lancer le traitement
-    // si le fichier est visiblement trop lourd. `applyWatermarkToExistingPdf`
-    // refait aussi le contrôle en interne (défense en profondeur), mais
-    // le faire ici permet un message immédiat sans passer par le state
-    // `isProcessing`.
-    if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
-      const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
-      const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
-      Alert.alert(
-        'Fichier trop volumineux',
-        `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`
-      );
-      return;
+  /*
+    const pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      type: 'application/pdf',
+      copyToCacheDirectory: true,
+    });
+    if (!result.canceled) {
+      const file = result.assets[0];
+  
+      // Vérification précoce côté UI : évite même de lancer le traitement
+      // si le fichier est visiblement trop lourd. `applyWatermarkToExistingPdf`
+      // refait aussi le contrôle en interne (défense en profondeur), mais
+      // le faire ici permet un message immédiat sans passer par le state
+      // `isProcessing`.
+      if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+        const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+        Alert.alert(
+          'Fichier trop volumineux',
+          `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`
+        );
+        return;
+      }
+  
+      await processExistingPDF(file.uri);
     }
-
-    await processExistingPDF(file.uri);
-  }
-};
-*/
-const processExistingPDF = async (fileUri) => {
-  setIsProcessing(true);
-  try {
-    const result = await applyWatermarkToExistingPdf(fileUri);
-    setPdfFile(result);
-    setPdfLocalUri(result.uri);
-    setPdfIntentUri(await getIntentUri(result.uri));
-    setPdfWebViewUri(isAndroid ? null : result.uri);
-    setStep('metadata');
-  } catch (e) {
-    console.error(e);
-    // On remonte le message précis (taille, fichier corrompu, etc.)
-    // plutôt qu'un message générique, pour que l'utilisateur comprenne
-    // pourquoi ça a échoué.
-    Alert.alert('Erreur', e.message || 'Erreur lors du traitement du PDF');
-  } finally {
-    setIsProcessing(false);
-  }
-};
+  };
+  */
+  const processExistingPDF = async (fileUri) => {
+    setIsProcessing(true);
+    try {
+      const result = await applyWatermarkToExistingPdf(fileUri);
+      setPdfFile(result);
+      setPdfLocalUri(result.uri);
+      setPdfIntentUri(await getIntentUri(result.uri));
+      setPdfWebViewUri(isAndroid ? null : result.uri);
+      setStep('metadata');
+    } catch (e) {
+      console.error(e);
+      // On remonte le message précis (taille, fichier corrompu, etc.)
+      // plutôt qu'un message générique, pour que l'utilisateur comprenne
+      // pourquoi ça a échoué.
+      Alert.alert('Erreur', e.message || 'Erreur lors du traitement du PDF');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
   const removeImage = (index) => {
     setImages(images.filter((_, i) => i !== index));
   };
@@ -294,36 +294,36 @@ const processExistingPDF = async (fileUri) => {
       setIsProcessing(false);
     }
   };
-/*
-  const processExistingPDF = async (fileUri) => {
-    setIsProcessing(true);
-    try {
-      const result = await applyWatermarkToExistingPdf(fileUri);
-      setPdfFile(result);
-      setPdfLocalUri(result.uri);
-      setPdfIntentUri(await getIntentUri(result.uri));
-      setPdfWebViewUri(isAndroid ? null : result.uri);
-      setStep('metadata');
-    } catch (e) {
-      console.error(e);
-      Alert.alert('Erreur', 'Erreur lors du traitement du PDF');
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-*/
+  /*
+    const processExistingPDF = async (fileUri) => {
+      setIsProcessing(true);
+      try {
+        const result = await applyWatermarkToExistingPdf(fileUri);
+        setPdfFile(result);
+        setPdfLocalUri(result.uri);
+        setPdfIntentUri(await getIntentUri(result.uri));
+        setPdfWebViewUri(isAndroid ? null : result.uri);
+        setStep('metadata');
+      } catch (e) {
+        console.error(e);
+        Alert.alert('Erreur', 'Erreur lors du traitement du PDF');
+      } finally {
+        setIsProcessing(false);
+      }
+    };
+  */
   // ─────────────────────────────────────────────────────────────
   // Validation & Submission
   // ─────────────────────────────────────────────────────────────
 
   const validateForm = (isDraft) => {
     const newErrors = {};
-    
+
     if (!isDraft) {
       if (!title.trim()) {
         newErrors.title = 'Titre requis';
       }
-      
+
       if (!category) {
         newErrors.category = 'Catégorie requise';
       }
@@ -355,7 +355,7 @@ const processExistingPDF = async (fileUri) => {
         };
 
         await updateDocumentMetadata(draftId, payload);
-        
+
         if (publish) {
           await validateDocumentStatus(draftId, 'approved');
         }
@@ -384,7 +384,7 @@ const processExistingPDF = async (fileUri) => {
         formData.append('metadataStatus', publish ? 'true' : 'false');
 
         await uploadDocument(formData);
-        
+
         Alert.alert(
           'Succès',
           publish ? 'Document publié avec succès' : 'Document enregistré en brouillon'
@@ -436,8 +436,8 @@ const processExistingPDF = async (fileUri) => {
       </View>
 
       <View style={styles.actionsContainer}>
-        <TouchableOpacity 
-          style={styles.actionCard} 
+        <TouchableOpacity
+          style={styles.actionCard}
           onPress={pickImage}
           activeOpacity={0.7}
         >
@@ -448,8 +448,8 @@ const processExistingPDF = async (fileUri) => {
           <Text variant="caption" color={theme.colors.textMuted}>Depuis la galerie</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={styles.actionCard} 
+        <TouchableOpacity
+          style={styles.actionCard}
           onPress={pickDocument}
           activeOpacity={0.7}
         >
@@ -471,19 +471,19 @@ const processExistingPDF = async (fileUri) => {
           </View>
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.imageScroll}>
-           {images.map((uri, index) => (
-  <View key={index} style={styles.imageWrapper}>
-    <TouchableOpacity onPress={() => setEditingIndex(index)} activeOpacity={0.8}>
-      <Image source={{ uri }} style={styles.previewImage} />
-    </TouchableOpacity>
-    <TouchableOpacity 
-      style={styles.removeImageButton} 
-      onPress={() => removeImage(index)}
-    >
-      <X size={14} color={theme.colors.textInverse} />
-    </TouchableOpacity>
-  </View>
-))}
+            {images.map((uri, index) => (
+              <View key={index} style={styles.imageWrapper}>
+                <TouchableOpacity onPress={() => setEditingIndex(index)} activeOpacity={0.8}>
+                  <Image source={{ uri }} style={styles.previewImage} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.removeImageButton}
+                  onPress={() => removeImage(index)}
+                >
+                  <X size={14} color={theme.colors.textInverse} />
+                </TouchableOpacity>
+              </View>
+            ))}
           </ScrollView>
 
           <Button
@@ -520,7 +520,7 @@ const processExistingPDF = async (fileUri) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.previewButton}
           onPress={() => setShowPdfPreview(true)}
         >
@@ -605,7 +605,7 @@ const processExistingPDF = async (fileUri) => {
         )}
 
         {/* Show More Fields Toggle */}
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.toggleMoreFields}
           onPress={() => setShowOnlyRequiredFields(!showOnlyRequiredFields)}
         >
@@ -663,72 +663,72 @@ const processExistingPDF = async (fileUri) => {
         feature="Créer, sauvegarder en brouillon et publier des documents PDF"
       />
     ) : (
-    <View style={styles.container}>
-      {step === 'choose' && renderChooseStep()}
-      {step === 'metadata' && renderMetadataStep()}
-      <ImageEditorModal
-  visible={editingIndex !== null}
-  imageUri={editingIndex !== null ? images[editingIndex] : null}
-  onCancel={() => setEditingIndex(null)}
-  onSave={(newUri) => {
-    setImages((prev) => prev.map((uri, i) => (i === editingIndex ? newUri : uri)));
-    setEditingIndex(null);
-  }}
-/>
-      {/* PDF Preview Modal */}
-      <Modal
-        visible={showPdfPreview}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setShowPdfPreview(false)}
-      >
-        <SafeAreaView style={styles.previewModal}>
-          <View style={styles.previewModalHeader}>
-            <Text variant="h3">Prévisualisation</Text>
-            <TouchableOpacity onPress={() => setShowPdfPreview(false)}>
-              <X size={24} color={theme.colors.textPrimary} />
-            </TouchableOpacity>
-          </View>
-          {webviewAvailable && pdfWebViewUri ? (
-            // Use WebView if available and not on Android, because Android WebView cannot reliably display local PDFs.
-            // eslint-disable-next-line global-require
-            (() => {
-              const { WebView } = require('react-native-webview');
-              return (
-                <View style={{ flex: 1 }}>
-                  <WebView
-                    source={{ uri: pdfWebViewUri }}
-                    originWhitelist={["*"]}
-                    allowFileAccess
-                    allowUniversalAccessFromFileURLs
-                    style={{ flex: 1 }}
-                  />
-                </View>
-              );
-            })()
-          ) : (
-            <View style={styles.previewPlaceholder}>
-              <FileText size={64} color={theme.colors.textMuted} />
-              <Text variant="body" color={theme.colors.textMuted} style={{ marginTop: 16 }}>
-                Prévisualisation PDF disponible
-              </Text>
-              {pdfIntentUri ? (
-                <Button
-                  title="Ouvrir la prévisualisation"
-                  onPress={handleOpenPreview}
-                  style={{ marginTop: 16 }}
-                />
-              ) : (
-                <Text variant="body" color={theme.colors.textSecondary} style={{ marginTop: 16 }}>
-                  Le fichier n'est pas encore prêt pour la prévisualisation.
-                </Text>
-              )}
+      <View style={styles.container}>
+        {step === 'choose' && renderChooseStep()}
+        {step === 'metadata' && renderMetadataStep()}
+        <ImageEditorModal
+          visible={editingIndex !== null}
+          imageUri={editingIndex !== null ? images[editingIndex] : null}
+          onCancel={() => setEditingIndex(null)}
+          onSave={(newUri) => {
+            setImages((prev) => prev.map((uri, i) => (i === editingIndex ? newUri : uri)));
+            setEditingIndex(null);
+          }}
+        />
+        {/* PDF Preview Modal */}
+        <Modal
+          visible={showPdfPreview}
+          transparent
+          animationType="fade"
+          onRequestClose={() => setShowPdfPreview(false)}
+        >
+          <SafeAreaView style={styles.previewModal}>
+            <View style={styles.previewModalHeader}>
+              <Text variant="h3">Prévisualisation</Text>
+              <TouchableOpacity onPress={() => setShowPdfPreview(false)}>
+                <X size={24} color={theme.colors.textPrimary} />
+              </TouchableOpacity>
             </View>
-          )}
-        </SafeAreaView>
-      </Modal>
-    </View>
-  ));
+            {webviewAvailable && pdfWebViewUri ? (
+              // Use WebView if available and not on Android, because Android WebView cannot reliably display local PDFs.
+              // eslint-disable-next-line global-require
+              (() => {
+                const { WebView } = require('react-native-webview');
+                return (
+                  <View style={{ flex: 1 }}>
+                    <WebView
+                      source={{ uri: pdfWebViewUri }}
+                      originWhitelist={["*"]}
+                      allowFileAccess
+                      allowUniversalAccessFromFileURLs
+                      style={{ flex: 1 }}
+                    />
+                  </View>
+                );
+              })()
+            ) : (
+              <View style={styles.previewPlaceholder}>
+                <FileText size={64} color={theme.colors.textMuted} />
+                <Text variant="body" color={theme.colors.textMuted} style={{ marginTop: 16 }}>
+                  Prévisualisation PDF disponible
+                </Text>
+                {pdfIntentUri ? (
+                  <Button
+                    title="Ouvrir la prévisualisation"
+                    onPress={handleOpenPreview}
+                    style={{ marginTop: 16 }}
+                  />
+                ) : (
+                  <Text variant="body" color={theme.colors.textSecondary} style={{ marginTop: 16 }}>
+                    Le fichier n'est pas encore prêt pour la prévisualisation.
+                  </Text>
+                )}
+              </View>
+            )}
+          </SafeAreaView>
+        </Modal>
+      </View>
+    ));
 };
 
 const styles = StyleSheet.create({

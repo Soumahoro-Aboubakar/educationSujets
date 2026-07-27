@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { View, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Search, Library, Sparkles, ArrowRight } from 'lucide-react-native';
+import { Library, ArrowRight } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import SearchInput from '../components/ui/SearchInput';
 import DocumentList from '../components/documents/DocumentList';
@@ -21,6 +22,7 @@ const { width } = Dimensions.get('window');
  */
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef(null);
   const downloads = useDownloadStore((state) => state.downloads);
 
@@ -36,18 +38,18 @@ const HomeScreen = () => {
     scrollY.value = event.contentOffset.y;
   });
 
+  const HEADER_MAX = 240 + insets.top;
+  const HEADER_MIN = 132 + insets.top;
+
   const headerStyle = useAnimatedStyle(() => {
-    const height = interpolate(scrollY.value, [0, 100], [240, 132], Extrapolation.CLAMP);
+    const height = interpolate(scrollY.value, [0, 100], [HEADER_MAX, HEADER_MIN], Extrapolation.CLAMP);
     return { height };
   });
 
   const headerContentStyle = useAnimatedStyle(() => {
     const opacity = interpolate(scrollY.value, [0, 55], [1, 0], Extrapolation.CLAMP);
     const translateY = interpolate(scrollY.value, [0, 55], [0, -16], Extrapolation.CLAMP);
-    return {
-      opacity,
-      transform: [{ translateY }],
-    };
+    return { opacity, transform: [{ translateY }] };
   });
 
   const handleFilterChange = (key, value) => {
@@ -75,19 +77,21 @@ const HomeScreen = () => {
 
   const ListHeader = (
     <View style={styles.listHeader}>
-      <TouchableOpacity style={styles.libraryCard} onPress={handleOpenDownloads} activeOpacity={0.9}>
+      <TouchableOpacity style={styles.libraryCard} onPress={handleOpenDownloads} activeOpacity={0.85}>
         <View style={styles.libraryIconWrap}>
-          <Library size={20} color={theme.colors.primary} />
+          <Library size={20} color={theme.colors.primary} strokeWidth={2.2} />
         </View>
         <View style={{ flex: 1 }}>
           <Text variant="h3">Ma bibliothèque</Text>
           <Text variant="body" color={theme.colors.textSecondary} style={styles.libraryText}>
             {downloadCount > 0
-              ? `${downloadCount} document${downloadCount > 1 ? 's' : ''} prêt${downloadCount > 1 ? 's' : ''} à consulter` 
+              ? `${downloadCount} document${downloadCount > 1 ? 's' : ''} prêt${downloadCount > 1 ? 's' : ''} à consulter`
               : 'Retrouvez ici vos PDFs téléchargés et partagés'}
           </Text>
         </View>
-        <ArrowRight size={18} color={theme.colors.textMuted} />
+        <View style={styles.chevronWrap}>
+          <ArrowRight size={16} color={theme.colors.textMuted} strokeWidth={2.2} />
+        </View>
       </TouchableOpacity>
 
       <FilterBar
@@ -95,12 +99,15 @@ const HomeScreen = () => {
         filterOptions={filterOptions}
         onRemoveFilter={handleRemoveFilter}
       />
+
       <View style={styles.resultsHeader}>
         <Text variant="h3">Récemment ajoutés</Text>
         {!isLoading && documentsData?.pagination && (
-          <Text variant="caption" color={theme.colors.textMuted}>
-            {documentsData.pagination.total} documents
-          </Text>
+          <View style={styles.countPill}>
+            <Text variant="caption" color={theme.colors.textMuted}>
+              {documentsData.pagination.total} documents
+            </Text>
+          </View>
         )}
       </View>
     </View>
@@ -112,18 +119,21 @@ const HomeScreen = () => {
 
       <Animated.View style={[styles.header, headerStyle]}>
         <LinearGradient
-          colors={['#1E3A8A', '#2563EB', '#3B82F6']}
+          colors={['#152B6B', '#1E3A8A', '#3B6FE8']}
+          locations={[0, 0.55, 1]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.gradient}
         />
 
-        <View style={styles.blob1} />
-        <View style={styles.blob2} />
+        <View style={styles.blob1} pointerEvents="none" />
+        <View style={styles.blob2} pointerEvents="none" />
+        <View style={styles.noiseOverlay} pointerEvents="none" />
 
-        <SafeAreaView style={styles.safeArea}>
+        <View style={[styles.headerInner, { paddingTop: insets.top }]}>
           <Animated.View style={[styles.headerContent, headerContentStyle]}>
             <View style={styles.badge}>
+              <View style={styles.badgeDot} />
               <Text variant="overline" color={theme.colors.textInverse}>Ressources éducatives</Text>
             </View>
             <Text variant="h1" color={theme.colors.textInverse} style={styles.title}>
@@ -144,7 +154,7 @@ const HomeScreen = () => {
               placeholder="Rechercher un cours, sujet..."
             />
           </View>
-        </SafeAreaView>
+        </View>
       </Animated.View>
 
       <DocumentList
@@ -182,31 +192,39 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: theme.radius['2xl'],
     zIndex: 10,
     elevation: 10,
+    shadowColor: '#0B1B4D',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
   },
   gradient: {
     ...StyleSheet.absoluteFillObject,
   },
   blob1: {
     position: 'absolute',
-    top: -45,
-    right: -15,
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-    backgroundColor: 'rgba(255, 255, 255, 0.13)',
+    top: -50,
+    right: -20,
+    width: 190,
+    height: 190,
+    borderRadius: 95,
+    backgroundColor: 'rgba(255, 255, 255, 0.10)',
     transform: [{ scale: 1.4 }],
   },
   blob2: {
     position: 'absolute',
-    bottom: -40,
-    left: -20,
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: 'rgba(59, 130, 246, 0.32)',
+    bottom: -45,
+    left: -25,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: 'rgba(96, 165, 250, 0.28)',
     transform: [{ scale: 1.4 }],
   },
-  safeArea: {
+  noiseOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(255,255,255,0.02)',
+  },
+  headerInner: {
     flex: 1,
     justifyContent: 'flex-end',
   },
@@ -215,19 +233,32 @@ const styles = StyleSheet.create({
     paddingBottom: theme.spacing.xl,
   },
   badge: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: 'rgba(255, 255, 255, 0.16)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.22)',
     alignSelf: 'flex-start',
     paddingHorizontal: theme.spacing.sm,
     paddingVertical: theme.spacing.xs,
     borderRadius: theme.radius.full,
     marginBottom: theme.spacing.md,
   },
+  badgeDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: '#7DD3FC',
+  },
   title: {
     marginBottom: theme.spacing.xs,
+    letterSpacing: -0.5,
   },
   subtitle: {
     opacity: 0.95,
     maxWidth: width * 0.8,
+    lineHeight: 20,
   },
   searchContainer: {
     paddingHorizontal: theme.spacing.lg,
@@ -245,11 +276,15 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.md,
     borderWidth: 1,
     borderColor: theme.colors.borderLight,
-    ...theme.shadows.sm,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 2,
   },
   libraryIconWrap: {
-    width: 40,
-    height: 40,
+    width: 42,
+    height: 42,
     borderRadius: theme.radius.md,
     backgroundColor: theme.colors.primaryWash,
     alignItems: 'center',
@@ -259,12 +294,27 @@ const styles = StyleSheet.create({
   libraryText: {
     marginTop: 2,
   },
+  chevronWrap: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: theme.colors.borderLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   resultsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'baseline',
+    alignItems: 'center',
     paddingHorizontal: theme.spacing.xs,
     marginTop: theme.spacing.sm,
+    marginBottom: theme.spacing.xs,
+  },
+  countPill: {
+    backgroundColor: theme.colors.surfaceMuted ?? theme.colors.borderLight,
+    paddingHorizontal: theme.spacing.sm,
+    paddingVertical: 3,
+    borderRadius: theme.radius.full,
   },
 });
 

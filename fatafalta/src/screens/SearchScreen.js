@@ -16,7 +16,7 @@ import theme from '../theme/tokens';
 const SearchScreen = () => {
   const navigation = useNavigation();
   const bottomSheetRef = useRef(null);
-  
+
   // Wait for transition to finish before auto-focusing
   const [isReady, setIsReady] = useState(false);
   const searchInputRef = useRef(null);
@@ -27,10 +27,10 @@ const SearchScreen = () => {
 
   // Queries
   const { data: filterOptions = {} } = useFilterOptions();
-  
+
   // Only fetch if there's a search term or an active filter to save bandwidth
   const hasActiveQuery = filters.search.length > 2 || activeFilterCount > 0;
-  
+
   const { data: documentsData, isLoading } = useDocuments(hasActiveQuery ? filters : null);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const SearchScreen = () => {
     Keyboard.dismiss();
     bottomSheetRef.current?.expand();
   };
-  
+
   const closeFilters = () => bottomSheetRef.current?.close();
 
   const handleDocumentPress = (doc) => {

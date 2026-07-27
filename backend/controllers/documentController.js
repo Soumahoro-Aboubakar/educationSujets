@@ -8,9 +8,13 @@ const {
   listDraftDocuments,
   getAnalytics,
   createDocument,
+  createCorrectionDocument: createCorrectionDocumentService,
   updateDocument,
   validateDocument,
   deleteDocument,
+  restoreDocument: restoreDocumentService,
+  permanentlyDeleteDocument: permanentlyDeleteDocumentService,
+  listTrashedDocuments,
   buildDownloadPayload,
   resolveLegacyLocalPath,
   incrementDocumentViews,
@@ -40,10 +44,23 @@ exports.getDocument = asyncHandler(async (req, res) => {
 
 exports.createDocument = asyncHandler(async (req, res) => {
   const document = await createDocument(req.body, req.file, req.user);
+  const isCorrection = req.body.documentType === 'corrige';
+
   sendSuccess(res, {
     statusCode: 201,
-    message: 'Document uploadé avec succes et en attente de validation',
+    message: isCorrection
+      ? 'Corrige associe au document'
+      : 'Document uploade avec succes et en attente de validation',
     data: document,
+  });
+});
+
+exports.createCorrectionDocument = asyncHandler(async (req, res) => {
+  const correction = await createCorrectionDocumentService(req.params.id, req.file, req.user);
+  sendSuccess(res, {
+    statusCode: 201,
+    message: 'Corrige associe au document',
+    data: correction,
   });
 });
 
@@ -114,4 +131,37 @@ exports.legacyDownloadByFileName = asyncHandler(async (req, res) => {
 
   await incrementDocumentDownloads(document._id);
   return res.download(legacyFilePath, document.originalFileName || document.file);
+});
+
+// ── Trash Management (Super Admin) ──────────────
+
+exports.getTrashedDocuments = asyncHandler(async (req, res) => {
+  const result = await listTrashedDocuments(req.query);
+  sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
+});
+
+exports.restoreDocument = asyncHandler(async (req, res) => {
+  const document = await restoreDocumentService(req.params.id);
+  sendSuccess(res, { message: 'Document restaure avec succes', data: document });
+});
+
+exports.permanentlyDeleteDocument = asyncHandler(async (req, res) => {
+  await permanentlyDeleteDocumentService(req.params.id);
+  sendSuccess(res, { message: 'Document supprime definitivement', data: {} });
+});
+
+exports.getTrashedDocumentPreview = asyncHandler(async (req, res) => {
+  const document = await getDocumentById(req.params.id);
+
+  if (!document) {
+    throw new AppError('Document non trouve', 404);
+  }
+
+  const download = await buildDownloadPayload(document, req.user);
+
+  if (!download) {
+    throw new AppError('Ce document ne dispose pas de lien de previsualisation', 400);
+  }
+
+  sendSuccess(res, { data: download });
 });

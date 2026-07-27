@@ -61,6 +61,21 @@ export const uploadDocument = async (formData) => {
 };
 
 /**
+ * Upload and associate a correction PDF to an existing document.
+ * @param {string} documentId
+ * @param {FormData} formData
+ * @returns {Promise<Object>}
+ */
+export const uploadCorrectionDocument = async (documentId, formData) => {
+  const response = await api.post(`/api/documents/${documentId}/correction`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+/**
  * Update an existing document (metadata only)
  * @param {string} id
  * @param {Object} payload

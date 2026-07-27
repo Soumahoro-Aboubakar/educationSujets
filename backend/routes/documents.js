@@ -4,6 +4,7 @@ const {
   checkDuplicateTitle,
   getDocument,
   createDocument,
+  createCorrectionDocument,
   updateDocument,
   deleteDocument,
   getMyDocuments,
@@ -12,8 +13,12 @@ const {
   getDraftDocuments,
   getAnalytics,
   getDocumentDownloadUrl,
+  getTrashedDocuments,
+  restoreDocument,
+  permanentlyDeleteDocument,
+  getTrashedDocumentPreview,
 } = require('../controllers/documentController');
-const { protect, authorize, optionalAuth } = require('../middleware/auth');
+const { protect, authorize, optionalAuth, authorizeSuperAdmin } = require('../middleware/auth');
 const upload = require('../middleware/upload');
 const validate = require('../middleware/validate');
 const {
@@ -43,11 +48,27 @@ router.get('/pending', protect, authorize('sub-admin', 'admin'), getPendingDocum
 router.get('/drafts', protect, authorize('sub-admin', 'admin'), getDraftDocuments);
 router.get('/analytics', protect, authorize('admin'), getAnalytics);
 router.get('/duplicates/title', protect, duplicateTitleValidator, validate, checkDuplicateTitle);
+
+// ── Trash routes (Super Admin only) ─────────────
+router.get('/trash', protect, authorizeSuperAdmin, getTrashedDocuments);
+router.get('/trash/:id/preview', protect, authorizeSuperAdmin, documentIdParamValidator, validate, getTrashedDocumentPreview);
+router.put('/trash/:id/restore', protect, authorizeSuperAdmin, documentIdParamValidator, validate, restoreDocument);
+router.delete('/trash/:id', protect, authorizeSuperAdmin, documentIdParamValidator, validate, permanentlyDeleteDocument);
+
 router.get('/:id/download', optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
+router.post(
+  '/:id/correction',
+  protect,
+  authorize('admin'),
+  documentIdParamValidator,
+  validate,
+  upload.single('file'),
+  createCorrectionDocument
+);
 router.route('/:id')
   .get(optionalAuth, documentIdParamValidator, validate, getDocument)
   .put(protect, authorize('admin'), updateDocumentValidator, validate, updateDocument)
-  .delete(protect, authorize('admin'), documentIdParamValidator, validate, deleteDocument);
+  .delete(protect, authorize('sub-admin', 'admin'), documentIdParamValidator, validate, deleteDocument);
 router.put('/:id/validate', protect, authorize('sub-admin', 'admin'), validateDocumentStatusValidator, validate, validateDocument);
 
 module.exports = router;

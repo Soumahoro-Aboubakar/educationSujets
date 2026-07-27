@@ -8,8 +8,18 @@ const objectIdField = (field, label) =>
 
 const uploadDocumentValidator = [
   body('title').custom((value, { req }) => {
-    if (req.body.metadataStatus === 'false') return true;
+    if (req.body.metadataStatus === 'false' || req.body.documentType === 'corrige') return true;
     if (!value || value.trim().length === 0) throw new Error('Le titre est obligatoire');
+    return true;
+  }),
+  body('documentType')
+    .optional()
+    .isIn(['sujet', 'corrige'])
+    .withMessage('Le type de document doit etre sujet ou corrige'),
+  body('correctionFor').custom((value, { req }) => {
+    if (req.body.documentType !== 'corrige') return true;
+    if (!value) throw new Error('Le document principal est obligatoire pour un corrige');
+    if (!/^[0-9a-fA-F]{24}$/.test(String(value))) throw new Error('Document principal invalide');
     return true;
   }),
   body('description').optional().isString().withMessage('La description doit etre une chaine de caracteres'),
