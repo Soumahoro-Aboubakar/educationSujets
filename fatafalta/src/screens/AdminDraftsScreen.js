@@ -98,14 +98,23 @@ const AdminDraftsScreen = ({ navigation }) => {
         </View>
         <View style={styles.headerActions}>
           {user?.role === 'admin' && (
-            <Button
-              title="Corrigé"
-              icon={<Link2 size={17} color={theme.colors.primary} />}
-              variant="secondary"
-              onPress={() => navigation.navigate('CorrectionUpload')}
-              style={styles.headerActionButton}
-              textStyle={styles.headerActionText}
-            />
+            <>
+              <Button
+                title=""
+                icon={<Trash2 size={18} color={theme.colors.error} />}
+                variant="ghost"
+                onPress={() => navigation.navigate('AdminTrash')}
+                style={styles.headerActionButton}
+              />
+              <Button
+                title="Corrigé"
+                icon={<Link2 size={17} color={theme.colors.primary} />}
+                variant="secondary"
+                onPress={() => navigation.navigate('CorrectionUpload')}
+                style={styles.headerActionButton}
+                textStyle={styles.headerActionText}
+              />
+            </>
           )}
           <Button
             title="Nouveau"

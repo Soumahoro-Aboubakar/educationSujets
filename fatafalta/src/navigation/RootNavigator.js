@@ -6,6 +6,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import UploadScreen from '../screens/UploadScreen';
 import EditDraftScreen from '../screens/EditDraftScreen';
 import CorrectionUploadScreen from '../screens/CorrectionUploadScreen';
+import AdminTrashScreen from '../screens/AdminTrashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,10 @@ const RootNavigator = () => {
         options={{
           presentation: 'modal',
         }}
+      />
+      <Stack.Screen
+        name="AdminTrash"
+        component={AdminTrashScreen}
       />
     </Stack.Navigator>
   );

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import {
   ArrowLeft, Download, Eye, FileText, Building2, GraduationCap,
-  Calendar, Layers, FolderOpen, Share2, CheckCircle2, Sparkles
+  Calendar, Layers, FolderOpen, Share2, CheckCircle2, Sparkles, Trash2
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import Button from '../components/ui/Button';
@@ -14,6 +14,8 @@ import { useDocument } from '../hooks/useDocument';
 import { useDownload } from '../hooks/useDownload';
 import { getFileIcon } from '../utils/fileIcons';
 import { formatDate, formatFileSize } from '../utils/format';
+import AuthContext from '../context/AuthContext';
+import { deleteDocument } from '../services/documents';
 import theme from '../theme/tokens';
 
 const InfoRow = ({ icon: Icon, label, value, isLast }) => {
@@ -39,8 +41,10 @@ const DocumentDetailScreen = () => {
 
   const { data: document = initialDocument } = useDocument(documentId);
   const { download, open, share, isDownloading, progress, isDownloaded, isInitializing } = useDownload(document);
+  const { user, isAdmin } = useContext(AuthContext);
 
   const [showCorrectionModal, setShowCorrectionModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Future check: const canDownloadCorrection = user?.isPremium;
   const canDownloadCorrection = true;
@@ -76,6 +80,34 @@ const DocumentDetailScreen = () => {
     navigation.navigate('DocumentDetail', { documentId: document.correction._id });
   };
 
+  const isOwner = user && document.uploadedBy && (user._id === (document.uploadedBy._id || document.uploadedBy));
+  const canDelete = user && (user.role === 'admin' || isOwner);
+
+  const handleDelete = () => {
+    Alert.alert(
+      'Supprimer le document',
+      'Voulez-vous vraiment effacer ce fichier ? Il sera déplacé vers la corbeille.',
+      [
+        { text: 'Annuler', style: 'cancel' },
+        {
+          text: 'Supprimer',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              setIsDeleting(true);
+              await deleteDocument(document._id || document.id);
+              Alert.alert('Succès', 'Document placé dans la corbeille.');
+              navigation.goBack();
+            } catch (err) {
+              Alert.alert('Erreur', 'Impossible de supprimer le document.');
+              setIsDeleting(false);
+            }
+          }
+        }
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
@@ -88,7 +120,17 @@ const DocumentDetailScreen = () => {
         <Text variant="h3" style={styles.headerTitle} numberOfLines={1}>
           Détail du document
         </Text>
-        <View style={{ width: 44 }} />
+        <View style={styles.headerRight}>
+          {canDelete && (
+            <Button
+              variant="ghost"
+              icon={<Trash2 size={20} color={theme.colors.error} />}
+              onPress={handleDelete}
+              loading={isDeleting}
+              style={styles.headerActionButton}
+            />
+          )}
+        </View>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
@@ -267,6 +309,13 @@ const styles = StyleSheet.create({
   headerTitle: {
     flex: 1,
     textAlign: 'center',
+  },
+  headerRight: {
+    width: 44,
+    alignItems: 'flex-end',
+  },
+  headerActionButton: {
+    padding: theme.spacing.xs,
   },
   scrollContent: {
     padding: theme.spacing.lg,

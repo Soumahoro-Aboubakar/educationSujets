@@ -94,3 +94,57 @@ export const validateDocumentStatus = async (id, status) => {
   const response = await api.put(`/api/documents/${id}/validate`, { status });
   return response.data;
 };
+
+/**
+ * Delete a document (move to trash)
+ * @param {string} id
+ */
+export const deleteDocument = async (id) => {
+  const response = await api.delete(`/api/documents/${id}`);
+  return response.data;
+};
+
+/**
+ * Get trashed documents (Super Admin only)
+ * @param {Object} params
+ */
+export const getTrashedDocuments = async (params = {}) => {
+  const cleanParams = {};
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      cleanParams[key] = value;
+    }
+  });
+  const response = await api.get('/api/documents/trash', { params: cleanParams });
+  return {
+    data: response.data.data || [],
+    pagination: response.data.meta?.pagination || null,
+  };
+};
+
+/**
+ * Get preview URL for a trashed document (Super Admin only)
+ * @param {string} id
+ */
+export const getTrashedDocumentPreview = async (id) => {
+  const response = await api.get(`/api/documents/trash/${id}/preview`);
+  return response.data.data;
+};
+
+/**
+ * Restore a trashed document (Super Admin only)
+ * @param {string} id
+ */
+export const restoreDocument = async (id) => {
+  const response = await api.put(`/api/documents/trash/${id}/restore`);
+  return response.data;
+};
+
+/**
+ * Permanently delete a trashed document (Super Admin only)
+ * @param {string} id
+ */
+export const permanentlyDeleteDocument = async (id) => {
+  const response = await api.delete(`/api/documents/trash/${id}`);
+  return response.data;
+};
