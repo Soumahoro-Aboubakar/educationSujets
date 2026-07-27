@@ -198,7 +198,7 @@ const buildDocumentFilters = (params = {}) => {
       filters.documentType = 'corrige';
       searchQuery = searchQuery.replace(correctionRegex, '').replace(/\s+/g, ' ').trim();
     } else {
-      filters.documentType = 'sujet';
+      filters.documentType = { $ne: 'corrige' };
     }
 
     if (searchQuery) {
@@ -209,7 +209,7 @@ const buildDocumentFilters = (params = {}) => {
       ];
     }
   } else {
-    filters.documentType = 'sujet';
+    filters.documentType = { $ne: 'corrige' };
   }
 
   return filters;

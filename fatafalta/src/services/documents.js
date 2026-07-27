@@ -19,6 +19,7 @@ export const fetchDocuments = async (params = {}) => {
   });
 
   const response = await api.get('/api/documents', { params: cleanParams });
+  console.log("Voici le log de la response ", response.data);
   return {
     data: response.data.data || [],
     pagination: response.data.meta?.pagination || null,
@@ -56,5 +57,25 @@ export const uploadDocument = async (formData) => {
       'Content-Type': 'multipart/form-data',
     },
   });
+  return response.data;
+};
+
+/**
+ * Update an existing document (metadata only)
+ * @param {string} id
+ * @param {Object} payload
+ */
+export const updateDocumentMetadata = async (id, payload) => {
+  const response = await api.put(`/api/documents/${id}`, payload);
+  return response.data;
+};
+
+/**
+ * Validate/publish a document
+ * @param {string} id
+ * @param {string} status - 'approved' or 'rejected'
+ */
+export const validateDocumentStatus = async (id, status) => {
+  const response = await api.put(`/api/documents/${id}/validate`, { status });
   return response.data;
 };

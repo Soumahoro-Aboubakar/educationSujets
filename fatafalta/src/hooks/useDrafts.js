@@ -17,7 +17,7 @@ export const useDrafts = () => {
   const loadDrafts = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await api.get('/documents/drafts');
+      const res = await api.get('/api/documents/drafts');
       setDrafts(res.data?.data || []);
     } catch (err) {
       console.error('Error loading drafts:', err);
@@ -32,7 +32,7 @@ export const useDrafts = () => {
 
   const deleteDraft = useCallback(async (draftId) => {
     try {
-      await api.delete('/documents/' + draftId);
+      await api.delete('/api/documents/' + draftId);
       setDrafts(prev => prev.filter(d => d._id !== draftId && d.id !== draftId));
     } catch (err) {
       console.error('Error deleting draft:', err);

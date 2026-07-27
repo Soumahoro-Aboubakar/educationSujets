@@ -28,7 +28,7 @@ import useMetadataOptions from '../hooks/useMetadataOptions';
 import useDrafts from '../hooks/useDrafts';
 import theme from '../theme/tokens';
 import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory,MAX_IMPORTED_PDF_SIZE_BYTES } from '../services/pdfService';
-import { uploadDocument } from '../services/documents';
+import { uploadDocument, updateDocumentMetadata, validateDocumentStatus } from '../services/documents';
 import ImageEditorModal from '../components/documents/ImageEditorModal';
 
 const UploadScreen = ({ navigation, route }) => {
@@ -138,6 +138,7 @@ const UploadScreen = ({ navigation, route }) => {
       if (draft) {
         loadDraftData(draft);
         setIsDraftMode(true);
+        setStep('metadata'); // Skip choose step since file is on server
       }
     }
   }, [draftId]);
@@ -148,9 +149,14 @@ const UploadScreen = ({ navigation, route }) => {
     setUniversity(draft.university || null);
     setDepartment(draft.department || null);
     setLevel(draft.level || null);
-    setSemester(draft.semester || null);
-    setCategory(draft.category || null);
-    setPdfFile(draft.pdfFile || null);
+    setSemester(draft.semester?._id || draft.semester || null);
+    setCategory(draft.category?._id || draft.category || null);
+    
+    // Create a mock pdfFile for UI preview
+    setPdfFile(draft.pdfFile || {
+      name: draft.originalFileName || draft.file || 'Document PDF',
+      isServerFile: true
+    });
   };
 
   // ─────────────────────────────────────────────────────────────
@@ -295,15 +301,17 @@ const processExistingPDF = async (fileUri) => {
   // Validation & Submission
   // ─────────────────────────────────────────────────────────────
 
-  const validateForm = () => {
+  const validateForm = (isDraft) => {
     const newErrors = {};
     
-    if (!title.trim()) {
-      newErrors.title = 'Titre requis';
-    }
-    
-    if (!category) {
-      newErrors.category = 'Catégorie requise';
+    if (!isDraft) {
+      if (!title.trim()) {
+        newErrors.title = 'Titre requis';
+      }
+      
+      if (!category) {
+        newErrors.category = 'Catégorie requise';
+      }
     }
 
     setErrors(newErrors);
@@ -311,61 +319,70 @@ const processExistingPDF = async (fileUri) => {
   };
 
   const handleSaveDraft = async () => {
-    try {
-      const draft = {
-        id: draftId,
-        title,
-        description,
-        university,
-        department,
-        level,
-        semester,
-        category,
-        pdfFile: pdfFile,
-        metadataStatus: !!(title && category && university),
-      };
-
-      await saveDraft(draft);
-      Alert.alert('Succès', 'Brouillon enregistré');
-      resetForm();
-    } catch (err) {
-      Alert.alert('Erreur', 'Impossible de sauvegarder le brouillon');
-    }
+    await handleUpload(false);
   };
 
   const handleUpload = async (publish = true) => {
-    if (!validateForm()) return;
+    if (!validateForm(!publish)) return;
 
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append('file', {
-        uri: pdfFile.uri,
-        name: pdfFile.name,
-        type: pdfFile.mimeType || 'application/pdf',
-      });
+      if (isDraftMode) {
+        // Update existing document metadata
+        const payload = {
+          title: title || undefined,
+          description: description || undefined,
+          university: university || undefined,
+          department: department || undefined,
+          level: level || undefined,
+          semester: semester || undefined,
+          category: category || undefined,
+        };
 
-      // Append metadata
-      if (title) formData.append('title', title);
-      if (description) formData.append('description', description);
-      if (university) formData.append('university', university);
-      if (department) formData.append('department', department);
-      if (level) formData.append('level', level);
-      if (semester) formData.append('semester', semester);
-      if (category) formData.append('category', category);
+        await updateDocumentMetadata(draftId, payload);
+        
+        if (publish) {
+          await validateDocumentStatus(draftId, 'approved');
+        }
 
-      formData.append('metadataStatus', publish ? 'true' : 'false');
+        Alert.alert(
+          'Succès',
+          publish ? 'Brouillon publié avec succès' : 'Brouillon mis à jour'
+        );
+      } else {
+        // New document upload
+        const formData = new FormData();
+        formData.append('file', {
+          uri: pdfFile.uri,
+          name: pdfFile.name,
+          type: pdfFile.mimeType || 'application/pdf',
+        });
 
-      await uploadDocument(formData);
-      
-      Alert.alert(
-        'Succès',
-        publish ? 'Document publié avec succès' : 'Document enregistré en brouillon'
-      );
+        if (title) formData.append('title', title);
+        if (description) formData.append('description', description);
+        if (university) formData.append('university', university);
+        if (department) formData.append('department', department);
+        if (level) formData.append('level', level);
+        if (semester) formData.append('semester', semester);
+        if (category) formData.append('category', category);
+
+        formData.append('metadataStatus', publish ? 'true' : 'false');
+
+        await uploadDocument(formData);
+        
+        Alert.alert(
+          'Succès',
+          publish ? 'Document publié avec succès' : 'Document enregistré en brouillon'
+        );
+      }
 
       await cleanTempDirectory();
       resetForm();
-      setStep('choose');
+      if (isDraftMode) {
+        navigation.goBack();
+      } else {
+        setStep('choose');
+      }
     } catch (error) {
       console.error(error);
       Alert.alert('Erreur', "Erreur lors de l'envoi du document");
@@ -502,7 +519,7 @@ const processExistingPDF = async (fileUri) => {
       {/* Metadata Form */}
       <View style={styles.formSection}>
         <FormInput
-          label="Titre *"
+          label="Titre"
           placeholder="Ex: Examen de Mathématiques 2024"
           value={title}
           onChangeText={(text) => {
@@ -523,7 +540,7 @@ const processExistingPDF = async (fileUri) => {
         />
 
         <MetadataSelect
-          label="Catégorie *"
+          label="Catégorie"
           placeholder="Sélectionner une catégorie"
           options={options.categories}
           value={category}
