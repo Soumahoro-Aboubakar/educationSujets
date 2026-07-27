@@ -4,6 +4,7 @@ import TabNavigator from './TabNavigator';
 import DocumentDetailScreen from '../screens/DocumentDetailScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import UploadScreen from '../screens/UploadScreen';
+import EditDraftScreen from '../screens/EditDraftScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,13 @@ const RootNavigator = () => {
       <Stack.Screen 
         name="Upload" 
         component={UploadScreen}
+        options={{
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen 
+        name="EditDraft" 
+        component={EditDraftScreen}
         options={{
           presentation: 'modal',
         }}

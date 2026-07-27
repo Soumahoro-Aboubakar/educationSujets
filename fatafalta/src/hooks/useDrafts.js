@@ -18,6 +18,7 @@ export const useDrafts = () => {
     try {
       setLoading(true);
       const res = await api.get('/api/documents/drafts');
+      console.log(" Voici les draft ", res.data?.data);
       setDrafts(res.data?.data || []);
     } catch (err) {
       console.error('Error loading drafts:', err);

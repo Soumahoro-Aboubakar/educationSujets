@@ -28,7 +28,7 @@ import useMetadataOptions from '../hooks/useMetadataOptions';
 import useDrafts from '../hooks/useDrafts';
 import theme from '../theme/tokens';
 import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory,MAX_IMPORTED_PDF_SIZE_BYTES } from '../services/pdfService';
-import { uploadDocument, updateDocumentMetadata, validateDocumentStatus } from '../services/documents';
+import { uploadDocument, updateDocumentMetadata, validateDocumentStatus, getDownloadUrl } from '../services/documents';
 import ImageEditorModal from '../components/documents/ImageEditorModal';
 
 const UploadScreen = ({ navigation, route }) => {
@@ -98,6 +98,10 @@ const UploadScreen = ({ navigation, route }) => {
       if (!pdfIntentUri) return;
 
       try {
+        if (pdfIntentUri.startsWith('http')) {
+          await Linking.openURL(pdfIntentUri);
+          return;
+        }
         await IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
           data: pdfIntentUri,
           flags: 1,
@@ -143,7 +147,7 @@ const UploadScreen = ({ navigation, route }) => {
     }
   }, [draftId]);
 
-  const loadDraftData = (draft) => {
+  const loadDraftData = async (draft) => {
     setTitle(draft.title || '');
     setDescription(draft.description || '');
     setUniversity(draft.university || null);
@@ -157,6 +161,17 @@ const UploadScreen = ({ navigation, route }) => {
       name: draft.originalFileName || draft.file || 'Document PDF',
       isServerFile: true
     });
+
+    try {
+      const downloadData = await getDownloadUrl(draft._id || draft.id);
+      if (downloadData && downloadData.url) {
+        setPdfWebViewUri(downloadData.url);
+        setPdfLocalUri(downloadData.url);
+        setPdfIntentUri(downloadData.url);
+      }
+    } catch (e) {
+      console.log('Could not fetch preview url', e);
+    }
   };
 
   // ─────────────────────────────────────────────────────────────

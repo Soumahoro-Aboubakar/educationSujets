@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   RefreshControl,
   Alert,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { Trash2, Edit, Send, Plus, Clock, FileText } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import Button from '../components/ui/Button';
@@ -18,7 +19,7 @@ import theme from '../theme/tokens';
 
 const AdminDraftsScreen = ({ navigation }) => {
   const { user, logout } = useContext(AuthContext);
-  const { drafts, loading, deleteDraft } = useDrafts();
+  const { drafts, loading, deleteDraft, loadDrafts } = useDrafts();
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
@@ -32,15 +33,21 @@ const AdminDraftsScreen = ({ navigation }) => {
     }
   }, [user]);
 
+  useFocusEffect(
+    useCallback(() => {
+      loadDrafts();
+    }, [loadDrafts])
+  );
+
   const handleRefresh = async () => {
     setRefreshing(true);
-    // Simulate refresh
-    setTimeout(() => setRefreshing(false), 500);
+    await loadDrafts();
+    setRefreshing(false);
   };
 
   const handleEditDraft = (draftId) => {
-    // Navigate to upload screen with draft data
-    navigation.navigate('Upload', { draftId });
+    // Navigate to edit draft screen with draft data
+    navigation.navigate('EditDraft', { draftId });
   };
 
   const handleDeleteDraft = (draftId) => {
