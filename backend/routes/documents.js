@@ -67,7 +67,7 @@ router.post(
 );
 router.route('/:id')
   .get(optionalAuth, documentIdParamValidator, validate, getDocument)
-  .put(protect, authorize('admin'), updateDocumentValidator, validate, updateDocument)
+  .put(protect, authorize('sub-admin', 'admin'), updateDocumentValidator, validate, updateDocument)
   .delete(protect, authorize('sub-admin', 'admin'), documentIdParamValidator, validate, deleteDocument);
 router.put('/:id/validate', protect, authorize('sub-admin', 'admin'), validateDocumentStatusValidator, validate, validateDocument);
 

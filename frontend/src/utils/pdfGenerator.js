@@ -65,12 +65,28 @@ export const generatePdfFromImages = async (images, onProgress) => {
       continue;
     }
 
-    const page = pdfDoc.addPage([image.width, image.height]);
+    const imgWidth = image.width;
+    const imgHeight = image.height;
+
+    const A4_WIDTH = 595.28;
+    const A4_HEIGHT = 841.89;
+
+    const isLandscape = imgWidth > imgHeight;
+    const maxPageWidth = isLandscape ? A4_HEIGHT : A4_WIDTH;
+    const maxPageHeight = isLandscape ? A4_WIDTH : A4_HEIGHT;
+
+    const scale = Math.min(maxPageWidth / imgWidth, maxPageHeight / imgHeight);
+    const finalScale = Math.min(scale, 1);
+
+    const finalWidth = imgWidth * finalScale;
+    const finalHeight = imgHeight * finalScale;
+
+    const page = pdfDoc.addPage([finalWidth, finalHeight]);
     page.drawImage(image, {
       x: 0,
       y: 0,
-      width: image.width,
-      height: image.height,
+      width: finalWidth,
+      height: finalHeight,
     });
 
     completed += 1;

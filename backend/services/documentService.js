@@ -506,6 +506,10 @@ const updateDocument = async (documentId, payload, user) => {
     }
   });
 
+  if (payload.metadataStatus === 'true' && document.status === 'draft') {
+    document.status = 'pending';
+  }
+
   await document.save();
   return getDocumentById(document._id);
 };

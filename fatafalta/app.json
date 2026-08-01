@@ -15,7 +15,9 @@
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
-      }
+      },
+      "package": "com.fatafalta.mobile",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -24,6 +26,12 @@
       "expo-font",
       "expo-sharing",
       "expo-secure-store"
-    ]
+    ],
+    "scheme": "fatafalta",
+    "extra": {
+      "eas": {
+        "projectId": "7c6124e2-4b3e-4276-8e08-8313cda1f9ac"
+      }
+    }
   }
 }

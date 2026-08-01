@@ -99,31 +99,30 @@ const AdminDraftsScreen = ({ navigation }) => {
         <View style={styles.headerActions}>
           {user?.role === 'admin' && (
             <>
-              <Button
-                title=""
-                icon={<Trash2 size={18} color={theme.colors.error} />}
-                variant="ghost"
-                onPress={() => navigation.navigate('AdminTrash')}
-                style={styles.headerActionButton}
-              />
-              <Button
-                title="Corrigé"
-                icon={<Link2 size={17} color={theme.colors.primary} />}
-                variant="secondary"
+              <TouchableOpacity
+                style={styles.iconAction}
                 onPress={() => navigation.navigate('CorrectionUpload')}
-                style={styles.headerActionButton}
-                textStyle={styles.headerActionText}
-              />
+                activeOpacity={0.7}
+              >
+                <Link2 size={20} color={theme.colors.primary} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconActionError}
+                onPress={() => navigation.navigate('AdminTrash')}
+                activeOpacity={0.7}
+              >
+                <Trash2 size={20} color={theme.colors.error} />
+              </TouchableOpacity>
             </>
           )}
-          <Button
-            title="Nouveau"
-            icon={<Plus size={18} color={theme.colors.textInverse} />}
-            variant="primary"
+          <TouchableOpacity
+            style={styles.primaryAction}
             onPress={() => navigation.navigate('Upload')}
-            style={styles.headerActionButton}
-            textStyle={styles.headerActionText}
-          />
+            activeOpacity={0.8}
+          >
+            <Plus size={18} color={theme.colors.textInverse} strokeWidth={2.5} />
+            <Text variant="caption" style={styles.primaryActionText}>Nouveau</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -296,14 +295,43 @@ const styles = StyleSheet.create({
   },
   headerActions: {
     flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
-  headerActionButton: {
-    height: 40,
-    paddingHorizontal: 12,
-    borderRadius: theme.radius.md,
+  iconAction: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: theme.colors.primaryWash,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  headerActionText: {
+  iconActionError: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: theme.colors.errorWash,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  primaryAction: {
+    height: 38,
+    paddingHorizontal: 14,
+    borderRadius: 19,
+    backgroundColor: theme.colors.primary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: theme.colors.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  primaryActionText: {
+    color: theme.colors.textInverse,
+    fontWeight: '700',
+    marginLeft: 4,
     fontSize: 13,
   },
   content: {

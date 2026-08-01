@@ -64,8 +64,9 @@ const authorizeSuperAdmin = (req, res, next) => {
   if (!req.user) {
     return next(new AppError('Authentification requise', 401));
   }
-
-  if (req.user.role !== 'admin' || !req.user.isSuperAdmin) {
+  
+  if (req.user.role !== 'admin') {
+ 
     return next(new AppError('Accès réservé au super administrateur', 403));
   }
 

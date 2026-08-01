@@ -16,6 +16,7 @@ import {
 } from 'chart.js';
 import CreatableSelect from '../components/CreatableSelect';
 import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
+import DraftManagement from '../components/DraftManagement';
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
 
@@ -220,6 +221,7 @@ const Dashboard = () => {
   const navItems = [
     { id: 'documents', label: 'Mes documents', icon: FileText },
     { id: 'upload', label: 'Uploader', icon: Upload },
+    ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'drafts', label: 'Gestion du Brouillons', icon: Clock }] : []),
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'validate', label: 'Valider', icon: CheckCircle, badge: pendingDocs.length }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'referentials', label: 'Gestion des référentiels', icon: Layers }] : []),
@@ -270,11 +272,15 @@ const Dashboard = () => {
     try {
       setDownloadingDocs(prev => ({ ...prev, [doc._id]: true }));
       const res = await axios.get(`/api/documents/${doc._id}/download`);
-      const url = res.data.data.url;
-      window.open(url || `/uploads/${doc.file}`, '_blank');
+      const url = res.data?.data?.url || res.data?.url;
+      if (url) {
+        window.open(url, '_blank');
+      } else {
+        alert("L'URL de prévisualisation est introuvable.");
+      }
     } catch (err) {
       console.error("Erreur lors de l'ouverture du document:", err);
-      window.open(`/uploads/${doc.file}`, '_blank');
+      alert("Erreur lors de la génération de l'URL de prévisualisation ou fichier introuvable.");
     } finally {
       setDownloadingDocs(prev => ({ ...prev, [doc._id]: false }));
     }
@@ -1117,6 +1123,10 @@ const Dashboard = () => {
                 </div>
               )}
             </motion.div>
+          )}
+
+          {activeTab === 'drafts' && (
+            <DraftManagement filtersData={filtersData} onOptionCreate={handleCreateOption} />
           )}
 
           {activeTab === 'referentials' && user?.isSuperAdmin && (

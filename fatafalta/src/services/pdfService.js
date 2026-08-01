@@ -232,11 +232,23 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
       continue;
     }
 
-    const { width: pxWidth, height: pxHeight } = image.scale(1);
-    const width = pixelsToPoints(pxWidth);
-    const height = pixelsToPoints(pxHeight);
-    const page = pdfDoc.addPage([width, height]);
-    page.drawImage(image, { x: 0, y: 0, width, height });
+    const { width: imgWidth, height: imgHeight } = image.scale(1);
+
+    const A4_WIDTH = 595.28;
+    const A4_HEIGHT = 841.89;
+
+    const isLandscape = imgWidth > imgHeight;
+    const maxPageWidth = isLandscape ? A4_HEIGHT : A4_WIDTH;
+    const maxPageHeight = isLandscape ? A4_WIDTH : A4_HEIGHT;
+
+    const scale = Math.min(maxPageWidth / imgWidth, maxPageHeight / imgHeight);
+    const finalScale = Math.min(scale, 1);
+
+    const finalWidth = imgWidth * finalScale;
+    const finalHeight = imgHeight * finalScale;
+
+    const page = pdfDoc.addPage([finalWidth, finalHeight]);
+    page.drawImage(image, { x: 0, y: 0, width: finalWidth, height: finalHeight });
     applyWatermark(page);
 
     embedded += 1;

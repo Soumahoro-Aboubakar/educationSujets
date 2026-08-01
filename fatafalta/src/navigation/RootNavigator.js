@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TabNavigator from './TabNavigator';
+import DrawerNavigator from './DrawerNavigator';
 import DocumentDetailScreen from '../screens/DocumentDetailScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import UploadScreen from '../screens/UploadScreen';
@@ -17,7 +17,7 @@ const RootNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen name="MainTabs" component={DrawerNavigator} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen 
         name="DocumentDetail" 

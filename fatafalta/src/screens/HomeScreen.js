@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Library, ArrowRight } from 'lucide-react-native';
+import { Library, ArrowRight, Menu } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import SearchInput from '../components/ui/SearchInput';
 import DocumentList from '../components/documents/DocumentList';
 import FilterBar from '../components/filters/FilterBar';
 import FilterBottomSheet from '../components/filters/FilterBottomSheet';
+import AuthContext from '../context/AuthContext';
 import { useDocuments } from '../hooks/useDocuments';
 import { useFilterOptions } from '../hooks/useFilterOptions';
 import useDownloadStore from '../store/useDownloadStore';
@@ -25,6 +26,7 @@ const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef(null);
   const downloads = useDownloadStore((state) => state.downloads);
+  const { isAuthenticated } = React.useContext(AuthContext);
 
   const [filters, setFilters] = useState({ search: '' });
   const activeFilterCount = Object.entries(filters).filter(([k, v]) => k !== 'search' && v).length;
@@ -131,7 +133,15 @@ const HomeScreen = () => {
         <View style={styles.noiseOverlay} pointerEvents="none" />
 
         <View style={[styles.headerInner, { paddingTop: insets.top }]}>
-          <Animated.View style={[styles.headerContent, headerContentStyle]}>
+          {isAuthenticated && (
+            <TouchableOpacity 
+              style={styles.menuButton}
+              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+            >
+              <Menu size={24} color={theme.colors.textInverse} />
+            </TouchableOpacity>
+          )}
+          <Animated.View style={[styles.headerContent, headerContentStyle, isAuthenticated && { paddingTop: 40 }]}>
             <View style={styles.badge}>
               <View style={styles.badgeDot} />
               <Text variant="overline" color={theme.colors.textInverse}>Ressources éducatives</Text>
@@ -227,6 +237,16 @@ const styles = StyleSheet.create({
   headerInner: {
     flex: 1,
     justifyContent: 'flex-end',
+  },
+  menuButton: {
+    position: 'absolute',
+    top: 0,
+    left: 16,
+    zIndex: 20,
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerContent: {
     paddingHorizontal: theme.spacing.lg,
