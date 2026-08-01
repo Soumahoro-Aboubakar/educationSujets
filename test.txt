@@ -1,41 +1,24 @@
-Refonte complète de la page d'accueil "Éducation CI" (React + Tailwind) pour un rendu premium, cohérent et professionnel (niveau Dribbble top 1%). Corrige les points suivants :
+Rôle : Expert Développeur Full-Stack (MERN Stack - JavaScript) / Traitement d'Images & Vision par Ordinateur.
 
-1. NAVBAR
-- Remplace le header clair actuel par une navbar flottante en glassmorphism sombre : 
-  background rgba(10,20,40,0.55), backdrop-blur-xl, border-b border-white/10, 
-  coins arrondis (rounded-2xl), légère marge du bord de l'écran (comme une pill nav).
-- Elle doit se raccorder visuellement au dégradé bleu nuit du hero (mêmes tons), 
-  plus aucune rupture blanc/sombre.
-- Ajoute un indicateur d'état actif (pill de fond bleu translucide) derrière le lien de la page courante.
-- Regroupe "Tableau de bord" + "Déconnexion" dans un menu déroulant déclenché par un avatar 
-  utilisateur (cercle avec initiale), placé à droite, séparé visuellement des liens de nav.
-- Ajoute une transition au scroll : opacité et ombre qui augmentent légèrement.
+Contexte : 
+Nous développons une application de scan de documents (type PDF) au sein de notre architecture, répartie entre le dossier mobile/client et le dossier serveur. Actuellement, lors de la génération de PDF à partir d'images capturées, les dimensions et les proportions ne s'adaptent pas correctement sur les écrans mobiles par rapport au rendu web. 
 
-2. HERO SECTION
-- Ajoute un bouton CTA principal ("Commencer" / "Créer mon compte") sous le texte, 
-  en dégradé bleu/violet cohérent avec le mot "admissions", avec effet hover (scale + glow).
-- Augmente légèrement l'opacité/visibilité de l'image de fond (toque, circuits) 
-  pour qu'elle participe au design sans nuire à la lisibilité du texte.
-- Rééquilibre l'espace horizontal entre le bloc de texte et la grille de cartes 
-  (réduire l'écart vide, ou agrandir le bloc de texte).
+Objectif : 
+Implémenter une solution de recadrage dynamique et de mise en forme professionnelle pour garantir un format de document propre (proche du ratio A4 de 1:1,414), sans distorsion, sans perte de qualité (même pour les images de petite taille), et parfaitement responsive entre le dossier 'fatafalta' (mobile) et le dossier 'front-end' (web).
 
-3. SYSTÈME DE CARTES — cohérence totale
-- Harmonise TOUTES les icônes (grandes cartes ET petites cartes) avec le même style : 
-  fond en dégradé (pas de flat), même taille de conteneur, même arrondi, même ombre portée.
-- Intègre les flèches des grandes cartes (Télécharger, Simuler) de façon plus fluide 
-  (au hover uniquement, avec translation légère au lieu d'être statiques).
-- Augmente le contraste des badges ("RESSOURCES", "ADMISSION") : texte plus clair 
-  ou fond plus saturé.
-- Ajoute un effet de profondeur (box-shadow douce + légère bordure lumineuse en haut) 
-  sur toutes les cartes pour un vrai effet glassmorphism au lieu d'un rendu plat.
-- Retravaille la carte "Parcours optimisé" pour qu'elle suive le même design system 
-  que les autres (même style d'icône, mêmes proportions, pas de carré blanc isolé).
+Merci de concevoir et d'implémenter la logique en JavaScript (MERN Stack, sans TypeScript) en suivant rigoureusement ces étapes techniques :
 
-4. GLOBAL
-- Vérifie la cohérence des espacements (padding/margin) entre toutes les sections.
-- Utilise Framer Motion pour des animations d'entrée subtiles (fade + slide léger) 
-  sur le hero et les cartes au chargement, et des micro-interactions au hover.
-- Palette : conserver le dégradé bleu nuit / violet du background, 
-  et l'utiliser de façon cohérente sur TOUS les éléments (navbar, boutons, badges, icônes).
+1. Détection des contours et des coins (Corner Detection) :
+   - Mettre en place un mécanisme (ou une intégration de bibliothèque adaptée comme OpenCV.js ou Sharp/Jimp côté backend / traitement côté client) pour identifier les 4 coins de la feuille de document sur l'image brute, indépendamment de l'angle de prise de vue.
 
-Fournis le code complet en un seul fichier (composant React + Tailwind), prêt à intégrer.
+2. Correction de perspective (Perspective Transformation) :
+   - Appliquer une matrice de transformation géométrique basée sur les coordonnées des coins détectés afin de "redresser" l'image (supprimer l'effet trapèze et simuler une prise de vue 100% de face).
+
+3. Application du ratio et redimensionnement intelligent (Resizing & Padding) :
+   - Forcer le respect strict du ratio du document cible (type A4, 1:1,414) lors du rendu final.
+   - Utiliser des algorithmes d'interpolation fluides (ex: Bicubic) lors du redimensionnement pour préserver la netteté et la qualité originale des images de petite taille.
+   - Gérer le recadrage des micro-bords superflus ou appliquer un padding propre pour remplir le conteneur sans déformation.
+
+4. Intégration dans l'architecture MERN :
+   - Assurer la synchronisation et la propreté du code à la fois dans le dossier 'fatafalta' (traitement initial ou pré-cadrage mobile) et le dossier 'front-end' / backend Node.js (traitement lourd et génération finale du PDF).
+   - Fournir le code propre, commenté et modulaire en JavaScript ES6+.

@@ -25,6 +25,23 @@ import theme from '../../theme/tokens';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const MIN_CROP_SIZE = 60;
+const A4_HEIGHT_TO_WIDTH = 841.89 / 595.28;
+
+const getDocumentAspect = (size) => (
+  size.width > size.height ? 1 / A4_HEIGHT_TO_WIDTH : A4_HEIGHT_TO_WIDTH
+);
+
+const getDefaultDocumentCropBox = (width, height, aspect) => {
+  const cropWidth = Math.min(width * 0.86, (height * 0.86) / aspect);
+  const cropHeight = cropWidth * aspect;
+
+  return {
+    x: (width - cropWidth) / 2,
+    y: (height - cropHeight) / 2,
+    width: cropWidth,
+    height: cropHeight,
+  };
+};
 
 const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
   const [currentUri, setCurrentUri] = useState(imageUri);
@@ -37,6 +54,10 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
 
   const cropBoxRef = useRef(cropBox);
   cropBoxRef.current = cropBox;
+  const naturalSizeRef = useRef(naturalSize);
+  naturalSizeRef.current = naturalSize;
+  const displaySizeRef = useRef(displaySize);
+  displaySizeRef.current = displaySize;
   const dragStartRef = useRef(cropBox);
 
   // Réinitialise l'état à chaque nouvelle image ouverte
@@ -59,24 +80,32 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
         const dispW = w * ratio;
         const dispH = h * ratio;
         setDisplaySize({ width: dispW, height: dispH });
-        const boxSize = Math.min(dispW, dispH) * 0.7;
-        setCropBox({
-          x: (dispW - boxSize) / 2,
-          y: (dispH - boxSize) / 2,
-          width: boxSize,
-          height: boxSize,
-        });
+        setCropBox(getDefaultDocumentCropBox(dispW, dispH, getDocumentAspect({ width: w, height: h })));
       },
       () => {}
     );
   }, [currentUri, containerLayout]);
 
   const clampCropBox = (box) => {
-    let { x, y, width, height } = box;
-    width = Math.max(MIN_CROP_SIZE, Math.min(width, displaySize.width));
-    height = Math.max(MIN_CROP_SIZE, Math.min(height, displaySize.height));
-    x = Math.max(0, Math.min(x, displaySize.width - width));
-    y = Math.max(0, Math.min(y, displaySize.height - height));
+    const currentDisplaySize = displaySizeRef.current;
+    const aspect = getDocumentAspect(naturalSizeRef.current);
+    let { x, y, width } = box;
+
+    width = Math.max(MIN_CROP_SIZE, width);
+    let height = width * aspect;
+
+    if (height > currentDisplaySize.height) {
+      height = currentDisplaySize.height;
+      width = height / aspect;
+    }
+
+    if (width > currentDisplaySize.width) {
+      width = currentDisplaySize.width;
+      height = width * aspect;
+    }
+
+    x = Math.max(0, Math.min(x, currentDisplaySize.width - width));
+    y = Math.max(0, Math.min(y, currentDisplaySize.height - height));
     return { x, y, width, height };
   };
 
@@ -103,11 +132,16 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
       },
       onPanResponderMove: (_, gesture) => {
         const start = dragStartRef.current;
+        const aspect = getDocumentAspect(naturalSizeRef.current);
+        const deltaFromY = gesture.dy / aspect;
+        const delta = Math.abs(gesture.dx) > Math.abs(deltaFromY) ? gesture.dx : deltaFromY;
+        const nextWidth = start.width + delta;
+
         setCropBox(
           clampCropBox({
             ...start,
-            width: start.width + gesture.dx,
-            height: start.height + gesture.dy,
+            width: nextWidth,
+            height: nextWidth * aspect,
           })
         );
       },
@@ -284,7 +318,7 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
               </TouchableOpacity>
               <TouchableOpacity style={styles.toolButton} onPress={() => setCropMode(true)} disabled={busy}>
                 <CropIcon size={22} color={theme.colors.textInverse} />
-                <Text variant="caption" color={theme.colors.textInverse}>Recadrer</Text>
+                <Text variant="caption" color={theme.colors.textInverse}>Recadrer A4</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.toolButton} onPress={resetImage} disabled={busy}>
                 <ResetIcon size={22} color={theme.colors.textInverse} />

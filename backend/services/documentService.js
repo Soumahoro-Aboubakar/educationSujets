@@ -7,6 +7,7 @@ const Document = require('../models/Document');
 const storageConfig = require('../config/storage');
 const getStorageProvider = require('../storage');
 const AppError = require('../utils/errors');
+const { normalizeImageUploadToPdf } = require('./documentImageProcessor');
 
 const access = promisify(fs.access);
 const legacyUploadsDir = path.join(__dirname, '..', 'uploads');
@@ -429,20 +430,21 @@ const createDocument = async (payload, file, user) => {
 
   const documentType = payload.documentType === 'corrige' ? 'corrige' : 'sujet';
   const isCorrection = documentType === 'corrige';
+  const uploadFile = await normalizeImageUploadToPdf(file);
 
   if (isCorrection) {
-    assertCorrectionFile(file);
+    assertCorrectionFile(uploadFile);
     await assertCorrectionTarget(payload.correctionFor);
   }
 
   const storageProvider = getStorageProvider();
-  const { extension, storedFileName, storageKey, fileType } = createStoragePayload(file, user._id.toString());
+  const { extension, storedFileName, storageKey, fileType } = createStoragePayload(uploadFile, user._id.toString());
 
-  await storageProvider.upload(storageKey, file.buffer, {
-    contentType: file.mimetype,
-    contentDisposition: `inline; filename*=UTF-8''${encodeURIComponent(file.originalname)}`,
+  await storageProvider.upload(storageKey, uploadFile.buffer, {
+    contentType: uploadFile.mimetype,
+    contentDisposition: `inline; filename*=UTF-8''${encodeURIComponent(uploadFile.originalname)}`,
     metadata: {
-      originalFileName: file.originalname,
+      originalFileName: uploadFile.originalname,
       uploadedBy: user._id.toString(),
     },
   });
@@ -451,11 +453,11 @@ const createDocument = async (payload, file, user) => {
     documentType,
     uploadedBy: user._id,
     file: storedFileName,
-    originalFileName: file.originalname,
+    originalFileName: uploadFile.originalname,
     fileType,
     extension,
-    mimeType: file.mimetype,
-    fileSize: file.size,
+    mimeType: uploadFile.mimetype,
+    fileSize: uploadFile.size,
     storageKey,
     storageProvider: storageConfig.provider,
     isPremmuim: false,

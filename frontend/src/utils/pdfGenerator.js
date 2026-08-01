@@ -1,9 +1,16 @@
 import { PDFDocument } from 'pdf-lib';
+import {
+  getA4PageSizeForImage,
+  getContainedImageLayout,
+  processImageFileForDocument,
+} from './documentImageProcessing';
 
 /**
- * Generate a PDF from a list of image files
- * @param {File[]} images Array of image Files (JPEG/PNG)
- * @param {Function} [onProgress] Optional callback for progress reporting
+ * Generate a professional A4-ratio PDF from a list of image files.
+ * Images are deskewed when four document corners can be detected. If not,
+ * they are inserted on an A4 page with clean padding and no distortion.
+ * @param {File[]} images Array of image Files (JPEG/PNG/etc.)
+ * @param {Function} [onProgress] Optional callback for progress reporting (0-100)
  * @returns {Promise<File>} The generated PDF File
  */
 const convertImageFileToPng = async (file) => {
@@ -29,7 +36,28 @@ const convertImageFileToPng = async (file) => {
     }, 'image/png');
   });
 
+  if (typeof imageBitmap.close === 'function') {
+    imageBitmap.close();
+  }
+
   return blob;
+};
+
+const embedPreparedImage = async (pdfDoc, prepared) => {
+  const imageBytes = await prepared.blob.arrayBuffer();
+  const mimeType = (prepared.mimeType || '').toLowerCase();
+
+  if (mimeType === 'image/jpeg' || mimeType === 'image/jpg') {
+    return pdfDoc.embedJpg(imageBytes);
+  }
+
+  if (mimeType === 'image/png') {
+    return pdfDoc.embedPng(imageBytes);
+  }
+
+  const pngBlob = await convertImageFileToPng(prepared.blob);
+  const pngBytes = await pngBlob.arrayBuffer();
+  return pdfDoc.embedPng(pngBytes);
 };
 
 export const generatePdfFromImages = async (images, onProgress) => {
@@ -42,20 +70,13 @@ export const generatePdfFromImages = async (images, onProgress) => {
   let processed = 0;
 
   for (const file of images) {
-    let imageBytes;
     let image;
+    let prepared;
 
     try {
-      if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
-        imageBytes = await file.arrayBuffer();
-        image = await pdfDoc.embedJpg(imageBytes);
-      } else if (file.type === 'image/png') {
-        imageBytes = await file.arrayBuffer();
-        image = await pdfDoc.embedPng(imageBytes);
-      } else if (file.type.startsWith('image/')) {
-        const pngBlob = await convertImageFileToPng(file);
-        imageBytes = await pngBlob.arrayBuffer();
-        image = await pdfDoc.embedPng(imageBytes);
+      if (file.type.startsWith('image/')) {
+        prepared = await processImageFileForDocument(file);
+        image = await embedPreparedImage(pdfDoc, prepared);
       } else {
         console.warn(`Type d'image non supporté ignoré: ${file.type}`);
         continue;
@@ -65,34 +86,18 @@ export const generatePdfFromImages = async (images, onProgress) => {
       continue;
     }
 
-    const imgWidth = image.width;
-    const imgHeight = image.height;
+    const imgWidth = prepared?.width || image.width;
+    const imgHeight = prepared?.height || image.height;
+    const pageSize = getA4PageSizeForImage(imgWidth, imgHeight);
+    const layout = getContainedImageLayout(imgWidth, imgHeight, pageSize.width, pageSize.height);
+    const page = pdfDoc.addPage([pageSize.width, pageSize.height]);
 
-    const A4_WIDTH = 595.28;
-    const A4_HEIGHT = 841.89;
-
-    const isLandscape = imgWidth > imgHeight;
-    const maxPageWidth = isLandscape ? A4_HEIGHT : A4_WIDTH;
-    const maxPageHeight = isLandscape ? A4_WIDTH : A4_HEIGHT;
-
-    const scale = Math.min(maxPageWidth / imgWidth, maxPageHeight / imgHeight);
-    const finalScale = Math.min(scale, 1);
-
-    const finalWidth = imgWidth * finalScale;
-    const finalHeight = imgHeight * finalScale;
-
-    const page = pdfDoc.addPage([finalWidth, finalHeight]);
-    page.drawImage(image, {
-      x: 0,
-      y: 0,
-      width: finalWidth,
-      height: finalHeight,
-    });
+    page.drawImage(image, layout);
 
     completed += 1;
     processed += 1;
     if (onProgress) {
-      onProgress(Math.round((processed / images.length) * 50)); // Generate takes up to 50% of the overall process
+      onProgress(Math.round((processed / images.length) * 90));
     }
   }
 

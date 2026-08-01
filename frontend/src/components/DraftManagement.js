@@ -90,7 +90,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
       setIsGeneratingPdf(true);
       setErrorMsg('');
       const generatedPdfFile = await generatePdfFromImages(imageFiles, (progress) => {
-        setPdfGenerationProgress(Math.round(progress * 100));
+        setPdfGenerationProgress(Math.round(progress));
       });
       
       if (generatedPdfFile) {

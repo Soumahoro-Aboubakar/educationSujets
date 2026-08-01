@@ -15,6 +15,27 @@ const CONCURRENCY = 3; // images traitées en parallèle
 // (72 DPI) qui donnent une impression de flou à l'impression/zoom, alors que
 // les pixels de l'image sont pourtant intacts.
 const TARGET_DPI = 200;
+const A4_WIDTH = 595.28;
+const A4_HEIGHT = 841.89;
+
+const getA4PageSizeForImage = (width, height) => (
+  width > height
+    ? { width: A4_HEIGHT, height: A4_WIDTH }
+    : { width: A4_WIDTH, height: A4_HEIGHT }
+);
+
+const getContainedImageLayout = (imageWidth, imageHeight, pageWidth, pageHeight) => {
+  const scale = Math.min(pageWidth / imageWidth, pageHeight / imageHeight);
+  const width = imageWidth * scale;
+  const height = imageHeight * scale;
+
+  return {
+    x: (pageWidth - width) / 2,
+    y: (pageHeight - height) / 2,
+    width,
+    height,
+  };
+};
 
 // Taille maximale acceptée pour un PDF importé depuis l'appareil.
 // Au-delà, le chargement base64 + le parsing pdf-lib consomment trop de
@@ -233,22 +254,11 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
     }
 
     const { width: imgWidth, height: imgHeight } = image.scale(1);
+    const pageSize = getA4PageSizeForImage(imgWidth, imgHeight);
+    const layout = getContainedImageLayout(imgWidth, imgHeight, pageSize.width, pageSize.height);
 
-    const A4_WIDTH = 595.28;
-    const A4_HEIGHT = 841.89;
-
-    const isLandscape = imgWidth > imgHeight;
-    const maxPageWidth = isLandscape ? A4_HEIGHT : A4_WIDTH;
-    const maxPageHeight = isLandscape ? A4_WIDTH : A4_HEIGHT;
-
-    const scale = Math.min(maxPageWidth / imgWidth, maxPageHeight / imgHeight);
-    const finalScale = Math.min(scale, 1);
-
-    const finalWidth = imgWidth * finalScale;
-    const finalHeight = imgHeight * finalScale;
-
-    const page = pdfDoc.addPage([finalWidth, finalHeight]);
-    page.drawImage(image, { x: 0, y: 0, width: finalWidth, height: finalHeight });
+    const page = pdfDoc.addPage([pageSize.width, pageSize.height]);
+    page.drawImage(image, layout);
     applyWatermark(page);
 
     embedded += 1;
