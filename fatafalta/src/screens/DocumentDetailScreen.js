@@ -1,17 +1,38 @@
-import React, { useState, useContext } from 'react';
-import { View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import {
-  ArrowLeft, Download, Eye, FileText, Building2, GraduationCap,
-  Calendar, Layers, FolderOpen, Share2, CheckCircle2, Sparkles, Trash2
+  View,
+  StyleSheet,
+  ScrollView,
+  Modal,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
+import {
+  ArrowLeft,
+  Download,
+  Eye,
+  FileText,
+  Building2,
+  GraduationCap,
+  Calendar,
+  Layers,
+  FolderOpen,
+  Share2,
+  CheckCircle2,
+  Sparkles,
+  Trash2,
+  Check,
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import ProgressBar from '../components/ui/ProgressBar';
+import Card from '../components/ui/Card';
 import { useDocument } from '../hooks/useDocument';
 import { useDownload } from '../hooks/useDownload';
+import useCorrectionPromptPreference from '../hooks/useCorrectionPromptPreference';
 import { getFileIcon } from '../utils/fileIcons';
 import { formatDate, formatFileSize } from '../utils/format';
 import AuthContext from '../context/AuthContext';
@@ -20,14 +41,19 @@ import theme from '../theme/tokens';
 
 const InfoRow = ({ icon: Icon, label, value, isLast }) => {
   if (!value) return null;
+
   return (
     <View style={[styles.infoRow, isLast && styles.infoRowLast]}>
       <View style={styles.infoIcon}>
         <Icon size={16} color={theme.colors.textMuted} strokeWidth={2.2} />
       </View>
       <View style={styles.infoTextContainer}>
-        <Text variant="caption" color={theme.colors.textMuted}>{label}</Text>
-        <Text variant="bodyMedium" color={theme.colors.textPrimary}>{value}</Text>
+        <Text variant="caption" color={theme.colors.textMuted}>
+          {label}
+        </Text>
+        <Text variant="bodyMedium" color={theme.colors.textPrimary}>
+          {value}
+        </Text>
       </View>
     </View>
   );
@@ -39,49 +65,95 @@ const DocumentDetailScreen = () => {
   const insets = useSafeAreaInsets();
   const { documentId, document: initialDocument } = route.params;
 
-  const { data: document = initialDocument } = useDocument(documentId);
-  const { download, open, share, isDownloading, progress, isDownloaded, isInitializing } = useDownload(document);
-  const { user, isAdmin } = useContext(AuthContext);
+  const { data: document = initialDocument, refetch } = useDocument(documentId);
+  const subjectDownload = useDownload(document);
+  const correctionDownload = useDownload(document?.correction);
+  const {
+    enabled: promptEnabled,
+    setEnabled: setPromptEnabled,
+    isLoaded: promptLoaded,
+  } = useCorrectionPromptPreference();
+  const { user } = useContext(AuthContext);
 
   const [showCorrectionModal, setShowCorrectionModal] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  // Future check: const canDownloadCorrection = user?.isPremium;
-  const canDownloadCorrection = true;
-
-  const fileConfig = getFileIcon(document?.fileType || document?.extension);
-
-  if (!document) return null;
+  const [dontAskAgain, setDontAskAgain] = useState(false);
+  const [wasSubjectDownloading, setWasSubjectDownloading] = useState(false);
 
   const isCorrection = document.documentType === 'corrige';
+  const hasCorrection = !isCorrection && !!document.correction?._id;
   const displayTitle = document.title || document.originalFileName || (isCorrection ? 'Corrigé' : 'Document PDF');
 
-  const handleAction = () => {
-    if (isDownloaded) {
-      open();
-    } else {
-      if (document.correction && document.correction.status === 'approved' && canDownloadCorrection) {
-        setShowCorrectionModal(true);
-      } else {
-        download();
-      }
-    }
-  };
+  const {
+    isInitializing: isSubjectInitializing,
+    isDownloading: isSubjectDownloading,
+    progress: subjectProgress,
+    isDownloaded: isSubjectDownloaded,
+    download: downloadSubject,
+    open: openSubject,
+    share: shareSubject,
+  } = subjectDownload;
 
-  const handleDownloadSubjectOnly = () => {
-    setShowCorrectionModal(false);
-    download();
-  };
-
-  const handleDownloadCorrectionAlso = () => {
-    setShowCorrectionModal(false);
-    download(); // download subject
-    // Navigate to correction so they can download it
-    navigation.navigate('DocumentDetail', { documentId: document.correction._id });
-  };
+  const {
+    isDownloading: isCorrectionDownloading,
+    progress: correctionProgress,
+    isDownloaded: isCorrectionDownloaded,
+    download: downloadCorrection,
+    open: openCorrection,
+  } = correctionDownload;
 
   const isOwner = user && document.uploadedBy && (user._id === (document.uploadedBy._id || document.uploadedBy));
   const canDelete = user && (user.role === 'admin' || isOwner);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!documentId) return;
+      refetch();
+    }, [documentId, refetch])
+  );
+
+  useEffect(() => {
+    if (!promptLoaded) return;
+    setDontAskAgain(!promptEnabled);
+  }, [promptLoaded, promptEnabled]);
+
+  useEffect(() => {
+    if (!promptLoaded) return;
+
+    if (
+      wasSubjectDownloading &&
+      !isSubjectDownloading &&
+      isSubjectDownloaded &&
+      hasCorrection &&
+      promptEnabled
+    ) {
+      setShowCorrectionModal(true);
+    }
+
+    setWasSubjectDownloading(isSubjectDownloading);
+  }, [wasSubjectDownloading, isSubjectDownloading, isSubjectDownloaded, hasCorrection, promptEnabled, promptLoaded]);
+
+  const handleToggleDontAskAgain = async () => {
+    const nextValue = !dontAskAgain;
+    setDontAskAgain(nextValue);
+    await setPromptEnabled(!nextValue);
+  };
+
+  const handlePrimaryAction = () => {
+    if (isSubjectDownloaded) {
+      openSubject();
+    } else {
+      downloadSubject();
+    }
+  };
+
+  const handleCorrectionAction = () => {
+    if (!hasCorrection) return;
+    if (isCorrectionDownloaded) {
+      openCorrection();
+    } else {
+      downloadCorrection();
+    }
+  };
 
   const handleDelete = () => {
     Alert.alert(
@@ -94,19 +166,32 @@ const DocumentDetailScreen = () => {
           style: 'destructive',
           onPress: async () => {
             try {
-              setIsDeleting(true);
               await deleteDocument(document._id || document.id);
               Alert.alert('Succès', 'Document placé dans la corbeille.');
               navigation.goBack();
             } catch (err) {
               Alert.alert('Erreur', 'Impossible de supprimer le document.');
-              setIsDeleting(false);
             }
-          }
-        }
+          },
+        },
       ]
     );
   };
+
+  const handleModalChoice = async (downloadNow) => {
+    setShowCorrectionModal(false);
+    if (dontAskAgain) {
+      await setPromptEnabled(false);
+    }
+
+    if (downloadNow) {
+      downloadCorrection();
+    }
+  };
+
+  const fileConfig = getFileIcon(document?.fileType || document?.extension);
+
+  if (!document) return null;
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
@@ -118,7 +203,7 @@ const DocumentDetailScreen = () => {
           style={styles.backButton}
         />
         <Text variant="h3" style={styles.headerTitle} numberOfLines={1}>
-          Détail du document
+          Détail du sujet
         </Text>
         <View style={styles.headerRight}>
           {canDelete && (
@@ -126,7 +211,6 @@ const DocumentDetailScreen = () => {
               variant="ghost"
               icon={<Trash2 size={20} color={theme.colors.error} />}
               onPress={handleDelete}
-              loading={isDeleting}
               style={styles.headerActionButton}
             />
           )}
@@ -134,8 +218,8 @@ const DocumentDetailScreen = () => {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <View style={styles.heroCard}>
-          <View style={[styles.iconBox, { backgroundColor: fileConfig.bgColor }]}>
+        <Card style={styles.heroCard}>
+          <View style={[styles.iconBox, { backgroundColor: fileConfig.bgColor }]}> 
             <FileText size={36} color={fileConfig.color} strokeWidth={1.8} />
           </View>
           <Badge
@@ -144,7 +228,7 @@ const DocumentDetailScreen = () => {
             backgroundColor={fileConfig.bgColor}
             style={styles.badge}
           />
-          <Text variant="h2" align="center" style={styles.title}>
+          <Text variant="h2" align="center" style={styles.title} numberOfLines={2}>
             {displayTitle}
           </Text>
           <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.date}>
@@ -153,102 +237,152 @@ const DocumentDetailScreen = () => {
           <View style={styles.heroPills}>
             <View style={styles.pill}>
               <Sparkles size={14} color={theme.colors.accent} strokeWidth={2.2} />
-              <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>Prêt mobile</Text>
+              <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>
+                Prêt mobile
+              </Text>
             </View>
             <View style={styles.pill}>
               <Download size={14} color={theme.colors.primary} strokeWidth={2.2} />
-              <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>{document.downloads || 0} téléchargements</Text>
+              <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>
+                {document.downloads || 0} téléchargements
+              </Text>
             </View>
           </View>
-        </View>
+          {hasCorrection && (
+            <View style={styles.correctionBadge}>
+              <Sparkles size={14} color={theme.colors.accentDark} strokeWidth={2} />
+              <Text variant="caption" color={theme.colors.accentDark} style={styles.correctionBadgeText}>
+                Corrigé disponible
+              </Text>
+            </View>
+          )}
+        </Card>
 
         <View style={styles.statsRow}>
           <View style={styles.statBox}>
-            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.primaryWash }]}>
+            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.primaryWash }]}> 
               <Download size={16} color={theme.colors.primary} strokeWidth={2.2} />
             </View>
-            <Text variant="h3" style={styles.statValue}>{document.downloads || 0}</Text>
-            <Text variant="caption" color={theme.colors.textMuted}>Téléchargements</Text>
+            <Text variant="h3" style={styles.statValue}>
+              {document.downloads || 0}
+            </Text>
+            <Text variant="caption" color={theme.colors.textMuted}>
+              Téléchargements
+            </Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statBox}>
-            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.accentWash }]}>
+            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.accentWash }]}> 
               <Eye size={16} color={theme.colors.accent} strokeWidth={2.2} />
             </View>
-            <Text variant="h3" style={styles.statValue}>{document.views || 0}</Text>
-            <Text variant="caption" color={theme.colors.textMuted}>Vues</Text>
+            <Text variant="h3" style={styles.statValue}>
+              {document.views || 0}
+            </Text>
+            <Text variant="caption" color={theme.colors.textMuted}>
+              Vues
+            </Text>
           </View>
         </View>
 
-        {isDownloaded ? (
-          <View style={styles.successCard}>
+        {isSubjectDownloaded && (
+          <Card style={styles.successCard} shadow="sm">
             <View style={styles.successIcon}>
               <CheckCircle2 size={22} color={theme.colors.success} strokeWidth={2} />
             </View>
             <View style={{ flex: 1 }}>
               <Text variant="h3">Prêt à ouvrir</Text>
               <Text variant="body" color={theme.colors.textSecondary} style={styles.successText}>
-                Ce PDF est disponible localement. Ouvrez-le, partagez-le ou revenez-y plus tard.
+                Ce PDF est disponible localement. Ouvrez-le, partagez-le ou retrouvez-le plus tard.
               </Text>
               <View style={styles.quickActions}>
                 <Button
                   variant="primary"
                   title="Ouvrir"
                   icon={<FileText size={16} color={theme.colors.textInverse} />}
-                  onPress={open}
+                  onPress={openSubject}
                   style={styles.quickActionButton}
                 />
                 <Button
                   variant="secondary"
                   title="Partager"
                   icon={<Share2 size={16} color={theme.colors.primary} />}
-                  onPress={share}
+                  onPress={shareSubject}
                   style={styles.quickActionButton}
                 />
               </View>
             </View>
-          </View>
-        ) : null}
+          </Card>
+        )}
 
         {document.description ? (
           <View style={styles.section}>
-            <Text variant="h3" style={styles.sectionTitle}>Description</Text>
+            <Text variant="h3" style={styles.sectionTitle}>
+              Description
+            </Text>
             <Text variant="body" color={theme.colors.textSecondary} style={styles.descriptionText}>
               {document.description}
             </Text>
           </View>
         ) : null}
 
-        <View style={styles.section}>
-          <Text variant="h3" style={styles.sectionTitle}>Informations</Text>
-          <View style={styles.infoCard}>
-            <InfoRow icon={Building2} label="Université" value={document.university?.name} />
-            <InfoRow icon={Layers} label="Département" value={document.department?.name} />
-            <InfoRow icon={GraduationCap} label="Niveau" value={document.level?.name} />
-            <InfoRow icon={Calendar} label="Session" value={document.semester?.displayName || document.semester?.name} />
-            <InfoRow icon={FolderOpen} label="Catégorie" value={document.category?.name} />
-            <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} isLast />
-          </View>
-        </View>
+        <Card style={styles.infoCard} shadow="sm">
+          <Text variant="h3" style={styles.sectionTitle}>
+            Informations
+          </Text>
+          <InfoRow icon={Building2} label="Université" value={document.university?.name} />
+          <InfoRow icon={Layers} label="Département" value={document.department?.name} />
+          <InfoRow icon={GraduationCap} label="Niveau" value={document.level?.name} />
+          <InfoRow icon={Calendar} label="Session" value={document.semester?.displayName || document.semester?.name} />
+          <InfoRow icon={FolderOpen} label="Catégorie" value={document.category?.name} />
+          <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} isLast />
+        </Card>
+
+        {hasCorrection && (
+          <Card style={styles.correctionCard} shadow="sm">
+            <View style={styles.correctionRow}>
+              <View style={styles.correctionIconContainer}>
+                <Sparkles size={18} color={theme.colors.accent} strokeWidth={2.2} />
+              </View>
+              <View style={styles.correctionContent}>
+                <Text variant="h3" style={styles.correctionTitle}>
+                  Corrigé associé
+                </Text>
+                <Text variant="body" color={theme.colors.textSecondary} style={styles.correctionDescription}>
+                  Ce sujet possède un corrigé. Vous pouvez le télécharger à tout moment.
+                </Text>
+              </View>
+            </View>
+            <View style={styles.correctionActions}>
+              <Button
+                variant={isCorrectionDownloaded ? 'secondary' : 'accent'}
+                title={isCorrectionDownloaded ? 'Ouvrir le corrigé' : (isCorrectionDownloading ? `Téléchargement ${Math.round(correctionProgress * 100)}%` : 'Télécharger le corrigé')}
+                onPress={handleCorrectionAction}
+                loading={isCorrectionDownloading}
+                disabled={isCorrectionDownloading}
+                style={styles.correctionButton}
+              />
+            </View>
+          </Card>
+        )}
       </ScrollView>
 
-      <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.lg) }]}>
-        {isDownloading && (
+      <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.lg) }]}> 
+        {isSubjectDownloading && (
           <View style={styles.progressContainer}>
             <Text variant="caption" color={theme.colors.primary} style={styles.progressText}>
-              Téléchargement en cours... {Math.round(progress * 100)}%
+              Téléchargement en cours... {Math.round(subjectProgress * 100)}%
             </Text>
-            <ProgressBar progress={progress} />
+            <ProgressBar progress={subjectProgress} />
           </View>
         )}
 
         <Button
-          variant={isDownloaded ? 'secondary' : 'accent'}
-          title={isDownloaded ? (isCorrection ? 'Ouvrir le corrigé' : 'Ouvrir le PDF') : (isCorrection ? 'Télécharger le corrigé' : 'Télécharger le PDF')}
-          icon={isDownloaded ? <FileText size={18} color={theme.colors.primary} /> : <Download size={18} color={theme.colors.textInverse} />}
-          onPress={handleAction}
-          loading={isInitializing}
-          disabled={isDownloading}
+          variant={isSubjectDownloaded ? 'secondary' : 'accent'}
+          title={isSubjectDownloaded ? (isCorrection ? 'Ouvrir le corrigé' : 'Ouvrir le PDF') : (isCorrection ? 'Télécharger le corrigé' : 'Télécharger le PDF')}
+          icon={isSubjectDownloaded ? <FileText size={18} color={theme.colors.primary} /> : <Download size={18} color={theme.colors.textInverse} />}
+          onPress={handlePrimaryAction}
+          loading={isSubjectInitializing}
+          disabled={isSubjectDownloading}
           style={styles.actionButton}
         />
       </View>
@@ -257,27 +391,38 @@ const DocumentDetailScreen = () => {
         visible={showCorrectionModal}
         transparent={true}
         animationType="fade"
+        onRequestClose={() => setShowCorrectionModal(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalIconBox}>
               <Sparkles size={24} color={theme.colors.accent} strokeWidth={2} />
             </View>
-            <Text variant="h3" align="center" style={styles.modalTitle}>Corrigé disponible !</Text>
-            <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.modalText}>
-              Souhaitez-vous également télécharger le corrigé de ce document ?
+            <Text variant="h3" align="center" style={styles.modalTitle}>
+              Corrigé disponible
             </Text>
+            <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.modalText}>
+              Une correction est disponible pour ce sujet. Souhaitez-vous la télécharger maintenant ?
+            </Text>
+            <TouchableOpacity style={styles.checkboxRow} activeOpacity={0.8} onPress={handleToggleDontAskAgain}>
+              <View style={[styles.checkbox, dontAskAgain && styles.checkboxChecked]}>
+                {dontAskAgain && <Check size={14} color={theme.colors.textInverse} />}
+              </View>
+              <Text variant="bodyMedium" color={theme.colors.textPrimary} style={styles.checkboxLabel}>
+                Ne plus me proposer automatiquement les corrections.
+              </Text>
+            </TouchableOpacity>
             <View style={styles.modalActions}>
               <Button
-                variant="primary"
-                title="Oui, voir le corrigé"
-                onPress={handleDownloadCorrectionAlso}
+                variant="secondary"
+                title="Plus tard"
+                onPress={() => handleModalChoice(false)}
                 style={styles.modalButton}
               />
               <Button
-                variant="secondary"
-                title="Non, juste le sujet"
-                onPress={handleDownloadSubjectOnly}
+                variant="accent"
+                title="Télécharger maintenant"
+                onPress={() => handleModalChoice(true)}
                 style={styles.modalButton}
               />
             </View>
@@ -319,21 +464,13 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: theme.spacing.lg,
-    paddingBottom: 140,
+    paddingBottom: 180,
   },
   heroCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.xl,
-    padding: theme.spacing.xl,
+    borderRadius: theme.radius['2xl'],
+    padding: theme.spacing['2xl'],
     alignItems: 'center',
     marginBottom: theme.spacing.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.06,
-    shadowRadius: 16,
-    elevation: 3,
   },
   iconBox: {
     width: 72,
@@ -363,13 +500,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.spacing.xs,
-    backgroundColor: theme.colors.primaryWash,
+    backgroundColor: theme.colors.surfaceRaised,
     borderRadius: theme.radius.full,
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.xs,
   },
   pillText: {
     marginLeft: 2,
+  },
+  correctionBadge: {
+    marginTop: theme.spacing.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: theme.colors.accentWash,
+    borderRadius: theme.radius.full,
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.xs,
+  },
+  correctionBadgeText: {
+    marginLeft: theme.spacing.xs,
+    color: theme.colors.accentDark,
   },
   statsRow: {
     flexDirection: 'row',
@@ -420,7 +570,7 @@ const styles = StyleSheet.create({
   successText: {
     marginTop: 4,
     marginBottom: theme.spacing.md,
-    lineHeight: 19,
+    lineHeight: 20,
   },
   quickActions: {
     flexDirection: 'row',
@@ -436,12 +586,12 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.md,
   },
   descriptionText: {
-    lineHeight: 21,
+    lineHeight: 22,
   },
   infoCard: {
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radius.lg,
-    paddingHorizontal: theme.spacing.md,
+    padding: theme.spacing.lg,
     borderWidth: 1,
     borderColor: theme.colors.borderLight,
     shadowColor: '#0F172A',
@@ -449,6 +599,47 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.04,
     shadowRadius: 8,
     elevation: 1,
+  },
+  correctionCard: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.lg,
+    padding: theme.spacing.lg,
+    marginTop: theme.spacing.lg,
+    borderWidth: 1,
+    borderColor: theme.colors.borderLight,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    elevation: 1,
+  },
+  correctionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  correctionIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: theme.radius.xl,
+    backgroundColor: theme.colors.accentWash,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: theme.spacing.md,
+  },
+  correctionContent: {
+    flex: 1,
+  },
+  correctionTitle: {
+    marginBottom: theme.spacing.xs,
+  },
+  correctionDescription: {
+    lineHeight: 20,
+  },
+  correctionActions: {
+    marginTop: theme.spacing.lg,
+  },
+  correctionButton: {
+    width: '100%',
   },
   infoRow: {
     flexDirection: 'row',
@@ -531,7 +722,31 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: theme.spacing.xl,
-    lineHeight: 21,
+    lineHeight: 22,
+  },
+  checkboxRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: theme.spacing.lg,
+  },
+  checkbox: {
+    width: 22,
+    height: 22,
+    borderRadius: theme.radius.sm,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: theme.spacing.md,
+  },
+  checkboxChecked: {
+    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primary,
+  },
+  checkboxLabel: {
+    flex: 1,
+    lineHeight: 20,
   },
   modalActions: {
     width: '100%',

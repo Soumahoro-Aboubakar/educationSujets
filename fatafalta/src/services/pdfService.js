@@ -389,6 +389,31 @@ const copyPickedFileLocally = async (fileUri) => {
     );
   }
 };
+
+const readPdfBytes = async (fileUri) => {
+  try {
+    const fileBase64 = await withTimeout(
+      FileSystem.readAsStringAsync(fileUri, { encoding: FileSystem.EncodingType.Base64 }),
+      30000,
+      'Lecture du PDF trop longue'
+    );
+    return decode(fileBase64);
+  } catch (readError) {
+    console.warn('Lecture directe du PDF échouée, tentative de copie locale:', fileUri, readError);
+    const localUri = await copyPickedFileLocally(fileUri);
+    try {
+      const fileBase64 = await withTimeout(
+        FileSystem.readAsStringAsync(localUri, { encoding: FileSystem.EncodingType.Base64 }),
+        30000,
+        'Lecture du PDF depuis la copie locale trop longue'
+      );
+      return decode(fileBase64);
+    } finally {
+      FileSystem.deleteAsync(localUri, { idempotent: true }).catch(() => {});
+    }
+  }
+};
+
 /*
 export const applyWatermarkToExistingPdf = async (fileUri) => {
   await initDirectory();
@@ -482,19 +507,12 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
   // 1) Garde-fou de taille, avant toute opération coûteuse
   await assertImportedPdfSizeIsSafe(fileUri);
 
-  // 2) Lecture directe de l'URI (content:// ou file://) sans passer par copyAsync
+  // 2) Lecture sécurisée : d'abord tentative directe, puis fallback par copie locale.
   let pdfBytes;
   try {
-    pdfBytes = await (async () => {
-      const fileBase64 = await withTimeout(
-        FileSystem.readAsStringAsync(fileUri, { encoding: FileSystem.EncodingType.Base64 }),
-        30000,
-        'Lecture du PDF trop longue'
-      );
-      return decode(fileBase64);
-    })();
+    pdfBytes = await readPdfBytes(fileUri);
   } catch (e) {
-    console.warn('Lecture du PDF importé — erreur détaillée:', fileUri, e);
+    console.warn('Lecture sécurisée du PDF échouée:', fileUri, e);
     throw new Error(`Impossible de lire le fichier PDF (${e.message || 'raison inconnue'})`);
   }
 

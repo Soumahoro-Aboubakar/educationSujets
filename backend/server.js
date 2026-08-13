@@ -53,6 +53,14 @@ const server = app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
 
+// Start trash purge cron to permanently remove files in trash after retention
+try {
+  const startTrashPurgeCron = require('./scripts/trashCron');
+  startTrashPurgeCron();
+} catch (err) {
+  console.warn('[TRASH_CRON] Could not start trash purge cron:', err.message);
+}
+
 const SELF_URL = process.env.SELF_URL; 
 const PING_INTERVAL = 2 * 60 * 1000; 
 

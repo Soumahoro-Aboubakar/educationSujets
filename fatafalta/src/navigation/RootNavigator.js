@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DrawerNavigator from './DrawerNavigator';
 import DocumentDetailScreen from '../screens/DocumentDetailScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import UploadScreen from '../screens/UploadScreen';
 import EditDraftScreen from '../screens/EditDraftScreen';
@@ -46,6 +47,10 @@ const RootNavigator = () => {
         options={{
           presentation: 'modal',
         }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
       />
       <Stack.Screen
         name="AdminTrash"

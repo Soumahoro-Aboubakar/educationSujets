@@ -1,9 +1,10 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { AppState, Platform, StyleSheet, Keyboard } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import * as NavigationBar from 'expo-navigation-bar';
 import { 
   useFonts, 
   Inter_400Regular, 
@@ -63,6 +64,46 @@ export default function App() {
     }
   }, [appIsReady, fontsLoaded]);
 
+  useEffect(() => {
+    const hideSystemNavigationBar = async () => {
+      if (Platform.OS !== 'android') {
+        return;
+      }
+
+      try {
+        // 1. Cacher la barre
+        await NavigationBar.setVisibilityAsync('hidden');
+        // 2. Comportement : 'overlay-swipe' permet de faire réapparaître la barre 
+        // temporairement si l'utilisateur glisse depuis le bas, puis elle se recache.
+        await NavigationBar.setBehaviorAsync('overlay-swipe');
+        // 3. Position absolue pour que la barre ne déforme pas votre layout 
+        // quand elle décide de s'afficher (elle se superposera au lieu de pousser le contenu)
+        await NavigationBar.setPositionAsync('absolute');
+      } catch (error) {
+        console.warn('Unable to hide Android navigation bar:', error);
+      }
+    };
+
+    hideSystemNavigationBar();
+
+    // Réappliquer le masquage quand l'app revient au premier plan
+    const appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+      if (nextAppState === 'active') {
+        hideSystemNavigationBar();
+      }
+    });
+
+    // Réappliquer le masquage quand le clavier se ferme (Android la fait souvent réapparaître)
+    const keyboardSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      hideSystemNavigationBar();
+    });
+
+    return () => {
+      appStateSubscription.remove();
+      keyboardSubscription.remove();
+    };
+  }, []);
+
   if (!appIsReady || !fontsLoaded) {
     return null;
   }
@@ -85,4 +126,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-

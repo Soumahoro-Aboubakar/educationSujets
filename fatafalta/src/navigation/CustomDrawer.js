@@ -165,6 +165,11 @@ const CustomDrawer = (props) => {
             label="Mes Téléchargements"
             onPress={() => navigation.navigate('DownloadsTab')}
           />
+          <DrawerItem
+            icon={Settings}
+            label="Paramètres"
+            onPress={() => navigation.getParent()?.navigate('Settings')}
+          />
           
           {isAuthenticated && (user?.role === 'admin' || user?.role === 'sub-admin') && (
             <>

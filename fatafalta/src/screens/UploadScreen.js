@@ -80,6 +80,7 @@ const UploadScreen = ({ navigation, route }) => {
 
   const getIntentUri = async (fileUri) => {
     if (!isAndroid) return fileUri;
+    if (fileUri?.startsWith('content://')) return fileUri;
 
     try {
       return await withTimeout(
@@ -91,6 +92,13 @@ const UploadScreen = ({ navigation, route }) => {
       console.warn('Unable to create Android content URI:', error);
       return null;
     }
+  };
+
+  const normalizeDocumentPickerResult = (result) => {
+    if (!result || result.canceled || result.type === 'cancel') return null;
+    if (Array.isArray(result.assets) && result.assets.length > 0) return result.assets[0];
+    if (result.uri) return result;
+    return null;
   };
 
   const handleOpenPreview = async () => {
@@ -203,25 +211,42 @@ const UploadScreen = ({ navigation, route }) => {
     }; */
 
   const pickDocument = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
-      type: 'application/pdf',
-      copyToCacheDirectory: false, // <-- TRÈS IMPORTANT : Mettre à false
-    });
+    let result;
+    try {
+      result = await DocumentPicker.getDocumentAsync({
+        type: 'application/pdf',
+        copyToCacheDirectory: true,
+        base64: false,
+        multiple: false,
+      });
+    } catch (error) {
+      console.error('DocumentPicker error:', error);
+      Alert.alert('Erreur', 'Impossible de sélectionner le fichier PDF.');
+      return;
+    }
 
-    if (!result.canceled) {
-      const file = result.assets[0];
-
-      // Vérification précoce côté UI
-      if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
-        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
-        const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
-        Alert.alert(
-          'Fichier trop volumineux',
-          `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`
-        );
-        return;
+    const file = normalizeDocumentPickerResult(result);
+    if (!file?.uri) {
+      if (result && !result.canceled) {
+        console.warn('DocumentPicker result without a valid file asset:', result);
       }
+      return;
+    }
 
+    // Vérification précoce côté UI
+    if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+      const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+      Alert.alert(
+        'Fichier trop volumineux',
+        `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`
+      );
+      return;
+    }
+
+    if (isAndroid) {
+      setTimeout(() => processExistingPDF(file.uri), 500);
+    } else {
       await processExistingPDF(file.uri);
     }
   };

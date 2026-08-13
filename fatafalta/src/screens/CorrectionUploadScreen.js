@@ -97,6 +97,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
 
   const getIntentUri = async (fileUri) => {
     if (!isAndroid) return fileUri;
+    if (fileUri?.startsWith('content://')) return fileUri;
 
     try {
       return await withTimeout(
@@ -108,6 +109,13 @@ const CorrectionUploadScreen = ({ navigation }) => {
       console.warn('Unable to create Android content URI:', error);
       return null;
     }
+  };
+
+  const normalizeDocumentPickerResult = (result) => {
+    if (!result || result.canceled || result.type === 'cancel') return null;
+    if (Array.isArray(result.assets) && result.assets.length > 0) return result.assets[0];
+    if (result.uri) return result;
+    return null;
   };
 
   const resetCorrectionFile = () => {
@@ -192,14 +200,28 @@ const CorrectionUploadScreen = ({ navigation }) => {
   };
 
   const pickPdf = async () => {
-    const result = await DocumentPicker.getDocumentAsync({
-      type: 'application/pdf',
-      copyToCacheDirectory: false,
-    });
+    let result;
+    try {
+      result = await DocumentPicker.getDocumentAsync({
+        type: 'application/pdf',
+        copyToCacheDirectory: true,
+        base64: false,
+        multiple: false,
+      });
+    } catch (error) {
+      console.error('DocumentPicker error:', error);
+      Alert.alert('Erreur', 'Impossible de sélectionner le fichier PDF.');
+      return;
+    }
 
-    if (result.canceled) return;
+    const file = normalizeDocumentPickerResult(result);
+    if (!file?.uri) {
+      if (result && !result.canceled) {
+        console.warn('DocumentPicker result without a valid file asset:', result);
+      }
+      return;
+    }
 
-    const file = result.assets[0];
     if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
       const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
       const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
