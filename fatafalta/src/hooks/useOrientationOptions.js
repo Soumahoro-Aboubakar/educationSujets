@@ -28,7 +28,7 @@ export const useOrientationOptions = () => {
         keys.forEach((k) => {
           payload[k] = (query.data && Object.prototype.hasOwnProperty.call(query.data, k)) ? query.data[k] : null;
         });  
-        console.log('Persisting orientation options to local cache', payload);
+        console.log('Persisting orientation options to local cache', payload["subjectContests"]);
         await cache.save(CACHE_KEY, { payload, cachedAt: Date.now() });
       } catch (e) {
         // ignore
@@ -56,6 +56,6 @@ export const useOrientationOptions = () => {
     hydrate();
     return () => { mounted = false; };
   }, [queryClient]);
-
+  //console.log('useOrientationOptions query', query["data"]? query["data"]["subjectContests"] : null);
   return query;
 };

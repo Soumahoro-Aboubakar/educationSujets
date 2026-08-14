@@ -139,14 +139,14 @@ const SelectionScreen = ({ navigation, route }) => {
     return () => { mounted = false; };
   }, [mode]);
 
-  // Update displayed options only when screen is focused
+ /* // Update displayed options only when screen is focused
   useEffect(() => {
     if (!isFocused) return;
     if (data && data[config.optionKey]) {
       setLocalOptions(data[config.optionKey]);
     }
   }, [isFocused, data, config.optionKey]);
-
+*/
   const handleSelect = async (option) => {
     if (isSaving) return;
     setIsSaving(true);
