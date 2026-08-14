@@ -64,7 +64,8 @@ const listDocumentsValidator = [
   query('semester').optional().isMongoId().withMessage('Filtre session invalide'),
   query('category').optional().isMongoId().withMessage('Filtre categorie invalide'),
   query('page').optional().isInt({ min: 1 }).withMessage('Page invalide'),
-  query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limite invalide'),
+  // Allow larger limit for client-side bulk fetch (up to 1000)
+  query('limit').optional().isInt({ min: 1, max: 1000 }).withMessage('Limite invalide'),
 ];
 
 module.exports = {
