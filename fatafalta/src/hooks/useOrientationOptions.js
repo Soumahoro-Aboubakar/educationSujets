@@ -21,7 +21,15 @@ export const useOrientationOptions = () => {
     const persist = async () => {
       if (!query.data) return;
       try {
-        await cache.save(CACHE_KEY, { payload: query.data, cachedAt: Date.now() });
+        // When persisting, explicitly set known option keys and
+        // reset to null any keys not present in the server response
+        const keys = ['universities', 'subjectContests', 'trainingContests'];
+        const payload = {};
+        keys.forEach((k) => {
+          payload[k] = (query.data && Object.prototype.hasOwnProperty.call(query.data, k)) ? query.data[k] : null;
+        });  
+        console.log('Persisting orientation options to local cache', payload);
+        await cache.save(CACHE_KEY, { payload, cachedAt: Date.now() });
       } catch (e) {
         // ignore
       }

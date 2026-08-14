@@ -17,10 +17,12 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
   const loadDocuments = async () => {
     try {
       setLoading(true);
-      const res = await api.get('/api/documents', { params: { contestType: contestType._id, limit: 1000 } });
+      const params = { limit: 1000 };
+      if (contestType && contestType._id) params.contestType = String(contestType._id);
+      const res = await api.get('/api/documents', { params });
       setDocuments(res.data.data || []);
     } catch (e) {
-      console.warn(e);
+      console.warn('Failed loading contest documents', e.response?.status, e.response?.data || e.message);
     } finally {
       setLoading(false);
     }

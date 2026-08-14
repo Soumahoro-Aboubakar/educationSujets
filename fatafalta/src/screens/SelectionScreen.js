@@ -21,6 +21,7 @@ import {
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import { useOrientationOptions } from '../hooks/useOrientationOptions';
+import api from '../services/api';
 import { usePreferences } from '../context/PreferencesContext';
 import { useIsFocused } from '@react-navigation/native';
 import cache from '../services/cache';
@@ -117,6 +118,27 @@ const SelectionScreen = ({ navigation, route }) => {
     return () => { mountedRef.current = false; };
   }, [config.optionKey, refetch]);
 
+  // If mode is 'contest', fetch contest types from API and show them instead
+  useEffect(() => {
+    let mounted = true;
+    if (mode !== 'contest') return undefined;
+
+    const loadContestTypes = async () => {
+      try {
+        const res = await api.get('/api/contest-types');
+        if (!mounted) return;
+        const items = res.data?.data || [];
+      //  console.log('Loaded contest types from API', items);
+        setLocalOptions(items);
+      } catch (e) {
+        // ignore — keep existing localOptions if any
+      }
+    };
+
+    loadContestTypes();
+    return () => { mounted = false; };
+  }, [mode]);
+
   // Update displayed options only when screen is focused
   useEffect(() => {
     if (!isFocused) return;
@@ -140,8 +162,9 @@ const SelectionScreen = ({ navigation, route }) => {
         });
         goToLibrary();
       } else if (mode === 'contest') {
-        // Navigate to contest type selection so user can pick a specific contest type
-        navigation.navigate('ContestTypeSelection', { contest: selection });
+        // When selecting a contest in this mode, selection is actually a contest type
+        // Navigate directly to the documents list for that contest type
+        navigation.navigate('ContestDocuments', { contest: null, contestType: selection });
       } else {
         await updatePreferences({
           contest: selection,

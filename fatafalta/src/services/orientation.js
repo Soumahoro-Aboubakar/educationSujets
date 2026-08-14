@@ -3,6 +3,7 @@ import api from './api';
 /** Data is intentionally provided by the API so unavailable catalog entries are never offered. */
 export const fetchOrientationOptions = async () => {
   const response = await api.get('/api/orientation/options');
+  //console.log('fetchOrientationOptions response', response.data.data);
   return response.data.data || {
     universities: [],
     subjectContests: [],

@@ -11,7 +11,6 @@ import CorrectionUploadScreen from '../screens/CorrectionUploadScreen';
 import AdminTrashScreen from '../screens/AdminTrashScreen';
 import OrientationScreen from '../screens/OrientationScreen';
 import SelectionScreen from '../screens/SelectionScreen';
-import ContestTypeSelectionScreen from '../screens/ContestTypeSelectionScreen';
 import ContestDocumentsScreen from '../screens/ContestDocumentsScreen';
 import TrainingSessionScreen from '../screens/TrainingSessionScreen';
 import { usePreferences } from '../context/PreferencesContext';
@@ -47,7 +46,6 @@ const RootNavigator = () => {
       <Stack.Screen name="Orientation" component={OrientationScreen} />
       <Stack.Screen name="EstablishmentSelection" component={SelectionScreen} />
       <Stack.Screen name="ContestSelection" component={SelectionScreen} />
-      <Stack.Screen name="ContestTypeSelection" component={ContestTypeSelectionScreen} />
       <Stack.Screen name="ContestDocuments" component={ContestDocumentsScreen} options={{ animation: 'slide_from_right' }} />
       <Stack.Screen name="TrainingSelection" component={SelectionScreen} />
       <Stack.Screen name="MainTabs" component={DrawerNavigator} />
