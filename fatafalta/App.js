@@ -16,6 +16,7 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import RootNavigator from './src/navigation/RootNavigator';
 import { AuthProvider } from './src/context/AuthContext';
+import { PreferencesProvider } from './src/context/PreferencesContext';
 import useDownloadStore from './src/store/useDownloadStore';
 
 // Keep the splash screen visible while we fetch resources
@@ -112,9 +113,11 @@ export default function App() {
     <GestureHandlerRootView style={styles.container}>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <NavigationContainer>
-            <RootNavigator />
-          </NavigationContainer>
+          <PreferencesProvider>
+            <NavigationContainer>
+              <RootNavigator />
+            </NavigationContainer>
+          </PreferencesProvider>
         </AuthProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

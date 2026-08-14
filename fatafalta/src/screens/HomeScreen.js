@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
@@ -13,8 +13,10 @@ import AuthContext from '../context/AuthContext';
 import { useDocuments } from '../hooks/useDocuments';
 import { useFilterOptions } from '../hooks/useFilterOptions';
 import useDownloadStore from '../store/useDownloadStore';
+import { usePreferences } from '../context/PreferencesContext';
 import theme from '../theme/tokens';
-import Animated, { useAnimatedScrollHandler, useSharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
+import Animated, { useAnimatedScrollHandler, useSharedValue, useAnimatedStyle, interpolate, Extrapolation, withTiming, withRepeat } from 'react-native-reanimated';
+import { Compass } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -27,8 +29,13 @@ const HomeScreen = () => {
   const bottomSheetRef = useRef(null);
   const downloads = useDownloadStore((state) => state.downloads);
   const { isAuthenticated } = React.useContext(AuthContext);
+  const { preferences, updatePreferences } = usePreferences();
 
-  const [filters, setFilters] = useState({ search: '' });
+  const [filters, setFilters] = useState(() => ({
+    search: '',
+    university: preferences.establishment?._id || '',
+    category: preferences.selectedContentType === 'subjects' ? preferences.contest?._id || '' : '',
+  }));
   const activeFilterCount = Object.entries(filters).filter(([k, v]) => k !== 'search' && v).length;
   const downloadCount = Object.keys(downloads || {}).length;
 
@@ -54,16 +61,84 @@ const HomeScreen = () => {
     return { opacity, transform: [{ translateY }] };
   });
 
+  // FAB animation
+  const fabScale = useSharedValue(1);
+  useEffect(() => {
+    fabScale.value = withRepeat(withTiming(1.06, { duration: 700 }), -1, true);
+  }, []);
+
+  const fabAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: fabScale.value }],
+  }));
+/*
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
-  };
+
+    // Choices made from the library filter are deliberate preference changes,
+    // so the same selection is restored on the next launch.
+    if (key === 'university') {
+      const establishment = (filterOptions.university || []).find((option) => option._id === value);
+      updatePreferences({
+        establishment: establishment ? { _id: establishment._id, name: establishment.name, abbreviation: establishment.abbreviation || '' } : null,
+      }).catch(() => {});
+    }
+
+    if (key === 'category') {
+      const contest = (filterOptions.category || []).find((option) => option._id === value);
+      updatePreferences({
+        contest: contest ? { _id: contest._id, name: contest.name, abbreviation: '' } : null,
+        selectedContentType: 'subjects',
+      }).catch(() => {});
+    }
+  };*/
+
+
+  // Remplace la fonction handleFilterChange existante par ces trois fonctions :
+
+const syncPreferenceForFilterKey = (key, value) => {
+  if (key === 'university') {
+    const establishment = (filterOptions.university || []).find((o) => o._id === value);
+    updatePreferences({
+      establishment: establishment
+        ? { _id: establishment._id, name: establishment.name, abbreviation: establishment.abbreviation || '' }
+        : null,
+    }).catch(() => {});
+  }
+  if (key === 'category') {
+    const contest = (filterOptions.category || []).find((o) => o._id === value);
+    updatePreferences({
+      contest: contest ? { _id: contest._id, name: contest.name, abbreviation: '' } : null,
+      selectedContentType: 'subjects',
+    }).catch(() => {});
+  }
+};
+
+// Utilisé pour les changements immédiats (ex: retrait d'un chip dans FilterBar)
+const handleFilterChange = (key, value) => {
+  setFilters((prev) => ({ ...prev, [key]: value }));
+  syncPreferenceForFilterKey(key, value);
+};
+
+// Utilisé quand l'utilisateur valide le brouillon du FilterBottomSheet
+const handleApplyFilters = (newFilters) => {
+  Object.entries(newFilters).forEach(([key, value]) => {
+    if (filters[key] !== value) {
+      syncPreferenceForFilterKey(key, value);
+    }
+  });
+  setFilters(newFilters);
+};
+
+
+//****************************** */
 
   const handleClearFilters = () => {
     setFilters({ search: filters.search });
+    updatePreferences({ establishment: null, contest: null }).catch(() => {});
   };
 
   const handleRemoveFilter = (key) => {
-    setFilters((prev) => ({ ...prev, [key]: '' }));
+    handleFilterChange(key, '');
   };
 
   const openFilters = () => bottomSheetRef.current?.expand();
@@ -79,6 +154,22 @@ const HomeScreen = () => {
 
   const ListHeader = (
     <View style={styles.listHeader}>
+      {/*(preferences.establishment || (preferences.selectedContentType === 'subjects' && preferences.contest)) && (
+        <TouchableOpacity style={styles.preferenceCard} onPress={openFilters} activeOpacity={0.82}>
+          <View style={styles.preferenceIconWrap}>
+            <Library size={18} color={theme.colors.primary} strokeWidth={2.25} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text variant="caption" color={theme.colors.textMuted}>Affichage personnalisé</Text>
+            <Text variant="bodyMedium" style={styles.preferenceTitle} numberOfLines={1}>
+              {preferences.selectedContentType === 'subjects' && preferences.contest
+                ? preferences.contest.name
+                : preferences.establishment?.name}
+            </Text>
+          </View>
+          <Text variant="caption" color={theme.colors.primary}>Modifier</Text>
+        </TouchableOpacity>
+      )
       <TouchableOpacity style={styles.libraryCard} onPress={handleOpenDownloads} activeOpacity={0.85}>
         <View style={styles.libraryIconWrap}>
           <Library size={20} color={theme.colors.primary} strokeWidth={2.2} />
@@ -95,7 +186,7 @@ const HomeScreen = () => {
           <ArrowRight size={16} color={theme.colors.textMuted} strokeWidth={2.2} />
         </View>
       </TouchableOpacity>
-
+*/}
       <FilterBar
         filters={filters}
         filterOptions={filterOptions}
@@ -179,13 +270,21 @@ const HomeScreen = () => {
       />
 
       <FilterBottomSheet
-        ref={bottomSheetRef}
-        filters={filters}
-        filterOptions={filterOptions}
-        onFilterChange={handleFilterChange}
-        onClearFilters={handleClearFilters}
-        onApply={closeFilters}
+      ref={bottomSheetRef}
+  filters={filters}
+  filterOptions={filterOptions}
+  onApply={handleApplyFilters}
       />
+
+      <Animated.View style={[styles.fabWrap, fabAnimatedStyle, { bottom: 12  }]}> 
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => navigation.navigate('Orientation')}
+          style={styles.fab}
+        >
+          <Compass size={22} color="#fff" />
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };
@@ -287,6 +386,29 @@ const styles = StyleSheet.create({
   listHeader: {
     paddingBottom: theme.spacing.md,
   },
+  preferenceCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+    marginBottom: theme.spacing.md,
+    padding: theme.spacing.sm,
+    paddingRight: theme.spacing.md,
+    borderRadius: theme.radius.lg,
+    borderWidth: 1,
+    borderColor: theme.colors.primary200,
+    backgroundColor: '#F6F9FF',
+  },
+  preferenceIconWrap: {
+    width: 35,
+    height: 35,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.surface,
+  },
+  preferenceTitle: {
+    marginTop: 1,
+  },
   libraryCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -335,6 +457,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spacing.sm,
     paddingVertical: 3,
     borderRadius: theme.radius.full,
+  },
+  fabWrap: {
+    position: 'absolute',
+    right: 20,
+    zIndex: 40,
+    elevation: 20,
+  },
+  fab: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: theme.colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#0B1B4D',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.18,
+    shadowRadius: 12,
+    elevation: 6,
   },
 });
 

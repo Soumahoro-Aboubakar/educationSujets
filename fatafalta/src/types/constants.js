@@ -34,8 +34,8 @@ export const FILTER_DEFINITIONS = [
   },
   {
     key: 'category',
-    label: 'Catégorie',
-    placeholder: 'Toutes les catégories',
+    label: 'Concours / catégorie',
+    placeholder: 'Tous les concours et catégories',
     icon: 'folder-open',
     endpoint: '/api/categories',
   },

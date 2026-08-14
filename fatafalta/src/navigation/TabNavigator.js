@@ -53,14 +53,14 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => <Library color={color} size={size} />,
         }}
       />
-      <Tab.Screen
+     {/* <Tab.Screen
         name="SearchTab"
         component={SearchScreen}
         options={{
           tabBarLabel: 'Recherche',
           tabBarIcon: ({ color, size }) => <Search color={color} size={size} />,
-        }}
-      />
+        }} 
+      /> */}
       <Tab.Screen
         name="DownloadsTab"
         component={DownloadsScreen}

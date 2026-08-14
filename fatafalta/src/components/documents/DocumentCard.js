@@ -41,12 +41,22 @@ const DocumentCard = ({
       <Card onPress={onPress} style={styles.card} shadow="sm">
         <View style={styles.content}>
           <View style={styles.header}>
-            <Badge
-              label={fileConfig.label}
-              color={fileConfig.color}
-              backgroundColor={fileConfig.bgColor}
-              icon={<FileText size={12} color={fileConfig.color} />}
-            />
+            <View style={styles.headerLeft}>
+              <Badge
+                label={fileConfig.label}
+                color={fileConfig.color}
+                backgroundColor={fileConfig.bgColor}
+                icon={<FileText size={12} color={fileConfig.color} />}
+              />
+              {document.correction ? (
+                <Badge
+                  label="Corrigé"
+                  color={theme.colors.success}
+                  backgroundColor={theme.colors.successWash}
+                  style={styles.correctionBadge}
+                />
+              ) : null}
+            </View>
             <Text variant="caption" color={theme.colors.textMuted}>
               {formatDate(document.createdAt)}
             </Text>
@@ -109,6 +119,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: theme.spacing.sm,
   },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+  },
   title: {
     marginBottom: theme.spacing.xs,
   },
@@ -147,6 +162,9 @@ const styles = StyleSheet.create({
     right: 0,
     height: 3,
     borderRadius: 0,
+  },
+  correctionBadge: {
+    marginLeft: theme.spacing.sm,
   },
 });
 

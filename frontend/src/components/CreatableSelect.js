@@ -33,7 +33,12 @@ const CreatableSelect = ({ label, options, value, onChange, onCreate, placeholde
   const handleCreate = async () => {
     if (!search.trim() || exactMatch) return;
     setIsCreating(true);
-    await onCreate(search.trim());
+    // onCreate should return the created entity { _id, name }
+    const created = await onCreate(search.trim());
+    // If creation returns the created entity, select it
+    if (created && created._id) {
+      onChange(created._id);
+    }
     setIsCreating(false);
     setIsOpen(false);
     setSearch('');

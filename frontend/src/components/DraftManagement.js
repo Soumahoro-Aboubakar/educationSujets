@@ -8,7 +8,7 @@ import AuthContext from '../context/AuthContext';
 import CreatableSelect from './CreatableSelect';
 
 const EMPTY_METADATA_FORM = {
-  title: '', description: '', university: '', department: '', level: '', semester: '', category: ''
+  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: ''
 };
 
 const DraftManagement = ({ filtersData, onOptionCreate }) => {
@@ -166,7 +166,8 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
         department: doc.department?._id || doc.department || '',
         level: doc.level?._id || doc.level || '',
         semester: doc.semester?._id || doc.semester || '',
-        category: doc.category?._id || doc.category || ''
+        category: doc.category?._id || doc.category || '',
+        contestType: doc.contestType?._id || doc.contestType || ''
       });
     }
   };
@@ -440,6 +441,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                           { key: 'level', dbKey: 'levels', label: 'Niveau', icon: GraduationCap, options: filtersData?.levels || [] },
                           { key: 'semester', dbKey: 'semesters', label: 'Session', icon: Calendar, options: filtersData?.semesters || [] },
                           { key: 'category', dbKey: 'categories', label: 'Catégorie', icon: Layers, options: filtersData?.categories || [] },
+                          { key: 'contestType', dbKey: 'contest-types', label: 'Type de concours', icon: FileText, options: filtersData?.contestTypes || [] },
                         ].map(field => (
                           <div key={field.key} className={field.key === 'category' ? 'md:col-span-2' : ''}>
                             <CreatableSelect

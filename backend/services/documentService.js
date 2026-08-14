@@ -18,6 +18,7 @@ const POPULATE_FIELDS = [
   { path: 'level', select: 'name order' },
   { path: 'semester', select: 'name order' },
   { path: 'category', select: 'name icon' },
+  { path: 'contestType', select: 'name abbreviation' },
   { path: 'uploadedBy', select: 'name email role' },
   { path: 'validatedBy', select: 'name email role' },
   { path: 'correction', select: '_id status originalFileName fileType extension mimeType fileSize documentType' },
@@ -209,7 +210,7 @@ const findDuplicateTitleCandidates = async (title, user) => {
 
 const buildDocumentFilters = (params = {}) => {
   const filters = { status: 'approved', isDeleted: { $ne: true } };
-  const refFields = ['university', 'department', 'level', 'semester', 'category'];
+  const refFields = ['university', 'department', 'level', 'semester', 'category', 'contestType'];
 
   refFields.forEach((field) => {
     if (params[field]) {
@@ -480,6 +481,7 @@ const createDocument = async (payload, file, user) => {
       level: payload.level || null,
       semester: payload.semester || null,
       category: payload.category || null,
+      contestType: payload.contestType || null,
       status: payload.metadataStatus === 'false' ? 'draft' : 'pending',
     };
 
@@ -500,7 +502,7 @@ const updateDocument = async (documentId, payload, user) => {
     throw new AppError('Les metadonnees ne sont pas modifiables sur un corrige', 400);
   }
 
-  const fields = ['title', 'description', 'university', 'department', 'level', 'semester', 'category'];
+  const fields = ['title', 'description', 'university', 'department', 'level', 'semester', 'category', 'contestType'];
 
   fields.forEach((field) => {
     if (payload[field] !== undefined) {

@@ -23,7 +23,7 @@ import { generatePdfFromImages } from '../utils/pdfGenerator';
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
 const EMPTY_UPLOAD_DATA = {
-  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', file: null, documentType: 'sujet', correctionFor: ''
+  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: '', file: null, documentType: 'sujet', correctionFor: ''
 };
 
 const EMPTY_DUPLICATE_CHECK = { status: 'idle', matches: [], error: '' };
@@ -48,7 +48,7 @@ const Dashboard = () => {
   
   // Filters data
   const [filtersData, setFiltersData] = useState({
-    universities: [], departments: [], levels: [], semesters: [], categories: []
+    universities: [], departments: [], levels: [], semesters: [], categories: [], contestTypes: []
   });
 
   const [activeFilters, setActiveFilters] = useState({
@@ -176,13 +176,14 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       setIsFetching(true);
-      const [docsRes, uniRes, deptRes, levelRes, semRes, catRes] = await Promise.all([
+      const [docsRes, uniRes, deptRes, levelRes, semRes, catRes, contestTypesRes] = await Promise.all([
         axios.get('/api/documents/my', { params: { page: 1, limit: 12 } }),
         axios.get('/api/universities'),
         axios.get('/api/departments'),
         axios.get('/api/levels'),
         axios.get('/api/semesters'),
         axios.get('/api/categories'),
+        axios.get('/api/contest-types'),
       ]);
       
       setDocuments(docsRes.data.data);
@@ -194,6 +195,7 @@ const Dashboard = () => {
         levels: levelRes.data.data,
         semesters: semRes.data.data,
         categories: catRes.data.data,
+        contestTypes: contestTypesRes.data.data,
       });
 
       if (user?.role === 'admin' || user?.role === 'sub-admin') {
@@ -242,6 +244,7 @@ const Dashboard = () => {
         ...prev,
         [fieldKey]: newEntity._id
       }));
+      return newEntity;
     } catch (error) {
       console.error(`Erreur lors de la création de l'option ${fieldKey}:`, error);
     }
@@ -883,6 +886,7 @@ const Dashboard = () => {
                         { key: 'level', dbKey: 'levels', label: 'Niveau', icon: GraduationCap, options: filtersData.levels },
                         { key: 'semester', dbKey: 'semesters', label: 'Session', icon: Calendar, options: filtersData.semesters },
                         { key: 'category', dbKey: 'categories', label: 'Catégorie', icon: Layers, options: filtersData.categories },
+                        { key: 'contestType', dbKey: 'contest-types', label: 'Type de concours', icon: FileText, options: filtersData.contestTypes },
                       ].map(field => (
                         <div key={field.key} className={field.key === 'category' ? 'sm:col-span-2' : ''}>
                           <CreatableSelect

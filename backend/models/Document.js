@@ -83,6 +83,11 @@ const DocumentSchema = new mongoose.Schema(
       ref: 'Category',
       default: metadataDefault,
     },
+    contestType: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ContestType',
+      default: metadataDefault,
+    },
     uploadedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -163,7 +168,7 @@ DocumentSchema.virtual('correction', {
 DocumentSchema.index({ status: 1, createdAt: -1 });
 DocumentSchema.index({ uploadedBy: 1, createdAt: -1 });
 DocumentSchema.index({ isDeleted: 1, deletedAt: 1 });
-DocumentSchema.index({ university: 1, department: 1, level: 1, semester: 1, category: 1 });
+DocumentSchema.index({ university: 1, department: 1, level: 1, semester: 1, category: 1, contestType: 1 });
 DocumentSchema.index({ storageKey: 1 }, { unique: true, sparse: true });
 
 module.exports = mongoose.model('Document', DocumentSchema);

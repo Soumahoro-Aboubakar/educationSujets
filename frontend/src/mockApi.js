@@ -35,6 +35,12 @@ const INITIAL_CATEGORIES = [
   { _id: 'cat4', name: 'Corrigés' }
 ];
 
+const INITIAL_CONTEST_TYPES = [
+  { _id: 'ct_infas', name: 'INFAS' },
+  { _id: 'ct_ens', name: 'ENS' },
+  { _id: 'ct_ensoa', name: 'ENSOA' },
+];
+
 const INITIAL_USERS = [
   {
     _id: 'user_admin',
@@ -156,6 +162,7 @@ const dbDepartments = loadDB('mock_departments', INITIAL_DEPARTMENTS);
 const dbLevels = loadDB('mock_levels', INITIAL_LEVELS);
 const dbSemesters = loadDB('mock_semesters', INITIAL_SEMESTERS);
 const dbCategories = loadDB('mock_categories', INITIAL_CATEGORIES);
+const dbContestTypes = loadDB('mock_contest_types', INITIAL_CONTEST_TYPES);
 
 // Helper function to extract user from Authorization header
 const getUserFromHeaders = (headers) => {
@@ -181,6 +188,7 @@ const populateDocument = (doc) => {
   const level = dbLevels.find(l => l._id === doc.level) || { _id: doc.level, name: 'Niveau inconnu' };
   const semester = dbSemesters.find(s => s._id === doc.semester) || { _id: doc.semester, name: 'Session inconnue' };
   const category = dbCategories.find(c => c._id === doc.category) || { _id: doc.category, name: 'Catégorie inconnue' };
+  const contestType = dbContestTypes.find(c => c._id === doc.contestType) || (doc.contestType ? { _id: doc.contestType, name: 'Type inconnu' } : null);
   const uploadedByUser = dbUsers.find(u => u._id === doc.uploadedBy) || { _id: doc.uploadedBy, name: 'Utilisateur anonyme' };
   
   return {
@@ -190,6 +198,7 @@ const populateDocument = (doc) => {
     level,
     semester,
     category,
+    contestType,
     uploadedBy: {
       _id: uploadedByUser._id,
       name: uploadedByUser.name,
@@ -364,6 +373,10 @@ const mockAdapter = (config) => {
         resolve({ status: 200, data: { data: dbCategories }, headers: {}, config });
         return;
       }
+      if (url === '/api/contest-types' && method === 'get') {
+        resolve({ status: 200, data: { data: dbContestTypes }, headers: {}, config });
+        return;
+      }
 
       // POST static entities
       const handleStaticPost = (entityList, dbKey) => {
@@ -408,6 +421,10 @@ const mockAdapter = (config) => {
         handleStaticPost(dbCategories, 'categories');
         return;
       }
+      if (url === '/api/contest-types' && method === 'post') {
+        handleStaticPost(dbContestTypes, 'contest_types');
+        return;
+      }
 
       // GET /api/documents/duplicates/title
       if (url === '/api/documents/duplicates/title' && method === 'get') {
@@ -450,6 +467,7 @@ const mockAdapter = (config) => {
           if (params.level) filtered = filtered.filter(d => d.level === params.level);
           if (params.semester) filtered = filtered.filter(d => d.semester === params.semester);
           if (params.category) filtered = filtered.filter(d => d.category === params.category);
+          if (params.contestType) filtered = filtered.filter(d => d.contestType === params.contestType);
         }
 
         const populated = filtered.map(populateDocument);
@@ -542,6 +560,7 @@ const mockAdapter = (config) => {
           level = data.get('level') || '';
           semester = data.get('semester') || '';
           category = data.get('category') || '';
+          const contestTypeField = data.get('contestType') || '';
           const fileObj = data.get('file');
           if (fileObj && typeof fileObj === 'object') {
             fileName = fileObj.name;
@@ -561,7 +580,7 @@ const mockAdapter = (config) => {
         const extension = fileName.split('.').pop().toUpperCase();
         const fileType = ['PDF', 'DOC', 'DOCX', 'XLS', 'XLSX', 'PPT', 'PPTX', 'PNG', 'JPG', 'JPEG'].includes(extension) ? extension : 'PDF';
 
-        const newDoc = {
+          const newDoc = {
           _id: `doc_${Date.now()}`,
           title,
           description,
@@ -570,6 +589,7 @@ const mockAdapter = (config) => {
           level,
           semester,
           category,
+          contestType: contestTypeField,
           file: fileName,
           fileType,
           views: 0,
