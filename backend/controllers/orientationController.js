@@ -1,5 +1,4 @@
 const Document = require('../models/Document');
-const TrainingQuestion = require('../models/TrainingQuestion');
 const asyncHandler = require('../utils/asyncHandler');
 const { sendSuccess } = require('../utils/api');
 
@@ -40,28 +39,8 @@ exports.getOrientationOptions = asyncHandler(async (_req, res) => {
   const [universities, subjectContests, trainingContests] = await Promise.all([
     getDocumentOptions('university', 'universities'),
     getDocumentOptions('category', 'categories'),
-    TrainingQuestion.aggregate([
-      { $match: { active: true, category: { $ne: null } } },
-      { $group: { _id: '$category', questionCount: { $sum: 1 } } },
-      {
-        $lookup: {
-          from: 'categories',
-          localField: '_id',
-          foreignField: '_id',
-          as: 'entity',
-        },
-      },
-      { $unwind: '$entity' },
-      {
-        $project: {
-          _id: '$entity._id',
-          name: '$entity.name',
-          abbreviation: { $literal: '' },
-          questionCount: 1,
-        },
-      },
-      { $sort: { name: 1 } },
-    ]),
+    // Contest types backed by actual documents
+    getDocumentOptions('contestType', 'contesttypes'),
   ]);
 
   sendSuccess(res, { data: { universities, subjectContests, trainingContests } });
