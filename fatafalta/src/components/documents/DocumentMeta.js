@@ -10,6 +10,10 @@ import Text from '../ui/Text';
 const DocumentMeta = ({ document, style }) => {
   const metaItems = [
     {
+      value: document.institution?.abbreviation || document.institution?.name,
+      icon: Building2,
+    },
+    {
       value: document.university?.abbreviation || document.university?.name,
       icon: Building2,
     },
@@ -25,6 +29,10 @@ const DocumentMeta = ({ document, style }) => {
       value: document.department?.name,
       icon: Layers,
     },
+    ...(document.taxonomyNodes || []).map((node) => ({
+      value: node?.name,
+      icon: Layers,
+    })),
   ].filter((item) => item.value);
 
   if (metaItems.length === 0) return null;

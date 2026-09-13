@@ -3,14 +3,14 @@ import { View, StyleSheet, StatusBar, TouchableOpacity, Dimensions } from 'react
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Library, ArrowRight, Menu } from 'lucide-react-native';
+import { Library, ArrowRight, Menu, LogIn } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import SearchInput from '../components/ui/SearchInput';
 import DocumentList from '../components/documents/DocumentList';
 import FilterBar from '../components/filters/FilterBar';
 import FilterBottomSheet from '../components/filters/FilterBottomSheet';
 import AuthContext from '../context/AuthContext';
-import { useDocuments } from '../hooks/useDocuments';
+import { useInfiniteDocuments } from '../hooks/useDocuments';
 import { useFilterOptions } from '../hooks/useFilterOptions';
 import useDownloadStore from '../store/useDownloadStore';
 import { usePreferences } from '../context/PreferencesContext';
@@ -40,7 +40,17 @@ const HomeScreen = () => {
   const downloadCount = Object.keys(downloads || {}).length;
 
   const { data: filterOptions = {} } = useFilterOptions();
-  const { data: documentsData, isLoading, refetch, isRefetching } = useDocuments(filters);
+  const {
+    data: documentsPages,
+    isLoading,
+    refetch,
+    isRefetching,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteDocuments(filters);
+  const documents = documentsPages?.pages.flatMap((page) => page.data || []) || [];
+  const pagination = documentsPages?.pages[0]?.pagination || null;
 
   const scrollY = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler((event) => {
@@ -195,10 +205,10 @@ const handleApplyFilters = (newFilters) => {
 
       <View style={styles.resultsHeader}>
         <Text variant="h3">Récemment ajoutés</Text>
-        {!isLoading && documentsData?.pagination && (
+        {!isLoading && pagination && (
           <View style={styles.countPill}>
             <Text variant="caption" color={theme.colors.textMuted}>
-              {documentsData.pagination.total} documents
+              {pagination.total} documents
             </Text>
           </View>
         )}
@@ -232,6 +242,20 @@ const handleApplyFilters = (newFilters) => {
               <Menu size={24} color={theme.colors.textInverse} />
             </TouchableOpacity>
           )}
+          {!isAuthenticated && (
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => navigation.navigate('Login')}
+              activeOpacity={0.82}
+              accessibilityRole="button"
+              accessibilityLabel="Se connecter"
+            >
+              <LogIn size={17} color={theme.colors.primary900} />
+              <Text variant="caption" color={theme.colors.primary900} style={styles.loginButtonText}>
+                Se connecter
+              </Text>
+            </TouchableOpacity>
+          )}
           <Animated.View style={[styles.headerContent, headerContentStyle, isAuthenticated && { paddingTop: 40 }]}>
             <View style={styles.badge}>
               <View style={styles.badgeDot} />
@@ -259,8 +283,11 @@ const handleApplyFilters = (newFilters) => {
       </Animated.View>
 
       <DocumentList
-        documents={documentsData?.data || []}
+        documents={documents}
         isLoading={isLoading}
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage}
+        onLoadMore={fetchNextPage}
         isRefreshing={isRefetching}
         onRefresh={refetch}
         onDocumentPress={handleDocumentPress}
@@ -346,6 +373,27 @@ const styles = StyleSheet.create({
     height: 44,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  loginButton: {
+    position: 'absolute',
+    top: 8,
+    right: 16,
+    zIndex: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    minHeight: 40,
+    paddingHorizontal: 12,
+    borderRadius: theme.radius.full,
+    backgroundColor: theme.colors.surface,
+    shadowColor: '#0B1B4D',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.16,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  loginButtonText: {
+    fontFamily: theme.fontFamily.semiBold,
   },
   headerContent: {
     paddingHorizontal: theme.spacing.lg,

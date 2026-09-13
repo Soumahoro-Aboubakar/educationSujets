@@ -6,6 +6,7 @@ import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
 import AuthContext from '../context/AuthContext';
 import CreatableSelect from './CreatableSelect';
+import DynamicMetadataFields from './DynamicMetadataFields';
 
 const EMPTY_METADATA_FORM = {
   title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: ''
@@ -23,6 +24,14 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
   const [pdfGenerationProgress, setPdfGenerationProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [dynamicMetadata, setDynamicMetadata] = useState({
+    organisme: null,
+    path: [],
+    matiere: null,
+    hasParcoursType: null,
+    parcoursType: null,
+    isNewOrganisme: false,
+  });
   
   const [editingMetadata, setEditingMetadata] = useState(null);
   const [metadataForm, setMetadataForm] = useState(EMPTY_METADATA_FORM);
@@ -123,12 +132,17 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
       formData.append('file', file);
       formData.append('documentType', 'sujet');
       formData.append('metadataStatus', 'false'); // 'false' triggers draft status in backend
+      formData.append('hasParcoursType', String(dynamicMetadata.hasParcoursType));
+      if (dynamicMetadata.path?.at(-1)?._id) formData.append('noeudId', dynamicMetadata.path.at(-1)._id);
+      if (dynamicMetadata.matiere?._id) formData.append('matiereId', dynamicMetadata.matiere._id);
+      if (dynamicMetadata.parcoursType?._id) formData.append('parcoursTypeId', dynamicMetadata.parcoursType._id);
       
       await axios.post('/api/documents', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       
       setFile(null);
+      setDynamicMetadata({ organisme: null, path: [], matiere: null, hasParcoursType: null, parcoursType: null, isNewOrganisme: false });
       if (resetWatermark) resetWatermark();
       fetchDrafts();
     } catch (error) {
@@ -348,9 +362,14 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
           </div>
         )}
 
+        <DynamicMetadataFields
+          value={dynamicMetadata}
+          onChange={setDynamicMetadata}
+        />
+
         <button
           onClick={handleSaveDraft}
-          disabled={!file || uploading || watermarking}
+          disabled={!file || uploading || watermarking || (dynamicMetadata.organisme && dynamicMetadata.hasParcoursType === null)}
           className="w-full py-4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-indigo-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:pointer-events-none"
         >
           {uploading ? (

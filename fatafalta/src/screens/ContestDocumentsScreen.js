@@ -5,42 +5,55 @@ import { ArrowLeft, Search } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import api from '../services/api';
 import DocumentList from '../components/documents/DocumentList';
+import EmptyState from '../components/ui/EmptyState';
 import theme from '../theme/tokens';
- 
+
 const ContestDocumentsScreen = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
-  const { contest, contestType } = route.params || {};
+  const { contest, contestType, catalogNode, institution, organisme, parcoursType, noeud, matiere } = route.params || {};
   const [query, setQuery] = useState('');
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [error, setError] = useState('');
+  const isDynamicCatalog = Boolean(noeud?._id && matiere?._id);
 
-  const loadDocuments = async () => {
+  const loadDocuments = async (requestedPage = 1, append = false) => {
     try {
       setLoading(true);
-      const params = { limit: 1000 };
-      if (contestType && contestType._id) params.contestType = String(contestType._id);
+      setError('');
+      const params = { limit: 12, page: requestedPage };
+      if (isDynamicCatalog) {
+        params.noeudId = String(noeud._id);
+        params.matiereId = String(matiere._id);
+        if (parcoursType?._id) params.parcoursTypeId = String(parcoursType._id);
+        params.type = 'sujet';
+        if (query.trim()) params.recherche = query.trim();
+      } else {
+        if (contestType?._id) params.contestType = String(contestType._id);
+        if (catalogNode?._id) params.node = String(catalogNode._id);
+        if (institution?._id) params.institution = String(institution._id);
+        if (query.trim()) params.search = query.trim();
+      }
       const res = await api.get('/api/documents', { params });
-      setDocuments(res.data.data || []);
+      const next = res.data.data || [];
+      setDocuments((current) => append ? [...current, ...next] : next);
+      setPage(requestedPage);
+      setHasNextPage(Boolean(res.data.pagination?.pages > requestedPage));
     } catch (e) {
       console.warn('Failed loading contest documents', e.response?.status, e.response?.data || e.message);
+      setError('Impossible de charger les sujets. Vérifiez votre connexion puis réessayez.');
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    loadDocuments();
-  }, [contestType?._id]);
+  useEffect(() => { loadDocuments(1, false); }, [contestType?._id, catalogNode?._id, institution?._id, noeud?._id, matiere?._id, parcoursType?._id, isDynamicCatalog, query]);
 
   const visible = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return documents;
-    return documents.filter((d) => {
-      return [d.title, d.originalFileName, d.description]
-        .filter(Boolean)
-        .some((v) => v.toLowerCase().includes(q));
-    });
-  }, [documents, query]);
+    return documents;
+  }, [documents]);
 
   return (
     <View style={[styles.container, { paddingTop: insets.top + 12 }]}>
@@ -49,8 +62,8 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
           <ArrowLeft size={20} color={theme.colors.textPrimary} />
         </Pressable>
         <View style={styles.titleWrap}>
-          <Text variant="overline" color={theme.colors.primary}>Sujets de concours</Text>
-          <Text variant="h1">{contestType?.name || 'Documents'}</Text>
+          <Text variant="overline" color={theme.colors.primary}>{organisme?.nom || organisme?.name || 'Sujets de concours'}</Text>
+          <Text variant="h1">{matiere?.nom || matiere?.name || catalogNode?.name || contestType?.name || 'Documents'}</Text>
         </View>
       </View>
 
@@ -61,15 +74,23 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
 
       {loading ? (
         <View style={styles.center}><ActivityIndicator color={theme.colors.primary} /></View>
+      ) : error ? (
+        <EmptyState
+          title="Sujets indisponibles"
+          description={error}
+          action={{ label: 'Réessayer', onPress: () => loadDocuments(1, false) }}
+        />
       ) : (
         <DocumentList
           documents={visible}
           isLoading={false}
-          onRefresh={loadDocuments}
+          onRefresh={() => loadDocuments(1, false)}
           isRefreshing={loading}
+          hasNextPage={hasNextPage}
+          onLoadMore={() => loadDocuments(page + 1, true)}
           onDocumentPress={(doc) => navigation.navigate('DocumentDetail', { documentId: doc._id, document: doc })}
           emptyStateTitle="Aucun document"
-          emptyStateDescription="Aucun sujet trouvé pour ce type de concours."
+          emptyStateDescription={isDynamicCatalog ? 'Aucun sujet publié pour cette matière.' : 'Aucun sujet trouvé pour ce type de concours.'}
         />
       )}
     </View>

@@ -9,6 +9,7 @@ import api from '../services/api';
 export const useMetadataOptions = () => {
   const [options, setOptions] = useState({
     universities: [],
+    institutions: [],
     departments: [],
     levels: [],
     semesters: [],
@@ -25,8 +26,9 @@ export const useMetadataOptions = () => {
   const fetchAllMetadata = async () => {
     setLoading(true);
     try {
-      const [uniRes, deptRes, levelRes, semRes, catRes] = await Promise.all([
+      const [uniRes, institutionRes, deptRes, levelRes, semRes, catRes] = await Promise.all([
         api.get('/api/universities'),
+        api.get('/api/institutions'),
         api.get('/api/departments'),
         api.get('/api/levels'),
         api.get('/api/semesters'),
@@ -35,6 +37,7 @@ export const useMetadataOptions = () => {
 
       setOptions({
         universities: uniRes.data.data || [],
+        institutions: institutionRes.data.data || [],
         departments: deptRes.data.data || [],
         levels: levelRes.data.data || [],
         semesters: semRes.data.data || [],

@@ -6,10 +6,8 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
+const legacyRouteMetrics = require('./middleware/legacyRouteMetrics');
 
-connectDB();
-
-console.log(process.env.FRONTEND_URL);
 const app = express();
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -37,7 +35,16 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/documents', require('./routes/documents'));
+app.use('/api/search', require('./routes/search'));
 app.use('/api/universities', require('./routes/universities'));
+app.use('/api/institutions', legacyRouteMetrics('institutions'), require('./routes/institutions'));
+app.use('/api/nodes', legacyRouteMetrics('nodes'), require('./routes/nodes'));
+app.use('/api/organismes', require('./routes/organismes'));
+app.use('/api', require('./routes/parcoursTypes'));
+app.use('/api/structures', require('./routes/structures'));
+app.use('/api/noeuds', require('./routes/noeuds'));
+app.use('/api/matieres', require('./routes/matieres'));
+app.use('/api/catalog', require('./routes/catalog'));
 app.use('/api/departments', require('./routes/departments'));
 app.use('/api/levels', require('./routes/levels'));
 app.use('/api/semesters', require('./routes/semesters'));
@@ -51,40 +58,43 @@ app.use('/uploads', require('./routes/uploads'));
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
-
-// Start trash purge cron to permanently remove files in trash after retention
-try {
-  const startTrashPurgeCron = require('./scripts/trashCron');
-  startTrashPurgeCron();
-} catch (err) {
-  console.warn('[TRASH_CRON] Could not start trash purge cron:', err.message);
-}
-
 const SELF_URL = process.env.SELF_URL; 
 const PING_INTERVAL = 2 * 60 * 1000; 
 
-if (SELF_URL) {
-  setInterval(async () => {
-    try {
-      const res = await fetch(`${SELF_URL}/api/health`);
-      console.log(`[self-ping] Status: ${res.status} - ${new Date().toISOString()}`);
-    } catch (err) {
-      console.error(`[self-ping] Échec: ${err.message}`);
-    }
-  }, PING_INTERVAL);
+const startServer = async () => {
+  await connectDB();
 
-  console.log(`[self-ping] Activé — ping toutes les 2 minutes vers ${SELF_URL}/api/health`);
-} else {
-  console.warn('[self-ping] SELF_URL non défini — auto-ping désactivé.');
-}
+  const PORT = process.env.PORT || 5000;
+  const server = app.listen(PORT, () => {
+    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+  });
 
+  try {
+    const startTrashPurgeCron = require('./scripts/trashCron');
+    startTrashPurgeCron();
+  } catch (err) {
+    console.warn('[TRASH_CRON] Could not start trash purge cron:', err.message);
+  }
 
+  if (SELF_URL) {
+    setInterval(async () => {
+      try {
+        const res = await fetch(`${SELF_URL}/api/health`);
+        console.log(`[self-ping] Status: ${res.status} - ${new Date().toISOString()}`);
+      } catch (err) {
+        console.error(`[self-ping] Echec: ${err.message}`);
+      }
+    }, PING_INTERVAL);
 
-process.on('unhandledRejection', (err) => {
-  console.error(`Unhandled rejection: ${err.message}`);
-  server.close(() => process.exit(1));
+    console.log(`[self-ping] Active - ping toutes les 2 minutes vers ${SELF_URL}/api/health`);
+  } else {
+    console.warn('[self-ping] SELF_URL non defini - auto-ping desactive.');
+  }
+
+  return server;
+};
+
+startServer().catch((error) => {
+  console.error(`[STARTUP] ${error.message}`);
+  process.exitCode = 1;
 });

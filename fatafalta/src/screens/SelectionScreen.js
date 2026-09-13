@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -21,9 +21,8 @@ import {
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import { useOrientationOptions } from '../hooks/useOrientationOptions';
-import api from '../services/api';
+import { fetchParcoursTypes, fetchPublishedOrganismes } from '../services/catalog';
 import { usePreferences } from '../context/PreferencesContext';
-import { useIsFocused } from '@react-navigation/native';
 import cache from '../services/cache';
 import theme from '../theme/tokens';
 
@@ -38,12 +37,12 @@ const SCREEN_CONFIG = {
     icon: Building2,
   },
   contest: {
-    title: "Choisir le concours",
+    title: "Choisir un organisme",
     eyebrow: 'Sujets de concours',
     subtitle: '',
     placeholder: 'Rechercher',
-    empty: 'Aucun concours avec des sujets disponibles.',
-    optionKey: 'subjectContests',
+    empty: 'Aucun organisme avec des sujets publiés n’est disponible.',
+    optionKey: null,
     icon: FileText,
   },
   training: {
@@ -59,7 +58,7 @@ const SCREEN_CONFIG = {
 
 const compactOption = (option) => ({
   _id: option._id,
-  name: option.name,
+  name: option.name || option.nom,
   abbreviation: option.abbreviation || '',
 });
 
@@ -74,11 +73,29 @@ const SelectionScreen = ({ navigation, route }) => {
   const { updatePreferences } = usePreferences();
   const [query, setQuery] = useState('');
   const [isSaving, setIsSaving] = useState(false);
-  const isFocused = useIsFocused();
   const [localOptions, setLocalOptions] = useState(null);
+  const [catalogOptions, setCatalogOptions] = useState([]);
+  const [catalogLoading, setCatalogLoading] = useState(true);
+  const [catalogError, setCatalogError] = useState(false);
   const mountedRef = useRef(true);
+  const isCatalogMode = mode === 'contest' || mode === 'establishment';
 
-  const options = localOptions ?? (data?.[config.optionKey] ?? []);
+  const loadCatalog = useCallback(async () => {
+    setCatalogLoading(true);
+    setCatalogError(false);
+    try {
+      const result = await fetchPublishedOrganismes({ limit: 100 });
+      if (mountedRef.current) setCatalogOptions(result.data);
+    } catch (error) {
+      if (mountedRef.current) setCatalogError(true);
+    } finally {
+      if (mountedRef.current) setCatalogLoading(false);
+    }
+  }, []);
+
+  const options = isCatalogMode
+    ? catalogOptions
+    : (localOptions ?? (data?.[config.optionKey] ?? []));
   const visibleOptions = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase();
     if (!normalizedQuery) return options;
@@ -94,6 +111,7 @@ const SelectionScreen = ({ navigation, route }) => {
   // Load cached orientation options immediately and trigger a background refresh
   useEffect(() => {
     mountedRef.current = true;
+    if (isCatalogMode) return () => { mountedRef.current = false; };
     const loadAndRefresh = async () => {
       try {
         const raw = await cache.load('orientation-options');
@@ -107,7 +125,7 @@ const SelectionScreen = ({ navigation, route }) => {
 
       // trigger background refresh to get latest data
       try {
-        refetch().catch(() => {});
+        refetch().catch(() => { });
       } catch (e) {
         // ignore
       }
@@ -116,55 +134,43 @@ const SelectionScreen = ({ navigation, route }) => {
     loadAndRefresh();
 
     return () => { mountedRef.current = false; };
-  }, [config.optionKey, refetch]);
+  }, [config.optionKey, isCatalogMode, refetch]);
 
-  // If mode is 'contest', fetch contest types from API and show them instead
   useEffect(() => {
-    let mounted = true;
-    if (mode !== 'contest') return undefined;
+    if (!isCatalogMode) return undefined;
+    loadCatalog();
+    return undefined;
+  }, [isCatalogMode, loadCatalog]);
 
-    const loadContestTypes = async () => {
-      try {
-        const res = await api.get('/api/contest-types');
-        if (!mounted) return;
-        const items = res.data?.data || [];
-      //  console.log('Loaded contest types from API', items);
-        setLocalOptions(items);
-      } catch (e) {
-        // ignore — keep existing localOptions if any
-      }
-    };
-
-    loadContestTypes();
-    return () => { mounted = false; };
-  }, [mode]);
-
- /* // Update displayed options only when screen is focused
-  useEffect(() => {
-    if (!isFocused) return;
-    if (data && data[config.optionKey]) {
-      setLocalOptions(data[config.optionKey]);
-    }
-  }, [isFocused, data, config.optionKey]);
-*/
+  /* // Update displayed options only when screen is focused
+   useEffect(() => {
+     if (!isFocused) return;
+     if (data && data[config.optionKey]) {
+       setLocalOptions(data[config.optionKey]);
+     }
+   }, [isFocused, data, config.optionKey]);
+ */
   const handleSelect = async (option) => {
     if (isSaving) return;
     setIsSaving(true);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => { });
 
     try {
       const selection = compactOption(option);
-      if (mode === 'establishment') {
-        await updatePreferences({
-          establishment: selection,
-          selectedContentType: 'subjects',
-          hasCompletedOrientation: true,
-        });
-        goToLibrary();
-      } else if (mode === 'contest') {
-        // When selecting a contest in this mode, selection is actually a contest type
-        // Navigate directly to the documents list for that contest type
-        navigation.navigate('ContestDocuments', { contest: null, contestType: selection });
+      if (isCatalogMode) {
+        if (mode === 'establishment') {
+          await updatePreferences({
+            establishment: selection,
+            selectedContentType: 'subjects',
+            hasCompletedOrientation: true,
+          });
+        }
+        const parcoursResult = await fetchParcoursTypes(option._id);
+        if (parcoursResult.data.length) {
+          navigation.navigate('ParcoursTypeSelection', { organisme: option, parcoursTypes: parcoursResult.data });
+        } else {
+          navigation.navigate('DynamicCatalog', { organisme: option });
+        }
       } else {
         await updatePreferences({
           contest: selection,
@@ -210,8 +216,8 @@ const SelectionScreen = ({ navigation, route }) => {
       <View style={styles.optionContent}>
         <Text variant="h3" style={styles.optionTitle}>{item.name}</Text>
         <Text variant="caption" color={theme.colors.textSecondary} style={styles.optionMeta}>
-          {item.abbreviation || (mode === 'training' ? 'QCM et exercices disponibles' : 'Sujets disponibles')}
-          {item.documentCount ? ` · ${item.documentCount} sujet${item.documentCount > 1 ? 's' : ''}` : ''}
+          {item.abbreviation || (mode === 'training' ? 'QCM et exercices disponibles' : 'Sujets publiés')}
+          {item.subjectCount ? ` · ${item.subjectCount} sujet${item.subjectCount > 1 ? 's' : ''}` : ''}
           {item.questionCount ? ` · ${item.questionCount} question${item.questionCount > 1 ? 's' : ''}` : ''}
         </Text>
       </View>
@@ -259,18 +265,18 @@ const SelectionScreen = ({ navigation, route }) => {
         />
       </View>
 
-      {isLoading ? (
+      {(isCatalogMode ? catalogLoading : isLoading) ? (
         <View style={styles.centerState}>
           <ActivityIndicator size="small" color={theme.colors.primary} />
           <Text variant="caption" color={theme.colors.textSecondary} style={styles.stateText}>Recherche des contenus disponibles…</Text>
         </View>
-      ) : isError ? (
+      ) : (isCatalogMode ? catalogError : isError) ? (
         <View style={styles.centerState}>
           <Text variant="h3">Impossible de charger la sélection</Text>
           <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.stateText}>
             Vérifie ta connexion, puis réessaie.
           </Text>
-          <Pressable style={styles.retryButton} onPress={refetch}>
+          <Pressable style={styles.retryButton} onPress={isCatalogMode ? loadCatalog : refetch}>
             <Text variant="bodyMedium" color={theme.colors.primary}>Réessayer</Text>
           </Pressable>
         </View>
@@ -302,7 +308,7 @@ const SelectionScreen = ({ navigation, route }) => {
             <ChevronRight size={17} color={theme.colors.textMuted} />
           </Pressable>
         </View>
-      )} 
+      )}
     </View>
   );
 };

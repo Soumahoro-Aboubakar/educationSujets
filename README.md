@@ -18,6 +18,8 @@ Plateforme de partage et de consultation de documents pedagogiques avec frontend
 
 ## Configuration du backend
 
+> Important : les agents et outils d'assistance ne doivent pas lire ni modifier directement le fichier `.env` du projet. Les variables sensibles doivent etre fournies par le developpeur humain, qui les ajoute lui-meme dans le fichier `.env` local. Les agents peuvent seulement proposer le nom de la variable a ajouter, jamais en ecrire la valeur ou l'inscrire directement.
+
 1. Installer les dependances:
 ```bash
 cd backend
@@ -40,6 +42,14 @@ cp .env.example .env
 ```bash
 npm run dev
 ```
+
+## Rglement de securite pour les variables d'environnement
+
+- Ne pas lire le fichier `.env` depuis un agent ou un outil automatiquement.
+- Ne pas demander ni afficher la valeur des secrets dans le terminal, les logs ou le code source.
+- Ne pas ecrire directement les variables sensibles dans `.env`.
+- Les variables a ajouter doivent etre communiquees au proprietaire du projet, qui les enregistre lui-meme localement dans `.env`.
+- Exemple : si une variable manque, l'agent peut dire `Ajouter la variable JWT_SECRET`, mais il ne doit pas la remplir ni la deposer dans le fichier de configuration.
 
 ## Variables d'environnement backend
 

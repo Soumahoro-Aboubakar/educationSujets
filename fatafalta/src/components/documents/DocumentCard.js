@@ -63,7 +63,7 @@ const DocumentCard = ({
           </View>
 
           <Text variant="h3" style={styles.title} numberOfLines={2}>
-            {document.title}
+            {document.title || document.originalFileName || (document.documentType === 'corrige' ? 'Corrigé' : 'Document PDF')}
           </Text>
 
           {document.description ? (

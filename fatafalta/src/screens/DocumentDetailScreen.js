@@ -329,11 +329,20 @@ const DocumentDetailScreen = () => {
           <Text variant="h3" style={styles.sectionTitle}>
             Informations
           </Text>
+          <InfoRow icon={Building2} label="Institution" value={document.institution?.name} />
           <InfoRow icon={Building2} label="Université" value={document.university?.name} />
           <InfoRow icon={Layers} label="Département" value={document.department?.name} />
           <InfoRow icon={GraduationCap} label="Niveau" value={document.level?.name} />
           <InfoRow icon={Calendar} label="Session" value={document.semester?.displayName || document.semester?.name} />
           <InfoRow icon={FolderOpen} label="Catégorie" value={document.category?.name} />
+          {(document.taxonomyNodes || []).map((node) => (
+            <InfoRow
+              key={node._id || `${node.type}-${node.name}`}
+              icon={Layers}
+              label={node.type?.replace(/[-_]/g, ' ') || 'Niveau'}
+              value={node.name}
+            />
+          ))}
           <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} isLast />
         </Card>
 

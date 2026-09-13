@@ -5,6 +5,7 @@ const {
   getDocument,
   createDocument,
   createCorrectionDocument,
+  replaceDocumentFile,
   updateDocument,
   deleteDocument,
   getMyDocuments,
@@ -20,6 +21,7 @@ const {
 } = require('../controllers/documentController');
 const { protect, authorize, optionalAuth, authorizeSuperAdmin } = require('../middleware/auth');
 const upload = require('../middleware/upload');
+const normalizeDocumentPayload = require('../middleware/normalizeDocumentPayload');
 const validate = require('../middleware/validate');
 const {
   uploadDocumentValidator, 
@@ -38,6 +40,7 @@ router.route('/')
     protect,
     authorize('admin'),
     upload.single('file'),
+    normalizeDocumentPayload,
     uploadDocumentValidator,
     validate,
     createDocument
@@ -65,9 +68,18 @@ router.post(
   upload.single('file'),
   createCorrectionDocument
 );
+router.put(
+  '/:id/file',
+  protect,
+  authorize('sub-admin', 'admin'),
+  documentIdParamValidator,
+  validate,
+  upload.single('file'),
+  replaceDocumentFile
+);
 router.route('/:id')
   .get(optionalAuth, documentIdParamValidator, validate, getDocument)
-  .put(protect, authorize('sub-admin', 'admin'), updateDocumentValidator, validate, updateDocument)
+  .put(protect, authorize('sub-admin', 'admin'), normalizeDocumentPayload, updateDocumentValidator, validate, updateDocument)
   .delete(protect, authorize('sub-admin', 'admin'), documentIdParamValidator, validate, deleteDocument);
 router.put('/:id/validate', protect, authorize('sub-admin', 'admin'), validateDocumentStatusValidator, validate, validateDocument);
 

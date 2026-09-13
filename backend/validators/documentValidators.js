@@ -8,18 +8,35 @@ const objectIdField = (field, label) =>
 
 const uploadDocumentValidator = [
   body('title').custom((value, { req }) => {
-    if (req.body.metadataStatus === 'false' || req.body.documentType === 'corrige') return true;
-    if (!value || value.trim().length === 0) throw new Error('Le titre est obligatoire');
+    const isDynamicDocument = Boolean(req.body.type || req.body.noeudId || req.body.matiereId || req.body.sujetParentId);
+    if (req.body.metadataStatus === 'false' || req.body.publicationStatus === 'draft' || req.body.documentType === 'corrige' || req.body.type === 'correction') return true;
+    const title = isDynamicDocument ? (req.body.titre || value) : value;
+    if (!title || title.trim().length === 0) throw new Error('Le titre est obligatoire');
     return true;
   }),
+  body('titre').optional().isString().trim().notEmpty().withMessage('Le titre est invalide'),
   body('documentType')
     .optional()
     .isIn(['sujet', 'corrige'])
     .withMessage('Le type de document doit etre sujet ou corrige'),
+  body('type')
+    .optional()
+    .isIn(['sujet', 'correction'])
+    .withMessage('Le type canonique doit etre sujet ou correction'),
+  body('publicationStatus')
+    .optional()
+    .isIn(['draft', 'approved'])
+    .withMessage('Le statut de publication doit etre draft ou approved'),
   body('correctionFor').custom((value, { req }) => {
     if (req.body.documentType !== 'corrige') return true;
     if (!value) throw new Error('Le document principal est obligatoire pour un corrige');
     if (!/^[0-9a-fA-F]{24}$/.test(String(value))) throw new Error('Document principal invalide');
+    return true;
+  }),
+  body('sujetParentId').custom((value, { req }) => {
+    if (req.body.type !== 'correction') return true;
+    if (!value) throw new Error('Le sujet parent est obligatoire pour une correction');
+    if (!/^[0-9a-fA-F]{24}$/.test(String(value))) throw new Error('Sujet parent invalide');
     return true;
   }),
   body('description').optional().isString().withMessage('La description doit etre une chaine de caracteres'),
@@ -28,6 +45,13 @@ const uploadDocumentValidator = [
   objectIdField('level', 'Niveau'),
   objectIdField('semester', 'Session'),
   objectIdField('category', 'Categorie'),
+  objectIdField('contestType', 'Type de concours'),
+  objectIdField('institution', 'Institution'),
+  objectIdField('noeudId', 'Noeud'),
+  objectIdField('matiereId', 'Matiere'),
+  objectIdField('parcoursTypeId', 'Type de parcours'),
+  body('taxonomyNodes').optional().isArray().withMessage('Les elements de structure doivent etre une liste'),
+  body('taxonomyNodes.*').optional().isMongoId().withMessage('Element de structure invalide'),
 ];
 
 const updateDocumentValidator = [
@@ -39,6 +63,13 @@ const updateDocumentValidator = [
   objectIdField('level', 'Niveau'),
   objectIdField('semester', 'Session'),
   objectIdField('category', 'Categorie'),
+  objectIdField('contestType', 'Type de concours'),
+  objectIdField('institution', 'Institution'),
+  objectIdField('noeudId', 'Noeud'),
+  objectIdField('matiereId', 'Matiere'),
+  objectIdField('parcoursTypeId', 'Type de parcours'),
+  body('taxonomyNodes').optional().isArray().withMessage('Les elements de structure doivent etre une liste'),
+  body('taxonomyNodes.*').optional().isMongoId().withMessage('Element de structure invalide'),
 ];
 
 const validateDocumentStatusValidator = [
@@ -63,9 +94,20 @@ const listDocumentsValidator = [
   query('level').optional().isMongoId().withMessage('Filtre niveau invalide'),
   query('semester').optional().isMongoId().withMessage('Filtre session invalide'),
   query('category').optional().isMongoId().withMessage('Filtre categorie invalide'),
+  query('contestType').optional().isMongoId().withMessage('Filtre concours invalide'),
+  query('institution').optional().isMongoId().withMessage('Filtre institution invalide'),
+  query('noeudId').optional().isMongoId().withMessage('Filtre noeud invalide'),
+  query('matiereId').optional().isMongoId().withMessage('Filtre matiere invalide'),
+  query('parcoursTypeId').optional().isMongoId().withMessage('Filtre parcours invalide'),
+  query('type').optional().isIn(['sujet', 'correction']).withMessage('Type canonique invalide'),
+  query('recherche').optional().isString().isLength({ max: 160 }).withMessage('Recherche invalide'),
+  query('node').optional().isMongoId().withMessage('Filtre structure invalide'),
+  query('taxonomyNode').optional().isMongoId().withMessage('Filtre structure invalide'),
+  query('documentType').optional().isIn(['sujet', 'corrige']).withMessage('Type de document invalide'),
+  query('hasCorrection').optional().isBoolean().withMessage('Filtre correction invalide'),
+  query('search').optional().isString().isLength({ max: 160 }).withMessage('Recherche invalide'),
   query('page').optional().isInt({ min: 1 }).withMessage('Page invalide'),
-  // Allow larger limit for client-side bulk fetch (up to 1000)
-  query('limit').optional().isInt({ min: 1, max: 1000 }).withMessage('Limite invalide'),
+  query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limite invalide'),
 ];
 
 module.exports = {

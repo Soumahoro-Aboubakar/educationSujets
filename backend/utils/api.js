@@ -10,6 +10,7 @@ const sendSuccess = (res, { statusCode = 200, message, data, meta } = {}) => {
   }
 
   if (meta && typeof meta === 'object') {
+    payload.meta = meta;
     Object.assign(payload, meta);
   }
 

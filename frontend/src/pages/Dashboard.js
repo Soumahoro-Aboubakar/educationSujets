@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   Search, SlidersHorizontal, LogOut, FileText, Upload,
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
-  MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User,
+  MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User, Building2,
   AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,6 +16,9 @@ import {
 } from 'chart.js';
 import CreatableSelect from '../components/CreatableSelect';
 import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
+import AdminCatalogPanel from '../components/AdminCatalogPanel';
+import DynamicStructureSelector from '../components/DynamicStructureSelector';
+import DynamicMetadataFields from '../components/DynamicMetadataFields';
 import DraftManagement from '../components/DraftManagement';
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
@@ -23,7 +26,13 @@ import { generatePdfFromImages } from '../utils/pdfGenerator';
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
 const EMPTY_UPLOAD_DATA = {
-  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: '', file: null, documentType: 'sujet', correctionFor: ''
+  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: '', institution: '', taxonomyNodes: [], file: null, documentType: 'sujet', correctionFor: '',
+  dynamicOrganisme: null,
+  dynamicPath: [],
+  dynamicMatiere: null,
+  dynamicHasParcoursType: null,
+  dynamicParcoursType: null,
+  dynamicIsNewOrganisme: false,
 };
 
 const EMPTY_DUPLICATE_CHECK = { status: 'idle', matches: [], error: '' };
@@ -102,6 +111,15 @@ const Dashboard = () => {
   }, [user]);
 
   useEffect(() => {
+    if (!user || activeTab !== 'documents') return undefined;
+    const timeout = setTimeout(() => {
+      setMyDocsPage(1);
+      fetchMyDocuments(1);
+    }, 350);
+    return () => clearTimeout(timeout);
+  }, [user, activeTab, searchQuery, activeFilters]);
+
+  useEffect(() => {
     const title = uploadData.title.trim();
     setDuplicateAcknowledged(false);
 
@@ -155,7 +173,7 @@ const Dashboard = () => {
 
   const fetchMyDocuments = async (page) => {
     try {
-      const res = await axios.get('/api/documents/my', { params: { page, limit: 12 } });
+      const res = await axios.get('/api/documents/my', { params: { page, limit: 12, search: searchQuery, ...activeFilters } });
       setDocuments(res.data.data);
       setMyDocsPagination(res.data.meta?.pagination || null);
     } catch (err) {
@@ -165,7 +183,7 @@ const Dashboard = () => {
 
   const fetchPendingDocuments = async (page) => {
     try {
-      const res = await axios.get('/api/documents/pending', { params: { page, limit: 12 } });
+      const res = await axios.get('/api/documents/pending', { params: { page, limit: 12, search: searchQuery, ...activeFilters } });
       setPendingDocs(res.data.data);
       setPendingDocsPagination(res.data.meta?.pagination || null);
     } catch (err) {
@@ -227,6 +245,7 @@ const Dashboard = () => {
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'validate', label: 'Valider', icon: CheckCircle, badge: pendingDocs.length }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'referentials', label: 'Gestion des référentiels', icon: Layers }] : []),
+   // ...(user?.role === 'admin' ? [{ id: 'catalog', label: 'Institutions et structures', icon: Building2 }] : []),
   ];
 
   // Rest of functions...
@@ -234,10 +253,12 @@ const Dashboard = () => {
     try {
       const res = await axios.post(`/api/${dbKey}`, { name: newName });
       const newEntity = res.data.data;
-      
+      // Ensure we update the proper filtersData key. dbKey is the API path (e.g. 'contest-types'),
+      // convert kebab-case to camelCase to match our state keys (e.g. 'contestTypes').
+      const stateKey = dbKey.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
       setFiltersData(prev => ({
         ...prev,
-        [dbKey]: [...prev[dbKey], newEntity]
+        [stateKey]: [...(Array.isArray(prev[stateKey]) ? prev[stateKey] : []), newEntity]
       }));
       
       setUploadData(prev => ({
@@ -367,6 +388,7 @@ const Dashboard = () => {
       }
 
       const formData = new FormData();
+      formData.append('hasParcoursType', String(uploadData.dynamicHasParcoursType));
       Object.keys(uploadData).forEach(key => {
         if (uploadData[key]) {
           if (key === 'file') {
@@ -377,6 +399,12 @@ const Dashboard = () => {
               .replace(/[\u0300-\u036f]/g, '')
               .replace(/[^a-zA-Z0-9.\-]/g, '_');
             formData.append(key, file, cleanName);
+          } else if (key === 'dynamicOrganisme' || key === 'dynamicPath' || key === 'dynamicMatiere' || key === 'dynamicParcoursType') {
+            if (key === 'dynamicPath' && uploadData.dynamicPath?.at(-1)?._id) formData.append('noeudId', uploadData.dynamicPath.at(-1)._id);
+            if (key === 'dynamicMatiere' && uploadData.dynamicMatiere?._id) formData.append('matiereId', uploadData.dynamicMatiere._id);
+            if (key === 'dynamicParcoursType' && uploadData.dynamicParcoursType?._id) formData.append('parcoursTypeId', uploadData.dynamicParcoursType._id);
+          } else if (key === 'taxonomyNodes') {
+            formData.append(key, JSON.stringify(uploadData[key]));
           } else {
             formData.append(key, uploadData[key]);
           }
@@ -396,7 +424,8 @@ const Dashboard = () => {
 
   const hasBlockingDuplicate = duplicateCheck.matches.length > 0 && !duplicateAcknowledged;
   const uploadButtonDisabled =
-    uploading || duplicateCheck.status === 'checking' || hasBlockingDuplicate || watermarking;
+    uploading || duplicateCheck.status === 'checking' || hasBlockingDuplicate || watermarking
+    || (uploadData.dynamicOrganisme && uploadData.dynamicHasParcoursType === null);
 
   if (loading) {
     return (
@@ -900,6 +929,30 @@ const Dashboard = () => {
                           />
                         </div>
                       ))}
+                      <DynamicStructureSelector
+                        institution={uploadData.institution}
+                        taxonomyNodes={uploadData.taxonomyNodes}
+                        onChange={(value) => setUploadData((previous) => ({ ...previous, ...value }))}
+                      />
+                      <DynamicMetadataFields
+                        value={{
+                          organisme: uploadData.dynamicOrganisme,
+                          path: uploadData.dynamicPath,
+                          matiere: uploadData.dynamicMatiere,
+                          hasParcoursType: uploadData.dynamicHasParcoursType,
+                          parcoursType: uploadData.dynamicParcoursType,
+                          isNewOrganisme: uploadData.dynamicIsNewOrganisme,
+                        }}
+                        onChange={(value) => setUploadData((previous) => ({
+                          ...previous,
+                          dynamicOrganisme: value.organisme !== undefined ? value.organisme : previous.dynamicOrganisme,
+                          dynamicPath: value.path !== undefined ? value.path : previous.dynamicPath,
+                          dynamicMatiere: value.matiere !== undefined ? value.matiere : previous.dynamicMatiere,
+                          dynamicHasParcoursType: value.hasParcoursType !== undefined ? value.hasParcoursType : previous.dynamicHasParcoursType,
+                          dynamicParcoursType: value.parcoursType !== undefined ? value.parcoursType : previous.dynamicParcoursType,
+                          dynamicIsNewOrganisme: value.isNewOrganisme !== undefined ? value.isNewOrganisme : previous.dynamicIsNewOrganisme,
+                        }))}
+                      />
                     </div>
                   </div>
 
@@ -1136,6 +1189,12 @@ const Dashboard = () => {
           {activeTab === 'referentials' && user?.isSuperAdmin && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
               <ReferentialAdminPanel />
+            </motion.div>
+          )}
+
+          {activeTab === 'catalog' && user?.role === 'admin' && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+              <AdminCatalogPanel />
             </motion.div>
           )}
 

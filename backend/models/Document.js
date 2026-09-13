@@ -8,7 +8,7 @@ const DocumentSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: function() { return this.status !== 'draft' && this.documentType !== 'corrige'; },
+      required: function () { return this.status !== 'draft' && this.documentType !== 'corrige'; },
       trim: true,
     },
     description: {
@@ -88,6 +88,31 @@ const DocumentSchema = new mongoose.Schema(
       ref: 'ContestType',
       default: metadataDefault,
     },
+    institution: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Institution',
+      default: null,
+    },
+    // Canonical dynamic catalog references. Legacy fields above remain for compatibility.
+    noeudId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Noeud',
+      default: null,
+    },
+    matiereId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Matiere',
+      default: null,
+    },
+      parcoursTypeId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ParcoursType',
+        default: null,
+      },
+    taxonomyNodes: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'TaxonomyNode',
+    }],
     uploadedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -117,10 +142,39 @@ const DocumentSchema = new mongoose.Schema(
       enum: ['sujet', 'corrige'],
       default: 'sujet',
     },
+    type: {
+      type: String,
+      enum: ['sujet', 'correction'],
+    },
     correctionFor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Document',
       default: null,
+    },
+    sujetParentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Document',
+      default: null,
+      validate: {
+        validator(value) {
+          if (this.type === 'correction') return Boolean(value);
+          if (this.type === 'sujet') return !value;
+          return true;
+        },
+        message: 'Une correction doit avoir un sujet parent et un sujet ne peut pas en avoir',
+      },
+    },
+    titre: {
+      type: String,
+      trim: true,
+    },
+    fichierUrl: {
+      type: String,
+      trim: true,
+    },
+    dateAjout: {
+      type: Date,
+      default: Date.now,
     },
     validatedBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -135,6 +189,11 @@ const DocumentSchema = new mongoose.Schema(
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+    deletionReason: {
+      type: String,
+      enum: ['manual', 'correction-replaced', 'parent-subject-deleted'],
+      default: 'manual',
     },
     deletedAt: {
       type: Date,
@@ -163,12 +222,24 @@ DocumentSchema.virtual('correction', {
   localField: '_id',
   foreignField: 'correctionFor',
   justOne: true,
+  match: { documentType: 'corrige', isDeleted: { $ne: true } },
+});
+
+DocumentSchema.virtual('dynamicCorrection', {
+  ref: 'Document',
+  localField: '_id',
+  foreignField: 'sujetParentId',
+  justOne: true,
+  match: { type: 'correction', isDeleted: { $ne: true } },
 });
 
 DocumentSchema.index({ status: 1, createdAt: -1 });
 DocumentSchema.index({ uploadedBy: 1, createdAt: -1 });
 DocumentSchema.index({ isDeleted: 1, deletedAt: 1 });
 DocumentSchema.index({ university: 1, department: 1, level: 1, semester: 1, category: 1, contestType: 1 });
+DocumentSchema.index({ institution: 1, taxonomyNodes: 1, documentType: 1, status: 1 });
+DocumentSchema.index({ noeudId: 1, matiereId: 1, type: 1, status: 1, isDeleted: 1 });
+DocumentSchema.index({ sujetParentId: 1, type: 1 });
 DocumentSchema.index({ storageKey: 1 }, { unique: true, sparse: true });
 
 module.exports = mongoose.model('Document', DocumentSchema);

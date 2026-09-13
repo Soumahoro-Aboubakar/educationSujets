@@ -1,10 +1,11 @@
 import * as FileSystem from 'expo-file-system/legacy';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { Image } from 'react-native';
-import { PDFDocument, rgb, degrees } from 'pdf-lib';
+import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
 import { decode } from 'base64-arraybuffer';
 
 const FATAFALTA_DIR = FileSystem.documentDirectory + 'fatafalta/';
+const PREFS_FILE = FileSystem.documentDirectory + 'fatafalta_prefs.json';
 // Seuil relevé : les photos de smartphones modernes font couramment 4000px+
 // sur le plus grand côté. Un seuil trop bas forçait un redimensionnement
 // quasi systématique et donc une perte de netteté sur (presque) toutes les images.
@@ -178,7 +179,7 @@ const prepareImage = async (uri) => {
   };
 };
 
-const applyWatermark = (page) => {
+const applyWatermark = (page, font) => {
   const { width, height } = page.getSize();
   const text = 'Fatafalta';
   // Taille proportionnelle à la largeur pour être toujours grand
@@ -196,7 +197,47 @@ const applyWatermark = (page) => {
     color: rgb(0.8, 0.8, 0.8),
     opacity: 0.35,
     rotate: degrees(angle),
+    font,
   });
+};
+
+const applyFooter = (page, font, footerText, size = 9) => {
+  const { width } = page.getSize();
+  const margin = 20;
+  const y = margin;
+
+  // Normalize whitespace
+  const text = (footerText || '').replace(/\s+/g, ' ').trim();
+  if (!text) return;
+
+  // Highlight specific tokens in blue if present
+  const tokens = ['Fatafalta', 'www.fatafalta.com'];
+  const tokenRegex = new RegExp(`(${tokens.map(t => t.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&')).join('|')})`);
+  const parts = text.split(tokenRegex).filter(Boolean);
+
+  // Compute total width to center the text
+  const totalWidth = parts.reduce((acc, part) => acc + font.widthOfTextAtSize(part, size), 0);
+  let offsetX = Math.max((width - totalWidth) / 2, margin);
+
+  // Draw each part with appropriate color
+  for (const part of parts) {
+    const partWidth = font.widthOfTextAtSize(part, size);
+    const isToken = tokens.includes(part);
+    page.drawText(part, { x: offsetX, y, size, font, color: isToken ? rgb(0.0, 0.48, 0.9) : rgb(0.2, 0.2, 0.2) });
+    offsetX += partWidth;
+    if (offsetX > width - margin) break;
+  }
+};
+
+const readPrefs = async () => {
+  try {
+    const info = await FileSystem.getInfoAsync(PREFS_FILE);
+    if (!info.exists) return {};
+    const raw = await FileSystem.readAsStringAsync(PREFS_FILE);
+    return JSON.parse(raw || '{}');
+  } catch (e) {
+    return {};
+  }
 };
 
 // Embarque l'image dans le PDF en respectant son format réel (JPEG ou PNG),
@@ -240,6 +281,21 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
   // Étape 2 : insertion dans le PDF — pdf-lib travaille sur un seul document, donc séquentiel,
   // mais c'est désormais l'étape la moins coûteuse puisque les images sont déjà allégées
   const pdfDoc = await PDFDocument.create();
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  // load preferences
+  let addWatermark = true;
+  let addFooter = false;
+  let footerTextPref = null;
+  let prefs = {};
+  try {
+    prefs = await readPrefs();
+    if (prefs['pdf.addWatermark'] !== undefined) addWatermark = Boolean(prefs['pdf.addWatermark']);
+    if (prefs['pdf.addFooter'] !== undefined) addFooter = Boolean(prefs['pdf.addFooter']);
+    if (prefs['pdf.footerText']) footerTextPref = String(prefs['pdf.footerText']);
+  } catch (e) {
+    // ignore
+  }
   let embedded = 0;
 
   for (const result of results) {
@@ -259,7 +315,8 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
 
     const page = pdfDoc.addPage([pageSize.width, pageSize.height]);
     page.drawImage(image, layout);
-    applyWatermark(page);
+    if (addWatermark) applyWatermark(page, font);
+    if (addFooter) applyFooter(page, font, footerTextPref || 'Fatafalta · Téléchargez plus de documents sur www.fatafalta.com', prefs['pdf.footerSize'] || 9);
 
     embedded += 1;
     if (onProgress) onProgress(70 + Math.round((embedded / imageUris.length) * 25)); // 70-95%
@@ -468,6 +525,21 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
   }
 
   const pages = pdfDoc.getPages();
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  // load preferences
+  let addWatermark = true;
+  let addFooter = false;
+  let footerTextPref = null;
+  let prefs = {};
+  try {
+    prefs = await readPrefs();
+    if (prefs['pdf.addWatermark'] !== undefined) addWatermark = Boolean(prefs['pdf.addWatermark']);
+    if (prefs['pdf.addFooter'] !== undefined) addFooter = Boolean(prefs['pdf.addFooter']);
+    if (prefs['pdf.footerText']) footerTextPref = String(prefs['pdf.footerText']);
+  } catch (e) {
+    // ignore
+  }
 
   // Garde-fou supplémentaire : un très grand nombre de pages multiplie le
   // travail de dessin de texte et la taille du document reconstruit.
@@ -479,7 +551,8 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
   }
 
   for (const page of pages) {
-    applyWatermark(page);
+    if (addWatermark) applyWatermark(page, font);
+    if (addFooter) applyFooter(page, font, footerTextPref || 'Fatafalta · Téléchargez plus de documents sur www.fatafalta.com', prefs['pdf.footerSize'] || 9);
   }
 
   const modifiedPdfBytes = await withTimeout(pdfDoc.saveAsBase64(), 30000, 'Sauvegarde du PDF trop longue');
@@ -541,8 +614,24 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
     );
   }
 
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  // load preferences
+  let addWatermark = true;
+  let addFooter = false;
+  let footerTextPref = null;
+  try {
+    const prefs = await readPrefs();
+    if (prefs['pdf.addWatermark'] !== undefined) addWatermark = Boolean(prefs['pdf.addWatermark']);
+    if (prefs['pdf.addFooter'] !== undefined) addFooter = Boolean(prefs['pdf.addFooter']);
+    if (prefs['pdf.footerText']) footerTextPref = String(prefs['pdf.footerText']);
+  } catch (e) {
+    // ignore
+  }
+
   for (const page of pages) {
-    applyWatermark(page);
+    if (addWatermark) applyWatermark(page, font);
+    if (addFooter) applyFooter(page, font, footerTextPref || 'Fatafalta · Téléchargez plus de documents sur www.fatafalta.com', prefs['pdf.footerSize'] || 9);
   }
 
   const modifiedPdfBytes = await withTimeout(pdfDoc.saveAsBase64(), 30000, 'Sauvegarde du PDF trop longue');

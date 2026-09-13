@@ -2,78 +2,109 @@ import React, { useEffect, useRef } from 'react';
 import {
   Animated,
   Pressable,
+  ScrollView,
   StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 import {
+  Award,
   BookOpenCheck,
   ChevronRight,
   FileDown,
-  GraduationCap,
+  LogIn,
   Sparkles,
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import theme from '../theme/tokens';
 
+// ---------------------------------------------------------------------------
+// Design tokens for this screen — a "concours officiel" identity: deep navy
+// + academic gold, evoking an exam board's seal rather than a generic
+// pastel card list. Kept local so the rest of the app's palette is untouched.
+// ---------------------------------------------------------------------------
+const INK = '#0F1B33';       // deep indigo-navy — hero, headline
+const INK_SOFT = '#33456B';  // muted navy for secondary text on light bg
+const GOLD = '#CC9A3C';      // academic gold — the one accent to spend boldness on
+const GOLD_SOFT = '#F3E4C2';
+const BURGUNDY = '#7A2E3B';  // second tag color, used sparingly for variety
+const PAPER = '#F4F6FB';     // cool paper background, not cream
+const CARD = '#FFFFFF';
+const HAIRLINE = '#E4E8F1';
+
 const OPTIONS = [
   {
-    id: 'student',
-    title: 'Je suis étudiant',
-    description: 'Retrouver mes sujets d’examens, devoirs et documents d’études.',
-    icon: GraduationCap,
-    tone: 'blue',
-    route: 'EstablishmentSelection',
-  },
-  {
     id: 'contest',
-    title: 'Je prépare un concours',
-    description: 'Consulter et télécharger des sujets de concours pour m’entraîner.',
+    tag: 'Archives',
+    title: 'Anciens sujets et corrigés',
+    description: 'Consulte les anciens sujets de concours et leurs corrigés pour mieux te préparer.',
     icon: FileDown,
-    tone: 'indigo',
+    accent: BURGUNDY,
     route: 'ContestSelection',
   },
   {
     id: 'training',
-    title: 'Je veux me former',
-    description: 'M’entraîner avec des questions, exercices et tests sur l’application.',
+    tag: 'Entraînement',
+    title: 'Préparer un concours',
+    description: 'Entraîne-toi avec des questions, exercices et tests chronométrés pour réussir.',
     icon: BookOpenCheck,
-    tone: 'sky',
+    accent: GOLD,
     route: 'TrainingSelection',
   },
 ];
 
 const OrientationCard = ({ option, index, onPress, entrance }) => {
   const Icon = option.icon;
+  const press = useRef(new Animated.Value(0)).current;
+
   const translateY = entrance.interpolate({
     inputRange: [0, 1],
-    outputRange: [18 + index * 8, 0],
+    outputRange: [22 + index * 10, 0],
   });
   const opacity = entrance.interpolate({
-    inputRange: [0, 0.55 + index * 0.1, 1],
+    inputRange: [0, 0.5 + index * 0.12, 1],
     outputRange: [0, 0, 1],
   });
+  const scale = press.interpolate({ inputRange: [0, 1], outputRange: [1, 0.975] });
+
+  const onPressIn = () =>
+    Animated.spring(press, { toValue: 1, useNativeDriver: true, speed: 40, bounciness: 4 }).start();
+  const onPressOut = () =>
+    Animated.spring(press, { toValue: 0, useNativeDriver: true, speed: 30, bounciness: 6 }).start();
 
   return (
-    <Animated.View style={{ opacity, transform: [{ translateY }] }}>
+    <Animated.View style={{ opacity, transform: [{ translateY }, { scale }] }}>
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={option.title}
         onPress={onPress}
-        style={({ pressed }) => [styles.card, styles[`card${option.tone}`], pressed && styles.cardPressed]}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={styles.card}
       >
-        <View style={[styles.iconWrap, styles[`icon${option.tone}`]]}>
-          <Icon size={23} color={theme.colors.primary} strokeWidth={2.1} />
-        </View>
-        <View style={styles.cardChevron}>
-          <ChevronRight size={18} color={theme.colors.primary} strokeWidth={2.4} />
-        </View>
-        <View style={styles.cardCopy}>
+        <View style={[styles.cardAccentBar, { backgroundColor: option.accent }]} />
+
+        <View style={styles.cardBody}>
+          <View style={styles.cardTopRow}>
+            <View style={[styles.iconWrap, { borderColor: `${option.accent}33`, backgroundColor: `${option.accent}14` }]}>
+              <Icon size={22} color={option.accent} strokeWidth={2.1} />
+            </View>
+            <Text style={[styles.cardTag, { color: option.accent }]}>{option.tag.toUpperCase()}</Text>
+          </View>
+
           <Text variant="h3" style={styles.cardTitle}>{option.title}</Text>
-          <Text variant="body" color={theme.colors.textSecondary} style={styles.cardDescription}>
+          <Text variant="body" color={INK_SOFT} style={styles.cardDescription}>
             {option.description}
           </Text>
+
+          <View style={styles.cardFooterRow}>
+            <Text style={[styles.cardCta, { color: option.accent }]}>Découvrir</Text>
+            <View style={[styles.cardChevron, { backgroundColor: `${option.accent}14` }]}>
+              <ChevronRight size={16} color={option.accent} strokeWidth={2.6} />
+            </View>
+          </View>
         </View>
       </Pressable>
     </Animated.View>
@@ -83,33 +114,67 @@ const OrientationCard = ({ option, index, onPress, entrance }) => {
 const OrientationScreen = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const entrance = useRef(new Animated.Value(0)).current;
+  const seal = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.timing(entrance, {
-      toValue: 1,
-      duration: 560,
-      useNativeDriver: true,
-    }).start();
-  }, [entrance]);
+    Animated.sequence([
+      Animated.spring(seal, { toValue: 1, useNativeDriver: true, speed: 10, bounciness: 9 }),
+      Animated.timing(entrance, { toValue: 1, duration: 520, useNativeDriver: true }),
+    ]).start();
+  }, [entrance, seal]);
+
+  const sealRotate = seal.interpolate({ inputRange: [0, 1], outputRange: ['-14deg', '-8deg'] });
+  const sealScale = seal.interpolate({ inputRange: [0, 1], outputRange: [0.6, 1] });
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top + 30, paddingBottom: Math.max(insets.bottom, 18) }]}>
-      <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
-      <View pointerEvents="none" style={styles.backgroundGlowTop} />
-      <View pointerEvents="none" style={styles.backgroundGlowBottom} />
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.scrollContent}
+      showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
+    >
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
-      <View style={styles.hero}>
-        <View style={styles.eyebrow}>
-          <Sparkles size={13} color={theme.colors.primary} strokeWidth={2.4} />
-          <Text variant="overline" color={theme.colors.primaryDark}>Éducation CI</Text>
+      {/* ---------------------------------------------------------------- */}
+      {/* Hero — navy banner with the seal as the one signature element    */}
+      {/* ---------------------------------------------------------------- */}
+      <LinearGradient
+        colors={[INK, '#182746']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={[styles.hero, { paddingTop: insets.top + 22 }]}
+      >
+        <View pointerEvents="none" style={styles.heroGlow} />
+
+        <View style={styles.eyebrowRow}>
+          <View style={styles.eyebrow}>
+            <Sparkles size={12} color={GOLD} strokeWidth={2.4} />
+            <Text variant="overline" style={styles.eyebrowText}>Éducation CI</Text>
+          </View>
+
+          <Animated.View
+            style={[
+              styles.seal,
+              { transform: [{ rotate: sealRotate }, { scale: sealScale }] },
+            ]}
+          >
+            <Award size={20} color={GOLD} strokeWidth={2} />
+          </Animated.View>
         </View>
-        <Text variant="h1" style={styles.heading}>Que veux-tu faire ?</Text>
-        <Text variant="body" color={theme.colors.textSecondary} style={styles.subtitle}>
-          Choisis l’espace qui correspond à ton besoin.
-        </Text>
-      </View>
 
-      <View style={styles.options}>
+        <Text variant="h1" style={styles.heading}>
+          Que veux-tu{'\n'}faire aujourd’hui ?
+        </Text>
+        <Text variant="body" style={styles.subtitle}>
+          Choisis l’espace qui correspond à ton besoin. Tu pourras en changer à tout moment.
+        </Text>
+
+      </LinearGradient>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Cards — overlap the hero slightly for a layered, premium feel    */}
+      {/* ---------------------------------------------------------------- */}
+      <View style={[styles.options, { paddingBottom: Math.max(insets.bottom, 20) }]}>
         {OPTIONS.map((option, index) => (
           <OrientationCard
             key={option.id}
@@ -119,142 +184,193 @@ const OrientationScreen = ({ navigation }) => {
             onPress={() => navigation.navigate(option.route)}
           />
         ))}
-      </View>
 
-      <Text variant="caption" color={theme.colors.textMuted} style={styles.footer} align="center">
-        Tu pourras modifier tes préférences à tout moment.
-      </Text>
-    </View>
+        <Text variant="caption" color={INK_SOFT} style={styles.footer} align="center">
+          Tu pourras modifier tes préférences à tout moment.
+        </Text>
+
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Accéder à mon espace"
+          onPress={() => navigation.navigate('Login')}
+          style={styles.accountLink}
+        >
+          <LogIn size={17} color={INK} strokeWidth={2.2} />
+          <Text variant="bodyMedium" style={styles.accountLinkText}>
+            Accéder à mon espace
+          </Text>
+          <ChevronRight size={16} color={INK} strokeWidth={2.4} />
+        </Pressable>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    backgroundColor: PAPER,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
+
+  // --- Hero ---
+  hero: {
     paddingHorizontal: theme.spacing.lg,
-    backgroundColor: '#F8FAFD',
+    paddingBottom: 56,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
     overflow: 'hidden',
   },
-  backgroundGlowTop: {
-    position: 'absolute',
-    width: 320,
-    height: 320,
-    borderRadius: 160,
-    right: -165,
-    top: -95,
-    backgroundColor: 'rgba(191, 219, 254, 0.36)',
-  },
-  backgroundGlowBottom: {
+  heroGlow: {
     position: 'absolute',
     width: 260,
     height: 260,
     borderRadius: 130,
-    left: -175,
-    bottom: 35,
-    backgroundColor: 'rgba(224, 231, 255, 0.44)',
+    right: -90,
+    top: -70,
+    backgroundColor: 'rgba(204, 154, 60, 0.16)',
   },
-  hero: {
-    zIndex: 1,
+  eyebrowRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing.lg,
   },
   eyebrow: {
-    alignSelf: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
     paddingHorizontal: 10,
     paddingVertical: 6,
-    marginBottom: theme.spacing.lg,
     borderRadius: theme.radius.full,
-    backgroundColor: 'rgba(239, 246, 255, 0.86)',
+    backgroundColor: 'rgba(204, 154, 60, 0.14)',
     borderWidth: 1,
-    borderColor: 'rgba(191, 219, 254, 0.76)',
+    borderColor: 'rgba(204, 154, 60, 0.32)',
+  },
+  eyebrowText: {
+    color: GOLD_SOFT,
+    letterSpacing: 0.6,
+  },
+  seal: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: 'rgba(204, 154, 60, 0.55)',
   },
   heading: {
-    fontSize: 34,
-    lineHeight: 40,
-    letterSpacing: -1.15,
+    fontSize: 32,
+    lineHeight: 38,
+    letterSpacing: -0.8,
+    color: '#FFFFFF',
+    fontWeight: '800',
   },
   subtitle: {
     marginTop: theme.spacing.sm,
-    maxWidth: 285,
+    maxWidth: 300,
+    color: 'rgba(255,255,255,0.66)',
+    lineHeight: 20,
   },
+  accountLink: {
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: theme.spacing.md,
+    marginBottom: theme.spacing.sm,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: theme.radius.full,
+    backgroundColor: GOLD_SOFT,
+    borderWidth: 1,
+    borderColor: `${GOLD}66`,
+  },
+  accountLinkText: {
+    color: INK,
+    fontSize: 14,
+  },
+
+  // --- Cards ---
   options: {
-    flex: 1,
-    justifyContent: 'center',
+    marginTop: -34,
+    paddingHorizontal: theme.spacing.lg,
     gap: theme.spacing.md,
-    minHeight: 455,
-    zIndex: 1,
   },
   card: {
-    minHeight: 141,
-    padding: theme.spacing.lg,
-    borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.96)',
+    flexDirection: 'row',
+    backgroundColor: CARD,
+    borderRadius: 22,
     borderWidth: 1,
-    borderColor: 'rgba(226, 232, 240, 0.82)',
+    borderColor: HAIRLINE,
+    shadowColor: INK,
+    shadowOffset: { width: 0, height: 14 },
+    shadowOpacity: 0.1,
+    shadowRadius: 24,
+    elevation: 0,
     overflow: 'hidden',
-    shadowColor: '#1E3A8A',
-    shadowOffset: { width: 0, height: 9 },
-    shadowOpacity: 0.065,
-    shadowRadius: 22,
-    elevation: -3,
   },
-  cardblue: { borderColor: 'rgba(191, 219, 254, 0.86)' },
-  cardindigo: { borderColor: 'rgba(224, 231, 255, 0.92)' },
-  cardsky: { borderColor: 'rgba(186, 230, 253, 0.86)' },
-  cardPressed: {
-    transform: [{ scale: 0.985 }],
-    opacity: 0.94,
+  cardAccentBar: {
+    width: 5,
+  },
+  cardBody: {
+    flex: 1,
+    padding: theme.spacing.lg,
+  },
+  cardTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   iconWrap: {
-    width: 45,
-    height: 45,
-    borderRadius: 15,
+    width: 42,
+    height: 42,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
   },
-  iconblue: {
-    backgroundColor: '#EFF6FF',
-    borderColor: '#DBEAFE',
-  },
-  iconindigo: {
-    backgroundColor: '#EEF2FF',
-    borderColor: '#E0E7FF',
-  },
-  iconsky: {
-    backgroundColor: '#F0F9FF',
-    borderColor: '#E0F2FE',
-  },
-  cardChevron: {
-    position: 'absolute',
-    top: theme.spacing.lg,
-    right: theme.spacing.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 34,
-    height: 34,
-    borderRadius: 12,
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1,
-    borderColor: '#F1F5F9',
-  },
-  cardCopy: {
-    marginTop: theme.spacing.md,
-    paddingRight: theme.spacing.md,
+  cardTag: {
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.8,
   },
   cardTitle: {
+    marginTop: theme.spacing.md,
     fontSize: 18,
     lineHeight: 23,
+    color: INK,
+    fontWeight: '700',
   },
   cardDescription: {
     marginTop: 4,
     lineHeight: 20,
     fontSize: 13.5,
   },
-  footer: {
-    zIndex: 1,
+  cardFooterRow: {
     marginTop: theme.spacing.md,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  cardCta: {
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  cardChevron: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  footer: {
+    marginTop: theme.spacing.sm,
   },
 });
 

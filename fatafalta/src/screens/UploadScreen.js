@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import {
   View,
   StyleSheet,
@@ -21,6 +21,7 @@ import Text from '../components/ui/Text';
 import Button from '../components/ui/Button';
 import FormInput from '../components/ui/FormInput';
 import MetadataSelect from '../components/ui/MetadataSelect';
+import TaxonomyPathFields from '../components/catalog/TaxonomyPathFields';
 import Card from '../components/ui/Card';
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
@@ -53,6 +54,8 @@ const UploadScreen = ({ navigation, route }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [university, setUniversity] = useState(null);
+  const [institution, setInstitution] = useState(null);
+  const [taxonomyNodes, setTaxonomyNodes] = useState([]);
   const [department, setDepartment] = useState(null);
   const [level, setLevel] = useState(null);
   const [semester, setSemester] = useState(null);
@@ -64,6 +67,10 @@ const UploadScreen = ({ navigation, route }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showOnlyRequiredFields, setShowOnlyRequiredFields] = useState(true);
   const [errors, setErrors] = useState({});
+  const selectedInstitution = useMemo(
+    () => options.institutions.find((item) => item._id === institution) || null,
+    [institution, options.institutions]
+  );
 
   const withTimeout = async (promise, timeoutMs, errorMessage) => {
     let timeoutId;
@@ -159,6 +166,8 @@ const UploadScreen = ({ navigation, route }) => {
     setTitle(draft.title || '');
     setDescription(draft.description || '');
     setUniversity(draft.university || null);
+    setInstitution(draft.institution?._id || draft.institution || null);
+    setTaxonomyNodes((draft.taxonomyNodes || []).map((node) => node?._id || node).filter(Boolean));
     setDepartment(draft.department || null);
     setLevel(draft.level || null);
     setSemester(draft.semester?._id || draft.semester || null);
@@ -349,8 +358,12 @@ const UploadScreen = ({ navigation, route }) => {
         newErrors.title = 'Titre requis';
       }
 
-      if (!category) {
-        newErrors.category = 'Catégorie requise';
+      if (!institution && !category) {
+        newErrors.category = 'Catégorie ou institution requise';
+      }
+
+      if (institution && taxonomyNodes.length !== selectedInstitution?.navigationStructure?.length) {
+        newErrors.taxonomy = 'Sélectionnez tous les niveaux de la structure';
       }
     }
 
@@ -373,10 +386,13 @@ const UploadScreen = ({ navigation, route }) => {
           title: title || undefined,
           description: description || undefined,
           university: university || undefined,
+          institution: institution || undefined,
+          taxonomyNodes,
           department: department || undefined,
           level: level || undefined,
           semester: semester || undefined,
           category: category || undefined,
+          metadataStatus: publish ? 'true' : 'false',
         };
 
         await updateDocumentMetadata(draftId, payload);
@@ -401,11 +417,14 @@ const UploadScreen = ({ navigation, route }) => {
         if (title) formData.append('title', title);
         if (description) formData.append('description', description);
         if (university) formData.append('university', university);
+        if (institution) formData.append('institution', institution);
+        formData.append('taxonomyNodes', JSON.stringify(taxonomyNodes));
         if (department) formData.append('department', department);
         if (level) formData.append('level', level);
         if (semester) formData.append('semester', semester);
         if (category) formData.append('category', category);
 
+        formData.append('documentType', 'sujet');
         formData.append('metadataStatus', publish ? 'true' : 'false');
 
         await uploadDocument(formData);
@@ -435,6 +454,8 @@ const UploadScreen = ({ navigation, route }) => {
     setTitle('');
     setDescription('');
     setUniversity(null);
+    setInstitution(null);
+    setTaxonomyNodes([]);
     setDepartment(null);
     setLevel(null);
     setSemester(null);
@@ -587,6 +608,29 @@ const UploadScreen = ({ navigation, route }) => {
           onChange={setCategory}
           onCreate={(name) => createOption('categories', 'categories', name)}
           error={errors.category}
+        />
+
+        <MetadataSelect
+          label="Institution"
+          placeholder="Sélectionner une institution"
+          options={options.institutions}
+          value={institution}
+          onChange={(value) => {
+            setInstitution(value);
+            setTaxonomyNodes([]);
+            if (errors.taxonomy) setErrors({ ...errors, taxonomy: null });
+          }}
+          onCreate={(name) => createOption('institutions', 'institutions', name)}
+        />
+
+        <TaxonomyPathFields
+          institution={selectedInstitution}
+          value={taxonomyNodes}
+          onChange={(path) => {
+            setTaxonomyNodes(path);
+            if (errors.taxonomy) setErrors({ ...errors, taxonomy: null });
+          }}
+          error={errors.taxonomy}
         />
 
         {!showOnlyRequiredFields && (

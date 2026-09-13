@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['contributor', 'sub-admin', 'admin'],
-    default: 'contributor',
+    default: 'admin',
   },
   isSuperAdmin: {
     type: Boolean,

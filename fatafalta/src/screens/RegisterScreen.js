@@ -42,7 +42,7 @@ const RegisterScreen = ({ navigation }) => {
     
     if (!email.trim()) {
       newErrors.email = 'Email requis';
-    } else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       newErrors.email = 'Email invalide';
     }
     
@@ -67,7 +67,7 @@ const RegisterScreen = ({ navigation }) => {
     setError(null);
 
     try {
-      const result = await register(name, email, password);
+      const result = await register(name.trim(), email.trim(), password);
       
       if (result.success) {
         setName('');

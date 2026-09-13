@@ -3,12 +3,14 @@ const {
   getDocumentByStoredFileName,
   findDuplicateTitleCandidates,
   listPublicDocuments,
+  listDynamicDocuments,
   listUserDocuments,
   listPendingDocuments,
   listDraftDocuments,
   getAnalytics,
   createDocument,
   createCorrectionDocument: createCorrectionDocumentService,
+  replaceDocumentFile,
   updateDocument,
   validateDocument,
   deleteDocument,
@@ -26,7 +28,9 @@ const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
 
 exports.getDocuments = asyncHandler(async (req, res) => {
-  const result = await listPublicDocuments(req.query);
+  const result = req.query.noeudId && req.query.matiereId
+    ? await listDynamicDocuments(req.query, req.user)
+    : await listPublicDocuments(req.query);
   sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
 });
 
@@ -62,6 +66,11 @@ exports.createCorrectionDocument = asyncHandler(async (req, res) => {
     message: 'Corrige associe au document',
     data: correction,
   });
+});
+
+exports.replaceDocumentFile = asyncHandler(async (req, res) => {
+  const document = await replaceDocumentFile(req.params.id, req.file, req.user);
+  sendSuccess(res, { message: 'Fichier remplace', data: document });
 });
 
 exports.updateDocument = asyncHandler(async (req, res) => {

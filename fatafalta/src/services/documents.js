@@ -12,17 +12,16 @@ import api from './api';
 export const fetchDocuments = async (params = {}) => {
   const cleanParams = {};
 
-  Object.entries(params).forEach(([key, value]) => {
+  Object.entries(params || {}).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== '') {
       cleanParams[key] = value;
     }
   });
 
   const response = await api.get('/api/documents', { params: cleanParams });
-  console.log("Voici le log de la response ", response.data);
   return {
     data: response.data.data || [],
-    pagination: response.data.meta?.pagination || null,
+    pagination: response.data.pagination || response.data.meta?.pagination || null,
   };
 };
 
@@ -118,7 +117,7 @@ export const getTrashedDocuments = async (params = {}) => {
   const response = await api.get('/api/documents/trash', { params: cleanParams });
   return {
     data: response.data.data || [],
-    pagination: response.data.meta?.pagination || null,
+    pagination: response.data.pagination || response.data.meta?.pagination || null,
   };
 };
 

@@ -5,6 +5,13 @@
 
 export const FILTER_DEFINITIONS = [
   {
+    key: 'institution',
+    label: 'Institution',
+    placeholder: 'Toutes les institutions',
+    icon: 'building-2',
+    endpoint: '/api/institutions',
+  },
+  {
     key: 'university',
     label: 'Université',
     placeholder: 'Toutes les universités',
@@ -42,7 +49,8 @@ export const FILTER_DEFINITIONS = [
 ];
 
 export const DOCUMENTS_PER_PAGE = 12;
+//'https://educationsujets-xaaz.onrender.com';
 
-export const API_BASE_URL = 'https://educationsujets-xaaz.onrender.com';
+export const API_BASE_URL = 'http://10.84.202.234:5000';
 
 export const DOWNLOAD_DIR = 'fatafalta_downloads';

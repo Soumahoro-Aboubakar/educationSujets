@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { Switch, TextInput, Modal } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
@@ -11,11 +12,13 @@ import {
   ChevronRight,
   Settings,
   User as UserIcon,
-  Crown
+  Crown,
+  Network
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import AuthContext from '../context/AuthContext';
 import theme from '../theme/tokens';
+import * as FileSystem from 'expo-file-system/legacy';
 
 const CustomDrawer = (props) => {
   const { state, navigation } = props;
@@ -65,6 +68,50 @@ const CustomDrawer = (props) => {
   };
 
   const roleInfo = user ? getRoleInfo(user.role) : null;
+
+  // Preferences for PDF generation (persisted locally)
+  const [addWatermarkPref, setAddWatermarkPref] = useState(true);
+  const [addFooterPref, setAddFooterPref] = useState(false);
+  const [footerText, setFooterText] = useState('Fatafalta · Téléchargez plus de documents sur www.fatafalta.com');
+  const [footerSize, setFooterSize] = useState(9);
+  const [editingFooter, setEditingFooter] = useState(false);
+
+  const PREFS_FILE = FileSystem.documentDirectory + 'fatafalta_prefs.json';
+
+  const readPrefs = async () => {
+    try {
+      const info = await FileSystem.getInfoAsync(PREFS_FILE);
+      if (!info.exists) return {};
+      const raw = await FileSystem.readAsStringAsync(PREFS_FILE);
+      return JSON.parse(raw || '{}');
+    } catch (e) {
+      return {};
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const prefs = await readPrefs();
+        if (prefs['pdf.addWatermark'] !== undefined) setAddWatermarkPref(Boolean(prefs['pdf.addWatermark']));
+        if (prefs['pdf.addFooter'] !== undefined) setAddFooterPref(Boolean(prefs['pdf.addFooter']));
+        if (prefs['pdf.footerText']) setFooterText(String(prefs['pdf.footerText']));
+          if (prefs['pdf.footerSize'] !== undefined) setFooterSize(Number(prefs['pdf.footerSize']));
+      } catch (e) {
+        // ignore
+      }
+    })();
+  }, []);
+
+  const savePref = async (key, value) => {
+    try {
+      const prefs = await readPrefs();
+      prefs[key] = value;
+      await FileSystem.writeAsStringAsync(PREFS_FILE, JSON.stringify(prefs));
+    } catch (e) {
+      // ignore
+    }
+  };
 
   const DrawerItem = ({ icon: Icon, label, onPress, active, isDanger }) => (
     <TouchableOpacity
@@ -170,6 +217,33 @@ const CustomDrawer = (props) => {
             label="Paramètres"
             onPress={() => navigation.getParent()?.navigate('Settings')}
           />
+          {/* PDF preferences */}
+          <View style={{ marginTop: 12, paddingHorizontal: 8 }}>
+            <Text variant="overline" color={theme.colors.textMuted} style={styles.sectionTitle}>
+              PDF
+            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 8 }}>
+              <Text variant="body" color={theme.colors.textPrimary}>Ajouter un filigrane</Text>
+              <Switch
+                value={addWatermarkPref}
+                onValueChange={(v) => { setAddWatermarkPref(v); savePref('pdf.addWatermark', v); }}
+              />
+            </View>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 8 }}>
+              <Text variant="body" color={theme.colors.textPrimary}>Ajouter un pied de page</Text>
+              <Switch
+                value={addFooterPref}
+                onValueChange={(v) => { setAddFooterPref(v); savePref('pdf.addFooter', v); }}
+              />
+            </View>
+
+            {isAuthenticated && (user?.role === 'admin' || user?.role === 'sub-admin') && (
+              <TouchableOpacity onPress={() => setEditingFooter(true)} style={{ paddingVertical: 8 }}>
+                <Text variant="bodyMedium" color={theme.colors.primary}>Modifier le texte du pied de page</Text>
+              </TouchableOpacity>
+            )}
+          </View>
           
           {isAuthenticated && (user?.role === 'admin' || user?.role === 'sub-admin') && (
             <>
@@ -182,10 +256,59 @@ const CustomDrawer = (props) => {
                 label="Tableau de bord"
                 onPress={() => navigation.navigate('AdminTab')}
               />
+              <DrawerItem
+                icon={Network}
+                label="Catalogue pédagogique"
+                onPress={() => navigation.getParent()?.navigate('CatalogManagement')}
+              />
             </>
           )}
         </View>
       </DrawerContentScrollView>
+
+      {/* Footer text editor modal (admin only) */}
+      <Modal visible={editingFooter} transparent animationType="slide" onRequestClose={() => setEditingFooter(false)}>
+        <View style={{ flex: 1, justifyContent: 'center', padding: 24, backgroundColor: 'rgba(0,0,0,0.4)' }}>
+          <View style={{ backgroundColor: theme.colors.background, borderRadius: 12, padding: 16 }}>
+            <Text variant="h3">Modifier le pied de page</Text>
+            <Text variant="caption" color={theme.colors.textMuted} style={{ marginTop: 8 }}>Ce texte sera ajouté en bas des PDFs téléchargés.</Text>
+            <TextInput
+              value={footerText}
+              onChangeText={setFooterText}
+              multiline
+              style={{ marginTop: 12, minHeight: 80, padding: 8, backgroundColor: theme.colors.surface, borderRadius: 8, color: theme.colors.textPrimary }}
+            />
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 12, gap: 12 }}>
+              <Text variant="body">Taille du texte :</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <TouchableOpacity
+                  onPress={() => setFooterSize((s) => Math.max(6, s - 1))}
+                  style={{ padding: 8, backgroundColor: theme.colors.surface, borderRadius: 8 }}
+                >
+                  <Text variant="body">-</Text>
+                </TouchableOpacity>
+                <View style={{ minWidth: 36, alignItems: 'center' }}>
+                  <Text variant="bodyMedium">{footerSize}</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => setFooterSize((s) => Math.min(24, s + 1))}
+                  style={{ padding: 8, backgroundColor: theme.colors.surface, borderRadius: 8 }}
+                >
+                  <Text variant="body">+</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12 }}>
+              <TouchableOpacity onPress={() => setEditingFooter(false)} style={{ padding: 8, marginRight: 8 }}>
+                <Text variant="body">Annuler</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={async () => { await savePref('pdf.footerText', footerText); await savePref('pdf.footerSize', footerSize); setEditingFooter(false); }} style={{ padding: 8 }}>
+                <Text variant="body" color={theme.colors.primary}>Enregistrer</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
 
       {/* Footer Area */}
       {isAuthenticated && (

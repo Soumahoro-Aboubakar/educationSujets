@@ -6,7 +6,7 @@ import SearchInput from '../components/ui/SearchInput';
 import DocumentList from '../components/documents/DocumentList';
 import FilterBar from '../components/filters/FilterBar';
 import FilterBottomSheet from '../components/filters/FilterBottomSheet';
-import { useDocuments } from '../hooks/useDocuments';
+import { useInfiniteDocuments } from '../hooks/useDocuments';
 import { useFilterOptions } from '../hooks/useFilterOptions';
 import theme from '../theme/tokens';
 
@@ -31,7 +31,17 @@ const SearchScreen = () => {
   // Only fetch if there's a search term or an active filter to save bandwidth
   const hasActiveQuery = filters.search.length > 2 || activeFilterCount > 0;
 
-  const { data: documentsData, isLoading } = useDocuments(hasActiveQuery ? filters : null);
+  const {
+    data: documentsPages,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+    isRefetching,
+    refetch,
+  } = useInfiniteDocuments(filters, hasActiveQuery);
+  const documents = documentsPages?.pages.flatMap((page) => page.data || []) || [];
+  const pagination = documentsPages?.pages[0]?.pagination || null;
 
   useEffect(() => {
     // Slight delay to not freeze the navigation transition
@@ -71,10 +81,10 @@ const SearchScreen = () => {
         filterOptions={filterOptions}
         onRemoveFilter={handleRemoveFilter}
       />
-      {hasActiveQuery && !isLoading && documentsData?.pagination && (
+      {hasActiveQuery && !isLoading && pagination && (
         <View style={styles.resultsHeader}>
           <Text variant="caption" color={theme.colors.textMuted}>
-            {documentsData.pagination.total} résultats trouvés
+            {pagination.total} résultats trouvés
           </Text>
         </View>
       )}
@@ -105,8 +115,13 @@ const SearchScreen = () => {
           </View>
         ) : (
           <DocumentList
-            documents={documentsData?.data || []}
+            documents={documents}
             isLoading={isLoading && hasActiveQuery}
+            isFetchingNextPage={isFetchingNextPage}
+            hasNextPage={hasNextPage}
+            onLoadMore={fetchNextPage}
+            isRefreshing={isRefetching}
+            onRefresh={refetch}
             onDocumentPress={handleDocumentPress}
             ListHeaderComponent={ListHeader}
             emptyStateTitle="Aucun résultat"
