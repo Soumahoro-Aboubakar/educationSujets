@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { ArrowLeft, ChevronRight, Layers3 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import Button from '../components/ui/Button';
@@ -74,9 +75,12 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
     setPath([]);
   }, [organisme?._id, parcoursType?._id]);
 
-  useEffect(() => {
-    loadItems(1, false);
-  }, [loadItems]);
+  useFocusEffect(
+    useCallback(() => {
+      loadItems(1, false);
+      return undefined;
+    }, [loadItems])
+  );
 
   const selectItem = (item) => {
     if (isMatterStep) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { FileText, Upload, CheckCircle, AlertTriangle, Image as ImageIcon, X, Eye, Clock, User, Trash2, Edit, MapPin, Briefcase, GraduationCap, Calendar, Layers, Save } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -16,7 +16,11 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
   const { user } = useContext(AuthContext);
   const [drafts, setDrafts] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
-  
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const observerTarget = useRef(null);
+
   const [uploadMode, setUploadMode] = useState('pdf'); // 'pdf' or 'images'
   const [file, setFile] = useState(null);
   const [imageFiles, setImageFiles] = useState([]);
@@ -32,28 +36,54 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
     parcoursType: null,
     isNewOrganisme: false,
   });
-  
+
   const [editingMetadata, setEditingMetadata] = useState(null);
   const [metadataForm, setMetadataForm] = useState(EMPTY_METADATA_FORM);
+  const [editingDynamicMetadata, setEditingDynamicMetadata] = useState(null);
   const [savingMetadata, setSavingMetadata] = useState(false);
-  
+
   const { processPdf, isProcessing: watermarking, progress: watermarkProgress, error: watermarkError, resetState: resetWatermark } = usePdfWatermark();
 
-  useEffect(() => {
-    fetchDrafts();
-  }, []);
-
-  const fetchDrafts = async () => {
+  const fetchDrafts = useCallback(async (pageNum = 1, append = false) => {
     try {
-      setIsFetching(true);
-      const res = await axios.get('/api/documents/drafts');
-      setDrafts(res.data.data || []);
+      if (append) setIsFetchingMore(true);
+      else setIsFetching(true);
+
+      const res = await axios.get('/api/documents/drafts', { params: { page: pageNum, limit: 12 } });
+      const newData = res.data?.data || [];
+      const pagination = res.data?.meta?.pagination;
+
+      setDrafts(prev => append ? [...prev, ...newData] : newData);
+      setPage(pageNum);
+      setHasMore(pagination ? pagination.pages > pageNum : false);
     } catch (error) {
       console.error("Erreur lors de la récupération des brouillons:", error);
     } finally {
-      setIsFetching(false);
+      if (append) setIsFetchingMore(false);
+      else setIsFetching(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchDrafts(1, false);
+  }, [fetchDrafts]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && hasMore && !isFetchingMore && !isFetching) {
+          fetchDrafts(page + 1, true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasMore, isFetchingMore, isFetching, page, fetchDrafts]);
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -101,7 +131,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
       const generatedPdfFile = await generatePdfFromImages(imageFiles, (progress) => {
         setPdfGenerationProgress(Math.round(progress));
       });
-      
+
       if (generatedPdfFile) {
         const watermarkedPdf = await processPdf(generatedPdfFile);
         if (watermarkedPdf) {
@@ -124,7 +154,23 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
       setErrorMsg('Veuillez fournir un fichier.');
       return;
     }
-    
+
+    if (dynamicMetadata.organisme) {
+      const leafNode = dynamicMetadata.path?.at(-1);
+      if (!leafNode?._id || !dynamicMetadata.matiere?._id) {
+        setErrorMsg('Veuillez sélectionner le dernier niveau et la matière.');
+        return;
+      }
+      if (dynamicMetadata.hasParcoursType === null) {
+        setErrorMsg('Veuillez indiquer si cet organisme possède un type de parcours.');
+        return;
+      }
+      if (dynamicMetadata.hasParcoursType === true && !dynamicMetadata.parcoursType?._id) {
+        setErrorMsg('Veuillez sélectionner ou créer un type de parcours.');
+        return;
+      }
+    }
+
     setUploading(true);
     setErrorMsg('');
     try {
@@ -132,22 +178,24 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
       formData.append('file', file);
       formData.append('documentType', 'sujet');
       formData.append('metadataStatus', 'false'); // 'false' triggers draft status in backend
-      formData.append('hasParcoursType', String(dynamicMetadata.hasParcoursType));
       if (dynamicMetadata.path?.at(-1)?._id) formData.append('noeudId', dynamicMetadata.path.at(-1)._id);
       if (dynamicMetadata.matiere?._id) formData.append('matiereId', dynamicMetadata.matiere._id);
+      if (dynamicMetadata.hasParcoursType !== null) {
+        formData.append('hasParcoursType', String(dynamicMetadata.hasParcoursType));
+      }
       if (dynamicMetadata.parcoursType?._id) formData.append('parcoursTypeId', dynamicMetadata.parcoursType._id);
-      
+
       await axios.post('/api/documents', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      
+
       setFile(null);
       setDynamicMetadata({ organisme: null, path: [], matiere: null, hasParcoursType: null, parcoursType: null, isNewOrganisme: false });
       if (resetWatermark) resetWatermark();
       fetchDrafts();
     } catch (error) {
       console.error("Erreur d'enregistrement:", error);
-      setErrorMsg("Échec de l'enregistrement du brouillon");
+      setErrorMsg(error.response?.data?.error || "Échec de l'enregistrement du brouillon");
     } finally {
       setUploading(false);
     }
@@ -171,8 +219,30 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
   const handleEditMetadata = (doc) => {
     if (editingMetadata === doc._id) {
       setEditingMetadata(null);
+      setEditingDynamicMetadata(null);
     } else {
       setEditingMetadata(doc._id);
+      const dynamicNode = doc.noeudId?._id ? doc.noeudId : null;
+      const dynamicOrganismeId = dynamicNode?.organismeId?._id || dynamicNode?.organismeId;
+      if (dynamicNode && dynamicOrganismeId) {
+        setEditingDynamicMetadata({
+          organisme: { _id: dynamicOrganismeId, nom: 'Organisme actuel' },
+          path: [dynamicNode],
+          matiere: doc.matiereId?._id ? doc.matiereId : null,
+          hasParcoursType: Boolean(doc.parcoursTypeId?._id || doc.parcoursTypeId),
+          parcoursType: doc.parcoursTypeId?._id ? doc.parcoursTypeId : null,
+          isNewOrganisme: false,
+        });
+      } else {
+        setEditingDynamicMetadata({
+          organisme: null,
+          path: [],
+          matiere: null,
+          hasParcoursType: null,
+          parcoursType: null,
+          isNewOrganisme: false,
+        });
+      }
       setMetadataForm({
         title: doc.title || doc.originalFileName || '',
         description: doc.description || '',
@@ -190,12 +260,26 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
     setSavingMetadata(true);
     try {
       const payload = { ...metadataForm };
+      if (editingDynamicMetadata) {
+        if (editingDynamicMetadata.path?.at(-1)?._id) {
+          payload.noeudId = editingDynamicMetadata.path.at(-1)._id;
+        }
+        if (editingDynamicMetadata.matiere?._id) {
+          payload.matiereId = editingDynamicMetadata.matiere._id;
+        }
+        if (editingDynamicMetadata.hasParcoursType !== null) {
+          payload.hasParcoursType = String(editingDynamicMetadata.hasParcoursType);
+        }
+        if (editingDynamicMetadata.parcoursType?._id) {
+          payload.parcoursTypeId = editingDynamicMetadata.parcoursType._id;
+        }
+      }
       if (publish) {
         payload.metadataStatus = 'true';
       }
-      
+
       await axios.put(`/api/documents/${docId}`, payload);
-      
+
       if (publish) {
         try {
           await axios.put(`/api/documents/${docId}/validate`, { status: 'approved' });
@@ -203,8 +287,9 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
           console.warn("Could not auto-approve published draft:", e);
         }
       }
-      
+
       setEditingMetadata(null);
+      setEditingDynamicMetadata(null);
       fetchDrafts();
     } catch (error) {
       console.error("Erreur d'enregistrement:", error);
@@ -215,7 +300,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
   };
 
   const handlePublishDraft = async (doc) => {
-    if(window.confirm('Voulez-vous vraiment publier ce brouillon ?')) {
+    if (window.confirm('Voulez-vous vraiment publier ce brouillon ?')) {
       try {
         await axios.put(`/api/documents/${doc._id}`, {
           metadataStatus: 'true'
@@ -234,7 +319,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
   };
 
   const handleDelete = async (docId) => {
-    if(window.confirm('Voulez-vous vraiment supprimer ce brouillon ?')) {
+    if (window.confirm('Voulez-vous vraiment supprimer ce brouillon ?')) {
       try {
         await axios.delete(`/api/documents/${docId}`);
         fetchDrafts();
@@ -253,27 +338,25 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
 
       <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-200/40">
         <h3 className="text-lg font-bold text-slate-800 mb-6">Nouveau Brouillon</h3>
-        
+
         <div className="flex bg-slate-100 p-1 rounded-2xl mb-6">
           <button
             type="button"
             onClick={() => setUploadMode('pdf')}
-            className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${
-              uploadMode === 'pdf'
+            className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${uploadMode === 'pdf'
                 ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
                 : 'border-slate-200 text-slate-500 hover:border-indigo-300 hover:bg-slate-50'
-            }`}
+              }`}
           >
             <FileText size={18} className="mr-2" /> Uploader un PDF
           </button>
           <button
             type="button"
             onClick={() => setUploadMode('images')}
-            className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${
-              uploadMode === 'images'
+            className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${uploadMode === 'images'
                 ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
                 : 'border-slate-200 text-slate-500 hover:border-indigo-300 hover:bg-slate-50'
-            }`}
+              }`}
           >
             <ImageIcon size={18} className="mr-2" /> Créer via Images
           </button>
@@ -291,7 +374,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                   <Upload size={28} />
                 )}
               </div>
-              
+
               {watermarking ? (
                 <div className="flex flex-col items-center w-full max-w-[200px]">
                   <span className="text-sm font-bold text-indigo-600 mb-2">Application du filigrane... {watermarkProgress}%</span>
@@ -307,7 +390,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                   {!file && <span className="text-xs font-medium text-slate-400 mt-2">PDF (Filigrané auto) - Max 10MB</span>}
                 </>
               )}
-              
+
               <input type="file" className="hidden" accept=".pdf" onChange={handleFileChange} disabled={watermarking} />
             </label>
             {watermarkError && (
@@ -320,7 +403,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
           <>
             <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${imageFiles.length > 0 ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'}`}>
               <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-4 transition-colors ${imageFiles.length > 0 ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 group-hover:text-indigo-500 group-hover:bg-indigo-50'}`}>
-                 <ImageIcon size={28} />
+                <ImageIcon size={28} />
               </div>
               <span className={`text-sm font-bold text-center px-4 ${imageFiles.length > 0 ? 'text-indigo-700' : 'text-slate-600'}`}>
                 {imageFiles.length > 0 ? `${imageFiles.length} image(s) sélectionnée(s)` : 'Cliquez ou glissez-déposez des images'}
@@ -384,9 +467,9 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
         <h3 className="text-xl font-bold text-slate-800 mb-4">Mes Brouillons</h3>
         {isFetching ? (
           <div className="animate-pulse space-y-4">
-             {[...Array(2)].map((_, i) => (
-                <div key={i} className="h-20 bg-slate-100 rounded-3xl border border-slate-200"></div>
-             ))}
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="h-20 bg-slate-100 rounded-3xl border border-slate-200"></div>
+            ))}
           </div>
         ) : drafts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 bg-white rounded-3xl border border-slate-100">
@@ -405,9 +488,9 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                     <div>
                       <h4 className="text-base font-bold text-slate-800 mb-1">{doc.originalFileName || 'Document sans nom'}</h4>
                       <div className="flex items-center gap-3 text-xs font-medium text-slate-500">
-                        <span className="flex items-center gap-1"><Clock size={12}/> {new Date(doc.createdAt).toLocaleDateString()}</span>
-                        <span className="w-1 h-1 rounded-full bg-slate-300"/>
-                        <span className="flex items-center gap-1"><User size={12}/> {doc.uploadedBy?.name || 'Inconnu'}</span>
+                        <span className="flex items-center gap-1"><Clock size={12} /> {new Date(doc.createdAt).toLocaleDateString()}</span>
+                        <span className="w-1 h-1 rounded-full bg-slate-300" />
+                        <span className="flex items-center gap-1"><User size={12} /> {doc.uploadedBy?.name || 'Inconnu'}</span>
                       </div>
                     </div>
                   </div>
@@ -432,6 +515,12 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                       <Edit size={16} className="text-indigo-600" /> Compléter les métadonnées
                     </h4>
                     <div className="space-y-4">
+                      {editingDynamicMetadata && (
+                        <DynamicMetadataFields
+                          value={editingDynamicMetadata}
+                          onChange={setEditingDynamicMetadata}
+                        />
+                      )}
                       <div>
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1 mb-2 block">Titre</label>
                         <input
@@ -452,7 +541,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                           placeholder="Description"
                         />
                       </div>
-                      
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[
                           { key: 'university', dbKey: 'universities', label: 'Université', icon: MapPin, options: filtersData?.universities || [] },
@@ -478,7 +567,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                         ))}
                       </div>
                       <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-100">
-                        <button onClick={() => setEditingMetadata(null)} className="px-4 py-2 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-100 transition-colors">
+                        <button onClick={() => { setEditingMetadata(null); setEditingDynamicMetadata(null); }} className="px-4 py-2 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-100 transition-colors">
                           Annuler
                         </button>
                         <button onClick={() => handleSaveMetadataForm(doc._id, false)} disabled={savingMetadata} className="px-5 py-2 rounded-xl bg-slate-100 text-slate-700 text-sm font-bold shadow-sm hover:bg-slate-200 transition-colors flex items-center gap-2">
@@ -495,6 +584,20 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                 )}
               </div>
             ))}
+
+            {hasMore && (
+              <div ref={observerTarget} className="flex justify-center py-6">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Chargement...</span>
+                </div>
+              </div>
+            )}
+            {!hasMore && drafts.length > 0 && (
+              <div className="text-center py-6">
+                <span className="text-sm font-medium text-slate-400">Fin de la liste</span>
+              </div>
+            )}
           </div>
         )}
       </div>

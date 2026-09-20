@@ -8,22 +8,37 @@ import api from '../services/api';
 export const useDrafts = () => {
   const [drafts, setDrafts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
 
   // Load drafts on mount
   useEffect(() => {
-    loadDrafts();
+    loadDrafts(1, false);
   }, []);
 
-  const loadDrafts = useCallback(async () => {
+  const loadDrafts = useCallback(async (requestedPage = 1, append = false) => {
     try {
-      setLoading(true);
-      const res = await api.get('/api/documents/drafts');
-
-      setDrafts(res.data?.data || []);
+      if (append) setLoadingMore(true);
+      else setLoading(true);
+      
+      const res = await api.get('/api/documents/drafts', { params: { page: requestedPage, limit: 12 } });
+      const newData = res.data?.data || [];
+      const pagination = res.data?.meta?.pagination;
+      
+      setDrafts(prev => {
+        if (!append) return newData;
+        const existingIds = new Set(prev.map(d => d._id || d.id));
+        const newItems = newData.filter(d => !existingIds.has(d._id || d.id));
+        return [...prev, ...newItems];
+      });
+      setPage(requestedPage);
+      setHasMore(pagination ? pagination.pages > requestedPage : false);
     } catch (err) {
       console.error('Error loading drafts:', err);
     } finally {
-      setLoading(false);
+      if (append) setLoadingMore(false);
+      else setLoading(false);
     }
   }, []);
 
@@ -57,6 +72,9 @@ export const useDrafts = () => {
     getDraftById,
     clearAllDrafts,
     loadDrafts,
+    page,
+    hasMore,
+    loadingMore,
   };
 };
 

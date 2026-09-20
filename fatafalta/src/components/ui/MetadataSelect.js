@@ -43,14 +43,14 @@ const MetadataSelect = ({
     opt.name.toLowerCase() === search.toLowerCase().trim()
   );
 
-  const handleSelectOption = (optionId) => {
-    onChange(optionId);
+  const handleSelectOption = (optionId, option) => {
+    onChange(optionId, option);
     setIsOpen(false);
     setSearch('');
   };
 
   const handleCreateOption = async () => {
-    const trimmedName = newOptionName.trim();
+    const trimmedName = search.trim() || newOptionName.trim();
     
     if (!trimmedName) {
       setCreatingError('Veuillez entrer un nom');
@@ -67,7 +67,7 @@ const MetadataSelect = ({
 
     try {
       const newOption = await onCreate(trimmedName);
-      handleSelectOption(newOption._id);
+      handleSelectOption(newOption._id, newOption);
       setNewOptionName('');
     } catch (err) {
       setCreatingError('Erreur lors de la création');
@@ -196,7 +196,7 @@ const MetadataSelect = ({
             />
 
             {/* Create New Option */}
-            {search.trim() && !exactMatch && (
+            {onCreate && search.trim() && !exactMatch && (
               <View style={styles.createContainer}>
                 {creatingError && (
                   <Text 

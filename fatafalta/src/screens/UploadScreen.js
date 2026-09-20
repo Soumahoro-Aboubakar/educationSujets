@@ -22,6 +22,7 @@ import Button from '../components/ui/Button';
 import FormInput from '../components/ui/FormInput';
 import MetadataSelect from '../components/ui/MetadataSelect';
 import TaxonomyPathFields from '../components/catalog/TaxonomyPathFields';
+import DynamicMetadataFields, { getPathFromLeaf } from '../components/catalog/DynamicMetadataFields';
 import Card from '../components/ui/Card';
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
@@ -53,13 +54,15 @@ const UploadScreen = ({ navigation, route }) => {
   // Metadata state
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [university, setUniversity] = useState(null);
   const [institution, setInstitution] = useState(null);
   const [taxonomyNodes, setTaxonomyNodes] = useState([]);
-  const [department, setDepartment] = useState(null);
-  const [level, setLevel] = useState(null);
-  const [semester, setSemester] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [dynamicMetadata, setDynamicMetadata] = useState({
+    organisme: null,
+    path: [],
+    matiere: null,
+    hasParcoursType: null,
+    parcoursType: null,
+  });
 
   // UI state
   const [step, setStep] = useState('choose'); // 'choose' | 'preview' | 'metadata'
@@ -165,13 +168,19 @@ const UploadScreen = ({ navigation, route }) => {
   const loadDraftData = async (draft) => {
     setTitle(draft.title || '');
     setDescription(draft.description || '');
-    setUniversity(draft.university || null);
     setInstitution(draft.institution?._id || draft.institution || null);
     setTaxonomyNodes((draft.taxonomyNodes || []).map((node) => node?._id || node).filter(Boolean));
-    setDepartment(draft.department || null);
-    setLevel(draft.level || null);
-    setSemester(draft.semester?._id || draft.semester || null);
-    setCategory(draft.category?._id || draft.category || null);
+    const dynamicNode = draft.noeudId?._id ? draft.noeudId : null;
+    const organisme = dynamicNode?.organismeId
+      ? (typeof dynamicNode.organismeId === 'object' ? dynamicNode.organismeId : { _id: dynamicNode.organismeId })
+      : null;
+    setDynamicMetadata({
+      organisme,
+      path: getPathFromLeaf(dynamicNode),
+      matiere: draft.matiereId?._id ? draft.matiereId : null,
+      hasParcoursType: draft.parcoursTypeId ? true : null,
+      parcoursType: draft.parcoursTypeId?._id ? draft.parcoursTypeId : null,
+    });
 
     // Create a mock pdfFile for UI preview
     setPdfFile(draft.pdfFile || {
@@ -358,12 +367,18 @@ const UploadScreen = ({ navigation, route }) => {
         newErrors.title = 'Titre requis';
       }
 
-      if (!institution && !category) {
-        newErrors.category = 'Catégorie ou institution requise';
-      }
-
       if (institution && taxonomyNodes.length !== selectedInstitution?.navigationStructure?.length) {
         newErrors.taxonomy = 'Sélectionnez tous les niveaux de la structure';
+      }
+
+      if (dynamicMetadata.organisme) {
+        if (dynamicMetadata.path.length === 0) newErrors.path = 'Sélectionnez l’année et les niveaux du sujet';
+        if (dynamicMetadata.structureLength && dynamicMetadata.path.length !== dynamicMetadata.structureLength) {
+          newErrors.path = 'Sélectionnez tous les niveaux du sujet';
+        }
+        if (!dynamicMetadata.matiere) newErrors.matiere = 'Sélectionnez une matière';
+        if (dynamicMetadata.hasParcoursType === null) newErrors.parcoursType = 'Indiquez si un type de parcours est utilisé';
+        if (dynamicMetadata.hasParcoursType && !dynamicMetadata.parcoursType) newErrors.parcoursType = 'Sélectionnez un type de parcours';
       }
     }
 
@@ -380,20 +395,26 @@ const UploadScreen = ({ navigation, route }) => {
 
     setUploading(true);
     try {
+      const hasCompleteDynamicMetadata = Boolean(
+        dynamicMetadata.path.at(-1)?._id
+        && dynamicMetadata.matiere?._id
+        && dynamicMetadata.hasParcoursType !== null
+      );
       if (isDraftMode) {
         // Update existing document metadata
         const payload = {
           title: title || undefined,
           description: description || undefined,
-          university: university || undefined,
           institution: institution || undefined,
           taxonomyNodes,
-          department: department || undefined,
-          level: level || undefined,
-          semester: semester || undefined,
-          category: category || undefined,
           metadataStatus: publish ? 'true' : 'false',
         };
+        if (hasCompleteDynamicMetadata) {
+          payload.noeudId = dynamicMetadata.path.at(-1)._id;
+          payload.matiereId = dynamicMetadata.matiere._id;
+          payload.hasParcoursType = String(dynamicMetadata.hasParcoursType);
+          if (dynamicMetadata.parcoursType?._id) payload.parcoursTypeId = dynamicMetadata.parcoursType._id;
+        }
 
         await updateDocumentMetadata(draftId, payload);
 
@@ -416,18 +437,27 @@ const UploadScreen = ({ navigation, route }) => {
 
         if (title) formData.append('title', title);
         if (description) formData.append('description', description);
-        if (university) formData.append('university', university);
         if (institution) formData.append('institution', institution);
         formData.append('taxonomyNodes', JSON.stringify(taxonomyNodes));
-        if (department) formData.append('department', department);
-        if (level) formData.append('level', level);
-        if (semester) formData.append('semester', semester);
-        if (category) formData.append('category', category);
+        if (hasCompleteDynamicMetadata) {
+          formData.append('noeudId', dynamicMetadata.path.at(-1)._id);
+          formData.append('matiereId', dynamicMetadata.matiere._id);
+          formData.append('hasParcoursType', String(dynamicMetadata.hasParcoursType));
+          if (dynamicMetadata.parcoursType?._id) formData.append('parcoursTypeId', dynamicMetadata.parcoursType._id);
+        }
 
         formData.append('documentType', 'sujet');
         formData.append('metadataStatus', publish ? 'true' : 'false');
 
-        await uploadDocument(formData);
+        const uploadResult = await uploadDocument(formData);
+
+        if (publish) {
+          const uploadedDocumentId = uploadResult?.data?._id || uploadResult?.data?.id || uploadResult?._id;
+          if (!uploadedDocumentId) {
+            throw new Error('Le document créé ne possède pas d’identifiant');
+          }
+          await validateDocumentStatus(uploadedDocumentId, 'approved');
+        }
 
         Alert.alert(
           'Succès',
@@ -453,13 +483,9 @@ const UploadScreen = ({ navigation, route }) => {
   const resetForm = () => {
     setTitle('');
     setDescription('');
-    setUniversity(null);
     setInstitution(null);
     setTaxonomyNodes([]);
-    setDepartment(null);
-    setLevel(null);
-    setSemester(null);
-    setCategory(null);
+    setDynamicMetadata({ organisme: null, path: [], matiere: null, hasParcoursType: null, parcoursType: null });
     setPdfFile(null);
     setPdfLocalUri(null);
     setPdfIntentUri(null);
@@ -600,14 +626,12 @@ const UploadScreen = ({ navigation, route }) => {
           style={{ height: 100 }}
         />
 
-        <MetadataSelect
-          label="Catégorie"
-          placeholder="Sélectionner une catégorie"
-          options={options.categories}
-          value={category}
-          onChange={setCategory}
-          onCreate={(name) => createOption('categories', 'categories', name)}
-          error={errors.category}
+        {/* Champs legacy temporairement désactivés : catégorie, université, département, niveau et semestre. */}
+
+        <DynamicMetadataFields
+          value={dynamicMetadata}
+          onChange={setDynamicMetadata}
+          error={errors}
         />
 
         <MetadataSelect
@@ -635,41 +659,7 @@ const UploadScreen = ({ navigation, route }) => {
 
         {!showOnlyRequiredFields && (
           <>
-            <MetadataSelect
-              label="Université"
-              placeholder="Sélectionner une université"
-              options={options.universities}
-              value={university}
-              onChange={setUniversity}
-              onCreate={(name) => createOption('universities', 'universities', name)}
-            />
-
-            <MetadataSelect
-              label="Département"
-              placeholder="Sélectionner un département"
-              options={options.departments}
-              value={department}
-              onChange={setDepartment}
-              onCreate={(name) => createOption('departments', 'departments', name)}
-            />
-
-            <MetadataSelect
-              label="Niveau"
-              placeholder="Sélectionner un niveau"
-              options={options.levels}
-              value={level}
-              onChange={setLevel}
-              onCreate={(name) => createOption('levels', 'levels', name)}
-            />
-
-            <MetadataSelect
-              label="Semestre"
-              placeholder="Sélectionner un semestre"
-              options={options.semesters}
-              value={semester}
-              onChange={setSemester}
-              onCreate={(name) => createOption('semesters', 'semesters', name)}
-            />
+            {/* Champs legacy temporairement désactivés : université, département, niveau et semestre. */}
           </>
         )}
 

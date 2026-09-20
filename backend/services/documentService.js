@@ -26,7 +26,22 @@ const POPULATE_FIELDS = [
   { path: 'contestType', select: 'name abbreviation' },
   { path: 'institution', select: 'name abbreviation navigationStructure' },
   { path: 'taxonomyNodes', select: 'name type parent institution order' },
-  { path: 'noeudId', select: 'nom organismeId parentId ordreNiveau' },
+  {
+    path: 'noeudId',
+    select: 'nom organismeId parentId ordreNiveau',
+    populate: {
+      path: 'parentId',
+      select: 'nom organismeId parentId ordreNiveau',
+      populate: {
+        path: 'parentId',
+        select: 'nom organismeId parentId ordreNiveau',
+        populate: {
+          path: 'parentId',
+          select: 'nom organismeId parentId ordreNiveau',
+        },
+      },
+    },
+  },
   { path: 'matiereId', select: 'nom organismeId' },
   { path: 'parcoursTypeId', select: 'nom organismeId isDefault' },
   { path: 'sujetParentId', select: '_id title titre status type documentType isDeleted' },
@@ -342,7 +357,7 @@ const listDynamicDocuments = async (params = {}, user = null) => {
     if (!parcoursType) throw new AppError('Type de parcours introuvable pour cet organisme', 404);
     filter.parcoursTypeId = parcoursType._id;
   }
-  if (!['admin', 'sub-admin'].includes(user?.role)) filter.status = 'approved';
+  filter.status = 'approved';
 
   const candidates = await Document.find(filter).sort('-dateAjout -createdAt').lean();
   const normalizedSearch = normalizeTitle(params.recherche || params.search || '');
@@ -767,6 +782,41 @@ const updateDocument = async (documentId, payload, user) => {
 
   if (document.documentType === 'corrige') {
     throw new AppError('Les metadonnees ne sont pas modifiables sur un corrige', 400);
+  }
+
+  const hasDynamicMetadata = payload.noeudId !== undefined
+    || payload.matiereId !== undefined
+    || payload.parcoursTypeId !== undefined
+    || payload.hasParcoursType !== undefined;
+
+  if (hasDynamicMetadata) {
+    const noeudId = payload.noeudId || document.noeudId;
+    const matiereId = payload.matiereId || document.matiereId;
+    const context = await getLeafContext({ noeudId, matiereId });
+    const hasParcoursType = payload.hasParcoursType === true || payload.hasParcoursType === 'true';
+    const parcoursTypeId = payload.parcoursTypeId || null;
+
+    if (hasParcoursType && !parcoursTypeId) {
+      throw new AppError('Le type de parcours est obligatoire pour cet organisme', 400);
+    }
+
+    if (parcoursTypeId) {
+      const parcoursType = await ParcoursType.findOne({
+        _id: parcoursTypeId,
+        organismeId: context.node.organismeId,
+      });
+      if (!parcoursType) throw new AppError('Type de parcours introuvable pour cet organisme', 404);
+    }
+
+    document.noeudId = context.node._id;
+    document.matiereId = context.matiere._id;
+    document.parcoursTypeId = parcoursTypeId;
+
+    // Si le document reçoit des métadonnées dynamiques mais n'avait pas de type canonique,
+    // on le définit comme 'sujet' (pour qu'il soit visible par les endpoints publics).
+    if (!document.type) {
+      document.type = 'sujet';
+    }
   }
 
   const nextInstitution = payload.institution !== undefined

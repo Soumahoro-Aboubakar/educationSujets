@@ -19,6 +19,7 @@ import {
   Search,
   Sparkles,
 } from 'lucide-react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import Text from '../components/ui/Text';
 import { useOrientationOptions } from '../hooks/useOrientationOptions';
 import { fetchParcoursTypes, fetchPublishedOrganismes } from '../services/catalog';
@@ -136,11 +137,13 @@ const SelectionScreen = ({ navigation, route }) => {
     return () => { mountedRef.current = false; };
   }, [config.optionKey, isCatalogMode, refetch]);
 
-  useEffect(() => {
-    if (!isCatalogMode) return undefined;
-    loadCatalog();
-    return undefined;
-  }, [isCatalogMode, loadCatalog]);
+  useFocusEffect(
+    useCallback(() => {
+      if (!isCatalogMode) return undefined;
+      loadCatalog();
+      return undefined;
+    }, [isCatalogMode, loadCatalog])
+  );
 
   /* // Update displayed options only when screen is focused
    useEffect(() => {

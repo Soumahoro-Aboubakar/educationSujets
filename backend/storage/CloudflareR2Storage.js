@@ -10,6 +10,10 @@ const StorageProvider = require('./StorageProvider');
 const storageConfig = require('../config/storage');
 const AppError = require('../utils/errors');
 
+const encodeMetadata = (metadata = {}) => Object.fromEntries(
+  Object.entries(metadata).map(([key, value]) => [key, encodeURIComponent(String(value))])
+);
+
 class CloudflareR2Storage extends StorageProvider {
   constructor() {
     super();
@@ -45,7 +49,7 @@ class CloudflareR2Storage extends StorageProvider {
         Key: key,
         Body: buffer,
         ContentType: options.contentType,
-        Metadata: options.metadata,
+        Metadata: options.metadata ? encodeMetadata(options.metadata) : undefined,
         ContentDisposition: options.contentDisposition,
       })
     );

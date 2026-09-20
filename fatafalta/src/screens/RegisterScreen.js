@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -16,7 +16,7 @@ import AuthContext from '../context/AuthContext';
 import theme from '../theme/tokens';
 
 const RegisterScreen = ({ navigation }) => {
-  const { register } = useContext(AuthContext);
+  const { register, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,6 +27,19 @@ const RegisterScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (authLoading || !isAuthenticated) return;
+
+    navigation.reset({
+      index: 0,
+      routes: [
+        user?.role === 'admin' || user?.role === 'sub-admin'
+          ? { name: 'MainTabs', params: { screen: 'AdminTab' } }
+          : { name: 'MainTabs' },
+      ],
+    });
+  }, [authLoading, isAuthenticated, navigation, user?.role]);
 
   const passwordRequirements = [
     { key: 'length', label: 'Au moins 6 caractères', met: password.length >= 6 },

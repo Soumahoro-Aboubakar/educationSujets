@@ -51,6 +51,6 @@ export const FILTER_DEFINITIONS = [
 export const DOCUMENTS_PER_PAGE = 12;
 //'https://educationsujets-xaaz.onrender.com';
 
-export const API_BASE_URL = 'http://10.84.202.234:5000';
+export const API_BASE_URL = 'http://10.240.49.234:5000';
 
 export const DOWNLOAD_DIR = 'fatafalta_downloads';

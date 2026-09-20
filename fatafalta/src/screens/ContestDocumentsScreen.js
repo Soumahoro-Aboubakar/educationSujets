@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { View, TextInput, ActivityIndicator, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { ArrowLeft, Search } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import api from '../services/api';
@@ -19,7 +20,7 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
   const [error, setError] = useState('');
   const isDynamicCatalog = Boolean(noeud?._id && matiere?._id);
 
-  const loadDocuments = async (requestedPage = 1, append = false) => {
+  const loadDocuments = useCallback(async (requestedPage = 1, append = false) => {
     try {
       setLoading(true);
       setError('');
@@ -47,9 +48,14 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contestType?._id, catalogNode?._id, institution?._id, noeud?._id, matiere?._id, parcoursType?._id, isDynamicCatalog, query]);
 
-  useEffect(() => { loadDocuments(1, false); }, [contestType?._id, catalogNode?._id, institution?._id, noeud?._id, matiere?._id, parcoursType?._id, isDynamicCatalog, query]);
+  useFocusEffect(
+    useCallback(() => {
+      loadDocuments(1, false);
+      return undefined;
+    }, [loadDocuments])
+  );
 
   const visible = useMemo(() => {
     return documents;

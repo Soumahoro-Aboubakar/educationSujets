@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -16,7 +16,7 @@ import AuthContext from '../context/AuthContext';
 import theme from '../theme/tokens';
 
 const LoginScreen = ({ navigation }) => {
-  const { login } = useContext(AuthContext);
+  const { login, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,6 +24,19 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (authLoading || !isAuthenticated) return;
+
+    navigation.reset({
+      index: 0,
+      routes: [
+        user?.role === 'admin' || user?.role === 'sub-admin'
+          ? { name: 'MainTabs', params: { screen: 'AdminTab' } }
+          : { name: 'MainTabs' },
+      ],
+    });
+  }, [authLoading, isAuthenticated, navigation, user?.role]);
 
   const validateForm = () => {
     const newErrors = {};

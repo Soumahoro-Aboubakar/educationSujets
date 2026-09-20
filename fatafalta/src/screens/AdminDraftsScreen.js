@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   RefreshControl,
   Alert,
+  FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
@@ -20,7 +22,7 @@ import theme from '../theme/tokens';
 
 const AdminDraftsScreen = ({ navigation }) => {
   const { user, logout } = useContext(AuthContext);
-  const { drafts, loading, deleteDraft, loadDrafts } = useDrafts();
+  const { drafts, loading, deleteDraft, loadDrafts, page, hasMore, loadingMore } = useDrafts();
   const [refreshing, setRefreshing] = useState(false);
 
   useFocusEffect(
@@ -39,8 +41,14 @@ const AdminDraftsScreen = ({ navigation }) => {
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    await loadDrafts();
+    await loadDrafts(1, false);
     setRefreshing(false);
+  };
+
+  const handleLoadMore = () => {
+    if (hasMore && !loadingMore && !loading && !refreshing) {
+      loadDrafts(page + 1, true);
+    }
   };
 
   const handleEditDraft = (draftId) => {
@@ -126,19 +134,8 @@ const AdminDraftsScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <ScrollView
-        style={styles.content}
-        contentContainerStyle={styles.contentContainer}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            tintColor={theme.colors.primary}
-          />
-        }
-        showsVerticalScrollIndicator={false}
-      >
-        {drafts.length === 0 ? (
+      {drafts.length === 0 && !loading && !refreshing ? (
+        <View style={styles.contentContainer}>
           <EmptyState
             icon={FileText}
             title="Aucun brouillon"
@@ -148,123 +145,145 @@ const AdminDraftsScreen = ({ navigation }) => {
               onPress: () => navigation.navigate('Upload'),
             }}
           />
-        ) : (
-          <View style={styles.draftsList}>
-            {drafts.map(draft => {
-              const isComplete = draft.status !== 'draft';
-              return (
-                <Card key={draft._id || draft.id} style={styles.draftCard}>
-                  <View style={styles.draftHeader}>
-                    <View style={styles.draftInfo}>
-                      <Text
-                        variant="bodyMedium"
-                        style={styles.draftTitle}
-                        numberOfLines={2}
-                      >
-                        {draft.title || 'Sans titre'}
-                      </Text>
-                      <View style={styles.draftMeta}>
-                        <Clock size={12} color={theme.colors.textMuted} strokeWidth={2.2} />
-                        <Text
-                          variant="caption"
-                          color={theme.colors.textMuted}
-                          style={{ marginLeft: 4 }}
-                        >
-                          {formatDate(draft.createdAt || draft.savedAt)}
-                        </Text>
-                      </View>
-                    </View>
-                    <View
-                      style={[
-                        styles.completionIndicator,
-                        isComplete && styles.completionIndicatorDone,
-                      ]}
+        </View>
+      ) : (
+        <FlatList
+          data={drafts}
+          keyExtractor={(item) => item._id || item.id}
+          style={styles.content}
+          contentContainerStyle={styles.contentContainer}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              tintColor={theme.colors.primary}
+            />
+          }
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+          ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+          ListFooterComponent={() => (
+            loadingMore ? (
+              <View style={{ paddingVertical: 20, alignItems: 'center' }}>
+                <ActivityIndicator color={theme.colors.primary} />
+              </View>
+            ) : null
+          )}
+          renderItem={({ item: draft }) => {
+            const isComplete = draft.status !== 'draft';
+            return (
+              <Card style={styles.draftCard}>
+                <View style={styles.draftHeader}>
+                  <View style={styles.draftInfo}>
+                    <Text
+                      variant="bodyMedium"
+                      style={styles.draftTitle}
+                      numberOfLines={2}
                     >
+                      {draft.title || 'Sans titre'}
+                    </Text>
+                    <View style={styles.draftMeta}>
+                      <Clock size={12} color={theme.colors.textMuted} strokeWidth={2.2} />
                       <Text
                         variant="caption"
-                        color={isComplete ? theme.colors.success : theme.colors.primary}
-                        style={styles.completionText}
+                        color={theme.colors.textMuted}
+                        style={{ marginLeft: 4 }}
                       >
-                        {isComplete ? '100%' : '~30%'}
+                        {formatDate(draft.createdAt || draft.savedAt)}
                       </Text>
                     </View>
                   </View>
-
-                  {draft.description && (
+                  <View
+                    style={[
+                      styles.completionIndicator,
+                      isComplete && styles.completionIndicatorDone,
+                    ]}
+                  >
                     <Text
                       variant="caption"
-                      color={theme.colors.textSecondary}
-                      numberOfLines={2}
-                      style={styles.description}
+                      color={isComplete ? theme.colors.success : theme.colors.primary}
+                      style={styles.completionText}
                     >
-                      {draft.description}
+                      {isComplete ? '100%' : '~30%'}
                     </Text>
-                  )}
-
-                  {(draft.university || draft.department || draft.category) && (
-                    <View style={styles.metadataPreview}>
-                      {draft.university && (
-                        <View style={styles.metadataBadge}>
-                          <Text variant="caption" color={theme.colors.primary}>
-                            {draft.university?.name || draft.university}
-                          </Text>
-                        </View>
-                      )}
-                      {draft.department && (
-                        <View style={styles.metadataBadge}>
-                          <Text variant="caption" color={theme.colors.primary}>
-                            {draft.department?.name || draft.department}
-                          </Text>
-                        </View>
-                      )}
-                    </View>
-                  )}
-
-                  <View style={styles.draftActions}>
-                    <TouchableOpacity
-                      style={[styles.actionButton, styles.editButton]}
-                      onPress={() => handleEditDraft(draft._id || draft.id)}
-                      activeOpacity={0.75}
-                    >
-                      <Edit size={16} color={theme.colors.primary} strokeWidth={2.2} />
-                      <Text
-                        variant="caption"
-                        color={theme.colors.primary}
-                        style={{ marginLeft: 4, fontWeight: '600' }}
-                      >
-                        Modifier
-                      </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={[styles.actionButton, styles.publishButton]}
-                      onPress={() => handleEditDraft(draft._id || draft.id)}
-                      activeOpacity={0.85}
-                    >
-                      <Send size={16} color={theme.colors.textInverse} strokeWidth={2.2} />
-                      <Text
-                        variant="caption"
-                        color={theme.colors.textInverse}
-                        style={{ marginLeft: 4, fontWeight: '600' }}
-                      >
-                        Publier
-                      </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={[styles.actionButton, styles.deleteButton]}
-                      onPress={() => handleDeleteDraft(draft._id || draft.id)}
-                      activeOpacity={0.75}
-                    >
-                      <Trash2 size={16} color={theme.colors.error} strokeWidth={2.2} />
-                    </TouchableOpacity>
                   </View>
-                </Card>
-              );
-            })}
-          </View>
-        )}
-      </ScrollView>
+                </View>
+
+                {draft.description && (
+                  <Text
+                    variant="caption"
+                    color={theme.colors.textSecondary}
+                    numberOfLines={2}
+                    style={styles.description}
+                  >
+                    {draft.description}
+                  </Text>
+                )}
+
+                {(draft.university || draft.department || draft.category) && (
+                  <View style={styles.metadataPreview}>
+                    {draft.university && (
+                      <View style={styles.metadataBadge}>
+                        <Text variant="caption" color={theme.colors.primary}>
+                          {draft.university?.name || draft.university}
+                        </Text>
+                      </View>
+                    )}
+                    {draft.department && (
+                      <View style={styles.metadataBadge}>
+                        <Text variant="caption" color={theme.colors.primary}>
+                          {draft.department?.name || draft.department}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                )}
+
+                <View style={styles.draftActions}>
+                  <TouchableOpacity
+                    style={[styles.actionButton, styles.editButton]}
+                    onPress={() => handleEditDraft(draft._id || draft.id)}
+                    activeOpacity={0.75}
+                  >
+                    <Edit size={16} color={theme.colors.primary} strokeWidth={2.2} />
+                    <Text
+                      variant="caption"
+                      color={theme.colors.primary}
+                      style={{ marginLeft: 4, fontWeight: '600' }}
+                    >
+                      Modifier
+                    </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={[styles.actionButton, styles.publishButton]}
+                    onPress={() => handleEditDraft(draft._id || draft.id)}
+                    activeOpacity={0.85}
+                  >
+                    <Send size={16} color={theme.colors.textInverse} strokeWidth={2.2} />
+                    <Text
+                      variant="caption"
+                      color={theme.colors.textInverse}
+                      style={{ marginLeft: 4, fontWeight: '600' }}
+                    >
+                      Publier
+                    </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={[styles.actionButton, styles.deleteButton]}
+                    onPress={() => handleDeleteDraft(draft._id || draft.id)}
+                    activeOpacity={0.75}
+                  >
+                    <Trash2 size={16} color={theme.colors.error} strokeWidth={2.2} />
+                  </TouchableOpacity>
+                </View>
+              </Card>
+            );
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };
