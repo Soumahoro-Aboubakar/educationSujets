@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, SafeAreaView, Keyboard, InteractionManager } from 'react-native';
+import { View, StyleSheet, Keyboard, InteractionManager } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Text from '../components/ui/Text';
 import SearchInput from '../components/ui/SearchInput';

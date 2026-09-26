@@ -65,7 +65,7 @@ const TabNavigator = () => {
         name="DownloadsTab"
         component={DownloadsScreen}
         options={{
-          tabBarLabel: 'Téléchargés',
+          tabBarLabel: 'Téléchargements',
           tabBarIcon: ({ color, size }) => <Download color={color} size={size} />,
         }}
       />

@@ -1,12 +1,25 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { ArrowLeft, ChevronRight, Layers3 } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ArrowLeft, ArrowUpRight, Layers3 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
-import Button from '../components/ui/Button';
-import EmptyState from '../components/ui/EmptyState';
 import theme from '../theme/tokens';
 import { fetchPublishedMatieres, fetchPublishedNoeuds } from '../services/catalog';
+
+const NAVY = '#0D1B32';
+const NAVY_SOFT = '#4F5E72';
+const SURFACE = '#FCFAF5';
+const GOLD = '#B48A48';
+const BURGUNDY = '#6C2838';
+const LINE = '#DED8CC';
 
 const labelOf = (item) => item?.nom || item?.name || '';
 
@@ -22,6 +35,7 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState('');
   const requestId = useRef(0);
+  const insets = useSafeAreaInsets();
 
   const leaf = path.at(-1) || null;
   const isMatterStep = path.length === levels.length;
@@ -64,7 +78,7 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
       setHasNextPage(Boolean(result.pagination?.pages > requestedPage));
     } catch (requestError) {
       if (currentRequest !== requestId.current) return;
-      setError('Impossible de charger le catalogue. Vérifiez votre connexion puis réessayez.');
+      setError('Impossible de charger le catalogue. Vérifie ta connexion puis réessaie.');
       if (!append) setItems([]);
     } finally {
       if (currentRequest === requestId.current) setLoader(false);
@@ -108,65 +122,127 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
     if (isMatterStep) return currentLevel.libellePluriel;
     return labelOf(path.at(-1)) || organisme?.nom || organisme?.name || 'Catalogue';
   }, [currentLevel?.libellePluriel, isMatterStep, organisme?.name, organisme?.nom, path]);
+  const sourceName = parcoursType?.nom || organisme?.nom || organisme?.name || 'Catalogue';
+  const breadcrumb = path.map(labelOf).filter(Boolean).join('  /  ');
   const emptyDescription = `Aucune ${String(currentLevel?.libellePluriel || 'entrée').toLocaleLowerCase()} avec des sujets publiés n’est disponible.`;
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.header}>
-        <Pressable onPress={goBack} style={styles.backButton} accessibilityRole="button" accessibilityLabel="Retour">
-          <ArrowLeft size={20} color={theme.colors.textPrimary} />
-        </Pressable>
-        <View style={styles.titleWrap}>
-          <Text variant="overline" color={theme.colors.primary}>{parcoursType?.nom || organisme?.nom || organisme?.name || 'Catalogue'}</Text>
-          <Text variant="h1">{title}</Text>
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+
+      <View style={[styles.hero, { paddingTop: insets.top + theme.spacing.base }]}>
+        <View style={styles.topBar}>
+          <Pressable
+            onPress={goBack}
+            style={({ pressed }) => [styles.backButton, pressed && styles.backPressed]}
+            accessibilityRole="button"
+            accessibilityLabel="Retour"
+            hitSlop={theme.hitSlop}
+          >
+            <ArrowLeft size={21} color="#FFFFFF" strokeWidth={1.9} />
+          </Pressable>
+
+          <View style={styles.brandLockup}>
+            <View style={styles.brandRule} />
+            <Text variant="overline" style={styles.brandName}>Éducation CI</Text>
+          </View>
+        </View>
+
+        <View style={styles.heroCopy}>
+          <Text variant="overline" style={styles.sourceName} numberOfLines={1}>{sourceName}</Text>
+          <Text variant="h1" style={styles.heading} numberOfLines={2}>{title}</Text>
+          <Text variant="body" style={styles.introduction}>
+            Choisis {String(currentLevel?.libelleSingulier || 'un élément').toLocaleLowerCase()} pour poursuivre.
+          </Text>
         </View>
       </View>
 
       {loading ? (
-        <View style={styles.center}><ActivityIndicator color={theme.colors.primary} /></View>
+        <View style={styles.centerState}>
+          <ActivityIndicator color={BURGUNDY} />
+          <Text variant="caption" style={styles.stateText}>Mise à jour du catalogue…</Text>
+        </View>
       ) : error ? (
-        <EmptyState
-          icon={Layers3}
-          title="Catalogue indisponible"
-          description={error}
-          action={{ label: 'Réessayer', onPress: () => loadItems(1, false) }}
-        />
+        <View style={styles.centerState}>
+          <Layers3 size={31} color={BURGUNDY} strokeWidth={1.45} />
+          <Text variant="h3" style={styles.stateTitle}>Catalogue indisponible</Text>
+          <Text variant="body" style={styles.stateText} align="center">{error}</Text>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Réessayer"
+            onPress={() => loadItems(1, false)}
+            style={styles.retryButton}
+          >
+            <Text variant="bodyMedium" style={styles.retryLabel}>Réessayer</Text>
+            <ArrowUpRight size={16} color={BURGUNDY} strokeWidth={1.9} />
+          </Pressable>
+        </View>
       ) : (
-        <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
-          <Text variant="caption" color={theme.colors.textSecondary}>
-            Choisissez {String(currentLevel?.libelleSingulier || 'un élément').toLocaleLowerCase()}.
-          </Text>
-          {items.map((item) => (
-            <Pressable
-              key={item._id}
-              onPress={() => selectItem(item)}
-              accessibilityRole="button"
-              accessibilityLabel={`Choisir ${labelOf(item)}`}
-              style={({ pressed }) => [styles.option, pressed && styles.pressed]}
-            >
-              <View style={styles.icon}><Layers3 size={20} color={theme.colors.primary} /></View>
-              <View style={styles.content}>
-                <Text variant="h3">{labelOf(item)}</Text>
-                {item.subjectCount ? (
-                  <Text variant="caption" color={theme.colors.textSecondary}>
-                    {item.subjectCount} sujet{item.subjectCount > 1 ? 's' : ''} publié{item.subjectCount > 1 ? 's' : ''}
-                  </Text>
-                ) : null}
+        <ScrollView
+          style={styles.content}
+          contentContainerStyle={[
+            styles.list,
+            { paddingBottom: Math.max(insets.bottom, theme.spacing.xl) },
+          ]}
+          showsVerticalScrollIndicator={false}
+        >
+          {breadcrumb ? (
+            <View style={styles.breadcrumb}>
+              <Text variant="caption" style={styles.breadcrumbLabel} numberOfLines={1}>{breadcrumb}</Text>
+            </View>
+          ) : null}
+
+          {items.length ? (
+            <>
+              <View style={styles.listHeader}>
+                <Text variant="overline" style={styles.listEyebrow}>{currentLevel?.libellePluriel || 'Sélection disponible'}</Text>
+                <View style={styles.listRule} />
               </View>
-              <ChevronRight size={19} color={theme.colors.primary} />
-            </Pressable>
-          ))}
-          {!items.length && (
-            <EmptyState icon={Layers3} title="Aucun contenu disponible" description={emptyDescription} />
+
+              {items.map((item, index) => (
+                <Pressable
+                  key={item._id}
+                  onPress={() => selectItem(item)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Choisir ${labelOf(item)}`}
+                  android_ripple={{ color: 'rgba(13, 27, 50, 0.05)' }}
+                  style={({ pressed }) => [styles.option, pressed && styles.optionPressed]}
+                >
+                  <Text style={styles.optionIndex}>{String(index + 1).padStart(2, '0')}</Text>
+                  <View style={styles.optionContent}>
+                    <Text variant="h3" style={styles.optionTitle}>{labelOf(item)}</Text>
+                    {item.subjectCount ? (
+                      <Text variant="caption" style={styles.optionMeta}>
+                        {item.subjectCount} sujet{item.subjectCount > 1 ? 's' : ''} publié{item.subjectCount > 1 ? 's' : ''}
+                      </Text>
+                    ) : (
+                      <Text variant="caption" style={styles.optionMeta}>{currentLevel?.libelleSingulier || 'Élément'} disponible</Text>
+                    )}
+                  </View>
+                  <ArrowUpRight size={19} color={BURGUNDY} strokeWidth={1.75} />
+                </Pressable>
+              ))}
+            </>
+          ) : (
+            <View style={styles.emptyState}>
+              <Layers3 size={31} color={BURGUNDY} strokeWidth={1.45} />
+              <Text variant="h3" style={styles.stateTitle} align="center">Aucun contenu disponible</Text>
+              <Text variant="body" style={styles.stateText} align="center">{emptyDescription}</Text>
+            </View>
           )}
+
           {hasNextPage ? (
-            <Button
-              title="Charger plus"
-              variant="secondary"
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Charger plus"
+              disabled={loadingMore}
               onPress={() => loadItems(page + 1, true)}
-              loading={loadingMore}
-            />
+              style={({ pressed }) => [styles.loadMore, pressed && styles.loadMorePressed]}
+            >
+              {loadingMore ? <ActivityIndicator size="small" color={BURGUNDY} /> : null}
+              <Text variant="bodyMedium" style={styles.loadMoreLabel}>Charger plus</Text>
+              <ArrowUpRight size={16} color={BURGUNDY} strokeWidth={1.9} />
+            </Pressable>
           ) : null}
         </ScrollView>
       )}
@@ -175,16 +251,191 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F8FAFD', paddingTop: 12 },
-  header: { flexDirection: 'row', alignItems: 'center', padding: theme.spacing.lg },
-  backButton: { width: 44, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.surface, borderWidth: 1, borderColor: theme.colors.borderLight },
-  titleWrap: { flex: 1, marginLeft: theme.spacing.md },
-  list: { flexGrow: 1, padding: theme.spacing.lg, gap: theme.spacing.md },
-  option: { minHeight: 72, padding: theme.spacing.md, borderRadius: 14, backgroundColor: theme.colors.surface, borderWidth: 1, borderColor: theme.colors.borderLight, flexDirection: 'row', alignItems: 'center' },
-  pressed: { opacity: 0.75 },
-  icon: { width: 42, height: 42, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.primary100 },
-  content: { flex: 1, marginLeft: theme.spacing.md },
-  center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  container: {
+    flex: 1,
+    backgroundColor: SURFACE,
+  },
+  hero: {
+    backgroundColor: NAVY,
+    paddingHorizontal: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
+  },
+  topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: -10,
+  },
+  backPressed: {
+    opacity: 0.62,
+  },
+  brandLockup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+  },
+  brandRule: {
+    width: 18,
+    height: 2,
+    backgroundColor: GOLD,
+  },
+  brandName: {
+    color: '#F4E6C8',
+    fontSize: 10,
+    letterSpacing: 1.25,
+  },
+  heroCopy: {
+    marginTop: theme.spacing.xl,
+  },
+  sourceName: {
+    color: GOLD,
+    fontSize: 10,
+    letterSpacing: 1.1,
+  },
+  heading: {
+    marginTop: theme.spacing.sm,
+    color: '#FFFFFF',
+    fontSize: 29,
+    lineHeight: 35,
+    letterSpacing: -0.8,
+  },
+  introduction: {
+    maxWidth: 320,
+    marginTop: theme.spacing.sm,
+    color: 'rgba(255,255,255,0.68)',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  content: {
+    flex: 1,
+    backgroundColor: SURFACE,
+  },
+  list: {
+    flexGrow: 1,
+    paddingHorizontal: theme.spacing.xl,
+    paddingBottom: theme.spacing['2xl'],
+  },
+  breadcrumb: {
+    paddingTop: theme.spacing.base,
+    paddingBottom: theme.spacing.sm,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: LINE,
+  },
+  breadcrumbLabel: {
+    color: NAVY_SOFT,
+    fontSize: 12,
+  },
+  listHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.md,
+    paddingTop: theme.spacing.lg,
+    paddingBottom: theme.spacing.sm,
+  },
+  listEyebrow: {
+    color: NAVY_SOFT,
+    fontSize: 10,
+    letterSpacing: 1.05,
+    textTransform: 'uppercase',
+  },
+  listRule: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: LINE,
+  },
+  option: {
+    minHeight: 80,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: theme.spacing.base,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: LINE,
+  },
+  optionPressed: {
+    backgroundColor: 'rgba(13, 27, 50, 0.035)',
+  },
+  optionIndex: {
+    width: 34,
+    color: BURGUNDY,
+    fontFamily: theme.fontFamily.semiBold,
+    fontSize: 11,
+    letterSpacing: 1.05,
+  },
+  optionContent: {
+    flex: 1,
+    paddingRight: theme.spacing.base,
+  },
+  optionTitle: {
+    color: NAVY,
+    fontFamily: theme.fontFamily.semiBold,
+    fontSize: 16,
+    lineHeight: 21,
+  },
+  optionMeta: {
+    marginTop: 3,
+    color: NAVY_SOFT,
+    fontSize: 12,
+    lineHeight: 17,
+  },
+  centerState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: theme.spacing['3xl'],
+    backgroundColor: SURFACE,
+  },
+  emptyState: {
+    flex: 1,
+    minHeight: 260,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: theme.spacing.xl,
+  },
+  stateTitle: {
+    marginTop: theme.spacing.base,
+    color: NAVY,
+    textAlign: 'center',
+  },
+  stateText: {
+    marginTop: theme.spacing.sm,
+    color: NAVY_SOFT,
+  },
+  retryButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: theme.spacing.lg,
+    paddingBottom: 3,
+    borderBottomWidth: 1,
+    borderBottomColor: BURGUNDY,
+  },
+  retryLabel: {
+    color: BURGUNDY,
+    fontSize: 14,
+  },
+  loadMore: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
+    marginTop: theme.spacing.xl,
+    paddingBottom: 3,
+    borderBottomWidth: 1,
+    borderBottomColor: BURGUNDY,
+  },
+  loadMorePressed: {
+    opacity: 0.62,
+  },
+  loadMoreLabel: {
+    color: BURGUNDY,
+    fontSize: 14,
+  },
 });
 
 export default DynamicCatalogScreen;

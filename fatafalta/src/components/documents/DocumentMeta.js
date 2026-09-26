@@ -1,79 +1,38 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Building2, GraduationCap, Calendar, Layers } from 'lucide-react-native';
-import theme from '../../theme/tokens';
+import { StyleSheet, View } from 'react-native';
 import Text from '../ui/Text';
+import theme from '../../theme/tokens';
 
-/**
- * Metadata tags for a document (University, Level, etc.)
- */
+const SOFT = '#4F5E72';
+
 const DocumentMeta = ({ document, style }) => {
-  const metaItems = [
-    {
-      value: document.institution?.abbreviation || document.institution?.name,
-      icon: Building2,
-    },
-    {
-      value: document.university?.abbreviation || document.university?.name,
-      icon: Building2,
-    },
-    {
-      value: document.level?.name,
-      icon: GraduationCap,
-    },
-    {
-      value: document.semester?.name,
-      icon: Calendar,
-    },
-    {
-      value: document.department?.name,
-      icon: Layers,
-    },
-    ...(document.taxonomyNodes || []).map((node) => ({
-      value: node?.name,
-      icon: Layers,
-    })),
-  ].filter((item) => item.value);
+  const items = [
+    document.institution?.abbreviation || document.institution?.name,
+    document.university?.abbreviation || document.university?.name,
+    document.level?.name,
+    document.semester?.name,
+    document.department?.name,
+    ...(document.taxonomyNodes || []).map((node) => node?.name),
+  ].filter(Boolean);
 
-  if (metaItems.length === 0) return null;
+  if (!items.length) return null;
 
   return (
     <View style={[styles.container, style]}>
-      {metaItems.map((item, index) => {
-        const Icon = item.icon;
-        return (
-          <View key={index} style={styles.tag}>
-            <Icon size={12} color={theme.colors.textSecondary} />
-            <Text variant="caption" color={theme.colors.textSecondary} style={styles.tagText} numberOfLines={1}>
-              {item.value}
-            </Text>
-          </View>
-        );
-      })}
+      {items.map((item, index) => (
+        <React.Fragment key={`${item}-${index}`}>
+          {index > 0 ? <Text style={styles.separator}>·</Text> : null}
+          <Text variant="caption" style={styles.item} numberOfLines={1}>{item}</Text>
+        </React.Fragment>
+      ))}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: theme.spacing.xs,
-  },
-  tag: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.surfaceRaised,
-    paddingHorizontal: theme.spacing.sm,
-    paddingVertical: theme.spacing.xs,
-    borderRadius: theme.radius.sm,
-    gap: theme.spacing.xs,
-    maxWidth: '100%',
-  },
-  tagText: {
-    fontSize: 11,
-    flexShrink: 1,
-  },
+  container: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 5, rowGap: 2 },
+  item: { maxWidth: '85%', color: SOFT, fontFamily: theme.fontFamily.medium, fontSize: 11, lineHeight: 16 },
+  separator: { color: SOFT, fontSize: 11, lineHeight: 16 },
 });
 
 export default DocumentMeta;

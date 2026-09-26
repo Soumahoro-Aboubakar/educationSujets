@@ -1,35 +1,34 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Modal,
-  TouchableOpacity,
+  ActivityIndicator,
   Alert,
+  Modal,
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  View,
 } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Building2,
+  Calendar,
+  Check,
+  CheckCircle2,
   Download,
   Eye,
   FileText,
-  Building2,
-  GraduationCap,
-  Calendar,
-  Layers,
   FolderOpen,
+  GraduationCap,
+  Layers,
   Share2,
-  CheckCircle2,
-  Sparkles,
   Trash2,
-  Check,
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
-import Button from '../components/ui/Button';
-import Badge from '../components/ui/Badge';
 import ProgressBar from '../components/ui/ProgressBar';
-import Card from '../components/ui/Card';
 import { useDocument } from '../hooks/useDocument';
 import { useDownload } from '../hooks/useDownload';
 import useCorrectionPromptPreference from '../hooks/useCorrectionPromptPreference';
@@ -39,21 +38,22 @@ import AuthContext from '../context/AuthContext';
 import { deleteDocument } from '../services/documents';
 import theme from '../theme/tokens';
 
+const NAVY = '#0D1B32';
+const NAVY_SOFT = '#4F5E72';
+const SURFACE = '#FCFAF5';
+const GOLD = '#B48A48';
+const BURGUNDY = '#6C2838';
+const LINE = '#DED8CC';
+
 const InfoRow = ({ icon: Icon, label, value, isLast }) => {
   if (!value) return null;
 
   return (
     <View style={[styles.infoRow, isLast && styles.infoRowLast]}>
-      <View style={styles.infoIcon}>
-        <Icon size={16} color={theme.colors.textMuted} strokeWidth={2.2} />
-      </View>
+      <Icon size={16} color={NAVY_SOFT} strokeWidth={1.75} />
       <View style={styles.infoTextContainer}>
-        <Text variant="caption" color={theme.colors.textMuted}>
-          {label}
-        </Text>
-        <Text variant="bodyMedium" color={theme.colors.textPrimary}>
-          {value}
-        </Text>
+        <Text variant="overline" style={styles.infoLabel}>{label}</Text>
+        <Text variant="bodyMedium" style={styles.infoValue}>{value}</Text>
       </View>
     </View>
   );
@@ -79,9 +79,12 @@ const DocumentDetailScreen = () => {
   const [dontAskAgain, setDontAskAgain] = useState(false);
   const [wasSubjectDownloading, setWasSubjectDownloading] = useState(false);
 
-  const isCorrection = document.documentType === 'corrige';
-  const hasCorrection = !isCorrection && !!document.correction?._id;
-  const displayTitle = document.title || document.originalFileName || (isCorrection ? 'Corrigé' : 'Document PDF');
+  const isCorrection = document?.documentType === 'corrige';
+  const hasCorrection = !isCorrection && !!document?.correction?._id;
+  const displayTitle = document?.title
+    || document?.titre
+    || document?.originalFileName
+    || (isCorrection ? 'Corrigé' : 'Document PDF');
 
   const {
     isInitializing: isSubjectInitializing,
@@ -101,7 +104,7 @@ const DocumentDetailScreen = () => {
     open: openCorrection,
   } = correctionDownload;
 
-  const isOwner = user && document.uploadedBy && (user._id === (document.uploadedBy._id || document.uploadedBy));
+  const isOwner = user && document?.uploadedBy && (user._id === (document.uploadedBy._id || document.uploadedBy));
   const canDelete = user && (user.role === 'admin' || isOwner);
 
   useFocusEffect(
@@ -120,11 +123,11 @@ const DocumentDetailScreen = () => {
     if (!promptLoaded) return;
 
     if (
-      wasSubjectDownloading &&
-      !isSubjectDownloading &&
-      isSubjectDownloaded &&
-      hasCorrection &&
-      promptEnabled
+      wasSubjectDownloading
+      && !isSubjectDownloading
+      && isSubjectDownloaded
+      && hasCorrection
+      && promptEnabled
     ) {
       setShowCorrectionModal(true);
     }
@@ -169,7 +172,7 @@ const DocumentDetailScreen = () => {
               await deleteDocument(document._id || document.id);
               Alert.alert('Succès', 'Document placé dans la corbeille.');
               navigation.goBack();
-            } catch (err) {
+            } catch (error) {
               Alert.alert('Erreur', 'Impossible de supprimer le document.');
             }
           },
@@ -189,580 +192,617 @@ const DocumentDetailScreen = () => {
     }
   };
 
-  const fileConfig = getFileIcon(document?.fileType || document?.extension);
-
   if (!document) return null;
 
+  const fileConfig = getFileIcon(document.fileType || document.extension);
+  const primaryLabel = isSubjectDownloaded
+    ? (isCorrection ? 'Ouvrir le corrigé' : 'Ouvrir le PDF')
+    : (isCorrection ? 'Télécharger le corrigé' : 'Télécharger le PDF');
+
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-      <View style={styles.header}>
-        <Button
-          variant="ghost"
-          icon={<ArrowLeft size={22} color={theme.colors.textPrimary} />}
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}
-        />
-        <Text variant="h3" style={styles.headerTitle} numberOfLines={1}>
-          Détail du sujet
-        </Text>
-        <View style={styles.headerRight}>
-          {canDelete && (
-            <Button
-              variant="ghost"
-              icon={<Trash2 size={20} color={theme.colors.error} />}
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+
+      <View style={[styles.hero, { paddingTop: insets.top + theme.spacing.base }]}>
+        <View style={styles.topBar}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Retour"
+            hitSlop={theme.hitSlop}
+            onPress={() => navigation.goBack()}
+            style={({ pressed }) => [styles.backButton, pressed && styles.headerPressed]}
+          >
+            <ArrowLeft size={21} color="#FFFFFF" strokeWidth={1.9} />
+          </Pressable>
+
+          <View style={styles.brandLockup}>
+            <View style={styles.brandRule} />
+            <Text variant="overline" style={styles.brandName}>Éducation CI</Text>
+          </View>
+
+          {canDelete ? (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Supprimer le document"
+              hitSlop={theme.hitSlop}
               onPress={handleDelete}
-              style={styles.headerActionButton}
-            />
-          )}
+              style={({ pressed }) => [styles.deleteButton, pressed && styles.headerPressed]}
+            >
+              <Trash2 size={18} color="#F4E6C8" strokeWidth={1.8} />
+            </Pressable>
+          ) : <View style={styles.headerSpacer} />}
+        </View>
+
+        <View style={styles.heroCopy}>
+          <View style={styles.documentTypeRow}>
+            <View style={[styles.typeRule, { backgroundColor: fileConfig.label === 'PDF' ? BURGUNDY : GOLD }]} />
+            <Text variant="overline" style={styles.documentType}>{fileConfig.label}</Text>
+            {document.correction ? <Text variant="overline" style={styles.correctionMarker}>Corrigé disponible</Text> : null}
+          </View>
+          <Text variant="h1" style={styles.title} numberOfLines={3}>{displayTitle}</Text>
+          <Text variant="body" style={styles.documentSummary}>
+            Ajouté le {formatDate(document.createdAt)} · {document.downloads || 0} téléchargement{document.downloads > 1 ? 's' : ''}
+          </Text>
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <Card style={styles.heroCard}>
-          <View style={[styles.iconBox, { backgroundColor: fileConfig.bgColor }]}> 
-            <FileText size={36} color={fileConfig.color} strokeWidth={1.8} />
+      <ScrollView
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: 156 + Math.max(insets.bottom, theme.spacing.lg) }]}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.metrics}>
+          <View style={styles.metric}>
+            <Download size={16} color={BURGUNDY} strokeWidth={1.8} />
+            <Text variant="h3" style={styles.metricValue}>{document.downloads || 0}</Text>
+            <Text variant="caption" style={styles.metricLabel}>Téléchargements</Text>
           </View>
-          <Badge
-            label={fileConfig.label}
-            color={fileConfig.color}
-            backgroundColor={fileConfig.bgColor}
-            style={styles.badge}
-          />
-          <Text variant="h2" align="center" style={styles.title} numberOfLines={2}>
-            {displayTitle}
-          </Text>
-          <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.date}>
-            Ajouté le {formatDate(document.createdAt)}
-          </Text>
-          <View style={styles.heroPills}>
-            <View style={styles.pill}>
-              <Sparkles size={14} color={theme.colors.accent} strokeWidth={2.2} />
-              <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>
-                Prêt mobile
-              </Text>
-            </View>
-            <View style={styles.pill}>
-              <Download size={14} color={theme.colors.primary} strokeWidth={2.2} />
-              <Text variant="caption" color={theme.colors.textSecondary} style={styles.pillText}>
-                {document.downloads || 0} téléchargements
-              </Text>
-            </View>
-          </View>
-          {hasCorrection && (
-            <View style={styles.correctionBadge}>
-              <Sparkles size={14} color={theme.colors.accentDark} strokeWidth={2} />
-              <Text variant="caption" color={theme.colors.accentDark} style={styles.correctionBadgeText}>
-                Corrigé disponible
-              </Text>
-            </View>
-          )}
-        </Card>
-
-        <View style={styles.statsRow}>
-          <View style={styles.statBox}>
-            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.primaryWash }]}> 
-              <Download size={16} color={theme.colors.primary} strokeWidth={2.2} />
-            </View>
-            <Text variant="h3" style={styles.statValue}>
-              {document.downloads || 0}
-            </Text>
-            <Text variant="caption" color={theme.colors.textMuted}>
-              Téléchargements
-            </Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statBox}>
-            <View style={[styles.statIconWrap, { backgroundColor: theme.colors.accentWash }]}> 
-              <Eye size={16} color={theme.colors.accent} strokeWidth={2.2} />
-            </View>
-            <Text variant="h3" style={styles.statValue}>
-              {document.views || 0}
-            </Text>
-            <Text variant="caption" color={theme.colors.textMuted}>
-              Vues
-            </Text>
+          <View style={styles.metricDivider} />
+          <View style={styles.metric}>
+            <Eye size={16} color={GOLD} strokeWidth={1.8} />
+            <Text variant="h3" style={styles.metricValue}>{document.views || 0}</Text>
+            <Text variant="caption" style={styles.metricLabel}>Consultations</Text>
           </View>
         </View>
 
-        {isSubjectDownloaded && (
-          <Card style={styles.successCard} shadow="sm">
-            <View style={styles.successIcon}>
-              <CheckCircle2 size={22} color={theme.colors.success} strokeWidth={2} />
+        {isSubjectDownloaded ? (
+          <View style={styles.localNotice}>
+            <CheckCircle2 size={19} color={GOLD} strokeWidth={1.8} />
+            <View style={styles.localNoticeCopy}>
+              <Text variant="bodyMedium" style={styles.localNoticeTitle}>Disponible hors connexion</Text>
+              <Text variant="caption" style={styles.localNoticeText}>Ce fichier est enregistré sur ton appareil.</Text>
             </View>
-            <View style={{ flex: 1 }}>
-              <Text variant="h3">Prêt à ouvrir</Text>
-              <Text variant="body" color={theme.colors.textSecondary} style={styles.successText}>
-                Ce PDF est disponible localement. Ouvrez-le, partagez-le ou retrouvez-le plus tard.
-              </Text>
-              <View style={styles.quickActions}>
-                <Button
-                  variant="primary"
-                  title="Ouvrir"
-                  icon={<FileText size={16} color={theme.colors.textInverse} />}
-                  onPress={openSubject}
-                  style={styles.quickActionButton}
-                />
-                <Button
-                  variant="secondary"
-                  title="Partager"
-                  icon={<Share2 size={16} color={theme.colors.primary} />}
-                  onPress={shareSubject}
-                  style={styles.quickActionButton}
-                />
-              </View>
-            </View>
-          </Card>
-        )}
-
-        {document.description ? (
-          <View style={styles.section}>
-            <Text variant="h3" style={styles.sectionTitle}>
-              Description
-            </Text>
-            <Text variant="body" color={theme.colors.textSecondary} style={styles.descriptionText}>
-              {document.description}
-            </Text>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Partager le document"
+              onPress={shareSubject}
+              style={({ pressed }) => [styles.shareLink, pressed && styles.linkPressed]}
+            >
+              <Share2 size={16} color={BURGUNDY} strokeWidth={1.8} />
+              <Text variant="caption" style={styles.shareLabel}>Partager</Text>
+            </Pressable>
           </View>
         ) : null}
 
-        <Card style={styles.infoCard} shadow="sm">
-          <Text variant="h3" style={styles.sectionTitle}>
-            Informations
-          </Text>
-          <InfoRow icon={Building2} label="Institution" value={document.institution?.name} />
-          <InfoRow icon={Building2} label="Université" value={document.university?.name} />
-          <InfoRow icon={Layers} label="Département" value={document.department?.name} />
-          <InfoRow icon={GraduationCap} label="Niveau" value={document.level?.name} />
-          <InfoRow icon={Calendar} label="Session" value={document.semester?.displayName || document.semester?.name} />
-          <InfoRow icon={FolderOpen} label="Catégorie" value={document.category?.name} />
-          {(document.taxonomyNodes || []).map((node) => (
-            <InfoRow
-              key={node._id || `${node.type}-${node.name}`}
-              icon={Layers}
-              label={node.type?.replace(/[-_]/g, ' ') || 'Niveau'}
-              value={node.name}
-            />
-          ))}
-          <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} isLast />
-        </Card>
+        {document.description ? (
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text variant="overline" style={styles.sectionEyebrow}>À propos</Text>
+              <View style={styles.sectionRule} />
+            </View>
+            <Text variant="body" style={styles.descriptionText}>{document.description}</Text>
+          </View>
+        ) : null}
 
-        {hasCorrection && (
-          <Card style={styles.correctionCard} shadow="sm">
-            <View style={styles.correctionRow}>
-              <View style={styles.correctionIconContainer}>
-                <Sparkles size={18} color={theme.colors.accent} strokeWidth={2.2} />
-              </View>
-              <View style={styles.correctionContent}>
-                <Text variant="h3" style={styles.correctionTitle}>
-                  Corrigé associé
-                </Text>
-                <Text variant="body" color={theme.colors.textSecondary} style={styles.correctionDescription}>
-                  Ce sujet possède un corrigé. Vous pouvez le télécharger à tout moment.
-                </Text>
-              </View>
-            </View>
-            <View style={styles.correctionActions}>
-              <Button
-                variant={isCorrectionDownloaded ? 'secondary' : 'accent'}
-                title={isCorrectionDownloaded ? 'Ouvrir le corrigé' : (isCorrectionDownloading ? `Téléchargement ${Math.round(correctionProgress * 100)}%` : 'Télécharger le corrigé')}
-                onPress={handleCorrectionAction}
-                loading={isCorrectionDownloading}
-                disabled={isCorrectionDownloading}
-                style={styles.correctionButton}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text variant="overline" style={styles.sectionEyebrow}>Informations</Text>
+            <View style={styles.sectionRule} />
+          </View>
+          <View style={styles.infoList}>
+            <InfoRow icon={Building2} label="Institution" value={document.institution?.name} />
+            <InfoRow icon={Building2} label="Université" value={document.university?.name} />
+            <InfoRow icon={Layers} label="Département" value={document.department?.name} />
+            <InfoRow icon={GraduationCap} label="Niveau" value={document.level?.name} />
+            <InfoRow icon={Calendar} label="Session" value={document.semester?.displayName || document.semester?.name} />
+            <InfoRow icon={FolderOpen} label="Catégorie" value={document.category?.name} />
+            {(document.taxonomyNodes || []).map((node) => (
+              <InfoRow
+                key={node._id || `${node.type}-${node.name}`}
+                icon={Layers}
+                label={node.type?.replace(/[-_]/g, ' ') || 'Niveau'}
+                value={node.name}
               />
+            ))}
+            <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} isLast />
+          </View>
+        </View>
+
+        {hasCorrection ? (
+          <View style={styles.correctionSection}>
+            <View style={styles.sectionHeader}>
+              <Text variant="overline" style={[styles.sectionEyebrow, { color: GOLD }]}>Corrigé associé</Text>
+              <View style={styles.sectionRule} />
             </View>
-          </Card>
-        )}
+            <Text variant="body" style={styles.correctionDescription}>
+              Une correction est disponible pour ce sujet et peut être enregistrée à tout moment.
+            </Text>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={isCorrectionDownloaded ? 'Ouvrir le corrigé' : 'Télécharger le corrigé'}
+              disabled={isCorrectionDownloading}
+              onPress={handleCorrectionAction}
+              style={({ pressed }) => [styles.correctionAction, pressed && styles.correctionActionPressed, isCorrectionDownloading && styles.actionDisabled]}
+            >
+              {isCorrectionDownloading ? <ActivityIndicator size="small" color="#FFFFFF" /> : null}
+              <Text variant="bodyMedium" style={styles.correctionActionText}>
+                {isCorrectionDownloaded ? 'Ouvrir le corrigé' : 'Télécharger le corrigé'}
+              </Text>
+              {!isCorrectionDownloading ? <ArrowUpRight size={17} color="#FFFFFF" strokeWidth={1.8} /> : null}
+            </Pressable>
+            {isCorrectionDownloading ? (
+              <ProgressBar progress={correctionProgress} color={GOLD} style={styles.correctionProgress} />
+            ) : null}
+          </View>
+        ) : null}
       </ScrollView>
 
-      <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.lg) }]}> 
-        {isSubjectDownloading && (
+      <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.lg) }]}>
+        {isSubjectDownloading ? (
           <View style={styles.progressContainer}>
-            <Text variant="caption" color={theme.colors.primary} style={styles.progressText}>
-              Téléchargement en cours... {Math.round(subjectProgress * 100)}%
+            <Text variant="caption" style={styles.progressText}>
+              Téléchargement en cours · {Math.round(subjectProgress * 100)}%
             </Text>
-            <ProgressBar progress={subjectProgress} />
+            <ProgressBar progress={subjectProgress} color={BURGUNDY} style={styles.primaryProgress} />
           </View>
-        )}
+        ) : null}
 
-        <Button
-          variant={isSubjectDownloaded ? 'secondary' : 'accent'}
-          title={isSubjectDownloaded ? (isCorrection ? 'Ouvrir le corrigé' : 'Ouvrir le PDF') : (isCorrection ? 'Télécharger le corrigé' : 'Télécharger le PDF')}
-          icon={isSubjectDownloaded ? <FileText size={18} color={theme.colors.primary} /> : <Download size={18} color={theme.colors.textInverse} />}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={primaryLabel}
+          disabled={isSubjectDownloading || isSubjectInitializing}
           onPress={handlePrimaryAction}
-          loading={isSubjectInitializing}
-          disabled={isSubjectDownloading}
-          style={styles.actionButton}
-        />
+          style={({ pressed }) => [
+            styles.primaryAction,
+            isSubjectDownloaded && styles.primaryActionDownloaded,
+            pressed && styles.primaryActionPressed,
+            (isSubjectDownloading || isSubjectInitializing) && styles.actionDisabled,
+          ]}
+        >
+          {isSubjectInitializing ? (
+            <ActivityIndicator size="small" color={isSubjectDownloaded ? NAVY : '#FFFFFF'} />
+          ) : (
+            <>
+              {isSubjectDownloaded ? <FileText size={18} color={NAVY} strokeWidth={1.8} /> : <Download size={18} color="#FFFFFF" strokeWidth={1.8} />}
+              <Text variant="bodyMedium" style={[styles.primaryActionLabel, isSubjectDownloaded && styles.primaryActionLabelDownloaded]}>{primaryLabel}</Text>
+              <ArrowUpRight size={17} color={isSubjectDownloaded ? NAVY : '#FFFFFF'} strokeWidth={1.8} />
+            </>
+          )}
+        </Pressable>
       </View>
 
       <Modal
         visible={showCorrectionModal}
-        transparent={true}
+        transparent
         animationType="fade"
         onRequestClose={() => setShowCorrectionModal(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <View style={styles.modalIconBox}>
-              <Sparkles size={24} color={theme.colors.accent} strokeWidth={2} />
-            </View>
-            <Text variant="h3" align="center" style={styles.modalTitle}>
-              Corrigé disponible
+            <View style={styles.modalRule} />
+            <Text variant="overline" style={styles.modalEyebrow}>Document associé</Text>
+            <Text variant="h3" align="center" style={styles.modalTitle}>Corrigé disponible</Text>
+            <Text variant="body" style={styles.modalText} align="center">
+              Une correction est disponible pour ce sujet. Souhaites-tu la télécharger maintenant ?
             </Text>
-            <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.modalText}>
-              Une correction est disponible pour ce sujet. Souhaitez-vous la télécharger maintenant ?
-            </Text>
-            <TouchableOpacity style={styles.checkboxRow} activeOpacity={0.8} onPress={handleToggleDontAskAgain}>
+            <Pressable
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: dontAskAgain }}
+              onPress={handleToggleDontAskAgain}
+              style={styles.checkboxRow}
+            >
               <View style={[styles.checkbox, dontAskAgain && styles.checkboxChecked]}>
-                {dontAskAgain && <Check size={14} color={theme.colors.textInverse} />}
+                {dontAskAgain ? <Check size={14} color="#FFFFFF" strokeWidth={2} /> : null}
               </View>
-              <Text variant="bodyMedium" color={theme.colors.textPrimary} style={styles.checkboxLabel}>
+              <Text variant="bodyMedium" style={styles.checkboxLabel}>
                 Ne plus me proposer automatiquement les corrections.
               </Text>
-            </TouchableOpacity>
+            </Pressable>
             <View style={styles.modalActions}>
-              <Button
-                variant="secondary"
-                title="Plus tard"
+              <Pressable
+                accessibilityRole="button"
                 onPress={() => handleModalChoice(false)}
-                style={styles.modalButton}
-              />
-              <Button
-                variant="accent"
-                title="Télécharger maintenant"
+                style={({ pressed }) => [styles.modalSecondary, pressed && styles.linkPressed]}
+              >
+                <Text variant="bodyMedium" style={styles.modalSecondaryLabel}>Plus tard</Text>
+              </Pressable>
+              <Pressable
+                accessibilityRole="button"
                 onPress={() => handleModalChoice(true)}
-                style={styles.modalButton}
-              />
+                style={({ pressed }) => [styles.modalPrimary, pressed && styles.correctionActionPressed]}
+              >
+                <Text variant="bodyMedium" style={styles.modalPrimaryLabel}>Télécharger maintenant</Text>
+                <ArrowUpRight size={16} color="#FFFFFF" strokeWidth={1.8} />
+              </Pressable>
             </View>
           </View>
         </View>
       </Modal>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.background,
+    backgroundColor: SURFACE,
   },
-  header: {
+  hero: {
+    backgroundColor: NAVY,
+    paddingHorizontal: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
+  },
+  topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: theme.spacing.sm,
-    paddingVertical: theme.spacing.sm,
-    backgroundColor: theme.colors.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
   },
   backButton: {
-    padding: theme.spacing.sm,
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-  },
-  headerRight: {
-    width: 44,
-    alignItems: 'flex-end',
-  },
-  headerActionButton: {
-    padding: theme.spacing.xs,
-  },
-  scrollContent: {
-    padding: theme.spacing.lg,
-    paddingBottom: 180,
-  },
-  heroCard: {
-    borderRadius: theme.radius['2xl'],
-    padding: theme.spacing['2xl'],
-    alignItems: 'center',
-    marginBottom: theme.spacing.lg,
-  },
-  iconBox: {
-    width: 72,
-    height: 72,
-    borderRadius: theme.radius.xl,
+    width: 40,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: theme.spacing.md,
+    marginLeft: -10,
   },
-  badge: {
-    marginBottom: theme.spacing.md,
+  brandLockup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+  },
+  brandRule: {
+    width: 18,
+    height: 2,
+    backgroundColor: GOLD,
+  },
+  brandName: {
+    color: '#F4E6C8',
+    fontSize: 10,
+    letterSpacing: 1.25,
+  },
+  deleteButton: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: -10,
+  },
+  headerSpacer: {
+    width: 30,
+  },
+  headerPressed: {
+    opacity: 0.62,
+  },
+  heroCopy: {
+    marginTop: theme.spacing.xl,
+  },
+  documentTypeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 7,
+  },
+  typeRule: {
+    width: 14,
+    height: 2,
+  },
+  documentType: {
+    color: GOLD,
+    fontSize: 10,
+    letterSpacing: 1.1,
+  },
+  correctionMarker: {
+    color: '#F4E6C8',
+    fontSize: 10,
+    letterSpacing: 0.8,
   },
   title: {
-    marginBottom: theme.spacing.xs,
-    letterSpacing: -0.3,
+    marginTop: theme.spacing.sm,
+    color: '#FFFFFF',
+    fontSize: 29,
+    lineHeight: 35,
+    letterSpacing: -0.8,
   },
-  date: {
-    marginBottom: theme.spacing.md,
-  },
-  heroPills: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: theme.spacing.sm,
-  },
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.xs,
-    backgroundColor: theme.colors.surfaceRaised,
-    borderRadius: theme.radius.full,
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: theme.spacing.xs,
-  },
-  pillText: {
-    marginLeft: 2,
-  },
-  correctionBadge: {
-    marginTop: theme.spacing.lg,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.accentWash,
-    borderRadius: theme.radius.full,
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: theme.spacing.xs,
-  },
-  correctionBadgeText: {
-    marginLeft: theme.spacing.xs,
-    color: theme.colors.accentDark,
-  },
-  statsRow: {
-    flexDirection: 'row',
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.lg,
-    padding: theme.spacing.lg,
-    marginBottom: theme.spacing.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 1,
-  },
-  statBox: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  statIconWrap: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: theme.spacing.xs,
-  },
-  statDivider: {
-    width: 1,
-    backgroundColor: theme.colors.borderLight,
-  },
-  statValue: {
-    marginBottom: 2,
-  },
-  successCard: {
-    flexDirection: 'row',
-    backgroundColor: theme.colors.successWash,
-    borderRadius: theme.radius.lg,
-    padding: theme.spacing.lg,
-    marginBottom: theme.spacing.lg,
-    borderWidth: 1,
-    borderColor: '#D1FAE5',
-  },
-  successIcon: {
-    marginRight: theme.spacing.md,
-    paddingTop: 2,
-  },
-  successText: {
-    marginTop: 4,
-    marginBottom: theme.spacing.md,
+  documentSummary: {
+    marginTop: theme.spacing.sm,
+    color: 'rgba(255,255,255,0.68)',
+    fontSize: 14,
     lineHeight: 20,
   },
-  quickActions: {
-    flexDirection: 'row',
-    gap: theme.spacing.sm,
+  scrollContent: {
+    paddingHorizontal: theme.spacing.xl,
+    paddingTop: theme.spacing.xl,
   },
-  quickActionButton: {
+  metrics: {
+    flexDirection: 'row',
+    marginBottom: theme.spacing.xl,
+    paddingBottom: theme.spacing.lg,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: LINE,
+  },
+  metric: {
     flex: 1,
+    alignItems: 'flex-start',
+    gap: 2,
+  },
+  metricDivider: {
+    width: StyleSheet.hairlineWidth,
+    marginHorizontal: theme.spacing.xl,
+    backgroundColor: LINE,
+  },
+  metricValue: {
+    color: NAVY,
+    fontSize: 20,
+    lineHeight: 25,
+  },
+  metricLabel: {
+    color: NAVY_SOFT,
+    fontSize: 11,
+  },
+  localNotice: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+    marginBottom: theme.spacing.xl,
+    paddingVertical: theme.spacing.md,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: LINE,
+  },
+  localNoticeCopy: {
+    flex: 1,
+  },
+  localNoticeTitle: {
+    color: NAVY,
+    fontSize: 14,
+  },
+  localNoticeText: {
+    marginTop: 1,
+    color: NAVY_SOFT,
+    fontSize: 11,
+  },
+  shareLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  shareLabel: {
+    color: BURGUNDY,
+    fontFamily: theme.fontFamily.semiBold,
+    fontSize: 11,
+  },
+  linkPressed: {
+    opacity: 0.62,
   },
   section: {
     marginBottom: theme.spacing.xl,
   },
-  sectionTitle: {
-    marginBottom: theme.spacing.md,
-  },
-  descriptionText: {
-    lineHeight: 22,
-  },
-  infoCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.lg,
-    padding: theme.spacing.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 1,
-  },
-  correctionCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.lg,
-    padding: theme.spacing.lg,
-    marginTop: theme.spacing.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 1,
-  },
-  correctionRow: {
+  sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: theme.spacing.md,
+    marginBottom: theme.spacing.md,
   },
-  correctionIconContainer: {
-    width: 44,
-    height: 44,
-    borderRadius: theme.radius.xl,
-    backgroundColor: theme.colors.accentWash,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: theme.spacing.md,
+  sectionEyebrow: {
+    color: NAVY_SOFT,
+    fontSize: 10,
+    letterSpacing: 1.05,
   },
-  correctionContent: {
+  sectionRule: {
     flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: LINE,
   },
-  correctionTitle: {
-    marginBottom: theme.spacing.xs,
+  descriptionText: {
+    color: NAVY_SOFT,
+    lineHeight: 22,
   },
-  correctionDescription: {
-    lineHeight: 20,
-  },
-  correctionActions: {
-    marginTop: theme.spacing.lg,
-  },
-  correctionButton: {
-    width: '100%',
+  infoList: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: LINE,
   },
   infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: theme.spacing.sm + 2,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
+    gap: theme.spacing.md,
+    paddingVertical: theme.spacing.md,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: LINE,
   },
   infoRowLast: {
     borderBottomWidth: 0,
   },
-  infoIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: theme.radius.md,
-    backgroundColor: theme.colors.surfaceRaised,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: theme.spacing.md,
-  },
   infoTextContainer: {
     flex: 1,
   },
+  infoLabel: {
+    color: NAVY_SOFT,
+    fontSize: 10,
+    letterSpacing: 0.9,
+  },
+  infoValue: {
+    marginTop: 2,
+    color: NAVY,
+    fontSize: 14,
+  },
+  correctionSection: {
+    marginBottom: theme.spacing.xl,
+    paddingTop: theme.spacing.xl,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: LINE,
+  },
+  correctionDescription: {
+    color: NAVY_SOFT,
+    lineHeight: 21,
+  },
+  correctionAction: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing.sm,
+    minHeight: 48,
+    marginTop: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.lg,
+    backgroundColor: BURGUNDY,
+    borderRadius: theme.radius.sm,
+  },
+  correctionActionPressed: {
+    opacity: 0.86,
+  },
+  correctionActionText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+  correctionProgress: {
+    marginTop: theme.spacing.sm,
+    height: 2,
+  },
   actionBar: {
     position: 'absolute',
+    right: 0,
     bottom: 0,
     left: 0,
-    right: 0,
-    backgroundColor: theme.colors.surface,
-    paddingHorizontal: theme.spacing.lg,
+    backgroundColor: SURFACE,
+    paddingHorizontal: theme.spacing.xl,
     paddingTop: theme.spacing.md,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.borderLight,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  actionButton: {
-    width: '100%',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: LINE,
   },
   progressContainer: {
     marginBottom: theme.spacing.sm,
   },
   progressText: {
     marginBottom: theme.spacing.xs,
+    color: NAVY_SOFT,
+    fontSize: 11,
     textAlign: 'center',
+  },
+  primaryProgress: {
+    height: 2,
+  },
+  primaryAction: {
+    minHeight: 52,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing.sm,
+    backgroundColor: NAVY,
+    borderRadius: theme.radius.sm,
+  },
+  primaryActionDownloaded: {
+    backgroundColor: SURFACE,
+    borderWidth: 1,
+    borderColor: NAVY,
+  },
+  primaryActionPressed: {
+    opacity: 0.86,
+  },
+  primaryActionLabel: {
+    color: '#FFFFFF',
+    fontSize: 15,
+  },
+  primaryActionLabelDownloaded: {
+    color: NAVY,
+  },
+  actionDisabled: {
+    opacity: 0.56,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(15, 23, 42, 0.55)',
-    justifyContent: 'center',
     alignItems: 'center',
-    padding: theme.spacing.lg,
+    justifyContent: 'center',
+    padding: theme.spacing.xl,
+    backgroundColor: 'rgba(13, 27, 50, 0.62)',
   },
   modalContent: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.xl,
-    padding: theme.spacing.xl,
     width: '100%',
+    maxWidth: 420,
     alignItems: 'center',
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.18,
-    shadowRadius: 24,
-    elevation: 10,
+    padding: theme.spacing.xl,
+    backgroundColor: SURFACE,
+    borderRadius: theme.radius.lg,
   },
-  modalIconBox: {
-    width: 56,
-    height: 56,
-    borderRadius: theme.radius.full,
-    backgroundColor: theme.colors.accentWash,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: theme.spacing.md,
+  modalRule: {
+    width: 22,
+    height: 2,
+    backgroundColor: GOLD,
+  },
+  modalEyebrow: {
+    marginTop: theme.spacing.md,
+    color: BURGUNDY,
+    fontSize: 10,
+    letterSpacing: 1,
   },
   modalTitle: {
-    marginBottom: theme.spacing.sm,
+    marginTop: theme.spacing.sm,
+    color: NAVY,
   },
   modalText: {
-    marginBottom: theme.spacing.xl,
-    lineHeight: 22,
+    marginTop: theme.spacing.sm,
+    color: NAVY_SOFT,
+    lineHeight: 21,
   },
   checkboxRow: {
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    marginBottom: theme.spacing.lg,
+    marginTop: theme.spacing.xl,
   },
   checkbox: {
     width: 22,
     height: 22,
-    borderRadius: theme.radius.sm,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: theme.spacing.md,
+    borderWidth: 1,
+    borderColor: NAVY_SOFT,
+    borderRadius: theme.radius.sm,
   },
   checkboxChecked: {
-    backgroundColor: theme.colors.primary,
-    borderColor: theme.colors.primary,
+    backgroundColor: NAVY,
+    borderColor: NAVY,
   },
   checkboxLabel: {
     flex: 1,
-    lineHeight: 20,
+    color: NAVY,
+    fontSize: 13,
+    lineHeight: 19,
   },
   modalActions: {
     width: '100%',
-    gap: theme.spacing.md,
+    gap: theme.spacing.sm,
+    marginTop: theme.spacing.xl,
   },
-  modalButton: {
-    width: '100%',
+  modalSecondary: {
+    minHeight: 46,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalSecondaryLabel: {
+    color: NAVY_SOFT,
+    fontSize: 14,
+  },
+  modalPrimary: {
+    minHeight: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.lg,
+    backgroundColor: BURGUNDY,
+    borderRadius: theme.radius.sm,
+  },
+  modalPrimaryLabel: {
+    color: '#FFFFFF',
+    fontSize: 14,
   },
 });
 

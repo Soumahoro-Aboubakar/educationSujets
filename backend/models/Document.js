@@ -239,6 +239,7 @@ DocumentSchema.index({ isDeleted: 1, deletedAt: 1 });
 DocumentSchema.index({ university: 1, department: 1, level: 1, semester: 1, category: 1, contestType: 1 });
 DocumentSchema.index({ institution: 1, taxonomyNodes: 1, documentType: 1, status: 1 });
 DocumentSchema.index({ noeudId: 1, matiereId: 1, type: 1, status: 1, isDeleted: 1 });
+DocumentSchema.index({ noeudId: 1, matiereId: 1, type: 1, status: 1, isDeleted: 1, dateAjout: -1, createdAt: -1 });
 DocumentSchema.index({ sujetParentId: 1, type: 1 });
 DocumentSchema.index({ storageKey: 1 }, { unique: true, sparse: true });
 

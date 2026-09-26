@@ -6,11 +6,15 @@ import useDownloadStore from '../store/useDownloadStore';
  * @returns {Array} List of downloaded documents
  */
 export const useOfflineDocuments = () => {
-  const { getDownloadedDocuments, hydrated } = useDownloadStore();
+  const downloads = useDownloadStore((state) => state.downloads);
+  const hydrated = useDownloadStore((state) => state.hydrated);
 
   const documents = useMemo(() => {
-    return hydrated ? getDownloadedDocuments() : [];
-  }, [hydrated, getDownloadedDocuments]);
+    if (!hydrated) return [];
+    return Object.entries(downloads)
+      .map(([id, entry]) => ({ id, ...entry }))
+      .sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+  }, [downloads, hydrated]);
 
   return documents;
 };

@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const Document = require('../models/Document');
 const Institution = require('../models/Institution');
 const TaxonomyNode = require('../models/TaxonomyNode');
+const Noeud = require('../models/Noeud');
+const Matiere = require('../models/Matiere');
+const Organisme = require('../models/Organisme');
 const ParcoursType = require('../models/ParcoursType');
 const { getLeafContext } = require('./dynamicCatalogService');
 const { validateDocumentTaxonomy } = require('./catalogService');
@@ -359,15 +362,51 @@ const listDynamicDocuments = async (params = {}, user = null) => {
   }
   filter.status = 'approved';
 
-  const candidates = await Document.find(filter).sort('-dateAjout -createdAt').lean();
-  const normalizedSearch = normalizeTitle(params.recherche || params.search || '');
-  const matching = normalizedSearch
-    ? candidates.filter((document) => normalizeTitle(document.titre || document.title || document.originalFileName).includes(normalizedSearch))
-    : candidates;
-  const limit = Number.parseInt(params.limit, 10) || 12;
-  const page = Number.parseInt(params.page, 10) || 1;
-  const start = (page - 1) * limit;
-  const pageItems = matching.slice(start, start + limit);
+  const numericPage = Math.max(Number.parseInt(params.page, 10) || 1, 1);
+  const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 12, 1), 100);
+  const rawSearch = String(params.recherche || params.search || '').trim();
+  const searchTokens = rawSearch.split(/\s+/).filter(Boolean);
+
+  if (searchTokens.length) {
+    const [organisme, parentNodes] = await Promise.all([
+      Organisme.findById(node.organismeId).select('nom').lean(),
+      (async () => {
+        const ancestors = [];
+        let parentId = node.parentId;
+        while (parentId) {
+          const parent = await Noeud.findById(parentId).select('nom parentId').lean();
+          if (!parent) break;
+          ancestors.push(parent);
+          parentId = parent.parentId;
+        }
+        return ancestors;
+      })(),
+    ]);
+    const searchableContext = [
+      matiere.nom,
+      node.nom,
+      organisme?.nom,
+      ...parentNodes.map((parent) => parent.nom),
+    ].map(normalizeTitle);
+    const contentFields = ['titre', 'title', 'description', 'originalFileName'];
+    const matchingTokens = searchTokens
+      .filter((token) => !searchableContext.some((value) => value.includes(normalizeTitle(token))))
+      .map((token) => {
+        const regex = new RegExp(escapeRegex(token), 'i');
+        return { $or: contentFields.map((field) => ({ [field]: regex })) };
+      });
+
+    if (matchingTokens.length) filter.$and = matchingTokens;
+  }
+
+  const [pageItems, total] = await Promise.all([
+    Document.find(filter)
+      .sort({ dateAjout: -1, createdAt: -1, _id: -1 })
+      .skip((numericPage - 1) * limit)
+      .limit(limit)
+      .lean(),
+    Document.countDocuments(filter),
+  ]);
   const data = await Promise.all(pageItems.map(async (subject) => {
     const correction = await Document.findOne(activeCorrectionFilter(subject._id))
       .sort('-dateAjout -createdAt')
@@ -377,7 +416,7 @@ const listDynamicDocuments = async (params = {}, user = null) => {
 
   return {
     data,
-    pagination: { total: matching.length, page, pages: Math.ceil(matching.length / limit), limit },
+    pagination: { total, page: numericPage, pages: Math.ceil(total / limit), limit },
   };
 };
 

@@ -1,157 +1,28 @@
 import React from 'react';
-import { FlatList, StyleSheet, View, RefreshControl } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FileText } from 'lucide-react-native';
 import DocumentCard from './DocumentCard';
 import Skeleton from '../ui/Skeleton';
-import EmptyState from '../ui/EmptyState';
-import theme from '../../theme/tokens';
+import Text from '../ui/Text';
 import useDownloadStore from '../../store/useDownloadStore';
+import theme from '../../theme/tokens';
 
-/**
- * List of documents with loading, empty states, and infinite scroll
- */
-const DocumentList = ({
-  documents = [],
-  isLoading = false,
-  isFetchingNextPage = false,
-  hasNextPage = false,
-  onLoadMore,
-  onRefresh,
-  isRefreshing = false,
-  onDocumentPress,
-  emptyStateTitle,
-  emptyStateDescription,
-  ListHeaderComponent,
-}) => {
+const NAVY = '#0D1B32';
+const SOFT = '#4F5E72';
+const BURGUNDY = '#6C2838';
+const LINE = '#DED8CC';
+
+const DocumentList = ({ documents = [], isLoading = false, isFetchingNextPage = false, hasNextPage = false, onLoadMore, onRefresh, isRefreshing = false, onDocumentPress, emptyStateTitle, emptyStateDescription, ListHeaderComponent }) => {
   const { activeDownloads, isDownloaded } = useDownloadStore();
-
-  const renderItem = ({ item }) => {
-    const isDownloading = !!activeDownloads[item._id]?.downloading;
-    const progress = activeDownloads[item._id]?.progress || 0;
-    const downloaded = isDownloaded(item._id);
-
-    return (
-      <DocumentCard
-        document={item}
-        onPress={() => onDocumentPress && onDocumentPress(item)}
-        isDownloading={isDownloading}
-        downloadProgress={progress}
-        isDownloaded={downloaded}
-      />
-    );
-  };
-
-  const renderSkeleton = () => (
-    <View style={styles.skeletonContainer}>
-      {[1, 2, 3, 4].map((key) => (
-        <View key={key} style={styles.skeletonCard}>
-          <View style={styles.skeletonHeader}>
-            <Skeleton width={60} height={24} />
-            <Skeleton width={80} height={16} />
-          </View>
-          <Skeleton width="90%" height={24} style={styles.skeletonTitle} />
-          <Skeleton width="70%" height={16} style={styles.skeletonDesc} />
-          <View style={styles.skeletonTags}>
-            <Skeleton width={80} height={24} />
-            <Skeleton width={100} height={24} />
-          </View>
-        </View>
-      ))}
-    </View>
-  );
-
-  const renderFooter = () => {
-    if (!isFetchingNextPage) return null;
-    return (
-      <View style={styles.footerLoader}>
-        <Skeleton width={150} height={20} />
-      </View>
-    );
-  };
-
-  if (isLoading && documents.length === 0) {
-    return (
-      <View style={styles.container}>
-        {ListHeaderComponent}
-        {renderSkeleton()}
-      </View>
-    );
-  }
-
-  return (
-    <FlatList
-      data={documents}
-      keyExtractor={(item) => item._id}
-      renderItem={renderItem}
-      contentContainerStyle={[
-        styles.listContent,
-        documents.length === 0 && styles.emptyContent,
-      ]}
-      ListHeaderComponent={ListHeaderComponent}
-      ListEmptyComponent={
-        <EmptyState
-          title={emptyStateTitle}
-          description={emptyStateDescription}
-        />
-      }
-      ListFooterComponent={renderFooter}
-      onEndReached={hasNextPage ? onLoadMore : null}
-      onEndReachedThreshold={0.5}
-      refreshControl={
-        onRefresh ? (
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-            colors={[theme.colors.primary]}
-            tintColor={theme.colors.primary}
-          />
-        ) : undefined
-      }
-      showsVerticalScrollIndicator={false}
-    />
-  );
+  const renderItem = ({ item }) => <DocumentCard document={item} onPress={() => onDocumentPress?.(item)} isDownloading={!!activeDownloads[item._id]?.downloading} downloadProgress={activeDownloads[item._id]?.progress || 0} isDownloaded={isDownloaded(item._id)} />;
+  const skeleton = <View style={styles.skeletonContainer}>{[1, 2, 3, 4].map((key) => <View key={key} style={styles.skeletonRow}><View style={styles.skeletonTop}><Skeleton width={46} height={11} /><Skeleton width={68} height={11} /></View><Skeleton width="78%" height={21} style={styles.skeletonTitle} /><Skeleton width="52%" height={14} /></View>)}</View>;
+  const empty = <View style={styles.empty}><FileText size={31} color={BURGUNDY} strokeWidth={1.45} /><Text variant="h3" style={styles.emptyTitle} align="center">{emptyStateTitle}</Text><Text variant="body" style={styles.emptyDescription} align="center">{emptyStateDescription}</Text></View>;
+  if (isLoading && !documents.length) return <View style={styles.container}><View style={styles.list}>{ListHeaderComponent}{skeleton}</View></View>;
+  return <FlatList data={documents} keyExtractor={(item) => item._id} renderItem={renderItem} contentContainerStyle={[styles.list, !documents.length && styles.emptyContent]} ListHeaderComponent={ListHeaderComponent} ListEmptyComponent={empty} ListFooterComponent={isFetchingNextPage ? <View style={styles.footer}><ActivityIndicator size="small" color={BURGUNDY} /><Text variant="caption" style={styles.footerText}>Chargement des sujets…</Text></View> : null} onEndReached={hasNextPage ? onLoadMore : null} onEndReachedThreshold={.45} refreshControl={onRefresh ? <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} colors={[BURGUNDY]} tintColor={BURGUNDY} /> : undefined} showsVerticalScrollIndicator={false} />;
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  listContent: {
-    padding: theme.spacing.md,
-    paddingBottom: theme.spacing['4xl'],
-  },
-  emptyContent: {
-    flexGrow: 1,
-  },
-  skeletonContainer: {
-    padding: theme.spacing.md,
-  },
-  skeletonCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.lg,
-    padding: theme.spacing.lg,
-    marginBottom: theme.spacing.md,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-  },
-  skeletonHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: theme.spacing.md,
-  },
-  skeletonTitle: {
-    marginBottom: theme.spacing.sm,
-  },
-  skeletonDesc: {
-    marginBottom: theme.spacing.lg,
-  },
-  skeletonTags: {
-    flexDirection: 'row',
-    gap: theme.spacing.sm,
-  },
-  footerLoader: {
-    paddingVertical: theme.spacing.xl,
-    alignItems: 'center',
-  },
+  container: { flex: 1 }, list: { flexGrow: 1, paddingHorizontal: theme.spacing.xl, paddingBottom: theme.spacing['4xl'] }, emptyContent: { flexGrow: 1 }, skeletonContainer: { paddingTop: theme.spacing.sm }, skeletonRow: { paddingVertical: theme.spacing.xl, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: LINE }, skeletonTop: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: theme.spacing.md }, skeletonTitle: { marginBottom: theme.spacing.sm }, empty: { flex: 1, minHeight: 280, alignItems: 'center', justifyContent: 'center', paddingHorizontal: theme.spacing.xl }, emptyTitle: { marginTop: theme.spacing.base, color: NAVY }, emptyDescription: { maxWidth: 285, marginTop: theme.spacing.sm, color: SOFT }, footer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: theme.spacing.sm, paddingVertical: theme.spacing.xl }, footerText: { color: SOFT },
 });
 
 export default DocumentList;

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Alert, Share } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import * as IntentLauncher from 'expo-intent-launcher';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
@@ -24,12 +24,20 @@ export const openDownloadedFile = async (document, { getLocalUri, removeDownload
       return;
     }
 
-    const contentUri = await FileSystem.getContentUriAsync(localUri);
-    await IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
-      data: contentUri,
-      flags: 1,
-      type: document.mimeType || '*/*',
-    });
+    if (Platform.OS === 'android') {
+      const contentUri = await FileSystem.getContentUriAsync(localUri);
+      await IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
+        data: contentUri,
+        flags: 1,
+        type: document.mimeType || '*/*',
+      });
+    } else {
+      await Sharing.shareAsync(localUri, {
+        UTI: document.mimeType || 'application/pdf',
+        mimeType: document.mimeType || 'application/pdf',
+        dialogTitle: `Ouvrir ${document.title || document.titre || 'le document'}`,
+      });
+    }
   } catch (error) {
     console.error('Open error:', error);
     Alert.alert(

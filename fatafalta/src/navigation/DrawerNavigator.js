@@ -24,7 +24,7 @@ const DrawerNavigator = () => {
         },
       }}
     >
-      <Drawer.Screen name="MainTabs" component={TabNavigator} />
+      <Drawer.Screen name="AppTabs" component={TabNavigator} />
     </Drawer.Navigator>
   );
 };

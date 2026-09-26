@@ -1,5 +1,6 @@
 import React, { useMemo, useCallback, useImperativeHandle, useRef, useState } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, Modal, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { SlidersHorizontal, Building2, Layers, GraduationCap, Calendar, FolderOpen, Search } from 'lucide-react-native';
 import Text from '../ui/Text';
@@ -7,7 +8,6 @@ import Button from '../ui/Button';
 import FilterSelect from './FilterSelect';
 import theme from '../../theme/tokens';
 import { FILTER_DEFINITIONS } from '../../types/constants';
-import { Modal, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
 import { X, Check } from 'lucide-react-native';
 
 // Map string icon names to Lucide components
