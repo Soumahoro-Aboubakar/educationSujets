@@ -1,60 +1,64 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
   Modal,
   Pressable,
   ScrollView,
-  StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
 import {
-  ArrowLeft,
-  ArrowUpRight,
-  Building2,
-  Calendar,
   Check,
   CheckCircle2,
   Download,
-  Eye,
+  FileCheck,
   FileText,
-  FolderOpen,
-  GraduationCap,
-  Layers,
+  Lock,
   Share2,
   Trash2,
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
+import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
+import StateView from '../components/ui/StateView';
 import ProgressBar from '../components/ui/ProgressBar';
+import { SkeletonRows } from '../components/ui/Skeleton';
 import { useDocument } from '../hooks/useDocument';
 import { useDownload } from '../hooks/useDownload';
+import { useDocumentAccess } from '../hooks/useDocumentAccess';
+import AccessSheet from '../components/access/AccessSheet';
 import useCorrectionPromptPreference from '../hooks/useCorrectionPromptPreference';
-import { getFileIcon } from '../utils/fileIcons';
-import { formatDate, formatFileSize } from '../utils/format';
+import { formatDate, formatFileSize, formatNumber } from '../utils/format';
+import { getCorrection, getDocumentTitle, getExtensionLabel } from '../utils/document';
 import AuthContext from '../context/AuthContext';
 import { deleteDocument } from '../services/documents';
 import theme from '../theme/tokens';
 
-const NAVY = '#0D1B32';
-const NAVY_SOFT = '#4F5E72';
-const SURFACE = '#FCFAF5';
-const GOLD = '#B48A48';
-const BURGUNDY = '#6C2838';
-const LINE = '#DED8CC';
+const { brand } = theme;
 
-const InfoRow = ({ icon: Icon, label, value, isLast }) => {
+const labelOf = (item) => item?.nom || item?.name || '';
+const capitalize = (value) => (value ? value.charAt(0).toLocaleUpperCase() + value.slice(1) : value);
+
+// Chaîne des nœuds du catalogue (racine → feuille) à partir du nœud peuplé par l'API.
+const nodeChain = (node) => {
+  const chain = [];
+  let current = node;
+  while (current && typeof current === 'object' && current.nom) {
+    chain.unshift(current);
+    current = current.parentId;
+  }
+  return chain;
+};
+
+const InfoRow = ({ label, value, isLast }) => {
   if (!value) return null;
-
   return (
     <View style={[styles.infoRow, isLast && styles.infoRowLast]}>
-      <Icon size={16} color={NAVY_SOFT} strokeWidth={1.75} />
-      <View style={styles.infoTextContainer}>
-        <Text variant="overline" style={styles.infoLabel}>{label}</Text>
-        <Text variant="bodyMedium" style={styles.infoValue}>{value}</Text>
-      </View>
+      <Text variant="caption" style={styles.infoLabel}>{label}</Text>
+      <Text variant="bodyMedium" style={styles.infoValue}>{value}</Text>
     </View>
   );
 };
@@ -63,11 +67,15 @@ const DocumentDetailScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const { documentId, document: initialDocument } = route.params;
+  const { documentId, document: initialDocument, context } = route.params;
 
-  const { data: document = initialDocument, refetch } = useDocument(documentId);
-  const subjectDownload = useDownload(document);
-  const correctionDownload = useDownload(document?.correction);
+  const { data, refetch, isError } = useDocument(documentId);
+  const document = data || initialDocument;
+  // La liste fournit `correction` ; le détail fournit `dynamicCorrection`.
+  const correction = getCorrection(document) || getCorrection(initialDocument);
+  const access = useDocumentAccess(navigation);
+  const subjectDownload = useDownload(document, { onAccessDenied: access.deny });
+  const correctionDownload = useDownload(correction, { onAccessDenied: access.deny });
   const {
     enabled: promptEnabled,
     setEnabled: setPromptEnabled,
@@ -79,12 +87,9 @@ const DocumentDetailScreen = () => {
   const [dontAskAgain, setDontAskAgain] = useState(false);
   const [wasSubjectDownloading, setWasSubjectDownloading] = useState(false);
 
-  const isCorrection = document?.documentType === 'corrige';
-  const hasCorrection = !isCorrection && !!document?.correction?._id;
-  const displayTitle = document?.title
-    || document?.titre
-    || document?.originalFileName
-    || (isCorrection ? 'Corrigé' : 'Document PDF');
+  const isCorrection = document?.documentType === 'corrige' || document?.type === 'correction';
+  const hasCorrection = !isCorrection && Boolean(correction);
+  const displayTitle = getDocumentTitle(document);
 
   const {
     isInitializing: isSubjectInitializing,
@@ -97,6 +102,7 @@ const DocumentDetailScreen = () => {
   } = subjectDownload;
 
   const {
+    isInitializing: isCorrectionInitializing,
     isDownloading: isCorrectionDownloading,
     progress: correctionProgress,
     isDownloaded: isCorrectionDownloaded,
@@ -128,12 +134,39 @@ const DocumentDetailScreen = () => {
       && isSubjectDownloaded
       && hasCorrection
       && promptEnabled
+      && !isCorrectionDownloaded
     ) {
       setShowCorrectionModal(true);
     }
 
     setWasSubjectDownloading(isSubjectDownloading);
-  }, [wasSubjectDownloading, isSubjectDownloading, isSubjectDownloaded, hasCorrection, promptEnabled, promptLoaded]);
+  }, [wasSubjectDownloading, isSubjectDownloading, isSubjectDownloaded, hasCorrection, promptEnabled, promptLoaded, isCorrectionDownloaded]);
+
+  // Contexte du sujet : données du détail si peuplées, sinon celles du parcours.
+  const details = useMemo(() => {
+    if (!document) return [];
+    const niveaux = context?.organisme?.structure?.niveaux || [];
+    const chain = nodeChain(document.noeudId);
+    const path = chain.length ? chain : (context?.path || []);
+    const rows = [
+      ['Organisme', labelOf(context?.organisme)],
+      ['Parcours', labelOf(document.parcoursTypeId) || labelOf(context?.parcoursType)],
+      ...path.map((node, index) => [niveaux[index]?.libelleSingulier || 'Niveau', labelOf(node)]),
+      ['Matière', labelOf(document.matiereId) || labelOf(context?.matiere)],
+      ['Institution', document.institution?.name],
+      ['Université', document.university?.name],
+      ['Département', document.department?.name],
+      ['Niveau', document.level?.name],
+      ['Session', document.semester?.displayName || document.semester?.name],
+      ['Catégorie', document.category?.name],
+      ...(document.taxonomyNodes || []).map((node) => [
+        node.type ? capitalize(node.type.replace(/[-_]/g, ' ')) : 'Niveau',
+        node.name,
+      ]),
+      ['Ajouté le', formatDate(document.dateAjout || document.createdAt)],
+    ];
+    return rows.filter(([, value]) => Boolean(value));
+  }, [context, document]);
 
   const handleToggleDontAskAgain = async () => {
     const nextValue = !dontAskAgain;
@@ -141,21 +174,16 @@ const DocumentDetailScreen = () => {
     await setPromptEnabled(!nextValue);
   };
 
+  // Un fichier déjà enregistré s'ouvre toujours ; un téléchargement passe par le contrôle d'accès.
   const handlePrimaryAction = () => {
-    if (isSubjectDownloaded) {
-      openSubject();
-    } else {
-      downloadSubject();
-    }
+    if (isSubjectDownloaded) openSubject();
+    else access.guard(downloadSubject)();
   };
 
   const handleCorrectionAction = () => {
     if (!hasCorrection) return;
-    if (isCorrectionDownloaded) {
-      openCorrection();
-    } else {
-      downloadCorrection();
-    }
+    if (isCorrectionDownloaded) openCorrection();
+    else access.guard(downloadCorrection)();
   };
 
   const handleDelete = () => {
@@ -186,213 +214,216 @@ const DocumentDetailScreen = () => {
     if (dontAskAgain) {
       await setPromptEnabled(false);
     }
-
     if (downloadNow) {
       downloadCorrection();
     }
   };
 
-  if (!document) return null;
+  const eyebrow = [labelOf(context?.organisme), labelOf(document?.matiereId) || labelOf(context?.matiere)]
+    .filter(Boolean)
+    .join(' · ') || (isCorrection ? 'Corrigé' : 'Sujet');
 
-  const fileConfig = getFileIcon(document.fileType || document.extension);
-  const primaryLabel = isSubjectDownloaded
-    ? (isCorrection ? 'Ouvrir le corrigé' : 'Ouvrir le PDF')
-    : (isCorrection ? 'Télécharger le corrigé' : 'Télécharger le PDF');
+  // Ouverture sans données préchargées (lien direct) : squelette puis erreur éventuelle.
+  if (!document) {
+    return (
+      <View style={styles.container}>
+        <ScreenHeader onBack={() => navigation.goBack()} eyebrow="Sujet" title={isError ? 'Sujet introuvable' : 'Chargement…'} />
+        {isError ? (
+          <StateView
+            icon={FileText}
+            title="Connexion impossible"
+            description="Ce sujet n’a pas pu être chargé. Vérifie ta connexion puis réessaie."
+            onRetry={refetch}
+          />
+        ) : <SkeletonRows count={5} />}
+      </View>
+    );
+  }
+
+  const fileLabel = [getExtensionLabel(document), formatFileSize(document.fileSize)].filter(Boolean).join(' · ');
+  const subjectNoun = isCorrection ? 'le corrigé' : 'le sujet';
+  const isLocked = Boolean(access.locked) && !isSubjectDownloaded;
+  const primaryLabel = isSubjectDownloading
+    ? `Téléchargement… ${Math.round(subjectProgress * 100)} %`
+    : isSubjectDownloaded ? `Ouvrir ${subjectNoun}` : isLocked ? `Débloquer ${subjectNoun}` : `Télécharger ${subjectNoun}`;
+  const primaryBusy = isSubjectDownloading || isSubjectInitializing;
+  const correctionBusy = isCorrectionDownloading || isCorrectionInitializing;
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-
-      <View style={[styles.hero, { paddingTop: insets.top + theme.spacing.base }]}>
-        <View style={styles.topBar}>
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Retour"
-            hitSlop={theme.hitSlop}
-            onPress={() => navigation.goBack()}
-            style={({ pressed }) => [styles.backButton, pressed && styles.headerPressed]}
-          >
-            <ArrowLeft size={21} color="#FFFFFF" strokeWidth={1.9} />
-          </Pressable>
-
-          <View style={styles.brandLockup}>
-            <View style={styles.brandRule} />
-            <Text variant="overline" style={styles.brandName}>Éducation CI</Text>
-          </View>
-
-          {canDelete ? (
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Supprimer le document"
-              hitSlop={theme.hitSlop}
-              onPress={handleDelete}
-              style={({ pressed }) => [styles.deleteButton, pressed && styles.headerPressed]}
-            >
-              <Trash2 size={18} color="#F4E6C8" strokeWidth={1.8} />
-            </Pressable>
-          ) : <View style={styles.headerSpacer} />}
+      <ScreenHeader
+        onBack={() => navigation.goBack()}
+        eyebrow={eyebrow}
+        title={displayTitle}
+        titleLines={3}
+        right={canDelete ? (
+          <HeaderIconButton icon={Trash2} label="Supprimer le document" onPress={handleDelete} />
+        ) : null}
+      >
+        <View style={styles.headerTags}>
+          <Text variant="caption" style={styles.headerTag}>{fileLabel}</Text>
+          {hasCorrection ? (
+            <View style={styles.headerChip}>
+              <FileCheck size={12} color={brand.ink} strokeWidth={2} />
+              <Text style={styles.headerChipLabel}>Corrigé disponible</Text>
+            </View>
+          ) : null}
         </View>
-
-        <View style={styles.heroCopy}>
-          <View style={styles.documentTypeRow}>
-            <View style={[styles.typeRule, { backgroundColor: fileConfig.label === 'PDF' ? BURGUNDY : GOLD }]} />
-            <Text variant="overline" style={styles.documentType}>{fileConfig.label}</Text>
-            {document.correction ? <Text variant="overline" style={styles.correctionMarker}>Corrigé disponible</Text> : null}
-          </View>
-          <Text variant="h1" style={styles.title} numberOfLines={3}>{displayTitle}</Text>
-          <Text variant="body" style={styles.documentSummary}>
-            Ajouté le {formatDate(document.createdAt)} · {document.downloads || 0} téléchargement{document.downloads > 1 ? 's' : ''}
-          </Text>
-        </View>
-      </View>
+      </ScreenHeader>
 
       <ScrollView
-        contentContainerStyle={[styles.scrollContent, { paddingBottom: 156 + Math.max(insets.bottom, theme.spacing.lg) }]}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: 120 + Math.max(insets.bottom, theme.spacing.lg) }]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.metrics}>
-          <View style={styles.metric}>
-            <Download size={16} color={BURGUNDY} strokeWidth={1.8} />
-            <Text variant="h3" style={styles.metricValue}>{document.downloads || 0}</Text>
-            <Text variant="caption" style={styles.metricLabel}>Téléchargements</Text>
-          </View>
-          <View style={styles.metricDivider} />
-          <View style={styles.metric}>
-            <Eye size={16} color={GOLD} strokeWidth={1.8} />
-            <Text variant="h3" style={styles.metricValue}>{document.views || 0}</Text>
-            <Text variant="caption" style={styles.metricLabel}>Consultations</Text>
-          </View>
-        </View>
-
         {isSubjectDownloaded ? (
-          <View style={styles.localNotice}>
-            <CheckCircle2 size={19} color={GOLD} strokeWidth={1.8} />
-            <View style={styles.localNoticeCopy}>
-              <Text variant="bodyMedium" style={styles.localNoticeTitle}>Disponible hors connexion</Text>
-              <Text variant="caption" style={styles.localNoticeText}>Ce fichier est enregistré sur ton appareil.</Text>
-            </View>
+          <Animated.View entering={FadeIn.duration(200)} style={styles.localNotice}>
+            <CheckCircle2 size={18} color={brand.gold} strokeWidth={2} />
+            <Text variant="bodyMedium" style={styles.localNoticeTitle}>Enregistré sur ton appareil</Text>
             <Pressable
               accessibilityRole="button"
               accessibilityLabel="Partager le document"
+              hitSlop={theme.hitSlop}
               onPress={shareSubject}
               style={({ pressed }) => [styles.shareLink, pressed && styles.linkPressed]}
             >
-              <Share2 size={16} color={BURGUNDY} strokeWidth={1.8} />
+              <Share2 size={15} color={brand.burgundy} strokeWidth={2} />
               <Text variant="caption" style={styles.shareLabel}>Partager</Text>
             </Pressable>
-          </View>
+          </Animated.View>
+        ) : null}
+
+        {isLocked ? (
+          <Animated.View entering={FadeIn.duration(200)}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Document réservé aux membres. Voir comment y accéder."
+              onPress={handlePrimaryAction}
+              style={({ pressed }) => [styles.lockNotice, pressed && styles.secondaryPressed]}
+            >
+              <View style={styles.lockIcon}>
+                <Lock size={17} color={brand.ink} strokeWidth={2} />
+              </View>
+              <View style={styles.correctionCopy}>
+                <Text variant="bodyMedium" style={styles.correctionTitle}>Document réservé aux membres</Text>
+                <Text variant="caption" style={styles.correctionText}>
+                  {access.locked === 'AUTH_REQUIRED'
+                    ? 'Le document est disponible. Connecte-toi pour vérifier ton accès.'
+                    : 'Le document est disponible. Un abonnement actif est nécessaire pour le télécharger.'}
+                </Text>
+              </View>
+            </Pressable>
+          </Animated.View>
+        ) : null}
+
+        {!isCorrection ? (
+          <Animated.View entering={FadeInDown.duration(260).delay(60)} style={styles.correctionBlock}>
+            <View style={[styles.correctionIcon, !hasCorrection && styles.correctionIconMuted]}>
+              <FileCheck size={18} color={hasCorrection ? brand.goldInk : brand.inkMuted} strokeWidth={1.8} />
+            </View>
+            <View style={styles.correctionCopy}>
+              <Text variant="bodyMedium" style={styles.correctionTitle}>
+                {hasCorrection ? 'Corrigé disponible' : 'Pas encore de corrigé'}
+              </Text>
+              <Text variant="caption" style={styles.correctionText}>
+                {hasCorrection
+                  ? (isCorrectionDownloaded ? 'Enregistré sur ton appareil.' : 'Compare tes réponses une fois le sujet traité.')
+                  : 'Le corrigé de ce sujet n’a pas encore été publié.'}
+              </Text>
+              {isCorrectionDownloading ? (
+                <ProgressBar progress={correctionProgress} color={brand.gold} style={styles.correctionProgress} />
+              ) : null}
+            </View>
+            {hasCorrection ? (
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={isCorrectionDownloaded ? 'Ouvrir le corrigé' : 'Télécharger le corrigé'}
+                disabled={correctionBusy}
+                onPress={handleCorrectionAction}
+                style={({ pressed }) => [styles.correctionAction, pressed && styles.secondaryPressed, correctionBusy && styles.actionDisabled]}
+              >
+                {correctionBusy ? (
+                  <ActivityIndicator size="small" color={brand.ink} />
+                ) : (
+                  <Text variant="bodyMedium" style={styles.correctionActionLabel}>
+                    {isCorrectionDownloaded ? 'Ouvrir' : 'Télécharger'}
+                  </Text>
+                )}
+              </Pressable>
+            ) : null}
+          </Animated.View>
         ) : null}
 
         {document.description ? (
           <View style={styles.section}>
-            <View style={styles.sectionHeader}>
-              <Text variant="overline" style={styles.sectionEyebrow}>À propos</Text>
-              <View style={styles.sectionRule} />
-            </View>
+            <Text variant="overline" style={styles.sectionTitle}>À propos</Text>
             <Text variant="body" style={styles.descriptionText}>{document.description}</Text>
           </View>
         ) : null}
 
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text variant="overline" style={styles.sectionEyebrow}>Informations</Text>
-            <View style={styles.sectionRule} />
-          </View>
+          <Text variant="overline" style={styles.sectionTitle}>Informations</Text>
           <View style={styles.infoList}>
-            <InfoRow icon={Building2} label="Institution" value={document.institution?.name} />
-            <InfoRow icon={Building2} label="Université" value={document.university?.name} />
-            <InfoRow icon={Layers} label="Département" value={document.department?.name} />
-            <InfoRow icon={GraduationCap} label="Niveau" value={document.level?.name} />
-            <InfoRow icon={Calendar} label="Session" value={document.semester?.displayName || document.semester?.name} />
-            <InfoRow icon={FolderOpen} label="Catégorie" value={document.category?.name} />
-            {(document.taxonomyNodes || []).map((node) => (
-              <InfoRow
-                key={node._id || `${node.type}-${node.name}`}
-                icon={Layers}
-                label={node.type?.replace(/[-_]/g, ' ') || 'Niveau'}
-                value={node.name}
-              />
+            {details.map(([label, value], index) => (
+              <InfoRow key={`${label}-${index}`} label={label} value={value} isLast={index === details.length - 1} />
             ))}
-            <InfoRow icon={FileText} label="Taille" value={formatFileSize(document.fileSize)} isLast />
           </View>
         </View>
 
-        {hasCorrection ? (
-          <View style={styles.correctionSection}>
-            <View style={styles.sectionHeader}>
-              <Text variant="overline" style={[styles.sectionEyebrow, { color: GOLD }]}>Corrigé associé</Text>
-              <View style={styles.sectionRule} />
-            </View>
-            <Text variant="body" style={styles.correctionDescription}>
-              Une correction est disponible pour ce sujet et peut être enregistrée à tout moment.
-            </Text>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={isCorrectionDownloaded ? 'Ouvrir le corrigé' : 'Télécharger le corrigé'}
-              disabled={isCorrectionDownloading}
-              onPress={handleCorrectionAction}
-              style={({ pressed }) => [styles.correctionAction, pressed && styles.correctionActionPressed, isCorrectionDownloading && styles.actionDisabled]}
-            >
-              {isCorrectionDownloading ? <ActivityIndicator size="small" color="#FFFFFF" /> : null}
-              <Text variant="bodyMedium" style={styles.correctionActionText}>
-                {isCorrectionDownloaded ? 'Ouvrir le corrigé' : 'Télécharger le corrigé'}
-              </Text>
-              {!isCorrectionDownloading ? <ArrowUpRight size={17} color="#FFFFFF" strokeWidth={1.8} /> : null}
-            </Pressable>
-            {isCorrectionDownloading ? (
-              <ProgressBar progress={correctionProgress} color={GOLD} style={styles.correctionProgress} />
-            ) : null}
-          </View>
-        ) : null}
+        <Text variant="caption" style={styles.stats}>
+          {formatNumber(document.views || 0)} consultation{document.views > 1 ? 's' : ''}
+          {'  ·  '}
+          {formatNumber(document.downloads || 0)} téléchargement{document.downloads > 1 ? 's' : ''}
+        </Text>
       </ScrollView>
 
-      <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.lg) }]}>
+      <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.base) }]}>
         {isSubjectDownloading ? (
-          <View style={styles.progressContainer}>
-            <Text variant="caption" style={styles.progressText}>
-              Téléchargement en cours · {Math.round(subjectProgress * 100)}%
-            </Text>
-            <ProgressBar progress={subjectProgress} color={BURGUNDY} style={styles.primaryProgress} />
-          </View>
+          <ProgressBar progress={subjectProgress} color={brand.burgundy} style={styles.primaryProgress} />
         ) : null}
-
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={primaryLabel}
-          disabled={isSubjectDownloading || isSubjectInitializing}
+          accessibilityState={{ busy: primaryBusy }}
+          disabled={primaryBusy}
           onPress={handlePrimaryAction}
           style={({ pressed }) => [
             styles.primaryAction,
-            isSubjectDownloaded && styles.primaryActionDownloaded,
             pressed && styles.primaryActionPressed,
-            (isSubjectDownloading || isSubjectInitializing) && styles.actionDisabled,
+            primaryBusy && styles.primaryActionBusy,
           ]}
         >
           {isSubjectInitializing ? (
-            <ActivityIndicator size="small" color={isSubjectDownloaded ? NAVY : '#FFFFFF'} />
+            <ActivityIndicator size="small" color={brand.onInk} />
           ) : (
             <>
-              {isSubjectDownloaded ? <FileText size={18} color={NAVY} strokeWidth={1.8} /> : <Download size={18} color="#FFFFFF" strokeWidth={1.8} />}
-              <Text variant="bodyMedium" style={[styles.primaryActionLabel, isSubjectDownloaded && styles.primaryActionLabelDownloaded]}>{primaryLabel}</Text>
-              <ArrowUpRight size={17} color={isSubjectDownloaded ? NAVY : '#FFFFFF'} strokeWidth={1.8} />
+              {isSubjectDownloaded
+                ? <FileText size={18} color={brand.onInk} strokeWidth={1.9} />
+                : isLocked
+                  ? <Lock size={18} color={brand.onInk} strokeWidth={1.9} />
+                  : <Download size={18} color={brand.onInk} strokeWidth={1.9} />}
+              <Text variant="bodyMedium" style={styles.primaryActionLabel}>{primaryLabel}</Text>
             </>
           )}
         </Pressable>
       </View>
 
+      <AccessSheet {...access.sheetProps} />
+
       <Modal
         visible={showCorrectionModal}
         transparent
         animationType="fade"
+        statusBarTranslucent
         onRequestClose={() => setShowCorrectionModal(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <View style={styles.modalRule} />
-            <Text variant="overline" style={styles.modalEyebrow}>Document associé</Text>
-            <Text variant="h3" align="center" style={styles.modalTitle}>Corrigé disponible</Text>
+            <View style={styles.modalIcon}>
+              <FileCheck size={22} color={brand.goldInk} strokeWidth={1.8} />
+            </View>
+            <Text variant="h3" align="center" style={styles.modalTitle}>Le corrigé est disponible</Text>
             <Text variant="body" style={styles.modalText} align="center">
-              Une correction est disponible pour ce sujet. Souhaites-tu la télécharger maintenant ?
+              Veux-tu aussi télécharger le corrigé de ce sujet ?
             </Text>
             <Pressable
               accessibilityRole="checkbox"
@@ -401,27 +432,26 @@ const DocumentDetailScreen = () => {
               style={styles.checkboxRow}
             >
               <View style={[styles.checkbox, dontAskAgain && styles.checkboxChecked]}>
-                {dontAskAgain ? <Check size={14} color="#FFFFFF" strokeWidth={2} /> : null}
+                {dontAskAgain ? <Check size={13} color={brand.onInk} strokeWidth={3} /> : null}
               </View>
-              <Text variant="bodyMedium" style={styles.checkboxLabel}>
-                Ne plus me proposer automatiquement les corrections.
+              <Text variant="caption" style={styles.checkboxLabel}>
+                Ne plus me le proposer
               </Text>
             </Pressable>
             <View style={styles.modalActions}>
               <Pressable
                 accessibilityRole="button"
                 onPress={() => handleModalChoice(false)}
-                style={({ pressed }) => [styles.modalSecondary, pressed && styles.linkPressed]}
+                style={({ pressed }) => [styles.modalSecondary, pressed && styles.secondaryPressed]}
               >
                 <Text variant="bodyMedium" style={styles.modalSecondaryLabel}>Plus tard</Text>
               </Pressable>
               <Pressable
                 accessibilityRole="button"
                 onPress={() => handleModalChoice(true)}
-                style={({ pressed }) => [styles.modalPrimary, pressed && styles.correctionActionPressed]}
+                style={({ pressed }) => [styles.modalPrimary, pressed && styles.primaryActionPressed]}
               >
-                <Text variant="bodyMedium" style={styles.modalPrimaryLabel}>Télécharger maintenant</Text>
-                <ArrowUpRight size={16} color="#FFFFFF" strokeWidth={1.8} />
+                <Text variant="bodyMedium" style={styles.modalPrimaryLabel}>Télécharger</Text>
               </Pressable>
             </View>
           </View>
@@ -434,140 +464,52 @@ const DocumentDetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: SURFACE,
+    backgroundColor: brand.paper,
   },
-  hero: {
-    backgroundColor: NAVY,
-    paddingHorizontal: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
-  },
-  topBar: {
+  headerTags: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: -10,
-  },
-  brandLockup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.sm,
-  },
-  brandRule: {
-    width: 18,
-    height: 2,
-    backgroundColor: GOLD,
-  },
-  brandName: {
-    color: '#F4E6C8',
-    fontSize: 10,
-    letterSpacing: 1.25,
-  },
-  deleteButton: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: -10,
-  },
-  headerSpacer: {
-    width: 30,
-  },
-  headerPressed: {
-    opacity: 0.62,
-  },
-  heroCopy: {
-    marginTop: theme.spacing.xl,
-  },
-  documentTypeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
     flexWrap: 'wrap',
-    gap: 7,
+    alignItems: 'center',
+    gap: theme.spacing.md,
+    marginTop: theme.spacing.md,
   },
-  typeRule: {
-    width: 14,
-    height: 2,
+  headerTag: {
+    color: brand.onInkSoft,
+    fontSize: 12,
   },
-  documentType: {
-    color: GOLD,
-    fontSize: 10,
-    letterSpacing: 1.1,
+  headerChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: theme.radius.full,
+    backgroundColor: brand.onInkAccent,
   },
-  correctionMarker: {
-    color: '#F4E6C8',
-    fontSize: 10,
-    letterSpacing: 0.8,
-  },
-  title: {
-    marginTop: theme.spacing.sm,
-    color: '#FFFFFF',
-    fontSize: 29,
-    lineHeight: 35,
-    letterSpacing: -0.8,
-  },
-  documentSummary: {
-    marginTop: theme.spacing.sm,
-    color: 'rgba(255,255,255,0.68)',
-    fontSize: 14,
-    lineHeight: 20,
+  headerChipLabel: {
+    color: brand.ink,
+    fontFamily: theme.fontFamily.semiBold,
+    fontSize: 11,
+    lineHeight: 15,
   },
   scrollContent: {
-    paddingHorizontal: theme.spacing.xl,
-    paddingTop: theme.spacing.xl,
-  },
-  metrics: {
-    flexDirection: 'row',
-    marginBottom: theme.spacing.xl,
-    paddingBottom: theme.spacing.lg,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: LINE,
-  },
-  metric: {
-    flex: 1,
-    alignItems: 'flex-start',
-    gap: 2,
-  },
-  metricDivider: {
-    width: StyleSheet.hairlineWidth,
-    marginHorizontal: theme.spacing.xl,
-    backgroundColor: LINE,
-  },
-  metricValue: {
-    color: NAVY,
-    fontSize: 20,
-    lineHeight: 25,
-  },
-  metricLabel: {
-    color: NAVY_SOFT,
-    fontSize: 11,
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.lg,
   },
   localNotice: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.spacing.sm,
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.md,
+    paddingHorizontal: theme.spacing.base,
     paddingVertical: theme.spacing.md,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: LINE,
-  },
-  localNoticeCopy: {
-    flex: 1,
+    borderRadius: theme.radius.md,
+    backgroundColor: brand.goldWash,
   },
   localNoticeTitle: {
-    color: NAVY,
+    flex: 1,
+    color: brand.ink,
     fontSize: 14,
-  },
-  localNoticeText: {
-    marginTop: 1,
-    color: NAVY_SOFT,
-    fontSize: 11,
   },
   shareLink: {
     flexDirection: 'row',
@@ -575,118 +517,154 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   shareLabel: {
-    color: BURGUNDY,
+    color: brand.burgundy,
     fontFamily: theme.fontFamily.semiBold,
-    fontSize: 11,
+    fontSize: 13,
   },
   linkPressed: {
-    opacity: 0.62,
+    opacity: 0.6,
   },
-  section: {
-    marginBottom: theme.spacing.xl,
+  correctionBlock: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.md,
+    padding: theme.spacing.base,
+    borderRadius: theme.radius.md,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: brand.lineStrong,
+    backgroundColor: theme.colors.surface,
   },
-  sectionHeader: {
+  lockNotice: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.spacing.md,
     marginBottom: theme.spacing.md,
+    padding: theme.spacing.base,
+    borderRadius: theme.radius.md,
+    backgroundColor: brand.goldWash,
   },
-  sectionEyebrow: {
-    color: NAVY_SOFT,
-    fontSize: 10,
-    letterSpacing: 1.05,
+  lockIcon: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.radius.full,
+    backgroundColor: theme.colors.surface,
   },
-  sectionRule: {
+  correctionIcon: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.radius.sm,
+    backgroundColor: brand.goldWash,
+  },
+  correctionIconMuted: {
+    backgroundColor: brand.paperDim,
+  },
+  correctionCopy: {
     flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: LINE,
+  },
+  correctionTitle: {
+    color: brand.ink,
+    fontSize: 15,
+  },
+  correctionText: {
+    marginTop: 2,
+    color: brand.inkSoft,
+    fontFamily: theme.fontFamily.regular,
+    fontSize: 13,
+    lineHeight: 18,
+  },
+  correctionProgress: {
+    height: 2,
+    marginTop: theme.spacing.sm,
+    backgroundColor: brand.line,
+  },
+  correctionAction: {
+    minWidth: 96,
+    minHeight: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: theme.spacing.base,
+    borderRadius: theme.radius.full,
+    borderWidth: 1,
+    borderColor: brand.ink,
+  },
+  correctionActionLabel: {
+    color: brand.ink,
+    fontSize: 14,
+  },
+  secondaryPressed: {
+    backgroundColor: brand.pressed,
+  },
+  actionDisabled: {
+    opacity: 0.6,
+  },
+  section: {
+    marginTop: theme.spacing.xl,
+  },
+  sectionTitle: {
+    marginBottom: theme.spacing.sm,
+    color: brand.inkSoft,
   },
   descriptionText: {
-    color: NAVY_SOFT,
-    lineHeight: 22,
+    color: brand.ink,
+    fontSize: 15,
+    lineHeight: 23,
   },
   infoList: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: LINE,
+    paddingHorizontal: theme.spacing.base,
+    borderRadius: theme.radius.md,
+    backgroundColor: theme.colors.surface,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: brand.line,
   },
   infoRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-    paddingVertical: theme.spacing.md,
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    gap: theme.spacing.base,
+    paddingVertical: 13,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: LINE,
+    borderBottomColor: brand.line,
   },
   infoRowLast: {
     borderBottomWidth: 0,
   },
-  infoTextContainer: {
-    flex: 1,
-  },
   infoLabel: {
-    color: NAVY_SOFT,
-    fontSize: 10,
-    letterSpacing: 0.9,
+    color: brand.inkSoft,
+    fontFamily: theme.fontFamily.regular,
+    fontSize: 14,
   },
   infoValue: {
-    marginTop: 2,
-    color: NAVY,
+    flexShrink: 1,
+    color: brand.ink,
     fontSize: 14,
+    textAlign: 'right',
   },
-  correctionSection: {
-    marginBottom: theme.spacing.xl,
-    paddingTop: theme.spacing.xl,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: LINE,
-  },
-  correctionDescription: {
-    color: NAVY_SOFT,
-    lineHeight: 21,
-  },
-  correctionAction: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: theme.spacing.sm,
-    minHeight: 48,
+  stats: {
     marginTop: theme.spacing.lg,
-    paddingHorizontal: theme.spacing.lg,
-    backgroundColor: BURGUNDY,
-    borderRadius: theme.radius.sm,
-  },
-  correctionActionPressed: {
-    opacity: 0.86,
-  },
-  correctionActionText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-  },
-  correctionProgress: {
-    marginTop: theme.spacing.sm,
-    height: 2,
+    color: brand.inkMuted,
+    fontFamily: theme.fontFamily.regular,
+    fontSize: 12,
+    textAlign: 'center',
   },
   actionBar: {
     position: 'absolute',
     right: 0,
     bottom: 0,
     left: 0,
-    backgroundColor: SURFACE,
-    paddingHorizontal: theme.spacing.xl,
+    paddingHorizontal: theme.layout.gutter,
     paddingTop: theme.spacing.md,
+    backgroundColor: brand.paper,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: LINE,
-  },
-  progressContainer: {
-    marginBottom: theme.spacing.sm,
-  },
-  progressText: {
-    marginBottom: theme.spacing.xs,
-    color: NAVY_SOFT,
-    fontSize: 11,
-    textAlign: 'center',
+    borderTopColor: brand.line,
   },
   primaryProgress: {
     height: 2,
+    marginBottom: theme.spacing.md,
+    backgroundColor: brand.line,
   },
   primaryAction: {
     minHeight: 52,
@@ -694,115 +672,108 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: theme.spacing.sm,
-    backgroundColor: NAVY,
-    borderRadius: theme.radius.sm,
-  },
-  primaryActionDownloaded: {
-    backgroundColor: SURFACE,
-    borderWidth: 1,
-    borderColor: NAVY,
+    backgroundColor: brand.ink,
+    borderRadius: theme.radius.md,
   },
   primaryActionPressed: {
-    opacity: 0.86,
+    opacity: 0.88,
+  },
+  primaryActionBusy: {
+    backgroundColor: brand.inkSoft,
   },
   primaryActionLabel: {
-    color: '#FFFFFF',
+    color: brand.onInk,
     fontSize: 15,
-  },
-  primaryActionLabelDownloaded: {
-    color: NAVY,
-  },
-  actionDisabled: {
-    opacity: 0.56,
   },
   modalOverlay: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: theme.spacing.xl,
-    backgroundColor: 'rgba(13, 27, 50, 0.62)',
+    backgroundColor: brand.backdrop,
   },
   modalContent: {
     width: '100%',
-    maxWidth: 420,
+    maxWidth: 380,
     alignItems: 'center',
     padding: theme.spacing.xl,
-    backgroundColor: SURFACE,
-    borderRadius: theme.radius.lg,
+    backgroundColor: brand.paper,
+    borderRadius: theme.radius.xl,
   },
-  modalRule: {
-    width: 22,
-    height: 2,
-    backgroundColor: GOLD,
-  },
-  modalEyebrow: {
-    marginTop: theme.spacing.md,
-    color: BURGUNDY,
-    fontSize: 10,
-    letterSpacing: 1,
+  modalIcon: {
+    width: 48,
+    height: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.radius.full,
+    backgroundColor: brand.goldWash,
   },
   modalTitle: {
-    marginTop: theme.spacing.sm,
-    color: NAVY,
+    marginTop: theme.spacing.base,
+    color: brand.ink,
   },
   modalText: {
-    marginTop: theme.spacing.sm,
-    color: NAVY_SOFT,
-    lineHeight: 21,
+    marginTop: 6,
+    color: brand.inkSoft,
+    fontSize: 14,
+    lineHeight: 20,
   },
   checkboxRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
-    marginTop: theme.spacing.xl,
+    alignSelf: 'center',
+    minHeight: theme.layout.touch,
+    marginTop: theme.spacing.base,
   },
   checkbox: {
-    width: 22,
-    height: 22,
+    width: 20,
+    height: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: theme.spacing.md,
-    borderWidth: 1,
-    borderColor: NAVY_SOFT,
-    borderRadius: theme.radius.sm,
+    marginRight: theme.spacing.sm,
+    borderWidth: 1.5,
+    borderColor: brand.lineStrong,
+    borderRadius: 5,
   },
   checkboxChecked: {
-    backgroundColor: NAVY,
-    borderColor: NAVY,
+    backgroundColor: brand.ink,
+    borderColor: brand.ink,
   },
   checkboxLabel: {
-    flex: 1,
-    color: NAVY,
+    color: brand.inkSoft,
+    fontFamily: theme.fontFamily.regular,
     fontSize: 13,
-    lineHeight: 19,
   },
   modalActions: {
     width: '100%',
+    flexDirection: 'row',
     gap: theme.spacing.sm,
-    marginTop: theme.spacing.xl,
+    marginTop: theme.spacing.md,
   },
   modalSecondary: {
-    minHeight: 46,
+    flex: 1,
+    minHeight: 48,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: theme.radius.md,
+    borderWidth: 1,
+    borderColor: brand.lineStrong,
   },
   modalSecondaryLabel: {
-    color: NAVY_SOFT,
-    fontSize: 14,
+    color: brand.ink,
+    fontSize: 15,
   },
   modalPrimary: {
-    minHeight: 50,
-    flexDirection: 'row',
+    flex: 1,
+    minHeight: 48,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: theme.spacing.sm,
-    paddingHorizontal: theme.spacing.lg,
-    backgroundColor: BURGUNDY,
-    borderRadius: theme.radius.sm,
+    borderRadius: theme.radius.md,
+    backgroundColor: brand.ink,
   },
   modalPrimaryLabel: {
-    color: '#FFFFFF',
-    fontSize: 14,
+    color: brand.onInk,
+    fontSize: 15,
   },
 });
 

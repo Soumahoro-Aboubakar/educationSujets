@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight, Eye, EyeOff, Lock, Mail } from 'lucide-react-n
 import Text from '../components/ui/Text';
 import FormInput from '../components/ui/FormInput';
 import AuthContext from '../context/AuthContext';
+import { useAuthRedirect } from '../hooks/useAuthRedirect';
 import theme from '../theme/tokens';
 
 const NAVY = '#0D1B32';
@@ -13,7 +14,7 @@ const GOLD = '#B48A48';
 const BURGUNDY = '#6C2838';
 const LINE = '#DED8CC';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
   const { login, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,17 +23,12 @@ const LoginScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
 
+  const redirectAfterAuth = useAuthRedirect(navigation, route);
+
   useEffect(() => {
     if (authLoading || !isAuthenticated) return;
-    navigation.reset({
-      index: 0,
-      routes: [
-        user?.role === 'admin' || user?.role === 'sub-admin'
-          ? { name: 'MainTabs', params: { screen: 'AdminTab' } }
-          : { name: 'MainTabs' },
-      ],
-    });
-  }, [authLoading, isAuthenticated, navigation, user?.role]);
+    redirectAfterAuth(user);
+  }, [authLoading, isAuthenticated, redirectAfterAuth, user]);
 
   const validateForm = () => {
     const nextErrors = {};
@@ -53,12 +49,7 @@ const LoginScreen = ({ navigation }) => {
         setError(result.error || 'Erreur lors de la connexion');
         return;
       }
-      navigation.reset({
-        index: 0,
-        routes: [result.user?.role === 'admin' || result.user?.role === 'sub-admin'
-          ? { name: 'MainTabs', params: { screen: 'AdminTab' } }
-          : { name: 'MainTabs' }],
-      });
+      redirectAfterAuth(result.user);
     } catch (requestError) {
       setError('Erreur inattendue. Veuillez réessayer.');
     } finally {
@@ -106,7 +97,7 @@ const LoginScreen = ({ navigation }) => {
             <Text variant="bodyMedium" style={styles.primaryLabel}>{loading ? 'Connexion en cours…' : 'Accéder à mon espace'}</Text>
             {!loading ? <ArrowUpRight size={18} color="#FFFFFF" strokeWidth={1.8} /> : null}
           </Pressable>
-          <View style={styles.registerLink}><Text variant="body" style={styles.linkPrefix}>Pas encore de compte ?</Text><Pressable onPress={() => navigation.navigate('Register')}><Text variant="bodyMedium" style={styles.linkLabel}>S’inscrire</Text></Pressable></View>
+          <View style={styles.registerLink}><Text variant="body" style={styles.linkPrefix}>Pas encore de compte ?</Text><Pressable onPress={() => (route?.params?.returnTo ? navigation.replace('Register', route.params) : navigation.navigate('Register'))}><Text variant="bodyMedium" style={styles.linkLabel}>S’inscrire</Text></Pressable></View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

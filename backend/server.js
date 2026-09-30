@@ -53,6 +53,9 @@ app.use('/api/contest-types', require('./routes/contestTypes'));
 app.use('/api/orientation', require('./routes/orientation'));
 app.use('/api/training', require('./routes/training'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/me', require('./routes/me'));
+app.use('/api/payments', require('./routes/payments'));
+app.use('/api/admin', require('./routes/admin'));
 app.use('/api/referentials', require('./routes/referentials'));
 app.use('/uploads', require('./routes/uploads'));
 

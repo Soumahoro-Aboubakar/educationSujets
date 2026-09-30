@@ -51,10 +51,46 @@ const Skeleton = ({
   );
 };
 
+/**
+ * Squelette d'une liste de ListRow : même géométrie que les lignes réelles,
+ * pour que le contenu remplace le squelette sans décalage visuel.
+ */
+const ROW_WIDTHS = ['72%', '58%', '80%', '64%', '52%', '70%'];
+
+export const SkeletonRows = ({ count = 5, withMeta = true }) => (
+  <View accessibilityLabel="Chargement" accessible>
+    {ROW_WIDTHS.slice(0, count).map((width, index) => (
+      <View key={index} style={styles.row}>
+        <View style={styles.rowContent}>
+          <Skeleton width={width} height={15} borderRadius={4} style={styles.brandTone} />
+          {withMeta ? <Skeleton width="34%" height={11} borderRadius={4} style={[styles.brandTone, styles.meta]} /> : null}
+        </View>
+      </View>
+    ))}
+  </View>
+);
+
 const styles = StyleSheet.create({
   skeleton: {
     backgroundColor: theme.colors.skeleton,
     overflow: 'hidden',
+  },
+  brandTone: {
+    backgroundColor: theme.brand.skeleton,
+  },
+  row: {
+    paddingLeft: theme.layout.gutter,
+  },
+  rowContent: {
+    minHeight: theme.layout.rowMinHeight,
+    justifyContent: 'center',
+    paddingVertical: 14,
+    paddingRight: theme.layout.gutter,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: theme.brand.line,
+  },
+  meta: {
+    marginTop: 8,
   },
 });
 

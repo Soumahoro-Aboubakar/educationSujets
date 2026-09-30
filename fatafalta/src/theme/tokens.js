@@ -56,6 +56,34 @@ export const colors = {
   backdrop: 'rgba(15, 23, 42, 0.4)',
 };
 
+// ── Brand — parcours étudiant ───────────────────
+// Palette éditoriale des écrans publics (accueil → catalogue → sujet).
+// Remplace les constantes NAVY/GOLD/… dupliquées dans chaque écran.
+// Règle d'usage :
+//   ink       → texte principal, en-têtes, action principale
+//   burgundy  → unique couleur d'interaction (liens, chevrons, focus)
+//   gold      → statuts positifs discrets (corrigé, hors ligne)
+export const brand = {
+  ink: '#0D1B32',
+  inkSoft: '#4F5E72',
+  inkMuted: '#7A8697',
+  paper: '#FCFAF5',
+  paperDim: '#F4F0E6',
+  line: '#E4DED2',
+  lineStrong: '#CFC7B8',
+  burgundy: '#6C2838',
+  burgundyWash: '#F4E9EA',
+  gold: '#B48A48',
+  goldWash: '#F6EEDF',
+  goldInk: '#7A5A24',
+  onInk: '#FFFFFF',
+  onInkSoft: 'rgba(255,255,255,0.66)',
+  onInkAccent: '#E4C997',
+  pressed: 'rgba(13,27,50,0.04)',
+  skeleton: '#ECE7DC',
+  backdrop: 'rgba(13,27,50,0.56)',
+};
+
 // ── Typography ──────────────────────────────────
 export const fontFamily = {
   regular: 'Inter-Regular',
@@ -159,12 +187,21 @@ export const durations = {
   slow: 400,
 };
 
+// Mise en page commune aux écrans du parcours
+export const layout = {
+  gutter: 20,
+  rowMinHeight: 64,
+  touch: 44,
+};
+
 // ── Hit slop ────────────────────────────────────
 export const hitSlop = { top: 8, bottom: 8, left: 8, right: 8 };
 
 // ── Convenience export ──────────────────────────
 const theme = {
   colors,
+  brand,
+  layout,
   typography,
   fontFamily,
   spacing,

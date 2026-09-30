@@ -3,26 +3,135 @@ import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from 'r
 import { FileText } from 'lucide-react-native';
 import DocumentCard from './DocumentCard';
 import Skeleton from '../ui/Skeleton';
-import Text from '../ui/Text';
+import StateView from '../ui/StateView';
 import useDownloadStore from '../../store/useDownloadStore';
 import theme from '../../theme/tokens';
 
-const NAVY = '#0D1B32';
-const SOFT = '#4F5E72';
-const BURGUNDY = '#6C2838';
-const LINE = '#DED8CC';
+const { brand } = theme;
 
-const DocumentList = ({ documents = [], isLoading = false, isFetchingNextPage = false, hasNextPage = false, onLoadMore, onRefresh, isRefreshing = false, onDocumentPress, emptyStateTitle, emptyStateDescription, ListHeaderComponent }) => {
+// Squelette calqué sur DocumentCard (vignette + titre + méta).
+export const DocumentSkeleton = () => (
+  <View accessible accessibilityLabel="Chargement des sujets">
+    {['82%', '64%', '74%', '58%'].map((width, index) => (
+      <React.Fragment key={index}>
+        {index > 0 ? <Separator /> : null}
+        <View style={styles.skeletonRow}>
+          <Skeleton width={40} height={50} borderRadius={6} style={styles.skeletonTone} />
+          <View style={styles.skeletonBody}>
+            <Skeleton width={width} height={15} borderRadius={4} style={styles.skeletonTone} />
+            <Skeleton width="30%" height={11} borderRadius={4} style={[styles.skeletonTone, styles.skeletonMeta]} />
+          </View>
+        </View>
+      </React.Fragment>
+    ))}
+  </View>
+);
+
+const DocumentList = ({
+  documents = [],
+  isLoading = false,
+  isFetchingNextPage = false,
+  hasNextPage = false,
+  onLoadMore,
+  onRefresh,
+  isRefreshing = false,
+  onDocumentPress,
+  emptyStateTitle,
+  emptyStateDescription,
+  emptyStateIcon = FileText,
+  ListHeaderComponent,
+  dimmed = false,
+}) => {
   const { activeDownloads, isDownloaded } = useDownloadStore();
-  const renderItem = ({ item }) => <DocumentCard document={item} onPress={() => onDocumentPress?.(item)} isDownloading={!!activeDownloads[item._id]?.downloading} downloadProgress={activeDownloads[item._id]?.progress || 0} isDownloaded={isDownloaded(item._id)} />;
-  const skeleton = <View style={styles.skeletonContainer}>{[1, 2, 3, 4].map((key) => <View key={key} style={styles.skeletonRow}><View style={styles.skeletonTop}><Skeleton width={46} height={11} /><Skeleton width={68} height={11} /></View><Skeleton width="78%" height={21} style={styles.skeletonTitle} /><Skeleton width="52%" height={14} /></View>)}</View>;
-  const empty = <View style={styles.empty}><FileText size={31} color={BURGUNDY} strokeWidth={1.45} /><Text variant="h3" style={styles.emptyTitle} align="center">{emptyStateTitle}</Text><Text variant="body" style={styles.emptyDescription} align="center">{emptyStateDescription}</Text></View>;
-  if (isLoading && !documents.length) return <View style={styles.container}><View style={styles.list}>{ListHeaderComponent}{skeleton}</View></View>;
-  return <FlatList data={documents} keyExtractor={(item) => item._id} renderItem={renderItem} contentContainerStyle={[styles.list, !documents.length && styles.emptyContent]} ListHeaderComponent={ListHeaderComponent} ListEmptyComponent={empty} ListFooterComponent={isFetchingNextPage ? <View style={styles.footer}><ActivityIndicator size="small" color={BURGUNDY} /><Text variant="caption" style={styles.footerText}>Chargement des sujets…</Text></View> : null} onEndReached={hasNextPage ? onLoadMore : null} onEndReachedThreshold={.45} refreshControl={onRefresh ? <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} colors={[BURGUNDY]} tintColor={BURGUNDY} /> : undefined} showsVerticalScrollIndicator={false} />;
+
+  const renderItem = ({ item }) => (
+    <DocumentCard
+      document={item}
+      onPress={() => onDocumentPress?.(item)}
+      isDownloading={!!activeDownloads[item._id]?.downloading}
+      downloadProgress={activeDownloads[item._id]?.progress || 0}
+      isDownloaded={isDownloaded(item._id)}
+    />
+  );
+
+  if (isLoading && !documents.length) {
+    return (
+      <View style={styles.list}>
+        {ListHeaderComponent}
+        <DocumentSkeleton />
+      </View>
+    );
+  }
+
+  return (
+    <FlatList
+      data={documents}
+      keyExtractor={(item) => item._id}
+      renderItem={renderItem}
+      style={dimmed && styles.dimmed}
+      contentContainerStyle={[styles.list, !documents.length && styles.emptyContent]}
+      ItemSeparatorComponent={Separator}
+      ListHeaderComponent={ListHeaderComponent}
+      ListEmptyComponent={(
+        <StateView icon={emptyStateIcon} title={emptyStateTitle} description={emptyStateDescription} />
+      )}
+      ListFooterComponent={isFetchingNextPage ? (
+        <ActivityIndicator size="small" color={brand.inkMuted} style={styles.footer} />
+      ) : null}
+      onEndReached={hasNextPage ? onLoadMore : null}
+      onEndReachedThreshold={0.45}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
+      refreshControl={onRefresh ? (
+        <RefreshControl
+          refreshing={isRefreshing}
+          onRefresh={onRefresh}
+          colors={[brand.ink]}
+          tintColor={brand.ink}
+        />
+      ) : undefined}
+      showsVerticalScrollIndicator={false}
+    />
+  );
 };
 
+const Separator = () => <View style={styles.separator} />;
+
 const styles = StyleSheet.create({
-  container: { flex: 1 }, list: { flexGrow: 1, paddingHorizontal: theme.spacing.xl, paddingBottom: theme.spacing['4xl'] }, emptyContent: { flexGrow: 1 }, skeletonContainer: { paddingTop: theme.spacing.sm }, skeletonRow: { paddingVertical: theme.spacing.xl, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: LINE }, skeletonTop: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: theme.spacing.md }, skeletonTitle: { marginBottom: theme.spacing.sm }, empty: { flex: 1, minHeight: 280, alignItems: 'center', justifyContent: 'center', paddingHorizontal: theme.spacing.xl }, emptyTitle: { marginTop: theme.spacing.base, color: NAVY }, emptyDescription: { maxWidth: 285, marginTop: theme.spacing.sm, color: SOFT }, footer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: theme.spacing.sm, paddingVertical: theme.spacing.xl }, footerText: { color: SOFT },
+  list: {
+    flexGrow: 1,
+    paddingHorizontal: theme.layout.gutter,
+    paddingBottom: theme.spacing['4xl'],
+  },
+  emptyContent: {
+    flexGrow: 1,
+  },
+  dimmed: {
+    opacity: 0.55,
+  },
+  separator: {
+    marginLeft: 54,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: brand.line,
+  },
+  skeletonRow: {
+    flexDirection: 'row',
+    gap: 14,
+    paddingVertical: theme.spacing.base,
+  },
+  skeletonBody: {
+    flex: 1,
+    paddingTop: 2,
+  },
+  skeletonTone: {
+    backgroundColor: brand.skeleton,
+  },
+  skeletonMeta: {
+    marginTop: 10,
+  },
+  footer: {
+    paddingVertical: theme.spacing.xl,
+  },
 });
 
 export default DocumentList;

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
+import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Library, Search, Download, LogIn, ShieldCheck } from 'lucide-react-native';
-import HomeScreen from '../screens/HomeScreen';
-import SearchScreen from '../screens/SearchScreen';
+import { Compass, Download, ShieldCheck, UserRound } from 'lucide-react-native';
+import SelectionScreen from '../screens/SelectionScreen';
 import DownloadsScreen from '../screens/DownloadsScreen';
 import AdminDraftsScreen from '../screens/AdminDraftsScreen';
-import LoginScreen from '../screens/LoginScreen';
+import AccountScreen from '../screens/account/AccountScreen';
 import AuthContext from '../context/AuthContext';
 import theme from '../theme/tokens';
 
@@ -18,49 +18,35 @@ const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.textMuted,
+        tabBarActiveTintColor: theme.brand.ink,
+        tabBarInactiveTintColor: theme.brand.inkMuted,
+        // Barre sobre : un filet suffit à la séparer du contenu.
         tabBarStyle: {
-          borderTopWidth: 1,
-          borderTopColor: theme.colors.borderLight,
-          backgroundColor: theme.colors.surface,
-          height: 72,
-          paddingBottom: 10,
+          height: 68,
           paddingTop: 8,
-          borderTopLeftRadius: 24,
-          borderTopRightRadius: 24,
-          elevation: 10,
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: -4 },
-          shadowOpacity: 0.08,
-          shadowRadius: 10,
+          paddingBottom: 10,
+          backgroundColor: theme.colors.surface,
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: theme.brand.line,
+          elevation: 0,
+          shadowOpacity: 0,
         },
         tabBarLabelStyle: {
           fontFamily: theme.fontFamily.medium,
           fontSize: 12,
           marginTop: 2,
         },
-        tabBarItemStyle: {
-          borderRadius: 16,
-        },
       }}
     >
+      {/* Explorer = catalogue des organismes (anciennement « Bibliothèque » / HomeScreen). */}
       <Tab.Screen
-        name="HomeTab"
-        component={HomeScreen}
+        name="ExploreTab"
+        component={SelectionScreen}
         options={{
-          tabBarLabel: 'Bibliothèque',
-          tabBarIcon: ({ color, size }) => <Library color={color} size={size} />,
+          tabBarLabel: 'Explorer',
+          tabBarIcon: ({ color, size }) => <Compass color={color} size={size} />,
         }}
       />
-     {/* <Tab.Screen
-        name="SearchTab"
-        component={SearchScreen}
-        options={{
-          tabBarLabel: 'Recherche',
-          tabBarIcon: ({ color, size }) => <Search color={color} size={size} />,
-        }} 
-      /> */}
       <Tab.Screen
         name="DownloadsTab"
         component={DownloadsScreen}
@@ -69,16 +55,15 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => <Download color={color} size={size} />,
         }}
       />
-      {!isAuthenticated && (
-        <Tab.Screen
-          name="LoginTab"
-          component={LoginScreen}
-          options={{
-            tabBarLabel: 'Connexion',
-            tabBarIcon: ({ color, size }) => <LogIn color={color} size={size} />,
-          }}
-        />
-      )}
+      {/* Invité : l'onglet Compte propose connexion et inscription. */}
+      <Tab.Screen
+        name="AccountTab"
+        component={AccountScreen}
+        options={{
+          tabBarLabel: 'Compte',
+          tabBarIcon: ({ color, size }) => <UserRound color={color} size={size} />,
+        }}
+      />
       {isAuthenticated && isAdmin() && (
         <Tab.Screen
           name="AdminTab"

@@ -82,3 +82,20 @@ export const truncateText = (text, maxLength = 100) => {
   if (!text || text.length <= maxLength) return text || '';
   return text.substring(0, maxLength).trim() + '…';
 };
+
+/**
+ * Montant en francs CFA, séparateur de milliers inclus (ex. « 2 000 FCFA »).
+ * @param {number} amount
+ * @returns {string}
+ */
+export const formatAmount = (amount) => `${formatNumber(Math.round(Number(amount) || 0)).replace(/[\u202f\u00a0]/g, '\u00a0')}\u00a0FCFA`;
+
+/**
+ * Date longue (ex. « 31 décembre 2026 »), pour les échéances.
+ * @param {string|Date} date
+ * @returns {string}
+ */
+export const formatLongDate = (date) => {
+  if (!date) return '';
+  return new Date(date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+};

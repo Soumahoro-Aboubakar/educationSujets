@@ -47,10 +47,10 @@ export const FILTER_DEFINITIONS = [
     endpoint: '/api/categories',
   },
 ];
-
+//http://10.31.127.234:5000 https://educationsujets.onrender.com
 export const DOCUMENTS_PER_PAGE = 12;
 //'https://educationsujets-xaaz.onrender.com';
 
-export const API_BASE_URL = 'http://10.31.127.234:5000';
+export const API_BASE_URL = 'https://educationsujets.onrender.com';
 
 export const DOWNLOAD_DIR = 'fatafalta_downloads';

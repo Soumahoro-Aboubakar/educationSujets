@@ -4,6 +4,8 @@ import * as IntentLauncher from 'expo-intent-launcher';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 import { getDownloadUrl } from '../services/documents';
+import { getErrorCode, getErrorMessage } from '../services/billing';
+import { useRefreshAccount } from './useAccount';
 import useDownloadStore from '../store/useDownloadStore';
 
 export const openDownloadedFile = async (document, { getLocalUri, removeDownload }) => {
@@ -80,8 +82,12 @@ export const shareDownloadedFile = async (document, { getLocalUri }) => {
  * @param {Object} document
  * @returns
  */
-export const useDownload = (document) => {
+// Refus d'accès décidés par le serveur : présentés par l'écran (feuille d'accès), pas par une alerte.
+const ACCESS_CODES = ['AUTH_REQUIRED', 'SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REACHED', 'ACCOUNT_DISABLED'];
+
+export const useDownload = (document, { onAccessDenied } = {}) => {
   const [isInitializing, setIsInitializing] = useState(false);
+  const refreshAccount = useRefreshAccount();
   const { startDownload, isDownloaded, getLocalUri, activeDownloads, removeDownload } =
     useDownloadStore();
 
@@ -104,15 +110,22 @@ export const useDownload = (document) => {
       const fileName = document.originalFileName || document.file;
       await startDownload(id, url, document, fileName);
     } catch (error) {
+      const code = getErrorCode(error);
+      if (onAccessDenied && ACCESS_CODES.includes(code)) {
+        onAccessDenied(code, error.response?.data?.details);
+        return;
+      }
       console.error('Download error:', error);
       Alert.alert(
         'Erreur de téléchargement',
-        error.message || 'Une erreur est survenue lors du téléchargement'
+        getErrorMessage(error, error.message || 'Une erreur est survenue lors du téléchargement')
       );
     } finally {
       setIsInitializing(false);
+      // Le quota du jour a pu évoluer.
+      refreshAccount();
     }
-  }, [id, document, isCurrentlyDownloading, startDownload]);
+  }, [id, document, isCurrentlyDownloading, startDownload, onAccessDenied, refreshAccount]);
 
   const handleOpen = useCallback(async () => {
     if (!id || !downloaded) return;

@@ -22,11 +22,25 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  firstName: { type: String, trim: true },
+  lastName: { type: String, trim: true },
+  phone: { type: String, trim: true },
+  // 'contributor' est conservé pour les comptes historiques ; les nouveaux comptes sont 'user'.
   role: {
     type: String,
-    enum: ['contributor', 'sub-admin', 'admin'],
-    default: 'admin',
+    enum: ['user', 'partner', 'contributor', 'sub-admin', 'admin'],
+    default: 'user',
   },
+  // Statut du compte, indépendant de l'abonnement et du code promotionnel.
+  accountStatus: {
+    type: String,
+    enum: ['ACTIVE', 'DISABLED', 'SUSPENDED'],
+    default: 'ACTIVE',
+  },
+  statusReason: { type: String, trim: true },
+  mustChangePassword: { type: Boolean, default: false },
+  // Code promotionnel utilisé lors du premier paiement (fixé une seule fois, côté serveur).
+  referredBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
   isSuperAdmin: {
     type: Boolean,
     default: false,

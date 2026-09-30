@@ -4,7 +4,8 @@ import {
   Search, SlidersHorizontal, LogOut, FileText, Upload,
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
   MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User, Building2,
-  AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon
+  AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon,
+  Users, CreditCard, Gift, Activity
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -20,6 +21,9 @@ import AdminCatalogPanel from '../components/AdminCatalogPanel';
 import DynamicStructureSelector from '../components/DynamicStructureSelector';
 import DynamicMetadataFields from '../components/DynamicMetadataFields';
 import DraftManagement from '../components/DraftManagement';
+import AdminOverview from '../components/admin/AdminOverview';
+import AdminUsers from '../components/admin/AdminUsers';
+import { AdminPayments, AdminReferrals } from '../components/admin/AdminFinance';
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
 
@@ -246,6 +250,13 @@ const Dashboard = () => {
     ...(user?.isSuperAdmin ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'referentials', label: 'Gestion des référentiels', icon: Layers }] : []),
    // ...(user?.role === 'admin' ? [{ id: 'catalog', label: 'Institutions et structures', icon: Building2 }] : []),
+    // Gestion commerciale (utilisateurs, abonnements, paiements, parrainage) : super admin uniquement.
+    ...(user?.role === 'admin' ? [
+      { id: 'platform', label: 'Activité plateforme', icon: Activity },
+      { id: 'users', label: 'Utilisateurs', icon: Users },
+      { id: 'payments', label: 'Paiements', icon: CreditCard },
+      { id: 'referrals', label: 'Parrainage', icon: Gift, badge: 0 },
+    ] : []),
   ];
 
   // Rest of functions...
@@ -443,7 +454,7 @@ const Dashboard = () => {
           <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
             <BookOpen className="text-white" size={20} />
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-800">Éducation CI</span>
+          <span className="font-bold text-xl tracking-tight text-slate-800">Fatafalta</span>
         </div>
         
         <div className="px-6 py-4">
@@ -499,7 +510,7 @@ const Dashboard = () => {
             <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
               <BookOpen className="text-white" size={16} />
             </div>
-            <span className="font-bold text-lg text-slate-800">Éducation CI</span>
+            <span className="font-bold text-lg text-slate-800">Fatafalta</span>
           </div>
           <button onClick={() => setMobileMenuOpen(true)} className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600">
             <Menu size={20} />
@@ -1197,6 +1208,11 @@ const Dashboard = () => {
               <AdminCatalogPanel />
             </motion.div>
           )}
+
+          {user?.role === 'admin' && activeTab === 'platform' && <AdminOverview />}
+          {user?.role === 'admin' && activeTab === 'users' && <AdminUsers />}
+          {user?.role === 'admin' && activeTab === 'payments' && <AdminPayments />}
+          {user?.role === 'admin' && activeTab === 'referrals' && <AdminReferrals />}
 
           {activeTab === 'analytics' && analytics && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">

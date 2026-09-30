@@ -1,4 +1,226 @@
-import React from'react';import{Alert,FlatList,Pressable,StyleSheet,View}from'react-native';import{SafeAreaView}from'react-native-safe-area-context';import{Calendar,ExternalLink,FileDown,Share2,Trash2}from'lucide-react-native';import Text from'../components/ui/Text';import DocumentCard from'../components/documents/DocumentCard';import{useOfflineDocuments}from'../hooks/useOfflineDocuments';import{openDownloadedFile,shareDownloadedFile}from'../hooks/useDownload';import useDownloadStore from'../store/useDownloadStore';import{formatDate}from'../utils/format';import theme from'../theme/tokens';
-const NAVY='#0D1B32',SOFT='#4F5E72',SURFACE='#FCFAF5',GOLD='#B48A48',BURGUNDY='#6C2838',LINE='#DED8CC';
-const DownloadsScreen=()=>{const documents=useOfflineDocuments();const{removeDownload,getLocalUri}=useDownloadStore();const open=async item=>openDownloadedFile(item.document,{getLocalUri:id=>getLocalUri(id),removeDownload});const share=async item=>shareDownloadedFile(item.document,{getLocalUri:id=>getLocalUri(id)});const remove=(id,title)=>Alert.alert('Supprimer le téléchargement',`Êtes-vous sûr de vouloir supprimer “${title}” de votre appareil ?`,[{text:'Annuler',style:'cancel'},{text:'Supprimer',style:'destructive',onPress:()=>removeDownload(id)}]);const render=({item})=>{const title=item.document.title||item.document.titre||item.document.originalFileName||'ce fichier';return <View style={styles.item}><DocumentCard document={item.document} onPress={()=>open(item)} isDownloaded/><View style={styles.context}><View style={styles.date}><Calendar size={13} color={SOFT}/><Text variant="caption" style={styles.dateText}>Téléchargé le {formatDate(item.downloadedAt)}</Text></View><Text variant="caption" style={styles.offline}>Hors connexion</Text></View><View style={styles.actions}><Pressable onPress={()=>open(item)} style={styles.action}><ExternalLink size={16} color={NAVY}/><Text variant="caption" style={styles.actionText}>Ouvrir</Text></Pressable><Pressable onPress={()=>share(item)} style={styles.action}><Share2 size={16} color={NAVY}/><Text variant="caption" style={styles.actionText}>Partager</Text></Pressable><Pressable onPress={()=>remove(item.id,title)} style={styles.remove}><Trash2 size={16} color={BURGUNDY}/><Text variant="caption" style={styles.removeText}>Supprimer</Text></Pressable></View></View>};return <SafeAreaView style={styles.container} edges={['top','left','right']}><View style={styles.hero}><View style={styles.brand}><View style={styles.brandRule}/><Text variant="overline" style={styles.brandName}>Éducation CI</Text></View><Text variant="h1" style={styles.title}>Mes téléchargements</Text><Text variant="body" style={styles.intro}>{documents.length?`${documents.length} fichier${documents.length>1?'s':''} disponible${documents.length>1?'s':''} hors connexion.`:'Retrouve ici les fichiers que tu peux consulter sans connexion.'}</Text></View><FlatList data={documents} keyExtractor={item=>item.id} renderItem={render} contentContainerStyle={[styles.list,!documents.length&&styles.emptyContent]} ListHeaderComponent={documents.length?<View style={styles.listHeader}><Text variant="overline" style={styles.listLabel}>Fichiers disponibles</Text><View style={styles.listRule}/></View>:null} ListEmptyComponent={<View style={styles.empty}><FileDown size={32} color={GOLD}/><Text variant="h3" style={styles.emptyTitle} align="center">Aucun téléchargement</Text><Text variant="body" style={styles.emptyText} align="center">Les fichiers enregistrés depuis l’application seront disponibles ici, même sans connexion.</Text></View>} showsVerticalScrollIndicator={false}/></SafeAreaView>};
-const styles=StyleSheet.create({container:{flex:1,backgroundColor:SURFACE},hero:{paddingHorizontal:theme.spacing.xl,paddingTop:theme.spacing.xl,paddingBottom:theme.spacing.xl,backgroundColor:NAVY},brand:{flexDirection:'row',alignItems:'center',gap:theme.spacing.sm},brandRule:{width:18,height:2,backgroundColor:GOLD},brandName:{color:'#F4E6C8',fontSize:10,letterSpacing:1.25},title:{marginTop:theme.spacing.xl,color:'#FFF',fontSize:29,lineHeight:35},intro:{maxWidth:315,marginTop:theme.spacing.sm,color:'rgba(255,255,255,.68)',fontSize:14,lineHeight:20},list:{flexGrow:1,paddingHorizontal:theme.spacing.xl,paddingBottom:theme.spacing['4xl']},emptyContent:{flexGrow:1},listHeader:{flexDirection:'row',alignItems:'center',gap:theme.spacing.md,paddingTop:theme.spacing.xl,paddingBottom:theme.spacing.sm},listLabel:{color:SOFT,fontSize:10,letterSpacing:1.05},listRule:{flex:1,height:StyleSheet.hairlineWidth,backgroundColor:LINE},item:{marginBottom:theme.spacing.xl},context:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingTop:theme.spacing.sm},date:{flexDirection:'row',alignItems:'center',gap:theme.spacing.xs},dateText:{color:SOFT,fontSize:11},offline:{color:GOLD,fontFamily:theme.fontFamily.semiBold,fontSize:11},actions:{flexDirection:'row',gap:theme.spacing.sm,marginTop:theme.spacing.md},action:{flex:1,minHeight:42,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6,borderWidth:1,borderColor:LINE,borderRadius:theme.radius.sm},remove:{flex:1,minHeight:42,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6,borderWidth:1,borderColor:'#D8B6BC',borderRadius:theme.radius.sm},actionText:{color:NAVY,fontFamily:theme.fontFamily.semiBold,fontSize:11},removeText:{color:BURGUNDY,fontFamily:theme.fontFamily.semiBold,fontSize:11},empty:{flex:1,alignItems:'center',justifyContent:'center',paddingHorizontal:theme.spacing.xl,paddingBottom:theme.spacing['4xl']},emptyTitle:{marginTop:theme.spacing.base,color:NAVY},emptyText:{maxWidth:280,marginTop:theme.spacing.sm,color:SOFT,lineHeight:21}});export default DownloadsScreen;
+import React, { useEffect, useMemo, useState } from 'react';
+import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { FileDown, SearchX, Share2, Trash2 } from 'lucide-react-native';
+import Text from '../components/ui/Text';
+import ScreenHeader from '../components/ui/ScreenHeader';
+import SearchField from '../components/ui/SearchField';
+import StateView from '../components/ui/StateView';
+import DocumentCard from '../components/documents/DocumentCard';
+import { DocumentSkeleton } from '../components/documents/DocumentList';
+import { useOfflineDocuments } from '../hooks/useOfflineDocuments';
+import { openDownloadedFile, shareDownloadedFile } from '../hooks/useDownload';
+import useDownloadStore from '../store/useDownloadStore';
+import { formatDate } from '../utils/format';
+import { getDocumentTitle } from '../utils/document';
+import theme from '../theme/tokens';
+
+const { brand } = theme;
+
+// Filet de sécurité si l'événement de fin de transition n'est jamais émis.
+const TRANSITION_FALLBACK_MS = 450;
+
+const normalize = (value) => String(value || '')
+  .normalize('NFD')
+  .replace(/[̀-ͯ]/g, '')
+  .toLocaleLowerCase();
+
+/**
+ * Fichiers disponibles hors connexion.
+ * Ouvert depuis l'accueil, l'écran est poussé dans la pile (retour visible) ;
+ * dans les onglets, il s'affiche sans bouton retour.
+ */
+const DownloadsScreen = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const isStacked = route.name === 'Downloads';
+  const documents = useOfflineDocuments();
+  const hydrated = useDownloadStore((state) => state.hydrated);
+  const removeDownload = useDownloadStore((state) => state.removeDownload);
+  const getLocalUri = useDownloadStore((state) => state.getLocalUri);
+  const [query, setQuery] = useState('');
+  // La liste est construite après l'animation d'ouverture : la transition
+  // reste fluide et un squelette occupe l'écran pendant ce court instant.
+  const [ready, setReady] = useState(!isStacked);
+
+  useEffect(() => {
+    if (ready) return undefined;
+    const unsubscribe = navigation.addListener('transitionEnd', () => setReady(true));
+    const timer = setTimeout(() => setReady(true), TRANSITION_FALLBACK_MS);
+    return () => {
+      unsubscribe();
+      clearTimeout(timer);
+    };
+  }, [navigation, ready]);
+
+  const visible = useMemo(() => {
+    const terms = normalize(query).split(/\s+/).filter(Boolean);
+    if (!terms.length) return documents;
+    return documents.filter((item) => {
+      const haystack = normalize([
+        getDocumentTitle(item.document),
+        item.document.originalFileName,
+        item.document.description,
+      ].join(' '));
+      return terms.every((term) => haystack.includes(term));
+    });
+  }, [documents, query]);
+
+  const open = (item) => openDownloadedFile(item.document, { getLocalUri, removeDownload });
+  const share = (item) => shareDownloadedFile(item.document, { getLocalUri });
+  const remove = (item) => {
+    Alert.alert(
+      'Supprimer le téléchargement',
+      `« ${getDocumentTitle(item.document)} » sera retiré de ton appareil.`,
+      [
+        { text: 'Annuler', style: 'cancel' },
+        { text: 'Supprimer', style: 'destructive', onPress: () => removeDownload(item.id) },
+      ]
+    );
+  };
+
+  const loading = !hydrated || !ready;
+  const count = documents.length;
+
+  const renderItem = ({ item }) => (
+    <View>
+      <DocumentCard document={item.document} onPress={() => open(item)} isDownloaded />
+      <View style={styles.itemFooter}>
+        <Text variant="caption" style={styles.itemDate}>Téléchargé le {formatDate(item.downloadedAt)}</Text>
+        <IconAction icon={Share2} label="Partager" onPress={() => share(item)} />
+        <IconAction icon={Trash2} label="Supprimer" onPress={() => remove(item)} danger />
+      </View>
+    </View>
+  );
+
+  const renderBody = () => {
+    if (loading) {
+      return <View style={styles.list}><DocumentSkeleton /></View>;
+    }
+    if (!count) {
+      return (
+        <StateView
+          icon={FileDown}
+          title="Aucun téléchargement"
+          description="Les sujets que tu télécharges apparaissent ici et restent consultables sans connexion."
+        />
+      );
+    }
+    return (
+      <FlatList
+        data={visible}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        ItemSeparatorComponent={Separator}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentContainerStyle={[styles.list, !visible.length && styles.listEmpty]}
+        ListHeaderComponent={visible.length ? (
+          <Text variant="overline" style={styles.count}>
+            {query.trim()
+              ? `${visible.length} résultat${visible.length > 1 ? 's' : ''}`
+              : `${count} fichier${count > 1 ? 's' : ''}`}
+          </Text>
+        ) : null}
+        ListEmptyComponent={(
+          <StateView
+            icon={SearchX}
+            title="Aucun résultat"
+            description={`Aucun fichier ne correspond à « ${query.trim()} ».`}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScreenHeader
+        onBack={isStacked ? () => navigation.goBack() : undefined}
+        eyebrow="Hors connexion"
+        title="Mes téléchargements"
+      />
+
+      {count > 0 ? (
+        <View style={styles.searchBar}>
+          <SearchField value={query} onChangeText={setQuery} placeholder="Rechercher un fichier" />
+        </View>
+      ) : null}
+
+      <View style={styles.body}>{renderBody()}</View>
+    </View>
+  );
+};
+
+const IconAction = ({ icon: Icon, label, onPress, danger }) => (
+  <Pressable
+    accessibilityRole="button"
+    accessibilityLabel={label}
+    hitSlop={theme.hitSlop}
+    onPress={onPress}
+    style={({ pressed }) => [styles.iconAction, pressed && styles.iconActionPressed]}
+  >
+    <Icon size={17} color={danger ? brand.burgundy : brand.inkSoft} strokeWidth={1.9} />
+  </Pressable>
+);
+
+const Separator = () => <View style={styles.separator} />;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: brand.paper,
+  },
+  searchBar: {
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.base,
+  },
+  body: {
+    flex: 1,
+  },
+  list: {
+    flexGrow: 1,
+    paddingHorizontal: theme.layout.gutter,
+    paddingBottom: theme.spacing['4xl'],
+  },
+  listEmpty: {
+    flexGrow: 1,
+  },
+  count: {
+    paddingTop: theme.spacing.lg,
+    paddingBottom: theme.spacing.xs,
+    color: brand.inkSoft,
+  },
+  itemFooter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.xs,
+    marginTop: -theme.spacing.sm,
+    paddingLeft: 54,
+    paddingBottom: theme.spacing.sm,
+  },
+  itemDate: {
+    flex: 1,
+    color: brand.inkMuted,
+    fontFamily: theme.fontFamily.regular,
+    fontSize: 12,
+  },
+  iconAction: {
+    width: 36,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.radius.full,
+  },
+  iconActionPressed: {
+    backgroundColor: brand.pressed,
+  },
+  separator: {
+    marginLeft: 54,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: brand.line,
+  },
+});
+
+export default DownloadsScreen;

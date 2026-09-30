@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Text from '../ui/Text';
 import theme from '../../theme/tokens';
 
-const SOFT = '#4F5E72';
+const SOFT = theme.brand.inkSoft;
 
 const DocumentMeta = ({ document, style }) => {
   const items = [
@@ -31,8 +31,8 @@ const DocumentMeta = ({ document, style }) => {
 
 const styles = StyleSheet.create({
   container: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 5, rowGap: 2 },
-  item: { maxWidth: '85%', color: SOFT, fontFamily: theme.fontFamily.medium, fontSize: 11, lineHeight: 16 },
-  separator: { color: SOFT, fontSize: 11, lineHeight: 16 },
+  item: { maxWidth: '85%', color: SOFT, fontFamily: theme.fontFamily.regular, fontSize: 12, lineHeight: 16 },
+  separator: { color: SOFT, fontSize: 12, lineHeight: 16 },
 });
 
 export default DocumentMeta;

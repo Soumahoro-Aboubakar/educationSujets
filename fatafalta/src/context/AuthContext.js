@@ -46,7 +46,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const persistAuthData = async (tokenValue, userValue) => {
-    console.log('Persisting auth data:', { tokenValue, userValue });
     const authToken = typeof tokenValue === 'string' ? tokenValue : JSON.stringify(tokenValue);
     const authUser = JSON.stringify(userValue);
 
@@ -73,7 +72,7 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true, user: newUser };
     } catch (err) {
-      const message = err.response?.data?.message || 'Erreur lors de l\'inscription';
+      const message = err.response?.data?.error || err.response?.data?.message || 'Erreur lors de l\'inscription';
       setError(message);
       return { success: false, error: message };
     }
@@ -98,7 +97,7 @@ export const AuthProvider = ({ children }) => {
       return { success: true, user: newUser };
     } catch (err) {
       console.error('Login error00:', err);
-      const message = err.response?.data?.message || 'Erreur lors de la connexion';
+      const message = err.response?.data?.error || err.response?.data?.message || 'Erreur lors de la connexion';
       setError(message);
       return { success: false, error: message };
     }

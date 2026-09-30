@@ -26,6 +26,10 @@ const protect = asyncHandler(async (req, res, next) => {
     throw new AppError('Utilisateur introuvable ou session invalide', 401);
   }
 
+  if (user.accountStatus && user.accountStatus !== 'ACTIVE') {
+    throw new AppError('Ce compte est desactive. Contactez le support.', 403, undefined, 'ACCOUNT_DISABLED');
+  }
+
   req.user = user;
   next();
 });
@@ -40,7 +44,7 @@ const optionalAuth = async (req, res, next) => {
     }
 
     const user = await resolveUser(token);
-    req.user = user || null;
+    req.user = user && (!user.accountStatus || user.accountStatus === 'ACTIVE') ? user : null;
     return next();
   } catch (error) {
     req.user = null;

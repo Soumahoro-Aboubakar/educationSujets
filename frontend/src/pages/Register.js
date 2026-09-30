@@ -1,140 +1,59 @@
-
-import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { User, Lock, Mail, AlertCircle } from 'lucide-react';
+import React, { useContext, useState } from 'react';
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 import AuthContext from '../context/AuthContext';
+import AuthShell from '../components/site/AuthShell';
+import { Button, Field } from '../components/ui';
+import { afterAuthPath } from '../lib/redirect';
 
+/** Inscription courte : trois champs. Le reste se complète plus tard dans le profil. */
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const { register, user } = useContext(AuthContext);
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+  const next = params.get('next');
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { register } = useContext(AuthContext);
-  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  if (user) return <Navigate to={afterAuthPath(user, next)} replace />;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setError('');
-    setLoading(true);
-
-    const result = await register(formData.name, formData.email, formData.password);
-    if (result.success) {
-      navigate('/dashboard');
-    } else {
-      setError(result.error);
+    if (form.password.length < 6) {
+      setError('Le mot de passe doit contenir au moins 6 caractères.');
+      return;
     }
+    setLoading(true);
+    const result = await register(form.name.trim(), form.email.trim(), form.password);
     setLoading(false);
+    if (result.success) navigate(afterAuthPath(result.user, next), { replace: true });
+    else setError(result.error);
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const suffix = next ? `?next=${encodeURIComponent(next)}` : '';
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Créez votre compte
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Ou{' '}
-            <Link to="/login" className="font-medium text-primary hover:text-blue-500">
-              connectez-vous
-            </Link>
-          </p>
+    <AuthShell
+      title="Créer votre compte"
+      subtitle="Gratuit. Votre abonnement s’ajoute quand vous le souhaitez."
+      footer={<>Déjà inscrit ? <Link to={`/login${suffix}`} className="font-semibold text-burgundy hover:underline">Se connecter</Link></>}
+    >
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        <Field label="Nom complet" autoComplete="name" required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
+        <Field label="Email" type="email" autoComplete="email" required value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
+        <div className="relative">
+          <Field label="Mot de passe" hint="6 caractères minimum." type={showPassword ? 'text' : 'password'} autoComplete="new-password" required value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} inputClassName="pr-12" />
+          <button type="button" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'} className="absolute right-0 top-[30px] flex h-12 w-12 items-center justify-center text-ink-muted hover:text-ink">
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center">
-              <AlertCircle className="h-5 w-5 text-red-500 mr-2" />
-              <span className="text-red-700">{error}</span>
-            </div>
-          )}
-          <div className="rounded-md shadow-sm space-y-4">
-            <div>
-              <label htmlFor="name" className="sr-only">
-                Nom complet
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                  placeholder="Nom complet"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Adresse email
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                  placeholder="Adresse email"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Mot de passe
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                  placeholder="Mot de passe (min 6 caractères)"
-                  minLength="6"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-              ) : (
-                'Créer un compte'
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        {error ? <p className="rounded-xl bg-rose-50 p-3 text-sm text-rose-700" role="alert">{error}</p> : null}
+        <Button type="submit" size="lg" className="w-full" loading={loading} disabled={!form.name || !form.email || !form.password}>Créer mon compte</Button>
+      </form>
+    </AuthShell>
   );
 };
 

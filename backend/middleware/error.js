@@ -45,6 +45,10 @@ const errorHandler = (err, req, res, next) => {
     error: message,
   };
 
+  if (err.errorCode) {
+    payload.code = err.errorCode;
+  }
+
   if (details) {
     payload.details = details;
   }

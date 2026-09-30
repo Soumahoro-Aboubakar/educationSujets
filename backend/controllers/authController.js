@@ -1,8 +1,11 @@
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const AuthHandoff = require('../models/AuthHandoff');
 const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
+const { ensurePromoCode } = require('../services/billing/promoCodeService');
 
 const sendTokenResponse = (user, statusCode, res) => {
   const token = user.getSignedJwtToken();
@@ -29,6 +32,8 @@ const sendTokenResponse = (user, statusCode, res) => {
         role: user.role,
         isSuperAdmin: Boolean(user.isSuperAdmin),
         isVerified: user.isVerified,
+        accountStatus: user.accountStatus || 'ACTIVE',
+        mustChangePassword: Boolean(user.mustChangePassword),
       },
     });
 };
@@ -47,6 +52,13 @@ exports.register = asyncHandler(async (req, res) => {
     name: name.trim(),
     email: normalizedEmail,
     password,
+    role: 'user',
+  });
+
+  // Code de parrainage créé dès l'inscription (inactif tant que l'abonnement ne l'est pas).
+  // Un échec ici ne bloque pas l'inscription : le code sera créé à la première consultation.
+  await ensurePromoCode(user._id).catch((error) => {
+    console.error(`[PROMO_CODE] Creation differee pour ${user._id}: ${error.message}`);
   });
 
   sendTokenResponse(user, 201, res);
@@ -59,6 +71,10 @@ exports.login = asyncHandler(async (req, res) => {
 
   if (!user || !(await user.matchPassword(password))) {
     throw new AppError('Identifiants invalides', 401);
+  }
+
+  if (user.accountStatus && user.accountStatus !== 'ACTIVE') {
+    throw new AppError('Ce compte est desactive. Contactez le support.', 403, undefined, 'ACCOUNT_DISABLED');
   }
 
   sendTokenResponse(user, 200, res);
@@ -78,6 +94,43 @@ exports.refreshToken = asyncHandler(async (req, res) => {
 
   if (!user) {
     throw new AppError('Utilisateur non trouve', 401);
+  }
+
+  if (user.accountStatus && user.accountStatus !== 'ACTIVE') {
+    throw new AppError('Ce compte est desactive. Contactez le support.', 403, undefined, 'ACCOUNT_DISABLED');
+  }
+
+  sendTokenResponse(user, 200, res);
+});
+
+const HANDOFF_TTL_MS = 2 * 60 * 1000;
+const hashCode = (code) => crypto.createHash('sha256').update(code).digest('hex');
+
+// Émis par l'application mobile juste avant d'ouvrir la souscription web.
+exports.createHandoff = asyncHandler(async (req, res) => {
+  const code = crypto.randomBytes(24).toString('base64url');
+  await AuthHandoff.create({
+    codeHash: hashCode(code),
+    user: req.user._id,
+    expiresAt: new Date(Date.now() + HANDOFF_TTL_MS),
+  });
+  sendSuccess(res, { statusCode: 201, data: { code, expiresIn: HANDOFF_TTL_MS / 1000 } });
+});
+
+// Échangé une seule fois par le site web contre une session normale.
+exports.exchangeHandoff = asyncHandler(async (req, res) => {
+  const handoff = await AuthHandoff.findOneAndDelete({
+    codeHash: hashCode(String(req.body.code || '')),
+    expiresAt: { $gt: new Date() },
+  });
+
+  if (!handoff) {
+    throw new AppError('Lien expiré. Reprenez depuis l’application.', 401, undefined, 'HANDOFF_INVALID');
+  }
+
+  const user = await User.findById(handoff.user);
+  if (!user || (user.accountStatus && user.accountStatus !== 'ACTIVE')) {
+    throw new AppError('Ce compte est desactive. Contactez le support.', 403, undefined, 'ACCOUNT_DISABLED');
   }
 
   sendTokenResponse(user, 200, res);

@@ -23,6 +23,7 @@ const {
   incrementDocumentDownloads,
   assertDocumentAccess,
 } = require('../services/documentService');
+const { authorizeDownload, logDownload } = require('../services/billing/downloadGuard');
 const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
@@ -110,12 +111,15 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
 
 exports.getDocumentDownloadUrl = asyncHandler(async (req, res) => {
   const document = await getDocumentById(req.params.id);
+  assertDocumentAccess(document, req.user || null);
+  await authorizeDownload(req.user || null, document);
   const download = await buildDownloadPayload(document, req.user || null);
 
   if (!download) {
     throw new AppError('Ce document ne dispose pas de lien signe', 400);
   }
 
+  await logDownload(req.user, document, req);
   sendSuccess(res, { data: download });
 });
 
@@ -126,7 +130,10 @@ exports.legacyDownloadByFileName = asyncHandler(async (req, res) => {
     throw new AppError('Document introuvable', 404);
   }
 
+  assertDocumentAccess(document, req.user || null);
+  await authorizeDownload(req.user || null, document);
   const download = await buildDownloadPayload(document, req.user || null);
+  await logDownload(req.user, document, req);
 
   if (download?.url) {
     return res.redirect(download.url);

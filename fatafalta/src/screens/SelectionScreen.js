@@ -1,4 +1,321 @@
-import React,{useCallback,useEffect,useMemo,useRef,useState}from'react';import{ActivityIndicator,FlatList,Pressable,StatusBar,StyleSheet,TextInput,View}from'react-native';import{useSafeAreaInsets}from'react-native-safe-area-context';import*as Haptics from'expo-haptics';import{ArrowLeft,ArrowUpRight,Building2,ClipboardList,FileText,Search}from'lucide-react-native';import{useFocusEffect}from'@react-navigation/native';import Text from'../components/ui/Text';import{useOrientationOptions}from'../hooks/useOrientationOptions';import{fetchPublishedOrganismes}from'../services/catalog';import{usePreferences}from'../context/PreferencesContext';import cache from'../services/cache';import theme from'../theme/tokens';
-const NAVY='#0D1B32',SOFT='#4F5E72',SURFACE='#FCFAF5',GOLD='#B48A48',BURGUNDY='#6C2838',LINE='#DED8CC';const CONFIG={establishment:{title:"Choisir l'établissement",eyebrow:'Personnalisation',subtitle:'Sélectionne ton établissement pour accéder aux ressources qui te correspondent.',empty:'Aucun établissement avec des sujets disponibles.',key:'universities',icon:Building2},contest:{title:'Choisir un organisme',eyebrow:'Archives',subtitle:'Sélectionne l’organisme dont tu souhaites consulter les sujets et corrigés.',empty:'Aucun organisme avec des sujets publiés n’est disponible.',key:null,icon:FileText},training:{title:"Choisir l'entraînement",eyebrow:'Formation interactive',subtitle:'Choisis le concours sur lequel tu souhaites t’entraîner.',empty:'Aucun entraînement interactif n’est disponible pour le moment.',key:'trainingContests',icon:ClipboardList}};const compact=o=>({_id:o._id,name:o.name||o.nom,abbreviation:o.abbreviation||''});
-const SelectionScreen=({navigation,route})=>{const mode=route.name==='EstablishmentSelection'?'establishment':route.name==='TrainingSelection'?'training':'contest',config=CONFIG[mode],Icon=config.icon,accent=mode==='contest'?BURGUNDY:GOLD,insets=useSafeAreaInsets();const{data,isLoading,isError,refetch}=useOrientationOptions();const{updatePreferences}=usePreferences();const[query,setQuery]=useState(''),[saving,setSaving]=useState(false),[local,setLocal]=useState(null),[catalog,setCatalog]=useState([]),[catalogLoading,setCatalogLoading]=useState(true),[catalogError,setCatalogError]=useState(false);const mounted=useRef(true),catalogMode=mode==='contest'||mode==='establishment';const loadCatalog=useCallback(async()=>{setCatalogLoading(true);setCatalogError(false);try{const r=await fetchPublishedOrganismes({limit:100});if(mounted.current)setCatalog(r.data)}catch(e){if(mounted.current)setCatalogError(true)}finally{if(mounted.current)setCatalogLoading(false)}},[]);const options=catalogMode?catalog:(local??(data?.[config.key]??[]));const visible=useMemo(()=>{const q=query.trim().toLocaleLowerCase();return q?options.filter(o=>[o.name,o.abbreviation].filter(Boolean).some(v=>v.toLocaleLowerCase().includes(q))):options},[options,query]);useEffect(()=>{mounted.current=true;if(catalogMode)return()=>{mounted.current=false};(async()=>{try{const raw=await cache.load('orientation-options');if(mounted.current&&raw?.payload?.[config.key])setLocal(raw.payload[config.key])}catch(e){}refetch().catch(()=>{})})();return()=>{mounted.current=false}},[catalogMode,config.key,refetch]);useFocusEffect(useCallback(()=>{if(!catalogMode)return undefined;loadCatalog();return undefined},[catalogMode,loadCatalog]));const select=async item=>{if(saving)return;setSaving(true);Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(()=>{});try{const selection=compact(item);if(catalogMode){if(mode==='establishment')updatePreferences({establishment:selection,selectedContentType:'subjects',hasCompletedOrientation:true}).catch(()=>{});navigation.navigate('ParcoursTypeSelection',{organisme:item})}else{await updatePreferences({contest:selection,selectedContentType:'training',hasCompletedOrientation:true});navigation.reset({index:0,routes:[{name:'TrainingSession',params:{contest:selection}}]})}}finally{setSaving(false)}};const skip=async()=>{if(saving)return;setSaving(true);try{await updatePreferences({establishment:null,contest:null,selectedContentType:'subjects',hasCompletedOrientation:true});navigation.reset({index:0,routes:[{name:'MainTabs'}]})}finally{setSaving(false)}};const item=({item,index})=><Pressable disabled={saving} onPress={()=>select(item)} style={({pressed})=>[styles.option,pressed&&styles.pressed]}><Text style={[styles.index,{color:accent}]}>{String(index+1).padStart(2,'0')}</Text><View style={styles.optionContent}><Text variant="h3" style={styles.optionTitle}>{item.name}</Text><Text variant="caption" style={styles.meta}>{item.abbreviation||(mode==='training'?'QCM et exercices disponibles':'Sujets publiés')}{item.subjectCount?` · ${item.subjectCount} sujet${item.subjectCount>1?'s':''}`:''}</Text></View><ArrowUpRight size={19} color={accent}/></Pressable>;const loading=catalogMode?catalogLoading:isLoading,error=catalogMode?catalogError:isError;return <View style={styles.container}><StatusBar barStyle="light-content" translucent backgroundColor="transparent"/><View style={[styles.hero,{paddingTop:insets.top+theme.spacing.base}]}><View style={styles.top}><Pressable onPress={()=>navigation.goBack()} style={styles.back}><ArrowLeft size={21} color="#FFF"/></Pressable><View style={styles.brand}><View style={styles.brandRule}/><Text variant="overline" style={styles.brandName}>Éducation CI</Text></View></View><Text variant="overline" style={[styles.eyebrow,{color:accent}]}>{config.eyebrow}</Text><Text variant="h1" style={styles.title}>{config.title}</Text><Text variant="body" style={styles.intro}>{config.subtitle}</Text></View><View style={styles.catalog}><View style={styles.search}><Search size={18} color={SOFT}/><TextInput value={query} onChangeText={setQuery} placeholder="Rechercher" placeholderTextColor={SOFT} style={styles.input}/></View>{loading?<View style={styles.center}><ActivityIndicator color={accent}/><Text variant="caption" style={styles.stateText}>Recherche des contenus disponibles…</Text></View>:error?<View style={styles.center}><Icon size={29} color={accent}/><Text variant="h3" style={styles.stateTitle}>Impossible de charger la sélection</Text><Text variant="body" style={styles.stateText} align="center">Vérifie ta connexion, puis réessaie.</Text><Pressable onPress={catalogMode?loadCatalog:refetch} style={styles.retry}><Text variant="bodyMedium" style={[styles.retryText,{color:accent}]}>Réessayer</Text><ArrowUpRight size={16} color={accent}/></Pressable></View>:<FlatList data={visible} renderItem={item} keyExtractor={i=>i._id} contentContainerStyle={[styles.list,mode==='establishment'&&styles.listSkip,!visible.length&&styles.emptyList]} ListHeaderComponent={visible.length?<View style={styles.listHeader}><Text variant="overline" style={styles.listLabel}>Sélection disponible</Text><View style={styles.listRule}/></View>:null} ListEmptyComponent={<View style={styles.center}><Icon size={31} color={accent}/><Text variant="h3" style={styles.stateTitle}>Pas encore de résultat</Text><Text variant="body" style={styles.stateText} align="center">{config.empty}</Text></View>}/>}</View>{mode==='establishment'?<View style={[styles.skip,{paddingBottom:Math.max(insets.bottom,theme.spacing.md)}]}><Pressable disabled={saving} onPress={skip} style={styles.skipButton}><Text variant="bodyMedium" style={styles.skipText}>Ignorer pour le moment</Text><ArrowUpRight size={16} color={SOFT}/></Pressable></View>:null}</View>};
-const styles=StyleSheet.create({container:{flex:1,backgroundColor:SURFACE},hero:{backgroundColor:NAVY,paddingHorizontal:theme.spacing.xl,paddingBottom:theme.spacing.xl},top:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},back:{width:40,height:40,alignItems:'center',justifyContent:'center',marginLeft:-10},brand:{flexDirection:'row',alignItems:'center',gap:theme.spacing.sm},brandRule:{width:18,height:2,backgroundColor:GOLD},brandName:{color:'#F4E6C8',fontSize:10,letterSpacing:1.25},eyebrow:{marginTop:theme.spacing.xl,fontSize:10,letterSpacing:1.15},title:{marginTop:theme.spacing.sm,color:'#FFF',fontSize:29,lineHeight:35},intro:{marginTop:theme.spacing.sm,color:'rgba(255,255,255,.68)',fontSize:14,lineHeight:20},catalog:{flex:1,paddingHorizontal:theme.spacing.xl},search:{height:57,flexDirection:'row',alignItems:'center',gap:theme.spacing.md,borderBottomWidth:1,borderBottomColor:NAVY},input:{flex:1,height:'100%',color:NAVY,fontFamily:theme.fontFamily.medium,fontSize:15},list:{paddingBottom:theme.spacing['2xl']},listSkip:{paddingBottom:86},emptyList:{flexGrow:1},listHeader:{flexDirection:'row',alignItems:'center',gap:theme.spacing.md,paddingTop:theme.spacing.xl,paddingBottom:theme.spacing.sm},listLabel:{color:SOFT,fontSize:10,letterSpacing:1.05},listRule:{flex:1,height:StyleSheet.hairlineWidth,backgroundColor:LINE},option:{minHeight:80,flexDirection:'row',alignItems:'center',paddingVertical:theme.spacing.base,borderBottomWidth:StyleSheet.hairlineWidth,borderBottomColor:LINE},pressed:{backgroundColor:'rgba(13,27,50,.035)'},index:{width:34,fontFamily:theme.fontFamily.semiBold,fontSize:11,letterSpacing:1.05},optionContent:{flex:1,paddingRight:theme.spacing.base},optionTitle:{color:NAVY,fontFamily:theme.fontFamily.semiBold,fontSize:16},meta:{marginTop:3,color:SOFT,fontSize:12},center:{flex:1,minHeight:230,alignItems:'center',justifyContent:'center',paddingHorizontal:theme.spacing['3xl']},stateTitle:{marginTop:theme.spacing.base,color:NAVY,textAlign:'center'},stateText:{marginTop:theme.spacing.sm,color:SOFT},retry:{flexDirection:'row',gap:6,marginTop:theme.spacing.lg,paddingBottom:3,borderBottomWidth:1,borderBottomColor:SOFT},retryText:{fontSize:14},skip:{paddingHorizontal:theme.spacing.xl,paddingTop:theme.spacing.sm,borderTopWidth:StyleSheet.hairlineWidth,borderTopColor:LINE},skipButton:{minHeight:48,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6},skipText:{color:SOFT,fontSize:14}});export default SelectionScreen;
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import * as Haptics from 'expo-haptics';
+import { Building2, ClipboardList, FileText, SearchX } from 'lucide-react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import Text from '../components/ui/Text';
+import ScreenHeader from '../components/ui/ScreenHeader';
+import ListRow from '../components/ui/ListRow';
+import SearchField from '../components/ui/SearchField';
+import StateView from '../components/ui/StateView';
+import { SkeletonRows } from '../components/ui/Skeleton';
+import { useOrientationOptions } from '../hooks/useOrientationOptions';
+import { fetchPublishedOrganismes } from '../services/catalog';
+import { usePreferences } from '../context/PreferencesContext';
+import cache from '../services/cache';
+import theme from '../theme/tokens';
+
+const { brand } = theme;
+
+// La recherche n'apparaît que lorsque la liste est assez longue pour la justifier.
+const SEARCH_THRESHOLD = 6;
+
+const CONFIG = {
+  establishment: {
+    title: 'Ton établissement',
+    eyebrow: 'Personnalisation',
+    subtitle: 'Pour te montrer les ressources qui te correspondent.',
+    empty: 'Aucun établissement avec des sujets disponibles.',
+    noun: ['établissement', 'établissements'],
+    key: 'universities',
+    icon: Building2,
+  },
+  contest: {
+    title: 'Choisis un organisme',
+    eyebrow: 'Anciens sujets',
+    subtitle: 'L’organisme qui a organisé le concours ou l’examen.',
+    empty: 'Aucun organisme avec des sujets publiés n’est disponible.',
+    noun: ['organisme', 'organismes'],
+    key: null,
+    icon: FileText,
+  },
+  training: {
+    title: 'Choisis un entraînement',
+    eyebrow: 'Formation interactive',
+    subtitle: 'Le concours sur lequel tu souhaites t’entraîner.',
+    empty: 'Aucun entraînement interactif n’est disponible pour le moment.',
+    noun: ['concours', 'concours'],
+    key: 'trainingContests',
+    icon: ClipboardList,
+  },
+};
+
+const compact = (option) => ({
+  _id: option._id,
+  name: option.name || option.nom,
+  abbreviation: option.abbreviation || '',
+});
+
+const plural = (count, [singular, pluralForm]) => `${count} ${count > 1 ? pluralForm : singular}`;
+
+const SelectionScreen = ({ navigation, route }) => {
+  const mode = route.name === 'EstablishmentSelection'
+    ? 'establishment'
+    : route.name === 'TrainingSelection' ? 'training' : 'contest';
+  const config = CONFIG[mode];
+  const insets = useSafeAreaInsets();
+  const { data, isLoading, isError, refetch } = useOrientationOptions();
+  const { updatePreferences } = usePreferences();
+  const [query, setQuery] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [local, setLocal] = useState(null);
+  const [catalog, setCatalog] = useState(null);
+  const [catalogLoading, setCatalogLoading] = useState(true);
+  const [catalogError, setCatalogError] = useState(false);
+  const mounted = useRef(true);
+  const catalogMode = mode === 'contest' || mode === 'establishment';
+
+  const loadCatalog = useCallback(async () => {
+    setCatalogLoading(true);
+    setCatalogError(false);
+    try {
+      const result = await fetchPublishedOrganismes({ limit: 100 });
+      if (mounted.current) setCatalog(result.data);
+    } catch (error) {
+      if (mounted.current) setCatalogError(true);
+    } finally {
+      if (mounted.current) setCatalogLoading(false);
+    }
+  }, []);
+
+  const options = catalogMode ? (catalog ?? []) : (local ?? (data?.[config.key] ?? []));
+
+  const visible = useMemo(() => {
+    const normalized = query.trim().toLocaleLowerCase();
+    if (!normalized) return options;
+    return options.filter((option) => [option.name, option.nom, option.abbreviation]
+      .filter(Boolean)
+      .some((value) => value.toLocaleLowerCase().includes(normalized)));
+  }, [options, query]);
+
+  useEffect(() => {
+    mounted.current = true;
+    if (catalogMode) return () => { mounted.current = false; };
+
+    (async () => {
+      try {
+        const raw = await cache.load('orientation-options');
+        if (mounted.current && raw?.payload?.[config.key]) setLocal(raw.payload[config.key]);
+      } catch (error) {
+        // Le cache est facultatif : la requête réseau prend le relais.
+      }
+      refetch().catch(() => {});
+    })();
+
+    return () => { mounted.current = false; };
+  }, [catalogMode, config.key, refetch]);
+
+  // Rafraîchit au retour sur l'écran ; la liste déjà affichée reste visible.
+  useFocusEffect(useCallback(() => {
+    if (catalogMode) loadCatalog();
+    return undefined;
+  }, [catalogMode, loadCatalog]));
+
+  const select = async (item) => {
+    if (saving) return;
+    setSaving(true);
+    Haptics.selectionAsync().catch(() => {});
+    try {
+      const selection = compact(item);
+      if (catalogMode) {
+        if (mode === 'establishment') {
+          updatePreferences({
+            establishment: selection,
+            selectedContentType: 'subjects',
+            hasCompletedOrientation: true,
+          }).catch(() => {});
+        }
+        navigation.navigate('ParcoursTypeSelection', { organisme: item });
+      } else {
+        await updatePreferences({
+          contest: selection,
+          selectedContentType: 'training',
+          hasCompletedOrientation: true,
+        });
+        navigation.reset({ index: 0, routes: [{ name: 'TrainingSession', params: { contest: selection } }] });
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const skip = async () => {
+    if (saving) return;
+    setSaving(true);
+    try {
+      await updatePreferences({
+        establishment: null,
+        contest: null,
+        selectedContentType: 'subjects',
+        hasCompletedOrientation: true,
+      });
+      navigation.reset({ index: 0, routes: [{ name: 'MainTabs' }] });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const hasData = catalogMode ? catalog !== null : options.length > 0;
+  const loading = (catalogMode ? catalogLoading : isLoading) && !hasData;
+  const error = (catalogMode ? catalogError : isError) && !options.length;
+  const retry = catalogMode ? loadCatalog : refetch;
+  const showSearch = options.length > SEARCH_THRESHOLD || Boolean(query);
+
+  const describe = (item) => {
+    const parts = [];
+    if (item.abbreviation && item.abbreviation !== item.name) parts.push(item.abbreviation);
+    if (item.subjectCount) parts.push(plural(item.subjectCount, ['sujet', 'sujets']));
+    if (!parts.length) parts.push(mode === 'training' ? 'QCM et exercices' : 'Sujets publiés');
+    return parts.join(' · ');
+  };
+
+  const renderContent = () => {
+    if (loading) return <SkeletonRows count={6} />;
+    if (error) {
+      return (
+        <StateView
+          icon={config.icon}
+          title="Connexion impossible"
+          description="Vérifie ta connexion Internet puis réessaie."
+          onRetry={retry}
+        />
+      );
+    }
+
+    return (
+      <FlatList
+        data={visible}
+        keyExtractor={(item) => item._id}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        contentContainerStyle={[
+          styles.list,
+          mode === 'establishment' && styles.listWithFooter,
+          !visible.length && styles.listEmpty,
+        ]}
+        ListHeaderComponent={visible.length ? (
+          <Text variant="overline" style={styles.count}>
+            {plural(visible.length, config.noun)}
+          </Text>
+        ) : null}
+        renderItem={({ item, index }) => (
+          <ListRow
+            title={item.name || item.nom}
+            meta={describe(item)}
+            disabled={saving}
+            isLast={index === visible.length - 1}
+            onPress={() => select(item)}
+          />
+        )}
+        ListEmptyComponent={query ? (
+          <StateView
+            icon={SearchX}
+            title="Aucun résultat"
+            description={`Rien ne correspond à « ${query.trim()} ». Vérifie l’orthographe ou essaie un sigle.`}
+          />
+        ) : (
+          <StateView icon={config.icon} title="Rien pour le moment" description={config.empty} />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScreenHeader
+        onBack={navigation.canGoBack() ? () => navigation.goBack() : undefined}
+        eyebrow={config.eyebrow}
+        title={config.title}
+        subtitle={config.subtitle}
+      />
+
+      {showSearch ? (
+        <View style={styles.searchBar}>
+          <SearchField
+            value={query}
+            onChangeText={setQuery}
+            placeholder={`Rechercher un ${config.noun[0]} ou un sigle`}
+          />
+        </View>
+      ) : null}
+
+      <View style={styles.body}>{renderContent()}</View>
+
+      {mode === 'establishment' ? (
+        <View style={[styles.footer, { paddingBottom: Math.max(insets.bottom, theme.spacing.md) }]}>
+          <Pressable
+            accessibilityRole="button"
+            disabled={saving}
+            onPress={skip}
+            style={({ pressed }) => [styles.skip, pressed && styles.skipPressed]}
+          >
+            <Text variant="bodyMedium" style={styles.skipLabel}>Ignorer pour le moment</Text>
+          </Pressable>
+        </View>
+      ) : null}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: brand.paper,
+  },
+  searchBar: {
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.base,
+  },
+  body: {
+    flex: 1,
+  },
+  list: {
+    paddingBottom: theme.spacing['2xl'],
+  },
+  listWithFooter: {
+    paddingBottom: 96,
+  },
+  listEmpty: {
+    flexGrow: 1,
+  },
+  count: {
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.lg,
+    paddingBottom: theme.spacing.xs,
+    color: brand.inkSoft,
+  },
+  footer: {
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.sm,
+    backgroundColor: brand.paper,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: brand.line,
+  },
+  skip: {
+    minHeight: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.radius.md,
+  },
+  skipPressed: {
+    backgroundColor: brand.pressed,
+  },
+  skipLabel: {
+    color: brand.inkSoft,
+    fontSize: 15,
+  },
+});
+
+export default SelectionScreen;

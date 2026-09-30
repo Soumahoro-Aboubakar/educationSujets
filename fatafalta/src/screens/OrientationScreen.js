@@ -1,12 +1,203 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { Pressable, StatusBar, StyleSheet, View } from 'react-native';
+import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ArrowUpRight, Download, FileDown } from 'lucide-react-native';
+import * as Haptics from 'expo-haptics';
+import { ChevronRight, Download, FileText, UserRound } from 'lucide-react-native';
 import Text from '../components/ui/Text';
+import OrientationArt, { OrientationBackdrop } from '../components/illustrations/OrientationArt';
 import theme from '../theme/tokens';
-const NAVY='#0D1B32', SOFT='#4F5E72', IVORY='#F7F3EA', SURFACE='#FCFAF5', GOLD='#B48A48', BURGUNDY='#6C2838', LINE='#DED8CC';
-const OPTIONS=[{id:'contest',index:'01',tag:'Archives',title:'Anciens sujets\net corrigés',description:'Consulte les anciens sujets de concours et leurs corrigés pour mieux te préparer.',action:'Explorer les archives',icon:FileDown,accent:BURGUNDY,route:'ContestSelection'},{id:'downloads',index:'02',tag:'Hors connexion',title:'Mes\ntéléchargements',description:'Retrouve et ouvre les fichiers déjà téléchargés, même sans connexion Internet.',action:'Ouvrir mes fichiers',icon:Download,accent:GOLD,route:'DownloadsTab'}];
-const Destination=({option,order,entrance,onPress})=>{const Icon=option.icon;const press=useRef(new Animated.Value(0)).current;const ty=entrance.interpolate({inputRange:[0,1],outputRange:[16+order*8,0]}),op=entrance.interpolate({inputRange:[0,.3+order*.15,1],outputRange:[0,0,1]}),scale=press.interpolate({inputRange:[0,1],outputRange:[1,.988]}),arrow=press.interpolate({inputRange:[0,1],outputRange:[0,4]});return <Animated.View style={{opacity:op,transform:[{translateY:ty},{scale}]}}><Pressable accessibilityRole="button" accessibilityLabel={option.title.replace('\n',' ')} android_ripple={{color:'rgba(13,27,50,.05)'}} onPress={onPress} onPressIn={()=>Animated.timing(press,{toValue:1,duration:110,useNativeDriver:true}).start()} onPressOut={()=>Animated.timing(press,{toValue:0,duration:160,useNativeDriver:true}).start()} style={styles.destination}><View style={styles.destinationTop}><Text style={[styles.index,{color:option.accent}]}>{option.index}</Text><Icon size={25} color={option.accent} strokeWidth={1.65}/></View><Text style={[styles.tag,{color:option.accent}]}>{option.tag}</Text><Text variant="h2" style={styles.destinationTitle}>{option.title}</Text><Text variant="body" style={styles.destinationDescription}>{option.description}</Text><View style={styles.destinationAction}><Text style={[styles.actionLabel,{color:option.accent}]}>{option.action}</Text><Animated.View style={{transform:[{translateX:arrow}]}}><ArrowUpRight size={18} color={option.accent} strokeWidth={1.9}/></Animated.View></View></Pressable></Animated.View>};
-const OrientationScreen=({navigation})=>{const insets=useSafeAreaInsets(),entrance=useRef(new Animated.Value(0)).current;useEffect(()=>{Animated.timing(entrance,{toValue:1,duration:520,useNativeDriver:true}).start()},[entrance]);const open=o=>o.route==='DownloadsTab'?navigation.navigate('MainTabs',{screen:'AppTabs',params:{screen:'DownloadsTab'}}):navigation.navigate(o.route);return <ScrollView style={styles.container} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}><StatusBar barStyle="light-content" translucent backgroundColor="transparent"/><View style={[styles.header,{paddingTop:insets.top+theme.spacing.base}]}><View style={styles.brand}><View style={styles.brandRule}/><Text variant="overline" style={styles.brandName}>Éducation CI</Text></View><Text variant="h1" style={styles.heading}>Que veux-tu faire aujourd’hui ?</Text><Text variant="body" style={styles.introduction}>Choisis l’espace qui répond à ton besoin. Tu pourras toujours revenir ici.</Text></View><View style={[styles.content,{paddingBottom:Math.max(insets.bottom,theme.spacing.lg)+theme.spacing.lg}]}><View style={styles.section}><Text variant="overline" style={styles.sectionLabel}>Votre bibliothèque</Text><View style={styles.sectionRule}/></View>{OPTIONS.map((o,i)=><Destination key={o.id} option={o} order={i} entrance={entrance} onPress={()=>open(o)}/>)}<View style={styles.account}><Text variant="caption" style={styles.accountHint}>Tu pourras modifier tes préférences à tout moment.</Text><Pressable accessibilityRole="button" onPress={()=>navigation.navigate('Login')} style={styles.accountLink}><Text variant="bodyMedium" style={styles.accountText}>Accéder à mon espace</Text><ArrowUpRight size={17} color={NAVY} strokeWidth={1.9}/></Pressable></View></View></ScrollView>};
-const styles=StyleSheet.create({container:{backgroundColor:IVORY},scroll:{flexGrow:1},header:{backgroundColor:NAVY,paddingHorizontal:theme.spacing.xl,paddingBottom:theme.spacing['2xl']},brand:{flexDirection:'row',alignItems:'center',gap:theme.spacing.sm},brandRule:{width:20,height:2,backgroundColor:GOLD},brandName:{color:'#F4E6C8',fontSize:10,letterSpacing:1.35},heading:{maxWidth:330,marginTop:theme.spacing['2xl'],color:'#FFF',fontSize:31,lineHeight:37,letterSpacing:-.9},introduction:{maxWidth:315,marginTop:theme.spacing.sm,color:'rgba(255,255,255,.68)',fontSize:14,lineHeight:20},content:{backgroundColor:SURFACE,paddingHorizontal:theme.spacing.xl,paddingTop:theme.spacing.xl},section:{flexDirection:'row',alignItems:'center',gap:theme.spacing.md,marginBottom:theme.spacing.sm},sectionLabel:{color:SOFT,fontSize:10,letterSpacing:1.1},sectionRule:{flex:1,height:StyleSheet.hairlineWidth,backgroundColor:LINE},destination:{paddingVertical:theme.spacing.xl,borderBottomWidth:StyleSheet.hairlineWidth,borderBottomColor:LINE},destinationTop:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},index:{fontFamily:theme.fontFamily.semiBold,fontSize:11,letterSpacing:1.2},tag:{marginTop:theme.spacing.base,fontFamily:theme.fontFamily.semiBold,fontSize:11,letterSpacing:1,textTransform:'uppercase'},destinationTitle:{marginTop:5,color:NAVY,fontFamily:theme.fontFamily.bold,fontSize:24,lineHeight:28,letterSpacing:-.65},destinationDescription:{maxWidth:325,marginTop:theme.spacing.sm,color:SOFT,fontSize:14,lineHeight:20},destinationAction:{alignSelf:'flex-start',flexDirection:'row',alignItems:'center',gap:7,marginTop:theme.spacing.base},actionLabel:{fontFamily:theme.fontFamily.semiBold,fontSize:13},account:{paddingTop:theme.spacing.xl},accountHint:{maxWidth:260,color:SOFT,fontSize:12,lineHeight:17},accountLink:{alignSelf:'flex-start',flexDirection:'row',alignItems:'center',gap:7,marginTop:theme.spacing.md,paddingBottom:3,borderBottomWidth:1,borderBottomColor:NAVY},accountText:{color:NAVY,fontSize:14}});
+
+const { brand } = theme;
+
+// Filet aux couleurs nationales, discret rappel du contexte ivoirien.
+const FLAG = ['#F77F00', '#FFFFFF', '#009E60'];
+
+/**
+ * Premier écran vu par l'utilisateur : une seule promesse, une action principale
+ * évidente, deux raccourcis. Tout tient dans la hauteur de l'écran, sans défilement.
+ */
+const OrientationScreen = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
+
+  // Retour tactile immédiat : l'appui est ressenti avant même la transition.
+  const go = (route) => {
+    Haptics.selectionAsync().catch(() => {});
+    navigation.navigate(route);
+  };
+  const openArchives = () => go('ContestSelection');
+  const openDownloads = () => go('Downloads');
+
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+
+      <OrientationBackdrop />
+
+      <View style={[styles.brand, { paddingTop: insets.top + theme.spacing.base }]}>
+        <View style={styles.flag}>
+          {FLAG.map((color) => <View key={color} style={[styles.flagBand, { backgroundColor: color }]} />)}
+        </View>
+        <Text variant="overline" style={styles.brandName}>Fatafalta</Text>
+      </View>
+
+      {/* L'illustration occupe l'espace libre : ni vide, ni rognage selon l'écran. */}
+      <Animated.View entering={FadeIn.duration(500)} style={styles.art}>
+        <OrientationArt />
+      </Animated.View>
+
+      <Animated.View entering={FadeInDown.duration(420).delay(120)} style={styles.hero}>
+        <Text variant="h1" style={styles.heading} accessibilityRole="header">
+          Les anciens sujets,{'\n'}à portée de main.
+        </Text>
+        <Text variant="body" style={styles.subtitle}>Concours et examens, avec leurs corrigés.</Text>
+      </Animated.View>
+
+      <Animated.View
+        entering={FadeInUp.duration(420).delay(200)}
+        style={[styles.panel, { paddingBottom: Math.max(insets.bottom, theme.spacing.base) + theme.spacing.sm }]}
+      >
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Explorer les anciens sujets"
+          onPress={openArchives}
+          style={({ pressed }) => [styles.primary, pressed && styles.primaryPressed]}
+        >
+          <View style={styles.primaryIcon}>
+            <FileText size={20} color={brand.ink} strokeWidth={1.9} />
+          </View>
+          <Text variant="bodyMedium" style={styles.primaryLabel}>Explorer les sujets</Text>
+          <ChevronRight size={20} color={brand.onInk} strokeWidth={2.2} />
+        </Pressable>
+
+        <View style={styles.shortcuts}>
+          <Shortcut icon={Download} label="Téléchargements" onPress={openDownloads} />
+          <Shortcut icon={UserRound} label="Mon espace" onPress={() => navigation.navigate('MainTabs', { screen: 'AppTabs', params: { screen: 'AccountTab' } })} />
+        </View>
+      </Animated.View>
+    </View>
+  );
+};
+
+const Shortcut = ({ icon: Icon, label, onPress }) => (
+  <Pressable
+    accessibilityRole="button"
+    accessibilityLabel={label}
+    onPress={onPress}
+    style={({ pressed }) => [styles.shortcut, pressed && styles.shortcutPressed]}
+  >
+    <Icon size={18} color={brand.ink} strokeWidth={1.9} />
+    <Text variant="bodyMedium" style={styles.shortcutLabel} numberOfLines={1}>{label}</Text>
+  </Pressable>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: brand.ink,
+  },
+  art: {
+    flex: 1,
+    minHeight: 120,
+    marginVertical: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.sm,
+  },
+  brand: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+    paddingHorizontal: theme.layout.gutter,
+  },
+  flag: {
+    flexDirection: 'row',
+    overflow: 'hidden',
+    borderRadius: 1,
+  },
+  flagBand: {
+    width: 7,
+    height: 3,
+  },
+  brandName: {
+    color: brand.onInk,
+    letterSpacing: 1.4,
+  },
+  hero: {
+    paddingHorizontal: theme.layout.gutter,
+    paddingBottom: theme.spacing.xl,
+  },
+  heading: {
+    color: brand.onInk,
+    fontFamily: theme.fontFamily.bold,
+    fontSize: 30,
+    lineHeight: 36,
+    letterSpacing: -0.8,
+  },
+  subtitle: {
+    marginTop: theme.spacing.sm,
+    color: brand.onInkSoft,
+    fontSize: 15,
+    lineHeight: 22,
+  },
+  panel: {
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.lg,
+    backgroundColor: brand.paper,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+  },
+  primary: {
+    minHeight: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.md,
+    paddingLeft: 10,
+    paddingRight: theme.spacing.base,
+    backgroundColor: brand.ink,
+    borderRadius: theme.radius.lg,
+  },
+  primaryPressed: {
+    opacity: 0.9,
+    transform: [{ scale: 0.99 }],
+  },
+  primaryIcon: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.radius.md,
+    backgroundColor: brand.onInkAccent,
+  },
+  primaryLabel: {
+    flex: 1,
+    color: brand.onInk,
+    fontSize: 16,
+  },
+  shortcuts: {
+    flexDirection: 'row',
+    gap: theme.spacing.md,
+    marginTop: theme.spacing.md,
+  },
+  shortcut: {
+    flex: 1,
+    minHeight: 52,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    backgroundColor: theme.colors.surface,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: brand.lineStrong,
+    borderRadius: theme.radius.lg,
+  },
+  shortcutPressed: {
+    backgroundColor: brand.paperDim,
+  },
+  shortcutLabel: {
+    flexShrink: 1,
+    color: brand.ink,
+    fontSize: 14,
+  },
+});
+
 export default OrientationScreen;

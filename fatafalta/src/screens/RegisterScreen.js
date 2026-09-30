@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight, Check, Eye, EyeOff, Lock, Mail, User } from 'l
 import Text from '../components/ui/Text';
 import FormInput from '../components/ui/FormInput';
 import AuthContext from '../context/AuthContext';
+import { useAuthRedirect } from '../hooks/useAuthRedirect';
 import theme from '../theme/tokens';
 
 const NAVY = '#0D1B32';
@@ -13,7 +14,7 @@ const GOLD = '#B48A48';
 const BURGUNDY = '#6C2838';
 const LINE = '#DED8CC';
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation, route }) => {
   const { register, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -25,15 +26,12 @@ const RegisterScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
 
+  const redirectAfterAuth = useAuthRedirect(navigation, route);
+
   useEffect(() => {
     if (authLoading || !isAuthenticated) return;
-    navigation.reset({
-      index: 0,
-      routes: [user?.role === 'admin' || user?.role === 'sub-admin'
-        ? { name: 'MainTabs', params: { screen: 'AdminTab' } }
-        : { name: 'MainTabs' }],
-    });
-  }, [authLoading, isAuthenticated, navigation, user?.role]);
+    redirectAfterAuth(user);
+  }, [authLoading, isAuthenticated, redirectAfterAuth, user]);
 
   const passwordRequirements = [
     { key: 'length', label: 'Au moins 6 caractères', met: password.length >= 6 },
@@ -63,7 +61,7 @@ const RegisterScreen = ({ navigation }) => {
         setEmail('');
         setPassword('');
         setConfirmPassword('');
-        navigation.reset({ index: 0, routes: [{ name: 'MainTabs' }] });
+        redirectAfterAuth(result.user);
       } else {
         setError(result.error || 'Erreur lors de l’inscription');
       }
@@ -117,7 +115,7 @@ const RegisterScreen = ({ navigation }) => {
             <Text variant="bodyMedium" style={styles.primaryLabel}>{loading ? 'Création en cours…' : 'Créer mon compte'}</Text>
             {!loading ? <ArrowUpRight size={18} color="#FFFFFF" strokeWidth={1.8} /> : null}
           </Pressable>
-          <View style={styles.loginLink}><Text variant="body" style={styles.linkPrefix}>Vous avez déjà un compte ?</Text><Pressable onPress={() => navigation.navigate('Login')}><Text variant="bodyMedium" style={styles.linkLabel}>Se connecter</Text></Pressable></View>
+          <View style={styles.loginLink}><Text variant="body" style={styles.linkPrefix}>Vous avez déjà un compte ?</Text><Pressable onPress={() => (route?.params?.returnTo ? navigation.replace('Login', route.params) : navigation.navigate('Login'))}><Text variant="bodyMedium" style={styles.linkLabel}>Se connecter</Text></Pressable></View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

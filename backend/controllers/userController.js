@@ -31,11 +31,18 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
+// Seuls ces champs sont modifiables par cette route : le mot de passe, les statuts
+// financiers et le parrainage passent par des services dédiés.
+const UPDATABLE_FIELDS = ['name', 'firstName', 'lastName', 'phone', 'email', 'role', 'accountStatus', 'statusReason'];
+
 exports.updateUser = async (req, res, next) => {
   try {
+    const updates = Object.fromEntries(
+      UPDATABLE_FIELDS.filter((field) => req.body[field] !== undefined).map((field) => [field, req.body[field]])
+    );
     const user = await User.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updates,
       {
         new: true,
         runValidators: true,

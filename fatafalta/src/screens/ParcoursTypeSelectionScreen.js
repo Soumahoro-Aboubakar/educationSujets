@@ -1,6 +1,133 @@
-import React,{useEffect,useMemo,useState}from'react';
-import{ActivityIndicator,Pressable,ScrollView,StatusBar,StyleSheet,View}from'react-native';
-import{useSafeAreaInsets}from'react-native-safe-area-context';import{ArrowLeft,ArrowUpRight,Layers3}from'lucide-react-native';import Text from'../components/ui/Text';import{fetchParcoursTypes}from'../services/catalog';import theme from'../theme/tokens';
-const NAVY='#0D1B32',SOFT='#4F5E72',SURFACE='#FCFAF5',GOLD='#B48A48',BURGUNDY='#6C2838',LINE='#DED8CC';const labelOf=item=>item?.nom||item?.name||'';
-const ParcoursTypeSelectionScreen=({navigation,route})=>{const organisme=route.params?.organisme||null;const[types,setTypes]=useState(route.params?.parcoursTypes||[]),[loading,setLoading]=useState(!route.params?.parcoursTypes),[error,setError]=useState(false),[saving,setSaving]=useState(false);const insets=useSafeAreaInsets(),title=useMemo(()=>organisme?.nom||organisme?.name||'Parcours types',[organisme]);const load=async()=>{if(!organisme?._id){setError(true);setLoading(false);return}setLoading(true);setError(false);try{const result=await fetchParcoursTypes(organisme._id);setTypes(result.data);if(!result.data.length)navigation.replace('DynamicCatalog',{organisme})}catch(e){setError(true)}finally{setLoading(false)}};useEffect(()=>{if(!route.params?.parcoursTypes)load()},[organisme?._id]);const select=item=>{if(saving)return;setSaving(true);navigation.replace('DynamicCatalog',{organisme,parcoursType:item})};return <View style={styles.container}><StatusBar barStyle="light-content" translucent backgroundColor="transparent"/><View style={[styles.hero,{paddingTop:insets.top+theme.spacing.base}]}><View style={styles.top}><Pressable onPress={()=>navigation.goBack()} style={styles.back}><ArrowLeft size={21} color="#FFF"/></Pressable><View style={styles.brand}><View style={styles.brandRule}/><Text variant="overline" style={styles.brandName}>Éducation CI</Text></View></View><Text variant="overline" style={styles.organisme} numberOfLines={1}>{title}</Text><Text variant="h1" style={styles.title}>Choisir un parcours</Text><Text variant="body" style={styles.intro}>Sélectionne le parcours qui correspond aux sujets que tu recherches.</Text></View><ScrollView style={styles.content} contentContainerStyle={[styles.list,{paddingBottom:Math.max(insets.bottom,theme.spacing.xl)}]} showsVerticalScrollIndicator={false}>{loading?<View style={styles.center}><ActivityIndicator color={BURGUNDY}/><Text variant="caption" style={styles.stateText}>Recherche des parcours disponibles…</Text></View>:error?<View style={styles.center}><Layers3 size={31} color={BURGUNDY}/><Text variant="h3" style={styles.stateTitle}>Parcours indisponibles</Text><Text variant="body" style={styles.stateText} align="center">Impossible de charger les parcours. Vérifie ta connexion puis réessaie.</Text><Pressable onPress={load} style={styles.retry}><Text variant="bodyMedium" style={styles.retryText}>Réessayer</Text><ArrowUpRight size={16} color={BURGUNDY}/></Pressable></View>:types.length?<><View style={styles.listHeader}><Text variant="overline" style={styles.listLabel}>Parcours disponibles</Text><View style={styles.listRule}/></View>{types.map((item,index)=><Pressable key={item._id} disabled={saving} onPress={()=>select(item)} style={({pressed})=>[styles.option,pressed&&styles.pressed]}><Text style={styles.index}>{String(index+1).padStart(2,'0')}</Text><View style={styles.optionContent}><Text variant="h3" style={styles.optionTitle}>{labelOf(item)}</Text><Text variant="caption" style={styles.optionMeta}>Parcours type</Text></View><ArrowUpRight size={19} color={BURGUNDY}/></Pressable>)}</>:<View style={styles.center}><Layers3 size={31} color={BURGUNDY}/><Text variant="h3" style={styles.stateTitle}>Aucun parcours disponible</Text><Text variant="body" style={styles.stateText} align="center">Cet organisme ne propose pas encore de parcours type.</Text></View>}{saving?<ActivityIndicator color={BURGUNDY} style={styles.saving}/>:null}</ScrollView></View>};
-const styles=StyleSheet.create({container:{flex:1,backgroundColor:SURFACE},hero:{backgroundColor:NAVY,paddingHorizontal:theme.spacing.xl,paddingBottom:theme.spacing.xl},top:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},back:{width:40,height:40,alignItems:'center',justifyContent:'center',marginLeft:-10},brand:{flexDirection:'row',alignItems:'center',gap:theme.spacing.sm},brandRule:{width:18,height:2,backgroundColor:GOLD},brandName:{color:'#F4E6C8',fontSize:10,letterSpacing:1.25},organisme:{marginTop:theme.spacing.xl,color:GOLD,fontSize:10,letterSpacing:1.1},title:{marginTop:theme.spacing.sm,color:'#FFF',fontSize:29,lineHeight:35},intro:{marginTop:theme.spacing.sm,color:'rgba(255,255,255,.68)',fontSize:14,lineHeight:20},content:{flex:1},list:{flexGrow:1,paddingHorizontal:theme.spacing.xl,paddingTop:theme.spacing.sm},listHeader:{flexDirection:'row',alignItems:'center',gap:theme.spacing.md,paddingTop:theme.spacing.lg,paddingBottom:theme.spacing.sm},listLabel:{color:SOFT,fontSize:10,letterSpacing:1.05},listRule:{flex:1,height:StyleSheet.hairlineWidth,backgroundColor:LINE},option:{minHeight:80,flexDirection:'row',alignItems:'center',paddingVertical:theme.spacing.base,borderBottomWidth:StyleSheet.hairlineWidth,borderBottomColor:LINE},pressed:{backgroundColor:'rgba(13,27,50,.035)'},index:{width:34,color:BURGUNDY,fontFamily:theme.fontFamily.semiBold,fontSize:11,letterSpacing:1.05},optionContent:{flex:1,paddingRight:theme.spacing.base},optionTitle:{color:NAVY,fontFamily:theme.fontFamily.semiBold,fontSize:16},optionMeta:{marginTop:3,color:SOFT,fontSize:12},center:{flex:1,minHeight:230,alignItems:'center',justifyContent:'center',paddingHorizontal:theme.spacing['3xl']},stateTitle:{marginTop:theme.spacing.base,color:NAVY,textAlign:'center'},stateText:{marginTop:theme.spacing.sm,color:SOFT},retry:{flexDirection:'row',alignItems:'center',gap:6,marginTop:theme.spacing.lg,paddingBottom:3,borderBottomWidth:1,borderBottomColor:BURGUNDY},retryText:{color:BURGUNDY},saving:{marginTop:theme.spacing.lg}});export default ParcoursTypeSelectionScreen;
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import * as Haptics from 'expo-haptics';
+import { Layers3 } from 'lucide-react-native';
+import Text from '../components/ui/Text';
+import ScreenHeader from '../components/ui/ScreenHeader';
+import ListRow from '../components/ui/ListRow';
+import StateView from '../components/ui/StateView';
+import { SkeletonRows } from '../components/ui/Skeleton';
+import { fetchParcoursTypes } from '../services/catalog';
+import theme from '../theme/tokens';
+
+const { brand } = theme;
+
+const labelOf = (item) => item?.nom || item?.name || '';
+
+const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
+  const organisme = route.params?.organisme || null;
+  const [types, setTypes] = useState(route.params?.parcoursTypes || []);
+  const [loading, setLoading] = useState(!route.params?.parcoursTypes);
+  const [error, setError] = useState(false);
+  const insets = useSafeAreaInsets();
+
+  const load = async () => {
+    if (!organisme?._id) {
+      setError(true);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    setError(false);
+    try {
+      const result = await fetchParcoursTypes(organisme._id);
+      setTypes(result.data);
+      // Organisme sans parcours : cette étape n'a pas de sens, on la retire de l'historique.
+      if (!result.data.length) navigation.replace('DynamicCatalog', { organisme });
+    } catch (requestError) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!route.params?.parcoursTypes) load();
+  }, [organisme?._id]);
+
+  // `navigate` (et non `replace`) : le retour depuis le catalogue ramène ici.
+  const select = (item) => {
+    Haptics.selectionAsync().catch(() => {});
+    navigation.navigate('DynamicCatalog', { organisme, parcoursType: item });
+  };
+
+  const renderContent = () => {
+    if (loading) return <SkeletonRows count={3} withMeta={false} />;
+    if (error) {
+      return (
+        <StateView
+          icon={Layers3}
+          title="Connexion impossible"
+          description="Les parcours n’ont pas pu être chargés. Vérifie ta connexion puis réessaie."
+          onRetry={load}
+        />
+      );
+    }
+    if (!types.length) {
+      return (
+        <StateView
+          icon={Layers3}
+          title="Aucun parcours disponible"
+          description="Cet organisme ne propose pas encore de parcours."
+        />
+      );
+    }
+
+    return (
+      <>
+        <Text variant="overline" style={styles.count}>
+          {types.length} parcours
+        </Text>
+        {types.map((item, index) => (
+          <ListRow
+            key={item._id}
+            title={labelOf(item)}
+            isLast={index === types.length - 1}
+            onPress={() => select(item)}
+          />
+        ))}
+      </>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScreenHeader
+        onBack={() => navigation.goBack()}
+        eyebrow={organisme?.nom || organisme?.name}
+        title="Choisis un parcours"
+        subtitle="Les sujets sont classés par parcours au sein de cet organisme."
+      />
+      <ScrollView
+        style={styles.body}
+        contentContainerStyle={[styles.list, { paddingBottom: Math.max(insets.bottom, theme.spacing.xl) }]}
+        showsVerticalScrollIndicator={false}
+      >
+        {renderContent()}
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: brand.paper,
+  },
+  body: {
+    flex: 1,
+  },
+  list: {
+    flexGrow: 1,
+    paddingTop: theme.spacing.xs,
+  },
+  count: {
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.lg,
+    paddingBottom: theme.spacing.xs,
+    color: brand.inkSoft,
+  },
+});
+
+export default ParcoursTypeSelectionScreen;

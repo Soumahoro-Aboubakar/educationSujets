@@ -49,8 +49,9 @@ const POPULATE_FIELDS = [
   { path: 'parcoursTypeId', select: 'nom organismeId isDefault' },
   { path: 'sujetParentId', select: '_id title titre status type documentType isDeleted' },
   { path: 'dynamicCorrection', select: '_id title titre status originalFileName fileType extension mimeType fileSize type isDeleted' },
-  { path: 'uploadedBy', select: 'name email role' },
-  { path: 'validatedBy', select: 'name email role' },
+  // Pas d'email : ces champs sont servis sur des routes publiques.
+  { path: 'uploadedBy', select: 'name role' },
+  { path: 'validatedBy', select: 'name role' },
   { path: 'correction', select: '_id status originalFileName fileType extension mimeType fileSize documentType' },
 ];
 
@@ -281,6 +282,42 @@ const buildDocumentFilters = (params = {}) => {
   return filters;
 };
 
+// Profondeur maximale d'un catalogue (organisme → concours → cycle → année…) : garde-fou.
+const MAX_CATALOG_DEPTH = 8;
+
+/**
+ * Nœuds et matières du catalogue dynamique dont le nom contient `token`.
+ * Un nœud trouvé (ex. « ENA ») couvre aussi tous ses descendants (années, sessions…),
+ * et un organisme trouvé couvre tous ses nœuds.
+ */
+const findCatalogMatches = async (token) => {
+  const regex = new RegExp(escapeRegex(token), 'i');
+  const [organismes, matchedNodes, matieres] = await Promise.all([
+    Organisme.find({ nomNormalise: regex }).select('_id').lean(),
+    Noeud.find({ nomNormalise: regex }).select('_id').limit(500).lean(),
+    Matiere.find({ nomNormalise: regex }).select('_id').limit(500).lean(),
+  ]);
+
+  const nodeIds = new Set(matchedNodes.map((node) => String(node._id)));
+
+  if (organismes.length) {
+    const organismeNodes = await Noeud.find({ organismeId: { $in: organismes.map((o) => o._id) } }).select('_id').lean();
+    organismeNodes.forEach((node) => nodeIds.add(String(node._id)));
+  }
+
+  let frontier = matchedNodes.map((node) => node._id);
+  for (let depth = 0; frontier.length && depth < MAX_CATALOG_DEPTH; depth += 1) {
+    const children = await Noeud.find({ parentId: { $in: frontier } }).select('_id').lean();
+    frontier = children.map((child) => child._id).filter((id) => !nodeIds.has(String(id)));
+    frontier.forEach((id) => nodeIds.add(String(id)));
+  }
+
+  return {
+    nodeIds: [...nodeIds].map((id) => new mongoose.Types.ObjectId(id)),
+    matiereIds: matieres.map((matiere) => matiere._id),
+  };
+};
+
 const listPublicDocuments = async (params = {}) => {
   const filters = buildDocumentFilters(params);
 
@@ -289,24 +326,28 @@ const listPublicDocuments = async (params = {}) => {
     if (tokens.length) {
       const referenceMatches = await Promise.all(tokens.map(async (token) => {
         const regex = new RegExp(escapeRegex(token), 'i');
-        const [institutions, nodes] = await Promise.all([
+        const [institutions, nodes, catalog] = await Promise.all([
           Institution.find({ normalizedName: regex }).select('_id').lean(),
           TaxonomyNode.find({ normalizedName: regex }).select('_id').lean(),
+          findCatalogMatches(token),
         ]);
         return {
           token,
           institutions: institutions.map((item) => item._id),
           nodes: nodes.map((item) => item._id),
+          catalog,
         };
       }));
 
-      filters.$and = referenceMatches.map(({ token, institutions, nodes }) => ({
+      filters.$and = referenceMatches.map(({ token, institutions, nodes, catalog }) => ({
         $or: [
           { title: { $regex: escapeRegex(token), $options: 'i' } },
           { description: { $regex: escapeRegex(token), $options: 'i' } },
           { originalFileName: { $regex: escapeRegex(token), $options: 'i' } },
           ...(institutions.length ? [{ institution: { $in: institutions } }] : []),
           ...(nodes.length ? [{ taxonomyNodes: { $in: nodes } }] : []),
+          ...(catalog.nodeIds.length ? [{ noeudId: { $in: catalog.nodeIds } }] : []),
+          ...(catalog.matiereIds.length ? [{ matiereId: { $in: catalog.matiereIds } }] : []),
         ],
       }));
       delete filters.$or;
