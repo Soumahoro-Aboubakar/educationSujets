@@ -1,4 +1,5 @@
 import * as FileSystem from 'expo-file-system/legacy';
+import { File } from 'expo-file-system';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { Image } from 'react-native';
 import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
@@ -447,7 +448,21 @@ const copyPickedFileLocally = async (fileUri) => {
   }
 };
 
+// Lecture binaire directe (API File d'expo-file-system) : évite de créer une
+// chaîne base64 de ~1,33× la taille du PDF côté JS *et* sa copie UTF-16 côté
+// natif. Sur un PDF de plusieurs Mo, ce pic mémoire suffisait à faire tuer
+// l'app par Android (OOM), ce qui se traduisait par un rechargement complet.
+const readPdfBytesDirect = async (fileUri) => {
+  const bytes = await withTimeout(new File(fileUri).bytes(), 30000, 'Lecture du PDF trop longue');
+  return bytes;
+};
+
 const readPdfBytes = async (fileUri) => {
+  try {
+    return await readPdfBytesDirect(fileUri);
+  } catch (directError) {
+    console.warn('Lecture binaire du PDF échouée, repli sur la lecture base64:', fileUri, directError);
+  }
   try {
     const fileBase64 = await withTimeout(
       FileSystem.readAsStringAsync(fileUri, { encoding: FileSystem.EncodingType.Base64 }),
@@ -620,29 +635,36 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
   let addWatermark = true;
   let addFooter = false;
   let footerTextPref = null;
+  let footerSize = 9;
   try {
     const prefs = await readPrefs();
     if (prefs['pdf.addWatermark'] !== undefined) addWatermark = Boolean(prefs['pdf.addWatermark']);
     if (prefs['pdf.addFooter'] !== undefined) addFooter = Boolean(prefs['pdf.addFooter']);
     if (prefs['pdf.footerText']) footerTextPref = String(prefs['pdf.footerText']);
+    if (Number(prefs['pdf.footerSize']) > 0) footerSize = Number(prefs['pdf.footerSize']);
   } catch (e) {
     // ignore
   }
 
   for (const page of pages) {
     if (addWatermark) applyWatermark(page, font);
-    if (addFooter) applyFooter(page, font, footerTextPref || 'Fatafalta · Téléchargez plus de documents sur www.fatafalta.com', prefs['pdf.footerSize'] || 9);
+    if (addFooter) applyFooter(page, font, footerTextPref || 'Fatafalta · Téléchargez plus de documents sur www.fatafalta.com', footerSize);
   }
 
-  const modifiedPdfBytes = await withTimeout(pdfDoc.saveAsBase64(), 30000, 'Sauvegarde du PDF trop longue');
-  const outputFileName = `fatafalta_doc_${Date.now()}.pdf`;
+  let modifiedPdfBytes = await withTimeout(pdfDoc.save(), 30000, 'Sauvegarde du PDF trop longue');
+  pdfDoc = null;
+  // Suffixe aléatoire : plusieurs PDFs peuvent être traités à la suite.
+  const outputFileName = `fatafalta_doc_${Date.now()}_${Math.random().toString(36).slice(2, 8)}.pdf`;
   const outputUri = FATAFALTA_DIR + outputFileName;
 
-  await withTimeout(
-    FileSystem.writeAsStringAsync(outputUri, modifiedPdfBytes, { encoding: FileSystem.EncodingType.Base64 }),
-    20000,
-    'Écriture du PDF trop longue'
-  );
+  try {
+    // Écriture binaire directe : pas de chaîne base64 géante transmise au natif.
+    new File(outputUri).write(modifiedPdfBytes);
+  } catch (e) {
+    throw new Error(`Impossible d'enregistrer le PDF traité (${e.message || 'raison inconnue'})`);
+  } finally {
+    modifiedPdfBytes = null;
+  }
 
   return {
     uri: outputUri,

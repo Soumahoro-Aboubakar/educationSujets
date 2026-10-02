@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useMemo } from 'react';
+import React, { useState, useContext, useEffect, useMemo, useRef } from 'react';
 import {
   View,
   StyleSheet,
@@ -16,7 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as IntentLauncher from 'expo-intent-launcher';
-import { FileText, Image as ImageIcon, X, UploadCloud, Eye, Save } from 'lucide-react-native';
+import { FileText, Image as ImageIcon, X, UploadCloud, Eye, Save, CircleCheck, CircleAlert } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import Button from '../components/ui/Button';
 import FormInput from '../components/ui/FormInput';
@@ -33,6 +33,35 @@ import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory,
 import { uploadDocument, updateDocumentMetadata, validateDocumentStatus, getDownloadUrl } from '../services/documents';
 import ImageEditorModal from '../components/documents/ImageEditorModal';
 
+const BATCH_STATUS_LABELS = {
+  pending: 'En attente',
+  processing: 'Préparation du PDF…',
+  uploading: 'Envoi en cours…',
+  publishing: 'Publication…',
+  success: 'Terminé',
+  error: 'Échec',
+};
+
+const isPdfAsset = (asset) => {
+  const mimeType = (asset?.mimeType || '').toLowerCase();
+  const name = (asset?.name || '').toLowerCase();
+  return mimeType === 'application/pdf' || name.endsWith('.pdf');
+};
+
+const titleFromFileName = (name) => (name || '').replace(/\.pdf$/i, '').trim();
+
+// Message renvoyé par l'API (express-validator, AppError) plutôt que le message axios générique.
+const getErrorMessage = (error, fallback) => {
+  const data = error?.response?.data;
+  return (
+    data?.message
+    || data?.error
+    || (Array.isArray(data?.errors) && data.errors[0]?.msg)
+    || error?.message
+    || fallback
+  );
+};
+
 const UploadScreen = ({ navigation, route }) => {
   const { user } = useContext(AuthContext);
   const { isAdmin, isAuthenticated } = useContext(AuthContext);
@@ -48,6 +77,14 @@ const UploadScreen = ({ navigation, route }) => {
   const [pdfWebViewUri, setPdfWebViewUri] = useState(null);
   const [showPdfPreview, setShowPdfPreview] = useState(false);
   const [webviewAvailable, setWebviewAvailable] = useState(false);
+
+  // Import multiple : chaque PDF est préparé puis envoyé l'un après l'autre.
+  // { id, uri, name, size, title, status, error, documentId }
+  const [batchFiles, setBatchFiles] = useState([]);
+  const [batchRunning, setBatchRunning] = useState(false);
+  const [batchProgress, setBatchProgress] = useState({ current: 0, total: 0 });
+  const batchRunningRef = useRef(false);
+  const isBatchMode = batchFiles.length > 0;
 
   const isAndroid = Platform.OS === 'android';
 
@@ -105,10 +142,10 @@ const UploadScreen = ({ navigation, route }) => {
   };
 
   const normalizeDocumentPickerResult = (result) => {
-    if (!result || result.canceled || result.type === 'cancel') return null;
-    if (Array.isArray(result.assets) && result.assets.length > 0) return result.assets[0];
-    if (result.uri) return result;
-    return null;
+    if (!result || result.canceled || result.type === 'cancel') return [];
+    if (Array.isArray(result.assets)) return result.assets.filter((asset) => asset?.uri);
+    if (result.uri) return [result];
+    return [];
   };
 
   const handleOpenPreview = async () => {
@@ -213,7 +250,7 @@ const UploadScreen = ({ navigation, route }) => {
 
     if (!result.canceled) {
       const newImages = result.assets.map(asset => asset.uri);
-      setImages([...images, ...newImages]);
+      setImages((prev) => [...prev, ...newImages]);
     }
   };
   /*
@@ -229,13 +266,15 @@ const UploadScreen = ({ navigation, route }) => {
     }; */
 
   const pickDocument = async () => {
+    if (isProcessing || batchRunningRef.current) return;
+
     let result;
     try {
       result = await DocumentPicker.getDocumentAsync({
         type: 'application/pdf',
         copyToCacheDirectory: true,
         base64: false,
-        multiple: false,
+        multiple: true,
       });
     } catch (error) {
       console.error('DocumentPicker error:', error);
@@ -243,30 +282,69 @@ const UploadScreen = ({ navigation, route }) => {
       return;
     }
 
-    const file = normalizeDocumentPickerResult(result);
-    if (!file?.uri) {
+    const assets = normalizeDocumentPickerResult(result);
+    if (assets.length === 0) {
       if (result && !result.canceled) {
         console.warn('DocumentPicker result without a valid file asset:', result);
       }
       return;
     }
 
-    // Vérification précoce côté UI
-    if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
-      const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
-      const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+    // Vérification précoce côté UI (type, taille, doublons)
+    const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
+    const rejected = [];
+    const seen = new Set();
+    const files = [];
+    assets.forEach((asset) => {
+      const name = asset.name || 'Document PDF';
+      const key = `${name}:${asset.size ?? ''}`;
+      if (!isPdfAsset(asset)) {
+        rejected.push(`${name} : ce n'est pas un fichier PDF`);
+      } else if (typeof asset.size === 'number' && asset.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
+        const sizeMb = (asset.size / (1024 * 1024)).toFixed(1);
+        rejected.push(`${name} : ${sizeMb} Mo (maximum ${maxMb} Mo)`);
+      } else if (seen.has(key)) {
+        rejected.push(`${name} : sélectionné plusieurs fois`);
+      } else {
+        seen.add(key);
+        files.push(asset);
+      }
+    });
+
+    if (rejected.length > 0) {
       Alert.alert(
-        'Fichier trop volumineux',
-        `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`
+        files.length > 0 ? 'Certains fichiers ont été ignorés' : 'Fichier refusé',
+        rejected.join('\n')
       );
+    }
+    if (files.length === 0) return;
+
+    if (files.length === 1) {
+      const fileUri = files[0].uri;
+      if (isAndroid) {
+        setIsProcessing(true);
+        setTimeout(() => processExistingPDF(fileUri), 500);
+      } else {
+        await processExistingPDF(fileUri);
+      }
       return;
     }
 
-    if (isAndroid) {
-      setTimeout(() => processExistingPDF(file.uri), 500);
-    } else {
-      await processExistingPDF(file.uri);
-    }
+    // Plusieurs PDFs : métadonnées communes, titre propre à chaque fichier.
+    // Le filigrane est appliqué au moment de l'envoi, fichier par fichier,
+    // pour ne jamais garder plusieurs PDFs lourds en mémoire.
+    setErrors({});
+    setBatchFiles(files.map((asset, index) => ({
+      id: `${Date.now()}_${index}`,
+      uri: asset.uri,
+      name: asset.name || `Document ${index + 1}.pdf`,
+      size: asset.size,
+      title: titleFromFileName(asset.name),
+      status: 'pending',
+      error: null,
+      documentId: null,
+    })));
+    setStep('metadata');
   };
 
   /*
@@ -363,7 +441,13 @@ const UploadScreen = ({ navigation, route }) => {
     const newErrors = {};
 
     if (!isDraft) {
-      if (!title.trim()) {
+      if (isBatchMode) {
+        batchFiles.forEach((file) => {
+          if (file.status !== 'success' && !file.title.trim()) {
+            newErrors[`title_${file.id}`] = 'Titre requis';
+          }
+        });
+      } else if (!title.trim()) {
         newErrors.title = 'Titre requis';
       }
 
@@ -383,23 +467,178 @@ const UploadScreen = ({ navigation, route }) => {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const isValid = Object.keys(newErrors).length === 0;
+    if (!isValid) {
+      Alert.alert('Formulaire incomplet', 'Veuillez corriger les champs signalés avant de continuer.');
+    }
+    return isValid;
   };
 
+  const hasCompleteDynamicMetadata = () => Boolean(
+    dynamicMetadata.path.at(-1)?._id
+    && dynamicMetadata.matiere?._id
+    && dynamicMetadata.hasParcoursType !== null
+  );
+
+  const buildUploadFormData = (file, documentTitle, publish) => {
+    const formData = new FormData();
+    formData.append('file', {
+      uri: file.uri,
+      name: file.name,
+      type: file.mimeType || 'application/pdf',
+    });
+
+    if (documentTitle) formData.append('title', documentTitle);
+    if (description) formData.append('description', description);
+    if (institution) formData.append('institution', institution);
+    formData.append('taxonomyNodes', JSON.stringify(taxonomyNodes));
+    if (hasCompleteDynamicMetadata()) {
+      formData.append('noeudId', dynamicMetadata.path.at(-1)._id);
+      formData.append('matiereId', dynamicMetadata.matiere._id);
+      formData.append('hasParcoursType', String(dynamicMetadata.hasParcoursType));
+      if (dynamicMetadata.parcoursType?._id) formData.append('parcoursTypeId', dynamicMetadata.parcoursType._id);
+    }
+
+    formData.append('documentType', 'sujet');
+    formData.append('metadataStatus', publish ? 'true' : 'false');
+    return formData;
+  };
+
+  const getUploadedDocumentId = (uploadResult) => (
+    uploadResult?.data?._id || uploadResult?.data?.id || uploadResult?._id || uploadResult?.id
+  );
+
   const handleSaveDraft = async () => {
+    if (isBatchMode) {
+      await handleBatchUpload(false);
+      return;
+    }
     await handleUpload(false);
   };
 
+  const updateBatchFile = (id, patch) => {
+    setBatchFiles((prev) => prev.map((file) => (file.id === id ? { ...file, ...patch } : file)));
+  };
+
+  // Envoi séquentiel : le PDF suivant n'est traité qu'une fois le précédent
+  // entièrement terminé (filigrane → envoi → publication). Un échec est
+  // enregistré sur le fichier concerné sans interrompre les suivants.
+  const handleBatchUpload = async (publish = true) => {
+    if (batchRunningRef.current) return;
+    if (!validateForm(!publish)) return;
+
+    const queue = batchFiles.filter((file) => file.status !== 'success');
+    if (queue.length === 0) return;
+
+    batchRunningRef.current = true;
+    setBatchRunning(true);
+    queue.forEach((file) => updateBatchFile(file.id, { status: 'pending', error: null }));
+
+    let successCount = 0;
+    const failures = [];
+
+    for (let index = 0; index < queue.length; index += 1) {
+      const file = queue[index];
+      setBatchProgress({ current: index + 1, total: queue.length });
+      let processedUri = null;
+      // Si un essai précédent a créé le document mais échoué à la publication,
+      // on ne le renvoie pas (évite les doublons) : on retente seulement la publication.
+      let documentId = file.documentId;
+
+      try {
+        if (!documentId) {
+          updateBatchFile(file.id, { status: 'processing' });
+          const processed = await applyWatermarkToExistingPdf(file.uri);
+          processedUri = processed.uri;
+
+          updateBatchFile(file.id, { status: 'uploading' });
+          const uploadResult = await uploadDocument(
+            buildUploadFormData(processed, file.title.trim(), publish)
+          );
+          documentId = getUploadedDocumentId(uploadResult);
+          if (documentId) updateBatchFile(file.id, { documentId });
+        }
+
+        if (publish) {
+          if (!documentId) {
+            throw new Error('Le document créé ne possède pas d’identifiant');
+          }
+          updateBatchFile(file.id, { status: 'publishing' });
+          await validateDocumentStatus(documentId, 'approved');
+        }
+
+        updateBatchFile(file.id, { status: 'success', error: null });
+        successCount += 1;
+      } catch (error) {
+        console.error(`Batch upload failed for ${file.name}:`, error);
+        let message = getErrorMessage(error, "Erreur lors de l'envoi du document");
+        if (documentId && publish) {
+          message = `Document envoyé en brouillon mais non publié : ${message}`;
+        }
+        updateBatchFile(file.id, { status: 'error', error: message });
+        failures.push(`${file.name} : ${message}`);
+      } finally {
+        if (processedUri) {
+          await FileSystem.deleteAsync(processedUri, { idempotent: true }).catch(() => {});
+        }
+      }
+    }
+
+    setBatchProgress({ current: 0, total: 0 });
+    batchRunningRef.current = false;
+    setBatchRunning(false);
+
+    if (failures.length === 0) {
+      Alert.alert(
+        'Succès',
+        publish
+          ? `${successCount} document(s) publié(s) avec succès`
+          : `${successCount} document(s) enregistré(s) en brouillon`
+      );
+      await cleanTempDirectory();
+      resetForm();
+      setStep('choose');
+      return;
+    }
+
+    Alert.alert(
+      successCount > 0 ? 'Envoi partiellement terminé' : "Échec de l'envoi",
+      `${successCount} réussi(s), ${failures.length} échec(s).\n\n${failures.join('\n')}\n\nCorrigez si besoin puis relancez : seuls les fichiers en échec seront renvoyés.`
+    );
+  };
+
+  const removeBatchFile = (id) => {
+    if (batchRunningRef.current) return;
+    setBatchFiles((prev) => {
+      const next = prev.filter((file) => file.id !== id);
+      if (next.length === 0) setStep('choose');
+      return next;
+    });
+    setErrors((prev) => ({ ...prev, [`title_${id}`]: null }));
+  };
+
+  const handleCancel = async () => {
+    if (uploading || batchRunningRef.current) return;
+    if (isDraftMode) {
+      navigation.goBack();
+      return;
+    }
+    await cleanTempDirectory();
+    resetForm();
+    setStep('choose');
+  };
+
   const handleUpload = async (publish = true) => {
+    if (uploading) return;
+    if (!isDraftMode && !pdfFile?.uri) {
+      Alert.alert('Erreur', 'Aucun fichier PDF à envoyer.');
+      return;
+    }
     if (!validateForm(!publish)) return;
 
     setUploading(true);
+    let createdDocumentId = null;
     try {
-      const hasCompleteDynamicMetadata = Boolean(
-        dynamicMetadata.path.at(-1)?._id
-        && dynamicMetadata.matiere?._id
-        && dynamicMetadata.hasParcoursType !== null
-      );
       if (isDraftMode) {
         // Update existing document metadata
         const payload = {
@@ -409,7 +648,7 @@ const UploadScreen = ({ navigation, route }) => {
           taxonomyNodes,
           metadataStatus: publish ? 'true' : 'false',
         };
-        if (hasCompleteDynamicMetadata) {
+        if (hasCompleteDynamicMetadata()) {
           payload.noeudId = dynamicMetadata.path.at(-1)._id;
           payload.matiereId = dynamicMetadata.matiere._id;
           payload.hasParcoursType = String(dynamicMetadata.hasParcoursType);
@@ -428,35 +667,14 @@ const UploadScreen = ({ navigation, route }) => {
         );
       } else {
         // New document upload
-        const formData = new FormData();
-        formData.append('file', {
-          uri: pdfFile.uri,
-          name: pdfFile.name,
-          type: pdfFile.mimeType || 'application/pdf',
-        });
-
-        if (title) formData.append('title', title);
-        if (description) formData.append('description', description);
-        if (institution) formData.append('institution', institution);
-        formData.append('taxonomyNodes', JSON.stringify(taxonomyNodes));
-        if (hasCompleteDynamicMetadata) {
-          formData.append('noeudId', dynamicMetadata.path.at(-1)._id);
-          formData.append('matiereId', dynamicMetadata.matiere._id);
-          formData.append('hasParcoursType', String(dynamicMetadata.hasParcoursType));
-          if (dynamicMetadata.parcoursType?._id) formData.append('parcoursTypeId', dynamicMetadata.parcoursType._id);
-        }
-
-        formData.append('documentType', 'sujet');
-        formData.append('metadataStatus', publish ? 'true' : 'false');
-
-        const uploadResult = await uploadDocument(formData);
+        const uploadResult = await uploadDocument(buildUploadFormData(pdfFile, title, publish));
 
         if (publish) {
-          const uploadedDocumentId = uploadResult?.data?._id || uploadResult?.data?.id || uploadResult?._id;
-          if (!uploadedDocumentId) {
+          createdDocumentId = getUploadedDocumentId(uploadResult);
+          if (!createdDocumentId) {
             throw new Error('Le document créé ne possède pas d’identifiant');
           }
-          await validateDocumentStatus(uploadedDocumentId, 'approved');
+          await validateDocumentStatus(createdDocumentId, 'approved');
         }
 
         Alert.alert(
@@ -474,13 +692,27 @@ const UploadScreen = ({ navigation, route }) => {
       }
     } catch (error) {
       console.error(error);
-      Alert.alert('Erreur', "Erreur lors de l'envoi du document");
+      const message = getErrorMessage(error, "Erreur lors de l'envoi du document");
+      if (createdDocumentId) {
+        // Le document existe déjà côté serveur : on évite un second envoi (doublon).
+        Alert.alert(
+          'Publication incomplète',
+          `Le document a été enregistré en brouillon mais n'a pas pu être publié : ${message}\nVous pourrez le publier depuis vos brouillons.`
+        );
+        await cleanTempDirectory();
+        resetForm();
+        setStep('choose');
+      } else {
+        Alert.alert('Erreur', message);
+      }
     } finally {
       setUploading(false);
     }
   };
 
   const resetForm = () => {
+    setBatchFiles([]);
+    setBatchProgress({ current: 0, total: 0 });
     setTitle('');
     setDescription('');
     setInstitution(null);
@@ -523,13 +755,18 @@ const UploadScreen = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.actionCard}
           onPress={pickDocument}
+          disabled={isProcessing}
           activeOpacity={0.7}
         >
           <View style={styles.actionIconContainer}>
-            <FileText color={theme.colors.primary} size={32} />
+            {isProcessing && images.length === 0
+              ? <ActivityIndicator color={theme.colors.primary} />
+              : <FileText color={theme.colors.primary} size={32} />}
           </View>
-          <Text variant="h3" style={styles.actionTitle}>Importer un PDF</Text>
-          <Text variant="caption" color={theme.colors.textMuted}>Fichier existant</Text>
+          <Text variant="h3" style={styles.actionTitle}>Importer des PDF</Text>
+          <Text variant="caption" color={theme.colors.textMuted}>
+            {isProcessing && images.length === 0 ? 'Préparation…' : 'Un ou plusieurs fichiers'}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -579,42 +816,50 @@ const UploadScreen = ({ navigation, route }) => {
         </Text>
       </View>
 
-      {/* PDF Preview Card */}
-      <Card style={styles.pdfCard}>
-        <View style={styles.pdfCardHeader}>
-          <FileText size={24} color={theme.colors.primary} />
-          <View style={styles.pdfCardInfo}>
-            <Text variant="bodyMedium" numberOfLines={1}>
-              {pdfFile?.name || 'Document PDF'}
-            </Text>
-            <Text variant="caption" color={theme.colors.textMuted}>
-              Prêt pour l'envoi
-            </Text>
+      {isBatchMode ? renderBatchFiles() : (
+        /* PDF Preview Card */
+        <Card style={styles.pdfCard}>
+          <View style={styles.pdfCardHeader}>
+            <FileText size={24} color={theme.colors.primary} />
+            <View style={styles.pdfCardInfo}>
+              <Text variant="bodyMedium" numberOfLines={1}>
+                {pdfFile?.name || 'Document PDF'}
+              </Text>
+              <Text variant="caption" color={theme.colors.textMuted}>
+                Prêt pour l'envoi
+              </Text>
+            </View>
           </View>
-        </View>
-        <TouchableOpacity
-          style={styles.previewButton}
-          onPress={() => setShowPdfPreview(true)}
-        >
-          <Eye size={18} color={theme.colors.primary} />
-          <Text variant="bodyMedium" color={theme.colors.primary}>
-            Prévisualiser
-          </Text>
-        </TouchableOpacity>
-      </Card>
+          <TouchableOpacity
+            style={styles.previewButton}
+            onPress={() => setShowPdfPreview(true)}
+          >
+            <Eye size={18} color={theme.colors.primary} />
+            <Text variant="bodyMedium" color={theme.colors.primary}>
+              Prévisualiser
+            </Text>
+          </TouchableOpacity>
+        </Card>
+      )}
 
       {/* Metadata Form */}
-      <View style={styles.formSection}>
-        <FormInput
-          label="Titre"
-          placeholder="Ex: Examen de Mathématiques 2024"
-          value={title}
-          onChangeText={(text) => {
-            setTitle(text);
-            if (errors.title) setErrors({ ...errors, title: null });
-          }}
-          error={errors.title}
-        />
+      <View style={styles.formSection} pointerEvents={batchRunning ? 'none' : 'auto'}>
+        {isBatchMode ? (
+          <Text variant="caption" color={theme.colors.textMuted}>
+            Les informations ci-dessous seront appliquées à tous les documents sélectionnés.
+          </Text>
+        ) : (
+          <FormInput
+            label="Titre"
+            placeholder="Ex: Examen de Mathématiques 2024"
+            value={title}
+            onChangeText={(text) => {
+              setTitle(text);
+              if (errors.title) setErrors({ ...errors, title: null });
+            }}
+            error={errors.title}
+          />
+        )}
 
         <FormInput
           label="Description"
@@ -679,30 +924,124 @@ const UploadScreen = ({ navigation, route }) => {
         <Button
           title="Annuler"
           variant="secondary"
-          onPress={() => {
-            resetForm();
-            setStep('choose');
-          }}
+          onPress={handleCancel}
+          disabled={busy}
           style={styles.actionButton}
         />
         <Button
-          title="Enregistrer en Brouillon"
+          title={hasBatchFailures ? 'Réessayer en brouillon' : 'Enregistrer en Brouillon'}
           icon={Save}
           variant="ghost"
           onPress={handleSaveDraft}
+          disabled={busy}
           style={styles.actionButton}
         />
         <Button
-          title="Publier"
+          title={hasBatchFailures ? 'Réessayer la publication' : isBatchMode ? `Publier (${pendingBatchCount})` : 'Publier'}
           icon={UploadCloud}
           variant="primary"
-          onPress={() => handleUpload(true)}
-          loading={uploading}
+          onPress={() => (isBatchMode ? handleBatchUpload(true) : handleUpload(true))}
+          loading={busy}
+          disabled={busy}
           style={styles.actionButton}
         />
       </View>
     </ScrollView>
   );
+
+  const busy = uploading || batchRunning;
+  const pendingBatchCount = batchFiles.filter((file) => file.status !== 'success').length;
+  const hasBatchFailures = batchFiles.some((file) => file.status === 'error');
+
+  const renderBatchFiles = () => {
+    const doneCount = batchFiles.filter((file) => file.status === 'success').length;
+    const failedCount = batchFiles.filter((file) => file.status === 'error').length;
+    const progressCount = doneCount + failedCount;
+    const currentFile = batchRunning
+      ? batchFiles.find((file) => ['processing', 'uploading', 'publishing'].includes(file.status))
+      : null;
+
+    return (
+      <Card style={styles.batchCard}>
+        <View style={styles.previewHeader}>
+          <Text variant="h3">PDF sélectionnés</Text>
+          <Text variant="bodyMedium" color={theme.colors.primary}>
+            {batchFiles.length}
+          </Text>
+        </View>
+
+        {(batchRunning || progressCount > 0) && (
+          <View style={styles.batchProgress}>
+            <View style={styles.progressTrack}>
+              <View
+                style={[
+                  styles.progressFill,
+                  { width: `${Math.round((progressCount / batchFiles.length) * 100)}%` },
+                ]}
+              />
+            </View>
+            <Text variant="caption" color={theme.colors.textSecondary}>
+              {batchRunning && currentFile
+                ? `Fichier ${batchProgress.current} sur ${batchProgress.total} · ${currentFile.name}`
+                : `${doneCount} réussi(s) · ${failedCount} échec(s)`}
+            </Text>
+          </View>
+        )}
+
+        {batchFiles.map((file) => {
+          const active = ['processing', 'uploading', 'publishing'].includes(file.status);
+          const statusColor = file.status === 'success'
+            ? theme.colors.success
+            : file.status === 'error'
+              ? theme.colors.error
+              : active ? theme.colors.primary : theme.colors.textMuted;
+          const locked = batchRunning || file.status === 'success' || Boolean(file.documentId);
+
+          return (
+            <View key={file.id} style={styles.batchItem}>
+              <View style={styles.batchItemHeader}>
+                {active ? <ActivityIndicator size="small" color={theme.colors.primary} />
+                  : file.status === 'success' ? <CircleCheck size={20} color={theme.colors.success} />
+                    : file.status === 'error' ? <CircleAlert size={20} color={theme.colors.error} />
+                      : <FileText size={20} color={theme.colors.textMuted} />}
+                <View style={styles.pdfCardInfo}>
+                  <Text variant="bodyMedium" numberOfLines={1}>{file.name}</Text>
+                  <Text variant="caption" color={statusColor}>
+                    {BATCH_STATUS_LABELS[file.status]}
+                    {typeof file.size === 'number' ? ` · ${(file.size / (1024 * 1024)).toFixed(1)} Mo` : ''}
+                  </Text>
+                </View>
+                {!batchRunning && file.status !== 'success' && (
+                  <TouchableOpacity
+                    onPress={() => removeBatchFile(file.id)}
+                    hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                    accessibilityLabel={`Retirer ${file.name}`}
+                  >
+                    <X size={18} color={theme.colors.textMuted} />
+                  </TouchableOpacity>
+                )}
+              </View>
+              <FormInput
+                placeholder="Titre du document"
+                value={file.title}
+                editable={!locked}
+                onChangeText={(text) => {
+                  updateBatchFile(file.id, { title: text });
+                  if (errors[`title_${file.id}`]) setErrors((prev) => ({ ...prev, [`title_${file.id}`]: null }));
+                }}
+                error={errors[`title_${file.id}`]}
+              />
+              {file.error ? (
+                <Text variant="caption" color={theme.colors.error} style={styles.batchError}>
+                  {file.error}
+                </Text>
+              ) : null}
+            </View>
+          );
+        })}
+      </Card>
+    );
+  };
 
   // Main render
   if (metadataLoading) {
@@ -906,6 +1245,39 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
+  },
+  batchCard: {
+    padding: 16,
+    marginBottom: 24,
+  },
+  batchProgress: {
+    gap: 6,
+    marginBottom: 12,
+  },
+  progressTrack: {
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: theme.colors.surfaceRaised,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    borderRadius: 3,
+    backgroundColor: theme.colors.primary,
+  },
+  batchItem: {
+    paddingVertical: 12,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.border,
+    gap: 8,
+  },
+  batchItemHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  batchError: {
+    marginTop: 2,
   },
   formSection: {
     gap: 16,

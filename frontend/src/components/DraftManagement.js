@@ -4,9 +4,31 @@ import { FileText, Upload, CheckCircle, AlertTriangle, Image as ImageIcon, X, Ey
 import { motion } from 'framer-motion';
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
+import { addWatermarkToPdf } from '../utils/pdfWatermark';
 import AuthContext from '../context/AuthContext';
 import CreatableSelect from './CreatableSelect';
 import DynamicMetadataFields from './DynamicMetadataFields';
+
+const MAX_PDF_SIZE = 10 * 1024 * 1024;
+
+const EMPTY_DYNAMIC_METADATA = {
+  organisme: null, path: [], matiere: null, hasParcoursType: null, parcoursType: null, isNewOrganisme: false,
+};
+
+const BATCH_STATUS_LABELS = {
+  pending: 'En attente',
+  processing: 'Filigrane',
+  uploading: 'Envoi',
+  success: 'Enregistré',
+  error: 'Échec',
+};
+
+const isPdfFile = (f) => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf');
+
+const getErrorMessage = (error, fallback) => {
+  const data = error?.response?.data;
+  return data?.error || data?.message || (Array.isArray(data?.errors) && data.errors[0]?.msg) || error?.message || fallback;
+};
 
 const EMPTY_METADATA_FORM = {
   title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: ''
@@ -28,6 +50,12 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
   const [pdfGenerationProgress, setPdfGenerationProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  // Sélection multiple : brouillons sans métadonnées, envoyés un par un.
+  // { id, file, status, progress, error }
+  const [batchFiles, setBatchFiles] = useState([]);
+  const [batchRunning, setBatchRunning] = useState(false);
+  const batchRunningRef = useRef(false);
+  const isBatchMode = batchFiles.length > 0;
   const [dynamicMetadata, setDynamicMetadata] = useState({
     organisme: null,
     path: [],
@@ -86,27 +114,107 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
   }, [hasMore, isFetchingMore, isFetching, page, fetchDrafts]);
 
   const handleFileChange = async (e) => {
-    const selectedFile = e.target.files[0];
-    if (!selectedFile) return;
+    const selectedFiles = Array.from(e.target.files || []);
+    // Permet de re-sélectionner le même fichier après une erreur ou un retrait.
+    e.target.value = '';
+    if (selectedFiles.length === 0 || batchRunningRef.current) return;
 
-    if (selectedFile.size > 10 * 1024 * 1024) {
-      setErrorMsg("Le fichier dépasse la limite de 10MB");
+    const rejected = [];
+    const seen = new Set();
+    const validFiles = [];
+    selectedFiles.forEach((f) => {
+      const key = `${f.name}:${f.size}:${f.lastModified}`;
+      if (!isPdfFile(f)) rejected.push(`${f.name} (pas un PDF)`);
+      else if (f.size > MAX_PDF_SIZE) rejected.push(`${f.name} (dépasse 10MB)`);
+      else if (seen.has(key)) rejected.push(`${f.name} (doublon)`);
+      else {
+        seen.add(key);
+        validFiles.push(f);
+      }
+    });
+
+    setErrorMsg(rejected.length > 0 ? `Fichier(s) ignoré(s) : ${rejected.join(', ')}` : '');
+    if (validFiles.length === 0) return;
+
+    if (resetWatermark) resetWatermark();
+
+    if (validFiles.length > 1) {
+      // Plusieurs PDFs : pas de métadonnées, le filigrane est appliqué à l'envoi.
+      setFile(null);
+      setDynamicMetadata(EMPTY_DYNAMIC_METADATA);
+      setBatchFiles(validFiles.map((f, index) => ({
+        id: `${Date.now()}_${index}`,
+        file: f,
+        status: 'pending',
+        progress: 0,
+        error: null,
+      })));
       return;
     }
 
-    if (selectedFile.type === 'application/pdf') {
+    setBatchFiles([]);
+    setFile(null);
+    const watermarkedPdf = await processPdf(validFiles[0]);
+    if (watermarkedPdf) setFile(watermarkedPdf);
+  };
+
+  const updateBatchFile = (id, patch) => {
+    setBatchFiles(prev => prev.map(item => (item.id === id ? { ...item, ...patch } : item)));
+  };
+
+  const handleRemoveBatchFile = (id) => {
+    if (batchRunningRef.current) return;
+    setBatchFiles(prev => prev.filter(item => item.id !== id));
+  };
+
+  // Envoi séquentiel : le PDF suivant ne part qu'une fois le précédent terminé.
+  // Un échec est noté sur le fichier concerné sans bloquer les suivants.
+  const handleSaveBatchDrafts = async () => {
+    if (batchRunningRef.current) return;
+    const queue = batchFiles.filter(item => item.status !== 'success');
+    if (queue.length === 0) return;
+
+    batchRunningRef.current = true;
+    setBatchRunning(true);
+    setErrorMsg('');
+    queue.forEach(item => updateBatchFile(item.id, { status: 'pending', progress: 0, error: null }));
+
+    let failedCount = 0;
+    for (const item of queue) {
       try {
-        const watermarkedPdf = await processPdf(selectedFile);
-        if (watermarkedPdf) {
-          setFile(watermarkedPdf);
-          setErrorMsg('');
-        }
-      } catch (err) {
-        setErrorMsg("Erreur lors de l'application du filigrane");
+        updateBatchFile(item.id, { status: 'processing', progress: 0 });
+        const watermarkedPdf = await addWatermarkToPdf(item.file, (progress) => {
+          updateBatchFile(item.id, { progress: Math.round(progress) });
+        });
+
+        updateBatchFile(item.id, { status: 'uploading', progress: 0 });
+        const formData = new FormData();
+        formData.append('file', watermarkedPdf);
+        formData.append('documentType', 'sujet');
+        formData.append('metadataStatus', 'false'); // 'false' triggers draft status in backend
+        await axios.post('/api/documents', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+          onUploadProgress: (event) => {
+            if (event.total) updateBatchFile(item.id, { progress: Math.round((event.loaded / event.total) * 100) });
+          },
+        });
+
+        updateBatchFile(item.id, { status: 'success', progress: 100 });
+      } catch (error) {
+        console.error(`Erreur d'enregistrement de ${item.file.name}:`, error);
+        failedCount += 1;
+        updateBatchFile(item.id, { status: 'error', error: getErrorMessage(error, "Échec de l'enregistrement") });
       }
+    }
+
+    batchRunningRef.current = false;
+    setBatchRunning(false);
+    fetchDrafts();
+
+    if (failedCount === 0) {
+      setBatchFiles([]);
     } else {
-      setFile(selectedFile);
-      setErrorMsg('');
+      setErrorMsg(`${queue.length - failedCount} brouillon(s) enregistré(s), ${failedCount} échec(s). Relancez pour renvoyer uniquement les fichiers en échec.`);
     }
   };
 
@@ -136,6 +244,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
         const watermarkedPdf = await processPdf(generatedPdfFile);
         if (watermarkedPdf) {
           setFile(watermarkedPdf);
+          setBatchFiles([]);
           setUploadMode('pdf');
           setImageFiles([]);
         }
@@ -190,12 +299,12 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
       });
 
       setFile(null);
-      setDynamicMetadata({ organisme: null, path: [], matiere: null, hasParcoursType: null, parcoursType: null, isNewOrganisme: false });
+      setDynamicMetadata(EMPTY_DYNAMIC_METADATA);
       if (resetWatermark) resetWatermark();
       fetchDrafts();
     } catch (error) {
       console.error("Erreur d'enregistrement:", error);
-      setErrorMsg(error.response?.data?.error || "Échec de l'enregistrement du brouillon");
+      setErrorMsg(getErrorMessage(error, "Échec de l'enregistrement du brouillon"));
     } finally {
       setUploading(false);
     }
@@ -343,6 +452,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
           <button
             type="button"
             onClick={() => setUploadMode('pdf')}
+            disabled={batchRunning}
             className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${uploadMode === 'pdf'
                 ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
                 : 'border-slate-200 text-slate-500 hover:border-indigo-300 hover:bg-slate-50'
@@ -353,6 +463,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
           <button
             type="button"
             onClick={() => setUploadMode('images')}
+            disabled={batchRunning}
             className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold border-2 transition-all flex items-center justify-center ${uploadMode === 'images'
                 ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
                 : 'border-slate-200 text-slate-500 hover:border-indigo-300 hover:bg-slate-50'
@@ -364,11 +475,11 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
 
         {uploadMode === 'pdf' ? (
           <>
-            <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${file ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'} ${watermarking ? 'opacity-70 pointer-events-none' : ''}`}>
-              <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-4 transition-colors ${file ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 group-hover:text-indigo-500 group-hover:bg-indigo-50'}`}>
+            <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[2rem] transition-all cursor-pointer group ${file || isBatchMode ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50'} ${watermarking || batchRunning ? 'opacity-70 pointer-events-none' : ''}`}>
+              <div className={`w-16 h-16 rounded-3xl flex items-center justify-center mb-4 transition-colors ${file || isBatchMode ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-400 group-hover:text-indigo-500 group-hover:bg-indigo-50'}`}>
                 {watermarking ? (
                   <div className="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
-                ) : file ? (
+                ) : file || isBatchMode ? (
                   <CheckCircle size={28} />
                 ) : (
                   <Upload size={28} />
@@ -384,18 +495,60 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                 </div>
               ) : (
                 <>
-                  <span className={`text-sm font-bold text-center px-4 ${file ? 'text-indigo-700' : 'text-slate-600'}`}>
-                    {file ? file.name : 'Cliquez ou glissez-déposez un PDF'}
+                  <span className={`text-sm font-bold text-center px-4 ${file || isBatchMode ? 'text-indigo-700' : 'text-slate-600'}`}>
+                    {isBatchMode ? `${batchFiles.length} PDF sélectionnés` : file ? file.name : 'Cliquez ou glissez-déposez un ou plusieurs PDF'}
                   </span>
-                  {!file && <span className="text-xs font-medium text-slate-400 mt-2">PDF (Filigrané auto) - Max 10MB</span>}
+                  {!file && !isBatchMode && <span className="text-xs font-medium text-slate-400 mt-2">PDF (Filigrané auto) - Max 10MB par fichier</span>}
                 </>
               )}
 
-              <input type="file" className="hidden" accept=".pdf" onChange={handleFileChange} disabled={watermarking} />
+              <input type="file" multiple className="hidden" accept=".pdf,application/pdf" onChange={handleFileChange} disabled={watermarking || batchRunning} />
             </label>
             {watermarkError && (
               <div className="mt-2 text-xs font-bold text-rose-500 flex items-center gap-1.5 ml-1">
                 <AlertTriangle size={14} /> {watermarkError}
+              </div>
+            )}
+            {isBatchMode && (
+              <div className="mt-4 space-y-2">
+                <p className="text-xs font-medium text-slate-500">
+                  Plusieurs fichiers : ils seront enregistrés en brouillon sans métadonnées, un par un. Vous pourrez compléter les métadonnées depuis « Mes Brouillons ».
+                </p>
+                {batchFiles.map(item => {
+                  const active = item.status === 'processing' || item.status === 'uploading';
+                  return (
+                    <div key={item.id} className={`flex items-center gap-3 p-3 rounded-xl border ${item.status === 'error' ? 'border-rose-200 bg-rose-50/50' : item.status === 'success' ? 'border-emerald-200 bg-emerald-50/50' : 'border-slate-200 bg-white'}`}>
+                      <div className="shrink-0">
+                        {active ? (
+                          <div className="w-5 h-5 border-2 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
+                        ) : item.status === 'success' ? (
+                          <CheckCircle size={20} className="text-emerald-500" />
+                        ) : item.status === 'error' ? (
+                          <AlertTriangle size={20} className="text-rose-500" />
+                        ) : (
+                          <FileText size={20} className="text-slate-400" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-slate-700 truncate">{item.file.name}</div>
+                        <div className={`text-xs font-medium ${item.status === 'error' ? 'text-rose-500' : 'text-slate-400'}`}>
+                          {BATCH_STATUS_LABELS[item.status]}{active ? ` ${item.progress}%` : ''} · {(item.file.size / (1024 * 1024)).toFixed(1)} MB
+                          {item.error ? ` — ${item.error}` : ''}
+                        </div>
+                        {active && (
+                          <div className="w-full bg-indigo-100 rounded-full h-1 mt-1.5 overflow-hidden">
+                            <div className="bg-indigo-600 h-1 rounded-full transition-all duration-300" style={{ width: `${item.progress}%` }} />
+                          </div>
+                        )}
+                      </div>
+                      {!batchRunning && item.status !== 'success' && (
+                        <button type="button" onClick={() => handleRemoveBatchFile(item.id)} className="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50" aria-label={`Retirer ${item.file.name}`}>
+                          <X size={16} />
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </>
@@ -445,22 +598,40 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
           </div>
         )}
 
-        <DynamicMetadataFields
-          value={dynamicMetadata}
-          onChange={setDynamicMetadata}
-        />
+        {isBatchMode ? (
+          <button
+            onClick={handleSaveBatchDrafts}
+            disabled={batchRunning || !batchFiles.some(item => item.status !== 'success')}
+            className="w-full py-4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-indigo-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:pointer-events-none"
+          >
+            {batchRunning ? (
+              <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Enregistrement {batchFiles.filter(item => item.status === 'success' || item.status === 'error').length + 1}/{batchFiles.length}...</>
+            ) : batchFiles.some(item => item.status === 'error') ? (
+              <><Upload size={18} /> Réessayer les fichiers en échec</>
+            ) : (
+              <><Upload size={18} /> Enregistrer {batchFiles.length} brouillons</>
+            )}
+          </button>
+        ) : (
+          <>
+            <DynamicMetadataFields
+              value={dynamicMetadata}
+              onChange={setDynamicMetadata}
+            />
 
-        <button
-          onClick={handleSaveDraft}
-          disabled={!file || uploading || watermarking || (dynamicMetadata.organisme && dynamicMetadata.hasParcoursType === null)}
-          className="w-full py-4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-indigo-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:pointer-events-none"
-        >
-          {uploading ? (
-            <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Enregistrement...</>
-          ) : (
-            <><Upload size={18} /> Enregistrer en Brouillon</>
-          )}
-        </button>
+            <button
+              onClick={handleSaveDraft}
+              disabled={!file || uploading || watermarking || (dynamicMetadata.organisme && dynamicMetadata.hasParcoursType === null)}
+              className="w-full py-4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-indigo-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:pointer-events-none"
+            >
+              {uploading ? (
+                <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Enregistrement...</>
+              ) : (
+                <><Upload size={18} /> Enregistrer en Brouillon</>
+              )}
+            </button>
+          </>
+        )}
       </div>
 
       <div className="mt-10">
