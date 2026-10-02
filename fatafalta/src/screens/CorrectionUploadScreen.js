@@ -384,7 +384,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
         <View style={styles.subjectFooter}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
             <Badge
-              label={hasCorrection ? 'Corrigé lié' : 'Sans corrigé'}
+              label={hasCorrection ? 'Corrigé lié' : document.correctionIncludedInPdf ? 'Corrigé inclus' : 'Sans corrigé'}
               color={hasCorrection ? theme.colors.success : theme.colors.primary}
               backgroundColor={hasCorrection ? theme.colors.successWash : theme.colors.primaryWash}
               icon={hasCorrection ? <CheckCircle2 size={12} color={theme.colors.success} /> : <Link2 size={12} color={theme.colors.primary} />}

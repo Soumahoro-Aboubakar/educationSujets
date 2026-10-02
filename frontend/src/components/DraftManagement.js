@@ -8,6 +8,7 @@ import { addWatermarkToPdf } from '../utils/pdfWatermark';
 import AuthContext from '../context/AuthContext';
 import CreatableSelect from './CreatableSelect';
 import DynamicMetadataFields from './DynamicMetadataFields';
+import CorrectionIncludedToggle from './CorrectionIncludedToggle';
 
 const MAX_PDF_SIZE = 10 * 1024 * 1024;
 
@@ -31,7 +32,7 @@ const getErrorMessage = (error, fallback) => {
 };
 
 const EMPTY_METADATA_FORM = {
-  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: ''
+  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: '', correctionIncludedInPdf: false
 };
 
 const DraftManagement = ({ filtersData, onOptionCreate }) => {
@@ -64,6 +65,8 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
     parcoursType: null,
     isNewOrganisme: false,
   });
+
+  const [correctionIncluded, setCorrectionIncluded] = useState(false);
 
   const [editingMetadata, setEditingMetadata] = useState(null);
   const [metadataForm, setMetadataForm] = useState(EMPTY_METADATA_FORM);
@@ -293,6 +296,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
         formData.append('hasParcoursType', String(dynamicMetadata.hasParcoursType));
       }
       if (dynamicMetadata.parcoursType?._id) formData.append('parcoursTypeId', dynamicMetadata.parcoursType._id);
+      formData.append('correctionIncludedInPdf', String(correctionIncluded));
 
       await axios.post('/api/documents', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -300,6 +304,7 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
 
       setFile(null);
       setDynamicMetadata(EMPTY_DYNAMIC_METADATA);
+      setCorrectionIncluded(false);
       if (resetWatermark) resetWatermark();
       fetchDrafts();
     } catch (error) {
@@ -360,7 +365,8 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
         level: doc.level?._id || doc.level || '',
         semester: doc.semester?._id || doc.semester || '',
         category: doc.category?._id || doc.category || '',
-        contestType: doc.contestType?._id || doc.contestType || ''
+        contestType: doc.contestType?._id || doc.contestType || '',
+        correctionIncludedInPdf: Boolean(doc.correctionIncludedInPdf)
       });
     }
   };
@@ -619,6 +625,8 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
               onChange={setDynamicMetadata}
             />
 
+            <CorrectionIncludedToggle className="mt-6" checked={correctionIncluded} onChange={setCorrectionIncluded} />
+
             <button
               onClick={handleSaveDraft}
               disabled={!file || uploading || watermarking || (dynamicMetadata.organisme && dynamicMetadata.hasParcoursType === null)}
@@ -712,6 +720,11 @@ const DraftManagement = ({ filtersData, onOptionCreate }) => {
                           placeholder="Description"
                         />
                       </div>
+
+                      <CorrectionIncludedToggle
+                        checked={metadataForm.correctionIncludedInPdf}
+                        onChange={(value) => setMetadataForm({ ...metadataForm, correctionIncludedInPdf: value })}
+                      />
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[

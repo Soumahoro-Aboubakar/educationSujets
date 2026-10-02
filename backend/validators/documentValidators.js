@@ -40,6 +40,7 @@ const uploadDocumentValidator = [
     return true;
   }),
   body('description').optional().isString().withMessage('La description doit etre une chaine de caracteres'),
+  body('correctionIncludedInPdf').optional().isBoolean().withMessage('Indicateur de corrige inclus invalide'),
   objectIdField('university', 'Universite'),
   objectIdField('department', 'Departement'),
   objectIdField('level', 'Niveau'),
@@ -58,6 +59,7 @@ const updateDocumentValidator = [
   param('id').isMongoId().withMessage('Identifiant de document invalide'),
   body('title').optional().trim().notEmpty().withMessage('Le titre ne peut pas etre vide'),
   body('description').optional().isString().withMessage('La description doit etre une chaine de caracteres'),
+  body('correctionIncludedInPdf').optional().isBoolean().withMessage('Indicateur de corrige inclus invalide'),
   objectIdField('university', 'Universite'),
   objectIdField('department', 'Departement'),
   objectIdField('level', 'Niveau'),

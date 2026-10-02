@@ -24,6 +24,7 @@ import MetadataSelect from '../components/ui/MetadataSelect';
 import TaxonomyPathFields from '../components/catalog/TaxonomyPathFields';
 import DynamicMetadataFields, { getPathFromLeaf } from '../components/catalog/DynamicMetadataFields';
 import Card from '../components/ui/Card';
+import CorrectionIncludedSwitch from '../components/documents/CorrectionIncludedSwitch';
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
 import useMetadataOptions from '../hooks/useMetadataOptions';
@@ -91,6 +92,7 @@ const UploadScreen = ({ navigation, route }) => {
   // Metadata state
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [correctionIncluded, setCorrectionIncluded] = useState(false);
   const [institution, setInstitution] = useState(null);
   const [taxonomyNodes, setTaxonomyNodes] = useState([]);
   const [dynamicMetadata, setDynamicMetadata] = useState({
@@ -205,6 +207,7 @@ const UploadScreen = ({ navigation, route }) => {
   const loadDraftData = async (draft) => {
     setTitle(draft.title || '');
     setDescription(draft.description || '');
+    setCorrectionIncluded(Boolean(draft.correctionIncludedInPdf));
     setInstitution(draft.institution?._id || draft.institution || null);
     setTaxonomyNodes((draft.taxonomyNodes || []).map((node) => node?._id || node).filter(Boolean));
     const dynamicNode = draft.noeudId?._id ? draft.noeudId : null;
@@ -500,6 +503,7 @@ const UploadScreen = ({ navigation, route }) => {
     }
 
     formData.append('documentType', 'sujet');
+    formData.append('correctionIncludedInPdf', String(correctionIncluded));
     formData.append('metadataStatus', publish ? 'true' : 'false');
     return formData;
   };
@@ -646,6 +650,7 @@ const UploadScreen = ({ navigation, route }) => {
           description: description || undefined,
           institution: institution || undefined,
           taxonomyNodes,
+          correctionIncludedInPdf: correctionIncluded,
           metadataStatus: publish ? 'true' : 'false',
         };
         if (hasCompleteDynamicMetadata()) {
@@ -715,6 +720,7 @@ const UploadScreen = ({ navigation, route }) => {
     setBatchProgress({ current: 0, total: 0 });
     setTitle('');
     setDescription('');
+    setCorrectionIncluded(false);
     setInstitution(null);
     setTaxonomyNodes([]);
     setDynamicMetadata({ organisme: null, path: [], matiere: null, hasParcoursType: null, parcoursType: null });
@@ -870,6 +876,8 @@ const UploadScreen = ({ navigation, route }) => {
           numberOfLines={4}
           style={{ height: 100 }}
         />
+
+        <CorrectionIncludedSwitch value={correctionIncluded} onValueChange={setCorrectionIncluded} disabled={busy} />
 
         {/* Champs legacy temporairement désactivés : catégorie, université, département, niveau et semestre. */}
 

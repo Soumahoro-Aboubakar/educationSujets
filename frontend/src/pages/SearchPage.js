@@ -5,7 +5,7 @@ import { Button, Container, EmptyState, SkeletonRows, cx } from '../components/u
 import useAsync from '../hooks/useAsync';
 import useDebounce from '../hooks/useDebounce';
 import { catalog, documents } from '../lib/api';
-import { correctionOf, documentTitle, formatDate, labelOf, nodeChain } from '../lib/format';
+import { documentTitle, formatDate, hasCorrection, labelOf, nodeChain } from '../lib/format';
 
 const PAGE_SIZE = 20;
 
@@ -162,7 +162,7 @@ const SearchPage = () => {
                     </div>
                     {document.documentType === 'corrige' ? (
                       <span className="rounded-full bg-paper-dim px-2.5 py-1 text-xs font-semibold text-ink-soft">Corrigé</span>
-                    ) : correctionOf(document) ? (
+                    ) : hasCorrection(document) ? (
                       <span className="hidden items-center gap-1 rounded-full bg-gold-wash px-2.5 py-1 text-xs font-semibold text-gold-ink sm:inline-flex"><FileCheck size={13} /> Corrigé</span>
                     ) : null}
                     <ArrowRight size={16} className="shrink-0 text-ink-muted group-hover:text-ink" />

@@ -19,6 +19,7 @@ import Button from '../components/ui/Button';
 import FormInput from '../components/ui/FormInput';
 import DynamicMetadataFields, { getPathFromLeaf } from '../components/catalog/DynamicMetadataFields';
 import Card from '../components/ui/Card';
+import CorrectionIncludedSwitch from '../components/documents/CorrectionIncludedSwitch';
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
 import useDrafts from '../hooks/useDrafts';
@@ -34,6 +35,7 @@ const EditDraftScreen = ({ navigation, route }) => {
   // Metadata state
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [correctionIncluded, setCorrectionIncluded] = useState(false);
   const [dynamicMetadata, setDynamicMetadata] = useState({
     organisme: null,
     path: [],
@@ -80,6 +82,7 @@ const EditDraftScreen = ({ navigation, route }) => {
   const loadDraftData = async (draft) => {
     setTitle(draft.title || '');
     setDescription(draft.description || '');
+    setCorrectionIncluded(Boolean(draft.correctionIncludedInPdf));
     const dynamicNode = draft.noeudId?._id ? draft.noeudId : null;
     const organisme = dynamicNode?.organismeId
       ? (typeof dynamicNode.organismeId === 'object' ? dynamicNode.organismeId : { _id: dynamicNode.organismeId })
@@ -170,6 +173,7 @@ const EditDraftScreen = ({ navigation, route }) => {
       const payload = {
         title: title || undefined,
         description: description || undefined,
+        correctionIncludedInPdf: correctionIncluded,
       };
       if (hasCompleteDynamicMetadata) {
         payload.noeudId = dynamicMetadata.path.at(-1)._id;
@@ -268,6 +272,8 @@ const EditDraftScreen = ({ navigation, route }) => {
             numberOfLines={4}
             style={{ height: 100 }}
           />
+
+          <CorrectionIncludedSwitch value={correctionIncluded} onValueChange={setCorrectionIncluded} disabled={uploading} />
 
           {/* Champs legacy temporairement désactivés : catégorie, université, département, niveau et semestre. */}
 

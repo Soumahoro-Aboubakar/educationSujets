@@ -21,6 +21,7 @@ import AdminCatalogPanel from '../components/AdminCatalogPanel';
 import DynamicStructureSelector from '../components/DynamicStructureSelector';
 import DynamicMetadataFields from '../components/DynamicMetadataFields';
 import DraftManagement from '../components/DraftManagement';
+import CorrectionIncludedToggle from '../components/CorrectionIncludedToggle';
 import PublishedSubjectsManager from '../components/PublishedSubjectsManager';
 import AdminOverview from '../components/admin/AdminOverview';
 import AdminUsers from '../components/admin/AdminUsers';
@@ -31,7 +32,7 @@ import { generatePdfFromImages } from '../utils/pdfGenerator';
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
 const EMPTY_UPLOAD_DATA = {
-  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: '', institution: '', taxonomyNodes: [], file: null, documentType: 'sujet', correctionFor: '',
+  title: '', description: '', university: '', department: '', level: '', semester: '', category: '', contestType: '', institution: '', taxonomyNodes: [], file: null, documentType: 'sujet', correctionFor: '', correctionIncludedInPdf: false,
   dynamicOrganisme: null,
   dynamicPath: [],
   dynamicMatiere: null,
@@ -725,6 +726,10 @@ const Dashboard = () => {
                               <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md">
                                 <CheckCircle size={12} /> Corrigé lié
                               </span>
+                            ) : doc.correctionIncludedInPdf ? (
+                              <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md">
+                                <CheckCircle size={12} /> Corrigé inclus
+                              </span>
                             ) : (
                               <button onClick={() => handleAddCorrection(doc)} className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-2 py-1 rounded-md transition-colors">
                                 <LinkIcon size={12} /> Ajouter un corrigé
@@ -920,6 +925,13 @@ const Dashboard = () => {
                         placeholder="Résumez brièvement le contenu du document..."
                       />
                     </div>
+
+                    {uploadData.documentType === 'sujet' && (
+                      <CorrectionIncludedToggle
+                        checked={uploadData.correctionIncludedInPdf}
+                        onChange={(value) => setUploadData((previous) => ({ ...previous, correctionIncludedInPdf: value }))}
+                      />
+                    )}
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 z-20 relative">
                       {[

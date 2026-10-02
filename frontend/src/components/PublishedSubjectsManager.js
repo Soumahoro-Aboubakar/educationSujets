@@ -5,10 +5,11 @@ import {
   FileText, Loader2, Pencil, RefreshCw, RotateCcw, Save, Trash2, X,
 } from 'lucide-react';
 import DynamicMetadataFields from './DynamicMetadataFields';
+import CorrectionIncludedToggle from './CorrectionIncludedToggle';
 import { AdminButton, Box, Panel, SearchBox, Select, Td, Th } from './admin/adminKit';
 import useDebounce from '../hooks/useDebounce';
 import { errorMessage } from '../lib/api';
-import { correctionOf, documentTitle, formatDate, formatFileSize, labelOf, nodeChain } from '../lib/format';
+import { correctionOf, documentTitle, formatDate, formatFileSize, hasIncludedCorrection, labelOf, nodeChain } from '../lib/format';
 
 /*
  * Gestion des sujets publiés : recherche, filtres, pagination côté serveur,
@@ -107,6 +108,7 @@ const EditDialog = ({ document: doc, filtersData, onClose, onSaved }) => {
     };
   });
   const [catalogDirty, setCatalogDirty] = useState(false);
+  const [correctionIncluded, setCorrectionIncluded] = useState(Boolean(doc.correctionIncludedInPdf));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -135,7 +137,7 @@ const EditDialog = ({ document: doc, filtersData, onClose, onSaved }) => {
       return;
     }
 
-    const payload = { title, description: form.description.trim() };
+    const payload = { title, description: form.description.trim(), correctionIncludedInPdf: correctionIncluded };
     LEGACY_FIELDS.forEach(([key]) => {
       if (legacy[key] !== idOf(doc[key])) payload[key] = legacy[key];
     });
@@ -194,6 +196,8 @@ const EditDialog = ({ document: doc, filtersData, onClose, onSaved }) => {
               placeholder="Résumé du contenu (facultatif)"
             />
           </label>
+
+          <CorrectionIncludedToggle checked={correctionIncluded} onChange={setCorrectionIncluded} className="bg-white" />
 
           <div className="grid">
             <DynamicMetadataFields
@@ -531,6 +535,10 @@ const PublishedSubjectsManager = ({ filtersData }) => {
                           {correctionOf(doc) ? (
                             <span className="mt-1 inline-flex items-center gap-1 rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-bold text-emerald-700">
                               <CheckCircle2 size={11} /> Corrigé lié
+                            </span>
+                          ) : hasIncludedCorrection(doc) ? (
+                            <span className="mt-1 inline-flex items-center gap-1 rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-bold text-emerald-700">
+                              <CheckCircle2 size={11} /> Corrigé inclus
                             </span>
                           ) : null}
                         </div>

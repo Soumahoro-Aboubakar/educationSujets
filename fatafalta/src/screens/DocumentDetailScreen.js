@@ -32,7 +32,7 @@ import { useDocumentAccess } from '../hooks/useDocumentAccess';
 import AccessSheet from '../components/access/AccessSheet';
 import useCorrectionPromptPreference from '../hooks/useCorrectionPromptPreference';
 import { formatDate, formatFileSize, formatNumber } from '../utils/format';
-import { getCorrection, getDocumentTitle, getExtensionLabel } from '../utils/document';
+import { getCorrection, getDocumentTitle, getExtensionLabel, hasIncludedCorrection } from '../utils/document';
 import AuthContext from '../context/AuthContext';
 import { deleteDocument } from '../services/documents';
 import theme from '../theme/tokens';
@@ -89,6 +89,9 @@ const DocumentDetailScreen = () => {
 
   const isCorrection = document?.documentType === 'corrige' || document?.type === 'correction';
   const hasCorrection = !isCorrection && Boolean(correction);
+  // Corrigé dans le même PDF que le sujet : rien d'autre à télécharger.
+  const correctionIncluded = hasIncludedCorrection(document) || hasIncludedCorrection(initialDocument);
+  const correctionInSubject = correctionIncluded && !hasCorrection;
   const displayTitle = getDocumentTitle(document);
 
   const {
@@ -262,7 +265,7 @@ const DocumentDetailScreen = () => {
       >
         <View style={styles.headerTags}>
           <Text variant="caption" style={styles.headerTag}>{fileLabel}</Text>
-          {hasCorrection ? (
+          {hasCorrection || correctionIncluded ? (
             <View style={styles.headerChip}>
               <FileCheck size={12} color={brand.ink} strokeWidth={2} />
               <Text style={styles.headerChipLabel}>Corrigé disponible</Text>
@@ -317,17 +320,19 @@ const DocumentDetailScreen = () => {
 
         {!isCorrection ? (
           <Animated.View entering={FadeInDown.duration(260).delay(60)} style={styles.correctionBlock}>
-            <View style={[styles.correctionIcon, !hasCorrection && styles.correctionIconMuted]}>
-              <FileCheck size={18} color={hasCorrection ? brand.goldInk : brand.inkMuted} strokeWidth={1.8} />
+            <View style={[styles.correctionIcon, !hasCorrection && !correctionInSubject && styles.correctionIconMuted]}>
+              <FileCheck size={18} color={hasCorrection || correctionInSubject ? brand.goldInk : brand.inkMuted} strokeWidth={1.8} />
             </View>
             <View style={styles.correctionCopy}>
               <Text variant="bodyMedium" style={styles.correctionTitle}>
-                {hasCorrection ? 'Corrigé disponible' : 'Pas encore de corrigé'}
+                {hasCorrection ? 'Corrigé disponible' : correctionInSubject ? 'Corrigé inclus' : 'Pas encore de corrigé'}
               </Text>
               <Text variant="caption" style={styles.correctionText}>
                 {hasCorrection
                   ? (isCorrectionDownloaded ? 'Enregistré sur ton appareil.' : 'Compare tes réponses une fois le sujet traité.')
-                  : 'Le corrigé de ce sujet n’a pas encore été publié.'}
+                  : correctionInSubject
+                    ? 'Il se trouve dans le même PDF, à la suite du sujet.'
+                    : 'Le corrigé de ce sujet n’a pas encore été publié.'}
               </Text>
               {isCorrectionDownloading ? (
                 <ProgressBar progress={correctionProgress} color={brand.gold} style={styles.correctionProgress} />

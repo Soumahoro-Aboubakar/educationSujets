@@ -19,6 +19,14 @@ export const getCorrection = (document) => {
   return correction?._id ? correction : null;
 };
 
+/** Le PDF du sujet contient lui-même son corrigé. */
+export const hasIncludedCorrection = (document) => Boolean(document?.correctionIncludedInPdf)
+  && document.documentType !== 'corrige'
+  && document.type !== 'correction';
+
+/** Corrigé séparé associé OU corrigé inclus dans le PDF du sujet. */
+export const hasCorrection = (document) => Boolean(getCorrection(document)) || hasIncludedCorrection(document);
+
 export const getExtensionLabel = (document) => String(document?.extension || document?.fileType || 'pdf')
   .replace(/^\./, '')
   .slice(0, 4)

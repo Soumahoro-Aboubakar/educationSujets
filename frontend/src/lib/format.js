@@ -31,6 +31,14 @@ export const correctionOf = (document) => {
   return correction?._id ? correction : null;
 };
 
+/** Le PDF du sujet contient lui-même son corrigé. */
+export const hasIncludedCorrection = (document) => Boolean(document?.correctionIncludedInPdf)
+  && document.documentType !== 'corrige'
+  && document.type !== 'correction';
+
+/** Corrigé séparé associé OU corrigé inclus dans le PDF du sujet. */
+export const hasCorrection = (document) => Boolean(correctionOf(document)) || hasIncludedCorrection(document);
+
 /** Chaîne des nœuds (racine → feuille) à partir du nœud peuplé par l'API. */
 export const nodeChain = (node) => {
   const chain = [];

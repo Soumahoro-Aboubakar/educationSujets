@@ -5,7 +5,7 @@ import { Button, Container, EmptyState, SkeletonRows, cx } from '../components/u
 import useAsync from '../hooks/useAsync';
 import useDebounce from '../hooks/useDebounce';
 import { catalog, documents as documentsApi } from '../lib/api';
-import { correctionOf, documentTitle, formatDate, labelOf } from '../lib/format';
+import { documentTitle, formatDate, hasCorrection, labelOf } from '../lib/format';
 
 /*
  * Parcours du catalogue : organisme → type de parcours → niveaux (concours, année…) → matière → sujets.
@@ -213,7 +213,7 @@ const ExplorePage = () => {
     if (!docs.length) return <EmptyState icon={FileText} title="Aucun sujet" description={filter ? 'Aucun sujet ne correspond à ce filtre.' : 'Aucun sujet publié pour cette matière.'} />;
 
     return docs.map((document) => {
-      const correction = correctionOf(document);
+      const correction = hasCorrection(document);
       return (
         <Row
           key={document._id}

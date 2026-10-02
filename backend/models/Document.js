@@ -151,6 +151,11 @@ const DocumentSchema = new mongoose.Schema(
       ref: 'Document',
       default: null,
     },
+    // Le PDF du sujet contient aussi son corrige (aucun second fichier attendu).
+    correctionIncludedInPdf: {
+      type: Boolean,
+      default: false,
+    },
     sujetParentId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Document',

@@ -6,7 +6,7 @@ import Text from '../ui/Text';
 import DocumentMeta from './DocumentMeta';
 import ProgressBar from '../ui/ProgressBar';
 import { formatDate } from '../../utils/format';
-import { getCorrection, getDocumentTitle, getExtensionLabel } from '../../utils/document';
+import { getDocumentTitle, getExtensionLabel, hasCorrection as documentHasCorrection } from '../../utils/document';
 import theme from '../../theme/tokens';
 
 const { brand } = theme;
@@ -18,7 +18,7 @@ const { brand } = theme;
  */
 const DocumentCard = ({ document, onPress, isDownloading, downloadProgress, isDownloaded }) => {
   const title = getDocumentTitle(document);
-  const hasCorrection = Boolean(getCorrection(document));
+  const hasCorrection = documentHasCorrection(document);
   const date = formatDate(document.dateAjout || document.createdAt);
 
   return (

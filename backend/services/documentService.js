@@ -72,6 +72,9 @@ const normalizeTitle = (value = '') =>
     .trim()
     .replace(/\s+/g, ' ');
 
+// Les formulaires multipart transmettent les booleens sous forme de chaines.
+const toBoolean = (value) => value === true || value === 'true' || value === '1' || value === 1;
+
 const escapeRegex = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const getTitleTokens = (value) =>
@@ -360,7 +363,11 @@ const listPublicDocuments = async (params = {}) => {
       status: 'approved',
       isDeleted: { $ne: true },
     });
-    filters._id = { $in: correctionTargets };
+    // Corrige separe OU corrige inclus dans le PDF du sujet.
+    filters.$and = [
+      ...(filters.$and || []),
+      { $or: [{ _id: { $in: correctionTargets } }, { correctionIncludedInPdf: true }] },
+    ];
   }
 
   let query = applyPopulate(Document.find(filters)).sort('-createdAt');
@@ -779,6 +786,7 @@ const createDynamicDocument = async (payload, file, user) => {
     parcoursTypeId: parcoursType?._id || null,
     sujetParentId: type === 'correction' ? subject._id : null,
     correctionFor: type === 'correction' ? subject._id : null,
+    correctionIncludedInPdf: type === 'sujet' && toBoolean(payload.correctionIncludedInPdf),
     fichierUrl: storageKey,
     dateAjout: new Date(),
     uploadedBy: user._id,
@@ -872,6 +880,7 @@ const createDocument = async (payload, file, user) => {
       contestType: payload.contestType || null,
       institution: payload.institution || null,
       taxonomyNodes,
+      correctionIncludedInPdf: toBoolean(payload.correctionIncludedInPdf),
       status: payload.metadataStatus === 'false' ? 'draft' : 'pending',
     };
 
@@ -988,6 +997,10 @@ const updateDocument = async (documentId, payload, user) => {
 
   if (payload.taxonomyNodes !== undefined) {
     document.taxonomyNodes = taxonomyNodes;
+  }
+
+  if (payload.correctionIncludedInPdf !== undefined) {
+    document.correctionIncludedInPdf = toBoolean(payload.correctionIncludedInPdf);
   }
 
   if (payload.metadataStatus === 'true' && document.status === 'draft') {

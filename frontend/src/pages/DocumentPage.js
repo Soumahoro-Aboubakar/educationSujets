@@ -7,7 +7,7 @@ import AuthContext from '../context/AuthContext';
 import useAsync from '../hooks/useAsync';
 import useEntitlements from '../hooks/useEntitlements';
 import { documents, errorCode, errorMessage } from '../lib/api';
-import { correctionOf, documentTitle, formatDate, formatFileSize, labelOf, nodeChain } from '../lib/format';
+import { correctionOf, documentTitle, formatDate, formatFileSize, hasIncludedCorrection, labelOf, nodeChain } from '../lib/format';
 
 const ACCESS_CODES = ['AUTH_REQUIRED', 'SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REACHED', 'ACCOUNT_DISABLED'];
 
@@ -86,6 +86,7 @@ const DocumentPage = () => {
   }
 
   const correction = correctionOf(document);
+  const correctionIncluded = hasIncludedCorrection(document);
   const isCorrection = document.documentType === 'corrige' || document.type === 'correction';
   const chain = nodeChain(document.noeudId);
   const details = [
@@ -150,7 +151,11 @@ const DocumentPage = () => {
         </p>
       ) : null}
 
-      {!isCorrection && !correction ? (
+      {correctionIncluded && !correction ? (
+        <p className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold-ink">
+          <FileCheck size={15} /> Corrigé inclus : il se trouve dans le même PDF, à la suite du sujet.
+        </p>
+      ) : !isCorrection && !correction ? (
         <p className="mt-4 text-sm text-ink-soft">Le corrigé de ce sujet n’a pas encore été publié.</p>
       ) : null}
 
