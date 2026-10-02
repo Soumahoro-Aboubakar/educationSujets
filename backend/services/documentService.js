@@ -530,6 +530,66 @@ const listPendingDocuments = async (params = {}) => {
   };
 };
 
+const MANAGED_SORTS = {
+  recent: '-createdAt',
+  oldest: 'createdAt',
+  title: 'title',
+  views: '-views',
+  downloads: '-downloads',
+};
+
+const parseDateBound = (value, label) => {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) throw new AppError(`${label} invalide`, 400);
+  return date;
+};
+
+/**
+ * Sujets publies, pour l'ecran de gestion (edition des metadonnees, corbeille).
+ * Meme perimetre que la suppression : l'admin voit tout, le sous-admin ses propres envois.
+ */
+const listManagedDocuments = async (params = {}, user) => {
+  const filters = {
+    status: 'approved',
+    isDeleted: { $ne: true },
+    documentType: { $ne: 'corrige' },
+    type: { $ne: 'correction' },
+  };
+  if (user.role !== 'admin') filters.uploadedBy = user._id;
+
+  if (params.search) {
+    const search = escapeRegex(String(params.search).trim());
+    filters.$or = ['title', 'titre', 'originalFileName', 'description'].map((field) => ({
+      [field]: { $regex: search, $options: 'i' },
+    }));
+  }
+
+  if (params.dateFrom || params.dateTo) {
+    filters.createdAt = {};
+    if (params.dateFrom) filters.createdAt.$gte = parseDateBound(params.dateFrom, 'Date de debut');
+    if (params.dateTo) filters.createdAt.$lte = parseDateBound(params.dateTo, 'Date de fin');
+  }
+
+  if (params.organismeId) {
+    filters.noeudId = { $in: await Noeud.find({ organismeId: params.organismeId }).distinct('_id') };
+  }
+
+  const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 10, 1), 100);
+  const page = Math.max(Number.parseInt(params.page, 10) || 1, 1);
+  const sort = MANAGED_SORTS[params.sort] || MANAGED_SORTS.recent;
+
+  const [data, total] = await Promise.all([
+    // _id departage les egalites pour une pagination stable.
+    applyPopulate(Document.find(filters).sort(`${sort} _id`).skip((page - 1) * limit).limit(limit)),
+    Document.countDocuments(filters),
+  ]);
+
+  return {
+    data,
+    pagination: { total, page, pages: Math.ceil(total / limit), limit },
+  };
+};
+
 const listDraftDocuments = async (params = {}) => {
   const filters = { status: 'draft', isDeleted: { $ne: true } };
   let query = applyPopulate(Document.find(filters).sort('-createdAt'));
@@ -1146,6 +1206,7 @@ module.exports = {
   listUserDocuments,
   listPendingDocuments,
   listDraftDocuments,
+  listManagedDocuments,
   getAnalytics,
   createDocument,
   createCorrectionDocument,

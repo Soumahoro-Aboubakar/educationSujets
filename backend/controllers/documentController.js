@@ -7,6 +7,7 @@ const {
   listUserDocuments,
   listPendingDocuments,
   listDraftDocuments,
+  listManagedDocuments,
   getAnalytics,
   createDocument,
   createCorrectionDocument: createCorrectionDocumentService,
@@ -101,6 +102,11 @@ exports.getPendingDocuments = asyncHandler(async (req, res) => {
 
 exports.getDraftDocuments = asyncHandler(async (req, res) => {
   const result = await listDraftDocuments(req.query);
+  sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
+});
+
+exports.getManagedDocuments = asyncHandler(async (req, res) => {
+  const result = await listManagedDocuments(req.query, req.user);
   sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
 });
 

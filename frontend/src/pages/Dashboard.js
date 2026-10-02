@@ -5,7 +5,7 @@ import {
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
   MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User, Building2,
   AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon,
-  Users, CreditCard, Gift, Activity
+  Users, CreditCard, Gift, Activity, FolderCog
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -21,6 +21,7 @@ import AdminCatalogPanel from '../components/AdminCatalogPanel';
 import DynamicStructureSelector from '../components/DynamicStructureSelector';
 import DynamicMetadataFields from '../components/DynamicMetadataFields';
 import DraftManagement from '../components/DraftManagement';
+import PublishedSubjectsManager from '../components/PublishedSubjectsManager';
 import AdminOverview from '../components/admin/AdminOverview';
 import AdminUsers from '../components/admin/AdminUsers';
 import { AdminPayments, AdminReferrals } from '../components/admin/AdminFinance';
@@ -245,6 +246,7 @@ const Dashboard = () => {
   const navItems = [
     { id: 'documents', label: 'Mes documents', icon: FileText },
     { id: 'upload', label: 'Uploader', icon: Upload },
+    ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'published', label: 'Sujets publiés', icon: FolderCog }] : []),
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'drafts', label: 'Gestion du Brouillons', icon: Clock }] : []),
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'validate', label: 'Valider', icon: CheckCircle, badge: pendingDocs.length }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
@@ -1195,6 +1197,12 @@ const Dashboard = () => {
 
           {activeTab === 'drafts' && (
             <DraftManagement filtersData={filtersData} onOptionCreate={handleCreateOption} />
+          )}
+
+          {activeTab === 'published' && (user?.role === 'admin' || user?.role === 'sub-admin') && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+              <PublishedSubjectsManager filtersData={filtersData} />
+            </motion.div>
           )}
 
           {activeTab === 'referentials' && user?.isSuperAdmin && (

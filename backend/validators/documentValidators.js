@@ -110,6 +110,16 @@ const listDocumentsValidator = [
   query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limite invalide'),
 ];
 
+const manageDocumentsValidator = [
+  query('search').optional().isString().isLength({ max: 160 }).withMessage('Recherche invalide'),
+  query('dateFrom').optional().isISO8601().withMessage('Date de debut invalide'),
+  query('dateTo').optional().isISO8601().withMessage('Date de fin invalide'),
+  query('organismeId').optional().isMongoId().withMessage('Filtre organisme invalide'),
+  query('sort').optional().isIn(['recent', 'oldest', 'title', 'views', 'downloads']).withMessage('Tri invalide'),
+  query('page').optional().isInt({ min: 1 }).withMessage('Page invalide'),
+  query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limite invalide'),
+];
+
 module.exports = {
   uploadDocumentValidator,
   updateDocumentValidator,
@@ -117,4 +127,5 @@ module.exports = {
   documentIdParamValidator,
   duplicateTitleValidator,
   listDocumentsValidator,
+  manageDocumentsValidator,
 };

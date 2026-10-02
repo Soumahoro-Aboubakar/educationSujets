@@ -12,6 +12,7 @@ const {
   validateDocument,
   getPendingDocuments,
   getDraftDocuments,
+  getManagedDocuments,
   getAnalytics,
   getDocumentDownloadUrl,
   getTrashedDocuments,
@@ -30,6 +31,7 @@ const {
   documentIdParamValidator,
   duplicateTitleValidator,
   listDocumentsValidator,
+  manageDocumentsValidator,
 } = require('../validators/documentValidators');
 
 const router = express.Router();
@@ -49,6 +51,7 @@ router.route('/')
 router.get('/my', protect, getMyDocuments);
 router.get('/pending', protect, authorize('sub-admin', 'admin'), getPendingDocuments);
 router.get('/drafts', protect, authorize('sub-admin', 'admin'), getDraftDocuments);
+router.get('/manage', protect, authorize('sub-admin', 'admin'), manageDocumentsValidator, validate, getManagedDocuments);
 router.get('/analytics', protect, authorize('admin'), getAnalytics);
 router.get('/duplicates/title', protect, duplicateTitleValidator, validate, checkDuplicateTitle);
 
