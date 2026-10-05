@@ -9,7 +9,9 @@ const resolveUser = async (token) => {
     return null;
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
+  // Un jeton de renouvellement ne donne jamais accès aux ressources.
+  if (decoded.typ === 'refresh') return null;
   return User.findById(decoded.id);
 };
 

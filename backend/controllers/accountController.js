@@ -5,7 +5,7 @@ const { describeSubscription, quoteForUser } = require('../services/billing/subs
 const { describeMyPromoCode, ensurePromoCode, resolvePromoStatus } = require('../services/billing/promoCodeService');
 const { describeWallet, requestWithdrawal, cancelMyWithdrawal } = require('../services/billing/walletService');
 const { getDailyUsage, isExempt } = require('../services/billing/downloadGuard');
-const { listMyPayments } = require('../services/payments/paymentService');
+const { listMyPayments, syncOpenPayment } = require('../services/payments/paymentService');
 const DownloadLog = require('../models/DownloadLog');
 const User = require('../models/User');
 const AppError = require('../utils/errors');
@@ -16,6 +16,8 @@ const AppError = require('../utils/errors');
  */
 exports.getEntitlements = asyncHandler(async (req, res) => {
   const user = req.user;
+  // Paiement ouvert (ex. réglé sur le web) : revérifié avant de répondre, pour un état à jour.
+  await syncOpenPayment(user._id);
   const [subscription, usage, promoCode, nextPayment] = await Promise.all([
     describeSubscription(user._id),
     getDailyUsage(user._id),
@@ -41,6 +43,7 @@ exports.getEntitlements = asyncHandler(async (req, res) => {
 });
 
 exports.getMySubscription = asyncHandler(async (req, res) => {
+  await syncOpenPayment(req.user._id);
   const [subscription, payments, nextPayment] = await Promise.all([
     describeSubscription(req.user._id),
     listMyPayments(req.user),
@@ -95,11 +98,16 @@ exports.getMyDownloads = asyncHandler(async (req, res) => {
 });
 
 const PROFILE_FIELDS = ['name', 'firstName', 'lastName', 'phone'];
+const PROFILE_MAX_LENGTH = 100;
 
 exports.updateProfile = asyncHandler(async (req, res) => {
   const updates = Object.fromEntries(
     PROFILE_FIELDS.filter((field) => typeof req.body[field] === 'string').map((field) => [field, req.body[field].trim()])
   );
+
+  if (Object.values(updates).some((value) => value.length > PROFILE_MAX_LENGTH)) {
+    throw new AppError(`Chaque champ du profil est limité à ${PROFILE_MAX_LENGTH} caractères.`, 400, undefined, 'PROFILE_FIELD_TOO_LONG');
+  }
 
   if (updates.name === '') {
     throw new AppError('Le nom est obligatoire', 400);
@@ -116,6 +124,10 @@ exports.changePassword = asyncHandler(async (req, res) => {
 
   if (typeof newPassword !== 'string' || newPassword.length < 8) {
     throw new AppError('Le nouveau mot de passe doit contenir au moins 8 caractères.', 400, undefined, 'PASSWORD_TOO_SHORT');
+  }
+
+  if (newPassword.length > 128 || (currentPassword && String(currentPassword).length > 128)) {
+    throw new AppError('Le mot de passe ne doit pas dépasser 128 caractères.', 400, undefined, 'PASSWORD_TOO_LONG');
   }
 
   const user = await User.findById(req.user._id).select('+password');

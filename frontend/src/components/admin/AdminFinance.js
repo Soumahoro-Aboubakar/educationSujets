@@ -16,7 +16,7 @@ export const AdminPayments = () => {
     <Panel title="Paiements" description="Toutes les transactions d’abonnement, quel que soit leur statut.">
       <div className="flex flex-wrap gap-3">
         <SearchBox value={search} onChange={setSearch} placeholder="Utilisateur, email ou référence…" />
-        <Select label="Statut" value={status} onChange={setStatus} options={[['', 'Tous les statuts'], ['SUCCEEDED', 'Réussis'], ['PENDING', 'En attente'], ['FAILED', 'Échoués'], ['CANCELLED', 'Annulés'], ['EXPIRED', 'Expirés']]} />
+        <Select label="Statut" value={status} onChange={setStatus} options={[['', 'Tous les statuts'], ['SUCCEEDED', 'Réussis'], ['PENDING', 'En attente'], ['PROCESSING', 'En cours'], ['FAILED', 'Échoués'], ['CANCELLED', 'Annulés'], ['EXPIRED', 'Expirés']]} />
       </div>
       <Box className="overflow-hidden">
         <div className="overflow-x-auto">
@@ -32,7 +32,11 @@ export const AdminPayments = () => {
                   <Td>{payment.methodLabel}<p className="text-xs text-slate-400">{payment.channel === 'mobile' ? 'depuis l’app' : 'web'}</p></Td>
                   <Td>{payment.promoCode ? <span className="font-mono text-xs">{payment.promoCode}</span> : '—'}</Td>
                   <Td className="text-right font-semibold">{formatAmount(payment.amount)}{payment.discount ? <p className="text-xs font-normal text-slate-400">{`− ${formatAmount(payment.discount)}`}</p> : null}</Td>
-                  <Td><StatusPill status={payment.status} />{payment.failureReason ? <p className="mt-1 max-w-[180px] text-xs text-slate-400">{payment.failureReason}</p> : null}</Td>
+                  <Td>
+                    <StatusPill status={payment.status} />
+                    {payment.failureReason ? <p className="mt-1 max-w-[180px] text-xs text-slate-400">{payment.failureReason}</p> : null}
+                    {payment.providerRef ? <p className="mt-1 font-mono text-[11px] text-slate-400" title={payment.providerStatus ? `Statut fournisseur : ${payment.providerStatus}` : undefined}>{payment.providerRef}{payment.providerEnvironment === 'sandbox' ? ' · test' : ''}</p> : null}
+                  </Td>
                 </tr>
               ))}
             </tbody>

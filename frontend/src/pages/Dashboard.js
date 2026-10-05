@@ -5,7 +5,7 @@ import {
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
   MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User, Building2,
   AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon,
-  Users, CreditCard, Gift, Activity, FolderCog
+  Users, CreditCard, Gift, Activity, FolderCog, Wallet
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -26,6 +26,7 @@ import PublishedSubjectsManager from '../components/PublishedSubjectsManager';
 import AdminOverview from '../components/admin/AdminOverview';
 import AdminUsers from '../components/admin/AdminUsers';
 import { AdminPayments, AdminReferrals } from '../components/admin/AdminFinance';
+import AdminPaymentMethods from '../components/admin/AdminPaymentMethods';
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
 
@@ -258,6 +259,7 @@ const Dashboard = () => {
       { id: 'platform', label: 'Activité plateforme', icon: Activity },
       { id: 'users', label: 'Utilisateurs', icon: Users },
       { id: 'payments', label: 'Paiements', icon: CreditCard },
+      { id: 'payment-methods', label: 'Méthodes de paiement', icon: Wallet },
       { id: 'referrals', label: 'Parrainage', icon: Gift, badge: 0 },
     ] : []),
   ];
@@ -1232,6 +1234,7 @@ const Dashboard = () => {
           {user?.role === 'admin' && activeTab === 'platform' && <AdminOverview />}
           {user?.role === 'admin' && activeTab === 'users' && <AdminUsers />}
           {user?.role === 'admin' && activeTab === 'payments' && <AdminPayments />}
+          {user?.role === 'admin' && activeTab === 'payment-methods' && <AdminPaymentMethods />}
           {user?.role === 'admin' && activeTab === 'referrals' && <AdminReferrals />}
 
           {activeTab === 'analytics' && analytics && (

@@ -62,6 +62,7 @@ export const STATUS_LABELS = {
   INACTIVE: ['Inactif', 'neutral'],
   EXPIRED: ['Expiré', 'negative'],
   PENDING: ['En attente', 'pending'],
+  PROCESSING: ['En cours', 'pending'],
   NONE: ['Aucun abonnement', 'neutral'],
   SUCCEEDED: ['Réussi', 'positive'],
   INITIATED: ['Initié', 'pending'],

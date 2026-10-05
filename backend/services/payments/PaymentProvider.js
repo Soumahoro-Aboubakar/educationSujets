@@ -25,6 +25,15 @@ class PaymentProvider {
     throw new Error(`${this.name}.getStatus() non implemente`);
   }
 
+  /**
+   * Codes des opérateurs Mobile Money ouverts chez le fournisseur dans un pays.
+   * `null` = inconnu : aucun moyen n'est alors masqué pour cette raison.
+   */
+  // eslint-disable-next-line no-unused-vars
+  async listMobileMoneyProviders(country) {
+    return null;
+  }
+
   /** Annule une transaction encore en attente, si le fournisseur le permet. */
   // eslint-disable-next-line no-unused-vars
   async cancel(payment) {

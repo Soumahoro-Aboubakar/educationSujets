@@ -69,7 +69,7 @@ const assertStructureCanChange = async (organismeId, niveaux) => {
 
 const listOrganismes = async ({ recherche = '', page = 1, limit = 20 } = {}) => {
   const normalizedSearch = normalizeText(recherche);
-  const numericPage = Math.max(Number.parseInt(page, 10) || 1, 1);
+  const numericPage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   const numericLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 20, 1), 100);
   const filter = normalizedSearch ? { nomNormalise: { $regex: normalizedSearch, $options: 'i' } } : {};
   const [data, total] = await Promise.all([
@@ -204,7 +204,7 @@ const saveStructure = async (organismeId, niveaux) => {
 
 const listNoeuds = async ({ organismeId, parentId, recherche = '', page = 1, limit = 50 }) => {
   const organism = toObjectId(organismeId, 'Organisme');
-  const numericPage = Math.max(Number.parseInt(page, 10) || 1, 1);
+  const numericPage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   const numericLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 50, 1), 100);
   const filter = { organismeId, parentId: parentId ? toObjectId(parentId, 'Parent') : null };
   const normalizedSearch = normalizeText(recherche);
@@ -253,7 +253,7 @@ const upsertNoeud = async (payload) => {
 
 const listMatieres = async ({ organismeId, recherche = '', page = 1, limit = 50 }) => {
   const organism = toObjectId(organismeId, 'Organisme');
-  const numericPage = Math.max(Number.parseInt(page, 10) || 1, 1);
+  const numericPage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   const numericLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 50, 1), 100);
   const filter = { organismeId: organism };
   const normalizedSearch = normalizeText(recherche);
@@ -301,7 +301,7 @@ const publishedSubjectFilter = {
 };
 
 const paginationFrom = ({ page = 1, limit = 50 } = {}) => {
-  const numericPage = Math.max(Number.parseInt(page, 10) || 1, 1);
+  const numericPage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   const numericLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 50, 1), 100);
   return { page: numericPage, limit: numericLimit };
 };

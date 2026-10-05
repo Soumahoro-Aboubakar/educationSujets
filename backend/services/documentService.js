@@ -287,6 +287,9 @@ const buildDocumentFilters = (params = {}) => {
 
 // Profondeur maximale d'un catalogue (organisme → concours → cycle → année…) : garde-fou.
 const MAX_CATALOG_DEPTH = 8;
+// Garde-fous de coût : nombre de mots pris en compte et de nœuds parcourus par mot.
+const MAX_SEARCH_TOKENS = require('../config/security').pagination.maxSearchTokens;
+const MAX_CATALOG_NODES = 5000;
 
 /**
  * Nœuds et matières du catalogue dynamique dont le nom contient `token`.
@@ -296,7 +299,7 @@ const MAX_CATALOG_DEPTH = 8;
 const findCatalogMatches = async (token) => {
   const regex = new RegExp(escapeRegex(token), 'i');
   const [organismes, matchedNodes, matieres] = await Promise.all([
-    Organisme.find({ nomNormalise: regex }).select('_id').lean(),
+    Organisme.find({ nomNormalise: regex }).select('_id').limit(200).lean(),
     Noeud.find({ nomNormalise: regex }).select('_id').limit(500).lean(),
     Matiere.find({ nomNormalise: regex }).select('_id').limit(500).lean(),
   ]);
@@ -304,13 +307,13 @@ const findCatalogMatches = async (token) => {
   const nodeIds = new Set(matchedNodes.map((node) => String(node._id)));
 
   if (organismes.length) {
-    const organismeNodes = await Noeud.find({ organismeId: { $in: organismes.map((o) => o._id) } }).select('_id').lean();
+    const organismeNodes = await Noeud.find({ organismeId: { $in: organismes.map((o) => o._id) } }).select('_id').limit(MAX_CATALOG_NODES).lean();
     organismeNodes.forEach((node) => nodeIds.add(String(node._id)));
   }
 
   let frontier = matchedNodes.map((node) => node._id);
-  for (let depth = 0; frontier.length && depth < MAX_CATALOG_DEPTH; depth += 1) {
-    const children = await Noeud.find({ parentId: { $in: frontier } }).select('_id').lean();
+  for (let depth = 0; frontier.length && depth < MAX_CATALOG_DEPTH && nodeIds.size < MAX_CATALOG_NODES; depth += 1) {
+    const children = await Noeud.find({ parentId: { $in: frontier } }).select('_id').limit(MAX_CATALOG_NODES).lean();
     frontier = children.map((child) => child._id).filter((id) => !nodeIds.has(String(id)));
     frontier.forEach((id) => nodeIds.add(String(id)));
   }
@@ -325,13 +328,15 @@ const listPublicDocuments = async (params = {}) => {
   const filters = buildDocumentFilters(params);
 
   if (params.search) {
-    const tokens = normalizeTitle(params.search).split(' ').filter((token) => token.length > 2);
+    // Mots distincts, plafonnés : chaque mot déclenche plusieurs requêtes de catalogue.
+    const tokens = [...new Set(normalizeTitle(String(params.search)).split(' ').filter((token) => token.length > 2))]
+      .slice(0, MAX_SEARCH_TOKENS);
     if (tokens.length) {
       const referenceMatches = await Promise.all(tokens.map(async (token) => {
         const regex = new RegExp(escapeRegex(token), 'i');
         const [institutions, nodes, catalog] = await Promise.all([
-          Institution.find({ normalizedName: regex }).select('_id').lean(),
-          TaxonomyNode.find({ normalizedName: regex }).select('_id').lean(),
+          Institution.find({ normalizedName: regex }).select('_id').limit(500).lean(),
+          TaxonomyNode.find({ normalizedName: regex }).select('_id').limit(MAX_CATALOG_NODES).lean(),
           findCatalogMatches(token),
         ]);
         return {
@@ -372,8 +377,8 @@ const listPublicDocuments = async (params = {}) => {
 
   let query = applyPopulate(Document.find(filters)).sort('-createdAt');
 
-  const limit = Number.parseInt(params.limit, 10) || 12;
-  const page = Number.parseInt(params.page, 10) || 1;
+  const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 12, 1), 100);
+  const page = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
   const skip = (page - 1) * limit;
 
   query = query.skip(skip).limit(limit);
@@ -410,10 +415,10 @@ const listDynamicDocuments = async (params = {}, user = null) => {
   }
   filter.status = 'approved';
 
-  const numericPage = Math.max(Number.parseInt(params.page, 10) || 1, 1);
+  const numericPage = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
   const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 12, 1), 100);
   const rawSearch = String(params.recherche || params.search || '').trim();
-  const searchTokens = rawSearch.split(/\s+/).filter(Boolean);
+  const searchTokens = [...new Set(rawSearch.slice(0, 160).split(/\s+/).filter(Boolean))].slice(0, MAX_SEARCH_TOKENS);
 
   if (searchTokens.length) {
     const [organisme, parentNodes] = await Promise.all([
@@ -488,8 +493,8 @@ const listUserDocuments = async (userId, params = {}) => {
   applyAdminListFilters(filters, params);
   let query = applyPopulate(Document.find(filters).sort('-createdAt'));
 
-  const limit = Number.parseInt(params.limit, 10) || 12;
-  const page = Number.parseInt(params.page, 10) || 1;
+  const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 12, 1), 100);
+  const page = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
   const skip = (page - 1) * limit;
 
   query = query.skip(skip).limit(limit);
@@ -515,8 +520,8 @@ const listPendingDocuments = async (params = {}) => {
   applyAdminListFilters(filters, params);
   let query = applyPopulate(Document.find(filters).sort('-createdAt'));
 
-  const limit = Number.parseInt(params.limit, 10) || 12;
-  const page = Number.parseInt(params.page, 10) || 1;
+  const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 12, 1), 100);
+  const page = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
   const skip = (page - 1) * limit;
 
   query = query.skip(skip).limit(limit);
@@ -582,7 +587,7 @@ const listManagedDocuments = async (params = {}, user) => {
   }
 
   const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 10, 1), 100);
-  const page = Math.max(Number.parseInt(params.page, 10) || 1, 1);
+  const page = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
   const sort = MANAGED_SORTS[params.sort] || MANAGED_SORTS.recent;
 
   const [data, total] = await Promise.all([
@@ -601,8 +606,8 @@ const listDraftDocuments = async (params = {}) => {
   const filters = { status: 'draft', isDeleted: { $ne: true } };
   let query = applyPopulate(Document.find(filters).sort('-createdAt'));
 
-  const limit = Number.parseInt(params.limit, 10) || 12;
-  const page = Number.parseInt(params.page, 10) || 1;
+  const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 12, 1), 100);
+  const page = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
   const skip = (page - 1) * limit;
 
   query = query.skip(skip).limit(limit);
@@ -1118,8 +1123,8 @@ const listTrashedDocuments = async (params = {}) => {
       .sort('-deletedAt')
   );
 
-  const limit = Number.parseInt(params.limit, 10) || 20;
-  const page = Number.parseInt(params.page, 10) || 1;
+  const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 20, 1), 100);
+  const page = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
   const skip = (page - 1) * limit;
 
   query = query.skip(skip).limit(limit);

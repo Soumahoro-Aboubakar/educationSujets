@@ -62,7 +62,8 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
               title={isRenewal ? 'Ton abonnement a expiré' : 'Débloque tous les sujets'}
               description="Ton compte n’a pas encore accès aux téléchargements."
             />
-            {amount ? (
+            {/* Version store : ni prix ni appel à l'achat, l'application ne vend rien. */}
+            {canCheckout && amount ? (
               <View style={styles.price}>
                 <Text style={styles.priceValue}>{formatAmount(amount)}</Text>
                 {plans && entitlements?.nextPayment?.kind !== 'monthly' ? (
@@ -83,13 +84,16 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
               <>
                 <ActionButton title={isRenewal ? 'Renouveler mon abonnement' : 'S’abonner'} onPress={onSubscribe} loading={subscribing} />
                 <Text variant="caption" align="center" style={styles.footnote}>
-                  Paiement Mobile Money sécurisé. Un code promotionnel peut être saisi à l’étape suivante.
+                  Le paiement se fait sur le site Fatafalta (Wave), où tu seras déjà connecté. Reviens ensuite ici : ton accès s’active tout seul.
                 </Text>
               </>
             ) : (
-              <Text variant="body" align="center" style={styles.footnote}>
-                L’abonnement n’est pas disponible dans l’application pour le moment.
-              </Text>
+              <>
+                <Text variant="body" align="center" style={styles.footnote}>
+                  Les téléchargements se débloquent automatiquement dès que ton compte dispose d’un abonnement actif.
+                </Text>
+                <ActionButton title="Compris" variant="secondary" onPress={onClose} />
+              </>
             )}
           </>
         );

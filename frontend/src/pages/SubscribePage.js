@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Check, CheckCircle2, Loader2, Smartphone, Tag, XCircle } from 'lucide-react';
+import { ArrowRight, Check, CheckCircle2, ExternalLink, Loader2, Tag, XCircle } from 'lucide-react';
 import { Button, Card, Container, Field, InfoRow, Spinner, cx } from '../components/ui';
 import AuthContext from '../context/AuthContext';
 import useAsync from '../hooks/useAsync';
@@ -8,12 +8,25 @@ import useEntitlements from '../hooks/useEntitlements';
 import { errorCode, errorMessage, payments } from '../lib/api';
 import { formatAmount, formatLongDate } from '../lib/format';
 import { safeNext } from '../lib/redirect';
+import PaymentMethodLogo from '../components/payments/PaymentMethodLogo';
 
 const POLL_INTERVAL_MS = 2500;
-const OPEN_STATUSES = ['INITIATED', 'PENDING'];
+const OPEN_STATUSES = ['INITIATED', 'PENDING', 'PROCESSING'];
 
 // Retour vers l'application mobile : seuls ses schémas sont acceptés (pas de redirection ouverte).
 const safeReturnUrl = (value) => (value && /^(fatafalta|exp|exps):\/\//i.test(value) ? value : null);
+
+// Délai avant d'afficher l'aide « Rien reçu ? » sur une validation par téléphone.
+const HELP_AFTER_SECONDS = 45;
+
+const formatElapsed = (seconds) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+
+const withParams = (url, params) => `${url}${url.includes('?') ? '&' : '?'}${new URLSearchParams(params).toString()}`;
+
+/** Opérateur affiché avec son logo, à côté de son nom. */
+const OperatorName = ({ method }) => (
+  <span className="inline-flex items-center gap-2"><PaymentMethodLogo method={method} size="sm" />{method.label || method.methodLabel}</span>
+);
 
 const Benefits = ({ downloadsPerDay }) => (
   <ul className="space-y-3 text-[15px] text-ink">
@@ -23,11 +36,38 @@ const Benefits = ({ downloadsPerDay }) => (
   </ul>
 );
 
-/** Suivi d'un paiement Mobile Money : attente de validation sur le téléphone, puis issue. */
-const PaymentProgress = ({ paymentId, instructions, onDone, onRetry, returnUrl, next }) => {
+/** Identifiant unique d'une tentative : rejouer la même tentative ne crée jamais une seconde transaction. */
+const newAttemptId = () => (window.crypto?.randomUUID?.() || `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`).replace(/[^A-Za-z0-9_-]/g, '');
+
+const formatPhone = (value) => value.replace(/\D/g, '').replace(/(\d{2})(?=\d)/g, '$1 ');
+
+const SummaryRows = ({ rows }) => (
+  <dl className="divide-y divide-line rounded-xl border border-line">
+    {rows.filter(([, value]) => value).map(([label, value]) => (
+      <div key={label} className="flex items-center justify-between gap-4 px-4 py-3 text-sm">
+        <dt className="text-ink-soft">{label}</dt>
+        <dd className="font-semibold text-ink">{value}</dd>
+      </div>
+    ))}
+  </dl>
+);
+
+/**
+ * Suivi d'UNE transaction (le composant est recréé pour chaque transaction : aucun état d'une
+ * tentative précédente ne peut s'afficher ici). Tout ce qui est montré vient du serveur et
+ * correspond exactement à ce qui a été envoyé à l'opérateur. L'issue est vérifiée par le serveur.
+ */
+const PaymentProgress = ({ paymentId, onDone, onEdit, returnUrl, next }) => {
   const [payment, setPayment] = useState(null);
   const [cancelling, setCancelling] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
   const doneRef = useRef(false);
+
+  useEffect(() => {
+    const startedAt = Date.now();
+    const timer = setInterval(() => setElapsed(Math.floor((Date.now() - startedAt) / 1000)), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     let timer;
@@ -54,24 +94,30 @@ const PaymentProgress = ({ paymentId, instructions, onDone, onRetry, returnUrl, 
     };
   }, [paymentId, onDone]);
 
-  const cancel = async () => {
+  // Modifier = abandonner cette tentative (côté serveur aussi), puis revenir au formulaire.
+  const edit = async () => {
     setCancelling(true);
     try {
-      setPayment(await payments.cancel(paymentId));
-    } finally {
-      setCancelling(false);
+      await payments.cancel(paymentId);
+    } catch (error) {
+      // Sans incidence : la prochaine tentative remplacera de toute façon celle-ci côté serveur.
     }
+    onEdit();
   };
 
-  const status = payment?.status || 'PENDING';
+  if (!payment) {
+    return <div className="flex justify-center py-16"><Spinner /></div>;
+  }
+
+  const { status } = payment;
 
   if (status === 'SUCCEEDED') {
     return (
       <div className="animate-fade-up text-center">
         <CheckCircle2 size={56} strokeWidth={1.5} className="mx-auto text-emerald-500" />
-        <h2 className="mt-5 text-2xl font-bold tracking-[-0.02em] text-ink">Abonnement activé</h2>
+        <h2 className="mt-5 text-2xl font-bold tracking-[-0.02em] text-ink">Paiement réussi</h2>
         <p className="mx-auto mt-2 max-w-sm text-ink-soft">
-          {payment.periodEnd ? `Votre accès est ouvert jusqu’au ${formatLongDate(payment.periodEnd)}.` : 'Votre accès est ouvert.'}
+          {payment.periodEnd ? `Votre abonnement est actif jusqu’au ${formatLongDate(payment.periodEnd)}.` : 'Votre abonnement est actif.'}
         </p>
         <div className="mt-8 grid gap-2">
           {returnUrl ? <Button as="a" href={returnUrl} size="lg">Retourner dans l’application</Button> : null}
@@ -84,37 +130,66 @@ const PaymentProgress = ({ paymentId, instructions, onDone, onRetry, returnUrl, 
   }
 
   if (['FAILED', 'CANCELLED', 'EXPIRED'].includes(status)) {
-    const titles = { FAILED: 'Paiement refusé', CANCELLED: 'Paiement annulé', EXPIRED: 'Délai dépassé' };
+    const titles = { FAILED: 'Paiement échoué', CANCELLED: 'Paiement annulé', EXPIRED: 'Paiement expiré' };
     return (
       <div className="animate-fade-up text-center">
         <XCircle size={56} strokeWidth={1.5} className="mx-auto text-rose-500" />
         <h2 className="mt-5 text-2xl font-bold tracking-[-0.02em] text-ink">{titles[status]}</h2>
-        <p className="mx-auto mt-2 max-w-sm text-ink-soft">
-          {payment?.failureReason || 'Aucun montant n’a été débité.'}
-        </p>
-        <Button size="lg" className="mt-8 w-full" onClick={onRetry}>Réessayer</Button>
+        <p className="mx-auto mt-2 max-w-sm text-ink-soft">{payment.failureReason || 'Aucun montant n’a été débité.'}</p>
+        <Button size="lg" className="mt-8 w-full" onClick={onEdit}>Réessayer</Button>
+        {returnUrl ? <Button as="a" href={returnUrl} size="lg" variant="ghost" className="mt-2 w-full">Retourner dans l’application</Button> : null}
       </div>
     );
   }
 
+  const isRedirect = payment.flow === 'redirect';
+  const steps = isRedirect
+    ? [`Ouvrez la page ${payment.methodLabel}`, 'Scannez le QR code avec votre téléphone', 'Confirmez le paiement']
+    : payment.confirmSteps;
+
   return (
-    <div className="text-center">
-      <div className="relative mx-auto flex h-20 w-20 items-center justify-center">
-        <span className="absolute inset-0 animate-ping rounded-full bg-gold-wash" />
-        <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gold-wash"><Smartphone size={26} className="text-ink" /></span>
+    <div className="animate-fade-up">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700"><Check size={20} strokeWidth={3} /></span>
+        <h2 className="text-xl font-bold tracking-[-0.02em] text-ink">Paiement initié</h2>
       </div>
-      <h2 className="mt-6 text-2xl font-bold tracking-[-0.02em] text-ink">Confirmez sur votre téléphone</h2>
-      <p className="mx-auto mt-2 max-w-sm text-ink-soft">{instructions || 'Une demande de paiement a été envoyée à votre numéro.'}</p>
-      {payment ? (
-        <Card className="mx-auto mt-6 max-w-sm px-5 text-left">
-          <InfoRow label="Montant" value={formatAmount(payment.amount)} />
-          <InfoRow label="Moyen" value={payment.methodLabel} />
-        </Card>
+
+      <div className="mt-5">
+        <SummaryRows rows={[['Opérateur', <OperatorName method={payment} />], ['Numéro', payment.phone], ['Montant', formatAmount(payment.amount)]]} />
+      </div>
+
+      <h3 className="mt-6 text-sm font-bold uppercase tracking-[0.12em] text-gold-ink">Dernière étape</h3>
+      <ol className="mt-3 space-y-2">
+        {steps.map((step) => (
+          <li key={step} className="flex items-center gap-3 rounded-xl bg-paper-dim px-4 py-3 font-semibold text-ink">
+            <span aria-hidden>👉</span>{step}
+          </li>
+        ))}
+      </ol>
+      {isRedirect && payment.redirectUrl ? (
+        <Button as="a" href={payment.redirectUrl} size="lg" className="mt-4 w-full" icon={ExternalLink}>{`Ouvrir la page ${payment.methodLabel}`}</Button>
       ) : null}
-      <p className="mt-6 inline-flex items-center gap-2 text-sm text-ink-muted"><Loader2 size={15} className="animate-spin" /> En attente de confirmation…</p>
-      <div>
-        <Button variant="ghost" size="sm" className="mt-4" loading={cancelling} onClick={cancel}>Annuler le paiement</Button>
-      </div>
+
+      <p className="mt-5 flex items-center justify-center gap-2 text-sm text-ink-soft" role="status">
+        <Loader2 size={15} className="animate-spin" />
+        {status === 'PROCESSING' ? 'Confirmation en cours…' : 'En attente de votre confirmation…'}
+        <span className="font-mono text-xs text-ink-muted">{formatElapsed(elapsed)}</span>
+      </p>
+
+      {!isRedirect && elapsed >= HELP_AFTER_SECONDS ? (
+        <div className="mt-4 rounded-xl border border-line p-4 text-sm">
+          <p className="font-semibold text-ink">Un problème ?</p>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-ink-soft">
+            <li>{`Vérifiez que le ${payment.phone} est bien votre numéro ${payment.methodLabel}.`}</li>
+            <li>Assurez-vous que votre solde couvre le montant.</li>
+            <li>Si le code ne fonctionne pas, modifiez puis relancez le paiement.</li>
+          </ul>
+        </div>
+      ) : null}
+
+      {status !== 'PROCESSING' ? (
+        <Button variant="ghost" size="sm" className="mt-5 w-full" loading={cancelling} onClick={edit}>Modifier l’opérateur ou le numéro</Button>
+      ) : null}
     </div>
   );
 };
@@ -136,7 +211,22 @@ const SubscribePage = () => {
   const [phone, setPhone] = useState('');
   const [formError, setFormError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  // Tentative en cours de vérification : valeurs figées au moment où l'abonné les a vérifiées.
+  const [attempt, setAttempt] = useState(null);
   const [activePayment, setActivePayment] = useState(null);
+
+  // Retour arrière depuis la page de l'opérateur (page restaurée par le navigateur) : la
+  // tentative précédente est terminée pour cette page, on repart d'un formulaire propre.
+  useEffect(() => {
+    const onPageShow = (event) => {
+      if (!event.persisted) return;
+      setSubmitting(false);
+      setAttempt(null);
+      setActivePayment(null);
+    };
+    window.addEventListener('pageshow', onPageShow);
+    return () => window.removeEventListener('pageshow', onPageShow);
+  }, []);
 
   // Arrivée depuis l'application : connexion transparente par code à usage unique.
   useEffect(() => {
@@ -147,6 +237,23 @@ const SubscribePage = () => {
     setParams(nextParams, { replace: true });
     exchangeHandoff(code).then((result) => setHandoffState(result.success ? 'done' : 'failed'));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Retour depuis la page GeniusPay (success_url / error_url). Ce retour ne prouve rien :
+  // l'issue réelle est toujours relue auprès du serveur, qui interroge GeniusPay.
+  const returningPaymentId = params.get('payment');
+  useEffect(() => {
+    if (authLoading || !returningPaymentId || !/^[a-f0-9]{24}$/i.test(returningPaymentId)) return;
+    if (returnUrl && !user) {
+      // Venu de l'application mais plus connecté ici : on y retourne, elle relit l'état elle-même.
+      window.location.replace(withParams(returnUrl, { payment: returningPaymentId }));
+      return;
+    }
+    // On garde `return` : la confirmation proposera de revenir dans l'application.
+    const nextParams = new URLSearchParams(params);
+    ['payment', 'outcome'].forEach((key) => nextParams.delete(key));
+    setParams(nextParams, { replace: true });
+    setActivePayment({ id: returningPaymentId });
+  }, [returningPaymentId, authLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const quote = useAsync(() => payments.quote(promoApplied), [promoApplied, user?._id || user?.id], { enabled: Boolean(user) });
 
@@ -163,35 +270,86 @@ const SubscribePage = () => {
     }
   };
 
-  const pay = async (event) => {
+  const methods = useMemo(() => plans.data?.methods || [], [plans.data]);
+  const selectedMethod = methods.find((item) => item.id === method) || null;
+  const needsPhone = selectedMethod ? selectedMethod.requiresPhone !== false : true;
+
+  // Un moyen désactivé entre-temps n'est plus sélectionnable ; un moyen unique est présélectionné.
+  useEffect(() => {
+    if (!plans.data) return;
+    if (method && !selectedMethod) setMethod(null);
+    else if (!method && methods.length === 1) setMethod(methods[0].id);
+  }, [method, plans.data, selectedMethod, methods]);
+
+  // Étape 1 → 2 : contrôle du formulaire, puis récapitulatif à vérifier (rien n'est encore envoyé).
+  const review = (event) => {
     event.preventDefault();
     setFormError(null);
-    if (!method) {
-      setFormError('Choisissez un moyen de paiement.');
+    if (!selectedMethod) {
+      setFormError('Choisissez un opérateur.');
       return;
     }
-    if (!/^0\d{9}$/.test(phone.replace(/\s/g, ''))) {
+    const digits = phone.replace(/\D/g, '');
+    if (needsPhone && !/^0\d{9}$/.test(digits)) {
       setFormError('Entrez un numéro à 10 chiffres, par exemple 07 01 02 03 04.');
       return;
     }
+    // Nouvelle tentative : identifiant neuf et valeurs actuelles uniquement.
+    setAttempt({
+      id: newAttemptId(),
+      method: selectedMethod,
+      phone: needsPhone ? digits : null,
+      amount: quote.data.amount,
+      promoCode: promoApplied || undefined,
+    });
+  };
+
+  // Retour au formulaire : la tentative vérifiée est abandonnée, la suivante sera neuve.
+  const backToForm = () => {
+    setAttempt(null);
+    setActivePayment(null);
+    setFormError(null);
+    setSubmitting(false);
+  };
+
+  // Étape 2 → 3 : initiation avec EXACTEMENT les valeurs vérifiées.
+  const confirm = async () => {
+    if (!attempt || submitting) return;
+    setFormError(null);
     setSubmitting(true);
+    let redirecting = false;
     try {
       const result = await payments.initiate({
-        method,
-        phone: phone.replace(/\s/g, ''),
-        promoCode: promoApplied || undefined,
+        method: attempt.method.id,
+        phone: attempt.phone || undefined,
+        promoCode: attempt.promoCode,
+        // Ouvert depuis l'application : le retour de Wave ramène ici avec le lien vers l'app.
         channel: returnUrl ? 'mobile' : 'web',
+        returnUrl: returnUrl || undefined,
+        attemptId: attempt.id,
       });
-      setActivePayment({ id: result.payment.id, instructions: result.instructions });
+      if (result.redirectUrl) {
+        // Page de paiement sécurisée de l'opérateur ; le bouton reste bloqué jusqu'au départ.
+        redirecting = true;
+        window.location.assign(result.redirectUrl);
+        return;
+      }
+      setAttempt(null);
+      setActivePayment({ id: result.payment.id });
     } catch (error) {
-      const paymentId = error.response?.data?.details?.paymentId;
-      if (errorCode(error) === 'PAYMENT_IN_PROGRESS' && paymentId) {
-        setActivePayment({ id: paymentId, instructions: 'Un paiement est déjà en cours pour votre compte.' });
+      const processingId = error.response?.data?.details?.paymentId;
+      if (errorCode(error) === 'PAYMENT_PROCESSING' && processingId) {
+        // Un paiement est déjà en cours de validation chez l'opérateur : on le suit plutôt
+        // que d'en lancer un second (risque de double débit).
+        setAttempt(null);
+        setActivePayment({ id: processingId });
+      } else if (!error.response) {
+        setFormError('Connexion impossible. Vérifiez votre réseau puis réessayez.');
       } else {
         setFormError(errorMessage(error));
       }
     } finally {
-      setSubmitting(false);
+      if (!redirecting) setSubmitting(false);
     }
   };
 
@@ -204,6 +362,7 @@ const SubscribePage = () => {
   const plan = plans.data;
   const current = entitlements.data?.subscription;
   const sandbox = plan?.sandbox;
+  const simulated = plan?.simulated;
 
   return (
     <Container className="grid gap-10 py-10 md:py-14 lg:grid-cols-[1fr_440px] lg:gap-16">
@@ -238,15 +397,39 @@ const SubscribePage = () => {
             </div>
           ) : activePayment ? (
             <PaymentProgress
+              key={activePayment.id}
               paymentId={activePayment.id}
-              instructions={activePayment.instructions}
               onDone={handleDone}
-              onRetry={() => setActivePayment(null)}
+              onEdit={backToForm}
               returnUrl={returnUrl}
               next={next}
             />
+          ) : attempt ? (
+            <div className="animate-fade-up">
+              <h2 className="text-xl font-bold tracking-[-0.02em] text-ink">Vérifiez vos informations</h2>
+              <p className="mt-1 text-sm text-ink-soft">Le paiement sera envoyé à cet opérateur et à ce numéro.</p>
+              <div className="mt-5">
+                <SummaryRows rows={[['Opérateur', <OperatorName method={attempt.method} />], ['Numéro', attempt.phone ? formatPhone(attempt.phone) : null], ['Montant', formatAmount(attempt.amount)]]} />
+              </div>
+              {formError ? <p className="mt-4 text-sm text-rose-600" role="alert">{formError}</p> : null}
+              <Button size="lg" className="mt-6 w-full" loading={submitting} onClick={confirm} icon={ArrowRight}>
+                {submitting ? 'Paiement en cours…' : `Confirmer et payer ${formatAmount(attempt.amount)}`}
+              </Button>
+              <Button variant="ghost" size="sm" className="mt-2 w-full" disabled={submitting} onClick={backToForm}>Modifier</Button>
+              <p className="mt-3 text-center text-xs text-ink-muted">
+                {attempt.method.flow === 'redirect' && !simulated
+                  ? `Vous serez redirigé vers la page sécurisée ${attempt.method.label}.`
+                  : 'Vous confirmerez ensuite le paiement sur votre téléphone. Aucun débit sans votre validation.'}
+              </p>
+            </div>
           ) : (
-            <form onSubmit={pay} noValidate>
+            <form onSubmit={review} noValidate>
+              {returnUrl ? (
+                <p className="mb-6 rounded-xl bg-paper-dim p-4 text-sm text-ink-soft">
+                  {'Paiement pour votre compte '}<span className="font-semibold text-ink">{user.name}</span>{user.email ? ` (${user.email})` : ''}
+                  {'. Votre accès sera aussi actif dans l’application.'}
+                </p>
+              ) : null}
               {current?.status === 'ACTIVE' ? (
                 <p className="mb-6 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800">
                   {`Votre abonnement est actif jusqu’au ${formatLongDate(current.currentPeriodEnd)}. Ce paiement prolongera votre accès.`}
@@ -293,45 +476,51 @@ const SubscribePage = () => {
                 </div>
               ) : null}
 
-              <h2 className="mt-8 text-lg font-bold text-ink">Moyen de paiement</h2>
-              <div className="mt-3 grid grid-cols-2 gap-2" role="radiogroup" aria-label="Moyen de paiement">
-                {(plan?.methods || []).map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    role="radio"
-                    aria-checked={method === item.id}
-                    onClick={() => setMethod(item.id)}
-                    className={cx('h-12 rounded-xl border px-3 text-sm font-semibold transition-colors', method === item.id ? 'border-ink bg-ink text-white' : 'border-line bg-white text-ink hover:border-line-strong')}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+              <h2 className="mt-8 text-lg font-bold text-ink">Choisir un opérateur</h2>
+              {plan && !methods.length ? (
+                <p className="mt-3 rounded-xl bg-paper-dim p-4 text-sm text-ink-soft">Aucun moyen de paiement n’est disponible pour le moment. Réessayez un peu plus tard.</p>
+              ) : (
+                <div className="mt-3 grid grid-cols-2 gap-2" role="radiogroup" aria-label="Moyen de paiement">
+                  {methods.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      role="radio"
+                      aria-checked={method === item.id}
+                      onClick={() => setMethod(item.id)}
+                      className={cx('flex h-12 items-center gap-2 rounded-xl border px-3 text-left text-sm font-semibold transition-colors disabled:opacity-60', method === item.id ? 'border-ink bg-ink text-white' : 'border-line bg-white text-ink hover:border-line-strong')}
+                    >
+                      <PaymentMethodLogo method={item} inverted={method === item.id} />
+                      <span className="truncate">{item.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
 
-              <Field
-                className="mt-4"
-                label="Numéro Mobile Money"
-                type="tel"
-                inputMode="tel"
-                placeholder="07 01 02 03 04"
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
-                hint={sandbox ? 'Démo : un numéro finissant par 00 simule un refus, 11 une annulation.' : undefined}
-              />
+              {needsPhone ? (
+                <Field
+                  className="mt-4"
+                  label="Numéro Mobile Money"
+                  type="tel"
+                  inputMode="tel"
+                  placeholder="07 01 02 03 04"
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                  hint={simulated ? 'Démo : un numéro finissant par 00 simule un refus, 11 une annulation.' : undefined}
+                />
+              ) : null}
+
+              {sandbox && !simulated ? (
+                <p className="mt-4 rounded-xl bg-gold-wash px-4 py-3 text-xs font-medium text-gold-ink">Mode test GeniusPay : aucune somme réelle ne sera débitée.</p>
+              ) : null}
 
               {formError ? <p className="mt-4 text-sm text-rose-600" role="alert">{formError}</p> : null}
 
-              <Button type="submit" size="lg" className="mt-6 w-full" loading={submitting} disabled={!quote.data} icon={ArrowRight}>
-                {quote.data ? `Payer ${formatAmount(quote.data.amount)}` : 'Payer'}
-              </Button>
-              <p className="mt-3 text-center text-xs text-ink-muted">
-                Vous confirmerez le paiement sur votre téléphone. Aucun débit sans votre validation.
-              </p>
+              <Button type="submit" size="lg" className="mt-6 w-full" disabled={!quote.data || !methods.length} icon={ArrowRight}>Continuer</Button>
             </form>
           )}
         </Card>
-        {user && !activePayment ? (
+        {user && !activePayment && !attempt ? (
           <p className="mt-4 text-center text-sm text-ink-soft">
             <Link to="/compte/abonnement" className="font-medium text-burgundy hover:underline">Voir mon abonnement</Link>
           </p>

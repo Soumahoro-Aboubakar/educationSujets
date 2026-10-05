@@ -12,6 +12,19 @@ const toInt = (value, fallback) => {
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
 };
 
+// Site web public. En production, jamais localhost : sans FRONTEND_URL, le domaine officiel.
+const PRODUCTION_WEB_URL = process.env.FRONTEND_URL || 'https://fatafalta.com';
+const publicWebUrl = () => {
+  const configured = (process.env.FRONTEND_URL || '').trim().replace(/\/$/, '');
+  const isProduction = process.env.NODE_ENV === 'production';
+  if (configured && !(isProduction && /\/\/(localhost|127\.0\.0\.1)(:|$)/.test(configured))) return configured;
+  if (isProduction) {
+    console.warn(`[billing] FRONTEND_URL ${configured ? 'pointe vers localhost' : 'non défini'} en production : ${PRODUCTION_WEB_URL} utilisé.`);
+    return PRODUCTION_WEB_URL;
+  }
+  return 'http://localhost:3000';
+};
+
 const billing = {
   currency: 'XOF',
 
@@ -62,22 +75,56 @@ const billing = {
   },
 
   payments: {
-    mode: (process.env.PAYMENT_MODE || 'mock').toLowerCase(),
-    methods: [
+    // Fournisseur actif. Par défaut : GeniusPay dès que ses clés sont présentes, sinon le mock.
+    mode: (process.env.PAYMENT_MODE || (process.env.GENIUSPAY_API_KEY ? 'geniuspay' : 'mock')).toLowerCase(),
+    /*
+     * Moyens de paiement proposés à l'installation. Ce n'est qu'une valeur initiale : la liste
+     * réelle vit en base (modèle PaymentMethod) et l'administrateur l'active, la désactive ou
+     * la complète depuis le web ou le mobile.
+     *
+     * Routage GeniusPay constaté en Côte d'Ivoire : Wave a sa passerelle (page de paiement / QR
+     * code) ; MTN, Orange et Moov passent par PawaPay avec un code opérateur (demande de
+     * validation envoyée sur le téléphone). `payment_method: mtn_money` est réorienté vers Wave
+     * par GeniusPay et ne doit pas être utilisé. Les opérateurs PawaPay réellement ouverts sont
+     * relus via GET /pawapay/providers : un opérateur absent n'est pas proposé aux abonnés.
+     *   flow 'redirect' : l'abonné finalise sur la page du fournisseur ;
+     *   flow 'push'     : l'abonné valide la demande reçue sur son téléphone.
+     *
+     * Pour l'instant seul Wave est activé : les opérateurs PawaPay restent configurés et se
+     * réactivent depuis l'administration (Méthodes de paiement), sans modification du code.
+     */
+    defaultMethods: [
+      { code: 'wave', label: 'Wave', enabled: true, requiresPhone: true, sortOrder: 10, gatewayMethod: 'wave', mmoProvider: null, flow: 'redirect' },
+      {
+        code: 'orange_money', label: 'Orange Money', enabled: false, requiresPhone: true, sortOrder: 20, gatewayMethod: 'pawapay', mmoProvider: 'ORANGE_CIV', flow: 'push',
+        confirmSteps: ['Composez #120#', 'Saisissez votre mot de passe', 'Confirmez le paiement'],
+      },
+      {
+        code: 'mtn_money', label: 'MTN Mobile Money', enabled: false, requiresPhone: true, sortOrder: 30, gatewayMethod: 'pawapay', mmoProvider: 'MTN_MOMO_CIV', flow: 'push',
+        confirmSteps: ['Composez *133#', 'Choisissez l’option 1', 'Confirmez le paiement'],
+      },
+      { code: 'moov_money', label: 'Moov Money', enabled: false, requiresPhone: true, sortOrder: 40, gatewayMethod: 'pawapay', mmoProvider: 'MOOV_CIV', flow: 'push' },
+      { code: 'card', label: 'Carte bancaire', enabled: false, requiresPhone: false, sortOrder: 50, gatewayMethod: 'card', mmoProvider: null, flow: 'redirect' },
+    ],
+    // Un paiement non confirmé au-delà de ce délai est considéré comme expiré (échoué).
+    // Le fournisseur est toujours interrogé avant : un paiement réellement encaissé n'expire jamais.
+    pendingTtlMinutes: toInt(process.env.PAYMENT_PENDING_TTL_MINUTES, 30),
+    // Le mobile peut-il proposer l'abonnement ? À désactiver si l'app est distribuée sur un
+    // store qui impose son propre système de paiement.
+    mobileWebCheckout: process.env.MOBILE_WEB_CHECKOUT !== 'false',
+    // Page d'abonnement ouverte depuis le mobile, et adresse de retour après un paiement GeniusPay.
+    webCheckoutUrl: `${publicWebUrl()}/abonnement`,
+  },
+
+  withdrawals: {
+    // Opérateurs de versement des commissions (traités manuellement par l'administration),
+    // indépendants des moyens de paiement activés pour les abonnements.
+    operators: [
       { id: 'orange_money', label: 'Orange Money' },
       { id: 'mtn_momo', label: 'MTN Mobile Money' },
       { id: 'moov_money', label: 'Moov Money' },
       { id: 'wave', label: 'Wave' },
     ],
-    // Un paiement non confirmé au-delà de ce délai est considéré comme expiré (échoué).
-    pendingTtlMinutes: toInt(process.env.PAYMENT_PENDING_TTL_MINUTES, 15),
-    // Le mobile peut-il renvoyer vers la souscription web ? À désactiver si l'app est
-    // distribuée sur un store qui impose son propre système de paiement.
-    mobileWebCheckout: process.env.MOBILE_WEB_CHECKOUT !== 'false',
-    webCheckoutUrl: `${(process.env.PUBLIC_WEB_URL || 'http://localhost:3000').replace(/\/$/, '')}/abonnement`,
-  },
-
-  withdrawals: {
     minAmount: toInt(process.env.WITHDRAWAL_MIN_AMOUNT, 1000),
     // Les frais de l'opérateur Mobile Money sont à la charge du bénéficiaire.
     feesPaidBy: 'user',

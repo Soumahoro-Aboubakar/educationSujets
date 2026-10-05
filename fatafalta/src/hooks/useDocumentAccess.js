@@ -67,6 +67,7 @@ export const useDocumentAccess = (navigation) => {
       onClose: close,
       onLogin: () => goToAuth('Login'),
       onRegister: () => goToAuth('Register'),
+      // Le paiement se fait sur le site ; au retour, les droits sont relus et la feuille se ferme seule.
       onSubscribe: () => checkout.open(entitlements?.checkout?.webCheckoutUrl),
       subscribing: checkout.opening,
       onOpenDownloads: () => {

@@ -17,12 +17,21 @@ const useAuthedQuery = (name, queryFn, options = {}) => {
     queryFn,
     enabled: Boolean(token),
     staleTime: 30 * 1000,
+    // État du compte relu à chaque retour dans l'app : un paiement fait sur le site est visible aussitôt.
+    refetchOnWindowFocus: 'always',
     ...options,
   });
 };
 
-export const useEntitlements = () => useAuthedQuery('entitlements', fetchEntitlements);
-export const useSubscription = () => useAuthedQuery('subscription', fetchSubscription);
+// Tant qu'un paiement est en attente de confirmation, l'état est relu régulièrement.
+const PENDING_REFRESH_MS = 5000;
+
+export const useEntitlements = () => useAuthedQuery('entitlements', fetchEntitlements, {
+  refetchInterval: (query) => (query.state.data?.subscription?.status === 'PENDING' ? PENDING_REFRESH_MS : false),
+});
+export const useSubscription = () => useAuthedQuery('subscription', fetchSubscription, {
+  refetchInterval: (query) => (query.state.data?.status === 'PENDING' ? PENDING_REFRESH_MS : false),
+});
 export const usePromoCode = () => useAuthedQuery('promo-code', fetchPromoCode);
 export const useWallet = () => useAuthedQuery('wallet', fetchWallet);
 

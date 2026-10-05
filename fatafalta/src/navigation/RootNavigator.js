@@ -19,6 +19,7 @@ import ParcoursTypeSelectionScreen from '../screens/ParcoursTypeSelectionScreen'
 import CatalogManagementScreen from '../screens/CatalogManagementScreen';
 import TrainingSessionScreen from '../screens/TrainingSessionScreen';
 import SubscriptionScreen from '../screens/account/SubscriptionScreen';
+import PaymentMethodsAdminScreen from '../screens/admin/PaymentMethodsAdminScreen';
 import PromoCodeScreen from '../screens/account/PromoCodeScreen';
 import WalletScreen from '../screens/account/WalletScreen';
 import WithdrawScreen from '../screens/account/WithdrawScreen';
@@ -78,6 +79,7 @@ const RootNavigator = () => {
       <Stack.Screen name="Login" component={LoginScreen} options={push} />
       <Stack.Screen name="DocumentDetail" component={DocumentDetailScreen} options={push} />
       <Stack.Screen name="Subscription" component={SubscriptionScreen} options={push} />
+      <Stack.Screen name="AdminPaymentMethods" component={PaymentMethodsAdminScreen} options={push} />
       <Stack.Screen name="PromoCode" component={PromoCodeScreen} options={push} />
       <Stack.Screen name="Wallet" component={WalletScreen} options={push} />
       <Stack.Screen name="Withdraw" component={WithdrawScreen} options={push} />

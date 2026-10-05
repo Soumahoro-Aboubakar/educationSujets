@@ -9,8 +9,10 @@
     "backfill:document-premmuim": "node scripts/backfillDocumentPremmuim.js",
     "migrate:taxonomy": "node scripts/migrateLegacyTaxonomy.js",
     "seed:institutions": "node scripts/seedInstitutions.js",
-    "test": "node --test tests/billingPricing.test.js tests/billingFlow.integration.test.js && node tests/parcoursTypeFlow.test.js",
-    "audit:admins": "node scripts/auditAdminRoles.js"
+    "test": "node --test --test-concurrency=1 tests/billingPricing.test.js tests/geniusPayProvider.test.js tests/billingFlow.integration.test.js tests/geniusPayFlow.integration.test.js tests/security.integration.test.js && node tests/parcoursTypeFlow.test.js",
+    "audit:admins": "node scripts/auditAdminRoles.js",
+    "geniuspay": "node scripts/geniuspay.js",
+    "payment-methods": "node scripts/paymentMethods.js"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

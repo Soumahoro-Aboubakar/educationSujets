@@ -18,4 +18,7 @@ const CommissionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Portefeuille : commissions d'un parrain, les plus récentes d'abord.
+CommissionSchema.index({ referrer: 1, createdAt: -1 });
+
 module.exports = mongoose.model('Commission', CommissionSchema);

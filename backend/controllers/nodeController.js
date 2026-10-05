@@ -32,7 +32,7 @@ exports.listNodes = asyncHandler(async (req, res) => {
   if (req.query.type) filter.type = String(req.query.type).toLowerCase();
 
   const limit = Math.min(Math.max(Number.parseInt(req.query.limit, 10) || 50, 1), 100);
-  const page = Math.max(Number.parseInt(req.query.page, 10) || 1, 1);
+  const page = Math.min(Math.max(Number.parseInt(req.query.page, 10) || 1, 1), 500);
   const [nodes, total] = await Promise.all([
     TaxonomyNode.find(filter)
       .sort({ order: 1, name: 1 })

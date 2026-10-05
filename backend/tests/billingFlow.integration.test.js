@@ -104,14 +104,15 @@ test('second payment: full price to the platform, no new commission', { skip }, 
   assert.equal(await Commission.countDocuments({ referredUser: buyer._id }), 1);
 });
 
-test('two concurrent payments are impossible', { skip }, async () => {
+test('a new attempt replaces an abandoned one: never two open payments', { skip }, async () => {
   process.env.MOCK_PAYMENT_DELAY_SECONDS = '600';
   const first = await paymentService.initiatePayment(buyer, { method: 'wave', phone: '0701020304' });
-  await assert.rejects(
-    paymentService.initiatePayment(buyer, { method: 'wave', phone: '0701020304' }),
-    { errorCode: 'PAYMENT_IN_PROGRESS' }
-  );
-  const cancelled = await paymentService.cancelMyPayment(buyer, first.payment.id);
+  const second = await paymentService.initiatePayment(buyer, { method: 'wave', phone: '0505050505' });
+  assert.notEqual(String(second.payment.id), String(first.payment.id));
+  assert.equal(second.payment.phone, '05 05 05 05 05');
+  assert.equal((await Payment.findById(first.payment.id)).status, 'CANCELLED');
+  assert.equal(await Payment.countDocuments({ user: buyer._id, openFor: { $exists: true } }), 1);
+  const cancelled = await paymentService.cancelMyPayment(buyer, second.payment.id);
   assert.equal(cancelled.status, 'CANCELLED');
   process.env.MOCK_PAYMENT_DELAY_SECONDS = '0';
 });

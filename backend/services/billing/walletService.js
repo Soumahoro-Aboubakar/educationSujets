@@ -52,7 +52,7 @@ const toPublicWithdrawal = (withdrawal) => ({
   amount: withdrawal.amount,
   currency: withdrawal.currency,
   operator: withdrawal.operator,
-  operatorLabel: billingConfig.payments.methods.find((m) => m.id === withdrawal.operator)?.label || withdrawal.operator,
+  operatorLabel: billingConfig.withdrawals.operators.find((m) => m.id === withdrawal.operator)?.label || withdrawal.operator,
   // Numéro masqué : seuls les 2 derniers chiffres restent visibles.
   phone: `•••• ${String(withdrawal.phone).slice(-2)}`,
   status: withdrawal.status,
@@ -87,7 +87,7 @@ const describeWallet = async (userId) => {
     withdrawalRules: {
       minAmount: billingConfig.withdrawals.minAmount,
       feesPaidBy: billingConfig.withdrawals.feesPaidBy,
-      operators: billingConfig.payments.methods,
+      operators: billingConfig.withdrawals.operators,
     },
   };
 };
@@ -102,7 +102,7 @@ const requestWithdrawal = async (user, { amount, operator, phone: rawPhone, firs
     throw new AppError(`Le retrait minimum est de ${billingConfig.withdrawals.minAmount} FCFA.`, 400, undefined, 'AMOUNT_TOO_LOW');
   }
 
-  if (!billingConfig.payments.methods.some((m) => m.id === operator)) {
+  if (!billingConfig.withdrawals.operators.some((m) => m.id === operator)) {
     throw new AppError('Opérateur non pris en charge.', 400, undefined, 'OPERATOR_INVALID');
   }
 

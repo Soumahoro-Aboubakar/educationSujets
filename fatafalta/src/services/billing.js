@@ -15,8 +15,13 @@ export const fetchPlans = () => api.get('/api/payments/plans').then(unwrap);
 export const requestWithdrawal = (payload) => api.post('/api/me/withdrawals', payload).then(unwrap);
 export const cancelWithdrawal = (id) => api.post(`/api/me/withdrawals/${id}/cancel`).then(unwrap);
 
-// Code de passage à usage unique : ouvre la souscription web déjà connecté.
+// Code de passage à usage unique : ouvre la souscription web déjà connecté au même compte.
+// Le paiement se fait uniquement sur le site ; l'application relit ensuite l'état du serveur.
 export const createWebHandoff = () => api.post('/api/auth/handoff').then(unwrap);
+
+// Administration des moyens de paiement (super administrateur).
+export const fetchAdminPaymentMethods = () => api.get('/api/admin/payment-methods').then(unwrap);
+export const updateAdminPaymentMethod = (code, changes) => api.patch(`/api/admin/payment-methods/${code}`, changes).then(unwrap);
 
 /** Code d'erreur métier renvoyé par l'API (AUTH_REQUIRED, SUBSCRIPTION_REQUIRED…). */
 export const getErrorCode = (error) => error?.response?.data?.code || null;

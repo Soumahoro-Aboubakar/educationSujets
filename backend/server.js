@@ -1,28 +1,62 @@
 require('dotenv').config();
+require('./config/network').applyNetworkDefaults();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
+const qs = require('qs');
 const connectDB = require('./config/db');
+const securityConfig = require('./config/security');
 const errorHandler = require('./middleware/error');
 const legacyRouteMetrics = require('./middleware/legacyRouteMetrics');
+const limits = require('./middleware/rateLimit');
+const security = require('./middleware/security');
 
 const app = express();
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: Number.parseInt(process.env.RATE_LIMIT_MAX, 10) || 300,
-  standardHeaders: true,
-  legacyHeaders: false,
-});
 
-app.set('trust proxy', 1);
+// Nombre de proxys de confiance (req.ip = vraie IP du client, base des limites par IP).
+const parseTrustProxy = (value) => {
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  return /^\d+$/.test(String(value)) ? Number(value) : value;
+};
+app.set('trust proxy', parseTrustProxy(securityConfig.network.trustProxy));
+// Chaîne de requête bornée : ni objets profonds, ni milliers de paramètres.
+app.set('query parser', (str) => qs.parse(str, {
+  depth: securityConfig.body.queryDepth,
+  parameterLimit: securityConfig.body.queryParameterLimit,
+  arrayLimit: securityConfig.body.queryArrayLimit,
+}));
+
+const { corsOrigins } = securityConfig.network;
+
+app.use(security.requestId);
+app.use(security.requestMonitor);
 app.use(helmet({ crossOriginResourcePolicy: false }));
-app.use(cors({ origin: true, credentials: true }));
+// CORS_ORIGINS défini : seules ces origines sont autorisées ; sinon, comportement historique.
+app.use(cors({ origin: corsOrigins.length ? corsOrigins : true, credentials: true, exposedHeaders: ['Retry-After', 'X-Request-Id'] }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
-app.use(express.json({ limit: '2mb' }));
-app.use(express.urlencoded({ extended: true }));
-app.use('/api', apiLimiter);
+
+// Avant tout travail : IP bloquée, puis limites globales (flood par IP, plafond général, rafales).
+app.use('/api', security.blockGuard, security.identify, limits.ipFlood);
+app.use('/api', (req, res, next) => (req.path.startsWith('/payments/webhooks/') ? next() : limits.general(req, res, next)));
+app.use('/api', (req, res, next) => (req.path.startsWith('/payments/webhooks/') ? next() : limits.burst(req, res, next)));
+
+// Corps brut conservé pour vérifier la signature HMAC des webhooks de paiement.
+app.use('/api/payments/webhooks', express.json({
+  limit: securityConfig.body.webhookLimit,
+  verify: (req, res, buf) => {
+    req.rawBody = Buffer.from(buf);
+  },
+}));
+app.use(express.json({ limit: securityConfig.body.jsonLimit }));
+app.use(express.urlencoded({
+  extended: true,
+  limit: securityConfig.body.jsonLimit,
+  parameterLimit: securityConfig.body.urlencodedParameterLimit,
+}));
+app.use(security.sanitizeInput);
+app.use('/api', security.apiTimeout);
 
 app.get('/api/health', (req, res) => {
   res.status(200).json({ success: true, data: { status: 'ok' } });
@@ -52,8 +86,10 @@ app.use('/api/me', require('./routes/me'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/referentials', require('./routes/referentials'));
-app.use('/uploads', require('./routes/uploads'));
+// Ancien lien de téléchargement direct : mêmes protections qu'un téléchargement via l'API.
+app.use('/uploads', security.blockGuard, security.identify, limits.ipFlood, limits.download, require('./routes/uploads'));
 
+app.use('/api', security.notFound);
 app.use(errorHandler);
 
 const SELF_URL = process.env.SELF_URL; 
@@ -66,6 +102,16 @@ const startServer = async () => {
   const server = app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
   });
+  // Connexions lentes (slowloris) : en-têtes et requête complète reçus dans un délai borné.
+  server.headersTimeout = securityConfig.timeouts.headersMs;
+  server.requestTimeout = securityConfig.timeouts.serverRequestMs;
+  // Supérieur au délai du proxy amont, pour éviter des 502 sur connexions réutilisées.
+  server.keepAliveTimeout = securityConfig.timeouts.keepAliveMs;
+
+  security.startSecurityMonitor();
+
+  // Confirme les paiements ouverts auprès du fournisseur, même sans webhook.
+  require('./services/payments/reconciler').startPaymentReconciler();
 
   try {
     const startTrashPurgeCron = require('./scripts/trashCron');
@@ -92,7 +138,12 @@ const startServer = async () => {
   return server;
 };
 
-startServer().catch((error) => {
-  console.error(`[STARTUP] ${error.message}`);
-  process.exitCode = 1;
-});
+// Démarrage uniquement en exécution directe (node server.js) ; les tests importent `app`.
+if (require.main === module) {
+  startServer().catch((error) => {
+    console.error(`[STARTUP] ${error.message}`);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = app;

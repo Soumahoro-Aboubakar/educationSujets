@@ -21,6 +21,8 @@ const {
   getTrashedDocumentPreview,
 } = require('../controllers/documentController');
 const { protect, authorize, optionalAuth, authorizeSuperAdmin } = require('../middleware/auth');
+const limits = require('../middleware/rateLimit');
+const { limitConcurrency } = require('../middleware/security');
 const upload = require('../middleware/upload');
 const normalizeDocumentPayload = require('../middleware/normalizeDocumentPayload');
 const validate = require('../middleware/validate');
@@ -36,11 +38,17 @@ const {
 
 const router = express.Router();
 
+// Toutes les écritures de ce routeur sont des opérations d'administration.
+router.use(limits.adminWrite);
+
+const searchConcurrency = limitConcurrency({ name: 'document-search', max: 3 });
+
 router.route('/')
-  .get(optionalAuth, listDocumentsValidator, validate, getDocuments)
+  .get(limits.searchWhenQuery, searchConcurrency, optionalAuth, listDocumentsValidator, validate, getDocuments)
   .post(
     protect,
     authorize('admin'),
+    limits.upload,
     upload.single('file'),
     normalizeDocumentPayload,
     uploadDocumentValidator,
@@ -61,11 +69,12 @@ router.get('/trash/:id/preview', protect, authorizeSuperAdmin, documentIdParamVa
 router.put('/trash/:id/restore', protect, authorizeSuperAdmin, documentIdParamValidator, validate, restoreDocument);
 router.delete('/trash/:id', protect, authorizeSuperAdmin, documentIdParamValidator, validate, permanentlyDeleteDocument);
 
-router.get('/:id/download', optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
+router.get('/:id/download', limits.download, optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
 router.post(
   '/:id/correction',
   protect,
   authorize('admin'),
+  limits.upload,
   documentIdParamValidator,
   validate,
   upload.single('file'),
@@ -75,6 +84,7 @@ router.put(
   '/:id/file',
   protect,
   authorize('sub-admin', 'admin'),
+  limits.upload,
   documentIdParamValidator,
   validate,
   upload.single('file'),

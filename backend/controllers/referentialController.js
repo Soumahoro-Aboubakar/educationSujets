@@ -1,6 +1,7 @@
 const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
+const { parsePagination } = require('../utils/pagination');
 const City = require('../models/City');
 const Region = require('../models/Region');
 const BacSeries = require('../models/BacSeries');
@@ -18,12 +19,15 @@ const getModel = (modelName) => {
   }
 };
 
+const escapeRegex = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 const buildQuery = (req) => {
-  const { search, active, page = 1, limit = 10 } = req.query;
+  const { search, active } = req.query;
   const query = {};
   if (active !== undefined) query.active = active === 'true';
   if (search) {
-    const regex = new RegExp(search, 'i');
+    // Texte échappé et borné : une recherche ne peut pas devenir une regex coûteuse (ReDoS).
+    const regex = new RegExp(escapeRegex(String(search).slice(0, 100)), 'i');
     query.$or = [
       { name: regex },
       { code: regex },
@@ -36,7 +40,9 @@ const buildQuery = (req) => {
       { typeEtablissement: regex },
     ];
   }
-  return { query, page: Number(page), limit: Number(limit) };
+  // L'écran d'administration charge jusqu'à 200 entrées d'un coup.
+  const { page, limit } = parsePagination(req.query, { defaultLimit: 10, maxLimit: 200 });
+  return { query, page, limit };
 };
 
 const canDeleteReferential = async (modelName, record) => {

@@ -3,6 +3,8 @@ const { param } = require('express-validator');
 const controller = require('../controllers/accountController');
 const { protect } = require('../middleware/auth');
 const validate = require('../middleware/validate');
+const limits = require('../middleware/rateLimit');
+const { restrictSensitive } = require('../middleware/security');
 
 const router = express.Router();
 
@@ -13,9 +15,9 @@ router.get('/subscription', controller.getMySubscription);
 router.get('/promo-code', controller.getMyPromoCode);
 router.get('/wallet', controller.getMyWallet);
 router.get('/downloads', controller.getMyDownloads);
-router.put('/profile', controller.updateProfile);
-router.put('/password', controller.changePassword);
-router.post('/withdrawals', controller.createWithdrawal);
-router.post('/withdrawals/:id/cancel', param('id').isMongoId(), validate, controller.cancelWithdrawal);
+router.put('/profile', limits.profileUpdate, controller.updateProfile);
+router.put('/password', limits.passwordChange, controller.changePassword);
+router.post('/withdrawals', restrictSensitive, limits.withdrawalCreate, controller.createWithdrawal);
+router.post('/withdrawals/:id/cancel', limits.withdrawalCancel, param('id').isMongoId(), validate, controller.cancelWithdrawal);
 
 module.exports = router;

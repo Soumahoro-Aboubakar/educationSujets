@@ -25,4 +25,7 @@ const WithdrawalSchema = new mongoose.Schema(
 WithdrawalSchema.index({ openFor: 1 }, { unique: true, sparse: true });
 WithdrawalSchema.statics.STATUSES = WITHDRAWAL_STATUSES;
 
+// Historique des retraits d'un utilisateur.
+WithdrawalSchema.index({ user: 1, createdAt: -1 });
+
 module.exports = mongoose.model('Withdrawal', WithdrawalSchema);

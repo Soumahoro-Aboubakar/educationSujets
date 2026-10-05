@@ -73,7 +73,7 @@ exports.getStructure = asyncHandler(async (req, res) => {
   const requestedParent = req.query.parent;
   const parent = requestedParent && requestedParent !== 'root' ? requestedParent : null;
   const limit = Math.min(Math.max(Number.parseInt(req.query.limit, 10) || 50, 1), 100);
-  const page = Math.max(Number.parseInt(req.query.page, 10) || 1, 1);
+  const page = Math.min(Math.max(Number.parseInt(req.query.page, 10) || 1, 1), 500);
   const filter = { institution: institution._id, parent, isActive: true };
   const [nodes, total] = await Promise.all([
     TaxonomyNode.find(filter)

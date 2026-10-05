@@ -23,7 +23,7 @@ const ACCOUNT_STATUSES = ['ACTIVE', 'DISABLED', 'SUSPENDED'];
 
 const paginate = ({ page, limit }) => {
   const safeLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 20, 1), 100);
-  const safePage = Math.max(Number.parseInt(page, 10) || 1, 1);
+  const safePage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   return { page: safePage, limit: safeLimit, skip: (safePage - 1) * safeLimit };
 };
 
@@ -324,6 +324,8 @@ const listPayments = async ({ status, search, page, limit }) => {
       promoCode: payment.promoCode?.code || null,
       provider: payment.provider,
       providerRef: payment.providerRef,
+      providerStatus: payment.providerStatus || null,
+      providerEnvironment: payment.providerEnvironment || null,
       channel: payment.channel,
     })),
     pagination: pagination(paging, total),

@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { AppState, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, focusManager } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { 
   useFonts, 
@@ -20,6 +20,13 @@ import useDownloadStore from './src/store/useDownloadStore';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
+
+// Retour de l'app au premier plan (ex. après un paiement sur le site) = « focus » pour React
+// Query : les requêtes qui l'acceptent (état du compte) sont relues auprès du serveur.
+focusManager.setEventListener((handleFocus) => {
+  const subscription = AppState.addEventListener('change', (state) => handleFocus(state === 'active'));
+  return () => subscription.remove();
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {

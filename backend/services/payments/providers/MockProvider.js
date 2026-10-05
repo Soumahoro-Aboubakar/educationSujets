@@ -29,12 +29,12 @@ class MockProvider extends PaymentProvider {
     super('mock');
   }
 
-  async initiate({ phone, method }) {
-    const scenario = SCENARIOS[phone.slice(-2)] || 'SUCCEEDED';
+  // Simule une demande de validation envoyée sur le téléphone (parcours « push »).
+  async initiate({ phone }) {
+    const scenario = SCENARIOS[String(phone || '').slice(-2)] || 'SUCCEEDED';
     return {
       providerRef: `MOCK-${scenario}-${crypto.randomUUID()}`,
       status: 'PENDING',
-      instructions: `Une demande de paiement ${method.label} a été envoyée au ${phone}. Validez-la sur votre téléphone.`,
     };
   }
 

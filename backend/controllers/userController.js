@@ -3,7 +3,8 @@ const User = require('../models/User');
 
 exports.getUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    // Liste historique sans pagination côté client : bornée pour ne jamais renvoyer toute la base.
+    const users = await User.find().sort({ createdAt: -1 }).limit(500);
     res.status(200).json({
       success: true,
       data: users,

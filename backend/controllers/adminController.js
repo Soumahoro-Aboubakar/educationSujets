@@ -1,6 +1,9 @@
 const asyncHandler = require('../utils/asyncHandler');
+const abuseTracker = require('../services/security/abuseTracker');
+const securityLog = require('../services/security/securityLogger');
 const { sendSuccess } = require('../utils/api');
 const admin = require('../services/admin/adminService');
+const paymentMethods = require('../services/payments/paymentMethodService');
 
 exports.getStats = asyncHandler(async (req, res) => sendSuccess(res, { data: await admin.getStats() }));
 
@@ -45,4 +48,23 @@ exports.listWithdrawals = asyncHandler(async (req, res) => {
 
 exports.processWithdrawal = asyncHandler(async (req, res) => {
   sendSuccess(res, { message: 'Retrait mis à jour', data: await admin.processWithdrawal(req.params.id, req.body, req.user) });
+});
+
+exports.listPaymentMethods = asyncHandler(async (req, res) => sendSuccess(res, { data: await paymentMethods.adminList() }));
+
+exports.createPaymentMethod = asyncHandler(async (req, res) => {
+  sendSuccess(res, { statusCode: 201, message: 'Moyen de paiement ajouté', data: await paymentMethods.adminCreate(req.body, req.user) });
+});
+
+exports.updatePaymentMethod = asyncHandler(async (req, res) => {
+  sendSuccess(res, { message: 'Moyen de paiement mis à jour', data: await paymentMethods.adminUpdate(req.params.code, req.body, req.user) });
+});
+
+exports.getSecurityOverview = asyncHandler(async (req, res) => sendSuccess(res, { data: abuseTracker.snapshot() }));
+
+// Levée manuelle d'un blocage (faux positif : IP d'école, réseau d'entreprise…).
+exports.liftSecurityBlock = asyncHandler(async (req, res) => {
+  const removed = abuseTracker.unblock(req.params.type, req.params.value);
+  securityLog.info('abuse.unblocked', { userId: req.user._id, reason: `${req.params.type}:${removed ? 'lifted' : 'none'}` });
+  sendSuccess(res, { message: removed ? 'Blocage levé' : 'Aucun blocage actif', data: { removed } });
 });
