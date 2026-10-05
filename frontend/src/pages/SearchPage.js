@@ -5,7 +5,8 @@ import { Button, Container, EmptyState, SkeletonRows, cx } from '../components/u
 import useAsync from '../hooks/useAsync';
 import useDebounce from '../hooks/useDebounce';
 import { catalog, documents } from '../lib/api';
-import { documentTitle, formatDate, hasCorrection, labelOf, nodeChain } from '../lib/format';
+import { documentTitle, formatDate, hasCorrection, labelOf, nodeChain, organismeLabel } from '../lib/format';
+import { segmentFor } from '../lib/slug';
 
 const PAGE_SIZE = 20;
 
@@ -127,8 +128,8 @@ const SearchPage = () => {
           <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-soft">Organismes</h2>
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
             {matchingOrganismes.map((organisme) => (
-              <Link key={organisme._id} to={`/sujets?o=${organisme._id}`} className="group flex items-center justify-between rounded-xl border border-line bg-white px-4 py-3 hover:border-line-strong">
-                <span className="font-medium text-ink">{labelOf(organisme)}</span>
+              <Link key={organisme._id} to={`/sujets?o=${segmentFor(organisme, organismes.data?.data)}`} className="group flex items-center justify-between rounded-xl border border-line bg-white px-4 py-3 hover:border-line-strong">
+                <span className="font-medium text-ink">{organismeLabel(organisme)}</span>
                 <ArrowRight size={16} className="text-ink-muted group-hover:text-ink" />
               </Link>
             ))}
@@ -153,7 +154,7 @@ const SearchPage = () => {
                   action={<Button to="/sujets" variant="secondary" size="sm">Parcourir le catalogue</Button>}
                 />
               ) : items.map((document) => {
-                const context = [labelOf(document.organismeId), ...nodeChain(document.noeudId).map(labelOf), labelOf(document.matiereId)].filter(Boolean).join(' · ');
+                const context = [organismeLabel(document.organismeId), ...nodeChain(document.noeudId).map(labelOf), labelOf(document.matiereId)].filter(Boolean).join(' · ');
                 return (
                   <Link key={document._id} to={`/sujets/document/${document._id}`} className="group flex items-center gap-4 border-b border-line px-5 py-4 last:border-0 hover:bg-paper">
                     <div className="min-w-0 flex-1">

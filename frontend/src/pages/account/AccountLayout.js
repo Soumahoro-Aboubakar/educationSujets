@@ -19,7 +19,8 @@ const AccountLayout = () => {
   const location = useLocation();
 
   if (loading) return <Container className="flex justify-center py-24"><Spinner /></Container>;
-  if (!user) return <Navigate to={`/login?next=${encodeURIComponent(location.pathname)}`} replace />;
+  // Page protégée : connexion, puis retour exact à la page demandée (chemin et paramètres).
+  if (!user) return <Navigate to={`/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`} replace />;
 
   return (
     <Container className="py-8 md:py-12">

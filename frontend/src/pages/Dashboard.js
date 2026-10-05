@@ -110,7 +110,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    if (!loading && !user) navigate('/login');
+    if (!loading && !user) navigate('/login?next=%2Fdashboard', { replace: true });
   }, [user, loading, navigate]);
 
   useEffect(() => {

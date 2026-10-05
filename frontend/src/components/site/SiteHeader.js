@@ -86,6 +86,9 @@ const SiteHeader = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  // Connexion depuis n'importe quelle page : retour automatique à cette page ensuite.
+  const here = `${location.pathname}${location.search}`;
+  const authSuffix = ['/', '/login', '/register'].includes(location.pathname) ? '' : `?next=${encodeURIComponent(here)}`;
 
   useEffect(() => {
     setMobileOpen(false);
@@ -116,8 +119,8 @@ const SiteHeader = () => {
         <div className="hidden items-center gap-2 md:flex">
           {user ? <AccountMenu user={user} onLogout={handleLogout} /> : (
             <>
-              <Button to="/login" variant="ghost" size="sm">Se connecter</Button>
-              <Button to="/register" size="sm">Créer un compte</Button>
+              <Button to={`/login${authSuffix}`} variant="ghost" size="sm">Se connecter</Button>
+              <Button to={`/register${authSuffix}`} size="sm">Créer un compte</Button>
             </>
           )}
         </div>
@@ -155,8 +158,8 @@ const SiteHeader = () => {
                 <Button variant="danger" onClick={handleLogout}>Se déconnecter</Button>
               ) : (
                 <>
-                  <Button to="/register">Créer un compte</Button>
-                  <Button to="/login" variant="secondary">Se connecter</Button>
+                  <Button to={`/register${authSuffix}`}>Créer un compte</Button>
+                  <Button to={`/login${authSuffix}`} variant="secondary">Se connecter</Button>
                 </>
               )}
             </div>

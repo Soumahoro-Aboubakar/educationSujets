@@ -110,6 +110,14 @@ const startServer = async () => {
 
   security.startSecurityMonitor();
 
+  // Alias d'URL des organismes (/sujets?o=inphb) : attribués à ceux qui n'en ont pas encore.
+  try {
+    const assigned = await require('./services/dynamicCatalogService').ensureOrganismeSlugs();
+    if (assigned) console.log(`[CATALOG] Alias attribués à ${assigned} organisme(s).`);
+  } catch (error) {
+    console.error(`[CATALOG] Attribution des alias impossible : ${error.message}`);
+  }
+
   // Fournisseur de paiement vérifié dès le démarrage : une configuration incomplète apparaît
   // dans les logs tout de suite, au lieu d'un « paiement momentanément indisponible » plus tard.
   try {

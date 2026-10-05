@@ -401,7 +401,7 @@ const listPublicDocuments = async (params = {}) => {
 
 const listDynamicDocuments = async (params = {}, user = null) => {
   if (params.type && params.type !== 'sujet') throw new AppError('Cette route liste uniquement les sujets', 400);
-  const { node } = await getLeafContext({ noeudId: params.noeudId, matiereId: params.matiereId });
+  const { node, matiere } = await getLeafContext({ noeudId: params.noeudId, matiereId: params.matiereId });
   const filter = {
     noeudId: node._id,
     matiereId: params.matiereId,

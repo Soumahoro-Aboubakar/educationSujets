@@ -13,6 +13,12 @@ const OrganismeSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
+    // Alias public et stable des URL (« inphb » pour INP-HB). L'_id reste l'identifiant interne.
+    slug: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
     logo: {
       type: String,
       trim: true,
@@ -40,6 +46,7 @@ OrganismeSchema.index(
   { unique: true, collation: { locale: 'fr', strength: 2 } }
 );
 OrganismeSchema.index({ nomNormalise: 1 }, { unique: true });
+OrganismeSchema.index({ slug: 1 }, { unique: true, partialFilterExpression: { slug: { $type: 'string' } } });
 
 OrganismeSchema.pre('validate', function normalizeName(next) {
   if (this.nom) this.nomNormalise = normalizeText(this.nom);

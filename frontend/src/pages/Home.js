@@ -5,7 +5,8 @@ import { Button, Container, SkeletonRows } from '../components/ui';
 import HeroVisual from '../components/illustrations/HeroVisual';
 import useAsync from '../hooks/useAsync';
 import { catalog, payments } from '../lib/api';
-import { formatAmount, labelOf } from '../lib/format';
+import { formatAmount, organismeLabel } from '../lib/format';
+import { segmentFor } from '../lib/slug';
 
 const STEPS = [
   { icon: Compass, title: 'Choisissez votre concours', text: 'Organisme, concours, année, matière : chaque sujet est rangé à sa place.' },
@@ -81,10 +82,10 @@ const Home = () => {
                 {(organismes.data?.data || []).map((organisme) => (
                   <Link
                     key={organisme._id}
-                    to={`/sujets?o=${organisme._id}`}
+                    to={`/sujets?o=${segmentFor(organisme, organismes.data.data)}`}
                     className="group flex min-w-0 flex-col justify-between rounded-2xl border border-line bg-paper p-4 transition-all sm:p-5 hover:-translate-y-0.5 hover:border-line-strong hover:bg-white hover:shadow-soft"
                   >
-                    <p className="break-words font-semibold leading-snug text-ink">{labelOf(organisme)}</p>
+                    <p className="break-words font-semibold leading-snug text-ink">{organismeLabel(organisme)}</p>
                     <p className="mt-6 flex items-center justify-between text-sm text-ink-soft">
                       {organisme.subjectCount ? `${organisme.subjectCount} sujet${organisme.subjectCount > 1 ? 's' : ''}` : 'Sujets publiés'}
                       <ArrowRight size={16} className="text-ink-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink" />

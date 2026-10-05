@@ -7,6 +7,7 @@ const ParcoursType = require('../models/ParcoursType');
 const Document = require('../models/Document');
 const AppError = require('../utils/errors');
 const normalizeText = require('../utils/normalizeText');
+const { slugify } = require('../utils/slug');
 
 const findOneAndUpdateWithDuplicateRetry = async (Model, filter, update, options = {}) => {
   try {
@@ -131,6 +132,34 @@ const ensureParcoursTypeForOrganisme = async (organismeId, payload = {}) => {
   return parcoursType;
 };
 
+/**
+ * Attribue un alias unique à un organisme qui n'en a pas (création, ou organisme existant
+ * avant l'introduction des alias). En cas de collision : « ena », « ena-2 », « ena-3 »…
+ */
+const assignOrganismeSlug = async (organisme, requested) => {
+  if (organisme.slug && !requested) return organisme.slug;
+  const base = slugify(requested || organisme.nom) || String(organisme._id);
+  for (let attempt = 1; attempt < 50; attempt += 1) {
+    const candidate = attempt === 1 ? base : `${base}-${attempt}`;
+    const taken = await Organisme.exists({ slug: candidate, _id: { $ne: organisme._id } });
+    if (taken) continue;
+    try {
+      await Organisme.updateOne({ _id: organisme._id }, { $set: { slug: candidate } });
+      return candidate;
+    } catch (error) {
+      if (error.code !== 11000) throw error;
+    }
+  }
+  throw new AppError('Impossible d attribuer un alias unique a cet organisme', 409);
+};
+
+/** Rattrapage au démarrage : chaque organisme existant reçoit son alias. Idempotent. */
+const ensureOrganismeSlugs = async () => {
+  const missing = await Organisme.find({ $or: [{ slug: { $exists: false } }, { slug: null }, { slug: '' }] }).select('nom slug').lean();
+  for (const organisme of missing) await assignOrganismeSlug(organisme);
+  return missing.length;
+};
+
 const createOrganisme = async (payload) => {
   if (!payload.nom?.trim()) throw new AppError('Le nom de l organisme est obligatoire', 400);
   const nom = payload.nom.trim();
@@ -148,6 +177,7 @@ const createOrganisme = async (payload) => {
     },
     { upsert: true, new: true, setDefaultsOnInsert: true }
   );
+  organisme.slug = await assignOrganismeSlug(organisme, payload.slug);
 
   const parcoursType = await ensureParcoursTypeForOrganisme(organisme._id, payload);
   return { ...organisme.toObject(), parcoursType: parcoursType ? { ...parcoursType } : null };
@@ -244,6 +274,16 @@ const upsertNoeud = async (payload) => {
     throw new AppError(`Le noeud doit appartenir au niveau ${expectedOrder}`, 400);
   }
   const nom = payload.nom.trim();
+  const existing = await Noeud.findOne({ organismeId: organisme._id, parentId, nomNormalise: normalizeText(nom) });
+  if (existing) return existing;
+  // Un niveau qui répète le nom de son parent (« 2023 » sous « 2023 ») est une erreur de saisie :
+  // il produirait un parcours « … > 2023 > 2023 ».
+  if (parentId) {
+    const parent = await Noeud.findById(parentId).select('nom nomNormalise').lean();
+    if (parent && parent.nomNormalise === normalizeText(nom)) {
+      throw new AppError(`« ${nom} » est déjà le niveau précédent. Choisissez la valeur du niveau suivant.`, 400, undefined, 'CATALOG_DUPLICATE_LEVEL');
+    }
+  }
   return findOneAndUpdateWithDuplicateRetry(Noeud,
     { organismeId: organisme._id, parentId, nomNormalise: normalizeText(nom) },
     { $setOnInsert: { organismeId: organisme._id, parentId, ordreNiveau: expectedOrder, nom, nomNormalise: normalizeText(nom) } },
@@ -269,6 +309,12 @@ const upsertMatiere = async ({ organismeId, nom }) => {
   const organisme = await getOrganismeOrThrow(organismeId);
   if (!nom?.trim()) throw new AppError('Le nom de la matiere est obligatoire', 400);
   const cleanName = nom.trim();
+  const existing = await Matiere.findOne({ organismeId: organisme._id, nomNormalise: normalizeText(cleanName) });
+  if (existing) return existing;
+  // Une matière n'est jamais une année : « 2023 » saisi ici dupliquerait l'année dans le parcours.
+  if (/^(19|20)\d{2}$/.test(cleanName)) {
+    throw new AppError(`« ${cleanName} » est une année, pas une matière. Indiquez la matière (ex. Mathématiques).`, 400, undefined, 'CATALOG_YEAR_AS_SUBJECT');
+  }
   return findOneAndUpdateWithDuplicateRetry(Matiere,
     { organismeId: organisme._id, nomNormalise: normalizeText(cleanName) },
     { $setOnInsert: { organismeId: organisme._id, nom: cleanName, nomNormalise: normalizeText(cleanName) } },
@@ -348,6 +394,7 @@ const listPublishedOrganismes = async ({ page, limit } = {}) => {
         // `name` makes the public DTO convenient for generic clients while
         // retaining `nom` as the canonical French database field.
         name: organisme.nom,
+        slug: organisme.slug || slugify(organisme.nom),
         structure: { niveaux: structure.niveaux },
         subjectCount: subjectCountByOrganisme.get(String(organisme._id)) || 0,
       };
@@ -429,7 +476,7 @@ const listPublishedNoeuds = async ({ organismeId, parentId, parcoursTypeId, rech
   const pagination = paginationFrom({ page, limit });
   const start = (pagination.page - 1) * pagination.limit;
   return {
-    organisme: { _id: organisme._id, nom: organisme.nom, name: organisme.nom },
+    organisme: { _id: organisme._id, nom: organisme.nom, name: organisme.nom, slug: organisme.slug || slugify(organisme.nom) },
     structure: { niveaux: structure.niveaux },
     data: items.slice(start, start + pagination.limit),
     pagination: {
@@ -491,6 +538,8 @@ const listPublishedMatieres = async ({ organismeId, noeudId, parcoursTypeId, rec
 };
 
 module.exports = {
+  assignOrganismeSlug,
+  ensureOrganismeSlugs,
   computeParcoursFlow,
   getOrganismeOrThrow,
   getStructureOrThrow,

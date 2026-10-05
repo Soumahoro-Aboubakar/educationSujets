@@ -1,9 +1,10 @@
 import React, { Suspense, lazy, useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { SearchX } from 'lucide-react';
 import AuthContext, { AuthProvider, isStaff } from './context/AuthContext';
 import SiteHeader from './components/site/SiteHeader';
 import SiteFooter from './components/site/SiteFooter';
-import { Container, Spinner } from './components/ui';
+import { Button, Container, EmptyState, Spinner } from './components/ui';
 import Home from './pages/Home';
 import ExplorePage from './pages/ExplorePage';
 import DocumentPage from './pages/DocumentPage';
@@ -43,6 +44,26 @@ const SiteLayout = () => (
   </div>
 );
 
+/**
+ * Adresse inconnue : une vraie page « introuvable » plutôt qu'un renvoi silencieux à l'accueil,
+ * qui ferait croire qu'un lien partagé fonctionne alors qu'il est erroné.
+ */
+const IndexAlias = () => {
+  const { search, hash } = useLocation();
+  return <Navigate to={`/${search}${hash}`} replace />;
+};
+
+const NotFound = () => (
+  <Container className="py-16">
+    <EmptyState
+      icon={SearchX}
+      title="Page introuvable"
+      description="Ce lien ne correspond à aucune page de Fatafalta. Il est peut-être incomplet ou a été modifié."
+      action={<Button to="/sujets" variant="secondary">Parcourir les sujets</Button>}
+    />
+  </Container>
+);
+
 /** L'administration garde sa propre interface ; accès réservé à l'équipe. */
 const StaffOnly = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
@@ -76,7 +97,9 @@ function App() {
             </Route>
             {/* Anciennes adresses */}
             <Route path="/ressources" element={<Navigate to="/sujets" replace />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            {/* Hébergeur qui sert /index.html explicitement : même page que l'accueil, paramètres conservés. */}
+            <Route path="/index.html" element={<IndexAlias />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/dashboard" element={<StaffOnly><Dashboard /></StaffOnly>} />
         </Routes>

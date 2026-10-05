@@ -20,6 +20,21 @@ export const formatFileSize = (bytes) => {
 
 export const labelOf = (item) => item?.nom || item?.name || '';
 
+// Les organismes (INP-HB, ENA, ESATIC…) sont toujours affichés en majuscules ; leur nom en base est inchangé.
+export const organismeLabel = (item) => labelOf(item).toLocaleUpperCase('fr-FR');
+
+/**
+ * Message d'erreur de chargement fidèle à la cause : « Connexion impossible » seulement si le
+ * serveur n'a pas répondu ; un lien invalide ou un refus n'est pas un problème de connexion.
+ */
+export const loadErrorOf = (error, what = 'Le contenu') => {
+  const status = error?.response?.status;
+  if (!error?.response) return { title: 'Connexion impossible', description: 'Vérifiez votre connexion internet puis réessayez.' };
+  if (status === 404 || status === 400) return { title: 'Contenu introuvable', description: 'Ce lien ne correspond plus à un contenu publié.' };
+  if (status === 429) return { title: 'Trop de requêtes', description: error.response.data?.error || 'Patientez quelques secondes puis réessayez.' };
+  return { title: 'Chargement impossible', description: `${what} n’a pas pu être chargé. Réessayez dans un instant.` };
+};
+
 export const documentTitle = (document) => document?.title
   || document?.titre
   || document?.originalFileName
