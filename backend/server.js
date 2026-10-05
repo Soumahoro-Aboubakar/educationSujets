@@ -110,6 +110,15 @@ const startServer = async () => {
 
   security.startSecurityMonitor();
 
+  // Fournisseur de paiement vérifié dès le démarrage : une configuration incomplète apparaît
+  // dans les logs tout de suite, au lieu d'un « paiement momentanément indisponible » plus tard.
+  try {
+    const provider = require('./services/payments').getPaymentProvider();
+    console.log(`[PAYMENTS] Fournisseur actif : ${provider.name}${provider.environment ? ` (${provider.environment})` : ''}`);
+  } catch (error) {
+    console.error(`[PAYMENTS] Paiements INDISPONIBLES — ${error.message}`);
+  }
+
   // Confirme les paiements ouverts auprès du fournisseur, même sans webhook.
   require('./services/payments/reconciler').startPaymentReconciler();
 

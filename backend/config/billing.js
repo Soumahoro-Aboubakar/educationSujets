@@ -13,7 +13,7 @@ const toInt = (value, fallback) => {
 };
 
 // Site web public. En production, jamais localhost : sans FRONTEND_URL, le domaine officiel.
-const PRODUCTION_WEB_URL = process.env.FRONTEND_URL || 'https://fatafalta.com';
+const PRODUCTION_WEB_URL = 'https://fatafalta.com';
 const publicWebUrl = () => {
   const configured = (process.env.FRONTEND_URL || '').trim().replace(/\/$/, '');
   const isProduction = process.env.NODE_ENV === 'production';
