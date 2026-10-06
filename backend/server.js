@@ -92,9 +92,6 @@ app.use('/uploads', security.blockGuard, security.identify, limits.ipFlood, limi
 app.use('/api', security.notFound);
 app.use(errorHandler);
 
-const SELF_URL = process.env.SELF_URL; 
-const PING_INTERVAL = 2 * 60 * 1000; 
-
 const startServer = async () => {
   await connectDB();
 
@@ -137,20 +134,8 @@ const startServer = async () => {
     console.warn('[TRASH_CRON] Could not start trash purge cron:', err.message);
   }
 
-  if (SELF_URL) {
-    setInterval(async () => {
-      try {
-        const res = await fetch(`${SELF_URL}/api/health`);
-        console.log(`[self-ping] Status: ${res.status} - ${new Date().toISOString()}`);
-      } catch (err) {
-        console.error(`[self-ping] Echec: ${err.message}`);
-      }
-    }, PING_INTERVAL);
-
-    console.log(`[self-ping] Active - ping toutes les 2 minutes vers ${SELF_URL}/api/health`);
-  } else {
-    console.warn('[self-ping] SELF_URL non defini - auto-ping desactive.');
-  }
+  // Auto-ping toutes les minutes vers SELF_URL : évite la mise en veille de Render (offre gratuite).
+  require('./services/keepAlive').startKeepAlive();
 
   return server;
 };
