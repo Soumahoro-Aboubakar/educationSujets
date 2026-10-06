@@ -4,6 +4,7 @@
  *   npm run catalog -- audit [alias]          Anomalies de parcours (lecture seule)
  *   npm run catalog -- aliases                Alias publics de chaque organisme (/sujets?o=<alias>)
  *   npm run catalog -- set-alias <alias|id> <nouvel-alias>
+ *   npm run catalog -- set-logo <alias|id> <url|->   Logo officiel (https://… ou /organismes/<alias>.svg) ; « - » le retire
  *
  * L'audit repère ce qui produit un fil d'Ariane du type « … > 2023 > 2023 » ou une liste de
  * sujets impossible à charger : niveau qui répète son parent, matière nommée comme une année
@@ -130,7 +131,16 @@ const main = async () => {
       console.log(`${organisme.nom.toUpperCase()} → /sujets?o=${slug}${slug !== slugify(arg2) ? ' (alias demandé déjà pris)' : ''}`);
       return undefined;
     }
-    console.log('Commandes : audit [alias] | aliases | set-alias <alias|id> <nouvel-alias>');
+    if (command === 'set-logo') {
+      const organisme = await findOrganisme(arg1);
+      if (!organisme || !arg2) throw new Error('Usage : set-logo <alias|id> <https://…|/organismes/fichier.svg|->');
+      // Même règle que l'affichage web : https, ou fichier servi par le site (dossier public/).
+      if (arg2 !== '-' && !/^(https:\/\/|\/(?!\/))\S+$/.test(arg2)) throw new Error('Logo refusé : adresse https:// ou chemin /organismes/… attendu.');
+      await Organisme.updateOne({ _id: organisme._id }, arg2 === '-' ? { $unset: { logo: 1 } } : { $set: { logo: arg2 } });
+      console.log(`${organisme.nom.toUpperCase()} → ${arg2 === '-' ? 'monogramme Fatafalta' : arg2}`);
+      return undefined;
+    }
+    console.log('Commandes : audit [alias] | aliases | set-alias <alias|id> <nouvel-alias> | set-logo <alias|id> <url|->');
     return undefined;
   } finally {
     await mongoose.disconnect();

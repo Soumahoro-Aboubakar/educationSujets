@@ -7,6 +7,7 @@ import useDebounce from '../hooks/useDebounce';
 import { catalog, documents } from '../lib/api';
 import { documentTitle, formatDate, hasCorrection, labelOf, nodeChain, organismeLabel } from '../lib/format';
 import { segmentFor } from '../lib/slug';
+import OrganismeLogo, { distinctPalette } from '../components/catalog/OrganismeLogo';
 
 const PAGE_SIZE = 20;
 
@@ -53,6 +54,7 @@ const SearchPage = () => {
   };
 
   const organismes = useAsync(() => catalog.organismes({ limit: 100 }), []);
+  const colors = useMemo(() => distinctPalette(organismes.data?.data || []), [organismes.data]);
   const matchingOrganismes = useMemo(() => {
     if (debounced.length < 2) return [];
     const needle = normalize(debounced);
@@ -129,7 +131,10 @@ const SearchPage = () => {
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
             {matchingOrganismes.map((organisme) => (
               <Link key={organisme._id} to={`/sujets?o=${segmentFor(organisme, organismes.data?.data)}`} className="group flex items-center justify-between rounded-xl border border-line bg-white px-4 py-3 hover:border-line-strong">
-                <span className="font-medium text-ink">{organismeLabel(organisme)}</span>
+                <span className="flex min-w-0 items-center gap-3">
+                  <OrganismeLogo organisme={organisme} size="sm" paletteIndex={colors[organisme._id]} />
+                  <span className="truncate font-medium text-ink">{organismeLabel(organisme)}</span>
+                </span>
                 <ArrowRight size={16} className="text-ink-muted group-hover:text-ink" />
               </Link>
             ))}

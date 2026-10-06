@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, BookOpenCheck, Check, Compass, Download, Search } from 'lucide-react';
 import { Button, Container, SkeletonRows } from '../components/ui';
@@ -7,6 +7,7 @@ import useAsync from '../hooks/useAsync';
 import { catalog, payments } from '../lib/api';
 import { formatAmount, organismeLabel } from '../lib/format';
 import { segmentFor } from '../lib/slug';
+import OrganismeLogo, { distinctPalette } from '../components/catalog/OrganismeLogo';
 
 const STEPS = [
   { icon: Compass, title: 'Choisissez votre concours', text: 'Organisme, concours, année, matière : chaque sujet est rangé à sa place.' },
@@ -17,7 +18,10 @@ const STEPS = [
 const Home = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
-  const organismes = useAsync(() => catalog.organismes({ limit: 8 }), []);
+  // Liste complète (quelques dizaines d'organismes) : mêmes couleurs de logo que le catalogue ; 8 affichés.
+  const organismes = useAsync(() => catalog.organismes({ limit: 100 }), []);
+  const allOrganismes = useMemo(() => organismes.data?.data || [], [organismes.data]);
+  const colors = useMemo(() => distinctPalette(allOrganismes), [allOrganismes]);
   const plans = useAsync(() => payments.plans(), []);
 
   const submitSearch = (event) => {
@@ -79,13 +83,16 @@ const Home = () => {
           <div className="mt-8">
             {organismes.loading && !organismes.data ? <SkeletonRows count={3} /> : (
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                {(organismes.data?.data || []).map((organisme) => (
+                {allOrganismes.slice(0, 8).map((organisme) => (
                   <Link
                     key={organisme._id}
-                    to={`/sujets?o=${segmentFor(organisme, organismes.data.data)}`}
+                    to={`/sujets?o=${segmentFor(organisme, allOrganismes)}`}
                     className="group flex min-w-0 flex-col justify-between rounded-2xl border border-line bg-paper p-4 transition-all sm:p-5 hover:-translate-y-0.5 hover:border-line-strong hover:bg-white hover:shadow-soft"
                   >
-                    <p className="break-words font-semibold leading-snug text-ink">{organismeLabel(organisme)}</p>
+                    <div className="flex min-w-0 items-center gap-3">
+                      <OrganismeLogo organisme={organisme} size="md" paletteIndex={colors[organisme._id]} />
+                      <p className="min-w-0 break-words font-semibold leading-snug text-ink">{organismeLabel(organisme)}</p>
+                    </div>
                     <p className="mt-6 flex items-center justify-between text-sm text-ink-soft">
                       {organisme.subjectCount ? `${organisme.subjectCount} sujet${organisme.subjectCount > 1 ? 's' : ''}` : 'Sujets publiés'}
                       <ArrowRight size={16} className="text-ink-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink" />

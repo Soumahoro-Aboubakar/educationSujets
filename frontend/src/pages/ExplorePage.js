@@ -7,6 +7,7 @@ import useDebounce from '../hooks/useDebounce';
 import { catalog, documents as documentsApi } from '../lib/api';
 import { documentTitle, formatDate, hasCorrection, labelOf, loadErrorOf, organismeLabel } from '../lib/format';
 import { findBySegment, segmentFor } from '../lib/slug';
+import OrganismeLogo, { distinctPalette } from '../components/catalog/OrganismeLogo';
 
 /*
  * Parcours du catalogue : organisme → type de parcours → niveaux (concours, année…) → matière → sujets.
@@ -17,9 +18,10 @@ import { findBySegment, segmentFor } from '../lib/slug';
 const MATTER_LEVEL = { libelleSingulier: 'Matière', libellePluriel: 'Matières' };
 const PAGE_SIZE = 20;
 
-const Row = ({ to, onClick, title, meta, icon: Icon = ChevronRight, trailing }) => {
+const Row = ({ to, onClick, title, meta, icon: Icon = ChevronRight, leading, trailing }) => {
   const content = (
     <>
+      {leading}
       <div className="min-w-0 flex-1">
         <p className="truncate text-[16px] font-semibold tracking-[-0.01em] text-ink">{title}</p>
         {meta ? <p className="mt-0.5 truncate text-sm text-ink-soft">{meta}</p> : null}
@@ -67,8 +69,10 @@ const ExplorePage = () => {
   };
 
   const organismes = useAsync(() => catalog.organismes({ limit: 100 }), []);
-  const organismeList = organismes.data?.data || [];
+  const organismeList = useMemo(() => organismes.data?.data || [], [organismes.data]);
   const organisme = findBySegment(organismeList, organismeSegment);
+  // Couleurs des monogrammes réparties sur la liste complète : identiques sur toutes les pages.
+  const colors = useMemo(() => distinctPalette(organismeList), [organismeList]);
   const organismeId = organisme?._id;
   const levels = organisme?.structure?.niveaux || [];
 
@@ -201,7 +205,7 @@ const ExplorePage = () => {
 
   const crumbs = [
     { label: 'Organismes', to: paramsFor({ withOrganisme: false }) },
-    organisme && { label: organismeLabel(organisme), to: paramsFor({ withParcours: false }) },
+    organisme && { label: organismeLabel(organisme), to: paramsFor({ withParcours: false }), logo: organisme },
     parcoursType && { label: labelOf(parcoursType), to: paramsFor() },
     ...nodes.map(({ item }, index) => ({ label: labelOf(item), to: paramsFor({ path: nodes.slice(0, index + 1) }) })),
     matiere && { label: labelOf(matiere), to: paramsFor({ path: nodes, subject: trail.data.matiere }) },
@@ -261,6 +265,7 @@ const ExplorePage = () => {
         <Row
           key={item._id}
           to={`/sujets?o=${segmentFor(item, organismeList)}`}
+          leading={<OrganismeLogo organisme={item} size="md" paletteIndex={colors[item._id]} />}
           title={organismeLabel(item)}
           meta={item.subjectCount ? `${item.subjectCount} sujet${item.subjectCount > 1 ? 's' : ''}` : 'Sujets publiés'}
         />
@@ -327,8 +332,16 @@ const ExplorePage = () => {
           return (
             <React.Fragment key={`${crumb.label}-${index}`}>
               {index > 0 ? <ChevronRight size={14} className="text-ink-muted" /> : null}
-              {last ? <span className="font-medium text-ink">{crumb.label}</span> : (
-                <Link to={`/sujets${crumb.to.toString() ? `?${crumb.to.toString()}` : ''}`} className="text-ink-soft hover:text-burgundy">{crumb.label}</Link>
+              {last ? (
+                <span className="inline-flex items-center gap-1.5 font-medium text-ink">
+                  {crumb.logo ? <OrganismeLogo organisme={crumb.logo} size="xs" paletteIndex={colors[crumb.logo._id]} /> : null}
+                  {crumb.label}
+                </span>
+              ) : (
+                <Link to={`/sujets${crumb.to.toString() ? `?${crumb.to.toString()}` : ''}`} className="inline-flex items-center gap-1.5 text-ink-soft hover:text-burgundy">
+                  {crumb.logo ? <OrganismeLogo organisme={crumb.logo} size="xs" paletteIndex={colors[crumb.logo._id]} /> : null}
+                  {crumb.label}
+                </Link>
               )}
             </React.Fragment>
           );
@@ -336,9 +349,13 @@ const ExplorePage = () => {
       </nav>
 
       <div key={`${step}-${nodes.length}`} className="mt-6 flex animate-fade-up flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <h1 className="text-3xl font-bold tracking-[-0.03em] text-ink md:text-4xl">{title}</h1>
-          {subtitle ? <p className="mt-1.5 text-ink-soft">{subtitle}</p> : null}
+        <div className="flex min-w-0 items-center gap-4">
+          {/* Dans le parcours d'un organisme, son logo rappelle en permanence où l'on se trouve. */}
+          {organisme && step !== 'notfound' && step !== 'error' ? <OrganismeLogo organisme={organisme} size="lg" paletteIndex={colors[organisme._id]} className="hidden sm:inline-flex" /> : null}
+          <div className="min-w-0">
+            <h1 className="text-3xl font-bold tracking-[-0.03em] text-ink md:text-4xl">{title}</h1>
+            {subtitle ? <p className="mt-1.5 text-ink-soft">{subtitle}</p> : null}
+          </div>
         </div>
         {step !== 'loading' && step !== 'notfound' && step !== 'error' ? (
           <Filter
