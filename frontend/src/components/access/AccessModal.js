@@ -7,7 +7,7 @@ import { formatAmount } from '../../lib/format';
 
 const Header = ({ icon: Icon, title, description }) => (
   <div className="mb-6 text-center">
-    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gold-wash">
+    <div className="mx-auto mb-4 flex h-16 w-16 animate-pop-in items-center justify-center rounded-2xl bg-gold-wash ring-8 ring-gold-wash/40">
       <Icon size={22} className="text-ink" strokeWidth={1.8} />
     </div>
     <h2 className="text-[22px] font-bold tracking-[-0.02em] text-ink">{title}</h2>
@@ -43,7 +43,7 @@ const AccessModal = ({ reason, onClose, next, entitlements, limitInfo }) => {
         />
         {plans.data ? (
           <div className="mb-5 text-center">
-            <p className="text-4xl font-extrabold tracking-[-0.04em] text-ink">
+            <p className="tabular text-4xl font-extrabold tracking-[-0.04em] text-ink">
               {formatAmount(entitlements?.nextPayment?.amount ?? plans.data.initial.amount)}
             </p>
             <p className="mt-1 text-sm text-ink-soft">
@@ -55,7 +55,9 @@ const AccessModal = ({ reason, onClose, next, entitlements, limitInfo }) => {
         ) : null}
         <ul className="mb-6 space-y-3 rounded-2xl border border-line bg-white p-4 text-[15px] text-ink">
           {['Tous les sujets et leurs corrigés', `Jusqu’à ${plans.data?.downloadsPerDay || entitlements?.downloads?.limit || 15} téléchargements par jour`, 'Paiement Mobile Money sécurisé'].map((item) => (
-            <li key={item} className="flex items-center gap-3"><Check size={16} className="shrink-0 text-gold-ink" strokeWidth={2.5} />{item}</li>
+            <li key={item} className="flex items-center gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold-wash"><Check size={13} className="text-gold-ink" strokeWidth={3} /></span>{item}
+            </li>
           ))}
         </ul>
         <Button to={`/abonnement?next=${nextParam}`} size="lg" className="w-full">{isRenewal ? 'Renouveler mon abonnement' : 'S’abonner'}</Button>

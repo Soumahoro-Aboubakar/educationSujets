@@ -2,7 +2,7 @@
  * Audit du catalogue public et gestion des alias d'organismes.
  *
  *   npm run catalog -- audit [alias]          Anomalies de parcours (lecture seule)
- *   npm run catalog -- aliases                Alias publics de chaque organisme (/sujets?o=<alias>)
+ *   npm run catalog -- aliases                Alias publics de chaque organisme (/sujets/<alias>)
  *   npm run catalog -- set-alias <alias|id> <nouvel-alias>
  *   npm run catalog -- set-logo <alias|id> <url|->   Logo officiel (https://… ou /organismes/<alias>.svg) ; « - » le retire
  *
@@ -121,14 +121,14 @@ const main = async () => {
     if (command === 'aliases') {
       const assigned = await ensureOrganismeSlugs();
       if (assigned) console.log(`${assigned} alias attribué(s).`);
-      (await Organisme.find().sort('nom').lean()).forEach((item) => console.log(`${item.nom.toUpperCase().padEnd(40)} /sujets?o=${item.slug}`));
+      (await Organisme.find().sort('nom').lean()).forEach((item) => console.log(`${item.nom.toUpperCase().padEnd(40)} /sujets/${item.slug}`));
       return undefined;
     }
     if (command === 'set-alias') {
       const organisme = await findOrganisme(arg1);
       if (!organisme || !arg2) throw new Error('Usage : set-alias <alias|id> <nouvel-alias>');
       const slug = await assignOrganismeSlug(organisme, arg2);
-      console.log(`${organisme.nom.toUpperCase()} → /sujets?o=${slug}${slug !== slugify(arg2) ? ' (alias demandé déjà pris)' : ''}`);
+      console.log(`${organisme.nom.toUpperCase()} → /sujets/${slug}${slug !== slugify(arg2) ? ' (alias demandé déjà pris)' : ''}`);
       return undefined;
     }
     if (command === 'set-logo') {

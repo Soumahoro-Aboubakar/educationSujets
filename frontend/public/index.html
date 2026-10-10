@@ -1,16 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0D1B32" />
+    <!-- Données du catalogue : connexion à l'API ouverte pendant le chargement du script. -->
+    <link rel="preconnect" href="https://educationsujets.onrender.com" crossorigin />
+    <!-- Police Inter : préconnexion et affichage immédiat du texte (police système en attendant). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <!-- Titre et description par défaut ; chaque page les remplace (lib/seo.js, scripts/prerender.mjs). -->
+    <title>Fatafalta — Anciens sujets de concours et corrigés en Côte d’Ivoire</title>
     <meta
       name="description"
-      content="Fatafalta : anciens sujets de concours, tests et corrigés pour préparer vos concours en Côte d’Ivoire."
+      content="Anciens sujets de concours et d’examens en Côte d’Ivoire, classés par organisme, année et matière, avec leurs corrigés quand ils sont publiés."
+      data-seo
     />
-    <title>Fatafalta — Anciens sujets de concours et corrigés</title>
   </head>
   <body>
     <noscript>Vous avez besoin d'activer JavaScript pour exécuter cette application.</noscript>

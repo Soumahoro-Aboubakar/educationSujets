@@ -28,6 +28,7 @@ const { authorizeDownload, logDownload } = require('../services/billing/download
 const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
+const { notifyCatalogChange } = require('../services/seoNotifier');
 
 exports.getDocuments = asyncHandler(async (req, res) => {
   const result = req.query.noeudId && req.query.matiereId
@@ -51,6 +52,8 @@ exports.getDocument = asyncHandler(async (req, res) => {
 exports.createDocument = asyncHandler(async (req, res) => {
   const document = await createDocument(req.body, req.file, req.user);
   const isCorrection = req.body.documentType === 'corrige';
+  // Un corrigé publié enrichit la fiche de son sujet ; un nouveau sujet attend sa validation.
+  if (isCorrection) notifyCatalogChange([req.body.correctionFor]);
 
   sendSuccess(res, {
     statusCode: 201,
@@ -63,6 +66,7 @@ exports.createDocument = asyncHandler(async (req, res) => {
 
 exports.createCorrectionDocument = asyncHandler(async (req, res) => {
   const correction = await createCorrectionDocumentService(req.params.id, req.file, req.user);
+  notifyCatalogChange([req.params.id]);
   sendSuccess(res, {
     statusCode: 201,
     message: 'Corrige associe au document',
@@ -72,16 +76,19 @@ exports.createCorrectionDocument = asyncHandler(async (req, res) => {
 
 exports.replaceDocumentFile = asyncHandler(async (req, res) => {
   const document = await replaceDocumentFile(req.params.id, req.file, req.user);
+  notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Fichier remplace', data: document });
 });
 
 exports.updateDocument = asyncHandler(async (req, res) => {
   const document = await updateDocument(req.params.id, req.body, req.user);
+  notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document mis a jour', data: document });
 });
 
 exports.deleteDocument = asyncHandler(async (req, res) => {
   await deleteDocument(req.params.id, req.user);
+  notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document supprime', data: {} });
 });
 
@@ -92,6 +99,7 @@ exports.getMyDocuments = asyncHandler(async (req, res) => {
 
 exports.validateDocument = asyncHandler(async (req, res) => {
   const document = await validateDocument(req.params.id, req.body.status, req.user);
+  notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Statut du document mis a jour', data: document });
 });
 
@@ -164,11 +172,13 @@ exports.getTrashedDocuments = asyncHandler(async (req, res) => {
 
 exports.restoreDocument = asyncHandler(async (req, res) => {
   const document = await restoreDocumentService(req.params.id);
+  notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document restaure avec succes', data: document });
 });
 
 exports.permanentlyDeleteDocument = asyncHandler(async (req, res) => {
   await permanentlyDeleteDocumentService(req.params.id);
+  notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document supprime definitivement', data: {} });
 });
 

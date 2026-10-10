@@ -1,7 +1,7 @@
-import { labelOf } from './format';
+import { labelOf } from './format.js';
 
 /*
- * Segments d'URL lisibles du catalogue : /sujets?o=inphb&pt=mpsi&n=2022&m=francais.
+ * Segments d'URL lisibles du catalogue : /sujets/inphb/mpsi/2022/francais.
  * Même règle que le serveur (backend/utils/slug.js) : minuscules, sans accents, chaque mot
  * réduit à ses lettres et chiffres, mots reliés par des tirets.
  * Les identifiants MongoDB restent acceptés (anciens liens) mais ne sont plus produits, sauf

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Check, CheckCircle2, ExternalLink, Loader2, Tag, XCircle } from 'lucide-react';
-import { Button, Card, Container, Field, InfoRow, Spinner, cx } from '../components/ui';
+import { ArrowLeft, ArrowRight, Check, ExternalLink, Loader2, Lock, ShieldCheck, Smartphone, Tag, X } from 'lucide-react';
+import { Button, Card, Container, ErrorNote, Eyebrow, Field, InfoRow, Skeleton, Spinner, cx } from '../components/ui';
 import AuthContext from '../context/AuthContext';
 import useAsync from '../hooks/useAsync';
 import useEntitlements from '../hooks/useEntitlements';
@@ -31,7 +31,10 @@ const OperatorName = ({ method }) => (
 const Benefits = ({ downloadsPerDay }) => (
   <ul className="space-y-3 text-[15px] text-ink">
     {['Tous les sujets et leurs corrigés', `Jusqu’à ${downloadsPerDay || 15} téléchargements par jour`, 'Accès identique sur le site et l’application'].map((item) => (
-      <li key={item} className="flex items-center gap-3"><Check size={16} strokeWidth={2.5} className="shrink-0 text-gold-ink" />{item}</li>
+      <li key={item} className="flex items-center gap-3">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold-wash"><Check size={13} strokeWidth={3} className="text-gold-ink" /></span>
+        {item}
+      </li>
     ))}
   </ul>
 );
@@ -41,15 +44,60 @@ const newAttemptId = () => (window.crypto?.randomUUID?.() || `${Date.now().toStr
 
 const formatPhone = (value) => value.replace(/\D/g, '').replace(/(\d{2})(?=\d)/g, '$1 ');
 
-const SummaryRows = ({ rows }) => (
-  <dl className="divide-y divide-line rounded-xl border border-line">
+const SummaryRows = ({ rows, amount }) => (
+  <dl className="overflow-hidden rounded-2xl border border-line bg-white">
     {rows.filter(([, value]) => value).map(([label, value]) => (
-      <div key={label} className="flex items-center justify-between gap-4 px-4 py-3 text-sm">
+      <div key={label} className="flex items-center justify-between gap-4 border-b border-line px-4 py-3 text-sm last:border-0">
         <dt className="text-ink-soft">{label}</dt>
-        <dd className="font-semibold text-ink">{value}</dd>
+        <dd className="tabular font-semibold text-ink">{value}</dd>
       </div>
     ))}
+    {amount ? (
+      <div className="flex items-baseline justify-between gap-4 bg-paper px-4 py-3.5">
+        <dt className="text-sm font-semibold text-ink">Montant</dt>
+        <dd className="tabular text-xl font-extrabold tracking-[-0.02em] text-ink">{amount}</dd>
+      </div>
+    ) : null}
   </dl>
+);
+
+const STEPS = ['Opérateur', 'Vérification', 'Validation'];
+
+/** Où en est l'abonné : choix de l'opérateur → vérification → validation chez l'opérateur. */
+const Stepper = ({ current }) => (
+  <ol className="mb-7 flex items-center gap-2" aria-label="Étapes du paiement">
+    {STEPS.map((label, index) => {
+      const done = index < current;
+      const active = index === current;
+      return (
+        <li key={label} className={cx('flex items-center gap-2', index < STEPS.length - 1 && 'min-w-0 flex-1')} aria-current={active ? 'step' : undefined}>
+          <span className={cx(
+            'flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold transition-colors duration-300',
+            done ? 'bg-ink text-white' : active ? 'bg-gold-light text-ink ring-4 ring-gold-wash' : 'bg-paper-dim text-ink-muted',
+          )}>
+            {done ? <Check size={12} strokeWidth={3} /> : index + 1}
+          </span>
+          <span className={cx('shrink-0 text-xs font-semibold', active ? 'text-ink' : 'hidden text-ink-muted min-[480px]:inline')}>{label}</span>
+          {index < STEPS.length - 1 ? (
+            <span className="relative h-px min-w-3 flex-1 overflow-hidden bg-line" aria-hidden>
+              <span className={cx('absolute inset-0 origin-left bg-ink transition-transform duration-500 ease-emphasized', done ? 'scale-x-100' : 'scale-x-0')} />
+            </span>
+          ) : null}
+        </li>
+      );
+    })}
+  </ol>
+);
+
+/** Pictogramme d'issue : coche dessinée (succès confirmé par le serveur) ou croix. */
+const Outcome = ({ success }) => (
+  <div className={cx('mx-auto flex h-20 w-20 animate-pop-in items-center justify-center rounded-full', success ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600')}>
+    {success ? (
+      <svg viewBox="0 0 24 24" className="h-10 w-10" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M5 12.5l4.5 4.5L19 7.5" className="draw-check" />
+      </svg>
+    ) : <X size={36} strokeWidth={2.2} aria-hidden />}
+  </div>
 );
 
 /**
@@ -106,18 +154,21 @@ const PaymentProgress = ({ paymentId, onDone, onEdit, returnUrl, next }) => {
   };
 
   if (!payment) {
-    return <div className="flex justify-center py-16"><Spinner /></div>;
+    return <div className="flex justify-center py-16"><Spinner label="Chargement du paiement" /></div>;
   }
 
   const { status } = payment;
 
   if (status === 'SUCCEEDED') {
     return (
-      <div className="animate-fade-up text-center">
-        <CheckCircle2 size={56} strokeWidth={1.5} className="mx-auto text-emerald-500" />
-        <h2 className="mt-5 text-2xl font-bold tracking-[-0.02em] text-ink">Paiement réussi</h2>
+      <div className="animate-fade-up text-center" role="status">
+        <Outcome success />
+        <h2 className="mt-6 text-2xl font-bold tracking-[-0.02em] text-ink">Paiement réussi</h2>
         <p className="mx-auto mt-2 max-w-sm text-ink-soft">
           {payment.periodEnd ? `Votre abonnement est actif jusqu’au ${formatLongDate(payment.periodEnd)}.` : 'Votre abonnement est actif.'}
+        </p>
+        <p className="mx-auto mt-4 inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-sm text-ink-soft">
+          <span className="tabular font-semibold text-ink">{formatAmount(payment.amount)}</span> · <OperatorName method={payment} />
         </p>
         <div className="mt-8 grid gap-2">
           {returnUrl ? <Button as="a" href={returnUrl} size="lg">Retourner dans l’application</Button> : null}
@@ -132,11 +183,11 @@ const PaymentProgress = ({ paymentId, onDone, onEdit, returnUrl, next }) => {
   if (['FAILED', 'CANCELLED', 'EXPIRED'].includes(status)) {
     const titles = { FAILED: 'Paiement échoué', CANCELLED: 'Paiement annulé', EXPIRED: 'Paiement expiré' };
     return (
-      <div className="animate-fade-up text-center">
-        <XCircle size={56} strokeWidth={1.5} className="mx-auto text-rose-500" />
-        <h2 className="mt-5 text-2xl font-bold tracking-[-0.02em] text-ink">{titles[status]}</h2>
+      <div className="animate-fade-up text-center" role="alert">
+        <Outcome success={false} />
+        <h2 className="mt-6 text-2xl font-bold tracking-[-0.02em] text-ink">{titles[status]}</h2>
         <p className="mx-auto mt-2 max-w-sm text-ink-soft">{payment.failureReason || 'Aucun montant n’a été débité.'}</p>
-        <Button size="lg" className="mt-8 w-full" onClick={onEdit}>Réessayer</Button>
+        <Button size="lg" className="mt-8 w-full" onClick={onEdit} icon={ArrowLeft}>Réessayer</Button>
         {returnUrl ? <Button as="a" href={returnUrl} size="lg" variant="ghost" className="mt-2 w-full">Retourner dans l’application</Button> : null}
       </div>
     );
@@ -149,20 +200,27 @@ const PaymentProgress = ({ paymentId, onDone, onEdit, returnUrl, next }) => {
 
   return (
     <div className="animate-fade-up">
-      <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700"><Check size={20} strokeWidth={3} /></span>
-        <h2 className="text-xl font-bold tracking-[-0.02em] text-ink">Paiement initié</h2>
+      {/* Demande envoyée, rien n'est encore confirmé : pictogramme d'attente, jamais de coche verte. */}
+      <div className="flex items-center gap-4">
+        <span className="pulse-ring relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold-wash text-gold">
+          <Smartphone size={21} className="relative text-ink" aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <h2 className="text-lg font-bold tracking-[-0.02em] text-ink sm:text-xl">{isRedirect ? 'Finalisez le paiement' : 'Validez sur votre téléphone'}</h2>
+          <p className="text-sm text-ink-soft">{`Demande envoyée à ${payment.methodLabel}. En attente de votre validation.`}</p>
+        </div>
       </div>
 
-      <div className="mt-5">
-        <SummaryRows rows={[['Opérateur', <OperatorName method={payment} />], ['Numéro', payment.phone], ['Montant', formatAmount(payment.amount)]]} />
+      <div className="mt-6">
+        <SummaryRows rows={[['Opérateur', <OperatorName method={payment} />], ['Numéro', payment.phone]]} amount={formatAmount(payment.amount)} />
       </div>
 
-      <h3 className="mt-6 text-sm font-bold uppercase tracking-[0.12em] text-gold-ink">Dernière étape</h3>
-      <ol className="mt-3 space-y-2">
-        {steps.map((step) => (
-          <li key={step} className="flex items-center gap-3 rounded-xl bg-paper-dim px-4 py-3 font-semibold text-ink">
-            <span aria-hidden>👉</span>{step}
+      <h3 className="mt-7 text-xs font-bold uppercase tracking-[0.14em] text-gold-ink">Dernière étape</h3>
+      <ol className="stagger mt-3 space-y-2">
+        {steps.map((step, index) => (
+          <li key={step} className="flex items-center gap-3 rounded-xl border border-line bg-white px-4 py-3 font-semibold text-ink">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-bold text-white">{index + 1}</span>
+            {step}
           </li>
         ))}
       </ol>
@@ -170,14 +228,14 @@ const PaymentProgress = ({ paymentId, onDone, onEdit, returnUrl, next }) => {
         <Button as="a" href={payment.redirectUrl} size="lg" className="mt-4 w-full" icon={ExternalLink}>{`Ouvrir la page ${payment.methodLabel}`}</Button>
       ) : null}
 
-      <p className="mt-5 flex items-center justify-center gap-2 text-sm text-ink-soft" role="status">
-        <Loader2 size={15} className="animate-spin" />
+      <p className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-paper px-4 py-2.5 text-center text-sm text-ink-soft" role="status" aria-live="polite">
+        <Loader2 size={15} className="animate-spin" aria-hidden />
         {status === 'PROCESSING' ? 'Confirmation en cours…' : 'En attente de votre confirmation…'}
-        <span className="font-mono text-xs text-ink-muted">{formatElapsed(elapsed)}</span>
+        <span className="tabular font-mono text-xs text-ink-muted" aria-hidden>{formatElapsed(elapsed)}</span>
       </p>
 
       {!isRedirect && elapsed >= HELP_AFTER_SECONDS ? (
-        <div className="mt-4 rounded-xl border border-line p-4 text-sm">
+        <div className="mt-4 animate-fade-up rounded-xl border border-gold/30 bg-gold-wash/50 p-4 text-sm">
           <p className="font-semibold text-ink">Un problème ?</p>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-ink-soft">
             <li>{`Vérifiez que le ${payment.phone} est bien votre numéro ${payment.methodLabel}.`}</li>
@@ -188,7 +246,7 @@ const PaymentProgress = ({ paymentId, onDone, onEdit, returnUrl, next }) => {
       ) : null}
 
       {status !== 'PROCESSING' ? (
-        <Button variant="ghost" size="sm" className="mt-5 w-full" loading={cancelling} onClick={edit}>Modifier l’opérateur ou le numéro</Button>
+        <Button variant="ghost" size="sm" className="mt-4 w-full" loading={cancelling} onClick={edit} icon={ArrowLeft}>Modifier l’opérateur ou le numéro</Button>
       ) : null}
     </div>
   );
@@ -355,6 +413,21 @@ const SubscribePage = () => {
 
   const handleDone = React.useCallback(() => entitlements.reload(), [entitlements.reload]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Changement d'étape : sur mobile, le panneau de paiement revient en vue s'il est hors de l'écran.
+  const panelRef = useRef(null);
+  const stepIndex = activePayment ? 2 : attempt ? 1 : 0;
+  const firstStep = useRef(true);
+  useEffect(() => {
+    if (firstStep.current) {
+      firstStep.current = false;
+      return;
+    }
+    const top = panelRef.current?.getBoundingClientRect().top;
+    if (top !== undefined && (top < 64 || top > window.innerHeight * 0.6)) {
+      panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [stepIndex]);
+
   if (authLoading || handoffState === 'pending') {
     return <Container className="flex justify-center py-24"><Spinner /></Container>;
   }
@@ -365,29 +438,42 @@ const SubscribePage = () => {
   const simulated = plan?.simulated;
 
   return (
-    <Container className="grid gap-10 py-10 md:py-14 lg:grid-cols-[1fr_440px] lg:gap-16">
+    <Container className="grid grid-cols-1 items-start gap-8 py-8 md:py-14 lg:grid-cols-[1fr_460px] lg:gap-x-16 lg:gap-y-8">
       {/* Offre */}
-      <section className="animate-fade-up">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold-ink">Abonnement Fatafalta</p>
-        <h1 className="mt-3 text-4xl font-extrabold tracking-[-0.035em] text-ink md:text-5xl">Préparez vos concours avec tous les sujets.</h1>
+      <section className="animate-rise-in lg:pt-4">
+        <Eyebrow>Abonnement Fatafalta</Eyebrow>
+        <h1 className="mt-3 text-title-lg font-extrabold text-ink lg:text-display">Préparez vos concours avec tous les sujets.</h1>
         {plan ? (
-          <div className="mt-8">
-            <p className="text-5xl font-extrabold tracking-[-0.04em] text-ink">{formatAmount(plan.initial.amount)}</p>
-            <p className="mt-2 text-ink-soft">{`${plan.initial.months} mois d’accès, puis ${formatAmount(plan.monthly.amount)} par mois jusqu’au renouvellement annuel.`}</p>
-            <p className="mt-1 text-sm font-medium text-gold-ink">{`${formatAmount(plan.promo.discountedInitialAmount)} avec un code promotionnel, pour un premier abonnement.`}</p>
+          <div className="mt-6 animate-fade-in md:mt-8">
+            <p className="tabular text-[clamp(2.5rem,2rem+2.4vw,3.25rem)] font-extrabold leading-none tracking-[-0.04em] text-ink">{formatAmount(plan.initial.amount)}</p>
+            <p className="mt-3 text-ink-soft">{`${plan.initial.months} mois d’accès, puis ${formatAmount(plan.monthly.amount)} par mois jusqu’au renouvellement annuel.`}</p>
+            <p className="mt-3 inline-flex items-start gap-2 rounded-xl bg-gold-wash px-3 py-2 text-sm font-medium text-gold-ink">
+              <Tag size={14} className="mt-[3px] shrink-0" aria-hidden />{`${formatAmount(plan.promo.discountedInitialAmount)} avec un code promotionnel, pour un premier abonnement.`}
+            </p>
           </div>
-        ) : <div className="mt-8 h-24 w-64 animate-pulse rounded-xl bg-paper-dim" />}
-        <div className="mt-8"><Benefits downloadsPerDay={plan?.downloadsPerDay} /></div>
+        ) : (
+          <div className="mt-6 space-y-3 md:mt-8">
+            <Skeleton className="h-12 w-56" />
+            <Skeleton className="h-4 w-72 max-w-full" />
+          </div>
+        )}
         {handoffState === 'failed' ? (
-          <p className="mt-8 rounded-xl bg-rose-50 p-4 text-sm text-rose-700">Le lien depuis l’application a expiré. Connectez-vous pour continuer.</p>
+          <ErrorNote className="mt-6">Le lien depuis l’application a expiré. Connectez-vous pour continuer.</ErrorNote>
         ) : null}
       </section>
 
+      {/* Mobile : avantages sous le paiement (le formulaire arrive plus tôt) ; ordinateur : sous l'offre. */}
+      <div className="order-last animate-rise-in border-t border-line pt-8 [animation-delay:120ms] lg:order-none lg:col-start-1 lg:row-start-2">
+        <Benefits downloadsPerDay={plan?.downloadsPerDay} />
+      </div>
+
       {/* Paiement */}
-      <section>
-        <Card className="p-6 shadow-soft md:p-8">
+      <section ref={panelRef} className="scroll-mt-20 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+        <Card className="animate-rise-in p-5 shadow-lift [animation-delay:80ms] sm:p-8">
+          {user ? <Stepper current={stepIndex} /> : null}
           {!user ? (
             <div className="text-center">
+              <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gold-wash"><Lock size={22} className="text-ink" aria-hidden /></span>
               <h2 className="text-xl font-bold text-ink">Créez votre compte pour vous abonner</h2>
               <p className="mt-2 text-sm text-ink-soft">Votre abonnement est lié à votre compte, sur le site comme sur l’application.</p>
               <div className="mt-6 grid gap-2">
@@ -409,14 +495,15 @@ const SubscribePage = () => {
               <h2 className="text-xl font-bold tracking-[-0.02em] text-ink">Vérifiez vos informations</h2>
               <p className="mt-1 text-sm text-ink-soft">Le paiement sera envoyé à cet opérateur et à ce numéro.</p>
               <div className="mt-5">
-                <SummaryRows rows={[['Opérateur', <OperatorName method={attempt.method} />], ['Numéro', attempt.phone ? formatPhone(attempt.phone) : null], ['Montant', formatAmount(attempt.amount)]]} />
+                <SummaryRows rows={[['Opérateur', <OperatorName method={attempt.method} />], ['Numéro', attempt.phone ? formatPhone(attempt.phone) : null], ['Code promotionnel', attempt.promoCode]]} amount={formatAmount(attempt.amount)} />
               </div>
-              {formError ? <p className="mt-4 text-sm text-rose-600" role="alert">{formError}</p> : null}
+              <ErrorNote className="mt-4">{formError}</ErrorNote>
               <Button size="lg" className="mt-6 w-full" loading={submitting} onClick={confirm} icon={ArrowRight}>
                 {submitting ? 'Paiement en cours…' : `Confirmer et payer ${formatAmount(attempt.amount)}`}
               </Button>
-              <Button variant="ghost" size="sm" className="mt-2 w-full" disabled={submitting} onClick={backToForm}>Modifier</Button>
-              <p className="mt-3 text-center text-xs text-ink-muted">
+              <Button variant="ghost" size="sm" className="mt-2 w-full" disabled={submitting} onClick={backToForm} icon={ArrowLeft}>Modifier</Button>
+              <p className="mt-3 flex items-start justify-center gap-1.5 text-center text-xs text-ink-muted">
+                <ShieldCheck size={14} className="mt-px shrink-0" aria-hidden />
                 {attempt.method.flow === 'redirect' && !simulated
                   ? `Vous serez redirigé vers la page sécurisée ${attempt.method.label}.`
                   : 'Vous confirmerez ensuite le paiement sur votre téléphone. Aucun débit sans votre validation.'}
@@ -431,33 +518,37 @@ const SubscribePage = () => {
                 </p>
               ) : null}
               {current?.status === 'ACTIVE' ? (
-                <p className="mb-6 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800">
-                  {`Votre abonnement est actif jusqu’au ${formatLongDate(current.currentPeriodEnd)}. Ce paiement prolongera votre accès.`}
+                <p className="mb-6 flex items-start gap-2.5 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800">
+                  <Check size={16} strokeWidth={2.5} className="mt-0.5 shrink-0" aria-hidden />
+                  <span>{`Votre abonnement est actif jusqu’au ${formatLongDate(current.currentPeriodEnd)}. Ce paiement prolongera votre accès.`}</span>
                 </p>
               ) : null}
 
               <h2 className="text-lg font-bold text-ink">Récapitulatif</h2>
-              <div className="mt-3">
+              <div className="mt-3 rounded-2xl border border-line bg-paper/60 px-4 pb-4">
                 {quote.data ? (
-                  <>
+                  <div className="animate-fade-in">
                     <InfoRow label={quote.data.kind === 'initial' ? `Abonnement · ${plan?.initial.months || 4} mois` : 'Mensualité · 1 mois'} value={formatAmount(quote.data.baseAmount)} />
                     {quote.data.discount ? <InfoRow label={`Code ${quote.data.promoCode}`} value={`− ${formatAmount(quote.data.discount)}`} /> : null}
                     <div className="flex items-baseline justify-between pt-4">
                       <span className="font-semibold text-ink">Total</span>
-                      <span className="text-2xl font-extrabold tracking-[-0.03em] text-ink">{formatAmount(quote.data.amount)}</span>
+                      <span key={quote.data.amount} className="tabular animate-pop-in text-2xl font-extrabold tracking-[-0.03em] text-ink">{formatAmount(quote.data.amount)}</span>
                     </div>
-                  </>
+                  </div>
                 ) : quote.error ? (
-                  <p className="text-sm text-rose-600">{errorMessage(quote.error)}</p>
-                ) : <div className="h-24 animate-pulse rounded-xl bg-paper-dim" />}
+                  <div className="flex items-center justify-between gap-3 pt-4">
+                    <p className="text-sm text-rose-600">{errorMessage(quote.error)}</p>
+                    <Button type="button" variant="secondary" size="sm" onClick={quote.reload}>Réessayer</Button>
+                  </div>
+                ) : <div className="space-y-3 pt-4"><Skeleton className="h-4 w-full" /><Skeleton className="ml-auto h-7 w-1/2" /></div>}
               </div>
 
               {quote.data?.kind === 'initial' ? (
                 <div className="mt-6">
                   {promoApplied ? (
-                    <div className="flex items-center justify-between rounded-xl bg-gold-wash px-4 py-3 text-sm">
-                      <span className="inline-flex items-center gap-2 font-semibold text-gold-ink"><Tag size={15} /> {promoApplied}</span>
-                      <button type="button" className="text-ink-soft hover:text-ink" onClick={() => { setPromoApplied(''); setPromoInput(''); }}>Retirer</button>
+                    <div className="flex animate-scale-in items-center justify-between rounded-xl border border-gold/30 bg-gold-wash px-4 py-1.5 text-sm">
+                      <span className="inline-flex items-center gap-2 font-semibold text-gold-ink"><Tag size={15} /> {promoApplied} <span className="font-normal">appliqué</span></span>
+                      <button type="button" className="-mr-2 rounded-lg px-2 py-2.5 font-medium text-ink-soft transition-colors hover:text-ink" onClick={() => { setPromoApplied(''); setPromoInput(''); }}>Retirer</button>
                     </div>
                   ) : (
                     <div className="flex items-start gap-2">
@@ -478,31 +569,43 @@ const SubscribePage = () => {
 
               <h2 className="mt-8 text-lg font-bold text-ink">Choisir un opérateur</h2>
               {plan && !methods.length ? (
-                <p className="mt-3 rounded-xl bg-paper-dim p-4 text-sm text-ink-soft">Aucun moyen de paiement n’est disponible pour le moment. Réessayez un peu plus tard.</p>
+                <p className="mt-3 rounded-xl bg-paper-dim p-4 text-sm text-ink-soft" role="status">Aucun moyen de paiement n’est disponible pour le moment. Réessayez un peu plus tard.</p>
               ) : (
-                <div className="mt-3 grid grid-cols-2 gap-2" role="radiogroup" aria-label="Moyen de paiement">
-                  {methods.map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      role="radio"
-                      aria-checked={method === item.id}
-                      onClick={() => setMethod(item.id)}
-                      className={cx('flex h-12 items-center gap-2 rounded-xl border px-3 text-left text-sm font-semibold transition-colors disabled:opacity-60', method === item.id ? 'border-ink bg-ink text-white' : 'border-line bg-white text-ink hover:border-line-strong')}
-                    >
-                      <PaymentMethodLogo method={item} inverted={method === item.id} />
-                      <span className="truncate">{item.label}</span>
-                    </button>
-                  ))}
+                <div className="mt-3 grid gap-2 sm:grid-cols-2" role="radiogroup" aria-label="Moyen de paiement">
+                  {!plan ? Array.from({ length: 4 }).map((_, index) => <Skeleton key={index} className="h-14 rounded-xl" />) : null}
+                  {methods.map((item) => {
+                    const checked = method === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={checked}
+                        onClick={() => setMethod(item.id)}
+                        className={cx(
+                          'relative flex h-14 min-w-0 items-center gap-2.5 rounded-xl border bg-white px-3 text-left text-sm font-semibold text-ink',
+                          'transition-[border-color,box-shadow,transform] duration-200 ease-out active:scale-[0.98] disabled:opacity-60',
+                          checked ? 'border-ink shadow-[0_0_0_1px_theme(colors.ink.DEFAULT)]' : 'border-line hover:border-line-strong',
+                        )}
+                      >
+                        <PaymentMethodLogo method={item} size="lg" />
+                        <span className="min-w-0 flex-1 truncate">{item.label}</span>
+                        <span className={cx('flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors duration-200', checked ? 'border-ink bg-ink text-white' : 'border-line-strong')} aria-hidden>
+                          {checked ? <Check size={12} strokeWidth={3} className="animate-pop-in" /> : null}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               )}
 
               {needsPhone ? (
                 <Field
-                  className="mt-4"
-                  label="Numéro Mobile Money"
+                  className="mt-5"
+                  label={selectedMethod ? `Numéro ${selectedMethod.label}` : 'Numéro Mobile Money'}
                   type="tel"
                   inputMode="tel"
+                  autoComplete="tel-national"
                   placeholder="07 01 02 03 04"
                   value={phone}
                   onChange={(event) => setPhone(event.target.value)}
@@ -514,15 +617,18 @@ const SubscribePage = () => {
                 <p className="mt-4 rounded-xl bg-gold-wash px-4 py-3 text-xs font-medium text-gold-ink">Mode test GeniusPay : aucune somme réelle ne sera débitée.</p>
               ) : null}
 
-              {formError ? <p className="mt-4 text-sm text-rose-600" role="alert">{formError}</p> : null}
+              <ErrorNote className="mt-4">{formError}</ErrorNote>
 
-              <Button type="submit" size="lg" className="mt-6 w-full" disabled={!quote.data || !methods.length} icon={ArrowRight}>Continuer</Button>
+              <Button type="submit" size="lg" className="mt-6 w-full" disabled={!quote.data || !methods.length} icon={ArrowRight} iconPosition="end">Continuer</Button>
+              <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-ink-muted">
+                <ShieldCheck size={14} className="shrink-0" aria-hidden /> Aucun débit sans votre validation.
+              </p>
             </form>
           )}
         </Card>
         {user && !activePayment && !attempt ? (
           <p className="mt-4 text-center text-sm text-ink-soft">
-            <Link to="/compte/abonnement" className="font-medium text-burgundy hover:underline">Voir mon abonnement</Link>
+            <Link to="/compte/abonnement" className="inline-block py-2 font-medium text-burgundy hover:underline">Voir mon abonnement</Link>
           </p>
         ) : null}
       </section>

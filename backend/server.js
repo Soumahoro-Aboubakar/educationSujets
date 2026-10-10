@@ -74,6 +74,7 @@ app.use('/api/structures', require('./routes/structures'));
 app.use('/api/noeuds', require('./routes/noeuds'));
 app.use('/api/matieres', require('./routes/matieres'));
 app.use('/api/catalog', require('./routes/catalog'));
+app.use('/api/seo', require('./routes/seo'));
 app.use('/api/departments', require('./routes/departments'));
 app.use('/api/levels', require('./routes/levels'));
 app.use('/api/semesters', require('./routes/semesters'));

@@ -98,3 +98,9 @@ npm run dev
 - Le backend stocke les metadonnees de chaque document en base.
 - Le provider de stockage est entierement interchangeable via `.env`.
 - Les listes utilisees par les selects du frontend proviennent toutes de la base de donnees.
+
+## Référencement (SEO)
+
+Le site est pré-rendu au build (`frontend/scripts/prerender.mjs`, données de `GET /api/seo/catalog`) :
+une page HTML par position du catalogue (`/sujets/<organisme>/…`) et par sujet, plus `sitemap.xml` et `robots.txt`.
+Déployer l'API avant le site. Variables, règles Render, Search Console, Bing/IndexNow et suivi : [docs/SEO.md](docs/SEO.md).

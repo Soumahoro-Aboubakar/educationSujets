@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowDownLeft, ArrowUpRight, Check, ChevronDown, Copy, CreditCard, Download, FileText, Gift, Wallet } from 'lucide-react';
-import { Button, Card, EmptyState, Field, InfoRow, Modal, SkeletonRows, StatusPill } from '../../components/ui';
+import { Button, Card, EmptyState, Field, InfoRow, Modal, PasswordField, SkeletonRows, StatusPill } from '../../components/ui';
 import AuthContext from '../../context/AuthContext';
 import useAsync from '../../hooks/useAsync';
 import useEntitlements from '../../hooks/useEntitlements';
@@ -79,8 +79,8 @@ export const AccountOverview = () => {
             <p className="text-sm text-ink-soft">Téléchargements aujourd’hui</p>
             <p className="mt-0.5 text-lg font-bold text-ink">{`${downloads.used} / ${downloads.limit}`}</p>
           </div>
-          <div className="h-2 w-40 overflow-hidden rounded-full bg-paper-dim" role="progressbar" aria-valuenow={downloads.used} aria-valuemax={downloads.limit}>
-            <div className="h-full rounded-full bg-ink transition-all" style={{ width: `${Math.min(100, (downloads.used / downloads.limit) * 100)}%` }} />
+          <div className="h-2 w-28 overflow-hidden rounded-full bg-paper-dim sm:w-40" role="progressbar" aria-label="Téléchargements utilisés aujourd’hui" aria-valuenow={downloads.used} aria-valuemin={0} aria-valuemax={downloads.limit}>
+            <div className="h-full origin-left rounded-full bg-ink transition-transform duration-700 ease-emphasized" style={{ transform: `scaleX(${Math.min(1, downloads.used / (downloads.limit || 1))})` }} />
           </div>
         </Card>
       ) : null}
@@ -460,8 +460,8 @@ export const AccountProfile = () => {
       <h2 className="mb-3 mt-10 text-lg font-bold text-ink">Mot de passe</h2>
       <Card className="p-6">
         <form onSubmit={savePassword} className="grid gap-4 sm:grid-cols-2">
-          <Field label="Mot de passe actuel" type="password" autoComplete="current-password" value={passwords.currentPassword} onChange={(event) => setPasswords({ ...passwords, currentPassword: event.target.value })} />
-          <Field label="Nouveau mot de passe" type="password" autoComplete="new-password" hint="8 caractères minimum." value={passwords.newPassword} onChange={(event) => setPasswords({ ...passwords, newPassword: event.target.value })} />
+          <PasswordField label="Mot de passe actuel" autoComplete="current-password" value={passwords.currentPassword} onChange={(event) => setPasswords({ ...passwords, currentPassword: event.target.value })} />
+          <PasswordField label="Nouveau mot de passe" autoComplete="new-password" hint="8 caractères minimum." value={passwords.newPassword} onChange={(event) => setPasswords({ ...passwords, newPassword: event.target.value })} />
           <div className="flex items-center gap-3 sm:col-span-2">
             <Button type="submit" variant="secondary" loading={passwordState?.loading}>Modifier le mot de passe</Button>
             {passwordState?.message ? <span className="text-sm text-emerald-700">{passwordState.message}</span> : null}

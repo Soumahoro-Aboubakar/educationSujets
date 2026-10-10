@@ -3,25 +3,36 @@ import { Link } from 'react-router-dom';
 import { Container } from '../ui';
 import Logo from './Logo';
 
+const GROUPS = [
+  { title: 'Explorer', links: [['/sujets', 'Sujets'], ['/recherche', 'Recherche'], ['/abonnement', 'Abonnement']] },
+  { title: 'Mon compte', links: [['/compte', 'Tableau de bord'], ['/compte/telechargements', 'Téléchargements'], ['/compte/code-promo', 'Parrainage']] },
+];
+
 const SiteFooter = () => (
-  <footer className="mt-auto border-t border-line bg-paper">
-    <Container className="flex flex-col gap-8 py-10 md:flex-row md:items-start md:justify-between">
-      <div className="max-w-xs">
+  <footer className="mt-auto border-t border-line bg-paper-dim/50">
+    <Container className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-[1.4fr_1fr_1fr] md:py-14">
+      <div className="col-span-2 max-w-xs md:col-span-1">
         <Logo />
-        <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+        <p className="mt-4 text-sm leading-relaxed text-ink-soft">
           Les anciens sujets de concours, tests et corrigés, réunis au même endroit.
         </p>
       </div>
-      <nav className="grid grid-cols-2 gap-x-12 gap-y-2 text-sm sm:grid-cols-3" aria-label="Pied de page">
-        <Link to="/sujets" className="text-ink-soft hover:text-ink">Sujets</Link>
-        <Link to="/recherche" className="text-ink-soft hover:text-ink">Recherche</Link>
-        <Link to="/abonnement" className="text-ink-soft hover:text-ink">Abonnement</Link>
-        <Link to="/compte" className="text-ink-soft hover:text-ink">Mon compte</Link>
-        <Link to="/compte/code-promo" className="text-ink-soft hover:text-ink">Parrainage</Link>
-      </nav>
+      {GROUPS.map(({ title, links }) => (
+        <nav key={title} aria-label={title}>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted">{title}</p>
+          <ul className="mt-3">
+            {links.map(([to, label]) => (
+              <li key={to}>
+                <Link to={to} className="inline-block py-1.5 text-[15px] text-ink-soft transition-colors hover:text-ink">{label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
     </Container>
-    <Container className="border-t border-line py-5 text-xs text-ink-muted">
-      © {new Date().getFullYear()} Fatafalta
+    <Container className="flex flex-wrap items-center justify-between gap-2 border-t border-line py-5 pb-safe text-xs text-ink-muted">
+      <span>© {new Date().getFullYear()} Fatafalta</span>
+      <span>Côte d’Ivoire</span>
     </Container>
   </footer>
 );

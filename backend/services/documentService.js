@@ -1186,7 +1186,7 @@ const buildDownloadPayload = async (document, user) => {
     contentType: document.mimeType,
   });
 
-  await Document.updateOne({ _id: document._id }, { $inc: { downloads: 1 } });
+  await Document.updateOne({ _id: document._id }, { $inc: { downloads: 1 } }, { timestamps: false });
 
   console.info(`[DOWNLOAD_URL] user=${user?._id || 'guest'} document=${document._id} expiresIn=${storageConfig.downloadUrlExpiration}`);
 
@@ -1207,12 +1207,13 @@ const resolveLegacyLocalPath = async (document) => {
   }
 };
 
+// Compteurs sans toucher à updatedAt : la date de modification (lastmod du sitemap) reste celle du contenu.
 const incrementDocumentViews = async (documentId) => {
-  await Document.updateOne({ _id: documentId }, { $inc: { views: 1 } });
+  await Document.updateOne({ _id: documentId }, { $inc: { views: 1 } }, { timestamps: false });
 };
 
 const incrementDocumentDownloads = async (documentId) => {
-  await Document.updateOne({ _id: documentId }, { $inc: { downloads: 1 } });
+  await Document.updateOne({ _id: documentId }, { $inc: { downloads: 1 } }, { timestamps: false });
 };
 
 module.exports = {

@@ -1,18 +1,23 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { ChevronRight, FileCheck, FileText, Layers3, SearchX } from 'lucide-react';
-import { Button, Container, EmptyState, SkeletonRows, cx } from '../components/ui';
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { ChevronRight, FileCheck, FileText, Layers3, Search, SearchX, X } from 'lucide-react';
+import { Breadcrumbs, Button, Container, EmptyState, SkeletonRows, cx } from '../components/ui';
 import useAsync from '../hooks/useAsync';
 import useDebounce from '../hooks/useDebounce';
+import useSeo from '../hooks/useSeo';
 import { catalog, documents as documentsApi } from '../lib/api';
 import { documentTitle, formatDate, hasCorrection, labelOf, loadErrorOf, organismeLabel } from '../lib/format';
 import { findBySegment, segmentFor } from '../lib/slug';
+import { CATALOG_ROOT, catalogCrumbs, catalogPath, catalogSeo, catalogText } from '../lib/catalogSeo';
+import { NOINDEX } from '../lib/seo';
 import OrganismeLogo, { distinctPalette } from '../components/catalog/OrganismeLogo';
 
 /*
  * Parcours du catalogue : organisme → type de parcours → niveaux (concours, année…) → matière → sujets.
- * L'état vit dans l'URL (?o, pt, n, m) sous forme d'alias lisibles (/sujets?o=inphb&pt=mpsi&n=2022) :
- * retour navigateur, partage de lien, nouvel onglet et rechargement arrivent au même endroit.
+ * L'état vit dans le chemin, sous forme d'alias lisibles (/sujets/inphb/mpsi/2022/francais) :
+ * retour navigateur, partage de lien, nouvel onglet et rechargement arrivent au même endroit,
+ * et chaque position a sa page pré-rendue pour les moteurs de recherche (scripts/prerender.mjs).
+ * Les anciens liens (/sujets?o=inphb&pt=mpsi&n=2022&m=francais) restent valides et sont réécrits.
  */
 
 const MATTER_LEVEL = { libelleSingulier: 'Matière', libellePluriel: 'Matières' };
@@ -23,37 +28,64 @@ const Row = ({ to, onClick, title, meta, icon: Icon = ChevronRight, leading, tra
     <>
       {leading}
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[16px] font-semibold tracking-[-0.01em] text-ink">{title}</p>
+        <p className="line-clamp-2 text-[16px] font-semibold leading-snug tracking-[-0.01em] text-ink sm:truncate">{title}</p>
         {meta ? <p className="mt-0.5 truncate text-sm text-ink-soft">{meta}</p> : null}
       </div>
       {trailing}
-      <Icon size={18} className="shrink-0 text-ink-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink" />
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink-muted transition-[background-color,color,transform] duration-200 group-hover:translate-x-0.5 group-hover:bg-paper-dim group-hover:text-ink">
+        <Icon size={18} aria-hidden />
+      </span>
     </>
   );
-  const className = 'group flex w-full items-center gap-4 border-b border-line px-5 py-4 text-left transition-colors last:border-0 hover:bg-paper';
+  const className = 'group flex min-h-[64px] w-full items-center gap-4 border-b border-line px-4 py-3.5 text-left transition-colors last:border-0 hover:bg-paper active:bg-paper-dim/60 sm:px-5';
   return to
     ? <Link to={to} className={className}>{content}</Link>
     : <button type="button" onClick={onClick} className={className}>{content}</button>;
 };
 
 const Filter = ({ value, onChange, placeholder }) => (
-  <input
-    value={value}
-    onChange={(event) => onChange(event.target.value)}
-    placeholder={placeholder}
-    aria-label={placeholder}
-    className="h-11 w-full rounded-xl border border-line bg-white px-4 text-[15px] text-ink placeholder:text-ink-muted focus:border-ink/30 focus:outline-none sm:max-w-xs"
-  />
+  <div className="relative w-full sm:max-w-xs">
+    <Search size={17} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-muted" aria-hidden />
+    <input
+      type="search"
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
+      placeholder={placeholder}
+      aria-label={placeholder}
+      enterKeyHint="search"
+      className="h-12 w-full appearance-none rounded-xl border border-line bg-white pl-10 pr-11 text-base text-ink transition-[border-color,box-shadow] duration-200 placeholder:text-ink-muted hover:border-line-strong focus:border-ink/40 focus:outline-none focus:ring-4 focus:ring-ink/[0.06] sm:h-11 sm:text-[15px] [&::-webkit-search-cancel-button]:hidden"
+    />
+    {value ? (
+      <button type="button" onClick={() => onChange('')} aria-label="Effacer le filtre" className="absolute right-1 top-1/2 flex h-10 w-10 -translate-y-1/2 animate-fade-in items-center justify-center rounded-full text-ink-muted hover:text-ink">
+        <X size={16} />
+      </button>
+    ) : null}
+  </div>
 );
 
+const countLabel = (count) => (count ? `${count} sujet${count > 1 ? 's' : ''}` : undefined);
+
+const safeDecode = (segment) => {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return segment;
+  }
+};
+
 const ExplorePage = () => {
-  const [params, setParams] = useSearchParams();
+  const { '*': splat = '' } = useParams();
+  const [params] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   // Segments d'URL : alias lisibles (« inphb », « 2023 ») ou, pour les anciens liens, identifiants.
-  const organismeSegment = params.get('o');
-  const parcoursSegment = params.get('pt');
-  const nodeParam = params.get('n') || '';
-  const nodeSegments = useMemo(() => nodeParam.split(',').filter(Boolean), [nodeParam]);
-  const matiereSegment = params.get('m');
+  const pathSegments = useMemo(() => splat.split('/').filter(Boolean).map(safeDecode), [splat]);
+  const legacy = params.get('o') ? {
+    parcours: params.get('pt'),
+    nodes: (params.get('n') || '').split(',').filter(Boolean),
+    matiere: params.get('m'),
+  } : null;
+  const organismeSegment = legacy ? params.get('o') : pathSegments[0] || null;
   const [filter, setFilter] = useState('');
 
   // Listes déjà chargées, par niveau : un clic ne relance aucune requête pour résoudre le chemin.
@@ -86,6 +118,12 @@ const ExplorePage = () => {
   const parcoursFresh = Boolean(parcoursTypes.data) && parcoursTypes.data.organismeId === organismeId && !parcoursTypes.loading;
   const parcoursList = parcoursFresh ? parcoursTypes.data.data : [];
   const needsParcours = parcoursList.length > 0;
+  // Après l'organisme : [parcours], un segment par niveau, puis la matière.
+  const tail = pathSegments.slice(needsParcours ? 2 : 1);
+  const parcoursSegment = legacy ? legacy.parcours : (needsParcours ? pathSegments[1] : null);
+  const nodeSegments = legacy ? legacy.nodes : tail.slice(0, levels.length);
+  const matiereSegment = legacy ? legacy.matiere : tail[levels.length] || null;
+  const extraSegments = !legacy && tail.length > levels.length + 1;
   const parcoursType = needsParcours ? findBySegment(parcoursList, parcoursSegment) : null;
   const parcoursTypeId = parcoursType?._id;
   const parcoursReady = Boolean(organismeId) && parcoursFresh && (!needsParcours || Boolean(parcoursType));
@@ -100,7 +138,7 @@ const ExplorePage = () => {
 
   // Lien direct, actualisation, lien partagé : chaque segment est retrouvé parmi les éléments
   // publiés de son niveau, dans l'ordre (organisme → parcours → niveaux → matière).
-  const trailKey = `${scope}|${nodeParam}|${matiereSegment || ''}|${levels.length}`;
+  const trailKey = `${scope}|${nodeSegments.join(',')}|${matiereSegment || ''}|${levels.length}`;
   const trail = useAsync(async () => ({ key: trailKey, ...(await resolveTrail()) }), [trailKey], { enabled: parcoursReady });
   async function resolveTrail() {
     const nodes = [];
@@ -129,6 +167,7 @@ const ExplorePage = () => {
             : !parcoursFresh ? 'loading'
               : needsParcours && !parcoursSegment ? 'parcours'
                 : needsParcours && !parcoursType ? 'notfound'
+                  : extraSegments ? 'notfound'
                   : trail.error ? 'error'
                     // Résolution en cours : jamais d'affichage (ni de réécriture d'URL) sur l'ancien chemin.
                     : !trailFresh ? 'loading'
@@ -146,27 +185,28 @@ const ExplorePage = () => {
   );
   const levelFresh = levelItems.data?.key === levelKey && !levelItems.loading;
 
-  /** URL publique d'une position du parcours : uniquement des alias lisibles. */
-  const paramsFor = ({ withOrganisme = true, withParcours = true, path = [], subject = null } = {}) => {
-    const next = new URLSearchParams();
-    if (!withOrganisme || !organisme) return next;
-    next.set('o', segmentFor(organisme, organismeList));
-    if (withParcours && parcoursType) next.set('pt', segmentFor(parcoursType, parcoursList));
-    if (path.length) next.set('n', path.map(({ item, siblings }) => segmentFor(item, siblings)).join(','));
-    if (subject) next.set('m', segmentFor(subject.item, subject.siblings));
-    return next;
+  /** Adresse publique d'une position du parcours : uniquement des alias lisibles. */
+  const pathFor = ({ withOrganisme = true, withParcours = true, path = [], subject = null } = {}) => {
+    if (!withOrganisme || !organisme) return CATALOG_ROOT;
+    return catalogPath([
+      segmentFor(organisme, organismeList),
+      withParcours && parcoursType ? segmentFor(parcoursType, parcoursList) : null,
+      ...path.map(({ item, siblings }) => segmentFor(item, siblings)),
+      subject ? segmentFor(subject.item, subject.siblings) : null,
+    ]);
   };
-  const go = (next) => setParams(next);
 
-  // Ancien lien (identifiants MongoDB) ou alias en majuscules : l'adresse est réécrite sous sa
-  // forme lisible, sans nouvelle entrée d'historique. Le lien d'origine continue de fonctionner.
+  // Ancien lien (?o=…, identifiants MongoDB) ou alias en majuscules : l'adresse est réécrite sous
+  // sa forme lisible, sans nouvelle entrée d'historique. Le lien d'origine continue de fonctionner.
   const canonical = ['noeud', 'matiere', 'documents', 'parcours'].includes(step)
-    ? paramsFor({ withParcours: step !== 'parcours', path: nodes, subject: trail.data?.matiere }).toString()
-    : null;
-  const current = params.toString();
+    ? pathFor({ withParcours: step !== 'parcours', path: nodes, subject: trail.data?.matiere })
+    : step === 'organisme' ? CATALOG_ROOT : null;
+  // Les autres paramètres (utm_source…) sont conservés ; ceux d'un ancien lien sont remplacés par le chemin.
+  const isLegacy = Boolean(legacy);
   useEffect(() => {
-    if (canonical !== null && canonical !== current) setParams(new URLSearchParams(canonical), { replace: true });
-  }, [canonical, current, setParams]);
+    if (canonical === null || (canonical === location.pathname && !isLegacy)) return;
+    navigate(`${canonical}${isLegacy ? '' : location.search}${location.hash}`, { replace: true });
+  }, [canonical, isLegacy, location.pathname, location.search, location.hash, navigate]);
 
   const [page, setPage] = useState(1);
   const [docs, setDocs] = useState([]);
@@ -204,29 +244,44 @@ const ExplorePage = () => {
   const currentLevel = step === 'matiere' ? MATTER_LEVEL : levels[nodes.length];
 
   const crumbs = [
-    { label: 'Organismes', to: paramsFor({ withOrganisme: false }) },
-    organisme && { label: organismeLabel(organisme), to: paramsFor({ withParcours: false }), logo: organisme },
-    parcoursType && { label: labelOf(parcoursType), to: paramsFor() },
-    ...nodes.map(({ item }, index) => ({ label: labelOf(item), to: paramsFor({ path: nodes.slice(0, index + 1) }) })),
-    matiere && { label: labelOf(matiere), to: paramsFor({ path: nodes, subject: trail.data.matiere }) },
+    { label: 'Organismes', to: pathFor({ withOrganisme: false }) },
+    organisme && { label: organismeLabel(organisme), to: pathFor({ withParcours: false }), logo: organisme },
+    parcoursType && { label: labelOf(parcoursType), to: pathFor() },
+    ...nodes.map(({ item }, index) => ({ label: labelOf(item), to: pathFor({ path: nodes.slice(0, index + 1) }) })),
+    matiere && { label: labelOf(matiere), to: pathFor({ path: nodes, subject: trail.data.matiere }) },
   ].filter(Boolean);
 
   // Lien en partie introuvable : on propose de revenir au dernier niveau valide.
   const lastValid = crumbs[crumbs.length - 1];
 
+  // Sujets publiés à la position affichée (compteurs du catalogue) : repris dans la description.
+  const positionCount = matiere ? trail.data.matiere.item.subjectCount
+    : nodes.length ? nodes[nodes.length - 1].item.subjectCount
+      : !parcoursType ? organisme?.subjectCount : undefined;
+  const text = ['organisme', 'parcours', 'noeud', 'matiere', 'documents'].includes(step)
+    ? catalogText({
+      organismes: organismeList, organisme, parcoursType, nodes: nodes.map(({ item }) => item), matiere, levels, step, count: positionCount,
+    })
+    : null;
+
   const titles = {
-    organisme: ['Choisissez un organisme', 'L’organisme qui a organisé le concours ou l’examen.'],
-    parcours: ['Type de parcours', `Les parcours proposés par ${organismeLabel(organisme)}.`],
-    noeud: [currentLevel?.libellePluriel || 'Niveaux', crumbs.slice(1).map((crumb) => crumb.label).join(' · ')],
-    matiere: ['Matières', crumbs.slice(1).map((crumb) => crumb.label).join(' · ')],
     notfound: organisme
       ? ['Lien introuvable', 'Une partie de ce lien ne correspond plus à un contenu publié.']
       : ['Organisme introuvable', 'Ce lien ne correspond à aucun organisme publié.'],
-    documents: [labelOf(matiere) || 'Sujets', crumbs.slice(1, -1).map((crumb) => crumb.label).join(' · ')],
     loading: ['Chargement…', ''],
     error: ['Chargement impossible', ''],
   };
-  const [title, subtitle] = titles[step];
+  const [title, subtitle] = text ? [text.h1, text.description] : titles[step];
+  const listHeading = text ? (step === 'noeud' ? currentLevel?.libellePluriel || text.listHeading : text.listHeading) : null;
+
+  // Une position introuvable n'est pas indexée ; une position valide a son adresse canonique.
+  // Métadonnées appliquées une fois la liste affichée : la page pré-rendue est remplacée d'un coup.
+  const listReady = step === 'noeud' || step === 'matiere' ? levelFresh
+    : step === 'documents' ? Boolean(documentsState.data) || Boolean(documentsState.error)
+      : true;
+  useSeo(text && canonical && listReady
+    ? catalogSeo({ text, path: canonical, crumbs: catalogCrumbs(crumbs.slice(1).map(({ label, to }) => ({ label, path: to }))) })
+    : step === 'notfound' ? { title: titles.notfound[0], description: titles.notfound[1], robots: NOINDEX } : null);
 
   const filterItems = (items, label = labelOf) => {
     const normalized = filter.trim().toLocaleLowerCase();
@@ -252,7 +307,7 @@ const ExplorePage = () => {
           icon={SearchX}
           title={titles.notfound[0]}
           description={titles.notfound[1]}
-          action={<Button variant="secondary" onClick={() => go(lastValid.to)}>{organisme ? `Revenir à ${lastValid.label}` : 'Voir tous les organismes'}</Button>}
+          action={<Button variant="secondary" onClick={() => navigate(lastValid.to)}>{organisme ? `Revenir à ${lastValid.label}` : 'Voir tous les organismes'}</Button>}
         />
       );
     }
@@ -264,17 +319,17 @@ const ExplorePage = () => {
       return items.map((item) => (
         <Row
           key={item._id}
-          to={`/sujets?o=${segmentFor(item, organismeList)}`}
+          to={catalogPath([segmentFor(item, organismeList)])}
           leading={<OrganismeLogo organisme={item} size="md" paletteIndex={colors[item._id]} />}
           title={organismeLabel(item)}
-          meta={item.subjectCount ? `${item.subjectCount} sujet${item.subjectCount > 1 ? 's' : ''}` : 'Sujets publiés'}
+          meta={countLabel(item.subjectCount) || 'Sujets publiés'}
         />
       ));
     }
 
     if (step === 'parcours') {
       return filterItems(parcoursList).map((item) => (
-        <Row key={item._id} to={`/sujets?${paramsFor({ withParcours: false }).toString()}&pt=${segmentFor(item, parcoursList)}`} title={labelOf(item)} />
+        <Row key={item._id} to={`${pathFor({ withParcours: false })}/${encodeURIComponent(segmentFor(item, parcoursList))}`} title={labelOf(item)} />
       ));
     }
 
@@ -286,14 +341,14 @@ const ExplorePage = () => {
       if (!items.length) return <EmptyState icon={SearchX} title="Rien ici pour le moment" description="Aucun élément ne correspond." />;
       return items.map((item) => {
         const next = step === 'noeud'
-          ? paramsFor({ path: [...nodes, { item, siblings }] })
-          : paramsFor({ path: nodes, subject: { item, siblings } });
+          ? pathFor({ path: [...nodes, { item, siblings }] })
+          : pathFor({ path: nodes, subject: { item, siblings } });
         return (
           <Row
             key={item._id}
-            to={`/sujets?${next.toString()}`}
+            to={next}
             title={labelOf(item)}
-            meta={item.subjectCount ? `${item.subjectCount} sujet${item.subjectCount > 1 ? 's' : ''}` : undefined}
+            meta={countLabel(item.subjectCount)}
           />
         );
       });
@@ -311,12 +366,17 @@ const ExplorePage = () => {
           key={document._id}
           to={`/sujets/document/${document._id}`}
           title={documentTitle(document)}
-          meta={formatDate(document.dateAjout || document.createdAt)}
-          trailing={correction ? (
-            <span className="hidden items-center gap-1 rounded-full bg-gold-wash px-2.5 py-1 text-xs font-semibold text-gold-ink sm:inline-flex">
-              <FileCheck size={13} /> Corrigé
+          leading={(
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-paper-dim text-ink">
+              <FileText size={18} aria-hidden />
             </span>
-          ) : null}
+          )}
+          meta={(
+            <span className="inline-flex items-center gap-2">
+              {formatDate(document.dateAjout || document.createdAt)}
+              {correction ? <span className="inline-flex items-center gap-1 font-medium text-gold-ink"><FileCheck size={13} aria-hidden /> Corrigé</span> : null}
+            </span>
+          )}
         />
       );
     });
@@ -326,35 +386,21 @@ const ExplorePage = () => {
 
   return (
     <Container className="py-8 md:py-12">
-      <nav aria-label="Fil d’Ariane" className="flex flex-wrap items-center gap-1 text-sm">
-        {crumbs.map((crumb, index) => {
-          const last = index === crumbs.length - 1;
-          return (
-            <React.Fragment key={`${crumb.label}-${index}`}>
-              {index > 0 ? <ChevronRight size={14} className="text-ink-muted" /> : null}
-              {last ? (
-                <span className="inline-flex items-center gap-1.5 font-medium text-ink">
-                  {crumb.logo ? <OrganismeLogo organisme={crumb.logo} size="xs" paletteIndex={colors[crumb.logo._id]} /> : null}
-                  {crumb.label}
-                </span>
-              ) : (
-                <Link to={`/sujets${crumb.to.toString() ? `?${crumb.to.toString()}` : ''}`} className="inline-flex items-center gap-1.5 text-ink-soft hover:text-burgundy">
-                  {crumb.logo ? <OrganismeLogo organisme={crumb.logo} size="xs" paletteIndex={colors[crumb.logo._id]} /> : null}
-                  {crumb.label}
-                </Link>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </nav>
+      <Breadcrumbs
+        crumbs={crumbs.map((crumb) => ({
+          label: crumb.label,
+          to: crumb.to,
+          leading: crumb.logo ? <OrganismeLogo organisme={crumb.logo} size="xs" paletteIndex={colors[crumb.logo._id]} /> : null,
+        }))}
+      />
 
-      <div key={`${step}-${nodes.length}`} className="mt-6 flex animate-fade-up flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <div key={`${step}-${nodes.length}`} className="mt-4 flex animate-fade-up flex-col justify-between gap-5 sm:mt-6 sm:flex-row sm:items-end">
         <div className="flex min-w-0 items-center gap-4">
           {/* Dans le parcours d'un organisme, son logo rappelle en permanence où l'on se trouve. */}
           {organisme && step !== 'notfound' && step !== 'error' ? <OrganismeLogo organisme={organisme} size="lg" paletteIndex={colors[organisme._id]} className="hidden sm:inline-flex" /> : null}
           <div className="min-w-0">
-            <h1 className="text-3xl font-bold tracking-[-0.03em] text-ink md:text-4xl">{title}</h1>
-            {subtitle ? <p className="mt-1.5 text-ink-soft">{subtitle}</p> : null}
+            <h1 className="text-title-lg font-bold text-ink">{title}</h1>
+            {subtitle ? <p className="mt-2 max-w-2xl text-ink-soft">{subtitle}</p> : null}
           </div>
         </div>
         {step !== 'loading' && step !== 'notfound' && step !== 'error' ? (
@@ -369,7 +415,11 @@ const ExplorePage = () => {
         ) : null}
       </div>
 
-      <div className={cx('mt-6 overflow-hidden rounded-2xl border border-line bg-white', step === 'loading' && 'opacity-80')}>
+      {listHeading ? <h2 className="mt-8 text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted">{listHeading}</h2> : null}
+      <div
+        key={`list-${step}-${leaf?._id || organismeId || 'root'}-${matiere?._id || ''}`}
+        className={cx(listHeading ? 'mt-3' : 'mt-6', 'stagger overflow-hidden rounded-2xl border border-line bg-white shadow-soft', step === 'loading' && 'opacity-80')}
+      >
         {renderList()}
       </div>
 

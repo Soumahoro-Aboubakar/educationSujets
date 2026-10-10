@@ -28,15 +28,15 @@ const AccountLayout = () => {
         <aside>
           <p className="hidden truncate text-sm font-semibold text-ink lg:block">{user.name}</p>
           <p className="mb-6 hidden truncate text-sm text-ink-muted lg:block">{user.email}</p>
-          <nav aria-label="Mon compte" className="-mx-4 flex gap-1 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+          <nav aria-label="Mon compte" className="fade-x scrollbar-none -mx-4 flex gap-1.5 overflow-x-auto px-4 pb-1 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:[mask-image:none]">
             {LINKS.map(({ to, label, icon: Icon, end }) => (
               <NavLink
                 key={to}
                 to={to}
                 end={end}
                 className={({ isActive }) => cx(
-                  'flex shrink-0 items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors',
-                  isActive ? 'bg-ink text-white' : 'text-ink-soft hover:bg-ink/[0.04] hover:text-ink',
+                  'flex min-h-[44px] shrink-0 items-center gap-2.5 rounded-xl px-3.5 text-sm font-medium transition-[background-color,color] duration-200',
+                  isActive ? 'bg-ink text-white shadow-soft' : 'border border-line bg-white text-ink-soft hover:text-ink lg:border-transparent lg:bg-transparent lg:hover:bg-ink/[0.04]',
                 )}
               >
                 <Icon size={16} /> {label}
@@ -55,7 +55,7 @@ const AccountLayout = () => {
 export const PageTitle = ({ title, description, action }) => (
   <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
     <div>
-      <h1 className="text-2xl font-bold tracking-[-0.03em] text-ink md:text-3xl">{title}</h1>
+      <h1 className="text-title font-bold text-ink">{title}</h1>
       {description ? <p className="mt-1 text-ink-soft">{description}</p> : null}
     </div>
     {action}

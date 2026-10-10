@@ -2,6 +2,9 @@
   "name": "education-ci-frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -20,10 +23,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && node scripts/prerender.mjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "react-scripts start"
+    "dev": "react-scripts start",
+    "build:spa": "react-scripts build",
+    "prerender": "node scripts/prerender.mjs",
+    "test:seo": "node --no-warnings --test scripts/prerender.test.mjs"
   },
   "eslintConfig": {
     "extends": [
