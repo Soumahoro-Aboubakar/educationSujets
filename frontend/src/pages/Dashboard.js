@@ -18,6 +18,8 @@ import {
 import CreatableSelect from '../components/CreatableSelect';
 import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
 import AdminCatalogPanel from '../components/AdminCatalogPanel';
+import AdminOrganismeLogos from '../components/admin/AdminOrganismeLogos';
+import YearIssuesPanel from '../components/admin/YearIssuesPanel';
 import DynamicStructureSelector from '../components/DynamicStructureSelector';
 import DynamicMetadataFields from '../components/DynamicMetadataFields';
 import DraftManagement from '../components/DraftManagement';
@@ -254,6 +256,8 @@ const Dashboard = () => {
     ...(user?.isSuperAdmin ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'referentials', label: 'Gestion des référentiels', icon: Layers }] : []),
    // ...(user?.role === 'admin' ? [{ id: 'catalog', label: 'Institutions et structures', icon: Building2 }] : []),
+    ...(user?.role === 'admin' ? [{ id: 'organisme-logos', label: 'Logos des organismes', icon: Building2 }] : []),
+    ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'year-issues', label: 'Années à vérifier', icon: Calendar }] : []),
     // Gestion commerciale (utilisateurs, abonnements, paiements, parrainage) : super admin uniquement.
     ...(user?.role === 'admin' ? [
       { id: 'platform', label: 'Activité plateforme', icon: Activity },
@@ -1231,6 +1235,8 @@ const Dashboard = () => {
             </motion.div>
           )}
 
+          {user?.role === 'admin' && activeTab === 'organisme-logos' && <AdminOrganismeLogos />}
+          {(user?.role === 'admin' || user?.role === 'sub-admin') && activeTab === 'year-issues' && <YearIssuesPanel />}
           {user?.role === 'admin' && activeTab === 'platform' && <AdminOverview />}
           {user?.role === 'admin' && activeTab === 'users' && <AdminUsers />}
           {user?.role === 'admin' && activeTab === 'payments' && <AdminPayments />}
