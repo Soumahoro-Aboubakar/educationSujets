@@ -20,6 +20,8 @@ import {
   Lock,
   Share2,
   Trash2,
+  Gift,
+  Clock,
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
@@ -31,7 +33,7 @@ import { useDownload } from '../hooks/useDownload';
 import { useDocumentAccess } from '../hooks/useDocumentAccess';
 import AccessSheet from '../components/access/AccessSheet';
 import useCorrectionPromptPreference from '../hooks/useCorrectionPromptPreference';
-import { formatDate, formatFileSize, formatNumber } from '../utils/format';
+import { formatDate, formatFileSize, formatNumber, formatRenewal } from '../utils/format';
 import { getCorrection, getDocumentTitle, getExtensionLabel, hasIncludedCorrection } from '../utils/document';
 import AuthContext from '../context/AuthContext';
 import { deleteDocument } from '../services/documents';
@@ -246,6 +248,8 @@ const DocumentDetailScreen = () => {
   const fileLabel = [getExtensionLabel(document), formatFileSize(document.fileSize)].filter(Boolean).join(' · ');
   const subjectNoun = isCorrection ? 'le corrigé' : 'le sujet';
   const isLocked = Boolean(access.locked) && !isSubjectDownloaded;
+  const quotaExhausted = document?.access?.tier === 'recent' && access.quota && !access.quota.unlimited
+    && access.quota.remaining === 0 && !access.quota.documentIds?.includes?.(document._id);
   const primaryLabel = isSubjectDownloading
     ? `Téléchargement… ${Math.round(subjectProgress * 100)} %`
     : isSubjectDownloaded ? `Ouvrir ${subjectNoun}` : isLocked ? `Débloquer ${subjectNoun}` : `Télécharger ${subjectNoun}`;
@@ -295,26 +299,28 @@ const DocumentDetailScreen = () => {
           </Animated.View>
         ) : null}
 
-        {isLocked ? (
-          <Animated.View entering={FadeIn.duration(200)}>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Document réservé aux membres. Voir comment y accéder."
-              onPress={handlePrimaryAction}
-              style={({ pressed }) => [styles.lockNotice, pressed && styles.secondaryPressed]}
-            >
-              <View style={styles.lockIcon}>
-                <Lock size={17} color={brand.ink} strokeWidth={2} />
-              </View>
-              <View style={styles.correctionCopy}>
-                <Text variant="bodyMedium" style={styles.correctionTitle}>Document réservé aux membres</Text>
-                <Text variant="caption" style={styles.correctionText}>
-                  {access.locked === 'AUTH_REQUIRED'
-                    ? 'Le document est disponible. Connecte-toi pour vérifier ton accès.'
-                    : 'Le document est disponible. Un abonnement actif est nécessaire pour le télécharger.'}
-                </Text>
-              </View>
-            </Pressable>
+        {/* Règle d'accès : sujet gratuit (2010 et avant) ou sujet récent compté dans le quota. */}
+        {!isSubjectDownloaded && document?.access ? (
+          <Animated.View entering={FadeIn.duration(200)} style={styles.lockNotice}>
+            <View style={styles.lockIcon}>
+              {document.access.tier === 'free'
+                ? <Gift size={17} color={brand.goldInk} strokeWidth={2} />
+                : <Clock size={17} color={brand.ink} strokeWidth={2} />}
+            </View>
+            <View style={styles.correctionCopy}>
+              <Text variant="bodyMedium" style={styles.correctionTitle}>
+                {document.access.tier === 'free' ? 'Sujet gratuit' : quotaExhausted ? 'Quota de sujets récents atteint' : 'Sujet récent'}
+              </Text>
+              <Text variant="caption" style={styles.correctionText}>
+                {document.access.tier === 'free'
+                  ? `Sujet de ${document.access.year} : téléchargement gratuit et illimité, sans compte.`
+                  : quotaExhausted
+                    ? `Tu as utilisé tes téléchargements de sujets récents.${formatRenewal(access.quota?.nextRenewalAt) ? ` Prochain à partir du ${formatRenewal(access.quota.nextRenewalAt)}.` : ''} Les sujets de ${access.quota?.freeUntilYear || 2010} et avant restent gratuits.`
+                    : access.quota && !access.quota.unlimited
+                      ? `${access.quota.remaining} sujet${access.quota.remaining > 1 ? 's' : ''} récent${access.quota.remaining > 1 ? 's' : ''} encore disponible${access.quota.remaining > 1 ? 's' : ''} sur ${access.quota.windowHours} h${access.quota.plan === 'subscriber' ? '.' : ' (sans abonnement).'}`
+                      : 'Téléchargement selon ton accès.'}
+              </Text>
+            </View>
           </Animated.View>
         ) : null}
 

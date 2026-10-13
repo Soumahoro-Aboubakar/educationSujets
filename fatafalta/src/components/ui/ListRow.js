@@ -11,7 +11,7 @@ const { brand } = theme;
  * Le chevron signale « entrer dans » ; le séparateur est inséré à gauche
  * pour que la surface d'appui couvre toute la largeur.
  */
-const ListRow = ({ title, meta, onPress, disabled, trailing, isLast, accessibilityLabel }) => (
+const ListRow = ({ title, meta, onPress, disabled, leading, trailing, isLast, accessibilityLabel }) => (
   <Pressable
     accessibilityRole="button"
     accessibilityLabel={accessibilityLabel || title}
@@ -21,6 +21,7 @@ const ListRow = ({ title, meta, onPress, disabled, trailing, isLast, accessibili
     style={({ pressed }) => [styles.row, pressed && styles.pressed]}
   >
     <View style={[styles.inner, isLast && styles.innerLast]}>
+      {leading || null}
       <View style={styles.content}>
         <Text variant="h3" style={styles.title} numberOfLines={2}>{title}</Text>
         {meta ? <Text variant="caption" style={styles.meta} numberOfLines={1}>{meta}</Text> : null}

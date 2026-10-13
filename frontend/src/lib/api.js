@@ -28,6 +28,26 @@ export const documents = {
   downloadUrl: (id) => axios.get(`/api/documents/${id}/download`).then(unwrap),
 };
 
+// Téléchargements : quota de sujets récents (visiteur ou compte) et téléchargement groupé.
+export const downloads = {
+  quota: () => axios.get('/api/downloads/quota').then(unwrap),
+  scope: (params) => axios.get('/api/downloads/scope', { params }).then(unwrap),
+  preview: (documentIds) => axios.post('/api/downloads/preview', { documentIds }).then(unwrap),
+  createBundle: (documentIds, delivery = 'zip') => axios.post('/api/downloads/bundles', { documentIds, delivery }).then(unwrap),
+  yearIssues: () => axios.get('/api/downloads/admin/year-issues').then(unwrap),
+};
+
+// Administration des logos d'organismes (web uniquement).
+export const organismeLogos = {
+  setUrl: (organismeId, url) => axios.put(`/api/organismes/${organismeId}/logo`, { url }).then(unwrap),
+  upload: (organismeId, file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return axios.put(`/api/organismes/${organismeId}/logo`, form).then(unwrap);
+  },
+  remove: (organismeId) => axios.delete(`/api/organismes/${organismeId}/logo`).then(unwrap),
+};
+
 export const account = {
   entitlements: () => axios.get('/api/me/entitlements').then(unwrap),
   subscription: () => axios.get('/api/me/subscription').then(unwrap),

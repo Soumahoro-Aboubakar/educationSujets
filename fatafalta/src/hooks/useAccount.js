@@ -8,6 +8,7 @@ import {
   fetchSubscription,
   fetchWallet,
 } from '../services/billing';
+import { fetchDownloadQuota } from '../services/documents';
 
 // Les clés incluent le jeton : changer de compte ne réutilise jamais les données du précédent.
 const useAuthedQuery = (name, queryFn, options = {}) => {
@@ -34,6 +35,20 @@ export const useSubscription = () => useAuthedQuery('subscription', fetchSubscri
 });
 export const usePromoCode = () => useAuthedQuery('promo-code', fetchPromoCode);
 export const useWallet = () => useAuthedQuery('wallet', fetchWallet);
+
+/**
+ * Quota de sujets récents (24 h glissantes), aussi pour un visiteur sans compte.
+ * Clé sous « account » : relu par useRefreshAccount après chaque téléchargement.
+ */
+export const useDownloadQuota = () => {
+  const { token } = useContext(AuthContext);
+  return useQuery({
+    queryKey: ['account', 'download-quota', token || 'visiteur'],
+    queryFn: fetchDownloadQuota,
+    staleTime: 15 * 1000,
+    refetchOnWindowFocus: 'always',
+  });
+};
 
 export const usePlans = () => useQuery({
   queryKey: ['plans'],

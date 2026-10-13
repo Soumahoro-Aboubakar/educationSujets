@@ -15,6 +15,7 @@ import OrientationScreen from '../screens/OrientationScreen';
 import SelectionScreen from '../screens/SelectionScreen';
 import ContestDocumentsScreen from '../screens/ContestDocumentsScreen';
 import DynamicCatalogScreen from '../screens/DynamicCatalogScreen';
+import BulkDownloadScreen from '../screens/BulkDownloadScreen';
 import ParcoursTypeSelectionScreen from '../screens/ParcoursTypeSelectionScreen';
 import CatalogManagementScreen from '../screens/CatalogManagementScreen';
 import TrainingSessionScreen from '../screens/TrainingSessionScreen';
@@ -78,6 +79,7 @@ const RootNavigator = () => {
       <Stack.Screen name="Register" component={RegisterScreen} options={push} />
       <Stack.Screen name="Login" component={LoginScreen} options={push} />
       <Stack.Screen name="DocumentDetail" component={DocumentDetailScreen} options={push} />
+      <Stack.Screen name="BulkDownload" component={BulkDownloadScreen} options={push} />
       <Stack.Screen name="Subscription" component={SubscriptionScreen} options={push} />
       <Stack.Screen name="AdminPaymentMethods" component={PaymentMethodsAdminScreen} options={push} />
       <Stack.Screen name="PromoCode" component={PromoCodeScreen} options={push} />

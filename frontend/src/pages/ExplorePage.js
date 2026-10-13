@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { ChevronRight, FileCheck, FileText, Layers3, Search, SearchX, X } from 'lucide-react';
+import { ChevronRight, FileCheck, FileText, Files, Layers3, Search, SearchX, X } from 'lucide-react';
 import { Breadcrumbs, Button, Container, EmptyState, SkeletonRows, cx } from '../components/ui';
 import useAsync from '../hooks/useAsync';
 import useDebounce from '../hooks/useDebounce';
@@ -375,6 +375,7 @@ const ExplorePage = () => {
             <span className="inline-flex items-center gap-2">
               {formatDate(document.dateAjout || document.createdAt)}
               {correction ? <span className="inline-flex items-center gap-1 font-medium text-gold-ink"><FileCheck size={13} aria-hidden /> Corrigé</span> : null}
+              {document.access?.tier === 'free' ? <span className="font-medium text-gold-ink">Gratuit</span> : null}
             </span>
           )}
         />
@@ -383,6 +384,17 @@ const ExplorePage = () => {
   };
 
   const hasMoreDocs = step === 'documents' && documentsState.data?.pagination && documentsState.data.pagination.pages > page;
+
+  // Téléchargement groupé du périmètre affiché (organisme, cycle, année, matière).
+  const bulkLink = (() => {
+    if (!organisme || !['parcours', 'noeud', 'matiere', 'documents'].includes(step)) return null;
+    const query = new URLSearchParams({ organisme: segmentFor(organisme, organismeList) });
+    if (parcoursType) query.set('cycle', parcoursType._id);
+    const year = nodes.map(({ item }) => labelOf(item)).find((label) => /^(19|20)\d{2}$/.test(label));
+    if (year) query.set('annee', year);
+    if (matiere) query.set('matieres', matiere._id);
+    return `/telecharger?${query}`;
+  })();
 
   return (
     <Container className="py-8 md:py-12">
@@ -426,6 +438,12 @@ const ExplorePage = () => {
       {hasMoreDocs ? (
         <div className="mt-6 flex justify-center">
           <Button variant="secondary" loading={documentsState.loading} onClick={() => setPage((value) => value + 1)}>Charger plus de sujets</Button>
+        </div>
+      ) : null}
+
+      {bulkLink ? (
+        <div className="mt-6 flex justify-center">
+          <Button to={bulkLink} variant="ghost" icon={Files}>Télécharger plusieurs sujets</Button>
         </div>
       ) : null}
     </Container>

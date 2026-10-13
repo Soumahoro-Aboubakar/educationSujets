@@ -1,0 +1,13 @@
+{
+  "description": "Alias maintenus à la main pour rapprocher les écritures d'un même organisme (catalogue dynamique, ancien modèle, saisie libre). Clé : nom tel qu'affiché sur le serveur ; valeur : autres écritures. Pris en compte à chaque « npm run referentiel:sync ».",
+  "alias": {
+    "inphb": ["INP-HB", "INPHB", "Institut National Polytechnique Félix Houphouët-Boigny", "INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro)"],
+    "Université Alassane Ouattara (Bouaké)": ["UAO", "Université de Bouaké"],
+    "ENS - École Normale Supérieure (Abidjan)": ["ENS", "ENS Abidjan", "École Normale Supérieure"],
+    "ENSEA": ["École Nationale Supérieure de Statistique et d'Économie Appliquée"],
+    "ENA": ["École Nationale d'Administration"],
+    "EAMAC": ["École Africaine de la Météorologie et de l'Aviation Civile"],
+    "ESATIC": ["École Supérieure Africaine des TIC"],
+    "ERNAM": ["École Régionale de la Navigation Aérienne et du Management"]
+  }
+}

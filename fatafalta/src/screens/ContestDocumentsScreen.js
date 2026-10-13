@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { FileText, SearchX } from 'lucide-react-native';
+import { FileText, Files, SearchX } from 'lucide-react-native';
 import Text from '../components/ui/Text';
-import ScreenHeader from '../components/ui/ScreenHeader';
+import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
 import SearchField from '../components/ui/SearchField';
 import StateView from '../components/ui/StateView';
 import DocumentList from '../components/documents/DocumentList';
@@ -154,6 +154,18 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
         eyebrow={eyebrow}
         title={title}
         subtitle={pathLabel || null}
+        right={organisme ? (
+          <HeaderIconButton
+            icon={Files}
+            label="Télécharger plusieurs sujets"
+            onPress={() => navigation.navigate('BulkDownload', {
+              organisme,
+              parcoursType,
+              annee: [...(taxonomyPath || []), noeud].map((item) => item?.nom || item?.name).find((label) => /^(19|20)\d{2}$/.test(String(label || ''))),
+              matiereId: matiere?._id,
+            })}
+          />
+        ) : null}
       />
 
       <View style={styles.searchBar}>

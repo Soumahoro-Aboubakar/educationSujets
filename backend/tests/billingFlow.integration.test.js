@@ -49,10 +49,15 @@ test('new users are plain users, never admins', { skip }, () => {
   assert.equal(buyer.role, 'user');
 });
 
-test('a guest or unsubscribed user cannot download', { skip }, async () => {
-  const doc = { _id: new mongoose.Types.ObjectId() };
-  await assert.rejects(authorizeDownload(null, doc), { errorCode: 'AUTH_REQUIRED' });
-  await assert.rejects(authorizeDownload(buyer, doc), { errorCode: 'SUBSCRIPTION_REQUIRED' });
+test('an unsubscribed user only has the free quota for recent documents', { skip }, async () => {
+  // Document sans année lisible : traité comme récent (jamais gratuit par défaut).
+  const { free } = billingConfig.downloads.recentLimits;
+  for (let i = 0; i < free; i += 1) {
+    await authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() });
+  }
+  await assert.rejects(authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() }), { errorCode: 'DAILY_LIMIT_REACHED' });
+  // Remis à zéro pour la suite du parcours (le même compte s'abonne plus loin).
+  await require('../models/DownloadQuota').deleteMany({});
 });
 
 test('an inactive promo code is refused', { skip }, async () => {

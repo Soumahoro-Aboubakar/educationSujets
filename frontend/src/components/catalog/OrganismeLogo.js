@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cx } from '../ui';
 import { labelOf } from '../../lib/format';
 import { slugOf } from '../../lib/slug';
+import { apiUrl } from '../../lib/visitor';
 
 /*
  * Logo d'un organisme, affiché devant son nom.
@@ -32,31 +33,25 @@ const SIZES = {
   lg: { box: 'h-14 w-14 rounded-2xl', text: 'text-[18px]', pad: 'p-2' },
 };
 
-// Mots ignorés pour les initiales (« Institut de … » → I…).
-const STOP_WORDS = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'l', 'd', 'et', 'en', 'a', 'au', 'aux']);
-
 /**
- * Monogramme lisible :
- *  - sigle (écrit en majuscules) : sa première partie si elle a 3 lettres au plus (ENA, INP-HB → INP),
- *    sinon ses deux premières lettres (ESATIC → ES) ;
- *  - nom en toutes lettres : initiales des trois premiers mots (École Normale Supérieure → ENS).
+ * Monogramme de secours (logo absent ou qui ne se charge pas) : les deux premiers caractères
+ * alphanumériques du nom, sans accents, en majuscules. Même règle sur l'application mobile
+ * (fatafalta/src/components/catalog/OrganismeLogo.js).
+ *   ENA → EN · Concours Police → CO · INP-HB → IN · « É » → E · nom vide → ?
  */
 export const monogramOf = (name = '') => {
-  const plain = String(name).normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
-  const words = plain.split(/[^A-Za-z0-9]+/).filter((word) => word && !STOP_WORDS.has(word.toLowerCase()));
-  if (!words.length) return '?';
-  const isAcronym = !/[a-z]/.test(plain);
-  if (isAcronym || words.length === 1) {
-    const [first] = words;
-    return (first.length <= 3 ? first : first.slice(0, 2)).toUpperCase();
-  }
-  return words.slice(0, 3).map((word) => word[0]).join('').toUpperCase();
+  const characters = String(name).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9]/g, '');
+  return characters ? characters.slice(0, 2).toUpperCase() : '?';
 };
 
 const hash = (value) => [...String(value)].reduce((acc, char) => ((acc * 31) + char.charCodeAt(0)) >>> 0, 7);
 
 // Seules les adresses https et les fichiers servis par le site sont acceptés comme logo.
-const safeLogoUrl = (value) => (typeof value === 'string' && /^(https:\/\/|\/(?!\/))\S+$/.test(value.trim()) ? value.trim() : null);
+// Logo téléversé par l'administration : servi par l'API (/api/organismes/:id/logo).
+const safeLogoUrl = (value) => {
+  if (typeof value !== 'string' || !/^(https:\/\/|\/(?!\/))\S+$/.test(value.trim())) return null;
+  return value.trim().startsWith('/api/') ? apiUrl(value.trim()) : value.trim();
+};
 
 /** Couleur stable d'un organisme : dérivée de son alias (même couleur sur toutes les pages). */
 export const paletteIndexOf = (organisme) => hash(slugOf(organisme) || labelOf(organisme)) % PALETTE.length;
@@ -82,6 +77,8 @@ export const distinctPalette = (organismes = []) => {
 
 const OrganismeLogo = ({ organisme, size = 'md', paletteIndex, className }) => {
   const [broken, setBroken] = useState(false);
+  // Nouveau logo (remplacement par l'administration) : nouvel essai d'affichage.
+  useEffect(() => setBroken(false), [organisme?.logo]);
   const dimensions = SIZES[size] || SIZES.md;
   const name = labelOf(organisme);
   const logo = !broken ? safeLogoUrl(organisme?.logo) : null;

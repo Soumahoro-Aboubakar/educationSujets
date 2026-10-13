@@ -231,7 +231,7 @@ const Home = () => {
               <ul className="mt-6 space-y-3.5 text-white/80">
                 {[
                   'Tous les sujets et leurs corrigés',
-                  `Jusqu’à ${plans.data?.downloadsPerDay || 15} téléchargements par jour`,
+                  `Jusqu’à ${plans.data?.downloadsPerDay || 20} sujets récents par 24 h, anciens sujets illimités`,
                   methodLabels.length ? `Paiement par ${methodLabels.join(', ').replace(/, ([^,]*)$/, ' ou $1')}` : 'Paiement par Orange Money, MTN, Moov ou Wave',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">

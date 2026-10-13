@@ -7,6 +7,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import Text from '../components/ui/Text';
 import ScreenHeader from '../components/ui/ScreenHeader';
 import ListRow from '../components/ui/ListRow';
+import OrganismeLogo from '../components/catalog/OrganismeLogo';
 import SearchField from '../components/ui/SearchField';
 import StateView from '../components/ui/StateView';
 import { SkeletonRows } from '../components/ui/Skeleton';
@@ -213,6 +214,7 @@ const SelectionScreen = ({ navigation, route }) => {
           <ListRow
             title={item.name || item.nom}
             meta={describe(item)}
+            leading={catalogMode ? <OrganismeLogo organisme={item} /> : undefined}
             disabled={saving}
             isLast={index === visible.length - 1}
             onPress={() => select(item)}

@@ -8,6 +8,7 @@ const Document = require('../models/Document');
 const AppError = require('../utils/errors');
 const normalizeText = require('../utils/normalizeText');
 const { slugify } = require('../utils/slug');
+const { assertLogoUrl, publicLogo, withPublicLogo } = require('./organismeLogoService');
 
 const findOneAndUpdateWithDuplicateRetry = async (Model, filter, update, options = {}) => {
   try {
@@ -77,7 +78,7 @@ const listOrganismes = async ({ recherche = '', page = 1, limit = 20 } = {}) => 
     Organisme.find(filter).sort('nom').skip((numericPage - 1) * numericLimit).limit(numericLimit).lean(),
     Organisme.countDocuments(filter),
   ]);
-  return { data, pagination: { page: numericPage, limit: numericLimit, total, pages: Math.ceil(total / numericLimit) } };
+  return { data: data.map(withPublicLogo), pagination: { page: numericPage, limit: numericLimit, total, pages: Math.ceil(total / numericLimit) } };
 };
 
 const computeParcoursFlow = ({ hasParcoursType, selectedParcoursType, existingParcoursTypes = [] }) => {
@@ -169,7 +170,7 @@ const createOrganisme = async (payload) => {
       $setOnInsert: {
         nom,
         nomNormalise: normalizeText(nom),
-        logo: payload.logo?.trim(),
+        logo: payload.logo?.trim() ? assertLogoUrl(payload.logo) : undefined,
         description: payload.description?.trim() || '',
         hasParcoursType: Boolean(payload.hasParcoursType),
         parcoursTypeId: payload.parcoursTypeId || null,
@@ -180,7 +181,7 @@ const createOrganisme = async (payload) => {
   organisme.slug = await assignOrganismeSlug(organisme, payload.slug);
 
   const parcoursType = await ensureParcoursTypeForOrganisme(organisme._id, payload);
-  return { ...organisme.toObject(), parcoursType: parcoursType ? { ...parcoursType } : null };
+  return { ...withPublicLogo(organisme.toObject()), parcoursType: parcoursType ? { ...parcoursType } : null };
 };
 
 const listParcoursTypes = async ({ organismeId } = {}) => {
@@ -391,6 +392,7 @@ const listPublishedOrganismes = async ({ page, limit } = {}) => {
       if (!structure) return null;
       return {
         ...organisme,
+        logo: publicLogo(organisme),
         // `name` makes the public DTO convenient for generic clients while
         // retaining `nom` as the canonical French database field.
         name: organisme.nom,
@@ -476,7 +478,7 @@ const listPublishedNoeuds = async ({ organismeId, parentId, parcoursTypeId, rech
   const pagination = paginationFrom({ page, limit });
   const start = (pagination.page - 1) * pagination.limit;
   return {
-    organisme: { _id: organisme._id, nom: organisme.nom, name: organisme.nom, slug: organisme.slug || slugify(organisme.nom) },
+    organisme: { _id: organisme._id, nom: organisme.nom, name: organisme.nom, slug: organisme.slug || slugify(organisme.nom), logo: publicLogo(organisme) },
     structure: { niveaux: structure.niveaux },
     data: items.slice(start, start + pagination.limit),
     pagination: {

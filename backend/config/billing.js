@@ -67,9 +67,31 @@ const billing = {
   },
 
   downloads: {
-    // 'all' : tout sujet/corrigé exige un abonnement actif. 'premium' : seuls les documents isPremmuim.
+    /*
+     * Politique freemium (services/billing/downloadGuard.js). L'année d'un document est celle du
+     * niveau « annee » de son catalogue (nœud « 2021 »…) : services/access/documentYear.js.
+     *  - document d'une année <= freeUntilYear : gratuit pour tous, sans compte, hors quota ;
+     *  - document plus récent OU d'année inconnue : « récent », compté dans un quota glissant
+     *    de `windowHours` heures — `recentLimits.subscriber` avec un abonnement actif,
+     *    `recentLimits.free` sinon (visiteur, compte sans abonnement, abonnement expiré).
+     *    `free: 0` réserve les sujets récents aux seuls abonnés.
+     */
+    freeUntilYear: toInt(process.env.DOWNLOAD_FREE_UNTIL_YEAR, 2010),
+    windowHours: toInt(process.env.DOWNLOAD_WINDOW_HOURS, 24) || 24,
+    recentLimits: {
+      free: toInt(process.env.DOWNLOAD_RECENT_LIMIT_FREE, 3),
+      subscriber: toInt(process.env.DOWNLOAD_RECENT_LIMIT_SUBSCRIBER, 20),
+    },
+    // Garde-fou anti-contournement des visiteurs anonymes : sujets récents par adresse IP et par
+    // fenêtre, tous identifiants visiteur confondus (large : une IP est souvent partagée en CI).
+    anonymousIpLimit: toInt(process.env.DOWNLOAD_ANONYMOUS_IP_LIMIT, 12),
+    // Téléchargement groupé : nombre maximal de documents par opération, durée de validité du lien.
+    bundleMaxDocuments: toInt(process.env.DOWNLOAD_BUNDLE_MAX, 60),
+    bundleTtlMinutes: toInt(process.env.DOWNLOAD_BUNDLE_TTL_MINUTES, 15) || 15,
+    // Historique : 'premium' ne change plus que les documents marqués isPremmuim (réservés aux abonnés).
     protection: process.env.DOWNLOAD_PROTECTION === 'premium' ? 'premium' : 'all',
-    dailyLimit: toInt(process.env.DOWNLOAD_DAILY_LIMIT, 15),
+    // Compatibilité (anciens clients, tableau de bord) : quota d'un abonné.
+    get dailyLimit() { return this.recentLimits.subscriber; },
     // Rôles qui gèrent le contenu : pas d'abonnement ni de quota requis.
     exemptRoles: ['admin', 'sub-admin'],
   },

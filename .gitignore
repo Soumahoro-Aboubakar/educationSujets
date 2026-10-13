@@ -26,6 +26,7 @@ fatafalta/node_modules/
 
 # Dossiers d'upload utilisateurs
 backend/uploads/
+rendu_sans_filigrane/
 
 # Fichiers système
 .DS_Store

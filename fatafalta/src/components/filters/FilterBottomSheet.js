@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
   },
   optionItemSelected: {
-    backgroundColor: theme.colors.primaryLight,
+    backgroundColor: theme.colors.primaryWash,
   },
 });
 

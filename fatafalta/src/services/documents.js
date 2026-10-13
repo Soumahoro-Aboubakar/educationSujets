@@ -147,3 +147,23 @@ export const permanentlyDeleteDocument = async (id) => {
   const response = await api.delete(`/api/documents/trash/${id}`);
   return response.data;
 };
+
+// ── Téléchargements : quota de sujets récents et téléchargement groupé ─────────────────────
+
+const unwrapData = (response) => response.data.data;
+
+/** Quota de sujets récents du demandeur (visiteur ou compte). */
+export const fetchDownloadQuota = () => api.get('/api/downloads/quota').then(unwrapData);
+
+/** Documents d'un périmètre : organisme, cycle (type de parcours), année, matières. */
+export const fetchDownloadScope = (params) => api.get('/api/downloads/scope', { params }).then(unwrapData);
+
+/** Contrôle d'une sélection avant téléchargement (rien n'est consommé). */
+export const previewDownloadSelection = (documentIds) => api.post('/api/downloads/preview', { documentIds }).then(unwrapData);
+
+/** Réserve le quota puis remet un lien signé par document (enregistrés dans l'application). */
+export const fetchBundleFiles = async (documentIds) => {
+  const bundle = await api.post('/api/downloads/bundles', { documentIds, delivery: 'files' }).then(unwrapData);
+  const delivery = await api.get(bundle.filesUrl).then(unwrapData);
+  return { ...delivery, count: bundle.count };
+};

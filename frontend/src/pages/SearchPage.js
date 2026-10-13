@@ -13,6 +13,7 @@ import OrganismeLogo, { distinctPalette } from '../components/catalog/OrganismeL
 
 const PAGE_SIZE = 20;
 
+// « Corrigés » : tout document qui dispose d'un corrigé, séparé ou inclus dans le PDF du sujet.
 const TYPE_FILTERS = [
   { id: '', label: 'Tout' },
   { id: 'sujet', label: 'Sujets' },
@@ -28,8 +29,9 @@ const normalize = (value) => value.normalize('NFD').replace(/[̀-ͯ]/g, '').toLo
 const SearchPage = () => {
   const [params, setParams] = useSearchParams();
   const [query, setQuery] = useState(params.get('q') || '');
-  const type = params.get('type') || '';
-  const withCorrection = params.get('corrige') === '1';
+  // Anciens liens « Avec corrigé » (?corrige=1) : même filtre que « Corrigés ».
+  const type = params.get('corrige') === '1' ? 'corrige' : params.get('type') || '';
+  const withCorrection = type === 'corrige';
   const debounced = useDebounce(query.trim(), 300);
   const [page, setPage] = useState(1);
   const [items, setItems] = useState([]);
@@ -50,6 +52,7 @@ const SearchPage = () => {
 
   const setFilter = (key, value) => {
     const next = new URLSearchParams(params);
+    next.delete('corrige');
     if (value) next.set(key, value);
     else next.delete(key);
     setParams(next, { replace: true });
@@ -67,7 +70,7 @@ const SearchPage = () => {
   const results = useAsync(async () => {
     const result = await documents.list({
       search: debounced || undefined,
-      documentType: type || undefined,
+      documentType: type === 'sujet' ? 'sujet' : undefined,
       hasCorrection: withCorrection ? 'true' : undefined,
       page,
       limit: PAGE_SIZE,
@@ -120,15 +123,6 @@ const SearchPage = () => {
             {filter.label}
           </button>
         ))}
-        <span className="mx-1 h-5 w-px shrink-0 bg-line" aria-hidden />
-        <button
-          type="button"
-          aria-pressed={withCorrection}
-          onClick={() => setFilter('corrige', withCorrection ? '' : '1')}
-          className={cx('inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200 active:scale-95', withCorrection ? 'border-gold bg-gold-wash text-gold-ink' : 'border-line bg-white text-ink-soft hover:border-line-strong hover:text-ink')}
-        >
-          <FileCheck size={14} /> Avec corrigé
-        </button>
       </div>
 
       {matchingOrganismes.length ? (

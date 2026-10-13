@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import ExplorePage from './pages/ExplorePage';
 import DocumentPage from './pages/DocumentPage';
 import SearchPage from './pages/SearchPage';
+import BulkDownloadPage from './pages/BulkDownloadPage';
 import SubscribePage from './pages/SubscribePage';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -104,6 +105,7 @@ function App() {
             {/* /sujets, /sujets/inphb, /sujets/inphb/idsi/2025/… : un seul composant, qui garde ses listes en mémoire. */}
             <Route path="/sujets/*" element={<ExplorePage />} />
             <Route path="/recherche" element={<Page seo="search"><SearchPage /></Page>} />
+            <Route path="/telecharger" element={<BulkDownloadPage />} />
             <Route path="/abonnement" element={<Page seo="subscribe"><SubscribePage /></Page>} />
             <Route path="/login" element={<Page seo="login"><Login /></Page>} />
             <Route path="/register" element={<Page seo="register"><Register /></Page>} />

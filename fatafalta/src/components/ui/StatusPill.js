@@ -7,9 +7,9 @@ const { brand, colors } = theme;
 
 // Une seule table de correspondance statut → ton, partagée par tous les écrans du compte.
 const TONES = {
-  positive: { dot: colors.success, bg: colors.successWash, fg: '#047857' },
+  positive: { dot: colors.success, bg: colors.successWash, fg: colors.success },
   pending: { dot: brand.gold, bg: brand.goldWash, fg: brand.goldInk },
-  negative: { dot: colors.error, bg: colors.errorWash, fg: '#B91C1C' },
+  negative: { dot: colors.error, bg: colors.errorWash, fg: colors.error },
   neutral: { dot: brand.inkMuted, bg: brand.paperDim, fg: brand.inkSoft },
 };
 

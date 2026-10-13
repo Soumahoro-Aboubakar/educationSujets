@@ -674,6 +674,12 @@ const getPublicPlans = async () => {
     // Uniquement les moyens activés par l'administrateur.
     methods: await listEnabled(),
     downloadsPerDay: billingConfig.downloads.dailyLimit,
+    // Politique de téléchargement affichée par les interfaces (gratuité, quotas glissants).
+    downloadPolicy: {
+      freeUntilYear: billingConfig.downloads.freeUntilYear,
+      windowHours: billingConfig.downloads.windowHours,
+      recentLimits: { ...billingConfig.downloads.recentLimits },
+    },
     // Aucun débit réel : simulation locale (mock) ou environnement de test du fournisseur.
     sandbox: mode === 'mock' || (mode === 'geniuspay' && geniusPayEnv !== 'production'),
     // Simulation locale : les scénarios dépendent des derniers chiffres du numéro.

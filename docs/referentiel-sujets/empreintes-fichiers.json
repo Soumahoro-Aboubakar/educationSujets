@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "description": "Empreintes SHA-256 des fichiers publiés, enregistrées localement après publication (le serveur ne les stocke pas). Ajout via npm run referentiel:empreinte.",
+  "empreintes": []
+}

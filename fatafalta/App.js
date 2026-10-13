@@ -2,18 +2,19 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { AppState, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
 import { QueryClient, QueryClientProvider, focusManager } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { 
-  useFonts, 
-  Inter_400Regular, 
-  Inter_500Medium, 
-  Inter_600SemiBold, 
-  Inter_700Bold, 
-  Inter_800ExtraBold 
-} from '@expo-google-fonts/inter';
+import { useFonts } from '@expo-google-fonts/inter/useFonts';
+// Import par graisse : seules les 5 graisses utilisées sont embarquées (et non les 18 du paquet).
+import { Inter_400Regular } from '@expo-google-fonts/inter/400Regular';
+import { Inter_500Medium } from '@expo-google-fonts/inter/500Medium';
+import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
+import { Inter_700Bold } from '@expo-google-fonts/inter/700Bold';
+import { Inter_800ExtraBold } from '@expo-google-fonts/inter/800ExtraBold';
 import * as SplashScreen from 'expo-splash-screen';
 import RootNavigator from './src/navigation/RootNavigator';
+import BrandIntro from './src/components/brand/BrandIntro';
 import { AuthProvider } from './src/context/AuthContext';
 import { PreferencesProvider } from './src/context/PreferencesContext';
 import useDownloadStore from './src/store/useDownloadStore';
@@ -28,6 +29,20 @@ focusManager.setEventListener((handleFocus) => {
   return () => subscription.remove();
 });
 
+/*
+ * Liens directs vers un sujet (partage, Google, assistant IA) : la fiche s'ouvre dans l'application,
+ * l'accueil est placé dessous pour que « Retour » y mène. Même adresse que le site web.
+ */
+const linking = {
+  prefixes: [Linking.createURL('/'), 'https://fatafalta.com', 'https://www.fatafalta.com', 'https://fatafalta.onrender.com'],
+  config: {
+    initialRouteName: 'MainTabs',
+    screens: {
+      DocumentDetail: 'sujets/document/:documentId',
+    },
+  },
+};
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -39,6 +54,8 @@ const queryClient = new QueryClient({
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  // Intro animée : jouée une fois par lancement à froid, jamais au retour d'un autre écran.
+  const [introVisible, setIntroVisible] = useState(true);
   const hydrateStore = useDownloadStore((state) => state.hydrate);
 
   let [fontsLoaded] = useFonts({
@@ -65,11 +82,8 @@ export default function App() {
     prepare();
   }, []);
 
-  useEffect(() => {
-    if (appIsReady && fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [appIsReady, fontsLoaded]);
+  // Le splash natif est masqué par BrandIntro dès sa première mise en page,
+  // pour que l'intro prenne le relais sans écran vide entre les deux.
 
   if (!appIsReady || !fontsLoaded) {
     return null;
@@ -80,12 +94,13 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <PreferencesProvider>
-            <NavigationContainer>
+            <NavigationContainer linking={linking}>
               <RootNavigator />
             </NavigationContainer>
           </PreferencesProvider>
         </AuthProvider>
       </QueryClientProvider>
+      {introVisible ? <BrandIntro onFinish={() => setIntroVisible(false)} /> : null}
     </GestureHandlerRootView>
   );
 }

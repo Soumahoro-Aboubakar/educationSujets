@@ -1,87 +1,64 @@
 /**
- * Design System Tokens — Éducation CI (Fatafalta)
+ * Design System Tokens — Fatafalta
  *
- * Palette : Bleu #2563EB dominant, orange #F97316 accent (CTA only)
+ * Identité : encre (bleu nuit) dominante, papier ivoire, or pour la valeur,
+ * bordeaux pour l'interaction. Valeurs de marque définies dans ./brand.js.
  * Typo    : Inter, hiérarchie 7 niveaux
  * Spacing : multiples de 4
- * Inspiré des codes visuels de Linear, Arc, Notion
  */
 
 import { Platform } from 'react-native';
+import { brand } from './brand';
+
+export { brand };
 
 // ── Colors ──────────────────────────────────────
+// Rôles sémantiques historiques (primary, accent…), désormais alignés sur
+// l'identité : les écrans qui les utilisent adoptent la marque sans réécriture.
 export const colors = {
-  // Primary — Bleu dominant
-  primary: '#2563EB',
-  primaryDark: '#1D4ED8',
-  primaryLight: '#3B82F6',
-  primaryWash: '#EFF6FF',
-  primary100: '#DBEAFE',
-  primary200: '#BFDBFE',
-  primary900: '#1E3A8A',
+  // Primary — encre
+  primary: brand.ink,
+  primaryDark: brand.inkDeep,
+  primaryLight: brand.inkGlow,
+  primaryWash: brand.paperDim,
+  primary100: brand.line,
+  primary200: brand.lineStrong,
+  primary900: brand.inkDeep,
 
-  // Accent — Orange (CTA téléchargement UNIQUEMENT)
-  accent: '#F97316',
-  accentDark: '#EA580C',
-  accentLight: '#FB923C',
-  accentWash: '#FFF7ED',
+  // Accent — bordeaux (CTA téléchargement, actions secondaires fortes)
+  accent: brand.burgundy,
+  accentDark: '#561F2C',
+  accentLight: '#8E3B50',
+  accentWash: brand.burgundyWash,
 
-  // Success / Error / Warning
-  success: '#10B981',
-  successWash: '#ECFDF5',
-  error: '#EF4444',
-  errorWash: '#FEF2F2',
-  warning: '#F59E0B',
-  warningWash: '#FFFBEB',
+  // Success / Error / Warning — tons profonds, lisibles en texte sur fond clair (≥ 4,5:1)
+  success: '#1F7A55',
+  successWash: '#E8F3EC',
+  error: '#B42318',
+  errorWash: '#FBEDEB',
+  warning: '#8F530F',
+  warningWash: brand.goldWash,
 
   // Neutrals
-  background: '#F8FAFC',
+  background: brand.paper,
   surface: '#FFFFFF',
-  surfaceRaised: '#F1F5F9',
-  surfaceOverlay: 'rgba(255, 255, 255, 0.72)',
+  surfaceRaised: brand.paperDim,
+  surfaceOverlay: 'rgba(252, 250, 245, 0.86)',
 
   // Text
-  textPrimary: '#0F172A',
-  textSecondary: '#475569',
-  textMuted: '#94A3B8',
+  textPrimary: brand.ink,
+  textSecondary: brand.inkSoft,
+  textMuted: brand.inkMuted,
   textInverse: '#FFFFFF',
 
   // Borders
-  border: '#E2E8F0',
-  borderLight: '#F1F5F9',
+  border: brand.line,
+  borderLight: '#EFEADF',
 
   // Misc
-  skeleton: '#E2E8F0',
-  skeletonHighlight: '#F1F5F9',
-  backdrop: 'rgba(15, 23, 42, 0.4)',
-};
-
-// ── Brand — parcours étudiant ───────────────────
-// Palette éditoriale des écrans publics (accueil → catalogue → sujet).
-// Remplace les constantes NAVY/GOLD/… dupliquées dans chaque écran.
-// Règle d'usage :
-//   ink       → texte principal, en-têtes, action principale
-//   burgundy  → unique couleur d'interaction (liens, chevrons, focus)
-//   gold      → statuts positifs discrets (corrigé, hors ligne)
-export const brand = {
-  ink: '#0D1B32',
-  inkSoft: '#4F5E72',
-  inkMuted: '#7A8697',
-  paper: '#FCFAF5',
-  paperDim: '#F4F0E6',
-  line: '#E4DED2',
-  lineStrong: '#CFC7B8',
-  burgundy: '#6C2838',
-  burgundyWash: '#F4E9EA',
-  gold: '#B48A48',
-  goldWash: '#F6EEDF',
-  goldInk: '#7A5A24',
-  onInk: '#FFFFFF',
-  onInkSoft: 'rgba(255,255,255,0.66)',
-  onInkAccent: '#E4C997',
-  pressed: 'rgba(13,27,50,0.04)',
-  skeleton: '#ECE7DC',
-  backdrop: 'rgba(13,27,50,0.56)',
+  skeleton: brand.skeleton,
+  skeletonHighlight: brand.paperDim,
+  backdrop: brand.backdrop,
 };
 
 // ── Typography ──────────────────────────────────
@@ -176,8 +153,8 @@ export const shadows = {
   md: createShadow(4, 8, 0.08, 3),
   lg: createShadow(8, 16, 0.1, 6),
   xl: createShadow(12, 24, 0.12, 8),
-  card: createShadow(2, 12, 0.06, 2, '#2563EB'),
-  cardHover: createShadow(8, 24, 0.12, 6, '#2563EB'),
+  card: createShadow(2, 12, 0.06, 2, brand.ink),
+  cardHover: createShadow(8, 24, 0.12, 6, brand.ink),
 };
 
 // ── Transitions ─────────────────────────────────

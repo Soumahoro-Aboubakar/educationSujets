@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import AuthContext from '../context/AuthContext';
-import { useEntitlements } from './useAccount';
+import { useDownloadQuota, useEntitlements } from './useAccount';
 import { useWebCheckout } from './useWebCheckout';
 
 /**
@@ -12,15 +12,16 @@ import { useWebCheckout } from './useWebCheckout';
  */
 export const useDocumentAccess = (navigation) => {
   const { isAuthenticated } = useContext(AuthContext);
+  const quota = useDownloadQuota();
   const { data: entitlements, isFetching } = useEntitlements();
   const checkout = useWebCheckout();
   const [reason, setReason] = useState(null);
   const [limitInfo, setLimitInfo] = useState(null);
   const awaitingAuth = useRef(false);
 
-  const locked = !isAuthenticated
-    ? 'AUTH_REQUIRED'
-    : entitlements && !entitlements.canDownload ? 'SUBSCRIPTION_REQUIRED' : null;
+  // Plus de blocage anticipé : les sujets de 2010 et avant sont gratuits sans compte et les
+  // sujets récents ont un quota gratuit. Le serveur décide et la feuille explique son refus.
+  const locked = null;
 
   // Retour de la connexion : on vérifie automatiquement l'abonnement.
   useEffect(() => {
@@ -57,6 +58,7 @@ export const useDocumentAccess = (navigation) => {
 
   return {
     locked,
+    quota: quota.data,
     guard,
     deny,
     sheetProps: {
@@ -64,6 +66,7 @@ export const useDocumentAccess = (navigation) => {
       reason,
       limitInfo,
       entitlements,
+      quota: quota.data,
       onClose: close,
       onLogin: () => goToAuth('Login'),
       onRegister: () => goToAuth('Register'),

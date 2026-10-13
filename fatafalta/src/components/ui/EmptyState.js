@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { FileText } from 'lucide-react-native';
 import Text from './Text';
 import Button from './Button';
 import theme from '../../theme/tokens';
@@ -16,21 +17,15 @@ const EmptyState = ({
 }) => {
   const renderIcon = () => {
     if (!Icon) {
-      // Fallback: render a simple text icon
-      return (
-        <Text style={{ fontSize: 30, color: theme.colors.primary }}>📄</Text>
-      );
+      return <FileText size={30} color={theme.colors.primary} strokeWidth={1.6} />;
     }
     if (React.isValidElement(Icon)) {
       return Icon;
     }
-    if (typeof Icon === 'function') {
-      return <Icon size={30} color={theme.colors.primary} />;
+    if (typeof Icon === 'function' || Icon?.$$typeof) {
+      return <Icon size={30} color={theme.colors.primary} strokeWidth={1.6} />;
     }
-    // If Icon is not valid, use fallback
-    return (
-      <Text style={{ fontSize: 30, color: theme.colors.primary }}>📄</Text>
-    );
+    return <FileText size={30} color={theme.colors.primary} strokeWidth={1.6} />;
   };
 
   const renderAction = () => {
@@ -79,7 +74,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: 84,
     height: 84,
-    borderRadius: theme.radius['2xl'],
+    borderRadius: theme.radius.full,
     backgroundColor: theme.colors.primaryWash,
     alignItems: 'center',
     justifyContent: 'center',

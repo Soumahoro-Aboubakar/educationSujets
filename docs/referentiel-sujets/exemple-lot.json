@@ -1,0 +1,48 @@
+{
+  "description": "Exemple de lot à contrôler avant publication : npm run verify:subjects -- ../docs/referentiel-sujets/exemple-lot.json (depuis backend/). Les champs absents sont tolérés ; plus ils sont renseignés, plus le contrôle est fiable.",
+  "lot": [
+    {
+      "ref": "deja-publie-meme-fichier",
+      "titre": "Concours ESATIC 2024 (Licence) : maths, physique, français, anglais",
+      "organisme": "ESATIC",
+      "parcoursType": "Bacheliers",
+      "annee": "2024",
+      "matiere": "Mathématiques, Sciences physiques, Français, Anglais",
+      "tailleOctets": 2221884
+    },
+    {
+      "ref": "variante-de-titre",
+      "titre": "ENA 2022 cycle moyen - épreuve d'anglais (présélection)",
+      "organisme": "ENA",
+      "parcoursType": "Cycle moyen",
+      "annee": "2022",
+      "matiere": "Anglais"
+    },
+    {
+      "ref": "meme-titre-autre-annee",
+      "titre": "ENA Cycle Moyen 2023 – Anglais (Présélection)",
+      "organisme": "ENA",
+      "parcoursType": "Cycle moyen",
+      "annee": "2023",
+      "matiere": "Anglais"
+    },
+    {
+      "ref": "corrige-d-un-sujet-existant",
+      "type": "corrige",
+      "sujetParentId": "6a773c949905fe6016fc2263"
+    },
+    {
+      "ref": "metadonnees-incompletes",
+      "titre": "Examen d'Algèbre 4B 2022-2023"
+    },
+    {
+      "ref": "nouvelle-ressource",
+      "titre": "INP-HB 2026 – Concours CAE : Mathématiques 1",
+      "organisme": "INP-HB",
+      "parcoursType": "CAE",
+      "annee": "2026",
+      "matiere": "Mathématiques 1",
+      "fichier": "chemin/vers/le-fichier.pdf"
+    }
+  ]
+}

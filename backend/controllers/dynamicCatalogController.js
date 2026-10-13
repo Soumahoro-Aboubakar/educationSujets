@@ -2,6 +2,8 @@ const asyncHandler = require('../utils/asyncHandler');
 const { sendSuccess } = require('../utils/api');
 const service = require('../services/dynamicCatalogService');
 const Noeud = require('../models/Noeud');
+const logos = require('../services/organismeLogoService');
+const AppError = require('../utils/errors');
 
 exports.listOrganismes = asyncHandler(async (req, res) => {
   const result = await service.listOrganismes(req.query);
@@ -73,4 +75,24 @@ exports.listPublishedNoeuds = asyncHandler(async (req, res) => {
 exports.listPublishedMatieres = asyncHandler(async (req, res) => {
   const result = await service.listPublishedMatieres(req.query);
   sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+});
+
+// ── Logos des organismes (administration web) ─────────────────────────────
+
+exports.setOrganismeLogo = asyncHandler(async (req, res) => {
+  const data = await logos.setOrganismeLogo(req.params.organismeId, { file: req.file, url: req.body?.url || req.body?.logo });
+  sendSuccess(res, { data, message: 'Logo enregistre' });
+});
+
+exports.removeOrganismeLogo = asyncHandler(async (req, res) => {
+  const data = await logos.removeOrganismeLogo(req.params.organismeId);
+  sendSuccess(res, { data, message: 'Logo supprime' });
+});
+
+/** Logo stocké : redirection vers une URL signée, mise en cache par le navigateur. */
+exports.getOrganismeLogo = asyncHandler(async (req, res) => {
+  const url = await logos.resolveStoredLogoUrl(req.params.organismeId);
+  if (!url) throw new AppError('Logo introuvable', 404);
+  res.set('Cache-Control', `public, max-age=${Math.floor(logos.SIGNED_URL_SECONDS / 2)}`);
+  res.redirect(302, url);
 });

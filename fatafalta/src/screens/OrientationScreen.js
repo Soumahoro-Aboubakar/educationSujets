@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { ChevronRight, Download, FileText, UserRound } from 'lucide-react-native';
 import Text from '../components/ui/Text';
+import BrandMark from '../components/brand/BrandMark';
 import OrientationArt, { OrientationBackdrop } from '../components/illustrations/OrientationArt';
 import theme from '../theme/tokens';
 
@@ -35,10 +36,11 @@ const OrientationScreen = ({ navigation }) => {
       <OrientationBackdrop />
 
       <View style={[styles.brand, { paddingTop: insets.top + theme.spacing.base }]}>
+        <BrandMark size={28} variant="onDark" />
+        <Text variant="bodyMedium" style={styles.brandName}>Fatafalta</Text>
         <View style={styles.flag}>
           {FLAG.map((color) => <View key={color} style={[styles.flagBand, { backgroundColor: color }]} />)}
         </View>
-        <Text variant="overline" style={styles.brandName}>Fatafalta</Text>
       </View>
 
       {/* L'illustration occupe l'espace libre : ni vide, ni rognage selon l'écran. */}
@@ -105,10 +107,11 @@ const styles = StyleSheet.create({
   brand: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: theme.spacing.sm,
+    gap: 6,
     paddingHorizontal: theme.layout.gutter,
   },
   flag: {
+    marginLeft: theme.spacing.xs,
     flexDirection: 'row',
     overflow: 'hidden',
     borderRadius: 1,
@@ -119,7 +122,9 @@ const styles = StyleSheet.create({
   },
   brandName: {
     color: brand.onInk,
-    letterSpacing: 1.4,
+    fontFamily: theme.fontFamily.bold,
+    fontSize: 17,
+    letterSpacing: -0.4,
   },
   hero: {
     paddingHorizontal: theme.layout.gutter,

@@ -1,0 +1,1124 @@
+{
+  "version": 1,
+  "genereLe": "2026-10-10T09:19:32.841Z",
+  "typesDocumentServeur": [
+    "sujet",
+    "corrige"
+  ],
+  "naturesDeduites": {
+    "(non déterminée)": 219,
+    "baccalaureat": 4,
+    "compilation": 1,
+    "concours": 50,
+    "corrige": 2,
+    "devoir": 3,
+    "examen": 16,
+    "td_exercices": 1,
+    "tp": 1
+  },
+  "catalogueDynamique": {
+    "description": "Organisme → nœuds (niveaux de la structure) → matière. Le type de concours / filière est porté par parcoursType.",
+    "organismes": [
+      {
+        "id": "6abefef7d89f729e5f65877a",
+        "nom": "EAMAC",
+        "slug": "eamac",
+        "niveauxStructure": [
+          {
+            "ordre": 1,
+            "type": "annee",
+            "libelleSingulier": "Année",
+            "libellePluriel": "Années"
+          }
+        ],
+        "parcoursTypes": [
+          {
+            "id": "6abf0136d89f729e5f658788",
+            "nom": "Contrôleurs de la Circulation Aérienne",
+            "parDefaut": true
+          },
+          {
+            "id": "6abf0ab1d89f729e5f6587b3",
+            "nom": "Exploitation en Aéronautique Civile",
+            "parDefaut": true
+          },
+          {
+            "id": "6abf015ed89f729e5f65878e",
+            "nom": "Ingénieur",
+            "parDefaut": true
+          },
+          {
+            "id": "6abf0a54d89f729e5f6587b2",
+            "nom": "Ingénieur & Exploitation en Aéronautique Civile",
+            "parDefaut": true
+          },
+          {
+            "id": "6abeff24d89f729e5f658780",
+            "nom": "Ingénieurs & Contrôleurs",
+            "parDefaut": true
+          },
+          {
+            "id": "6abf0001d89f729e5f658783",
+            "nom": "Technicien",
+            "parDefaut": true
+          },
+          {
+            "id": "6abf00d1d89f729e5f658785",
+            "nom": "Technicien & Technicien Supérieur",
+            "parDefaut": true
+          }
+        ],
+        "matieres": [
+          {
+            "id": "6abf058bd89f729e5f65879c",
+            "nom": "Anglais"
+          },
+          {
+            "id": "6abf061dd89f729e5f6587a1",
+            "nom": "Français"
+          },
+          {
+            "id": "6abf00d8d89f729e5f658786",
+            "nom": "Mathématiques"
+          },
+          {
+            "id": "6abeff4dd89f729e5f658782",
+            "nom": "Physique"
+          }
+        ],
+        "noeuds": [
+          {
+            "id": "6abeff37d89f729e5f658781",
+            "nom": "2011",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf0115d89f729e5f658787",
+            "nom": "2012",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf029fd89f729e5f658790",
+            "nom": "2013",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf04a1d89f729e5f658798",
+            "nom": "2014",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf0589d89f729e5f65879b",
+            "nom": "2014-2015",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf05c1d89f729e5f65879d",
+            "nom": "2015",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf06d0d89f729e5f6587a3",
+            "nom": "2016",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf07ecd89f729e5f6587a5",
+            "nom": "2018",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf0a34d89f729e5f6587b1",
+            "nom": "2022",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf0abcd89f729e5f6587b9",
+            "nom": "2023",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abf0b7fd89f729e5f6587bb",
+            "nom": "2024",
+            "parentId": null,
+            "ordreNiveau": 1
+          }
+        ],
+        "variantesMatieresASurveiller": []
+      },
+      {
+        "id": "6abdac72c16ff3242bba68fe",
+        "nom": "ENA",
+        "slug": "ena",
+        "niveauxStructure": [
+          {
+            "ordre": 1,
+            "type": "annee",
+            "libelleSingulier": "Année",
+            "libellePluriel": "Années"
+          }
+        ],
+        "parcoursTypes": [
+          {
+            "id": "6abdac98c16ff3242bba68ff",
+            "nom": "Cycle moyen",
+            "parDefaut": true
+          }
+        ],
+        "matieres": [
+          {
+            "id": "6abdb4e0c16ff3242bba6926",
+            "nom": "Anglais"
+          },
+          {
+            "id": "6abdb619c16ff3242bba692b",
+            "nom": "Aptitude verbale"
+          },
+          {
+            "id": "6abe6946c16ff3242bba6e1a",
+            "nom": "Aptitude verbale, Culture générale"
+          },
+          {
+            "id": "6abe6c27c16ff3242bba6e42",
+            "nom": "Aptitude verbale, Culture générale, Anglais, Aptitude numérique, Logique"
+          },
+          {
+            "id": "6abdb1bcc16ff3242bba690d",
+            "nom": "Culture générale"
+          },
+          {
+            "id": "6abdacc9c16ff3242bba6901",
+            "nom": "Test d'organisation, Test d'aptitude numérique"
+          }
+        ],
+        "noeuds": [
+          {
+            "id": "6abdb5fac16ff3242bba692a",
+            "nom": "2015",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abe6cd1c16ff3242bba6e48",
+            "nom": "2017",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abdacb1c16ff3242bba6900",
+            "nom": "2018",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abdb49bc16ff3242bba6924",
+            "nom": "2020",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abe691fc16ff3242bba6e19",
+            "nom": "2022",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abe6c1ac16ff3242bba6e41",
+            "nom": "2025",
+            "parentId": null,
+            "ordreNiveau": 1
+          }
+        ],
+        "variantesMatieresASurveiller": []
+      },
+      {
+        "id": "6ac0392bd89f729e5f659150",
+        "nom": "ENSEA",
+        "slug": "ensea",
+        "niveauxStructure": [
+          {
+            "ordre": 1,
+            "type": "annee",
+            "libelleSingulier": "Année",
+            "libellePluriel": "Années"
+          }
+        ],
+        "parcoursTypes": [
+          {
+            "id": "6ac28562d89f729e5f659ff4",
+            "nom": "Analystes Statisticiens (AS)",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac280f3d89f729e5f659fd5",
+            "nom": "ISE Cycle Long / AS",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac0395bd89f729e5f659152",
+            "nom": "ISE Option Mathématiques",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac27cdbd89f729e5f659fa7",
+            "nom": "ISE Option Économie",
+            "parDefaut": true
+          }
+        ],
+        "matieres": [
+          {
+            "id": "6ac2794bd89f729e5f659f91",
+            "nom": "Anglais"
+          },
+          {
+            "id": "6ac03eb3d89f729e5f65916a",
+            "nom": "Calcul numérique"
+          },
+          {
+            "id": "6ac03aced89f729e5f659157",
+            "nom": "Contraction de texte"
+          },
+          {
+            "id": "6ac03aa1d89f729e5f659156",
+            "nom": "Mathématiques"
+          },
+          {
+            "id": "6ac278b2d89f729e5f659f8f",
+            "nom": "Mathématiques 1"
+          },
+          {
+            "id": "6ac27865d89f729e5f659f8e",
+            "nom": "Mathématiques 2"
+          },
+          {
+            "id": "6ac03987d89f729e5f659154",
+            "nom": "Ordre général"
+          },
+          {
+            "id": "6ac27eded89f729e5f659fc4",
+            "nom": "Économie"
+          }
+        ],
+        "noeuds": [
+          {
+            "id": "6ac043c7d89f729e5f659186",
+            "nom": "1998",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04344d89f729e5f659184",
+            "nom": "1999",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac042ecd89f729e5f659183",
+            "nom": "2000",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04295d89f729e5f659182",
+            "nom": "2001",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac0423ed89f729e5f659180",
+            "nom": "2002",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac041e5d89f729e5f65917f",
+            "nom": "2003",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac0418ed89f729e5f65917e",
+            "nom": "2004",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04136d89f729e5f659174",
+            "nom": "2005",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac040d9d89f729e5f659173",
+            "nom": "2006",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac0407fd89f729e5f659172",
+            "nom": "2007",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04026d89f729e5f659170",
+            "nom": "2008",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03fccd89f729e5f65916f",
+            "nom": "2009",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03f76d89f729e5f65916e",
+            "nom": "2010",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03f1fd89f729e5f65916d",
+            "nom": "2011",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03ec8d89f729e5f65916b",
+            "nom": "2012",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03e6fd89f729e5f659169",
+            "nom": "2013",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03e2bd89f729e5f659168",
+            "nom": "2014",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03debd89f729e5f659167",
+            "nom": "2015",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03da9d89f729e5f659162",
+            "nom": "2016",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03d68d89f729e5f659161",
+            "nom": "2017",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03d28d89f729e5f659160",
+            "nom": "2018",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03c1dd89f729e5f65915e",
+            "nom": "2019",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03bd9d89f729e5f65915d",
+            "nom": "2020",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03b98d89f729e5f65915c",
+            "nom": "2021",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03b57d89f729e5f659158",
+            "nom": "2022",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac03971d89f729e5f659153",
+            "nom": "2023",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac27bc2d89f729e5f659fa0",
+            "nom": "2024",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac27988d89f729e5f659f92",
+            "nom": "2025",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac277a5d89f729e5f659f7f",
+            "nom": "2026",
+            "parentId": null,
+            "ordreNiveau": 1
+          }
+        ],
+        "variantesMatieresASurveiller": []
+      },
+      {
+        "id": "6abf08bdd89f729e5f6587aa",
+        "nom": "ERNAM",
+        "slug": "ernam",
+        "niveauxStructure": [
+          {
+            "ordre": 1,
+            "type": "annee",
+            "libelleSingulier": "Année",
+            "libellePluriel": "Années"
+          }
+        ],
+        "parcoursTypes": [
+          {
+            "id": "6abf09d4d89f729e5f6587af",
+            "nom": "Prépa EAC/ING",
+            "parDefaut": true
+          },
+          {
+            "id": "6abf08bfd89f729e5f6587ab",
+            "nom": "Prépa Technicien",
+            "parDefaut": true
+          }
+        ],
+        "matieres": [
+          {
+            "id": "6abf09f2d89f729e5f6587b0",
+            "nom": "Mathématiques"
+          },
+          {
+            "id": "6abf08c5d89f729e5f6587ad",
+            "nom": "Physique"
+          }
+        ],
+        "noeuds": [
+          {
+            "id": "6abf08c3d89f729e5f6587ac",
+            "nom": "2022",
+            "parentId": null,
+            "ordreNiveau": 1
+          }
+        ],
+        "variantesMatieresASurveiller": []
+      },
+      {
+        "id": "6ac04634d89f729e5f6591da",
+        "nom": "ESATIC",
+        "slug": "esatic",
+        "niveauxStructure": [
+          {
+            "ordre": 1,
+            "type": "annee",
+            "libelleSingulier": "Année",
+            "libellePluriel": "Années"
+          }
+        ],
+        "parcoursTypes": [
+          {
+            "id": "6ac0463bd89f729e5f6591db",
+            "nom": "Bacheliers",
+            "parDefaut": true
+          }
+        ],
+        "matieres": [
+          {
+            "id": "6ac046ccd89f729e5f6591e4",
+            "nom": "Mathématiques"
+          },
+          {
+            "id": "6ac0474dd89f729e5f6591f0",
+            "nom": "Mathématiques, Sciences physiques"
+          },
+          {
+            "id": "6ac04662d89f729e5f6591df",
+            "nom": "Mathématiques, Sciences physiques, Anglais"
+          },
+          {
+            "id": "6ac04646d89f729e5f6591dd",
+            "nom": "Mathématiques, Sciences physiques, Français, Anglais"
+          }
+        ],
+        "noeuds": [
+          {
+            "id": "6ac04748d89f729e5f6591ef",
+            "nom": "2012",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac0472fd89f729e5f6591ec",
+            "nom": "2013",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04716d89f729e5f6591e7",
+            "nom": "2014",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac046fdd89f729e5f6591e6",
+            "nom": "2015",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac046e2d89f729e5f6591e5",
+            "nom": "2016",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac046c8d89f729e5f6591e3",
+            "nom": "2017",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac046add89f729e5f6591e2",
+            "nom": "2020",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04691d89f729e5f6591e1",
+            "nom": "2021",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04677d89f729e5f6591e0",
+            "nom": "2022",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac0465cd89f729e5f6591de",
+            "nom": "2023",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04641d89f729e5f6591dc",
+            "nom": "2024",
+            "parentId": null,
+            "ordreNiveau": 1
+          }
+        ],
+        "variantesMatieresASurveiller": []
+      },
+      {
+        "id": "6abc1686914ef4263264f560",
+        "nom": "inphb",
+        "slug": "inphb",
+        "niveauxStructure": [
+          {
+            "ordre": 1,
+            "type": "annee",
+            "libelleSingulier": "Année",
+            "libellePluriel": "Années"
+          }
+        ],
+        "parcoursTypes": [
+          {
+            "id": "6ac27a71d89f729e5f659f93",
+            "nom": "A2GP",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac2882dd89f729e5f65a011",
+            "nom": "A2GP/GCN/GIN",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac0441ed89f729e5f659187",
+            "nom": "Bacheliers",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac2894ad89f729e5f65a021",
+            "nom": "CAE",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac28710d89f729e5f65a005",
+            "nom": "GCN/GIN",
+            "parDefaut": true
+          },
+          {
+            "id": "6ac59b0cd89f729e5f65b56f",
+            "nom": "IDSI",
+            "parDefaut": true
+          }
+        ],
+        "matieres": [
+          {
+            "id": "6ac29ed2d89f729e5f65a086",
+            "nom": "Anglais 1"
+          },
+          {
+            "id": "6ac2891dd89f729e5f65a01e",
+            "nom": "Anglais 2"
+          },
+          {
+            "id": "6ac045f2d89f729e5f6591d6",
+            "nom": "Anglais, Culture générale, Culture scientifique"
+          },
+          {
+            "id": "6ac0442bd89f729e5f659189",
+            "nom": "Anglais, Français, Mathématiques"
+          },
+          {
+            "id": "6ac286dcd89f729e5f65a003",
+            "nom": "Biologie 1"
+          },
+          {
+            "id": "6ac288e5d89f729e5f65a01a",
+            "nom": "Chimie 1"
+          },
+          {
+            "id": "6ac288abd89f729e5f65a017",
+            "nom": "Chimie 2"
+          },
+          {
+            "id": "6ac286a5d89f729e5f65a002",
+            "nom": "Chimie 3 – Chimie générale"
+          },
+          {
+            "id": "6ac2866dd89f729e5f65a000",
+            "nom": "Chimie 3 – Chimie organique"
+          },
+          {
+            "id": "6ac29fb6d89f729e5f65a089",
+            "nom": "Culture générale"
+          },
+          {
+            "id": "6ac28872d89f729e5f65a015",
+            "nom": "Français 2"
+          },
+          {
+            "id": "6ac28636d89f729e5f659ffe",
+            "nom": "Géologie 1"
+          },
+          {
+            "id": "6ac28990d89f729e5f65a024",
+            "nom": "Histoire, Géographie et GMC"
+          },
+          {
+            "id": "6ac2883ad89f729e5f65a012",
+            "nom": "Informatique 1"
+          },
+          {
+            "id": "6ac285fbd89f729e5f659ff9",
+            "nom": "Informatique 2"
+          },
+          {
+            "id": "6ac59b2dd89f729e5f65b570",
+            "nom": "Informatique, Mathématiques générales, Statistiques-Probabilités"
+          },
+          {
+            "id": "6ac28958d89f729e5f65a022",
+            "nom": "Mathématiques 1"
+          },
+          {
+            "id": "6ac28800d89f729e5f65a010",
+            "nom": "Mathématiques 2"
+          },
+          {
+            "id": "6ac27a82d89f729e5f659f95",
+            "nom": "Mathématiques 3"
+          },
+          {
+            "id": "6ac287cad89f729e5f65a00e",
+            "nom": "Physique 1"
+          },
+          {
+            "id": "6ac28792d89f729e5f65a00c",
+            "nom": "Physique 2"
+          },
+          {
+            "id": "6ac285b6d89f729e5f659ff5",
+            "nom": "Physique 3"
+          },
+          {
+            "id": "6ac2875ad89f729e5f65a009",
+            "nom": "Sciences industrielles 1"
+          },
+          {
+            "id": "6ac2871ed89f729e5f65a006",
+            "nom": "Sciences industrielles 2"
+          },
+          {
+            "id": "6abc16b2914ef4263264f563",
+            "nom": "français"
+          },
+          {
+            "id": "6ac289c7d89f729e5f65a028",
+            "nom": "Économie générale"
+          }
+        ],
+        "noeuds": [
+          {
+            "id": "6ac04424d89f729e5f659188",
+            "nom": "2015",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac045b8d89f729e5f6591d3",
+            "nom": "2016",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac045d3d89f729e5f6591d4",
+            "nom": "2017",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac045edd89f729e5f6591d5",
+            "nom": "2018",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04609d89f729e5f6591d7",
+            "nom": "2019",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac04623d89f729e5f6591d9",
+            "nom": "2020",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6abc16a3914ef4263264f562",
+            "nom": "2021",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac27a75d89f729e5f659f94",
+            "nom": "2025",
+            "parentId": null,
+            "ordreNiveau": 1
+          },
+          {
+            "id": "6ac59bc0d89f729e5f65b571",
+            "nom": "2026",
+            "parentId": null,
+            "ordreNiveau": 1
+          }
+        ],
+        "variantesMatieresASurveiller": [
+          "« Français 2 » / « français » : casse différente"
+        ]
+      }
+    ]
+  },
+  "referentielsLegacy": {
+    "categories": [
+      {
+        "id": "6a491ca269e6c372954c19d2",
+        "nom": "Annales / Sujets de Concours"
+      },
+      {
+        "id": "6a491ca269e6c372954c19d0",
+        "nom": "Corrigés"
+      },
+      {
+        "id": "6a491ca269e6c372954c19cc",
+        "nom": "Cours"
+      },
+      {
+        "id": "6a491ca269e6c372954c19cd",
+        "nom": "Exercices / TD"
+      },
+      {
+        "id": "6a491ca269e6c372954c19d1",
+        "nom": "Fiches de Révision"
+      },
+      {
+        "id": "6a4daf51490a6cabc6f605aa",
+        "nom": "Sujets Bac"
+      },
+      {
+        "id": "6a491ca269e6c372954c19cf",
+        "nom": "Sujets d'Examens"
+      },
+      {
+        "id": "6a491ca269e6c372954c19ce",
+        "nom": "TP (Travaux Pratiques)"
+      }
+    ],
+    "typesConcours": [
+      {
+        "id": "6a7ef6e65bf8af377920e9df",
+        "nom": "ena"
+      },
+      {
+        "id": "6a7efa4b5bf8af377920ea54",
+        "nom": "infas"
+      }
+    ],
+    "universites": [
+      {
+        "id": "6a491ca169e6c372954c19a0",
+        "nom": "ENS - École Normale Supérieure (Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c199e",
+        "nom": "ENSEA - École Nationale Supérieure de Statistique et d'Économie Appliquée (Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c199f",
+        "nom": "ESATIC - École Supérieure Africaine des TIC (Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c199d",
+        "nom": "INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19a1",
+        "nom": "UCAO - Université Catholique de l'Afrique de l'Ouest (Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19a2",
+        "nom": "UIGB - Université Internationale de Grand-Bassam (Grand-Bassam)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19a3",
+        "nom": "UST-CI - Université des Sciences et Technologies de Côte d'Ivoire (Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c1996",
+        "nom": "Université Alassane Ouattara (Bouaké)"
+      },
+      {
+        "id": "6a491ca169e6c372954c1994",
+        "nom": "Université Félix Houphouët-Boigny (Cocody, Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c1997",
+        "nom": "Université Jean Lorougnon Guédé (Daloa)"
+      },
+      {
+        "id": "6a491ca169e6c372954c1995",
+        "nom": "Université Nangui Abrogoua (Abobo-Adjamé, Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19a4",
+        "nom": "Université Nord-Sud (Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c199a",
+        "nom": "Université Polytechnique de San-Pédro (San-Pédro)"
+      },
+      {
+        "id": "6a491ca169e6c372954c1998",
+        "nom": "Université Péléforo Gon Coulibaly (Korhogo)"
+      },
+      {
+        "id": "6a491ca169e6c372954c199c",
+        "nom": "Université Virtuelle de Côte d'Ivoire - UVCI (Abidjan)"
+      },
+      {
+        "id": "6a491ca169e6c372954c199b",
+        "nom": "Université de Bondoukou (Bondoukou)"
+      },
+      {
+        "id": "6a491ca169e6c372954c1999",
+        "nom": "Université de Man (Man)"
+      }
+    ],
+    "institutions": [],
+    "niveaux": [
+      {
+        "id": "6a491ca169e6c372954c19c2",
+        "nom": "Licence 1"
+      },
+      {
+        "id": "6a491ca169e6c372954c19c3",
+        "nom": "Licence 2"
+      },
+      {
+        "id": "6a491ca169e6c372954c19c4",
+        "nom": "Licence 3"
+      },
+      {
+        "id": "6a491ca169e6c372954c19c5",
+        "nom": "Master 1"
+      },
+      {
+        "id": "6a491ca169e6c372954c19c6",
+        "nom": "Master 2"
+      },
+      {
+        "id": "6a491ca169e6c372954c19c7",
+        "nom": "Doctorat"
+      },
+      {
+        "id": "6a4daf43490a6cabc6f605a5",
+        "nom": "Baccalauréat"
+      },
+      {
+        "id": "6a4db040490a6cabc6f605bf",
+        "nom": "Tle C"
+      }
+    ],
+    "semestres": [
+      {
+        "id": "6a491ca269e6c372954c19c9",
+        "nom": "Semestre 1"
+      },
+      {
+        "id": "6a491ca269e6c372954c19ca",
+        "nom": "Semestre 2"
+      }
+    ],
+    "departements": [
+      {
+        "id": "6a491ca169e6c372954c19b5",
+        "nom": "Agronomie"
+      },
+      {
+        "id": "6a491ca169e6c372954c19ab",
+        "nom": "Biosciences"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b9",
+        "nom": "Communication, Milieu et Société (CMS)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19ba",
+        "nom": "Criminologie"
+      },
+      {
+        "id": "6a4bf6e71067f0d1d6b997d2",
+        "nom": "Data Science Institute"
+      },
+      {
+        "id": "6a491ca169e6c372954c19bf",
+        "nom": "Environnement"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b0",
+        "nom": "Génie Civil"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b3",
+        "nom": "Génie Informatique"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b2",
+        "nom": "Génie Mécanique et Énergétique"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b1",
+        "nom": "Génie Électrique et Électronique"
+      },
+      {
+        "id": "6a491ca169e6c372954c19bc",
+        "nom": "Information, Communication et Arts (ICA)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19bb",
+        "nom": "Langues, Littératures et Civilisations (LLC)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19a8",
+        "nom": "Mathématiques et Informatique (MI)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b4",
+        "nom": "Mines et Géologie"
+      },
+      {
+        "id": "6a491ca169e6c372954c19ad",
+        "nom": "Odonto-Stomatologie"
+      },
+      {
+        "id": "6a491ca169e6c372954c19a9",
+        "nom": "Sciences Fondamentales et Appliquées (SFA)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b7",
+        "nom": "Sciences Juridiques, Administratives et Politiques (SJAP)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19ac",
+        "nom": "Sciences Médicales"
+      },
+      {
+        "id": "6a491ca169e6c372954c19ae",
+        "nom": "Sciences Pharmaceutiques et Biologiques"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b8",
+        "nom": "Sciences de l'Homme et de la Société (SHS)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19bd",
+        "nom": "Sciences de l'Éducation"
+      },
+      {
+        "id": "6a491ca169e6c372954c19af",
+        "nom": "Sciences de la Nature"
+      },
+      {
+        "id": "6a491ca169e6c372954c19aa",
+        "nom": "Sciences de la Terre et des Ressources Minières (STRM)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19a7",
+        "nom": "Sciences des Structures et de la Matière (SSMT)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19b6",
+        "nom": "Sciences Économiques et de Gestion (SEG)"
+      },
+      {
+        "id": "6a491ca169e6c372954c19be",
+        "nom": "Statistique et Démographie"
+      },
+      {
+        "id": "6a4bfab71067f0d1d6b9980a",
+        "nom": "UFR Sciences et Technologie"
+      }
+    ]
+  }
+}

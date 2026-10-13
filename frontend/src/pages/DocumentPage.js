@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Download, FileCheck, FileText, Lock, Search } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, Download, FileCheck, FileText, Files, Gift, Search } from 'lucide-react';
 import { Breadcrumbs, Button, Card, Container, EmptyState, ErrorNote, InfoRow, Skeleton } from '../components/ui';
 import AccessModal from '../components/access/AccessModal';
 import AuthContext from '../context/AuthContext';
 import useAsync from '../hooks/useAsync';
 import useEntitlements from '../hooks/useEntitlements';
 import useSeo from '../hooks/useSeo';
-import { catalog, documents, errorCode, errorMessage } from '../lib/api';
+import { catalog, documents, downloads as downloadsApi, errorCode, errorMessage } from '../lib/api';
 import { catalogCrumbs, catalogPath, documentSeo } from '../lib/catalogSeo';
-import { correctionOf, documentTitle, formatDate, formatFileSize, hasCorrection, hasIncludedCorrection, labelOf, nodeChain, organismeLabel } from '../lib/format';
+import { correctionOf, documentTitle, formatDate, formatFileSize, formatRenewal, hasCorrection, hasIncludedCorrection, labelOf, nodeChain, organismeLabel } from '../lib/format';
 import { NOINDEX } from '../lib/seo';
 import { trackEvent } from '../lib/analytics';
 import { segmentFor, slugOf } from '../lib/slug';
@@ -18,25 +18,21 @@ const ACCESS_CODES = ['AUTH_REQUIRED', 'SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REA
 
 /**
  * Téléchargement contrôlé : le bouton est un guide, le serveur reste seul juge.
- * En cas de refus, la fenêtre d'accès explique la situation au lieu d'un message d'erreur brut.
+ * Sujets de 2010 et avant : gratuits, sans compte. Sujets récents : quota glissant (visiteur,
+ * compte ou abonné). En cas de refus, la fenêtre d'accès explique la situation et la suite.
  */
 const useProtectedDownload = (next) => {
   const { user } = useContext(AuthContext);
   const entitlements = useEntitlements();
+  const quota = useAsync(() => downloadsApi.quota(), [user?._id || user?.id || 'visiteur']);
   const [reason, setReason] = useState(null);
   const [limitInfo, setLimitInfo] = useState(null);
   const [busyId, setBusyId] = useState(null);
   const [error, setError] = useState(null);
 
-  const locked = !user ? 'AUTH_REQUIRED' : entitlements.data && !entitlements.data.canDownload ? 'SUBSCRIPTION_REQUIRED' : null;
-
   const download = async (documentId) => {
     setError(null);
-    trackEvent('download_click', { document_id: documentId, locked: Boolean(locked) });
-    if (locked) {
-      setReason(locked);
-      return;
-    }
+    trackEvent('download_click', { document_id: documentId });
     setBusyId(documentId);
     // Onglet ouvert pendant le clic : un window.open après une requête serait bloqué.
     const tab = window.open('about:blank', '_blank');
@@ -48,13 +44,15 @@ const useProtectedDownload = (next) => {
       } else {
         window.location.assign(url);
       }
-      entitlements.reload();
+      quota.reload();
+      if (user) entitlements.reload();
     } catch (requestError) {
       tab?.close();
       const code = errorCode(requestError);
       if (ACCESS_CODES.includes(code)) {
         setLimitInfo(requestError.response?.data?.details || null);
         setReason(code);
+        quota.reload();
       } else {
         setError(errorMessage(requestError, 'Le téléchargement n’a pas pu démarrer.'));
       }
@@ -64,13 +62,23 @@ const useProtectedDownload = (next) => {
   };
 
   return {
-    locked,
     download,
     busyId,
     error,
+    quota: quota.data,
     entitlements: entitlements.data,
     modal: <AccessModal reason={reason} onClose={() => setReason(null)} next={next} entitlements={entitlements.data} limitInfo={limitInfo} />,
   };
+};
+
+/** État d'accès d'un document pour l'affichage : gratuit, récent disponible, ou quota épuisé. */
+const accessState = (document, quota) => {
+  const access = document?.access;
+  if (access?.tier === 'free') return { kind: 'free', access };
+  if (quota?.unlimited) return { kind: 'recent', access, remaining: null };
+  const alreadyGranted = quota?.documentIds?.includes?.(document?._id);
+  if (quota && quota.remaining === 0 && !alreadyGranted) return { kind: 'exhausted', access, quota };
+  return { kind: 'recent', access, remaining: quota?.remaining, quota };
 };
 
 /**
@@ -95,6 +103,14 @@ const catalogContext = (document, organismeList) => {
     path: catalogPath(steps.slice(0, index + 1).map(({ segment }) => segment)),
   })));
   return { organisme, parcoursType, nodes, matiere, crumbs };
+};
+
+/** Téléchargement groupé, pré-filtré sur l'organisme, le cycle et l'année du sujet. */
+const bulkPath = (context, document) => {
+  const params = new URLSearchParams({ organisme: slugOf(context.organisme) || context.organisme._id });
+  if (context.parcoursType?._id) params.set('cycle', context.parcoursType._id);
+  if (document?.access?.year) params.set('annee', String(document.access.year));
+  return `/telecharger?${params}`;
 };
 
 const DocumentPage = () => {
@@ -135,11 +151,23 @@ const DocumentPage = () => {
   if (error || !document) {
     return (
       <Container className="max-w-3xl py-12">
-        <EmptyState icon={FileText} title="Sujet introuvable" description="Ce document n’existe pas ou n’est plus disponible." onRetry={reload} action={<Button to="/sujets" variant="ghost" size="sm">Parcourir les sujets</Button>} />
+        <EmptyState
+          icon={FileText}
+          title="Sujet introuvable"
+          description="Ce document n’existe pas ou n’est plus disponible. Il a peut-être été déplacé : retrouvez-le par organisme, année ou matière."
+          onRetry={error?.response ? undefined : reload}
+          action={(
+            <div className="flex flex-wrap justify-center gap-2">
+              <Button to="/recherche" variant="secondary" size="sm" icon={Search}>Rechercher un sujet</Button>
+              <Button to="/sujets" variant="ghost" size="sm">Parcourir les sujets</Button>
+            </div>
+          )}
+        />
       </Container>
     );
   }
 
+  const state = accessState(document, access.quota);
   const correction = correctionOf(document);
   const correctionIncluded = hasIncludedCorrection(document);
   const isCorrection = document.documentType === 'corrige' || document.type === 'correction';
@@ -202,38 +230,54 @@ const DocumentPage = () => {
                 <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 rounded bg-burgundy px-1.5 py-0.5 text-[9px] font-bold tracking-wide text-white">{format}</span>
               </div>
               <div className="min-w-0">
-                <p className="font-semibold text-ink">{access.locked ? 'Document réservé aux membres' : 'Prêt à télécharger'}</p>
+                <p className="font-semibold text-ink">
+                  {state.kind === 'free' ? 'Sujet gratuit' : state.kind === 'exhausted' ? 'Quota de sujets récents atteint' : 'Prêt à télécharger'}
+                </p>
                 <p className="mt-0.5 text-sm text-ink-soft">
-                  {access.locked === 'AUTH_REQUIRED'
-                    ? 'Le document est disponible. Connectez-vous pour vérifier votre accès.'
-                    : access.locked
-                      ? 'Le document est disponible. Un abonnement actif est nécessaire pour le télécharger.'
-                      : [format, formatFileSize(document.fileSize)].filter(Boolean).join(' · ')}
+                  {[format, formatFileSize(document.fileSize)].filter(Boolean).join(' · ')}
                 </p>
               </div>
             </div>
 
+            {/* Règle d'accès du document : gratuit (ancien sujet) ou récent (quota). */}
+            <p className={`mt-4 flex items-start gap-2 rounded-xl px-3 py-2.5 text-sm ${state.kind === 'free' ? 'bg-gold-wash text-gold-ink' : 'bg-paper-dim text-ink-soft'}`}>
+              {state.kind === 'free' ? <Gift size={15} className="mt-0.5 shrink-0" aria-hidden /> : <Clock size={15} className="mt-0.5 shrink-0" aria-hidden />}
+              <span>
+                {state.kind === 'free'
+                  ? `Sujet de ${state.access.year} : téléchargement gratuit et illimité, sans compte.`
+                  : state.kind === 'exhausted'
+                    ? `Vous avez utilisé vos téléchargements de sujets récents.${formatRenewal(state.quota.nextRenewalAt) ? ` Prochain téléchargement possible à partir du ${formatRenewal(state.quota.nextRenewalAt)}.` : ''} Les sujets de ${state.quota.freeUntilYear} et avant restent gratuits.`
+                    : state.remaining === null || state.remaining === undefined
+                      ? (state.access?.yearKnown === false ? 'Sujet récent (année non précisée).' : 'Sujet récent.')
+                      : `Sujet récent : ${state.remaining} téléchargement${state.remaining > 1 ? 's' : ''} de sujet récent restant${state.remaining > 1 ? 's' : ''} sur ${state.quota.windowHours} heures${state.quota.plan === 'subscriber' ? '.' : ' (gratuit, sans abonnement).'}`}
+              </span>
+            </p>
             <div className="mt-5 grid gap-2">
-              <Button size="lg" icon={access.locked ? Lock : Download} loading={access.busyId === document._id} onClick={() => access.download(document._id)}>
-                {access.locked ? `Débloquer ${noun}` : `Télécharger ${noun}`}
+              <Button size="lg" icon={Download} loading={access.busyId === document._id} onClick={() => access.download(document._id)}>
+                {state.kind === 'free' ? `Télécharger ${noun} gratuitement` : `Télécharger ${noun}`}
               </Button>
               {correction ? (
-                <Button size="lg" variant="secondary" icon={access.locked ? Lock : FileCheck} loading={access.busyId === correction._id} onClick={() => access.download(correction._id)}>
-                  {access.locked ? 'Débloquer le corrigé' : 'Télécharger le corrigé'}
+                <Button size="lg" variant="secondary" icon={FileCheck} loading={access.busyId === correction._id} onClick={() => access.download(correction._id)}>
+                  Télécharger le corrigé
                 </Button>
               ) : null}
             </div>
             <ErrorNote className="mt-3">{access.error}</ErrorNote>
 
-            {access.entitlements?.downloads && !access.entitlements.downloads.unlimited && !access.locked ? (
+            {state.kind !== 'free' && access.quota && !access.quota.unlimited ? (
               <div className="mt-4">
                 <div className="flex items-baseline justify-between text-xs text-ink-muted">
-                  <span>Téléchargements aujourd’hui</span>
-                  <span className="tabular font-semibold text-ink-soft">{`${access.entitlements.downloads.used} / ${access.entitlements.downloads.limit}`}</span>
+                  <span>{`Sujets récents (${access.quota.windowHours} h glissantes)`}</span>
+                  <span className="tabular font-semibold text-ink-soft">{`${access.quota.used} / ${access.quota.limit}`}</span>
                 </div>
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-paper-dim" role="progressbar" aria-label="Téléchargements utilisés aujourd’hui" aria-valuenow={access.entitlements.downloads.used} aria-valuemin={0} aria-valuemax={access.entitlements.downloads.limit}>
-                  <div className="h-full origin-left rounded-full bg-ink transition-transform duration-700 ease-emphasized" style={{ transform: `scaleX(${Math.min(1, access.entitlements.downloads.used / (access.entitlements.downloads.limit || 1))})` }} />
+                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-paper-dim" role="progressbar" aria-label="Sujets récents téléchargés sur la période" aria-valuenow={access.quota.used} aria-valuemin={0} aria-valuemax={access.quota.limit}>
+                  <div className="h-full origin-left rounded-full bg-ink transition-transform duration-700 ease-emphasized" style={{ transform: `scaleX(${Math.min(1, access.quota.used / (access.quota.limit || 1))})` }} />
                 </div>
+                {access.quota.plan !== 'subscriber' ? (
+                  <Link to={`/abonnement?next=${encodeURIComponent(location.pathname)}`} className="mt-2 inline-block text-xs font-semibold text-burgundy hover:underline">
+                    {`Abonnés : jusqu’à ${access.quota.limits?.subscriber || 20} sujets récents par ${access.quota.windowHours} h`}
+                  </Link>
+                ) : null}
               </div>
             ) : null}
 
@@ -260,6 +304,16 @@ const DocumentPage = () => {
             <span className="min-w-0 flex-1">
               <span className="block text-sm text-ink-soft">Tous les sujets</span>
               <span className="block truncate font-semibold text-ink">{context.crumbs.slice(1).map((crumb) => crumb.label).join(' · ')}</span>
+            </span>
+            <ArrowRight size={17} className="shrink-0 text-ink-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink" aria-hidden />
+          </Link>
+        ) : null}
+        {context.organisme ? (
+          <Link to={bulkPath(context, document)} className="group flex min-w-0 items-center gap-4 rounded-2xl border border-line bg-white p-4 transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-soft">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-paper-dim"><Files size={18} className="text-ink" aria-hidden /></span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm text-ink-soft">Plusieurs sujets d’un coup</span>
+              <span className="block truncate font-semibold text-ink">Télécharger plusieurs sujets</span>
             </span>
             <ArrowRight size={17} className="shrink-0 text-ink-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink" aria-hidden />
           </Link>

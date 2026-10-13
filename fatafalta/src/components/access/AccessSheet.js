@@ -5,7 +5,7 @@ import Text from '../ui/Text';
 import Sheet from '../ui/Sheet';
 import ActionButton from '../ui/ActionButton';
 import { usePlans } from '../../hooks/useAccount';
-import { formatAmount } from '../../utils/format';
+import { formatAmount, formatRenewal } from '../../utils/format';
 import theme from '../../theme/tokens';
 
 const { brand } = theme;
@@ -36,6 +36,10 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
   const canCheckout = entitlements?.checkout?.mobileWebCheckout !== false;
   const amount = entitlements?.nextPayment?.amount ?? plans?.initial?.amount;
   const isRenewal = entitlements?.subscription?.status === 'EXPIRED';
+  const freeUntilYear = limitInfo?.freeUntilYear || plans?.downloadPolicy?.freeUntilYear || 2010;
+  const windowHours = limitInfo?.windowHours || plans?.downloadPolicy?.windowHours || 24;
+  const subscriberLimit = plans?.downloadPolicy?.recentLimits?.subscriber || plans?.downloadsPerDay || 20;
+  const renewal = formatRenewal(limitInfo?.nextRenewalAt || limitInfo?.resetsAt);
 
   const renderContent = () => {
     switch (reason) {
@@ -59,8 +63,8 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
           <>
             <Header
               icon={Lock}
-              title={isRenewal ? 'Ton abonnement a expiré' : 'Débloque tous les sujets'}
-              description="Ton compte n’a pas encore accès aux téléchargements."
+              title={isRenewal ? 'Ton abonnement a expiré' : 'Sujet réservé aux abonnés'}
+              description={`Ce sujet fait partie de nos ressources récentes, réservées aux abonnés Fatafalta. Tu peux télécharger gratuitement les anciens sujets jusqu’à l’année ${freeUntilYear}. Pour accéder à ce document et aux autres sujets récents, découvre notre abonnement.`}
             />
             {/* Version store : ni prix ni appel à l'achat, l'application ne vend rien. */}
             {canCheckout && amount ? (
@@ -77,12 +81,12 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
             ) : null}
             <View style={styles.benefits}>
               <Benefit>Tous les sujets et leurs corrigés</Benefit>
-              <Benefit>{`Jusqu’à ${plans?.downloadsPerDay || entitlements?.downloads?.limit || 15} téléchargements par jour`}</Benefit>
+              <Benefit>{`Jusqu’à ${subscriberLimit} sujets récents par période de ${windowHours} heures`}</Benefit>
               <Benefit>Consultation hors ligne après téléchargement</Benefit>
             </View>
             {canCheckout ? (
               <>
-                <ActionButton title={isRenewal ? 'Renouveler mon abonnement' : 'S’abonner'} onPress={onSubscribe} loading={subscribing} />
+                <ActionButton title={isRenewal ? 'Renouveler mon abonnement' : 'Prendre mon abonnement'} onPress={onSubscribe} loading={subscribing} />
                 <Text variant="caption" align="center" style={styles.footnote}>
                   Le paiement se fait sur le site Fatafalta (Wave), où tu seras déjà connecté. Reviens ensuite ici : ton accès s’active tout seul.
                 </Text>
@@ -103,12 +107,24 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
           <>
             <Header
               icon={Clock}
-              title="Limite du jour atteinte"
-              description={`Tu as utilisé tes ${limitInfo?.limit || entitlements?.downloads?.limit || ''} téléchargements d’aujourd’hui. Ton quota sera renouvelé à minuit.`}
+              title={limitInfo?.sharedConnection ? 'Limite atteinte pour cette connexion' : 'Quota de sujets récents atteint'}
+              description={limitInfo?.sharedConnection
+                ? 'Plusieurs visiteurs partagent cette connexion et ont utilisé tous les téléchargements de sujets récents disponibles. Crée un compte gratuit pour avoir ton propre quota.'
+                : `Tu as utilisé ${limitInfo?.limit ? `tes ${limitInfo.limit} téléchargements` : 'tous tes téléchargements'} de sujets récents sur les dernières ${windowHours} heures.`}
             />
+            <View style={styles.benefits}>
+              <Benefit>{renewal ? `Prochain sujet récent à partir du ${renewal}.` : `Chaque téléchargement sort du décompte ${windowHours} heures après avoir été fait.`}</Benefit>
+              <Benefit>{`Les sujets de ${freeUntilYear} et avant restent gratuits et illimités.`}</Benefit>
+            </View>
             <View style={styles.actions}>
-              <ActionButton title="Voir mes téléchargements" variant="secondary" onPress={onOpenDownloads} />
-              <ActionButton title="Compris" onPress={onClose} />
+              {limitInfo?.canSubscribe && canCheckout ? (
+                <ActionButton title="Prendre mon abonnement" onPress={onSubscribe} loading={subscribing} />
+              ) : null}
+              {limitInfo?.sharedConnection && !entitlements ? (
+                <ActionButton title="Créer un compte gratuit" variant="secondary" onPress={onRegister} />
+              ) : null}
+              {entitlements ? <ActionButton title="Voir mes téléchargements" variant="secondary" onPress={onOpenDownloads} /> : null}
+              <ActionButton title="Compris" variant={limitInfo?.canSubscribe ? 'secondary' : 'primary'} onPress={onClose} />
             </View>
           </>
         );

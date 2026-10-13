@@ -4,7 +4,7 @@ const billingConfig = require('../config/billing');
 const { describeSubscription, quoteForUser } = require('../services/billing/subscriptionService');
 const { describeMyPromoCode, ensurePromoCode, resolvePromoStatus } = require('../services/billing/promoCodeService');
 const { describeWallet, requestWithdrawal, cancelMyWithdrawal } = require('../services/billing/walletService');
-const { getDailyUsage, isExempt } = require('../services/billing/downloadGuard');
+const { getQuotaStatus, isExempt } = require('../services/billing/downloadGuard');
 const { listMyPayments, syncOpenPayment } = require('../services/payments/paymentService');
 const DownloadLog = require('../models/DownloadLog');
 const User = require('../models/User');
@@ -20,7 +20,7 @@ exports.getEntitlements = asyncHandler(async (req, res) => {
   await syncOpenPayment(user._id);
   const [subscription, usage, promoCode, nextPayment] = await Promise.all([
     describeSubscription(user._id),
-    getDailyUsage(user._id),
+    getQuotaStatus(user),
     ensurePromoCode(user._id),
     quoteForUser(user._id),
   ]);
@@ -30,8 +30,9 @@ exports.getEntitlements = asyncHandler(async (req, res) => {
     data: {
       account: { status: user.accountStatus || 'ACTIVE', role: user.role, mustChangePassword: Boolean(user.mustChangePassword) },
       subscription,
+      // Accès complet (abonnement actif). Les sujets gratuits et le quota gratuit restent ouverts sans lui.
       canDownload: exempt || subscription.status === 'ACTIVE',
-      downloads: { ...usage, unlimited: exempt },
+      downloads: (({ documentIds, ...status }) => ({ ...status, resetsAt: status.nextRenewalAt, unlimited: exempt }))(usage),
       promoCode: { code: promoCode.code, status: await resolvePromoStatus(promoCode) },
       nextPayment: { kind: nextPayment.kind, amount: nextPayment.amount, currency: nextPayment.currency },
       checkout: {

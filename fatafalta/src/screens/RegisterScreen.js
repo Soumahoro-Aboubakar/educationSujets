@@ -1,20 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { ArrowLeft, ArrowUpRight, Check, Eye, EyeOff, Lock, Mail, User } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import FormInput from '../components/ui/FormInput';
 import AuthContext from '../context/AuthContext';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
+import BrandMark from '../components/brand/BrandMark';
 import theme from '../theme/tokens';
 
-const NAVY = '#0D1B32';
-const NAVY_SOFT = '#4F5E72';
-const SURFACE = '#FCFAF5';
-const GOLD = '#B48A48';
-const BURGUNDY = '#6C2838';
-const LINE = '#DED8CC';
+const { brand } = theme;
+const NAVY = brand.ink;
+const NAVY_SOFT = brand.inkSoft;
+const SURFACE = brand.paper;
+const GOLD = brand.gold;
+const BURGUNDY = brand.burgundy;
+const LINE = brand.line;
 
 const RegisterScreen = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const { register, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -78,10 +82,10 @@ const RegisterScreen = ({ navigation, route }) => {
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-        <View style={styles.hero}>
+        <View style={[styles.hero, { paddingTop: insets.top + theme.spacing.base }]}>
           <View style={styles.topBar}>
             <Pressable onPress={() => navigation.goBack()} hitSlop={theme.hitSlop} style={({ pressed }) => [styles.backButton, pressed && styles.pressed]}><ArrowLeft size={21} color="#FFFFFF" strokeWidth={1.9} /></Pressable>
-            <View style={styles.brandLockup}><View style={styles.brandRule} /><Text variant="overline" style={styles.brandName}>Éducation CI</Text></View>
+            <View style={styles.brandLockup}><BrandMark size={24} variant="onDark" /><Text variant="bodyMedium" style={styles.brandName}>Fatafalta</Text></View>
           </View>
           <Text variant="overline" style={styles.eyebrow}>Nouveau compte</Text>
           <Text variant="h1" style={styles.title}>Créer un compte</Text>
@@ -125,12 +129,11 @@ const RegisterScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: SURFACE },
   scrollContent: { flexGrow: 1 },
-  hero: { paddingTop: 58, paddingHorizontal: theme.spacing.xl, paddingBottom: theme.spacing.xl, backgroundColor: NAVY },
+  hero: { paddingHorizontal: theme.spacing.xl, paddingBottom: theme.spacing.xl, backgroundColor: NAVY },
   topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   backButton: { width: 40, height: 40, marginLeft: -10, alignItems: 'center', justifyContent: 'center' },
-  brandLockup: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm },
-  brandRule: { width: 18, height: 2, backgroundColor: GOLD },
-  brandName: { color: '#F4E6C8', fontSize: 10, letterSpacing: 1.25 },
+  brandLockup: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+    brandName: { color: brand.paper, fontFamily: theme.fontFamily.bold, fontSize: 16, letterSpacing: -0.4 },
   eyebrow: { marginTop: theme.spacing.xl, color: GOLD, fontSize: 10, letterSpacing: 1.05 },
   title: { marginTop: theme.spacing.sm, color: '#FFFFFF', fontSize: 29, lineHeight: 35, letterSpacing: -0.8 },
   introduction: { maxWidth: 320, marginTop: theme.spacing.sm, color: 'rgba(255,255,255,0.68)', fontSize: 14, lineHeight: 20 },
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
   sectionEyebrow: { color: NAVY_SOFT, fontSize: 10, letterSpacing: 1.05 },
   sectionRule: { flex: 1, height: StyleSheet.hairlineWidth, backgroundColor: LINE },
   form: { gap: theme.spacing.lg },
-  errorBanner: { marginBottom: theme.spacing.lg, padding: theme.spacing.md, borderLeftWidth: 2, borderLeftColor: BURGUNDY, backgroundColor: '#F8EDEF' },
+  errorBanner: { marginBottom: theme.spacing.lg, padding: theme.spacing.md, borderLeftWidth: 2, borderLeftColor: BURGUNDY, backgroundColor: brand.burgundyWash },
   errorText: { color: BURGUNDY, fontSize: 13 },
   showPasswordButton: { position: 'absolute', right: theme.spacing.md, top: 43, padding: theme.spacing.xs },
   requirements: { gap: theme.spacing.sm, marginTop: theme.spacing.lg, paddingVertical: theme.spacing.md, borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: LINE },

@@ -9,11 +9,15 @@
     "backfill:document-premmuim": "node scripts/backfillDocumentPremmuim.js",
     "migrate:taxonomy": "node scripts/migrateLegacyTaxonomy.js",
     "seed:institutions": "node scripts/seedInstitutions.js",
-    "test": "node --test --test-concurrency=1 tests/billingPricing.test.js tests/geniusPayProvider.test.js tests/billingFlow.integration.test.js tests/geniusPayFlow.integration.test.js tests/security.integration.test.js tests/catalogAliases.test.js tests/seoCatalog.test.js && node tests/parcoursTypeFlow.test.js",
+    "test": "node --test --test-concurrency=1 tests/billingPricing.test.js tests/geniusPayProvider.test.js tests/billingFlow.integration.test.js tests/geniusPayFlow.integration.test.js tests/security.integration.test.js tests/catalogAliases.test.js tests/seoCatalog.test.js tests/referentielSujets.test.js tests/downloadPolicy.integration.test.js && node tests/parcoursTypeFlow.test.js",
+    "test:referentiel": "node --test tests/referentielSujets.test.js",
     "audit:admins": "node scripts/auditAdminRoles.js",
     "geniuspay": "node scripts/geniuspay.js",
     "payment-methods": "node scripts/paymentMethods.js",
-    "catalog": "node scripts/catalogAudit.js"
+    "catalog": "node scripts/catalogAudit.js",
+    "verify:subjects": "node scripts/referentiel/verify.js",
+    "referentiel:sync": "node scripts/referentiel/sync.js",
+    "referentiel:empreinte": "node scripts/referentiel/record.js"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
@@ -21,6 +25,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1078.0",
     "@aws-sdk/s3-request-presigner": "^3.1078.0",
+    "archiver": "^7.0.1",
     "backblaze-b2": "^1.7.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

@@ -244,6 +244,10 @@ const findDuplicateTitleCandidates = async (title, user) => {
   });
 };
 
+// Mot « corrigé » dans une recherche : équivaut au filtre « Corrigés » (hasCorrection).
+const CORRECTION_KEYWORD = /(^|[^\p{L}])(corrections?|corrig[ée]s?)(?=$|[^\p{L}])/iu;
+const CORRECTION_TOKEN = /^(corrections?|corriges?)$/;
+
 const buildDocumentFilters = (params = {}) => {
   const filters = { status: 'approved', isDeleted: { $ne: true } };
   const refFields = ['university', 'department', 'level', 'semester', 'category', 'contestType', 'institution'];
@@ -261,11 +265,11 @@ const buildDocumentFilters = (params = {}) => {
   }
   if (params.search) {
     let searchQuery = params.search;
-    const correctionRegex = /\b(correction|corrigé|corrige)s?\b/i;
 
-    if (correctionRegex.test(searchQuery)) {
-      if (!params.documentType) filters.documentType = 'corrige';
-      searchQuery = searchQuery.replace(correctionRegex, '').replace(/\s+/g, ' ').trim();
+    if (CORRECTION_KEYWORD.test(searchQuery)) {
+      // « corrigé » : sujets disposant d'un corrigé (séparé ou inclus), voir listPublicDocuments.
+      if (!params.documentType) filters.documentType = { $ne: 'corrige' };
+      searchQuery = searchQuery.replace(CORRECTION_KEYWORD, '').replace(/\s+/g, ' ').trim();
     } else if (!params.documentType) {
       filters.documentType = { $ne: 'corrige' };
     }
@@ -329,7 +333,7 @@ const listPublicDocuments = async (params = {}) => {
 
   if (params.search) {
     // Mots distincts, plafonnés : chaque mot déclenche plusieurs requêtes de catalogue.
-    const tokens = [...new Set(normalizeTitle(String(params.search)).split(' ').filter((token) => token.length > 2))]
+    const tokens = [...new Set(normalizeTitle(String(params.search)).split(' ').filter((token) => token.length > 2 && !CORRECTION_TOKEN.test(token)))]
       .slice(0, MAX_SEARCH_TOKENS);
     if (tokens.length) {
       const referenceMatches = await Promise.all(tokens.map(async (token) => {
@@ -362,7 +366,8 @@ const listPublicDocuments = async (params = {}) => {
     }
   }
 
-  if (params.hasCorrection === 'true' || params.hasCorrection === true) {
+  const correctionKeyword = !params.documentType && params.search && CORRECTION_KEYWORD.test(String(params.search));
+  if (params.hasCorrection === 'true' || params.hasCorrection === true || correctionKeyword) {
     const correctionTargets = await Document.distinct('correctionFor', {
       documentType: 'corrige',
       status: 'approved',

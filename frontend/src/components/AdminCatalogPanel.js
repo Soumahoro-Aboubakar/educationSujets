@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Building2, Info, Plus, RefreshCw, Save } from 'lucide-react';
 import DynamicDocumentWizard from './DynamicDocumentWizard';
 import DocumentManagementPanel from './DocumentManagementPanel';
+import OrganismeLogoEditor from './admin/OrganismeLogoEditor';
+import YearIssuesPanel from './admin/YearIssuesPanel';
 
 const emptyOrganisme = { nom: '', logo: '', description: '' };
 const errorMessage = (error, fallback) => error.response?.data?.error || fallback;
@@ -135,6 +137,13 @@ const AdminCatalogPanel = () => {
         </div>
       </div>
 
+      {selected && (
+        <OrganismeLogoEditor
+          organisme={selected}
+          onSaved={(updated) => setOrganismes((items) => items.map((item) => (item._id === updated._id ? { ...item, ...updated } : item)))}
+        />
+      )}
+
       {selectedId && (
         <form onSubmit={saveStructure} className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-start justify-between gap-4">
@@ -214,10 +223,12 @@ const AdminCatalogPanel = () => {
         <button type="button" onClick={() => setMode('configuration')} className={`rounded-xl px-4 py-2.5 text-sm font-bold ${mode === 'configuration' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-50'}`}>Configuration</button>
         <button type="button" onClick={() => setMode('wizard')} className={`rounded-xl px-4 py-2.5 text-sm font-bold ${mode === 'wizard' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-50'}`}>Saisie de contenu</button>
         <button type="button" onClick={() => setMode('documents')} className={`rounded-xl px-4 py-2.5 text-sm font-bold ${mode === 'documents' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-50'}`}>Documents existants</button>
+        <button type="button" onClick={() => setMode('years')} className={`rounded-xl px-4 py-2.5 text-sm font-bold ${mode === 'years' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-50'}`}>Années à vérifier</button>
       </div>
       {mode === 'configuration' && configuration}
       {mode === 'wizard' && <DynamicDocumentWizard onNeedStructure={() => setMode('configuration')} />}
       {mode === 'documents' && <DocumentManagementPanel />}
+      {mode === 'years' && <YearIssuesPanel />}
     </div>
   );
 };

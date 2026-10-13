@@ -30,7 +30,7 @@ const OperatorName = ({ method }) => (
 
 const Benefits = ({ downloadsPerDay }) => (
   <ul className="space-y-3 text-[15px] text-ink">
-    {['Tous les sujets et leurs corrigés', `Jusqu’à ${downloadsPerDay || 15} téléchargements par jour`, 'Accès identique sur le site et l’application'].map((item) => (
+    {['Tous les sujets et leurs corrigés', `Jusqu’à ${downloadsPerDay || 20} sujets récents par 24 h, anciens sujets illimités`, 'Accès identique sur le site et l’application'].map((item) => (
       <li key={item} className="flex items-center gap-3">
         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold-wash"><Check size={13} strokeWidth={3} className="text-gold-ink" /></span>
         {item}

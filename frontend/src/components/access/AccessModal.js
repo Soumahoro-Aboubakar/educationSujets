@@ -3,7 +3,7 @@ import { Check, Clock, Lock, ShieldOff } from 'lucide-react';
 import { Button, Modal } from '../ui';
 import useAsync from '../../hooks/useAsync';
 import { payments } from '../../lib/api';
-import { formatAmount } from '../../lib/format';
+import { formatAmount, formatRenewal } from '../../lib/format';
 
 const Header = ({ icon: Icon, title, description }) => (
   <div className="mb-6 text-center">
@@ -20,6 +20,9 @@ const Header = ({ icon: Icon, title, description }) => (
  * `reason` : AUTH_REQUIRED | SUBSCRIPTION_REQUIRED | DAILY_LIMIT_REACHED | ACCOUNT_DISABLED.
  */
 const AccessModal = ({ reason, onClose, next, entitlements, limitInfo }) => {
+  const freeUntilYear = limitInfo?.freeUntilYear || entitlements?.downloads?.freeUntilYear || 2010;
+  const renewal = formatRenewal(limitInfo?.nextRenewalAt || limitInfo?.resetsAt);
+  const windowHours = limitInfo?.windowHours || 24;
   const plans = useAsync(() => payments.plans(), [], { enabled: reason === 'SUBSCRIPTION_REQUIRED' });
   const nextParam = encodeURIComponent(next || '/sujets');
   const isRenewal = entitlements?.subscription?.status === 'EXPIRED';
@@ -38,8 +41,8 @@ const AccessModal = ({ reason, onClose, next, entitlements, limitInfo }) => {
       <>
         <Header
           icon={Lock}
-          title={isRenewal ? 'Votre abonnement a expiré' : 'Débloquez tous les sujets'}
-          description="Votre compte n’a pas encore accès aux téléchargements."
+          title={isRenewal ? 'Votre abonnement a expiré' : 'Sujet réservé aux abonnés'}
+          description={`Ce sujet fait partie de nos ressources récentes, réservées aux abonnés Fatafalta. Vous pouvez télécharger gratuitement les anciens sujets jusqu’à l’année ${freeUntilYear}. Pour accéder à ce document et aux autres sujets récents, découvrez notre abonnement.`}
         />
         {plans.data ? (
           <div className="mb-5 text-center">
@@ -54,13 +57,13 @@ const AccessModal = ({ reason, onClose, next, entitlements, limitInfo }) => {
           </div>
         ) : null}
         <ul className="mb-6 space-y-3 rounded-2xl border border-line bg-white p-4 text-[15px] text-ink">
-          {['Tous les sujets et leurs corrigés', `Jusqu’à ${plans.data?.downloadsPerDay || entitlements?.downloads?.limit || 15} téléchargements par jour`, 'Paiement Mobile Money sécurisé'].map((item) => (
+          {['Tous les sujets et leurs corrigés', `Jusqu’à ${plans.data?.downloadPolicy?.recentLimits?.subscriber || plans.data?.downloadsPerDay || 20} sujets récents par période de ${plans.data?.downloadPolicy?.windowHours || 24} heures`, 'Paiement Mobile Money sécurisé'].map((item) => (
             <li key={item} className="flex items-center gap-3">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold-wash"><Check size={13} className="text-gold-ink" strokeWidth={3} /></span>{item}
             </li>
           ))}
         </ul>
-        <Button to={`/abonnement?next=${nextParam}`} size="lg" className="w-full">{isRenewal ? 'Renouveler mon abonnement' : 'S’abonner'}</Button>
+        <Button to={`/abonnement?next=${nextParam}`} size="lg" className="w-full">{isRenewal ? 'Renouveler mon abonnement' : 'Prendre mon abonnement'}</Button>
         <p className="mt-3 text-center text-xs text-ink-muted">Un code promotionnel peut être saisi à l’étape suivante.</p>
       </>
     ),
@@ -68,12 +71,26 @@ const AccessModal = ({ reason, onClose, next, entitlements, limitInfo }) => {
       <>
         <Header
           icon={Clock}
-          title="Limite du jour atteinte"
-          description={`Vous avez utilisé vos ${limitInfo?.limit || entitlements?.downloads?.limit || ''} téléchargements d’aujourd’hui. Votre quota sera renouvelé à minuit.`}
+          title={limitInfo?.sharedConnection ? 'Limite atteinte pour cette connexion' : 'Quota de sujets récents atteint'}
+          description={limitInfo?.sharedConnection
+            ? 'Plusieurs visiteurs partagent cette connexion et ont utilisé tous les téléchargements de sujets récents disponibles. Créez un compte gratuit pour disposer de votre propre quota.'
+            : `Vous avez utilisé ${limitInfo?.limit ? `vos ${limitInfo.limit} téléchargements` : 'tous vos téléchargements'} de sujets récents sur les dernières ${windowHours} heures.`}
         />
+        <ul className="mb-6 space-y-3 rounded-2xl border border-line bg-white p-4 text-[15px] text-ink">
+          <li className="flex items-start gap-3">
+            <Clock size={16} className="mt-0.5 shrink-0 text-gold-ink" aria-hidden />
+            {renewal ? `Prochain téléchargement de sujet récent possible à partir du ${renewal}.` : `Chaque téléchargement sort du décompte ${windowHours} heures après avoir été fait.`}
+          </li>
+          <li className="flex items-start gap-3">
+            <Check size={16} className="mt-0.5 shrink-0 text-gold-ink" strokeWidth={3} aria-hidden />
+            {`Les sujets de ${freeUntilYear} et avant restent gratuits et illimités, dès maintenant.`}
+          </li>
+        </ul>
         <div className="grid gap-2">
-          <Button to="/compte/telechargements" variant="secondary" size="lg">Voir mes téléchargements</Button>
-          <Button onClick={onClose} size="lg">Compris</Button>
+          {limitInfo?.canSubscribe ? <Button to={`/abonnement?next=${nextParam}`} size="lg">Prendre mon abonnement</Button> : null}
+          {limitInfo?.sharedConnection ? <Button to={`/register?next=${nextParam}`} size="lg" variant="secondary">Créer un compte gratuit</Button> : null}
+          {entitlements ? <Button to="/compte/telechargements" variant="secondary" size="lg">Voir mes téléchargements</Button> : null}
+          <Button onClick={onClose} variant={limitInfo?.canSubscribe ? 'ghost' : 'primary'} size="lg">Compris</Button>
         </div>
       </>
     ),

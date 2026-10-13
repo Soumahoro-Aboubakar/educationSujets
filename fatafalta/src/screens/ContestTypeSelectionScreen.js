@@ -82,7 +82,7 @@ const ContestTypeSelectionScreen = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F8FAFD' },
+  container: { flex: 1, backgroundColor: theme.brand.paper },
   header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: theme.spacing.lg },
   backButton: { width: 44, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.surface, borderWidth: 1, borderColor: theme.colors.borderLight },
   titleWrap: { marginLeft: theme.spacing.md },

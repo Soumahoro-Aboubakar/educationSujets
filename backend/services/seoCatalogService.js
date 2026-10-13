@@ -6,6 +6,9 @@ const ParcoursType = require('../models/ParcoursType');
 const Document = require('../models/Document');
 const { slugify } = require('../utils/slug');
 
+// Chargé à l'appel : organismeLogoService dépend lui-même de ce module (invalidation du cache).
+const publicLogo = (organisme) => require('./organismeLogoService').publicLogo(organisme);
+
 /*
  * Flux public du catalogue pour le pré-rendu du site web (pages HTML statiques + sitemap).
  *
@@ -85,7 +88,7 @@ const buildSeoCatalog = async () => {
         _id: organismeId,
         nom: organisme.nom,
         slug: organisme.slug || slugify(organisme.nom),
-        logo: organisme.logo || null,
+        logo: publicLogo(organisme),
         description: organisme.description || '',
         niveaux: structureByOrganisme.get(organismeId).niveaux.map(({ ordre, type, libelleSingulier, libellePluriel }) => ({
           ordre, type, libelleSingulier, libellePluriel,

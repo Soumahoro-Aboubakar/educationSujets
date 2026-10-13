@@ -24,7 +24,8 @@ const {
   incrementDocumentDownloads,
   assertDocumentAccess,
 } = require('../services/documentService');
-const { authorizeDownload, logDownload } = require('../services/billing/downloadGuard');
+const { authorizeDownload, buildActor, getQuotaStatus, logDownload, releaseCharge } = require('../services/billing/downloadGuard');
+const { resolveAccessForDocument, withAccess } = require('../services/access/documentYear');
 const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
@@ -34,7 +35,9 @@ exports.getDocuments = asyncHandler(async (req, res) => {
   const result = req.query.noeudId && req.query.matiereId
     ? await listDynamicDocuments(req.query, req.user)
     : await listPublicDocuments(req.query);
-  sendSuccess(res, { data: result.data, meta: { count: result.data.length, pagination: result.pagination } });
+  // `access` : année et gratuité de chaque document (badges « Gratuit » des interfaces).
+  const data = await withAccess(result.data);
+  sendSuccess(res, { data, meta: { count: data.length, pagination: result.pagination } });
 });
 
 exports.checkDuplicateTitle = asyncHandler(async (req, res) => {
@@ -46,7 +49,8 @@ exports.getDocument = asyncHandler(async (req, res) => {
   const document = await getDocumentById(req.params.id);
   assertDocumentAccess(document, req.user || null);
   await incrementDocumentViews(document._id);
-  sendSuccess(res, { data: document });
+  const [withYear] = await withAccess([document]);
+  sendSuccess(res, { data: withYear });
 });
 
 exports.createDocument = asyncHandler(async (req, res) => {
@@ -126,15 +130,29 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
 exports.getDocumentDownloadUrl = asyncHandler(async (req, res) => {
   const document = await getDocumentById(req.params.id);
   assertDocumentAccess(document, req.user || null);
-  await authorizeDownload(req.user || null, document);
-  const download = await buildDownloadPayload(document, req.user || null);
+  const actor = await buildActor(req, res);
+  const access = await resolveAccessForDocument(document);
+  const grant = await authorizeDownload(actor, document, { access });
 
-  if (!download) {
-    throw new AppError('Ce document ne dispose pas de lien signe', 400);
+  let download;
+  try {
+    download = await buildDownloadPayload(document, req.user || null);
+    if (!download) throw new AppError('Ce fichier est momentanément indisponible. Réessayez plus tard.', 400, undefined, 'FILE_UNAVAILABLE');
+  } catch (error) {
+    // Le lien n'a pas pu être produit : le quota consommé pour ce document est rendu.
+    if (grant.op) await releaseCharge(actor, grant.op);
+    throw error;
   }
 
-  await logDownload(req.user, document, req);
-  sendSuccess(res, { data: download });
+  await logDownload(actor, document, req);
+  sendSuccess(res, {
+    data: {
+      ...download,
+      access,
+      quota: await getQuotaStatus(actor),
+      ...(res.locals.visitorToken ? { visitorToken: res.locals.visitorToken } : {}),
+    },
+  });
 });
 
 exports.legacyDownloadByFileName = asyncHandler(async (req, res) => {
@@ -145,9 +163,10 @@ exports.legacyDownloadByFileName = asyncHandler(async (req, res) => {
   }
 
   assertDocumentAccess(document, req.user || null);
-  await authorizeDownload(req.user || null, document);
+  const actor = await buildActor(req, res);
+  await authorizeDownload(actor, document);
   const download = await buildDownloadPayload(document, req.user || null);
-  await logDownload(req.user, document, req);
+  await logDownload(actor, document, req);
 
   if (download?.url) {
     return res.redirect(download.url);

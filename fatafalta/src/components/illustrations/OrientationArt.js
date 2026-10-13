@@ -24,7 +24,7 @@ export const OrientationBackdrop = () => (
   <Svg style={StyleSheet.absoluteFill} viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice">
     <Defs>
       <RadialGradient id="glow" cx="78%" cy="22%" r="70%">
-        <Stop offset="0" stopColor="#264069" stopOpacity="1" />
+        <Stop offset="0" stopColor={brand.inkGlow} stopOpacity="1" />
         <Stop offset="1" stopColor={brand.ink} stopOpacity="0" />
       </RadialGradient>
       <Pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">

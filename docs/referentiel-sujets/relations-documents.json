@@ -1,0 +1,3759 @@
+{
+  "version": 1,
+  "genereLe": "2026-10-10T09:19:32.841Z",
+  "sujetsCorriges": [
+    {
+      "sujetId": "6a6d40e6b2880023e548ec09",
+      "corrigeId": "6a6e04a39905fe6016fc129b",
+      "mode": "fichier_separe",
+      "sujetTitre": "Sujet_Bac_Histoire_Geo.pdf-------------",
+      "sujetPresent": true
+    },
+    {
+      "sujetId": "6a7efa8d5bf8af377920ea77",
+      "corrigeId": "6a7f04561510b2c486604dea",
+      "mode": "fichier_separe",
+      "sujetTitre": "infas_test_1",
+      "sujetPresent": true
+    }
+  ],
+  "corrigesInclusDansPdf": [
+    "6ac2737f316193dda86e456d",
+    "6ac2737d316193dda86e4566",
+    "6ac27376316193dda86e4551",
+    "6ac272f5316193dda86e4440",
+    "6ac272ef316193dda86e4432",
+    "6ac272ea316193dda86e442b",
+    "6ac272e4316193dda86e4416",
+    "6ac272e1316193dda86e440f",
+    "6ac272df316193dda86e4408",
+    "6ac272d9316193dda86e43f3",
+    "6ac272d6316193dda86e43ec",
+    "6ac272d2316193dda86e43e5",
+    "6ac272cd316193dda86e43d7",
+    "6ac272ca316193dda86e43d0",
+    "6ac272c1316193dda86e43bb",
+    "6ac272bd316193dda86e43b4",
+    "6ac272b6316193dda86e439f",
+    "6ac272b2316193dda86e4398",
+    "6ac272aa316193dda86e4383",
+    "6ac272a7316193dda86e437c",
+    "6ac272a0316193dda86e4367",
+    "6ac2729c316193dda86e4360",
+    "6ac27294316193dda86e4345",
+    "6ac27291316193dda86e433e",
+    "6ac026d736d8963a0a88c75a",
+    "6ac026cf36d8963a0a88c74c",
+    "6ac026be36d8963a0a88c71b",
+    "6ac026b836d8963a0a88c70d",
+    "6ac026b336d8963a0a88c6ff",
+    "6ac026af36d8963a0a88c6f1",
+    "6ac0268f36d8963a0a88c6d5",
+    "6ac0268a36d8963a0a88c6c7",
+    "6ac0268236d8963a0a88c6ab",
+    "6ac0267c36d8963a0a88c696",
+    "6ac0267836d8963a0a88c688",
+    "6ac0267336d8963a0a88c67a",
+    "6ac0267036d8963a0a88c66c",
+    "6ac0266c36d8963a0a88c65e",
+    "6ac0266836d8963a0a88c650",
+    "6ac0266436d8963a0a88c642",
+    "6ac0266036d8963a0a88c634",
+    "6ac0265c36d8963a0a88c626",
+    "6ac0265936d8963a0a88c618",
+    "6ac0265536d8963a0a88c60a",
+    "6ac0265136d8963a0a88c5fc",
+    "6ac0264d36d8963a0a88c5ee",
+    "6ac0264936d8963a0a88c5e0",
+    "6ac0264636d8963a0a88c5d2",
+    "6ac0264236d8963a0a88c5c4",
+    "6ac0263e36d8963a0a88c5b6",
+    "6ac0263a36d8963a0a88c5a8",
+    "6ac0263536d8963a0a88c59a",
+    "6ac0263036d8963a0a88c58c",
+    "6ac0262d36d8963a0a88c585",
+    "6ac0262936d8963a0a88c577",
+    "6ac0262236d8963a0a88c562",
+    "6ac0261e36d8963a0a88c554",
+    "6ac0261a36d8963a0a88c546",
+    "6ac0261636d8963a0a88c538",
+    "6ac0261336d8963a0a88c531",
+    "6ac0260e36d8963a0a88c523",
+    "6ac0260836d8963a0a88c50e",
+    "6ac0260336d8963a0a88c500",
+    "6ac025ff36d8963a0a88c4f2",
+    "6ac025fc36d8963a0a88c4e4",
+    "6ac01ecf36d8963a0a88c481",
+    "6ac01eca36d8963a0a88c47a",
+    "6ac01ec536d8963a0a88c473",
+    "6ac01ebf36d8963a0a88c46c",
+    "6ac01eba36d8963a0a88c465",
+    "6ac01eb336d8963a0a88c45e",
+    "6ac01eb036d8963a0a88c457",
+    "6ac01ea936d8963a0a88c450",
+    "6ac01ea436d8963a0a88c449",
+    "6ac01e9d36d8963a0a88c442",
+    "6ac01e9636d8963a0a88c43b"
+  ],
+  "groupesMemeContexte": [
+    {
+      "cle": "EAMAC | Technicien & Technicien Supérieur | 2012 | Physique",
+      "ids": [
+        "6abef2be25de0f7a2e7d03de",
+        "6abef2b325de0f7a2e7d03b4"
+      ],
+      "titres": [
+        "EAMAC 2012 – Physique, Technicien & Technicien Supérieur",
+        "EAMAC 2012 (Franceville) – Physique, Technicien & Technicien Supérieur"
+      ]
+    },
+    {
+      "cle": "EAMAC | Contrôleurs de la Circulation Aérienne | 2012 | Physique",
+      "ids": [
+        "6abef2bc25de0f7a2e7d03d7",
+        "6abef2b025de0f7a2e7d03a6"
+      ],
+      "titres": [
+        "EAMAC 2012 – Physique, Contrôleurs de la Circulation Aérienne",
+        "EAMAC 2012 (Franceville) – Physique, Contrôleurs de la Circulation Aérienne"
+      ]
+    },
+    {
+      "cle": "EAMAC | Ingénieur | 2012 | Physique",
+      "ids": [
+        "6abef2ba25de0f7a2e7d03d0",
+        "6abef2b225de0f7a2e7d03ad"
+      ],
+      "titres": [
+        "EAMAC 2012 – Physique, Ingénieur",
+        "EAMAC 2012 (Franceville) – Physique, Ingénieur"
+      ]
+    },
+    {
+      "cle": "EAMAC | Technicien & Technicien Supérieur | 2013 | Mathématiques",
+      "ids": [
+        "6abef28b25de0f7a2e7d0392",
+        "6abef28425de0f7a2e7d0376"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun, version anglaise) – Mathématiques, Technicien & Technicien Supérieur",
+        "EAMAC 2013 – Mathématiques, Technicien & Technicien Supérieur"
+      ]
+    },
+    {
+      "cle": "EAMAC | Ingénieur | 2013 | Physique",
+      "ids": [
+        "6abef28a25de0f7a2e7d038b",
+        "6abef27e25de0f7a2e7d0355"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun) – Physique, Ingénieur",
+        "EAMAC 2013 – Physique (Proposition 2), Ingénieur"
+      ]
+    },
+    {
+      "cle": "EAMAC | Ingénieur | 2013 | Mathématiques",
+      "ids": [
+        "6abef28825de0f7a2e7d0384",
+        "6abef28025de0f7a2e7d0362"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun) – Mathématiques, Ingénieur",
+        "EAMAC 2013 – Mathématiques, Ingénieur"
+      ]
+    },
+    {
+      "cle": "EAMAC | Contrôleurs de la Circulation Aérienne | 2013 | Physique",
+      "ids": [
+        "6abef28525de0f7a2e7d037d",
+        "6abef27a25de0f7a2e7d0341"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun) – Physique, Contrôleurs de la Circulation Aérienne",
+        "EAMAC 2013 – Physique (Proposition 3), Contrôleurs de la Circulation Aérienne"
+      ]
+    },
+    {
+      "cle": "ENA | Cycle moyen | 2020 | Aptitude verbale",
+      "ids": [
+        "6a771a489905fe6016fc21d6",
+        "6a7a64ee9905fe6016fc2350"
+      ],
+      "titres": [
+        "ENA Cycle Moyen 2020 – Test d'aptitude verbale (Présélection)",
+        "ENA 2020 – Cycle moyen : Aptitude verbale"
+      ]
+    }
+  ],
+  "arborescence": [
+    {
+      "modele": "catalogue_dynamique",
+      "enfants": [
+        {
+          "organisme": "EAMAC",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "Contrôleurs de la Circulation Aérienne",
+              "enfants": [
+                {
+                  "annee": "2012",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef2b725de0f7a2e7d03c2",
+                          "titre": "EAMAC 2012 – Mathématiques, Contrôleurs de la Circulation Aérienne",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef2bc25de0f7a2e7d03d7",
+                          "titre": "EAMAC 2012 – Physique, Contrôleurs de la Circulation Aérienne",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6abef2b025de0f7a2e7d03a6",
+                          "titre": "EAMAC 2012 (Franceville) – Physique, Contrôleurs de la Circulation Aérienne",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2013",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef28225de0f7a2e7d036f",
+                          "titre": "EAMAC 2013 – Mathématiques, Contrôleurs de la Circulation Aérienne",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef28525de0f7a2e7d037d",
+                          "titre": "EAMAC 2013 (Cameroun) – Physique, Contrôleurs de la Circulation Aérienne",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6abef27a25de0f7a2e7d0341",
+                          "titre": "EAMAC 2013 – Physique (Proposition 3), Contrôleurs de la Circulation Aérienne",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2014",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef23e25de0f7a2e7d0304",
+                          "titre": "EAMAC 2014 – Mathématiques, Contrôleurs de la Circulation Aérienne (sujet M-C-8)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef24525de0f7a2e7d0319",
+                          "titre": "EAMAC 2014 – Physique, Contrôleurs de la Circulation Aérienne (sujet P-C-5)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Exploitation en Aéronautique Civile",
+              "enfants": [
+                {
+                  "annee": "2023",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeeaa425de0f7a2e7d01de",
+                          "titre": "EAMAC 2023 – Mathématiques, Exploitation en Aéronautique Civile",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeeaab25de0f7a2e7d01f3",
+                          "titre": "EAMAC 2023 – Physique, Exploitation en Aéronautique Civile",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeea6d25de0f7a2e7d01ae",
+                          "titre": "EAMAC 2024 – Mathématiques, Exploitation en Aéronautique Civile (SME-4)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeea7425de0f7a2e7d01c3",
+                          "titre": "EAMAC 2024 – Physique, Exploitation en Aéronautique Civile (SPE-1)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Ingénieur",
+              "enfants": [
+                {
+                  "annee": "2012",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef2b525de0f7a2e7d03bb",
+                          "titre": "EAMAC 2012 – Mathématiques, Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef2ba25de0f7a2e7d03d0",
+                          "titre": "EAMAC 2012 – Physique, Ingénieur",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6abef2b225de0f7a2e7d03ad",
+                          "titre": "EAMAC 2012 (Franceville) – Physique, Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2013",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef28825de0f7a2e7d0384",
+                          "titre": "EAMAC 2013 (Cameroun) – Mathématiques, Ingénieur",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6abef28025de0f7a2e7d0362",
+                          "titre": "EAMAC 2013 – Mathématiques, Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef28a25de0f7a2e7d038b",
+                          "titre": "EAMAC 2013 (Cameroun) – Physique, Ingénieur",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6abef27e25de0f7a2e7d0355",
+                          "titre": "EAMAC 2013 – Physique (Proposition 2), Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2014",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef24325de0f7a2e7d0312",
+                          "titre": "EAMAC 2014 – Mathématiques, Ingénieur (sujet M-I-5)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef24825de0f7a2e7d0320",
+                          "titre": "EAMAC 2014 – Physique, Ingénieur (sujet P-I-8)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2014-2015",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6abef20a25de0f7a2e7d02db",
+                          "titre": "EAMAC 2014-2015 – Anglais, Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2015",
+                  "enfants": [
+                    {
+                      "matiere": "Français",
+                      "sujets": [
+                        {
+                          "id": "6abef20325de0f7a2e7d02c6",
+                          "titre": "EAMAC 2015 – Français, Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef20625de0f7a2e7d02cd",
+                          "titre": "EAMAC 2015 – Mathématiques, Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef20825de0f7a2e7d02d4",
+                          "titre": "EAMAC 2015 – Physique, Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2016",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef03625de0f7a2e7d02ab",
+                          "titre": "EAMAC 2016 – Mathématiques, Ingénieur (sujet S-MI2)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef03925de0f7a2e7d02b2",
+                          "titre": "EAMAC 2016 – Physique, Ingénieur (sujet S-PI4)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2018",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeecc325de0f7a2e7d0244",
+                          "titre": "EAMAC 2018 – Mathématiques, Ingénieur (sujet S-MI-1)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeecd625de0f7a2e7d0259",
+                          "titre": "EAMAC 2018 – Physique, Ingénieur (sujet S-PI-3)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2023",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeeaa625de0f7a2e7d01e5",
+                          "titre": "EAMAC 2023 – Mathématiques, Cycle Ingénieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeea6f25de0f7a2e7d01b5",
+                          "titre": "EAMAC 2024 – Mathématiques, Cycle Ingénieur (SMI-3)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeea7125de0f7a2e7d01bc",
+                          "titre": "EAMAC 2024 – Physique, Cycle Ingénieur (SPI-1)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Ingénieur & Exploitation en Aéronautique Civile",
+              "enfants": [
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeeacf25de0f7a2e7d0200",
+                          "titre": "EAMAC 2022 – Mathématiques, Ingénieur & Exploitation en Aéronautique Civile",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeead425de0f7a2e7d020e",
+                          "titre": "EAMAC 2022 – Physique, Ingénieur & Exploitation en Aéronautique Civile",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6abeea6525de0f7a2e7d0199",
+                          "titre": "EAMAC 2024 – Anglais, Ingénieur & Exploitation en Aéronautique Civile (SAI-EAC-1)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Français",
+                      "sujets": [
+                        {
+                          "id": "6abeea6325de0f7a2e7d0192",
+                          "titre": "EAMAC 2024 – Français, Ingénieur & Exploitation en Aéronautique Civile (SFI-EAC-3)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Ingénieurs & Contrôleurs",
+              "enfants": [
+                {
+                  "annee": "2011",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef33d25de0f7a2e7d03eb",
+                          "titre": "EAMAC 2011 – Mathématiques, Ingénieurs & Contrôleurs",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef34225de0f7a2e7d0400",
+                          "titre": "EAMAC 2011 – Physique, Ingénieurs & Contrôleurs",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Technicien",
+              "enfants": [
+                {
+                  "annee": "2011",
+                  "enfants": [
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef34025de0f7a2e7d03f9",
+                          "titre": "EAMAC 2011 – Physique, Technicien",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeead125de0f7a2e7d0207",
+                          "titre": "EAMAC 2022 – Mathématiques, Cycle Technicien",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeead625de0f7a2e7d0215",
+                          "titre": "EAMAC 2022 – Physique, Cycle Technicien",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2023",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeeaa825de0f7a2e7d01ec",
+                          "titre": "EAMAC 2023 – Mathématiques, Cycle Technicien",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6abeea6725de0f7a2e7d01a0",
+                          "titre": "EAMAC 2024 – Anglais, Cycle Technicien (SAT-2)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Français",
+                      "sujets": [
+                        {
+                          "id": "6abeea6a25de0f7a2e7d01a7",
+                          "titre": "EAMAC 2024 – Français, Cycle Technicien (SFT-3)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeea7925de0f7a2e7d01d1",
+                          "titre": "EAMAC 2024 – Mathématiques, Cycle Technicien (SMT-3)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeea7725de0f7a2e7d01ca",
+                          "titre": "EAMAC 2024 – Physique, Cycle Technicien (SPT-2)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Technicien & Technicien Supérieur",
+              "enfants": [
+                {
+                  "annee": "2011",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef33f25de0f7a2e7d03f2",
+                          "titre": "EAMAC 2011 – Mathématiques, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2012",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef2b825de0f7a2e7d03c9",
+                          "titre": "EAMAC 2012 – Mathématiques, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef2be25de0f7a2e7d03de",
+                          "titre": "EAMAC 2012 – Physique, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6abef2b325de0f7a2e7d03b4",
+                          "titre": "EAMAC 2012 (Franceville) – Physique, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2013",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef28b25de0f7a2e7d0392",
+                          "titre": "EAMAC 2013 (Cameroun, version anglaise) – Mathématiques, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6abef28425de0f7a2e7d0376",
+                          "titre": "EAMAC 2013 – Mathématiques, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef28d25de0f7a2e7d0399",
+                          "titre": "EAMAC 2013 (Cameroun, version anglaise) – Physique, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2014",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef24025de0f7a2e7d030b",
+                          "titre": "EAMAC 2014 – Mathématiques, Technicien & Technicien Supérieur (sujet M-T-7)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2014-2015",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6abef21225de0f7a2e7d02f7",
+                          "titre": "EAMAC 2014-2015 – Anglais, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2015",
+                  "enfants": [
+                    {
+                      "matiere": "Français",
+                      "sujets": [
+                        {
+                          "id": "6abef20c25de0f7a2e7d02e2",
+                          "titre": "EAMAC 2015 – Français, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef20e25de0f7a2e7d02e9",
+                          "titre": "EAMAC 2015 – Mathématiques, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef21025de0f7a2e7d02f0",
+                          "titre": "EAMAC 2015 – Physique, Technicien & Technicien Supérieur",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2016",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abef03425de0f7a2e7d02a4",
+                          "titre": "EAMAC 2016 – Mathématiques, Technicien & Technicien Supérieur (sujet S-MT1)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abef03c25de0f7a2e7d02b9",
+                          "titre": "EAMAC 2016 – Physique, Technicien & Technicien Supérieur (sujet S-PT5)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2018",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeeccc25de0f7a2e7d024b",
+                          "titre": "EAMAC 2018 – Mathématiques, Technicien & Technicien Supérieur (sujet S-MT4)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeecd125de0f7a2e7d0252",
+                          "titre": "EAMAC 2018 – Physique, Technicien & Technicien Supérieur (sujet S-PT4)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "ENA",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "Cycle moyen",
+              "enfants": [
+                {
+                  "annee": "2015",
+                  "enfants": [
+                    {
+                      "matiere": "Aptitude verbale",
+                      "sujets": [
+                        {
+                          "id": "6a7a64f99905fe6016fc2356",
+                          "titre": "ENA 2015 – Cycle moyen : Aptitude verbale",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Culture générale",
+                      "sujets": [
+                        {
+                          "id": "6a7a64e79905fe6016fc234a",
+                          "titre": "ENA 2015 – Cycle moyen : Culture générale",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2017",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6a771b999905fe6016fc21e1",
+                          "titre": "ENA Cycle Moyen 2017 – Anglais (Présélection)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Test d'organisation, Test d'aptitude numérique",
+                      "sujets": [
+                        {
+                          "id": "6a771d169905fe6016fc21f1",
+                          "titre": "ENA Cycle Moyen 2017 – Test d'organisation ou aptitude numérique (Présélection)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2018",
+                  "enfants": [
+                    {
+                      "matiere": "Culture générale",
+                      "sujets": [
+                        {
+                          "id": "6a7a65ea9905fe6016fc23b8",
+                          "titre": "ENA 2018 – Cycle moyen : Culture générale",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Test d'organisation, Test d'aptitude numérique",
+                      "sujets": [
+                        {
+                          "id": "6a7a64e19905fe6016fc2344",
+                          "titre": "ENA 2018 – Cycle moyen : Test d'organisation & aptitude numérique",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2020",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6a7a65039905fe6016fc235c",
+                          "titre": "ENA 2020 – Cycle moyen : Anglais",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Aptitude verbale",
+                      "sujets": [
+                        {
+                          "id": "6a771a489905fe6016fc21d6",
+                          "titre": "ENA Cycle Moyen 2020 – Test d'aptitude verbale (Présélection)",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a7a64ee9905fe6016fc2350",
+                          "titre": "ENA 2020 – Cycle moyen : Aptitude verbale",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Culture générale",
+                      "sujets": [
+                        {
+                          "id": "6a771a2a9905fe6016fc21cb",
+                          "titre": "ENA Cycle Moyen 2020 – Culture générale (Présélection)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6a773c949905fe6016fc2263",
+                          "titre": "ENA Cycle Moyen 2022 – Anglais (Présélection)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Aptitude verbale, Culture générale",
+                      "sujets": [
+                        {
+                          "id": "6a773cbc9905fe6016fc2269",
+                          "titre": "ENA Cycle Moyen 2022 – Culture générale et aptitudes verbales (Présélection)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Test d'organisation, Test d'aptitude numérique",
+                      "sujets": [
+                        {
+                          "id": "6a773c809905fe6016fc225d",
+                          "titre": "ENA Cycle Moyen 2022 – Logique : test d'organisation et aptitude numérique (Présélection)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Aptitude verbale, Culture générale, Anglais, Aptitude numérique, Logique",
+                      "sujets": [
+                        {
+                          "id": "6a7731a19905fe6016fc2221",
+                          "titre": "ENA Cycle Moyen 2025 – Présélection complète (toutes matières)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "ENSEA",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "Analystes Statisticiens (AS)",
+              "enfants": [
+                {
+                  "annee": "2021",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac2728b316193dda86e4330",
+                          "titre": "ENSEA 2021 – Test de présélection AS : Mathématiques",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "ISE Cycle Long / AS",
+              "enfants": [
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac2728e316193dda86e4337",
+                          "titre": "ENSEA 2022 – ISE Cycle Long / AS : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac27291316193dda86e433e",
+                          "titre": "ENSEA 2022 – ISE Cycle Long / AS : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac27294316193dda86e4345",
+                          "titre": "ENSEA 2022 – ISE Cycle Long / AS : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac27297316193dda86e434d",
+                          "titre": "ENSEA 2022 – ISE Cycle Long / AS : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2023",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac27299316193dda86e4359",
+                          "titre": "ENSEA 2023 – ISE Cycle Long / AS : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac2729c316193dda86e4360",
+                          "titre": "ENSEA 2023 – ISE Cycle Long / AS : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272a0316193dda86e4367",
+                          "titre": "ENSEA 2023 – ISE Cycle Long / AS : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272a2316193dda86e436e",
+                          "titre": "ENSEA 2023 – ISE Cycle Long / AS : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac272a5316193dda86e4375",
+                          "titre": "ENSEA 2024 – ISE Cycle Long / AS : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272a7316193dda86e437c",
+                          "titre": "ENSEA 2024 – ISE Cycle Long / AS : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272aa316193dda86e4383",
+                          "titre": "ENSEA 2024 – ISE Cycle Long / AS : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272ad316193dda86e438a",
+                          "titre": "ENSEA 2024 – ISE Cycle Long / AS : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac272af316193dda86e4391",
+                          "titre": "ENSEA 2025 – ISE Cycle Long / AS : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272b2316193dda86e4398",
+                          "titre": "ENSEA 2025 – ISE Cycle Long / AS : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272b6316193dda86e439f",
+                          "titre": "ENSEA 2025 – ISE Cycle Long / AS : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272b7316193dda86e43a6",
+                          "titre": "ENSEA 2025 – ISE Cycle Long / AS : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2026",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac272ba316193dda86e43ad",
+                          "titre": "ENSEA 2026 – ISE Cycle Long / AS : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272bd316193dda86e43b4",
+                          "titre": "ENSEA 2026 – ISE Cycle Long / AS : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272c1316193dda86e43bb",
+                          "titre": "ENSEA 2026 – ISE Cycle Long / AS : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272c4316193dda86e43c2",
+                          "titre": "ENSEA 2026 – ISE Cycle Long / AS : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "ISE Option Économie",
+              "enfants": [
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Économie",
+                      "sujets": [
+                        {
+                          "id": "6ac272c6316193dda86e43c9",
+                          "titre": "ENSEA 2024 – ISE Option Économie : Économie",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272ca316193dda86e43d0",
+                          "titre": "ENSEA 2024 – ISE Option Économie : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272cd316193dda86e43d7",
+                          "titre": "ENSEA 2024 – ISE Option Économie : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272cf316193dda86e43de",
+                          "titre": "ENSEA 2024 – ISE Option Économie : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Économie",
+                      "sujets": [
+                        {
+                          "id": "6ac272d2316193dda86e43e5",
+                          "titre": "ENSEA 2025 – ISE Option Économie : Économie",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272d6316193dda86e43ec",
+                          "titre": "ENSEA 2025 – ISE Option Économie : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272d9316193dda86e43f3",
+                          "titre": "ENSEA 2025 – ISE Option Économie : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272db316193dda86e43fa",
+                          "titre": "ENSEA 2025 – ISE Option Économie : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2026",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac272dd316193dda86e4401",
+                          "titre": "ENSEA 2026 – ISE Option Économie : Anglais",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Économie",
+                      "sujets": [
+                        {
+                          "id": "6ac272df316193dda86e4408",
+                          "titre": "ENSEA 2026 – ISE Option Économie : Économie",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272e1316193dda86e440f",
+                          "titre": "ENSEA 2026 – ISE Option Économie : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272e4316193dda86e4416",
+                          "titre": "ENSEA 2026 – ISE Option Économie : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272e6316193dda86e441d",
+                          "titre": "ENSEA 2026 – ISE Option Économie : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "ISE Option Mathématiques",
+              "enfants": [
+                {
+                  "annee": "1998",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac025fc36d8963a0a88c4e4",
+                          "titre": "ENSEA 1998 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac025fe36d8963a0a88c4eb",
+                          "titre": "ENSEA 1998 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac025ff36d8963a0a88c4f2",
+                          "titre": "ENSEA 1998 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0260136d8963a0a88c4f9",
+                          "titre": "ENSEA 1998 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "1999",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0260336d8963a0a88c500",
+                          "titre": "ENSEA 1999 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0260536d8963a0a88c507",
+                          "titre": "ENSEA 1999 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0260836d8963a0a88c50e",
+                          "titre": "ENSEA 1999 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0260a36d8963a0a88c515",
+                          "titre": "ENSEA 1999 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2000",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0260e36d8963a0a88c523",
+                          "titre": "ENSEA 2000 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0261036d8963a0a88c52a",
+                          "titre": "ENSEA 2000 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0261336d8963a0a88c531",
+                          "titre": "ENSEA 2000 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0260c36d8963a0a88c51c",
+                          "titre": "ENSEA 2000 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2001",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0261636d8963a0a88c538",
+                          "titre": "ENSEA 2001 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0261736d8963a0a88c53f",
+                          "titre": "ENSEA 2001 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0261a36d8963a0a88c546",
+                          "titre": "ENSEA 2001 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0261c36d8963a0a88c54d",
+                          "titre": "ENSEA 2001 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2002",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0261e36d8963a0a88c554",
+                          "titre": "ENSEA 2002 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0262036d8963a0a88c55b",
+                          "titre": "ENSEA 2002 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0262236d8963a0a88c562",
+                          "titre": "ENSEA 2002 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0262436d8963a0a88c569",
+                          "titre": "ENSEA 2002 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2003",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0262936d8963a0a88c577",
+                          "titre": "ENSEA 2003 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0262b36d8963a0a88c57e",
+                          "titre": "ENSEA 2003 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0262d36d8963a0a88c585",
+                          "titre": "ENSEA 2003 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0262536d8963a0a88c570",
+                          "titre": "ENSEA 2003 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2004",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0263036d8963a0a88c58c",
+                          "titre": "ENSEA 2004 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0263136d8963a0a88c593",
+                          "titre": "ENSEA 2004 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0263536d8963a0a88c59a",
+                          "titre": "ENSEA 2004 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0263736d8963a0a88c5a1",
+                          "titre": "ENSEA 2004 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2005",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0263a36d8963a0a88c5a8",
+                          "titre": "ENSEA 2005 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0263b36d8963a0a88c5af",
+                          "titre": "ENSEA 2005 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0263e36d8963a0a88c5b6",
+                          "titre": "ENSEA 2005 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0264036d8963a0a88c5bd",
+                          "titre": "ENSEA 2005 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2006",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0264236d8963a0a88c5c4",
+                          "titre": "ENSEA 2006 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0264436d8963a0a88c5cb",
+                          "titre": "ENSEA 2006 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0264636d8963a0a88c5d2",
+                          "titre": "ENSEA 2006 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0264736d8963a0a88c5d9",
+                          "titre": "ENSEA 2006 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2007",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0264936d8963a0a88c5e0",
+                          "titre": "ENSEA 2007 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0264b36d8963a0a88c5e7",
+                          "titre": "ENSEA 2007 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0264d36d8963a0a88c5ee",
+                          "titre": "ENSEA 2007 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0264f36d8963a0a88c5f5",
+                          "titre": "ENSEA 2007 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2008",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0265136d8963a0a88c5fc",
+                          "titre": "ENSEA 2008 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0265336d8963a0a88c603",
+                          "titre": "ENSEA 2008 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0265536d8963a0a88c60a",
+                          "titre": "ENSEA 2008 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0265736d8963a0a88c611",
+                          "titre": "ENSEA 2008 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2009",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0265c36d8963a0a88c626",
+                          "titre": "ENSEA 2009 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0265e36d8963a0a88c62d",
+                          "titre": "ENSEA 2009 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0265936d8963a0a88c618",
+                          "titre": "ENSEA 2009 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0265a36d8963a0a88c61f",
+                          "titre": "ENSEA 2009 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2010",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0266036d8963a0a88c634",
+                          "titre": "ENSEA 2010 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0266236d8963a0a88c63b",
+                          "titre": "ENSEA 2010 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0266436d8963a0a88c642",
+                          "titre": "ENSEA 2010 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0266536d8963a0a88c649",
+                          "titre": "ENSEA 2010 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2011",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0266836d8963a0a88c650",
+                          "titre": "ENSEA 2011 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0266936d8963a0a88c657",
+                          "titre": "ENSEA 2011 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0266c36d8963a0a88c65e",
+                          "titre": "ENSEA 2011 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0266d36d8963a0a88c665",
+                          "titre": "ENSEA 2011 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2012",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0267336d8963a0a88c67a",
+                          "titre": "ENSEA 2012 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0267536d8963a0a88c681",
+                          "titre": "ENSEA 2012 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0267036d8963a0a88c66c",
+                          "titre": "ENSEA 2012 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0267136d8963a0a88c673",
+                          "titre": "ENSEA 2012 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2013",
+                  "enfants": [
+                    {
+                      "matiere": "Calcul numérique",
+                      "sujets": [
+                        {
+                          "id": "6ac0267836d8963a0a88c688",
+                          "titre": "ENSEA 2013 – ISE Option Mathématiques : Calcul numérique",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0267936d8963a0a88c68f",
+                          "titre": "ENSEA 2013 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0267c36d8963a0a88c696",
+                          "titre": "ENSEA 2013 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0267d36d8963a0a88c69d",
+                          "titre": "ENSEA 2013 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2014",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0267f36d8963a0a88c6a4",
+                          "titre": "ENSEA 2014 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0268236d8963a0a88c6ab",
+                          "titre": "ENSEA 2014 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0268336d8963a0a88c6b2",
+                          "titre": "ENSEA 2014 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2015",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0268736d8963a0a88c6c0",
+                          "titre": "ENSEA 2015 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0268a36d8963a0a88c6c7",
+                          "titre": "ENSEA 2015 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0268536d8963a0a88c6b9",
+                          "titre": "ENSEA 2015 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2016",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0268c36d8963a0a88c6ce",
+                          "titre": "ENSEA 2016 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac0268f36d8963a0a88c6d5",
+                          "titre": "ENSEA 2016 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0269136d8963a0a88c6dc",
+                          "titre": "ENSEA 2016 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2017",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac0269536d8963a0a88c6ea",
+                          "titre": "ENSEA 2017 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac026af36d8963a0a88c6f1",
+                          "titre": "ENSEA 2017 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac0269336d8963a0a88c6e3",
+                          "titre": "ENSEA 2017 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2018",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac026b036d8963a0a88c6f8",
+                          "titre": "ENSEA 2018 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac026b336d8963a0a88c6ff",
+                          "titre": "ENSEA 2018 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac026b536d8963a0a88c706",
+                          "titre": "ENSEA 2018 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2019",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac026b836d8963a0a88c70d",
+                          "titre": "ENSEA 2019 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2020",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac026ba36d8963a0a88c714",
+                          "titre": "ENSEA 2020 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac026be36d8963a0a88c71b",
+                          "titre": "ENSEA 2020 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac026c036d8963a0a88c722",
+                          "titre": "ENSEA 2020 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2021",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac026c336d8963a0a88c729",
+                          "titre": "ENSEA 2021 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac026c536d8963a0a88c730",
+                          "titre": "ENSEA 2021 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac026c736d8963a0a88c737",
+                          "titre": "ENSEA 2021 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac026cb36d8963a0a88c745",
+                          "titre": "ENSEA 2022 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac026cf36d8963a0a88c74c",
+                          "titre": "ENSEA 2022 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac026c936d8963a0a88c73e",
+                          "titre": "ENSEA 2022 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2023",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac026d236d8963a0a88c753",
+                          "titre": "ENSEA 2023 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac026d736d8963a0a88c75a",
+                          "titre": "ENSEA 2023 – ISE Option Mathématiques : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac026da36d8963a0a88c761",
+                          "titre": "ENSEA 2023 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac272e8316193dda86e4424",
+                          "titre": "ENSEA 2024 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272ea316193dda86e442b",
+                          "titre": "ENSEA 2024 – ISE Option Mathématiques : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac272ef316193dda86e4432",
+                          "titre": "ENSEA 2024 – ISE Option Mathématiques : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272f2316193dda86e4439",
+                          "titre": "ENSEA 2024 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac27373316193dda86e454a",
+                          "titre": "ENSEA 2025 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac272f5316193dda86e4440",
+                          "titre": "ENSEA 2025 – ISE Option Mathématiques : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac27376316193dda86e4551",
+                          "titre": "ENSEA 2025 – ISE Option Mathématiques : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac272f6316193dda86e4447",
+                          "titre": "ENSEA 2025 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2026",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac27378316193dda86e4558",
+                          "titre": "ENSEA 2026 – ISE Option Mathématiques : Anglais",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Contraction de texte",
+                      "sujets": [
+                        {
+                          "id": "6ac2737a316193dda86e455f",
+                          "titre": "ENSEA 2026 – ISE Option Mathématiques : Contraction de texte",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac2737d316193dda86e4566",
+                          "titre": "ENSEA 2026 – ISE Option Mathématiques : 1re composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac2737f316193dda86e456d",
+                          "titre": "ENSEA 2026 – ISE Option Mathématiques : 2e composition de mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Ordre général",
+                      "sujets": [
+                        {
+                          "id": "6ac27381316193dda86e4574",
+                          "titre": "ENSEA 2026 – ISE Option Mathématiques : Ordre général",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "ERNAM",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "Prépa EAC/ING",
+              "enfants": [
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeec8725de0f7a2e7d0222",
+                          "titre": "ERNAM 2022 – Mathématiques, Cycles Prépa EAC/ING",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeec8c25de0f7a2e7d0230",
+                          "titre": "ERNAM 2022 – Physique, Cycles Prépa EAC/ING",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Prépa Technicien",
+              "enfants": [
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6abeec8a25de0f7a2e7d0229",
+                          "titre": "ERNAM 2022 – Mathématiques, Cycle Prépa Technicien",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique",
+                      "sujets": [
+                        {
+                          "id": "6abeec8e25de0f7a2e7d0237",
+                          "titre": "ERNAM 2022 – Physique, Cycle Prépa Technicien",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "ESATIC",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "Bacheliers",
+              "enfants": [
+                {
+                  "annee": "2012",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques",
+                      "sujets": [
+                        {
+                          "id": "6ac01e9636d8963a0a88c43b",
+                          "titre": "ESATIC 2012 – Concours d'entrée en Licence : Mathématiques, Sciences physiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2013",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Français, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01e9d36d8963a0a88c442",
+                          "titre": "ESATIC 2013 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Français, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2014",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01ea436d8963a0a88c449",
+                          "titre": "ESATIC 2014 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2015",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Français, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01ea936d8963a0a88c450",
+                          "titre": "ESATIC 2015 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Français, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2016",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Français, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01eb036d8963a0a88c457",
+                          "titre": "ESATIC 2016 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Français, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2017",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac01eb336d8963a0a88c45e",
+                          "titre": "ESATIC 2017 – Concours d'entrée en Licence : Mathématiques",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2020",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01eba36d8963a0a88c465",
+                          "titre": "ESATIC 2020 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2021",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01ebf36d8963a0a88c46c",
+                          "titre": "ESATIC 2021 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2022",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Français, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01ec536d8963a0a88c473",
+                          "titre": "ESATIC 2022 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Français, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2023",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01eca36d8963a0a88c47a",
+                          "titre": "ESATIC 2023 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2024",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques, Sciences physiques, Français, Anglais",
+                      "sujets": [
+                        {
+                          "id": "6ac01ecf36d8963a0a88c481",
+                          "titre": "ESATIC 2024 – Concours d'entrée en Licence : Mathématiques, Sciences physiques, Français, Anglais",
+                          "corrige": "inclus_dans_pdf"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "inphb",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "A2GP",
+              "enfants": [
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Biologie 1",
+                      "sujets": [
+                        {
+                          "id": "6ac27258316193dda86e4306",
+                          "titre": "INP-HB 2025 – Concours A2GP : Biologie 1",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Chimie 3 – Chimie générale",
+                      "sujets": [
+                        {
+                          "id": "6ac2726a316193dda86e430d",
+                          "titre": "INP-HB 2025 – Concours A2GP : Chimie 3 (chimie générale)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Chimie 3 – Chimie organique",
+                      "sujets": [
+                        {
+                          "id": "6ac27282316193dda86e4314",
+                          "titre": "INP-HB 2025 – Concours A2GP : Chimie 3 (chimie organique)",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Géologie 1",
+                      "sujets": [
+                        {
+                          "id": "6ac27284316193dda86e431b",
+                          "titre": "INP-HB 2025 – Concours A2GP : Géologie 1",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Informatique 2",
+                      "sujets": [
+                        {
+                          "id": "6ac27286316193dda86e4322",
+                          "titre": "INP-HB 2025 – Concours A2GP : Informatique 2",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 3",
+                      "sujets": [
+                        {
+                          "id": "6ac272f9316193dda86e444e",
+                          "titre": "INP-HB 2025 – Concours A2GP : Mathématiques 3",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique 3",
+                      "sujets": [
+                        {
+                          "id": "6ac27288316193dda86e4329",
+                          "titre": "INP-HB 2025 – Concours A2GP : Physique 3",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "A2GP/GCN/GIN",
+              "enfants": [
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais 2",
+                      "sujets": [
+                        {
+                          "id": "6ac27217316193dda86e42c0",
+                          "titre": "INP-HB 2025 – Concours A2GP/GCN/GIN : Anglais 2",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Chimie 1",
+                      "sujets": [
+                        {
+                          "id": "6ac2721a316193dda86e42c7",
+                          "titre": "INP-HB 2025 – Concours A2GP/GCN/GIN : Chimie 1",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Chimie 2",
+                      "sujets": [
+                        {
+                          "id": "6ac2721e316193dda86e42ce",
+                          "titre": "INP-HB 2025 – Concours A2GP/GCN/GIN : Chimie 2",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Français 2",
+                      "sujets": [
+                        {
+                          "id": "6ac27220316193dda86e42d5",
+                          "titre": "INP-HB 2025 – Concours A2GP/GCN/GIN : Français 2",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Informatique 1",
+                      "sujets": [
+                        {
+                          "id": "6ac27223316193dda86e42dc",
+                          "titre": "INP-HB 2025 – Concours A2GP/GCN/GIN : Informatique 1",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "Bacheliers",
+              "enfants": [
+                {
+                  "annee": "2015",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais, Français, Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac01f4f36d8963a0a88c4d1",
+                          "titre": "INP-HB 2015 – Concours Bacheliers : Anglais, Français, Mathématiques",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2016",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais, Français, Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac01f4d36d8963a0a88c4ca",
+                          "titre": "INP-HB 2016 – Concours Bacheliers : Anglais, Français, Mathématiques",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2017",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais, Français, Mathématiques",
+                      "sujets": [
+                        {
+                          "id": "6ac01f4b36d8963a0a88c4c3",
+                          "titre": "INP-HB 2017 – Concours Bacheliers : Anglais, Français, Mathématiques",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2018",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais, Culture générale, Culture scientifique",
+                      "sujets": [
+                        {
+                          "id": "6ac01f4936d8963a0a88c4bc",
+                          "titre": "INP-HB 2018 – Concours Bacheliers : Anglais, Culture générale, Culture scientifique",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2019",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais, Culture générale, Culture scientifique",
+                      "sujets": [
+                        {
+                          "id": "6ac01f4636d8963a0a88c4b5",
+                          "titre": "INP-HB 2019 – Concours Bacheliers : Anglais, Culture générale, Culture scientifique",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2020",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais, Culture générale, Culture scientifique",
+                      "sujets": [
+                        {
+                          "id": "6ac01f4436d8963a0a88c4ae",
+                          "titre": "INP-HB 2020 – Concours Bacheliers : Anglais, Culture générale, Culture scientifique",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "CAE",
+              "enfants": [
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Anglais 1",
+                      "sujets": [
+                        {
+                          "id": "6ac2720a316193dda86e429d",
+                          "titre": "INP-HB 2025 – Concours CAE : Anglais 1",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Culture générale",
+                      "sujets": [
+                        {
+                          "id": "6ac2720c316193dda86e42a4",
+                          "titre": "INP-HB 2025 – Concours CAE : Culture générale",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Économie générale",
+                      "sujets": [
+                        {
+                          "id": "6ac2720f316193dda86e42ab",
+                          "titre": "INP-HB 2025 – Concours CAE : Économie générale",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Histoire, Géographie et GMC",
+                      "sujets": [
+                        {
+                          "id": "6ac27212316193dda86e42b2",
+                          "titre": "INP-HB 2025 – Concours CAE : Histoire, Géographie et GMC",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Mathématiques 1",
+                      "sujets": [
+                        {
+                          "id": "6ac27215316193dda86e42b9",
+                          "titre": "INP-HB 2025 – Concours CAE : Mathématiques 1",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "GCN/GIN",
+              "enfants": [
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Mathématiques 2",
+                      "sujets": [
+                        {
+                          "id": "6ac27226316193dda86e42e3",
+                          "titre": "INP-HB 2025 – Concours GCN/GIN : Mathématiques 2",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique 1",
+                      "sujets": [
+                        {
+                          "id": "6ac27229316193dda86e42ea",
+                          "titre": "INP-HB 2025 – Concours GCN/GIN : Physique 1",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Physique 2",
+                      "sujets": [
+                        {
+                          "id": "6ac2722e316193dda86e42f1",
+                          "titre": "INP-HB 2025 – Concours GCN/GIN : Physique 2",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Sciences industrielles 1",
+                      "sujets": [
+                        {
+                          "id": "6ac27231316193dda86e42f8",
+                          "titre": "INP-HB 2025 – Concours GCN/GIN : Sciences industrielles 1",
+                          "corrige": null
+                        }
+                      ]
+                    },
+                    {
+                      "matiere": "Sciences industrielles 2",
+                      "sujets": [
+                        {
+                          "id": "6ac27244316193dda86e42ff",
+                          "titre": "INP-HB 2025 – Concours GCN/GIN : Sciences industrielles 2",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "IDSI",
+              "enfants": [
+                {
+                  "annee": "2025",
+                  "enfants": [
+                    {
+                      "matiere": "Informatique, Mathématiques générales, Statistiques-Probabilités",
+                      "sujets": [
+                        {
+                          "id": "6ac5012eae4c7a812b70c19f",
+                          "titre": "INP-HB 2025 – Concours Data Science Institute (IDSI) : Informatique, Maths, Stats-Probas",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2026",
+                  "enfants": [
+                    {
+                      "matiere": "Informatique, Mathématiques générales, Statistiques-Probabilités",
+                      "sujets": [
+                        {
+                          "id": "6ac50118ae4c7a812b70c191",
+                          "titre": "INP-HB 2026 – Concours d'entrée Data Science Institute (IDSI) : Informatique, Maths, Stats-Probas",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modele": "legacy",
+      "enfants": [
+        {
+          "organisme": "(organisme inconnu)",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "(legacy) Annales / Sujets de Concours",
+              "enfants": [
+                {
+                  "annee": "(année inconnue)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a7efa8d5bf8af377920ea77",
+                          "titre": "infas_test_1",
+                          "corrige": [
+                            "6a7f04561510b2c486604dea"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "(legacy) Sujets Bac",
+              "enfants": [
+                {
+                  "annee": "2025-2026 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a4db087490a6cabc6f605c3",
+                          "titre": "Épreuve de Mathématiques - Série C - Baccalauréat Blanc Session 2025-2026 (Gabon)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2026 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a4daf62490a6cabc6f605ae",
+                          "titre": "Épreuve de Mathématiques - Séries A2 & H - Baccalauréat Session 2026 (Sujet et Corrigé National)",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "ENS - École Normale Supérieure (Abidjan)",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "(legacy) Annales / Sujets de Concours",
+              "enfants": [
+                {
+                  "annee": "(année inconnue)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a66c760cf28531ddc5743ca",
+                          "titre": "Test09",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a6cad8bb2880023e548e7e8",
+                          "titre": "document-genere.pdf",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a6d3d9cb2880023e548eaa4",
+                          "titre": "rooo****",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a636b31d91470ab6c504686",
+                          "titre": "test2",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "(legacy) Corrigés",
+              "enfants": [
+                {
+                  "annee": "(année inconnue)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a6d40e6b2880023e548ec09",
+                          "titre": "Sujet_Bac_Histoire_Geo.pdf-------------",
+                          "corrige": [
+                            "6a6e04a39905fe6016fc129b"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro)",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "(legacy) Annales / Sujets de Concours",
+              "enfants": [
+                {
+                  "annee": "2018 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a4bf70b1067f0d1d6b997d6",
+                          "titre": "Test de sélection en M1 Data Science 2018 - Statistiques et Probabilités",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2021 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a4bf8761067f0d1d6b997e7",
+                          "titre": "Test de sélection en M1 Data Science 2021 - Statistiques et Probabilités",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a4bf9d31067f0d1d6b997f8",
+                          "titre": "Test de sélection en M1 Data Science 2021 - Mathématiques",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "(legacy) Sujets Bac",
+              "enfants": [
+                {
+                  "annee": "(année inconnue)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a66dc32673ea4ade2aa99b4",
+                          "titre": "Dara",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organisme": "Université Alassane Ouattara (Bouaké)",
+          "enfants": [
+            {
+              "parcoursOuCategorie": "(legacy) Annales / Sujets de Concours",
+              "enfants": [
+                {
+                  "annee": "(année inconnue)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a5ef3785fac2a9953e88e06",
+                          "titre": "test1",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "(legacy) Exercices / TD",
+              "enfants": [
+                {
+                  "annee": "2024 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a4c62ab490a6cabc6f60535",
+                          "titre": "Feuille de TD 1 - Théorie de la Mesure - Session 2024/25",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "parcoursOuCategorie": "(legacy) Sujets d'Examens",
+              "enfants": [
+                {
+                  "annee": "2022 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a5f6ae2cfd044b594c2313f",
+                          "titre": "Examen de Mécanique Quantique avec Proposition de Correction Détaillée - Année Académique 2022-2022022-2023",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2022-2023 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a4c6cd0490a6cabc6f6054e",
+                          "titre": "Compilation de sujets d'examen de Licence 3 de Mathématiques (2022-2023 et 2023-2024).",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f4c6e6ae0bca7eebf7cdc",
+                          "titre": "Examen d'Algèbre Linéaire (Complément 1B) avec Correction Détaillée - Session 1 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f4d916ae0bca7eebf7d2f",
+                          "titre": "Examen d'Algèbre Linéaire (Complément 1A) avec Correction Détaillée - Session 1 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f4ef46ae0bca7eebf7d9c",
+                          "titre": "Examen d'Analyse 3A (Espaces vectoriels normés et calcul différentiel 1) avec Correction Détaillée - 2ème Session 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f50e96ae0bca7eebf7dd4",
+                          "titre": "Examen d'Analyse 3B (Séries et intégrales impropres) avec Correction Détaillée - 2ème Session 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f51e36ae0bca7eebf7e03",
+                          "titre": "Examen d'Analyse 3B (Séries et intégrales impropres 1) avec Correction Détaillée - 1ère Session 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f577765ac8dbeaa8e707c",
+                          "titre": "Devoir Surveillé d'Analyse 3-B avec Correction Détaillée - Année académique 2022/2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f584f65ac8dbeaa8e70e0",
+                          "titre": "Devoir Surveillé d'Analyse 3-A avec Correction Détaillée - Année académique 2022/2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f592f65ac8dbeaa8e7106",
+                          "titre": "Examen d'Algèbre 4A avec Proposition de Correction Détaillée - Année académique 2022/2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f59d065ac8dbeaa8e712c",
+                          "titre": "Examen d'Algèbre 4B avec Proposition de Correction Détaillée - Année académique 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f5bbe65ac8dbeaa8e71ee",
+                          "titre": "Examen d'Algèbre 4B avec Proposition de Correction Détaillée - Année académique 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f5d9965ac8dbeaa8e7272",
+                          "titre": "Examen de Mécanique Quantique avec Proposition de Correction - Licence 2 Maths - Infos  2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f5e7565ac8dbeaa8e729a",
+                          "titre": "Examen de Probabilités avec Proposition de Correction Détaillée - Année Universitaire 2022/2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f5f5565ac8dbeaa8e72c2",
+                          "titre": "Examen de Probabilités avec Proposition de Correction Détaillée - Année Universitaire 2022/2023 (Session 2)",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f608865ac8dbeaa8e7331",
+                          "titre": "Examen d'Algèbre 4A avec Proposition de Correction Détaillée - Année Académique 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f6a16cfd044b594c230f9",
+                          "titre": "Examen d'Analyse 3B avec Proposition de Correction Détaillée - Année Académique 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f6c22cfd044b594c23167",
+                          "titre": "Devoir de Mécanique Quantique avec Proposition de Correction Détaillée - Année Académique 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f6ceecfd044b594c2318f",
+                          "titre": "Examen de Thermodynamique Physique avec Proposition de Correction - Année Académique 2022-2023",
+                          "corrige": null
+                        },
+                        {
+                          "id": "6a5f6daecfd044b594c231b5",
+                          "titre": "Examen de Thermodynamique Physique (2ème Session) avec Proposition de Correction - Année Universitaire 2022-2023",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "annee": "2023-2024 (déduite)",
+                  "enfants": [
+                    {
+                      "matiere": "(matière non renseignée)",
+                      "sujets": [
+                        {
+                          "id": "6a4c6dde490a6cabc6f60567",
+                          "titre": "Compilation de quelques sujets d'examen, de devoirs et de TP de Licence 3 Informatique et Gestion (2023-2024).",
+                          "corrige": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

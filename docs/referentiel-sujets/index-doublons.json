@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "genereLe": "2026-10-10T09:19:32.841Z",
+  "description": "Paires de ressources existantes susceptibles d'être des doublons. Aucune ressource n'est supprimée ni fusionnée automatiquement.",
+  "regles": {
+    "doublon_confirme": "Même identifiant, même clé de stockage, même empreinte SHA-256, ou décision manuelle enregistrée.",
+    "doublon_probable": "Taille de fichier identique à l'octet sans contradiction de contexte, ou même organisme + année + matière (+ parcours) avec titres proches (≥ 60 %).",
+    "a_verifier": "Indices partiels : même contexte avec titres différents, métadonnées incomplètes, ou titres très proches avec une matière différente."
+  },
+  "statistiques": {
+    "doublon_confirme": 0,
+    "doublon_probable": 10,
+    "a_verifier": 3
+  },
+  "correspondances": [
+    {
+      "ids": [
+        "6a5f59d065ac8dbeaa8e712c",
+        "6a5f5bbe65ac8dbeaa8e71ee"
+      ],
+      "statut": "doublon_probable",
+      "score": 1,
+      "raisons": [
+        "contexte : organisme identique, annee identique",
+        "similarité titre/description 100 %",
+        "titres quasi identiques, même organisme et même année (matière non renseignée)"
+      ],
+      "titres": [
+        "Examen d'Algèbre 4B avec Proposition de Correction Détaillée - Année académique 2022-2023",
+        "Examen d'Algèbre 4B avec Proposition de Correction Détaillée - Année académique 2022-2023"
+      ],
+      "contexte": "Université Alassane Ouattara (Bouaké) 2022-2023 / Université Alassane Ouattara (Bouaké) 2022-2023"
+    },
+    {
+      "ids": [
+        "6abef2bc25de0f7a2e7d03d7",
+        "6abef2b025de0f7a2e7d03a6"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.93,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 93 %"
+      ],
+      "titres": [
+        "EAMAC 2012 – Physique, Contrôleurs de la Circulation Aérienne",
+        "EAMAC 2012 (Franceville) – Physique, Contrôleurs de la Circulation Aérienne"
+      ],
+      "contexte": "EAMAC 2012 / EAMAC 2012"
+    },
+    {
+      "ids": [
+        "6abef2be25de0f7a2e7d03de",
+        "6abef2b325de0f7a2e7d03b4"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.92,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 92 %"
+      ],
+      "titres": [
+        "EAMAC 2012 – Physique, Technicien & Technicien Supérieur",
+        "EAMAC 2012 (Franceville) – Physique, Technicien & Technicien Supérieur"
+      ],
+      "contexte": "EAMAC 2012 / EAMAC 2012"
+    },
+    {
+      "ids": [
+        "6abef2ba25de0f7a2e7d03d0",
+        "6abef2b225de0f7a2e7d03ad"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.9,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 90 %"
+      ],
+      "titres": [
+        "EAMAC 2012 – Physique, Ingénieur",
+        "EAMAC 2012 (Franceville) – Physique, Ingénieur"
+      ],
+      "contexte": "EAMAC 2012 / EAMAC 2012"
+    },
+    {
+      "ids": [
+        "6abef28825de0f7a2e7d0384",
+        "6abef28025de0f7a2e7d0362"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.9,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 90 %"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun) – Mathématiques, Ingénieur",
+        "EAMAC 2013 – Mathématiques, Ingénieur"
+      ],
+      "contexte": "EAMAC 2013 / EAMAC 2013"
+    },
+    {
+      "ids": [
+        "6abef28525de0f7a2e7d037d",
+        "6abef27a25de0f7a2e7d0341"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.89,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 89 %"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun) – Physique, Contrôleurs de la Circulation Aérienne",
+        "EAMAC 2013 – Physique (Proposition 3), Contrôleurs de la Circulation Aérienne"
+      ],
+      "contexte": "EAMAC 2013 / EAMAC 2013"
+    },
+    {
+      "ids": [
+        "6a771a489905fe6016fc21d6",
+        "6a7a64ee9905fe6016fc2350"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.88,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 88 %"
+      ],
+      "titres": [
+        "ENA Cycle Moyen 2020 – Test d'aptitude verbale (Présélection)",
+        "ENA 2020 – Cycle moyen : Aptitude verbale"
+      ],
+      "contexte": "ENA 2020 / ENA 2020"
+    },
+    {
+      "ids": [
+        "6abef28b25de0f7a2e7d0392",
+        "6abef28425de0f7a2e7d0376"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.81,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 81 %"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun, version anglaise) – Mathématiques, Technicien & Technicien Supérieur",
+        "EAMAC 2013 – Mathématiques, Technicien & Technicien Supérieur"
+      ],
+      "contexte": "EAMAC 2013 / EAMAC 2013"
+    },
+    {
+      "ids": [
+        "6abef28a25de0f7a2e7d038b",
+        "6abef27e25de0f7a2e7d0355"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.8,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 80 %"
+      ],
+      "titres": [
+        "EAMAC 2013 (Cameroun) – Physique, Ingénieur",
+        "EAMAC 2013 – Physique (Proposition 2), Ingénieur"
+      ],
+      "contexte": "EAMAC 2013 / EAMAC 2013"
+    },
+    {
+      "ids": [
+        "6a5ef3785fac2a9953e88e06",
+        "6a5f51e36ae0bca7eebf7e03"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.07,
+      "raisons": [
+        "taille identique à l'octet (269187 o)",
+        "même nom de fichier d'origine (« Analyse3B_Series_Integrales_Impropres_Sujet_et_Correction.pdf »)",
+        "contexte : organisme identique",
+        "similarité titre/description 7 %",
+        "numéros discriminants différents dans les titres (ex. « 1 »/« 2 », « 3A »/« 3B »)"
+      ],
+      "titres": [
+        "test1",
+        "Examen d'Analyse 3B (Séries et intégrales impropres 1) avec Correction Détaillée - 1ère Session 2022-2023"
+      ],
+      "contexte": "Université Alassane Ouattara (Bouaké) ? / Université Alassane Ouattara (Bouaké) 2022-2023"
+    },
+    {
+      "ids": [
+        "6a5f592f65ac8dbeaa8e7106",
+        "6a5f59d065ac8dbeaa8e712c"
+      ],
+      "statut": "a_verifier",
+      "score": 0.91,
+      "raisons": [
+        "même nom de fichier d'origine (« Examen_Algebre_4A_Sujet_et_Correction.pdf »)",
+        "contexte : organisme identique, annee identique",
+        "similarité titre/description 91 %",
+        "numéros discriminants différents dans les titres (ex. « 1 »/« 2 », « 3A »/« 3B »)"
+      ],
+      "titres": [
+        "Examen d'Algèbre 4A avec Proposition de Correction Détaillée - Année académique 2022/2023",
+        "Examen d'Algèbre 4B avec Proposition de Correction Détaillée - Année académique 2022-2023"
+      ],
+      "contexte": "Université Alassane Ouattara (Bouaké) 2022-2023 / Université Alassane Ouattara (Bouaké) 2022-2023"
+    },
+    {
+      "ids": [
+        "6a4bf8761067f0d1d6b997e7",
+        "6a4bf9d31067f0d1d6b997f8"
+      ],
+      "statut": "a_verifier",
+      "score": 0.8,
+      "raisons": [
+        "contexte : organisme identique, annee identique",
+        "similarité titre/description 80 %",
+        "métadonnées incomplètes : impossible de trancher"
+      ],
+      "titres": [
+        "Test de sélection en M1 Data Science 2021 - Statistiques et Probabilités",
+        "Test de sélection en M1 Data Science 2021 - Mathématiques"
+      ],
+      "contexte": "INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro) 2021 / INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro) 2021"
+    },
+    {
+      "ids": [
+        "6a5f51e36ae0bca7eebf7e03",
+        "6a5f6a16cfd044b594c230f9"
+      ],
+      "statut": "a_verifier",
+      "score": 0.75,
+      "raisons": [
+        "contexte : organisme identique, annee identique, session identique",
+        "similarité titre/description 75 %",
+        "métadonnées incomplètes : impossible de trancher"
+      ],
+      "titres": [
+        "Examen d'Analyse 3B (Séries et intégrales impropres 1) avec Correction Détaillée - 1ère Session 2022-2023",
+        "Examen d'Analyse 3B avec Proposition de Correction Détaillée - Année Académique 2022-2023"
+      ],
+      "contexte": "Université Alassane Ouattara (Bouaké) 2022-2023 / Université Alassane Ouattara (Bouaké) 2022-2023"
+    }
+  ],
+  "decisionsManuelles": [],
+  "aideDecisionsManuelles": "Ajouter { \"ids\": [\"<idA>\", \"<idB>\"], \"statut\": \"doublon_confirme\" | \"distinct\", \"date\": \"AAAA-MM-JJ\", \"par\": \"<qui>\", \"note\": \"<justification>\" } dans decisionsManuelles. Ces décisions sont conservées et appliquées à chaque synchronisation."
+}

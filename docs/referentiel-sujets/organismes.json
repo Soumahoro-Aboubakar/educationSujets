@@ -1,0 +1,300 @@
+{
+  "version": 1,
+  "genereLe": "2026-10-10T09:19:32.841Z",
+  "remarque": "Un même établissement peut apparaître deux fois : comme organisme du catalogue dynamique et comme université de l'ancien modèle (ex. inphb / INPHB). Les alias servent au rapprochement.",
+  "organismes": [
+    {
+      "id": "6abefef7d89f729e5f65877a",
+      "nom": "EAMAC",
+      "alias": [
+        "eamac",
+        "École Africaine de la Météorologie et de l'Aviation Civile"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 62,
+      "corriges": 0,
+      "annees": [
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2014-2015",
+        "2015",
+        "2016",
+        "2018",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "parcoursTypes": [
+        "Contrôleurs de la Circulation Aérienne",
+        "Exploitation en Aéronautique Civile",
+        "Ingénieur",
+        "Ingénieur & Exploitation en Aéronautique Civile",
+        "Ingénieurs & Contrôleurs",
+        "Technicien",
+        "Technicien & Technicien Supérieur"
+      ],
+      "matieres": [
+        "Anglais",
+        "Français",
+        "Mathématiques",
+        "Physique"
+      ]
+    },
+    {
+      "id": "6abdac72c16ff3242bba68fe",
+      "nom": "ENA",
+      "alias": [
+        "ena",
+        "École Nationale d'Administration"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 14,
+      "corriges": 0,
+      "annees": [
+        "2015",
+        "2017",
+        "2018",
+        "2020",
+        "2022",
+        "2025"
+      ],
+      "parcoursTypes": [
+        "Cycle moyen"
+      ],
+      "matieres": [
+        "Anglais",
+        "Aptitude verbale",
+        "Aptitude verbale, Culture générale",
+        "Aptitude verbale, Culture générale, Anglais, Aptitude numérique, Logique",
+        "Culture générale",
+        "Test d'organisation, Test d'aptitude numérique"
+      ]
+    },
+    {
+      "id": "6a491ca169e6c372954c19a0",
+      "nom": "ENS - École Normale Supérieure (Abidjan)",
+      "alias": [
+        "ENS",
+        "ENS Abidjan",
+        "École Normale Supérieure"
+      ],
+      "source": "legacy_universite",
+      "sujets": 5,
+      "corriges": 1,
+      "annees": [],
+      "parcoursTypes": [],
+      "matieres": []
+    },
+    {
+      "id": "6ac0392bd89f729e5f659150",
+      "nom": "ENSEA",
+      "alias": [
+        "ensea",
+        "École Nationale Supérieure de Statistique et d'Économie Appliquée"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 139,
+      "corriges": 0,
+      "annees": [
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Analystes Statisticiens (AS)",
+        "ISE Cycle Long / AS",
+        "ISE Option Économie",
+        "ISE Option Mathématiques"
+      ],
+      "matieres": [
+        "Anglais",
+        "Calcul numérique",
+        "Contraction de texte",
+        "Économie",
+        "Mathématiques",
+        "Mathématiques 1",
+        "Mathématiques 2",
+        "Ordre général"
+      ]
+    },
+    {
+      "id": "6abf08bdd89f729e5f6587aa",
+      "nom": "ERNAM",
+      "alias": [
+        "ernam",
+        "École Régionale de la Navigation Aérienne et du Management"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 4,
+      "corriges": 0,
+      "annees": [
+        "2022"
+      ],
+      "parcoursTypes": [
+        "Prépa EAC/ING",
+        "Prépa Technicien"
+      ],
+      "matieres": [
+        "Mathématiques",
+        "Physique"
+      ]
+    },
+    {
+      "id": "6ac04634d89f729e5f6591da",
+      "nom": "ESATIC",
+      "alias": [
+        "esatic",
+        "École Supérieure Africaine des TIC"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 11,
+      "corriges": 0,
+      "annees": [
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "parcoursTypes": [
+        "Bacheliers"
+      ],
+      "matieres": [
+        "Mathématiques",
+        "Mathématiques, Sciences physiques",
+        "Mathématiques, Sciences physiques, Anglais",
+        "Mathématiques, Sciences physiques, Français, Anglais"
+      ]
+    },
+    {
+      "id": "6abc1686914ef4263264f560",
+      "nom": "inphb",
+      "alias": [
+        "INP-HB",
+        "INPHB",
+        "Institut National Polytechnique Félix Houphouët-Boigny",
+        "INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro)"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 30,
+      "corriges": 0,
+      "annees": [
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2025",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "A2GP",
+        "A2GP/GCN/GIN",
+        "Bacheliers",
+        "CAE",
+        "GCN/GIN",
+        "IDSI"
+      ],
+      "matieres": [
+        "Anglais 1",
+        "Anglais 2",
+        "Anglais, Culture générale, Culture scientifique",
+        "Anglais, Français, Mathématiques",
+        "Biologie 1",
+        "Chimie 1",
+        "Chimie 2",
+        "Chimie 3 – Chimie générale",
+        "Chimie 3 – Chimie organique",
+        "Culture générale",
+        "Économie générale",
+        "Français 2",
+        "Géologie 1",
+        "Histoire, Géographie et GMC",
+        "Informatique 1",
+        "Informatique 2",
+        "Informatique, Mathématiques générales, Statistiques-Probabilités",
+        "Mathématiques 1",
+        "Mathématiques 2",
+        "Mathématiques 3",
+        "Physique 1",
+        "Physique 2",
+        "Physique 3",
+        "Sciences industrielles 1",
+        "Sciences industrielles 2"
+      ]
+    },
+    {
+      "id": "6a491ca169e6c372954c199d",
+      "nom": "INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro)",
+      "alias": [
+        "INPHB",
+        "inphb",
+        "INP-HB",
+        "Institut National Polytechnique Félix Houphouët-Boigny"
+      ],
+      "source": "legacy_universite",
+      "sujets": 4,
+      "corriges": 0,
+      "annees": [
+        "2018",
+        "2021"
+      ],
+      "parcoursTypes": [],
+      "matieres": []
+    },
+    {
+      "id": "6a491ca169e6c372954c1996",
+      "nom": "Université Alassane Ouattara (Bouaké)",
+      "alias": [
+        "UAO",
+        "Université de Bouaké"
+      ],
+      "source": "legacy_universite",
+      "sujets": 23,
+      "corriges": 0,
+      "annees": [
+        "2022",
+        "2022-2023",
+        "2023-2024",
+        "2024"
+      ],
+      "parcoursTypes": [],
+      "matieres": []
+    }
+  ]
+}

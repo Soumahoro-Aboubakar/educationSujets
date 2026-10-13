@@ -11,6 +11,16 @@ export const formatLongDate = (date) => (date
   ? new Date(date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
   : '');
 
+/** Date et heure d'un renouvellement de quota (« mardi 14 octobre à 14 h 30 »). */
+export const formatRenewal = (date) => {
+  if (!date) return '';
+  const value = new Date(date);
+  if (Number.isNaN(value.getTime())) return '';
+  const day = value.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+  const time = value.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }).replace(':', ' h ');
+  return `${day} à ${time}`;
+};
+
 export const formatFileSize = (bytes) => {
   if (!bytes) return '';
   const units = ['o', 'Ko', 'Mo', 'Go'];

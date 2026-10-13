@@ -34,7 +34,7 @@ app.use(security.requestId);
 app.use(security.requestMonitor);
 app.use(helmet({ crossOriginResourcePolicy: false }));
 // CORS_ORIGINS défini : seules ces origines sont autorisées ; sinon, comportement historique.
-app.use(cors({ origin: corsOrigins.length ? corsOrigins : true, credentials: true, exposedHeaders: ['Retry-After', 'X-Request-Id'] }));
+app.use(cors({ origin: corsOrigins.length ? corsOrigins : true, credentials: true, exposedHeaders: ['Retry-After', 'X-Request-Id', 'X-Visitor-Token'] }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Avant tout travail : IP bloquée, puis limites globales (flood par IP, plafond général, rafales).
@@ -84,6 +84,7 @@ app.use('/api/orientation', require('./routes/orientation'));
 app.use('/api/training', require('./routes/training'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/me', require('./routes/me'));
+app.use('/api/downloads', require('./routes/downloads'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/referentials', require('./routes/referentials'));

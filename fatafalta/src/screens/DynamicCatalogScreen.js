@@ -4,9 +4,9 @@ import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
-import { ChevronRight, Layers3 } from 'lucide-react-native';
+import { ChevronRight, Layers3, Files } from 'lucide-react-native';
 import Text from '../components/ui/Text';
-import ScreenHeader from '../components/ui/ScreenHeader';
+import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
 import ListRow from '../components/ui/ListRow';
 import StateView from '../components/ui/StateView';
 import { SkeletonRows } from '../components/ui/Skeleton';
@@ -234,6 +234,17 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
         onBack={goBack}
         eyebrow={sourceName}
         title={currentLevel?.libellePluriel || 'Catalogue'}
+        right={organisme ? (
+          <HeaderIconButton
+            icon={Files}
+            label="Télécharger plusieurs sujets"
+            onPress={() => navigation.navigate('BulkDownload', {
+              organisme,
+              parcoursType,
+              annee: path.map((item) => item?.nom || item?.name).find((label) => /^(19|20)\d{2}$/.test(String(label || ''))),
+            })}
+          />
+        ) : null}
       >
         <View style={styles.steps} accessibilityLabel={`Étape ${path.length + 1} sur ${totalSteps}`}>
           {Array.from({ length: totalSteps }, (_, index) => (

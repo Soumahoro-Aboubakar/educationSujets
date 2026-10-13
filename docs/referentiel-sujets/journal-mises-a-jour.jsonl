@@ -1,0 +1,2 @@
+{"date":"2026-10-10T09:19:32.841Z","action":"inventaire_initial","ressources":297}
+{"date":"2026-10-10T09:19:32.841Z","action":"synchronisation","bilan":{"ressources":297,"sujets":295,"corrigesSepares":2,"sujetsAvecCorrigeInclus":76,"catalogueDynamique":260,"legacy":37,"completes":260,"partielles":37,"avecAnomalies":28,"disparusConserves":0,"sujetsCatalogueSeo":260,"organismesCatalogue":6,"requetesHttp":104},"doublons":{"doublon_confirme":0,"doublon_probable":10,"a_verifier":3},"changements":null}

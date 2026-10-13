@@ -76,10 +76,10 @@ export const AccountOverview = () => {
       {!downloads.unlimited ? (
         <Card className="mt-4 flex items-center justify-between gap-4 p-5">
           <div>
-            <p className="text-sm text-ink-soft">Téléchargements aujourd’hui</p>
+            <p className="text-sm text-ink-soft">Sujets récents (24 h glissantes)</p>
             <p className="mt-0.5 text-lg font-bold text-ink">{`${downloads.used} / ${downloads.limit}`}</p>
           </div>
-          <div className="h-2 w-28 overflow-hidden rounded-full bg-paper-dim sm:w-40" role="progressbar" aria-label="Téléchargements utilisés aujourd’hui" aria-valuenow={downloads.used} aria-valuemin={0} aria-valuemax={downloads.limit}>
+          <div className="h-2 w-28 overflow-hidden rounded-full bg-paper-dim sm:w-40" role="progressbar" aria-label="Sujets récents téléchargés sur 24 heures glissantes" aria-valuenow={downloads.used} aria-valuemin={0} aria-valuemax={downloads.limit}>
             <div className="h-full origin-left rounded-full bg-ink transition-transform duration-700 ease-emphasized" style={{ transform: `scaleX(${Math.min(1, downloads.used / (downloads.limit || 1))})` }} />
           </div>
         </Card>

@@ -109,8 +109,8 @@ const AccountScreen = ({ navigation }) => {
               {downloads && !downloads.unlimited ? (
                 <Row
                   icon={Download}
-                  label="Téléchargements du jour"
-                  hint="Renouvelés chaque jour à minuit"
+                  label="Sujets récents téléchargés"
+                  hint="Sujets récents, sur 24 heures glissantes"
                   value={`${downloads.used} / ${downloads.limit}`}
                   isLast
                 />

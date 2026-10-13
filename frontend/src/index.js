@@ -5,10 +5,12 @@ import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import './index.css';
 import App from './App';
+import { installVisitorToken } from './lib/visitor';
 //https://educationsujets.onrender.com
 // REACT_APP_API_URL permet de viser un backend local (ex. http://localhost:5000) ; production par défaut.//https://educationsujets.onrender.com
 axios.defaults.baseURL = (process.env.REACT_APP_API_URL || 'https://educationsujets.onrender.com').replace(/\/$/, '');
 axios.defaults.headers.common.Accept = 'application/json';
+installVisitorToken();
 
 /*
  * Page pré-rendue (scripts/prerender.mjs) : son contenu reste affiché pendant que l'application

@@ -7,7 +7,7 @@ const PromoCode = require('../../models/PromoCode');
 const Commission = require('../../models/Commission');
 const Withdrawal = require('../../models/Withdrawal');
 const DownloadLog = require('../../models/DownloadLog');
-const DownloadCounter = require('../../models/DownloadCounter');
+const DownloadQuota = require('../../models/DownloadQuota');
 const billingConfig = require('../../config/billing');
 const AppError = require('../../utils/errors');
 const { dayKey, DAY_MS } = require('../billing/pricing');
@@ -36,6 +36,34 @@ const generateTempPassword = () => {
 };
 
 // ── Indicateurs ────────────────────────────────────────
+
+/** Comptes dont le quota glissant de sujets récents est entièrement utilisé (selon leur abonnement). */
+const countAccountsAtLimit = async (now) => {
+  const { recentLimits, windowHours } = billingConfig.downloads;
+  const since = new Date(now.getTime() - windowHours * 60 * 60 * 1000);
+  const rows = await DownloadQuota.aggregate([
+    { $match: { subject: /^u:/ } },
+    {
+      $project: {
+        subject: 1,
+        used: {
+          $size: {
+            $filter: {
+              input: '$grants',
+              cond: { $and: [{ $gt: ['$$this.grantedAt', since] }, { $eq: ['$$this.status', 'consumed'] }] },
+            },
+          },
+        },
+      },
+    },
+    { $match: { used: { $gte: Math.min(recentLimits.free, recentLimits.subscriber) } } },
+  ]);
+  if (!rows.length) return 0;
+  const userIds = rows.map((row) => row.subject.slice(2)).filter((id) => mongoose.Types.ObjectId.isValid(id));
+  const subscribed = new Set((await Subscription.find({ user: { $in: userIds }, currentPeriodEnd: { $gt: now } }).distinct('user')).map(String));
+  return rows.filter((row) => row.used >= (subscribed.has(row.subject.slice(2)) ? recentLimits.subscriber : recentLimits.free)).length;
+};
+
 const getStats = async () => {
   const now = new Date();
   const since7 = new Date(now.getTime() - 7 * DAY_MS);
@@ -81,7 +109,7 @@ const getStats = async () => {
       { $unwind: '$document' },
       { $project: { count: 1, title: { $ifNull: ['$document.title', '$document.originalFileName'] } } },
     ]),
-    DownloadCounter.countDocuments({ day: today, count: { $gte: billingConfig.downloads.dailyLimit } }),
+    countAccountsAtLimit(now),
     Withdrawal.aggregate([{ $match: { status: 'PENDING' } }, { $group: { _id: null, amount: { $sum: '$amount' }, count: { $sum: 1 } } }]),
   ]);
 

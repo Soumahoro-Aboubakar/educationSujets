@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, ActivityIndicator, StyleSheet, View } from 'react-native';
+import { Pressable, ActivityIndicator, StyleSheet, View } from 'react-native';
 import Text from './Text';
 import theme from '../../theme/tokens';
 
@@ -83,12 +83,14 @@ const Button = ({
     style,
   ];
 
+  // Compression légère à l'appui : retour immédiat, sans attendre la navigation.
   return (
-    <TouchableOpacity
-      style={containerStyle}
+    <Pressable
+      style={({ pressed }) => [containerStyle, pressed && styles.pressed]}
       onPress={onPress}
       disabled={disabled || loading}
-      activeOpacity={0.8}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: disabled || loading, busy: loading }}
       {...props}
     >
       {loading ? (
@@ -107,7 +109,7 @@ const Button = ({
           )}
         </View>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -123,6 +125,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  pressed: {
+    opacity: 0.88,
+    transform: [{ scale: 0.98 }],
   },
   iconContainer: {
     marginRight: theme.spacing.sm,

@@ -69,6 +69,7 @@ npm run dev
 - `ALLOWED_FILE_MIME_TYPES`: types MIME autorises separes par des virgules
 - `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`, `R2_ENDPOINT`: configuration Cloudflare R2
 - `B2_APPLICATION_KEY_ID`, `B2_APPLICATION_KEY`, `B2_BUCKET_NAME`, `B2_REGION`, `B2_ENDPOINT`: configuration Backblaze B2
+- Téléchargements (toutes facultatives, valeurs par défaut entre parenthèses) : `DOWNLOAD_FREE_UNTIL_YEAR` (2010, sujets gratuits jusqu'à cette année incluse), `DOWNLOAD_WINDOW_HOURS` (24, fenêtre glissante du quota), `DOWNLOAD_RECENT_LIMIT_FREE` (3, sujets récents sans abonnement), `DOWNLOAD_RECENT_LIMIT_SUBSCRIBER` (20, avec abonnement), `DOWNLOAD_ANONYMOUS_IP_LIMIT` (12, plafond par connexion pour les visiteurs), `DOWNLOAD_BUNDLE_MAX` (60, documents par téléchargement groupé), `DOWNLOAD_BUNDLE_TTL_MINUTES` (15, validité d'un lien d'archive), `VISITOR_TOKEN_SECRET` (secret de signature des identifiants visiteurs ; à défaut `JWT_SECRET`)
 
 ## Contrats API utilises par le frontend
 
@@ -104,3 +105,8 @@ npm run dev
 Le site est pré-rendu au build (`frontend/scripts/prerender.mjs`, données de `GET /api/seo/catalog`) :
 une page HTML par position du catalogue (`/sujets/<organisme>/…`) et par sujet, plus `sitemap.xml` et `robots.txt`.
 Déployer l'API avant le site. Variables, règles Render, Search Console, Bing/IndexNow et suivi : [docs/SEO.md](docs/SEO.md).
+
+## Référentiel des sujets et anti-doublons
+
+Inventaire local de toutes les ressources publiées et contrôle obligatoire avant chaque publication
+(`npm run verify:subjects -- <lot.json>` dans `backend/`) : [docs/referentiel-sujets/README.md](docs/referentiel-sujets/README.md).
