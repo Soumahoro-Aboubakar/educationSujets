@@ -1,0 +1,36 @@
+# Dépendances et caches
+**/node_modules/
+**/.expo/
+**/.cache/
+**/.metro/
+
+# Sorties générées localement
+/dist/
+/web-build/
+/android/
+/ios/
+*.tsbuildinfo
+
+# Fichiers temporaires et logs
+**/*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.DS_Store
+Thumbs.db
+
+# Fichiers locaux/sensibles
+.env
+.env.*
+*.jks
+*.p8
+*.p12
+*.key
+*.pem
+*.mobileprovision
+
+# Jeux de données et dossiers sans rapport avec l'application
+/new_files_unique/
+/rendu_sans_filigrane/
+/backend/
+/frontend/

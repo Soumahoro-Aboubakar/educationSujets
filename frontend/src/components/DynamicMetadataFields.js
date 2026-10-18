@@ -56,10 +56,6 @@ const DynamicMetadataFields = ({ value, onChange }) => {
     const response = await axios.get('/api/organismes', { params: { recherche, limit: 20 } });
     return response.data.data || [];
   };
-  const createOrganisme = async (nom) => {
-    const response = await axios.post('/api/organismes', { nom });
-    return response.data.data;
-  };
   const searchNodes = async (recherche, parentId) => {
     if (!organisme?._id) return [];
     const response = await axios.get('/api/noeuds', {

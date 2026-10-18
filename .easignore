@@ -1,0 +1,32 @@
+# Dépôts de données volumineux, inutiles au build de l'application mobile
+/new_files_unique/
+/rendu_sans_filigrane/
+/backend/
+/frontend/
+
+# Dépendances, caches et sorties générées, quel que soit leur emplacement
+**/node_modules/
+**/.expo/
+**/.cache/
+**/.metro/
+**/dist/
+**/build/
+**/coverage/
+**/tmp/
+**/temp/
+
+# Métadonnées et fichiers locaux
+.git/
+.vscode/
+.claude/
+**/*.log
+.DS_Store
+Thumbs.db
+
+# Ne jamais envoyer les fichiers d'environnement ou clés locales
+.env
+.env.*
+**/.env
+**/.env.*
+keys.text
+**/keys.text

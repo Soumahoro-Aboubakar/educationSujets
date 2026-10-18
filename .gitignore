@@ -4,8 +4,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-yarn.lock
 
 # Fichiers d'environnement (contiennent des données sensibles)
 .env
@@ -27,6 +25,16 @@ fatafalta/node_modules/
 # Dossiers d'upload utilisateurs
 backend/uploads/
 rendu_sans_filigrane/
+new_files_unique/
+
+# Caches et sorties de build
+**/.expo/
+**/.cache/
+**/.metro/
+**/dist/
+**/build/
+coverage/
+.nyc_output/
 
 # Fichiers système
 .DS_Store

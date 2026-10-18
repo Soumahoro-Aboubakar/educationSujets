@@ -10,7 +10,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import AuthContext from '../context/AuthContext';
-import { Doughnut, Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS, ArcElement, Tooltip, Legend,
   CategoryScale, LinearScale, BarElement, Title,
@@ -117,6 +117,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user) fetchDashboardData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -126,6 +127,7 @@ const Dashboard = () => {
       fetchMyDocuments(1);
     }, 350);
     return () => clearTimeout(timeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, activeTab, searchQuery, activeFilters]);
 
   useEffect(() => {
@@ -170,6 +172,7 @@ const Dashboard = () => {
     } else if (user && !isFetching && myDocsPage === 1 && myDocsPagination) {
       fetchMyDocuments(1);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myDocsPage]);
 
   useEffect(() => {
@@ -178,6 +181,7 @@ const Dashboard = () => {
     } else if (user && !isFetching && pendingDocsPage === 1 && pendingDocsPagination) {
       fetchPendingDocuments(1);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingDocsPage]);
 
   const fetchMyDocuments = async (page) => {
@@ -417,7 +421,7 @@ const Dashboard = () => {
             const cleanName = file.name
               .normalize('NFD')
               .replace(/[\u0300-\u036f]/g, '')
-              .replace(/[^a-zA-Z0-9.\-]/g, '_');
+              .replace(/[^a-zA-Z0-9.-]/g, '_');
             formData.append(key, file, cleanName);
           } else if (key === 'dynamicOrganisme' || key === 'dynamicPath' || key === 'dynamicMatiere' || key === 'dynamicParcoursType') {
             if (key === 'dynamicPath' && uploadData.dynamicPath?.at(-1)?._id) formData.append('noeudId', uploadData.dynamicPath.at(-1)._id);

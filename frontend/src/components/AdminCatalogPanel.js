@@ -14,7 +14,7 @@ const AdminCatalogPanel = () => {
   const [mode, setMode] = useState('configuration');
   const [organismes, setOrganismes] = useState([]);
   const [selectedId, setSelectedId] = useState('');
-  const [structure, setStructure] = useState(null);
+  const [, setStructure] = useState(null);
   const [levels, setLevels] = useState([]);
   const [nodeCount, setNodeCount] = useState(0);
   const [form, setForm] = useState(emptyOrganisme);
@@ -49,7 +49,9 @@ const AdminCatalogPanel = () => {
     } finally { setLoading(false); }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { loadOrganismes(); }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { loadStructure(selectedId); }, [selectedId]);
 
   const createOrganisme = async (event) => {

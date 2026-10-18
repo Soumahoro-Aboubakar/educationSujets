@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { FileText, Upload, CheckCircle, AlertTriangle, Image as ImageIcon, X, Eye, Clock, User, Trash2, Edit, MapPin, Briefcase, GraduationCap, Calendar, Layers, Save } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { usePdfWatermark } from '../hooks/usePdfWatermark';
 import { generatePdfFromImages } from '../utils/pdfGenerator';
 import { addWatermarkToPdf } from '../utils/pdfWatermark';
-import AuthContext from '../context/AuthContext';
 import CreatableSelect from './CreatableSelect';
 import DynamicMetadataFields from './DynamicMetadataFields';
 import CorrectionIncludedToggle from './CorrectionIncludedToggle';
@@ -36,7 +35,6 @@ const EMPTY_METADATA_FORM = {
 };
 
 const DraftManagement = ({ filtersData, onOptionCreate }) => {
-  const { user } = useContext(AuthContext);
   const [drafts, setDrafts] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
   const [page, setPage] = useState(1);
