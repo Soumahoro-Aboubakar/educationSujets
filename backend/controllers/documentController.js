@@ -144,7 +144,7 @@ exports.getDocumentDownloadUrl = asyncHandler(async (req, res) => {
     throw error;
   }
 
-  await logDownload(actor, document, req);
+  await logDownload(actor, document, req, { plan: grant.plan, access, charged: grant.charged.length > 0 });
   sendSuccess(res, {
     data: {
       ...download,
@@ -164,9 +164,15 @@ exports.legacyDownloadByFileName = asyncHandler(async (req, res) => {
 
   assertDocumentAccess(document, req.user || null);
   const actor = await buildActor(req, res);
-  await authorizeDownload(actor, document);
-  const download = await buildDownloadPayload(document, req.user || null);
-  await logDownload(actor, document, req);
+  const grant = await authorizeDownload(actor, document);
+  let download;
+  try {
+    download = await buildDownloadPayload(document, req.user || null);
+  } catch (error) {
+    if (grant.op) await releaseCharge(actor, grant.op);
+    throw error;
+  }
+  await logDownload(actor, document, req, { plan: grant.plan, access: grant.access, charged: grant.charged.length > 0 });
 
   if (download?.url) {
     return res.redirect(download.url);

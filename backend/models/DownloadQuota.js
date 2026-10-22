@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 /**
  * Quota glissant de téléchargements de sujets récents, un document par « sujet » de quota :
- *   u:<userId> (compte), v:<visitorId> (visiteur anonyme), ip:<adresse> (garde-fou anonyme).
+ *   u:<userId> (compte abonné), ip:<adresse> (garde-fou anonyme), et le quota gratuit à vie
+ *   free:u:<userId> / free:v:<visitorId> (sujets 2010-2020 sans abonnement : sans fenêtre ni TTL).
  *
  * Chaque téléchargement récent est un « droit » daté ; il sort du calcul `windowHours` heures
  * après avoir été accordé (fenêtre glissante, dates serveur en UTC). Un droit `reserved` (archive

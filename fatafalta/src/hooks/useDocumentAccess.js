@@ -19,8 +19,8 @@ export const useDocumentAccess = (navigation) => {
   const [limitInfo, setLimitInfo] = useState(null);
   const awaitingAuth = useRef(false);
 
-  // Plus de blocage anticipé : les sujets de 2010 et avant sont gratuits sans compte et les
-  // sujets récents ont un quota gratuit. Le serveur décide et la feuille explique son refus.
+  // Plus de blocage anticipé : les sujets de 2009 et avant sont gratuits sans compte et les
+  // sujets 2010-2020 ont un quota gratuit. Le serveur décide et la feuille explique son refus.
   const locked = null;
 
   // Retour de la connexion : on vérifie automatiquement l'abonnement.

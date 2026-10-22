@@ -674,9 +674,10 @@ const getPublicPlans = async () => {
     // Uniquement les moyens activés par l'administrateur.
     methods: await listEnabled(),
     downloadsPerDay: billingConfig.downloads.dailyLimit,
-    // Politique de téléchargement affichée par les interfaces (gratuité, quotas glissants).
+    // Politique de téléchargement affichée par les interfaces (gratuité, quota gratuit à vie, quota abonné glissant).
     downloadPolicy: {
       freeUntilYear: billingConfig.downloads.freeUntilYear,
+      freeQuotaUntilYear: billingConfig.downloads.freeQuotaUntilYear,
       windowHours: billingConfig.downloads.windowHours,
       recentLimits: { ...billingConfig.downloads.recentLimits },
     },

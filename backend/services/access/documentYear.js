@@ -29,11 +29,18 @@ const isYearLabel = (label) => /^\s*(19|20)\d{2}(\s*[-/–]\s*(19|20)\d{2})?\s*$
 
 const accessTierOf = (year) => (Number.isInteger(year) && year <= billingConfig.downloads.freeUntilYear ? 'free' : 'recent');
 
-const describeYear = (year) => ({
+/** Sujet « récent » téléchargeable sans abonnement sur le quota gratuit (2010-2020) ; jamais si l'année est inconnue. */
+const isFreeQuotaEligible = (year) => accessTierOf(year) === 'recent'
+  && Number.isInteger(year) && year <= billingConfig.downloads.freeQuotaUntilYear;
+
+const describeYear = (year, organismeId = null) => ({
   year: Number.isInteger(year) ? year : null,
   yearKnown: Number.isInteger(year),
   tier: accessTierOf(year),
+  freeQuotaEligible: isFreeQuotaEligible(year),
   freeUntilYear: billingConfig.downloads.freeUntilYear,
+  freeQuotaUntilYear: billingConfig.downloads.freeQuotaUntilYear,
+  organismeId,
 });
 
 /**
@@ -75,7 +82,7 @@ const loadNodeChains = async (leafIds) => {
 const isCorrection = (document) => document?.type === 'correction' || document?.documentType === 'corrige';
 
 /**
- * Accès de plusieurs documents : Map(_id → { year, yearKnown, tier, freeUntilYear }).
+ * Accès de plusieurs documents : Map(_id → { year, yearKnown, tier, freeQuotaEligible, organismeId… }).
  * Accepte des documents bruts ou peuplés (noeudId objet ou identifiant).
  */
 const resolveAccessForDocuments = async (documents = []) => {
@@ -106,7 +113,7 @@ const resolveAccessForDocuments = async (documents = []) => {
   list.forEach((document) => {
     const chain = chainOf(leafOf(document));
     const structure = chain.length ? structureByOrganisme.get(id(chain[0].organismeId)) : null;
-    result.set(id(document._id), describeYear(chain.length ? yearOfChain(chain, structure) : null));
+    result.set(id(document._id), describeYear(chain.length ? yearOfChain(chain, structure) : null, chain.length ? id(chain[0].organismeId) : null));
   });
   return result;
 };
@@ -128,6 +135,7 @@ module.exports = {
   isYearLabel,
   yearOfChain,
   accessTierOf,
+  isFreeQuotaEligible,
   describeYear,
   loadNodeChains,
   resolveAccessForDocuments,

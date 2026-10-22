@@ -12,6 +12,18 @@ exports.listUsers = asyncHandler(async (req, res) => {
   sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
 });
 
+exports.listFreeDownloads = asyncHandler(async (req, res) => {
+  const result = await admin.listFreeDownloads(req.query);
+  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+});
+
+exports.listFreeQuotaUsers = asyncHandler(async (req, res) => {
+  const result = await admin.listFreeQuotaUsers(req.query);
+  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+});
+
+exports.getFreeDownloadStats = asyncHandler(async (req, res) => sendSuccess(res, { data: await admin.getFreeDownloadStats() }));
+
 exports.getUser = asyncHandler(async (req, res) => sendSuccess(res, { data: await admin.getUserDetails(req.params.id) }));
 
 exports.createUser = asyncHandler(async (req, res) => {

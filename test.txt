@@ -1,24 +1,370 @@
-Rôle : Expert Développeur Full-Stack (MERN Stack - JavaScript) / Traitement d'Images & Vision par Ordinateur.
+# MISSION : RECHERCHE EXHAUSTIVE DES ANCIENS SUJETS ET CORRIGÉS DU CONCOURS INFAS DE CÔTE D'IVOIRE
 
-Contexte : 
-Nous développons une application de scan de documents (type PDF) au sein de notre architecture, répartie entre le dossier mobile/client et le dossier serveur. Actuellement, lors de la génération de PDF à partir d'images capturées, les dimensions et les proportions ne s'adaptent pas correctement sur les écrans mobiles par rapport au rendu web. 
+## 1. Rôle et niveau d'expertise
 
-Objectif : 
-Implémenter une solution de recadrage dynamique et de mise en forme professionnelle pour garantir un format de document propre (proche du ratio A4 de 1:1,414), sans distorsion, sans perte de qualité (même pour les images de petite taille), et parfaitement responsive entre le dossier 'fatafalta' (mobile) et le dossier 'front-end' (web).
+Agis comme un agent de recherche documentaire numérique spécialisé dans :
 
-Merci de concevoir et d'implémenter la logique en JavaScript (MERN Stack, sans TypeScript) en suivant rigoureusement ces étapes techniques :
+- La recherche approfondie sur le Web (OSINT documentaire).
+- La collecte d'archives de concours et d'examens.
+- L'exploration de sites institutionnels, de plateformes éducatives, de bibliothèques numériques et de documents PDF.
+- L'identification, le téléchargement, la vérification et le classement de fichiers.
+- L'automatisation des recherches avec Python, des outils en ligne de commande et des navigateurs Web.
 
-1. Détection des contours et des coins (Corner Detection) :
-   - Mettre en place un mécanisme (ou une intégration de bibliothèque adaptée comme OpenCV.js ou Sharp/Jimp côté backend / traitement côté client) pour identifier les 4 coins de la feuille de document sur l'image brute, indépendamment de l'angle de prise de vue.
+Tu disposes, dans la mesure des outils et autorisations disponibles, d'un navigateur Web, d'un moteur de recherche, d'un terminal et d'un accès au système de fichiers.
 
-2. Correction de perspective (Perspective Transformation) :
-   - Appliquer une matrice de transformation géométrique basée sur les coordonnées des coins détectés afin de "redresser" l'image (supprimer l'effet trapèze et simuler une prise de vue 100% de face).
+## 2. Objectif principal
 
-3. Application du ratio et redimensionnement intelligent (Resizing & Padding) :
-   - Forcer le respect strict du ratio du document cible (type A4, 1:1,414) lors du rendu final.
-   - Utiliser des algorithmes d'interpolation fluides (ex: Bicubic) lors du redimensionnement pour préserver la netteté et la qualité originale des images de petite taille.
-   - Gérer le recadrage des micro-bords superflus ou appliquer un padding propre pour remplir le conteneur sans déformation.
+Je souhaite constituer une bibliothèque documentaire aussi complète que possible des anciens sujets des concours organisés par l'Institut National de Formation Judiciaire (INFAS) de Côte d'Ivoire.
 
-4. Intégration dans l'architecture MERN :
-   - Assurer la synchronisation et la propreté du code à la fois dans le dossier 'fatafalta' (traitement initial ou pré-cadrage mobile) et le dossier 'front-end' / backend Node.js (traitement lourd et génération finale du PDF).
-   - Fournir le code propre, commenté et modulaire en JavaScript ES6+.
+Ta mission consiste à rechercher, retrouver, vérifier et télécharger :
+
+1. Tous les anciens sujets du concours INFAS disponibles en ligne, pour toutes les années accessibles.
+2. Les sujets correspondant à tous les concours, cycles, filières, corps et spécialités proposés par l'INFAS.
+3. Les épreuves écrites et, lorsqu'ils existent, les sujets des épreuves orales, tests pratiques et autres épreuves de sélection.
+4. Tous les corrigés disponibles : corrigés officiels, propositions de correction, corrigés détaillés et barèmes de notation.
+5. Les documents difficiles à retrouver : anciens PDF, scans, fichiers hébergés dans des sous-pages, archives, pages oubliées, liens indirects et documents référencés sur des forums ou des sites éducatifs.
+
+Le résultat final doit être enregistré dans le dossier local nommé exactement :
+
+`INFAS`
+
+**Priorité absolue : récupérer les fichiers originaux complets et exploitables, et non simplement produire une liste de liens.**
+
+Ne prétends jamais avoir téléchargé un document si le fichier n'existe pas réellement sur le disque.
+
+## 3. Périmètre de recherche
+
+### A. Recherche par année
+
+Recherche les sujets pour chaque année disponible, depuis les archives les plus anciennes jusqu'à l'année actuelle.
+
+Ne fixe pas arbitrairement une année de début ou de fin. Détermine les années couvertes par les sources et recherche explicitement les années manquantes.
+
+Effectue notamment des recherches avec des variantes telles que :
+
+- Ancien sujet concours INFAS Côte d'Ivoire PDF.
+- Sujet concours INFAS [année].
+- Épreuve écrite INFAS [année].
+- Concours direct INFAS [année] sujet.
+- Concours professionnel INFAS [année] sujet.
+- INFAS corrigé sujet [année].
+- Correction épreuve INFAS [année].
+- INFAS annales PDF.
+- INFAS sujet scanné.
+- Sujet admissibilité INFAS [année].
+- Sujet concours magistrature Côte d'Ivoire [année].
+- Sujet concours greffier Côte d'Ivoire [année].
+
+Adapte les mots-clés aux appellations réellement utilisées chaque année.
+
+### B. Recherche par concours, cycle et spécialité
+
+Ne te limite pas à une seule filière.
+
+Identifie les concours, corps, cycles, options et spécialités pertinents à partir des sources officielles de l'INFAS et des annonces historiques.
+
+Pour chaque concours identifié, recherche les différentes épreuves et les éventuels corrigés associés.
+
+Les exemples ci-dessous servent uniquement de pistes de recherche : vérifie les appellations officielles et leur existence pour chaque période.
+
+- Magistrature.
+- Greffes et métiers de greffe.
+- Éducation surveillée et protection judiciaire de la jeunesse.
+- Administration pénitentiaire.
+- Autres corps, cycles, concours directs ou professionnels effectivement organisés par l'INFAS.
+
+Ne suppose pas que toutes ces catégories existent chaque année.
+
+### C. Recherche des corrigés
+
+Pour chaque sujet trouvé, lance une recherche distincte afin de retrouver sa correction.
+
+Utilise des variantes telles que :
+
+- Corrigé du sujet INFAS [année].
+- Proposition de correction INFAS [année].
+- Correction détaillée épreuve [nom du concours].
+- Barème officiel INFAS [année].
+- Sujet corrigé concours INFAS PDF.
+- Annales corrigées INFAS.
+- Correction dissertation juridique INFAS [année].
+- Correction cas pratique INFAS [année].
+- Correction culture générale INFAS [année].
+
+Recherche également les corrigés publiés sous forme de documents Word, PDF scannés, images, pages Web ou vidéos pédagogiques.
+
+Distingue clairement :
+- Les corrigés officiels.
+- Les corrigés proposés par des enseignants ou formateurs.
+- Les corrigés communautaires ou non vérifiés.
+- Les simples explications ou cours qui ne constituent pas un corrigé du sujet.
+
+Ne présente jamais une correction non officielle comme un corrigé officiel.
+
+## 4. Stratégie de recherche approfondie
+
+Procède méthodiquement en plusieurs phases.
+
+### Phase 1 — Découverte des sources
+
+Explore notamment :
+
+- Le site officiel de l'INFAS.
+- Les sites gouvernementaux ivoiriens et les ministères concernés.
+- Les communiqués de concours et avis de recrutement.
+- Les moteurs de recherche généralistes.
+- Les plateformes ivoiriennes de préparation aux concours.
+- Les sites éducatifs, blogs et forums.
+- Les bibliothèques et dépôts documentaires accessibles publiquement.
+- Les pages publiques des établissements de formation et des enseignants.
+- Les plateformes de partage de documents accessibles légalement.
+- Les pages publiques de réseaux sociaux contenant des liens vers des annales.
+- Les archives Web permettant de retrouver d'anciennes pages publiques.
+- Les fichiers PDF indexés par les moteurs de recherche.
+
+Explore les résultats au-delà de la première page lorsqu'un moteur de recherche le permet.
+
+### Phase 2 — Recherche avancée
+
+Utilise des opérateurs de recherche lorsque le moteur le permet :
+
+- `site:INFAS.ci INFAS sujet concours`
+- `filetype:pdf INFAS concours Côte d'Ivoire`
+- `"INFAS" "corrigé" filetype:pdf`
+- `"Institut National de Formation Judiciaire" annales`
+- `"concours INFAS" "2020"`
+- `"concours INFAS" "2021"`
+- `"concours INFAS" "2022"`
+- `"concours INFAS" "2023"`
+- `"concours INFAS" "2024"`
+- `"concours INFAS" "2025"`
+- `"concours INFAS" "2026"`
+
+Vérifie le domaine officiel réel avant d'utiliser un domaine dans les recherches ciblées. Complète ensuite ces recherches par les années antérieures et les années nouvellement identifiées.
+
+Pour chaque résultat pertinent, explore les liens internes, les pièces jointes, les pages associées et les documents cités.
+
+### Phase 3 — Exploration des documents difficiles à retrouver
+
+Recherche les fichiers dont les liens ne sont pas directement visibles dans les résultats classiques, mais qui sont référencés dans des pages publiques accessibles.
+
+Lorsque c'est possible et autorisé :
+
+- Examine les liens de téléchargement présents dans les pages.
+- Explore les pages de pagination et les archives de catégories.
+- Repère les documents PDF intégrés dans les pages.
+- Recherche les versions anciennes de pages publiques archivées.
+- Identifie les liens directs vers des documents publiquement accessibles.
+- Examine les métadonnées des PDF et leurs premières pages pour identifier l'année, le concours et l'épreuve.
+- Recherche les variantes d'un même document sur plusieurs sites.
+
+Tu peux utiliser les fonctions de recherche avancée, les outils de navigation et des scripts locaux raisonnables pour automatiser les recherches et les téléchargements.
+
+**Limite importante :** ne contourne pas les authentifications, les contrôles d'accès, les paywalls ou les protections techniques. N'accède pas à des fichiers privés ou non autorisés. L'objectif est de retrouver les documents publics, légalement accessibles ou fournis avec une autorisation.
+
+### Phase 4 — Vérification des résultats
+
+Pour chaque fichier candidat :
+
+1. Vérifie que le téléchargement a abouti.
+2. Vérifie que le fichier n'est pas vide ou manifestement incomplet.
+3. Vérifie qu'il s'ouvre correctement.
+4. Confirme qu'il concerne bien l'INFAS de Côte d'Ivoire.
+5. Identifie autant que possible l'année, le concours, la spécialité et la matière.
+6. Vérifie s'il s'agit d'un sujet, d'une correction, d'un barème ou d'un autre document.
+7. Compare les fichiers similaires afin d'éviter les doublons.
+8. Conserve la source d'origine et l'URL publique du document.
+
+Pour les PDF scannés, utilise l'OCR si nécessaire et si les outils sont disponibles. Ne rejette pas un sujet simplement parce que son texte n'est pas sélectionnable.
+
+Ne renomme pas arbitrairement un document si son contenu ne permet pas d'en confirmer les informations.
+
+## 5. Organisation obligatoire du dossier `INFAS`
+
+Crée le dossier `INFAS` dans le répertoire de travail actuel si celui-ci n'existe pas déjà.
+
+Si un dossier `INFAS` existe, examine son contenu avant toute modification. Conserve les fichiers existants et évite tout écrasement non nécessaire.
+
+Organise les résultats de manière claire :
+
+INFAS/
+├── README.md
+├── INDEX_GENERAL.csv
+├── RAPPORT_RECHERCHE.md
+├── SOURCES.md
+├── sujets/
+│   ├── 2026/
+│   ├── 2025/
+│   ├── 2024/
+│   └── ...
+├── corrections/
+│   ├── 2026/
+│   ├── 2025/
+│   ├── 2024/
+│   └── ...
+├── sujets_a_identifier/
+└── documents_annexes/
+
+À l'intérieur des dossiers annuels, organise les documents par concours, spécialité et matière lorsque ces informations sont connues.
+
+Utilise des noms de fichiers cohérents, par exemple :
+
+`2024_Magistrature_Droit_Constitutionnel_SUJET.pdf`
+
+`2024_Magistrature_Droit_Constitutionnel_CORRIGE_OFFICIEL.pdf`
+
+`2023_Greffier_Culture_Generale_SUJET.pdf`
+
+`2023_Greffier_Culture_Generale_CORRIGE_NON_OFFICIEL.pdf`
+
+Ces noms sont des exemples : n'utilise ces catégories que si elles correspondent réellement au document.
+
+Si l'année ou la matière reste inconnue, conserve un nom neutre et place le fichier dans `sujets_a_identifier/` ou dans le sous-dossier approprié.
+
+Ne supprime jamais un document utile simplement parce qu'il est mal nommé.
+
+## 6. Index général obligatoire
+
+Crée un fichier `INDEX_GENERAL.csv` qui répertorie chaque document récupéré.
+
+Utilise au minimum les colonnes suivantes :
+
+- identifiant
+- nom_fichier
+- chemin_local
+- annee
+- organisme
+- concours
+- cycle_ou_specialite
+- matiere
+- type_document
+- statut_correction
+- source_url
+- url_page_source
+- date_recuperation
+- statut_verification
+- empreinte_sha256
+- observations
+
+Pour `type_document`, utilise des valeurs cohérentes comme :
+
+- SUJET
+- CORRIGE_OFFICIEL
+- CORRIGE_NON_OFFICIEL
+- BAREME
+- DOCUMENT_ANNEXE
+- A_CLASSER
+
+Enregistre les informations réellement disponibles. Utilise `INCONNU` ou une cellule vide lorsqu'une donnée ne peut pas être confirmée.
+
+Ne fabrique jamais une URL, une date, un statut officiel ou une information documentaire manquante.
+
+## 7. Gestion des doublons et des versions
+
+Compare les fichiers à l'aide de leur empreinte SHA-256 lorsque possible.
+
+Deux fichiers ayant la même empreinte sont identiques. Ne conserve qu'un exemplaire principal dans l'arborescence documentaire, mais enregistre les différentes sources connues dans `SOURCES.md` ou dans les observations de l'index.
+
+Si deux PDF sont différents mais semblent correspondre au même sujet, compare leur contenu avant de décider s'il s'agit de doublons ou de versions distinctes.
+
+Ne fusionne pas automatiquement des fichiers distincts.
+
+Privilégie la version complète et lisible, sans supprimer les versions utiles comportant des corrections ou annotations différentes.
+
+## 8. Rapprochement automatique entre sujets et corrigés
+
+Pour chaque sujet retrouvé, recherche une correction correspondante.
+
+Utilise une combinaison de critères :
+
+- Année.
+- Concours et spécialité.
+- Matière.
+- Intitulé de l'épreuve.
+- Date ou session.
+- Similarité du contenu.
+
+Ajoute dans l'index un statut permettant d'identifier :
+
+- Sujet avec corrigé officiel.
+- Sujet avec corrigé non officiel.
+- Sujet sans corrigé retrouvé.
+- Corrigé retrouvé mais sujet original manquant.
+- Correspondance incertaine à vérifier.
+
+Ne considère pas deux documents comme correspondants uniquement parce qu'ils portent le même nom de matière.
+
+## 9. Rapport de recherche final
+
+Produis un fichier `RAPPORT_RECHERCHE.md` indiquant :
+
+1. Les sources explorées.
+2. Les années couvertes.
+3. Les concours et spécialités identifiés.
+4. Le nombre total de sujets récupérés.
+5. Le nombre de corrigés officiels récupérés.
+6. Le nombre de corrigés non officiels récupérés.
+7. Le nombre de barèmes et documents annexes.
+8. Le nombre de sujets sans corrigé retrouvé.
+9. Les années et spécialités pour lesquelles les documents restent introuvables.
+10. Les erreurs de téléchargement et les fichiers illisibles.
+11. Les sources les plus utiles.
+12. Les prochaines recherches recommandées.
+
+Dans `README.md`, explique simplement comment naviguer dans les dossiers et consulter l'index.
+
+Dans `SOURCES.md`, répertorie les URL consultées et les liens directs des documents récupérés, avec une brève description de leur utilité.
+
+## 10. Exécution technique
+
+Adapte les outils à l'environnement réellement disponible.
+
+Avant d'exécuter un script ou d'installer un outil :
+
+- Vérifie les outils déjà disponibles.
+- Privilégie les solutions simples et compatibles avec le système.
+- Évite les installations inutiles.
+- N'exécute pas de commandes destructrices.
+- Ne modifie pas les autres projets ou dossiers.
+- Ne publie aucun document récupéré sans mon autorisation.
+
+Tu peux utiliser Python pour automatiser, selon les besoins, la vérification des fichiers, le calcul des empreintes SHA-256, l'extraction de texte, le traitement des métadonnées et la création de l'index CSV.
+
+Si un outil de navigation, un accès Internet ou une permission manque, indique précisément la limitation et poursuis avec les moyens disponibles.
+
+Ne simule jamais une recherche Web, un téléchargement ou une vérification que tu n'as pas réellement effectués.
+
+## 11. Critères de réussite
+
+La mission sera considérée comme correctement exécutée lorsque :
+
+- Le dossier `INFAS` existe réellement sur le disque.
+- Tous les documents récupérés sont enregistrés localement.
+- Les sujets et les corrigés sont classés séparément.
+- Les années, matières et spécialités sont renseignées lorsque cela est vérifiable.
+- Les doublons exacts sont traités.
+- Les sources sont conservées.
+- L'index CSV et les rapports sont créés.
+- Les documents non identifiés sont conservés pour un classement ultérieur.
+- Les lacunes de la recherche sont explicitement documentées.
+
+**Ne t'arrête pas après quelques résultats.** Continue à explorer les sources pertinentes, à varier les mots-clés, à rechercher les corrections séparément et à couvrir les années anciennes comme récentes, jusqu'à épuisement raisonnable des pistes accessibles.
+
+## 12. Consigne de démarrage
+
+Commence immédiatement par :
+
+1. Identifier le répertoire de travail actuel.
+2. Vérifier si le dossier `INFAS` existe.
+3. Inventorier les outils de recherche et de téléchargement disponibles.
+4. Établir une première liste des sources pertinentes.
+5. Construire une stratégie de recherche par année, concours et matière.
+6. Exécuter les recherches et télécharger les documents vérifiés.
+7. Organiser les fichiers et produire les rapports demandés.
+
+À la fin, affiche un bilan synthétique avec les nombres réels de fichiers téléchargés, de sujets, de corrigés, de doublons détectés, d'années couvertes et de pistes restant à explorer.
+
+Ne me demande pas de valider chaque étape : prends les initiatives raisonnables nécessaires pour mener la mission à bien, tout en respectant les limites d'accès, la sécurité du système et les droits d'accès aux documents.
+
+
+NB:pour chaque fichier télécharger, si le rendu du document est flou ou encore peux visibles il faudra le traité pour avoir une sortie premium,

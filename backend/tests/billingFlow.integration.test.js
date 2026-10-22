@@ -20,6 +20,7 @@ const paymentService = require('../services/payments/paymentService');
 const promoService = require('../services/billing/promoCodeService');
 const walletService = require('../services/billing/walletService');
 const { authorizeDownload } = require('../services/billing/downloadGuard');
+const { describeYear } = require('../services/access/documentYear');
 const billingConfig = require('../config/billing');
 
 let referrer;
@@ -49,13 +50,15 @@ test('new users are plain users, never admins', { skip }, () => {
   assert.equal(buyer.role, 'user');
 });
 
-test('an unsubscribed user only has the free quota for recent documents', { skip }, async () => {
-  // Document sans année lisible : traité comme récent (jamais gratuit par défaut).
+test('an unsubscribed user only has the free quota (2010-2020); recent or unknown years need a subscription', { skip }, async () => {
+  // Document sans année lisible : jamais gratuit, réservé aux abonnés.
+  await assert.rejects(authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() }), { errorCode: 'SUBSCRIPTION_REQUIRED' });
+  await assert.rejects(authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() }, { access: describeYear(2021) }), { errorCode: 'SUBSCRIPTION_REQUIRED' });
   const { free } = billingConfig.downloads.recentLimits;
   for (let i = 0; i < free; i += 1) {
-    await authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() });
+    await authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() }, { access: describeYear(2015) });
   }
-  await assert.rejects(authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() }), { errorCode: 'DAILY_LIMIT_REACHED' });
+  await assert.rejects(authorizeDownload(buyer, { _id: new mongoose.Types.ObjectId() }, { access: describeYear(2015) }), { errorCode: 'DAILY_LIMIT_REACHED' });
   // Remis à zéro pour la suite du parcours (le même compte s'abonne plus loin).
   await require('../models/DownloadQuota').deleteMany({});
 });

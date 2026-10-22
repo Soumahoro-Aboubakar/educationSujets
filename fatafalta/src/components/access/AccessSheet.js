@@ -36,7 +36,11 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
   const canCheckout = entitlements?.checkout?.mobileWebCheckout !== false;
   const amount = entitlements?.nextPayment?.amount ?? plans?.initial?.amount;
   const isRenewal = entitlements?.subscription?.status === 'EXPIRED';
-  const freeUntilYear = limitInfo?.freeUntilYear || plans?.downloadPolicy?.freeUntilYear || 2010;
+  const freeUntilYear = limitInfo?.freeUntilYear || plans?.downloadPolicy?.freeUntilYear || 2009;
+  const freeQuotaUntilYear = limitInfo?.freeQuotaUntilYear || plans?.downloadPolicy?.freeQuotaUntilYear || 2020;
+  const freeLimit = plans?.downloadPolicy?.recentLimits?.free ?? 3;
+  // Quota gratuit à vie (sans abonnement) : épuisé, il ne se renouvelle pas.
+  const lifetime = Boolean(limitInfo?.lifetime);
   const windowHours = limitInfo?.windowHours || plans?.downloadPolicy?.windowHours || 24;
   const subscriberLimit = plans?.downloadPolicy?.recentLimits?.subscriber || plans?.downloadsPerDay || 20;
   const renewal = formatRenewal(limitInfo?.nextRenewalAt || limitInfo?.resetsAt);
@@ -64,7 +68,7 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
             <Header
               icon={Lock}
               title={isRenewal ? 'Ton abonnement a expiré' : 'Sujet réservé aux abonnés'}
-              description={`Ce sujet fait partie de nos ressources récentes, réservées aux abonnés Fatafalta. Tu peux télécharger gratuitement les anciens sujets jusqu’à l’année ${freeUntilYear}. Pour accéder à ce document et aux autres sujets récents, découvre notre abonnement.`}
+              description={`Ce sujet est réservé aux utilisateurs disposant d’un abonnement valide. Sans abonnement, les sujets de ${freeUntilYear} et avant sont gratuits et illimités, et tu peux télécharger jusqu’à ${freeLimit} sujets de ${freeUntilYear + 1} à ${freeQuotaUntilYear}.`}
             />
             {/* Version store : ni prix ni appel à l'achat, l'application ne vend rien. */}
             {canCheckout && amount ? (
@@ -80,8 +84,8 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
               </View>
             ) : null}
             <View style={styles.benefits}>
-              <Benefit>Tous les sujets et leurs corrigés</Benefit>
-              <Benefit>{`Jusqu’à ${subscriberLimit} sujets récents par période de ${windowHours} heures`}</Benefit>
+              <Benefit>Tous les sujets et leurs corrigés, y compris les plus récents</Benefit>
+              <Benefit>{`Jusqu’à ${subscriberLimit} sujets par période de ${windowHours} heures`}</Benefit>
               <Benefit>Consultation hors ligne après téléchargement</Benefit>
             </View>
             {canCheckout ? (
@@ -107,13 +111,17 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
           <>
             <Header
               icon={Clock}
-              title={limitInfo?.sharedConnection ? 'Limite atteinte pour cette connexion' : 'Quota de sujets récents atteint'}
+              title={limitInfo?.sharedConnection ? 'Limite atteinte pour cette connexion' : lifetime ? 'Téléchargements gratuits utilisés' : 'Quota de sujets récents atteint'}
               description={limitInfo?.sharedConnection
-                ? 'Plusieurs visiteurs partagent cette connexion et ont utilisé tous les téléchargements de sujets récents disponibles. Crée un compte gratuit pour avoir ton propre quota.'
-                : `Tu as utilisé ${limitInfo?.limit ? `tes ${limitInfo.limit} téléchargements` : 'tous tes téléchargements'} de sujets récents sur les dernières ${windowHours} heures.`}
+                ? 'Plusieurs visiteurs partagent cette connexion et ont utilisé tous les téléchargements disponibles. Crée un compte gratuit pour avoir ton propre quota.'
+                : lifetime
+                  ? `Tu as utilisé tes ${limitInfo?.limit || freeLimit} téléchargements gratuits. ${canCheckout ? 'Souscris à un abonnement pour continuer à télécharger des sujets.' : 'Un abonnement actif est nécessaire pour continuer à télécharger des sujets.'}`
+                  : `Tu as utilisé ${limitInfo?.limit ? `tes ${limitInfo.limit} téléchargements` : 'tous tes téléchargements'} de sujets récents sur les dernières ${windowHours} heures.`}
             />
             <View style={styles.benefits}>
-              <Benefit>{renewal ? `Prochain sujet récent à partir du ${renewal}.` : `Chaque téléchargement sort du décompte ${windowHours} heures après avoir été fait.`}</Benefit>
+              {lifetime && !limitInfo?.sharedConnection ? null : (
+                <Benefit>{renewal ? `Prochain téléchargement à partir du ${renewal}.` : `Chaque téléchargement sort du décompte ${windowHours} heures après avoir été fait.`}</Benefit>
+              )}
               <Benefit>{`Les sujets de ${freeUntilYear} et avant restent gratuits et illimités.`}</Benefit>
             </View>
             <View style={styles.actions}>

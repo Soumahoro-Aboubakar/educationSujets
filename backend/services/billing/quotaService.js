@@ -4,6 +4,7 @@ const billingConfig = require('../../config/billing');
 /*
  * Quota glissant (voir models/DownloadQuota.js). Fonctions sans connaissance des plans :
  * l'appelant fournit le sujet (« u:… », « v:… », « ip:… ») et la limite applicable.
+ * Un sujet « free:… » (quota gratuit) est à vie : pas de fenêtre, jamais purgé.
  */
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -11,10 +12,11 @@ const MAX_ATTEMPTS = 8;
 
 const windowMs = () => billingConfig.downloads.windowHours * HOUR_MS;
 const idOf = (value) => String(value?._id || value);
+const isLifetime = (subject) => String(subject).startsWith('free:');
 
-/** Droits encore comptés à `now` : accordés dans la fenêtre, et confirmés ou réservés non expirés. */
-const activeGrants = (grants = [], now = new Date()) => {
-  const since = now.getTime() - windowMs();
+/** Droits encore comptés à `now` : accordés dans la fenêtre (sauf quota à vie), et confirmés ou réservés non expirés. */
+const activeGrants = (grants = [], now = new Date(), lifetime = false) => {
+  const since = lifetime ? -Infinity : now.getTime() - windowMs();
   return grants.filter((grant) => new Date(grant.grantedAt).getTime() > since
     && (grant.status === 'consumed' || (grant.reservedUntil && new Date(grant.reservedUntil) > now)));
 };
@@ -26,22 +28,24 @@ const renewalAfter = (grants, count = 1) => {
   return sorted.length ? new Date(sorted[index] + windowMs()) : null;
 };
 
-const summarize = (grants, limit) => {
+const summarize = (grants, limit, lifetime = false) => {
   const used = grants.length;
   return {
     used,
     limit,
     remaining: Math.max(0, limit - used),
-    windowHours: billingConfig.downloads.windowHours,
-    // Prochain droit libéré : uniquement utile quand tout est consommé.
-    nextRenewalAt: used >= limit ? renewalAfter(grants, used - limit + 1) : renewalAfter(grants, 1),
+    lifetime,
+    windowHours: lifetime ? null : billingConfig.downloads.windowHours,
+    // Prochain droit libéré : uniquement utile quand tout est consommé. Jamais pour un quota à vie.
+    nextRenewalAt: lifetime ? null : used >= limit ? renewalAfter(grants, used - limit + 1) : renewalAfter(grants, 1),
     documentIds: grants.map((grant) => idOf(grant.document)),
   };
 };
 
 const getUsage = async (subject, limit, now = new Date()) => {
   const quota = await DownloadQuota.findOne({ subject }).lean();
-  return summarize(activeGrants(quota?.grants, now), limit);
+  const lifetime = isLifetime(subject);
+  return summarize(activeGrants(quota?.grants, now, lifetime), limit, lifetime);
 };
 
 class QuotaExceededError extends Error {
@@ -61,6 +65,7 @@ class QuotaExceededError extends Error {
  */
 const grant = async (subject, documentIds, limit, { op, status = 'consumed', reservedUntil = null, now = new Date() } = {}) => {
   const wanted = [...new Set(documentIds.map(idOf))];
+  const lifetime = isLifetime(subject);
 
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt += 1) {
     const quota = await DownloadQuota.findOneAndUpdate(
@@ -73,13 +78,13 @@ const grant = async (subject, documentIds, limit, { op, status = 'consumed', res
     });
     if (!quota) continue;
 
-    const active = activeGrants(quota.grants, now);
+    const active = activeGrants(quota.grants, now, lifetime);
     const granted = new Set(active.map((item) => idOf(item.document)));
     const charged = wanted.filter((documentId) => !granted.has(documentId));
     const alreadyGranted = wanted.filter((documentId) => granted.has(documentId));
 
     if (active.length + charged.length > limit) {
-      throw new QuotaExceededError(subject, summarize(active, limit), charged.length);
+      throw new QuotaExceededError(subject, summarize(active, limit, lifetime), charged.length);
     }
 
     const nextGrants = [
@@ -89,12 +94,12 @@ const grant = async (subject, documentIds, limit, { op, status = 'consumed', res
     const updated = await DownloadQuota.updateOne(
       { _id: quota._id, version: quota.version },
       {
-        $set: { grants: nextGrants, expiresAt: new Date(now.getTime() + 2 * windowMs()) },
+        $set: { grants: nextGrants, expiresAt: lifetime ? null : new Date(now.getTime() + 2 * windowMs()) },
         $inc: { version: 1 },
       }
     );
     if (updated.modifiedCount === 1) {
-      return { charged, alreadyGranted, usage: summarize(nextGrants, limit) };
+      return { charged, alreadyGranted, usage: summarize(nextGrants, limit, lifetime) };
     }
     // Conflit : une autre requête a modifié ce quota entre-temps ; on recommence avec l'état à jour.
   }
@@ -119,6 +124,7 @@ const release = (subject, op, documentIds = null) => DownloadQuota.updateOne(
 
 module.exports = {
   activeGrants,
+  isLifetime,
   getUsage,
   grant,
   confirm,

@@ -110,6 +110,7 @@ const describeDocuments = async (documents, { subjectsById = new Map() } = {}) =
       year: documentAccess.year,
       yearKnown: documentAccess.yearKnown,
       tier: documentAccess.tier,
+      freeQuotaEligible: documentAccess.freeQuotaEligible,
       premiumOnly: requiresSubscription(document),
       correctionIncludedInPdf: Boolean(document.correctionIncludedInPdf),
       fileSize: document.fileSize || 0,
@@ -258,8 +259,9 @@ const analyzeSelection = async (documentIds, actor) => {
   const status = await getQuotaStatus(actor);
   const granted = new Set(status.documentIds || []);
   const recent = items.filter((item) => item.tier === 'recent');
-  const blocked = actor.plan === 'subscriber' || actor.plan === 'unlimited' ? [] : recent.filter((item) => item.premiumOnly);
-  const chargeable = recent.filter((item) => !item.premiumOnly || actor.plan !== 'free');
+  // Sans abonnement : sujets >= 2021, d'année inconnue ou « premium » réservés aux abonnés.
+  const blocked = actor.plan === 'subscriber' || actor.plan === 'unlimited' ? [] : recent.filter((item) => item.premiumOnly || !item.freeQuotaEligible);
+  const chargeable = recent.filter((item) => !blocked.includes(item));
   const toCharge = status.unlimited ? [] : chargeable.filter((item) => !granted.has(item._id));
   const remaining = status.unlimited ? Infinity : status.remaining;
   const overflow = Math.max(0, toCharge.length - remaining);
@@ -296,9 +298,18 @@ const previewSelection = async (documentIds, actor) => (await analyzeSelection(d
 const selectionExceedsError = (summary, actor) => {
   const { counts, quota: status, overflow } = summary;
   const plural = (count, word) => `${count} ${word.split(' ').map((part) => `${part}${count > 1 ? 's' : ''}`).join(' ')}`;
-  const message = status.remaining === 0
-    ? `Votre quota de sujets récents est épuisé pour le moment. Retirez les ${plural(counts.recentToCharge, 'sujet récent')} de votre sélection pour télécharger les documents gratuits, ou attendez le renouvellement de votre quota.`
-    : `Votre sélection contient ${plural(counts.recentToCharge, 'sujet récent')}, mais il vous reste seulement ${plural(status.remaining, 'téléchargement')} ${actor.plan === 'subscriber' ? '' : 'gratuits '}pour le moment. Désélectionnez ${plural(overflow, 'sujet récent')} pour continuer. Les autres pourront être téléchargés lorsque votre quota sera renouvelé.`;
+  const subscriber = actor.plan === 'subscriber';
+  // Sans abonnement, seuls les sujets 2010-2020 consomment le quota.
+  const what = subscriber ? 'sujet récent' : 'sujet';
+  const range = subscriber ? '' : ` de ${status.freeUntilYear + 1} à ${status.freeQuotaUntilYear}`;
+  let message;
+  if (status.remaining === 0) {
+    message = subscriber
+      ? `Votre quota de sujets récents est épuisé pour le moment. Retirez les ${plural(counts.recentToCharge, what)} de votre sélection pour télécharger les documents gratuits, ou attendez le renouvellement de votre quota.`
+      : `Vous avez utilisé vos ${status.limit} téléchargements gratuits. Retirez les ${plural(counts.recentToCharge, what)}${range} de votre sélection pour télécharger les sujets de ${status.freeUntilYear} et avant, ou souscrivez à un abonnement pour continuer.`;
+  } else {
+    message = `Votre sélection contient ${plural(counts.recentToCharge, what)}${range}, mais il vous reste seulement ${plural(status.remaining, 'téléchargement')} ${subscriber ? 'pour le moment' : 'gratuits'}. Désélectionnez ${plural(overflow, what)}${range} pour continuer.${subscriber ? ' Les autres pourront être téléchargés lorsque votre quota sera renouvelé.' : ''}`;
+  }
   return new AppError(message.replace(/\s+/g, ' '), 429, summary, 'SELECTION_EXCEEDS_QUOTA');
 };
 
@@ -308,7 +319,7 @@ const createBundle = async (documentIds, actor, { delivery = 'zip' } = {}) => {
   const { summary } = analysis;
   if (analysis.blocked.length) {
     throw new AppError(
-      'Certains sujets récents de votre sélection sont réservés aux abonnés Fatafalta. Retirez-les ou prenez votre abonnement.',
+      'Certains sujets de votre sélection sont réservés aux utilisateurs disposant d’un abonnement valide (sujets de 2021 et après, ou d’année inconnue). Retirez-les ou souscrivez à un abonnement.',
       403,
       summary,
       'SUBSCRIPTION_REQUIRED'
@@ -340,8 +351,10 @@ const createBundle = async (documentIds, actor, { delivery = 'zip' } = {}) => {
     subjects: charge.subjects || [],
     user: actor.user?._id || null,
     visitor: actor.user ? null : actor.visitorId,
+    plan: actor.plan,
     documents: analysis.items.map((item) => item._id),
     recentDocuments: recentIds,
+    chargedDocuments: charge.charged || [],
     label,
     delivery,
     expiresAt,
@@ -358,6 +371,17 @@ const createBundle = async (documentIds, actor, { delivery = 'zip' } = {}) => {
     counts: summary.counts,
   };
 };
+
+const logBundleItem = (bundle, item, req) => logDownload(
+  { user: bundle.user ? { _id: bundle.user } : null, visitorId: bundle.visitor },
+  { _id: item._id },
+  req,
+  {
+    plan: bundle.plan,
+    access: { tier: item.tier, year: item.year, organismeId: item.organismeId },
+    charged: (bundle.chargedDocuments || []).some((documentId) => id(documentId) === item._id),
+  }
+);
 
 /** Lien à usage unique : passe « ready » → « streaming » une seule fois. */
 const claimBundle = async (token) => {
@@ -503,7 +527,7 @@ const streamArchive = async (token, req, res) => {
     confirmBundle(bundle, delivered.length, missing.map((item) => item._id))
       .then(() => Promise.all(delivered.map(async (item) => {
         await Document.updateOne({ _id: item._id }, { $inc: { downloads: 1 } }, { timestamps: false });
-        await logDownload({ user: bundle.user ? { _id: bundle.user } : null, visitorId: bundle.visitor }, { _id: item._id }, req);
+        await logBundleItem(bundle, item, req);
       })))
       .catch((error) => console.error(`[BUNDLE] Confirmation impossible ${bundle._id}: ${error.message}`));
   });
@@ -550,7 +574,7 @@ const deliverFiles = async (token, req) => {
   }
   await confirmBundle(bundle, files.length, missing.map((item) => item._id));
   await Promise.all(files.map((file) => Document.updateOne({ _id: file._id }, { $inc: { downloads: 1 } }, { timestamps: false })));
-  await Promise.all(files.map((file) => logDownload({ user: bundle.user ? { _id: bundle.user } : null, visitorId: bundle.visitor }, { _id: file._id }, req)));
+  await Promise.all(files.map((file) => logBundleItem(bundle, file, req)));
   return { files, missing: missing.map(publicItem), expiresIn: storageConfig.downloadUrlExpiration };
 };
 
@@ -584,6 +608,7 @@ const listYearIssues = async ({ limit = 200 } = {}) => {
   return {
     total: issues.length,
     freeUntilYear: downloads.freeUntilYear,
+    freeQuotaUntilYear: downloads.freeQuotaUntilYear,
     data: issues.slice(0, limit).map((item) => ({
       ...publicItem(item),
       organisme: item.organismeId ? { _id: item.organismeId, nom: organismeName.get(item.organismeId) || '' } : null,

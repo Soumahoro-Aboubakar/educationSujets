@@ -21,6 +21,10 @@ router.patch('/users/:id', idParam, controller.updateUser);
 router.post('/users/:id/reset-password', idParam, controller.resetPassword);
 router.post('/users/:id/promo-code', idParam, controller.overridePromoCode);
 router.get('/payments', controller.listPayments);
+// Suivi du quota gratuit (sujets 2010-2020 sans abonnement).
+router.get('/free-downloads', controller.listFreeDownloads);
+router.get('/free-downloads/users', controller.listFreeQuotaUsers);
+router.get('/free-downloads/stats', controller.getFreeDownloadStats);
 router.get('/payment-methods', controller.listPaymentMethods);
 router.post(
   '/payment-methods',

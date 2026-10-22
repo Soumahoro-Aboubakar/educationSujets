@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { AlertTriangle, CheckCircle2, Clock, Download, FileCheck, FileText, Files, Gift, Layers3, SearchX, X } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, Clock, Download, FileCheck, FileText, Files, Gift, Layers3, Lock, SearchX, X } from 'lucide-react';
 import { Button, Card, Container, EmptyState, ErrorNote, Eyebrow, SkeletonRows, cx } from '../components/ui';
 import OrganismeLogo from '../components/catalog/OrganismeLogo';
 import AuthContext from '../context/AuthContext';
@@ -48,10 +48,20 @@ const FilterGroup = ({ label, hint, children }) => (
   </div>
 );
 
-const TierBadge = ({ item }) => (item.tier === 'free' ? (
+/** Sans abonnement (`plan` 'free') : sujets 2010-2020 sur le quota gratuit, plus récents réservés aux abonnés. */
+const reservedFor = (item, plan) => plan === 'free' && item.tier !== 'free' && !item.freeQuotaEligible;
+const tierLabel = (item, plan) => {
+  if (item.tier === 'free') return 'gratuit';
+  if (plan !== 'free') return 'récent';
+  return reservedFor(item, plan) ? 'abonnés' : 'quota gratuit';
+};
+
+const TierBadge = ({ item, plan }) => (item.tier === 'free' ? (
   <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-gold-wash px-2.5 py-1 text-xs font-semibold text-gold-ink"><Gift size={12} aria-hidden /> Gratuit</span>
+) : reservedFor(item, plan) ? (
+  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-paper-dim px-2.5 py-1 text-xs font-semibold text-ink-soft"><Lock size={12} aria-hidden /> Abonnés</span>
 ) : (
-  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-paper-dim px-2.5 py-1 text-xs font-semibold text-ink-soft"><Clock size={12} aria-hidden /> Récent</span>
+  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-paper-dim px-2.5 py-1 text-xs font-semibold text-ink-soft"><Clock size={12} aria-hidden /> {plan === 'free' ? 'Quota gratuit' : 'Récent'}</span>
 ));
 
 const describe = (item) => [
@@ -77,7 +87,7 @@ const BulkDownloadPage = () => {
 
   useSeo({
     title: 'Télécharger plusieurs sujets',
-    description: 'Téléchargez en une fois les sujets d’un organisme, d’un cycle ou d’une année. Sujets de 2010 et avant gratuits, sans compte.',
+    description: 'Téléchargez en une fois les sujets d’un organisme, d’un cycle ou d’une année. Sujets de 2009 et avant gratuits, sans compte.',
     robots: 'noindex, follow',
   });
 
@@ -152,8 +162,10 @@ const BulkDownloadPage = () => {
   const keepWithinQuota = () => {
     if (!summary) return;
     const granted = new Set(summary.documents.filter((item) => item.alreadyGranted).map((item) => item._id));
+    const blockedIds = new Set(summary.blocked || []);
     let budget = summary.quota.remaining ?? Infinity;
     setSelected(new Set(selectedItems.filter((item) => {
+      if (blockedIds.has(item._id)) return false;
       if (item.tier === 'free' || granted.has(item._id)) return true;
       if (budget > 0) { budget -= 1; return true; }
       return false;
@@ -248,7 +260,7 @@ const BulkDownloadPage = () => {
             <span className="line-clamp-2 font-semibold leading-snug text-ink sm:truncate">{item.title}</span>
             <span id={`meta-${item._id}`} className="mt-0.5 block truncate text-sm text-ink-soft">{describe(item)}</span>
           </span>
-          <TierBadge item={item} />
+          <TierBadge item={item} plan={quota?.plan} />
         </label>
       );
     });
@@ -270,7 +282,9 @@ const BulkDownloadPage = () => {
 
       {quota && !quota.unlimited ? (
         <p className="mt-3 text-sm text-ink-soft">
-          {`Sujets récents : ${quota.remaining} sur ${quota.limit} encore disponibles (${quota.windowHours} h glissantes).`}
+          {quota.lifetime
+            ? `Il vous reste ${plural(quota.remaining, 'téléchargement gratuit', 'téléchargements gratuits')} sur ${quota.limit} (sujets de ${quota.freeUntilYear + 1} à ${quota.freeQuotaUntilYear}).`
+            : `Sujets récents : ${quota.remaining} sur ${quota.limit} encore disponibles (${quota.windowHours} h glissantes).`}
           {quota.remaining === 0 && renewal ? ` Prochain téléchargement possible à partir du ${renewal}.` : ''}
         </p>
       ) : quota?.unlimited ? <p className="mt-3 text-sm text-ink-soft">Accès administrateur : aucun quota.</p> : null}
@@ -279,12 +293,16 @@ const BulkDownloadPage = () => {
         <div className="mt-4 rounded-xl border border-gold/40 bg-gold-wash/60 p-3.5 text-sm text-ink" role="status">
           <p className="flex items-start gap-2 font-semibold"><AlertTriangle size={16} className="mt-0.5 shrink-0 text-gold-ink" aria-hidden /> Sélection au-delà de votre quota</p>
           <p className="mt-1.5 text-ink-soft">
-            {quota.remaining === 0
+            {quota.lifetime
+              ? (quota.remaining === 0
+                ? `Vous avez utilisé vos ${quota.limit} téléchargements gratuits. Souscrivez à un abonnement pour continuer à télécharger des sujets. Les sujets de ${quota.freeUntilYear} et avant peuvent être téléchargés dès maintenant.`
+                : `Votre sélection contient ${plural(counts.recentToCharge, `sujet de ${quota.freeUntilYear + 1}-${quota.freeQuotaUntilYear}`, `sujets de ${quota.freeUntilYear + 1}-${quota.freeQuotaUntilYear}`)}, mais il vous reste seulement ${plural(quota.remaining, 'téléchargement gratuit', 'téléchargements gratuits')}.`)
+              : quota.remaining === 0
               ? `Votre sélection contient ${plural(counts.recentToCharge, 'sujet récent', 'sujets récents')}, et votre quota de sujets récents est épuisé pour le moment.${renewal ? ` Il sera renouvelé progressivement, à partir du ${renewal}.` : ''} Les sujets gratuits peuvent être téléchargés dès maintenant.`
               : `Votre sélection contient ${plural(counts.recentToCharge, 'sujet récent', 'sujets récents')}, mais il vous reste seulement ${plural(quota.remaining, `téléchargement${quota.plan === 'subscriber' ? '' : ' gratuit'}`, `téléchargements${quota.plan === 'subscriber' ? '' : ' gratuits'}`)} pour le moment. Vous pouvez choisir jusqu’à ${plural(quota.remaining, 'sujet récent', 'sujets récents')} maintenant. Les autres pourront être téléchargés lorsque votre quota sera renouvelé.`}
           </p>
           <div className="mt-3 grid gap-2">
-            {quota.remaining > 0 ? <Button size="sm" variant="secondary" onClick={keepWithinQuota}>{`Garder ${plural(quota.remaining, 'sujet récent', 'sujets récents')} et les gratuits`}</Button> : null}
+            {quota.remaining > 0 ? <Button size="sm" variant="secondary" onClick={keepWithinQuota}>{`Garder ${plural(quota.remaining, quota.lifetime ? 'sujet du quota' : 'sujet récent', quota.lifetime ? 'sujets du quota' : 'sujets récents')} et les gratuits`}</Button> : null}
             {counts.free ? <Button size="sm" variant="secondary" onClick={removeRecent}>Ne garder que les sujets gratuits</Button> : null}
             {quota.plan !== 'subscriber' ? <Button size="sm" to="/abonnement?next=%2Ftelecharger">Prendre mon abonnement</Button> : null}
           </div>
@@ -293,7 +311,7 @@ const BulkDownloadPage = () => {
 
       {blocked > 0 ? (
         <p className="mt-4 rounded-xl bg-paper-dim p-3.5 text-sm text-ink-soft">
-          {`${plural(blocked, 'sujet récent est réservé', 'sujets récents sont réservés')} aux abonnés. Retirez-les ou `}
+          {`${plural(blocked, 'sujet est réservé', 'sujets sont réservés')} aux utilisateurs disposant d’un abonnement valide (sujets de ${(quota?.freeQuotaUntilYear || 2020) + 1} et après, ou d’année non précisée). Retirez-les ou `}
           <Link to="/abonnement?next=%2Ftelecharger" className="font-semibold text-burgundy hover:underline">prenez votre abonnement</Link>.
         </p>
       ) : null}
@@ -304,7 +322,7 @@ const BulkDownloadPage = () => {
             <li key={item._id} className="flex items-center gap-2 px-3 py-2 text-sm">
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-medium text-ink">{item.title}</span>
-                <span className="block truncate text-xs text-ink-muted">{[item.yearKnown ? item.year : 'Année non précisée', item.matiere?.nom, item.tier === 'free' ? 'gratuit' : 'récent'].filter(Boolean).join(' · ')}</span>
+                <span className="block truncate text-xs text-ink-muted">{[item.yearKnown ? item.year : 'Année non précisée', item.matiere?.nom, tierLabel(item, quota?.plan)].filter(Boolean).join(' · ')}</span>
               </span>
               <button type="button" onClick={() => toggle(item._id)} aria-label={`Retirer ${item.title}`} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-muted hover:bg-paper-dim hover:text-ink"><X size={15} /></button>
             </li>
@@ -329,7 +347,7 @@ const BulkDownloadPage = () => {
         </p>
       ) : null}
       <p className="mt-4 text-xs leading-relaxed text-ink-muted">
-        {`Sujets de ${quota?.freeUntilYear || 2010} et avant : gratuits, sans compte. Sujets plus récents : ${quota?.limits?.free ?? 3} par ${quota?.windowHours || 24} h sans abonnement, ${quota?.limits?.subscriber ?? 20} avec un abonnement.`}
+        {`Sujets de ${quota?.freeUntilYear || 2009} et avant : gratuits et illimités. De ${(quota?.freeUntilYear || 2009) + 1} à ${quota?.freeQuotaUntilYear || 2020} : ${quota?.limits?.free ?? 3} téléchargements gratuits au total sans abonnement. ${(quota?.freeQuotaUntilYear || 2020) + 1} et après : abonnement obligatoire (jusqu’à ${quota?.limits?.subscriber ?? 20} sujets par ${quota?.windowHours || 24} h).`}
       </p>
     </Card></div>
   );

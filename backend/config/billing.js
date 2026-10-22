@@ -70,15 +70,18 @@ const billing = {
     /*
      * Politique freemium (services/billing/downloadGuard.js). L'année d'un document est celle du
      * niveau « annee » de son catalogue (nœud « 2021 »…) : services/access/documentYear.js.
-     *  - document d'une année <= freeUntilYear : gratuit pour tous, sans compte, hors quota ;
-     *  - document plus récent OU d'année inconnue : « récent », compté dans un quota glissant
-     *    de `windowHours` heures — `recentLimits.subscriber` avec un abonnement actif,
-     *    `recentLimits.free` sinon (visiteur, compte sans abonnement, abonnement expiré).
-     *    `free: 0` réserve les sujets récents aux seuls abonnés.
+     *  - année <= freeUntilYear (2009) : gratuit pour tous, sans compte, hors quota ;
+     *  - année de freeUntilYear + 1 à freeQuotaUntilYear (2010-2020) : sans abonnement, quota
+     *    gratuit de `recentLimits.free` téléchargements AU TOTAL (à vie, par compte ou visiteur) ;
+     *  - année plus récente OU inconnue : abonnement obligatoire sans abonnement actif.
+     *  - abonnement actif : tout document > freeUntilYear compte dans un quota glissant de
+     *    `recentLimits.subscriber` téléchargements par `windowHours` heures.
      */
-    freeUntilYear: toInt(process.env.DOWNLOAD_FREE_UNTIL_YEAR, 2010),
+    freeUntilYear: toInt(process.env.DOWNLOAD_FREE_UNTIL_YEAR, 2009),
+    freeQuotaUntilYear: toInt(process.env.DOWNLOAD_FREE_QUOTA_UNTIL_YEAR, 2020),
     windowHours: toInt(process.env.DOWNLOAD_WINDOW_HOURS, 24) || 24,
     recentLimits: {
+      // Quota gratuit à vie (sujets <= freeQuotaUntilYear), pas une limite par fenêtre.
       free: toInt(process.env.DOWNLOAD_RECENT_LIMIT_FREE, 3),
       subscriber: toInt(process.env.DOWNLOAD_RECENT_LIMIT_SUBSCRIBER, 20),
     },

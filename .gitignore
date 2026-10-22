@@ -55,3 +55,14 @@ coverage/
 # Dossiers temporaires
 tmp/
 temp/
+
+# Graphe de connaissances (graphify)
+graphify-out/
+
+# Jeux de sujets bruts (PDF à importer, jamais versionnés)
+/INFAS/
+/INP-HB/
+/sujets/
+
+# Réglages locaux des assistants (Claude Code)
+**/.claude/settings.local.json

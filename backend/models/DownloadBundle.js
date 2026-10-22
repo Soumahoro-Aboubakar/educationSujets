@@ -15,6 +15,9 @@ const DownloadBundleSchema = new mongoose.Schema(
     visitor: { type: String, default: null },
     documents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document' }],
     recentDocuments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document' }],
+    // Profil au moment de la réservation et documents ayant consommé le quota (journal de suivi).
+    plan: { type: String, default: null },
+    chargedDocuments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document' }],
     label: { type: String, default: 'sujets' },
     delivery: { type: String, enum: ['zip', 'files'], default: 'zip' },
     status: { type: String, enum: ['ready', 'streaming', 'done', 'failed'], default: 'ready' },

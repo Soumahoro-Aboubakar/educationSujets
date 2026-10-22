@@ -247,9 +247,13 @@ const DocumentDetailScreen = () => {
 
   const fileLabel = [getExtensionLabel(document), formatFileSize(document.fileSize)].filter(Boolean).join(' · ');
   const subjectNoun = isCorrection ? 'le corrigé' : 'le sujet';
-  const isLocked = Boolean(access.locked) && !isSubjectDownloaded;
   const quotaExhausted = document?.access?.tier === 'recent' && access.quota && !access.quota.unlimited
     && access.quota.remaining === 0 && !access.quota.documentIds?.includes?.(document._id);
+  // Sans abonnement : sujets de 2021 et après (ou d'année inconnue) réservés aux abonnés.
+  const freePlan = access.quota?.plan === 'free';
+  const needsSubscription = freePlan && document?.access?.tier === 'recent' && !document.access.freeQuotaEligible;
+  // Cadenas affiché d'avance ; le serveur reste seul juge et la feuille explique son refus.
+  const isLocked = (Boolean(access.locked) || needsSubscription || (freePlan && quotaExhausted)) && !isSubjectDownloaded;
   const primaryLabel = isSubjectDownloading
     ? `Téléchargement… ${Math.round(subjectProgress * 100)} %`
     : isSubjectDownloaded ? `Ouvrir ${subjectNoun}` : isLocked ? `Débloquer ${subjectNoun}` : `Télécharger ${subjectNoun}`;
@@ -299,26 +303,37 @@ const DocumentDetailScreen = () => {
           </Animated.View>
         ) : null}
 
-        {/* Règle d'accès : sujet gratuit (2010 et avant) ou sujet récent compté dans le quota. */}
+        {/* Règle d'accès : gratuit (2009 et avant), quota gratuit (2010-2020) ou abonnement. */}
         {!isSubjectDownloaded && document?.access ? (
           <Animated.View entering={FadeIn.duration(200)} style={styles.lockNotice}>
             <View style={styles.lockIcon}>
               {document.access.tier === 'free'
                 ? <Gift size={17} color={brand.goldInk} strokeWidth={2} />
-                : <Clock size={17} color={brand.ink} strokeWidth={2} />}
+                : needsSubscription
+                  ? <Lock size={17} color={brand.ink} strokeWidth={2} />
+                  : <Clock size={17} color={brand.ink} strokeWidth={2} />}
             </View>
             <View style={styles.correctionCopy}>
               <Text variant="bodyMedium" style={styles.correctionTitle}>
-                {document.access.tier === 'free' ? 'Sujet gratuit' : quotaExhausted ? 'Quota de sujets récents atteint' : 'Sujet récent'}
+                {document.access.tier === 'free' ? 'Sujet gratuit'
+                  : needsSubscription ? 'Réservé aux abonnés'
+                    : quotaExhausted ? (freePlan ? 'Téléchargements gratuits utilisés' : 'Quota de sujets récents atteint')
+                      : freePlan ? 'Éligible au quota gratuit' : 'Sujet récent'}
               </Text>
               <Text variant="caption" style={styles.correctionText}>
                 {document.access.tier === 'free'
                   ? `Sujet de ${document.access.year} : téléchargement gratuit et illimité, sans compte.`
-                  : quotaExhausted
-                    ? `Tu as utilisé tes téléchargements de sujets récents.${formatRenewal(access.quota?.nextRenewalAt) ? ` Prochain à partir du ${formatRenewal(access.quota.nextRenewalAt)}.` : ''} Les sujets de ${access.quota?.freeUntilYear || 2010} et avant restent gratuits.`
-                    : access.quota && !access.quota.unlimited
-                      ? `${access.quota.remaining} sujet${access.quota.remaining > 1 ? 's' : ''} récent${access.quota.remaining > 1 ? 's' : ''} encore disponible${access.quota.remaining > 1 ? 's' : ''} sur ${access.quota.windowHours} h${access.quota.plan === 'subscriber' ? '.' : ' (sans abonnement).'}`
-                      : 'Téléchargement selon ton accès.'}
+                  : needsSubscription
+                    ? 'Ce sujet est réservé aux utilisateurs disposant d’un abonnement valide.'
+                    : quotaExhausted
+                      ? (freePlan
+                        ? `Tu as utilisé tes ${access.quota.limit} téléchargements gratuits. Un abonnement est nécessaire pour continuer à télécharger des sujets. Les sujets de ${access.quota.freeUntilYear} et avant restent gratuits.`
+                        : `Tu as utilisé tes téléchargements de sujets récents.${formatRenewal(access.quota?.nextRenewalAt) ? ` Prochain à partir du ${formatRenewal(access.quota.nextRenewalAt)}.` : ''} Les sujets de ${access.quota?.freeUntilYear || 2009} et avant restent gratuits.`)
+                      : access.quota && !access.quota.unlimited
+                        ? (freePlan
+                          ? `Ce sujet est éligible à ton quota gratuit. Il te reste ${access.quota.remaining} téléchargement${access.quota.remaining > 1 ? 's' : ''} gratuit${access.quota.remaining > 1 ? 's' : ''}.`
+                          : `${access.quota.remaining} sujet${access.quota.remaining > 1 ? 's' : ''} récent${access.quota.remaining > 1 ? 's' : ''} encore disponible${access.quota.remaining > 1 ? 's' : ''} sur ${access.quota.windowHours} h.`)
+                        : 'Téléchargement selon ton accès.'}
               </Text>
             </View>
           </Animated.View>

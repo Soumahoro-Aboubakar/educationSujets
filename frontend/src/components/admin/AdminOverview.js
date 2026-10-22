@@ -67,7 +67,7 @@ const AdminOverview = () => {
           <div>
             <h3 className="border-b border-slate-100 px-5 py-3.5 text-sm font-bold text-slate-700">Téléchargements</h3>
             <Metric label="Aujourd’hui" value={downloads.today} />
-            <Metric label="Limite atteinte" value={downloads.usersAtLimit} hint={`${downloads.dailyLimit} téléchargements / jour`} />
+            <Metric label="Limite atteinte" value={downloads.usersAtLimit} hint="Quota gratuit épuisé, ou abonnés à leur limite sur 24 h" />
           </div>
           <div>
             <h3 className="border-b border-slate-100 px-5 py-3.5 text-sm font-bold text-slate-700">Documents populaires (30 j)</h3>

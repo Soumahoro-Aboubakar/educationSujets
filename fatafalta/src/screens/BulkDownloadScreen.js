@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Alert, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
-import { AlertTriangle, Check, CheckCircle2, Clock, Download, FileCheck, FileText, Gift, Layers3 } from 'lucide-react-native';
+import { AlertTriangle, Check, CheckCircle2, Clock, Download, FileCheck, FileText, Gift, Layers3, Lock } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import ScreenHeader from '../components/ui/ScreenHeader';
 import StateView from '../components/ui/StateView';
@@ -31,6 +31,13 @@ const { brand } = theme;
 const ACCESS_CODES = ['SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REACHED', 'ACCOUNT_DISABLED'];
 const NO_YEAR = 'inconnue';
 const plural = (count, singular, pluralForm = `${singular}s`) => `${count} ${count > 1 ? pluralForm : singular}`;
+// Sans abonnement (`plan` 'free') : sujets 2010-2020 sur le quota gratuit, plus récents réservés aux abonnés.
+const reservedFor = (item, plan) => plan === 'free' && item.tier !== 'free' && !item.freeQuotaEligible;
+const tierLabel = (item, plan) => {
+  if (item.tier === 'free') return 'Gratuit';
+  if (plan !== 'free') return 'Récent';
+  return reservedFor(item, plan) ? 'Abonnés' : 'Quota gratuit';
+};
 
 const Chip = ({ label, active, onPress, count }) => (
   <Pressable
@@ -154,8 +161,10 @@ const BulkDownloadScreen = ({ navigation, route }) => {
   const keepWithinQuota = () => {
     if (!summary) return;
     const granted = new Set(summary.documents.filter((item) => item.alreadyGranted).map((item) => item._id));
+    const blockedIds = new Set(summary.blocked || []);
     let budget = summary.quota.remaining ?? Infinity;
     setSelected(new Set(selectedItems.filter((item) => {
+      if (blockedIds.has(item._id)) return false;
       if (item.tier === 'free' || granted.has(item._id)) return true;
       if (budget > 0) { budget -= 1; return true; }
       return false;
@@ -262,7 +271,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
       <Pressable
         accessibilityRole="checkbox"
         accessibilityState={{ checked }}
-        accessibilityLabel={`${item.title}, ${describe(item)}, ${item.tier === 'free' ? 'gratuit' : 'récent'}`}
+        accessibilityLabel={`${item.title}, ${describe(item)}, ${tierLabel(item, quota?.plan).toLowerCase()}`}
         onPress={() => toggle(item._id)}
         android_ripple={{ color: brand.pressed }}
         style={({ pressed }) => [styles.row, checked && styles.rowChecked, pressed && styles.pressed]}
@@ -278,8 +287,10 @@ const BulkDownloadScreen = ({ navigation, route }) => {
           <Text variant="caption" style={styles.rowMeta} numberOfLines={1}>{describe(item)}</Text>
         </View>
         <View style={[styles.badge, item.tier === 'free' ? styles.badgeFree : styles.badgeRecent]}>
-          {item.tier === 'free' ? <Gift size={11} color={brand.goldInk} strokeWidth={2.2} /> : <Clock size={11} color={brand.inkSoft} strokeWidth={2.2} />}
-          <Text style={[styles.badgeLabel, item.tier === 'free' && styles.badgeLabelFree]}>{item.tier === 'free' ? 'Gratuit' : 'Récent'}</Text>
+          {item.tier === 'free' ? <Gift size={11} color={brand.goldInk} strokeWidth={2.2} />
+            : reservedFor(item, quota?.plan) ? <Lock size={11} color={brand.inkSoft} strokeWidth={2.2} />
+              : <Clock size={11} color={brand.inkSoft} strokeWidth={2.2} />}
+          <Text style={[styles.badgeLabel, item.tier === 'free' && styles.badgeLabelFree]}>{tierLabel(item, quota?.plan)}</Text>
         </View>
       </Pressable>
     );
@@ -315,7 +326,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
         onBack={() => navigation.goBack()}
         eyebrow={organisme?.nom || organisme?.name}
         title="Plusieurs sujets"
-        subtitle="Sujets de 2010 et avant gratuits, sans compte."
+        subtitle="Sujets de 2009 et avant gratuits, sans compte."
         right={organisme ? <OrganismeLogo organisme={organisme} size={36} /> : null}
       />
       <View style={styles.body}>{renderBody()}</View>
@@ -334,17 +345,36 @@ const BulkDownloadScreen = ({ navigation, route }) => {
             </Text>
             {counts ? (
               <Text variant="caption" style={styles.footerMeta}>
-                {`${plural(counts.free, 'gratuit')} · ${plural(counts.recentToCharge, 'récent décompté', 'récents décomptés')}${quota && !quota.unlimited ? ` · ${quota.remaining}/${quota.limit} récents disponibles` : ''}`}
+                {quota?.lifetime
+                  ? `${plural(counts.free, 'gratuit')} · ${plural(counts.recentToCharge, 'décompté', 'décomptés')} · ${plural(quota.remaining, 'téléchargement gratuit restant', 'téléchargements gratuits restants')}`
+                  : `${plural(counts.free, 'gratuit')} · ${plural(counts.recentToCharge, 'récent décompté', 'récents décomptés')}${quota && !quota.unlimited ? ` · ${quota.remaining}/${quota.limit} récents disponibles` : ''}`}
               </Text>
             ) : quota && !quota.unlimited ? (
-              <Text variant="caption" style={styles.footerMeta}>{`${quota.remaining} sur ${quota.limit} sujets récents disponibles (${quota.windowHours} h glissantes)`}</Text>
+              <Text variant="caption" style={styles.footerMeta}>
+                {quota.lifetime
+                  ? `Il te reste ${plural(quota.remaining, 'téléchargement gratuit', 'téléchargements gratuits')} sur ${quota.limit} (sujets ${quota.freeUntilYear + 1}-${quota.freeQuotaUntilYear})`
+                  : `${quota.remaining} sur ${quota.limit} sujets récents disponibles (${quota.windowHours} h glissantes)`}
+              </Text>
+            ) : null}
+
+            {counts?.blocked > 0 ? (
+              <View style={styles.warning}>
+                <Lock size={16} color={brand.goldInk} strokeWidth={2} />
+                <Text variant="caption" style={styles.warningText}>
+                  {`${plural(counts.blocked, 'sujet est réservé', 'sujets sont réservés')} aux utilisateurs disposant d’un abonnement valide (${(quota?.freeQuotaUntilYear || 2020) + 1} et après, ou année non précisée). Retire-les pour continuer.`}
+                </Text>
+              </View>
             ) : null}
 
             {overflow > 0 ? (
               <View style={styles.warning}>
                 <AlertTriangle size={16} color={brand.goldInk} strokeWidth={2} />
                 <Text variant="caption" style={styles.warningText}>
-                  {quota.remaining === 0
+                  {quota.lifetime
+                    ? (quota.remaining === 0
+                      ? `Tu as utilisé tes ${quota.limit} téléchargements gratuits. Un abonnement est nécessaire pour continuer. Les sujets de ${quota.freeUntilYear} et avant restent téléchargeables.`
+                      : `Ta sélection contient ${plural(counts.recentToCharge, 'sujet décompté', 'sujets décomptés')}, mais il te reste ${plural(quota.remaining, 'téléchargement gratuit', 'téléchargements gratuits')}.`)
+                    : quota.remaining === 0
                     ? `Ton quota de sujets récents est épuisé pour le moment${renewal ? ` (prochain à partir du ${renewal})` : ''}. Les sujets gratuits restent téléchargeables.`
                     : `Ta sélection contient ${plural(counts.recentToCharge, 'sujet récent', 'sujets récents')}, mais il te reste ${plural(quota.remaining, 'téléchargement', 'téléchargements')}. Choisis jusqu’à ${quota.remaining} sujet${quota.remaining > 1 ? 's' : ''} récent${quota.remaining > 1 ? 's' : ''} maintenant ; les autres plus tard.`}
                 </Text>
@@ -359,9 +389,9 @@ const BulkDownloadScreen = ({ navigation, route }) => {
 
             <View style={styles.footerActions}>
               {overflow > 0 && quota.remaining > 0 ? (
-                <ActionButton title={`Garder ${quota.remaining} récent${quota.remaining > 1 ? 's' : ''} + gratuits`} variant="secondary" onPress={keepWithinQuota} />
+                <ActionButton title={`Garder ${quota.remaining} ${quota.lifetime ? 'du quota' : `récent${quota.remaining > 1 ? 's' : ''}`} + gratuits`} variant="secondary" onPress={keepWithinQuota} />
               ) : null}
-              {overflow > 0 && quota.plan !== 'subscriber' ? (
+              {(overflow > 0 || counts?.blocked > 0) && quota?.plan !== 'subscriber' ? (
                 <ActionButton title="Prendre mon abonnement" variant="secondary" onPress={access.sheetProps.onSubscribe} loading={access.sheetProps.subscribing} />
               ) : null}
               <ActionButton

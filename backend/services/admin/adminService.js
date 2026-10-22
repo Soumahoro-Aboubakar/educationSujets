@@ -8,6 +8,8 @@ const Commission = require('../../models/Commission');
 const Withdrawal = require('../../models/Withdrawal');
 const DownloadLog = require('../../models/DownloadLog');
 const DownloadQuota = require('../../models/DownloadQuota');
+const Document = require('../../models/Document');
+const Organisme = require('../../models/Organisme');
 const billingConfig = require('../../config/billing');
 const AppError = require('../../utils/errors');
 const { dayKey, DAY_MS } = require('../billing/pricing');
@@ -37,7 +39,20 @@ const generateTempPassword = () => {
 
 // ── Indicateurs ────────────────────────────────────────
 
-/** Comptes dont le quota glissant de sujets récents est entièrement utilisé (selon leur abonnement). */
+// Droits confirmés d'un quota gratuit à vie (« free:u:… »).
+const FREE_QUOTA_USED = { $size: { $filter: { input: '$grants', cond: { $eq: ['$$this.status', 'consumed'] } } } };
+
+const countExhaustedFreeAccounts = async () => {
+  const [row] = await DownloadQuota.aggregate([
+    { $match: { subject: /^free:u:/ } },
+    { $project: { used: FREE_QUOTA_USED } },
+    { $match: { used: { $gte: billingConfig.downloads.recentLimits.free } } },
+    { $count: 'count' },
+  ]);
+  return row?.count || 0;
+};
+
+/** Comptes à la limite : quota gratuit à vie épuisé, ou quota glissant d'abonné entièrement utilisé. */
 const countAccountsAtLimit = async (now) => {
   const { recentLimits, windowHours } = billingConfig.downloads;
   const since = new Date(now.getTime() - windowHours * 60 * 60 * 1000);
@@ -56,12 +71,11 @@ const countAccountsAtLimit = async (now) => {
         },
       },
     },
-    { $match: { used: { $gte: Math.min(recentLimits.free, recentLimits.subscriber) } } },
+    { $match: { used: { $gte: recentLimits.subscriber } } },
   ]);
-  if (!rows.length) return 0;
   const userIds = rows.map((row) => row.subject.slice(2)).filter((id) => mongoose.Types.ObjectId.isValid(id));
-  const subscribed = new Set((await Subscription.find({ user: { $in: userIds }, currentPeriodEnd: { $gt: now } }).distinct('user')).map(String));
-  return rows.filter((row) => row.used >= (subscribed.has(row.subject.slice(2)) ? recentLimits.subscriber : recentLimits.free)).length;
+  const subscribed = userIds.length ? await Subscription.countDocuments({ user: { $in: userIds }, currentPeriodEnd: { $gt: now } }) : 0;
+  return subscribed + await countExhaustedFreeAccounts();
 };
 
 const getStats = async () => {
@@ -427,8 +441,164 @@ const processWithdrawal = async (withdrawalId, { status, reference, reason }, ad
   return toPublicWithdrawal(withdrawal);
 };
 
+// ── Téléchargements gratuits (quota 2010-2020 sans abonnement) ─────────────────
+
+const parseDate = (value, label, endOfDay = false) => {
+  if (!value) return null;
+  const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) && endOfDay ? `${value}T23:59:59.999Z` : value);
+  if (Number.isNaN(date.getTime())) throw new AppError(`Date ${label} invalide.`, 400);
+  return date;
+};
+
+const findIds = (Model, filter, max = 500) => Model.find(filter).select('_id').limit(max).lean().then((rows) => rows.map((row) => row._id));
+
+/** Historique paginé des téléchargements sur le quota gratuit ; recherche par utilisateur ou titre. */
+const listFreeDownloads = async ({ search, from, to, year, organisme, page, limit }) => {
+  const paging = paginate({ page, limit });
+  const filter = { access: 'free_quota' };
+  const since = parseDate(from, 'de début');
+  const until = parseDate(to, 'de fin', true);
+  if (since || until) filter.createdAt = { ...(since ? { $gte: since } : {}), ...(until ? { $lte: until } : {}) };
+  if (year) {
+    if (!/^\d{4}$/.test(String(year))) throw new AppError('Année invalide.', 400);
+    filter.year = Number(year);
+  }
+  if (organisme) {
+    if (!mongoose.isValidObjectId(organisme)) throw new AppError('Organisme invalide.', 400);
+    filter.organisme = organisme;
+  }
+  if (search && search.trim()) {
+    const regex = new RegExp(escapeRegex(search.trim()), 'i');
+    const [userIds, documentIds] = await Promise.all([
+      findIds(User, { $or: [{ name: regex }, { email: regex }] }),
+      findIds(Document, { $or: [{ title: regex }, { titre: regex }, { originalFileName: regex }] }),
+    ]);
+    filter.$or = [{ user: { $in: userIds } }, { document: { $in: documentIds } }];
+  }
+
+  const [logs, total] = await Promise.all([
+    DownloadLog.find(filter).sort({ createdAt: -1 }).skip(paging.skip).limit(paging.limit)
+      .populate('user', 'name email')
+      .populate({
+        path: 'document',
+        select: 'title titre originalFileName matiereId parcoursTypeId',
+        populate: [{ path: 'matiereId', select: 'nom' }, { path: 'parcoursTypeId', select: 'nom' }],
+      })
+      .populate('organisme', 'nom')
+      .lean(),
+    DownloadLog.countDocuments(filter),
+  ]);
+
+  return {
+    data: logs.map((log) => ({
+      id: log._id,
+      date: log.createdAt,
+      user: log.user ? { id: log.user._id, name: log.user.name, email: log.user.email } : null,
+      // Visiteur sans compte : identifiant abrégé, jamais le jeton.
+      visitor: log.user ? null : (log.visitor ? String(log.visitor).slice(0, 8) : null),
+      document: {
+        id: log.document?._id || log.document || null,
+        title: log.document ? (log.document.title || log.document.titre || log.document.originalFileName) : 'Document supprimé',
+      },
+      year: log.year,
+      organisme: log.organisme ? { id: log.organisme._id, nom: log.organisme.nom } : null,
+      parcoursType: log.document?.parcoursTypeId?.nom || null,
+      matiere: log.document?.matiereId?.nom || null,
+      access: log.access,
+      charged: Boolean(log.charged),
+    })),
+    pagination: pagination(paging, total),
+  };
+};
+
+/** Comptes ayant utilisé le quota gratuit : utilisés, restants, épuisés ; les plus actifs d'abord. */
+const listFreeQuotaUsers = async ({ search, status, page, limit }) => {
+  const paging = paginate({ page, limit });
+  const quotaLimit = billingConfig.downloads.recentLimits.free;
+  let subjectMatch = /^free:u:/;
+  if (search && search.trim()) {
+    const regex = new RegExp(escapeRegex(search.trim()), 'i');
+    subjectMatch = { $in: (await findIds(User, { $or: [{ name: regex }, { email: regex }] })).map((userId) => `free:u:${userId}`) };
+  }
+  const [result] = await DownloadQuota.aggregate([
+    { $match: { subject: subjectMatch } },
+    { $project: { subject: 1, used: FREE_QUOTA_USED, lastAt: { $max: '$grants.grantedAt' } } },
+    ...(status === 'exhausted' ? [{ $match: { used: { $gte: quotaLimit } } }] : []),
+    ...(status === 'available' ? [{ $match: { used: { $lt: quotaLimit } } }] : []),
+    { $sort: { used: -1, lastAt: -1 } },
+    { $facet: { rows: [{ $skip: paging.skip }, { $limit: paging.limit }], total: [{ $count: 'count' }] } },
+  ]);
+  const rows = result?.rows || [];
+  const userIds = rows.map((row) => row.subject.slice('free:u:'.length)).filter((userId) => mongoose.isValidObjectId(userId));
+  const [users, deliveries] = await Promise.all([
+    User.find({ _id: { $in: userIds } }).select('name email').lean(),
+    DownloadLog.aggregate([
+      { $match: { access: 'free_quota', user: { $in: userIds.map((userId) => new mongoose.Types.ObjectId(userId)) } } },
+      { $group: { _id: '$user', count: { $sum: 1 } } },
+    ]),
+  ]);
+  const userById = new Map(users.map((user) => [String(user._id), user]));
+  const deliveriesById = new Map(deliveries.map((row) => [String(row._id), row.count]));
+
+  return {
+    data: rows.map((row) => {
+      const userId = row.subject.slice('free:u:'.length);
+      const user = userById.get(userId);
+      return {
+        user: { id: userId, name: user?.name || 'Compte supprimé', email: user?.email || null },
+        used: row.used,
+        limit: quotaLimit,
+        remaining: Math.max(0, quotaLimit - row.used),
+        exhausted: row.used >= quotaLimit,
+        // Livraisons gratuites (re-téléchargements compris).
+        deliveries: deliveriesById.get(userId) || 0,
+        lastAt: row.lastAt || null,
+      };
+    }),
+    pagination: pagination(paging, result?.total?.[0]?.count || 0),
+  };
+};
+
+/** Indicateurs du quota gratuit et valeurs des filtres (années, organismes). */
+const getFreeDownloadStats = async () => {
+  const [charged, deliveries, accounts, exhausted, years, organismeIds, top] = await Promise.all([
+    DownloadLog.countDocuments({ access: 'free_quota', charged: true }),
+    DownloadLog.countDocuments({ access: 'free_quota' }),
+    DownloadQuota.countDocuments({ subject: /^free:u:/ }),
+    countExhaustedFreeAccounts(),
+    DownloadLog.distinct('year', { access: 'free_quota' }),
+    DownloadLog.distinct('organisme', { access: 'free_quota' }),
+    DownloadLog.aggregate([
+      { $match: { access: 'free_quota', user: { $ne: null } } },
+      { $group: { _id: '$user', count: { $sum: 1 }, lastAt: { $max: '$createdAt' } } },
+      { $sort: { count: -1, lastAt: -1 } },
+      { $limit: 5 },
+      { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'user' } },
+    ]),
+  ]);
+  const organismes = await Organisme.find({ _id: { $in: organismeIds.filter(Boolean) } }).select('nom').sort('nom').lean();
+  return {
+    limit: billingConfig.downloads.recentLimits.free,
+    freeUntilYear: billingConfig.downloads.freeUntilYear,
+    freeQuotaUntilYear: billingConfig.downloads.freeQuotaUntilYear,
+    // Téléchargements ayant consommé le quota / livraisons totales (re-téléchargements compris).
+    charged,
+    deliveries,
+    accounts,
+    exhausted,
+    topUsers: top.map((row) => ({ id: row._id, name: row.user[0]?.name || 'Compte supprimé', email: row.user[0]?.email || null, count: row.count, lastAt: row.lastAt })),
+    filters: {
+      years: years.filter(Number.isInteger).sort((a, b) => b - a),
+      organismes: organismes.map((item) => ({ id: item._id, nom: item.nom })),
+    },
+  };
+};
+
 module.exports = {
   getStats,
+  listFreeDownloads,
+  listFreeQuotaUsers,
+  getFreeDownloadStats,
   listUsers,
   getUserDetails,
   createUser,

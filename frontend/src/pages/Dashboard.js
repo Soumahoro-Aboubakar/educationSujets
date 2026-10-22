@@ -5,7 +5,7 @@ import {
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
   MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User, Building2,
   AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon,
-  Users, CreditCard, Gift, Activity, FolderCog, Wallet
+  Users, CreditCard, Gift, Activity, FolderCog, Wallet, Download
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -20,6 +20,7 @@ import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
 import AdminCatalogPanel from '../components/AdminCatalogPanel';
 import AdminOrganismeLogos from '../components/admin/AdminOrganismeLogos';
 import YearIssuesPanel from '../components/admin/YearIssuesPanel';
+import AdminFreeDownloads from '../components/admin/AdminFreeDownloads';
 import DynamicStructureSelector from '../components/DynamicStructureSelector';
 import DynamicMetadataFields from '../components/DynamicMetadataFields';
 import DraftManagement from '../components/DraftManagement';
@@ -267,6 +268,7 @@ const Dashboard = () => {
       { id: 'platform', label: 'Activité plateforme', icon: Activity },
       { id: 'users', label: 'Utilisateurs', icon: Users },
       { id: 'payments', label: 'Paiements', icon: CreditCard },
+      { id: 'free-downloads', label: 'Téléchargements gratuits', icon: Download },
       { id: 'payment-methods', label: 'Méthodes de paiement', icon: Wallet },
       { id: 'referrals', label: 'Parrainage', icon: Gift, badge: 0 },
     ] : []),
@@ -1244,6 +1246,7 @@ const Dashboard = () => {
           {user?.role === 'admin' && activeTab === 'platform' && <AdminOverview />}
           {user?.role === 'admin' && activeTab === 'users' && <AdminUsers />}
           {user?.role === 'admin' && activeTab === 'payments' && <AdminPayments />}
+          {user?.role === 'admin' && activeTab === 'free-downloads' && <AdminFreeDownloads />}
           {user?.role === 'admin' && activeTab === 'payment-methods' && <AdminPaymentMethods />}
           {user?.role === 'admin' && activeTab === 'referrals' && <AdminReferrals />}
 

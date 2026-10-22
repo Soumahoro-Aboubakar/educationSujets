@@ -13,15 +13,17 @@ const { resolveVisitor } = require('../access/visitorIdentity');
 /*
  * Droit de télécharger un document (politique freemium, règles dans config/billing.js) :
  *
- *   | Profil                         | <= freeUntilYear | Plus récent (ou année inconnue)      |
- *   | Visiteur sans compte           | gratuit          | quota « free » (3 / 24 h glissantes) |
- *   | Compte sans abonnement / expiré| gratuit          | quota « free » (3 / 24 h glissantes) |
- *   | Abonnement actif               | gratuit          | quota « subscriber » (20 / 24 h)     |
- *   | Administration                 | gratuit          | illimité                             |
+ *   | Profil                          | <= 2009  | 2010-2020                       | >= 2021 ou année inconnue |
+ *   | Visiteur sans compte            | gratuit  | quota gratuit : 3 au total      | abonnement obligatoire    |
+ *   | Compte sans abonnement / expiré | gratuit  | quota gratuit : 3 au total      | abonnement obligatoire    |
+ *   | Abonnement actif                | gratuit  | quota « subscriber » (20 / 24 h glissantes)                 |
+ *   | Administration                  | gratuit  | illimité                                                    |
  *
- * Les documents gratuits ne consomment jamais de quota. Un document récent déjà accordé dans la
- * fenêtre de 24 h ne recompte pas (nouvel essai après un échec, second appareil). Le serveur est
- * seul juge : les interfaces ne font qu'anticiper ces réponses.
+ * Le quota gratuit est à vie (sujet « free:u:… » ou « free:v:… », jamais renouvelé) ; un visiteur
+ * est en plus plafonné par adresse IP sur 24 h. Les documents gratuits ne consomment jamais de
+ * quota. Un document déjà accordé ne recompte pas (nouvel essai, double clic, second appareil) :
+ * pour toujours sur le quota gratuit, dans la fenêtre de 24 h pour un abonné. Le serveur est seul
+ * juge : les interfaces ne font qu'anticiper ces réponses.
  */
 
 const { downloads } = billingConfig;
@@ -69,9 +71,10 @@ const limitOf = (plan) => (plan === 'subscriber' ? downloads.recentLimits.subscr
 /** Quotas à respecter, le principal en premier. Un visiteur a aussi un plafond par IP. */
 const subjectsOf = (actor) => {
   const limit = limitOf(actor.plan);
-  if (actor.user) return [{ subject: `u:${actor.user._id}`, limit }];
+  // Sans abonnement : quota gratuit à vie (« free: ») ; abonné : quota glissant.
+  if (actor.user) return [{ subject: `${actor.plan === 'subscriber' ? '' : 'free:'}u:${actor.user._id}`, limit }];
   const subjects = [];
-  if (actor.visitorId) subjects.push({ subject: `v:${actor.visitorId}`, limit });
+  if (actor.visitorId) subjects.push({ subject: `free:v:${actor.visitorId}`, limit });
   if (actor.ipKey) subjects.push({ subject: `ip:${actor.ipKey}`, limit: Math.max(limit, downloads.anonymousIpLimit), shared: true });
   return subjects.length ? subjects : [{ subject: 'ip:unknown', limit, shared: true }];
 };
@@ -92,7 +95,10 @@ const getQuotaStatus = async (actorOrUser, now = new Date()) => {
     plan: actor.plan,
     isVisitor: !actor.user,
     windowHours: downloads.windowHours,
+    // Quota gratuit à vie (sans abonnement) : jamais renouvelé, seulement les sujets <= freeQuotaUntilYear.
+    lifetime: actor.plan === 'free',
     freeUntilYear: downloads.freeUntilYear,
+    freeQuotaUntilYear: downloads.freeQuotaUntilYear,
     limits: { ...downloads.recentLimits },
   };
   if (actor.plan === 'unlimited') {
@@ -114,25 +120,23 @@ const getQuotaStatus = async (actorOrUser, now = new Date()) => {
 };
 
 const subscriptionRequiredError = () => new AppError(
-  `Ce sujet fait partie de nos ressources récentes, réservées aux abonnés Fatafalta. Vous pouvez télécharger gratuitement les anciens sujets jusqu'à l'année ${downloads.freeUntilYear}. Pour accéder à ce document et aux autres sujets récents, découvrez notre abonnement.`,
+  `Ce sujet est réservé aux utilisateurs disposant d'un abonnement valide. Sans abonnement, les sujets de ${downloads.freeUntilYear} et avant sont gratuits et illimités, et vous pouvez télécharger jusqu'à ${downloads.recentLimits.free} sujets de ${downloads.freeUntilYear + 1} à ${downloads.freeQuotaUntilYear}.`,
   403,
-  { freeUntilYear: downloads.freeUntilYear, canSubscribe: true },
+  { freeUntilYear: downloads.freeUntilYear, freeQuotaUntilYear: downloads.freeQuotaUntilYear, canSubscribe: true },
   'SUBSCRIPTION_REQUIRED'
 );
 
 const quotaExceededError = (actor, usage, requested, { shared = false } = {}) => {
   const renewal = formatRenewal(usage.nextRenewalAt);
   const free = actor.plan !== 'subscriber';
-  const what = free
-    ? `vos ${usage.limit} téléchargements gratuits de sujets récents`
-    : `vos ${usage.limit} téléchargements de sujets récents`;
   const message = [
     shared
-      ? `La limite de téléchargements de sujets récents est atteinte pour cette connexion (partagée par plusieurs visiteurs).${free ? ' Créez un compte gratuit pour disposer de votre propre quota.' : ''}`
-      : `Vous avez utilisé ${what} sur les dernières ${downloads.windowHours} heures.`,
+      ? `La limite de téléchargements est atteinte pour cette connexion (partagée par plusieurs visiteurs).${free ? ' Créez un compte gratuit pour disposer de votre propre quota.' : ''}`
+      : free
+        ? `Vous avez utilisé vos ${usage.limit} téléchargements gratuits. Souscrivez à un abonnement pour continuer à télécharger des sujets.`
+        : `Vous avez utilisé vos ${usage.limit} téléchargements de sujets récents sur les dernières ${downloads.windowHours} heures.`,
     renewal ? `Un nouveau téléchargement sera possible à partir du ${renewal} (heure d'Abidjan).` : null,
     `Les sujets de ${downloads.freeUntilYear} et avant restent gratuits et illimités.`,
-    free && !shared ? 'Avec un abonnement, vous pouvez télécharger jusqu’à ' + `${downloads.recentLimits.subscriber} sujets récents par période de ${downloads.windowHours} heures.` : null,
   ].filter(Boolean).join(' ');
   return new AppError(message, 429, {
     plan: actor.plan,
@@ -144,7 +148,9 @@ const quotaExceededError = (actor, usage, requested, { shared = false } = {}) =>
     // Ancien champ lu par les clients existants.
     resetsAt: usage.nextRenewalAt,
     windowHours: downloads.windowHours,
+    lifetime: Boolean(usage.lifetime),
     freeUntilYear: downloads.freeUntilYear,
+    freeQuotaUntilYear: downloads.freeQuotaUntilYear,
     canSubscribe: free,
     sharedConnection: shared,
   }, 'DAILY_LIMIT_REACHED');
@@ -197,7 +203,7 @@ const releaseCharge = async (actorOrUser, op, documentIds = null) => {
 /**
  * Contrôle avant de délivrer un document : compte actif → gratuité → abonnement → quota.
  * L'existence et la visibilité du document sont vérifiées par documentService.assertDocumentAccess.
- * @returns {{ tier: 'free'|'recent', access: object, op: string|null, charged: string[] }}
+ * @returns {{ tier: 'free'|'recent', access: object, op: string|null, charged: string[], plan: string }}
  */
 const authorizeDownload = async (actorOrUser, document, { access = null, now = new Date() } = {}) => {
   if (!document) {
@@ -207,13 +213,14 @@ const authorizeDownload = async (actorOrUser, document, { access = null, now = n
   const documentAccess = access || await resolveAccessForDocument(document);
 
   if (documentAccess.tier === 'free' || actor.plan === 'unlimited') {
-    return { tier: documentAccess.tier, access: documentAccess, op: null, charged: [] };
+    return { tier: documentAccess.tier, access: documentAccess, op: null, charged: [], plan: actor.plan };
   }
-  if (requiresSubscription(document) && actor.plan !== 'subscriber') {
+  // Sans abonnement : seuls les sujets 2010-2020 d'année connue passent, sur le quota gratuit.
+  if (actor.plan !== 'subscriber' && (!documentAccess.freeQuotaEligible || requiresSubscription(document))) {
     throw subscriptionRequiredError();
   }
   const { op, charged } = await chargeRecent(actor, [document._id], { now });
-  return { tier: 'recent', access: documentAccess, op, charged };
+  return { tier: 'recent', access: documentAccess, op, charged, plan: actor.plan };
 };
 
 /** Compatibilité : usage du quota d'un compte (tableau de bord, anciens appels). */
@@ -223,7 +230,18 @@ const getDailyUsage = async (userOrId) => {
   return { ...status, resetsAt: status.nextRenewalAt };
 };
 
-const logDownload = async (actorOrUser, document, req) => {
+/** Type d'accès journalisé : 'free' (<= 2009), 'free_quota', 'subscription' ou 'staff'. */
+const accessKindOf = (plan, tier) => {
+  if (tier === 'free') return 'free';
+  if (plan === 'unlimited') return 'staff';
+  return plan === 'subscriber' ? 'subscription' : 'free_quota';
+};
+
+/**
+ * `details` : { plan, access (objet de documentYear), charged } — type d'accès, année et organisme
+ * conservés pour le suivi administratif ; `charged` : ce téléchargement a consommé le quota.
+ */
+const logDownload = async (actorOrUser, document, req, { plan = null, access = null, charged = false } = {}) => {
   // Acteur complet, { user, visitorId } (lot préparé), ou compte seul (anciens appels).
   const actor = actorOrUser?.[ACTOR] || (actorOrUser && 'visitorId' in actorOrUser)
     ? actorOrUser
@@ -235,6 +253,10 @@ const logDownload = async (actorOrUser, document, req) => {
       user: actor.user?._id || null,
       visitor: actor.user ? null : actor.visitorId,
       document: document._id,
+      access: access ? accessKindOf(plan || actor.plan, access.tier) : null,
+      charged: Boolean(charged),
+      year: access?.year ?? null,
+      organisme: access?.organismeId || null,
       day: dayKey(),
       ip: req?.ip,
       userAgent: req?.get?.('user-agent')?.slice(0, 200),

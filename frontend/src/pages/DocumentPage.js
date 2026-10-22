@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Clock, Download, FileCheck, FileText, Files, Gift, Search } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, Download, FileCheck, FileText, Files, Gift, Lock, Search } from 'lucide-react';
 import { Breadcrumbs, Button, Card, Container, EmptyState, ErrorNote, InfoRow, Skeleton } from '../components/ui';
 import AccessModal from '../components/access/AccessModal';
 import AuthContext from '../context/AuthContext';
@@ -18,8 +18,8 @@ const ACCESS_CODES = ['AUTH_REQUIRED', 'SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REA
 
 /**
  * Téléchargement contrôlé : le bouton est un guide, le serveur reste seul juge.
- * Sujets de 2010 et avant : gratuits, sans compte. Sujets récents : quota glissant (visiteur,
- * compte ou abonné). En cas de refus, la fenêtre d'accès explique la situation et la suite.
+ * Sujets de 2009 et avant : gratuits, sans compte. 2010-2020 : quota gratuit de 3 au total sans
+ * abonnement. 2021 et après : abonnement (quota glissant des abonnés). En cas de refus, la fenêtre d'accès explique la situation et la suite.
  */
 const useProtectedDownload = (next) => {
   const { user } = useContext(AuthContext);
@@ -71,11 +71,13 @@ const useProtectedDownload = (next) => {
   };
 };
 
-/** État d'accès d'un document pour l'affichage : gratuit, récent disponible, ou quota épuisé. */
+/** État d'accès d'un document pour l'affichage : gratuit, réservé aux abonnés, quota disponible ou épuisé. */
 const accessState = (document, quota) => {
   const access = document?.access;
   if (access?.tier === 'free') return { kind: 'free', access };
   if (quota?.unlimited) return { kind: 'recent', access, remaining: null };
+  // Sans abonnement : seuls les sujets 2010-2020 (année connue) entrent dans le quota gratuit.
+  if (quota?.plan === 'free' && !access?.freeQuotaEligible) return { kind: 'subscription', access, quota };
   const alreadyGranted = quota?.documentIds?.includes?.(document?._id);
   if (quota && quota.remaining === 0 && !alreadyGranted) return { kind: 'exhausted', access, quota };
   return { kind: 'recent', access, remaining: quota?.remaining, quota };
@@ -231,7 +233,10 @@ const DocumentPage = () => {
               </div>
               <div className="min-w-0">
                 <p className="font-semibold text-ink">
-                  {state.kind === 'free' ? 'Sujet gratuit' : state.kind === 'exhausted' ? 'Quota de sujets récents atteint' : 'Prêt à télécharger'}
+                  {state.kind === 'free' ? 'Sujet gratuit'
+                    : state.kind === 'subscription' ? 'Réservé aux abonnés'
+                      : state.kind === 'exhausted' ? (state.quota.plan === 'free' ? 'Téléchargements gratuits utilisés' : 'Quota de sujets récents atteint')
+                        : 'Prêt à télécharger'}
                 </p>
                 <p className="mt-0.5 text-sm text-ink-soft">
                   {[format, formatFileSize(document.fileSize)].filter(Boolean).join(' · ')}
@@ -239,23 +244,35 @@ const DocumentPage = () => {
               </div>
             </div>
 
-            {/* Règle d'accès du document : gratuit (ancien sujet) ou récent (quota). */}
+            {/* Règle d'accès du document : gratuit (ancien sujet), quota gratuit, abonnement. */}
             <p className={`mt-4 flex items-start gap-2 rounded-xl px-3 py-2.5 text-sm ${state.kind === 'free' ? 'bg-gold-wash text-gold-ink' : 'bg-paper-dim text-ink-soft'}`}>
-              {state.kind === 'free' ? <Gift size={15} className="mt-0.5 shrink-0" aria-hidden /> : <Clock size={15} className="mt-0.5 shrink-0" aria-hidden />}
+              {state.kind === 'free' ? <Gift size={15} className="mt-0.5 shrink-0" aria-hidden />
+                : state.kind === 'subscription' ? <Lock size={15} className="mt-0.5 shrink-0" aria-hidden />
+                  : <Clock size={15} className="mt-0.5 shrink-0" aria-hidden />}
               <span>
                 {state.kind === 'free'
                   ? `Sujet de ${state.access.year} : téléchargement gratuit et illimité, sans compte.`
-                  : state.kind === 'exhausted'
-                    ? `Vous avez utilisé vos téléchargements de sujets récents.${formatRenewal(state.quota.nextRenewalAt) ? ` Prochain téléchargement possible à partir du ${formatRenewal(state.quota.nextRenewalAt)}.` : ''} Les sujets de ${state.quota.freeUntilYear} et avant restent gratuits.`
-                    : state.remaining === null || state.remaining === undefined
-                      ? (state.access?.yearKnown === false ? 'Sujet récent (année non précisée).' : 'Sujet récent.')
-                      : `Sujet récent : ${state.remaining} téléchargement${state.remaining > 1 ? 's' : ''} de sujet récent restant${state.remaining > 1 ? 's' : ''} sur ${state.quota.windowHours} heures${state.quota.plan === 'subscriber' ? '.' : ' (gratuit, sans abonnement).'}`}
+                  : state.kind === 'subscription'
+                    ? `Ce sujet est réservé aux utilisateurs disposant d’un abonnement valide.${state.access?.yearKnown === false ? ' (Année non précisée.)' : ''}`
+                    : state.kind === 'exhausted'
+                      ? (state.quota.plan === 'free'
+                        ? `Vous avez utilisé vos ${state.quota.limit} téléchargements gratuits. Souscrivez à un abonnement pour continuer à télécharger des sujets. Les sujets de ${state.quota.freeUntilYear} et avant restent gratuits.`
+                        : `Vous avez utilisé vos téléchargements de sujets récents.${formatRenewal(state.quota.nextRenewalAt) ? ` Prochain téléchargement possible à partir du ${formatRenewal(state.quota.nextRenewalAt)}.` : ''} Les sujets de ${state.quota.freeUntilYear} et avant restent gratuits.`)
+                      : state.remaining === null || state.remaining === undefined
+                        ? (state.access?.yearKnown === false ? 'Sujet récent (année non précisée).' : 'Sujet récent.')
+                        : state.quota.plan === 'free'
+                          ? `Ce sujet est éligible à votre quota gratuit. Il vous reste ${state.remaining} téléchargement${state.remaining > 1 ? 's' : ''} gratuit${state.remaining > 1 ? 's' : ''}.`
+                          : `Sujet récent : ${state.remaining} téléchargement${state.remaining > 1 ? 's' : ''} de sujet récent restant${state.remaining > 1 ? 's' : ''} sur ${state.quota.windowHours} heures.`}
               </span>
             </p>
             <div className="mt-5 grid gap-2">
-              <Button size="lg" icon={Download} loading={access.busyId === document._id} onClick={() => access.download(document._id)}>
-                {state.kind === 'free' ? `Télécharger ${noun} gratuitement` : `Télécharger ${noun}`}
-              </Button>
+              {state.kind === 'subscription' || (state.kind === 'exhausted' && state.quota.plan === 'free') ? (
+                <Button size="lg" icon={Lock} to={`/abonnement?next=${encodeURIComponent(location.pathname)}`}>Prendre mon abonnement</Button>
+              ) : (
+                <Button size="lg" icon={Download} loading={access.busyId === document._id} onClick={() => access.download(document._id)}>
+                  {state.kind === 'free' ? `Télécharger ${noun} gratuitement` : `Télécharger ${noun}`}
+                </Button>
+              )}
               {correction ? (
                 <Button size="lg" variant="secondary" icon={FileCheck} loading={access.busyId === correction._id} onClick={() => access.download(correction._id)}>
                   Télécharger le corrigé
@@ -267,15 +284,15 @@ const DocumentPage = () => {
             {state.kind !== 'free' && access.quota && !access.quota.unlimited ? (
               <div className="mt-4">
                 <div className="flex items-baseline justify-between text-xs text-ink-muted">
-                  <span>{`Sujets récents (${access.quota.windowHours} h glissantes)`}</span>
+                  <span>{access.quota.plan === 'free' ? `Téléchargements gratuits (sujets ${access.quota.freeUntilYear + 1}-${access.quota.freeQuotaUntilYear})` : `Sujets récents (${access.quota.windowHours} h glissantes)`}</span>
                   <span className="tabular font-semibold text-ink-soft">{`${access.quota.used} / ${access.quota.limit}`}</span>
                 </div>
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-paper-dim" role="progressbar" aria-label="Sujets récents téléchargés sur la période" aria-valuenow={access.quota.used} aria-valuemin={0} aria-valuemax={access.quota.limit}>
+                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-paper-dim" role="progressbar" aria-label={access.quota.plan === 'free' ? 'Téléchargements gratuits utilisés' : 'Sujets récents téléchargés sur la période'} aria-valuenow={access.quota.used} aria-valuemin={0} aria-valuemax={access.quota.limit}>
                   <div className="h-full origin-left rounded-full bg-ink transition-transform duration-700 ease-emphasized" style={{ transform: `scaleX(${Math.min(1, access.quota.used / (access.quota.limit || 1))})` }} />
                 </div>
                 {access.quota.plan !== 'subscriber' ? (
                   <Link to={`/abonnement?next=${encodeURIComponent(location.pathname)}`} className="mt-2 inline-block text-xs font-semibold text-burgundy hover:underline">
-                    {`Abonnés : jusqu’à ${access.quota.limits?.subscriber || 20} sujets récents par ${access.quota.windowHours} h`}
+                    {`Abonnés : tous les sujets, jusqu’à ${access.quota.limits?.subscriber || 20} par ${access.quota.windowHours} h`}
                   </Link>
                 ) : null}
               </div>

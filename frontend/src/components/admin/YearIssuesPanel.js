@@ -20,7 +20,7 @@ const YearIssuesPanel = () => {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">Gratuité des anciens sujets</p>
           <h2 className="mt-1 text-2xl font-black text-slate-800">Années à vérifier</h2>
           <p className="mt-1 max-w-2xl text-sm text-slate-500">
-            {`Les sujets de ${data?.freeUntilYear || 2010} et avant sont gratuits. Sans année lisible, un sujet n’est jamais gratuit : rattachez-le à une année (onglet « Documents existants ») ou corrigez le nom du niveau d’année.`}
+            {`Les sujets de ${data?.freeUntilYear || 2009} et avant sont gratuits, ceux de ${(data?.freeUntilYear || 2009) + 1} à ${data?.freeQuotaUntilYear || 2020} entrent dans le quota gratuit. Sans année lisible, un sujet n’est jamais gratuit ni éligible au quota : rattachez-le à une année (onglet « Documents existants ») ou corrigez le nom du niveau d’année.`}
           </p>
         </div>
         <button type="button" onClick={issues.reload} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-bold text-slate-600">

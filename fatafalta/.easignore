@@ -34,3 +34,14 @@ Thumbs.db
 /rendu_sans_filigrane/
 /backend/
 /frontend/
+
+# Outils de développement et assistants : inutiles au build de l'APK
+graphify-out/
+.claude/
+CLAUDE.md
+AGENTS.md
+BUILD_ANDROID.md
+/docs/
+/INFAS/
+/INP-HB/
+/sujets/
