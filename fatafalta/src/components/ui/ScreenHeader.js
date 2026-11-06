@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ArrowLeft } from 'lucide-react-native';
 import Text from './Text';
 import theme from '../../theme/tokens';
+import { NightBackground } from '../../prep/ui/primitives';
 
 const { brand } = theme;
 
@@ -14,11 +15,12 @@ const { brand } = theme;
  * - `title` dit ce que l'écran propose ; il est animé lorsqu'il change
  *   (navigation interne du catalogue) pour signaler le changement de niveau.
  */
-const ScreenHeader = ({ eyebrow, title, subtitle, onBack, right, titleLines = 2, children }) => {
+const ScreenHeader = ({ eyebrow, title, subtitle, onBack, right, titleLines = 2, children, sheet = true }) => {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={styles.container}>
+      <NightBackground />
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <View style={[styles.inner, { paddingTop: insets.top + theme.spacing.xs }]}>
         <View style={styles.topBar}>
@@ -38,13 +40,20 @@ const ScreenHeader = ({ eyebrow, title, subtitle, onBack, right, titleLines = 2,
 
         <Animated.View key={title} entering={FadeIn.duration(200)} style={styles.copy}>
           {eyebrow ? (
-            <Text variant="overline" style={styles.eyebrow} numberOfLines={1}>{eyebrow}</Text>
+            <Text variant="caption" style={styles.eyebrow} numberOfLines={1}>{eyebrow}</Text>
           ) : null}
           <Text variant="h1" style={styles.title} numberOfLines={titleLines} accessibilityRole="header">{title}</Text>
           {subtitle ? <Text variant="body" style={styles.subtitle}>{subtitle}</Text> : null}
         </Animated.View>
         {children}
       </View>
+      {/* Bord de la « pile de copies » : une feuille fantôme dépasse, la feuille papier commence ici. */}
+      {sheet ? (
+        <View style={styles.sheetEdge} pointerEvents="none">
+          <View style={styles.ghost} />
+          <View style={styles.cap} />
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -63,11 +72,37 @@ export const HeaderIconButton = ({ icon: Icon, label, onPress }) => (
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: brand.ink,
+    backgroundColor: brand.inkDeep,
+    overflow: 'hidden',
   },
   inner: {
     paddingHorizontal: theme.layout.gutter,
-    paddingBottom: theme.spacing.xl,
+    paddingBottom: theme.spacing.base,
+  },
+  sheetEdge: {
+    height: 34,
+  },
+  ghost: {
+    position: 'absolute',
+    top: 4,
+    left: 16,
+    right: 16,
+    height: 40,
+    borderTopLeftRadius: 26,
+    borderTopRightRadius: 26,
+    backgroundColor: 'rgba(244,240,230,0.34)',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(255,255,255,0.25)',
+  },
+  cap: {
+    position: 'absolute',
+    top: 14,
+    left: 0,
+    right: 0,
+    bottom: -1,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    backgroundColor: brand.paper,
   },
   topBar: {
     height: theme.layout.touch,
@@ -76,13 +111,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   iconButton: {
-    width: 40,
-    height: 40,
+    width: 44,
+    height: 44,
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: -4,
     borderRadius: theme.radius.full,
     backgroundColor: 'rgba(255,255,255,0.08)',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(255,255,255,0.16)',
   },
   iconButtonPressed: {
     backgroundColor: 'rgba(255,255,255,0.18)',
@@ -95,15 +132,16 @@ const styles = StyleSheet.create({
   },
   eyebrow: {
     color: brand.onInkAccent,
-    letterSpacing: 1,
+    fontFamily: theme.fontFamily.semiBold,
   },
   title: {
     marginTop: 6,
     color: brand.onInk,
-    fontFamily: theme.fontFamily.bold,
-    fontSize: 26,
-    lineHeight: 32,
-    letterSpacing: -0.6,
+    fontFamily: theme.fontFamily.serif,
+    fontVariant: ['lining-nums'],
+    fontSize: 28,
+    lineHeight: 34,
+    letterSpacing: -0.3,
   },
   subtitle: {
     maxWidth: 340,

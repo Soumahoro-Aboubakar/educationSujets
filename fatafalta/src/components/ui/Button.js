@@ -25,8 +25,9 @@ const Button = ({
   const getBackgroundColor = () => {
     if (disabled) return theme.colors.surfaceRaised;
     switch (variant) {
-      case 'primary': return theme.colors.primary;
-      case 'secondary': return theme.colors.surface;
+      // Action principale bordeaux (références visuelles validées) ; l'encre reste la couleur du texte.
+      case 'primary': return theme.brand.burgundy;
+      case 'secondary': return theme.brand.sheet;
       case 'ghost': return 'transparent';
       case 'accent': return theme.colors.accent; // for CTAs
       default: return theme.colors.primary;
@@ -41,7 +42,7 @@ const Button = ({
         return theme.colors.textInverse;
       case 'secondary':
       case 'ghost':
-        return theme.colors.primary;
+        return theme.brand.burgundy;
       default:
         return theme.colors.textInverse;
     }
@@ -50,7 +51,7 @@ const Button = ({
   const getBorderColor = () => {
     if (disabled) return theme.colors.border;
     switch (variant) {
-      case 'secondary': return theme.colors.border;
+      case 'secondary': return 'rgba(108,40,56,0.45)';
       default: return 'transparent';
     }
   };
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: theme.spacing.md,
     paddingHorizontal: theme.spacing.xl,
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
     alignItems: 'center',
     justifyContent: 'center',
   },

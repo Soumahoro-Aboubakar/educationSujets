@@ -76,7 +76,7 @@ const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
 
     return (
       <>
-        <Text variant="overline" style={styles.count}>
+        <Text variant="h3" style={styles.count}>
           {types.length} parcours
         </Text>
         {types.map((item, index) => (
@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
   },
   count: {
     paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.lg,
-    paddingBottom: theme.spacing.xs,
-    color: brand.inkSoft,
+    paddingTop: theme.spacing.sm,
+    paddingBottom: theme.spacing.md,
+    color: brand.ink,
   },
 });
 

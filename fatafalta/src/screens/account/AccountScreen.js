@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import {
   CreditCard,
   Download,
@@ -15,6 +15,7 @@ import ScreenHeader from '../../components/ui/ScreenHeader';
 import ActionButton from '../../components/ui/ActionButton';
 import StatusPill from '../../components/ui/StatusPill';
 import { AccountScroll, Row, Section } from '../../components/account/AccountLayout';
+import MeCard from '../../prep/components/MeCard';
 import { SkeletonRows } from '../../components/ui/Skeleton';
 import AuthContext from '../../context/AuthContext';
 import { useEntitlements, useWallet } from '../../hooks/useAccount';
@@ -25,7 +26,15 @@ const { brand } = theme;
 
 const GuestAccount = ({ navigation }) => (
   <View style={styles.container}>
-    <ScreenHeader eyebrow="Mon espace" title="Ton compte Fatafalta" />
+    <ScreenHeader eyebrow="Moi" title="Ton espace Fatafalta" />
+    <ScrollView contentContainerStyle={styles.guestScroll} showsVerticalScrollIndicator={false}>
+    <MeCard navigation={navigation} />
+    <View style={styles.guestRows}>
+      <Section>
+        <Row icon={Download} label="Téléchargements" hint="Sujets PDF enregistrés sur cet appareil" onPress={() => navigation.navigate('Downloads')} />
+        <Row icon={Settings} label="Paramètres" hint="Objectif quotidien, texte, documents PDF" onPress={() => navigation.navigate('Settings')} isLast />
+      </Section>
+    </View>
     <View style={styles.guest}>
       <View style={styles.guestIcon}>
         <UserRound size={24} color={brand.ink} strokeWidth={1.7} />
@@ -39,6 +48,7 @@ const GuestAccount = ({ navigation }) => (
         <ActionButton title="Se connecter" variant="secondary" onPress={() => navigation.navigate('Login')} />
       </View>
     </View>
+    </ScrollView>
   </View>
 );
 
@@ -73,7 +83,7 @@ const AccountScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader eyebrow="Mon espace" title={user?.name || 'Mon compte'} subtitle={user?.email} titleLines={1} />
+      <ScreenHeader eyebrow="Moi" title={user?.name || 'Mon compte'} subtitle={user?.email} titleLines={1} />
       <AccountScroll
         refreshing={refreshing}
         onRefresh={() => {
@@ -81,6 +91,7 @@ const AccountScreen = ({ navigation }) => {
           wallet.refetch();
         }}
       >
+        <MeCard navigation={navigation} email={user?.email} />
         {!data && entitlements.isLoading ? <SkeletonRows count={4} /> : (
           <>
             <Section>
@@ -121,6 +132,7 @@ const AccountScreen = ({ navigation }) => {
               {isAdmin() ? (
                 <Row icon={ShieldCheck} label="Administration" onPress={() => navigation.navigate('AdminTab')} />
               ) : null}
+              <Row icon={Download} label="Téléchargements" onPress={() => navigation.navigate('Downloads')} />
               <Row icon={Settings} label="Paramètres" onPress={() => navigation.navigate('Settings')} />
               <Row icon={LogOut} label="Se déconnecter" onPress={confirmLogout} danger isLast />
             </Section>
@@ -136,10 +148,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: brand.paper,
   },
+  guestRows: {
+    marginTop: theme.spacing.sm,
+  },
+  guestScroll: {
+    flexGrow: 1,
+    paddingBottom: theme.spacing['2xl'],
+  },
   guest: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: theme.spacing['2xl'],
     paddingHorizontal: theme.spacing['2xl'],
     paddingBottom: theme.spacing['3xl'],
   },

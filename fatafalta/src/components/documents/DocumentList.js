@@ -110,14 +110,16 @@ const styles = StyleSheet.create({
     opacity: 0.55,
   },
   separator: {
-    marginLeft: 54,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: brand.line,
+    height: 10,
   },
   skeletonRow: {
     flexDirection: 'row',
     gap: 14,
-    paddingVertical: theme.spacing.base,
+    padding: 14,
+    borderRadius: 18,
+    backgroundColor: brand.sheet,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: brand.line,
   },
   skeletonBody: {
     flex: 1,

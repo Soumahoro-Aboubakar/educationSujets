@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AppState, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
@@ -12,12 +12,52 @@ import { Inter_500Medium } from '@expo-google-fonts/inter/500Medium';
 import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
 import { Inter_700Bold } from '@expo-google-fonts/inter/700Bold';
 import { Inter_800ExtraBold } from '@expo-google-fonts/inter/800ExtraBold';
+// Serif d'apparat (titres, chiffres héros) : Playfair Display, 3 graisses seulement.
+import { PlayfairDisplay_600SemiBold } from '@expo-google-fonts/playfair-display/600SemiBold';
+import { PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display/700Bold';
+import { PlayfairDisplay_700Bold_Italic } from '@expo-google-fonts/playfair-display/700Bold_Italic';
 import * as SplashScreen from 'expo-splash-screen';
 import RootNavigator from './src/navigation/RootNavigator';
 import BrandIntro from './src/components/brand/BrandIntro';
-import { AuthProvider } from './src/context/AuthContext';
+import AuthContext, { AuthProvider } from './src/context/AuthContext';
 import { PreferencesProvider } from './src/context/PreferencesContext';
 import useDownloadStore from './src/store/useDownloadStore';
+import usePrep from './src/prep/store';
+import prepApi, { setPrepToken } from './src/prep/api';
+import { useEntitlements } from './src/hooks/useAccount';
+
+/**
+ * Pont entre le compte et la préparation : statut d'abonné (même abonnement, § 24) et
+ * rattachement de l'identité appareil au compte à la connexion (§ 25.5).
+ */
+const PrepBridge = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+  const entitlements = useEntitlements();
+  const setAbonneLocal = usePrep((s) => s.setAbonneLocal);
+  const token = usePrep((s) => s.token);
+  const attached = useRef(false);
+  useEffect(() => {
+    setAbonneLocal(isAuthenticated && entitlements.data?.subscription?.status === 'ACTIVE');
+  }, [isAuthenticated, entitlements.data?.subscription?.status, setAbonneLocal]);
+  useEffect(() => {
+    if (!isAuthenticated) { attached.current = false; return; }
+    if (!token || attached.current) return;
+    attached.current = true;
+    prepApi.attach().then((out) => {
+      if (!out?.token) return;
+      setPrepToken(out.token);
+      usePrep.setState({ token: out.token, identite: out.identite });
+      usePrep.getState().persist();
+      usePrep.getState().flush();
+    }).catch(() => { attached.current = false; });
+  }, [isAuthenticated, token]);
+  // Retour au premier plan : envoi des réponses faites hors ligne (§ 22).
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (state) => { if (state === 'active') usePrep.getState().flush(); });
+    return () => sub.remove();
+  }, []);
+  return null;
+};
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -64,6 +104,9 @@ export default function App() {
     'Inter-SemiBold': Inter_600SemiBold,
     'Inter-Bold': Inter_700Bold,
     'Inter-ExtraBold': Inter_800ExtraBold,
+    'Playfair-SemiBold': PlayfairDisplay_600SemiBold,
+    'Playfair-Bold': PlayfairDisplay_700Bold,
+    'Playfair-BoldItalic': PlayfairDisplay_700Bold_Italic,
   });
 
   useEffect(() => {
@@ -71,6 +114,8 @@ export default function App() {
       try {
         // Hydrate offline downloads state
         await hydrateStore();
+        // Copie locale de la préparation (identité, progression, file hors ligne).
+        await usePrep.getState().hydrate();
       } catch (e) {
         console.warn(e);
       } finally {
@@ -94,6 +139,7 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <PreferencesProvider>
+            <PrepBridge />
             <NavigationContainer linking={linking}>
               <RootNavigator />
             </NavigationContainer>

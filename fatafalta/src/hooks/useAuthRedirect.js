@@ -21,9 +21,11 @@ export const useAuthRedirect = (navigation, route) => {
     }
 
     navigation.reset({
-      index: 0,
-      // MainTabs (tiroir) → AppTabs (onglets) → onglet cible.
-      routes: [{ name: 'MainTabs', params: { screen: 'AppTabs', params: { screen: isStaff(user) ? 'AdminTab' : 'AccountTab' } } }],
+      index: isStaff(user) ? 1 : 0,
+      // Onglets (plus de tiroir, § 5) ; l'équipe arrive sur l'administration, empilée sur « Moi ».
+      routes: isStaff(user)
+        ? [{ name: 'MainTabs', params: { screen: 'AccountTab' } }, { name: 'AdminTab' }]
+        : [{ name: 'MainTabs', params: { screen: 'AccountTab' } }],
     });
   }, [navigation, route?.params?.returnTo]);
 };

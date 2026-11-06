@@ -46,18 +46,19 @@ const SearchField = ({ value, onChangeText, placeholder = 'Rechercher', busy = f
 
 const styles = StyleSheet.create({
   container: {
-    height: 46,
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    paddingHorizontal: 14,
-    backgroundColor: theme.colors.surface,
+    paddingHorizontal: 16,
+    backgroundColor: brand.sheet,
     borderWidth: 1,
     borderColor: brand.line,
-    borderRadius: theme.radius.md,
+    borderRadius: 14,
+    ...theme.shadows.sm,
   },
   focused: {
-    borderColor: brand.ink,
+    borderColor: brand.burgundy,
   },
   input: {
     flex: 1,

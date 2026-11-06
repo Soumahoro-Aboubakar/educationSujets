@@ -74,7 +74,7 @@ const OrientationScreen = ({ navigation }) => {
 
         <View style={styles.shortcuts}>
           <Shortcut icon={Download} label="Téléchargements" onPress={openDownloads} />
-          <Shortcut icon={UserRound} label="Mon espace" onPress={() => navigation.navigate('MainTabs', { screen: 'AppTabs', params: { screen: 'AccountTab' } })} />
+          <Shortcut icon={UserRound} label="Mon espace" onPress={() => navigation.navigate('MainTabs', { screen: 'AccountTab' })} />
         </View>
       </Animated.View>
     </View>

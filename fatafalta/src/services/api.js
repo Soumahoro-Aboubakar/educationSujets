@@ -55,7 +55,10 @@ api.interceptors.response.use(
       error.message ||
       'Une erreur est survenue';
 
-    console.warn('[API Error]', error.config?.url, message);
+    // Statuts attendus par l'appelant (ex. service de préparation pas encore déployé) : pas de bruit.
+    if (!error.config?.quietStatuses?.includes(error.response?.status)) {
+      console.warn('[API Error]', error.config?.url, message);
+    }
     return Promise.reject(error);
   }
 );

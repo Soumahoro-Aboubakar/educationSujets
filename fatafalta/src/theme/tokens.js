@@ -68,20 +68,41 @@ export const fontFamily = {
   semiBold: 'Inter-SemiBold',
   bold: 'Inter-Bold',
   extraBold: 'Inter-ExtraBold',
+  // Serif d'apparat : titres d'écran, chiffres héros, mise en valeur.
+  serif: 'Playfair-Bold',
+  serifSemiBold: 'Playfair-SemiBold',
+  serifItalic: 'Playfair-BoldItalic',
 };
 
 export const typography = {
+  // Titres en Playfair Display : la voix « copie d'excellence » de la marque.
+  display: {
+    fontFamily: fontFamily.serif,
+    fontVariant: ['lining-nums'],
+    fontSize: 40,
+    lineHeight: 46,
+    letterSpacing: -0.6,
+  },
+  title: {
+    fontFamily: fontFamily.serif,
+    fontVariant: ['lining-nums'],
+    fontSize: 32,
+    lineHeight: 38,
+    letterSpacing: -0.4,
+  },
   h1: {
-    fontFamily: fontFamily.extraBold,
+    fontFamily: fontFamily.serif,
+    fontVariant: ['lining-nums'],
     fontSize: 28,
     lineHeight: 34,
-    letterSpacing: -0.5,
+    letterSpacing: -0.3,
   },
   h2: {
-    fontFamily: fontFamily.bold,
+    fontFamily: fontFamily.serif,
+    fontVariant: ['lining-nums'],
     fontSize: 22,
     lineHeight: 28,
-    letterSpacing: -0.3,
+    letterSpacing: -0.2,
   },
   h3: {
     fontFamily: fontFamily.semiBold,
@@ -155,6 +176,9 @@ export const shadows = {
   xl: createShadow(12, 24, 0.12, 8),
   card: createShadow(2, 12, 0.06, 2, brand.ink),
   cardHover: createShadow(8, 24, 0.12, 6, brand.ink),
+  // Cartes ivoire des références : ombre basse, large et très diffuse.
+  soft: createShadow(8, 22, 0.07, 3, brand.ink),
+  button: createShadow(8, 16, 0.28, 5, brand.burgundyDeep),
 };
 
 // ── Transitions ─────────────────────────────────

@@ -140,7 +140,7 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
   const count = total ?? documents.length;
 
   const listHeader = !isInitial && documents.length ? (
-    <Text variant="overline" style={styles.count}>
+    <Text variant="h3" style={styles.count}>
       {searching
         ? `${count} résultat${count > 1 ? 's' : ''}`
         : `${count} sujet${count > 1 ? 's' : ''}`}
@@ -219,9 +219,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   count: {
-    paddingTop: theme.spacing.lg,
-    paddingBottom: theme.spacing.xs,
-    color: brand.inkSoft,
+    paddingHorizontal: 2,
+    paddingTop: theme.spacing.sm,
+    paddingBottom: theme.spacing.md,
+    color: brand.ink,
   },
 });
 

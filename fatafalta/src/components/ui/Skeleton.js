@@ -57,6 +57,21 @@ const Skeleton = ({
  */
 const ROW_WIDTHS = ['72%', '58%', '80%', '64%', '52%', '70%'];
 
+/** Grille de cartes en chargement (organismes). */
+export const SkeletonGrid = ({ count = 6, columns = 2 }) => (
+  <View accessibilityLabel="Chargement" accessible style={styles.grid}>
+    {Array.from({ length: count }, (_, index) => (
+      <View key={index} style={[styles.gridCell, { width: `${100 / columns}%` }]}>
+        <View style={styles.gridCard}>
+          <Skeleton width={52} height={52} borderRadius={16} style={styles.brandTone} />
+          <Skeleton width="78%" height={14} borderRadius={4} style={[styles.brandTone, { marginTop: 16 }]} />
+          <Skeleton width="52%" height={11} borderRadius={4} style={[styles.brandTone, { marginTop: 8 }]} />
+        </View>
+      </View>
+    ))}
+  </View>
+);
+
 export const SkeletonRows = ({ count = 5, withMeta = true }) => (
   <View accessibilityLabel="Chargement" accessible>
     {ROW_WIDTHS.slice(0, count).map((width, index) => (
@@ -79,18 +94,39 @@ const styles = StyleSheet.create({
     backgroundColor: theme.brand.skeleton,
   },
   row: {
-    paddingLeft: theme.layout.gutter,
+    paddingHorizontal: theme.layout.gutter,
+    paddingBottom: 10,
   },
   rowContent: {
-    minHeight: theme.layout.rowMinHeight,
+    minHeight: 72,
     justifyContent: 'center',
     paddingVertical: 14,
-    paddingRight: theme.layout.gutter,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: theme.brand.line,
+    paddingHorizontal: 16,
+    borderRadius: 18,
+    backgroundColor: theme.brand.sheet,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.brand.line,
   },
   meta: {
     marginTop: 8,
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: theme.layout.gutter - 6,
+    paddingTop: theme.spacing.base,
+  },
+  gridCell: {
+    padding: 6,
+  },
+  gridCard: {
+    height: 176,
+    alignItems: 'center',
+    paddingTop: 18,
+    borderRadius: 20,
+    backgroundColor: theme.brand.sheet,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.brand.line,
   },
 });
 

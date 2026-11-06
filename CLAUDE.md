@@ -18,6 +18,14 @@ réutiliser ces libellés plutôt que d'en créer des variantes), `relations-doc
 
 Ne jamais supprimer, modifier ou republier un sujet existant sans autorisation explicite.
 
+## Design UI/UX (OBLIGATOIRE)
+
+Toute tâche d'interface (app mobile `fatafalta/`, site `frontend/`) charge les skills globaux `impeccable`,
+`taste-skill` et ceux d'Emil Kowalski (`emil-design-eng` ; `animate-expo` et `mobile-native` pour l'app Expo),
+en plus de `ui-ux-pro-max` et `react-native-best-practices` (détail : `~/.claude/CLAUDE.md`).
+Référence prioritaire en cas de conflit : `docs/maquettes-ecrans-preparation.md` (direction artistique
+« La copie d'excellence ») et `docs/cahier-des-charges-mobile-preparation.md`.
+
 ## Sécurité
 
 Ne pas lire ni modifier `.env` ni `keys.text` (voir `README.md`, « Règlement de sécurité »).

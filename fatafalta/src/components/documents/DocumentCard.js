@@ -30,7 +30,8 @@ const DocumentCard = ({ document, onPress, isDownloading, downloadProgress, isDo
         style={({ pressed }) => [styles.card, pressed && styles.pressed]}
       >
         <View style={styles.tile}>
-          <FileText size={18} color={brand.ink} strokeWidth={1.6} />
+          {hasCorrection ? <View style={styles.tileFold} /> : null}
+          <FileText size={18} color={brand.burgundy} strokeWidth={1.7} />
           <Text style={styles.tileLabel}>{getExtensionLabel(document)}</Text>
           {isDownloaded ? (
             <View style={styles.tileBadge}>
@@ -40,7 +41,7 @@ const DocumentCard = ({ document, onPress, isDownloading, downloadProgress, isDo
         </View>
 
         <View style={styles.body}>
-          <Text variant="h3" style={styles.title} numberOfLines={2}>{title}</Text>
+          <Text variant="h3" style={styles.title} numberOfLines={3} textBreakStrategy="balanced">{title}</Text>
           {document.description ? (
             <Text variant="caption" style={styles.description} numberOfLines={1}>{document.description}</Text>
           ) : null}
@@ -60,7 +61,7 @@ const DocumentCard = ({ document, onPress, isDownloading, downloadProgress, isDo
           ) : null}
         </View>
 
-        <ChevronRight size={18} color={brand.inkMuted} strokeWidth={2} style={styles.chevron} />
+        <View style={styles.chevron}><ChevronRight size={16} color={brand.burgundy} strokeWidth={2.4} /></View>
       </Pressable>
     </Animated.View>
   );
@@ -75,26 +76,41 @@ export const Tag = ({ label, tone = 'neutral' }) => (
 const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: 14,
-    marginHorizontal: -10,
-    paddingHorizontal: 10,
-    paddingVertical: theme.spacing.base,
-    borderRadius: theme.radius.md,
+    padding: 14,
+    borderRadius: 18,
+    backgroundColor: brand.sheet,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: brand.line,
+    ...theme.shadows.soft,
   },
   pressed: {
-    backgroundColor: brand.pressed,
+    backgroundColor: brand.paperDim,
+    transform: [{ scale: 0.985 }],
+  },
+  tileFold: {
+    position: 'absolute',
+    top: -StyleSheet.hairlineWidth,
+    right: -StyleSheet.hairlineWidth,
+    width: 0,
+    height: 0,
+    borderTopWidth: 12,
+    borderLeftWidth: 12,
+    borderTopColor: brand.paper,
+    borderLeftColor: brand.goldLight,
+    borderTopRightRadius: 6,
   },
   tile: {
-    width: 40,
-    height: 50,
+    width: 44,
+    height: 56,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 3,
-    backgroundColor: theme.colors.surface,
+    backgroundColor: brand.paper,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: brand.lineStrong,
-    borderRadius: 6,
+    borderRadius: 8,
   },
   tileLabel: {
     color: brand.inkSoft,
@@ -151,12 +167,17 @@ const styles = StyleSheet.create({
     backgroundColor: brand.line,
   },
   chevron: {
-    marginTop: 2,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: brand.burgundyWash,
   },
   tag: {
-    paddingHorizontal: 7,
+    paddingHorizontal: 8,
     paddingVertical: 2,
-    borderRadius: 4,
+    borderRadius: 8,
     backgroundColor: brand.paperDim,
   },
   tagGold: {

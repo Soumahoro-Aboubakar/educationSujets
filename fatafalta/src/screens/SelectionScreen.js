@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { Building2, ClipboardList, FileText, SearchX } from 'lucide-react-native';
@@ -7,10 +7,10 @@ import { useFocusEffect } from '@react-navigation/native';
 import Text from '../components/ui/Text';
 import ScreenHeader from '../components/ui/ScreenHeader';
 import ListRow from '../components/ui/ListRow';
-import OrganismeLogo from '../components/catalog/OrganismeLogo';
+import OrganismCard from '../components/catalog/OrganismCard';
 import SearchField from '../components/ui/SearchField';
 import StateView from '../components/ui/StateView';
-import { SkeletonRows } from '../components/ui/Skeleton';
+import { SkeletonGrid, SkeletonRows } from '../components/ui/Skeleton';
 import { useOrientationOptions } from '../hooks/useOrientationOptions';
 import { fetchPublishedOrganismes } from '../services/catalog';
 import { usePreferences } from '../context/PreferencesContext';
@@ -66,6 +66,9 @@ const SelectionScreen = ({ navigation, route }) => {
     : route.name === 'TrainingSelection' ? 'training' : 'contest';
   const config = CONFIG[mode];
   const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
+  // Plusieurs organismes par rangée : 2 colonnes sur téléphone, 3 sur tablette.
+  const columns = width >= 700 ? 3 : 2;
   const { data, isLoading, isError, refetch } = useOrientationOptions();
   const { updatePreferences } = usePreferences();
   const [query, setQuery] = useState('');
@@ -182,7 +185,7 @@ const SelectionScreen = ({ navigation, route }) => {
   };
 
   const renderContent = () => {
-    if (loading) return <SkeletonRows count={6} />;
+    if (loading) return catalogMode ? <SkeletonGrid count={6} columns={columns} /> : <SkeletonRows count={6} />;
     if (error) {
       return (
         <StateView
@@ -196,30 +199,41 @@ const SelectionScreen = ({ navigation, route }) => {
 
     return (
       <FlatList
+        key={catalogMode ? `grid-${columns}` : 'list'}
         data={visible}
+        numColumns={catalogMode ? columns : 1}
         keyExtractor={(item) => item._id}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         contentContainerStyle={[
           styles.list,
+          catalogMode && styles.grid,
           mode === 'establishment' && styles.listWithFooter,
           !visible.length && styles.listEmpty,
         ]}
         ListHeaderComponent={visible.length ? (
-          <Text variant="overline" style={styles.count}>
-            {plural(visible.length, config.noun)}
-          </Text>
+          <View style={[styles.countRow, catalogMode && styles.countRowGrid]}>
+            <Text variant="h2" style={styles.countTitle}>{query ? 'Résultats' : `Tous les ${config.noun[1]}`}</Text>
+            <Text variant="caption" style={styles.countMeta}>{plural(visible.length, config.noun)}</Text>
+          </View>
         ) : null}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (catalogMode ? (
+          <View style={[styles.cell, { width: `${100 / columns}%` }]}>
+            <OrganismCard
+              organisme={item}
+              meta={item.subjectCount ? plural(item.subjectCount, ['sujet', 'sujets']) : 'Sujets publiés'}
+              disabled={saving}
+              onPress={() => select(item)}
+            />
+          </View>
+        ) : (
           <ListRow
             title={item.name || item.nom}
             meta={describe(item)}
-            leading={catalogMode ? <OrganismeLogo organisme={item} /> : undefined}
             disabled={saving}
-            isLast={index === visible.length - 1}
             onPress={() => select(item)}
           />
-        )}
+        ))}
         ListEmptyComponent={query ? (
           <StateView
             icon={SearchX}
@@ -278,13 +292,39 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.base,
+    paddingTop: 2,
+    paddingBottom: theme.spacing.md,
   },
   body: {
     flex: 1,
   },
   list: {
     paddingBottom: theme.spacing['2xl'],
+  },
+  grid: {
+    paddingHorizontal: theme.layout.gutter - 6,
+  },
+  cell: {
+    padding: 6,
+  },
+  countRow: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    gap: theme.spacing.md,
+    paddingHorizontal: theme.layout.gutter,
+    paddingTop: theme.spacing.sm,
+    paddingBottom: theme.spacing.md,
+  },
+  countRowGrid: {
+    paddingHorizontal: 6,
+  },
+  countTitle: {
+    color: brand.ink,
+    flexShrink: 1,
+  },
+  countMeta: {
+    color: brand.inkSoft,
   },
   listWithFooter: {
     paddingBottom: 96,

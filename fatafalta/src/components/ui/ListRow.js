@@ -7,51 +7,63 @@ import theme from '../../theme/tokens';
 const { brand } = theme;
 
 /**
- * Ligne de navigation hiérarchique (organisme, parcours, niveau, matière).
- * Le chevron signale « entrer dans » ; le séparateur est inséré à gauche
- * pour que la surface d'appui couvre toute la largeur.
+ * Ligne de navigation hiérarchique (organisme, parcours, niveau, matière) : chaque élément est
+ * une carte encadrée (« copie » distincte), le chevron bordeaux signale « entrer dans ».
+ * Les intitulés longs passent sur 3 lignes avec césure équilibrée plutôt que d'être tronqués.
  */
-const ListRow = ({ title, meta, onPress, disabled, leading, trailing, isLast, accessibilityLabel }) => (
-  <Pressable
-    accessibilityRole="button"
-    accessibilityLabel={accessibilityLabel || title}
-    disabled={disabled}
-    onPress={onPress}
-    android_ripple={{ color: brand.pressed }}
-    style={({ pressed }) => [styles.row, pressed && styles.pressed]}
-  >
-    <View style={[styles.inner, isLast && styles.innerLast]}>
+const ListRow = ({ title, meta, onPress, disabled, leading, trailing, accessibilityLabel }) => (
+  <View style={styles.row}>
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel || [title, meta].filter(Boolean).join(', ')}
+      disabled={disabled}
+      onPress={onPress}
+      android_ripple={{ color: brand.pressed, borderless: false }}
+      style={({ pressed }) => [styles.card, pressed && styles.pressed]}
+    >
       {leading || null}
       <View style={styles.content}>
-        <Text variant="h3" style={styles.title} numberOfLines={2}>{title}</Text>
-        {meta ? <Text variant="caption" style={styles.meta} numberOfLines={1}>{meta}</Text> : null}
+        <Text variant="h3" style={styles.title} numberOfLines={3} textBreakStrategy="balanced" android_hyphenationFrequency="normal">{title}</Text>
+        {meta ? <Text variant="caption" style={styles.meta} numberOfLines={2}>{meta}</Text> : null}
       </View>
       {trailing !== undefined ? trailing : (
-        <ChevronRight size={18} color={brand.inkMuted} strokeWidth={2} />
+        <View style={styles.chevron}><ChevronRight size={16} color={brand.burgundy} strokeWidth={2.4} /></View>
       )}
-    </View>
-  </Pressable>
+    </Pressable>
+  </View>
 );
 
 const styles = StyleSheet.create({
   row: {
-    paddingLeft: theme.layout.gutter,
+    paddingHorizontal: theme.layout.gutter,
+    paddingBottom: 10,
   },
-  pressed: {
-    backgroundColor: brand.pressed,
-  },
-  inner: {
-    minHeight: theme.layout.rowMinHeight,
+  card: {
+    minHeight: 72,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: theme.spacing.md,
+    gap: 14,
     paddingVertical: 14,
-    paddingRight: theme.layout.gutter,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: brand.line,
+    paddingLeft: 16,
+    paddingRight: 14,
+    borderRadius: 18,
+    backgroundColor: brand.sheet,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: brand.line,
+    overflow: 'hidden',
+    ...theme.shadows.soft,
   },
-  innerLast: {
-    borderBottomWidth: 0,
+  pressed: {
+    backgroundColor: brand.paperDim,
+    transform: [{ scale: 0.985 }],
+  },
+  chevron: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: brand.burgundyWash,
   },
   content: {
     flex: 1,

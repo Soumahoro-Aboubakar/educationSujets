@@ -11,7 +11,7 @@ const { brand } = theme;
  */
 const ActionButton = ({ title, onPress, variant = 'primary', icon: Icon, loading, disabled, style, accessibilityLabel }) => {
   const primary = variant === 'primary';
-  const color = primary ? brand.onInk : brand.ink;
+  const color = primary ? brand.onInk : brand.burgundy;
 
   return (
     <Pressable
@@ -46,17 +46,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: theme.spacing.sm,
     paddingHorizontal: theme.spacing.lg,
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
   },
   primary: {
-    backgroundColor: brand.ink,
+    backgroundColor: brand.burgundy,
+    ...theme.shadows.button,
   },
   primaryPressed: {
     opacity: 0.88,
   },
   secondary: {
-    borderWidth: 1,
-    borderColor: brand.lineStrong,
+    borderWidth: 1.2,
+    borderColor: 'rgba(108,40,56,0.45)',
+    backgroundColor: brand.sheet,
   },
   secondaryPressed: {
     backgroundColor: brand.pressed,
