@@ -2,12 +2,12 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import Animated, { Easing, FadeIn, FadeInDown, useAnimatedProps, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { ChevronRight, Search } from 'lucide-react-native';
+import { Bell, ChevronRight, Search } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import { brand, colors, motion, theme } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
-import { Badge } from '../ui/primitives';
+import { Badge, InlineAction } from '../ui/primitives';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const SEARCH_THRESHOLD = 6;
@@ -91,16 +91,16 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
                   accessibilityRole="radio"
                   accessibilityState={{ checked: isSel, disabled: !cycle.publie }}
                   accessibilityLabel={`${cycle.nom}${cycle.publie ? '' : ', bientôt disponible'}`}
-                  style={[styles.cycle, isSel && styles.cycleSel, !cycle.publie && styles.cycleOff]}
+                  style={[styles.cycle, isSel && styles.cycleSel]}
                 >
-                  <View style={styles.cycleText}>
+                  <View style={[styles.cycleText, !cycle.publie && styles.cycleOff]}>
                     <Highlight text={cycle.nom} query={query} style={styles.cycleName} />
                     <Text variant="caption" style={styles.muted}>
                       {cycle.publie ? `${cycle.modulesPublies} module${cycle.modulesPublies > 1 ? 's' : ''} prêts · ${cycle.matieres} matières` : 'Bientôt disponible'}
                     </Text>
                   </View>
                   {cycle.publie ? <Radio checked={isSel} /> : (
-                    <Pressable onPress={() => onNotify?.(cycle)} hitSlop={8}><Text variant="caption" style={styles.notify}>Me prévenir</Text></Pressable>
+                    <InlineAction title="Me prévenir" icon={Bell} onPress={() => onNotify?.(cycle)} accessibilityLabel={`Me prévenir quand ${cycle.nom} sera disponible`} />
                   )}
                 </Pressable>
               </Animated.View>

@@ -100,7 +100,7 @@ const LoginScreen = ({ navigation, route }) => {
             <Text variant="bodyMedium" style={styles.primaryLabel}>{loading ? 'Connexion en cours…' : 'Accéder à mon espace'}</Text>
             {!loading ? <ArrowUpRight size={18} color="#FFFFFF" strokeWidth={1.8} /> : null}
           </Pressable>
-          <View style={styles.registerLink}><Text variant="body" style={styles.linkPrefix}>Pas encore de compte ?</Text><Pressable onPress={() => (route?.params?.returnTo ? navigation.replace('Register', route.params) : navigation.navigate('Register'))}><Text variant="bodyMedium" style={styles.linkLabel}>S’inscrire</Text></Pressable></View>
+          <View style={styles.registerLink}><Text variant="body" style={styles.linkPrefix}>Pas encore de compte ?</Text><Pressable onPress={() => (route?.params?.returnTo ? navigation.replace('Register', route.params) : navigation.navigate('Register'))} accessibilityRole="button" hitSlop={6} style={({ pressed }) => [styles.linkButton, pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] }]}><Text variant="bodyMedium" style={styles.linkLabel}>S’inscrire</Text></Pressable></View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
   primaryLabel: { color: '#FFFFFF', fontSize: 15 },
   registerLink: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: theme.spacing.xs, marginTop: theme.spacing.xl },
   linkPrefix: { color: NAVY_SOFT, fontSize: 14 },
-  linkLabel: { color: BURGUNDY, fontSize: 14 },
+  linkLabel: { color: BURGUNDY, fontSize: 14, fontFamily: theme.fontFamily.semiBold },
+  linkButton: { minHeight: 36, justifyContent: 'center', paddingHorizontal: 14, marginLeft: 8, borderRadius: 18, backgroundColor: '#F4E9EA', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(108,40,56,0.18)' },
   pressed: { opacity: 0.62 },
 });
 

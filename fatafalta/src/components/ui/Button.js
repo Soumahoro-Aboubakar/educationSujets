@@ -28,7 +28,7 @@ const Button = ({
       // Action principale bordeaux (références visuelles validées) ; l'encre reste la couleur du texte.
       case 'primary': return theme.brand.burgundy;
       case 'secondary': return theme.brand.sheet;
-      case 'ghost': return 'transparent';
+      case 'ghost': return theme.brand.burgundyWash;
       case 'accent': return theme.colors.accent; // for CTAs
       default: return theme.colors.primary;
     }

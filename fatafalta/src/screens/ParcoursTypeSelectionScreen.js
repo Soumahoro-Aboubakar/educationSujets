@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { Layers3 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
+import OrganismeLogo from '../components/catalog/OrganismeLogo';
 import ScreenHeader from '../components/ui/ScreenHeader';
 import ListRow from '../components/ui/ListRow';
 import StateView from '../components/ui/StateView';
@@ -96,6 +97,7 @@ const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
       <ScreenHeader
         onBack={() => navigation.goBack()}
         eyebrow={organisme?.nom || organisme?.name}
+        eyebrowIcon={organisme ? <OrganismeLogo organisme={organisme} size={24} /> : null}
         title="Choisis un parcours"
         subtitle="Les sujets sont classés par parcours au sein de cet organisme."
       />

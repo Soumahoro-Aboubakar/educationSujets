@@ -257,7 +257,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
           <Text variant="caption" style={styles.listCount}>
             {`${plural(visible.length, 'document')} · ${plural(visible.filter((item) => item.tier === 'free').length, 'gratuit')}`}
           </Text>
-          <Pressable accessibilityRole="button" onPress={toggleAll} hitSlop={theme.hitSlop} style={({ pressed }) => pressed && styles.pressed}>
+          <Pressable accessibilityRole="button" onPress={toggleAll} hitSlop={theme.hitSlop} style={({ pressed }) => [styles.linkButton, pressed && styles.pressed]}>
             <Text variant="bodyMedium" style={styles.link}>{allVisibleSelected ? 'Tout désélectionner' : 'Tout sélectionner'}</Text>
           </Pressable>
         </View>
@@ -445,7 +445,8 @@ const styles = StyleSheet.create({
     paddingBottom: theme.spacing.sm,
   },
   listCount: { color: brand.inkSoft, fontFamily: theme.fontFamily.regular },
-  link: { color: brand.burgundy, fontSize: 14 },
+  link: { color: brand.burgundy, fontSize: 13, fontFamily: theme.fontFamily.semiBold },
+  linkButton: { minHeight: 34, justifyContent: 'center', paddingHorizontal: 14, borderRadius: 17, backgroundColor: brand.burgundyWash, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(108,40,56,0.18)' },
   row: {
     minHeight: 68,
     flexDirection: 'row',

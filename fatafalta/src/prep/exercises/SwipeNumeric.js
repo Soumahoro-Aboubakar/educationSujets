@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   tfStage: { alignItems: 'center' },
   tfCounter: { color: brand.inkMuted, marginBottom: 12 },
   tfDeck: { width: '100%', alignItems: 'center', minHeight: 380 },
-  tfCard: { width: '88%', minHeight: 280, padding: 24, borderRadius: 24, backgroundColor: brand.sheet, alignItems: 'center', justifyContent: 'center', shadowColor: brand.ink, shadowOpacity: 0.12, shadowRadius: 24, shadowOffset: { width: 0, height: 8 }, elevation: 6 },
+  tfCard: { width: '88%', minHeight: 280, padding: 24, borderRadius: 24, backgroundColor: brand.sheet, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: brand.line, shadowColor: brand.ink, shadowOpacity: 0.05, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 0 },
   tfBehind: { position: 'absolute', top: 0, backgroundColor: brand.paperDim, shadowOpacity: 0, elevation: 0, borderWidth: 1, borderColor: brand.line },
   tfText: { color: brand.ink, textAlign: 'center' },
   stamp: { position: 'absolute', top: 22, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 2, borderRadius: 6 },

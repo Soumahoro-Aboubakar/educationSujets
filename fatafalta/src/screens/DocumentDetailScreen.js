@@ -540,7 +540,13 @@ const styles = StyleSheet.create({
   shareLink: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
+    gap: 6,
+    minHeight: 34,
+    paddingHorizontal: 12,
+    borderRadius: 17,
+    backgroundColor: brand.burgundyWash,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(108,40,56,0.18)',
   },
   shareLabel: {
     color: brand.burgundy,

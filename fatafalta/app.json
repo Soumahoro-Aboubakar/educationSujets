@@ -66,9 +66,9 @@
       [
         "expo-navigation-bar",
         {
-          "position": "absolute",
-          "visibility": "hidden",
-          "behavior": "overlay-swipe"
+          "hidden": true,
+          "enforceContrast": false,
+          "style": "dark"
         }
       ]
     ],

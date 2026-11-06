@@ -169,16 +169,18 @@ const createShadow = (offsetY, blurRadius, opacity, elevation, color = '#000') =
   ...(Platform.OS === 'android' ? { elevation } : {}),
 });
 
+// Profondeur « papier » : la séparation vient du ton (carte blanche sur papier ivoire) et du filet,
+// pas de l'ombre. Aucune élévation Android sur les cartes (évite le halo gris et l'effet d'empilement) ;
+// seuls les éléments réellement flottants (feuilles, menus, barre d'onglets) en gardent une.
 export const shadows = {
-  sm: createShadow(1, 3, 0.06, 1),
-  md: createShadow(4, 8, 0.08, 3),
-  lg: createShadow(8, 16, 0.1, 6),
+  sm: createShadow(1, 2, 0.035, 0),
+  md: createShadow(2, 6, 0.05, 0),
+  lg: createShadow(6, 18, 0.08, 3),
   xl: createShadow(12, 24, 0.12, 8),
-  card: createShadow(2, 12, 0.06, 2, brand.ink),
-  cardHover: createShadow(8, 24, 0.12, 6, brand.ink),
-  // Cartes ivoire des références : ombre basse, large et très diffuse.
-  soft: createShadow(8, 22, 0.07, 3, brand.ink),
-  button: createShadow(8, 16, 0.28, 5, brand.burgundyDeep),
+  card: createShadow(1, 3, 0.035, 0),
+  cardHover: createShadow(6, 16, 0.1, 4),
+  soft: createShadow(1, 4, 0.04, 0),
+  button: createShadow(3, 8, 0.16, 0),
 };
 
 // ── Transitions ─────────────────────────────────

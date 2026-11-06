@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   holeText: { color: brand.ink, fontSize: 15 },
   wrongSmall: { position: 'absolute', top: -16, color: colors.error, textDecorationLine: 'line-through', fontSize: 11 },
   reserve: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 22, padding: 12, borderRadius: 16, backgroundColor: brand.paperDim },
-  tag: { minHeight: 40, paddingHorizontal: 14, justifyContent: 'center', borderRadius: 10, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet, shadowColor: brand.ink, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.06, elevation: 1 },
+  tag: { minHeight: 40, paddingHorizontal: 14, justifyContent: 'center', borderRadius: 10, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet, shadowColor: brand.ink, shadowRadius: 4, shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.04, elevation: 0 },
   tagSelected: { borderColor: brand.burgundy, borderWidth: 2, transform: [{ translateY: -3 }] },
   tagText: { color: brand.ink, fontSize: 15 },
   ghost: { borderStyle: 'dashed', backgroundColor: 'transparent', shadowOpacity: 0, elevation: 0 },

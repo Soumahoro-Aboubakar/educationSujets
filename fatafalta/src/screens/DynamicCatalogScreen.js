@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { ChevronRight, Layers3, Files } from 'lucide-react-native';
 import Text from '../components/ui/Text';
+import OrganismeLogo from '../components/catalog/OrganismeLogo';
 import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
 import ListRow from '../components/ui/ListRow';
 import StateView from '../components/ui/StateView';
@@ -233,6 +234,7 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
       <ScreenHeader
         onBack={goBack}
         eyebrow={sourceName}
+        eyebrowIcon={organisme ? <OrganismeLogo organisme={organisme} size={24} /> : null}
         title={currentLevel?.libellePluriel || 'Catalogue'}
         right={organisme ? (
           <HeaderIconButton

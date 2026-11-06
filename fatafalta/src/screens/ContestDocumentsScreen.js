@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { FileText, Files, SearchX } from 'lucide-react-native';
 import Text from '../components/ui/Text';
+import OrganismeLogo from '../components/catalog/OrganismeLogo';
 import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
 import SearchField from '../components/ui/SearchField';
 import StateView from '../components/ui/StateView';
@@ -152,6 +153,7 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
       <ScreenHeader
         onBack={() => navigation.goBack()}
         eyebrow={eyebrow}
+        eyebrowIcon={organisme ? <OrganismeLogo organisme={organisme} size={24} /> : null}
         title={title}
         subtitle={pathLabel || null}
         right={organisme ? (

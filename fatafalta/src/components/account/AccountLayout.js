@@ -53,7 +53,9 @@ export const Row = ({ icon: Icon, label, hint, value, trailing, onPress, isLast,
         <Text variant="bodyMedium" style={styles.rowValue} numberOfLines={1}>{value}</Text>
       ) : null}
       {trailing}
-      {onPress && !danger ? <ChevronRight size={17} color={brand.inkMuted} strokeWidth={2} /> : null}
+      {onPress ? (
+        <View style={styles.chevron}><ChevronRight size={15} color={brand.burgundy} strokeWidth={2.4} /></View>
+      ) : null}
     </View>
   );
 
@@ -147,6 +149,14 @@ const styles = StyleSheet.create({
   },
   danger: {
     color: brand.burgundy,
+  },
+  chevron: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: brand.burgundyWash,
   },
   pressed: {
     backgroundColor: brand.pressed,

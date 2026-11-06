@@ -40,8 +40,11 @@ export const PressScale = ({ onPress, onLongPress, disabled, style, children, sc
 };
 
 /**
- * Boutons (références validées) : principal bordeaux en relief doux (56), secondaire ivoire à filet
- * bordeaux (52), or (Aube or, réservé à « S'abonner »), clair (ivoire sur fond Nuit), lien (bordeaux).
+ * Boutons : un bouton doit se lire comme un bouton, jamais comme du texte.
+ * - primary : bordeaux plein (56) — l'action principale, une par écran ;
+ * - secondary : blanc à filet bordeaux (52) ;
+ * - link (tertiaire) : pastille bordeaux pâle (48) — actions de repli (« Plus tard », « Retour… ») ;
+ * - gold : Aube or, réservé à « S'abonner » ; light : ivoire sur fond Nuit.
  */
 export const PrepButton = ({ title, onPress, variant = 'primary', icon: Icon, iconLeft: IconLeft, disabled, loading, style, accessibilityLabel, compact }) => {
   const isLink = variant === 'link';
@@ -75,7 +78,7 @@ export const PrepButton = ({ title, onPress, variant = 'primary', icon: Icon, ic
         isLight && styles.btnLight,
         isGold && !disabled && styles.btnGoldShadow,
         isLink && styles.btnLink,
-        disabled && !isLink && styles.btnDisabled,
+        disabled && styles.btnDisabled,
         style,
       ]}
     >
@@ -92,6 +95,16 @@ export const PrepButton = ({ title, onPress, variant = 'primary', icon: Icon, ic
     </PressScale>
   );
 };
+
+/**
+ * Petite action en ligne (« Me prévenir », « Se connecter »…) : pastille compacte, jamais du texte nu.
+ */
+export const InlineAction = ({ title, onPress, icon: Icon, style, accessibilityLabel, disabled }) => (
+  <PressScale onPress={onPress} disabled={disabled} accessibilityLabel={accessibilityLabel || title} hitSlop={6} style={[styles.inline, disabled && { opacity: 0.5 }, style]}>
+    {Icon ? <Icon size={14} color={brand.burgundy} strokeWidth={2.2} /> : null}
+    <Text variant="caption" style={styles.inlineText} numberOfLines={1}>{title}</Text>
+  </PressScale>
+);
 
 /** Barre de progression animée (hauteur 6, rail `line`). */
 export const ProgressBar = ({ value = 0, color = brand.ink, track = brand.line, height = 6, style, delay = 0 }) => {
@@ -223,34 +236,52 @@ export const Badge = ({ label, tone = 'neutral', icon: Icon, style }) => {
 };
 
 /**
- * Coin corné or (motif de marque : « je maîtrise ») : le coin de la carte est replié, son revers or
- * apparaît en relief avec une ombre portée sous la pliure. `cut` = couleur du fond derrière la carte.
+ * Coin corné (motif du logo F) : le coin haut-droit de la carte est replié, son revers apparaît en
+ * relief, avec une ombre portée sous la pliure. Même géométrie que le revers du symbole F
+ * (triangle rectangle à angle intérieur arrondi). `cut` = couleur du fond derrière la carte.
+ * - tone : 'gold' (revers or, comme le logo) · 'muted' (élément pas encore disponible) ;
+ * - animated : le coin « se plie » à l'apparition (ressort depuis l'angle), sauf mouvement réduit.
  */
+const FOLD_TONES = {
+  gold: ['#F3E1B5', brand.goldLight, brand.gold],
+  muted: ['#F7F4EC', brand.line, brand.lineStrong],
+};
 let foldSeq = 0;
-export const CornerFold = ({ size = 26, radius = 18, cut = brand.paper }) => {
+export const CornerFold = ({ size = 26, radius = 18, cut = brand.paper, tone = 'gold', animated = false, delay = 0 }) => {
   const id = useRef(`fold${(foldSeq += 1)}`).current;
+  const reduce = useReduceMotion();
+  const fold = useSharedValue(animated && !reduce ? 0 : 1);
+  useEffect(() => {
+    if (!animated || reduce) { fold.value = 1; return undefined; }
+    const t = setTimeout(() => { fold.value = withSpring(1, { damping: 13, stiffness: 180, mass: 0.8 }); }, 180 + delay);
+    return () => clearTimeout(t);
+  }, [animated, reduce, delay, fold]);
+  const foldStyle = useAnimatedStyle(() => ({ transform: [{ scale: fold.value }], opacity: Math.min(1, fold.value * 1.6) }));
+  const [c0, c1, c2] = FOLD_TONES[tone] || FOLD_TONES.gold;
   return (
     <View pointerEvents="none" style={[styles.corner, { borderTopRightRadius: radius }]}>
-      <Svg width={size + 4} height={size + 4} viewBox="0 0 30 30">
-        <Defs>
-          <SvgGradient id={`${id}g`} x1="0" y1="0" x2="1" y2="1">
-            <Stop offset="0" stopColor="#F3E1B5" />
-            <Stop offset="0.45" stopColor={brand.goldLight} />
-            <Stop offset="1" stopColor={brand.gold} />
-          </SvgGradient>
-          <SvgGradient id={`${id}s`} x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0" stopColor={brand.ink} stopOpacity="0.16" />
-            <Stop offset="1" stopColor={brand.ink} stopOpacity="0" />
-          </SvgGradient>
-        </Defs>
-        {/* Coin disparu : on voit le fond derrière la carte. */}
-        <Path d="M4 0H30V26Z" fill={cut} />
-        {/* Ombre portée du revers sur la carte. */}
-        <Path d="M4 0L30 26L9 30Q3 30 2 25Z" fill={`url(#${id}s)`} />
-        {/* Revers or, légèrement bombé. */}
-        <Path d="M4 0L30 26H9.5Q4 26 4 20.5Z" fill={`url(#${id}g)`} />
-        <Path d="M4 0L30 26" stroke="#FFF6DD" strokeOpacity="0.9" strokeWidth="0.8" />
-      </Svg>
+      <Animated.View style={[{ transformOrigin: 'top right' }, foldStyle]}>
+        <Svg width={size + 4} height={size + 4} viewBox="0 0 30 30">
+          <Defs>
+            <SvgGradient id={`${id}g`} x1="0" y1="0" x2="1" y2="1">
+              <Stop offset="0" stopColor={c0} />
+              <Stop offset="0.45" stopColor={c1} />
+              <Stop offset="1" stopColor={c2} />
+            </SvgGradient>
+            <SvgGradient id={`${id}s`} x1="0" y1="0" x2="0" y2="1">
+              <Stop offset="0" stopColor={brand.ink} stopOpacity="0.14" />
+              <Stop offset="1" stopColor={brand.ink} stopOpacity="0" />
+            </SvgGradient>
+          </Defs>
+          {/* Coin disparu : on voit le fond derrière la carte. */}
+          <Path d="M4 0H30V26Z" fill={cut} />
+          {/* Ombre portée du revers sur la carte. */}
+          <Path d="M4 0L30 26L9 30Q3 30 2 25Z" fill={`url(#${id}s)`} />
+          {/* Revers replié, angle intérieur arrondi comme sur le symbole F. */}
+          <Path d="M4 0L30 26H9.5A5.5 5.5 0 0 1 4 20.5Z" fill={`url(#${id}g)`} />
+          <Path d="M4 0L30 26" stroke="#FFFFFF" strokeOpacity="0.85" strokeWidth="0.8" />
+        </Svg>
+      </Animated.View>
     </View>
   );
 };
@@ -427,10 +458,12 @@ const styles = StyleSheet.create({
   btnSecondary: { minHeight: 52, backgroundColor: brand.sheet, borderWidth: 1.2, borderColor: 'rgba(108,40,56,0.55)' },
   btnLight: { backgroundColor: brand.paper, ...theme.shadows.md },
   btnGoldShadow: { ...theme.shadows.md, shadowColor: brand.gold },
-  btnLink: { minHeight: 44, backgroundColor: 'transparent' },
+  btnLink: { minHeight: 48, backgroundColor: brand.burgundyWash, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(108,40,56,0.18)' },
+  inline: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', minHeight: 34, paddingHorizontal: 14, borderRadius: 17, backgroundColor: brand.burgundyWash, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(108,40,56,0.18)' },
+  inlineText: { color: brand.burgundy, fontFamily: theme.fontFamily.semiBold, fontSize: 13 },
   btnDisabled: { backgroundColor: brand.line, borderColor: brand.line, shadowOpacity: 0, elevation: 0 },
   btnText: { fontSize: 16, fontFamily: theme.fontFamily.semiBold, letterSpacing: -0.1, textAlign: 'center', flexShrink: 1 },
-  linkText: { fontSize: 15 },
+  linkText: { fontSize: 15, fontFamily: theme.fontFamily.semiBold },
   dot: { borderRadius: 999, borderWidth: 1.5, alignItems: 'center', justifyContent: 'center' },
   levelDots: { flexDirection: 'row', gap: 3, alignItems: 'center' },
   badge: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-start', height: 22, paddingHorizontal: 8, borderRadius: 8 },
@@ -448,7 +481,7 @@ const styles = StyleSheet.create({
   subjectIcon: { alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   subjectGloss: { position: 'absolute', left: 0, right: 0, top: 0, height: '50%', backgroundColor: 'rgba(255,255,255,0.10)', borderBottomLeftRadius: 0, borderBottomRightRadius: 0 },
   segment: { flexDirection: 'row', padding: 4, borderRadius: 14, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.sm },
-  segmentPill: { position: 'absolute', top: 4, bottom: 4, left: 0, borderRadius: 10, backgroundColor: brand.burgundy, ...theme.shadows.button, shadowOpacity: 0.18 },
+  segmentPill: { position: 'absolute', top: 4, bottom: 4, left: 0, borderRadius: 10, backgroundColor: brand.burgundy },
   segmentItem: { flex: 1, minHeight: 40, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 10 },
   segmentText: { color: brand.inkSoft, fontFamily: theme.fontFamily.semiBold, fontSize: 14 },
   stackRoot: { flex: 1, backgroundColor: brand.inkDeep },

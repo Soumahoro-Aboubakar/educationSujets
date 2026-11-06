@@ -15,7 +15,7 @@ const { brand } = theme;
  * - `title` dit ce que l'écran propose ; il est animé lorsqu'il change
  *   (navigation interne du catalogue) pour signaler le changement de niveau.
  */
-const ScreenHeader = ({ eyebrow, title, subtitle, onBack, right, titleLines = 2, children, sheet = true }) => {
+const ScreenHeader = ({ eyebrow, eyebrowIcon, title, subtitle, onBack, right, titleLines = 2, children, sheet = true }) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -40,7 +40,10 @@ const ScreenHeader = ({ eyebrow, title, subtitle, onBack, right, titleLines = 2,
 
         <Animated.View key={title} entering={FadeIn.duration(200)} style={styles.copy}>
           {eyebrow ? (
-            <Text variant="caption" style={styles.eyebrow} numberOfLines={1}>{eyebrow}</Text>
+            <View style={styles.eyebrowRow}>
+              {eyebrowIcon || null}
+              <Text variant="caption" style={[styles.eyebrow, styles.eyebrowText]} numberOfLines={1}>{eyebrow}</Text>
+            </View>
           ) : null}
           <Text variant="h1" style={styles.title} numberOfLines={titleLines} accessibilityRole="header">{title}</Text>
           {subtitle ? <Text variant="body" style={styles.subtitle}>{subtitle}</Text> : null}
@@ -133,6 +136,14 @@ const styles = StyleSheet.create({
   eyebrow: {
     color: brand.onInkAccent,
     fontFamily: theme.fontFamily.semiBold,
+  },
+  eyebrowRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  eyebrowText: {
+    flexShrink: 1,
   },
   title: {
     marginTop: 6,

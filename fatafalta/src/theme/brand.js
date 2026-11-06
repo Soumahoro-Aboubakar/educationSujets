@@ -24,7 +24,7 @@ export const brand = {
   paper: '#FCFAF5',
   paperDim: '#F4F0E6',
   // Surface des cartes posées sur le papier : ivoire plus clair que le fond.
-  sheet: '#FFFEFB',
+  sheet: '#FFFFFF',
   line: '#E4DED2',
   lineStrong: '#CFC7B8',
   burgundy: '#6C2838',

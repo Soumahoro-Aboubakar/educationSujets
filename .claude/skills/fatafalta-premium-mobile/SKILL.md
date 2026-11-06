@@ -55,7 +55,8 @@ Or : jamais en aplat large, jamais en texte < 17 pt sur papier (utiliser `goldIn
 | Composant | Usage |
 |---|---|
 | `PaperStack` | Cadre de tout écran poussé (header sur encre + feuille) |
-| `PrepButton` | `primary` bordeaux en relief (56) · `secondary` ivoire filet bordeaux (52) · `gold` (abonnement seulement) · `light` · `link` |
+| `PrepButton` | `primary` bordeaux plein (56) · `secondary` blanc filet bordeaux (52) · `link` = **tertiaire** : pastille bordeaux pâle (48) · `gold` (abonnement seulement) · `light` |
+| `InlineAction` | Petite action en ligne (« Me prévenir »…) : pastille compacte bordeaux pâle (34) |
 | `Card` | Carte ivoire rayon 18, filet hairline, ombre `shadows.soft` |
 | `CornerFold` | Coin corné or en relief = « maîtrisé / validé / recommandé ». `cut` = couleur du fond derrière |
 | `SubjectIcon` | Pastille de matière (plein ou `soft`), icône déduite du nom |
@@ -72,6 +73,20 @@ cartes encadrées (une « copie » par élément, chevron bordeaux dans un disqu
 en grille de `OrganismCard` (2 colonnes, 3 sur tablette). Noms longs : sigle en Playfair + nom complet sur
 2 lignes, sinon nom centré sur 3 lignes en césure équilibrée avec corps dégressif (15 → 14 → 13 pt) ;
 jamais de troncature d'un nom court, lecteur d'écran = nom complet.
+
+Barre d'onglets : `src/navigation/PremiumTabBar.js`, capsule d'encre flottante, pastille ivoire qui
+glisse (ressort) et porte l'icône + le libellé de l'onglet actif, haptique, masquée clavier ouvert.
+Barre système Android : masquée en mode immersif (`expo-navigation-bar` 56, plugin `hidden: true` +
+`<NavigationBar hidden />` dans `App.js`).
+
+Profondeur : **pas d'élévation Android sur les cartes**, ombres iOS quasi nulles (`shadows.soft/card/sm`).
+La carte se distingue par le ton (blanc `brand.sheet` sur papier) et un filet. Seuls les éléments
+réellement flottants (feuilles modales, menus, barre d'onglets, élément soulevé pendant un glisser)
+portent une ombre visible.
+
+**Un bouton se lit toujours comme un bouton** : jamais de texte nu cliquable. Toute action porte un
+fond ou un contour (plein, contour, pastille pâle) ; toute ligne cliquable porte un chevron bordeaux
+dans un disque `burgundyWash`.
 
 Boutons ronds sur l'encre : 44 × 44, fond blanc 8 %, filet blanc 16 %. Bouton fixe en bas : sur un
 dégradé papier transparent → `brand.paper` (`LinearGradient`), jamais sur un aplat opaque.

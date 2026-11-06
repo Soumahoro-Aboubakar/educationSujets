@@ -12,6 +12,8 @@ import { AnimatedNumber, Badge, NightBackground, PaperStack, PrepButton } from '
 import ART from '../ui/art';
 import { PaperStopwatch } from '../ui/Illustrations';
 import { sessionParams } from './SessionScreen';
+import { useCatalogue } from './OnboardingScreens';
+import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 
 // ═══ E32 — Concours blanc : introduction ════════════════════════════════
 export const MockIntroScreen = ({ navigation, route }) => {
@@ -50,11 +52,15 @@ export const MockIntroScreen = ({ navigation, route }) => {
 export const ProgramInfoScreen = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
   const p = getProgramme(route.params.programme);
+  const org = useCatalogue().find((o) => o.sigle === p.organisme.sigle);
   return (
     <PaperStack header={(
       <View style={styles.stackHeader}>
         <Pressable onPress={() => navigation.goBack()} accessibilityLabel="Retour" hitSlop={6} style={styles.closeDark}><ArrowLeft size={20} color={brand.onInk} /></Pressable>
-        <Text variant="bodyMedium" style={styles.headerText}>{p.organisme.sigle}</Text>
+        <View style={styles.headerOrg}>
+          <OrganismeLogo organisme={{ nom: p.organisme.sigle, logo: org?.logo }} size={28} />
+          <Text variant="bodyMedium" style={styles.headerText}>{p.organisme.sigle}</Text>
+        </View>
         <View style={{ width: 44 }} />
       </View>
     )}>
@@ -147,6 +153,7 @@ const styles = StyleSheet.create({
   night: { flex: 1, backgroundColor: brand.inkDeep },
   stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
   headerText: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold },
+  headerOrg: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   condNum: { color: brand.goldLight, fontSize: 28, lineHeight: 34 },
   emblem: { width: 120, height: 120, alignSelf: 'center', marginTop: 4 },
   benefitIcon: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(228,201,151,0.12)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(228,201,151,0.35)' },

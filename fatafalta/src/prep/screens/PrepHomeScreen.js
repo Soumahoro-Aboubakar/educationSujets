@@ -69,7 +69,7 @@ const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, onPress
         accessibilityLabel={`Module ${item.numero}, ${item.titre}${item.publie ? `, ${pct} %` : ', bientôt disponible'}${st?.valide ? ', validé' : ''}${locked ? ', verrouillé' : ''}`}
         style={[styles.moduleCard, current && !locked && styles.moduleCurrent, !item.publie && styles.moduleSoon]}
       >
-        {st?.valide ? <CornerFold radius={18} /> : null}
+        <CornerFold size={30} radius={18} tone={item.publie && !locked ? 'gold' : 'muted'} animated delay={Math.min(index, 8) * 60} />
         <View style={styles.moduleLead}>
           {locked ? (
             <View style={[styles.moduleState, styles.moduleLocked]}><Lock size={18} color={brand.inkMuted} /></View>
@@ -455,7 +455,7 @@ const styles = StyleSheet.create({
   chipIdle: { borderWidth: StyleSheet.hairlineWidth, borderColor: brand.lineStrong, backgroundColor: brand.sheet },
   chipText: { color: brand.inkSoft, fontFamily: theme.fontFamily.semiBold },
   modules: { gap: 10, marginTop: 14 },
-  moduleCard: { minHeight: 82, flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 14, paddingLeft: 14, paddingRight: 14, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
+  moduleCard: { minHeight: 82, flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 14, paddingLeft: 14, paddingRight: 24, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
   moduleCurrent: { borderWidth: 1.5, borderColor: 'rgba(108,40,56,0.55)' },
   moduleSoon: { opacity: 0.6 },
   moduleLead: { width: 46, alignItems: 'center' },

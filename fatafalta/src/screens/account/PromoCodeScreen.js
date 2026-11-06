@@ -200,8 +200,11 @@ const styles = StyleSheet.create({
     minHeight: theme.layout.touch,
     alignItems: 'center',
     justifyContent: 'center',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: brand.line,
+    margin: theme.spacing.md,
+    borderRadius: 16,
+    backgroundColor: brand.burgundyWash,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(108,40,56,0.18)',
   },
   moreLabel: {
     color: brand.burgundy,

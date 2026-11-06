@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { AppState, StyleSheet } from 'react-native';
+import { AppState, Platform, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
 import { QueryClient, QueryClientProvider, focusManager } from '@tanstack/react-query';
@@ -17,6 +17,7 @@ import { PlayfairDisplay_600SemiBold } from '@expo-google-fonts/playfair-display
 import { PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display/700Bold';
 import { PlayfairDisplay_700Bold_Italic } from '@expo-google-fonts/playfair-display/700Bold_Italic';
 import * as SplashScreen from 'expo-splash-screen';
+import { NavigationBar } from 'expo-navigation-bar';
 import RootNavigator from './src/navigation/RootNavigator';
 import BrandIntro from './src/components/brand/BrandIntro';
 import AuthContext, { AuthProvider } from './src/context/AuthContext';
@@ -57,6 +58,28 @@ const PrepBridge = () => {
     return () => sub.remove();
   }, []);
   return null;
+};
+
+/**
+ * Barre de navigation Android (boutons système) masquée en mode immersif dans toute l'application :
+ * un glissement depuis le bord bas la fait réapparaître un instant (Android ne permet pas de la
+ * supprimer). Réappliqué au retour au premier plan, Android la réaffichant parfois (clavier, feuilles).
+ * Aussi déclaré dans app.json (plugin expo-navigation-bar) pour être masquée dès le lancement.
+ */
+const ImmersiveNavigationBar = () => {
+  useEffect(() => {
+    if (Platform.OS !== 'android') return undefined;
+    NavigationBar.setHidden(true);
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') {
+        // Forcer la réapplication : la valeur mémorisée peut être déjà « masquée ».
+        NavigationBar.setHidden(false);
+        NavigationBar.setHidden(true);
+      }
+    });
+    return () => sub.remove();
+  }, []);
+  return Platform.OS === 'android' ? <NavigationBar hidden style="dark" /> : null;
 };
 
 // Keep the splash screen visible while we fetch resources
@@ -136,6 +159,7 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
+      <ImmersiveNavigationBar />
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <PreferencesProvider>

@@ -18,6 +18,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { LessonBlock } from '../components/LessonBlocks';
 import { LockedSheet } from '../components/Sheets';
 import { useCatalogue } from './OnboardingScreens';
+import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import { sessionParams } from './SessionScreen';
 
 // ═══ E08 — Module ═══════════════════════════════════════════════════════
@@ -76,6 +77,7 @@ export const ModuleScreen = ({ navigation, route }) => {
         </View>
         <GoldSwash width={96} style={{ marginLeft: 66, marginTop: 2 }} />
         <View style={styles.modMeta}>
+          <CornerFold size={30} radius={20} animated />
           <ProgressRing size={64} stroke={6} value={st.pourcentage} color={st.valide ? colors.success : undefined} gradient={!st.valide} track={brand.line}>
             <Text style={[styles.modPct, type.tabular]}>{`${Math.round(st.pourcentage * 100)} %`}</Text>
           </ProgressRing>
@@ -155,7 +157,7 @@ export const ModuleScreen = ({ navigation, route }) => {
         )}
 
         <PressScale onPress={openSubjects} style={styles.subjectsLink} accessibilityLabel={`Anciens sujets ${programme.organisme.sigle}`}>
-          <View style={styles.subjectsIcon}><FileText size={19} color={brand.goldLight} /></View>
+          <OrganismeLogo organisme={{ nom: programme.organisme.sigle, logo: org?.logo }} size={42} />
           <View style={{ flex: 1 }}>
             <Text variant="bodyMedium" style={styles.rowTitle}>Anciens sujets</Text>
             <Text variant="caption" style={styles.muted} numberOfLines={1}>{`${programme.organisme.sigle} · ${programme.parcoursType}`}</Text>

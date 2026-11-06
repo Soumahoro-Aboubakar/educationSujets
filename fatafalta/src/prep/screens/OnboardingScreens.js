@@ -9,6 +9,8 @@ import BrandMark from '../../components/brand/BrandMark';
 import { usePreferences } from '../../context/PreferencesContext';
 import { localCatalogue } from '../content';
 import prepApi from '../api';
+import { fetchPublishedOrganismes } from '../../services/catalog';
+import cache from '../../services/cache';
 import usePrep from '../store';
 import { brand, colors, motion, theme, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
@@ -21,17 +23,61 @@ import ContestAccordion from '../components/ContestAccordion';
 
 const FLAG = ['#F77F00', '#FFFFFF', '#009E60'];
 
+/**
+ * Logos des organismes : repris du catalogue des anciens sujets (/api/catalog/organismes), déjà
+ * administré sur le web, en attendant que le service de préparation fournisse les siens.
+ * Rapprochement par sigle normalisé (« inphb », « INP-HB » → INPHB). Mémoire partagée entre écrans
+ * + copie sur l'appareil : les logos restent affichés hors ligne après le premier chargement.
+ */
+const LOGO_CACHE_KEY = 'prep-organisme-logos';
+const keyOf = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+let logoIndex = null;
+let logoRequest = null;
+const indexLogos = (organismes) => {
+  const index = {};
+  (organismes || []).forEach((o) => {
+    if (!o?.logo) return;
+    const entry = { logo: o.logo, organismeId: o._id, nom: o.name || o.nom };
+    [o.abbreviation, o.name, o.nom].forEach((label) => { const k = keyOf(label); if (k && !index[k]) index[k] = entry; });
+  });
+  return index;
+};
+const loadLogoIndex = () => {
+  if (logoIndex) return Promise.resolve(logoIndex);
+  if (!logoRequest) {
+    logoRequest = (async () => {
+      const cached = await cache.load(LOGO_CACHE_KEY);
+      if (cached && typeof cached === 'object') logoIndex = cached;
+      try {
+        const result = await fetchPublishedOrganismes({ limit: 100 });
+        logoIndex = indexLogos(result.data);
+        cache.save(LOGO_CACHE_KEY, logoIndex);
+      } catch (error) {
+        // Hors ligne : la copie locale (ou les monogrammes) prend le relais.
+      }
+      logoRequest = null;
+      return logoIndex || {};
+    })();
+  }
+  return logoRequest;
+};
+const withLogos = (catalogue, index) => catalogue.map((o) => {
+  const found = index?.[keyOf(o.sigle)];
+  return found ? { ...o, logo: o.logo || found.logo, organismeId: o.organismeId || found.organismeId } : o;
+});
+
 /** Catalogue « organismes → cycles » : embarqué tout de suite, enrichi par l'API (logos). */
 export const useCatalogue = () => {
-  const [catalogue, setCatalogue] = useState(localCatalogue);
+  const [catalogue, setCatalogue] = useState(() => withLogos(localCatalogue(), logoIndex));
   useEffect(() => {
     let alive = true;
+    loadLogoIndex().then((index) => { if (alive) setCatalogue((current) => withLogos(current, index)); });
     prepApi.catalogue().then((remote) => {
       if (!alive || !Array.isArray(remote)) return;
-      setCatalogue((local) => local.map((o) => {
+      setCatalogue((local) => withLogos(local.map((o) => {
         const r = remote.find((x) => x.sigle === o.sigle);
-        return r ? { ...o, nom: r.nom || o.nom, logo: r.logo || null, organismeId: r.organismeId, cycles: o.cycles.map((c) => ({ ...c, parcoursTypeId: r.cycles.find((rc) => rc.programme === c.programme)?.parcoursTypeId || null })) } : o;
-      }));
+        return r ? { ...o, nom: r.nom || o.nom, logo: r.logo || o.logo || null, organismeId: r.organismeId || o.organismeId, cycles: o.cycles.map((c) => ({ ...c, parcoursTypeId: r.cycles.find((rc) => rc.programme === c.programme)?.parcoursTypeId || null })) } : o;
+      }), logoIndex));
     }).catch(() => {});
     return () => { alive = false; };
   }, []);
@@ -275,7 +321,7 @@ const styles = StyleSheet.create({
   choiceText: { flex: 1, gap: 4 },
   choiceTitle: { fontSize: 21, lineHeight: 26 },
   choiceGo: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', borderWidth: 1.2, borderColor: 'rgba(108,40,56,0.4)' },
-  choiceGoFeatured: { backgroundColor: brand.burgundy, borderColor: brand.burgundy, ...theme.shadows.button, shadowOpacity: 0.22 },
+  choiceGoFeatured: { backgroundColor: brand.burgundy, borderColor: brand.burgundy },
   footNote: { marginTop: 18 },
   stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
   roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
