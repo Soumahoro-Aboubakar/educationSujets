@@ -11,6 +11,19 @@ test('Le contenu de préparation passe tous les contrôles automatiques', () => 
   assert.match(out, /Contenu valide/);
 });
 
+test('Le pack de contenu est versionné (sinon l’API de préparation répond 500 en production)', () => {
+  const pack = path.join(ROOT, 'data/prep/build/pack.json');
+  assert.ok(fs.existsSync(pack), 'Lancer « npm run prep:pack ».');
+  let ignored = false;
+  try {
+    execFileSync('git', ['check-ignore', '-q', pack], { cwd: ROOT, stdio: 'ignore' });
+    ignored = true; // code 0 : le fichier est ignoré par git
+  } catch (error) {
+    ignored = false; // code 1 (non ignoré) ou git absent (dépôt déployé)
+  }
+  assert.equal(ignored, false, 'data/prep/build/pack.json ne doit pas être ignoré par .gitignore');
+});
+
 test('La copie mobile du moteur partagé est identique à la source', () => {
   const source = fs.readFileSync(path.join(ROOT, 'services/prep/shared/prepCore.js'), 'utf8');
   const mobilePath = path.resolve(ROOT, '../fatafalta/src/prep/shared/prepCore.js');

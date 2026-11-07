@@ -33,6 +33,8 @@ new_files_unique/
 **/.metro/
 **/dist/
 **/build/
+# Exception : le pack de contenu de la préparation est VERSIONNÉ (le serveur le lit au démarrage).
+!backend/data/prep/build/
 coverage/
 .nyc_output/
 
