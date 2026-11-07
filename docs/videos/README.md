@@ -1,8 +1,10 @@
 # Vidéos explicatives — architecture et procédure
 
-Vidéo d'explication d'un **module** (une par module et par version de langue, optionnelle) et vidéo
-de présentation d'un **concours** (une par programme, optionnelle). Aucune durée imposée.
-Décisions du 2026-11-07 (cahier des charges, § 9 bis et § 32).
+Vidéo d'explication d'une **leçon** (une par leçon et par version de langue, optionnelle), affichée en
+tête de la leçon **dès son ouverture**, et vidéo de présentation d'un **concours** (une par programme,
+optionnelle). Aucune durée imposée (viser court). Décisions du 2026-11-07 (cahier des charges,
+§ 9 bis et § 32) : la vidéo par leçon remplace la vidéo par module (plus courte, placée au-dessus du
+texte qu'elle explique, plus simple à tenir à jour).
 
 ## 1. Vue d'ensemble
 
@@ -20,22 +22,25 @@ contenu du pack ──► npm run video:brief ──► dossier de génération 
                                        GET /api/prep/videos (+ champ video des réponses) ◄┘
                                                          │  index relu toutes les 5 min
                                                          ▼
-                                       Application : lecteur YouTube intégré en tête du contenu
+                                       Application : lecteur YouTube intégré en tête de la leçon
 ```
 
 - **Données** : collection `prepvideos` (`backend/models/PrepVideo.js`), clé unique
-  `{ cible: 'module' | 'concours', code, langue }`. Les modules et concours vivent dans le pack de
-  contenu embarqué dans l'application : la vidéo y est rattachée par **code** (`MATH-LNEXP`,
+  `{ cible: 'lecon' | 'concours', code, langue }`. Les leçons et concours vivent dans le pack de
+  contenu embarqué dans l'application : la vidéo y est rattachée par **code** (`MATH-LNEXP-L1`,
   `ENSEA-AS`…), ce qui permet d'ajouter une vidéo sans nouvelle version de l'application.
   Aucun document existant n'est modifié ; pas de document = pas de vidéo.
 - **API (lecture seule)** : champ `video` (`null` sans vidéo) dans `GET /api/prep/catalogue`
-  (`cycles[].video`), `GET /api/prep/programmes/:code` (`programme.video`, `modules[code].video`),
-  `GET /api/prep/modules/:code?version=en` ; index compact `GET /api/prep/videos`. Seules les vidéos
-  au statut `published` sont exposées. **Aucune route d'écriture.**
+  (`cycles[].video`), `GET /api/prep/programmes/:code` (`programme.video`,
+  `modules[code].lecons[].video`), `GET /api/prep/modules/:code?version=en` (`lecons[].video`) ;
+  index compact `GET /api/prep/videos` → `{ lecons: { CODE: { fr, en } }, concours: { CODE: { fr } } }`.
+  Seules les vidéos au statut `published` sont exposées. **Aucune route d'écriture.**
 - **Application** : `fatafalta/src/prep/video/` — sans vidéo, rien ne s'affiche (ni bouton, ni icône,
-  ni message). Avec vidéo : indicateur « Vidéo » dans les listes, lecteur en tête de l'écran Module /
-  de l'écran du concours, chargé d'office si connexion (pas de lecture automatique), barre « vidéo en
-  cours » quand on fait défiler pour lire, pause automatique à l'ouverture d'une leçon.
+  ni message). Avec vidéo : indicateur « Vidéo » sur la leçon (écran Module) et sur le module (accueil
+  Prépa) ; à l'ouverture de la leçon, lecteur en tête du texte, chargé d'office si connexion (pas de
+  lecture automatique) ; « Lire la leçon » descend au texte ; barre « vidéo en cours » quand on fait
+  défiler pour lire ; pause en quittant la leçon. Le concours garde sa vidéo de présentation en tête
+  de sa page.
 
 ## 2. Prérequis (une seule fois)
 
@@ -60,13 +65,15 @@ contenu du pack ──► npm run video:brief ──► dossier de génération 
 Depuis `backend/` :
 
 ```bash
-npm run video:brief   -- --type module --id MATH-LNEXP              # dossier de génération (aucune vidéo)
-npm run video:publish -- --type module --id MATH-LNEXP --fichier ~/videos/math-lnexp.mp4 --dry-run
-npm run video:publish -- --type module --id MATH-LNEXP --fichier ~/videos/math-lnexp.mp4
-npm run video:publish -- --type module --id ANG-GRAM --langue en --fichier ~/videos/ang-gram-en.mp4
+npm run video:brief   -- --type lecon --id MATH-LNEXP-L1              # dossier de génération (aucune vidéo)
+npm run video:publish -- --type lecon --id MATH-LNEXP-L1 --fichier ~/videos/math-lnexp-l1.mp4 --dry-run
+npm run video:publish -- --type lecon --id MATH-LNEXP-L1 --fichier ~/videos/math-lnexp-l1.mp4
+npm run video:publish -- --type lecon --id ANG-GRAM-L1 --langue en --fichier ~/videos/ang-gram-l1-en.mp4
 npm run video:publish -- --type concours --id ENSEA-AS --fichier ~/videos/ensea-as.mp4
-npm run video:publish -- --etat                                       # qui a une vidéo ? contenu modifié depuis ?
-npm run video:publish -- --type module --id MATH-LNEXP --masquer      # retirer de l'application
+npm run video:publish -- --etat                                         # chaque leçon / concours : vidéo ? contenu modifié ?
+npm run video:publish -- --type lecon --id MATH-LNEXP-L1 --masquer      # retirer de l'application
+
+# Codes des leçons : <MODULE>-L<n> (MATH-LNEXP-L1, ANG-GRAM-L2…) ; liste complète : --etat
 ```
 
 Étapes affichées : `[1/7] Cible` · `[2/7] Fichier` · `[3/7] Production` (lecture) · `[4/7] YouTube`
@@ -101,8 +108,9 @@ cd fatafalta && npm run start:videos-demo     # EXPO_PUBLIC_VIDEOS_DEMO=1 expo s
 ```
 
 Ajoute, en développement uniquement, de vraies vidéos YouTube publiques (`src/prep/video/demo.js`) :
-module `MATH-LNEXP` (fr), cours `ANG-GRAM` (fr et en), concours `ENSEA-AS`. Jamais actif dans une
-version publiée (`__DEV__` faux : vérifié, aucune trace dans les bundles de production).
+leçons `MATH-LNEXP-L1` et `MATH-LNEXP-L2` (fr), leçon `ANG-GRAM-L1` (fr et en ; la leçon 2 n'en a pas),
+concours `ENSEA-AS`. Ajouter `-- --clear` si Metro tournait déjà sans le mode démo. Jamais actif dans
+une version publiée (`__DEV__` faux : vérifié, aucune trace dans les bundles de production).
 
 ## 6. Cours de langue étrangère (deux versions)
 
@@ -112,4 +120,4 @@ cours entièrement dans la langue étudiée. Les exercices sont communs (mêmes 
 seules les consignes, explications et mini-cours changent. `npm run prep:pack` refuse un cours de
 langue sans ses deux versions. Dans l'application, une bascule **FR / EN** dans l'en-tête de l'écran
 Module et du lecteur de leçon change de version sans perdre le passage lu ; le choix est mémorisé par
-module. Chaque version peut avoir sa propre vidéo (`--langue en`).
+module. Chaque version d'une leçon peut avoir sa propre vidéo (`--langue en`).

@@ -89,7 +89,7 @@ const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, video, 
           </View>
           <Text variant="bodyMedium" style={styles.moduleTitle} numberOfLines={2}>{item.titre}</Text>
           {item.publie && video ? (
-            // Indicateur « vidéo » : uniquement quand le module en a une (sinon, ligne inchangée).
+            // Indicateur « vidéo » : au moins une leçon du module en a une (sinon, ligne inchangée).
             <View style={styles.row}>
               <Text variant="caption" style={[styles.muted, styles.shrink]} numberOfLines={1}>
                 {st.valide ? 'Module validé' : `${st.leconsTotal} leçons${n2 != null ? ` · Niveau 2 : ${Math.round(n2 * 100)} %` : pct ? ` · ${pct} %` : ''}`}
@@ -364,7 +364,7 @@ const PrepHomeScreen = ({ navigation, route }) => {
                 const idx = modules.indexOf(m);
                 const ahead = recommendedIndex >= 0 && idx > recommendedIndex && m.publie && core.moduleStatus(m.module, etat).statut !== 'valide'
                   ? modules[recommendedIndex].numero : null;
-                return <ModuleRow key={m.code} item={m} etat={etat} index={i} current={idx === recommendedIndex} locked={locked && m.publie} conseilleApres={ahead && ahead !== m.numero && idx === recommendedIndex + 1 ? ahead : null} video={Boolean(findVideo(videos, 'module', m.code, prefs.versions?.[m.code] || 'fr'))} onPress={() => openModule(m)} />;
+                return <ModuleRow key={m.code} item={m} etat={etat} index={i} current={idx === recommendedIndex} locked={locked && m.publie} conseilleApres={ahead && ahead !== m.numero && idx === recommendedIndex + 1 ? ahead : null} video={Boolean(m.module?.lecons.some((l) => findVideo(videos, 'lecon', l.code, prefs.versions?.[m.code] || 'fr')))} onPress={() => openModule(m)} />;
               })}
             </Animated.View>
 

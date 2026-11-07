@@ -7,13 +7,13 @@ const { watchUrl } = require('./youtube');
 
 /**
  * Chaîne de publication d'une vidéo (étapes a → d du cahier des charges vidéo), idempotente :
- *   1. cible       module / concours / version, vérifiés dans le pack
+ *   1. cible       leçon / concours / version, vérifiés dans le pack
  *   2. fichier     vidéo à envoyer (a. génération : aucun générateur branché pour l'instant)
  *   3. production  lecture de la vidéo déjà enregistrée pour cette cible
  *   4. YouTube     b. envoi public reprenable — jamais deux fois la même vidéo
  *   5. YouTube     c. identifiant, traitement terminé, visibilité publique, intégrable, durée
  *   6. confirmation explicite avant d'écrire en production
- *   7. production  d. écriture idempotente rattachée au module / concours
+ *   7. production  d. écriture idempotente rattachée à la leçon / au concours
  *
  * Toutes les dépendances (YouTube, base, journal, confirmation) sont injectées : les tests les
  * remplacent par des faux, aucune vidéo n'est envoyée.

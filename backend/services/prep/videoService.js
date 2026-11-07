@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 /**
- * Vidéos explicatives (modules) et de présentation (concours) de la préparation.
+ * Vidéos explicatives (une par leçon) et de présentation (concours) de la préparation.
  *
  * Index en mémoire rafraîchi toutes les 5 minutes : une vidéo enregistrée en production par le
  * script local (scripts/video/publish.js) apparaît dans l'application au plus tard 5 minutes
  * après, sans redéploiement ni nouvelle version. Seules les vidéos « published » sont exposées ;
  * une base indisponible ne casse jamais une réponse (dernier index connu, sinon aucun).
  *
- * Forme de l'index : { modules: { CODE: { fr: video, en: video } }, concours: { CODE: { fr: video } } }
+ * Forme de l'index : { lecons: { CODE_LECON: { fr: video, en: video } }, concours: { CODE: { fr: video } } }
  */
 const TTL_MS = 5 * 60 * 1000;
-const CIBLES = { module: 'modules', concours: 'concours' };
+const CIBLES = { lecon: 'lecons', concours: 'concours' };
 
 /** Champs publics d'une vidéo (contrat de l'API). */
 const publicVideo = (doc) => (doc ? {
@@ -23,7 +23,7 @@ const publicVideo = (doc) => (doc ? {
   status: doc.status,
 } : null);
 
-const emptyIndex = () => ({ modules: {}, concours: {} });
+const emptyIndex = () => ({ lecons: {}, concours: {} });
 
 const buildIndex = (docs) => {
   const index = emptyIndex();
@@ -67,7 +67,7 @@ const createVideoService = ({
   return {
     index,
     find,
-    forModule: async (code, langue = 'fr') => find(await index(), 'module', code, langue),
+    forLesson: async (code, langue = 'fr') => find(await index(), 'lecon', code, langue),
     forConcours: async (code) => find(await index(), 'concours', code, 'fr'),
     reset: () => { cache = { at: 0, index: null }; },
   };

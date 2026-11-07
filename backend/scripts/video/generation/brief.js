@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * Dossier de génération d'une vidéo, construit UNIQUEMENT à partir du contenu du module ou du
+ * Dossier de génération d'une vidéo, construit UNIQUEMENT à partir du contenu de la leçon ou du
  * concours présent dans le projet (pack). Aucune vidéo n'est générée ici.
  *
- *   npm run video:brief -- --type module --id MATH-LNEXP
- *   npm run video:brief -- --type module --id ANG-GRAM --langue en
+ *   npm run video:brief -- --type lecon --id MATH-LNEXP-L1
+ *   npm run video:brief -- --type lecon --id ANG-GRAM-L1 --langue en
  *   npm run video:brief -- --type concours --id ENSEA-AS --stdout
  *
  * Sorties : backend/.video-state/briefs/<type>-<code>-<langue>.json (données) et .md (consigne
@@ -31,41 +31,45 @@ const VISUEL_PAR_BLOC = {
   recap: 'récapitulatif final, points numérotés',
 };
 
-/** Termes dans l'ordre de première apparition (gras du cours + libellés de notions). */
-const glossaireModule = (mod) => {
+/** Termes dans l'ordre de première apparition dans la leçon (termes en gras du cours). */
+const glossaireLecon = (lecon) => {
   const vus = new Map();
   const ajouter = (terme, ou) => {
     const t = terme.replace(/[.:;,]+$/, '').trim();
     if (t.length < 3 || t.length > 60 || vus.has(t.toLowerCase())) return;
     vus.set(t.toLowerCase(), { terme: t, premiereApparition: ou });
   };
-  mod.lecons.forEach((l, li) => l.blocs.forEach((b, bi) => {
-    const ou = `leçon ${li + 1}, bloc ${bi + 1}`;
+  lecon.blocs.forEach((b, bi) => {
+    const ou = `bloc ${bi + 1}`;
     [b.md, b.texte, ...(b.items || []), ...(b.lignes || []).flat()].forEach((x) => gras(x).forEach((t) => ajouter(t, ou)));
-  }));
-  mod.notions.forEach((n) => ajouter(n.libelle, 'notion du module'));
+  });
   return [...vus.values()];
 };
 
-const briefModule = (cible) => {
-  const mod = cible.contenu;
+const briefLecon = (cible) => {
+  const { lecon, module: mod } = cible.contenu;
+  // Le plan suit les sections (titres) de la leçon ; à défaut, la leçon forme une seule partie.
+  const sections = [];
+  lecon.blocs.forEach((b) => {
+    if (b.type === 'titre' || !sections.length) sections.push({ titre: b.type === 'titre' ? b.texte : lecon.titre, blocs: [] });
+    if (b.type !== 'titre') sections[sections.length - 1].blocs.push(b);
+  });
   return {
-    cible: { type: 'module', code: cible.code, langue: cible.langue },
-    titre: mod.titre,
-    resume: mod.resume,
+    cible: { type: 'lecon', code: cible.code, langue: cible.langue },
+    titre: lecon.titre,
+    resume: cible.resume,
     matiere: mod.matiere,
+    module: { code: mod.code, titre: mod.titre },
     concours: cible.concours,
     empreinteContenu: cible.empreinte,
-    plan: mod.lecons.map((l) => ({
-      lecon: l.code,
-      titre: l.titre,
-      sections: l.blocs.filter((b) => b.type === 'titre').map((b) => b.texte),
-      aRetenir: l.blocs.filter((b) => b.type === 'aRetenir' || b.type === 'recap').flatMap((b) => (b.items ? b.items : [sansGras(b.texte)])),
-      pieges: l.blocs.filter((b) => b.type === 'piege').map((b) => sansGras(b.texte)),
-      visuels: [...new Set(l.blocs.map((b) => VISUEL_PAR_BLOC[b.type]).filter(Boolean))],
+    plan: sections.map((sec) => ({
+      titre: sec.titre,
+      aRetenir: sec.blocs.filter((b) => b.type === 'aRetenir' || b.type === 'recap').flatMap((b) => (b.items ? b.items.map(sansGras) : [sansGras(b.texte)])),
+      pieges: sec.blocs.filter((b) => b.type === 'piege').map((b) => sansGras(b.texte)),
+      visuels: [...new Set(sec.blocs.map((b) => VISUEL_PAR_BLOC[b.type]).filter(Boolean))],
     })),
-    glossaire: glossaireModule(mod),
-    contenuSource: mod.lecons.map((l) => ({ titre: l.titre, blocs: l.blocs.filter((b) => b.type !== 'miniQuestion') })),
+    glossaire: glossaireLecon(lecon),
+    contenuSource: { titre: lecon.titre, blocs: lecon.blocs.filter((b) => b.type !== 'miniQuestion') },
   };
 };
 
@@ -94,7 +98,7 @@ const markdown = (b) => [
   `Empreinte du contenu : ${b.empreinteContenu}`,
   '',
   '## Mission',
-  `Produire une vidéo ${b.cible.type === 'module' ? 'd’explication de ce module' : 'de présentation de ce concours'} pour l’application Fatafalta, en ${b.cible.langue === 'fr' ? 'français' : `langue « ${b.cible.langue} »`}.`,
+  `Produire une vidéo ${b.cible.type === 'lecon' ? `d’explication de cette leçon (module « ${b.module.titre} »), affichée en tête de la leçon` : 'de présentation de ce concours'} pour l’application Fatafalta, en ${b.cible.langue === 'fr' ? 'français' : `langue « ${b.cible.langue} »`}.`,
   'Produire d’abord le **storyboard** (format : scripts/video/generation/storyboard.js), le faire valider par `verifierStoryboard`, puis seulement le rendu.',
   '',
   '## Plan issu du contenu',
@@ -106,7 +110,7 @@ const markdown = (b) => [
 
 const construireBrief = (opts) => {
   const cible = resolveCible(opts);
-  const brief = cible.type === 'module' ? briefModule(cible) : briefConcours(cible);
+  const brief = cible.type === 'lecon' ? briefLecon(cible) : briefConcours(cible);
   return { brief, markdown: markdown(brief) };
 };
 
@@ -115,7 +119,7 @@ if (require.main === module) {
   const val = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
   try {
     const opts = { type: val('--type'), id: val('--id'), langue: val('--langue', 'fr') };
-    if (!['module', 'concours'].includes(opts.type) || !opts.id) throw new Error('Usage : --type module|concours --id <code> [--langue en] [--stdout]');
+    if (!['lecon', 'concours'].includes(opts.type) || !opts.id) throw new Error('Usage : --type lecon|concours --id <code> [--langue en] [--stdout]');
     const { brief, markdown: md } = construireBrief(opts);
     if (args.includes('--stdout')) { process.stdout.write(md); } else {
       fs.mkdirSync(OUT, { recursive: true });
@@ -130,4 +134,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { construireBrief, glossaireModule };
+module.exports = { construireBrief, glossaireLecon };

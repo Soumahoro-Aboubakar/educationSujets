@@ -20,7 +20,7 @@ const { construireBrief } = require('../scripts/video/generation/brief');
 
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'video-test-'));
 const SHA = 'a'.repeat(64);
-const fichier = { chemin: '/videos/math.mp4', taille: 20 * 1024 * 1024, sha256: SHA };
+const fichier = { chemin: '/videos/math-l1.mp4', taille: 20 * 1024 * 1024, sha256: SHA };
 
 const fakeYoutube = (over = {}) => {
   const calls = { ouvrirSession: 0, envoyer: 0, chercher: 0 };
@@ -64,14 +64,15 @@ const deps = (over = {}) => ({
   ...over,
 });
 
-const OPTS = { type: 'module', id: 'MATH-LNEXP', langue: 'fr', fichier: '/videos/math.mp4', attenteMinutes: 1 };
+const OPTS = { type: 'lecon', id: 'MATH-LNEXP-L1', langue: 'fr', fichier: '/videos/math-l1.mp4', attenteMinutes: 1 };
 
 test('options : erreurs explicites, aucune action par défaut', () => {
   assert.throws(() => parseArgs(['--id', 'X']), /--type/);
   assert.throws(() => parseArgs(['--type', 'module']), /--id/);
   assert.throws(() => parseArgs(['--type', 'concours', '--id', 'ENSEA-AS', '--langue', 'en']), /concours/);
-  assert.throws(() => parseArgs(['--type', 'module', '--id', 'X', '--inconnue']), /option inconnue/);
-  const o = parseArgs(['--type', 'module', '--id', 'MATH-LNEXP', '--dry-run']);
+  assert.throws(() => parseArgs(['--type', 'lecon', '--id', 'X', '--inconnue']), /option inconnue/);
+  assert.throws(() => parseArgs(['--type', 'module', '--id', 'MATH-LNEXP']), /par leçon/);
+  const o = parseArgs(['--type', 'lecon', '--id', 'MATH-LNEXP-L1', '--dry-run']);
   assert.equal(o.dryRun, true);
   assert.equal(o.langue, 'fr');
 });
@@ -84,18 +85,24 @@ test('secrets : URI masquée, jamais d’identifiants affichés ; refus sur le s
   assert.doesNotThrow(() => assertLocalMachine({}));
 });
 
-test('cible : module, concours et version de langue vérifiés dans le pack', () => {
-  assert.equal(resolveCible({ type: 'module', id: 'MATH-LNEXP' }).type, 'module');
+test('cible : leçon, concours et version de langue vérifiés dans le pack', () => {
+  const l1 = resolveCible({ type: 'lecon', id: 'MATH-LNEXP-L1' });
+  assert.equal(l1.type, 'lecon');
+  assert.equal(l1.module.code, 'MATH-LNEXP');
   assert.equal(resolveCible({ type: 'concours', id: 'ENSEA-AS' }).sigle, 'ENSEA');
-  assert.equal(resolveCible({ type: 'module', id: 'ANG-GRAM', langue: 'en' }).titre, 'English grammar essentials');
-  assert.throws(() => resolveCible({ type: 'module', id: 'MATH-LNEXP', langue: 'en' }), /version « en » inexistante/);
-  assert.throws(() => resolveCible({ type: 'module', id: 'INCONNU' }), /introuvable/);
+  assert.equal(resolveCible({ type: 'lecon', id: 'ANG-GRAM-L1', langue: 'en' }).titre, 'Tenses: present, past and present perfect');
+  assert.notEqual(resolveCible({ type: 'lecon', id: 'ANG-GRAM-L1' }).empreinte, resolveCible({ type: 'lecon', id: 'ANG-GRAM-L2' }).empreinte);
+  assert.throws(() => resolveCible({ type: 'lecon', id: 'MATH-LNEXP-L1', langue: 'en' }), /version « en » inexistante/);
+  assert.throws(() => resolveCible({ type: 'lecon', id: 'MATH-LNEXP' }), /introuvable/);
+  assert.throws(() => resolveCible({ type: 'module', id: 'MATH-LNEXP' }), /type de cible inconnu/);
   assert.throws(() => resolveCible({ type: 'concours', id: 'INCONNU' }), /introuvable/);
 });
 
 test('métadonnées YouTube : public, intégrable, marqueur d’idempotence, titre ≤ 100', () => {
-  const cible = resolveCible({ type: 'module', id: 'MATH-LNEXP' });
+  const cible = resolveCible({ type: 'lecon', id: 'MATH-LNEXP-L1' });
   const meta = metadonnees(cible, { fichierSha256: SHA });
+  assert.match(meta.snippet.title, /La fonction logarithme népérien — Logarithme et exponentielle/);
+  assert.match(meta.snippet.description, /fatafalta:lecon:MATH-LNEXP-L1:fr:/);
   assert.equal(meta.status.privacyStatus, 'public');
   assert.equal(meta.status.embeddable, true);
   assert.ok(meta.snippet.description.includes(marqueur(cible, SHA)));
@@ -204,12 +211,13 @@ test('sans fichier ni reprise : message « aucun générateur branché »', asyn
 });
 
 test('--masquer et --etat', async () => {
-  const db = fakeDb({ cible: 'module', code: 'MATH-LNEXP', langue: 'fr', youtubeId: 'OLDVIDEO123', status: 'published', source: { empreinteContenu: 'ancienne' } });
+  const db = fakeDb({ cible: 'lecon', code: 'MATH-LNEXP-L1', langue: 'fr', youtubeId: 'OLDVIDEO123', status: 'published', source: { empreinteContenu: 'ancienne' } });
   const lignes = await listerEtat(deps({ db }));
-  const ligne = lignes.find((l) => l.code === 'MATH-LNEXP');
+  assert.ok(lignes.some((l) => l.type === 'lecon' && l.code === 'ANG-GRAM-L1' && l.langue === 'en'), 'chaque leçon, dans chaque version');
+  const ligne = lignes.find((l) => l.code === 'MATH-LNEXP-L1');
   assert.equal(ligne.video, true);
   assert.match(ligne.statut, /contenu modifié/);
-  assert.equal((await masquer({ type: 'module', id: 'MATH-LNEXP', langue: 'fr' }, deps({ db }))).action, 'masquee');
+  assert.equal((await masquer({ type: 'lecon', id: 'MATH-LNEXP-L1', langue: 'fr' }, deps({ db }))).action, 'masquee');
   assert.equal(db.doc.status, 'hidden');
 });
 
@@ -233,8 +241,10 @@ test('storyboard : un terme utilisé avant d’être défini est refusé', () =>
   assert.ok(ko.erreurs.some((e) => /visuel manquant/.test(e)));
 });
 
-test('dossier de génération : issu du contenu, glossaire ordonné, consignes qualité', () => {
-  const { brief, markdown } = construireBrief({ type: 'module', id: 'ANG-GRAM', langue: 'fr' });
+test('dossier de génération : issu de la leçon, glossaire ordonné, consignes qualité', () => {
+  const { brief, markdown } = construireBrief({ type: 'lecon', id: 'ANG-GRAM-L1', langue: 'fr' });
+  assert.equal(brief.module.code, 'ANG-GRAM');
+  assert.ok(brief.plan.some((p) => p.titre === 'For, since, ago : dire « depuis » et « il y a »'));
   const termes = brief.glossaire.map((g) => g.terme);
   assert.ok(termes.indexOf('auxiliaire') < termes.indexOf('present perfect'));
   assert.match(markdown, /Expliquer AVANT d'utiliser/);

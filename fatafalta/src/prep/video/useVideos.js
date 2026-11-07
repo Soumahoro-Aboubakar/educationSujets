@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import usePrep from '../store';
 
 /**
- * Accès aux vidéos publiées. Sans vidéo, ces hooks renvoient null : l'écran n'affiche alors
+ * Accès aux vidéos publiées : une par leçon (affichée à l'ouverture de la leçon) et une de
+ * présentation par concours. Sans vidéo, ces hooks renvoient null : l'écran n'affiche alors
  * strictement rien de lié à la vidéo (ni bouton, ni icône, ni message).
  */
-const KEYS = { module: 'modules', concours: 'concours' };
+const KEYS = { lecon: 'lecons', concours: 'concours' };
 
 export const findVideo = (index, cible, code, langue = 'fr') => index?.[KEYS[cible]]?.[code]?.[langue] || null;
 
@@ -17,7 +18,7 @@ export const useVideosIndex = () => {
   return index;
 };
 
-/** Vidéo d'un module (dans la version de cours lue) ou d'un concours, sinon null. */
+/** Vidéo d'une leçon (dans la version de cours lue) ou d'un concours, sinon null. */
 export const useVideo = (cible, code, langue = 'fr') => findVideo(useVideosIndex(), cible, code, langue);
 
 /** « 18 min », « 45 s » — durée lisible ; null si inconnue. */

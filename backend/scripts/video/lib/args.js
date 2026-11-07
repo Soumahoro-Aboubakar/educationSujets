@@ -3,22 +3,22 @@
  * Erreur explicite (et aucune action) dès qu'une option est inconnue ou incohérente.
  */
 const USAGE = `
-Publication d'une vidéo explicative (module) ou de présentation (concours) — EN LOCAL UNIQUEMENT.
+Publication d'une vidéo explicative (leçon) ou de présentation (concours) — EN LOCAL UNIQUEMENT.
 
-  node scripts/video/publish.js --type module   --id MATH-LNEXP --fichier ~/videos/math-lnexp.mp4
-  node scripts/video/publish.js --type concours --id ENSEA-AS   --fichier ~/videos/ensea-as.mp4
-  node scripts/video/publish.js --type module   --id ANG-GRAM --langue en --fichier …
+  node scripts/video/publish.js --type lecon    --id MATH-LNEXP-L1 --fichier ~/videos/math-lnexp-l1.mp4
+  node scripts/video/publish.js --type concours --id ENSEA-AS      --fichier ~/videos/ensea-as.mp4
+  node scripts/video/publish.js --type lecon    --id ANG-GRAM-L1 --langue en --fichier …
 
 Options
-  --type module|concours   cible de la vidéo (obligatoire, sauf --etat)
-  --id <code>              code du module ou du concours (programme) dans le pack
-  --langue fr|en…          version du cours (défaut : fr ; autre valeur : cours de langue seulement)
+  --type lecon|concours    cible de la vidéo (obligatoire, sauf --etat)
+  --id <code>              code de la leçon (ex. MATH-LNEXP-L1) ou du concours (programme) dans le pack
+  --langue fr|en…          version du cours (défaut : fr ; autre valeur : leçon d'un cours de langue)
   --fichier <mp4>          vidéo à envoyer (étape « génération » : aucun générateur branché pour l'instant)
   --titre "<titre>"        titre YouTube (défaut : construit depuis le contenu)
   --dry-run                lit tout (pack, fichier, YouTube, base), n'envoie rien, n'écrit rien
   --remplacer              autorise le remplacement d'une vidéo déjà enregistrée pour cette cible
   --masquer                retire la vidéo de l'application (statut « hidden ») sans la supprimer de YouTube
-  --etat                   liste les modules et concours avec ou sans vidéo en production (lecture seule)
+  --etat                   liste les leçons et concours avec ou sans vidéo en production (lecture seule)
   --confirmer <code>       confirmation non interactive (doit être exactement le code de la cible)
   --attente <minutes>      attente maximale du traitement YouTube (défaut : 20)
   --env-video <fichier>    défaut : backend/.env.video.local
@@ -56,8 +56,9 @@ const parseArgs = (argv) => {
     }
   }
   if (opts.aide || opts.etat) return opts;
-  if (!['module', 'concours'].includes(opts.type)) throw new Error('--type module|concours est obligatoire');
-  if (!opts.id || !/^[A-Z0-9][A-Z0-9-]{1,59}$/i.test(opts.id)) throw new Error('--id <code> est obligatoire (ex. MATH-LNEXP, ENSEA-AS)');
+  if (opts.type === 'module') throw new Error('les vidéos sont désormais faites par leçon : --type lecon --id <code de la leçon> (ex. MATH-LNEXP-L1)');
+  if (!['lecon', 'concours'].includes(opts.type)) throw new Error('--type lecon|concours est obligatoire');
+  if (!opts.id || !/^[A-Z0-9][A-Z0-9-]{1,59}$/i.test(opts.id)) throw new Error('--id <code> est obligatoire (ex. MATH-LNEXP-L1, ENSEA-AS)');
   if (!/^[a-z]{2}$/.test(opts.langue)) throw new Error('--langue attend un code à deux lettres (fr, en…)');
   if (opts.type === 'concours' && opts.langue !== 'fr') throw new Error('un concours n’a qu’une version (fr)');
   if (!(opts.attenteMinutes > 0)) throw new Error('--attente attend un nombre de minutes > 0');

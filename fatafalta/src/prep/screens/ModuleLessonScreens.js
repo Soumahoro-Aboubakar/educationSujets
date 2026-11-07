@@ -5,7 +5,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import Svg, { Path } from 'react-native-svg';
-import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, FileText, Lock, Type as TypeIcon, X } from 'lucide-react-native';
+import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, FileText, Lock, PlayCircle, Type as TypeIcon, X } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
 import { getLesson, getModule, getProgramme, levelExercises, programmeModules } from '../content';
@@ -14,10 +14,10 @@ import LangToggle from '../ui/LangToggle';
 import VideoPanel from '../video/VideoPanel';
 import VideoDock from '../video/VideoDock';
 import useVideoScroll from '../video/useVideoScroll';
-import { useVideo } from '../video/useVideos';
+import { findVideo, useVideo, useVideosIndex } from '../video/useVideos';
 import { brand, colors, LEVELS, paperLines, subjectTint, theme, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
-import { CornerFold, Enter, GoldSwash, LevelDots, NightBackground, PaperStack, Pop, PrepButton, PressScale, ProgressBar, ProgressRing, Segmented, SubjectIcon } from '../ui/primitives';
+import { Badge, CornerFold, Enter, GoldSwash, LevelDots, NightBackground, PaperStack, Pop, PrepButton, PressScale, ProgressBar, ProgressRing, Segmented, SubjectIcon } from '../ui/primitives';
 import ART from '../ui/art';
 import { LinearGradient } from 'expo-linear-gradient';
 import { LessonBlock } from '../components/LessonBlocks';
@@ -35,13 +35,8 @@ export const ModuleScreen = ({ navigation, route }) => {
   const [version, setVersion, versions] = useModuleVersion(moduleCode);
   const mod = getModule(moduleCode, version);
   const ref = programmeModules(programme).find((m) => m.code === moduleCode);
-  // Vidéo explicative : absente → rien ne change à l'écran.
-  const video = useVideo('module', moduleCode, version);
-  const vs = useVideoScroll();
-  const panel = useRef(null);
-  const [player, setPlayer] = useState({ playing: false, started: false });
-  const [dockHold, setDockHold] = useState(false);
-  useEffect(() => { if (!vs.panelOut) setDockHold(false); }, [vs.panelOut]);
+  // Vidéos : une par leçon, lue à l'ouverture de la leçon ; ici, seulement l'indicateur par leçon.
+  const videos = useVideosIndex();
   const etat = useProgress(programmeCode);
   const rights = useRights();
   const catalogue = useCatalogue();
@@ -81,7 +76,7 @@ export const ModuleScreen = ({ navigation, route }) => {
   return (
     <PaperStack header={header}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-      <Animated.ScrollView ref={vs.scrollRef} onScroll={vs.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.modContent} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.modContent} showsVerticalScrollIndicator={false}>
         <View style={styles.modHead}>
           <SubjectIcon nom={mod.matiere} teinte={ref?.teinte} size={52} />
           <View style={{ flex: 1 }}>
@@ -90,19 +85,6 @@ export const ModuleScreen = ({ navigation, route }) => {
           </View>
         </View>
         <GoldSwash width={96} style={{ marginLeft: 66, marginTop: 2 }} />
-        {video ? (
-          <VideoPanel
-            ref={panel}
-            video={video}
-            kind="module"
-            language={version}
-            onLayout={vs.onPanelLayout}
-            onRead={() => vs.scrollToAnchor('lecons')}
-            readLabel="Lire le cours"
-            onPlayerChange={setPlayer}
-            style={styles.video}
-          />
-        ) : null}
         <View style={styles.modMeta}>
           <CornerFold size={30} radius={20} animated />
           <ProgressRing size={64} stroke={6} value={st.pourcentage} color={st.valide ? colors.success : undefined} gradient={!st.valide} track={brand.line}>
@@ -117,24 +99,29 @@ export const ModuleScreen = ({ navigation, route }) => {
           </View>
         </View>
 
-        <View onLayout={vs.anchor('lecons')}>
-          <Segmented items={[{ key: 'lecons', label: 'Leçons' }, { key: 'exercices', label: 'Exercices' }]} value={tab} onChange={setTab} style={styles.segment} />
-        </View>
+        <Segmented items={[{ key: 'lecons', label: 'Leçons' }, { key: 'exercices', label: 'Exercices' }]} value={tab} onChange={setTab} style={styles.segment} />
 
         {tab === 'lecons' ? (
           <View style={styles.list}>
             {mod.lecons.map((l, i) => {
               const p = etat.lecons?.[l.code];
               const isNext = nextLesson?.code === l.code;
+              const lessonVideo = findVideo(videos, 'lecon', l.code, version);
               return (
                 <Enter key={l.code} index={i}>
-                  <PressScale onPress={go(() => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.code }))} style={[styles.lessonRow, isNext && styles.rowCurrent]} accessibilityLabel={`Leçon ${i + 1}, ${l.titre}, ${l.duree} minutes${p?.terminee ? ', terminée' : ''}`}>
+                  <PressScale onPress={go(() => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.code }))} style={[styles.lessonRow, isNext && styles.rowCurrent]} accessibilityLabel={`Leçon ${i + 1}, ${l.titre}, ${l.duree} minutes${lessonVideo ? ', avec vidéo' : ''}${p?.terminee ? ', terminée' : ''}`}>
                     {p?.terminee ? <CornerFold radius={18} size={22} /> : null}
                     <View style={[styles.lessonNum, p?.terminee && styles.lessonDone, isNext && styles.lessonNext]}>
                       {p?.terminee ? <Check size={18} color="#FFF" strokeWidth={2.8} /> : <Text style={[styles.lessonNumText, isNext && { color: brand.burgundy }]}>{i + 1}</Text>}
                     </View>
                     <View style={{ flex: 1, gap: 2 }}>
-                      <Text variant="caption" style={styles.muted}>{`Leçon ${i + 1} · ${l.duree} min`}</Text>
+                      {lessonVideo ? (
+                        // Indicateur : cette leçon s'ouvre sur une vidéo (sinon, ligne inchangée).
+                        <View style={styles.row}>
+                          <Text variant="caption" style={styles.muted}>{`Leçon ${i + 1} · ${l.duree} min`}</Text>
+                          <Badge label="Vidéo" tone="ink" icon={PlayCircle} />
+                        </View>
+                      ) : <Text variant="caption" style={styles.muted}>{`Leçon ${i + 1} · ${l.duree} min`}</Text>}
                       <Text variant="bodyMedium" style={styles.rowTitle}>{l.titre}</Text>
                       {p && !p.terminee ? <ProgressBar value={p.position} height={3} color={brand.burgundy} style={{ marginTop: 6, width: 120 }} /> : null}
                     </View>
@@ -193,18 +180,7 @@ export const ModuleScreen = ({ navigation, route }) => {
           </View>
           <ChevronRight size={18} color={brand.burgundy} />
         </PressScale>
-      </Animated.ScrollView>
-      {video ? (
-        <VideoDock
-          visible={vs.panelOut && (player.playing || dockHold)}
-          playing={player.playing}
-          title={video.title || mod.titre}
-          durationSec={video.durationSec}
-          getCurrentTime={() => panel.current?.getCurrentTime() ?? Promise.resolve(0)}
-          onToggle={() => { setDockHold(true); panel.current?.toggle(); }}
-          onBack={vs.scrollToPanel}
-        />
-      ) : null}
+      </ScrollView>
       <View style={[styles.sticky, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
         <LinearGradient colors={['rgba(252,250,245,0)', brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
         {rights.peutEtudier
@@ -242,6 +218,8 @@ export const LessonScreen = ({ navigation, route }) => {
   const [version, setVersion, versions] = useModuleVersion(getLesson(leconCode)?.module.code);
   const found = getLesson(leconCode, version);
   const { lecon, module: mod, index } = found;
+  // Vidéo explicative de la leçon (dans la version lue), en tête du texte ; absente → rien ne change.
+  const video = useVideo('lecon', leconCode, version);
   const programme = getProgramme(programmeCode);
   const ref = programmeModules(programme).find((m) => m.code === mod.code);
   const tint = subjectTint(ref?.teinte);
@@ -262,6 +240,12 @@ export const LessonScreen = ({ navigation, route }) => {
   const [locked, setLocked] = useState(false);
   const scroll = useRef(null);
   const progress = useSharedValue(0);
+  const vs = useVideoScroll({ scrollRef: scroll });
+  const videoY = vs.y; // valeur partagée seule : le worklet ne doit pas capturer tout l'objet vs
+  const panel = useRef(null);
+  const [player, setPlayer] = useState({ playing: false, started: false });
+  const [dockHold, setDockHold] = useState(false);
+  useEffect(() => { if (!vs.panelOut) setDockHold(false); }, [vs.panelOut]);
   const lastPos = useRef(etat.lecons?.[leconCode]?.position || 0);
   const started = useRef(Date.now());
   const opened = useRef(false);
@@ -324,6 +308,7 @@ export const LessonScreen = ({ navigation, route }) => {
     const max = Math.max(1, e.contentSize.height - e.layoutMeasurement.height);
     const p = Math.min(1, Math.max(0, e.contentOffset.y / max));
     progress.value = p;
+    videoY.set(e.contentOffset.y);
     scheduleOnRN(onPos, p);
   });
   const bar = useAnimatedStyle(() => ({ transform: [{ scaleX: progress.value }] }));
@@ -411,7 +396,20 @@ export const LessonScreen = ({ navigation, route }) => {
         <Text variant="title" style={[styles.ink, { marginTop: 14 }]} accessibilityRole="header">{lecon.titre}</Text>
         <GoldSwash width={120} style={{ marginTop: 4 }} />
         <Text variant="caption" style={[styles.mutedLight, { marginBottom: 22, marginTop: 8 }]}>{`${lecon.duree} min de lecture`}</Text>
-        <View style={{ gap: 18 }}>
+        {video ? (
+          <VideoPanel
+            ref={panel}
+            video={video}
+            kind="lecon"
+            language={version}
+            onLayout={vs.onPanelLayout}
+            onRead={() => vs.scrollToAnchor('texte')}
+            readLabel="Lire la leçon"
+            onPlayerChange={setPlayer}
+            style={styles.lessonVideo}
+          />
+        ) : null}
+        <View style={{ gap: 18 }} onLayout={vs.anchor('texte')}>
           {lecon.blocs.map((bloc, i) => (
             <Animated.View key={`${lecon.code}-${i}`} entering={reduce ? undefined : FadeInDown.delay(Math.min(i, 6) * 40).duration(320)}>
               <LessonBlock bloc={bloc} tint={tint.tint} size={size} onMiniResult={(code, ok) => { if (!ok) markFragile(programmeCode, code, mod.notions[0]?.code); }} />
@@ -420,6 +418,18 @@ export const LessonScreen = ({ navigation, route }) => {
         </View>
         <View style={{ height: 130 }} />
       </Animated.ScrollView>
+      {video ? (
+        <VideoDock
+          visible={vs.panelOut && (player.playing || dockHold)}
+          playing={player.playing}
+          title={video.title || lecon.titre}
+          durationSec={video.durationSec}
+          getCurrentTime={() => panel.current?.getCurrentTime() ?? Promise.resolve(0)}
+          onToggle={() => { setDockHold(true); panel.current?.toggle(); }}
+          onBack={vs.scrollToPanel}
+          top={14}
+        />
+      ) : null}
       {sizeOpen ? (
         <Animated.View entering={FadeInDown.duration(180)} exiting={FadeOut.duration(120)} style={styles.sizePicker}>
           {SIZES.map((sz) => (
@@ -463,7 +473,7 @@ const styles = StyleSheet.create({
   modContent: { paddingHorizontal: 20, paddingTop: 26, paddingBottom: 140 },
   modHead: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   modKicker: { fontFamily: theme.fontFamily.semiBold },
-  video: { marginTop: 20 },
+  lessonVideo: { marginBottom: 28 },
   modMeta: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 20, padding: 14, borderRadius: 20, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
   modPct: { fontFamily: theme.fontFamily.bold, fontSize: 14, color: brand.ink },
   metaFacts: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' },

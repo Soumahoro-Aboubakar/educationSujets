@@ -82,19 +82,20 @@ exports.getProgramme = asyncHandler(async (req, res) => {
     modules[code] = {
       code, titre: m.titre, resume: m.resume, matiere: m.matiere, duree: m.duree, stats: m.stats,
       versions: core.moduleVersions(m),
-      video: videos.find(index, 'module', code),
-      lecons: m.lecons.map((l) => ({ code: l.code, titre: l.titre, duree: l.duree })),
+      // Vidéo explicative de chaque leçon (version par défaut) ; null sans vidéo.
+      lecons: m.lecons.map((l) => ({ code: l.code, titre: l.titre, duree: l.duree, video: videos.find(index, 'lecon', l.code) })),
     };
   });
   res.json({ success: true, data: { programme: { ...programme, video: videos.find(index, 'concours', programme.code) }, modules } });
 });
 
-// GET /api/prep/modules/:code?version=en
+// GET /api/prep/modules/:code?version=en — chaque leçon porte sa vidéo (null sans vidéo)
 exports.getModule = asyncHandler(async (req, res) => {
   const mod = content.getModule(req.params.code);
   if (!mod) throw new AppError('Module introuvable', 404);
   const data = content.publicModule(mod, versionOf(req.query.version));
-  res.json({ success: true, data: { ...data, video: await videos.forModule(mod.code, data.version) } });
+  const index = await videos.index();
+  res.json({ success: true, data: { ...data, lecons: data.lecons.map((l) => ({ ...l, video: videos.find(index, 'lecon', l.code, data.version) })) } });
 });
 
 // POST /api/prep/exercices/:code/tentative — correction en ligne immédiate

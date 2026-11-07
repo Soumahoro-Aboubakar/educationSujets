@@ -12,11 +12,11 @@ import YoutubeEmbed from './YoutubeEmbed';
 import { formatDuree } from './useVideos';
 
 /**
- * Vidéo en tête du contenu à lire (module ou concours).
+ * Vidéo en tête du contenu à lire : la leçon (à son ouverture) ou la page du concours.
  * - Chargée d'office quand il y a une connexion, sans lecture automatique : on la regarde en
- *   touchant « lecture », ou on fait défiler pour lire le cours dessous.
+ *   touchant « lecture », ou on fait défiler pour lire la leçon dessous.
  * - Le lecteur YouTube n'est jamais recouvert une fois prêt ; la miniature ne sert qu'au chargement.
- * - Quitter l'écran (ouvrir une leçon) met en pause : on retrouve la vidéo au même instant.
+ * - Quitter l'écran met la vidéo en pause.
  * Ne pas rendre ce composant sans vidéo : l'écran reste alors exactement comme avant.
  */
 const LOAD_TIMEOUT = 20000;
@@ -27,7 +27,7 @@ const MESSAGES = {
   indisponible: 'Cette vidéo est momentanément indisponible. Le cours écrit reste disponible dessous.',
 };
 
-const VideoPanel = forwardRef(({ video, kind = 'module', language = 'fr', readLabel, onRead, onLayout, onPlayerChange, style }, ref) => {
+const VideoPanel = forwardRef(({ video, kind = 'lecon', language = 'fr', readLabel, onRead, onLayout, onPlayerChange, style }, ref) => {
   const reduce = useReduceMotion();
   const enLigne = usePrep((s) => s.videosEnLigne);
   const loadVideos = usePrep((s) => s.loadVideos);

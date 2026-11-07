@@ -33,13 +33,15 @@ const DEFAULT_PREFS = { objectif: 10, tailleTexte: 17, puce: {}, rythmeFait: fal
  * EXPO_PUBLIC_VIDEOS_DEMO=1 ajoute des vidéos YouTube réelles pour tester l'interface.
  */
 const VIDEOS_TTL = 5 * 60 * 1000;
-const EMPTY_VIDEOS = { modules: {}, concours: {} };
 // eslint-disable-next-line global-require
 const DEMO_VIDEOS = __DEV__ && process.env.EXPO_PUBLIC_VIDEOS_DEMO === '1' ? require('./video/demo').default : null;
-const withDemo = (index) => (DEMO_VIDEOS ? {
-  modules: { ...(index?.modules || {}), ...DEMO_VIDEOS.modules },
-  concours: { ...(index?.concours || {}), ...DEMO_VIDEOS.concours },
-} : index || EMPTY_VIDEOS);
+const withDemo = (index) => {
+  const base = { lecons: index?.lecons || {}, concours: index?.concours || {} };
+  return DEMO_VIDEOS ? {
+    lecons: { ...base.lecons, ...DEMO_VIDEOS.lecons },
+    concours: { ...base.concours, ...DEMO_VIDEOS.concours },
+  } : base;
+};
 let videosRequest = null;
 
 const usePrep = create((set, get) => ({
@@ -71,7 +73,7 @@ const usePrep = create((set, get) => ({
     if (videosRequest) return videosRequest;
     videosRequest = prepApi.videos()
       .then((index) => {
-        if (index && index.modules && index.concours) {
+        if (index && index.concours) {
           set({ videos: { index: withDemo(index), majLe: Date.now() }, videosEnLigne: true });
           get().persist();
         }

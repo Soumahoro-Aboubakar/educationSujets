@@ -7,8 +7,9 @@ tout générateur de vidéo, humain ou IA. Elles priment sur toute autre préfé
 
 - Une idée par scène. Phrases courtes, vocabulaire courant, ton bienveillant (tutoiement, comme l'application).
 - Détaillée ne veut pas dire longue : chaque étape d'un raisonnement est montrée, aucune n'est sautée.
-- **Aucune durée imposée** : la durée suit le module (un module court donne une vidéo courte).
-- Fin de vidéo : récapitulatif des points à retenir (blocs « À retenir » et « Récapitulatif » du module).
+- **Une vidéo par leçon**, placée au-dessus du texte qu'elle explique : elle couvre la leçon, rien de plus.
+- **Aucune durée imposée** : la durée suit la leçon (viser court : l'attention baisse nettement au-delà de 6 min).
+- Fin de vidéo : récapitulatif des points à retenir (blocs « À retenir » et « Récapitulatif » de la leçon).
 
 ## 2. Expliquer AVANT d'utiliser
 
@@ -34,7 +35,7 @@ tout générateur de vidéo, humain ou IA. Elles priment sur toute autre préfé
 
 ## 4. Exactitude
 
-- Le contenu vient **uniquement** du module ou du concours concerné (dossier de génération) : aucun fait
+- Le contenu vient **uniquement** de la leçon ou du concours concerné (dossier de génération) : aucun fait
   ajouté. Un fait daté ou incertain (épreuves, coefficients) est présenté comme « à vérifier sur l'avis
   de concours de l'année ».
 - Relecture par un second modèle d'une autre famille puis validation du propriétaire (§ 26.2) avant

@@ -434,17 +434,20 @@ paramètres d'environnement existants ; ils ne sont pas modifiés par ce projet.
 
 ### 9 bis.1 Vidéos
 
-- **Vidéo d'explication d'un module** (une par module, et par version de langue pour un cours de
-  langue) et **vidéo de présentation d'un concours** (une par programme). Toutes optionnelles, sans
-  durée imposée, ajoutées progressivement **sans nouvelle version de l'application**.
+- **Vidéo d'explication d'une leçon** (une par leçon, et par version de langue pour un cours de
+  langue), visible **dès l'ouverture de la leçon**, et **vidéo de présentation d'un concours** (une par
+  programme). Toutes optionnelles, sans durée imposée (viser court), ajoutées progressivement **sans
+  nouvelle version de l'application**. La vidéo par leçon remplace la vidéo par module (décision du
+  2026-11-07) : plus courte, placée au-dessus du texte qu'elle explique, plus simple à tenir à jour.
 - **Sans vidéo** : aucun élément lié à la vidéo (ni bouton, ni icône, ni message) ; l'écran reste
   identique.
-- **Avec vidéo** : indicateur « Vidéo » (liste des modules, « Quel concours ? », lien vers le
-  concours) ; lecteur YouTube intégré **en tête du contenu à lire** (écran Module sous le titre,
-  écran du concours sous le titre), chargé d'office avec une connexion, **sans lecture automatique** ;
-  on regarde, ou on fait défiler pour lire, ou les deux : une barre « vidéo en cours » reste en haut
-  pendant la lecture du cours (pause, retour à la vidéo) ; ouvrir une leçon met la vidéo en pause au
-  même instant ; hors ligne, état calme « Connecte-toi pour regarder la vidéo » avec « Réessayer ».
+- **Avec vidéo** : indicateur « Vidéo » (leçon dans l'écran Module, module dans l'accueil Prépa,
+  « Quel concours ? », lien vers le concours) ; à l'ouverture de la leçon, lecteur YouTube intégré
+  **en tête du texte** (sous le titre de la leçon), chargé d'office avec une connexion, **sans lecture
+  automatique** ; on regarde, ou on fait défiler pour lire (« Lire la leçon »), ou les deux : une barre
+  « vidéo en cours » reste en haut pendant la lecture (pause, retour à la vidéo) ; quitter la leçon met
+  la vidéo en pause ; hors ligne, état calme « Connecte-toi pour regarder la vidéo » avec « Réessayer ».
+  Le concours garde sa vidéo de présentation en tête de sa page.
 - **Production (en local uniquement)** : génération par IA à partir du contenu du projet (pas encore
   branchée), envoi public sur la chaîne YouTube (API YouTube Data v3, OAuth 2.0), écriture en base de
   production après confirmation explicite ; script unique, idempotent, avec `--dry-run` et reprise.
@@ -1123,7 +1126,7 @@ EssaiAppareil    { identitéAppareil, joursInteraction[dates], iaUtilisées, sta
 ProfilPublic     { identité, pseudonyme, avatar, visibleClassement }
 StatsClassement  { identité, programme, période, score, compteurs }
 Signalement      { identité, élément, motif, texte, statut }
-PrepVideo        { cible (module|concours), code, langue, youtubeId, url, title, durationSec,
+PrepVideo        { cible (lecon|concours), code, langue, youtubeId, url, title, durationSec,
                    publishedAt, status (processing|published|hidden), source{empreinteContenu,
                    fichierSha256} }  — clé unique (cible, code, langue) ; écrite par script local
 LotGeneration    { programme, périmètre, modèles, statut, coûts, éléments[] }
@@ -1142,7 +1145,7 @@ GET   /api/prep/droits                            essai (jours restants, IA rest
 POST  /api/prep/jours-interaction                 enregistrement d'un jour d'interaction
 GET   /api/prep/catalogue                         organismes → cycles disposant d'un programme
 GET   /api/prep/programmes/:id                    matières, modules, progression
-GET   /api/prep/modules/:id?version=en            leçons, niveaux, statut, versions, video (null sans vidéo)
+GET   /api/prep/modules/:id?version=en            leçons (chacune avec video, null sans vidéo), niveaux, statut, versions
 GET   /api/prep/videos                            index des vidéos publiées (lecture seule ; pas de route d'écriture)
 GET   /api/prep/lecons/:id
 GET   /api/prep/modules/:id/session?niveau=n      exercices (sans les réponses)
@@ -1298,7 +1301,8 @@ Chaque composant est documenté (rôle, propriétés, états) et testé isoléme
 | 2026-11-05 | Même abonnement que les anciens sujets |
 | 2026-11-05 | Concours pilotes communiqués plus tard : l'IA doit les demander avant de développer |
 | 2026-11-05 | Claude Code collabore avec ChatGPT Plus (Codex CLI) dès que ChatGPT peut produire un rendu plus expert, en priorité pour les images ; Claude reste maître d'œuvre (§ 0, règle 5) |
-| 2026-11-07 | Vidéos explicatives (module) et de présentation (concours), optionnelles, hébergées sur YouTube, lues dans l'application ; aucune trace à l'écran sans vidéo ; publication par script local uniquement (§ 9 bis.1) |
+| 2026-11-07 | Vidéos explicatives et de présentation (concours), optionnelles, hébergées sur YouTube, lues dans l'application ; aucune trace à l'écran sans vidéo ; publication par script local uniquement (§ 9 bis.1) |
+| 2026-11-07 | Une vidéo par **leçon**, visible dès l'ouverture de la leçon, en tête du texte (remplace la vidéo par module) (§ 9 bis.1) |
 | 2026-11-07 | Cours de langue étrangère en deux versions : expliqué en français par défaut, ou entièrement dans la langue étudiée, bascule depuis l'interface du cours (§ 9 bis.2) |
 
 ---
@@ -1324,6 +1328,7 @@ Chaque composant est documenté (rôle, propriétés, états) et testé isoléme
 
 | Version | Date | Évolution |
 |---|---|---|
+| 0.8 | 2026-11-07 | Vidéo par leçon, visible à l'ouverture de la leçon (remplace la vidéo par module) ; API `lecons[].video` (§ 9 bis.1, § 28, § 29) |
 | 0.7 | 2026-11-07 | Vidéos explicatives et de présentation (§ 9 bis.1, `docs/videos/README.md`) ; cours de langue bilingues (§ 9 bis.2) ; modèle `PrepVideo` (§ 28) et API vidéo (§ 29) |
 | 0.6 | 2026-11-05 | Consigne de collaboration Claude Code ↔ ChatGPT Plus via Codex CLI (§ 0, règle 5) et décision correspondante (§ 32) |
 | 0.5 | 2026-11-05 | Ajout des parcours utilisateur de bout en bout (§ 4 bis), des fenêtres Mini-cours et Raisonnement (§ 12.1-12.2), du système de composants premium et des principes d'interaction (§ 29 bis), des critères d'acceptation (§ 31 bis) ; question sur les sujets de 2020 |

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Publication d'une vidéo explicative de module ou de présentation de concours.
+ * Publication d'une vidéo explicative de leçon ou de présentation de concours.
  * LOCAL UNIQUEMENT — jamais sur le serveur. Procédure complète : docs/videos/README.md
  *
- *   node scripts/video/publish.js --type module   --id MATH-LNEXP --fichier ~/videos/math-lnexp.mp4
+ *   node scripts/video/publish.js --type lecon    --id MATH-LNEXP-L1 --fichier ~/videos/math-lnexp-l1.mp4
  *   node scripts/video/publish.js --type concours --id ENSEA-AS   --fichier ~/videos/ensea-as.mp4 --dry-run
  *   node scripts/video/publish.js --etat
  *

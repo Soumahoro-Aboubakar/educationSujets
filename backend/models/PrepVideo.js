@@ -1,21 +1,23 @@
 const mongoose = require('mongoose');
 
 /**
- * Vidéo explicative d'un module ou de présentation d'un concours (programme de préparation).
+ * Vidéo explicative d'une LEÇON (affichée en tête de la leçon, à son ouverture) ou vidéo de
+ * présentation d'un concours (programme de préparation). Décision du 2026-11-07 : une vidéo par
+ * leçon (courte, placée au-dessus du texte qu'elle explique) plutôt qu'une par module.
  *
- * Le contenu de la préparation (modules, programmes) vit dans le pack versionné
+ * Le contenu de la préparation (leçons, programmes) vit dans le pack versionné
  * (data/prep/build/pack.json), embarqué dans l'application : la vidéo est donc rattachée par
- * CODE (« MATH-LNEXP », « ENSEA-AS »…) dans cette collection, pour qu'une vidéo ajoutée en
+ * CODE (« MATH-LNEXP-L1 », « ENSEA-AS »…) dans cette collection, pour qu'une vidéo ajoutée en
  * production apparaisse sans nouvelle version de l'application ni du pack.
  *
  * Écriture : uniquement par le script local scripts/video/publish.js (aucune route d'écriture).
  * Lecture : services/prep/videoService.js, qui n'expose que les vidéos « published ».
  */
 const PrepVideoSchema = new mongoose.Schema({
-  cible: { type: String, enum: ['module', 'concours'], required: true },
+  cible: { type: String, enum: ['lecon', 'concours'], required: true },
   code: { type: String, required: true, trim: true, maxlength: 60 },
-  // Version du cours : « fr » par défaut ; un module de langue étrangère peut avoir une vidéo
-  // par version (ex. « en » pour la version anglaise d'ANG-GRAM).
+  // Version du cours : « fr » par défaut ; une leçon d'un cours de langue étrangère peut avoir
+  // une vidéo par version (ex. « en » pour la version anglaise d'ANG-GRAM-L1).
   langue: { type: String, default: 'fr', match: /^[a-z]{2}$/ },
   youtubeId: { type: String, required: true, match: /^[A-Za-z0-9_-]{11}$/ },
   url: { type: String, required: true },
@@ -24,7 +26,7 @@ const PrepVideoSchema = new mongoose.Schema({
   publishedAt: { type: Date, default: null },
   status: { type: String, enum: ['processing', 'published', 'hidden'], default: 'processing' },
   // Traçabilité (§ 26.3) : contenu et fichier ayant servi à la vidéo, pour repérer les vidéos
-  // devenues obsolètes quand le module est modifié.
+  // devenues obsolètes quand la leçon est modifiée.
   source: {
     empreinteContenu: { type: String, default: null },
     fichierSha256: { type: String, default: null },
