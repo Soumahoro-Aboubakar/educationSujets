@@ -1,8 +1,244 @@
 {
   "version": 1,
-  "genereLe": "2026-10-10T09:19:32.841Z",
+  "genereLe": "2026-11-04T22:14:02.521Z",
   "remarque": "Un même établissement peut apparaître deux fois : comme organisme du catalogue dynamique et comme université de l'ancien modèle (ex. inphb / INPHB). Les alias servent au rapprochement.",
   "organismes": [
+    {
+      "id": "6ae00def65030ea5b4c871f1",
+      "nom": "BAC",
+      "alias": [
+        "bac"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 40,
+      "corriges": 0,
+      "annees": [
+        "2025",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Série A1",
+        "Série A2",
+        "Série B",
+        "Série C",
+        "Série D",
+        "Série E",
+        "Série G1",
+        "Série G2",
+        "Séries A, B, C, D",
+        "Séries A, B, C, D, E, H",
+        "Séries A1, A2",
+        "Séries A2, H",
+        "Séries C, D, E",
+        "Séries C, E",
+        "Séries F1, F2, F3, F4",
+        "Séries G1, G2",
+        "Toutes séries"
+      ],
+      "matieres": [
+        "Allemand (LV1)",
+        "Allemand (LV2)",
+        "Anglais (LV1)",
+        "Anglais (LV2)",
+        "Arts plastiques",
+        "Économie générale - Économie d'entreprise - Droit",
+        "Espagnol (LV1)",
+        "Espagnol (LV2)",
+        "Français",
+        "Histoire-géographie",
+        "Mathématiques",
+        "Philosophie",
+        "Physique-chimie",
+        "SVT"
+      ]
+    },
+    {
+      "id": "6ae00f9a65030ea5b4c87219",
+      "nom": "BEPC",
+      "alias": [
+        "bepc"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 52,
+      "corriges": 0,
+      "annees": [
+        "2025",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Zone 1",
+        "Zone 2",
+        "Zone 3"
+      ],
+      "matieres": [
+        "Allemand (LV2)",
+        "Anglais (LV1)",
+        "Composition française",
+        "EDHC",
+        "Espagnol (LV2)",
+        "Histoire-géographie",
+        "Mathématiques",
+        "Orthographe",
+        "Physique-chimie",
+        "SVT"
+      ]
+    },
+    {
+      "id": "6ae0115e65030ea5b4c8722a",
+      "nom": "BTS",
+      "alias": [
+        "bts"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 15,
+      "corriges": 0,
+      "annees": [
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Finances, comptabilité et gestion des entreprises (FCGE)",
+        "Génie civil option bâtiment (GBAT)",
+        "Gestion commerciale (GEC)",
+        "Hygiène et sécurité du travail (HST)",
+        "Informatique développeur d'applications (IDA)",
+        "Logistique (LOG)",
+        "Réseaux informatiques et télécommunications (RIT)",
+        "Ressources humaines et communication (RHC)",
+        "Systèmes électroniques et informatiques (SEI)"
+      ],
+      "matieres": [
+        "Etude de Cas",
+        "Etude des systèmes Techniques",
+        "Fondements, Concepts Marketing et Etude de Marché",
+        "Marketing",
+        "Mathématiques",
+        "Physiques Appliquées",
+        "Psychologie Appliquée",
+        "Résistance des Matériaux et Béton Armé (RDM-BA)",
+        "Télécommunication et Réseaux",
+        "Topographie Appliquée"
+      ]
+    },
+    {
+      "id": "6adf3fe1857bb04cc210e462",
+      "nom": "CAFOP",
+      "alias": [
+        "cafop"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 79,
+      "corriges": 0,
+      "annees": [
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Instituteur adjoint (IA)",
+        "Instituteur ordinaire (IO)",
+        "Professeur de CAFOP (concours professionnel)",
+        "Recrutement exceptionnel des enseignants contractuels"
+      ],
+      "matieres": [
+        "Culture générale",
+        "ECM et Fonction publique",
+        "Français",
+        "Mathématiques",
+        "Mathématiques, Français, Culture générale",
+        "Psychopédagogie",
+        "Tests psychotechniques"
+      ]
+    },
+    {
+      "id": "6adfcf2865030ea5b4c87067",
+      "nom": "Club UNESCO ENI-ABT",
+      "alias": [
+        "club-unesco-eniabt",
+        "club unesco eni-abt"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 2,
+      "corriges": 0,
+      "annees": [
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Concours inter-lycées – Série TSE-STI",
+        "Concours inter-lycées – Série TSEXP"
+      ],
+      "matieres": [
+        "Mathématiques"
+      ]
+    },
+    {
+      "id": "6adf4be2857bb04cc210e533",
+      "nom": "CME",
+      "alias": [
+        "cme"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 1,
+      "corriges": 0,
+      "annees": [
+        "2019"
+      ],
+      "parcoursTypes": [
+        "Test de niveau BAC et BT"
+      ],
+      "matieres": [
+        "Anglais, Français, Logique, Sciences"
+      ]
+    },
+    {
+      "id": "6adfcf1a65030ea5b4c87063",
+      "nom": "Concours Houphouët-Boigny de mathématiques",
+      "alias": [
+        "concours-houphouetboigny-de-mathematiques",
+        "concours houphouet-boigny de mathematiques"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 1,
+      "corriges": 0,
+      "annees": [
+        "2018"
+      ],
+      "parcoursTypes": [
+        "Phase finale – Sixième et cinquième"
+      ],
+      "matieres": [
+        "Mathématiques"
+      ]
+    },
     {
       "id": "6abefef7d89f729e5f65877a",
       "nom": "EAMAC",
@@ -11,9 +247,14 @@
         "École Africaine de la Météorologie et de l'Aviation Civile"
       ],
       "source": "catalogue_dynamique",
-      "sujets": 62,
+      "sujets": 110,
       "corriges": 0,
       "annees": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
         "2011",
         "2012",
         "2013",
@@ -21,10 +262,14 @@
         "2014-2015",
         "2015",
         "2016",
+        "2017",
         "2018",
+        "2019",
+        "2021",
         "2022",
         "2023",
-        "2024"
+        "2024",
+        "2026"
       ],
       "parcoursTypes": [
         "Contrôleurs de la Circulation Aérienne",
@@ -32,14 +277,75 @@
         "Ingénieur",
         "Ingénieur & Exploitation en Aéronautique Civile",
         "Ingénieurs & Contrôleurs",
+        "Niveau Bac scientifique",
         "Technicien",
         "Technicien & Technicien Supérieur"
       ],
       "matieres": [
         "Anglais",
         "Français",
+        "Français, Anglais",
         "Mathématiques",
         "Physique"
+      ]
+    },
+    {
+      "id": "6adf4b7f857bb04cc210e529",
+      "nom": "EAMAU",
+      "alias": [
+        "eamau"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 3,
+      "corriges": 0,
+      "annees": [
+        "2014",
+        "2017"
+      ],
+      "parcoursTypes": [
+        "Architecture",
+        "Architecture, urbanisme et gestion urbaine",
+        "Urbanisme et gestion urbaine"
+      ],
+      "matieres": [
+        "Physique"
+      ]
+    },
+    {
+      "id": "6adf4593857bb04cc210e4cd",
+      "nom": "EMPT",
+      "alias": [
+        "empt"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 36,
+      "corriges": 0,
+      "annees": [
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2012",
+        "2013",
+        "2015",
+        "2016",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Concours d'entrée en 6e"
+      ],
+      "matieres": [
+        "Dictée",
+        "Éveil au milieu",
+        "Français (étude de texte)",
+        "Langue et communication (étude de texte, dictée)",
+        "Mathématiques"
       ]
     },
     {
@@ -50,26 +356,123 @@
         "École Nationale d'Administration"
       ],
       "source": "catalogue_dynamique",
-      "sujets": 14,
+      "sujets": 72,
       "corriges": 0,
       "annees": [
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
         "2015",
         "2017",
         "2018",
         "2020",
+        "2021",
         "2022",
-        "2025"
+        "2023",
+        "2024",
+        "2025",
+        "2026"
       ],
       "parcoursTypes": [
-        "Cycle moyen"
+        "Cycle moyen",
+        "Cycle moyen supérieur",
+        "Cycle supérieur"
       ],
       "matieres": [
         "Anglais",
         "Aptitude verbale",
         "Aptitude verbale, Culture générale",
         "Aptitude verbale, Culture générale, Anglais, Aptitude numérique, Logique",
+        "Aptitude verbale, Culture générale, Anglais, Aptitudes numériques et logique",
+        "Contraction de texte",
         "Culture générale",
+        "Culture générale, Anglais, Logique",
+        "Culture générale, Aptitude verbale, Anglais, Logique",
+        "Droit administratif",
+        "Droit constitutionnel",
+        "Géographie",
+        "Histoire",
+        "Logique (test d'organisation, aptitude numérique)",
+        "Mise au net",
+        "Note de synthèse",
+        "Ordre général",
+        "Ordre général, Connaissance du monde contemporain",
+        "Problèmes économiques et sociaux",
         "Test d'organisation, Test d'aptitude numérique"
+      ]
+    },
+    {
+      "id": "6adf2ce8857bb04cc210e32f",
+      "nom": "ENS",
+      "alias": [
+        "ens",
+        "ENS - École Normale Supérieure (Abidjan)",
+        "ENS Abidjan",
+        "École Normale Supérieure"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 76,
+      "corriges": 0,
+      "annees": [
+        "2004",
+        "2014",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "CAP-CEG",
+        "CAP/PC Allemand",
+        "CAP/PC Anglais",
+        "CAP/PC Espagnol",
+        "CAP/PC Histoire-Géographie",
+        "CAP/PC Lettres modernes",
+        "CAP/PC Mathématiques",
+        "CAP/PC Sciences physiques",
+        "CAP/PC SVT",
+        "CAP/PL Allemand",
+        "CAP/PL Anglais",
+        "CAP/PL Espagnol",
+        "CAP/PL Histoire-Géographie",
+        "CAP/PL Lettres modernes",
+        "CAP/PL Mathématiques",
+        "CAP/PL Philosophie",
+        "CAP/PL Sciences physiques",
+        "CAP/PL SVT",
+        "Concours professionnel - Assistant conservateur, CAP/CPLAS, CAPEAS",
+        "Concours professionnel - CAPCM",
+        "Concours professionnel - Éducateur",
+        "Éducateur"
+      ],
+      "matieres": [
+        "Algèbre",
+        "Analyse",
+        "Biologie cellulaire, Génétique, Biochimie, Géologie",
+        "Biologie et physiologie animales et végétales",
+        "Chimie",
+        "Commentaire",
+        "Culture générale",
+        "ECM et Fonction publique",
+        "Géographie",
+        "Grammaire et stylistique",
+        "Histoire",
+        "Langue",
+        "Mathématiques",
+        "Mathématiques, Physiologie végétale",
+        "Physique",
+        "Résumé de texte",
+        "Système éducatif ivoirien",
+        "Traduction"
       ]
     },
     {
@@ -95,7 +498,7 @@
         "École Nationale Supérieure de Statistique et d'Économie Appliquée"
       ],
       "source": "catalogue_dynamique",
-      "sujets": 139,
+      "sujets": 462,
       "corriges": 0,
       "annees": [
         "1998",
@@ -132,9 +535,13 @@
         "Analystes Statisticiens (AS)",
         "ISE Cycle Long / AS",
         "ISE Option Économie",
-        "ISE Option Mathématiques"
+        "ISE Option Mathématiques",
+        "ITS Option Économie",
+        "ITS Option Mathématiques",
+        "ITS Voie A"
       ],
       "matieres": [
+        "Analyse d'une documentation statistique",
         "Anglais",
         "Calcul numérique",
         "Contraction de texte",
@@ -201,6 +608,235 @@
       ]
     },
     {
+      "id": "6adf53a9857bb04cc210e57f",
+      "nom": "Fonction publique",
+      "alias": [
+        "fonction-publique",
+        "fonction publique"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 27,
+      "corriges": 0,
+      "annees": [
+        "1997",
+        "1998",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2016",
+        "2018",
+        "2019",
+        "2020",
+        "2022",
+        "2023",
+        "2025"
+      ],
+      "parcoursTypes": [
+        "Agent de bureau",
+        "Agent de maîtrise des travaux publics (chauffeur)",
+        "Aide-soignant",
+        "Assistant conservateur de documentation",
+        "Concours direct d'accès à l'emploi",
+        "Concours direct d'accès aux cycles de formation",
+        "Conseiller d'éducation",
+        "Conseiller pédagogique du préscolaire et du primaire",
+        "Éducateur (concours professionnel)",
+        "Inspecteur de l'enseignement primaire",
+        "Instituteur ordinaire",
+        "Moniteur des productions végétales et animales",
+        "Secrétaire assistant administratif (concours professionnel)",
+        "Secrétaire de direction et assistant comptable",
+        "Secrétaires dactylographes et secrétaires comptables",
+        "Technicien supérieur de santé",
+        "Technicien supérieur du commerce"
+      ],
+      "matieres": [
+        "Connaissance du statut général de la Fonction publique",
+        "Culture générale",
+        "Culture générale et administrative",
+        "ECM et Fonction publique",
+        "Hygiène générale",
+        "Logique",
+        "Mise au net",
+        "OPAJ",
+        "Sciences naturelles (connaissance du corps humain)"
+      ]
+    },
+    {
+      "id": "6adf452f857bb04cc210e4bc",
+      "nom": "Gendarmerie nationale",
+      "alias": [
+        "gendarmerie-nationale",
+        "gendarmerie nationale"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 12,
+      "corriges": 0,
+      "annees": [
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012"
+      ],
+      "parcoursTypes": [
+        "Concours direct"
+      ],
+      "matieres": [
+        "Culture générale"
+      ]
+    },
+    {
+      "id": "6adf8bc0857bb04cc210e807",
+      "nom": "IIA",
+      "alias": [
+        "iia"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 3,
+      "corriges": 0,
+      "annees": [
+        "2014"
+      ],
+      "parcoursTypes": [
+        "Cycle III / DESS-A",
+        "Cycle III / MST-A"
+      ],
+      "matieres": [
+        "Culture générale et français",
+        "Droit, Économie, Techniques d'assurances, Mathématiques, Comptabilité"
+      ]
+    },
+    {
+      "id": "6adf2d57857bb04cc210e34f",
+      "nom": "INFAS",
+      "alias": [
+        "infas"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 5,
+      "corriges": 0,
+      "annees": [
+        "2022"
+      ],
+      "parcoursTypes": [
+        "Auxiliaires de santé"
+      ],
+      "matieres": [
+        "QCM (toutes matières)"
+      ]
+    },
+    {
+      "id": "6ad44860a48cf272846ea344",
+      "nom": "INFJ",
+      "alias": [
+        "infj"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 104,
+      "corriges": 0,
+      "annees": [
+        "2012",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "parcoursTypes": [
+        "Cycle moyen supérieur judiciaire",
+        "EPPJEJ - Cycle moyen",
+        "EPPJEJ - Cycle moyen supérieur",
+        "EPPJEJ - Cycle supérieur",
+        "Examen professionnel de notaire",
+        "Greffes - Cycle moyen",
+        "Greffes - Cycle moyen supérieur",
+        "Greffes - Cycle supérieur",
+        "Magistrature",
+        "Pénitentiaire - Agents d’encadrement (AEEP)",
+        "Pénitentiaire - Contrôleurs",
+        "Pénitentiaire - Cycle moyen",
+        "Pénitentiaire - Cycle moyen supérieur",
+        "Pénitentiaire - Cycle supérieur",
+        "Tous cycles"
+      ],
+      "matieres": [
+        "Composition française",
+        "Dissertation",
+        "Dissertation juridique, Étude de cas",
+        "Dissertation, Organisation politique administrative et judiciaire, Organisation et fonctionnement de l'administration pénitentiaire",
+        "Droit administratif",
+        "Droit civil",
+        "Droit civil et procédure civile",
+        "Droit commercial",
+        "Droit pénal",
+        "Droit pénal et procédure pénale",
+        "Droits de l'enfant",
+        "Droits de l'enfant, Statut et déontologie de la fonction publique, Organisation judiciaire, Sujet d'ordre général",
+        "Éducation civique et morale",
+        "Étude de texte, Droits et obligations des détenus, Organisation judiciaire",
+        "Informatique et bureautique",
+        "Mise au net",
+        "Organisation administrative",
+        "Organisation de la justice pénale",
+        "Organisation du système pénitentiaire",
+        "Organisation et fonctionnement de l'administration pénitentiaire",
+        "Organisation judiciaire",
+        "Organisation judiciaire, Droit administratif, Organisation politique administrative et judiciaire, Droit pénitentiaire",
+        "Organisation politique administrative et judiciaire",
+        "Organisation politique économique administrative et judiciaire",
+        "Organisation politique économique et administrative",
+        "Présélection",
+        "Statut et déontologie de la fonction publique",
+        "Sujet d'ordre général",
+        "Sujet d'ordre général, Droit administratif, Droit civil, Organisation judiciaire, Informatique et bureautique",
+        "Sujet d'ordre général, Droit pénal, Organisation judiciaire, Organisation du système pénitentiaire",
+        "Sujet d'ordre général, Informatique et bureautique, Organisation politique administrative et judiciaire, Droit administratif",
+        "Sujet d'ordre général, Organisation judiciaire",
+        "Sujet d'ordre général, Organisation politique administrative et judiciaire, Organisation judiciaire"
+      ]
+    },
+    {
+      "id": "6adf4b23857bb04cc210e524",
+      "nom": "INFPA",
+      "alias": [
+        "infpa"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 5,
+      "corriges": 0,
+      "annees": [
+        "2018",
+        "2019",
+        "2020"
+      ],
+      "parcoursTypes": [
+        "Niveau BAC",
+        "Niveau BAC (BTSA)",
+        "Niveau BEPC (BTA)"
+      ],
+      "matieres": [
+        "Anglais",
+        "Culture générale, Français, Anglais, Mathématiques, Sciences"
+      ]
+    },
+    {
       "id": "6abc1686914ef4263264f560",
       "nom": "inphb",
       "alias": [
@@ -210,7 +846,7 @@
         "INPHB - Institut National Polytechnique Félix Houphouët-Boigny (Yamoussoukro)"
       ],
       "source": "catalogue_dynamique",
-      "sujets": 30,
+      "sujets": 34,
       "corriges": 0,
       "annees": [
         "2015",
@@ -219,6 +855,7 @@
         "2018",
         "2019",
         "2020",
+        "2024",
         "2025",
         "2026"
       ],
@@ -276,6 +913,75 @@
       ],
       "parcoursTypes": [],
       "matieres": []
+    },
+    {
+      "id": "6adf8bff857bb04cc210e80e",
+      "nom": "INSFS",
+      "alias": [
+        "insfs"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 1,
+      "corriges": 0,
+      "annees": [
+        "2024"
+      ],
+      "parcoursTypes": [
+        "Éducateurs spécialisés"
+      ],
+      "matieres": [
+        "Résumé"
+      ]
+    },
+    {
+      "id": "6adfceef65030ea5b4c8705b",
+      "nom": "SMCI",
+      "alias": [
+        "smci"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 4,
+      "corriges": 0,
+      "annees": [
+        "2008",
+        "2012",
+        "2017",
+        "2018"
+      ],
+      "parcoursTypes": [
+        "Terminale C",
+        "Terminale C et E"
+      ],
+      "matieres": [
+        "Mathématiques"
+      ]
+    },
+    {
+      "id": "6adfd02065030ea5b4c87070",
+      "nom": "UAM",
+      "alias": [
+        "uam"
+      ],
+      "source": "catalogue_dynamique",
+      "sujets": 7,
+      "corriges": 0,
+      "annees": [
+        "2020",
+        "2022",
+        "2023"
+      ],
+      "parcoursTypes": [
+        "École supérieure d'urbanisme, d'architecture et d'aménagement du territoire",
+        "École supérieure des mines, de la géologie et de l'environnement",
+        "École supérieure des sciences agricoles et de l'alimentation",
+        "École supérieure des sciences et techniques de l'ingénieur",
+        "Haute école des sciences économiques et de gestion",
+        "Tronc commun"
+      ],
+      "matieres": [
+        "Français, Anglais, Mathématiques, Culture générale",
+        "Français, Anglais, Mathématiques, Logique et culture générale"
+      ]
     },
     {
       "id": "6a491ca169e6c372954c1996",

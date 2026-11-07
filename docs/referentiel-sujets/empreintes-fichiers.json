@@ -1,5 +1,110 @@
 {
   "version": 1,
   "description": "Empreintes SHA-256 des fichiers publiés, enregistrées localement après publication (le serveur ne les stocke pas). Ajout via npm run referentiel:empreinte.",
-  "empreintes": []
+  "empreintes": [
+    {
+      "id": "6aeb98f311c325e41b462f51",
+      "sha256": "3139ba8c13ea335940b128f6c0a7d10dda00666ddfef0b91f3c8c8dcd4374c52",
+      "tailleOctets": 239163,
+      "nomFichier": "ENS_2025_CAP-PL_Lettres_modernes_Grammaire_stylistique.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.246Z"
+    },
+    {
+      "id": "6aeb98f711c325e41b462f5f",
+      "sha256": "dbbd6670ba47e2f72993a911db8338e36aa3f1e3fa0dc4e45728704a5bcbfa72",
+      "tailleOctets": 195792,
+      "nomFichier": "ENS_2025_CAP-PC_Mathematiques-TICE_Algebre.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.344Z"
+    },
+    {
+      "id": "6aeb993e11c325e41b462f6e",
+      "sha256": "f5a0add21415af5f560e7e762b80695bde81896f8eee5753f58204227e0f78b5",
+      "tailleOctets": 90980,
+      "nomFichier": "ENS_2025_CAP-PC_Histoire-Geographie_Histoire.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.444Z"
+    },
+    {
+      "id": "6aeb994311c325e41b462f7c",
+      "sha256": "88b004f98b849c73eb8fb720d4a94296b5750856ca90e245c52a7095782d707e",
+      "tailleOctets": 210305,
+      "nomFichier": "ENS_2025_CAP-PC_Lettres_modernes_Commentaire.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.541Z"
+    },
+    {
+      "id": "6aeb994711c325e41b462f8a",
+      "sha256": "e6f16e8151ad6e5bbdc176e674bd40d6370b8656bc1b3fa58d5bbc73d2717e5d",
+      "tailleOctets": 93829,
+      "nomFichier": "ENS_2025_CAP-PC_Espagnol_Langue.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.639Z"
+    },
+    {
+      "id": "6aeb994b11c325e41b462f98",
+      "sha256": "aba1f5e344b4c6428c1d09b48d23d17c5b6d5871ed1e3f5412f208e2c20b2e39",
+      "tailleOctets": 211564,
+      "nomFichier": "ENS_2025_CAP-PC_Espagnol_Traduction.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.749Z"
+    },
+    {
+      "id": "6aeb995011c325e41b462fa6",
+      "sha256": "793fa3983303280906ca36aacfb20b5f90d00a1fc744ed7beb6ea508491e2625",
+      "tailleOctets": 216603,
+      "nomFichier": "ENS_2024_Educateur_Culture_generale.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.850Z"
+    },
+    {
+      "id": "6aeb995511c325e41b462fb4",
+      "sha256": "ab750be243bfd40612e63efce5bbc4c15a325dc6b2ea7845a5797e7c1c44f427",
+      "tailleOctets": 135302,
+      "nomFichier": "ENS_2024_Educateur_Psychopedagogie_SEI.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:45.947Z"
+    },
+    {
+      "id": "6aeb995a11c325e41b462fc2",
+      "sha256": "f44309968fffe4c16f9e12dbc28d1df1ccf105425932c9fa373a12680e8cce1e",
+      "tailleOctets": 178674,
+      "nomFichier": "ENS_2024_CAP-PC_Histoire-Geographie_Histoire.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:46.044Z"
+    },
+    {
+      "id": "6aeb995e11c325e41b462fd1",
+      "sha256": "9f121e95a614c09846301f3fbd7ca66b38fee57517502fde02b0612458f634fb",
+      "tailleOctets": 178542,
+      "nomFichier": "ENS_2024_CAP-PL_Histoire-Geographie_Geographie.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:46.142Z"
+    },
+    {
+      "id": "6aeb996311c325e41b462fdf",
+      "sha256": "202a7c5a6802388c515c5d2cead0add79f26d0ca51f9a90bd2daa65962bbfbcc",
+      "tailleOctets": 178172,
+      "nomFichier": "ENS_2024_CAP-PL_Histoire-Geographie_Histoire.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:46.240Z"
+    },
+    {
+      "id": "6aeb996711c325e41b462fed",
+      "sha256": "4466d482e7deef37c4c5624cdf5d2aff3e513568a3720b0c2ebdbbbb9d429f44",
+      "tailleOctets": 183708,
+      "nomFichier": "ENS_2023_Educateur_Culture_generale.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:46.339Z"
+    },
+    {
+      "id": "6aeb996c11c325e41b463000",
+      "sha256": "e199f8efa4d87d0790bac8be4085d3f2701cf94dd4bc63402210ae56a258e123",
+      "tailleOctets": 93012,
+      "nomFichier": "ENS_2018_Educateur_Psychopedagogie_SEI.pdf",
+      "titre": null,
+      "enregistreLe": "2026-11-04T20:45:46.437Z"
+    }
+  ]
 }

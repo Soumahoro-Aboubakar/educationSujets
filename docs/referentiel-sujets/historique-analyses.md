@@ -44,3 +44,19 @@
 - Exposition de données : la route publique `GET /api/documents` renvoie `storageKey` (qui contient l'identifiant du contributeur), `file` et le nom/rôle de l'auteur et du validateur, alors que le flux SEO les exclut volontairement. Ces champs ne sont pas repris dans le référentiel, hormis la clé de stockage utile à la détection de doublons. À examiner côté backend.
 
 Aucune ressource n'a été modifiée, supprimée ou republiée sur le serveur.
+
+## Synchronisation du 2026-11-04 (19:43 UTC) — automatique
+
+- Ressources publiées : **1190** (1188 sujets, 2 corrigés séparés, 279 sujets avec corrigé inclus)
+- Catalogue dynamique : 1153 · legacy : 37 · complètes : 1153 · partielles : 37 · avec anomalies : 41
+- Correspondances : doublon_confirme 0, doublon_probable 30, a_verifier 9
+- Changements : 893 ajout(s), 2 modification(s), 0 disparition(s), 0 réapparition(s)
+- Requêtes HTTP : 336
+
+## Synchronisation du 2026-11-04 (22:14 UTC) — automatique
+
+- Ressources publiées : **1203** (1201 sujets, 2 corrigés séparés, 279 sujets avec corrigé inclus)
+- Catalogue dynamique : 1166 · legacy : 37 · complètes : 1166 · partielles : 37 · avec anomalies : 41
+- Correspondances : doublon_confirme 0, doublon_probable 30, a_verifier 9
+- Changements : 13 ajout(s), 0 modification(s), 0 disparition(s), 0 réapparition(s)
+- Requêtes HTTP : 338

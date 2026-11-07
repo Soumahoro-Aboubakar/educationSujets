@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "genereLe": "2026-10-10T09:19:32.841Z",
+  "genereLe": "2026-11-04T22:14:02.521Z",
   "description": "Paires de ressources existantes susceptibles d'être des doublons. Aucune ressource n'est supprimée ni fusionnée automatiquement.",
   "regles": {
     "doublon_confirme": "Même identifiant, même clé de stockage, même empreinte SHA-256, ou décision manuelle enregistrée.",
@@ -9,8 +9,8 @@
   },
   "statistiques": {
     "doublon_confirme": 0,
-    "doublon_probable": 10,
-    "a_verifier": 3
+    "doublon_probable": 30,
+    "a_verifier": 9
   },
   "correspondances": [
     {
@@ -30,6 +30,57 @@
         "Examen d'Algèbre 4B avec Proposition de Correction Détaillée - Année académique 2022-2023"
       ],
       "contexte": "Université Alassane Ouattara (Bouaké) 2022-2023 / Université Alassane Ouattara (Bouaké) 2022-2023"
+    },
+    {
+      "ids": [
+        "6ae67d2c11c325e41b45cc3a",
+        "6ae66a2611c325e41b45cafc"
+      ],
+      "statut": "doublon_probable",
+      "score": 1,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 100 %"
+      ],
+      "titres": [
+        "ENS 2023 – CAP/PL Mathématiques – Algèbre",
+        "ENS 2023 – CAP/PL Mathématiques – Algèbre"
+      ],
+      "contexte": "ENS 2023 / ENS 2023"
+    },
+    {
+      "ids": [
+        "6ae67d2c11c325e41b45cc3a",
+        "6ae6695c11c325e41b45ca69"
+      ],
+      "statut": "doublon_probable",
+      "score": 1,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 100 %"
+      ],
+      "titres": [
+        "ENS 2023 – CAP/PL Mathématiques – Algèbre",
+        "ENS 2023 – CAP/PL Mathématiques – Algèbre"
+      ],
+      "contexte": "ENS 2023 / ENS 2023"
+    },
+    {
+      "ids": [
+        "6ae66a2611c325e41b45cafc",
+        "6ae6695c11c325e41b45ca69"
+      ],
+      "statut": "doublon_probable",
+      "score": 1,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 100 %"
+      ],
+      "titres": [
+        "ENS 2023 – CAP/PL Mathématiques – Algèbre",
+        "ENS 2023 – CAP/PL Mathématiques – Algèbre"
+      ],
+      "contexte": "ENS 2023 / ENS 2023"
     },
     {
       "ids": [
@@ -64,6 +115,23 @@
         "EAMAC 2012 (Franceville) – Physique, Technicien & Technicien Supérieur"
       ],
       "contexte": "EAMAC 2012 / EAMAC 2012"
+    },
+    {
+      "ids": [
+        "6ad4419bdd410f0b0256bab3",
+        "6ad4413cdd410f0b0256ba66"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.91,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 91 %"
+      ],
+      "titres": [
+        "INFJ 2023 – Greffes cycle moyen supérieur (concours professionnel) – Sujet d'ordre général",
+        "INFJ 2023 – Greffes cycle moyen supérieur – Sujet d'ordre général"
+      ],
+      "contexte": "INFJ 2023 / INFJ 2023"
     },
     {
       "ids": [
@@ -118,20 +186,88 @@
     },
     {
       "ids": [
-        "6a771a489905fe6016fc21d6",
-        "6a7a64ee9905fe6016fc2350"
+        "6ad444dadd410f0b0256bd68",
+        "6ad43fb4dd410f0b0256b89f"
       ],
       "statut": "doublon_probable",
-      "score": 0.88,
+      "score": 0.83,
       "raisons": [
         "même organisme, année et matière",
-        "similarité titre/description 88 %"
+        "similarité titre/description 83 %"
       ],
       "titres": [
-        "ENA Cycle Moyen 2020 – Test d'aptitude verbale (Présélection)",
-        "ENA 2020 – Cycle moyen : Aptitude verbale"
+        "INFJ 2018 – Magistrature – Sujet d'ordre général (sujet + corrigé)",
+        "INFJ 2018 – Magistrature – Sujet d'ordre général : meilleure copie officielle"
       ],
-      "contexte": "ENA 2020 / ENA 2020"
+      "contexte": "INFJ 2018 / INFJ 2018"
+    },
+    {
+      "ids": [
+        "6adf8b68ecb585bf0e4f55b6",
+        "6adf8b4decb585bf0e4f5588"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.81,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 81 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Imagerie médicale (TIM), version D",
+        "INFAS 2022 – Auxiliaires de santé – QCM Biologie médicale (ABM), version D"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6ad444d6dd410f0b0256bd5a",
+        "6ad43f68dd410f0b0256b87c"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.81,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 81 %"
+      ],
+      "titres": [
+        "INFJ 2018 – Magistrature – Droit commercial (sujet + corrigé)",
+        "INFJ 2018 – Magistrature – Droit commercial : meilleure copie officielle"
+      ],
+      "contexte": "INFJ 2018 / INFJ 2018"
+    },
+    {
+      "ids": [
+        "6ad444d2dd410f0b0256bd4c",
+        "6ad43f24dd410f0b0256b860"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.81,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 81 %"
+      ],
+      "titres": [
+        "INFJ 2018 – Magistrature – Droit administratif (sujet + corrigé)",
+        "INFJ 2018 – Magistrature – Droit administratif : meilleure copie officielle"
+      ],
+      "contexte": "INFJ 2018 / INFJ 2018"
+    },
+    {
+      "ids": [
+        "6acaf98b89c9a7371c45a6d2",
+        "6abef28d25de0f7a2e7d0399"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.81,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 81 %"
+      ],
+      "titres": [
+        "EAMAC 2013 – Technicien / Technicien supérieur : Physique",
+        "EAMAC 2013 (Cameroun, version anglaise) – Physique, Technicien & Technicien Supérieur"
+      ],
+      "contexte": "EAMAC 2013 / EAMAC 2013"
     },
     {
       "ids": [
@@ -169,6 +305,210 @@
     },
     {
       "ids": [
+        "6adf8b86ecb585bf0e4f55e5",
+        "6adf8b56ecb585bf0e4f559f"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.78,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 78 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins obstétricaux (ASO), version D",
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins infirmiers (AISI), version A"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6adf2531ecb585bf0e4f29b2",
+        "6a7731a19905fe6016fc2221"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.77,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 77 %"
+      ],
+      "titres": [
+        "ENA 2025 – Cycle moyen : Présélection (session juillet 2024)",
+        "ENA Cycle Moyen 2025 – Présélection complète (toutes matières)"
+      ],
+      "contexte": "ENA 2025 / ENA 2025"
+    },
+    {
+      "ids": [
+        "6ad444d4dd410f0b0256bd53",
+        "6ad43f44dd410f0b0256b86e"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.72,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 72 %"
+      ],
+      "titres": [
+        "INFJ 2018 – Magistrature – Droit civil et procédure civile (sujet + corrigé)",
+        "INFJ 2018 – Magistrature – Droit civil : meilleure copie officielle"
+      ],
+      "contexte": "INFJ 2018 / INFJ 2018"
+    },
+    {
+      "ids": [
+        "6adf8b56ecb585bf0e4f559f",
+        "6adf8b4decb585bf0e4f5588"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.71,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 71 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins infirmiers (AISI), version A",
+        "INFAS 2022 – Auxiliaires de santé – QCM Biologie médicale (ABM), version D"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6adf8b86ecb585bf0e4f55e5",
+        "6adf8b4decb585bf0e4f5588"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.7,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 70 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins obstétricaux (ASO), version D",
+        "INFAS 2022 – Auxiliaires de santé – QCM Biologie médicale (ABM), version D"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6adf8b86ecb585bf0e4f55e5",
+        "6adf8b68ecb585bf0e4f55b6"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.69,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 69 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins obstétricaux (ASO), version D",
+        "INFAS 2022 – Auxiliaires de santé – QCM Imagerie médicale (TIM), version D"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6adf8b77ecb585bf0e4f55ce",
+        "6adf8b4decb585bf0e4f5588"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.68,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 68 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Préparateur gestionnaire en pharmacie (APGP), version A",
+        "INFAS 2022 – Auxiliaires de santé – QCM Biologie médicale (ABM), version D"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6adf8b68ecb585bf0e4f55b6",
+        "6adf8b56ecb585bf0e4f559f"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.68,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 68 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Imagerie médicale (TIM), version D",
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins infirmiers (AISI), version A"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6ad444d8dd410f0b0256bd61",
+        "6ad43f91dd410f0b0256b88a"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.67,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 67 %"
+      ],
+      "titres": [
+        "INFJ 2018 – Magistrature – Droit pénal et procédure pénale (sujet + corrigé)",
+        "INFJ 2018 – Magistrature – Droit pénal : meilleure copie officielle"
+      ],
+      "contexte": "INFJ 2018 / INFJ 2018"
+    },
+    {
+      "ids": [
+        "6adf8b77ecb585bf0e4f55ce",
+        "6adf8b56ecb585bf0e4f559f"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.66,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 66 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Préparateur gestionnaire en pharmacie (APGP), version A",
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins infirmiers (AISI), version A"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6adf8b86ecb585bf0e4f55e5",
+        "6adf8b77ecb585bf0e4f55ce"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.63,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 63 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Soins obstétricaux (ASO), version D",
+        "INFAS 2022 – Auxiliaires de santé – QCM Préparateur gestionnaire en pharmacie (APGP), version A"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
+        "6adf8b77ecb585bf0e4f55ce",
+        "6adf8b68ecb585bf0e4f55b6"
+      ],
+      "statut": "doublon_probable",
+      "score": 0.63,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 63 %"
+      ],
+      "titres": [
+        "INFAS 2022 – Auxiliaires de santé – QCM Préparateur gestionnaire en pharmacie (APGP), version A",
+        "INFAS 2022 – Auxiliaires de santé – QCM Imagerie médicale (TIM), version D"
+      ],
+      "contexte": "INFAS 2022 / INFAS 2022"
+    },
+    {
+      "ids": [
         "6a5ef3785fac2a9953e88e06",
         "6a5f51e36ae0bca7eebf7e03"
       ],
@@ -189,6 +529,60 @@
     },
     {
       "ids": [
+        "6adf4703ecb585bf0e4f3ae6",
+        "6adf46faecb585bf0e4f3aca"
+      ],
+      "statut": "a_verifier",
+      "score": 0.98,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 98 %",
+        "numéros discriminants différents dans les titres (ex. « 1 »/« 2 », « 3A »/« 3B »)"
+      ],
+      "titres": [
+        "EMPT 2015 – Concours d'entrée en 6e – Mathématiques, sujet 2 (sujet + corrigé)",
+        "EMPT 2015 – Concours d'entrée en 6e – Mathématiques, sujet 1 (sujet + corrigé)"
+      ],
+      "contexte": "EMPT 2015 / EMPT 2015"
+    },
+    {
+      "ids": [
+        "6adf46e3ecb585bf0e4f3a94",
+        "6adf46d9ecb585bf0e4f3a79"
+      ],
+      "statut": "a_verifier",
+      "score": 0.97,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 97 %",
+        "numéros discriminants différents dans les titres (ex. « 1 »/« 2 », « 3A »/« 3B »)"
+      ],
+      "titres": [
+        "EMPT 2015 – Concours d'entrée en 6e – Éveil au milieu, sujet 2 (sujet + corrigé)",
+        "EMPT 2015 – Concours d'entrée en 6e – Éveil au milieu, sujet 1 (sujet + corrigé)"
+      ],
+      "contexte": "EMPT 2015 / EMPT 2015"
+    },
+    {
+      "ids": [
+        "6acaf99589c9a7371c45a6f4",
+        "6acaf99089c9a7371c45a6e0"
+      ],
+      "statut": "a_verifier",
+      "score": 0.97,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 97 %",
+        "numéros discriminants différents dans les titres (ex. « 1 »/« 2 », « 3A »/« 3B »)"
+      ],
+      "titres": [
+        "EAMAC 2017 – Ingénieur : Physique (sujet n°2)",
+        "EAMAC 2017 – Ingénieur : Physique (sujet n°1)"
+      ],
+      "contexte": "EAMAC 2017 / EAMAC 2017"
+    },
+    {
+      "ids": [
         "6a5f592f65ac8dbeaa8e7106",
         "6a5f59d065ac8dbeaa8e712c"
       ],
@@ -205,6 +599,42 @@
         "Examen d'Algèbre 4B avec Proposition de Correction Détaillée - Année académique 2022-2023"
       ],
       "contexte": "Université Alassane Ouattara (Bouaké) 2022-2023 / Université Alassane Ouattara (Bouaké) 2022-2023"
+    },
+    {
+      "ids": [
+        "6adf8990ecb585bf0e4f5054",
+        "6adf4c60ecb585bf0e4f3f63"
+      ],
+      "statut": "a_verifier",
+      "score": 0.89,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 89 %",
+        "numéros discriminants différents dans les titres (ex. « 1 »/« 2 », « 3A »/« 3B »)"
+      ],
+      "titres": [
+        "CAFOP 2005 – Professeur de CAFOP (concours professionnel) – Psychopédagogie (2e sujet)",
+        "CAFOP 2005 – Professeur de CAFOP (concours professionnel) – Psychopédagogie générale (1er sujet)"
+      ],
+      "contexte": "CAFOP 2005 / CAFOP 2005"
+    },
+    {
+      "ids": [
+        "6adf46adecb585bf0e4f39ac",
+        "6acaf97889c9a7371c45a699"
+      ],
+      "statut": "a_verifier",
+      "score": 0.84,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 84 %",
+        "numéros discriminants différents dans les titres (ex. « 1 »/« 2 », « 3A »/« 3B »)"
+      ],
+      "titres": [
+        "EAMAC 2017 – Cycle Technicien / Technicien supérieur – Mathématiques (sujet S-MT2)",
+        "EAMAC 2017 – Technicien / Technicien supérieur : Mathématiques (sujet n°1)"
+      ],
+      "contexte": "EAMAC 2017 / EAMAC 2017"
     },
     {
       "ids": [
@@ -241,6 +671,23 @@
         "Examen d'Analyse 3B avec Proposition de Correction Détaillée - Année Académique 2022-2023"
       ],
       "contexte": "Université Alassane Ouattara (Bouaké) 2022-2023 / Université Alassane Ouattara (Bouaké) 2022-2023"
+    },
+    {
+      "ids": [
+        "6ad9ce9936b1c50cc9403bf6",
+        "6ac01f4436d8963a0a88c4ae"
+      ],
+      "statut": "a_verifier",
+      "score": 0.56,
+      "raisons": [
+        "même organisme, année et matière",
+        "similarité titre/description 56 %"
+      ],
+      "titres": [
+        "Sujet Concours INPHB 2020-2023",
+        "INP-HB 2020 – Concours Bacheliers : Anglais, Culture générale, Culture scientifique"
+      ],
+      "contexte": "inphb 2020 / inphb 2020"
     }
   ],
   "decisionsManuelles": [],
