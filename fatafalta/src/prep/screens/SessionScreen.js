@@ -135,7 +135,8 @@ const SessionReview = ({ session, navigation, onRestart, celebrations }) => {
   const [rank, setRank] = useState(null);
   useEffect(() => { prepApi.ranking(session.programme, 'tout').then(setRank).catch(() => {}); }, [session.programme]);
   useEffect(() => { haptic.celebrate(); }, []);
-  const mod = session.module ? getModule(session.module) : null;
+  const versions = usePrep((s) => s.prefs.versions);
+  const mod = session.module ? getModule(session.module, versions) : null;
   const title = session.mode === 'blanc' ? 'Copie remise' : ratio >= 0.8 ? 'Excellente session' : ratio >= 0.5 ? 'Bonne progression' : 'Chaque erreur te fait avancer';
   const label = session.mode === 'niveau' ? `Niveau ${session.niveau} · ${mod?.titre || ''}` : session.mode === 'revision' ? 'Révisions' : session.mode === 'blanc' ? 'Concours blanc' : 'Test de positionnement';
   const reviewCodes = items.filter((it) => !it.result?.correct || it.essai === 2).length;
@@ -282,7 +283,8 @@ const SessionScreen = ({ navigation, route }) => {
 
   const mode = session.mode;
   const code = session.codes[session.index];
-  const found = code ? getExercise(code) : null;
+  // Cours de langue : consignes, explications et mini-cours dans la version choisie (clés identiques).
+  const found = code ? getExercise(code, store.prefs.versions) : null;
   const exercice = found?.exercice;
   const item = session.items[code] || emptyItem();
   const Renderer = exercice ? RENDERERS[exercice.type] : null;
@@ -309,7 +311,7 @@ const SessionScreen = ({ navigation, route }) => {
     const pts = done.reduce((a, it) => a + (it.points || 0), 0);
     const score = final.codes.length ? pts / final.codes.length : 0;
     if (final.mode === 'niveau') {
-      const mod = getModule(final.module);
+      const mod = getModule(final.module, store.prefs.versions);
       const before = core.moduleStatus(mod, usePrep.getState().progress(final.programme));
       store.finishSession({ programme: final.programme, module: final.module, niveau: final.niveau, session: final.id, score, nbQuestions: final.codes.length });
       const after = core.moduleStatus(mod, usePrep.getState().progress(final.programme));

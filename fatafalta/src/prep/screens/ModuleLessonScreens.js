@@ -9,7 +9,12 @@ import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, FileText, Lock, T
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
 import { getLesson, getModule, getProgramme, levelExercises, programmeModules } from '../content';
-import usePrep, { todayKey, useProgress, useRights } from '../store';
+import usePrep, { todayKey, useModuleVersion, useProgress, useRights } from '../store';
+import LangToggle from '../ui/LangToggle';
+import VideoPanel from '../video/VideoPanel';
+import VideoDock from '../video/VideoDock';
+import useVideoScroll from '../video/useVideoScroll';
+import { useVideo } from '../video/useVideos';
 import { brand, colors, LEVELS, paperLines, subjectTint, theme, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
 import { CornerFold, Enter, GoldSwash, LevelDots, NightBackground, PaperStack, Pop, PrepButton, PressScale, ProgressBar, ProgressRing, Segmented, SubjectIcon } from '../ui/primitives';
@@ -26,8 +31,17 @@ export const ModuleScreen = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
   const { programme: programmeCode, module: moduleCode } = route.params;
   const programme = getProgramme(programmeCode);
-  const mod = getModule(moduleCode);
+  // Cours de langue : version expliquée en français par défaut, ou version dans la langue étudiée.
+  const [version, setVersion, versions] = useModuleVersion(moduleCode);
+  const mod = getModule(moduleCode, version);
   const ref = programmeModules(programme).find((m) => m.code === moduleCode);
+  // Vidéo explicative : absente → rien ne change à l'écran.
+  const video = useVideo('module', moduleCode, version);
+  const vs = useVideoScroll();
+  const panel = useRef(null);
+  const [player, setPlayer] = useState({ playing: false, started: false });
+  const [dockHold, setDockHold] = useState(false);
+  useEffect(() => { if (!vs.panelOut) setDockHold(false); }, [vs.panelOut]);
   const etat = useProgress(programmeCode);
   const rights = useRights();
   const catalogue = useCatalogue();
@@ -60,14 +74,14 @@ export const ModuleScreen = ({ navigation, route }) => {
         <View style={[styles.tintDot, { backgroundColor: tint.wash }]} />
         <Text variant="caption" style={styles.headerChipText} numberOfLines={1}>{mod.matiere}</Text>
       </View>
-      <View style={{ width: 44 }} />
+      {versions.length > 1 ? <LangToggle value={version} versions={versions} onChange={setVersion} /> : <View style={{ width: 44 }} />}
     </View>
   );
 
   return (
     <PaperStack header={header}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-      <ScrollView contentContainerStyle={styles.modContent} showsVerticalScrollIndicator={false}>
+      <Animated.ScrollView ref={vs.scrollRef} onScroll={vs.onScroll} scrollEventThrottle={16} contentContainerStyle={styles.modContent} showsVerticalScrollIndicator={false}>
         <View style={styles.modHead}>
           <SubjectIcon nom={mod.matiere} teinte={ref?.teinte} size={52} />
           <View style={{ flex: 1 }}>
@@ -76,6 +90,19 @@ export const ModuleScreen = ({ navigation, route }) => {
           </View>
         </View>
         <GoldSwash width={96} style={{ marginLeft: 66, marginTop: 2 }} />
+        {video ? (
+          <VideoPanel
+            ref={panel}
+            video={video}
+            kind="module"
+            language={version}
+            onLayout={vs.onPanelLayout}
+            onRead={() => vs.scrollToAnchor('lecons')}
+            readLabel="Lire le cours"
+            onPlayerChange={setPlayer}
+            style={styles.video}
+          />
+        ) : null}
         <View style={styles.modMeta}>
           <CornerFold size={30} radius={20} animated />
           <ProgressRing size={64} stroke={6} value={st.pourcentage} color={st.valide ? colors.success : undefined} gradient={!st.valide} track={brand.line}>
@@ -90,7 +117,9 @@ export const ModuleScreen = ({ navigation, route }) => {
           </View>
         </View>
 
-        <Segmented items={[{ key: 'lecons', label: 'Leçons' }, { key: 'exercices', label: 'Exercices' }]} value={tab} onChange={setTab} style={styles.segment} />
+        <View onLayout={vs.anchor('lecons')}>
+          <Segmented items={[{ key: 'lecons', label: 'Leçons' }, { key: 'exercices', label: 'Exercices' }]} value={tab} onChange={setTab} style={styles.segment} />
+        </View>
 
         {tab === 'lecons' ? (
           <View style={styles.list}>
@@ -164,7 +193,18 @@ export const ModuleScreen = ({ navigation, route }) => {
           </View>
           <ChevronRight size={18} color={brand.burgundy} />
         </PressScale>
-      </ScrollView>
+      </Animated.ScrollView>
+      {video ? (
+        <VideoDock
+          visible={vs.panelOut && (player.playing || dockHold)}
+          playing={player.playing}
+          title={video.title || mod.titre}
+          durationSec={video.durationSec}
+          getCurrentTime={() => panel.current?.getCurrentTime() ?? Promise.resolve(0)}
+          onToggle={() => { setDockHold(true); panel.current?.toggle(); }}
+          onBack={vs.scrollToPanel}
+        />
+      ) : null}
       <View style={[styles.sticky, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
         <LinearGradient colors={['rgba(252,250,245,0)', brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
         {rights.peutEtudier
@@ -198,7 +238,9 @@ export const LessonScreen = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
   const reduce = useReduceMotion();
   const { programme: programmeCode, lecon: leconCode } = route.params;
-  const found = getLesson(leconCode);
+  // Cours de langue : même leçon (même code, même progression) dans la version choisie.
+  const [version, setVersion, versions] = useModuleVersion(getLesson(leconCode)?.module.code);
+  const found = getLesson(leconCode, version);
   const { lecon, module: mod, index } = found;
   const programme = getProgramme(programmeCode);
   const ref = programmeModules(programme).find((m) => m.code === mod.code);
@@ -243,10 +285,27 @@ export const LessonScreen = ({ navigation, route }) => {
 
   useFocusEffect(useCallback(() => () => save(false), [save]));
 
+  // Changement de version : on garde le passage lu (même proportion du texte).
+  const [versionBubble, setVersionBubble] = useState(null);
+  const pendingRatio = useRef(null);
+  const switchVersion = (v) => {
+    pendingRatio.current = progress.get();
+    resumed.current = true;
+    setVersion(v);
+    setVersionBubble(v);
+    setTimeout(() => setVersionBubble(null), 1800);
+  };
+
   // Reprise exacte à la position quittée (§ 9.2).
   const resumed = useRef(false);
   const onContentSize = (_, h) => {
     setContentH(h);
+    if (pendingRatio.current != null) {
+      const ratio = pendingRatio.current;
+      pendingRatio.current = null;
+      if (h > viewH) requestAnimationFrame(() => scroll.current?.scrollTo({ y: ratio * (h - viewH), animated: false }));
+      return;
+    }
     if (!resumed.current && lastPos.current > 0.04 && lastPos.current < 0.98 && h > viewH) {
       resumed.current = true;
       setTimeout(() => {
@@ -323,8 +382,11 @@ export const LessonScreen = ({ navigation, route }) => {
   const header = (
     <View style={styles.stackHeader}>
       <Pressable onPress={() => navigation.goBack()} hitSlop={6} accessibilityLabel="Quitter la leçon" style={styles.roundOnInk}><X size={20} color={brand.onInk} /></Pressable>
-      <Text variant="bodyMedium" style={styles.headerChipText}>{`Leçon ${index + 1} sur ${mod.lecons.length}`}</Text>
-      <Pressable onPress={() => { haptic.select(); setSizeOpen((o) => !o); }} hitSlop={6} accessibilityLabel="Taille du texte" accessibilityState={{ expanded: sizeOpen }} style={[styles.roundOnInk, sizeOpen && { backgroundColor: 'rgba(228,201,151,0.22)' }]}><TypeIcon size={18} color={brand.onInk} /></Pressable>
+      <Text variant="bodyMedium" style={[styles.headerChipText, styles.headerTitle]} numberOfLines={1}>{`Leçon ${index + 1} sur ${mod.lecons.length}`}</Text>
+      <View style={styles.headerRight}>
+        {versions.length > 1 ? <LangToggle value={version} versions={versions} onChange={switchVersion} /> : null}
+        <Pressable onPress={() => { haptic.select(); setSizeOpen((o) => !o); }} hitSlop={6} accessibilityLabel="Taille du texte" accessibilityState={{ expanded: sizeOpen }} style={[styles.roundOnInk, sizeOpen && { backgroundColor: 'rgba(228,201,151,0.22)' }]}><TypeIcon size={18} color={brand.onInk} /></Pressable>
+      </View>
     </View>
   );
 
@@ -368,6 +430,11 @@ export const LessonScreen = ({ navigation, route }) => {
         </Animated.View>
       ) : null}
       {resumeBubble ? <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.bubble}><Text variant="caption" style={{ color: '#FFF' }}>Reprise où tu t’étais arrêté</Text></Animated.View> : null}
+      {versionBubble ? (
+        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(150)} style={styles.bubble} accessibilityLiveRegion="polite">
+          <Text variant="caption" style={{ color: '#FFF' }}>{versionBubble === 'fr' ? 'Cours expliqué en français · même passage' : 'Cours en anglais · même passage'}</Text>
+        </Animated.View>
+      ) : null}
       {nearEnd || contentH <= viewH + 40 ? (
         <Animated.View entering={FadeInDown.duration(260)} style={[styles.sticky, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
           <LinearGradient colors={['rgba(252,250,245,0)', brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
@@ -390,10 +457,13 @@ const styles = StyleSheet.create({
   roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
   headerChip: { flexShrink: 1, flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 14, height: 34, borderRadius: 17, backgroundColor: 'rgba(255,255,255,0.08)' },
   headerChipText: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold },
+  headerTitle: { flexShrink: 1, marginHorizontal: 8 },
+  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   tintDot: { width: 8, height: 8, borderRadius: 4 },
   modContent: { paddingHorizontal: 20, paddingTop: 26, paddingBottom: 140 },
   modHead: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   modKicker: { fontFamily: theme.fontFamily.semiBold },
+  video: { marginTop: 20 },
   modMeta: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 20, padding: 14, borderRadius: 20, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
   modPct: { fontFamily: theme.fontFamily.bold, fontSize: 14, color: brand.ink },
   metaFacts: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' },

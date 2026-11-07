@@ -21,6 +21,8 @@ export const prepApi = {
   declare: (identifiants) => api.post('/api/prep/appareils', identifiants, { ...quiet, timeout: 12000 }).then(data),
   rights: () => api.get('/api/prep/droits', { ...quiet, headers: headers(), timeout: 10000 }).then(data),
   catalogue: () => api.get('/api/prep/catalogue', { ...quiet, timeout: 10000 }).then(data),
+  /** Index des vidéos publiées { modules: { CODE: { fr, en } }, concours: { CODE: { fr } } } (lecture seule). */
+  videos: () => api.get('/api/prep/videos', { ...quiet, timeout: 10000 }).then(data),
   sync: (actions) => api.post('/api/prep/sync', { actions }, { ...quiet, headers: headers(), timeout: 20000 }).then(data),
   reasoning: (exercice, body) => api.post(`/api/prep/exercices/${exercice}/raisonnement`, body, { headers: headers(), timeout: 9000 }).then(data),
   ranking: (programme, periode) => api.get(`/api/prep/programmes/${programme}/classement`, { ...quiet, params: { periode }, headers: headers(), timeout: 12000 }).then(data),

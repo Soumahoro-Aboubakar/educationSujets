@@ -2,12 +2,13 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import Animated, { Easing, FadeIn, FadeInDown, useAnimatedProps, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { Bell, ChevronRight, Search } from 'lucide-react-native';
+import { Bell, ChevronRight, PlayCircle, Search } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import { brand, colors, motion, theme } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
 import { Badge, InlineAction } from '../ui/primitives';
+import { findVideo, useVideosIndex } from '../video/useVideos';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const SEARCH_THRESHOLD = 6;
@@ -47,7 +48,7 @@ const Highlight = ({ text, query, style }) => {
   );
 };
 
-const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify, index }) => {
+const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify, index, videos }) => {
   const reduce = useReduceMotion();
   const [contentH, setContentH] = useState(0);
   const progress = useSharedValue(open ? 1 : 0);
@@ -95,9 +96,17 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
                 >
                   <View style={[styles.cycleText, !cycle.publie && styles.cycleOff]}>
                     <Highlight text={cycle.nom} query={query} style={styles.cycleName} />
-                    <Text variant="caption" style={styles.muted}>
-                      {cycle.publie ? `${cycle.modulesPublies} module${cycle.modulesPublies > 1 ? 's' : ''} prêts · ${cycle.matieres} matières` : 'Bientôt disponible'}
-                    </Text>
+                    {cycle.publie && findVideo(videos, 'concours', cycle.programme) ? (
+                      // Indicateur : ce concours a une vidéo de présentation.
+                      <View style={styles.metaRow}>
+                        <Text variant="caption" style={[styles.muted, styles.shrink]}>{`${cycle.modulesPublies} module${cycle.modulesPublies > 1 ? 's' : ''} prêts · ${cycle.matieres} matières`}</Text>
+                        <Badge label="Vidéo" tone="ink" icon={PlayCircle} />
+                      </View>
+                    ) : (
+                      <Text variant="caption" style={styles.muted}>
+                        {cycle.publie ? `${cycle.modulesPublies} module${cycle.modulesPublies > 1 ? 's' : ''} prêts · ${cycle.matieres} matières` : 'Bientôt disponible'}
+                      </Text>
+                    )}
                   </View>
                   {cycle.publie ? <Radio checked={isSel} /> : (
                     <InlineAction title="Me prévenir" icon={Bell} onPress={() => onNotify?.(cycle)} accessibilityLabel={`Me prévenir quand ${cycle.nom} sera disponible`} />
@@ -119,6 +128,7 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
 const ContestAccordion = ({ catalogue, selected, onSelect, scrollTo }) => {
   const [open, setOpen] = useState(() => catalogue.find((o) => o.cycles.some((c) => c.programme === selected))?.sigle || null);
   const [query, setQuery] = useState('');
+  const videos = useVideosIndex();
   const positions = useRef({});
 
   const filtered = useMemo(() => {
@@ -150,6 +160,7 @@ const ContestAccordion = ({ catalogue, selected, onSelect, scrollTo }) => {
       {filtered.length ? filtered.map((org, index) => (
         <View key={org.sigle} onLayout={(e) => { positions.current[org.sigle] = e.nativeEvent.layout.y; }}>
           <OrganismRow
+            videos={videos}
             org={org}
             index={index}
             open={open === org.sigle}
@@ -172,6 +183,8 @@ const styles = StyleSheet.create({
   headText: { flex: 1 },
   orgName: { color: brand.ink, fontFamily: theme.fontFamily.serif, fontSize: 18, lineHeight: 23 },
   muted: { color: brand.inkSoft },
+  metaRow: { flexDirection: 'row', alignItems: 'center', gap: 6, flexWrap: 'wrap' },
+  shrink: { flexShrink: 1 },
   bodyClip: { overflow: 'hidden' },
   bodyInner: { position: 'absolute', left: 0, right: 0, top: 0, paddingBottom: 10 },
   divider: { height: StyleSheet.hairlineWidth, backgroundColor: brand.line, marginHorizontal: 16, marginBottom: 2 },

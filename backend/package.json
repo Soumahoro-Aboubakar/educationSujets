@@ -10,7 +10,7 @@
     "migrate:free-quota": "node scripts/migrateFreeQuota.js",
     "migrate:taxonomy": "node scripts/migrateLegacyTaxonomy.js",
     "seed:institutions": "node scripts/seedInstitutions.js",
-    "test": "node --test --test-concurrency=1 tests/billingPricing.test.js tests/geniusPayProvider.test.js tests/billingFlow.integration.test.js tests/geniusPayFlow.integration.test.js tests/security.integration.test.js tests/catalogAliases.test.js tests/seoCatalog.test.js tests/referentielSujets.test.js tests/downloadPolicy.integration.test.js && node tests/parcoursTypeFlow.test.js",
+    "test": "node --test --test-concurrency=1 tests/billingPricing.test.js tests/geniusPayProvider.test.js tests/billingFlow.integration.test.js tests/geniusPayFlow.integration.test.js tests/security.integration.test.js tests/catalogAliases.test.js tests/seoCatalog.test.js tests/referentielSujets.test.js tests/prepCore.test.js tests/prepContent.test.js tests/prepVideo.test.js tests/videoPublish.test.js tests/downloadPolicy.integration.test.js && node tests/parcoursTypeFlow.test.js",
     "test:referentiel": "node --test tests/referentielSujets.test.js",
     "audit:admins": "node scripts/auditAdminRoles.js",
     "geniuspay": "node scripts/geniuspay.js",
@@ -18,7 +18,15 @@
     "catalog": "node scripts/catalogAudit.js",
     "verify:subjects": "node scripts/referentiel/verify.js",
     "referentiel:sync": "node scripts/referentiel/sync.js",
-    "referentiel:empreinte": "node scripts/referentiel/record.js"
+    "referentiel:empreinte": "node scripts/referentiel/record.js",
+    "prep:pack": "node scripts/prep/buildPack.js",
+    "prep:check": "node scripts/prep/buildPack.js --check",
+    "prep:seed": "node scripts/prep/seed.js",
+    "test:prep": "node --test tests/prepCore.test.js tests/prepContent.test.js tests/prepVideo.test.js",
+    "video:publish": "node scripts/video/publish.js",
+    "video:auth": "node scripts/video/auth.js",
+    "video:brief": "node scripts/video/generation/brief.js",
+    "test:video": "node --test tests/prepVideo.test.js tests/videoPublish.test.js"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

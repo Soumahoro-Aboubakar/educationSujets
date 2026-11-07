@@ -82,6 +82,7 @@ app.use('/api/categories', require('./routes/categories'));
 app.use('/api/contest-types', require('./routes/contestTypes'));
 app.use('/api/orientation', require('./routes/orientation'));
 app.use('/api/training', require('./routes/training'));
+app.use('/api/prep', require('./routes/prep'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/me', require('./routes/me'));
 app.use('/api/downloads', require('./routes/downloads'));

@@ -317,6 +317,80 @@ function publicExercise(ex) {
   return copy;
 }
 
+// ── Versions linguistiques des cours de langue étrangère ─────────────────
+/**
+ * Un cours de langue étrangère (ex. ANG-GRAM, langueCible « en ») est rédigé en deux versions :
+ *  - la version par défaut (« fr ») : explications en français, pour qui débute dans la langue ;
+ *  - la version cible (module.versionCible) : le cours entièrement dans la langue étudiée.
+ * Les exercices sont les MÊMES (codes, matériau linguistique, clés de correction) : seule
+ * l'enveloppe pédagogique change. Progression, scores et correction serveur sont donc communs.
+ */
+var VERSION_PAR_DEFAUT = 'fr';
+
+/** Textes d'un exercice qu'une version peut traduire (jamais la clé ni le matériau évalué). */
+var TRADUISIBLES = {
+  exercice: ['consigne', 'explication', 'miniCours', 'indice', 'raisonnement'],
+  contenu: ['enonce', 'libelleHaut', 'libelleBas', 'affirmations', 'categories'],
+};
+
+function moduleVersions(module) {
+  var v = module && module.versionCible;
+  return v && v.langue ? [VERSION_PAR_DEFAUT, v.langue] : [VERSION_PAR_DEFAUT];
+}
+
+/** Applique la traduction d'une version à un exercice (copie ; l'original n'est pas modifié). */
+function exerciseVersion(ex, trad) {
+  if (!ex || !trad) return ex;
+  var copy = Object.assign({}, ex);
+  ['consigne', 'explication', 'miniCours', 'indice'].forEach(function (k) { if (trad[k] !== undefined) copy[k] = trad[k]; });
+  if (trad.raisonnement && ex.raisonnement) {
+    copy.raisonnement = Object.assign({}, ex.raisonnement, {
+      reference: trad.raisonnement.reference || ex.raisonnement.reference,
+      etapesCles: trad.raisonnement.etapes || trad.raisonnement.etapesCles || ex.raisonnement.etapesCles,
+    });
+  }
+  var c = ex.contenu || {};
+  var contenu = null;
+  var touch = function () { if (!contenu) contenu = Object.assign({}, c); return contenu; };
+  ['enonce', 'libelleHaut', 'libelleBas'].forEach(function (k) { if (trad[k] !== undefined) touch()[k] = trad[k]; });
+  if (Array.isArray(trad.affirmations) && Array.isArray(c.affirmations)) {
+    // Traduction de l'explication de chaque affirmation (le texte évalué reste celui du cours).
+    touch().affirmations = c.affirmations.map(function (a, i) { return trad.affirmations[i] ? Object.assign({}, a, { explication: trad.affirmations[i] }) : a; });
+  }
+  if (Array.isArray(trad.categories) && Array.isArray(c.categories)) {
+    touch().categories = c.categories.map(function (cat, i) { return trad.categories[i] ? Object.assign({}, cat, { nom: trad.categories[i] }) : cat; });
+  }
+  if (contenu) copy.contenu = contenu;
+  return copy;
+}
+
+/**
+ * Module dans la version demandée. Sans version cible, ou pour « fr », renvoie le module tel quel.
+ * Le résultat porte `version` (code de langue) ; les leçons gardent leurs codes.
+ */
+function moduleVersion(module, langue) {
+  var v = module && module.versionCible;
+  if (!v || !langue || langue === VERSION_PAR_DEFAUT || langue !== v.langue) return module;
+  var lecons = (module.lecons || []).map(function (l) {
+    var t = (v.lecons || {})[l.code];
+    return t ? Object.assign({}, l, { titre: t.titre || l.titre, duree: t.duree || l.duree, blocs: t.blocs || l.blocs }) : l;
+  });
+  var notions = (module.notions || []).map(function (n) {
+    var libelle = (v.notions || {})[n.code];
+    return libelle ? Object.assign({}, n, { libelle: libelle }) : n;
+  });
+  var exercices = (module.exercices || []).map(function (ex) { return exerciseVersion(ex, (v.exercices || {})[ex.code]); });
+  return Object.assign({}, module, {
+    titre: v.titre || module.titre,
+    resume: v.resume || module.resume,
+    notions: notions,
+    lecons: lecons,
+    exercices: exercices,
+    duree: lecons.reduce(function (sum, l) { return sum + (l.duree || 0); }, 0),
+    version: v.langue,
+  });
+}
+
 // ── Barème (§ 10.2) ──────────────────────────────────────────────────────
 /**
  * @param {{ score:number, essai:1|2, indices:number }} t
@@ -656,6 +730,11 @@ module.exports = {
   countHoles: countHoles,
   checkExercise: checkExercise,
   publicExercise: publicExercise,
+  VERSION_PAR_DEFAUT: VERSION_PAR_DEFAUT,
+  TRADUISIBLES: TRADUISIBLES,
+  moduleVersions: moduleVersions,
+  moduleVersion: moduleVersion,
+  exerciseVersion: exerciseVersion,
   pointsTentative: pointsTentative,
   seededRandom: seededRandom,
   seededShuffle: seededShuffle,

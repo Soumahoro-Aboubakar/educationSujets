@@ -6,7 +6,7 @@ import { ArrowLeft, ChevronRight, Play, RotateCcw } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
 import { getExercise, getProgramme, programmeModules } from '../content';
-import { todayKey, useProgress, useRights } from '../store';
+import usePrep, { todayKey, useProgress, useRights } from '../store';
 import { brand, colors, motion, subjectTint, theme, type } from '../theme';
 import { haptic } from '../feedback';
 import { GoldSwash, PaperStack, PrepButton, PressScale, Segmented } from '../ui/primitives';
@@ -38,6 +38,7 @@ const ReviewsScreen = ({ navigation, route }) => {
   const programmeCode = route.params.programme;
   const programme = getProgramme(programmeCode);
   const etat = useProgress(programmeCode);
+  const versions = usePrep((s) => s.prefs.versions);
   const rights = useRights();
   const [tab, setTab] = useState(route.params.onglet === 'cahier' ? 'cahier' : 'jour');
   const [chip, setChip] = useState('Toutes');
@@ -48,7 +49,7 @@ const ReviewsScreen = ({ navigation, route }) => {
   const due = core.dueReviews(etat, today);
   const modules = programmeModules(programme);
   const matiereOf = (moduleCode) => modules.find((m) => m.code === moduleCode);
-  const erreurs = Object.entries(etat.erreurs || {}).map(([code, e]) => ({ code, ...e, found: getExercise(code) })).filter((e) => e.found);
+  const erreurs = Object.entries(etat.erreurs || {}).map(([code, e]) => ({ code, ...e, found: getExercise(code, versions) })).filter((e) => e.found);
   const filtered = erreurs.filter((e) => chip === 'Toutes' || matiereOf(e.found.module.code)?.matiere === chip);
   const groups = useMemo(() => {
     const g = {};

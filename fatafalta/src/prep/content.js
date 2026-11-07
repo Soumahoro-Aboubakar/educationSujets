@@ -14,9 +14,35 @@ Object.values(pack.modules).forEach((mod) => {
 
 export const programmes = pack.programmes;
 export const getProgramme = (code) => pack.programmes.find((p) => p.code === code) || null;
-export const getModule = (code) => pack.modules[code] || null;
-export const getExercise = (code) => exercises.get(code) || null;
-export const getLesson = (code) => lessons.get(code) || null;
+
+/**
+ * Cours de langue étrangère : deux versions (« fr » par défaut, explications en français ;
+ * ou la langue étudiée). Les exercices et leurs clés sont communs : seule l'enveloppe change.
+ * `version` est un code de langue, ou la table des préférences { [codeModule]: langue }.
+ */
+const versionFor = (moduleCode, version) => (typeof version === 'string' ? version : version?.[moduleCode]) || core.VERSION_PAR_DEFAUT;
+const versioned = new Map();
+export const moduleVersions = (mod) => core.moduleVersions(mod);
+export const getModule = (code, version) => {
+  const mod = pack.modules[code] || null;
+  const v = versionFor(code, version);
+  if (!mod || !moduleVersions(mod).includes(v) || v === core.VERSION_PAR_DEFAUT) return mod;
+  const key = `${code}:${v}`;
+  if (!versioned.has(key)) versioned.set(key, core.moduleVersion(mod, v));
+  return versioned.get(key);
+};
+export const getExercise = (code, version) => {
+  const found = exercises.get(code) || null;
+  if (!found || !version) return found;
+  const mod = getModule(found.module.code, version);
+  return mod === found.module ? found : { exercice: mod.exercices.find((ex) => ex.code === code) || found.exercice, module: mod };
+};
+export const getLesson = (code, version) => {
+  const found = lessons.get(code) || null;
+  if (!found || !version) return found;
+  const mod = getModule(found.module.code, version);
+  return mod === found.module ? found : { lecon: mod.lecons[found.index], module: mod, index: found.index };
+};
 
 /** Organismes → cycles (même forme que GET /api/prep/catalogue, sans logos). */
 export const localCatalogue = () => {

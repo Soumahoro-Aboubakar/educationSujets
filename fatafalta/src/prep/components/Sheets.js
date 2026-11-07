@@ -9,6 +9,7 @@ import { brand, colors, theme, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
 import prepApi from '../api';
 import usePrep, { useRights } from '../store';
+import { getExercise } from '../content';
 
 // ═══ Mini-cours (E24, § 12.1) ═══════════════════════════════════════════
 export const MiniCoursSheet = ({ visible, miniCours, notion, onRetry, onSkip, onOpenLesson }) => {
@@ -80,6 +81,7 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
   const rights = useRights();
   const useIA = usePrep((s) => s.useIA);
   const markFragile = usePrep((s) => s.markFragile);
+  const versions = usePrep((s) => s.prefs.versions);
   const [texte, setTexte] = useState('');
   const [step, setStep] = useState('saisie');
   const [result, setResult] = useState(null);
@@ -90,7 +92,9 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
   const verify = async () => {
     setStep('analyse');
     try {
-      const out = await prepApi.reasoning(exercice.code, { texte, programme });
+      // Cours de langue : la référence comparée est celle de la version lue (fr ou langue étudiée).
+      const version = versions?.[getExercise(exercice.code)?.module.code] || 'fr';
+      const out = await prepApi.reasoning(exercice.code, { texte, programme, version });
       if (out.disponible) {
         useIA();
         if (out.verdict === 'exact') haptic.success(); else haptic.warning();

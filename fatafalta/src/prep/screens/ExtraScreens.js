@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Image, Linking, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -14,6 +14,10 @@ import { PaperStopwatch } from '../ui/Illustrations';
 import { sessionParams } from './SessionScreen';
 import { useCatalogue } from './OnboardingScreens';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
+import VideoPanel from '../video/VideoPanel';
+import VideoDock from '../video/VideoDock';
+import useVideoScroll from '../video/useVideoScroll';
+import { useVideo } from '../video/useVideos';
 
 // ═══ E32 — Concours blanc : introduction ════════════════════════════════
 export const MockIntroScreen = ({ navigation, route }) => {
@@ -53,6 +57,13 @@ export const ProgramInfoScreen = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
   const p = getProgramme(route.params.programme);
   const org = useCatalogue().find((o) => o.sigle === p.organisme.sigle);
+  // Vidéo de présentation du concours : absente → l'écran reste exactement comme avant.
+  const video = useVideo('concours', p.code);
+  const vs = useVideoScroll();
+  const panel = useRef(null);
+  const [player, setPlayer] = useState({ playing: false, started: false });
+  const [dockHold, setDockHold] = useState(false);
+  useEffect(() => { if (!vs.panelOut) setDockHold(false); }, [vs.panelOut]);
   return (
     <PaperStack header={(
       <View style={styles.stackHeader}>
@@ -64,11 +75,22 @@ export const ProgramInfoScreen = ({ navigation, route }) => {
         <View style={{ width: 44 }} />
       </View>
     )}>
-      <ScrollView contentContainerStyle={{ paddingTop: 24, paddingHorizontal: 20, paddingBottom: 40, gap: 14 }} showsVerticalScrollIndicator={false}>
+      <Animated.ScrollView ref={vs.scrollRef} onScroll={vs.onScroll} scrollEventThrottle={16} contentContainerStyle={{ paddingTop: 24, paddingHorizontal: 20, paddingBottom: 40, gap: 14 }} showsVerticalScrollIndicator={false}>
         <Text variant="title" style={styles.ink} accessibilityRole="header">{p.titre}</Text>
+        {video ? (
+          <VideoPanel
+            ref={panel}
+            video={video}
+            kind="concours"
+            onLayout={vs.onPanelLayout}
+            onRead={() => vs.scrollToAnchor('epreuves')}
+            readLabel="Les épreuves"
+            onPlayerChange={setPlayer}
+          />
+        ) : null}
         <Text variant="body" style={styles.muted}>{p.description}</Text>
         <Badge label={p.fiabilite === 'officielle' ? 'Épreuves issues d’un texte officiel' : 'Matières déduites des anciens sujets'} tone={p.fiabilite === 'officielle' ? 'success' : 'warning'} icon={p.fiabilite === 'officielle' ? ShieldCheck : FileText} />
-        <Text variant="h2" style={[styles.ink, { marginTop: 10 }]}>Épreuves</Text>
+        <Text variant="h2" style={[styles.ink, { marginTop: 10 }]} onLayout={vs.anchor('epreuves')}>Épreuves</Text>
         <View style={styles.card}>
           {p.epreuves.map((e, i) => (
             <Animated.View key={e.nom} entering={FadeInDown.delay(i * 30)} style={[styles.epRow, i < p.epreuves.length - 1 && styles.hair]}>
@@ -89,7 +111,18 @@ export const ProgramInfoScreen = ({ navigation, route }) => {
           </Pressable>
         ))}
         <Text variant="caption" style={styles.muted}>{`Contenu pilote — ${packInfo.provenance.statut}. Rédaction : ${packInfo.provenance.redaction}. ${packInfo.provenance.relecture}. Signale toute erreur depuis un exercice (drapeau).`}</Text>
-      </ScrollView>
+      </Animated.ScrollView>
+      {video ? (
+        <VideoDock
+          visible={vs.panelOut && (player.playing || dockHold)}
+          playing={player.playing}
+          title={video.title || p.titre}
+          durationSec={video.durationSec}
+          getCurrentTime={() => panel.current?.getCurrentTime() ?? Promise.resolve(0)}
+          onToggle={() => { setDockHold(true); panel.current?.toggle(); }}
+          onBack={vs.scrollToPanel}
+        />
+      ) : null}
     </PaperStack>
   );
 };

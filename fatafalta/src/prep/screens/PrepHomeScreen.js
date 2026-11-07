@@ -5,7 +5,7 @@ import Animated, { FadeIn, LinearTransition, useAnimatedStyle, useSharedValue, w
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import {
-  BookOpen, Check, CheckCircle2, ChevronRight, ChevronsUpDown, CloudOff, Flame, GraduationCap, Lock, Play, RotateCcw, Sparkles, Target, Timer, Trophy,
+  BookOpen, Check, CheckCircle2, ChevronRight, ChevronsUpDown, CloudOff, Flame, GraduationCap, Lock, Play, PlayCircle, RotateCcw, Sparkles, Target, Timer, Trophy,
 } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
@@ -22,6 +22,7 @@ import ART from '../ui/art';
 import BottomSheet from '../ui/BottomSheet';
 import { LockedSheet } from '../components/Sheets';
 import { RhythmSheet, useCatalogue } from './OnboardingScreens';
+import { findVideo, useVideosIndex } from '../video/useVideos';
 import { sessionParams } from './SessionScreen';
 
 // ── Puces de matières : la pastille de fond glisse d'une puce à l'autre ────
@@ -56,7 +57,7 @@ const SubjectChips = ({ subjects, active, onChange }) => {
 
 // ── Ligne de module (E05) ─────────────────────────────────────────────────
 // Validé : coche verte + coin corné or. Conseillé : filet bordeaux + flèche. Verrouillé : cadenas.
-const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, onPress }) => {
+const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, video, onPress }) => {
   const tint = subjectTint(item.teinte);
   const st = item.publie ? core.moduleStatus(item.module, etat) : null;
   const n2 = etat.scores?.[item.code]?.[2];
@@ -87,7 +88,15 @@ const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, onPress
             <Text variant="caption" style={styles.moduleKicker} numberOfLines={1}>{`Module ${item.numero} · ${item.matiere}`}</Text>
           </View>
           <Text variant="bodyMedium" style={styles.moduleTitle} numberOfLines={2}>{item.titre}</Text>
-          {item.publie ? (
+          {item.publie && video ? (
+            // Indicateur « vidéo » : uniquement quand le module en a une (sinon, ligne inchangée).
+            <View style={styles.row}>
+              <Text variant="caption" style={[styles.muted, styles.shrink]} numberOfLines={1}>
+                {st.valide ? 'Module validé' : `${st.leconsTotal} leçons${n2 != null ? ` · Niveau 2 : ${Math.round(n2 * 100)} %` : pct ? ` · ${pct} %` : ''}`}
+              </Text>
+              <Badge label="Vidéo" tone="ink" icon={PlayCircle} />
+            </View>
+          ) : item.publie ? (
             <Text variant="caption" style={styles.muted} numberOfLines={1}>
               {st.valide ? 'Module validé' : `${st.leconsTotal} leçons${n2 != null ? ` · Niveau 2 : ${Math.round(n2 * 100)} %` : pct ? ` · ${pct} %` : ''}`}
             </Text>
@@ -144,6 +153,7 @@ const PrepHomeScreen = ({ navigation, route }) => {
   const identite = usePrep((s) => s.identite);
   const enCours = usePrep((s) => s.enCours[programmeCode]);
   const prefs = usePrep((s) => s.prefs);
+  const videos = useVideosIndex();
   const online = usePrep((s) => s.online);
   const queueLength = usePrep((s) => s.queue.length);
   const flush = usePrep((s) => s.flush);
@@ -354,7 +364,7 @@ const PrepHomeScreen = ({ navigation, route }) => {
                 const idx = modules.indexOf(m);
                 const ahead = recommendedIndex >= 0 && idx > recommendedIndex && m.publie && core.moduleStatus(m.module, etat).statut !== 'valide'
                   ? modules[recommendedIndex].numero : null;
-                return <ModuleRow key={m.code} item={m} etat={etat} index={i} current={idx === recommendedIndex} locked={locked && m.publie} conseilleApres={ahead && ahead !== m.numero && idx === recommendedIndex + 1 ? ahead : null} onPress={() => openModule(m)} />;
+                return <ModuleRow key={m.code} item={m} etat={etat} index={i} current={idx === recommendedIndex} locked={locked && m.publie} conseilleApres={ahead && ahead !== m.numero && idx === recommendedIndex + 1 ? ahead : null} video={Boolean(findVideo(videos, 'module', m.code, prefs.versions?.[m.code] || 'fr'))} onPress={() => openModule(m)} />;
               })}
             </Animated.View>
 
@@ -377,6 +387,7 @@ const PrepHomeScreen = ({ navigation, route }) => {
             <Pressable onPress={() => navigation.navigate('PrepProgramInfo', { programme: programmeCode })} style={styles.infoLink} accessibilityRole="button">
               <BookOpen size={16} color={brand.burgundy} />
               <Text variant="bodyMedium" style={{ color: brand.burgundy, flex: 1 }}>Épreuves officielles et sources du programme</Text>
+              {findVideo(videos, 'concours', programmeCode) ? <Badge label="Vidéo" tone="ink" icon={PlayCircle} style={{ alignSelf: 'center' }} /> : null}
               <ChevronRight size={16} color={brand.burgundy} />
             </Pressable>
           </View>
@@ -414,6 +425,7 @@ const styles = StyleSheet.create({
   onInk: { color: brand.onInk },
   onSoft: { color: brand.onInkSoft },
   row: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  shrink: { flexShrink: 1 },
   header: { paddingHorizontal: 20, paddingBottom: 18 },
   headerRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
   selector: { flexShrink: 1, flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 44, paddingLeft: 6, paddingRight: 12, borderRadius: 22, backgroundColor: 'rgba(255,255,255,0.07)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.14)' },

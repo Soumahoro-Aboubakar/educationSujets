@@ -66,3 +66,8 @@ graphify-out/
 
 # Réglages locaux des assistants (Claude Code)
 **/.claude/settings.local.json
+
+# Pipeline vidéo local (scripts/video) : journal de reprise, dossiers de génération, fichiers vidéo
+backend/.video-state/
+*.mp4
+*.mov

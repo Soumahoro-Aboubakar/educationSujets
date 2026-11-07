@@ -430,6 +430,41 @@ paramètres d'environnement existants ; ils ne sont pas modifiés par ce projet.
 
 ---
 
+## 9 bis. Vidéos explicatives et cours de langue bilingues (décisions du 2026-11-07)
+
+### 9 bis.1 Vidéos
+
+- **Vidéo d'explication d'un module** (une par module, et par version de langue pour un cours de
+  langue) et **vidéo de présentation d'un concours** (une par programme). Toutes optionnelles, sans
+  durée imposée, ajoutées progressivement **sans nouvelle version de l'application**.
+- **Sans vidéo** : aucun élément lié à la vidéo (ni bouton, ni icône, ni message) ; l'écran reste
+  identique.
+- **Avec vidéo** : indicateur « Vidéo » (liste des modules, « Quel concours ? », lien vers le
+  concours) ; lecteur YouTube intégré **en tête du contenu à lire** (écran Module sous le titre,
+  écran du concours sous le titre), chargé d'office avec une connexion, **sans lecture automatique** ;
+  on regarde, ou on fait défiler pour lire, ou les deux : une barre « vidéo en cours » reste en haut
+  pendant la lecture du cours (pause, retour à la vidéo) ; ouvrir une leçon met la vidéo en pause au
+  même instant ; hors ligne, état calme « Connecte-toi pour regarder la vidéo » avec « Réessayer ».
+- **Production (en local uniquement)** : génération par IA à partir du contenu du projet (pas encore
+  branchée), envoi public sur la chaîne YouTube (API YouTube Data v3, OAuth 2.0), écriture en base de
+  production après confirmation explicite ; script unique, idempotent, avec `--dry-run` et reprise.
+  Procédure : `docs/videos/README.md`.
+- **Qualité** : simple, claire, détaillée ; toute notion difficile, tout terme technique est expliqué
+  **avant** d'être utilisé (storyboard contrôlé automatiquement) ; visuels représentatifs.
+
+### 9 bis.2 Cours de langue étrangère
+
+- Un cours de langue autre que le français existe en **deux versions** : par défaut, le cours est
+  **expliqué en français** (débutant qui ne comprend pas encore la langue) ; la seconde version est le
+  cours **entièrement dans la langue étudiée** (candidat avancé).
+- Bascule **FR / EN** dans l'en-tête de l'écran Module et du lecteur de leçon : même leçon, même
+  passage, même progression ; choix mémorisé par module ; les sessions d'exercices suivent la version.
+- Les exercices sont **communs** aux deux versions (mêmes codes, mêmes phrases évaluées, mêmes clés) :
+  seules les consignes, explications, mini-cours, indices et raisonnements de référence changent.
+  Le contrôle `npm run prep:pack` refuse un cours de langue sans ses deux versions.
+
+---
+
 ## 10. Session d'exercices (plein écran)
 
 ### 10.1 Déroulement
@@ -1088,6 +1123,9 @@ EssaiAppareil    { identitéAppareil, joursInteraction[dates], iaUtilisées, sta
 ProfilPublic     { identité, pseudonyme, avatar, visibleClassement }
 StatsClassement  { identité, programme, période, score, compteurs }
 Signalement      { identité, élément, motif, texte, statut }
+PrepVideo        { cible (module|concours), code, langue, youtubeId, url, title, durationSec,
+                   publishedAt, status (processing|published|hidden), source{empreinteContenu,
+                   fichierSha256} }  — clé unique (cible, code, langue) ; écrite par script local
 LotGeneration    { programme, périmètre, modèles, statut, coûts, éléments[] }
 ```
 
@@ -1104,7 +1142,8 @@ GET   /api/prep/droits                            essai (jours restants, IA rest
 POST  /api/prep/jours-interaction                 enregistrement d'un jour d'interaction
 GET   /api/prep/catalogue                         organismes → cycles disposant d'un programme
 GET   /api/prep/programmes/:id                    matières, modules, progression
-GET   /api/prep/modules/:id                       leçons, niveaux, statut
+GET   /api/prep/modules/:id?version=en            leçons, niveaux, statut, versions, video (null sans vidéo)
+GET   /api/prep/videos                            index des vidéos publiées (lecture seule ; pas de route d'écriture)
 GET   /api/prep/lecons/:id
 GET   /api/prep/modules/:id/session?niveau=n      exercices (sans les réponses)
 POST  /api/prep/exercices/:id/tentative           correction serveur, seconde chance, cahier d'erreurs
@@ -1259,6 +1298,8 @@ Chaque composant est documenté (rôle, propriétés, états) et testé isoléme
 | 2026-11-05 | Même abonnement que les anciens sujets |
 | 2026-11-05 | Concours pilotes communiqués plus tard : l'IA doit les demander avant de développer |
 | 2026-11-05 | Claude Code collabore avec ChatGPT Plus (Codex CLI) dès que ChatGPT peut produire un rendu plus expert, en priorité pour les images ; Claude reste maître d'œuvre (§ 0, règle 5) |
+| 2026-11-07 | Vidéos explicatives (module) et de présentation (concours), optionnelles, hébergées sur YouTube, lues dans l'application ; aucune trace à l'écran sans vidéo ; publication par script local uniquement (§ 9 bis.1) |
+| 2026-11-07 | Cours de langue étrangère en deux versions : expliqué en français par défaut, ou entièrement dans la langue étudiée, bascule depuis l'interface du cours (§ 9 bis.2) |
 
 ---
 
@@ -1283,6 +1324,7 @@ Chaque composant est documenté (rôle, propriétés, états) et testé isoléme
 
 | Version | Date | Évolution |
 |---|---|---|
+| 0.7 | 2026-11-07 | Vidéos explicatives et de présentation (§ 9 bis.1, `docs/videos/README.md`) ; cours de langue bilingues (§ 9 bis.2) ; modèle `PrepVideo` (§ 28) et API vidéo (§ 29) |
 | 0.6 | 2026-11-05 | Consigne de collaboration Claude Code ↔ ChatGPT Plus via Codex CLI (§ 0, règle 5) et décision correspondante (§ 32) |
 | 0.5 | 2026-11-05 | Ajout des parcours utilisateur de bout en bout (§ 4 bis), des fenêtres Mini-cours et Raisonnement (§ 12.1-12.2), du système de composants premium et des principes d'interaction (§ 29 bis), des critères d'acceptation (§ 31 bis) ; question sur les sujets de 2020 |
 | 0.4 | 2026-11-05 | Données de l'essai sur le serveur (classement des visiteurs identique aux abonnés) ; règles des anciens sujets explicitement inchangées et rappelées (§ 8.1) |

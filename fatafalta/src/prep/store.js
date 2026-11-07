@@ -5,7 +5,7 @@ import core from './shared/prepCore';
 import { loadState, saveState } from './storage';
 import { deviceIdentifiers } from './device';
 import prepApi, { setPrepToken } from './api';
-import { getLesson, getModule, getProgramme, publishedModuleDefs } from './content';
+import { getLesson, getModule, getProgramme, moduleVersions, publishedModuleDefs } from './content';
 
 /**
  * État de la préparation (§ 25.5) : le serveur est la référence, le téléphone garde une copie
@@ -22,9 +22,25 @@ let flushing = false;
 let counter = 0;
 const newKey = () => `${Date.now().toString(36)}-${(counter += 1).toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 
-const PERSISTED = ['identite', 'token', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding'];
+const PERSISTED = ['identite', 'token', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding', 'videos'];
 
-const DEFAULT_PREFS = { objectif: 10, tailleTexte: 17, puce: {}, rythmeFait: false, testPropose: {}, notifications: true };
+// versions : version choisie par cours de langue { [codeModule]: 'en' } ; « fr » par défaut.
+const DEFAULT_PREFS = { objectif: 10, tailleTexte: 17, puce: {}, rythmeFait: false, testPropose: {}, notifications: true, versions: {} };
+
+/**
+ * Vidéos explicatives : index servi par GET /api/prep/videos, relu au plus toutes les 5 minutes
+ * (une vidéo publiée apparaît sans nouvelle version de l'application). En développement,
+ * EXPO_PUBLIC_VIDEOS_DEMO=1 ajoute des vidéos YouTube réelles pour tester l'interface.
+ */
+const VIDEOS_TTL = 5 * 60 * 1000;
+const EMPTY_VIDEOS = { modules: {}, concours: {} };
+// eslint-disable-next-line global-require
+const DEMO_VIDEOS = __DEV__ && process.env.EXPO_PUBLIC_VIDEOS_DEMO === '1' ? require('./video/demo').default : null;
+const withDemo = (index) => (DEMO_VIDEOS ? {
+  modules: { ...(index?.modules || {}), ...DEMO_VIDEOS.modules },
+  concours: { ...(index?.concours || {}), ...DEMO_VIDEOS.concours },
+} : index || EMPTY_VIDEOS);
+let videosRequest = null;
 
 const usePrep = create((set, get) => ({
   ready: false,
@@ -45,6 +61,33 @@ const usePrep = create((set, get) => ({
   horlogeSuspecte: false,
   retour: null,
   onboarding: { fait: false, choix: null },
+  videos: { index: withDemo(null), majLe: 0 },
+  videosEnLigne: null,
+
+  /** Relit l'index des vidéos (au plus toutes les 5 min) ; hors ligne, la copie locale reste. */
+  loadVideos: (force = false) => {
+    const { videos } = get();
+    if (!force && Date.now() - (videos.majLe || 0) < VIDEOS_TTL && get().videosEnLigne !== false) return videosRequest || Promise.resolve();
+    if (videosRequest) return videosRequest;
+    videosRequest = prepApi.videos()
+      .then((index) => {
+        if (index && index.modules && index.concours) {
+          set({ videos: { index: withDemo(index), majLe: Date.now() }, videosEnLigne: true });
+          get().persist();
+        }
+      })
+      // Une réponse d'erreur du serveur (ex. 404 : API pas encore déployée) prouve qu'on est en ligne.
+      .catch((error) => { set({ videosEnLigne: Boolean(error?.response) }); })
+      .finally(() => { videosRequest = null; });
+    return videosRequest;
+  },
+
+  /** Version d'un cours de langue (« fr » = explications en français, par défaut). */
+  setModuleVersion: (moduleCode, version) => {
+    const s = get();
+    set({ prefs: { ...s.prefs, versions: { ...(s.prefs.versions || {}), [moduleCode]: version } } });
+    get().persist();
+  },
 
   persist: () => {
     const s = get();
@@ -57,6 +100,7 @@ const usePrep = create((set, get) => ({
     const stored = await loadState();
     const today = todayKey();
     const patch = stored ? { ...stored, prefs: { ...DEFAULT_PREFS, ...(stored.prefs || {}) } } : {};
+    if (stored?.videos) patch.videos = { index: withDemo(stored.videos.index), majLe: stored.videos.majLe || 0 };
     // Manipulation de l'horloge (§ 25.8) : une date antérieure à la dernière connue est suspecte.
     const suspect = Boolean(stored?.derniereDate && today < stored.derniereDate);
     set({ ...patch, ready: true, horlogeSuspecte: suspect, derniereDate: suspect ? stored.derniereDate : today });
@@ -284,6 +328,18 @@ export const computeSummary = (code, etatStored, objectifPref) => {
     reviews: core.dueReviews(etat, today),
     stats: core.publicStats(etat),
   };
+};
+
+/**
+ * Version lue d'un cours de langue : [version, choisir(version), versions disponibles].
+ * « fr » (explications en français) par défaut ; une seule version pour les autres modules.
+ */
+export const useModuleVersion = (moduleCode) => {
+  const choisie = usePrep((s) => s.prefs.versions?.[moduleCode]);
+  const setModuleVersion = usePrep((s) => s.setModuleVersion);
+  const versions = useMemo(() => moduleVersions(getModule(moduleCode)), [moduleCode]);
+  const version = versions.includes(choisie) ? choisie : versions[0];
+  return [version, (v) => setModuleVersion(moduleCode, v), versions];
 };
 
 /** Hooks sûrs : sélection de valeurs stables, calcul mémorisé (zustand v5 exige des sélecteurs stables). */
