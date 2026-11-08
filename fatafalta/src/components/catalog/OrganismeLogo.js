@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Image } from 'expo-image';
+import { useReducedMotion } from 'react-native-reanimated';
 import Text from '../ui/Text';
 import { API_BASE_URL } from '../../types/constants';
 import theme from '../../theme/tokens';
@@ -23,26 +25,41 @@ export const monogramOf = (name = '') => {
 
 const hash = (value) => [...String(value)].reduce((acc, char) => ((acc * 31) + char.charCodeAt(0)) >>> 0, 7);
 
-/** Adresse affichable : https, ou logo téléversé servi par l'API (/api/organismes/:id/logo). */
+/** Les références storage passent par l'API, qui redirige vers l'image signée. */
 const logoUri = (value) => {
   if (typeof value !== 'string') return null;
   const trimmed = value.trim();
   if (/^https:\/\/\S+$/.test(trimmed)) return trimmed;
   if (/^\/api\/\S+$/.test(trimmed)) return `${API_BASE_URL.replace(/\/$/, '')}${trimmed}`;
+  const stored = /^storage:documents\/organismes\/([A-Za-z0-9_-]+)\/[^\s]+$/.exec(trimmed);
+  if (stored) return `${API_BASE_URL.replace(/\/$/, '')}/api/organismes/${stored[1]}/logo`;
   return null;
 };
 
 const OrganismeLogo = ({ organisme, size = 44, style }) => {
-  const [broken, setBroken] = useState(false);
-  useEffect(() => setBroken(false), [organisme?.logo]);
+  const reduceMotion = useReducedMotion();
+  const [failedLogo, setFailedLogo] = useState(null);
+  const logo = organisme?.logo;
+  // La référence brute inclut le nom horodaté : nouveau fichier = nouvelle entrée du cache.
+  const cacheKey = typeof logo === 'string' ? `organisme-logo:${logo}` : null;
   const name = organisme?.nom || organisme?.name || '';
-  const uri = !broken ? logoUri(organisme?.logo) : null;
+  const uri = failedLogo !== logo ? logoUri(logo) : null;
   const radius = Math.round(size * 0.28);
 
   if (uri) {
     return (
       <View style={[styles.box, styles.imageBox, { width: size, height: size, borderRadius: radius, padding: Math.round(size * 0.12) }, style]}>
-        <Image source={{ uri }} resizeMode="contain" onError={() => setBroken(true)} style={styles.image} accessibilityIgnoresInvertColors />
+        <Image
+          key={cacheKey}
+          source={{ uri, cacheKey }}
+          cachePolicy="memory-disk"
+          recyclingKey={cacheKey}
+          contentFit="contain"
+          transition={reduceMotion ? 0 : 120}
+          onError={() => setFailedLogo(logo)}
+          style={styles.image}
+          accessibilityIgnoresInvertColors
+        />
       </View>
     );
   }

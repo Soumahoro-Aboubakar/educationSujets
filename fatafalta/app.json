@@ -70,7 +70,8 @@
           "enforceContrast": false,
           "style": "dark"
         }
-      ]
+      ],
+      "expo-image"
     ],
     "scheme": "fatafalta",
     "extra": {
