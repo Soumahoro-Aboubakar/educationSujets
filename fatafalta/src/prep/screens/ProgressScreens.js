@@ -1,20 +1,18 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { FlatList, Image, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import Animated, { FadeIn, FadeInDown, FadeInUp, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { getErrorMessage } from '../../utils/userMessages';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Image, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import Svg, { Circle, Line, Path, Rect } from 'react-native-svg';
-import { ArrowLeft, Check, ChevronRight, Flame, NotebookPen, Target, Timer, Trophy } from 'lucide-react-native';
+import { Check, ChevronRight, Flame, NotebookPen, Target, Timer, Trophy } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
 import { getProgramme, programmeModules } from '../content';
 import usePrep, { todayKey, useSummary } from '../store';
-import prepApi, { isServiceMissing } from '../api';
-import { brand, colors, motion, PODIUM, subjectTint, theme, type } from '../theme';
+import prepApi from '../api';
+import { brand, colors, subjectTint, theme, type } from '../theme';
 import { haptic } from '../feedback';
-import { AnimatedNumber, Avatar, Card, Enter, NightBackground, PaperStack, PrepButton, PressScale, ProgressBar, ProgressRing, SectionTitle, Segmented, StatTile, SubjectIcon } from '../ui/primitives';
-import { CloudOffArt } from '../ui/Illustrations';
+import { AnimatedNumber, Card, Enter, NightBackground, PrepButton, PressScale, ProgressBar, ProgressRing, SectionTitle, Segmented, StatTile, SubjectIcon } from '../ui/primitives';
 import ART from '../ui/art';
 import { sessionParams } from './SessionScreen';
 
@@ -98,7 +96,7 @@ export const ProgressScreen = ({ navigation }) => {
   const [tab, setTab] = useState('progression');
   useFocusEffect(useCallback(() => {
     if (!programmeCode) return;
-    prepApi.ranking(programmeCode, 'tout').then((r) => { setRank(r); setOffline(false); }).catch((err) => setOffline(isServiceMissing(err) ? 'indisponible' : 'reseau'));
+    prepApi.ranking(programmeCode, 'tout').then((r) => { setRank(r); setOffline(false); }).catch((err) => setOffline(getErrorMessage(err, 'classement')));
   }, [programmeCode]));
 
   if (!summary) {
@@ -142,7 +140,7 @@ export const ProgressScreen = ({ navigation }) => {
                   {rank.variation ? <Text variant="caption" style={{ color: rank.variation > 0 ? '#8FD9B4' : '#F3ADA4', fontFamily: theme.fontFamily.semiBold }}>{`${rank.variation > 0 ? '▲' : '▼'} ${Math.abs(rank.variation)} cette semaine`}</Text> : null}
                 </>
               ) : (
-                <Text variant="bodyMedium" style={styles.onInk}>{offline === 'indisponible' ? 'Classement bientôt disponible pour ce cycle' : offline ? 'Classement disponible avec une connexion' : 'Classement en cours de calcul'}</Text>
+                <Text variant="bodyMedium" style={styles.onInk}>{offline || 'Ton rang n’est pas encore affiché. Réponds à des questions puis consulte le classement.'}</Text>
               )}
             </View>
             <View style={styles.rankGo}><ChevronRight size={18} color={brand.ink} /></View>
@@ -250,192 +248,8 @@ export const ProgressScreen = ({ navigation }) => {
   );
 };
 
-// ═══ E34 — Candidats du cycle ═══════════════════════════════════════════
-const PERIODES = [['semaine', 'Semaine'], ['mois', 'Mois'], ['tout', 'Depuis le début']];
-
-const PLACE_LABEL = ['1er', '2e', '3e'];
-const PodiumColumn = ({ c, place, height, delay, onPress }) => {
-  const y = useSharedValue(60);
-  useEffect(() => { const t = setTimeout(() => { y.value = withSpring(0, motion.snap); }, delay); return () => clearTimeout(t); }, [delay, y]);
-  const s = useAnimatedStyle(() => ({ transform: [{ translateY: y.value }], opacity: 1 - y.value / 60 }));
-  const color = PODIUM[place - 1];
-  const big = place === 1;
-  return (
-    <Animated.View style={[styles.podiumCol, s]}>
-      <Pressable onPress={onPress} style={{ alignItems: 'center' }} accessibilityLabel={`${place}ᵉ, ${c.pseudonyme}, score ${Math.round(c.score)}`}>
-        <View style={[styles.laurelWrap, big && styles.laurelWrapBig]}>
-          <Image source={ART.laurels[place - 1]} style={StyleSheet.absoluteFill} resizeMode="contain" accessible={false} />
-          <Avatar name={c.pseudonyme} tint={c.avatarTeinte} size={big ? 52 : 44} />
-        </View>
-        <Text variant="caption" style={[styles.inkStrong, { marginTop: 2 }]} numberOfLines={1}>{c.moi ? 'Toi' : c.pseudonyme}</Text>
-        <Text style={[type.numeral, styles.podiumScore]}>{Math.round(c.score)}</Text>
-      </Pressable>
-      <View style={[styles.podiumSheet, { height }]}>
-        <LinearGradient colors={[`${color}33`, 'rgba(255,255,255,0)']} style={StyleSheet.absoluteFill} />
-        <Text style={[type.numeral, styles.podiumPlace, { color }]}>{PLACE_LABEL[place - 1]}</Text>
-      </View>
-    </Animated.View>
-  );
-};
-
-const CandidateRow = ({ c, rang, onPress }) => (
-  <Pressable onPress={onPress} style={({ pressed }) => [styles.candRow, c.moi && styles.candMe, pressed && { backgroundColor: brand.paperDim }]} accessibilityLabel={`${rang}ᵉ, ${c.moi ? 'toi' : c.pseudonyme}, score ${Math.round(c.score)}, ${nf(c.stats.questions)} questions, ${c.stats.modulesValides} modules validés, ${nf(c.stats.erreurs)} erreurs, ${pct(c.stats.reussite)} de réussite`}>
-    <Text style={[type.numeral, styles.candRank]}>{rang}</Text>
-    <Avatar name={c.pseudonyme} tint={c.avatarTeinte} size={40} />
-    <View style={{ flex: 1 }}>
-      <Text variant="bodyMedium" style={styles.ink} numberOfLines={1}>{c.moi ? `Toi · ${c.pseudonyme}` : c.pseudonyme}</Text>
-      <Text variant="caption" style={styles.muted} numberOfLines={1}>{`${nf(c.stats.questions)} questions · ${c.stats.modulesValides} modules · ${nf(c.stats.erreurs)} erreurs · ${pct(c.stats.reussite)}`}</Text>
-    </View>
-    <View style={{ alignItems: 'flex-end' }}>
-      <Text style={[type.numeral, styles.candScore]}>{Math.round(c.score)}</Text>
-      {c.stats.serie ? <View style={styles.row}><Flame size={12} color={brand.goldInk} /><Text variant="caption" style={styles.muted}>{c.stats.serie}</Text></View> : null}
-    </View>
-  </Pressable>
-);
-
-export const RankingScreen = ({ navigation, route }) => {
-  const insets = useSafeAreaInsets();
-  const programmeCode = route.params.programme;
-  const programme = getProgramme(programmeCode);
-  const [periode, setPeriode] = useState('tout');
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(false);
-  const [meVisible, setMeVisible] = useState(true);
-  const list = useRef(null);
-
-  const load = useCallback(() => {
-    setError(false);
-    prepApi.ranking(programmeCode, periode).then(setData).catch((err) => setError(isServiceMissing(err) ? 'indisponible' : 'reseau'));
-  }, [programmeCode, periode]);
-  useEffect(load, [load]);
-
-  const candidats = data?.candidats || [];
-  const podium = candidats.slice(0, 3);
-  const rest = candidats.length >= 3 ? candidats.slice(3) : candidats;
-  const me = candidats.find((c) => c.moi);
-  const meIndex = rest.findIndex((c) => c.moi);
-  const open = (c) => { haptic.select(); if (!c.moi) navigation.navigate('PrepCandidate', { programme: programmeCode, identite: c.identite, rang: c.rangApprox }); };
-
-  const onViewable = useRef(({ viewableItems }) => { setMeVisible(viewableItems.some((v) => v.item.moi)); }).current;
-
-  return (
-    <PaperStack header={(
-      <View style={styles.stackHeader}>
-        <Pressable onPress={() => navigation.goBack()} accessibilityLabel="Retour" hitSlop={6} style={styles.roundDark}><ArrowLeft size={20} color="#FFF" /></Pressable>
-        <View style={{ width: 44 }} />
-      </View>
-    )}>
-      <View style={{ paddingTop: 24, paddingHorizontal: 20 }}>
-        <Text variant="title" style={styles.ink} accessibilityRole="header">Classement</Text>
-        <Text variant="caption" style={[styles.muted, { marginTop: 4 }]}>{`${programme.organisme.sigle} · ${programme.titre}${data ? ` · ${data.total} candidat${data.total > 1 ? 's' : ''}` : ''}`}</Text>
-        <Segmented items={PERIODES.map(([k, l]) => ({ key: k, label: l }))} value={periode} onChange={setPeriode} style={{ marginTop: 16, marginBottom: 8 }} />
-      </View>
-      {error ? (
-        error === 'indisponible' ? (
-        <View style={[styles.centerAll, { flex: 1 }]}>
-          <Image source={ART.laurels[0]} style={{ width: 96, height: 96 }} resizeMode="contain" accessible={false} />
-          <Text variant="h2" style={[styles.ink, { textAlign: 'center' }]}>Classement bientôt disponible</Text>
-          <Text variant="body" style={[styles.muted, { textAlign: 'center' }]}>Le classement de ce cycle s’ouvrira prochainement. Ta progression est déjà comptée.</Text>
-        </View>
-      ) : (
-        <View style={[styles.centerAll, { flex: 1 }]}><CloudOffArt /><Text variant="h3" style={styles.ink}>Connexion impossible</Text><PrepButton title="Réessayer" variant="secondary" onPress={load} /></View>
-      )
-      ) : !data ? (
-        <View style={{ padding: 20, gap: 10 }}>{[0, 1, 2, 3, 4].map((i) => <View key={i} style={styles.skeleton} />)}</View>
-      ) : (
-        <FlatList
-          ref={list}
-          data={rest}
-          keyExtractor={(c) => c.identite}
-          onViewableItemsChanged={onViewable}
-          viewabilityConfig={{ itemVisiblePercentThreshold: 60 }}
-          contentContainerStyle={{ paddingBottom: 110 }}
-          ListHeaderComponent={candidats.length >= 3 ? (
-            <View style={styles.podium}>
-              <PodiumColumn c={podium[1]} place={2} height={62} delay={100} onPress={() => open(podium[1])} />
-              <PodiumColumn c={podium[0]} place={1} height={88} delay={0} onPress={() => open(podium[0])} />
-              <PodiumColumn c={podium[2]} place={3} height={46} delay={200} onPress={() => open(podium[2])} />
-            </View>
-          ) : <Text variant="body" style={[styles.muted, { textAlign: 'center', padding: 20 }]}>Sois parmi les premiers de ton cycle.</Text>}
-          renderItem={({ item, index }) => <CandidateRow c={item} rang={item.rangApprox} onPress={() => open(item)} />}
-          ListFooterComponent={data.moi && !data.moi.visible ? <Text variant="caption" style={[styles.muted, { padding: 20, textAlign: 'center' }]}>Tu n’apparais pas dans le classement des autres.</Text> : null}
-        />
-      )}
-      {me && !meVisible && meIndex >= 0 ? (
-        <Animated.View entering={FadeInUp} style={[styles.pinned, { paddingBottom: Math.max(insets.bottom, 8) }]}>
-          <CandidateRow c={me} rang={data.rang} onPress={() => list.current?.scrollToIndex({ index: meIndex, viewPosition: 0.5 })} />
-        </Animated.View>
-      ) : null}
-    </PaperStack>
-  );
-};
-
-// ═══ E35 — Profil d'un candidat ═════════════════════════════════════════
-export const CandidateScreen = ({ navigation, route }) => {
-  const insets = useSafeAreaInsets();
-  const { programme: programmeCode, identite } = route.params;
-  const programme = getProgramme(programmeCode);
-  const mine = useSummary(programmeCode);
-  const [p, setP] = useState(null);
-  const [error, setError] = useState(false);
-  useEffect(() => { prepApi.candidate(programmeCode, identite).then(setP).catch(() => setError(true)); }, [programmeCode, identite]);
-
-  const compare = p ? [
-    ['Questions répondues', mine.stats.questions, p.stats.questions],
-    ['Modules validés', mine.modulesValides, p.stats.modulesValides],
-    ['Réussite du 1ᵉʳ coup', Math.round(mine.stats.reussite * 100), Math.round((p.stats.reussite || 0) * 100), '%'],
-    ['Série record', mine.etat.serie?.record || 0, p.stats.serieRecord || 0],
-  ] : [];
-  const biggestGap = compare.length ? compare.reduce((a, c) => ((c[2] - c[1]) / Math.max(1, c[2]) > (a[2] - a[1]) / Math.max(1, a[2]) ? c : a)) : null;
-
-  return (
-    <View style={styles.paper}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
-        <View style={[styles.header, { paddingTop: insets.top + 8, alignItems: 'center' }]}>
-          <NightBackground />
-          <Pressable onPress={() => navigation.goBack()} accessibilityLabel="Retour" style={[styles.roundDark, { alignSelf: 'flex-start' }]}><ArrowLeft size={22} color="#FFF" /></Pressable>
-          {p ? (
-            <Animated.View entering={FadeIn} style={{ alignItems: 'center', gap: 6 }}>
-              <Avatar name={p.pseudonyme} tint={p.avatarTeinte} size={72} ring={PODIUM[p.rang - 1] || brand.goldLight} />
-              <Text variant="h2" style={styles.onInk}>{p.pseudonyme}</Text>
-              <Text variant="bodyMedium" style={{ color: brand.goldLight }}>{`${p.rang}ᵉ · ${programme.organisme.sigle} ${programme.titre}`}</Text>
-            </Animated.View>
-          ) : <Text variant="body" style={styles.onSoft}>{error ? 'Profil indisponible' : 'Chargement…'}</Text>}
-        </View>
-        {p ? (
-          <View style={styles.section}>
-            <View style={styles.grid}>
-              {[[nf(p.stats.questions), 'questions'], [p.stats.modulesValides, 'modules validés'], [nf(p.stats.erreurs), 'erreurs effectuées'], [pct(p.stats.reussite), 'de réussite'], [p.stats.raisonnementsValides || 0, 'raisonnements validés'], [p.stats.meilleurBlanc != null ? `${String(p.stats.meilleurBlanc).replace('.', ',')}/20` : '—', 'meilleur concours blanc']].map(([v, l], i) => (
-                <Enter key={l} index={i} style={styles.gridCell}><Card style={styles.statCard}><Text style={[type.numeral, styles.statNum]}>{v}</Text><Text variant="caption" style={styles.muted}>{l}</Text></Card></Enter>
-              ))}
-            </View>
-            {p.matieresFortes?.length ? (
-              <View style={{ gap: 8 }}>
-                <Text variant="h3" style={styles.ink}>Matières fortes</Text>
-                <View style={[styles.row, { flexWrap: 'wrap' }]}>{p.matieresFortes.map((m) => <View key={m} style={styles.strong}><Text variant="caption" style={styles.ink}>{m}</Text></View>)}</View>
-              </View>
-            ) : null}
-            <SectionTitle>{`Toi / ${p.pseudonyme}`}</SectionTitle>
-            {compare.map(([l, a, b, unit], i) => {
-              const m = Math.max(a, b, 1);
-              return (
-                <View key={l} style={{ gap: 6 }}>
-                  <View style={styles.between}><Text variant="caption" style={styles.ink}>{l}</Text><Text variant="caption" style={[styles.muted, type.tabular]}>{`${nf(a)}${unit || ''} · ${nf(b)}${unit || ''}`}</Text></View>
-                  <ProgressBar value={a / m} color={brand.burgundy} delay={i * 60} />
-                  <ProgressBar value={b / m} color={brand.gold} delay={i * 60} />
-                </View>
-              );
-            })}
-            <Text variant="caption" style={styles.muted}>Barre bordeaux : toi · barre or : {p.pseudonyme}</Text>
-            {biggestGap && biggestGap[2] > biggestGap[1] ? (
-              <View style={styles.advice}><Trophy size={18} color={brand.goldInk} /><Text variant="body" style={[styles.ink, { flex: 1 }]}>{`Ce qui fait la différence : ${biggestGap[0].toLowerCase()} (${nf(biggestGap[2])}${biggestGap[3] || ''}).`}</Text></View>
-            ) : null}
-          </View>
-        ) : null}
-      </ScrollView>
-    </View>
-  );
-};
+// Les écrans du classement partagent leur pagination et leurs composants dédiés.
+export { RankingScreen, CandidateScreen } from '../components/RankingScreens';
 
 const styles = StyleSheet.create({
   paper: { flex: 1, backgroundColor: brand.paper },
@@ -461,47 +275,16 @@ const styles = StyleSheet.create({
   subjectPct: { color: brand.ink, fontSize: 17, lineHeight: 22 },
   noteCard: { marginTop: 6, padding: 14, borderRadius: 16, backgroundColor: brand.goldWash, gap: 4, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.35)' },
   linkIcon: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
-  stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
-  statNum: { color: brand.ink, fontSize: 24, lineHeight: 30 },
-  laurelWrap: { width: 84, height: 84, alignItems: 'center', justifyContent: 'center' },
-  laurelWrapBig: { width: 100, height: 100 },
-  podiumScore: { color: brand.ink, fontSize: 18, lineHeight: 22 },
-  podiumPlace: { fontSize: 24, lineHeight: 30 },
-  candScore: { color: brand.ink, fontSize: 18, lineHeight: 23 },
   centerAll: { alignItems: 'center', justifyContent: 'center', gap: 10, padding: 24 },
   ink: { color: brand.ink },
   muted: { color: brand.inkSoft },
   onInk: { color: brand.onInk },
   onSoft: { color: brand.onInkSoft },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   between: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   header: { paddingHorizontal: 20, paddingBottom: 20 },
   rankRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 10, marginTop: 8 },
-  ghostBtn: { marginTop: 16, alignSelf: 'flex-start', backgroundColor: 'rgba(255,255,255,0.92)' },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, paddingHorizontal: 20, marginTop: -36 },
-  gridCell: { width: '48%' },
-  statCard: { padding: 16, gap: 2, minHeight: 92 },
-  section: { paddingHorizontal: 20, marginTop: 24, gap: 12 },
-  tintDot: { width: 8, height: 8, borderRadius: 4 },
   chartCard: { padding: 16 },
   resultRow: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 14, paddingVertical: 12 },
   hair: { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
   linkRow: { minHeight: 60, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  round: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paperDim },
-  roundDark: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
-  periods: { flexDirection: 'row', gap: 4, padding: 4, marginTop: 16, marginBottom: 8, borderRadius: 999, backgroundColor: brand.paperDim },
-  period: { flex: 1, height: 36, alignItems: 'center', justifyContent: 'center', borderRadius: 999 },
-  periodOn: { backgroundColor: colors.surface, ...theme.shadows.sm },
-  skeleton: { height: 64, borderRadius: 14, backgroundColor: brand.skeleton },
-  podium: { height: 260, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'center', gap: 10, paddingHorizontal: 20, marginBottom: 10 },
-  podiumArt: { position: 'absolute', bottom: 0, opacity: 0 },
-  podiumCol: { width: 104, alignItems: 'center', gap: 6 },
-  podiumSheet: { width: '100%', borderTopLeftRadius: 16, borderTopRightRadius: 16, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', ...theme.shadows.soft },
-  podiumFold: { position: 'absolute', top: -1, right: -1, width: 0, height: 0, borderTopWidth: 14, borderLeftWidth: 14, borderLeftColor: 'transparent', borderTopRightRadius: 10 },
-  candRow: { minHeight: 76, flexDirection: 'row', alignItems: 'center', gap: 12, marginHorizontal: 16, marginBottom: 8, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 18, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, backgroundColor: brand.sheet },
-  candMe: { backgroundColor: brand.goldWash, borderColor: 'rgba(180,138,72,0.55)', borderWidth: 1 },
-  candRank: { width: 32, textAlign: 'center', color: brand.inkSoft, fontSize: 18, lineHeight: 23 },
-  pinned: { position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: brand.paper, shadowColor: brand.ink, shadowOpacity: 0.12, shadowRadius: 16, shadowOffset: { width: 0, height: -4 }, elevation: 12 },
-  strong: { paddingHorizontal: 12, height: 30, borderRadius: 15, justifyContent: 'center', backgroundColor: brand.goldWash },
-  advice: { flexDirection: 'row', gap: 10, padding: 16, borderRadius: 18, backgroundColor: brand.goldWash, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.35)' },
 });

@@ -19,7 +19,8 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 /** Carte ou bouton qui s'enfonce à l'appui (A10 « press » : 100 ms, échelle 0,97). */
 export const PressScale = ({ onPress, onLongPress, disabled, style, children, scaleTo = motion.press.scale, hapticOnPress, accessibilityLabel, accessibilityRole = 'button', accessibilityState, accessibilityHint, hitSlop }) => {
   const pressed = useSharedValue(0);
-  const animated = useAnimatedStyle(() => ({ transform: [{ scale: interpolate(pressed.value, [0, 1], [1, scaleTo]) }] }));
+  const reduce = useReduceMotion();
+  const animated = useAnimatedStyle(() => ({ transform: [{ scale: reduce ? 1 : interpolate(pressed.value, [0, 1], [1, scaleTo]) }] }));
   return (
     <AnimatedPressable
       accessibilityRole={accessibilityRole}

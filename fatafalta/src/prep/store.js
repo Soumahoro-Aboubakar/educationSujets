@@ -22,7 +22,7 @@ let flushing = false;
 let counter = 0;
 const newKey = () => `${Date.now().toString(36)}-${(counter += 1).toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 
-const PERSISTED = ['identite', 'token', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding', 'videos'];
+const PERSISTED = ['identite', 'token', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'candidatsSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding', 'videos'];
 
 // versions : version choisie par cours de langue { [codeModule]: 'en' } ; « fr » par défaut.
 const DEFAULT_PREFS = { objectif: 10, tailleTexte: 17, puce: {}, rythmeFait: false, testPropose: {}, notifications: true, versions: {} };
@@ -53,6 +53,7 @@ const usePrep = create((set, get) => ({
   abonneLocal: false,
   programme: null,
   programmesSuivis: [],
+  candidatsSuivis: {},
   progressions: {},
   queue: [],
   prefs: DEFAULT_PREFS,
@@ -96,6 +97,21 @@ const usePrep = create((set, get) => ({
     const snapshot = {};
     PERSISTED.forEach((k) => { snapshot[k] = s[k]; });
     saveState(snapshot);
+  },
+
+  // Un suivi appartient à un programme. Aucun rang ni statistique privée n'est conservé.
+  followCandidate: (programme, candidat) => {
+    if (!programme || !candidat?.identite) return;
+    const suivis = get().candidatsSuivis || {};
+    const liste = suivis[programme] || [];
+    if (liste.some((c) => c.identite === candidat.identite)) return;
+    set({ candidatsSuivis: { ...suivis, [programme]: [...liste, { identite: candidat.identite, pseudonyme: candidat.pseudonyme }] } });
+    get().persist();
+  },
+  unfollowCandidate: (programme, identite) => {
+    const suivis = get().candidatsSuivis || {};
+    set({ candidatsSuivis: { ...suivis, [programme]: (suivis[programme] || []).filter((c) => c.identite !== identite) } });
+    get().persist();
   },
 
   hydrate: async () => {
