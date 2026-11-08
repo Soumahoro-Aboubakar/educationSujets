@@ -164,7 +164,9 @@ export default function App() {
         <AuthProvider>
           <PreferencesProvider>
             <PrepBridge />
-            <NavigationContainer linking={linking}>
+            {/* Web/PWA : sans formatter, React Navigation met le nom technique de l'écran
+                (« ExploreTab ») en titre d'onglet, repris par « Sur l'écran d'accueil » d'iOS. */}
+            <NavigationContainer linking={linking} documentTitle={{ formatter: () => 'Fatafalta' }}>
               <RootNavigator />
             </NavigationContainer>
           </PreferencesProvider>

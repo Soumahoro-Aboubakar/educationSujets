@@ -48,7 +48,16 @@
       ]
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "name": "Fatafalta",
+      "shortName": "Fatafalta",
+      "lang": "fr",
+      "themeColor": "#0D1B32",
+      "backgroundColor": "#0D1B32",
+      "display": "standalone",
+      "orientation": "portrait",
+      "bundler": "metro",
+      "output": "single"
     },
     "plugins": [
       [

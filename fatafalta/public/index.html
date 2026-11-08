@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- translate="no" : la traduction automatique du navigateur réécrit le DOM sous React et fait
+     planter l'interface ; elle propose aussi une barre « Traduire ? » jusque dans l'app installée. -->
+<html lang="fr" translate="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="google" content="notranslate" />
+    <!-- viewport-fit=cover : l'app peint sous l'encoche et l'indicateur d'accueil, le contenu
+         est repoussé par react-native-safe-area-context (env(safe-area-inset-*)).
+         Le zoom reste autorisé (accessibilité) ; c'est la taille des champs qui évite le zoom auto. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <title>Fatafalta</title>
+    <meta name="description" content="Sujets d'examens et de concours, corrigés et préparation, à ton rythme." />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <!-- theme-color est injecté par Expo depuis app.json (web.themeColor = encre #0D1B32) : le haut de
+         chaque écran est l'en-tête encre. Thème clair uniquement (app.json → userInterfaceStyle). -->
+    <meta name="color-scheme" content="light" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Fatafalta" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <!-- Écran de lancement de la PWA iOS (sinon noir) : iOS ignore le manifeste ici et n'affiche
+         qu'une image aux dimensions exactes de l'écran. Même rendu que le splash natif et #boot. -->
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1320x2868.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1260x2736.png" media="(device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1206x2622.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/icons/splash/launch-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+
+    <style id="expo-reset">
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        /* Encre, comme le splash natif : aucun flash blanc au lancement ni sous la barre d'état. */
+        background-color: #0d1b32;
+      }
+      body {
+        /* Les ScrollView gèrent le défilement ; la page elle-même ne bouge pas. */
+        overflow: hidden;
+      }
+      /* Racine fixée : la page elle-même ne bouge jamais, seules les listes défilent. */
+      #root {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+      }
+      /* PWA iOS installée (barre d'état black-translucent) : la fenêtre (innerHeight, 100%, dvh)
+         vaut l'écran MOINS la barre d'état (812 au lieu de 874 pt sur iPhone 17 Pro), alors que la
+         page peint dessous → l'app s'arrêtait ~60 pt avant le bas et les listes ne défilaient pas
+         jusqu'au bout. Seuls 100vh / 100lvh valent la hauteur réelle de l'écran (mesuré, iOS 26).
+         Limité au mode installé : dans Safari, 100vh passerait sous la barre d'outils. */
+      @media (display-mode: standalone) {
+        html,
+        body,
+        #root {
+          bottom: auto;
+          height: 100vh;
+          height: 100lvh;
+        }
+      }
+    </style>
+
+    <style id="fatafalta-mobile">
+      html {
+        -webkit-tap-highlight-color: transparent; /* pas de voile gris au toucher, chaque bouton a son état pressé */
+        -webkit-text-size-adjust: 100%;           /* pas de grossissement du texte en paysage */
+        overscroll-behavior: none;                /* ni rebond de page ni « tirer pour rafraîchir » */
+      }
+      /* Un contrôle ne se sélectionne pas à l'appui long ; le texte de contenu reste sélectionnable. */
+      [role="button"],
+      [role="tab"],
+      [role="link"],
+      [role="switch"],
+      [role="checkbox"],
+      [role="radio"] {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        touch-action: manipulation;               /* clic immédiat, sans attente du double-tap */
+      }
+      /* iOS zoome dans la page sur un champ < 16 px et ne dézoome pas : 16 px minimum au toucher.
+         !important : react-native-web pose la taille par classe, plus spécifique qu'un sélecteur d'élément. */
+      @media (pointer: coarse) {
+        input,
+        textarea,
+        select {
+          font-size: 16px !important;
+        }
+      }
+
+      /* Écran de démarrage : même image et même place que le splash natif, remplacé au premier rendu. */
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #0d1b32;
+      }
+      #boot img {
+        width: 160px;
+        height: 160px;
+      }
+    </style>
+
+    <script>
+      // Service worker : uniquement sur la version exportée (bundle /_expo/static/),
+      // jamais sur le serveur de développement, où il servirait un ancien bundle.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          if (!document.querySelector('script[src*="/_expo/static/"]')) return;
+          navigator.serviceWorker.register('/sw.js').catch(function (error) {
+            console.warn('Service worker non enregistré :', error);
+          });
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <noscript>Activez JavaScript pour utiliser Fatafalta.</noscript>
+    <div id="root">
+      <div id="boot" aria-hidden="true"><img src="/icons/splash-mark.png" alt="" /></div>
+    </div>
+  </body>
+</html>
