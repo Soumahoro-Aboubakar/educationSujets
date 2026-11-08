@@ -18,6 +18,7 @@ router.post('/exercices/:code/tentative', limits.publicWrite, prep.attempt);
 router.post('/exercices/:code/raisonnement', limits.publicWrite, prep.reasoning);
 router.post('/sync', limits.publicWrite, prep.sync);
 router.get('/programmes/:code/classement', prep.ranking);
+router.get('/programmes/:code/candidats', limits.search, prep.searchCandidates);
 router.get('/programmes/:code/candidats/:identite', prep.candidate);
 router.post('/signalements', limits.publicWrite, prep.report);
 router.post('/rattachement', protect, prep.attach);

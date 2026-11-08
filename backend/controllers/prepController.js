@@ -154,14 +154,23 @@ exports.reasoning = asyncHandler(async (req, res) => {
 // GET /api/prep/programmes/:code/classement?periode=semaine|mois|tout
 exports.ranking = asyncHandler(async (req, res) => {
   const identite = await identity.fromRequest(req);
-  const periode = ['semaine', 'mois', 'tout'].includes(req.query.periode) ? req.query.periode : 'tout';
-  res.json({ success: true, data: await progress.ranking(identite, req.params.code, { periode }) });
+  const { periode, limite, apres, avant, autour } = req.query;
+  res.set('Cache-Control', 'private, no-store');
+  res.json({ success: true, data: await progress.ranking(identite, req.params.code, { periode, limite, apres, avant, autour }) });
+});
+
+// GET /api/prep/programmes/:code/candidats?q=préfixe
+exports.searchCandidates = asyncHandler(async (req, res) => {
+  res.set('Cache-Control', 'private, no-store');
+  res.json({ success: true, data: await progress.searchCandidates(req.params.code, req.query.q, { periode: req.query.periode }) });
 });
 
 // GET /api/prep/programmes/:code/candidats/:identite
 exports.candidate = asyncHandler(async (req, res) => {
   if (!/^[a-f0-9]{24}$/.test(req.params.identite)) throw new AppError('Candidat introuvable', 404);
-  const profil = await progress.candidateProfile(req.params.code, req.params.identite);
+  const viewer = await identity.fromRequest(req);
+  const profil = await progress.candidateProfile(req.params.code, req.params.identite, { periode: req.query.periode, viewer });
+  res.set('Cache-Control', 'private, no-store');
   if (!profil) throw new AppError('Candidat introuvable', 404);
   res.json({ success: true, data: profil });
 });
@@ -185,7 +194,7 @@ exports.attach = asyncHandler(async (req, res) => {
     for (const doc of docs) {
       // eslint-disable-next-line no-await-in-loop
       const target = await PrepProgression.findOne({ identite: existing._id, programme: doc.programme });
-      if (!target) { doc.identite = existing._id; await doc.save(); continue; } // eslint-disable-line no-await-in-loop
+      if (!target) { doc.identite = existing._id; await doc.save(); progress.invalidateRanking(doc.programme); continue; } // eslint-disable-line no-await-in-loop
       const a = target.etat; const b = doc.etat;
       ['questions', 'erreurs', 'erreursCorrigees', 'secondesChancesReussies', 'raisonnementsValides'].forEach((k) => { a.compteurs[k] += b.compteurs[k] || 0; });
       [1, 2, 3].forEach((n) => { a.premierCoup[n] = [a.premierCoup[n][0] + b.premierCoup[n][0], a.premierCoup[n][1] + b.premierCoup[n][1]]; });
@@ -195,12 +204,13 @@ exports.attach = asyncHandler(async (req, res) => {
       a.joursActifs = [...new Set([...a.joursActifs, ...b.joursActifs])].sort();
       a.blancs = [...a.blancs, ...b.blancs];
       target.markModified('etat');
-      await target.save(); // eslint-disable-line no-await-in-loop
+      await progress.finalize(target); // eslint-disable-line no-await-in-loop
       await doc.deleteOne(); // eslint-disable-line no-await-in-loop
     }
     existing.essai.jours = [...new Set([...existing.essai.jours, ...identite.essai.jours])].sort();
     existing.essai.iaUtilisees = Math.max(existing.essai.iaUtilisees, identite.essai.iaUtilisees);
     await existing.save();
+    progress.invalidateRanking();
     identite.fusionneeDans = existing._id;
     await identite.save();
     return res.json({ success: true, data: { token: identity.issueToken(String(existing._id)), identite: publicIdentity(existing), fusion: true } });
@@ -225,5 +235,7 @@ exports.updatePublicProfile = asyncHandler(async (req, res) => {
   if (avatarTeinte !== undefined) identite.avatarTeinte = Math.max(0, Math.min(5, Number(avatarTeinte) || 0));
   if (visibleClassement !== undefined) identite.visibleClassement = Boolean(visibleClassement);
   await identite.save();
+  // Invalide aussi les pseudonymes/avatars publics mémorisés dans la première page.
+  progress.invalidateRanking();
   res.json({ success: true, data: publicIdentity(identite) });
 });

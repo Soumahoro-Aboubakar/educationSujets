@@ -22,7 +22,7 @@
     "prep:pack": "node scripts/prep/buildPack.js",
     "prep:check": "node scripts/prep/buildPack.js --check",
     "prep:seed": "node scripts/prep/seed.js",
-    "test:prep": "node --test tests/prepCore.test.js tests/prepContent.test.js tests/prepVideo.test.js",
+    "test:prep": "node --test tests/prepCore.test.js tests/prepContent.test.js tests/prepVideo.test.js tests/prepRanking.test.js tests/prepRanking.integration.test.js",
     "video:publish": "node scripts/video/publish.js",
     "video:auth": "node scripts/video/auth.js",
     "video:brief": "node scripts/video/generation/brief.js",

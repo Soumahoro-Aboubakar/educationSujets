@@ -15,10 +15,14 @@ const PrepProgressionSchema = new mongoose.Schema({
   rangSemainePrecedente: { type: Number, default: null },
   semaineReference: { type: String, default: null },
   stats: { type: mongoose.Schema.Types.Mixed, default: {} },
+  matieresFortes: { type: [String], default: [] },
   derniereActivite: { type: Date, default: null },
 }, { timestamps: true, minimize: false });
 
 PrepProgressionSchema.index({ identite: 1, programme: 1 }, { unique: true });
-PrepProgressionSchema.index({ programme: 1, score: -1 });
+// L'ordre de curseur est couvert ; derniereActivite en suffixe permet de filtrer les périodes
+// tout en conservant l'ordre. L'index de date sert aux totaux des périodes sélectives.
+PrepProgressionSchema.index({ programme: 1, score: -1, _id: 1, derniereActivite: 1 });
+PrepProgressionSchema.index({ programme: 1, derniereActivite: 1, score: -1 });
 
 module.exports = mongoose.model('PrepProgression', PrepProgressionSchema);

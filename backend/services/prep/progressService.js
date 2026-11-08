@@ -1,9 +1,9 @@
 const PrepProgression = require('../../models/PrepProgression');
 const PrepTentative = require('../../models/PrepTentative');
-const PrepIdentite = require('../../models/PrepIdentite');
 const { isSubscriptionActive } = require('../billing/subscriptionService');
 const content = require('./contentService');
 const core = require('./shared/prepCore');
+const leaderboard = require('./rankingService');
 
 /**
  * Application des actions de préparation, en ligne ou différées (§ 22, § 25.5).
@@ -53,15 +53,17 @@ const finalize = async (doc) => {
   const semaine = core.addDays(t, -((new Date(`${t}T00:00:00Z`).getUTCDay() + 6) % 7));
   if (doc.semaineReference !== semaine) {
     // Début d'une nouvelle semaine : on mémorise le rang de référence pour la variation ▲ / ▼ (§ 19).
-    doc.rangSemainePrecedente = doc.isNew ? null : (await PrepProgression.countDocuments({ programme: doc.programme, score: { $gt: doc.score } })) + 1;
+    doc.rangSemainePrecedente = doc.isNew ? null : (await PrepProgression.countDocuments({ programme: doc.programme, score: { $gt: doc.score } }).maxTimeMS(3000)) + 1;
     doc.scoreSemainePrecedente = doc.score;
     doc.semaineReference = semaine;
   }
   doc.score = core.rankingScore(core.rankingInput(doc.etat, total, t));
   doc.stats = { ...core.publicStats(doc.etat), serie: core.currentStreak(doc.etat, t) };
+  doc.matieresFortes = prog ? prog.matieres.filter((m) => m.modules.some((x) => (doc.etat.modulesValides || []).includes(x.code))).map((m) => m.nom) : [];
   doc.derniereActivite = new Date();
   doc.markModified('etat');
   await doc.save();
+  leaderboard.invalidateRanking(doc.programme);
   return doc;
 };
 
@@ -206,49 +208,4 @@ const ingest = async (identite, user, actions) => {
   return { resultats, droits, progressions };
 };
 
-/** Rang « Xᵉ sur N » et liste des candidats du programme (§ 20). */
-const ranking = async (identite, programme, { periode = 'tout', limit = 100 } = {}) => {
-  const depuis = periode === 'semaine' ? new Date(Date.now() - 7 * 864e5) : periode === 'mois' ? new Date(Date.now() - 30 * 864e5) : null;
-  const filter = { programme, ...(depuis ? { derniereActivite: { $gte: depuis } } : {}) };
-  const total = await PrepProgression.countDocuments(filter);
-  const mine = identite ? await PrepProgression.findOne({ identite: identite._id, programme }).lean() : null;
-  const rang = mine ? (await PrepProgression.countDocuments({ ...filter, score: { $gt: mine.score } })) + 1 : null;
-
-  const rows = await PrepProgression.find(filter).sort({ score: -1, updatedAt: 1 }).limit(Math.min(limit, 200))
-    .populate('identite', 'pseudonyme avatarTeinte visibleClassement').lean();
-  let position = 0;
-  const candidats = rows
-    .filter((r) => r.identite && (r.identite.visibleClassement || (identite && String(r.identite._id) === String(identite._id))))
-    .map((r) => {
-      position += 1;
-      return {
-        identite: String(r.identite._id),
-        pseudonyme: r.identite.pseudonyme,
-        avatarTeinte: r.identite.avatarTeinte,
-        moi: Boolean(identite && String(r.identite._id) === String(identite._id)),
-        score: r.score,
-        stats: r.stats || {},
-        rangApprox: position,
-      };
-    });
-  return {
-    total,
-    rang,
-    variation: mine && mine.rangSemainePrecedente && rang ? mine.rangSemainePrecedente - rang : 0,
-    moi: mine ? { score: mine.score, stats: mine.stats, visible: identite.visibleClassement } : null,
-    candidats,
-  };
-};
-
-const candidateProfile = async (programme, identiteId) => {
-  const identite = await PrepIdentite.findById(identiteId).select('pseudonyme avatarTeinte visibleClassement').lean();
-  if (!identite || !identite.visibleClassement) return null;
-  const doc = await PrepProgression.findOne({ identite: identiteId, programme }).lean();
-  if (!doc) return null;
-  const rang = (await PrepProgression.countDocuments({ programme, score: { $gt: doc.score } })) + 1;
-  const prog = content.getProgramme(programme);
-  const matieresFortes = prog ? prog.matieres.filter((m) => m.modules.some((x) => (doc.etat.modulesValides || []).includes(x.code))).map((m) => m.nom) : [];
-  return { pseudonyme: identite.pseudonyme, avatarTeinte: identite.avatarTeinte, rang, score: doc.score, stats: doc.stats, matieresFortes };
-};
-
-module.exports = { rights, ingest, gradeAttempt, ranking, candidateProfile, loadProgress, trustedDay, today };
+module.exports = { rights, ingest, gradeAttempt, ...leaderboard, loadProgress, finalize, trustedDay, today };

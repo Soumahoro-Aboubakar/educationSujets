@@ -697,7 +697,12 @@ function publicStats(state) {
     modulesValides: (s.modulesValides || []).length,
     erreurs: s.compteurs.erreurs,
     erreursCorrigees: s.compteurs.erreursCorrigees,
-    reussite: total ? round(justes / total, 3) : 0,
+    // Même périmètre : premiers essais N1–N3, tous contextes sauf test de positionnement ;
+    // une répétition compte à nouveau, ce ne sont pas des exercices uniques.
+    reussies: justes,
+    reussite: total ? round(justes / total, 3) : 0, // fraction 0–1 sur ces premiers essais
+    // Tous les succès à essai=2, tous contextes/niveaux, test compris (compteur historique).
+    secondesChancesReussies: s.compteurs.secondesChancesReussies || 0,
     raisonnementsValides: s.compteurs.raisonnementsValides,
     serieRecord: s.serie.record,
     meilleurBlanc: blancs.length ? Math.max.apply(null, blancs) : null,
