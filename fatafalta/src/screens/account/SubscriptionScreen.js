@@ -1,3 +1,4 @@
+import { getUserMessage } from '../../utils/userMessages';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ExternalLink, Receipt } from 'lucide-react-native';
@@ -26,7 +27,7 @@ const TITLES = {
 const KIND_LABELS = { initial: 'Abonnement', monthly: 'Mensualité' };
 
 const SubscriptionScreen = ({ navigation }) => {
-  const { data, isLoading, isError, refetch, isRefetching } = useSubscription();
+  const { data, isLoading, isError, refetch, isRefetching, error: loadError } = useSubscription();
   const { data: entitlements } = useEntitlements();
   const canCheckout = entitlements?.checkout?.mobileWebCheckout !== false;
   const checkout = useWebCheckout();
@@ -50,8 +51,8 @@ const SubscriptionScreen = ({ navigation }) => {
       return (
         <StateView
           icon={Receipt}
-          title="Connexion impossible"
-          description="Ton abonnement n’a pas pu être chargé."
+          title={getUserMessage(loadError, 'abonnement').title}
+          description={getUserMessage(loadError, 'abonnement').message}
           onRetry={refetch}
         />
       );
@@ -107,7 +108,7 @@ const SubscriptionScreen = ({ navigation }) => {
               isLast={index === data.payments.length - 1}
             />
           )) : (
-            <Text variant="body" style={styles.empty}>Aucun paiement pour le moment.</Text>
+            <Text variant="body" style={styles.empty}>Aucun paiement pour le moment. Consulte les détails de ton abonnement pour connaître ton accès.</Text>
           )}
         </Section>
       </>
@@ -119,7 +120,7 @@ const SubscriptionScreen = ({ navigation }) => {
       <ScreenHeader
         onBack={() => navigation.goBack()}
         eyebrow="Mon abonnement"
-        title={TITLES[status]}
+        title={TITLES[status] || 'Abonnement à vérifier'}
         subtitle={isLoading ? undefined : subtitle}
       >
         {data ? <View style={styles.pill}><StatusPill status={status} /></View> : null}

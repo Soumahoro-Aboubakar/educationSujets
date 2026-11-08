@@ -1,3 +1,4 @@
+import { getErrorAlert } from '../utils/userMessages';
 import React, { useState, useContext, useCallback } from 'react';
 import {
   View,
@@ -22,7 +23,7 @@ import theme from '../theme/tokens';
 
 const AdminDraftsScreen = ({ navigation }) => {
   const { user, logout } = useContext(AuthContext);
-  const { drafts, loading, deleteDraft, loadDrafts, page, hasMore, loadingMore } = useDrafts();
+  const { drafts, loading, deleteDraft, loadDrafts, page, hasMore, loadingMore, error: loadError } = useDrafts();
   const [refreshing, setRefreshing] = useState(false);
 
   useFocusEffect(
@@ -68,7 +69,7 @@ const AdminDraftsScreen = ({ navigation }) => {
             try {
               await deleteDraft(draftId);
             } catch (err) {
-              Alert.alert('Erreur', 'Impossible de supprimer le brouillon');
+              Alert.alert(...getErrorAlert(err, 'suppression', 'vous'));
             }
           },
         },
@@ -138,8 +139,8 @@ const AdminDraftsScreen = ({ navigation }) => {
         <View style={styles.contentContainer}>
           <EmptyState
             icon={FileText}
-            title="Aucun brouillon"
-            description="Créez un nouveau document pour commencer"
+            title={loadError ? loadError.title : 'Aucun brouillon'}
+            description={loadError ? loadError.message : 'Créez un nouveau document pour commencer.'}
             action={{
               label: 'Créer un document',
               onPress: () => navigation.navigate('Upload'),

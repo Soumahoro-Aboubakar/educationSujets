@@ -1,3 +1,4 @@
+import { getErrorAlert } from '../utils/userMessages';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -50,7 +51,7 @@ const CatalogManagementScreen = () => {
       const next = items.find((item) => item._id === (preferredId || institutionId));
       if (next) hydrateForm(next);
     } catch (error) {
-      Alert.alert('Erreur', 'Impossible de charger les institutions.');
+      Alert.alert(...getErrorAlert(error, 'catalogue', 'vous'));
     } finally {
       setLoading(false);
     }
@@ -61,11 +62,11 @@ const CatalogManagementScreen = () => {
   const validateStructure = () => {
     const navigationStructure = parseStructure(structureText);
     if (navigationStructure.length < 2 || navigationStructure.at(-1) !== 'subject') {
-      Alert.alert('Structure invalide', 'Indiquez au moins deux niveaux et terminez par « subject ».');
+      Alert.alert('Structure invalide', 'Indiquez au moins deux niveaux et choisissez « Matière » comme dernier niveau.');
       return null;
     }
     if (new Set(navigationStructure).size !== navigationStructure.length) {
-      Alert.alert('Structure invalide', 'Chaque type de niveau doit être unique.');
+      Alert.alert('Structure invalide', 'Chaque type de niveau doit être unique. Choisissez un type différent pour les niveaux en double.');
       return null;
     }
     return navigationStructure;
@@ -87,7 +88,7 @@ const CatalogManagementScreen = () => {
       await refreshInstitutions(saved._id);
       Alert.alert('Enregistré', institutionId ? 'Institution mise à jour.' : 'Institution créée et configurée.');
     } catch (error) {
-      Alert.alert('Erreur', error.response?.data?.error || 'Impossible d’enregistrer cette structure.');
+      Alert.alert(...getErrorAlert(error, 'catalogue', 'vous'));
     } finally {
       setSaving(false);
     }

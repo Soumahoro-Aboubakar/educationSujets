@@ -1,10 +1,11 @@
+import { getErrorAlert } from '../utils/userMessages';
 import { useState, useCallback } from 'react';
 import { Alert, Platform } from 'react-native';
 import * as IntentLauncher from 'expo-intent-launcher';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 import { getDownloadUrl } from '../services/documents';
-import { getErrorCode, getErrorMessage } from '../services/billing';
+import { getErrorCode } from '../services/billing';
 import { useRefreshAccount } from './useAccount';
 import useDownloadStore from '../store/useDownloadStore';
 
@@ -14,7 +15,7 @@ export const openDownloadedFile = async (document, { getLocalUri, removeDownload
 
   const localUri = getLocalUri(documentId);
   if (!localUri) {
-    Alert.alert('Fichier introuvable', 'Ce document n’est pas encore disponible localement.');
+    Alert.alert('Fichier introuvable', 'Télécharge ce document pour l’ouvrir sur cet appareil.');
     return;
   }
 
@@ -22,7 +23,7 @@ export const openDownloadedFile = async (document, { getLocalUri, removeDownload
     const info = await FileSystem.getInfoAsync(localUri);
     if (!info.exists) {
       await removeDownload(documentId);
-      Alert.alert('Fichier introuvable', 'Le fichier a été supprimé du stockage local.');
+      Alert.alert('Fichier introuvable', 'Télécharge à nouveau ce document pour le consulter.');
       return;
     }
 
@@ -43,8 +44,7 @@ export const openDownloadedFile = async (document, { getLocalUri, removeDownload
   } catch (error) {
     console.error('Open error:', error);
     Alert.alert(
-      'Erreur d’ouverture',
-      'Impossible d’ouvrir le fichier. Vérifiez qu’une application compatible est installée.'
+      ...getErrorAlert(error, 'ouverture', 'tu')
     );
   }
 };
@@ -55,14 +55,14 @@ export const shareDownloadedFile = async (document, { getLocalUri }) => {
 
   const localUri = getLocalUri(documentId);
   if (!localUri) {
-    Alert.alert('Fichier introuvable', 'Ce document n’est pas encore disponible localement.');
+    Alert.alert('Fichier introuvable', 'Télécharge ce document pour l’ouvrir sur cet appareil.');
     return;
   }
 
   try {
     const info = await FileSystem.getInfoAsync(localUri);
     if (!info.exists) {
-      Alert.alert('Fichier introuvable', 'Le fichier a été supprimé du stockage local.');
+      Alert.alert('Fichier introuvable', 'Télécharge à nouveau ce document pour le consulter.');
       return;
     }
 
@@ -73,7 +73,7 @@ export const shareDownloadedFile = async (document, { getLocalUri }) => {
     });
   } catch (error) {
     console.error('Share error:', error);
-    Alert.alert('Erreur de partage', 'Impossible de partager ce document pour le moment.');
+    Alert.alert(...getErrorAlert(error, 'partage', 'tu'));
   }
 };
 
@@ -117,8 +117,7 @@ export const useDownload = (document, { onAccessDenied } = {}) => {
       }
       console.error('Download error:', error);
       Alert.alert(
-        'Erreur de téléchargement',
-        getErrorMessage(error, error.message || 'Une erreur est survenue lors du téléchargement')
+        ...getErrorAlert(error, 'telechargement', 'tu')
       );
     } finally {
       setIsInitializing(false);

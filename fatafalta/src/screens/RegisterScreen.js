@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../utils/userMessages';
 import React, { useContext, useEffect, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
@@ -44,12 +45,12 @@ const RegisterScreen = ({ navigation, route }) => {
 
   const validateForm = () => {
     const nextErrors = {};
-    if (!name.trim()) nextErrors.name = 'Nom requis';
-    if (!email.trim()) nextErrors.email = 'Email requis';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) nextErrors.email = 'Email invalide';
-    if (!password) nextErrors.password = 'Mot de passe requis';
-    else if (password.length < 6) nextErrors.password = 'Minimum 6 caractères';
-    if (password !== confirmPassword) nextErrors.confirmPassword = 'Les mots de passe ne correspondent pas';
+    if (!name.trim()) nextErrors.name = 'Saisis ton nom.';
+    if (!email.trim()) nextErrors.email = 'Saisis ton adresse e-mail.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) nextErrors.email = 'Cette adresse e-mail n’est pas valide.';
+    if (!password) nextErrors.password = 'Saisis ton mot de passe.';
+    else if (password.length < 6) nextErrors.password = 'Ton mot de passe doit contenir au moins 6 caractères.';
+    if (password !== confirmPassword) nextErrors.confirmPassword = 'Les deux mots de passe ne correspondent pas.';
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -67,10 +68,10 @@ const RegisterScreen = ({ navigation, route }) => {
         setConfirmPassword('');
         redirectAfterAuth(result.user);
       } else {
-        setError(result.error || 'Erreur lors de l’inscription');
+        setError(result.error || getErrorMessage(null, 'inscription', 'tu'));
       }
     } catch (requestError) {
-      setError('Erreur inattendue. Veuillez réessayer.');
+      setError(getErrorMessage(requestError, 'inscription', 'tu'));
     } finally {
       setLoading(false);
     }

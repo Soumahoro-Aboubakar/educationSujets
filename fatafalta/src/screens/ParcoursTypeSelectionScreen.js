@@ -1,3 +1,4 @@
+import { getUserMessage } from '../utils/userMessages';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -37,7 +38,7 @@ const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
       // Organisme sans parcours : cette étape n'a pas de sens, on la retire de l'historique.
       if (!result.data.length) navigation.replace('DynamicCatalog', { organisme });
     } catch (requestError) {
-      setError(true);
+      setError(requestError);
     } finally {
       setLoading(false);
     }
@@ -59,8 +60,8 @@ const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
       return (
         <StateView
           icon={Layers3}
-          title="Connexion impossible"
-          description="Les parcours n’ont pas pu être chargés. Vérifie ta connexion puis réessaie."
+          title={getUserMessage(error, 'catalogue').title}
+          description={getUserMessage(error, 'catalogue').message}
           onRetry={load}
         />
       );
@@ -70,7 +71,7 @@ const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
         <StateView
           icon={Layers3}
           title="Aucun parcours disponible"
-          description="Cet organisme ne propose pas encore de parcours."
+          description="Cet organisme ne propose pas encore de parcours. Consulte un autre organisme."
         />
       );
     }

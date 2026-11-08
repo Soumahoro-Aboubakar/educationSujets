@@ -25,5 +25,4 @@ export const updateAdminPaymentMethod = (code, changes) => api.patch(`/api/admin
 
 /** Code d'erreur métier renvoyé par l'API (AUTH_REQUIRED, SUBSCRIPTION_REQUIRED…). */
 export const getErrorCode = (error) => error?.response?.data?.code || null;
-export const getErrorMessage = (error, fallback = 'Une erreur est survenue. Réessaie dans un instant.') =>
-  error?.response?.data?.error || fallback;
+export { getErrorMessage } from '../utils/userMessages';

@@ -31,7 +31,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
       setMethods(await fetchAdminPaymentMethods());
       setLoadError(null);
     } catch (error) {
-      setLoadError(getErrorMessage(error, 'Impossible de charger les moyens de paiement.'));
+      setLoadError(getErrorMessage(error, 'moyensPaiement', 'vous'));
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
       setMethods((current) => current.map((item) => (item.code === method.code ? updated : item)));
     } catch (error) {
       setMethods((current) => current.map((item) => (item.code === method.code ? method : item)));
-      setActionError(getErrorMessage(error));
+      setActionError(getErrorMessage(error, 'enregistrement', 'vous'));
     } finally {
       setBusy(null);
     }
@@ -68,7 +68,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
       return <StateView icon={CreditCard} title="Accès réservé" description="Seul le super administrateur gère les moyens de paiement." />;
     }
     if (loading) return <View style={styles.loading}><ActivityIndicator color={brand.ink} /></View>;
-    if (loadError) return <StateView icon={CreditCard} title="Connexion impossible" description={loadError} onRetry={load} />;
+    if (loadError) return <StateView icon={CreditCard} title="Moyens de paiement indisponibles" description={loadError} onRetry={load} />;
 
     return (
       <>
@@ -103,7 +103,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
           ))}
         </Section>
         <Text variant="caption" style={styles.notice}>
-          Seuls les moyens activés sont proposés aux abonnés, sur le site comme sur l’application. Le serveur refuse tout paiement avec un moyen désactivé. Pour ajouter un moyen ou modifier son logo, utilisez l’administration web.
+          Seuls les moyens activés sont proposés aux abonnés, sur le site comme sur l’application. Un moyen désactivé ne peut pas être utilisé pour payer. Pour ajouter un moyen ou modifier son logo, utilisez l’administration web.
         </Text>
       </>
     );

@@ -56,13 +56,13 @@ const WithdrawScreen = ({ navigation }) => {
   const validate = () => {
     const next = {};
     const amount = Number(form.amount);
-    if (!form.operator) next.operator = 'Choisis un opérateur';
-    if (!/^0\d{9}$/.test(form.phone.replace(/\s/g, ''))) next.phone = '10 chiffres, ex. 07 01 02 03 04';
-    if (!form.firstName.trim()) next.firstName = 'Prénom requis';
-    if (!form.lastName.trim()) next.lastName = 'Nom requis';
-    if (!Number.isInteger(amount) || amount <= 0) next.amount = 'Montant invalide';
-    else if (rules && amount < rules.minAmount) next.amount = `Minimum ${formatAmount(rules.minAmount)}`;
-    else if (amount > available) next.amount = `Maximum ${formatAmount(available)}`;
+    if (!form.operator) next.operator = 'Opérateur requis. Choisis ton opérateur Mobile Money.';
+    if (!/^0\d{9}$/.test(form.phone.replace(/\s/g, ''))) next.phone = 'Numéro à vérifier. Saisis 10 chiffres, par exemple 07 01 02 03 04.';
+    if (!form.firstName.trim()) next.firstName = 'Prénom requis. Saisis ton prénom pour continuer.';
+    if (!form.lastName.trim()) next.lastName = 'Nom requis. Saisis ton nom pour continuer.';
+    if (!Number.isInteger(amount) || amount <= 0) next.amount = 'Montant à vérifier. Saisis un montant entier supérieur à zéro.';
+    else if (rules && amount < rules.minAmount) next.amount = `Montant trop faible. Choisis au moins ${formatAmount(rules.minAmount)}.`;
+    else if (amount > available) next.amount = `Solde insuffisant. Choisis un montant inférieur ou égal à ${formatAmount(available)}.`;
     setErrors(next);
     return !Object.keys(next).length;
   };
@@ -82,7 +82,7 @@ const WithdrawScreen = ({ navigation }) => {
       setDone(withdrawal);
       refreshAccount();
     } catch (error) {
-      setServerError(getErrorMessage(error));
+      setServerError(getErrorMessage(error, 'retrait'));
     } finally {
       setSubmitting(false);
     }

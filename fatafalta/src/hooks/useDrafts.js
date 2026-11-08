@@ -1,3 +1,4 @@
+import { getUserMessage, getErrorMessage } from '../utils/userMessages';
 /**
  * Hook for managing document drafts from the server
  */
@@ -11,6 +12,7 @@ export const useDrafts = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
+  const [error, setError] = useState(null);
 
   // Load drafts on mount
   useEffect(() => {
@@ -18,6 +20,7 @@ export const useDrafts = () => {
   }, []);
 
   const loadDrafts = useCallback(async (requestedPage = 1, append = false) => {
+    setError(null);
     try {
       if (append) setLoadingMore(true);
       else setLoading(true);
@@ -36,6 +39,7 @@ export const useDrafts = () => {
       setHasMore(pagination ? pagination.pages > requestedPage : false);
     } catch (err) {
       console.error('Error loading drafts:', err);
+      setError(getUserMessage(err, 'documents', 'vous'));
     } finally {
       if (append) setLoadingMore(false);
       else setLoading(false);
@@ -43,7 +47,7 @@ export const useDrafts = () => {
   }, []);
 
   const saveDraft = useCallback(async (draft) => {
-    throw new Error('Save draft is now handled by the regular upload API.');
+    throw new Error(getErrorMessage(null, 'envoi', 'vous'));
   }, []);
 
   const deleteDraft = useCallback(async (draftId) => {
@@ -66,6 +70,7 @@ export const useDrafts = () => {
 
   return {
     drafts,
+    error,
     loading,
     saveDraft,
     deleteDraft,

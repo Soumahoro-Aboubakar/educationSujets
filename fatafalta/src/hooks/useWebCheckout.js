@@ -1,8 +1,9 @@
+import { getErrorAlert } from '../utils/userMessages';
 import { useCallback, useState } from 'react';
 import { Alert } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
-import { createWebHandoff, getErrorMessage } from '../services/billing';
+import { createWebHandoff } from '../services/billing';
 import { useRefreshAccount } from './useAccount';
 
 /**
@@ -24,7 +25,7 @@ export const useWebCheckout = () => {
       if (promoCode) params.set('code', promoCode);
       await WebBrowser.openAuthSessionAsync(`${checkoutUrl}?${params.toString()}`, returnUrl);
     } catch (error) {
-      Alert.alert('Abonnement', getErrorMessage(error, 'Impossible d’ouvrir la page d’abonnement pour le moment.'));
+      Alert.alert(...getErrorAlert(error, 'abonnement', 'tu'));
     } finally {
       setOpening(false);
       refreshAccount();

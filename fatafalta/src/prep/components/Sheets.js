@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../../utils/userMessages';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, FadeOut, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
@@ -85,7 +86,8 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
   const [texte, setTexte] = useState('');
   const [step, setStep] = useState('saisie');
   const [result, setResult] = useState(null);
-  useEffect(() => { if (visible) { setTexte(''); setStep('saisie'); setResult(null); } }, [visible, exercice?.code]);
+  const [failureMessage, setFailureMessage] = useState(null);
+  useEffect(() => { if (visible) { setTexte(''); setStep('saisie'); setResult(null); setFailureMessage(null); } }, [visible, exercice?.code]);
   if (!exercice) return null;
   const locked = !rights.abonne && rights.iaRestantes <= 0;
 
@@ -104,6 +106,7 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
     } catch (error) {
       // Hors ligne ou service indisponible : démarche de référence, non décomptée (§ 13.4).
       setResult({ disponible: false, reference: exercice.raisonnement?.reference, etapesCles: exercice.raisonnement?.etapesCles || [], horsLigne: true });
+      setFailureMessage(getErrorMessage(error, 'verification'));
     }
     setStep('verdict');
   };
@@ -176,7 +179,7 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
           ) : (
             <Animated.View entering={FadeInDown.duration(300)} style={[styles.verdict, { backgroundColor: brand.paperDim }]}>
               <Text variant="bodyMedium" style={{ color: brand.inkSoft, flex: 1 }}>
-                {result.horsLigne ? 'Vérification disponible avec une connexion. Voici la démarche attendue — rien n’a été décompté.' : 'Vérification momentanément indisponible. Voici la démarche attendue — rien n’a été décompté.'}
+                {`${failureMessage || 'Vérification momentanément indisponible. Réessaie dans quelques instants.'} En attendant, consulte la démarche attendue ci-dessous. Rien n’a été décompté.`}
               </Text>
             </Animated.View>
           )}

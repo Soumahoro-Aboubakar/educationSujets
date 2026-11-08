@@ -1,3 +1,4 @@
+import { getErrorAlert } from '../utils/userMessages';
 import React, { useState, useCallback } from 'react';
 import {
   View,
@@ -34,7 +35,7 @@ const AdminTrashScreen = ({ navigation }) => {
       setTrashedDocs(response.data || []);
     } catch (err) {
       console.error('Erreur lors du chargement de la corbeille', err);
-      Alert.alert('Erreur', 'Impossible de charger la corbeille.');
+      Alert.alert(...getErrorAlert(err, 'corbeille', 'vous'));
     } finally {
       setLoading(false);
     }
@@ -65,7 +66,7 @@ const AdminTrashScreen = ({ navigation }) => {
               await restoreDocument(docId);
               setTrashedDocs((prev) => prev.filter((doc) => (doc._id || doc.id) !== docId));
             } catch (err) {
-              Alert.alert('Erreur', 'Impossible de restaurer le document.');
+              Alert.alert(...getErrorAlert(err, 'restauration', 'vous'));
             }
           },
         },
@@ -87,7 +88,7 @@ const AdminTrashScreen = ({ navigation }) => {
               await permanentlyDeleteDocument(docId);
               setTrashedDocs((prev) => prev.filter((doc) => (doc._id || doc.id) !== docId));
             } catch (err) {
-              Alert.alert('Erreur', 'Impossible de supprimer définitivement le document.');
+              Alert.alert(...getErrorAlert(err, 'suppression', 'vous'));
             }
           },
         },
@@ -101,10 +102,10 @@ const AdminTrashScreen = ({ navigation }) => {
       if (previewData && previewData.url) {
         await WebBrowser.openBrowserAsync(previewData.url);
       } else {
-        Alert.alert('Erreur', 'Lien de prévisualisation introuvable.');
+        Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
       }
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de prévisualiser ce document.');
+      Alert.alert(...getErrorAlert(err, 'ouverture', 'vous'));
     }
   };
 
@@ -154,7 +155,7 @@ const AdminTrashScreen = ({ navigation }) => {
           <EmptyState
             icon={Trash2}
             title="Corbeille vide"
-            description="Aucun document n'a été supprimé récemment."
+            description="Aucun document n’a été supprimé récemment. Revenez à vos documents pour continuer."
           />
         ) : (
           <View style={styles.list}>

@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../utils/userMessages';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
@@ -88,7 +89,7 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
       setHasNext(exists);
       hasLoaded.current = true;
     } catch (requestError) {
-      if (id === request.current && mode !== 'silent') setError('Les sujets n’ont pas pu être chargés. Vérifie ta connexion puis réessaie.');
+      if (id === request.current && mode !== 'silent') setError(getErrorMessage(requestError, 'documents'));
     } finally {
       if (id === request.current) {
         setLoading(false);
@@ -181,7 +182,7 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
 
       <View style={styles.body}>
         {error && !documents.length && !loading ? (
-          <StateView icon={FileText} title="Connexion impossible" description={error} onRetry={refresh} />
+          <StateView icon={FileText} title="Sujets indisponibles" description={error} onRetry={refresh} />
         ) : (
           <DocumentList
             documents={documents}
@@ -199,8 +200,8 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
             emptyStateDescription={searching
               ? `Rien ne correspond à « ${debounced} ». Essaie une année ou un autre mot du titre.`
               : dynamic
-                ? 'Les sujets de cette matière n’ont pas encore été publiés.'
-                : 'Aucun sujet n’est encore publié pour ce concours.'}
+                ? 'Les sujets de cette matière n’ont pas encore été publiés. Consulte une autre matière ou reviens plus tard.'
+                : 'Aucun sujet n’est encore publié pour ce concours. Consulte un autre concours ou reviens plus tard.'}
           />
         )}
       </View>

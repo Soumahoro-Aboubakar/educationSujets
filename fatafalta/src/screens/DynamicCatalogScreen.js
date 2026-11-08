@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../utils/userMessages';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, BackHandler, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
@@ -49,7 +50,7 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
       setItems([]);
       setItemsKey(levelKey);
       setLoading(false);
-      setError('La structure de cet organisme est indisponible.');
+      setError('Ce catalogue est momentanément indisponible. Consulte un autre organisme ou réessaie un peu plus tard.');
       return;
     }
 
@@ -96,7 +97,7 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
     } catch (requestError) {
       if (currentRequest !== requestId.current) return;
       // Une erreur de rafraîchissement ne masque pas un niveau déjà affiché.
-      if (!cached || append) setError('Le catalogue n’a pas pu être chargé. Vérifie ta connexion puis réessaie.');
+      if (!cached || append) setError(getErrorMessage(requestError, 'catalogue'));
       if (!append && !cached) {
         setItems([]);
         setItemsKey(levelKey);
@@ -173,7 +174,7 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
     .join(' · ');
   const totalSteps = levels.length + 1;
   const emptyDescription = useMemo(
-    () => `Aucune ${String(currentLevel?.libelleSingulier || 'entrée').toLocaleLowerCase()} n’a encore de sujets publiés ici.`,
+    () => `Aucune ${String(currentLevel?.libelleSingulier || 'entrée').toLocaleLowerCase()} n’a encore de sujets publiés ici. Consulte une autre rubrique ou reviens plus tard.`,
     [currentLevel?.libelleSingulier]
   );
 
@@ -185,7 +186,7 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
       return (
         <StateView
           icon={Layers3}
-          title="Connexion impossible"
+          title="Catalogue indisponible"
           description={error}
           onRetry={() => loadItems(1, false)}
         />

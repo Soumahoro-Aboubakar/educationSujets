@@ -21,8 +21,8 @@ export const STATUS_LABELS = {
   PROCESSING: ['En cours', 'pending'],
   NONE: ['Aucun abonnement', 'neutral'],
   SUCCEEDED: ['Réussi', 'positive'],
-  INITIATED: ['Initié', 'pending'],
-  FAILED: ['Échoué', 'negative'],
+  INITIATED: ['En attente de confirmation', 'pending'],
+  FAILED: ['Non abouti', 'negative'],
   CANCELLED: ['Annulé', 'neutral'],
   AVAILABLE: ['Disponible', 'positive'],
   REVERSED: ['Annulée', 'negative'],
@@ -30,7 +30,7 @@ export const STATUS_LABELS = {
 };
 
 const StatusPill = ({ status, label, tone }) => {
-  const [defaultLabel, defaultTone] = STATUS_LABELS[status] || [status, 'neutral'];
+  const [defaultLabel, defaultTone] = Object.prototype.hasOwnProperty.call(STATUS_LABELS, status) ? STATUS_LABELS[status] : ['À vérifier', 'neutral'];
   const palette = TONES[tone || defaultTone];
 
   return (

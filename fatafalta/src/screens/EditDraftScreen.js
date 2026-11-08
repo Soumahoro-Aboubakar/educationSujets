@@ -1,3 +1,4 @@
+import { getErrorAlert } from '../utils/userMessages';
 import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
@@ -132,28 +133,28 @@ const EditDraftScreen = ({ navigation, route }) => {
         return;
       } catch (error) {
         console.warn('Unable to open Android preview intent:', error);
-        Alert.alert('Erreur', "Impossible d'ouvrir le fichier");
+        Alert.alert(...getErrorAlert(error, 'ouverture', 'vous'));
         return;
       }
     }
     if (!pdfLocalUri) return;
     Linking.openURL(pdfLocalUri).catch(() => {
-      Alert.alert('Erreur', "Impossible d'ouvrir le fichier");
+      Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
     });
   };
 
   const validateForm = (isPublishing) => {
     const newErrors = {};
     if (isPublishing) {
-      if (!title.trim()) newErrors.title = 'Titre requis';
+      if (!title.trim()) newErrors.title = 'Titre requis. Saisissez un titre pour continuer.';
       if (dynamicMetadata.organisme) {
-        if (!dynamicMetadata.path.length) newErrors.path = 'Sélectionnez l’année et les niveaux du sujet';
+        if (!dynamicMetadata.path.length) newErrors.path = 'Classement du sujet incomplet. Sélectionnez l’année et les niveaux.';
         if (dynamicMetadata.structureLength && dynamicMetadata.path.length !== dynamicMetadata.structureLength) {
-          newErrors.path = 'Sélectionnez tous les niveaux du sujet';
+          newErrors.path = 'Classement du sujet incomplet. Sélectionnez chaque niveau.';
         }
-        if (!dynamicMetadata.matiere) newErrors.matiere = 'Sélectionnez une matière';
-        if (dynamicMetadata.hasParcoursType === null) newErrors.parcoursType = 'Indiquez si un type de parcours est utilisé';
-        if (dynamicMetadata.hasParcoursType && !dynamicMetadata.parcoursType) newErrors.parcoursType = 'Sélectionnez un type de parcours';
+        if (!dynamicMetadata.matiere) newErrors.matiere = 'Matière requise. Sélectionnez une matière.';
+        if (dynamicMetadata.hasParcoursType === null) newErrors.parcoursType = 'Parcours à préciser. Indiquez si un type de parcours est utilisé.';
+        if (dynamicMetadata.hasParcoursType && !dynamicMetadata.parcoursType) newErrors.parcoursType = 'Parcours requis. Sélectionnez un type de parcours.';
       }
     }
     setErrors(newErrors);
@@ -200,7 +201,7 @@ const EditDraftScreen = ({ navigation, route }) => {
       navigation.goBack();
     } catch (error) {
       console.error(error);
-      Alert.alert('Erreur', "Erreur lors de la mise à jour du document");
+      Alert.alert(...getErrorAlert(error, 'enregistrement', 'vous'));
     } finally {
       setUploading(false);
     }
@@ -235,7 +236,7 @@ const EditDraftScreen = ({ navigation, route }) => {
                 {pdfFile?.name || 'Document PDF'}
               </Text>
               <Text variant="caption" color={theme.colors.textMuted}>
-                Fichier enregistré sur le serveur
+                Fichier enregistré dans vos brouillons
               </Text>
             </View>
           </View>

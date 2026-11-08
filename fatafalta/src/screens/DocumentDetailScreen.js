@@ -1,3 +1,4 @@
+import { getErrorAlert, getUserMessage } from '../utils/userMessages';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -71,7 +72,7 @@ const DocumentDetailScreen = () => {
   const insets = useSafeAreaInsets();
   const { documentId, document: initialDocument, context } = route.params;
 
-  const { data, refetch, isError } = useDocument(documentId);
+  const { data, refetch, isError, error: documentError } = useDocument(documentId);
   const document = data || initialDocument;
   // La liste fournit `correction` ; le détail fournit `dynamicCorrection`.
   const correction = getCorrection(document) || getCorrection(initialDocument);
@@ -194,7 +195,7 @@ const DocumentDetailScreen = () => {
   const handleDelete = () => {
     Alert.alert(
       'Supprimer le document',
-      'Voulez-vous vraiment effacer ce fichier ? Il sera déplacé vers la corbeille.',
+      'Souhaites-tu supprimer ce document ? Il sera déplacé vers la corbeille.',
       [
         { text: 'Annuler', style: 'cancel' },
         {
@@ -206,7 +207,7 @@ const DocumentDetailScreen = () => {
               Alert.alert('Succès', 'Document placé dans la corbeille.');
               navigation.goBack();
             } catch (error) {
-              Alert.alert('Erreur', 'Impossible de supprimer le document.');
+              Alert.alert(...getErrorAlert(error, 'suppression', 'tu'));
             }
           },
         },
@@ -236,8 +237,8 @@ const DocumentDetailScreen = () => {
         {isError ? (
           <StateView
             icon={FileText}
-            title="Connexion impossible"
-            description="Ce sujet n’a pas pu être chargé. Vérifie ta connexion puis réessaie."
+            title={getUserMessage(documentError, 'documents').title}
+            description={getUserMessage(documentError, 'documents').message}
             onRetry={refetch}
           />
         ) : <SkeletonRows count={5} />}

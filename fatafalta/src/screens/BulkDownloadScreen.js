@@ -1,3 +1,4 @@
+import { getUserMessage } from '../utils/userMessages';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -97,7 +98,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
     try {
       setScope(await fetchDownloadScope({ organisme: organisme._id, parcoursTypeId: cycleId || undefined }));
     } catch (error) {
-      setLoadError(true);
+      setLoadError(error);
     } finally {
       setLoading(false);
     }
@@ -135,7 +136,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
         const result = await previewDownloadSelection(selectionKey.split(','));
         if (!cancelled) setSummary(result);
       } catch (error) {
-        if (!cancelled) setMessage({ error: true, text: getErrorMessage(error, 'La sélection n’a pas pu être vérifiée.') });
+        if (!cancelled) setMessage({ error: true, text: getErrorMessage(error, 'telechargement') });
       } finally {
         if (!cancelled) setChecking(false);
       }
@@ -211,7 +212,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
     } catch (error) {
       const code = getErrorCode(error);
       if (ACCESS_CODES.includes(code)) access.deny(code, error.response?.data?.details);
-      else setMessage({ error: true, text: getErrorMessage(error, 'Le téléchargement n’a pas pu démarrer. Réessaie dans un instant.') });
+      else setMessage({ error: true, text: getErrorMessage(error, 'telechargement') });
     } finally {
       setProgress(null);
       refreshAccount();
@@ -298,7 +299,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
 
   const renderBody = () => {
     if (loading && !scope) return <SkeletonRows count={6} />;
-    if (loadError) return <StateView icon={Layers3} title="Connexion impossible" description="Les sujets n’ont pas pu être chargés. Vérifie ta connexion puis réessaie." onRetry={load} />;
+    if (loadError) return <StateView icon={Layers3} title={getUserMessage(loadError, 'documents').title} description={getUserMessage(loadError, 'documents').message} onRetry={load} />;
     if (scope?.requiresCycle && !scope.cycle) {
       return (
         <ScrollView contentContainerStyle={styles.cyclePicker}>
@@ -313,7 +314,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
         keyExtractor={(item) => item._id}
         renderItem={renderItem}
         ListHeaderComponent={header}
-        ListEmptyComponent={<StateView icon={FileText} title="Aucun document" description="Aucun document publié ne correspond à ces filtres." />}
+        ListEmptyComponent={<StateView icon={FileText} title="Aucun document" description="Aucun document publié ne correspond à ces filtres. Modifie les filtres pour élargir ta recherche." />}
         contentContainerStyle={{ paddingBottom: 220 + insets.bottom }}
         showsVerticalScrollIndicator={false}
       />

@@ -155,7 +155,7 @@ export const ModuleScreen = ({ navigation, route }) => {
                         <Text variant="caption" style={styles.muted}>{`· ${LEVELS[n].label}`}</Text>
                       </View>
                       <Text variant="caption" style={styles.muted}>
-                        {!count ? 'Bientôt disponible' : lockedLevel ? `Atteins ${Math.round(seuil * 100)} % au niveau 2 pour débloquer` : `${n === 1 ? 'Questions directes sur chaque leçon' : n === 2 ? 'Les notions du module mélangées' : 'Cas pratiques, pièges, format concours'} · ${count} questions`}
+                        {!count ? 'Exercices à venir. Choisis un autre niveau en attendant.' : lockedLevel ? `Atteins ${Math.round(seuil * 100)} % au niveau 2 pour débloquer` : `${n === 1 ? 'Questions directes sur chaque leçon' : n === 2 ? 'Les notions du module mélangées' : 'Cas pratiques, pièges, format concours'} · ${count} questions`}
                       </Text>
                       {lockedLevel ? <ProgressBar value={(scores[2] || 0) / seuil} height={4} color={brand.gold} style={{ marginTop: 6, width: 150 }} /> : null}
                     </View>

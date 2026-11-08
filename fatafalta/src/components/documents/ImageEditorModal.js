@@ -1,3 +1,4 @@
+import { getErrorAlert } from '../../utils/userMessages';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Modal,
@@ -159,7 +160,7 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
       setCurrentUri(result.uri);
     } catch (e) {
       console.warn('Rotation échouée', e);
-      Alert.alert('Erreur', "Impossible de faire pivoter l'image");
+      Alert.alert(...getErrorAlert(e, 'image', 'vous'));
     } finally {
       setBusy(false);
     }
@@ -176,7 +177,7 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
       setCurrentUri(result.uri);
     } catch (e) {
       console.warn('Miroir échoué', e);
-      Alert.alert('Erreur', "Impossible d'appliquer le miroir");
+      Alert.alert(...getErrorAlert(e, 'image', 'vous'));
     } finally {
       setBusy(false);
     }
@@ -202,7 +203,7 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
       setCropMode(false);
     } catch (e) {
       console.warn('Recadrage échoué', e);
-      Alert.alert('Erreur', "Impossible de recadrer l'image");
+      Alert.alert(...getErrorAlert(e, 'image', 'vous'));
     } finally {
       setBusy(false);
     }

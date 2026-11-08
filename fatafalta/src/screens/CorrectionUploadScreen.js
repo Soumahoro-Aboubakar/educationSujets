@@ -1,3 +1,4 @@
+import { createUserError, getErrorAlert } from '../utils/userMessages';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -52,8 +53,7 @@ const isPdfDocument = (document) => {
   return document?.mimeType === 'application/pdf' || document?.fileType === 'PDF' || extension === 'pdf';
 };
 
-const getApiErrorMessage = (error) =>
-  error.response?.data?.error || error.response?.data?.message || error.message || 'Erreur lors de l’association du corrigé';
+
 
 const CorrectionUploadScreen = ({ navigation }) => {
   const { user } = useContext(AuthContext);
@@ -85,7 +85,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
   const withTimeout = async (promise, timeoutMs, errorMessage) => {
     let timeoutId;
     const timeoutPromise = new Promise((_, reject) => {
-      timeoutId = setTimeout(() => reject(new Error(errorMessage)), timeoutMs);
+      timeoutId = setTimeout(() => reject(createUserError('attente')), timeoutMs);
     });
 
     try {
@@ -145,7 +145,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       setSubjects(pdfSubjects);
     } catch (error) {
       console.warn('Unable to load documents for correction:', error);
-      Alert.alert('Erreur', 'Impossible de charger les documents');
+      Alert.alert(...getErrorAlert(error, 'documents', 'vous'));
     } finally {
       setLoadingSubjects(false);
     }
@@ -178,7 +178,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
 
   const handleSelectSubject = (document) => {
     if (document.correction) {
-      Alert.alert('Corrigé déjà lié', 'Ce document possède déjà une proposition de correction.');
+      Alert.alert('Corrigé déjà lié', 'Ce document possède déjà une proposition de correction. Sélectionnez un autre document.');
       return;
     }
     setSelectedSubject(document);
@@ -210,7 +210,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       });
     } catch (error) {
       console.error('DocumentPicker error:', error);
-      Alert.alert('Erreur', 'Impossible de sélectionner le fichier PDF.');
+      Alert.alert(...getErrorAlert(error, 'selection', 'vous'));
       return;
     }
 
@@ -225,7 +225,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
     if (typeof file.size === 'number' && file.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
       const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
       const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
-      Alert.alert('Fichier trop volumineux', `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo.`);
+      Alert.alert('Fichier trop volumineux', `Ce PDF fait ${sizeMb} Mo. La taille maximale acceptée est ${maxMb} Mo. Sélectionnez un fichier plus léger.`);
       return;
     }
 
@@ -250,7 +250,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       setPdfWebViewUri(isAndroid ? null : result.uri);
     } catch (error) {
       console.error(error);
-      Alert.alert('Erreur', error.message || 'Erreur lors du traitement du PDF');
+      Alert.alert(...getErrorAlert(error, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
     }
@@ -275,7 +275,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       setPdfWebViewUri(isAndroid ? null : result.uri);
     } catch (error) {
       console.error(error);
-      Alert.alert('Erreur', error.message || 'Erreur lors de la création du PDF');
+      Alert.alert(...getErrorAlert(error, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
     }
@@ -293,14 +293,14 @@ const CorrectionUploadScreen = ({ navigation }) => {
         });
       } catch (error) {
         console.warn('Unable to open Android preview intent:', error);
-        Alert.alert('Erreur', "Impossible d'ouvrir le fichier");
+        Alert.alert(...getErrorAlert(error, 'ouverture', 'vous'));
       }
       return;
     }
 
     if (!pdfLocalUri) return;
     Linking.openURL(pdfLocalUri).catch(() => {
-      Alert.alert('Erreur', "Impossible d'ouvrir le fichier");
+      Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
     });
   };
 
@@ -331,7 +331,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       resetAll();
     } catch (error) {
       console.error(error);
-      Alert.alert('Erreur', getApiErrorMessage(error));
+      Alert.alert(...getErrorAlert(error, 'envoi', 'vous'));
     } finally {
       setUploading(false);
     }
@@ -343,12 +343,12 @@ const CorrectionUploadScreen = ({ navigation }) => {
       const downloadData = await getDownloadUrl(document._id);
       if (downloadData && downloadData.url) {
         Linking.openURL(downloadData.url).catch(() => {
-          Alert.alert("Erreur", "Impossible d'ouvrir le lien dans le navigateur.");
+          Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
         });
       }
     } catch (e) {
       console.warn("Erreur de prévisualisation du sujet", e);
-      Alert.alert("Erreur", "Impossible d'obtenir le lien du sujet.");
+      Alert.alert(...getErrorAlert(e, 'ouverture', 'vous'));
     } finally {
       setLoadingPreviewId(null);
     }
@@ -470,7 +470,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
             <ActivityIndicator color={theme.colors.primary} />
           </View>
         ) : subjects.length === 0 ? (
-          <EmptyState title="Aucun PDF" description="Aucun document PDF disponible pour cette recherche." />
+          <EmptyState title="Aucun PDF" description="Aucun document PDF disponible pour cette recherche. Essayez un autre titre ou modifiez les filtres." />
         ) : (
           <View>
             <View style={styles.subjectList}>

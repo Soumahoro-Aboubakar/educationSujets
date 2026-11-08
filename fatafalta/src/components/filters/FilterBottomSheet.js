@@ -288,7 +288,7 @@ const FilterBottomSheet = React.forwardRef(({
                   isUniversityFilter && optionSearch ? (
                     <View style={styles.emptyState}>
                       <Text variant="body" color={theme.colors.textMuted}>
-                        Aucune université ne correspond à « {optionSearch} »
+                        Aucune université ne correspond à « {optionSearch} ». Essayez un autre nom.
                       </Text>
                     </View>
                   ) : null

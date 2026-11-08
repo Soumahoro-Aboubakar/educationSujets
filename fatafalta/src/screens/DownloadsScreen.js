@@ -102,7 +102,7 @@ const DownloadsScreen = () => {
         <StateView
           icon={FileDown}
           title="Aucun téléchargement"
-          description="Les sujets que tu télécharges apparaissent ici et restent consultables sans connexion."
+          description="Télécharge un sujet depuis la bibliothèque pour le retrouver ici et le consulter sans connexion."
         />
       );
     }
@@ -126,7 +126,7 @@ const DownloadsScreen = () => {
           <StateView
             icon={SearchX}
             title="Aucun résultat"
-            description={`Aucun fichier ne correspond à « ${query.trim()} ».`}
+            description={`Aucun fichier ne correspond à « ${query.trim()} ». Essaie un autre mot ou efface ta recherche.`}
           />
         )}
         showsVerticalScrollIndicator={false}

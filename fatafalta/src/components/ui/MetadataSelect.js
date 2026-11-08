@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../../utils/userMessages';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
@@ -53,12 +54,12 @@ const MetadataSelect = ({
     const trimmedName = search.trim() || newOptionName.trim();
     
     if (!trimmedName) {
-      setCreatingError('Veuillez entrer un nom');
+      setCreatingError('Nom requis. Saisissez un nom pour continuer.');
       return;
     }
 
     if (exactMatch) {
-      setCreatingError('Cette option existe déjà');
+      setCreatingError('Cette option existe déjà. Sélectionnez-la dans la liste.');
       return;
     }
 
@@ -70,7 +71,7 @@ const MetadataSelect = ({
       handleSelectOption(newOption._id, newOption);
       setNewOptionName('');
     } catch (err) {
-      setCreatingError('Erreur lors de la création');
+      setCreatingError(getErrorMessage(err, 'enregistrement', 'vous'));
       console.error('Error creating option:', err);
     } finally {
       setIsCreating(false);
@@ -186,7 +187,7 @@ const MetadataSelect = ({
                 !search.trim() ? null : (
                   <View style={styles.emptyState}>
                     <RNText style={styles.emptyStateText}>
-                      Aucune option trouvée
+                      Aucune option trouvée. Essayez un autre nom.
                     </RNText>
                   </View>
                 )

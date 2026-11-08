@@ -1,3 +1,4 @@
+import { createUserError } from '../utils/userMessages';
 import * as FileSystem from 'expo-file-system/legacy';
 import { File } from 'expo-file-system';
 import * as ImageManipulator from 'expo-image-manipulator';
@@ -56,7 +57,7 @@ const initDirectory = async () => {
 const withTimeout = async (promise, timeoutMs, errorMessage) => {
   let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {
-    timeoutId = setTimeout(() => reject(new Error(errorMessage)), timeoutMs);
+    timeoutId = setTimeout(() => reject(createUserError('attente')), timeoutMs);
   });
   try {
     return await Promise.race([promise, timeoutPromise]);
@@ -169,7 +170,7 @@ const prepareImage = async (uri) => {
   );
 
   if (!result.base64) {
-    throw new Error("Impossible de convertir l'image");
+    throw createUserError('pdf_preparation');
   }
 
   return {
@@ -259,7 +260,7 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
   await initDirectory();
 
   if (!imageUris || imageUris.length === 0) {
-    throw new Error('Aucune image fournie');
+    throw createUserError('pdf_images');
   }
 
   let prepared = 0;
@@ -324,7 +325,7 @@ export const generatePdfFromImages = async (imageUris, onProgress) => {
   }
 
   if (embedded === 0) {
-    throw new Error('Aucune image prise en charge trouvée. Veuillez utiliser un format image valide.');
+    throw createUserError('pdf_images');
   }
 
   const pdfBytes = await withTimeout(pdfDoc.saveAsBase64(), 30000, 'Sauvegarde du PDF trop longue');
@@ -386,16 +387,13 @@ const assertImportedPdfSizeIsSafe = async (fileUri) => {
   }
 
   if (!info.exists) {
-    throw new Error('Le fichier sélectionné est introuvable');
+    throw createUserError('pdf_lecture');
   }
 
   if (typeof info.size === 'number' && info.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
     const sizeMb = (info.size / (1024 * 1024)).toFixed(1);
     const maxMb = Math.round(MAX_IMPORTED_PDF_SIZE_BYTES / (1024 * 1024));
-    throw new Error(
-      `Ce PDF est trop volumineux (${sizeMb} Mo, maximum ${maxMb} Mo). ` +
-      'Veuillez importer un fichier plus léger.'
-    );
+    throw createUserError('pdf_taille');
   }
 };
 
@@ -438,13 +436,7 @@ const copyPickedFileLocally = async (fileUri) => {
     return localUri;
   } catch (secondError) {
     console.warn('Copie locale du PDF importé — échec (2e tentative):', fileUri, secondError);
-    throw new Error(
-      "Impossible d'accéder au fichier sélectionné, même après nouvelle tentative. " +
-      "Ce comportement est un problème connu d'Expo Go sur certains appareils/versions Android. " +
-      "Si le problème persiste, essayez de tester avec un development build (npx expo run:android) " +
-      "plutôt que dans Expo Go, ou sélectionnez le fichier depuis le stockage local plutôt que " +
-      "depuis une application/cloud tierce."
-    );
+    throw createUserError('pdf_lecture', secondError);
   }
 };
 
@@ -512,7 +504,7 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
     })();
   } catch (e) {
     console.warn('Lecture du PDF importé (copie locale) — erreur détaillée:', localUri, e);
-    throw new Error(`Impossible de lire le fichier PDF (${e.message || 'raison inconnue'})`);
+    throw createUserError('pdf_lecture', e);
   } finally {
     // Nettoyage de la copie temporaire, qu'elle ait réussi ou échoué à être lue.
     FileSystem.deleteAsync(localUri, { idempotent: true }).catch(() => {});
@@ -601,7 +593,7 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
     pdfBytes = await readPdfBytes(fileUri);
   } catch (e) {
     console.warn('Lecture sécurisée du PDF échouée:', fileUri, e);
-    throw new Error(`Impossible de lire le fichier PDF (${e.message || 'raison inconnue'})`);
+    throw createUserError('pdf_lecture', e);
   }
 
   // 3) Chargement pdf-lib.
@@ -613,9 +605,7 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
       'Analyse du PDF trop longue'
     );
   } catch (e) {
-    throw new Error(
-      "Ce fichier n'a pas pu être ouvert : il est peut-être corrompu, protégé par mot de passe, ou dans un format non pris en charge."
-    );
+    throw createUserError('pdf_format', e);
   } finally {
     pdfBytes = null;
   }
@@ -624,9 +614,7 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
 
   const MAX_PAGES = 300;
   if (pages.length > MAX_PAGES) {
-    throw new Error(
-      `Ce PDF contient trop de pages (${pages.length}, maximum ${MAX_PAGES}).`
-    );
+    throw createUserError('pdf_pages');
   }
 
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
@@ -661,7 +649,7 @@ export const applyWatermarkToExistingPdf = async (fileUri) => {
     // Écriture binaire directe : pas de chaîne base64 géante transmise au natif.
     new File(outputUri).write(modifiedPdfBytes);
   } catch (e) {
-    throw new Error(`Impossible d'enregistrer le PDF traité (${e.message || 'raison inconnue'})`);
+    throw createUserError('pdf_preparation', e);
   } finally {
     modifiedPdfBytes = null;
   }

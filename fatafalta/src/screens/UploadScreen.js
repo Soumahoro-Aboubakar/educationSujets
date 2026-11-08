@@ -1,3 +1,4 @@
+import { createUserError, getErrorAlert, getErrorMessage } from '../utils/userMessages';
 import React, { useState, useContext, useEffect, useMemo, useRef } from 'react';
 import {
   View,
@@ -40,7 +41,7 @@ const BATCH_STATUS_LABELS = {
   uploading: 'Envoi en cours…',
   publishing: 'Publication…',
   success: 'Terminé',
-  error: 'Échec',
+  error: 'Envoi à reprendre',
 };
 
 const isPdfAsset = (asset) => {
@@ -50,18 +51,6 @@ const isPdfAsset = (asset) => {
 };
 
 const titleFromFileName = (name) => (name || '').replace(/\.pdf$/i, '').trim();
-
-// Message renvoyé par l'API (express-validator, AppError) plutôt que le message axios générique.
-const getErrorMessage = (error, fallback) => {
-  const data = error?.response?.data;
-  return (
-    data?.message
-    || data?.error
-    || (Array.isArray(data?.errors) && data.errors[0]?.msg)
-    || error?.message
-    || fallback
-  );
-};
 
 const UploadScreen = ({ navigation, route }) => {
   const { user } = useContext(AuthContext);
@@ -117,7 +106,7 @@ const UploadScreen = ({ navigation, route }) => {
   const withTimeout = async (promise, timeoutMs, errorMessage) => {
     let timeoutId;
     const timeoutPromise = new Promise((_, reject) => {
-      timeoutId = setTimeout(() => reject(new Error(errorMessage)), timeoutMs);
+      timeoutId = setTimeout(() => reject(createUserError('attente')), timeoutMs);
     });
 
     try {
@@ -167,7 +156,7 @@ const UploadScreen = ({ navigation, route }) => {
         return;
       } catch (error) {
         console.warn('Unable to open Android preview intent:', error);
-        Alert.alert('Erreur', "Impossible d'ouvrir le fichier");
+        Alert.alert(...getErrorAlert(error, 'ouverture', 'vous'));
         return;
       }
     }
@@ -175,7 +164,7 @@ const UploadScreen = ({ navigation, route }) => {
     if (!pdfLocalUri) return;
 
     Linking.openURL(pdfLocalUri).catch(() => {
-      Alert.alert('Erreur', "Impossible d'ouvrir le fichier");
+      Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
     });
   };
 
@@ -281,7 +270,7 @@ const UploadScreen = ({ navigation, route }) => {
       });
     } catch (error) {
       console.error('DocumentPicker error:', error);
-      Alert.alert('Erreur', 'Impossible de sélectionner le fichier PDF.');
+      Alert.alert(...getErrorAlert(error, 'selection', 'vous'));
       return;
     }
 
@@ -302,12 +291,12 @@ const UploadScreen = ({ navigation, route }) => {
       const name = asset.name || 'Document PDF';
       const key = `${name}:${asset.size ?? ''}`;
       if (!isPdfAsset(asset)) {
-        rejected.push(`${name} : ce n'est pas un fichier PDF`);
+        rejected.push(`${name} : format non accepté. Sélectionnez un PDF.`);
       } else if (typeof asset.size === 'number' && asset.size > MAX_IMPORTED_PDF_SIZE_BYTES) {
         const sizeMb = (asset.size / (1024 * 1024)).toFixed(1);
-        rejected.push(`${name} : ${sizeMb} Mo (maximum ${maxMb} Mo)`);
+        rejected.push(`${name} : ${sizeMb} Mo (maximum ${maxMb} Mo). Sélectionnez un PDF plus léger.`);
       } else if (seen.has(key)) {
-        rejected.push(`${name} : sélectionné plusieurs fois`);
+        rejected.push(`${name} : sélectionné plusieurs fois. Gardez une seule copie.`);
       } else {
         seen.add(key);
         files.push(asset);
@@ -392,7 +381,7 @@ const UploadScreen = ({ navigation, route }) => {
       // On remonte le message précis (taille, fichier corrompu, etc.)
       // plutôt qu'un message générique, pour que l'utilisateur comprenne
       // pourquoi ça a échoué.
-      Alert.alert('Erreur', e.message || 'Erreur lors du traitement du PDF');
+      Alert.alert(...getErrorAlert(e, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
     }
@@ -413,7 +402,7 @@ const UploadScreen = ({ navigation, route }) => {
       setStep('metadata');
     } catch (e) {
       console.error(e);
-      Alert.alert('Erreur', 'Erreur lors de la création du PDF');
+      Alert.alert(...getErrorAlert(e, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
     }
@@ -430,7 +419,7 @@ const UploadScreen = ({ navigation, route }) => {
         setStep('metadata');
       } catch (e) {
         console.error(e);
-        Alert.alert('Erreur', 'Erreur lors du traitement du PDF');
+        Alert.alert(...getErrorAlert(e, 'pdf', 'vous'));
       } finally {
         setIsProcessing(false);
       }
@@ -447,25 +436,25 @@ const UploadScreen = ({ navigation, route }) => {
       if (isBatchMode) {
         batchFiles.forEach((file) => {
           if (file.status !== 'success' && !file.title.trim()) {
-            newErrors[`title_${file.id}`] = 'Titre requis';
+            newErrors[`title_${file.id}`] = 'Titre requis. Saisissez un titre pour continuer.';
           }
         });
       } else if (!title.trim()) {
-        newErrors.title = 'Titre requis';
+        newErrors.title = 'Titre requis. Saisissez un titre pour continuer.';
       }
 
       if (institution && taxonomyNodes.length !== selectedInstitution?.navigationStructure?.length) {
-        newErrors.taxonomy = 'Sélectionnez tous les niveaux de la structure';
+        newErrors.taxonomy = 'Classement du document incomplet. Sélectionnez chaque niveau.';
       }
 
       if (dynamicMetadata.organisme) {
-        if (dynamicMetadata.path.length === 0) newErrors.path = 'Sélectionnez l’année et les niveaux du sujet';
+        if (dynamicMetadata.path.length === 0) newErrors.path = 'Classement du sujet incomplet. Sélectionnez l’année et les niveaux.';
         if (dynamicMetadata.structureLength && dynamicMetadata.path.length !== dynamicMetadata.structureLength) {
-          newErrors.path = 'Sélectionnez tous les niveaux du sujet';
+          newErrors.path = 'Classement du sujet incomplet. Sélectionnez chaque niveau.';
         }
-        if (!dynamicMetadata.matiere) newErrors.matiere = 'Sélectionnez une matière';
-        if (dynamicMetadata.hasParcoursType === null) newErrors.parcoursType = 'Indiquez si un type de parcours est utilisé';
-        if (dynamicMetadata.hasParcoursType && !dynamicMetadata.parcoursType) newErrors.parcoursType = 'Sélectionnez un type de parcours';
+        if (!dynamicMetadata.matiere) newErrors.matiere = 'Matière requise. Sélectionnez une matière.';
+        if (dynamicMetadata.hasParcoursType === null) newErrors.parcoursType = 'Parcours à préciser. Indiquez si un type de parcours est utilisé.';
+        if (dynamicMetadata.hasParcoursType && !dynamicMetadata.parcoursType) newErrors.parcoursType = 'Parcours requis. Sélectionnez un type de parcours.';
       }
     }
 
@@ -575,7 +564,7 @@ const UploadScreen = ({ navigation, route }) => {
         successCount += 1;
       } catch (error) {
         console.error(`Batch upload failed for ${file.name}:`, error);
-        let message = getErrorMessage(error, "Erreur lors de l'envoi du document");
+        let message = getErrorMessage(error, 'envoi', 'vous');
         if (documentId && publish) {
           message = `Document envoyé en brouillon mais non publié : ${message}`;
         }
@@ -635,7 +624,7 @@ const UploadScreen = ({ navigation, route }) => {
   const handleUpload = async (publish = true) => {
     if (uploading) return;
     if (!isDraftMode && !pdfFile?.uri) {
-      Alert.alert('Erreur', 'Aucun fichier PDF à envoyer.');
+      Alert.alert('PDF requis', 'Ajoutez ou générez un PDF avant de continuer.');
       return;
     }
     if (!validateForm(!publish)) return;
@@ -697,7 +686,7 @@ const UploadScreen = ({ navigation, route }) => {
       }
     } catch (error) {
       console.error(error);
-      const message = getErrorMessage(error, "Erreur lors de l'envoi du document");
+      const message = getErrorMessage(error, 'envoi', 'vous');
       if (createdDocumentId) {
         // Le document existe déjà côté serveur : on évite un second envoi (doublon).
         Alert.alert(
@@ -708,7 +697,7 @@ const UploadScreen = ({ navigation, route }) => {
         resetForm();
         setStep('choose');
       } else {
-        Alert.alert('Erreur', message);
+        Alert.alert(...getErrorAlert(error, 'envoi', 'vous'));
       }
     } finally {
       setUploading(false);

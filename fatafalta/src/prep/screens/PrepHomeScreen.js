@@ -67,7 +67,7 @@ const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, video, 
       <PressScale
         onPress={onPress}
         disabled={!item.publie}
-        accessibilityLabel={`Module ${item.numero}, ${item.titre}${item.publie ? `, ${pct} %` : ', bientôt disponible'}${st?.valide ? ', validé' : ''}${locked ? ', verrouillé' : ''}`}
+        accessibilityLabel={`Module ${item.numero}, ${item.titre}${item.publie ? `, ${pct} %` : ', contenu à venir'}${st?.valide ? ', validé' : ''}${locked ? ', verrouillé' : ''}`}
         style={[styles.moduleCard, current && !locked && styles.moduleCurrent, !item.publie && styles.moduleSoon]}
       >
         <CornerFold size={30} radius={18} tone={item.publie && !locked ? 'gold' : 'muted'} animated delay={Math.min(index, 8) * 60} />
@@ -100,10 +100,10 @@ const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, video, 
             <Text variant="caption" style={styles.muted} numberOfLines={1}>
               {st.valide ? 'Module validé' : `${st.leconsTotal} leçons${n2 != null ? ` · Niveau 2 : ${Math.round(n2 * 100)} %` : pct ? ` · ${pct} %` : ''}`}
             </Text>
-          ) : <Text variant="caption" style={styles.muted}>Bientôt disponible</Text>}
+          ) : <Text variant="caption" style={styles.muted}>Contenu à venir. Choisis un autre module en attendant.</Text>}
           {conseilleApres ? <Badge label={`Conseillé après M${conseilleApres}`} tone="neutral" style={{ marginTop: 6 }} /> : null}
         </View>
-        {item.publie ? <ChevronRight size={18} color={current && !locked ? brand.burgundy : brand.lineStrong} strokeWidth={2.2} /> : <Badge label="Bientôt" tone="neutral" />}
+        {item.publie ? <ChevronRight size={18} color={current && !locked ? brand.burgundy : brand.lineStrong} strokeWidth={2.2} /> : <Badge label="À venir" tone="neutral" />}
       </PressScale>
     </Enter>
   );

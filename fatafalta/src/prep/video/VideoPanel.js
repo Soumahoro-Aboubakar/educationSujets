@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../../utils/userMessages';
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import Animated, { FadeOut } from 'react-native-reanimated';
@@ -23,8 +24,8 @@ const LOAD_TIMEOUT = 20000;
 const RATIO = 9 / 16;
 
 const MESSAGES = {
-  horsLigne: 'Connecte-toi pour regarder la vidéo. Le cours écrit reste disponible dessous.',
-  indisponible: 'Cette vidéo est momentanément indisponible. Le cours écrit reste disponible dessous.',
+  horsLigne: `${getErrorMessage({ code: 'ERR_NETWORK' }, 'video')} Tu peux poursuivre avec le cours écrit ci-dessous.`,
+  indisponible: `${getErrorMessage(null, 'video')} Tu peux poursuivre avec le cours écrit ci-dessous.`,
 };
 
 const VideoPanel = forwardRef(({ video, kind = 'lecon', language = 'fr', readLabel, onRead, onLayout, onPlayerChange, style }, ref) => {

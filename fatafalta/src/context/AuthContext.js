@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../utils/userMessages';
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import api from '../services/api';
@@ -72,7 +73,7 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true, user: newUser };
     } catch (err) {
-      const message = err.response?.data?.error || err.response?.data?.message || 'Erreur lors de l\'inscription';
+      const message = getErrorMessage(err, 'inscription', 'tu');
       setError(message);
       return { success: false, error: message };
     }
@@ -97,7 +98,7 @@ export const AuthProvider = ({ children }) => {
       return { success: true, user: newUser };
     } catch (err) {
       console.error('Login error00:', err);
-      const message = err.response?.data?.error || err.response?.data?.message || 'Erreur lors de la connexion';
+      const message = getErrorMessage(err, 'connexion', 'tu');
       setError(message);
       return { success: false, error: message };
     }

@@ -1,3 +1,5 @@
+import { getUserMessage } from '../../utils/userMessages';
+import { getErrorAlert } from '../../utils/userMessages';
 import React from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import { ArrowDownLeft, ArrowUpRight, Wallet } from 'lucide-react-native';
@@ -9,14 +11,14 @@ import StateView from '../../components/ui/StateView';
 import { SkeletonRows } from '../../components/ui/Skeleton';
 import { AccountScroll, Metric, Row, Section } from '../../components/account/AccountLayout';
 import { useRefreshAccount, useWallet } from '../../hooks/useAccount';
-import { cancelWithdrawal, getErrorMessage } from '../../services/billing';
+import { cancelWithdrawal } from '../../services/billing';
 import { formatAmount, formatDate } from '../../utils/format';
 import theme from '../../theme/tokens';
 
 const { brand } = theme;
 
 const WalletScreen = ({ navigation }) => {
-  const { data, isLoading, isError, refetch, isRefetching } = useWallet();
+  const { data, isLoading, isError, refetch, isRefetching, error: loadError } = useWallet();
   const refreshAccount = useRefreshAccount();
 
   const askCancel = (entry) => {
@@ -30,7 +32,7 @@ const WalletScreen = ({ navigation }) => {
             await cancelWithdrawal(entry.id);
             refreshAccount();
           } catch (error) {
-            Alert.alert('Retrait', getErrorMessage(error));
+            Alert.alert(...getErrorAlert(error, 'retrait', 'tu'));
           }
         },
       },
@@ -40,7 +42,7 @@ const WalletScreen = ({ navigation }) => {
   const renderBody = () => {
     if (isLoading) return <SkeletonRows count={4} />;
     if (isError) {
-      return <StateView icon={Wallet} title="Connexion impossible" description="Ton portefeuille n’a pas pu être chargé." onRetry={refetch} />;
+      return <StateView icon={Wallet} title={getUserMessage(loadError, 'portefeuille').title} description={getUserMessage(loadError, 'portefeuille').message} onRetry={refetch} />;
     }
 
     const { balances, history, withdrawalRules } = data;

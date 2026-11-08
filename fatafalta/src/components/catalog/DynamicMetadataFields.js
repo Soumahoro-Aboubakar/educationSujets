@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../../utils/userMessages';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import MetadataSelect from '../ui/MetadataSelect';
@@ -56,7 +57,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
           if (current && current.name !== organisme.name) onChange({ ...value, organisme: current });
         }
       })
-      .catch(() => active && setCatalogError('Impossible de charger les organismes.'));
+      .catch((error) => active && setCatalogError(getErrorMessage(error, 'catalogue', 'vous')));
     return () => { active = false; };
   }, []);
 
@@ -86,7 +87,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
           onChange({ ...value, structureLength: (nextStructure?.niveaux || []).length });
         }
       })
-      .catch(() => active && setCatalogError('Impossible de charger le catalogue de cet organisme.'))
+      .catch((error) => active && setCatalogError(getErrorMessage(error, 'catalogue', 'vous')))
       .finally(() => active && setLoading(false));
 
     return () => { active = false; };
@@ -109,7 +110,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
         }
         if (active) setNodesByLevel(nextOptions);
       } catch (requestError) {
-        if (active) setCatalogError('Impossible de charger les niveaux du catalogue.');
+        if (active) setCatalogError(getErrorMessage(requestError, 'catalogue', 'vous'));
       }
     };
     loadNodes();

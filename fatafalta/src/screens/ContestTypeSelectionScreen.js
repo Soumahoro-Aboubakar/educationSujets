@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../utils/userMessages';
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, FlatList, Pressable, TextInput, ActivityIndicator, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,6 +13,7 @@ const ContestTypeSelectionScreen = ({ navigation, route }) => {
   const [query, setQuery] = useState('');
   const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
     let mounted = true;
@@ -22,6 +24,7 @@ const ContestTypeSelectionScreen = ({ navigation, route }) => {
         setTypes(res.data.data || []);
       } catch (e) {
         console.warn(e);
+        if (mounted) setLoadError(getErrorMessage(e, 'catalogue'));
       } finally {
         if (mounted) setLoading(false);
       }
@@ -74,7 +77,7 @@ const ContestTypeSelectionScreen = ({ navigation, route }) => {
               <ChevronRight size={18} color={theme.colors.textMuted} />
             </Pressable>
           )}
-          ListEmptyComponent={<View style={styles.center}><Text variant="body" color={theme.colors.textSecondary}>Aucun type de concours trouvé.</Text></View>}
+          ListEmptyComponent={<View style={styles.center}><Text variant="body" color={theme.colors.textSecondary}>{loadError || 'Aucun type de concours trouvé. Reviens à la liste et choisis un autre organisme.'}</Text></View>}
         />
       )}
     </View>

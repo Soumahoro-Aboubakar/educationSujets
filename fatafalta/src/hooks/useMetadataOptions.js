@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../utils/userMessages';
 /**
  * Hook for fetching and managing metadata options
  * (universities, departments, levels, semesters, categories)
@@ -46,7 +47,7 @@ export const useMetadataOptions = () => {
       setError(null);
     } catch (err) {
       console.error('Error fetching metadata:', err);
-      setError('Erreur lors du chargement des métadonnées');
+      setError(getErrorMessage(err, 'catalogue', 'vous'));
     } finally {
       setLoading(false);
     }

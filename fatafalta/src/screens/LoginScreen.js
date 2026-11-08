@@ -1,3 +1,4 @@
+import { getErrorMessage } from '../utils/userMessages';
 import React, { useContext, useEffect, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
@@ -36,9 +37,9 @@ const LoginScreen = ({ navigation, route }) => {
 
   const validateForm = () => {
     const nextErrors = {};
-    if (!email.trim()) nextErrors.email = 'Email requis';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = 'Email invalide';
-    if (!password) nextErrors.password = 'Mot de passe requis';
+    if (!email.trim()) nextErrors.email = 'Saisis ton adresse e-mail.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = 'Cette adresse e-mail n’est pas valide.';
+    if (!password) nextErrors.password = 'Saisis ton mot de passe.';
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -50,12 +51,12 @@ const LoginScreen = ({ navigation, route }) => {
     try {
       const result = await login(email, password);
       if (!result.success) {
-        setError(result.error || 'Erreur lors de la connexion');
+        setError(result.error || getErrorMessage(null, 'connexion', 'tu'));
         return;
       }
       redirectAfterAuth(result.user);
     } catch (requestError) {
-      setError('Erreur inattendue. Veuillez réessayer.');
+      setError(getErrorMessage(requestError, 'connexion', 'tu'));
     } finally {
       setLoading(false);
     }

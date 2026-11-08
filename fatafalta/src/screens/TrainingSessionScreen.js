@@ -1,3 +1,4 @@
+import { getUserMessage } from '../utils/userMessages';
 import React, { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
@@ -28,7 +29,7 @@ const TrainingSessionScreen = ({ navigation, route }) => {
   const { preferences } = usePreferences();
   const contest = route.params?.contest || preferences.contest;
   const contestId = contest?._id;
-  const { data: questions = [], isLoading, isError, refetch } = useTrainingQuestions(contestId);
+  const { data: questions = [], isLoading, isError, refetch, error: loadError } = useTrainingQuestions(contestId);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [feedback, setFeedback] = useState(null);
@@ -95,7 +96,7 @@ const TrainingSessionScreen = ({ navigation, route }) => {
       <View style={[styles.loadingScreen, { paddingTop: insets.top }]}>
         <XCircle size={36} color={theme.colors.error} />
         <Text variant="h2" style={styles.errorTitle}>Entraînement indisponible</Text>
-        <Text variant="body" color={theme.colors.textSecondary} align="center">Nous n’avons pas pu charger cette session.</Text>
+        <Text variant="body" color={theme.colors.textSecondary} align="center">{isError ? getUserMessage(loadError, 'entrainement').message : 'Choisis un concours dans la bibliothèque pour commencer.'}</Text>
         <Pressable style={styles.primaryButton} onPress={isError ? refetch : exitToLibrary}>
           <Text variant="bodyMedium" color={theme.colors.textInverse}>{isError ? 'Réessayer' : 'Retour à la bibliothèque'}</Text>
         </Pressable>
@@ -107,9 +108,9 @@ const TrainingSessionScreen = ({ navigation, route }) => {
     return (
       <View style={[styles.loadingScreen, { paddingTop: insets.top }]}>
         <View style={styles.emptyBadge}><Lightbulb size={26} color={theme.colors.primary} /></View>
-        <Text variant="h2" style={styles.errorTitle}>Bientôt disponible</Text>
+        <Text variant="h2" style={styles.errorTitle}>Aucun exercice disponible</Text>
         <Text variant="body" color={theme.colors.textSecondary} align="center" style={styles.emptyCopy}>
-          Les exercices interactifs pour {contest.name} arrivent prochainement.
+          Aucun exercice interactif n’est disponible pour {contest.name}. Consulte les sujets pour poursuivre ta préparation.
         </Text>
         <Pressable style={styles.primaryButton} onPress={exitToLibrary}>
           <Text variant="bodyMedium" color={theme.colors.textInverse}>Voir les sujets disponibles</Text>

@@ -1,3 +1,4 @@
+import { getUserMessage } from '../utils/userMessages';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -27,7 +28,7 @@ const CONFIG = {
     title: 'Ton établissement',
     eyebrow: 'Personnalisation',
     subtitle: 'Pour te montrer les ressources qui te correspondent.',
-    empty: 'Aucun établissement avec des sujets disponibles.',
+    empty: 'Aucun établissement avec des sujets disponibles. Consulte les concours ou reviens plus tard.',
     noun: ['établissement', 'établissements'],
     key: 'universities',
     icon: Building2,
@@ -36,7 +37,7 @@ const CONFIG = {
     title: 'Choisis un organisme',
     eyebrow: 'Anciens sujets',
     subtitle: 'L’organisme qui a organisé le concours ou l’examen.',
-    empty: 'Aucun organisme avec des sujets publiés n’est disponible.',
+    empty: 'Aucun organisme avec des sujets publiés n’est disponible. Consulte les établissements ou reviens plus tard.',
     noun: ['organisme', 'organismes'],
     key: null,
     icon: FileText,
@@ -45,7 +46,7 @@ const CONFIG = {
     title: 'Choisis un entraînement',
     eyebrow: 'Formation interactive',
     subtitle: 'Le concours sur lequel tu souhaites t’entraîner.',
-    empty: 'Aucun entraînement interactif n’est disponible pour le moment.',
+    empty: 'Aucun entraînement interactif n’est disponible pour le moment. Consulte les sujets pour poursuivre ta préparation.',
     noun: ['concours', 'concours'],
     key: 'trainingContests',
     icon: ClipboardList,
@@ -69,7 +70,7 @@ const SelectionScreen = ({ navigation, route }) => {
   const { width } = useWindowDimensions();
   // Plusieurs organismes par rangée : 2 colonnes sur téléphone, 3 sur tablette.
   const columns = width >= 700 ? 3 : 2;
-  const { data, isLoading, isError, refetch } = useOrientationOptions();
+  const { data, isLoading, isError, refetch, error: optionsError } = useOrientationOptions();
   const { updatePreferences } = usePreferences();
   const [query, setQuery] = useState('');
   const [saving, setSaving] = useState(false);
@@ -87,7 +88,7 @@ const SelectionScreen = ({ navigation, route }) => {
       const result = await fetchPublishedOrganismes({ limit: 100 });
       if (mounted.current) setCatalog(result.data);
     } catch (error) {
-      if (mounted.current) setCatalogError(true);
+      if (mounted.current) setCatalogError(error);
     } finally {
       if (mounted.current) setCatalogLoading(false);
     }
@@ -190,8 +191,8 @@ const SelectionScreen = ({ navigation, route }) => {
       return (
         <StateView
           icon={config.icon}
-          title="Connexion impossible"
-          description="Vérifie ta connexion Internet puis réessaie."
+          title={getUserMessage(catalogMode ? catalogError : optionsError, 'catalogue').title}
+          description={getUserMessage(catalogMode ? catalogError : optionsError, 'catalogue').message}
           onRetry={retry}
         />
       );

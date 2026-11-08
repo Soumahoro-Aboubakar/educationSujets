@@ -11,7 +11,7 @@ import theme from '../../theme/tokens';
 const EmptyState = ({
   icon: Icon = null,
   title = 'Aucun résultat',
-  description = "Nous n'avons rien trouvé correspondant à vos critères.",
+  description = "Aucun résultat ne correspond à vos critères. Modifiez votre recherche ou vos filtres.",
   action,
   style,
 }) => {

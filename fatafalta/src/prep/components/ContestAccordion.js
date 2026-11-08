@@ -91,7 +91,7 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
                   onPress={() => { haptic.success(); onSelect(cycle); }}
                   accessibilityRole="radio"
                   accessibilityState={{ checked: isSel, disabled: !cycle.publie }}
-                  accessibilityLabel={`${cycle.nom}${cycle.publie ? '' : ', bientôt disponible'}`}
+                  accessibilityLabel={`${cycle.nom}${cycle.publie ? '' : ', contenu à venir'}`}
                   style={[styles.cycle, isSel && styles.cycleSel]}
                 >
                   <View style={[styles.cycleText, !cycle.publie && styles.cycleOff]}>
@@ -104,7 +104,7 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
                       </View>
                     ) : (
                       <Text variant="caption" style={styles.muted}>
-                        {cycle.publie ? `${cycle.modulesPublies} module${cycle.modulesPublies > 1 ? 's' : ''} prêts · ${cycle.matieres} matières` : 'Bientôt disponible'}
+                        {cycle.publie ? `${cycle.modulesPublies} module${cycle.modulesPublies > 1 ? 's' : ''} prêts · ${cycle.matieres} matières` : 'Contenu à venir. Choisis un autre cycle en attendant.'}
                       </Text>
                     )}
                   </View>
@@ -171,7 +171,7 @@ const ContestAccordion = ({ catalogue, selected, onSelect, scrollTo }) => {
           />
         </View>
       )) : (
-        <Animated.View entering={FadeIn}><Text variant="body" style={[styles.muted, { textAlign: 'center', marginTop: 20 }]}>{`Aucun organisme ne correspond à « ${query} »`}</Text></Animated.View>
+        <Animated.View entering={FadeIn}><Text variant="body" style={[styles.muted, { textAlign: 'center', marginTop: 20 }]}>{`Aucun organisme ne correspond à « ${query} ». Essaie un autre nom ou un sigle.`}</Text></Animated.View>
       )}
     </View>
   );

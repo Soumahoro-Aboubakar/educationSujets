@@ -1,3 +1,4 @@
+import { getUserMessage } from '../../utils/userMessages';
 import React, { useState } from 'react';
 import { LayoutAnimation, Pressable, Share, StyleSheet, View } from 'react-native';
 import * as Clipboard from 'expo-clipboard';
@@ -19,7 +20,7 @@ const { brand } = theme;
 const PREVIEW_COUNT = 3;
 
 const PromoCodeScreen = ({ navigation }) => {
-  const { data, isLoading, isError, refetch, isRefetching } = usePromoCode();
+  const { data, isLoading, isError, refetch, isRefetching, error: loadError } = usePromoCode();
   const [copied, setCopied] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
@@ -43,7 +44,7 @@ const PromoCodeScreen = ({ navigation }) => {
   const renderBody = () => {
     if (isLoading) return <SkeletonRows count={4} />;
     if (isError) {
-      return <StateView icon={Gift} title="Connexion impossible" description="Ton code n’a pas pu être chargé." onRetry={refetch} />;
+      return <StateView icon={Gift} title={getUserMessage(loadError, 'codePromo').title} description={getUserMessage(loadError, 'codePromo').message} onRetry={refetch} />;
     }
 
     const isActive = data.status === 'ACTIVE';
@@ -78,7 +79,7 @@ const PromoCodeScreen = ({ navigation }) => {
               isLast={index === referrals.length - 1 && data.referrals.length <= PREVIEW_COUNT}
             />
           )) : (
-            <Text variant="body" style={styles.empty}>Personne n’a encore utilisé ton code.</Text>
+            <Text variant="body" style={styles.empty}>Personne n’a encore utilisé ton code. Partage-le avec tes proches pour leur en faire profiter.</Text>
           )}
           {data.referrals.length > PREVIEW_COUNT ? (
             <Pressable onPress={() => toggle(setShowAll)} style={({ pressed }) => [styles.more, pressed && styles.pressed]}>

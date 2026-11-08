@@ -1,3 +1,4 @@
+import { getUserMessage } from '../utils/userMessages';
 import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, Keyboard, InteractionManager } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -40,6 +41,8 @@ const SearchScreen = () => {
     fetchNextPage,
     isRefetching,
     refetch,
+    isError,
+    error: searchError,
   } = useInfiniteDocuments(filters, hasActiveQuery);
   const documents = documentsPages?.pages.flatMap((page) => page.data || []) || [];
   const pagination = documentsPages?.pages[0]?.pagination || null;
@@ -125,8 +128,8 @@ const SearchScreen = () => {
             onRefresh={refetch}
             onDocumentPress={handleDocumentPress}
             ListHeaderComponent={ListHeader}
-            emptyStateTitle="Aucun résultat"
-            emptyStateDescription="Essayez d'autres mots-clés ou modifiez vos filtres."
+            emptyStateTitle={isError ? getUserMessage(searchError, 'documents', 'vous').title : 'Aucun résultat'}
+            emptyStateDescription={isError ? getUserMessage(searchError, 'documents', 'vous').message : 'Essayez d’autres mots-clés ou modifiez vos filtres.'}
           />
         )}
       </View>
