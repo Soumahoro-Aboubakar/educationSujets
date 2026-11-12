@@ -43,13 +43,13 @@ module.exports = [
     matieres: [
       { nom: 'Mathématiques', modules: [
         'MATH-LNEXP', 'MATH-SUITES', 'MATH-PROBA',
-        aVenir('ENSEA-AS-COMPLEXES', 'Nombres complexes', ['Forme algébrique, module, argument', 'Formes trigonométrique et exponentielle, Moivre', 'Équations du second degré, racines n-ièmes']),
-        aVenir('ENSEA-AS-ANALYSE', 'Limites, continuité, dérivation', ['Théorème des valeurs intermédiaires', 'Accroissements finis', 'Étude de fonctions et asymptotes']),
-        aVenir('ENSEA-AS-INTEGR', 'Intégration et équations différentielles', ['Intégrale, valeur moyenne', 'Intégration par parties', 'y′ = ay + b']),
-        aVenir('ENSEA-AS-GEOM', 'Géométrie dans l’espace', ['Produit scalaire', 'Représentations paramétriques', 'Équation cartésienne d’un plan']),
-        aVenir('ENSEA-AS-STAT', 'Statistique descriptive', ['Moyenne, médiane, quartiles, écart-type', 'Séries doubles, droite des moindres carrés']),
+        'ENSEA-AS-COMPLEXES',
+        'ENSEA-AS-ANALYSE',
+        'ENSEA-AS-INTEGR',
+        'ENSEA-AS-GEOM',
+        'ENSEA-AS-STAT',
       ] },
-      { nom: 'Français', modules: ['FR-RESUME', aVenir('ENSEA-AS-OG', 'Ordre général : la dissertation', ['Analyser le sujet', 'Construire un plan', 'Argumenter et illustrer'])] },
+      { nom: 'Français', modules: ['FR-RESUME', 'ENSEA-AS-OG'] },
     ],
   },
   {
@@ -71,17 +71,17 @@ module.exports = [
     matieres: [
       { nom: 'Mathématiques', modules: [
         'MATH-PROBA',
-        aVenir('ISE-ECO-ALGLIN', 'Calcul matriciel et algèbre linéaire', ['Matrices, rang, inverse par pivot de Gauss', 'Espaces vectoriels, théorème du rang', 'Valeurs propres, diagonalisation']),
-        aVenir('ISE-ECO-SERIES', 'Suites, séries et intégrales généralisées', ['Séries géométriques et de Riemann', 'Intégrales de Riemann, critères de comparaison']),
-        aVenir('ISE-ECO-2VAR', 'Fonctions de deux variables', ['Dérivées partielles, Schwarz', 'Extremums, critère de Monge']),
+        'ISE-ECO-ALGLIN',
+        'ISE-ECO-SERIES',
+        'ISE-ECO-2VAR',
       ] },
       { nom: 'Économie', modules: [
         'ECO-MONNAIE',
-        aVenir('ISE-ECO-CN', 'Comptabilité nationale', ['Valeur ajoutée et PIB', 'Secteurs institutionnels, TCEI', 'Tableau ressources-emplois']),
-        aVenir('ISE-ECO-MICRO', 'Microéconomie', ['Consommateur et demande', 'Producteur et offre', 'Structures de marché, équilibre de Nash']),
-        aVenir('ISE-ECO-MACRO', 'Macroéconomie et politiques économiques', ['Approches classique et keynésienne', 'Politique budgétaire', 'Balance des paiements, régimes de change']),
+        'ISE-ECO-CN',
+        'ISE-ECO-MICRO',
+        'ISE-ECO-MACRO',
       ] },
-      { nom: 'Anglais', modules: ['ANG-GRAM'] },
+      { nom: 'Anglais', modules: ['ANG-GRAM', 'ANG-QCM'] },
     ],
   },
 
@@ -107,12 +107,12 @@ module.exports = [
     noteSources: 'Épreuves fixées par l’arrêté de 2017 (session 2018) : à vérifier sur l’avis de concours de l’année. Une note ≤ 5/20 est éliminatoire, sauf délibération motivée du jury.',
     concoursBlanc: { dureeMinutes: 40, nbQuestions: 24 },
     matieres: [
-      { nom: 'Droit civil', modules: ['DROIT-CONTRAT', aVenir('INFJ-MAG-PERSONNES', 'Les personnes et la famille', ['Personnalité juridique, capacité', 'Mariage et filiation']), aVenir('INFJ-MAG-PROCCIV', 'Procédure civile', ['Action en justice', 'Compétence', 'Voies de recours'])] },
-      { nom: 'Droit pénal', modules: ['DROIT-PENAL', aVenir('INFJ-MAG-PROCPEN', 'Procédure pénale', ['Action publique et action civile', 'Enquête et instruction', 'Jugement et voies de recours'])] },
+      { nom: 'Droit civil', modules: ['DROIT-CONTRAT', 'INFJ-MAG-PERSONNES', 'INFJ-MAG-PROCCIV'] },
+      { nom: 'Droit pénal', modules: ['DROIT-PENAL', 'INFJ-MAG-PROCPEN'] },
       { nom: 'Organisation judiciaire', modules: ['DROIT-ORGJUD'] },
-      { nom: 'Droit commercial', modules: [aVenir('INFJ-MAG-COMMERCIAL', 'Droit commercial général (OHADA)', ['Actes de commerce et commerçant', 'Fonds de commerce', 'Sociétés commerciales'])] },
-      { nom: 'Droit administratif', modules: [aVenir('INFJ-MAG-ADMIN', 'Droit administratif', ['Organisation administrative', 'Actes administratifs', 'Responsabilité administrative'])] },
-      { nom: 'Culture générale', modules: ['CG-INSTIT', aVenir('INFJ-MAG-SYNTHESE', 'Dissertation et note de synthèse', ['Problématiser', 'Plan en deux parties', 'Note de synthèse à partir d’un dossier'])] },
+      { nom: 'Droit commercial', modules: ['INFJ-MAG-COMMERCIAL'] },
+      { nom: 'Droit administratif', modules: ['INFJ-MAG-ADMIN'] },
+      { nom: 'Culture générale', modules: ['CG-INSTIT', 'ENSEA-AS-OG', 'INFJ-MAG-SYNTHESE'] },
     ],
   },
   {
@@ -136,8 +136,8 @@ module.exports = [
     matieres: [
       { nom: 'Organisation judiciaire', modules: ['DROIT-ORGJUD'] },
       { nom: 'Droit pénal', modules: ['DROIT-PENAL'] },
-      { nom: 'Droit constitutionnel', modules: ['CG-INSTIT', aVenir('INFJ-CMS-ADMIN', 'Droit administratif', ['Organisation administrative', 'Actes administratifs'])] },
-      { nom: 'Français', modules: ['FR-RESUME', aVenir('INFJ-CMS-DISSERT', 'Dissertation d’ordre général', ['Analyse du sujet', 'Plan', 'Introduction et conclusion'])] },
+      { nom: 'Droit constitutionnel', modules: ['CG-INSTIT', 'INFJ-MAG-ADMIN'] },
+      { nom: 'Français', modules: ['FR-RESUME', 'ENSEA-AS-OG'] },
     ],
   },
 
@@ -158,8 +158,8 @@ module.exports = [
     noteSources: 'Aucun programme officiel détaillé n’a été trouvé en ligne : épreuves déduites des anciens sujets publiés (2018-2025). Durées et coefficients à confirmer.',
     concoursBlanc: { dureeMinutes: 30, nbQuestions: 18 },
     matieres: [
-      { nom: 'Psychopédagogie et système éducatif', modules: ['EDU-SEI', aVenir('ENS-EDU-PSYCHOPEDA', 'Psychopédagogie de l’adolescent', ['Puberté et construction de l’identité', 'Motivation et apprentissage', 'Gestion des conflits'])] },
-      { nom: 'Culture générale', modules: ['FR-RESUME', 'CG-INSTIT'] },
+      { nom: 'Psychopédagogie et système éducatif', modules: ['EDU-SEI', 'ENS-EDU-PSYCHOPEDA'] },
+      { nom: 'Culture générale', modules: ['FR-RESUME', 'CG-INSTIT', 'ENSEA-AS-OG'] },
     ],
   },
 
@@ -182,11 +182,11 @@ module.exports = [
     noteSources: 'Aucun programme officiel trouvé en ligne : matières déduites des anciens sujets « Bacheliers » publiés. Les épreuves varient selon la filière visée (série C/D/E, prépas scientifiques ou commerciales).',
     concoursBlanc: { dureeMinutes: 40, nbQuestions: 24 },
     matieres: [
-      { nom: 'Mathématiques', modules: ['MATH-LNEXP', 'MATH-PROBA', aVenir('INPHB-BAC-COMPLEXES', 'Nombres complexes', ['Forme exponentielle', 'Équations dans ℂ'])] },
-      { nom: 'Sciences physiques', modules: ['PC-ELEC', aVenir('INPHB-BAC-MECA', 'Mécanique : lois de Newton', ['Cinématique', 'Deuxième loi de Newton', 'Mouvement dans un champ uniforme'])] },
+      { nom: 'Mathématiques', modules: ['MATH-LNEXP', 'MATH-PROBA', 'ENSEA-AS-COMPLEXES', 'ENSEA-AS-ANALYSE'] },
+      { nom: 'Sciences physiques', modules: ['PC-ELEC', 'INPHB-BAC-MECA'] },
       { nom: 'Français', modules: ['FR-RESUME'] },
       { nom: 'Culture générale', modules: ['CG-INSTIT'] },
-      { nom: 'Anglais', modules: ['ANG-GRAM'] },
+      { nom: 'Anglais', modules: ['ANG-GRAM', 'ANG-QCM'] },
     ],
   },
 
@@ -208,10 +208,10 @@ module.exports = [
     noteSources: 'Aucun programme officiel trouvé en ligne : matières déduites des anciens sujets publiés (Mathématiques, Sciences physiques, Français, Anglais).',
     concoursBlanc: { dureeMinutes: 35, nbQuestions: 20 },
     matieres: [
-      { nom: 'Mathématiques', modules: ['MATH-LNEXP', 'MATH-SUITES', aVenir('ESATIC-BAC-ARITH', 'Arithmétique', ['Divisibilité, PGCD', 'Congruences'])] },
-      { nom: 'Sciences physiques', modules: ['PC-ELEC', aVenir('ESATIC-BAC-ONDES', 'Ondes et signaux', ['Ondes mécaniques', 'Oscillations électriques'])] },
+      { nom: 'Mathématiques', modules: ['MATH-LNEXP', 'MATH-SUITES', 'ENSEA-AS-COMPLEXES', 'ENSEA-AS-ANALYSE', 'ESATIC-BAC-ARITH'] },
+      { nom: 'Sciences physiques', modules: ['PC-ELEC', 'INPHB-BAC-MECA', 'ESATIC-BAC-ONDES'] },
       { nom: 'Français', modules: ['FR-RESUME'] },
-      { nom: 'Anglais', modules: ['ANG-GRAM'] },
+      { nom: 'Anglais', modules: ['ANG-GRAM', 'ANG-QCM'] },
     ],
   },
 
@@ -230,7 +230,7 @@ module.exports = [
     noteSources: 'Aucun programme officiel trouvé en ligne : les anciens sujets publiés sont des QCM « toutes matières ». Contenu à confirmer par le propriétaire pour chaque filière (infirmiers, sages-femmes, techniciens…).',
     concoursBlanc: { dureeMinutes: 30, nbQuestions: 20 },
     matieres: [
-      { nom: 'Biologie', modules: ['BIO-COEUR', aVenir('INFAS-AUX-DIGESTION', 'Digestion et nutrition', ['Appareil digestif', 'Nutriments et équilibre alimentaire']), aVenir('INFAS-AUX-HYGIENE', 'Hygiène et santé publique', ['Maladies transmissibles', 'Vaccination'])] },
+      { nom: 'Biologie', modules: ['BIO-COEUR', 'INFAS-AUX-DIGESTION', 'INFAS-AUX-HYGIENE'] },
       { nom: 'Mathématiques', modules: ['CALC-SANTE'] },
       { nom: 'Culture générale', modules: ['CG-INSTIT'] },
       { nom: 'Français', modules: ['FR-RESUME'] },
