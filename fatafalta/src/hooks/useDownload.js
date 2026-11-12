@@ -1,5 +1,6 @@
 import { getErrorAlert } from '../utils/userMessages';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
+import useAsyncAction from './useAsyncAction';
 import { Alert, Platform } from 'react-native';
 import * as IntentLauncher from 'expo-intent-launcher';
 import * as FileSystem from 'expo-file-system/legacy';
@@ -86,21 +87,21 @@ export const shareDownloadedFile = async (document, { getLocalUri }) => {
 const ACCESS_CODES = ['AUTH_REQUIRED', 'SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REACHED', 'ACCOUNT_DISABLED'];
 
 export const useDownload = (document, { onAccessDenied } = {}) => {
-  const [isInitializing, setIsInitializing] = useState(false);
+  const [runDownload, isInitializing] = useAsyncAction();
+  const [runFile, isFilePending] = useAsyncAction();
   const refreshAccount = useRefreshAccount();
   const { startDownload, isDownloaded, getLocalUri, activeDownloads, removeDownload } =
     useDownloadStore();
 
   const id = document?._id;
   const isCurrentlyDownloading = activeDownloads[id]?.downloading;
-  const progress = activeDownloads[id]?.progress || 0;
+  const progress = activeDownloads[id]?.progress ?? null;
   const downloaded = isDownloaded(id);
 
-  const handleDownload = useCallback(async () => {
+  const handleDownload = useCallback(() => runDownload(async () => {
     if (!id || isCurrentlyDownloading) return;
 
     try {
-      setIsInitializing(true);
       const { url } = await getDownloadUrl(id);
 
       if (!url) {
@@ -120,24 +121,24 @@ export const useDownload = (document, { onAccessDenied } = {}) => {
         ...getErrorAlert(error, 'telechargement', 'tu')
       );
     } finally {
-      setIsInitializing(false);
       // Le quota du jour a pu évoluer.
       refreshAccount();
     }
-  }, [id, document, isCurrentlyDownloading, startDownload, onAccessDenied, refreshAccount]);
+  }), [runDownload, id, document, isCurrentlyDownloading, startDownload, onAccessDenied, refreshAccount]);
 
-  const handleOpen = useCallback(async () => {
+  const handleOpen = useCallback(() => runFile(async () => {
     if (!id || !downloaded) return;
     await openDownloadedFile(document, { getLocalUri, removeDownload });
-  }, [id, downloaded, getLocalUri, document, removeDownload]);
+  }), [runFile, id, downloaded, getLocalUri, document, removeDownload]);
 
-  const handleShare = useCallback(async () => {
+  const handleShare = useCallback(() => runFile(async () => {
     if (!id || !downloaded) return;
     await shareDownloadedFile(document, { getLocalUri });
-  }, [id, downloaded, getLocalUri, document]);
+  }), [runFile, id, downloaded, getLocalUri, document]);
 
   return {
     isInitializing,
+    isFilePending,
     isDownloading: isCurrentlyDownloading,
     progress,
     isDownloaded: downloaded,

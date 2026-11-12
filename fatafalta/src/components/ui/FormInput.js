@@ -1,6 +1,7 @@
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React from 'react';
 import { TextInput, StyleSheet } from 'react-native';
-import theme from '../../theme/tokens';
+
 import Text from './Text';
 
 /**
@@ -18,6 +19,8 @@ const FormInput = ({
   editable = true,
   ...props
 }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   return (
     <>
       {label && (
@@ -37,6 +40,9 @@ const FormInput = ({
             backgroundColor: editable ? theme.colors.surface : theme.colors.surfaceRaised,
           }
         ]}
+        accessibilityLabel={label || placeholder}
+        accessibilityHint={error || undefined}
+        selectionColor={theme.brand.burgundy}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.textMuted}
         value={value}
@@ -59,25 +65,28 @@ const FormInput = ({
   );
 };
 
-const styles = StyleSheet.create({
-  label: {
-    marginBottom: 8,
-    fontWeight: '600',
-  },
-  input: {
-    height: 56,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 12,
-    borderWidth: 1.5,
-    borderColor: theme.colors.border,
-    fontSize: 16,
-    color: theme.colors.textPrimary,
-    fontFamily: 'Inter',
-  },
-  errorText: {
-    marginTop: 6,
-  },
-});
-
 export default FormInput;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    label: {
+      marginBottom: 8,
+      fontWeight: '600',
+    },
+    input: {
+      minHeight: 56,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderRadius: 12,
+      borderWidth: 1.5,
+      borderColor: theme.colors.border,
+      fontSize: 16,
+      color: theme.colors.textPrimary,
+      fontFamily: theme.fontFamily.regular,
+    },
+    errorText: {
+      marginTop: 6,
+    },
+  });
+  return { styles };
+});

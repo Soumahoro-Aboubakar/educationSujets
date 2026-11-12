@@ -1,3 +1,5 @@
+import useAsyncAction from '../../hooks/useAsyncAction';
+import { createThemedStyles } from '../../theme/ThemeProvider';
 import { getUserMessage } from '../../utils/userMessages';
 import { getErrorAlert } from '../../utils/userMessages';
 import React from 'react';
@@ -5,7 +7,7 @@ import { Alert, StyleSheet, View } from 'react-native';
 import { ArrowDownLeft, ArrowUpRight, Wallet } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import ScreenHeader from '../../components/ui/ScreenHeader';
-import ActionButton from '../../components/ui/ActionButton';
+import { PrepButton as ActionButton } from '../../prep/ui/primitives';
 import StatusPill from '../../components/ui/StatusPill';
 import StateView from '../../components/ui/StateView';
 import { SkeletonRows } from '../../components/ui/Skeleton';
@@ -13,13 +15,13 @@ import { AccountScroll, Metric, Row, Section } from '../../components/account/Ac
 import { useRefreshAccount, useWallet } from '../../hooks/useAccount';
 import { cancelWithdrawal } from '../../services/billing';
 import { formatAmount, formatDate } from '../../utils/format';
-import theme from '../../theme/tokens';
-
-const { brand } = theme;
 
 const WalletScreen = ({ navigation }) => {
+  const { styles } = useStyles();
   const { data, isLoading, isError, refetch, isRefetching, error: loadError } = useWallet();
   const refreshAccount = useRefreshAccount();
+  const [runCancel, cancelling] = useAsyncAction();
+  const [cancellingId, setCancellingId] = React.useState(null);
 
   const askCancel = (entry) => {
     Alert.alert('Annuler ce retrait ?', `${formatAmount(entry.amount)} seront de nouveau disponibles dans ton solde.`, [
@@ -27,14 +29,15 @@ const WalletScreen = ({ navigation }) => {
       {
         text: 'Annuler le retrait',
         style: 'destructive',
-        onPress: async () => {
+        onPress: () => runCancel(async () => {
+          setCancellingId(entry.id);
           try {
             await cancelWithdrawal(entry.id);
             refreshAccount();
           } catch (error) {
             Alert.alert(...getErrorAlert(error, 'retrait', 'tu'));
           }
-        },
+        }),
       },
     ]);
   };
@@ -51,6 +54,7 @@ const WalletScreen = ({ navigation }) => {
 
     return (
       <>
+        <Metric paper label="Solde disponible" value={formatAmount(balances.available)} />
         <Section>
           <View style={styles.metrics}>
             <Metric compact label="Gains générés" value={formatAmount(balances.earned)} />
@@ -89,6 +93,8 @@ const WalletScreen = ({ navigation }) => {
                 hint={formatDate(entry.date)}
                 value={`${isWithdrawal ? '−' : '+'}${formatAmount(entry.amount)}`}
                 trailing={<StatusPill status={entry.status} />}
+                loading={cancelling && cancellingId === entry.id}
+                disabled={cancelling}
                 onPress={isWithdrawal && entry.status === 'PENDING' ? () => askCancel(entry) : undefined}
                 isLast={index === history.length - 1}
               />
@@ -105,9 +111,7 @@ const WalletScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader onBack={() => navigation.goBack()} eyebrow="Portefeuille" title="Mes gains">
-        {data ? <Metric label="Solde disponible" value={formatAmount(data.balances.available)} /> : null}
-      </ScreenHeader>
+      <ScreenHeader onBack={() => navigation.goBack()} title="Mes gains" />
       <AccountScroll refreshing={isRefetching} onRefresh={refetch}>
         {renderBody()}
       </AccountScroll>
@@ -115,42 +119,46 @@ const WalletScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  metrics: {
-    flexDirection: 'row',
-  },
-  divider: {
-    width: StyleSheet.hairlineWidth,
-    backgroundColor: brand.line,
-  },
-  pendingRow: {
-    paddingHorizontal: theme.spacing.base,
-    paddingVertical: theme.spacing.md,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: brand.line,
-  },
-  pendingText: {
-    color: brand.goldInk,
-    fontFamily: theme.fontFamily.regular,
-  },
-  hint: {
-    marginTop: theme.spacing.sm,
-    color: brand.inkMuted,
-    fontFamily: theme.fontFamily.regular,
-  },
-  history: {
-    marginTop: theme.spacing.xl,
-  },
-  empty: {
-    padding: theme.spacing.base,
-    color: brand.inkSoft,
-    fontSize: 14,
-    lineHeight: 20,
-  },
-});
-
 export default WalletScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    metrics: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    divider: {
+      width: StyleSheet.hairlineWidth,
+      backgroundColor: brand.line,
+    },
+    pendingRow: {
+      paddingHorizontal: theme.spacing.base,
+      paddingVertical: theme.spacing.md,
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: brand.line,
+    },
+    pendingText: {
+      color: brand.goldInk,
+      fontFamily: theme.fontFamily.regular,
+    },
+    hint: {
+      marginTop: theme.spacing.sm,
+      color: brand.inkSoft,
+      fontFamily: theme.fontFamily.regular,
+    },
+    history: {
+      marginTop: theme.spacing.xl,
+    },
+    empty: {
+      padding: theme.spacing.base,
+      color: brand.inkSoft,
+      fontSize: 14,
+      lineHeight: 20,
+    },
+  });
+  return { styles };
+});

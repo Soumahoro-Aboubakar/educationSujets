@@ -1,6 +1,8 @@
+import Pressable from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorMessage } from '../utils/userMessages';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, BackHandler, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, BackHandler, FlatList, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,15 +14,15 @@ import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
 import ListRow from '../components/ui/ListRow';
 import StateView from '../components/ui/StateView';
 import { SkeletonRows } from '../components/ui/Skeleton';
-import theme from '../theme/tokens';
-import { fetchPublishedMatieres, fetchPublishedNoeuds } from '../services/catalog';
 
-const { brand } = theme;
+import { fetchPublishedMatieres, fetchPublishedNoeuds } from '../services/catalog';
 
 const labelOf = (item) => item?.nom || item?.name || '';
 const MATTER_LEVEL = { libelleSingulier: 'Matière', libellePluriel: 'Matières' };
 
 const DynamicCatalogScreen = ({ navigation, route }) => {
+  const { theme, brand } = useTheme();
+  const { styles } = useStyles();
   const organisme = route.params?.organisme || null;
   const parcoursType = route.params?.parcoursType || null;
   const levels = organisme?.structure?.niveaux || [];
@@ -282,8 +284,10 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
 };
 
 // Segment du fil d'Ariane : appuyer dessus remonte directement à ce niveau.
-const TrailItem = ({ label, first, current, onPress }) => (
-  <View style={styles.trailItem}>
+const TrailItem = ({ label, first, current, onPress }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
+  return (<View style={styles.trailItem}>
     {!first ? <ChevronRight size={13} color={brand.onInkSoft} strokeWidth={2} /> : null}
     <Pressable
       accessibilityRole="button"
@@ -296,68 +300,71 @@ const TrailItem = ({ label, first, current, onPress }) => (
         {label}
       </Text>
     </Pressable>
-  </View>
-);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  body: {
-    flex: 1,
-  },
-  steps: {
-    flexDirection: 'row',
-    gap: 4,
-    marginTop: theme.spacing.base,
-  },
-  step: {
-    flex: 1,
-    height: 3,
-    borderRadius: 2,
-    backgroundColor: 'rgba(255,255,255,0.14)',
-  },
-  stepDone: {
-    backgroundColor: brand.onInkAccent,
-  },
-  trail: {
-    marginTop: theme.spacing.md,
-    marginHorizontal: -theme.layout.gutter,
-  },
-  trailContent: {
-    paddingHorizontal: theme.layout.gutter,
-    alignItems: 'center',
-  },
-  trailItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    marginRight: 4,
-  },
-  trailLabel: {
-    maxWidth: 180,
-    color: brand.onInkSoft,
-    fontSize: 13,
-  },
-  trailLabelCurrent: {
-    color: brand.onInk,
-  },
-  list: {
-    flexGrow: 1,
-  },
-  listEmpty: {
-    flexGrow: 1,
-  },
-  count: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.sm,
-    paddingBottom: theme.spacing.md,
-    color: brand.ink,
-  },
-  footerLoader: {
-    paddingVertical: theme.spacing.xl,
-  },
-});
+  </View>);
+};
 
 export default DynamicCatalogScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    body: {
+      flex: 1,
+    },
+    steps: {
+      flexDirection: 'row',
+      gap: 4,
+      marginTop: theme.spacing.base,
+    },
+    step: {
+      flex: 1,
+      height: 3,
+      borderRadius: 2,
+      backgroundColor: 'rgba(255,255,255,0.14)',
+    },
+    stepDone: {
+      backgroundColor: brand.onInkAccent,
+    },
+    trail: {
+      marginTop: theme.spacing.md,
+      marginHorizontal: -theme.layout.gutter,
+    },
+    trailContent: {
+      paddingHorizontal: theme.layout.gutter,
+      alignItems: 'center',
+    },
+    trailItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      marginRight: 4,
+    },
+    trailLabel: {
+      maxWidth: 180,
+      color: brand.onInkSoft,
+      fontSize: 13,
+    },
+    trailLabelCurrent: {
+      color: brand.onInk,
+    },
+    list: {
+      flexGrow: 1,
+    },
+    listEmpty: {
+      flexGrow: 1,
+    },
+    count: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.sm,
+      paddingBottom: theme.spacing.md,
+      color: brand.ink,
+    },
+    footerLoader: {
+      paddingVertical: theme.spacing.xl,
+    },
+  });
+  return { styles };
+});

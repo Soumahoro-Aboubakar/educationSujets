@@ -1,3 +1,8 @@
+import useAsyncAction from '../hooks/useAsyncAction';
+import ProgressBar from '../components/ui/ProgressBar';
+import { SkeletonRows } from '../components/ui/Skeleton';
+import { TouchableOpacity } from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { createUserError, getErrorAlert, getErrorMessage } from '../utils/userMessages';
 import React, { useState, useContext, useEffect, useMemo, useRef } from 'react';
 import {
@@ -5,7 +10,6 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  TouchableOpacity,
   Modal,
   Platform,
   ActivityIndicator,
@@ -30,7 +34,7 @@ import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
 import useMetadataOptions from '../hooks/useMetadataOptions';
 import useDrafts from '../hooks/useDrafts';
-import theme from '../theme/tokens';
+
 import { generatePdfFromImages, applyWatermarkToExistingPdf, cleanTempDirectory, MAX_IMPORTED_PDF_SIZE_BYTES } from '../services/pdfService';
 import { uploadDocument, updateDocumentMetadata, validateDocumentStatus, getDownloadUrl } from '../services/documents';
 import ImageEditorModal from '../components/documents/ImageEditorModal';
@@ -53,6 +57,10 @@ const isPdfAsset = (asset) => {
 const titleFromFileName = (name) => (name || '').replace(/\.pdf$/i, '').trim();
 
 const UploadScreen = ({ navigation, route }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
+  const [runSave, savePending] = useAsyncAction();
+  const [runFileTask, fileTaskPending] = useAsyncAction();
   const { user } = useContext(AuthContext);
   const { isAdmin, isAuthenticated } = useContext(AuthContext);
   const { options, loading: metadataLoading, createOption } = useMetadataOptions();
@@ -95,6 +103,8 @@ const UploadScreen = ({ navigation, route }) => {
   // UI state
   const [step, setStep] = useState('choose'); // 'choose' | 'preview' | 'metadata'
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(null);
+  const [pdfProgress, setPdfProgress] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showOnlyRequiredFields, setShowOnlyRequiredFields] = useState(true);
   const [errors, setErrors] = useState({});
@@ -163,7 +173,7 @@ const UploadScreen = ({ navigation, route }) => {
 
     if (!pdfLocalUri) return;
 
-    Linking.openURL(pdfLocalUri).catch(() => {
+    await Linking.openURL(pdfLocalUri).catch(() => {
       Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
     });
   };
@@ -233,7 +243,7 @@ const UploadScreen = ({ navigation, route }) => {
   // PDF Generation & Processing
   // ─────────────────────────────────────────────────────────────
 
-  const pickImage = async () => {
+  const pickImage = () => runFileTask(async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsMultipleSelection: true,
@@ -244,7 +254,7 @@ const UploadScreen = ({ navigation, route }) => {
       const newImages = result.assets.map(asset => asset.uri);
       setImages((prev) => [...prev, ...newImages]);
     }
-  };
+  });
   /*
     const pickDocument = async () => {
       let result = await DocumentPicker.getDocumentAsync({
@@ -257,7 +267,7 @@ const UploadScreen = ({ navigation, route }) => {
       }
     }; */
 
-  const pickDocument = async () => {
+  const pickDocument = () => runFileTask(async () => {
     if (isProcessing || batchRunningRef.current) return;
 
     let result;
@@ -315,7 +325,8 @@ const UploadScreen = ({ navigation, route }) => {
       const fileUri = files[0].uri;
       if (isAndroid) {
         setIsProcessing(true);
-        setTimeout(() => processExistingPDF(fileUri), 500);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        await processExistingPDF(fileUri);
       } else {
         await processExistingPDF(fileUri);
       }
@@ -337,7 +348,7 @@ const UploadScreen = ({ navigation, route }) => {
       documentId: null,
     })));
     setStep('metadata');
-  };
+  });
 
   /*
     const pickDocument = async () => {
@@ -347,7 +358,6 @@ const UploadScreen = ({ navigation, route }) => {
     });
     if (!result.canceled) {
       const file = result.assets[0];
-  
       // Vérification précoce côté UI : évite même de lancer le traitement
       // si le fichier est visiblement trop lourd. `applyWatermarkToExistingPdf`
       // refait aussi le contrôle en interne (défense en profondeur), mais
@@ -362,7 +372,6 @@ const UploadScreen = ({ navigation, route }) => {
         );
         return;
       }
-  
       await processExistingPDF(file.uri);
     }
   };
@@ -384,16 +393,18 @@ const UploadScreen = ({ navigation, route }) => {
       Alert.alert(...getErrorAlert(e, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
+      setPdfProgress(null);
     }
   };
   const removeImage = (index) => {
     setImages(images.filter((_, i) => i !== index));
   };
 
-  const generatePDF = async () => {
+  const generatePDF = () => runFileTask(async () => {
     setIsProcessing(true);
     try {
-      const result = await generatePdfFromImages(images);
+      setPdfProgress(0);
+      const result = await generatePdfFromImages(images, (value) => setPdfProgress(value / 100));
       setPdfFile(result);
       setPdfLocalUri(result.uri);
       setPdfIntentUri(await getIntentUri(result.uri));
@@ -405,8 +416,9 @@ const UploadScreen = ({ navigation, route }) => {
       Alert.alert(...getErrorAlert(e, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
+      setPdfProgress(null);
     }
-  };
+  });
   /*
     const processExistingPDF = async (fileUri) => {
       setIsProcessing(true);
@@ -422,6 +434,7 @@ const UploadScreen = ({ navigation, route }) => {
         Alert.alert(...getErrorAlert(e, 'pdf', 'vous'));
       } finally {
         setIsProcessing(false);
+      setPdfProgress(null);
       }
     };
   */
@@ -516,7 +529,7 @@ const UploadScreen = ({ navigation, route }) => {
   // Envoi séquentiel : le PDF suivant n'est traité qu'une fois le précédent
   // entièrement terminé (filigrane → envoi → publication). Un échec est
   // enregistré sur le fichier concerné sans interrompre les suivants.
-  const handleBatchUpload = async (publish = true) => {
+  const handleBatchUpload = (publish = true) => runSave(async () => {
     if (batchRunningRef.current) return;
     if (!validateForm(!publish)) return;
 
@@ -525,7 +538,7 @@ const UploadScreen = ({ navigation, route }) => {
 
     batchRunningRef.current = true;
     setBatchRunning(true);
-    queue.forEach((file) => updateBatchFile(file.id, { status: 'pending', error: null }));
+    queue.forEach((file) => updateBatchFile(file.id, { status: 'pending', error: null, uploadProgress: null }));
 
     let successCount = 0;
     const failures = [];
@@ -546,7 +559,8 @@ const UploadScreen = ({ navigation, route }) => {
 
           updateBatchFile(file.id, { status: 'uploading' });
           const uploadResult = await uploadDocument(
-            buildUploadFormData(processed, file.title.trim(), publish)
+            buildUploadFormData(processed, file.title.trim(), publish),
+            (value) => updateBatchFile(file.id, { uploadProgress: value })
           );
           documentId = getUploadedDocumentId(uploadResult);
           if (documentId) updateBatchFile(file.id, { documentId });
@@ -598,7 +612,7 @@ const UploadScreen = ({ navigation, route }) => {
       successCount > 0 ? 'Envoi partiellement terminé' : "Échec de l'envoi",
       `${successCount} réussi(s), ${failures.length} échec(s).\n\n${failures.join('\n')}\n\nCorrigez si besoin puis relancez : seuls les fichiers en échec seront renvoyés.`
     );
-  };
+  });
 
   const removeBatchFile = (id) => {
     if (batchRunningRef.current) return;
@@ -621,7 +635,7 @@ const UploadScreen = ({ navigation, route }) => {
     setStep('choose');
   };
 
-  const handleUpload = async (publish = true) => {
+  const handleUpload = (publish = true) => runSave(async () => {
     if (uploading) return;
     if (!isDraftMode && !pdfFile?.uri) {
       Alert.alert('PDF requis', 'Ajoutez ou générez un PDF avant de continuer.');
@@ -629,6 +643,7 @@ const UploadScreen = ({ navigation, route }) => {
     }
     if (!validateForm(!publish)) return;
 
+    setUploadProgress(null);
     setUploading(true);
     let createdDocumentId = null;
     try {
@@ -661,7 +676,7 @@ const UploadScreen = ({ navigation, route }) => {
         );
       } else {
         // New document upload
-        const uploadResult = await uploadDocument(buildUploadFormData(pdfFile, title, publish));
+        const uploadResult = await uploadDocument(buildUploadFormData(pdfFile, title, publish), setUploadProgress);
 
         if (publish) {
           createdDocumentId = getUploadedDocumentId(uploadResult);
@@ -701,8 +716,9 @@ const UploadScreen = ({ navigation, route }) => {
       }
     } finally {
       setUploading(false);
+      setUploadProgress(null);
     }
-  };
+  });
 
   const resetForm = () => {
     setBatchFiles([]);
@@ -737,6 +753,7 @@ const UploadScreen = ({ navigation, route }) => {
       <View style={styles.actionsContainer}>
         <TouchableOpacity
           style={styles.actionCard}
+          disabled={fileTaskPending || isProcessing}
           onPress={pickImage}
           activeOpacity={0.7}
         >
@@ -750,7 +767,7 @@ const UploadScreen = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.actionCard}
           onPress={pickDocument}
-          disabled={isProcessing}
+          disabled={fileTaskPending || isProcessing}
           activeOpacity={0.7}
         >
           <View style={styles.actionIconContainer}>
@@ -765,6 +782,10 @@ const UploadScreen = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
 
+        {isProcessing && pdfProgress !== null ? <View accessibilityLiveRegion="polite" style={{ gap: 8 }}>
+          <ProgressBar progress={pdfProgress} />
+          <Text variant="caption" color={theme.colors.textSecondary}>{`Création du PDF… ${Math.round(pdfProgress * 100)} %`}</Text>
+        </View> : null}
       {images.length > 0 && (
         <Card style={styles.imagesPreviewCard}>
           <View style={styles.previewHeader}>
@@ -863,7 +884,7 @@ const UploadScreen = ({ navigation, route }) => {
           onChangeText={setDescription}
           multiline
           numberOfLines={4}
-          style={{ height: 100 }}
+          style={{ minHeight: 100 }}
         />
 
         <CorrectionIncludedSwitch value={correctionIncluded} onValueChange={setCorrectionIncluded} disabled={busy} />
@@ -916,6 +937,10 @@ const UploadScreen = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
 
+      {uploading && uploadProgress !== null ? <View accessibilityLiveRegion="polite" style={{ gap: 8 }}>
+        <ProgressBar progress={uploadProgress} />
+        <Text variant="caption" color={theme.colors.textSecondary}>{uploadProgress < 1 ? `Envoi du PDF… ${Math.round(uploadProgress * 100)} %` : 'Envoi terminé · finalisation…'}</Text>
+      </View> : null}
       {/* Action Buttons */}
       <View style={styles.actions}>
         <Button
@@ -946,7 +971,7 @@ const UploadScreen = ({ navigation, route }) => {
     </ScrollView>
   );
 
-  const busy = uploading || batchRunning;
+  const busy = uploading || batchRunning || savePending;
   const pendingBatchCount = batchFiles.filter((file) => file.status !== 'success').length;
   const hasBatchFailures = batchFiles.some((file) => file.status === 'error');
 
@@ -969,14 +994,7 @@ const UploadScreen = ({ navigation, route }) => {
 
         {(batchRunning || progressCount > 0) && (
           <View style={styles.batchProgress}>
-            <View style={styles.progressTrack}>
-              <View
-                style={[
-                  styles.progressFill,
-                  { width: `${Math.round((progressCount / batchFiles.length) * 100)}%` },
-                ]}
-              />
-            </View>
+            <ProgressBar progress={progressCount / Math.max(1, batchFiles.length)} />
             <Text variant="caption" color={theme.colors.textSecondary}>
               {batchRunning && currentFile
                 ? `Fichier ${batchProgress.current} sur ${batchProgress.total} · ${currentFile.name}`
@@ -1005,6 +1023,7 @@ const UploadScreen = ({ navigation, route }) => {
                   <Text variant="bodyMedium" numberOfLines={1}>{file.name}</Text>
                   <Text variant="caption" color={statusColor}>
                     {BATCH_STATUS_LABELS[file.status]}
+                    {file.status === 'uploading' && file.uploadProgress !== null && file.uploadProgress !== undefined ? ` · ${Math.round(file.uploadProgress * 100)} %` : ''}
                     {typeof file.size === 'number' ? ` · ${(file.size / (1024 * 1024)).toFixed(1)} Mo` : ''}
                   </Text>
                 </View>
@@ -1018,6 +1037,7 @@ const UploadScreen = ({ navigation, route }) => {
                   </TouchableOpacity>
                 )}
               </View>
+              {file.status === 'uploading' && file.uploadProgress !== null && file.uploadProgress !== undefined ? <ProgressBar progress={file.uploadProgress} /> : null}
               <FormInput
                 placeholder="Titre du document"
                 value={file.title}
@@ -1044,7 +1064,7 @@ const UploadScreen = ({ navigation, route }) => {
   if (metadataLoading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={theme.colors.primary} />
+        <SkeletonRows count={4} />
       </View>
     );
   }
@@ -1126,189 +1146,194 @@ const UploadScreen = ({ navigation, route }) => {
     ));
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.background,
-  },
-  stepContent: {
-    paddingHorizontal: 16,
-    paddingVertical: 24,
-    paddingBottom: 40,
-  },
-  stepHeader: {
-    marginBottom: 32,
-  },
-  stepTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 8,
-  },
-  actionsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 12,
-    marginBottom: 24,
-  },
-  actionCard: {
-    flex: 1,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 16,
-    padding: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1.5,
-    borderColor: theme.colors.border,
-  },
-  actionIconContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: 12,
-    backgroundColor: theme.colors.primaryWash,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  actionTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    marginBottom: 4,
-    textAlign: 'center',
-  },
-  imagesPreviewCard: {
-    padding: 16,
-  },
-  previewHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  imageScroll: {
-    marginHorizontal: -4,
-    marginBottom: 12,
-  },
-  imageWrapper: {
-    marginHorizontal: 4,
-    position: 'relative',
-  },
-  previewImage: {
-    width: 80,
-    height: 110,
-    borderRadius: 8,
-    backgroundColor: theme.colors.surfaceRaised,
-  },
-  removeImageButton: {
-    position: 'absolute',
-    top: -6,
-    right: -6,
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: theme.colors.error,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  generateButton: {
-    marginTop: 12,
-  },
-  pdfCard: {
-    padding: 16,
-    marginBottom: 24,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  pdfCardHeader: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  pdfCardInfo: {
-    flex: 1,
-  },
-  previewButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-    backgroundColor: theme.colors.primaryWash,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  batchCard: {
-    padding: 16,
-    marginBottom: 24,
-  },
-  batchProgress: {
-    gap: 6,
-    marginBottom: 12,
-  },
-  progressTrack: {
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: theme.colors.surfaceRaised,
-    overflow: 'hidden',
-  },
-  progressFill: {
-    height: '100%',
-    borderRadius: 3,
-    backgroundColor: theme.colors.primary,
-  },
-  batchItem: {
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.border,
-    gap: 8,
-  },
-  batchItemHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  batchError: {
-    marginTop: 2,
-  },
-  formSection: {
-    gap: 16,
-    marginBottom: 24,
-  },
-  toggleMoreFields: {
-    paddingVertical: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  actions: {
-    gap: 8,
-  },
-  actionButton: {
-    height: 48,
-  },
-  previewModal: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  previewModalHeader: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
-  },
-  previewPlaceholder: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
 export default UploadScreen;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.colors.background,
+    },
+    stepContent: {
+      paddingHorizontal: 16,
+      paddingVertical: 24,
+      paddingBottom: 40,
+    },
+    stepHeader: {
+      marginBottom: 32,
+    },
+    stepTitle: {
+      fontSize: 28,
+      fontWeight: '700',
+      marginBottom: 8,
+    },
+    actionsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      gap: 12,
+      marginBottom: 24,
+    },
+    actionCard: {
+      flex: 1,
+      backgroundColor: theme.colors.surface,
+      borderRadius: 16,
+      padding: 16,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderWidth: 1.5,
+      borderColor: theme.colors.border,
+    },
+    actionIconContainer: {
+      width: 56,
+      minHeight: 56,
+      paddingVertical: 12,
+      borderRadius: 12,
+      backgroundColor: theme.colors.primaryWash,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 12,
+    },
+    actionTitle: {
+      fontSize: 14,
+      fontWeight: '600',
+      marginBottom: 4,
+      textAlign: 'center',
+    },
+    imagesPreviewCard: {
+      padding: 16,
+    },
+    previewHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 12,
+    },
+    imageScroll: {
+      marginHorizontal: -4,
+      marginBottom: 12,
+    },
+    imageWrapper: {
+      marginHorizontal: 4,
+      position: 'relative',
+    },
+    previewImage: {
+      width: 80,
+      height: 110,
+      borderRadius: 8,
+      backgroundColor: theme.colors.surfaceRaised,
+    },
+    removeImageButton: {
+      position: 'absolute',
+      top: -6,
+      right: -6,
+      width: 24,
+      height: 24,
+      borderRadius: 12,
+      backgroundColor: theme.colors.errorSolid,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    generateButton: {
+      marginTop: 12,
+    },
+    pdfCard: {
+      padding: 16,
+      marginBottom: 24,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    pdfCardHeader: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 12,
+    },
+    pdfCardInfo: {
+      flex: 1,
+    },
+    previewButton: {
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 8,
+      backgroundColor: theme.colors.primaryWash,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 6,
+    },
+    batchCard: {
+      padding: 16,
+      marginBottom: 24,
+    },
+    batchProgress: {
+      gap: 6,
+      marginBottom: 12,
+    },
+    progressTrack: {
+      height: 6,
+      borderRadius: 3,
+      backgroundColor: theme.colors.surfaceRaised,
+      overflow: 'hidden',
+    },
+    progressFill: {
+      height: '100%',
+      borderRadius: 3,
+      backgroundColor: theme.brand.night,
+    },
+    batchItem: {
+      paddingVertical: 12,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.border,
+      gap: 8,
+    },
+    batchItemHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 12,
+    },
+    batchError: {
+      marginTop: 2,
+    },
+    formSection: {
+      gap: 16,
+      marginBottom: 24,
+    },
+    toggleMoreFields: {
+      paddingVertical: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    actions: {
+      gap: 8,
+    },
+    actionButton: {
+      minHeight: 48,
+      paddingVertical: 10,
+    },
+    previewModal: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    previewModalHeader: {
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.border,
+    },
+    previewPlaceholder: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+  return { styles };
+});

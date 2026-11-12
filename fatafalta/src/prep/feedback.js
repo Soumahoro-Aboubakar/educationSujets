@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AccessibilityInfo } from 'react-native';
+import { useReducedMotion } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 
 /**
@@ -26,7 +27,8 @@ export const haptic = {
  * ne lit le réglage qu'au démarrage).
  */
 export const useReduceMotion = () => {
-  const [reduce, setReduce] = useState(false);
+  const initiallyReduced = useReducedMotion();
+  const [reduce, setReduce] = useState(initiallyReduced);
   useEffect(() => {
     let mounted = true;
     AccessibilityInfo.isReduceMotionEnabled?.().then((value) => { if (mounted) setReduce(Boolean(value)); }).catch(() => {});

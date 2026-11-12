@@ -1,3 +1,4 @@
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -11,13 +12,12 @@ import ListRow from '../components/ui/ListRow';
 import StateView from '../components/ui/StateView';
 import { SkeletonRows } from '../components/ui/Skeleton';
 import { fetchParcoursTypes } from '../services/catalog';
-import theme from '../theme/tokens';
-
-const { brand } = theme;
 
 const labelOf = (item) => item?.nom || item?.name || '';
 
 const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const organisme = route.params?.organisme || null;
   const [types, setTypes] = useState(route.params?.parcoursTypes || []);
   const [loading, setLoading] = useState(!route.params?.parcoursTypes);
@@ -113,24 +113,27 @@ const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  body: {
-    flex: 1,
-  },
-  list: {
-    flexGrow: 1,
-    paddingTop: theme.spacing.xs,
-  },
-  count: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.sm,
-    paddingBottom: theme.spacing.md,
-    color: brand.ink,
-  },
-});
-
 export default ParcoursTypeSelectionScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    body: {
+      flex: 1,
+    },
+    list: {
+      flexGrow: 1,
+      paddingTop: theme.spacing.xs,
+    },
+    count: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.sm,
+      paddingBottom: theme.spacing.md,
+      color: brand.ink,
+    },
+  });
+  return { styles };
+});

@@ -1,9 +1,9 @@
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { FileText } from 'lucide-react-native';
 import Text from './Text';
 import Button from './Button';
-import theme from '../../theme/tokens';
 
 /**
  * Empty state component
@@ -15,17 +15,19 @@ const EmptyState = ({
   action,
   style,
 }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const renderIcon = () => {
     if (!Icon) {
-      return <FileText size={30} color={theme.colors.primary} strokeWidth={1.6} />;
+      return <FileText size={30} color={theme.colors.primary} strokeWidth={2} />;
     }
     if (React.isValidElement(Icon)) {
       return Icon;
     }
     if (typeof Icon === 'function' || Icon?.$$typeof) {
-      return <Icon size={30} color={theme.colors.primary} strokeWidth={1.6} />;
+      return <Icon size={30} color={theme.colors.primary} strokeWidth={2} />;
     }
-    return <FileText size={30} color={theme.colors.primary} strokeWidth={1.6} />;
+    return <FileText size={30} color={theme.colors.primary} strokeWidth={2} />;
   };
 
   const renderAction = () => {
@@ -64,32 +66,35 @@ const EmptyState = ({
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.spacing['2xl'],
-  },
-  iconContainer: {
-    width: 84,
-    height: 84,
-    borderRadius: theme.radius.full,
-    backgroundColor: theme.colors.primaryWash,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: theme.spacing.lg,
-  },
-  title: {
-    marginBottom: theme.spacing.sm,
-  },
-  description: {
-    marginBottom: theme.spacing.xl,
-    maxWidth: 280,
-  },
-  actionContainer: {
-    marginTop: theme.spacing.md,
-  },
-});
-
 export default EmptyState;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: theme.spacing['2xl'],
+    },
+    iconContainer: {
+      width: 84,
+      height: 84,
+      borderRadius: theme.radius.full,
+      backgroundColor: theme.colors.primaryWash,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: theme.spacing.lg,
+    },
+    title: {
+      marginBottom: theme.spacing.sm,
+    },
+    description: {
+      marginBottom: theme.spacing.xl,
+      maxWidth: 280,
+    },
+    actionContainer: {
+      marginTop: theme.spacing.md,
+    },
+  });
+  return { styles };
+});

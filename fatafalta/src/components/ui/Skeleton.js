@@ -1,13 +1,16 @@
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Animated, {
+  cancelAnimation,
   useSharedValue,
   useAnimatedStyle,
   withRepeat,
   withTiming,
   withSequence,
 } from 'react-native-reanimated';
-import theme from '../../theme/tokens';
+
+import { useReduceMotion } from '../../prep/feedback';
 
 /**
  * Animated Skeleton loader
@@ -19,12 +22,17 @@ import theme from '../../theme/tokens';
 const Skeleton = ({
   width = '100%',
   height = 20,
-  borderRadius = theme.radius.sm,
+  borderRadius: borderRadiusProp,
   style,
 }) => {
-  const opacity = useSharedValue(0.4);
+  const { theme } = useTheme();
+  const { styles } = useStyles();
+  const borderRadius = borderRadiusProp === undefined ? theme.radius.sm : borderRadiusProp;
+  const reduce = useReduceMotion();
+  const opacity = useSharedValue(reduce ? 1 : 0.4);
 
   useEffect(() => {
+    if (reduce) { cancelAnimation(opacity); opacity.value = 1; return undefined; }
     opacity.value = withRepeat(
       withSequence(
         withTiming(1, { duration: 800 }),
@@ -33,7 +41,8 @@ const Skeleton = ({
       -1,
       true
     );
-  }, []);
+    return () => cancelAnimation(opacity);
+  }, [reduce, opacity]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -58,8 +67,9 @@ const Skeleton = ({
 const ROW_WIDTHS = ['72%', '58%', '80%', '64%', '52%', '70%'];
 
 /** Grille de cartes en chargement (organismes). */
-export const SkeletonGrid = ({ count = 6, columns = 2 }) => (
-  <View accessibilityLabel="Chargement" accessible style={styles.grid}>
+export const SkeletonGrid = ({ count = 6, columns = 2 }) => {
+  const { styles } = useStyles();
+  return (<View accessibilityLabel="Chargement" accessible style={styles.grid}>
     {Array.from({ length: count }, (_, index) => (
       <View key={index} style={[styles.gridCell, { width: `${100 / columns}%` }]}>
         <View style={styles.gridCard}>
@@ -69,11 +79,12 @@ export const SkeletonGrid = ({ count = 6, columns = 2 }) => (
         </View>
       </View>
     ))}
-  </View>
-);
+  </View>);
+};
 
-export const SkeletonRows = ({ count = 5, withMeta = true }) => (
-  <View accessibilityLabel="Chargement" accessible>
+export const SkeletonRows = ({ count = 5, withMeta = true }) => {
+  const { styles } = useStyles();
+  return (<View accessibilityLabel="Chargement" accessibilityState={{ busy: true }} accessible style={{ width: '100%' }}>
     {ROW_WIDTHS.slice(0, count).map((width, index) => (
       <View key={index} style={styles.row}>
         <View style={styles.rowContent}>
@@ -82,52 +93,55 @@ export const SkeletonRows = ({ count = 5, withMeta = true }) => (
         </View>
       </View>
     ))}
-  </View>
-);
-
-const styles = StyleSheet.create({
-  skeleton: {
-    backgroundColor: theme.colors.skeleton,
-    overflow: 'hidden',
-  },
-  brandTone: {
-    backgroundColor: theme.brand.skeleton,
-  },
-  row: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingBottom: 10,
-  },
-  rowContent: {
-    minHeight: 72,
-    justifyContent: 'center',
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderRadius: 18,
-    backgroundColor: theme.brand.sheet,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.brand.line,
-  },
-  meta: {
-    marginTop: 8,
-  },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingHorizontal: theme.layout.gutter - 6,
-    paddingTop: theme.spacing.base,
-  },
-  gridCell: {
-    padding: 6,
-  },
-  gridCard: {
-    height: 176,
-    alignItems: 'center',
-    paddingTop: 18,
-    borderRadius: 20,
-    backgroundColor: theme.brand.sheet,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.brand.line,
-  },
-});
+  </View>);
+};
 
 export default Skeleton;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    skeleton: {
+      backgroundColor: theme.colors.skeleton,
+      overflow: 'hidden',
+    },
+    brandTone: {
+      backgroundColor: theme.brand.skeleton,
+    },
+    row: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingBottom: 10,
+    },
+    rowContent: {
+      minHeight: 72,
+      justifyContent: 'center',
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      borderRadius: 18,
+      backgroundColor: theme.brand.sheet,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: theme.brand.line,
+    },
+    meta: {
+      marginTop: 8,
+    },
+    grid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      paddingHorizontal: theme.layout.gutter - 6,
+      paddingTop: theme.spacing.base,
+    },
+    gridCell: {
+      padding: 6,
+    },
+    gridCard: {
+      height: 176,
+      alignItems: 'center',
+      paddingTop: 18,
+      borderRadius: 20,
+      backgroundColor: theme.brand.sheet,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: theme.brand.line,
+    },
+  });
+  return { styles };
+});

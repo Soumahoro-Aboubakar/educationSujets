@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from 'react';
-import { useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle, useReducedMotion, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import core from '../shared/prepCore';
 import { brand, colors } from '../theme';
+import { useReduceMotion } from '../feedback';
 
 /**
  * Contrat commun des Renderers (§ 11.1) :
@@ -27,15 +28,18 @@ export const useShuffled = (items, seed, enabled = true) => useMemo(
 
 /** Secousse horizontale (3 oscillations, 300 ms) déclenchée quand `trigger` passe à vrai. */
 export const useShake = (trigger) => {
+  const reduce = useReduceMotion();
+  const initiallyReduced = useReducedMotion();
   const x = useSharedValue(0);
   useEffect(() => {
+    if (reduce || initiallyReduced) { x.value = 0; return; }
     if (!trigger) return;
     x.value = withSequence(
       withTiming(-7, { duration: 50 }), withTiming(7, { duration: 50 }),
       withTiming(-5, { duration: 50 }), withTiming(5, { duration: 50 }),
       withTiming(-2, { duration: 50 }), withTiming(0, { duration: 50 }),
     );
-  }, [trigger, x]);
+  }, [trigger, reduce, initiallyReduced, x]);
   return useAnimatedStyle(() => ({ transform: [{ translateX: x.value }] }));
 };
 

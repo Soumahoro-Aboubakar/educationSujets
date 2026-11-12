@@ -1,6 +1,8 @@
+import { SkeletonRows } from '../components/ui/Skeleton';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorAlert } from '../utils/userMessages';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Settings2 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
@@ -11,7 +13,7 @@ import MetadataSelect from '../components/ui/MetadataSelect';
 import TaxonomyPathFields from '../components/catalog/TaxonomyPathFields';
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
-import theme from '../theme/tokens';
+
 import { createInstitution, fetchInstitutions, updateInstitution } from '../services/institutions';
 
 const parseStructure = (value) => value
@@ -20,6 +22,8 @@ const parseStructure = (value) => value
   .filter(Boolean);
 
 const CatalogManagementScreen = () => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const { isAdmin } = useContext(AuthContext);
   const [institutions, setInstitutions] = useState([]);
   const [institutionId, setInstitutionId] = useState(null);
@@ -112,8 +116,8 @@ const CatalogManagementScreen = () => {
     );
   }
 
-  if (loading) {
-    return <View style={styles.loading}><ActivityIndicator size="large" color={theme.colors.primary} /></View>;
+  if (loading && !institutions.length) {
+    return <View style={styles.loading}><SkeletonRows count={4} /></View>;
   }
 
   return (
@@ -168,15 +172,18 @@ const CatalogManagementScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.background },
-  content: { padding: theme.spacing.lg, paddingBottom: theme.spacing['4xl'], gap: theme.spacing.lg },
-  loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.background },
-  heading: { flexDirection: 'row', gap: theme.spacing.md, alignItems: 'flex-start' },
-  headingCopy: { flex: 1 },
-  icon: { width: 46, height: 46, borderRadius: 14, backgroundColor: theme.colors.primary100, alignItems: 'center', justifyContent: 'center' },
-  card: { padding: theme.spacing.lg },
-  help: { marginBottom: theme.spacing.md, lineHeight: 18 },
-});
-
 export default CatalogManagementScreen;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame, flex: 1, backgroundColor: theme.colors.background },
+    content: { padding: theme.spacing.lg, paddingBottom: theme.spacing['4xl'], gap: theme.spacing.lg },
+    loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.background },
+    heading: { flexDirection: 'row', gap: theme.spacing.md, alignItems: 'flex-start' },
+    headingCopy: { flex: 1 },
+    icon: { width: 46, height: 46, borderRadius: 14, backgroundColor: theme.colors.primary100, alignItems: 'center', justifyContent: 'center' },
+    card: { padding: theme.spacing.lg },
+    help: { marginBottom: theme.spacing.md, lineHeight: 18 },
+  });
+  return { styles };
+});

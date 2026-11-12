@@ -50,8 +50,9 @@ export const getDownloadUrl = async (id) => {
  * @param {FormData} formData
  * @returns {Promise<Object>}
  */
-export const uploadDocument = async (formData) => {
+export const uploadDocument = async (formData, onProgress) => {
   const response = await api.post('/api/documents', formData, {
+    onUploadProgress: onProgress ? ({ loaded, total }) => { if (total > 0) onProgress(Math.min(1, loaded / total)); } : undefined,
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -65,8 +66,9 @@ export const uploadDocument = async (formData) => {
  * @param {FormData} formData
  * @returns {Promise<Object>}
  */
-export const uploadCorrectionDocument = async (documentId, formData) => {
+export const uploadCorrectionDocument = async (documentId, formData, onProgress) => {
   const response = await api.post(`/api/documents/${documentId}/correction`, formData, {
+    onUploadProgress: onProgress ? ({ loaded, total }) => { if (total > 0) onProgress(Math.min(1, loaded / total)); } : undefined,
     headers: {
       'Content-Type': 'multipart/form-data',
     },

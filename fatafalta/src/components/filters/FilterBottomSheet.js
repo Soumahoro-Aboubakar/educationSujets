@@ -1,12 +1,16 @@
+import { TouchableOpacity } from '../ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+
 import React, { useMemo, useCallback, useImperativeHandle, useRef, useState } from 'react';
-import { View, StyleSheet, TextInput, Modal, FlatList, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TextInput, Modal, FlatList, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { SlidersHorizontal, Building2, Layers, GraduationCap, Calendar, FolderOpen, Search } from 'lucide-react-native';
 import Text from '../ui/Text';
 import Button from '../ui/Button';
 import FilterSelect from './FilterSelect';
-import theme from '../../theme/tokens';
+import { useReduceMotion } from '../../prep/feedback';
+
 import { FILTER_DEFINITIONS } from '../../types/constants';
 import { X, Check } from 'lucide-react-native';
 
@@ -31,6 +35,11 @@ const FilterBottomSheet = React.forwardRef(({
   filterOptions,
   onApply, // (draftFilters) => void — appelé uniquement quand l'utilisateur valide
 }, ref) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
+  const { fontScale, height } = useWindowDimensions();
+  const flowFooter = fontScale >= 1.3 || height < 600;
+  const reduce = useReduceMotion();
   const snapPoints = useMemo(() => ['70%', '90%'], []);
   const [activeFilter, setActiveFilter] = React.useState(null);
   const [optionSearch, setOptionSearch] = useState('');
@@ -127,13 +136,16 @@ const FilterBottomSheet = React.forwardRef(({
     const isSelected = activeFilter && draftFilters[activeFilter.key] === item._id;
     return (
       <TouchableOpacity
+        accessibilityRole="radio"
+        accessibilityLabel={item.displayName || item.name}
+        accessibilityState={{ checked: Boolean(isSelected) }}
         style={[styles.optionItem, isSelected && styles.optionItemSelected]}
         onPress={() => {
           handleDraftChange(activeFilter.key, item._id);
           closeOptionModal();
         }}
       >
-        <Text variant="body" color={isSelected ? theme.colors.primary : theme.colors.textPrimary}>
+        <Text variant="body" style={{ flex: 1 }} color={isSelected ? theme.colors.primary : theme.colors.textPrimary}>
           {item.displayName || item.name}
         </Text>
         {isSelected && <Check size={20} color={theme.colors.primary} />}
@@ -182,12 +194,6 @@ const FilterBottomSheet = React.forwardRef(({
                   <SlidersHorizontal size={20} color={theme.colors.primary} />
                   <Text variant="h2" style={styles.title}>Filtres avancés</Text>
                 </View>
-                <Button
-                  variant="primary"
-                  title="Appliquer"
-                  onPress={handleApply}
-                  style={styles.clearButton}
-                />
               </View>
 
               <BottomSheetScrollView contentContainerStyle={styles.scrollContent}>
@@ -201,34 +207,19 @@ const FilterBottomSheet = React.forwardRef(({
                     onPress={() => handleSelectPress(def)}
                   />
                 ))}
+                {flowFooter ? <Button title={`Appliquer les filtres${changedCount ? ` (${changedCount})` : ''}`} icon={Check} onPress={handleApply} /> : null}
               </BottomSheetScrollView>
 
-              <View style={styles.footer}>
-                <TouchableOpacity
-                  activeOpacity={0.85}
-                  onPress={handleApply}
-                  style={styles.applyButton}
-                >
-                  <Check size={20} color="#fff" strokeWidth={2.5} />
-                  <Text variant="bodyMedium" color="#fff" style={styles.applyButtonText}>
-                    Appliquer les filtres
-                  </Text>
-                  {changedCount > 0 && (
-                    <View style={styles.applyBadge}>
-                      <Text variant="caption" color={theme.colors.primary} style={styles.applyBadgeText}>
-                        {changedCount}
-                      </Text>
-                    </View>
-                  )}
-                </TouchableOpacity>
-              </View>
+              {!flowFooter ? <View style={styles.footer}>
+                <Button title={`Appliquer les filtres${changedCount ? ` (${changedCount})` : ''}`} icon={Check} onPress={handleApply} />
+              </View> : null}
             </View>
           </BottomSheet>
 
           {/* Modal d'options pour le filtre actif */}
           <Modal
             visible={!!activeFilter}
-            animationType="slide"
+            animationType={reduce ? 'fade' : 'slide'}
             presentationStyle="pageSheet"
             onRequestClose={closeOptionModal}
           >
@@ -237,7 +228,7 @@ const FilterBottomSheet = React.forwardRef(({
                 <Text variant="h2" style={styles.modalTitle}>
                   {activeFilter ? activeFilter.label : ''}
                 </Text>
-                <TouchableOpacity onPress={closeOptionModal} style={styles.closeModalBtn}>
+                <TouchableOpacity onPress={closeOptionModal} accessibilityRole="button" accessibilityLabel="Fermer les options du filtre" style={styles.closeModalBtn}>
                   <X size={24} color={theme.colors.textPrimary} />
                 </TouchableOpacity>
               </View>
@@ -302,144 +293,117 @@ const FilterBottomSheet = React.forwardRef(({
   );
 });
 
-const styles = StyleSheet.create({
-  background: {
-    backgroundColor: theme.colors.surface,
-    borderTopLeftRadius: theme.radius['2xl'],
-    borderTopRightRadius: theme.radius['2xl'],
-  },
-  indicator: {
-    backgroundColor: theme.colors.border,
-    width: 40,
-  },
-  container: {
-    flex: 1,
-  },
-  sheet: {
-    zIndex: 9999,
-    elevation: 9999,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: theme.spacing.lg,
-    paddingVertical: theme.spacing.md,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-  },
-  headerTitleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.sm,
-  },
-  title: {
-    color: theme.colors.textPrimary,
-  },
-  clearButton: {
-    paddingHorizontal: theme.spacing.sm,
-    paddingVertical: theme.spacing.sm,
-  },
-  scrollContent: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing['4xl'],
-  },
-  footer: {
-    padding: theme.spacing.lg,
-    paddingBottom: theme.spacing['2xl'],
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.borderLight,
-    backgroundColor: theme.colors.surface,
-  },
-  applyButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: theme.spacing.sm,
-    width: '100%',
-    paddingVertical: 16,
-    borderRadius: theme.radius.lg,
-    backgroundColor: theme.colors.primary,
-    shadowColor: theme.colors.primary,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  applyButtonText: {
-    fontWeight: '700',
-    fontSize: 16,
-  },
-  applyBadge: {
-    backgroundColor: '#fff',
-    minWidth: 22,
-    height: 22,
-    borderRadius: 11,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 6,
-  },
-  applyBadgeText: {
-    fontWeight: '700',
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: theme.spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-    backgroundColor: theme.colors.surface,
-  },
-  modalTitle: {
-    color: theme.colors.textPrimary,
-  },
-  closeModalBtn: {
-    padding: theme.spacing.xs,
-  },
-  searchWrap: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.sm,
-    marginHorizontal: theme.spacing.lg,
-    marginTop: theme.spacing.md,
-    marginBottom: theme.spacing.xs,
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: 10,
-    borderRadius: theme.radius.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    backgroundColor: theme.colors.surface,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 15,
-    color: theme.colors.textPrimary,
-    padding: 0,
-  },
-  modalListContent: {
-    paddingBottom: theme.spacing['4xl'],
-  },
-  emptyState: {
-    padding: theme.spacing.xl,
-    alignItems: 'center',
-  },
-  optionItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: theme.spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-    backgroundColor: theme.colors.surface,
-  },
-  optionItemSelected: {
-    backgroundColor: theme.colors.primaryWash,
-  },
-});
-
 export default FilterBottomSheet;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    background: {
+      backgroundColor: theme.colors.surface,
+      borderTopLeftRadius: theme.radius['2xl'],
+      borderTopRightRadius: theme.radius['2xl'],
+    },
+    indicator: {
+      backgroundColor: theme.colors.border,
+      width: 40,
+    },
+    container: {
+      flex: 1,
+    },
+    sheet: {
+      ...theme.layout.readingFrame,
+      zIndex: 9999,
+      elevation: 9999,
+    },
+    header: {
+      flexDirection: 'row', flexWrap: 'wrap', gap: 10,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: theme.spacing.lg,
+      paddingVertical: theme.spacing.md,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+    },
+    headerTitleRow: {
+      flexShrink: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.sm,
+    },
+    title: {
+      flexShrink: 1,
+      color: theme.colors.textPrimary,
+    },
+    scrollContent: {
+      padding: theme.spacing.lg,
+      paddingBottom: theme.spacing['4xl'],
+    },
+    footer: {
+      padding: theme.spacing.lg,
+      paddingBottom: theme.spacing['2xl'],
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.borderLight,
+      backgroundColor: theme.colors.surface,
+    },
+    modalContainer: {
+      ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    modalHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: theme.spacing.lg,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+      backgroundColor: theme.colors.surface,
+    },
+    modalTitle: {
+      color: theme.colors.textPrimary,
+    },
+    closeModalBtn: {
+      minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center',
+      padding: theme.spacing.xs,
+    },
+    searchWrap: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.sm,
+      marginHorizontal: theme.spacing.lg,
+      marginTop: theme.spacing.md,
+      marginBottom: theme.spacing.xs,
+      paddingHorizontal: theme.spacing.md,
+      paddingVertical: 10,
+      borderRadius: theme.radius.lg,
+      borderWidth: 1,
+      borderColor: theme.colors.borderLight,
+      backgroundColor: theme.colors.surface,
+    },
+    searchInput: {
+      flex: 1,
+      fontSize: 15,
+      color: theme.colors.textPrimary,
+      padding: 0,
+    },
+    modalListContent: {
+      paddingBottom: theme.spacing['4xl'],
+    },
+    emptyState: {
+      padding: theme.spacing.xl,
+      alignItems: 'center',
+    },
+    optionItem: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: theme.spacing.lg,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+      backgroundColor: theme.colors.surface,
+    },
+    optionItemSelected: {
+      backgroundColor: theme.colors.primaryWash,
+    },
+  });
+  return { styles };
+});

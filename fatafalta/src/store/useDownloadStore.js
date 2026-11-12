@@ -52,7 +52,7 @@ const useDownloadStore = create((set, get) => ({
   /** @type {Object.<string, { document: Object, localUri: string, downloadedAt: string }>} */
   downloads: {},
 
-  /** @type {Object.<string, { progress: number, downloading: boolean }>} */
+  /** @type {Object.<string, { progress: number|null, downloading: boolean }>} */
   activeDownloads: {},
 
   /** Whether the store has been hydrated from disk */
@@ -117,7 +117,7 @@ const useDownloadStore = create((set, get) => ({
     set((state) => ({
       activeDownloads: {
         ...state.activeDownloads,
-        [documentId]: { progress: 0, downloading: true },
+        [documentId]: { progress: null, downloading: true },
       },
     }));
 
@@ -127,9 +127,10 @@ const useDownloadStore = create((set, get) => ({
         localUri,
         {},
         (downloadProgress) => {
-          const progress =
-            downloadProgress.totalBytesWritten /
-            downloadProgress.totalBytesExpectedToWrite;
+          const { totalBytesWritten, totalBytesExpectedToWrite } = downloadProgress;
+          const progress = totalBytesExpectedToWrite > 0 && Number.isFinite(totalBytesWritten)
+            ? Math.max(0, Math.min(1, totalBytesWritten / totalBytesExpectedToWrite))
+            : null;
 
           set((state) => ({
             activeDownloads: {
@@ -142,7 +143,7 @@ const useDownloadStore = create((set, get) => ({
 
       const result = await downloadResumable.downloadAsync();
 
-      if (result?.uri) {
+      if (result?.uri && result.status >= 200 && result.status < 300) {
         const newDownloads = {
           ...get().downloads,
           [documentId]: {

@@ -1,9 +1,11 @@
+import Pressable from '../../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, { Easing, FadeIn, FadeInDown, FadeOut } from 'react-native-reanimated';
 import { ChevronUp, Pause, Play } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
-import { brand, theme, type } from '../theme';
+import { type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
 
 /**
@@ -19,6 +21,8 @@ const clock = (s) => {
 };
 
 const VideoDock = ({ visible, playing, title, durationSec, getCurrentTime, onToggle, onBack, top = 10 }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
   const reduce = useReduceMotion();
   const [time, setTime] = useState(null);
 
@@ -61,17 +65,20 @@ const VideoDock = ({ visible, playing, title, durationSec, getCurrentTime, onTog
   );
 };
 
-const styles = StyleSheet.create({
-  dock: {
-    position: 'absolute', left: 16, right: 16, minHeight: 60, flexDirection: 'row', alignItems: 'center', gap: 12,
-    paddingLeft: 10, paddingRight: 8, paddingVertical: 8, borderRadius: 20, backgroundColor: brand.ink, ...theme.shadows.lg,
-  },
-  toggle: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paper },
-  text: { flex: 1, justifyContent: 'center', minHeight: 44 },
-  state: { color: brand.onInkSoft },
-  title: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold },
-  back: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
-  pressed: { transform: [{ scale: 0.96 }] },
-});
-
 export default VideoDock;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    dock: {
+      position: 'absolute', left: 16, right: 16, minHeight: 60, flexDirection: 'row', alignItems: 'center', gap: 12,
+      paddingLeft: 10, paddingRight: 8, paddingVertical: 8, borderRadius: 20, backgroundColor: brand.night, ...theme.shadows.lg,
+    },
+    toggle: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paper },
+    text: { flex: 1, justifyContent: 'center', minHeight: 44 },
+    state: { color: brand.onInkSoft },
+    title: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold },
+    back: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
+    pressed: { transform: [{ scale: 0.96 }] },
+  });
+  return { styles };
+});

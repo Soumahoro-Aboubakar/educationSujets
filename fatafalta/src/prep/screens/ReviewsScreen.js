@@ -1,16 +1,19 @@
-import React, { useMemo, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
-import Animated, { FadeInDown, LinearTransition, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Pressable from '../../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+import { useMemo, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ArrowLeft, ChevronRight, Play, RotateCcw } from 'lucide-react-native';
+import { ArrowLeft, Play, RotateCcw } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
 import { getExercise, getProgramme, programmeModules } from '../content';
 import usePrep, { todayKey, useProgress, useRights } from '../store';
-import { brand, colors, motion, subjectTint, theme, type } from '../theme';
+import { type } from '../theme';
 import { haptic } from '../feedback';
-import { GoldSwash, PaperStack, PrepButton, PressScale, Segmented } from '../ui/primitives';
+import { GoldSwash, PaperStack, PrepButton, PressScale } from '../ui/primitives';
 import { LinearGradient } from 'expo-linear-gradient';
+import { CopyMargin } from '../components/StudyPresentation';
+import { HomeChevron } from '../components/HomePresentation';
 import { ErrorNotebook } from '../ui/Illustrations';
 import BottomSheet from '../ui/BottomSheet';
 import { LockedSheet } from '../components/Sheets';
@@ -34,6 +37,8 @@ const describeAnswer = (ex, cle) => {
 
 /** E29 — Révisions du jour / Cahier d'erreurs, E30 — Fiche d'erreur. */
 const ReviewsScreen = ({ navigation, route }) => {
+  const { brand, subjectTint, colors, theme } = useTheme();
+  const { styles } = useStyles();
   const insets = useSafeAreaInsets();
   const programmeCode = route.params.programme;
   const programme = getProgramme(programmeCode);
@@ -72,62 +77,69 @@ const ReviewsScreen = ({ navigation, route }) => {
   return (
     <PaperStack header={(
       <View style={styles.stackHeader}>
-        <Pressable onPress={() => navigation.goBack()} accessibilityLabel="Retour" hitSlop={6} style={styles.roundOnInk}><ArrowLeft size={20} color="#FFF" /></Pressable>
+        <Pressable onPress={() => navigation.goBack()} accessibilityRole="button" accessibilityLabel="Retour" hitSlop={6} style={styles.roundOnInk}><ArrowLeft size={20} color={brand.onInk} /></Pressable>
         <View style={{ width: 44 }} />
       </View>
     )}>
-      <ScrollView contentContainerStyle={{ paddingTop: 24, paddingHorizontal: 20, paddingBottom: 130 }} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingTop: 24, paddingHorizontal: 24, paddingBottom: Math.max(insets.bottom, 20) }} showsVerticalScrollIndicator={false}>
         <Text variant="title" style={styles.ink} accessibilityRole="header">À réviser</Text>
         <GoldSwash width={96} style={{ marginTop: 2 }} />
-        <Segmented items={[{ key: 'jour', label: `Aujourd’hui (${due.total})` }, { key: 'cahier', label: `Cahier d’erreurs (${erreurs.length})` }]} value={tab} onChange={switchTab} style={{ marginVertical: 18 }} />
+        <View accessibilityRole="tablist" style={styles.tabs}>
+          {[['jour', `Aujourd’hui · ${due.total}`], ['cahier', `Cahier d’erreurs · ${erreurs.length}`]].map(([key, label]) => (
+            <PressScale key={key} accessibilityRole="tab" accessibilityState={{ selected: tab === key }} onPress={() => switchTab(key)} style={[styles.tab, tab === key && styles.tabOn]}>
+              <Text variant="bodyMedium" style={{ color: tab === key ? brand.burgundy : brand.inkSoft }}>{label}</Text>
+            </PressScale>
+          ))}
+        </View>
 
         {tab === 'jour' ? (
           due.total ? (
-            <Animated.View entering={FadeInDown.duration(260)} style={{ gap: 18 }}>
-              <PressScale onPress={() => start(due.codes)} style={styles.hero} accessibilityLabel={`Lancer ${due.codes.length} révisions`}>
-                <LinearGradient colors={[brand.burgundyBright, brand.burgundy, brand.burgundyDeep]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-                <View style={styles.play}><Play size={20} color={brand.burgundy} fill={brand.burgundy} style={{ marginLeft: 2 }} /></View>
-                <View style={{ flex: 1 }}>
-                  <Text variant="h2" style={styles.onInk}>{`${due.codes.length} question${due.codes.length > 1 ? 's' : ''}`}</Text>
-                  <Text variant="caption" style={styles.onSoft}>{`Environ ${Math.max(2, Math.round(due.codes.length * 0.7))} min · révisions du jour`}</Text>
-                </View>
-              </PressScale>
+            <View style={{ gap: 18 }}>
+              <View style={styles.hero}>
+                <CopyMargin style={{ left: 14, top: 20, bottom: 20 }} />
+                <Text variant="h2" style={styles.ink}>{`${due.codes.length} question${due.codes.length > 1 ? 's' : ''} à retrouver`}</Text>
+                <Text variant="body" style={styles.muted}>{`Environ ${Math.max(2, Math.round(due.codes.length * 0.7))} min pour consolider tes acquis.`}</Text>
+              </View>
               {parMatiere.map((m) => (
-                <View key={m.nom} style={{ gap: 6 }}>
+                <View key={m.nom} style={styles.subjectRow}>
                   <View style={styles.between}><Text variant="caption" style={styles.ink}>{m.nom}</Text><Text variant="caption" style={[styles.muted, type.tabular]}>{m.n}</Text></View>
                   <View style={styles.bar}><View style={[styles.barFill, { width: `${(100 * m.n) / due.codes.length}%`, backgroundColor: subjectTint(m.teinte).tint }]} /></View>
                 </View>
               ))}
               <Text variant="caption" style={styles.muted}>Les questions reviennent après 1, 3, 7 et 14 jours.</Text>
-            </Animated.View>
+              <PrepButton title="Commencer mes révisions" icon={Play} onPress={() => start(due.codes)} accessibilityLabel={`Lancer ${due.codes.length} révisions`} />
+            </View>
           ) : (
             <View style={styles.empty}><ErrorNotebook /><Text variant="h3" style={styles.ink}>Tout est à jour</Text><Text variant="body" style={[styles.muted, { textAlign: 'center' }]}>Aucune révision prévue aujourd’hui. Continue comme ça.</Text></View>
           )
         ) : erreurs.length ? (
           <View style={{ gap: 14 }}>
+            <Text variant="body" style={styles.muted}>Ouvre une erreur pour comprendre la correction. Choisis une matière pour cibler ta révision.</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
               {['Toutes', ...programme.matieres.map((m) => m.nom)].map((m) => (
-                <Pressable key={m} onPress={() => { haptic.select(); setChip(m); }} style={[styles.chip, chip === m && styles.chipOn]} accessibilityState={{ selected: chip === m }}>
-                  <Text variant="caption" style={[styles.muted, chip === m && { color: '#FFF' }]}>{m}</Text>
+                <Pressable key={m} accessibilityRole="button" accessibilityLabel={`Filtrer : ${m}`} onPress={() => { haptic.select(); setChip(m); }} style={[styles.chip, chip === m && styles.chipOn]} accessibilityState={{ selected: chip === m }}>
+                  <Text variant="caption" style={[styles.muted, chip === m && { color: brand.onInk }]}>{m}</Text>
                 </Pressable>
               ))}
             </ScrollView>
+            {!filtered.length ? <View style={styles.empty}><Text variant="h3" style={styles.ink}>Aucune erreur dans cette matière</Text><Text variant="body" style={[styles.muted, { textAlign: 'center' }]}>Choisis une autre matière ou « Toutes » pour retrouver tes erreurs.</Text></View> : null}
             {groups.map(([titre, list]) => (
-              <Animated.View key={titre} layout={LinearTransition} style={{ gap: 8 }}>
+              <View key={titre} style={{ gap: 8 }}>
+                <CopyMargin style={{ left: -12 }} />
                 <Text variant="h3" style={[styles.ink, { marginTop: 6 }]}>{titre}</Text>
                 {list.map((e, i) => (
-                  <Animated.View key={e.code} entering={FadeInDown.delay(i * 30)} layout={LinearTransition}>
+                  <View key={e.code}>
                     <PressScale onPress={() => setFiche(e)} style={styles.errRow} accessibilityLabel={`${e.found.exercice.consigne}, ratée ${e.rates} fois`}>
                       <View style={styles.errIcon}><RotateCcw size={16} color={colors.error} /></View>
                       <View style={{ flex: 1 }}>
-                        <Text variant="bodyMedium" style={styles.ink} numberOfLines={2}>{e.found.exercice.consigne}</Text>
+                        <Text variant="bodyMedium" style={styles.ink}>{e.found.exercice.consigne}</Text>
                         <Text variant="caption" style={styles.muted}>{`Ratée ${e.rates} fois · ${ago(e.derniereTentative)}`}</Text>
                       </View>
-                      <View style={styles.dots}>{[0, 1].map((k) => <View key={k} style={[styles.dot, k < (e.reussites || 0) && styles.dotOn]} />)}</View>
+                      <View style={styles.dots}>{[0, 1].map((k) => <View key={k} style={[styles.dot, k < (e.reussites || 0) && styles.dotOn]} />)}</View><HomeChevron />
                     </PressScale>
-                  </Animated.View>
+                  </View>
                 ))}
-              </Animated.View>
+              </View>
             ))}
           </View>
         ) : (
@@ -136,7 +148,7 @@ const ReviewsScreen = ({ navigation, route }) => {
       </ScrollView>
       {tab === 'cahier' && filtered.length ? (
         <View style={[styles.sticky, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
-          <LinearGradient colors={['rgba(252,250,245,0)', brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
+          <LinearGradient colors={[theme.brand.paperTransparent, brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
           <PrepButton title="Réviser mes erreurs" iconLeft={RotateCcw} onPress={() => start(filtered.map((e) => e.code).slice(0, 20))} />
         </View>
       ) : null}
@@ -169,30 +181,35 @@ const ReviewsScreen = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  paper: { flex: 1, backgroundColor: brand.paper },
-  ink: { color: brand.ink },
-  muted: { color: brand.inkSoft },
-  onInk: { color: brand.onInk },
-  onSoft: { color: brand.onInkSoft },
-  between: { flexDirection: 'row', justifyContent: 'space-between' },
-  stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
-  roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
-  hero: { flexDirection: 'row', alignItems: 'center', gap: 14, padding: 18, borderRadius: 22, overflow: 'hidden', ...theme.shadows.button },
-  play: { width: 52, height: 52, borderRadius: 26, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paper },
-  bar: { height: 6, borderRadius: 3, backgroundColor: brand.line, overflow: 'hidden' },
-  barFill: { height: 6, borderRadius: 3 },
-  empty: { alignItems: 'center', gap: 10, marginTop: 30 },
-  chip: { height: 38, paddingHorizontal: 16, borderRadius: 19, justifyContent: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: brand.lineStrong, backgroundColor: brand.sheet },
-  chipOn: { backgroundColor: brand.burgundy, borderColor: brand.burgundy },
-  errRow: { minHeight: 76, flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  errIcon: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.errorWash },
-  dots: { flexDirection: 'row', gap: 4 },
-  dot: { width: 8, height: 8, borderRadius: 4, borderWidth: 1, borderColor: colors.success },
-  dotOn: { backgroundColor: colors.success },
-  sticky: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingHorizontal: 20, paddingTop: 24 },
-  answerBox: { padding: 16, borderRadius: 16, backgroundColor: colors.successWash, gap: 6 },
-  retain: { padding: 16, borderRadius: 16, backgroundColor: brand.goldWash, gap: 6 },
-});
-
 export default ReviewsScreen;
+
+const useStyles = createThemedStyles(({ brand, colors }) => {
+  const styles = StyleSheet.create({
+
+    ink: { color: brand.ink },
+    muted: { color: brand.inkSoft },
+
+    between: { flexDirection: 'row', justifyContent: 'space-between' },
+    stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
+    roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
+    tabs: { marginVertical: 20, gap: 8, flexDirection: 'row', flexWrap: 'wrap' },
+    tab: { minHeight: 48, flexGrow: 1, justifyContent: 'center', padding: 12, borderRadius: 12, borderWidth: 1, borderColor: brand.lineStrong },
+    tabOn: { backgroundColor: brand.burgundyWash, borderColor: brand.burgundy },
+    hero: { gap: 8, paddingLeft: 32, paddingRight: 20, paddingVertical: 24, backgroundColor: brand.sheet, borderRadius: 18, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.lineStrong },
+    subjectRow: { gap: 10, paddingVertical: 12, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    bar: { height: 6, borderRadius: 3, backgroundColor: brand.line, overflow: 'hidden' },
+    barFill: { height: 6, borderRadius: 3 },
+    empty: { alignItems: 'center', gap: 10, marginTop: 30 },
+    chip: { minHeight: 44, paddingVertical: 10, paddingHorizontal: 16, borderRadius: 19, justifyContent: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: brand.lineStrong, backgroundColor: brand.sheet },
+    chipOn: { backgroundColor: brand.burgundySolid, borderColor: brand.burgundy },
+    errRow: { minHeight: 76, flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    errIcon: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.errorWash },
+    dots: { flexDirection: 'row', gap: 4 },
+    dot: { width: 8, height: 8, borderRadius: 4, borderWidth: 1, borderColor: colors.success },
+    dotOn: { backgroundColor: colors.successSolid },
+    sticky: { paddingHorizontal: 24, paddingTop: 24 },
+    answerBox: { padding: 16, borderRadius: 16, backgroundColor: colors.successWash, gap: 6 },
+    retain: { paddingVertical: 16, borderTopWidth: 1, borderBottomWidth: 1, borderColor: brand.line, gap: 8 },
+  });
+  return { styles };
+});

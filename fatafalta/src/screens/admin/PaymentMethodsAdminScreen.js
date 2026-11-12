@@ -1,3 +1,6 @@
+import useAsyncAction from '../../hooks/useAsyncAction';
+import { SkeletonRows } from '../../components/ui/Skeleton';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useContext, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Switch, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
@@ -9,15 +12,14 @@ import StateView from '../../components/ui/StateView';
 import { AccountScroll, Section } from '../../components/account/AccountLayout';
 import AuthContext from '../../context/AuthContext';
 import { fetchAdminPaymentMethods, getErrorMessage, updateAdminPaymentMethod } from '../../services/billing';
-import theme from '../../theme/tokens';
-
-const { brand } = theme;
 
 /**
  * Moyens de paiement (super administrateur). Même configuration serveur que l'administration
  * web : un changement ici s'applique immédiatement au site et à l'application.
  */
 const PaymentMethodsAdminScreen = ({ navigation }) => {
+  const { brand, theme } = useTheme();
+  const { styles } = useStyles();
   const { user } = useContext(AuthContext);
   const [methods, setMethods] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,6 +27,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
   const [loadError, setLoadError] = useState(null);
   const [actionError, setActionError] = useState(null);
   const [busy, setBusy] = useState(null);
+  const [runToggle, toggling] = useAsyncAction();
 
   const load = useCallback(async () => {
     try {
@@ -45,7 +48,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
     setRefreshing(false);
   };
 
-  const toggle = async (method, enabled) => {
+  const toggle = (method, enabled) => runToggle(async () => {
     setBusy(method.code);
     setActionError(null);
     // Affichage immédiat, annulé si le serveur refuse.
@@ -59,7 +62,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
     } finally {
       setBusy(null);
     }
-  };
+  });
 
   const enabledCount = methods.filter((method) => method.enabled).length;
 
@@ -67,7 +70,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
     if (user?.role !== 'admin') {
       return <StateView icon={CreditCard} title="Accès réservé" description="Seul le super administrateur gère les moyens de paiement." />;
     }
-    if (loading) return <View style={styles.loading}><ActivityIndicator color={brand.ink} /></View>;
+    if (loading) return <SkeletonRows count={4} />;
     if (loadError) return <StateView icon={CreditCard} title="Moyens de paiement indisponibles" description={loadError} onRetry={load} />;
 
     return (
@@ -93,7 +96,8 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
               {busy === method.code ? <ActivityIndicator size="small" color={brand.inkMuted} style={styles.spinner} /> : null}
               <Switch
                 value={method.enabled}
-                disabled={busy === method.code}
+                disabled={toggling}
+                accessibilityState={{ disabled: toggling, busy: busy === method.code }}
                 onValueChange={(value) => toggle(method, value)}
                 trackColor={{ false: brand.line, true: theme.colors.success }}
                 thumbColor={theme.colors.surface}
@@ -124,75 +128,78 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  loading: {
-    paddingVertical: theme.spacing['2xl'],
-    alignItems: 'center',
-  },
-  row: {
-    minHeight: 72,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-    marginHorizontal: theme.spacing.base,
-    paddingVertical: theme.spacing.md,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: brand.line,
-  },
-  rowLast: {
-    borderBottomWidth: 0,
-  },
-  copy: {
-    flex: 1,
-  },
-  label: {
-    color: brand.ink,
-    fontSize: 15,
-  },
-  code: {
-    marginTop: 1,
-    color: brand.inkMuted,
-    fontFamily: theme.fontFamily.regular,
-    fontSize: 12,
-  },
-  status: {
-    marginTop: 2,
-    fontSize: 12,
-  },
-  statusOn: {
-    color: theme.colors.success,
-  },
-  statusOff: {
-    color: brand.inkSoft,
-  },
-  closed: {
-    marginTop: 2,
-    color: brand.goldInk,
-    fontSize: 12,
-  },
-  spinner: {
-    marginRight: theme.spacing.xs,
-  },
-  warning: {
-    marginBottom: theme.spacing.base,
-    padding: theme.spacing.md,
-    borderRadius: theme.radius.md,
-    backgroundColor: brand.goldWash,
-    color: brand.goldInk,
-  },
-  error: {
-    marginBottom: theme.spacing.base,
-    color: theme.colors.error,
-  },
-  notice: {
-    color: brand.inkSoft,
-    fontFamily: theme.fontFamily.regular,
-    lineHeight: 18,
-  },
-});
-
 export default PaymentMethodsAdminScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    loading: {
+      paddingVertical: theme.spacing['2xl'],
+      alignItems: 'center',
+    },
+    row: {
+      minHeight: 72,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.md,
+      marginHorizontal: theme.spacing.base,
+      paddingVertical: theme.spacing.md,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: brand.line,
+    },
+    rowLast: {
+      borderBottomWidth: 0,
+    },
+    copy: {
+      flex: 1,
+    },
+    label: {
+      color: brand.ink,
+      fontSize: 15,
+    },
+    code: {
+      marginTop: 1,
+      color: brand.inkMuted,
+      fontFamily: theme.fontFamily.regular,
+      fontSize: 12,
+    },
+    status: {
+      marginTop: 2,
+      fontSize: 12,
+    },
+    statusOn: {
+      color: theme.colors.success,
+    },
+    statusOff: {
+      color: brand.inkSoft,
+    },
+    closed: {
+      marginTop: 2,
+      color: brand.goldInk,
+      fontSize: 12,
+    },
+    spinner: {
+      marginRight: theme.spacing.xs,
+    },
+    warning: {
+      marginBottom: theme.spacing.base,
+      padding: theme.spacing.md,
+      borderRadius: theme.radius.md,
+      backgroundColor: brand.goldWash,
+      color: brand.goldInk,
+    },
+    error: {
+      marginBottom: theme.spacing.base,
+      color: theme.colors.error,
+    },
+    notice: {
+      color: brand.inkSoft,
+      fontFamily: theme.fontFamily.regular,
+      lineHeight: 18,
+    },
+  });
+  return { styles };
+});

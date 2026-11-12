@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import cache from '../services/cache';
+import useAsyncAction from './useAsyncAction';
 
 const CACHE_KEY = 'correctionPromptPreference';
 
 const useCorrectionPromptPreference = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [enabled, setEnabledState] = useState(true);
+  const [run, saving] = useAsyncAction();
 
   useEffect(() => {
     let mounted = true;
@@ -24,15 +26,21 @@ const useCorrectionPromptPreference = () => {
     };
   }, []);
 
-  const setEnabled = useCallback(async (value) => {
+  const setEnabled = useCallback((value) => run(async () => {
     setEnabledState(value);
-    await cache.save(CACHE_KEY, value);
-  }, []);
+    try {
+      await cache.save(CACHE_KEY, value, { throwOnError: true });
+    } catch (error) {
+      setEnabledState(!value);
+      throw error;
+    }
+  }), [run]);
 
   return {
     enabled,
     setEnabled,
     isLoaded,
+    saving,
   };
 };
 

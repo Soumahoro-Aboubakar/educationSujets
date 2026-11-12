@@ -1,9 +1,10 @@
+import { useTheme } from '../../theme/ThemeProvider';
 import { getErrorMessage } from '../../utils/userMessages';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import MetadataSelect from '../ui/MetadataSelect';
 import Text from '../ui/Text';
-import theme from '../../theme/tokens';
+
 import {
   createCatalogNode,
   createMatiere,
@@ -30,12 +31,15 @@ const getPathFromLeaf = (leaf) => {
 };
 
 const DynamicMetadataFields = ({ value, onChange, error }) => {
+  const { theme } = useTheme();
   const [organismes, setOrganismes] = useState([]);
   const [structure, setStructure] = useState(null);
   const [parcoursTypes, setParcoursTypes] = useState([]);
   const [matieres, setMatieres] = useState([]);
   const [nodesByLevel, setNodesByLevel] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [organismesLoading, setOrganismesLoading] = useState(true);
+  const [nodesLoading, setNodesLoading] = useState(false);
   const [catalogError, setCatalogError] = useState(null);
   const [createdOrganisme, setCreatedOrganisme] = useState(null);
   const [createdParcoursType, setCreatedParcoursType] = useState(null);
@@ -57,13 +61,15 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
           if (current && current.name !== organisme.name) onChange({ ...value, organisme: current });
         }
       })
-      .catch((error) => active && setCatalogError(getErrorMessage(error, 'catalogue', 'vous')));
+      .catch((error) => active && setCatalogError(getErrorMessage(error, 'catalogue', 'vous')))
+      .finally(() => active && setOrganismesLoading(false));
     return () => { active = false; };
   }, []);
 
   useEffect(() => {
     let active = true;
     if (!organisme?._id) {
+      setLoading(false);
       setStructure(null);
       setParcoursTypes([]);
       setMatieres([]);
@@ -96,8 +102,9 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
   useEffect(() => {
     let active = true;
     const loadNodes = async () => {
-      if (!organisme?._id || !levels.length) return;
+      if (!organisme?._id || !levels.length) { setNodesLoading(false); return; }
       const nextOptions = [];
+      setNodesLoading(true);
       try {
         for (let index = 0; index < levels.length; index += 1) {
           const parentId = index ? path[index - 1]?._id : null;
@@ -111,6 +118,8 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
         if (active) setNodesByLevel(nextOptions);
       } catch (requestError) {
         if (active) setCatalogError(getErrorMessage(requestError, 'catalogue', 'vous'));
+      } finally {
+        if (active) setNodesLoading(false);
       }
     };
     loadNodes();
@@ -167,6 +176,8 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
           setCreatedOrganisme(created);
           return created;
         }}
+        disabled={organismesLoading}
+        loading={organismesLoading}
         error={error?.organisme}
       />
 
@@ -217,7 +228,8 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
               value={path[index]?._id || null}
               onChange={(selected) => selectPath(index, selected)}
               onCreate={handleCreateNode(index)}
-              disabled={index > 0 && !path[index - 1]}
+              loading={nodesLoading || loading}
+              disabled={nodesLoading || loading || (index > 0 && !path[index - 1])}
               error={index === levels.length - 1 ? error?.path : undefined}
             />
           ))}
@@ -246,7 +258,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
         </>
       )}
 
-      {loading && <ActivityIndicator size="small" color={theme.colors.primary} />}
+      {(loading || nodesLoading || organismesLoading) && <ActivityIndicator size="small" color={theme.colors.primary} />}
       {catalogError && <Text variant="caption" color={theme.colors.error}>{catalogError}</Text>}
     </View>
   );

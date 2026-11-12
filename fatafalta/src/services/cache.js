@@ -10,7 +10,7 @@ const getFilePath = () => {
   return `${dir}${CACHE_FILENAME}`;
 };
 
-export const save = async (key, value) => {
+export const save = async (key, value, { throwOnError = false } = {}) => {
   try {
     if (isWeb) {
       window.localStorage.setItem(key, JSON.stringify(value));
@@ -32,6 +32,7 @@ export const save = async (key, value) => {
     existing[key] = value;
     await FileSystem.writeAsStringAsync(filePath, JSON.stringify(existing));
   } catch (e) {
+    if (throwOnError) throw e;
     // swallow errors — caching is best-effort
     // console.warn('Cache save failed', e);
   }

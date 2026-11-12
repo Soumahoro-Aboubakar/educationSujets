@@ -1,3 +1,7 @@
+import useAsyncAction from '../../hooks/useAsyncAction';
+import { TouchableOpacity } from '../ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+
 import { getErrorAlert } from '../../utils/userMessages';
 import React, { useState, useRef, useEffect } from 'react';
 import {
@@ -5,7 +9,6 @@ import {
   View,
   Image,
   StyleSheet,
-  TouchableOpacity,
   PanResponder,
   Dimensions,
   Alert,
@@ -22,7 +25,7 @@ import {
 } from 'lucide-react-native';
 import * as ImageManipulator from 'expo-image-manipulator';
 import Text from '../ui/Text';
-import theme from '../../theme/tokens';
+import { useReduceMotion } from '../../prep/feedback';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const MIN_CROP_SIZE = 60;
@@ -45,6 +48,10 @@ const getDefaultDocumentCropBox = (width, height, aspect) => {
 };
 
 const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
+  const reduce = useReduceMotion();
+  const { theme } = useTheme();
+  const [runEdit, editPending] = useAsyncAction();
+  const { styles } = useStyles();
   const [currentUri, setCurrentUri] = useState(imageUri);
   const [naturalSize, setNaturalSize] = useState({ width: 1, height: 1 });
   const [displaySize, setDisplaySize] = useState({ width: SCREEN_WIDTH, height: SCREEN_WIDTH });
@@ -149,7 +156,7 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
     })
   ).current;
 
-  const rotate = async (degrees) => {
+  const rotate = (degrees) => runEdit(async () => {
     setBusy(true);
     try {
       const result = await ImageManipulator.manipulateAsync(
@@ -164,9 +171,9 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
     } finally {
       setBusy(false);
     }
-  };
+  });
 
-  const flipHorizontal = async () => {
+  const flipHorizontal = () => runEdit(async () => {
     setBusy(true);
     try {
       const result = await ImageManipulator.manipulateAsync(
@@ -181,9 +188,9 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
     } finally {
       setBusy(false);
     }
-  };
+  });
 
-  const applyCrop = async () => {
+  const applyCrop = () => runEdit(async () => {
     setBusy(true);
     try {
       const scaleX = naturalSize.width / displaySize.width;
@@ -207,7 +214,7 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
     } finally {
       setBusy(false);
     }
-  };
+  });
 
   const resetImage = () => {
     setCurrentUri(imageUri);
@@ -217,18 +224,18 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
   if (!imageUri) return null;
 
   return (
-    <Modal visible={visible} animationType="slide" onRequestClose={onCancel}>
+    <Modal visible={visible} animationType={reduce ? 'fade' : 'slide'} onRequestClose={onCancel}>
       <SafeAreaView style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={onCancel} style={styles.headerButton} disabled={busy}>
+          <TouchableOpacity onPress={onCancel} style={styles.headerButton} disabled={busy || editPending}>
             <X size={24} color={theme.colors.textInverse} />
           </TouchableOpacity>
           <Text variant="h3" color={theme.colors.textInverse}>Modifier l'image</Text>
           <TouchableOpacity
             onPress={() => onSave(currentUri)}
             style={styles.headerButton}
-            disabled={busy}
+            disabled={busy || editPending}
           >
             <Check size={24} color={theme.colors.textInverse} />
           </TouchableOpacity>
@@ -294,34 +301,34 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
         <View style={styles.toolbar}>
           {cropMode ? (
             <>
-              <TouchableOpacity style={styles.toolButton} onPress={() => setCropMode(false)} disabled={busy}>
+              <TouchableOpacity style={styles.toolButton} onPress={() => setCropMode(false)} disabled={busy || editPending}>
                 <X size={22} color={theme.colors.textInverse} />
                 <Text variant="caption" color={theme.colors.textInverse}>Annuler</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.toolButton} onPress={applyCrop} disabled={busy}>
+              <TouchableOpacity style={styles.toolButton} onPress={applyCrop} disabled={busy || editPending}>
                 <Check size={22} color={theme.colors.primary} />
                 <Text variant="caption" color={theme.colors.primary}>Valider</Text>
               </TouchableOpacity>
             </>
           ) : (
             <>
-              <TouchableOpacity style={styles.toolButton} onPress={() => rotate(-90)} disabled={busy}>
+              <TouchableOpacity style={styles.toolButton} onPress={() => rotate(-90)} disabled={busy || editPending}>
                 <RotateCcw size={22} color={theme.colors.textInverse} />
                 <Text variant="caption" color={theme.colors.textInverse}>Pivoter</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.toolButton} onPress={() => rotate(90)} disabled={busy}>
+              <TouchableOpacity style={styles.toolButton} onPress={() => rotate(90)} disabled={busy || editPending}>
                 <RotateCw size={22} color={theme.colors.textInverse} />
                 <Text variant="caption" color={theme.colors.textInverse}>Pivoter</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.toolButton} onPress={flipHorizontal} disabled={busy}>
+              <TouchableOpacity style={styles.toolButton} onPress={flipHorizontal} disabled={busy || editPending}>
                 <FlipHorizontal size={22} color={theme.colors.textInverse} />
                 <Text variant="caption" color={theme.colors.textInverse}>Miroir</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.toolButton} onPress={() => setCropMode(true)} disabled={busy}>
+              <TouchableOpacity style={styles.toolButton} onPress={() => setCropMode(true)} disabled={busy || editPending}>
                 <CropIcon size={22} color={theme.colors.textInverse} />
                 <Text variant="caption" color={theme.colors.textInverse}>Recadrer A4</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.toolButton} onPress={resetImage} disabled={busy}>
+              <TouchableOpacity style={styles.toolButton} onPress={resetImage} disabled={busy || editPending}>
                 <ResetIcon size={22} color={theme.colors.textInverse} />
                 <Text variant="caption" color={theme.colors.textInverse}>Réinitialiser</Text>
               </TouchableOpacity>
@@ -333,47 +340,50 @@ const ImageEditorModal = ({ visible, imageUri, onCancel, onSave }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#000' },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  headerButton: { padding: 8 },
-  editorArea: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  mask: {
-    position: 'absolute',
-    backgroundColor: 'rgba(0,0,0,0.6)',
-  },
-  cropBox: {
-    position: 'absolute',
-    borderWidth: 2,
-    borderColor: '#fff',
-  },
-  resizeHandle: {
-    position: 'absolute',
-    right: -14,
-    bottom: -14,
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: '#fff',
-  },
-  toolbar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 16,
-    paddingHorizontal: 8,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-  },
-  toolButton: { alignItems: 'center', gap: 4, padding: 6 },
-});
-
 export default ImageEditorModal;
+
+const useStyles = createThemedStyles(({ illustration, brand }) => {
+  const styles = StyleSheet.create({
+    container: { flex: 1, backgroundColor: illustration.shadow },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+    },
+    headerButton: { padding: 8, minWidth: 44, minHeight: 44, justifyContent: 'center', alignItems: 'center' },
+    editorArea: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    mask: {
+      position: 'absolute',
+      backgroundColor: 'rgba(0,0,0,0.6)',
+    },
+    cropBox: {
+      position: 'absolute',
+      borderWidth: 2,
+      borderColor: brand.onInk,
+    },
+    resizeHandle: {
+      position: 'absolute',
+      right: -14,
+      bottom: -14,
+      width: 28,
+      height: 28,
+      borderRadius: 14,
+      backgroundColor: brand.sheet,
+    },
+    toolbar: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      paddingVertical: 16,
+      paddingHorizontal: 8,
+      backgroundColor: 'rgba(255,255,255,0.05)',
+    },
+    toolButton: { alignItems: 'center', gap: 4, padding: 6 },
+  });
+  return { styles };
+});

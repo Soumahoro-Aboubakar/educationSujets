@@ -1,5 +1,6 @@
 import { getErrorAlert } from '../utils/userMessages';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
+import useAsyncAction from './useAsyncAction';
 import { Alert } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
@@ -12,12 +13,11 @@ import { useRefreshAccount } from './useAccount';
  * L'URL n'est jamais affichée : elle vient de /api/me/entitlements (checkout.webCheckoutUrl).
  */
 export const useWebCheckout = () => {
-  const [opening, setOpening] = useState(false);
+  const [run, opening] = useAsyncAction();
   const refreshAccount = useRefreshAccount();
 
-  const open = useCallback(async (checkoutUrl, { promoCode } = {}) => {
-    if (!checkoutUrl || opening) return;
-    setOpening(true);
+  const open = useCallback((checkoutUrl, { promoCode } = {}) => run(async () => {
+    if (!checkoutUrl) return;
     try {
       const { code } = await createWebHandoff();
       const returnUrl = Linking.createURL('abonnement-retour');
@@ -27,10 +27,9 @@ export const useWebCheckout = () => {
     } catch (error) {
       Alert.alert(...getErrorAlert(error, 'abonnement', 'tu'));
     } finally {
-      setOpening(false);
       refreshAccount();
     }
-  }, [opening, refreshAccount]);
+  }), [run, refreshAccount]);
 
   return { open, opening };
 };

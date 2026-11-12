@@ -1,13 +1,15 @@
+import Pressable from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FlatList, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { Building2, ClipboardList, FileText, SearchX } from 'lucide-react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import Text from '../components/ui/Text';
 import ScreenHeader from '../components/ui/ScreenHeader';
-import ListRow from '../components/ui/ListRow';
+
 import OrganismCard from '../components/catalog/OrganismCard';
 import SearchField from '../components/ui/SearchField';
 import StateView from '../components/ui/StateView';
@@ -16,9 +18,10 @@ import { useOrientationOptions } from '../hooks/useOrientationOptions';
 import { fetchPublishedOrganismes } from '../services/catalog';
 import { usePreferences } from '../context/PreferencesContext';
 import cache from '../services/cache';
-import theme from '../theme/tokens';
 
-const { brand } = theme;
+import { PrepButton } from '../prep/ui/primitives';
+import { HomeChevron } from '../prep/components/HomePresentation';
+import { CopyMargin } from '../prep/components/StudyPresentation';
 
 // La recherche n'apparaît que lorsque la liste est assez longue pour la justifier.
 const SEARCH_THRESHOLD = 6;
@@ -62,14 +65,16 @@ const compact = (option) => ({
 const plural = (count, [singular, pluralForm]) => `${count} ${count > 1 ? pluralForm : singular}`;
 
 const SelectionScreen = ({ navigation, route }) => {
+  const { brand, theme } = useTheme();
+  const { styles } = useStyles();
   const mode = route.name === 'EstablishmentSelection'
     ? 'establishment'
     : route.name === 'TrainingSelection' ? 'training' : 'contest';
   const config = CONFIG[mode];
   const insets = useSafeAreaInsets();
-  const { width } = useWindowDimensions();
-  // Plusieurs organismes par rangée : 2 colonnes sur téléphone, 3 sur tablette.
-  const columns = width >= 700 ? 3 : 2;
+  const { width, fontScale } = useWindowDimensions();
+  // Une copie garde sa mesure ; grand texte : moins de colonnes, jamais de texte réduit.
+  const columns = Math.max(1, Math.min(3, Math.floor((Math.min(width, 1040) - 28) / (160 * fontScale))));
   const { data, isLoading, isError, refetch, error: optionsError } = useOrientationOptions();
   const { updatePreferences } = usePreferences();
   const [query, setQuery] = useState('');
@@ -228,12 +233,14 @@ const SelectionScreen = ({ navigation, route }) => {
             />
           </View>
         ) : (
-          <ListRow
-            title={item.name || item.nom}
-            meta={describe(item)}
-            disabled={saving}
-            onPress={() => select(item)}
-          />
+          <Pressable accessibilityRole="button" accessibilityLabel={`${item.name || item.nom}, ${describe(item)}`} accessibilityState={{ disabled: saving }} disabled={saving} onPress={() => select(item)} style={styles.optionRow}>
+            <CopyMargin style={{ top: 16, bottom: 16 }} />
+            <View style={{ flex: 1, gap: 6 }}>
+              <Text variant="h3">{item.name || item.nom}</Text>
+              <Text variant="caption" style={{ color: brand.inkSoft }}>{describe(item)}</Text>
+            </View>
+            <HomeChevron />
+          </Pressable>
         ))}
         ListEmptyComponent={query ? (
           <StateView
@@ -253,7 +260,6 @@ const SelectionScreen = ({ navigation, route }) => {
     <View style={styles.container}>
       <ScreenHeader
         onBack={navigation.canGoBack() ? () => navigation.goBack() : undefined}
-        eyebrow={config.eyebrow}
         title={config.title}
         subtitle={config.subtitle}
       />
@@ -272,93 +278,73 @@ const SelectionScreen = ({ navigation, route }) => {
 
       {mode === 'establishment' ? (
         <View style={[styles.footer, { paddingBottom: Math.max(insets.bottom, theme.spacing.md) }]}>
-          <Pressable
-            accessibilityRole="button"
-            disabled={saving}
-            onPress={skip}
-            style={({ pressed }) => [styles.skip, pressed && styles.skipPressed]}
-          >
-            <Text variant="bodyMedium" style={styles.skipLabel}>Ignorer pour le moment</Text>
-          </Pressable>
+          <PrepButton title="Ignorer pour le moment" variant="link" disabled={saving} onPress={skip} />
         </View>
       ) : null}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  searchBar: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: 2,
-    paddingBottom: theme.spacing.md,
-  },
-  body: {
-    flex: 1,
-  },
-  list: {
-    paddingBottom: theme.spacing['2xl'],
-  },
-  grid: {
-    paddingHorizontal: theme.layout.gutter - 6,
-  },
-  cell: {
-    padding: 6,
-  },
-  countRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    gap: theme.spacing.md,
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.sm,
-    paddingBottom: theme.spacing.md,
-  },
-  countRowGrid: {
-    paddingHorizontal: 6,
-  },
-  countTitle: {
-    color: brand.ink,
-    flexShrink: 1,
-  },
-  countMeta: {
-    color: brand.inkSoft,
-  },
-  listWithFooter: {
-    paddingBottom: 96,
-  },
-  listEmpty: {
-    flexGrow: 1,
-  },
-  count: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.lg,
-    paddingBottom: theme.spacing.xs,
-    color: brand.inkSoft,
-  },
-  footer: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.sm,
-    backgroundColor: brand.paper,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: brand.line,
-  },
-  skip: {
-    minHeight: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.md,
-  },
-  skipPressed: {
-    backgroundColor: brand.pressed,
-  },
-  skipLabel: {
-    color: brand.inkSoft,
-    fontSize: 15,
-  },
-});
-
 export default SelectionScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    optionRow: { marginHorizontal: 24, minHeight: 80, flexDirection: 'row', alignItems: 'center', gap: 12, paddingLeft: 18, paddingVertical: 20, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: brand.line },
+    container: { ...theme.layout.catalogFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    searchBar: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: 2,
+      paddingBottom: theme.spacing.md,
+    },
+    body: {
+      flex: 1,
+    },
+    list: {
+      paddingBottom: theme.spacing['2xl'],
+    },
+    grid: {
+      paddingHorizontal: theme.layout.gutter - 6,
+    },
+    cell: {
+      padding: 6,
+    },
+    countRow: {
+      flexDirection: 'row',
+      alignItems: 'baseline',
+      justifyContent: 'space-between',
+      gap: theme.spacing.md,
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.sm,
+      paddingBottom: theme.spacing.md,
+    },
+    countRowGrid: {
+      paddingHorizontal: 6,
+    },
+    countTitle: {
+      color: brand.ink,
+      flexShrink: 1,
+    },
+    countMeta: {
+      color: brand.inkSoft,
+    },
+    listWithFooter: {
+      paddingBottom: 96,
+    },
+    listEmpty: {
+      flexGrow: 1,
+    },
+
+    footer: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.sm,
+      backgroundColor: brand.paper,
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: brand.line,
+    },
+
+  });
+  return { styles };
+});

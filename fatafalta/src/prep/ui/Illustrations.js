@@ -1,7 +1,8 @@
+import { useTheme } from '../../theme/ThemeProvider';
 import React, { useEffect } from 'react';
 import Animated, { useAnimatedProps, useSharedValue, withDelay, withTiming, Easing } from 'react-native-reanimated';
 import Svg, { Circle, Defs, G, Line, LinearGradient, Path, Rect, Stop } from 'react-native-svg';
-import { brand } from '../theme';
+
 import { useReduceMotion } from '../feedback';
 
 /**
@@ -11,14 +12,15 @@ import { useReduceMotion } from '../feedback';
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-const GoldDefs = () => (
-  <Defs>
+const GoldDefs = () => {
+  const { brand } = useTheme();
+  return (<Defs>
     <LinearGradient id="aube" x1="0" y1="0" x2="1" y2="1">
       <Stop offset="0" stopColor={brand.goldLight} />
       <Stop offset="1" stopColor={brand.gold} />
     </LinearGradient>
-  </Defs>
-);
+  </Defs>);
+};
 
 /** Jalon qui « s'allume » (rayon 0 → r), échelonné. */
 const Milestone = ({ cx, cy, r, fill, stroke, delay, reduce }) => {
@@ -43,8 +45,9 @@ const DrawnPath = ({ d, length, stroke, width = 2.5, delay = 0, duration = 800, 
 
 /** Carnet ouvert + chemin de 4 jalons, le dernier en or (E01, E04). */
 export const NotebookPath = ({ size = 140, onDark = false }) => {
+  const { brand } = useTheme();
   const reduce = useReduceMotion();
-  const page = onDark ? 'rgba(255,255,255,0.08)' : '#FFFFFF';
+  const page = onDark ? 'rgba(255,255,255,0.08)' : brand.sheet;
   const line = onDark ? 'rgba(255,255,255,0.18)' : brand.line;
   const ink = onDark ? brand.onInk : brand.ink;
   return (
@@ -67,20 +70,22 @@ export const NotebookPath = ({ size = 140, onDark = false }) => {
 };
 
 /** Boussole de papier (E02). */
-export const PaperCompass = ({ size = 56 }) => (
-  <Svg width={size} height={size} viewBox="0 0 56 56" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+export const PaperCompass = ({ size = 56 }) => {
+  const { brand } = useTheme();
+  return (<Svg width={size} height={size} viewBox="0 0 56 56" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
     <GoldDefs />
-    <Circle cx="28" cy="28" r="25" fill="#FFFFFF" stroke={brand.line} strokeWidth="1.5" />
+    <Circle cx="28" cy="28" r="25" fill={brand.sheet} stroke={brand.line} strokeWidth="1.5" />
     <Circle cx="28" cy="28" r="19" fill="none" stroke={brand.line} strokeDasharray="1 4" />
     <Path d="M28 10L33 28H23Z" fill={brand.burgundy} />
     <Path d="M28 46L23 28H33Z" fill="url(#aube)" />
     <Circle cx="28" cy="28" r="3" fill={brand.ink} />
-  </Svg>
-);
+  </Svg>);
+};
 
 /** Cible + feuille cornée plantée au centre (E31). */
-export const TargetSheet = ({ size = 160 }) => (
-  <Svg width={size} height={size} viewBox="0 0 160 160" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+export const TargetSheet = ({ size = 160 }) => {
+  const { brand } = useTheme();
+  return (<Svg width={size} height={size} viewBox="0 0 160 160" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
     <GoldDefs />
     {[64, 46, 28].map((r, i) => <Circle key={r} cx="80" cy="84" r={r} fill="none" stroke={brand.onInk} strokeOpacity={0.14 + i * 0.1} strokeWidth="2" />)}
     <Circle cx="80" cy="84" r="10" fill="url(#aube)" />
@@ -90,12 +95,13 @@ export const TargetSheet = ({ size = 160 }) => (
       {[42, 50, 58].map((y) => <Rect key={y} x="90" y={y} width="20" height="2.5" rx="1" fill={brand.line} />)}
     </G>
     <Line x1="80" y1="84" x2="98" y2="68" stroke={brand.onInk} strokeWidth="2" />
-  </Svg>
-);
+  </Svg>);
+};
 
 /** Chronomètre de papier, secteur or (E32). */
-export const PaperStopwatch = ({ size = 150 }) => (
-  <Svg width={size} height={size} viewBox="0 0 150 150" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+export const PaperStopwatch = ({ size = 150 }) => {
+  const { brand } = useTheme();
+  return (<Svg width={size} height={size} viewBox="0 0 150 150" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
     <GoldDefs />
     <Rect x="64" y="14" width="22" height="12" rx="4" fill={brand.paper} />
     <Circle cx="75" cy="82" r="54" fill={brand.paper} />
@@ -106,34 +112,37 @@ export const PaperStopwatch = ({ size = 150 }) => (
     })}
     <Line x1="75" y1="82" x2="75" y2="44" stroke={brand.ink} strokeWidth="3" strokeLinecap="round" />
     <Circle cx="75" cy="82" r="4" fill={brand.ink} />
-  </Svg>
-);
+  </Svg>);
+};
 
 /** Carnet d'erreurs fermé, marque-page bordeaux et coche or (état vide E29). */
-export const ErrorNotebook = ({ size = 120 }) => (
-  <Svg width={size} height={size} viewBox="0 0 120 120" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+export const ErrorNotebook = ({ size = 120 }) => {
+  const { brand } = useTheme();
+  return (<Svg width={size} height={size} viewBox="0 0 120 120" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
     <GoldDefs />
     <G transform="rotate(-5 60 60)">
-      <Rect x="26" y="18" width="68" height="88" rx="8" fill="#FFFFFF" stroke={brand.line} strokeWidth="1.5" />
+      <Rect x="26" y="18" width="68" height="88" rx="8" fill={brand.sheet} stroke={brand.line} strokeWidth="1.5" />
       <Rect x="26" y="18" width="12" height="88" rx="6" fill={brand.paperDim} />
       <Path d="M74 18V44L80 39L86 44V18Z" fill={brand.burgundy} />
       <Circle cx="62" cy="68" r="16" fill="url(#aube)" />
-      <Path d="M54 68L60 74L71 62" stroke="#FFFFFF" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M54 68L60 74L71 62" stroke={brand.onInk} strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </G>
-  </Svg>
-);
+  </Svg>);
+};
 
 /** Nuage barré (hors ligne / erreur réseau). */
-export const CloudOffArt = ({ size = 110 }) => (
-  <Svg width={size} height={size} viewBox="0 0 110 110" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+export const CloudOffArt = ({ size = 110 }) => {
+  const { brand } = useTheme();
+  return (<Svg width={size} height={size} viewBox="0 0 110 110" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
     <Path d="M32 76H80A18 18 0 0 0 78 40A26 26 0 0 0 30 46A15 15 0 0 0 32 76Z" fill="none" stroke={brand.ink} strokeWidth="3" strokeLinejoin="round" />
     <Line x1="22" y1="22" x2="90" y2="90" stroke={brand.burgundy} strokeWidth="4" strokeLinecap="round" />
-  </Svg>
-);
+  </Svg>);
+};
 
 /** Podium de feuilles (E34) : 2ᵉ à gauche, 1ᵉʳ au centre, 3ᵉ à droite. */
-export const PaperPodium = ({ width = 240 }) => (
-  <Svg width={width} height={width * 0.42} viewBox="0 0 240 100" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+export const PaperPodium = ({ width = 240 }) => {
+  const { brand } = useTheme();
+  return (<Svg width={width} height={width * 0.42} viewBox="0 0 240 100" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
     <GoldDefs />
     {[[12, 40, 60], [90, 14, 86], [168, 54, 46]].map(([x, y, h], i) => (
       <G key={x}>
@@ -141,5 +150,5 @@ export const PaperPodium = ({ width = 240 }) => (
         <Path d={`M${x + 48} ${y}H${x + 60}V${y + 12}Z`} fill={i === 1 ? 'url(#aube)' : brand.lineStrong} />
       </G>
     ))}
-  </Svg>
-);
+  </Svg>);
+};

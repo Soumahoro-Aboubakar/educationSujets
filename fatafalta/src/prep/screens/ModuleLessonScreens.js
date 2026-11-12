@@ -1,11 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Image, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeOut, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming, interpolate } from 'react-native-reanimated';
+import Pressable from '../../components/ui/FeedbackPressable';
+import StatusBar from '../../theme/ThemeStatusBar';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import Animated, { FadeIn, FadeOut, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import Svg, { Path } from 'react-native-svg';
-import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, FileText, Lock, PlayCircle, Type as TypeIcon, X } from 'lucide-react-native';
+import { ArrowLeft, ArrowRight, Check, Lock, PlayCircle, Type as TypeIcon, X } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
 import { getLesson, getModule, getProgramme, levelExercises, programmeModules } from '../content';
@@ -15,19 +18,22 @@ import VideoPanel from '../video/VideoPanel';
 import VideoDock from '../video/VideoDock';
 import useVideoScroll from '../video/useVideoScroll';
 import { findVideo, useVideo, useVideosIndex } from '../video/useVideos';
-import { brand, colors, LEVELS, paperLines, subjectTint, theme, type } from '../theme';
+import { type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
-import { Badge, CornerFold, Enter, GoldSwash, LevelDots, NightBackground, PaperStack, Pop, PrepButton, PressScale, ProgressBar, ProgressRing, Segmented, SubjectIcon } from '../ui/primitives';
-import ART from '../ui/art';
+import { Badge, CornerFold, GoldSwash, LevelDots, NightBackground, PaperStack, PrepButton, PressScale, ProgressBar, ProgressRing, Segmented, SubjectIcon } from '../ui/primitives';
 import { LinearGradient } from 'expo-linear-gradient';
 import { LessonBlock } from '../components/LessonBlocks';
 import { LockedSheet } from '../components/Sheets';
 import { useCatalogue } from './OnboardingScreens';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import { sessionParams } from './SessionScreen';
+import { CompletionStamp, CopyMargin, useResultAnnouncement } from '../components/StudyPresentation';
+import { HomeChevron } from '../components/HomePresentation';
 
 // ═══ E08 — Module ═══════════════════════════════════════════════════════
 export const ModuleScreen = ({ navigation, route }) => {
+  const { subjectTint, brand, colors, LEVELS, theme } = useTheme();
+  const { styles } = useStyles();
   const insets = useSafeAreaInsets();
   const { programme: programmeCode, module: moduleCode } = route.params;
   const programme = getProgramme(programmeCode);
@@ -67,7 +73,7 @@ export const ModuleScreen = ({ navigation, route }) => {
       <Pressable onPress={() => navigation.goBack()} accessibilityLabel="Retour" hitSlop={6} style={styles.roundOnInk}><ArrowLeft size={20} color={brand.onInk} /></Pressable>
       <View style={styles.headerChip}>
         <View style={[styles.tintDot, { backgroundColor: tint.wash }]} />
-        <Text variant="caption" style={styles.headerChipText} numberOfLines={1}>{mod.matiere}</Text>
+        <Text variant="caption" style={styles.headerChipText}>{`${mod.matiere} · Module ${ref?.numero || ''}`}</Text>
       </View>
       {versions.length > 1 ? <LangToggle value={version} versions={versions} onChange={setVersion} /> : <View style={{ width: 44 }} />}
     </View>
@@ -80,13 +86,11 @@ export const ModuleScreen = ({ navigation, route }) => {
         <View style={styles.modHead}>
           <SubjectIcon nom={mod.matiere} teinte={ref?.teinte} size={52} />
           <View style={{ flex: 1 }}>
-            <Text variant="caption" style={[styles.modKicker, { color: tint.tint }]}>{`Module ${ref?.numero || ''}`}</Text>
             <Text variant="title" style={styles.ink} accessibilityRole="header">{mod.titre}</Text>
           </View>
         </View>
         <GoldSwash width={96} style={{ marginLeft: 66, marginTop: 2 }} />
         <View style={styles.modMeta}>
-          <CornerFold size={30} radius={20} animated />
           <ProgressRing size={64} stroke={6} value={st.pourcentage} color={st.valide ? colors.success : undefined} gradient={!st.valide} track={brand.line}>
             <Text style={[styles.modPct, type.tabular]}>{`${Math.round(st.pourcentage * 100)} %`}</Text>
           </ProgressRing>
@@ -98,21 +102,23 @@ export const ModuleScreen = ({ navigation, route }) => {
             <MetaFact value={mod.exercices.length} label="exercices" />
           </View>
         </View>
+        {st.valide ? <CompletionStamp label="Maîtrisé" animate={false} /> : null}
 
         <Segmented items={[{ key: 'lecons', label: 'Leçons' }, { key: 'exercices', label: 'Exercices' }]} value={tab} onChange={setTab} style={styles.segment} />
 
         {tab === 'lecons' ? (
           <View style={styles.list}>
+            <CopyMargin style={{ left: 19 }} />
             {mod.lecons.map((l, i) => {
               const p = etat.lecons?.[l.code];
               const isNext = nextLesson?.code === l.code;
               const lessonVideo = findVideo(videos, 'lecon', l.code, version);
               return (
-                <Enter key={l.code} index={i}>
+                <View key={l.code}>
                   <PressScale onPress={go(() => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.code }))} style={[styles.lessonRow, isNext && styles.rowCurrent]} accessibilityLabel={`Leçon ${i + 1}, ${l.titre}, ${l.duree} minutes${lessonVideo ? ', avec vidéo' : ''}${p?.terminee ? ', terminée' : ''}`}>
                     {p?.terminee ? <CornerFold radius={18} size={22} /> : null}
                     <View style={[styles.lessonNum, p?.terminee && styles.lessonDone, isNext && styles.lessonNext]}>
-                      {p?.terminee ? <Check size={18} color="#FFF" strokeWidth={2.8} /> : <Text style={[styles.lessonNumText, isNext && { color: brand.burgundy }]}>{i + 1}</Text>}
+                      {p?.terminee ? <Check size={18} color={brand.onInk} strokeWidth={2.2} /> : <Text style={[styles.lessonNumText, isNext && { color: brand.onInk }]}>{i + 1}</Text>}
                     </View>
                     <View style={{ flex: 1, gap: 2 }}>
                       {lessonVideo ? (
@@ -125,27 +131,27 @@ export const ModuleScreen = ({ navigation, route }) => {
                       <Text variant="bodyMedium" style={styles.rowTitle}>{l.titre}</Text>
                       {p && !p.terminee ? <ProgressBar value={p.position} height={3} color={brand.burgundy} style={{ marginTop: 6, width: 120 }} /> : null}
                     </View>
-                    <ChevronRight size={18} color={isNext ? brand.burgundy : brand.lineStrong} strokeWidth={2.2} />
+                    <HomeChevron />
                   </PressScale>
-                </Enter>
+                </View>
               );
             })}
           </View>
         ) : (
           <View style={styles.list}>
-            {[1, 2, 3].map((n, i) => {
+            {[1, 2, 3].map((n) => {
               const count = levelExercises(mod, n).length;
               const lockedLevel = n === 3 && !st.niveau3Debloque;
               const best = scores[n];
               return (
-                <Enter key={n} index={i}>
+                <View key={n}>
                   <PressScale
                     disabled={!count}
                     onPress={lockedLevel ? () => haptic.warning() : go(() => navigation.navigate('PrepSession', sessionParams.niveau(programmeCode, moduleCode, n)))}
                     style={[styles.levelCard, lockedLevel && styles.levelLocked, n === 3 && !lockedLevel && styles.levelGold, !count && styles.levelSoon]}
                     accessibilityLabel={`Niveau ${n}, ${LEVELS[n].label}${lockedLevel ? `, verrouillé : atteins ${Math.round(seuil * 100)} % au niveau 2` : ''}${best != null ? `, meilleur score ${Math.round(best * 100)} %` : ''}`}
                   >
-                    {n === 3 && !lockedLevel ? <CornerFold radius={18} size={22} /> : null}
+                    {best >= seuil ? <CornerFold radius={18} size={22} /> : null}
                     <View style={[styles.levelBadge, { backgroundColor: lockedLevel ? brand.line : `${LEVELS[n].color}18` }]}>
                       {lockedLevel ? <Lock size={18} color={brand.inkMuted} /> : <LevelDots niveau={n} size={6} />}
                     </View>
@@ -159,14 +165,15 @@ export const ModuleScreen = ({ navigation, route }) => {
                       </Text>
                       {lockedLevel ? <ProgressBar value={(scores[2] || 0) / seuil} height={4} color={brand.gold} style={{ marginTop: 6, width: 150 }} /> : null}
                     </View>
-                    {!lockedLevel && count ? (
+                    {!lockedLevel && count && best != null ? (
                       <View style={styles.levelScore}>
-                        <Text style={[type.numeral, styles.levelScoreText]}>{best != null ? `${Math.round(best * 100)}` : '—'}</Text>
-                        {best != null ? <Text variant="caption" style={styles.muted}>%</Text> : null}
+                        <Text style={[type.numeral, styles.levelScoreText]}>{`${Math.round(best * 100)}`}</Text>
+                        <Text variant="caption" style={styles.muted}>%</Text>
                       </View>
                     ) : null}
+                    {!lockedLevel && count ? <HomeChevron /> : null}
                   </PressScale>
-                </Enter>
+                </View>
               );
             })}
           </View>
@@ -178,11 +185,11 @@ export const ModuleScreen = ({ navigation, route }) => {
             <Text variant="bodyMedium" style={styles.rowTitle}>Anciens sujets</Text>
             <Text variant="caption" style={styles.muted} numberOfLines={1}>{`${programme.organisme.sigle} · ${programme.parcoursType}`}</Text>
           </View>
-          <ChevronRight size={18} color={brand.burgundy} />
+          <HomeChevron />
         </PressScale>
       </ScrollView>
       <View style={[styles.sticky, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
-        <LinearGradient colors={['rgba(252,250,245,0)', brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
+        <LinearGradient colors={[theme.brand.paperTransparent, brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
         {rights.peutEtudier
           ? <PrepButton title={primary.title} icon={ArrowRight} onPress={go(primary.run)} />
           : <PrepButton title="Débloquer avec l’abonnement" variant="gold" onPress={() => navigation.navigate('PrepSubscription')} />}
@@ -192,25 +199,29 @@ export const ModuleScreen = ({ navigation, route }) => {
   );
 };
 
-const MetaFact = ({ value, label }) => (
-  <View style={styles.metaFact}>
+const MetaFact = ({ value, label }) => {
+  const { styles } = useStyles();
+  return (<View style={styles.metaFact}>
     <Text style={[type.numeral, styles.metaValue]}>{value}</Text>
     <Text variant="caption" style={styles.muted}>{label}</Text>
-  </View>
-);
+  </View>);
+};
 
 // ═══ E10 — Lecteur de leçon / E12 — Leçon terminée ══════════════════════
-const LinedPaper = ({ height }) => (
-  <Svg pointerEvents="none" style={[StyleSheet.absoluteFill, { height }]} width="100%" height={height}>
+const LinedPaper = ({ height }) => {
+  const { paperLines } = useTheme();
+  return (<Svg pointerEvents="none" style={[StyleSheet.absoluteFill, { height }]} width="100%" height={height}>
     {Array.from({ length: Math.ceil(height / paperLines.step) }, (_, i) => (
       <Path key={i} d={`M0 ${(i + 1) * paperLines.step} H2000`} stroke={paperLines.color} strokeOpacity={0.5} strokeWidth={1} />
     ))}
-  </Svg>
-);
+  </Svg>);
+};
 
 const SIZES = [15, 17, 19, 21];
 
 export const LessonScreen = ({ navigation, route }) => {
+  const { subjectTint, brand, theme } = useTheme();
+  const { styles } = useStyles();
   const insets = useSafeAreaInsets();
   const reduce = useReduceMotion();
   const { programme: programmeCode, lecon: leconCode } = route.params;
@@ -232,6 +243,7 @@ export const LessonScreen = ({ navigation, route }) => {
   const markFragile = usePrep((s) => s.markFragile);
   const rights = useRights();
   const [done, setDone] = useState(false);
+  useResultAnnouncement(done ? `Leçon terminée. ${lecon.titre}` : null);
   const [sizeOpen, setSizeOpen] = useState(false);
   const [resumeBubble, setResumeBubble] = useState(false);
   const [contentH, setContentH] = useState(1);
@@ -333,18 +345,18 @@ export const LessonScreen = ({ navigation, route }) => {
         <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
         <NightBackground />
         <ScrollView contentContainerStyle={[styles.doneContent, { paddingTop: insets.top + 28 }]} showsVerticalScrollIndicator={false}>
-          <Pop><Image source={ART.medal} style={styles.doneMedal} resizeMode="contain" accessible={false} /></Pop>
-          <Animated.View entering={FadeInDown.delay(160).duration(420)} style={{ alignItems: 'center' }}>
-            <Text variant="title" style={[styles.onInk, styles.centerText]} accessibilityRole="header">Leçon terminée</Text>
-            <Text variant="body" style={[styles.onSoft, styles.centerText, { marginTop: 6 }]}>{lecon.titre}</Text>
-          </Animated.View>
-          <Animated.View entering={FadeInDown.delay(260).duration(420)} style={styles.doneStats}>
+          <CompletionStamp label="Leçon terminée" eventKey={`lesson:${programmeCode}:${leconCode}`} onInk />
+          <View style={{ alignItems: 'center' }} accessibilityLiveRegion="polite">
+            <Text variant="title" style={[styles.onInk, styles.centerText]} accessibilityRole="header">{lecon.titre}</Text>
+          </View>
+          <View style={styles.doneStats}>
             <View style={styles.doneStat}><Text style={[type.numeral, styles.doneStatValue]}>{lecon.duree}</Text><Text variant="caption" style={styles.onSoft}>min de lecture</Text></View>
             <View style={styles.doneStatSep} />
             <View style={styles.doneStat}><Text style={[type.numeral, styles.doneStatValue]}>{`${Math.round(minutesJour)}/${objectif}`}</Text><Text variant="caption" style={styles.onSoft}>min aujourd’hui</Text></View>
-          </Animated.View>
+          </View>
           {recap.length ? (
-            <Animated.View entering={FadeInDown.delay(340).duration(420)} style={styles.doneRecap}>
+            <View style={styles.doneRecap}>
+              <CopyMargin style={{ left: 14, top: 20, bottom: 20 }} />
               <Text variant="h2" style={styles.ink}>Ce qu’il faut retenir</Text>
               {recap.map((r, i) => (
                 <View key={r} style={styles.doneRecapRow}>
@@ -352,14 +364,15 @@ export const LessonScreen = ({ navigation, route }) => {
                   <Text variant="body" style={[styles.ink, { flex: 1 }]}>{r}</Text>
                 </View>
               ))}
-            </Animated.View>
+            </View>
           ) : null}
+          <View style={styles.doneSpacer} />
+          <View style={[styles.doneActions, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
+            <PrepButton title="Passer aux exercices" icon={ArrowRight} onPress={() => navigation.replace('PrepSession', sessionParams.niveau(programmeCode, mod.code, 1))} />
+            {nextLessonCode ? <PrepButton title="Leçon suivante" variant="secondary" onPress={() => navigation.replace('PrepLesson', { programme: programmeCode, lecon: nextLessonCode })} style={{ marginTop: 10 }} /> : null}
+            <PrepButton title="Retour au module" variant="link" onPress={() => navigation.goBack()} style={styles.tertiaryAction} textStyle={styles.tertiaryText} />
+          </View>
         </ScrollView>
-        <View style={[styles.doneActions, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
-          <PrepButton title="Passer aux exercices" icon={ArrowRight} onPress={() => navigation.replace('PrepSession', sessionParams.niveau(programmeCode, mod.code, 1))} />
-          {nextLessonCode ? <PrepButton title="Leçon suivante" variant="secondary" onPress={() => navigation.replace('PrepLesson', { programme: programmeCode, lecon: nextLessonCode })} style={{ marginTop: 10 }} /> : null}
-          <PrepButton title="Retour au module" variant="link" onPress={() => navigation.goBack()} />
-        </View>
       </View>
     );
   }
@@ -389,6 +402,7 @@ export const LessonScreen = ({ navigation, route }) => {
         showsVerticalScrollIndicator={false}
       >
         <LinedPaper height={contentH} />
+        <CopyMargin style={{ left: 10, top: 24, bottom: 130 }} />
         <View style={styles.row}>
           <SubjectIcon nom={mod.matiere} teinte={ref?.teinte} size={28} />
           <Text variant="caption" style={[styles.modKicker, { color: tint.tint }]}>{`${mod.matiere} · Module ${ref?.numero || ''}`}</Text>
@@ -409,14 +423,14 @@ export const LessonScreen = ({ navigation, route }) => {
             style={styles.lessonVideo}
           />
         ) : null}
-        <View style={{ gap: 18 }} onLayout={vs.anchor('texte')}>
+        <View style={{ gap: 24 }} onLayout={vs.anchor('texte')}>
           {lecon.blocs.map((bloc, i) => (
-            <Animated.View key={`${lecon.code}-${i}`} entering={reduce ? undefined : FadeInDown.delay(Math.min(i, 6) * 40).duration(320)}>
+            <View key={`${lecon.code}-${i}`}>
               <LessonBlock bloc={bloc} tint={tint.tint} size={size} onMiniResult={(code, ok) => { if (!ok) markFragile(programmeCode, code, mod.notions[0]?.code); }} />
-            </Animated.View>
+            </View>
           ))}
         </View>
-        <View style={{ height: 130 }} />
+        <View style={{ height: 24 }} />
       </Animated.ScrollView>
       {video ? (
         <VideoDock
@@ -431,23 +445,23 @@ export const LessonScreen = ({ navigation, route }) => {
         />
       ) : null}
       {sizeOpen ? (
-        <Animated.View entering={FadeInDown.duration(180)} exiting={FadeOut.duration(120)} style={styles.sizePicker}>
+        <Animated.View entering={reduce ? undefined : FadeIn.duration(150)} exiting={reduce ? undefined : FadeOut.duration(120)} style={styles.sizePicker}>
           {SIZES.map((sz) => (
             <Pressable key={sz} onPress={() => { haptic.select(); setPrefs({ tailleTexte: sz }); }} accessibilityLabel={`Taille ${sz}`} accessibilityState={{ selected: size === sz }} style={[styles.sizeBtn, size === sz && styles.sizeOn]}>
-              <Text style={{ fontSize: sz - 2, fontFamily: theme.fontFamily.serif, color: size === sz ? '#FFF' : brand.ink }}>A</Text>
+              <Text style={{ fontSize: sz - 2, fontFamily: theme.fontFamily.serif, color: size === sz ? brand.onInk : brand.ink }}>A</Text>
             </Pressable>
           ))}
         </Animated.View>
       ) : null}
-      {resumeBubble ? <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.bubble}><Text variant="caption" style={{ color: '#FFF' }}>Reprise où tu t’étais arrêté</Text></Animated.View> : null}
+      {resumeBubble ? <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.bubble}><Text variant="caption" style={{ color: brand.onInk }}>Reprise où tu t’étais arrêté</Text></Animated.View> : null}
       {versionBubble ? (
         <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(150)} style={styles.bubble} accessibilityLiveRegion="polite">
-          <Text variant="caption" style={{ color: '#FFF' }}>{versionBubble === 'fr' ? 'Cours expliqué en français · même passage' : 'Cours en anglais · même passage'}</Text>
+          <Text variant="caption" style={{ color: brand.onInk }}>{versionBubble === 'fr' ? 'Cours expliqué en français · même passage' : 'Cours en anglais · même passage'}</Text>
         </Animated.View>
       ) : null}
       {nearEnd || contentH <= viewH + 40 ? (
-        <Animated.View entering={FadeInDown.duration(260)} style={[styles.sticky, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
-          <LinearGradient colors={['rgba(252,250,245,0)', brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
+        <Animated.View entering={reduce ? undefined : FadeIn.duration(150)} style={[styles.sticky, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
+          <LinearGradient colors={[theme.brand.paperTransparent, brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
           <PrepButton title="Terminer la leçon" icon={Check} onPress={finish} />
         </Animated.View>
       ) : null}
@@ -456,68 +470,74 @@ export const LessonScreen = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  paper: { flex: 1, backgroundColor: brand.paper },
-  ink: { color: brand.ink },
-  muted: { color: brand.inkSoft },
-  mutedLight: { color: brand.inkMuted, marginTop: 4 },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  between: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
-  stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
-  roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
-  headerChip: { flexShrink: 1, flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 14, height: 34, borderRadius: 17, backgroundColor: 'rgba(255,255,255,0.08)' },
-  headerChipText: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold },
-  headerTitle: { flexShrink: 1, marginHorizontal: 8 },
-  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  tintDot: { width: 8, height: 8, borderRadius: 4 },
-  modContent: { paddingHorizontal: 20, paddingTop: 26, paddingBottom: 140 },
-  modHead: { flexDirection: 'row', alignItems: 'center', gap: 14 },
-  modKicker: { fontFamily: theme.fontFamily.semiBold },
-  lessonVideo: { marginBottom: 28 },
-  modMeta: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 20, padding: 14, borderRadius: 20, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  modPct: { fontFamily: theme.fontFamily.bold, fontSize: 14, color: brand.ink },
-  metaFacts: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' },
-  metaFact: { alignItems: 'center' },
-  metaValue: { fontSize: 24, lineHeight: 29, color: brand.ink },
-  metaSep: { width: StyleSheet.hairlineWidth, height: 32, backgroundColor: brand.line },
-  segment: { marginTop: 22 },
-  list: { gap: 10, marginTop: 16 },
-  rowTitle: { color: brand.ink, fontFamily: theme.fontFamily.semiBold },
-  rowCurrent: { borderWidth: 1.5, borderColor: 'rgba(108,40,56,0.55)' },
-  lessonRow: { minHeight: 76, flexDirection: 'row', alignItems: 'center', gap: 14, paddingHorizontal: 14, paddingVertical: 12, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  lessonNum: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', borderWidth: 1.5, borderColor: brand.lineStrong, backgroundColor: brand.sheet },
-  lessonNumText: { fontFamily: theme.fontFamily.bold, fontSize: 15, color: brand.inkSoft },
-  lessonNext: { borderColor: brand.burgundy, backgroundColor: brand.burgundyWash },
-  lessonDone: { backgroundColor: colors.success, borderColor: colors.success },
-  levelCard: { minHeight: 92, flexDirection: 'row', alignItems: 'center', gap: 14, padding: 16, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  levelLocked: { backgroundColor: brand.paperDim, shadowOpacity: 0, elevation: 0 },
-  levelGold: { borderColor: brand.gold, borderWidth: 1.5 },
-  levelSoon: { opacity: 0.55 },
-  levelBadge: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
-  levelScore: { flexDirection: 'row', alignItems: 'baseline', gap: 1 },
-  levelScoreText: { fontSize: 24, lineHeight: 29, color: brand.ink },
-  subjectsLink: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 24, padding: 14, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line },
-  subjectsIcon: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.ink },
-  sticky: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingHorizontal: 20, paddingTop: 24 },
-  readBar: { height: 3, backgroundColor: brand.line, overflow: 'hidden' },
-  readFill: { height: 3, width: '100%', backgroundColor: brand.burgundy, transformOrigin: 'left' },
-  sizePicker: { position: 'absolute', right: 16, top: 12, flexDirection: 'row', gap: 6, padding: 6, borderRadius: 16, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.lg },
-  sizeBtn: { width: 44, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
-  sizeOn: { backgroundColor: brand.burgundy },
-  readerContent: { paddingHorizontal: 24, paddingTop: 24 },
-  bubble: { position: 'absolute', alignSelf: 'center', top: 24, paddingHorizontal: 14, paddingVertical: 8, borderRadius: 16, backgroundColor: brand.ink },
-  night: { flex: 1, backgroundColor: brand.inkDeep },
-  onInk: { color: brand.onInk },
-  onSoft: { color: brand.onInkSoft },
-  centerText: { textAlign: 'center' },
-  doneContent: { paddingHorizontal: 24, alignItems: 'center', paddingBottom: 24 },
-  doneMedal: { width: 168, height: 168 },
-  doneStats: { flexDirection: 'row', alignItems: 'center', gap: 20, marginTop: 22, paddingVertical: 14, paddingHorizontal: 24, borderRadius: 18, backgroundColor: 'rgba(255,255,255,0.06)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.14)' },
-  doneStat: { alignItems: 'center', minWidth: 96 },
-  doneStatValue: { color: brand.goldLight, fontSize: 28, lineHeight: 34 },
-  doneStatSep: { width: StyleSheet.hairlineWidth, height: 36, backgroundColor: 'rgba(255,255,255,0.18)' },
-  doneRecap: { alignSelf: 'stretch', marginTop: 22, padding: 18, borderRadius: 22, backgroundColor: brand.paper, gap: 12 },
-  doneRecapRow: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
-  doneRecapNum: { width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.goldWash, marginTop: 1 },
-  doneActions: { paddingHorizontal: 20, paddingTop: 14, backgroundColor: brand.paper, borderTopLeftRadius: 28, borderTopRightRadius: 28 },
+const useStyles = createThemedStyles(({ brand, theme, colors }) => {
+  const styles = StyleSheet.create({
+    paper: { flex: 1, backgroundColor: brand.paper },
+    ink: { color: brand.ink },
+    muted: { color: brand.inkSoft },
+    mutedLight: { color: brand.inkMuted, marginTop: 4 },
+    row: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 8 },
+    between: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
+    stackHeader: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
+    roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
+    headerChip: { flexShrink: 1, flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 14, paddingVertical: 6, minHeight: 34, borderRadius: 17, backgroundColor: 'rgba(255,255,255,0.08)' },
+    headerChipText: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold, flexShrink: 1 },
+    headerTitle: { flexShrink: 1, marginHorizontal: 8 },
+    headerRight: { flexDirection: 'row', flexWrap: 'wrap', marginLeft: 'auto', alignItems: 'center', gap: 8 },
+    tintDot: { width: 8, height: 8, borderRadius: 4 },
+    modContent: { paddingHorizontal: 20, paddingTop: 26, paddingBottom: 24 },
+    modHead: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+    modKicker: { fontFamily: theme.fontFamily.semiBold },
+    lessonVideo: { marginBottom: 28 },
+    modMeta: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16, marginTop: 24, paddingVertical: 18, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    modPct: { fontFamily: theme.fontFamily.bold, fontSize: 14, color: brand.ink },
+    metaFacts: { flexGrow: 1, flexBasis: 220, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' },
+    metaFact: { alignItems: 'center' },
+    metaValue: { fontSize: 24, lineHeight: 29, color: brand.ink },
+    metaSep: { width: StyleSheet.hairlineWidth, height: 32, backgroundColor: brand.line },
+    segment: { marginTop: 22 },
+    list: { gap: 8, marginTop: 20 },
+    rowTitle: { color: brand.ink, fontFamily: theme.fontFamily.semiBold },
+    rowCurrent: { borderWidth: 1.5, borderColor: brand.burgundy, borderRadius: 16, backgroundColor: brand.sheet },
+    lessonRow: { minHeight: 88, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 8, paddingVertical: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    lessonNum: { minWidth: 40, minHeight: 40, padding: 6, borderRadius: 20, alignItems: 'center', justifyContent: 'center', borderWidth: 1.5, borderColor: brand.lineStrong, backgroundColor: brand.sheet },
+    lessonNumText: { fontFamily: theme.fontFamily.bold, fontSize: 15, color: brand.inkSoft },
+    lessonNext: { borderColor: brand.burgundy, backgroundColor: brand.burgundySolid },
+    lessonDone: { backgroundColor: colors.successSolid, borderColor: colors.success },
+    levelCard: { minHeight: 100, flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 8, paddingVertical: 18, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    levelLocked: { backgroundColor: brand.paperDim, shadowOpacity: 0, elevation: 0 },
+    levelGold: { borderBottomColor: brand.gold },
+    levelSoon: { backgroundColor: brand.paperDim },
+    levelBadge: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
+    levelScore: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', gap: 1, maxWidth: '24%' },
+    levelScoreText: { fontSize: 24, lineHeight: 29, color: brand.ink },
+    subjectsLink: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 24, padding: 14, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line },
+    subjectsIcon: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.night },
+    sticky: { paddingHorizontal: 20, paddingTop: 24 },
+    readBar: { height: 3, backgroundColor: brand.line, overflow: 'hidden' },
+    readFill: { height: 3, width: '100%', backgroundColor: brand.burgundySolid, transformOrigin: 'left' },
+    sizePicker: { alignSelf: 'flex-end', margin: 12, flexWrap: 'wrap', flexDirection: 'row', gap: 6, padding: 6, borderRadius: 16, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.lg },
+    sizeBtn: { minWidth: 44, minHeight: 44, padding: 8, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+    sizeOn: { backgroundColor: brand.burgundySolid },
+    readerContent: { paddingHorizontal: 24, paddingTop: 24 },
+    bubble: { position: 'absolute', alignSelf: 'center', top: 24, paddingHorizontal: 14, paddingVertical: 8, borderRadius: 16, backgroundColor: brand.night },
+    night: { ...theme.layout.readingFrame, flex: 1, backgroundColor: brand.inkDeep },
+    onInk: { color: brand.onInk },
+    onSoft: { color: brand.onInkSoft },
+    centerText: { textAlign: 'center' },
+    doneContent: { flexGrow: 1, paddingHorizontal: 24, alignItems: 'center' },
+
+    doneStats: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: 20, marginTop: 18, paddingVertical: 14 },
+    doneStat: { alignItems: 'center', minWidth: 96 },
+    doneStatValue: { color: brand.goldLight, fontSize: 28, lineHeight: 34 },
+    doneStatSep: { width: StyleSheet.hairlineWidth, height: 36, backgroundColor: 'rgba(255,255,255,0.18)' },
+    doneRecap: { alignSelf: 'stretch', marginTop: 22, padding: 20, paddingLeft: 32, borderRadius: 22, backgroundColor: brand.paper, gap: 16 },
+    doneRecapRow: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
+    doneRecapNum: { minWidth: 24, minHeight: 24, paddingHorizontal: 6, paddingVertical: 2, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.goldWash, marginTop: 1 },
+    tertiaryAction: { alignSelf: 'center', marginTop: 10, paddingHorizontal: 4, backgroundColor: brand.paper, borderColor: brand.line },
+    tertiaryText: { color: brand.inkSoft, fontSize: 14 },
+    doneSpacer: { flex: 1, minHeight: 28 },
+    doneActions: { alignSelf: 'stretch', marginHorizontal: -24, paddingHorizontal: 20, paddingTop: 18, backgroundColor: brand.paper, borderTopLeftRadius: 28, borderTopRightRadius: 28 },
+  });
+  return { styles };
 });

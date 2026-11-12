@@ -1,3 +1,4 @@
+import { useTheme } from '../theme/ThemeProvider';
 import React from 'react';
 import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -31,7 +32,6 @@ import { RankingScreen, CandidateScreen } from '../prep/screens/ProgressScreens'
 import { MockIntroScreen, ProgramInfoScreen, PrepSubscriptionScreen } from '../prep/screens/ExtraScreens';
 import { usePreferences } from '../context/PreferencesContext';
 import usePrep from '../prep/store';
-import theme from '../theme/tokens';
 
 // Écrans hiérarchiques : glissent depuis la droite. Lecteurs plein écran (leçon, session) :
 // montée depuis le bas, sans geste de retour accidentel (quitter demande confirmation, § 5.3).
@@ -42,6 +42,7 @@ const sheet = { animation: 'slide_from_bottom' };
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
+  const { theme } = useTheme();
   const { preferences, isPreferencesReady } = usePreferences();
   const prepReady = usePrep((s) => s.ready);
   const onboardingDone = usePrep((s) => s.onboarding.fait);

@@ -1,10 +1,14 @@
+import useAsyncAction from '../hooks/useAsyncAction';
+import { SkeletonRows } from '../components/ui/Skeleton';
+import { TouchableOpacity } from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
+
 import { getErrorAlert } from '../utils/userMessages';
 import React, { useState, useCallback } from 'react';
 import {
   View,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   RefreshControl,
   Alert,
 } from 'react-native';
@@ -16,7 +20,7 @@ import Text from '../components/ui/Text';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import EmptyState from '../components/ui/EmptyState';
-import theme from '../theme/tokens';
+
 import {
   getTrashedDocuments,
   restoreDocument,
@@ -25,9 +29,13 @@ import {
 } from '../services/documents';
 
 const AdminTrashScreen = ({ navigation }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const [trashedDocs, setTrashedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [runMutation, mutating] = useAsyncAction();
+  const [mutationId, setMutationId] = useState(null);
 
   const loadTrash = async () => {
     try {
@@ -61,14 +69,15 @@ const AdminTrashScreen = ({ navigation }) => {
         { text: 'Annuler', style: 'cancel' },
         {
           text: 'Restaurer',
-          onPress: async () => {
+          onPress: () => runMutation(async () => {
+            setMutationId(docId);
             try {
               await restoreDocument(docId);
               setTrashedDocs((prev) => prev.filter((doc) => (doc._id || doc.id) !== docId));
             } catch (err) {
               Alert.alert(...getErrorAlert(err, 'restauration', 'vous'));
             }
-          },
+          }),
         },
       ]
     );
@@ -83,14 +92,15 @@ const AdminTrashScreen = ({ navigation }) => {
         {
           text: 'Supprimer',
           style: 'destructive',
-          onPress: async () => {
+          onPress: () => runMutation(async () => {
+            setMutationId(docId);
             try {
               await permanentlyDeleteDocument(docId);
               setTrashedDocs((prev) => prev.filter((doc) => (doc._id || doc.id) !== docId));
             } catch (err) {
               Alert.alert(...getErrorAlert(err, 'suppression', 'vous'));
             }
-          },
+          }),
         },
       ]
     );
@@ -151,7 +161,7 @@ const AdminTrashScreen = ({ navigation }) => {
         }
         showsVerticalScrollIndicator={false}
       >
-        {!loading && trashedDocs.length === 0 ? (
+        {loading && !trashedDocs.length ? <SkeletonRows count={4} /> : !loading && trashedDocs.length === 0 ? (
           <EmptyState
             icon={Trash2}
             title="Corbeille vide"
@@ -195,6 +205,8 @@ const AdminTrashScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                       style={[styles.actionButton, styles.restoreButton]}
+                      loading={mutating && mutationId === id}
+                      disabled={mutating}
                       onPress={() => handleRestore(id)}
                       activeOpacity={0.85}
                     >
@@ -206,6 +218,8 @@ const AdminTrashScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                       style={[styles.actionButton, styles.deleteButton]}
+                      loading={mutating && mutationId === id}
+                      disabled={mutating}
                       onPress={() => handlePermanentDelete(id)}
                       activeOpacity={0.75}
                     >
@@ -222,113 +236,117 @@ const AdminTrashScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: theme.spacing.sm,
-    paddingVertical: theme.spacing.sm,
-    backgroundColor: theme.colors.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-  },
-  backButton: {
-    padding: theme.spacing.sm,
-  },
-  headerTitleContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: '700',
-    letterSpacing: -0.4,
-  },
-  subtitle: {
-    fontSize: 14,
-  },
-  content: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 32,
-  },
-  list: {
-    gap: 12,
-  },
-  card: {
-    padding: 14,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 1,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 8,
-  },
-  info: {
-    flex: 1,
-    marginRight: 8,
-  },
-  docTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 4,
-    color: theme.colors.textPrimary,
-  },
-  meta: {
-    flexDirection: 'column',
-    gap: 2,
-  },
-  actions: {
-    flexDirection: 'row',
-    gap: 8,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.borderLight,
-    paddingTop: 12,
-    marginTop: 4,
-  },
-  actionButton: {
-    flex: 1,
-    height: 38,
-    borderRadius: theme.radius.md,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  actionText: {
-    marginLeft: 6,
-    fontWeight: '600',
-  },
-  previewButton: {
-    backgroundColor: theme.colors.primaryWash,
-    borderWidth: 1,
-    borderColor: theme.colors.primary,
-  },
-  restoreButton: {
-    backgroundColor: theme.colors.successWash,
-    borderWidth: 1,
-    borderColor: theme.colors.success,
-  },
-  deleteButton: {
-    flex: 0.4,
-    backgroundColor: theme.colors.errorWash,
-    borderWidth: 1,
-    borderColor: theme.colors.error,
-  },
-});
-
 export default AdminTrashScreen;
+
+const useStyles = createThemedStyles(({ theme, studySurface }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.sm,
+      backgroundColor: theme.colors.surface,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+    },
+    backButton: {
+      padding: theme.spacing.sm,
+    },
+    headerTitleContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    title: {
+      fontSize: 22,
+      fontWeight: '700',
+      letterSpacing: -0.4,
+    },
+    subtitle: {
+      fontSize: 14,
+    },
+    content: {
+      flex: 1,
+    },
+    contentContainer: {
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 32,
+    },
+    list: {
+      gap: 12,
+    },
+    card: {
+      padding: 14,
+      borderWidth: 1,
+      borderColor: theme.colors.borderLight,
+      shadowColor: studySurface.adminShadow,
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity: 0.05,
+      shadowRadius: 10,
+      elevation: 1,
+    },
+    cardHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      marginBottom: 8,
+    },
+    info: {
+      flex: 1,
+      marginRight: 8,
+    },
+    docTitle: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginBottom: 4,
+      color: theme.colors.textPrimary,
+    },
+    meta: {
+      flexDirection: 'column',
+      gap: 2,
+    },
+    actions: {
+      flexDirection: 'row', flexWrap: 'wrap',
+      gap: 8,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.borderLight,
+      paddingTop: 12,
+      marginTop: 4,
+    },
+    actionButton: {
+      flexGrow: 1, flexBasis: 140,
+      minHeight: 44,
+      paddingVertical: 8,
+      borderRadius: theme.radius.md,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    actionText: {
+      marginLeft: 6,
+      fontWeight: '600',
+    },
+    previewButton: {
+      backgroundColor: theme.colors.primaryWash,
+      borderWidth: 1,
+      borderColor: theme.colors.primary,
+    },
+    restoreButton: {
+      backgroundColor: theme.colors.successWash,
+      borderWidth: 1,
+      borderColor: theme.colors.success,
+    },
+    deleteButton: {
+      flex: 0.4,
+      backgroundColor: theme.colors.errorWash,
+      borderWidth: 1,
+      borderColor: theme.colors.error,
+    },
+  });
+  return { styles };
+});

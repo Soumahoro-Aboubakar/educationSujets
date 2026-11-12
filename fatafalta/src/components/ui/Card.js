@@ -1,6 +1,7 @@
+import { TouchableOpacity } from './FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import theme from '../../theme/tokens';
+import { View, StyleSheet, } from 'react-native';
 
 /**
  * Base Card component with shadow and radius
@@ -14,6 +15,8 @@ const Card = ({
   shadow = 'sm',
   ...props
 }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const cardStyle = [
     styles.card,
     theme.shadows[shadow],
@@ -40,14 +43,17 @@ const Card = ({
   );
 };
 
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    overflow: 'hidden',
-  },
-});
-
 export default Card;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    card: {
+      backgroundColor: theme.colors.surface,
+      borderRadius: theme.radius.lg,
+      borderWidth: 1,
+      borderColor: theme.colors.borderLight,
+      overflow: 'hidden',
+    },
+  });
+  return { styles };
+});

@@ -1,5 +1,8 @@
+import useAsyncAction from '../hooks/useAsyncAction';
+import Pressable from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { FileDown, SearchX, Share2, Trash2 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
@@ -13,9 +16,6 @@ import { openDownloadedFile, shareDownloadedFile } from '../hooks/useDownload';
 import useDownloadStore from '../store/useDownloadStore';
 import { formatDate } from '../utils/format';
 import { getDocumentTitle } from '../utils/document';
-import theme from '../theme/tokens';
-
-const { brand } = theme;
 
 // Filet de sécurité si l'événement de fin de transition n'est jamais émis.
 const TRANSITION_FALLBACK_MS = 450;
@@ -31,6 +31,7 @@ const normalize = (value) => String(value || '')
  * dans les onglets, il s'affiche sans bouton retour.
  */
 const DownloadsScreen = () => {
+  const { styles } = useStyles();
   const navigation = useNavigation();
   const route = useRoute();
   const isStacked = route.name === 'Downloads';
@@ -39,6 +40,9 @@ const DownloadsScreen = () => {
   const removeDownload = useDownloadStore((state) => state.removeDownload);
   const getLocalUri = useDownloadStore((state) => state.getLocalUri);
   const [query, setQuery] = useState('');
+  const [runRemove, removing] = useAsyncAction();
+  const [runFile, filePending] = useAsyncAction();
+  const [removingId, setRemovingId] = useState(null);
   // La liste est construite après l'animation d'ouverture : la transition
   // reste fluide et un squelette occupe l'écran pendant ce court instant.
   const [ready, setReady] = useState(!isStacked);
@@ -66,15 +70,15 @@ const DownloadsScreen = () => {
     });
   }, [documents, query]);
 
-  const open = (item) => openDownloadedFile(item.document, { getLocalUri, removeDownload });
-  const share = (item) => shareDownloadedFile(item.document, { getLocalUri });
+  const open = (item) => runFile(() => openDownloadedFile(item.document, { getLocalUri, removeDownload }));
+  const share = (item) => runFile(() => shareDownloadedFile(item.document, { getLocalUri }));
   const remove = (item) => {
     Alert.alert(
       'Supprimer le téléchargement',
       `« ${getDocumentTitle(item.document)} » sera retiré de ton appareil.`,
       [
         { text: 'Annuler', style: 'cancel' },
-        { text: 'Supprimer', style: 'destructive', onPress: () => removeDownload(item.id) },
+        { text: 'Supprimer', style: 'destructive', onPress: () => runRemove(async () => { setRemovingId(item.id); await removeDownload(item.id); }) },
       ]
     );
   };
@@ -84,11 +88,11 @@ const DownloadsScreen = () => {
 
   const renderItem = ({ item }) => (
     <View>
-      <DocumentCard document={item.document} onPress={() => open(item)} isDownloaded />
+      <DocumentCard document={item.document} disabled={filePending} onPress={() => open(item)} isDownloaded />
       <View style={styles.itemFooter}>
         <Text variant="caption" style={styles.itemDate}>Téléchargé le {formatDate(item.downloadedAt)}</Text>
-        <IconAction icon={Share2} label="Partager" onPress={() => share(item)} />
-        <IconAction icon={Trash2} label="Supprimer" onPress={() => remove(item)} danger />
+        <IconAction icon={Share2} label="Partager" disabled={filePending} onPress={() => share(item)} />
+        <IconAction icon={Trash2} label="Supprimer" loading={removing && removingId === item.id} disabled={removing} onPress={() => remove(item)} danger />
       </View>
     </View>
   );
@@ -153,74 +157,85 @@ const DownloadsScreen = () => {
   );
 };
 
-const IconAction = ({ icon: Icon, label, onPress, danger }) => (
-  <Pressable
+const IconAction = ({ icon: Icon, label, onPress, danger, loading, disabled }) => {
+  const { theme, brand } = useTheme();
+  const { styles } = useStyles();
+  return (<Pressable
     accessibilityRole="button"
     accessibilityLabel={label}
     hitSlop={theme.hitSlop}
     onPress={onPress}
+    loading={loading}
+    disabled={disabled}
     style={({ pressed }) => [styles.iconAction, pressed && styles.iconActionPressed]}
   >
     <Icon size={17} color={danger ? brand.burgundy : brand.inkSoft} strokeWidth={1.9} />
-  </Pressable>
-);
+  </Pressable>);
+};
 
-const Separator = () => <View style={styles.separator} />;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  searchBar: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.base,
-  },
-  body: {
-    flex: 1,
-  },
-  list: {
-    flexGrow: 1,
-    paddingHorizontal: theme.layout.gutter,
-    paddingBottom: theme.spacing['4xl'],
-  },
-  listEmpty: {
-    flexGrow: 1,
-  },
-  count: {
-    paddingTop: theme.spacing.lg,
-    paddingBottom: theme.spacing.xs,
-    color: brand.inkSoft,
-  },
-  itemFooter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.xs,
-    marginTop: -theme.spacing.sm,
-    paddingLeft: 54,
-    paddingBottom: theme.spacing.sm,
-  },
-  itemDate: {
-    flex: 1,
-    color: brand.inkMuted,
-    fontFamily: theme.fontFamily.regular,
-    fontSize: 12,
-  },
-  iconAction: {
-    width: 36,
-    height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.full,
-  },
-  iconActionPressed: {
-    backgroundColor: brand.pressed,
-  },
-  separator: {
-    marginLeft: 54,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: brand.line,
-  },
-});
+const Separator = () => {
+  const { styles } = useStyles();
+  return (<View style={styles.separator} />);
+};
 
 export default DownloadsScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    searchBar: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.base,
+    },
+    body: {
+      flex: 1,
+    },
+    list: {
+      flexGrow: 1,
+      paddingHorizontal: theme.layout.gutter,
+      paddingBottom: theme.spacing['4xl'],
+    },
+    listEmpty: {
+      flexGrow: 1,
+    },
+    count: {
+      paddingTop: theme.spacing.lg,
+      paddingBottom: theme.spacing.xs,
+      color: brand.inkSoft,
+    },
+    itemFooter: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.xs,
+      marginTop: -theme.spacing.sm,
+      paddingLeft: 54,
+      paddingBottom: theme.spacing.sm,
+    },
+    itemDate: {
+      flex: 1,
+      color: brand.inkMuted,
+      fontFamily: theme.fontFamily.regular,
+      fontSize: 12,
+    },
+    iconAction: {
+      width: 36,
+      minHeight: 44,
+      paddingVertical: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: theme.radius.full,
+    },
+    iconActionPressed: {
+      backgroundColor: brand.pressed,
+    },
+    separator: {
+      marginLeft: 54,
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: brand.line,
+    },
+  });
+  return { styles };
+});

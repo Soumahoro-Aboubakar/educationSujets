@@ -1,16 +1,19 @@
+import { TouchableOpacity } from './ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import React, { useContext } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { LogOut, User, LogIn } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from '../context/AuthContext';
-import theme from '../theme/tokens';
 
 /**
  * Header Account Component
  * Displays user info or login/register buttons based on auth state
  */
 const HeaderAccount = () => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const { user, isAuthenticated, logout } = useContext(AuthContext);
   const navigation = useNavigation();
 
@@ -66,58 +69,61 @@ const HeaderAccount = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-  },
-  button: {
-    flexDirection: 'row',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-    alignItems: 'center',
-    gap: 6,
-  },
-  loginButton: {
-    backgroundColor: theme.colors.primaryWash,
-    borderWidth: 1,
-    borderColor: theme.colors.primary,
-    marginRight: 8,
-  },
-  registerButton: {
-    backgroundColor: theme.colors.primary,
-  },
-  buttonText: {
-    fontWeight: '600',
-  },
-  userInfo: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: theme.colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatarText: {
-    fontWeight: '700',
-  },
-  userName: {
-    fontWeight: '600',
-    marginBottom: 2,
-  },
-  logoutButton: {
-    padding: 8,
-  },
-});
-
 export default HeaderAccount;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: 16,
+      paddingVertical: 8,
+    },
+    button: {
+      flexDirection: 'row',
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 8,
+      alignItems: 'center',
+      gap: 6,
+    },
+    loginButton: {
+      backgroundColor: theme.colors.primaryWash,
+      borderWidth: 1,
+      borderColor: theme.colors.primary,
+      marginRight: 8,
+    },
+    registerButton: {
+      backgroundColor: theme.brand.night,
+    },
+    buttonText: {
+      fontWeight: '600',
+    },
+    userInfo: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 12,
+    },
+    avatar: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: theme.brand.night,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    avatarText: {
+      fontWeight: '700',
+    },
+    userName: {
+      fontWeight: '600',
+      marginBottom: 2,
+    },
+    logoutButton: {
+      padding: 8,
+    },
+  });
+  return { styles };
+});

@@ -1,12 +1,13 @@
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { getErrorMessage } from '../../utils/userMessages';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeOut, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
+import Animated, { cancelAnimation, FadeIn, FadeInDown, FadeOut, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { BookOpen, Check, Circle as CircleIcon, Flag, Lock, RotateCcw, Sparkles } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import BottomSheet, { Dialog } from '../ui/BottomSheet';
 import { Badge, PrepButton } from '../ui/primitives';
-import { brand, colors, theme, type } from '../theme';
+import { type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
 import prepApi from '../api';
 import usePrep, { useRights } from '../store';
@@ -14,7 +15,10 @@ import { getExercise } from '../content';
 
 // ═══ Mini-cours (E24, § 12.1) ═══════════════════════════════════════════
 export const MiniCoursSheet = ({ visible, miniCours, notion, onRetry, onSkip, onOpenLesson }) => {
+  const { theme, brand } = useTheme();
+  const { styles } = useStyles();
   const [confirm, setConfirm] = useState(false);
+  const reduce = useReduceMotion();
   if (!miniCours) return null;
   return (
     <>
@@ -25,14 +29,14 @@ export const MiniCoursSheet = ({ visible, miniCours, notion, onRetry, onSkip, on
         onClose={() => setConfirm(true)}
         footer={<PrepButton title="Réessayer" iconLeft={RotateCcw} onPress={onRetry} />}
       >
-        <Animated.View entering={FadeInDown.duration(300)} style={styles.row}>
+        <Animated.View entering={reduce ? FadeIn.duration(150) : FadeInDown.duration(300)} style={styles.row}>
           <Badge label="Rappel" tone="burgundy" />
           {notion ? <Text variant="caption" style={styles.muted} numberOfLines={1}>{notion}</Text> : null}
         </Animated.View>
-        <Animated.Text entering={FadeInDown.delay(40).duration(300)} style={[theme.typography.h2, styles.title]}>{miniCours.titre}</Animated.Text>
-        <Animated.Text entering={FadeInDown.delay(80).duration(300)} style={[type.reading, styles.body]}>{miniCours.corps}</Animated.Text>
+        <Animated.Text entering={reduce ? FadeIn.duration(150) : FadeInDown.delay(40).duration(300)} style={[theme.typography.h2, styles.title]}>{miniCours.titre}</Animated.Text>
+        <Animated.Text entering={reduce ? FadeIn.duration(150) : FadeInDown.delay(80).duration(300)} style={[type.reading, styles.body]}>{miniCours.corps}</Animated.Text>
         {miniCours.aRetenir ? (
-          <Animated.View entering={FadeInDown.delay(120).duration(300)} style={styles.retain}>
+          <Animated.View entering={reduce ? FadeIn.duration(150) : FadeInDown.delay(120).duration(300)} style={styles.retain}>
             <Text variant="h3" style={{ color: brand.goldInk }}>À retenir</Text>
             <Text variant="bodyMedium" style={{ color: brand.ink }}>{miniCours.aRetenir}</Text>
           </Animated.View>
@@ -54,14 +58,20 @@ export const MiniCoursSheet = ({ visible, miniCours, notion, onRetry, onSkip, on
 
 // ═══ Raisonnement et verdict IA (E25, § 12.2, § 13) ═════════════════════
 const Thinking = () => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const reduce = useReduceMotion();
   const phrases = ['Lecture de ta démarche…', 'Comparaison avec les étapes clés…', 'Rédaction du retour…'];
   const [i, setI] = useState(0);
   useEffect(() => { const t = setInterval(() => setI((x) => (x + 1) % phrases.length), 1300); return () => clearInterval(t); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const Dot = ({ d }) => {
     const v = useSharedValue(0.3);
-    useEffect(() => { if (!reduce) v.value = withDelay(d, withRepeat(withSequence(withTiming(1, { duration: 380 }), withTiming(0.3, { duration: 380 })), -1)); }, []); // eslint-disable-line react-hooks/exhaustive-deps
-    const s = useAnimatedStyle(() => ({ opacity: v.value, transform: [{ scale: 0.8 + v.value * 0.3 }] }));
+    useEffect(() => {
+      if (reduce) { cancelAnimation(v); v.value = 1; }
+      else v.value = withDelay(d, withRepeat(withSequence(withTiming(1, { duration: 380 }), withTiming(0.3, { duration: 380 })), -1));
+      return () => cancelAnimation(v);
+    }, [reduce, d, v]);
+    const s = useAnimatedStyle(() => ({ opacity: v.value, transform: [{ scale: reduce ? 1 : 0.8 + v.value * 0.3 }] }));
     return <Animated.View style={[styles.dot, s]} />;
   };
   return (
@@ -72,13 +82,10 @@ const Thinking = () => {
   );
 };
 
-const VERDICTS = {
-  exact: { label: 'Bien raisonné', color: colors.success, wash: colors.successWash },
-  partiel: { label: 'Tu y es presque', color: colors.warning, wash: colors.warningWash },
-  faux: { label: 'Reprenons la logique', color: colors.error, wash: colors.errorWash },
-};
-
 export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscribe, onDone }) => {
+  const reduce = useReduceMotion();
+  const { brand } = useTheme();
+  const { VERDICTS, styles } = useStyles();
   const rights = useRights();
   const useIA = usePrep((s) => s.useIA);
   const markFragile = usePrep((s) => s.markFragile);
@@ -172,12 +179,12 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
       {step === 'verdict' && result ? (
         <View style={{ gap: 14 }}>
           {v ? (
-            <Animated.View entering={FadeInDown.duration(300)} style={[styles.verdict, { backgroundColor: v.wash }]}>
-              <View style={[styles.verdictIcon, { backgroundColor: v.color }]}><Sparkles size={18} color="#FFF" /></View>
+            <Animated.View entering={reduce ? FadeIn.duration(150) : FadeInDown.duration(300)} style={[styles.verdict, { backgroundColor: v.wash }]}>
+              <View style={[styles.verdictIcon, { backgroundColor: v.solid }]}><Sparkles size={18} color={brand.onInk} /></View>
               <Text variant="h3" style={{ color: v.color }}>{v.label}</Text>
             </Animated.View>
           ) : (
-            <Animated.View entering={FadeInDown.duration(300)} style={[styles.verdict, { backgroundColor: brand.paperDim }]}>
+            <Animated.View entering={reduce ? FadeIn.duration(150) : FadeInDown.duration(300)} style={[styles.verdict, { backgroundColor: brand.paperDim }]}>
               <Text variant="bodyMedium" style={{ color: brand.inkSoft, flex: 1 }}>
                 {`${failureMessage || 'Vérification momentanément indisponible. Réessaie dans quelques instants.'} En attendant, consulte la démarche attendue ci-dessous. Rien n’a été décompté.`}
               </Text>
@@ -187,8 +194,8 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
           {(result.etapesCles || []).map((etape, i) => {
             const ok = result.etapesValidees?.includes(etape);
             return (
-              <Animated.View key={etape} entering={FadeInDown.delay(120 * i).duration(260)} style={styles.stepRow}>
-                {ok ? <View style={styles.stepOk}><Check size={12} color="#FFF" strokeWidth={3} /></View> : <CircleIcon size={20} color={brand.inkMuted} />}
+              <Animated.View key={etape} entering={reduce ? FadeIn.duration(150) : FadeInDown.delay(40 * i).duration(260)} style={styles.stepRow}>
+                {ok ? <View style={styles.stepOk}><Check size={12} color={brand.onInk} strokeWidth={2.2} /></View> : <CircleIcon size={20} color={brand.inkMuted} />}
                 <Text variant="body" style={[styles.stepText, !ok && v && { color: brand.inkSoft }]}>{etape}</Text>
               </Animated.View>
             );
@@ -201,7 +208,7 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
               title="Je conteste ce verdict"
               variant="link"
               iconLeft={Flag}
-              onPress={() => { prepApi.report({ element: exercice.code, motif: 'verdict', texte }).catch(() => {}); haptic.select(); }}
+              onPress={() => { haptic.select(); return prepApi.report({ element: exercice.code, motif: 'verdict', texte }); }}
             />
           ) : null}
         </View>
@@ -211,8 +218,10 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
 };
 
 // ═══ Verrou « Abonnés » (E37) ═══════════════════════════════════════════
-export const LockedSheet = ({ visible, onClose, onSubscribe, message }) => (
-  <BottomSheet visible={visible} onClose={onClose} maxHeight={0.6}>
+export const LockedSheet = ({ visible, onClose, onSubscribe, message }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
+  return (<BottomSheet visible={visible} onClose={onClose} maxHeight={0.6}>
     <View style={styles.lockedBox}>
       <View style={styles.lockIcon}><Lock size={24} color={brand.goldInk} /></View>
       <Text variant="h2" style={[styles.center, { color: brand.ink }]}>Réservé aux abonnés</Text>
@@ -220,33 +229,42 @@ export const LockedSheet = ({ visible, onClose, onSubscribe, message }) => (
       <PrepButton title="Voir l’abonnement" variant="gold" onPress={onSubscribe} style={{ alignSelf: 'stretch' }} />
       <PrepButton title="Plus tard" variant="link" onPress={onClose} />
     </View>
-  </BottomSheet>
-);
+  </BottomSheet>);
+};
 
-const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  between: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  muted: { color: brand.inkSoft },
-  center: { textAlign: 'center' },
-  title: { color: brand.ink, marginTop: 12 },
-  body: { color: brand.ink, marginTop: 8 },
-  retain: { marginTop: 16, padding: 16, borderRadius: 18, backgroundColor: brand.goldWash, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.35)', gap: 6 },
-  sparkle: { width: 24, height: 24, borderRadius: 12, backgroundColor: brand.goldWash, alignItems: 'center', justifyContent: 'center' },
-  recall: { color: brand.inkSoft, padding: 12, borderRadius: 14, backgroundColor: brand.paperDim },
-  input: { minHeight: 160, padding: 16, borderRadius: 18, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet, textAlignVertical: 'top', color: brand.ink, fontFamily: theme.fontFamily.regular, fontSize: 16, lineHeight: 23 },
-  quota: { width: 8, height: 8, borderRadius: 4, borderWidth: 1, borderColor: brand.gold },
-  quotaOn: { backgroundColor: brand.gold },
-  quote: { padding: 16, borderRadius: 16, backgroundColor: brand.paperDim },
-  quoteText: { color: brand.inkSoft, fontStyle: 'italic' },
-  thinking: { alignItems: 'center', gap: 10, paddingVertical: 20 },
-  dots: { flexDirection: 'row', gap: 8 },
-  dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: brand.gold },
-  verdict: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 16, borderRadius: 18 },
-  verdictIcon: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
-  stepRow: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
-  stepOk: { width: 20, height: 20, borderRadius: 10, backgroundColor: colors.success, alignItems: 'center', justifyContent: 'center', marginTop: 1 },
-  stepText: { flex: 1, color: brand.ink },
-  explBox: { padding: 16, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  lockedBox: { alignItems: 'center', gap: 12, paddingVertical: 8 },
-  lockIcon: { width: 64, height: 64, borderRadius: 32, backgroundColor: brand.goldWash, alignItems: 'center', justifyContent: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.4)' },
+const useStyles = createThemedStyles(({ colors, brand, theme }) => {
+  const VERDICTS = {
+    exact: { label: 'Bien raisonné', color: colors.success, solid: colors.successSolid, wash: colors.successWash },
+    partiel: { label: 'Tu y es presque', color: colors.warning, solid: colors.warningSolid, wash: colors.warningWash },
+    faux: { label: 'Reprenons la logique', color: colors.error, solid: colors.errorSolid, wash: colors.errorWash },
+  };
+
+  const styles = StyleSheet.create({
+    row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+    between: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+    muted: { color: brand.inkSoft },
+    center: { textAlign: 'center' },
+    title: { color: brand.ink, marginTop: 12 },
+    body: { color: brand.ink, marginTop: 8 },
+    retain: { marginTop: 16, padding: 16, borderRadius: 18, backgroundColor: brand.goldWash, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.35)', gap: 6 },
+    sparkle: { width: 24, height: 24, borderRadius: 12, backgroundColor: brand.goldWash, alignItems: 'center', justifyContent: 'center' },
+    recall: { color: brand.inkSoft, padding: 12, borderRadius: 14, backgroundColor: brand.paperDim },
+    input: { minHeight: 160, padding: 16, borderRadius: 18, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet, textAlignVertical: 'top', color: brand.ink, fontFamily: theme.fontFamily.regular, fontSize: 16, lineHeight: 23 },
+    quota: { width: 8, height: 8, borderRadius: 4, borderWidth: 1, borderColor: brand.gold },
+    quotaOn: { backgroundColor: brand.gold },
+    quote: { padding: 16, borderRadius: 16, backgroundColor: brand.paperDim },
+    quoteText: { color: brand.inkSoft, fontStyle: 'italic' },
+    thinking: { alignItems: 'center', gap: 10, paddingVertical: 20 },
+    dots: { flexDirection: 'row', gap: 8 },
+    dot: { width: 10, height: 10, borderRadius: 5, backgroundColor: brand.gold },
+    verdict: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 16, borderRadius: 18 },
+    verdictIcon: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
+    stepRow: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
+    stepOk: { width: 20, height: 20, borderRadius: 10, backgroundColor: colors.successSolid, alignItems: 'center', justifyContent: 'center', marginTop: 1 },
+    stepText: { flex: 1, color: brand.ink },
+    explBox: { padding: 16, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
+    lockedBox: { alignItems: 'center', gap: 12, paddingVertical: 8 },
+    lockIcon: { width: 64, height: 64, borderRadius: 32, backgroundColor: brand.goldWash, alignItems: 'center', justifyContent: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.4)' },
+  });
+  return { VERDICTS, styles };
 });

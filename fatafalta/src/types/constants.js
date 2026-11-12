@@ -51,6 +51,7 @@ export const FILTER_DEFINITIONS = [
 export const DOCUMENTS_PER_PAGE = 12;
 //'https://educationsujets-xaaz.onrender.com';
 
-export const API_BASE_URL = 'https://educationsujets.onrender.com';
+// Production par défaut ; en local : EXPO_PUBLIC_API_URL=http://<IP du Mac>:5000 npx expo start
+export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://educationsujets.onrender.com';
 
 export const DOWNLOAD_DIR = 'fatafalta_downloads';

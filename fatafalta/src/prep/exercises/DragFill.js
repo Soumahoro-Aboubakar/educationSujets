@@ -1,13 +1,15 @@
+import Pressable from '../../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { scheduleOnRN } from 'react-native-worklets';
 import { Check } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
-import { brand, colors, motion, theme, type } from '../theme';
-import { haptic } from '../feedback';
-import { STATE_COLORS, isCorrected, useShake, useShuffled } from './kit';
+import { motion, type } from '../theme';
+import { haptic, useReduceMotion } from '../feedback';
+import { isCorrected, useShake, useShuffled } from './kit';
 
 const MAGNET = 24; // pt : l'emplacement « aimante » l'étiquette en deçà de cette distance
 
@@ -39,6 +41,8 @@ const useDropZones = () => {
 
 /** Étiquette déplaçable : se soulève (échelle 1,06, ombre, rotation 2°), revient en ressort. */
 const DraggableTag = ({ label, onDragStart, onHover, onDrop, onTap, selected, disabled, style, textStyle }) => {
+  const { styles } = useStyles();
+  const reduce = useReduceMotion();
   const tx = useSharedValue(0);
   const ty = useSharedValue(0);
   const lifted = useSharedValue(0);
@@ -83,9 +87,9 @@ const DraggableTag = ({ label, onDragStart, onHover, onDrop, onTap, selected, di
     shadowOpacity: 0.06 + lifted.value * 0.12,
     transform: [
       { translateX: tx.value },
-      { translateY: ty.value - lifted.value * 2 },
-      { scale: 1 + lifted.value * 0.06 },
-      { rotate: `${Math.max(-2, Math.min(2, tx.value / 40)) * lifted.value}deg` },
+      { translateY: ty.value - (reduce ? 0 : lifted.value * 2) },
+      { scale: reduce ? 1 : 1 + lifted.value * 0.06 },
+      { rotate: reduce ? '0deg' : `${Math.max(-2, Math.min(2, tx.value / 40)) * lifted.value}deg` },
     ],
   }));
 
@@ -107,6 +111,8 @@ const DraggableTag = ({ label, onDragStart, onHover, onDrop, onTap, selected, di
 
 // ═══ Glisser pour compléter (§ 11.2, E14) ═══════════════════════════════
 const Hole = ({ register, id, hovered, placed, onPress, status, correctLabel }) => {
+  const { STATE_COLORS, colors } = useTheme();
+  const { styles } = useStyles();
   const shake = useShake(status === 'faux');
   const st = status ? STATE_COLORS[status === 'vide' ? 'faux' : status] : null;
   return (
@@ -121,13 +127,14 @@ const Hole = ({ register, id, hovered, placed, onPress, status, correctLabel }) 
         <Text variant="bodyMedium" style={[styles.holeText, st && { color: st.fg }]}>
           {status && status !== 'juste' ? correctLabel : (placed || ' ')}
         </Text>
-        {status === 'juste' ? <Check size={14} color={colors.success} strokeWidth={3} /> : null}
+        {status === 'juste' ? <Check size={14} color={colors.success} strokeWidth={2.2} /> : null}
       </Pressable>
     </Animated.View>
   );
 };
 
 export const GlisserRenderer = ({ exercice, value, onChange, phase, correction, seed }) => {
+  const { styles } = useStyles();
   const c = exercice.contenu;
   const tags = useShuffled(c.etiquettes, seed);
   const trous = value?.trous || {};
@@ -215,6 +222,9 @@ export const GlisserRenderer = ({ exercice, value, onChange, phase, correction, 
 
 // ═══ Classer dans des catégories (§ 11.6, E17) ══════════════════════════
 export const ClasserRenderer = ({ exercice, value, onChange, phase, correction, seed }) => {
+  const { fontScale } = useWindowDimensions();
+  const { STATE_COLORS, colors } = useTheme();
+  const { styles } = useStyles();
   const c = exercice.contenu;
   const cards = useShuffled(c.cartes, seed);
   const placed = value?.cartes || {};
@@ -245,7 +255,7 @@ export const ClasserRenderer = ({ exercice, value, onChange, phase, correction, 
           const inBin = cards.filter((k) => placed[k.id] === cat.id);
           const missing = corrected ? cards.filter((k) => expected(k.id) === cat.id && placed[k.id] !== cat.id) : [];
           return (
-            <View key={cat.id} ref={zones.register(cat.id)} collapsable={false} style={c.categories.length <= 3 ? styles.binFlex : styles.binWrap}>
+            <View key={cat.id} ref={zones.register(cat.id)} collapsable={false} style={[c.categories.length <= 3 ? styles.binFlex : styles.binWrap, fontScale >= 1.3 && { width: '100%', flexBasis: '100%' }]}>
               <Pressable
                 onPress={() => { if (selected && !corrected) { drop(selected, cat.id); setSelected(null); } }}
                 accessibilityRole="button"
@@ -300,36 +310,39 @@ export const ClasserRenderer = ({ exercice, value, onChange, phase, correction, 
   );
 };
 
-const styles = StyleSheet.create({
-  textFlow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', rowGap: 8 },
-  flowWord: { color: brand.ink },
-  lineBreak: { width: '100%', height: 4 },
-  hole: { minWidth: 76, minHeight: 36, paddingHorizontal: 10, marginHorizontal: 2, borderRadius: 8, borderWidth: 1.5, borderStyle: 'dashed', borderColor: brand.lineStrong, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 4 },
-  holeFilled: { borderStyle: 'solid', borderColor: brand.burgundy, backgroundColor: brand.sheet },
-  holeHover: { borderStyle: 'solid', borderColor: brand.burgundy, backgroundColor: brand.paperDim },
-  holeText: { color: brand.ink, fontSize: 15 },
-  wrongSmall: { position: 'absolute', top: -16, color: colors.error, textDecorationLine: 'line-through', fontSize: 11 },
-  reserve: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 22, padding: 12, borderRadius: 16, backgroundColor: brand.paperDim },
-  tag: { minHeight: 40, paddingHorizontal: 14, justifyContent: 'center', borderRadius: 10, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet, shadowColor: brand.ink, shadowRadius: 4, shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.04, elevation: 0 },
-  tagSelected: { borderColor: brand.burgundy, borderWidth: 2, transform: [{ translateY: -3 }] },
-  tagText: { color: brand.ink, fontSize: 15 },
-  ghost: { borderStyle: 'dashed', backgroundColor: 'transparent', shadowOpacity: 0, elevation: 0 },
-  bins: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  binWrap: { width: '48.5%' },
-  binFlex: { flex: 1 },
-  bin: { minHeight: 120, padding: 10, borderRadius: 16, borderWidth: 1.5, borderStyle: 'dashed', borderColor: brand.lineStrong, backgroundColor: brand.sheet },
-  binHover: { borderStyle: 'solid', borderColor: brand.burgundy, transform: [{ scale: 1.03 }] },
-  binTarget: { borderColor: brand.burgundy },
-  binHead: { gap: 2 },
-  binTitle: { color: brand.ink, fontSize: 10.5, letterSpacing: 0.3 },
-  binCount: { color: brand.inkMuted },
-  pills: { gap: 6, marginTop: 8 },
-  pill: { paddingHorizontal: 8, paddingVertical: 6, borderRadius: 8, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.paper },
-  pillMissing: { borderStyle: 'dashed', borderColor: colors.success, backgroundColor: 'transparent' },
-  pillText: { color: brand.ink, fontSize: 12, lineHeight: 16 },
-  pile: { marginTop: 24, alignItems: 'center', minHeight: 100 },
-  card: { width: '88%', minHeight: 64, paddingHorizontal: 16, paddingVertical: 12, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.sheet, borderWidth: 1, borderColor: brand.lineStrong },
-  cardBehind: { position: 'absolute', top: 0, backgroundColor: brand.paperDim },
-  cardText: { textAlign: 'center', fontSize: 15.5, fontFamily: theme.fontFamily.semiBold },
-  pileCount: { marginTop: 12, color: brand.inkMuted },
+const useStyles = createThemedStyles(({ brand, colors, theme }) => {
+  const styles = StyleSheet.create({
+    textFlow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', rowGap: 8 },
+    flowWord: { color: brand.ink },
+    lineBreak: { width: '100%', height: 4 },
+    hole: { minWidth: 76, minHeight: 44, paddingVertical: 8, paddingHorizontal: 10, marginHorizontal: 2, borderRadius: 8, borderWidth: 1.5, borderStyle: 'dashed', borderColor: brand.lineStrong, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 4 },
+    holeFilled: { borderStyle: 'solid', borderColor: brand.burgundy, backgroundColor: brand.sheet },
+    holeHover: { borderStyle: 'solid', borderColor: brand.burgundy, backgroundColor: brand.paperDim },
+    holeText: { color: brand.ink, fontSize: 15 },
+    wrongSmall: { position: 'absolute', top: -16, color: colors.error, textDecorationLine: 'line-through', fontSize: 11 },
+    reserve: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 22, padding: 12, borderRadius: 16, backgroundColor: brand.paperDim },
+    tag: { minHeight: 44, paddingVertical: 8, paddingHorizontal: 14, justifyContent: 'center', borderRadius: 10, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet, shadowColor: brand.night, shadowRadius: 4, shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.04, elevation: 0 },
+    tagSelected: { borderColor: brand.burgundy, borderWidth: 2, transform: [{ translateY: -3 }] },
+    tagText: { color: brand.ink, fontSize: 15 },
+    ghost: { borderStyle: 'dashed', backgroundColor: 'transparent', shadowOpacity: 0, elevation: 0 },
+    bins: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+    binWrap: { width: '48.5%' },
+    binFlex: { flex: 1 },
+    bin: { minHeight: 120, padding: 10, borderRadius: 16, borderWidth: 1.5, borderStyle: 'dashed', borderColor: brand.lineStrong, backgroundColor: brand.sheet },
+    binHover: { borderStyle: 'solid', borderColor: brand.burgundy, transform: [{ scale: 1.03 }] },
+    binTarget: { borderColor: brand.burgundy },
+    binHead: { gap: 2 },
+    binTitle: { color: brand.ink, fontSize: 10.5, letterSpacing: 0.3 },
+    binCount: { color: brand.inkMuted },
+    pills: { gap: 6, marginTop: 8 },
+    pill: { paddingHorizontal: 8, paddingVertical: 6, borderRadius: 8, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.paper },
+    pillMissing: { borderStyle: 'dashed', borderColor: colors.success, backgroundColor: 'transparent' },
+    pillText: { color: brand.ink, fontSize: 12, lineHeight: 16 },
+    pile: { marginTop: 24, alignItems: 'center', minHeight: 100 },
+    card: { width: '88%', minHeight: 64, paddingHorizontal: 16, paddingVertical: 12, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.sheet, borderWidth: 1, borderColor: brand.lineStrong },
+    cardBehind: { position: 'absolute', top: 0, backgroundColor: brand.paperDim },
+    cardText: { textAlign: 'center', fontSize: 15.5, fontFamily: theme.fontFamily.semiBold },
+    pileCount: { marginTop: 12, color: brand.inkMuted },
+  });
+  return { styles };
 });

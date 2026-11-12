@@ -1,3 +1,4 @@
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React from 'react';
 import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { FileText } from 'lucide-react-native';
@@ -5,13 +6,11 @@ import DocumentCard from './DocumentCard';
 import Skeleton from '../ui/Skeleton';
 import StateView from '../ui/StateView';
 import useDownloadStore from '../../store/useDownloadStore';
-import theme from '../../theme/tokens';
-
-const { brand } = theme;
 
 // Squelette calqué sur DocumentCard (vignette + titre + méta).
-export const DocumentSkeleton = () => (
-  <View accessible accessibilityLabel="Chargement des sujets">
+export const DocumentSkeleton = () => {
+  const { styles } = useStyles();
+  return (<View accessible accessibilityLabel="Chargement des sujets">
     {['82%', '64%', '74%', '58%'].map((width, index) => (
       <React.Fragment key={index}>
         {index > 0 ? <Separator /> : null}
@@ -24,8 +23,8 @@ export const DocumentSkeleton = () => (
         </View>
       </React.Fragment>
     ))}
-  </View>
-);
+  </View>);
+};
 
 const DocumentList = ({
   documents = [],
@@ -42,6 +41,8 @@ const DocumentList = ({
   ListHeaderComponent,
   dimmed = false,
 }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
   const { activeDownloads, isDownloaded } = useDownloadStore();
 
   const renderItem = ({ item }) => (
@@ -49,7 +50,7 @@ const DocumentList = ({
       document={item}
       onPress={() => onDocumentPress?.(item)}
       isDownloading={!!activeDownloads[item._id]?.downloading}
-      downloadProgress={activeDownloads[item._id]?.progress || 0}
+      downloadProgress={activeDownloads[item._id]?.progress ?? null}
       isDownloaded={isDownloaded(item._id)}
     />
   );
@@ -95,45 +96,51 @@ const DocumentList = ({
   );
 };
 
-const Separator = () => <View style={styles.separator} />;
-
-const styles = StyleSheet.create({
-  list: {
-    flexGrow: 1,
-    paddingHorizontal: theme.layout.gutter,
-    paddingBottom: theme.spacing['4xl'],
-  },
-  emptyContent: {
-    flexGrow: 1,
-  },
-  dimmed: {
-    opacity: 0.55,
-  },
-  separator: {
-    height: 10,
-  },
-  skeletonRow: {
-    flexDirection: 'row',
-    gap: 14,
-    padding: 14,
-    borderRadius: 18,
-    backgroundColor: brand.sheet,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: brand.line,
-  },
-  skeletonBody: {
-    flex: 1,
-    paddingTop: 2,
-  },
-  skeletonTone: {
-    backgroundColor: brand.skeleton,
-  },
-  skeletonMeta: {
-    marginTop: 10,
-  },
-  footer: {
-    paddingVertical: theme.spacing.xl,
-  },
-});
+const Separator = () => {
+  const { styles } = useStyles();
+  return (<View style={styles.separator} />);
+};
 
 export default DocumentList;
+
+const useStyles = createThemedStyles(({ theme, brand }) => {
+  const styles = StyleSheet.create({
+    list: {
+      flexGrow: 1,
+      paddingHorizontal: theme.layout.gutter,
+      paddingBottom: theme.spacing['4xl'],
+    },
+    emptyContent: {
+      flexGrow: 1,
+    },
+    dimmed: {
+      opacity: 0.55,
+    },
+    separator: {
+      height: 10,
+    },
+    skeletonRow: {
+      flexDirection: 'row',
+      gap: 14,
+      padding: 14,
+      borderRadius: 18,
+      backgroundColor: brand.sheet,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: brand.line,
+    },
+    skeletonBody: {
+      flex: 1,
+      paddingTop: 2,
+    },
+    skeletonTone: {
+      backgroundColor: brand.skeleton,
+    },
+    skeletonMeta: {
+      marginTop: 10,
+    },
+    footer: {
+      paddingVertical: theme.spacing.xl,
+    },
+  });
+  return { styles };
+});

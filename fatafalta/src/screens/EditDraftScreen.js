@@ -1,16 +1,13 @@
+import Skeleton, { SkeletonRows } from '../components/ui/Skeleton';
+import ScreenHeader from '../components/ui/ScreenHeader';
+import StateView from '../components/ui/StateView';
+import { getUserMessage } from '../utils/userMessages';
+import useAsyncAction from '../hooks/useAsyncAction';
+import { TouchableOpacity } from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorAlert } from '../utils/userMessages';
 import React, { useState, useContext, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Modal,
-  Platform,
-  ActivityIndicator,
-  Alert,
-  Linking
-} from 'react-native';
+import { View, StyleSheet, ScrollView, Modal, Platform, Alert, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as IntentLauncher from 'expo-intent-launcher';
 import { FileText, X, UploadCloud, Eye, Save } from 'lucide-react-native';
@@ -24,12 +21,15 @@ import CorrectionIncludedSwitch from '../components/documents/CorrectionIncluded
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
 import useDrafts from '../hooks/useDrafts';
-import theme from '../theme/tokens';
+
 import { updateDocumentMetadata, validateDocumentStatus, getDownloadUrl } from '../services/documents';
 
 const EditDraftScreen = ({ navigation, route }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
+  const [runSave, savePending] = useAsyncAction();
   const { isAdmin } = useContext(AuthContext);
-  const { getDraftById, loadDrafts } = useDrafts();
+  const { getDraftById, loadDrafts, loading: draftsLoading, error: draftsError } = useDrafts();
 
   const draftId = route?.params?.draftId;
 
@@ -95,7 +95,6 @@ const EditDraftScreen = ({ navigation, route }) => {
       hasParcoursType: draft.parcoursTypeId ? true : null,
       parcoursType: draft.parcoursTypeId?._id ? draft.parcoursTypeId : null,
     });
-    
     setPdfFile({
       name: draft.originalFileName || draft.file || 'Document PDF',
     });
@@ -138,7 +137,7 @@ const EditDraftScreen = ({ navigation, route }) => {
       }
     }
     if (!pdfLocalUri) return;
-    Linking.openURL(pdfLocalUri).catch(() => {
+    await Linking.openURL(pdfLocalUri).catch(() => {
       Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
     });
   };
@@ -161,7 +160,7 @@ const EditDraftScreen = ({ navigation, route }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleUpdate = async (publish = true) => {
+  const handleUpdate = (publish = true) => runSave(async () => {
     if (!validateForm(publish)) return;
 
     setUploading(true);
@@ -186,7 +185,6 @@ const EditDraftScreen = ({ navigation, route }) => {
       if (publish) payload.metadataStatus = 'true';
 
       await updateDocumentMetadata(draftId, payload);
-      
       if (publish) {
         await validateDocumentStatus(draftId, 'approved');
       }
@@ -195,7 +193,6 @@ const EditDraftScreen = ({ navigation, route }) => {
         'Succès',
         publish ? 'Brouillon publié avec succès' : 'Brouillon mis à jour'
       );
-      
       // Refresh drafts list before going back
       await loadDrafts();
       navigation.goBack();
@@ -205,7 +202,7 @@ const EditDraftScreen = ({ navigation, route }) => {
     } finally {
       setUploading(false);
     }
-  };
+  });
 
   if (!isAdmin()) {
     return (
@@ -215,6 +212,17 @@ const EditDraftScreen = ({ navigation, route }) => {
         feature="Modifier et publier des brouillons"
       />
     );
+  }
+
+  if (!isDataLoaded) {
+    return <View style={styles.container}>
+      <ScreenHeader title="Modifier le brouillon" onBack={() => navigation.goBack()} />
+      {draftsLoading ? <SkeletonRows count={5} /> : <StateView
+        title={draftsError?.title || getUserMessage(null, 'documents').title}
+        description={draftsError?.message || getUserMessage(null, 'documents').message}
+        onRetry={() => loadDrafts()}
+      />}
+    </View>;
   }
 
   return (
@@ -271,10 +279,10 @@ const EditDraftScreen = ({ navigation, route }) => {
             onChangeText={setDescription}
             multiline
             numberOfLines={4}
-            style={{ height: 100 }}
+            style={{ minHeight: 100 }}
           />
 
-          <CorrectionIncludedSwitch value={correctionIncluded} onValueChange={setCorrectionIncluded} disabled={uploading} />
+          <CorrectionIncludedSwitch value={correctionIncluded} onValueChange={setCorrectionIncluded} disabled={uploading || savePending} />
 
           {/* Champs legacy temporairement désactivés : catégorie, université, département, niveau et semestre. */}
 
@@ -358,7 +366,7 @@ const EditDraftScreen = ({ navigation, route }) => {
               <FileText size={64} color={theme.colors.textMuted} />
               {isLoadingPreview ? (
                 <>
-                  <ActivityIndicator size="large" color={theme.colors.primary} style={{ marginTop: 24 }} />
+                  <Skeleton width="90%" height={180} style={{ marginTop: 24 }} />
                   <Text variant="body" color={theme.colors.textMuted} style={{ marginTop: 16 }}>
                     Génération du lien sécurisé...
                   </Text>
@@ -387,87 +395,90 @@ const EditDraftScreen = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.background,
-  },
-  stepContent: {
-    paddingHorizontal: 16,
-    paddingVertical: 24,
-    paddingBottom: 40,
-  },
-  stepHeader: {
-    marginBottom: 32,
-  },
-  stepTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 8,
-  },
-  pdfCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 16,
-    marginBottom: 24,
-  },
-  pdfCardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  pdfCardInfo: {
-    marginLeft: 12,
-    flex: 1,
-  },
-  previewButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    padding: 8,
-    backgroundColor: theme.colors.primaryWash,
-    borderRadius: 8,
-  },
-  formSection: {
-    gap: 16,
-    marginBottom: 32,
-  },
-  toggleMoreFields: {
-    paddingVertical: 8,
-    alignItems: 'center',
-  },
-  actions: {
-    flexDirection: 'column',
-    gap: 12,
-  },
-  actionButton: {
-    width: '100%',
-  },
-  previewModal: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  previewModalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-  },
-  previewPlaceholder: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 24,
-  },
-});
-
 export default EditDraftScreen;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.colors.background,
+    },
+    stepContent: {
+      paddingHorizontal: 16,
+      paddingVertical: 24,
+      paddingBottom: 40,
+    },
+    stepHeader: {
+      marginBottom: 32,
+    },
+    stepTitle: {
+      fontSize: 28,
+      fontWeight: '700',
+      marginBottom: 8,
+    },
+    pdfCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: 16,
+      marginBottom: 24,
+    },
+    pdfCardHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      flex: 1,
+    },
+    pdfCardInfo: {
+      marginLeft: 12,
+      flex: 1,
+    },
+    previewButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      padding: 8,
+      backgroundColor: theme.colors.primaryWash,
+      borderRadius: 8,
+    },
+    formSection: {
+      gap: 16,
+      marginBottom: 32,
+    },
+    toggleMoreFields: {
+      paddingVertical: 8,
+      alignItems: 'center',
+    },
+    actions: {
+      flexDirection: 'column',
+      gap: 12,
+    },
+    actionButton: {
+      width: '100%',
+    },
+    previewModal: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    previewModalHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 16,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+    },
+    previewPlaceholder: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 24,
+    },
+  });
+  return { styles };
+});

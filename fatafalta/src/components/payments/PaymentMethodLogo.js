@@ -1,9 +1,7 @@
+import { createThemedStyles } from '../../theme/ThemeProvider';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import Text from '../ui/Text';
-import theme from '../../theme/tokens';
-
-const { brand } = theme;
 
 // Logos fournis avec l'application. Un logo saisi dans l'administration (logoUrl) reste prioritaire.
 const BUNDLED_LOGOS = {
@@ -12,6 +10,7 @@ const BUNDLED_LOGOS = {
 
 /** Logo d'un moyen de paiement, ou son initiale s'il n'en a pas. */
 const PaymentMethodLogo = ({ code, label = '', logoUrl, size = 24 }) => {
+  const { styles } = useStyles();
   const source = logoUrl ? { uri: logoUrl } : BUNDLED_LOGOS[code];
   const box = { width: size, height: size, borderRadius: Math.round(size / 4) };
 
@@ -25,15 +24,18 @@ const PaymentMethodLogo = ({ code, label = '', logoUrl, size = 24 }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  fallback: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: brand.paperDim,
-  },
-  letter: {
-    color: brand.ink,
-  },
-});
-
 export default PaymentMethodLogo;
+
+const useStyles = createThemedStyles(({ brand }) => {
+  const styles = StyleSheet.create({
+    fallback: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: brand.paperDim,
+    },
+    letter: {
+      color: brand.ink,
+    },
+  });
+  return { styles };
+});

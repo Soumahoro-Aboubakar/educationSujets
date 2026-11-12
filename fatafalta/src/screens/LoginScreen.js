@@ -1,24 +1,21 @@
+import Pressable from '../components/ui/FeedbackPressable';
+import StatusBar from '../theme/ThemeStatusBar';
+import { createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorMessage } from '../utils/userMessages';
-import React, { useContext, useEffect, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import { ArrowLeft, ArrowUpRight, Eye, EyeOff, Lock, Mail } from 'lucide-react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { Eye, EyeOff, Lock, Mail } from 'lucide-react-native';
 import Text from '../components/ui/Text';
-import FormInput from '../components/ui/FormInput';
+import { AccountField as FormInput, AccountPaper, useAuthStyles } from '../components/account/AccountPresentation';
+import ScreenHeader from '../components/ui/ScreenHeader';
+import { PrepButton } from '../prep/ui/primitives';
 import AuthContext from '../context/AuthContext';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
-import BrandMark from '../components/brand/BrandMark';
-import theme from '../theme/tokens';
-
-const { brand } = theme;
-const NAVY = brand.ink;
-const NAVY_SOFT = brand.inkSoft;
-const SURFACE = brand.paper;
-const GOLD = brand.gold;
-const BURGUNDY = brand.burgundy;
-const LINE = brand.line;
 
 const LoginScreen = ({ navigation, route }) => {
+  const { NAVY_SOFT } = useStyles();
+  const styles = useAuthStyles();
   const insets = useSafeAreaInsets();
   const { login, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
   const [email, setEmail] = useState('');
@@ -68,74 +65,31 @@ const LoginScreen = ({ navigation, route }) => {
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-        <View style={[styles.hero, { paddingTop: insets.top + theme.spacing.base }]}>
-          <View style={styles.topBar}>
-            <Pressable onPress={() => navigation.goBack()} hitSlop={theme.hitSlop} style={({ pressed }) => [styles.backButton, pressed && styles.pressed]}>
-              <ArrowLeft size={21} color="#FFFFFF" strokeWidth={1.9} />
-            </Pressable>
-            <View style={styles.brandLockup}>
-              <BrandMark size={24} variant="onDark" /><Text variant="bodyMedium" style={styles.brandName}>Fatafalta</Text>
-            </View>
-          </View>
-          <Text variant="overline" style={styles.eyebrow}>Votre espace</Text>
-          <Text variant="h1" style={styles.title}>Se connecter</Text>
+        <ScreenHeader title="Se connecter" onBack={() => navigation.goBack()} />
+        <AccountPaper style={[styles.formArea, { paddingBottom: Math.max(insets.bottom, 16) + 24 }]}>
           <Text variant="body" style={styles.introduction}>Retrouve tes documents, tes téléchargements et ton espace personnel.</Text>
-        </View>
-
-        <View style={styles.formArea}>
-          <View style={styles.sectionHeader}>
-            <Text variant="overline" style={styles.sectionEyebrow}>Identifiants</Text>
-            <View style={styles.sectionRule} />
-          </View>
-          {error ? <View style={styles.errorBanner}><Text variant="bodyMedium" style={styles.errorText}>{error}</Text></View> : null}
+          {error ? <View style={styles.errorBanner}><Text variant="bodyMedium" accessibilityLiveRegion="polite" style={styles.errorText}>{error}</Text></View> : null}
           <View style={styles.form}>
-            <FormInput label="Adresse email" placeholder="votre@email.com" value={email} onChangeText={(text) => { setEmail(text); if (errors.email) setErrors({ ...errors, email: null }); }} keyboardType="email-address" autoCapitalize="none" autoCorrect={false} icon={Mail} error={errors.email} editable={!loading} />
+            <FormInput label="Adresse email" placeholder="toi@exemple.com" value={email} onChangeText={(text) => { setEmail(text); if (errors.email) setErrors({ ...errors, email: null }); }} keyboardType="email-address" autoCapitalize="none" autoCorrect={false} icon={Mail} error={errors.email} editable={!loading} />
             <View>
-              <FormInput label="Mot de passe" placeholder="••••••••" value={password} onChangeText={(text) => { setPassword(text); if (errors.password) setErrors({ ...errors, password: null }); }} secureTextEntry={!showPassword} autoCapitalize="none" icon={Lock} error={errors.password} editable={!loading} />
-              <Pressable accessibilityRole="button" accessibilityLabel={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'} onPress={() => setShowPassword((value) => !value)} style={styles.showPasswordButton}>
-                {showPassword ? <EyeOff size={18} color={NAVY_SOFT} strokeWidth={1.8} /> : <Eye size={18} color={NAVY_SOFT} strokeWidth={1.8} />}
-              </Pressable>
+              <FormInput label="Mot de passe" placeholder="••••••••" value={password} onChangeText={(text) => { setPassword(text); if (errors.password) setErrors({ ...errors, password: null }); }} secureTextEntry={!showPassword} autoCapitalize="none" icon={Lock} error={errors.password} editable={!loading} trailing={<Pressable accessibilityRole="button" accessibilityLabel={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'} onPress={() => setShowPassword((value) => !value)} style={styles.showPasswordButton}>
+                {showPassword ? <EyeOff size={18} color={NAVY_SOFT} strokeWidth={2} /> : <Eye size={18} color={NAVY_SOFT} strokeWidth={2} />}
+              </Pressable>} />
             </View>
           </View>
-          <Pressable disabled={loading || !isFormValid} onPress={handleLogin} style={({ pressed }) => [styles.primaryAction, pressed && styles.primaryPressed, (loading || !isFormValid) && styles.disabled]}>
-            <Text variant="bodyMedium" style={styles.primaryLabel}>{loading ? 'Connexion en cours…' : 'Accéder à mon espace'}</Text>
-            {!loading ? <ArrowUpRight size={18} color="#FFFFFF" strokeWidth={1.8} /> : null}
-          </Pressable>
-          <View style={styles.registerLink}><Text variant="body" style={styles.linkPrefix}>Pas encore de compte ?</Text><Pressable onPress={() => (route?.params?.returnTo ? navigation.replace('Register', route.params) : navigation.navigate('Register'))} accessibilityRole="button" hitSlop={6} style={({ pressed }) => [styles.linkButton, pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] }]}><Text variant="bodyMedium" style={styles.linkLabel}>S’inscrire</Text></Pressable></View>
-        </View>
+          <View style={styles.submit}>
+            <PrepButton title="Accéder à mon espace" loading={loading} disabled={loading || !isFormValid} onPress={handleLogin} />
+          </View>
+          <View style={styles.registerLink}><Text variant="body" style={styles.linkPrefix}>Pas encore de compte ?</Text><Pressable onPress={() => (route?.params?.returnTo ? navigation.replace('Register', route.params) : navigation.navigate('Register'))} accessibilityRole="button" hitSlop={6} style={({ pressed }) => [styles.linkButton, pressed && { opacity: 0.8 }]}><Text variant="bodyMedium" style={styles.linkLabel}>S’inscrire</Text></Pressable></View>
+        </AccountPaper>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: SURFACE },
-  scrollContent: { flexGrow: 1 },
-  hero: { paddingHorizontal: theme.spacing.xl, paddingBottom: theme.spacing.xl, backgroundColor: NAVY },
-  topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  backButton: { width: 40, height: 40, marginLeft: -10, alignItems: 'center', justifyContent: 'center' },
-  brandLockup: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-    brandName: { color: brand.paper, fontFamily: theme.fontFamily.bold, fontSize: 16, letterSpacing: -0.4 },
-  eyebrow: { marginTop: theme.spacing.xl, color: GOLD, fontSize: 10, letterSpacing: 1.05 },
-  title: { marginTop: theme.spacing.sm, color: '#FFFFFF', fontSize: 29, lineHeight: 35, letterSpacing: -0.8 },
-  introduction: { maxWidth: 320, marginTop: theme.spacing.sm, color: 'rgba(255,255,255,0.68)', fontSize: 14, lineHeight: 20 },
-  formArea: { flex: 1, paddingHorizontal: theme.spacing.xl, paddingTop: theme.spacing.xl, paddingBottom: theme.spacing['3xl'] },
-  sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.md, marginBottom: theme.spacing.lg },
-  sectionEyebrow: { color: NAVY_SOFT, fontSize: 10, letterSpacing: 1.05 },
-  sectionRule: { flex: 1, height: StyleSheet.hairlineWidth, backgroundColor: LINE },
-  form: { gap: theme.spacing.lg },
-  errorBanner: { marginBottom: theme.spacing.lg, padding: theme.spacing.md, borderLeftWidth: 2, borderLeftColor: BURGUNDY, backgroundColor: brand.burgundyWash },
-  errorText: { color: BURGUNDY, fontSize: 13 },
-  showPasswordButton: { position: 'absolute', right: theme.spacing.md, top: 43, padding: theme.spacing.xs },
-  primaryAction: { minHeight: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: theme.spacing.sm, marginTop: theme.spacing.xl, backgroundColor: NAVY, borderRadius: theme.radius.sm },
-  primaryPressed: { opacity: 0.86 },
-  disabled: { opacity: 0.45 },
-  primaryLabel: { color: '#FFFFFF', fontSize: 15 },
-  registerLink: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: theme.spacing.xs, marginTop: theme.spacing.xl },
-  linkPrefix: { color: NAVY_SOFT, fontSize: 14 },
-  linkLabel: { color: BURGUNDY, fontSize: 14, fontFamily: theme.fontFamily.semiBold },
-  linkButton: { minHeight: 36, justifyContent: 'center', paddingHorizontal: 14, marginLeft: 8, borderRadius: 18, backgroundColor: '#F4E9EA', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(108,40,56,0.18)' },
-  pressed: { opacity: 0.62 },
-});
-
 export default LoginScreen;
+
+const useStyles = createThemedStyles(({ brand }) => {
+  const NAVY_SOFT = brand.inkSoft;
+  return { NAVY_SOFT };
+});

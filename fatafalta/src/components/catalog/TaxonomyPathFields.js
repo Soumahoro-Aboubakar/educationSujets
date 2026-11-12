@@ -1,8 +1,9 @@
+import { useTheme } from '../../theme/ThemeProvider';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import MetadataSelect from '../ui/MetadataSelect';
 import Text from '../ui/Text';
-import theme from '../../theme/tokens';
+
 import { createCatalogNode, fetchNodes } from '../../services/institutions';
 
 const labelFor = (type) => String(type || '')
@@ -14,6 +15,7 @@ const labelFor = (type) => String(type || '')
  * only for the selected parent, which keeps large catalogs off the device.
  */
 const TaxonomyPathFields = ({ institution, value = [], onChange, error, disabled = false }) => {
+  const { theme } = useTheme();
   const structure = useMemo(() => institution?.navigationStructure || [], [institution]);
   const [optionsByLevel, setOptionsByLevel] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -103,7 +105,8 @@ const TaxonomyPathFields = ({ institution, value = [], onChange, error, disabled
           value={value[index] || null}
           onChange={(selectedId) => handleSelect(index, selectedId)}
           onCreate={createAtLevel(index)}
-          disabled={disabled || (index > 0 && !value[index - 1])}
+          loading={isLoading}
+          disabled={disabled || isLoading || (index > 0 && !value[index - 1])}
           error={index === structure.length - 1 ? error : undefined}
         />
       ))}

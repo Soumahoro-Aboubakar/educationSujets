@@ -1,3 +1,8 @@
+import useAsyncAction from '../hooks/useAsyncAction';
+import ProgressBar from '../components/ui/ProgressBar';
+import { DocumentSkeleton } from '../components/documents/DocumentList';
+import { TouchableOpacity } from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { createUserError, getErrorAlert } from '../utils/userMessages';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
@@ -10,7 +15,6 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -46,16 +50,16 @@ import {
   MAX_IMPORTED_PDF_SIZE_BYTES,
 } from '../services/pdfService';
 import { formatDate, formatFileSize } from '../utils/format';
-import theme from '../theme/tokens';
 
 const isPdfDocument = (document) => {
   const extension = String(document?.extension || '').replace('.', '').toLowerCase();
   return document?.mimeType === 'application/pdf' || document?.fileType === 'PDF' || extension === 'pdf';
 };
 
-
-
 const CorrectionUploadScreen = ({ navigation }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
+  const [runFileTask, fileTaskPending] = useAsyncAction();
   const { user } = useContext(AuthContext);
   const isAndroid = Platform.OS === 'android';
   const canManageCorrections = user?.role === 'admin';
@@ -77,6 +81,8 @@ const CorrectionUploadScreen = ({ navigation }) => {
   const [webviewAvailable, setWebviewAvailable] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(null);
+  const [pdfProgress, setPdfProgress] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
 
   const [displayLimit, setDisplayLimit] = useState(6);
@@ -184,7 +190,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
     setSelectedSubject(document);
   };
 
-  const pickImages = async () => {
+  const pickImages = () => runFileTask(async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsMultipleSelection: true,
@@ -197,9 +203,9 @@ const CorrectionUploadScreen = ({ navigation }) => {
       const newImages = result.assets.map((asset) => asset.uri);
       setImages((previous) => [...previous, ...newImages]);
     }
-  };
+  });
 
-  const pickPdf = async () => {
+  const pickPdf = () => runFileTask(async () => {
     let result;
     try {
       result = await DocumentPicker.getDocumentAsync({
@@ -231,14 +237,13 @@ const CorrectionUploadScreen = ({ navigation }) => {
 
     setInputMode('pdf');
     setImages([]);
-    
     // Un léger délai permet à l'UI de se mettre à jour (ex: fermeture du sélecteur DocumentPicker) 
     // avant d'entamer le décodage lourd qui bloque le thread JS. 
     // Ceci empêche le crash/rebuild d'Expo Go constaté sur certains appareils Android.
-    setTimeout(() => {
-      processLocalPdf(file.uri);
-    }, 500);
-  };
+    setIsProcessing(true);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await processLocalPdf(file.uri);
+  });
 
   const processLocalPdf = async (fileUri) => {
     setIsProcessing(true);
@@ -253,6 +258,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       Alert.alert(...getErrorAlert(error, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
+      setPdfProgress(null);
     }
   };
 
@@ -260,7 +266,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
     setImages((previous) => previous.filter((_, imageIndex) => imageIndex !== index));
   };
 
-  const generatePDF = async () => {
+  const generatePDF = () => runFileTask(async () => {
     if (images.length === 0) {
       Alert.alert('Images requises', 'Sélectionnez au moins une image.');
       return;
@@ -268,7 +274,8 @@ const CorrectionUploadScreen = ({ navigation }) => {
 
     setIsProcessing(true);
     try {
-      const result = await generatePdfFromImages(images);
+      setPdfProgress(0);
+      const result = await generatePdfFromImages(images, (value) => setPdfProgress(value / 100));
       setPdfFile(result);
       setPdfLocalUri(result.uri);
       setPdfIntentUri(await getIntentUri(result.uri));
@@ -278,8 +285,9 @@ const CorrectionUploadScreen = ({ navigation }) => {
       Alert.alert(...getErrorAlert(error, 'pdf', 'vous'));
     } finally {
       setIsProcessing(false);
+      setPdfProgress(null);
     }
-  };
+  });
 
   const handleOpenPreview = async () => {
     if (isAndroid) {
@@ -299,7 +307,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
     }
 
     if (!pdfLocalUri) return;
-    Linking.openURL(pdfLocalUri).catch(() => {
+    await Linking.openURL(pdfLocalUri).catch(() => {
       Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
     });
   };
@@ -315,6 +323,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       return;
     }
 
+    setUploadProgress(null);
     setUploading(true);
     try {
       const formData = new FormData();
@@ -324,7 +333,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
         type: pdfFile.mimeType || 'application/pdf',
       });
 
-      await uploadCorrectionDocument(selectedSubject._id, formData);
+      await uploadCorrectionDocument(selectedSubject._id, formData, setUploadProgress);
       await cleanTempDirectory();
       await loadSubjects();
       Alert.alert('Succès', 'Le corrigé a été associé au document.');
@@ -334,6 +343,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       Alert.alert(...getErrorAlert(error, 'envoi', 'vous'));
     } finally {
       setUploading(false);
+      setUploadProgress(null);
     }
   };
 
@@ -342,7 +352,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
       setLoadingPreviewId(document._id);
       const downloadData = await getDownloadUrl(document._id);
       if (downloadData && downloadData.url) {
-        Linking.openURL(downloadData.url).catch(() => {
+        await Linking.openURL(downloadData.url).catch(() => {
           Alert.alert(...getErrorAlert(null, 'ouverture', 'vous'));
         });
       }
@@ -389,7 +399,6 @@ const CorrectionUploadScreen = ({ navigation }) => {
               backgroundColor={hasCorrection ? theme.colors.successWash : theme.colors.primaryWash}
               icon={hasCorrection ? <CheckCircle2 size={12} color={theme.colors.success} /> : <Link2 size={12} color={theme.colors.primary} />}
             />
-            
             <TouchableOpacity 
               style={styles.previewSubjectButton} 
               onPress={() => handlePreviewSubject(document)}
@@ -467,7 +476,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
 
         {loadingSubjects && !refreshing ? (
           <View style={styles.loadingBlock}>
-            <ActivityIndicator color={theme.colors.primary} />
+            <DocumentSkeleton />
           </View>
         ) : subjects.length === 0 ? (
           <EmptyState title="Aucun PDF" description="Aucun document PDF disponible pour cette recherche. Essayez un autre titre ou modifiez les filtres." />
@@ -495,6 +504,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
         <View style={styles.sourceRow}>
           <TouchableOpacity
             style={[styles.sourceButton, inputMode === 'images' && styles.sourceButtonActive]}
+            disabled={fileTaskPending || uploading}
             onPress={pickImages}
             activeOpacity={0.8}
           >
@@ -506,6 +516,7 @@ const CorrectionUploadScreen = ({ navigation }) => {
 
           <TouchableOpacity
             style={[styles.sourceButton, inputMode === 'pdf' && styles.sourceButtonActive]}
+            disabled={fileTaskPending || uploading}
             onPress={pickPdf}
             activeOpacity={0.8}
           >
@@ -516,6 +527,10 @@ const CorrectionUploadScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
+        {isProcessing && pdfProgress !== null ? <View accessibilityLiveRegion="polite" style={{ gap: 8 }}>
+          <ProgressBar progress={pdfProgress} />
+          <Text variant="caption" color={theme.colors.textSecondary}>{`Création du PDF… ${Math.round(pdfProgress * 100)} %`}</Text>
+        </View> : null}
         {images.length > 0 ? (
           <Card style={styles.previewCard}>
             <View style={styles.previewHeader}>
@@ -565,12 +580,16 @@ const CorrectionUploadScreen = ({ navigation }) => {
           </Card>
         ) : null}
 
+        {uploading && uploadProgress !== null ? <View accessibilityLiveRegion="polite" style={{ gap: 8 }}>
+          <ProgressBar progress={uploadProgress} />
+          <Text variant="caption" color={theme.colors.textSecondary}>{uploadProgress < 1 ? `Envoi du corrigé… ${Math.round(uploadProgress * 100)} %` : 'Envoi terminé · finalisation…'}</Text>
+        </View> : null}
         <Button
           title="Associer le corrigé"
           icon={<UploadCloud size={18} color={theme.colors.textInverse} />}
           onPress={submitCorrection}
           loading={uploading}
-          disabled={!selectedSubject || !pdfFile || isProcessing}
+          disabled={!selectedSubject || !pdfFile || isProcessing || fileTaskPending}
           style={styles.submitButton}
         />
       </ScrollView>
@@ -612,223 +631,231 @@ const CorrectionUploadScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: theme.spacing.sm,
-    paddingVertical: theme.spacing.sm,
-    backgroundColor: theme.colors.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-  },
-  backButton: {
-    padding: theme.spacing.sm,
-    width: 44,
-  },
-  headerText: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  headerIconButton: {
-    width: 44,
-    height: 44,
-    borderRadius: theme.radius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.colors.primaryWash,
-  },
-  content: {
-    padding: theme.spacing.base,
-    paddingBottom: theme.spacing['4xl'],
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: theme.spacing.md,
-    marginBottom: theme.spacing.sm,
-  },
-  searchBox: {
-    height: 52,
-    borderRadius: theme.radius.lg,
-    backgroundColor: theme.colors.surface,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: theme.spacing.md,
-    marginBottom: theme.spacing.md,
-  },
-  searchInput: {
-    flex: 1,
-    height: '100%',
-    marginLeft: theme.spacing.sm,
-    fontFamily: theme.fontFamily.medium,
-    color: theme.colors.textPrimary,
-    fontSize: 15,
-  },
-  loadingBlock: {
-    paddingVertical: theme.spacing.xl,
-    alignItems: 'center',
-  },
-  subjectList: {
-    gap: theme.spacing.sm,
-  },
-  subjectCard: {
-    padding: theme.spacing.md,
-  },
-  subjectCardSelected: {
-    borderColor: theme.colors.success,
-    borderWidth: 1.5,
-  },
-  subjectCardDisabled: {
-    opacity: 0.72,
-  },
-  subjectHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  subjectIconBox: {
-    width: 40,
-    height: 40,
-    borderRadius: theme.radius.md,
-    backgroundColor: theme.colors.primaryWash,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: theme.spacing.md,
-  },
-  subjectInfo: {
-    flex: 1,
-  },
-  subjectTitle: {
-    color: theme.colors.textPrimary,
-    marginBottom: 2,
-  },
-  subjectFooter: {
-    marginTop: theme.spacing.md,
-  },
-  previewSubjectButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    backgroundColor: theme.colors.primaryWash,
-    borderRadius: theme.radius.sm,
-  },
-  sourceRow: {
-    flexDirection: 'row',
-    gap: theme.spacing.md,
-    marginBottom: theme.spacing.md,
-  },
-  sourceButton: {
-    flex: 1,
-    minHeight: 88,
-    borderRadius: theme.radius.lg,
-    backgroundColor: theme.colors.surface,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.spacing.md,
-  },
-  sourceButtonActive: {
-    backgroundColor: theme.colors.primary,
-    borderColor: theme.colors.primary,
-  },
-  sourceLabel: {
-    marginTop: theme.spacing.sm,
-    textAlign: 'center',
-  },
-  previewCard: {
-    padding: theme.spacing.md,
-    marginBottom: theme.spacing.md,
-  },
-  previewHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: theme.spacing.sm,
-  },
-  imageStrip: {
-    marginHorizontal: -4,
-    marginBottom: theme.spacing.md,
-  },
-  imageWrapper: {
-    position: 'relative',
-    marginHorizontal: 4,
-  },
-  previewImage: {
-    width: 78,
-    height: 108,
-    borderRadius: theme.radius.sm,
-    backgroundColor: theme.colors.surfaceRaised,
-  },
-  removeImageButton: {
-    position: 'absolute',
-    top: -6,
-    right: -6,
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: theme.colors.error,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fullButton: {
-    height: 46,
-  },
-  pdfCard: {
-    padding: theme.spacing.md,
-    marginBottom: theme.spacing.md,
-  },
-  pdfHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: theme.spacing.md,
-  },
-  pdfIconBox: {
-    width: 42,
-    height: 42,
-    borderRadius: theme.radius.md,
-    backgroundColor: theme.colors.primaryWash,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: theme.spacing.md,
-  },
-  pdfInfo: {
-    flex: 1,
-  },
-  submitButton: {
-    marginTop: theme.spacing.md,
-    height: 50,
-  },
-  previewModal: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  previewModalHeader: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
-  },
-  previewPlaceholder: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.spacing.xl,
-  },
-  previewOpenButton: {
-    marginTop: theme.spacing.lg,
-  },
-});
-
 export default CorrectionUploadScreen;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.sm,
+      backgroundColor: theme.colors.surface,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+    },
+    backButton: {
+      padding: theme.spacing.sm,
+      width: 44,
+    },
+    headerText: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    headerIconButton: {
+      width: 44,
+      height: 44,
+      borderRadius: theme.radius.md,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: theme.colors.primaryWash,
+    },
+    content: {
+      padding: theme.spacing.base,
+      paddingBottom: theme.spacing['4xl'],
+    },
+    sectionHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginTop: theme.spacing.md,
+      marginBottom: theme.spacing.sm,
+    },
+    searchBox: {
+      minHeight: 52,
+      borderRadius: theme.radius.lg,
+      backgroundColor: theme.colors.surface,
+      borderWidth: 1,
+      borderColor: theme.colors.borderLight,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: theme.spacing.md,
+      marginBottom: theme.spacing.md,
+    },
+    searchInput: {
+      flex: 1,
+      minHeight: 50,
+      paddingVertical: 12,
+      marginLeft: theme.spacing.sm,
+      fontFamily: theme.fontFamily.medium,
+      color: theme.colors.textPrimary,
+      fontSize: 15,
+    },
+    loadingBlock: {
+      paddingVertical: theme.spacing.xl,
+      alignItems: 'center',
+    },
+    subjectList: {
+      gap: theme.spacing.sm,
+    },
+    subjectCard: {
+      padding: theme.spacing.md,
+    },
+    subjectCardSelected: {
+      borderColor: theme.colors.success,
+      borderWidth: 1.5,
+    },
+    subjectCardDisabled: {
+      opacity: 0.72,
+    },
+    subjectHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    subjectIconBox: {
+      width: 40,
+      minHeight: 44,
+      paddingVertical: 8,
+      borderRadius: theme.radius.md,
+      backgroundColor: theme.colors.primaryWash,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: theme.spacing.md,
+    },
+    subjectInfo: {
+      flex: 1,
+    },
+    subjectTitle: {
+      color: theme.colors.textPrimary,
+      marginBottom: 2,
+    },
+    subjectFooter: {
+      marginTop: theme.spacing.md,
+    },
+    previewSubjectButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 6,
+      paddingHorizontal: 10,
+      backgroundColor: theme.colors.primaryWash,
+      borderRadius: theme.radius.sm,
+    },
+    sourceRow: {
+      flexDirection: 'row',
+      gap: theme.spacing.md,
+      marginBottom: theme.spacing.md,
+    },
+    sourceButton: {
+      flex: 1,
+      minHeight: 88,
+      borderRadius: theme.radius.lg,
+      backgroundColor: theme.colors.surface,
+      borderWidth: 1,
+      borderColor: theme.colors.borderLight,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: theme.spacing.md,
+    },
+    sourceButtonActive: {
+      backgroundColor: theme.brand.night,
+      borderColor: theme.colors.primary,
+    },
+    sourceLabel: {
+      marginTop: theme.spacing.sm,
+      textAlign: 'center',
+    },
+    previewCard: {
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.md,
+    },
+    previewHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: theme.spacing.sm,
+    },
+    imageStrip: {
+      marginHorizontal: -4,
+      marginBottom: theme.spacing.md,
+    },
+    imageWrapper: {
+      position: 'relative',
+      marginHorizontal: 4,
+    },
+    previewImage: {
+      width: 78,
+      height: 108,
+      borderRadius: theme.radius.sm,
+      backgroundColor: theme.colors.surfaceRaised,
+    },
+    removeImageButton: {
+      position: 'absolute',
+      top: -6,
+      right: -6,
+      width: 24,
+      height: 24,
+      borderRadius: 12,
+      backgroundColor: theme.colors.errorSolid,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    fullButton: {
+      minHeight: 46,
+      paddingVertical: 8,
+    },
+    pdfCard: {
+      padding: theme.spacing.md,
+      marginBottom: theme.spacing.md,
+    },
+    pdfHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: theme.spacing.md,
+    },
+    pdfIconBox: {
+      width: 42,
+      minHeight: 44,
+      paddingVertical: 8,
+      borderRadius: theme.radius.md,
+      backgroundColor: theme.colors.primaryWash,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: theme.spacing.md,
+    },
+    pdfInfo: {
+      flex: 1,
+    },
+    submitButton: {
+      marginTop: theme.spacing.md,
+      minHeight: 50,
+      paddingVertical: 10,
+    },
+    previewModal: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    previewModalHeader: {
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.border,
+    },
+    previewPlaceholder: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: theme.spacing.xl,
+    },
+    previewOpenButton: {
+      marginTop: theme.spacing.lg,
+    },
+  });
+  return { styles };
+});

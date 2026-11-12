@@ -1,5 +1,7 @@
+import Pressable from '../../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import Animated, { Easing, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { scheduleOnRN } from 'react-native-worklets';
@@ -7,19 +9,23 @@ import Svg, { Path } from 'react-native-svg';
 import { Check, X } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
-import { brand, colors, motion, theme, type } from '../theme';
+import { motion, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
-import { STATE_COLORS, isCorrected, useShake, useShuffled } from './kit';
+import { isCorrected, useShuffled } from './kit';
 import { PressScale } from '../ui/primitives';
+import { CorrectionStrike } from '../components/StudyPresentation';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 // ═══ QCM (§ 11.8, E20) ═════════════════════════════════════════════════
 const QcmOption = ({ option, letter, selected, status, multiple, onPress, disabled }) => {
-  const shake = useShake(status === 'faux');
+  const { STATE_COLORS, brand, colors } = useTheme();
+  const { styles } = useStyles();
+  const { fontScale } = useWindowDimensions();
+  const letterSize = Math.max(34, Math.ceil(26 * fontScale));
   const st = status && status !== 'neutre' ? STATE_COLORS[status] : null;
   return (
-    <Animated.View style={shake}>
+    <View>
       <PressScale
         onPress={onPress}
         disabled={disabled}
@@ -29,21 +35,30 @@ const QcmOption = ({ option, letter, selected, status, multiple, onPress, disabl
         style={[
           styles.option,
           selected && !st && styles.optionSelected,
-          st && { backgroundColor: st.bg, borderColor: st.border, borderStyle: st.dashed ? 'dashed' : 'solid', borderWidth: 1.5 },
+          st && { backgroundColor: brand.sheet, borderColor: brand.line },
         ]}
       >
-        <View style={[styles.letter, multiple && styles.letterSquare, selected && !st && styles.letterSelected, st && { backgroundColor: st.dashed ? 'transparent' : st.border, borderColor: st.border }]}>
-          {status === 'juste' || status === 'oublie' ? <Check size={16} color={status === 'oublie' ? colors.success : '#FFF'} strokeWidth={3} />
-            : status === 'faux' ? <X size={16} color="#FFF" strokeWidth={3} />
-              : <Text variant="bodyMedium" style={[styles.letterText, selected && { color: '#FFF' }]}>{multiple && selected ? '✓' : letter}</Text>}
+        <View style={[styles.letter, { width: letterSize, height: letterSize, borderRadius: letterSize / 2 }, multiple && styles.letterSquare, selected && !st && styles.letterSelected, st && { backgroundColor: st.dashed ? 'transparent' : st.border, borderColor: st.border }]}>
+          {status === 'juste' || status === 'oublie' ? <Check size={16} color={status === 'oublie' ? colors.success : brand.onInk} strokeWidth={2.2} />
+            : status === 'faux' ? <X size={16} color={brand.onInk} strokeWidth={2.2} />
+              : <Text variant="bodyMedium" style={[styles.letterText, selected && { color: brand.onInk }]}>{letter}</Text>}
         </View>
-        <Text variant="bodyMedium" style={styles.optionText}>{option.texte}</Text>
+        <View style={styles.optionCopy}>
+          <Text variant="bodyMedium" style={styles.optionText}>{option.texte}</Text>
+          {status === 'faux' ? <CorrectionStrike /> : null}
+        </View>
+        {status === 'juste' || status === 'oublie' ? (
+          <Svg pointerEvents="none" accessible={false} width="100%" height="100%" viewBox="0 0 360 80" preserveAspectRatio="none" style={StyleSheet.absoluteFill}>
+            <Path d="M343 18 C302 1 63 0 23 13 C-4 22 4 62 28 69 C83 82 306 78 341 65 C365 54 360 25 340 16" stroke={colors.success} strokeWidth={1.5} fill="none" />
+          </Svg>
+        ) : null}
       </PressScale>
-    </Animated.View>
+    </View>
   );
 };
 
 export const QcmRenderer = ({ exercice, value, onChange, phase, correction, seed }) => {
+  const { styles } = useStyles();
   const c = exercice.contenu;
   const options = useShuffled(c.options, seed);
   const chosen = value?.ids || [];
@@ -119,6 +134,8 @@ const PenCircle = ({ width, height, visible, color, dashed, seedKey }) => {
 };
 
 const CircleWord = ({ el, selected, status, onPress, disabled }) => {
+  const { STATE_COLORS, brand } = useTheme();
+  const { styles } = useStyles();
   const [size, setSize] = useState({ w: 0, h: 0 });
   const st = status && status !== 'neutre' ? STATE_COLORS[status] : null;
   const color = st ? st.border : brand.burgundy;
@@ -141,6 +158,7 @@ const CircleWord = ({ el, selected, status, onPress, disabled }) => {
 };
 
 export const EntourerRenderer = ({ exercice, value, onChange, phase, correction, seed }) => {
+  const { styles } = useStyles();
   const c = exercice.contenu;
   const elements = useShuffled(c.elements, seed);
   const chosen = value?.ids || [];
@@ -165,6 +183,7 @@ export const EntourerRenderer = ({ exercice, value, onChange, phase, correction,
 
 // ═══ Surligner (§ 11.10, E22) — feutre, au geste ou au toucher ═══════════
 export const SurlignerRenderer = ({ exercice, value, onChange, phase, correction }) => {
+  const { styles } = useStyles();
   const segments = exercice.contenu.segments;
   const chosen = value?.ids || [];
   const corrected = isCorrected(phase);
@@ -241,26 +260,30 @@ export const SurlignerRenderer = ({ exercice, value, onChange, phase, correction
   );
 };
 
-const styles = StyleSheet.create({
-  stack: { gap: 10 },
-  enonce: { color: brand.ink, marginBottom: 6 },
-  hint: { color: brand.inkMuted, marginBottom: 8 },
-  option: { minHeight: 62, flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 12, paddingHorizontal: 14, borderRadius: 16, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet, ...theme.shadows.sm },
-  optionSelected: { borderWidth: 1.5, borderColor: brand.burgundy, backgroundColor: brand.burgundyWash },
-  letter: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.sheet, borderWidth: 1.2, borderColor: brand.lineStrong },
-  letterSquare: { borderRadius: 9 },
-  letterSelected: { backgroundColor: brand.burgundy, borderColor: brand.burgundy },
-  letterText: { color: brand.inkSoft, fontFamily: theme.fontFamily.semiBold },
-  optionText: { flex: 1, color: brand.ink, fontSize: 16, lineHeight: 22 },
-  cloud: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 22, rowGap: 26, paddingVertical: 18, paddingHorizontal: 6 },
-  word: { paddingHorizontal: 4, paddingVertical: 2 },
-  wordText: { color: brand.ink, textAlign: 'center' },
-  struck: { textDecorationLine: 'line-through', textDecorationColor: colors.error },
-  paragraph: { flexDirection: 'row', flexWrap: 'wrap', paddingVertical: 8 },
-  hlWord: { borderRadius: 3, marginVertical: 1 },
-  readingText: { color: brand.ink },
-  hl: { backgroundColor: 'rgba(228,201,151,0.55)' },
-  hlJuste: { backgroundColor: colors.successWash, borderBottomWidth: 2, borderBottomColor: colors.success },
-  hlFaux: { backgroundColor: colors.errorWash },
-  hlOublie: { borderWidth: 1, borderStyle: 'dashed', borderColor: colors.success },
+const useStyles = createThemedStyles(({ brand, theme, colors }) => {
+  const styles = StyleSheet.create({
+    stack: { gap: 10 },
+    enonce: { color: brand.ink, marginBottom: 6 },
+    hint: { color: brand.inkMuted, marginBottom: 8 },
+    option: { minHeight: 62, flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 12, paddingHorizontal: 14, borderRadius: 16, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet, ...theme.shadows.sm },
+    optionSelected: { borderWidth: 1.5, borderColor: brand.burgundy, backgroundColor: brand.burgundyWash },
+    letter: { width: 34, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.sheet, borderWidth: 1.2, borderColor: brand.lineStrong },
+    letterSquare: { borderRadius: 9 },
+    letterSelected: { backgroundColor: brand.burgundySolid, borderColor: brand.burgundy },
+    letterText: { color: brand.inkSoft, fontFamily: theme.fontFamily.semiBold },
+    optionCopy: { flex: 1, paddingVertical: 2 },
+    optionText: { color: brand.ink, fontSize: 16, lineHeight: 24 },
+    cloud: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', columnGap: 22, rowGap: 26, paddingVertical: 18, paddingHorizontal: 6 },
+    word: { paddingHorizontal: 4, paddingVertical: 2 },
+    wordText: { color: brand.ink, textAlign: 'center' },
+    struck: { textDecorationLine: 'line-through', textDecorationColor: colors.error },
+    paragraph: { flexDirection: 'row', flexWrap: 'wrap', paddingVertical: 8 },
+    hlWord: { borderRadius: 3, marginVertical: 1 },
+    readingText: { color: brand.ink },
+    hl: { backgroundColor: theme.brand.highlight },
+    hlJuste: { backgroundColor: colors.successWash, borderBottomWidth: 2, borderBottomColor: colors.success },
+    hlFaux: { backgroundColor: colors.errorWash },
+    hlOublie: { borderWidth: 1, borderStyle: 'dashed', borderColor: colors.success },
+  });
+  return { styles };
 });

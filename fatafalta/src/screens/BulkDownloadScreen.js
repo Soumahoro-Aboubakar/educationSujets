@@ -1,6 +1,8 @@
+import Pressable from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { AlertTriangle, Check, CheckCircle2, Clock, Download, FileCheck, FileText, Gift, Layers3, Lock } from 'lucide-react-native';
@@ -18,9 +20,6 @@ import { fetchBundleFiles, fetchDownloadScope, previewDownloadSelection } from '
 import { getErrorCode, getErrorMessage } from '../services/billing';
 import useDownloadStore from '../store/useDownloadStore';
 import { formatFileSize, formatRenewal } from '../utils/format';
-import theme from '../theme/tokens';
-
-const { brand } = theme;
 
 /*
  * Téléchargement groupé (mobile) : organisme → cycle (un seul par opération) → années, matières.
@@ -40,8 +39,9 @@ const tierLabel = (item, plan) => {
   return reservedFor(item, plan) ? 'Abonnés' : 'Quota gratuit';
 };
 
-const Chip = ({ label, active, onPress, count }) => (
-  <Pressable
+const Chip = ({ label, active, onPress, count }) => {
+  const { styles } = useStyles();
+  return (<Pressable
     accessibilityRole="button"
     accessibilityState={{ selected: active }}
     onPress={onPress}
@@ -49,11 +49,12 @@ const Chip = ({ label, active, onPress, count }) => (
   >
     <Text style={[styles.chipLabel, active && styles.chipLabelActive]}>{label}</Text>
     {count !== undefined ? <Text style={[styles.chipCount, active && styles.chipLabelActive]}>{count}</Text> : null}
-  </Pressable>
-);
+  </Pressable>);
+};
 
-const ChipRow = ({ title, hint, children }) => (
-  <View style={styles.chipGroup}>
+const ChipRow = ({ title, hint, children }) => {
+  const { styles } = useStyles();
+  return (<View style={styles.chipGroup}>
     <View style={styles.chipGroupHeader}>
       <Text variant="overline" style={styles.chipGroupTitle}>{title}</Text>
       {hint ? <Text variant="caption" style={styles.chipGroupHint}>{hint}</Text> : null}
@@ -61,8 +62,8 @@ const ChipRow = ({ title, hint, children }) => (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chipRow}>
       {children}
     </ScrollView>
-  </View>
-);
+  </View>);
+};
 
 const describe = (item) => [
   item.yearKnown ? String(item.year) : 'Année non précisée',
@@ -72,7 +73,10 @@ const describe = (item) => [
 ].filter(Boolean).join(' · ');
 
 const BulkDownloadScreen = ({ navigation, route }) => {
+  const { theme, brand } = useTheme();
+  const { styles } = useStyles();
   const insets = useSafeAreaInsets();
+  const { height, fontScale } = useWindowDimensions();
   const organisme = route.params?.organisme || null;
   const [cycleId, setCycleId] = useState(route.params?.parcoursType?._id || '');
   const [year, setYear] = useState(route.params?.annee ? String(route.params.annee) : '');
@@ -128,7 +132,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
 
   // Récapitulatif serveur, après chaque changement de sélection.
   useEffect(() => {
-    if (!selectionKey) { setSummary(null); return undefined; }
+    if (!selectionKey) { setSummary(null); setChecking(false); return undefined; }
     let cancelled = false;
     setChecking(true);
     const timer = setTimeout(async () => {
@@ -278,10 +282,10 @@ const BulkDownloadScreen = ({ navigation, route }) => {
         style={({ pressed }) => [styles.row, checked && styles.rowChecked, pressed && styles.pressed]}
       >
         <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
-          {checked ? <Check size={15} color={brand.onInk} strokeWidth={3} /> : null}
+          {checked ? <Check size={15} color={brand.onInk} strokeWidth={2.2} /> : null}
         </View>
         <View style={styles.rowIcon}>
-          {item.kind === 'corrige' ? <FileCheck size={17} color={brand.ink} strokeWidth={1.8} /> : <FileText size={17} color={brand.ink} strokeWidth={1.8} />}
+          {item.kind === 'corrige' ? <FileCheck size={17} color={brand.ink} strokeWidth={2} /> : <FileText size={17} color={brand.ink} strokeWidth={2} />}
         </View>
         <View style={styles.rowContent}>
           <Text variant="bodyMedium" style={styles.rowTitle} numberOfLines={2}>{item.title}</Text>
@@ -315,7 +319,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
         renderItem={renderItem}
         ListHeaderComponent={header}
         ListEmptyComponent={<StateView icon={FileText} title="Aucun document" description="Aucun document publié ne correspond à ces filtres. Modifie les filtres pour élargir ta recherche." />}
-        contentContainerStyle={{ paddingBottom: 220 + insets.bottom }}
+        contentContainerStyle={{ paddingBottom: theme.spacing.xl }}
         showsVerticalScrollIndicator={false}
       />
     );
@@ -333,7 +337,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
       <View style={styles.body}>{renderBody()}</View>
 
       {/* Récapitulatif fixe : sélection, gratuits, récents, quota, action. */}
-      <View style={[styles.footer, { paddingBottom: Math.max(insets.bottom, theme.spacing.md) }]}>
+      <ScrollView style={{ flexGrow: 0, maxHeight: height * (fontScale >= 1.3 ? 0.45 : 0.5) }} contentContainerStyle={[styles.footer, { paddingBottom: Math.max(insets.bottom, theme.spacing.md) }]}>
         {progress ? (
           <View style={styles.progress}>
             <Text variant="bodyMedium" style={styles.footerTitle}>{`Enregistrement ${progress.done} / ${progress.total}…`}</Text>
@@ -405,108 +409,108 @@ const BulkDownloadScreen = ({ navigation, route }) => {
             </View>
           </>
         )}
-      </View>
+      </ScrollView>
 
       <AccessSheet {...access.sheetProps} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: brand.paper },
-  body: { flex: 1 },
-  pressed: { opacity: 0.85 },
-  cyclePicker: { paddingBottom: theme.spacing['2xl'] },
-  chipGroup: { paddingTop: theme.spacing.base },
-  chipGroupHeader: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', paddingHorizontal: theme.layout.gutter },
-  chipGroupTitle: { color: brand.inkSoft },
-  chipGroupHint: { color: brand.inkMuted, fontFamily: theme.fontFamily.regular },
-  chipRow: { gap: theme.spacing.sm, paddingHorizontal: theme.layout.gutter, paddingTop: theme.spacing.sm },
-  chip: {
-    minHeight: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    paddingHorizontal: 14,
-    borderRadius: theme.radius.full,
-    borderWidth: 1,
-    borderColor: brand.line,
-    backgroundColor: '#FFFFFF',
-  },
-  chipActive: { backgroundColor: brand.ink, borderColor: brand.ink },
-  chipLabel: { color: brand.inkSoft, fontFamily: theme.fontFamily.medium, fontSize: 14 },
-  chipLabelActive: { color: brand.onInk },
-  chipCount: { color: brand.inkMuted, fontFamily: theme.fontFamily.regular, fontSize: 12 },
-  listHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.lg,
-    paddingBottom: theme.spacing.sm,
-  },
-  listCount: { color: brand.inkSoft, fontFamily: theme.fontFamily.regular },
-  link: { color: brand.burgundy, fontSize: 13, fontFamily: theme.fontFamily.semiBold },
-  linkButton: { minHeight: 34, justifyContent: 'center', paddingHorizontal: 14, borderRadius: 17, backgroundColor: brand.burgundyWash, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(108,40,56,0.18)' },
-  row: {
-    minHeight: 68,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-    paddingHorizontal: theme.layout.gutter,
-    paddingVertical: 12,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: brand.line,
-  },
-  rowChecked: { backgroundColor: brand.goldWash },
-  checkbox: {
-    width: 24,
-    height: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 7,
-    borderWidth: 1.5,
-    borderColor: brand.lineStrong,
-    backgroundColor: '#FFFFFF',
-  },
-  checkboxChecked: { backgroundColor: brand.ink, borderColor: brand.ink },
-  rowIcon: {
-    width: 36,
-    height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.md,
-    backgroundColor: brand.paperDim,
-  },
-  rowContent: { flex: 1 },
-  rowTitle: { color: brand.ink, fontSize: 15, lineHeight: 20 },
-  rowMeta: { marginTop: 2, color: brand.inkSoft, fontFamily: theme.fontFamily.regular },
-  badge: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 8, paddingVertical: 4, borderRadius: theme.radius.full },
-  badgeFree: { backgroundColor: brand.goldWash },
-  badgeRecent: { backgroundColor: brand.paperDim },
-  badgeLabel: { color: brand.inkSoft, fontFamily: theme.fontFamily.semiBold, fontSize: 11 },
-  badgeLabelFree: { color: brand.goldInk },
-  footer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    gap: theme.spacing.sm,
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.md,
-    backgroundColor: '#FFFFFF',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: brand.line,
-  },
-  footerTitle: { color: brand.ink, fontSize: 15 },
-  footerMeta: { color: brand.inkSoft, fontFamily: theme.fontFamily.regular },
-  footerActions: { gap: theme.spacing.sm },
-  progress: { gap: theme.spacing.sm, paddingBottom: theme.spacing.sm },
-  warning: { flexDirection: 'row', gap: theme.spacing.sm, padding: theme.spacing.md, borderRadius: theme.radius.md, backgroundColor: brand.goldWash },
-  warningText: { flex: 1, color: brand.ink, fontFamily: theme.fontFamily.regular, lineHeight: 17 },
-  notice: { flexDirection: 'row', gap: theme.spacing.sm, alignItems: 'flex-start' },
-  noticeText: { flex: 1, color: brand.inkSoft, fontFamily: theme.fontFamily.regular, lineHeight: 17 },
-  noticeError: { color: brand.burgundy },
-});
-
 export default BulkDownloadScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame, flex: 1, backgroundColor: brand.paper },
+    body: { flex: 1 },
+    pressed: { opacity: 0.85 },
+    cyclePicker: { paddingBottom: theme.spacing['2xl'] },
+    chipGroup: { paddingTop: theme.spacing.base },
+    chipGroupHeader: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', paddingHorizontal: theme.layout.gutter },
+    chipGroupTitle: { color: brand.inkSoft },
+    chipGroupHint: { color: brand.inkMuted, fontFamily: theme.fontFamily.regular },
+    chipRow: { gap: theme.spacing.sm, paddingHorizontal: theme.layout.gutter, paddingTop: theme.spacing.sm },
+    chip: {
+      minHeight: 40,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 6,
+      paddingHorizontal: 14,
+      borderRadius: theme.radius.full,
+      borderWidth: 1,
+      borderColor: brand.line,
+      backgroundColor: brand.sheet,
+    },
+    chipActive: { backgroundColor: brand.night, borderColor: brand.ink },
+    chipLabel: { color: brand.inkSoft, fontFamily: theme.fontFamily.medium, fontSize: 14 },
+    chipLabelActive: { color: brand.onInk },
+    chipCount: { color: brand.inkMuted, fontFamily: theme.fontFamily.regular, fontSize: 12 },
+    listHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.lg,
+      paddingBottom: theme.spacing.sm,
+    },
+    listCount: { color: brand.inkSoft, fontFamily: theme.fontFamily.regular },
+    link: { color: brand.burgundy, fontSize: 13, fontFamily: theme.fontFamily.semiBold },
+    linkButton: { minHeight: 34, justifyContent: 'center', paddingHorizontal: 14, borderRadius: 17, backgroundColor: brand.burgundyWash, borderWidth: StyleSheet.hairlineWidth, borderColor: theme.brand.actionBorderSoft },
+    row: {
+      minHeight: 68,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.md,
+      paddingHorizontal: theme.layout.gutter,
+      paddingVertical: 12,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: brand.line,
+    },
+    rowChecked: { backgroundColor: brand.goldWash },
+    checkbox: {
+      width: 24,
+      height: 24,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 7,
+      borderWidth: 1.5,
+      borderColor: brand.lineStrong,
+      backgroundColor: brand.sheet,
+    },
+    checkboxChecked: { backgroundColor: brand.night, borderColor: brand.ink },
+    rowIcon: {
+      width: 36,
+      minHeight: 44,
+      paddingVertical: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: theme.radius.md,
+      backgroundColor: brand.paperDim,
+    },
+    rowContent: { flex: 1 },
+    rowTitle: { color: brand.ink, fontSize: 15, lineHeight: 20 },
+    rowMeta: { marginTop: 2, color: brand.inkSoft, fontFamily: theme.fontFamily.regular },
+    badge: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 8, paddingVertical: 4, borderRadius: theme.radius.full },
+    badgeFree: { backgroundColor: brand.goldWash },
+    badgeRecent: { backgroundColor: brand.paperDim },
+    badgeLabel: { color: brand.inkSoft, fontFamily: theme.fontFamily.semiBold, fontSize: 11 },
+    badgeLabelFree: { color: brand.goldInk },
+    footer: {
+      gap: theme.spacing.sm,
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.md,
+      backgroundColor: brand.sheet,
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: brand.line,
+    },
+    footerTitle: { color: brand.ink, fontSize: 15 },
+    footerMeta: { color: brand.inkSoft, fontFamily: theme.fontFamily.regular },
+    footerActions: { gap: theme.spacing.sm },
+    progress: { gap: theme.spacing.sm, paddingBottom: theme.spacing.sm },
+    warning: { flexDirection: 'row', gap: theme.spacing.sm, padding: theme.spacing.md, borderRadius: theme.radius.md, backgroundColor: brand.goldWash },
+    warningText: { flex: 1, color: brand.ink, fontFamily: theme.fontFamily.regular, lineHeight: 17 },
+    notice: { flexDirection: 'row', gap: theme.spacing.sm, alignItems: 'flex-start' },
+    noticeText: { flex: 1, color: brand.inkSoft, fontFamily: theme.fontFamily.regular, lineHeight: 17 },
+    noticeError: { color: brand.burgundy },
+  });
+  return { styles };
+});

@@ -1,23 +1,28 @@
+import Pressable from '../../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming, useAnimatedReaction } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { scheduleOnRN } from 'react-native-worklets';
 import Svg, { Circle, Path } from 'react-native-svg';
 import { ArrowDown, ArrowUp, GripVertical } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
-import { brand, colors, motion, theme, type } from '../theme';
-import { haptic } from '../feedback';
-import { STATE_COLORS, isCorrected, useShuffled } from './kit';
+import { motion, type } from '../theme';
+import { haptic, useReduceMotion } from '../feedback';
+import { isCorrected, useShuffled } from './kit';
 
 // ═══ Remettre dans l'ordre (§ 11.4, E16) ════════════════════════════════
 const ROW = 60;
 const GAP = 8;
-const STEP = ROW + GAP;
 
-const OrderRow = ({ item, index, count, positions, onDrop, onMove, selected, onSelect, status, corrected, rang }) => {
+const OrderRow = ({ item, index, count, positions, onDrop, onMove, selected, onSelect, status, corrected, rang, rowHeight }) => {
+  const { STATE_COLORS, brand } = useTheme();
+  const { styles } = useStyles();
+  const reduce = useReduceMotion();
+  const step = rowHeight + GAP;
   const dragging = useSharedValue(0);
-  const y = useSharedValue(index * STEP);
+  const y = useSharedValue(index * step);
   const startY = useSharedValue(0);
   const latest = useRef({ onDrop });
   latest.current = { onDrop };
@@ -26,9 +31,9 @@ const OrderRow = ({ item, index, count, positions, onDrop, onMove, selected, onS
 
   // Les autres cartes s'écartent en douceur quand l'ordre change.
   useAnimatedReaction(() => positions.value[item.id], (pos, prev) => {
-    if (pos !== prev && dragging.value === 0 && pos != null) y.value = withSpring(pos * STEP, motion.sheet);
+    if (pos !== prev && dragging.value === 0 && pos != null) y.value = reduce ? pos * step : withSpring(pos * step, motion.sheet);
   });
-  useEffect(() => { if (!dragging.value) y.value = withSpring(index * STEP, motion.sheet); }, [index]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (!dragging.value) y.value = reduce ? index * step : withSpring(index * step, motion.sheet); }, [index, step, reduce]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const pan = useMemo(() => Gesture.Pan()
     .enabled(!corrected)
@@ -40,7 +45,7 @@ const OrderRow = ({ item, index, count, positions, onDrop, onMove, selected, onS
     })
     .onUpdate((e) => {
       y.value = startY.value + e.translationY;
-      const target = Math.max(0, Math.min(count - 1, Math.round(y.value / STEP)));
+      const target = Math.max(0, Math.min(count - 1, Math.round(y.value / step)));
       const current = positions.value[item.id];
       if (target !== current) {
         const next = { ...positions.value };
@@ -54,23 +59,23 @@ const OrderRow = ({ item, index, count, positions, onDrop, onMove, selected, onS
       }
     })
     .onEnd(() => {
-      y.value = withSpring(positions.value[item.id] * STEP, motion.snap);
+      y.value = reduce ? positions.value[item.id] * step : withSpring(positions.value[item.id] * step, motion.snap);
       dragging.value = withTiming(0, { duration: 150 });
       scheduleOnRN(drop);
-    }), [corrected, count, item.id, drop, lift]); // eslint-disable-line react-hooks/exhaustive-deps
+    }), [corrected, count, item.id, drop, lift, step, reduce]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const style = useAnimatedStyle(() => ({
     top: 0,
     zIndex: dragging.value > 0 ? 20 : 1,
     elevation: dragging.value * 8,
     shadowOpacity: 0.05 + dragging.value * 0.12,
-    transform: [{ translateY: y.value }, { scale: 1 + dragging.value * 0.04 }],
+    transform: [{ translateY: y.value }, { scale: reduce ? 1 : 1 + dragging.value * 0.04 }],
   }));
 
   const st = status ? STATE_COLORS[status] : null;
   return (
     <GestureDetector gesture={pan}>
-      <Animated.View style={[styles.orderRow, selected && styles.orderSelected, st && { borderColor: st.border, backgroundColor: st.bg }, style]}>
+      <Animated.View style={[styles.orderRow, { height: rowHeight }, selected && styles.orderSelected, st && { borderColor: st.border, backgroundColor: st.bg }, style]}>
         <Pressable
           style={styles.orderPress}
           onPress={() => onSelect(item.id)}
@@ -80,9 +85,9 @@ const OrderRow = ({ item, index, count, positions, onDrop, onMove, selected, onS
           accessibilityHint="Appui long puis glisse pour déplacer, ou touche pour afficher les flèches"
         >
           <View style={[styles.rank, st && { backgroundColor: st.border }]}>
-            <Text variant="caption" style={[styles.rankText, type.tabular, st && { color: '#FFF' }]}>{index + 1}</Text>
+            <Text variant="caption" style={[styles.rankText, type.tabular, st && { color: brand.onInk }]}>{index + 1}</Text>
           </View>
-          <Text variant="bodyMedium" style={styles.orderText} numberOfLines={2}>{item.texte}</Text>
+          <Text variant="bodyMedium" style={styles.orderText}>{item.texte}</Text>
           {corrected && status === 'faux' ? <Text variant="caption" style={styles.expected}>{`→ ${rang}`}</Text> : null}
           {!corrected && selected ? (
             <View style={styles.arrows}>
@@ -97,6 +102,12 @@ const OrderRow = ({ item, index, count, positions, onDrop, onMove, selected, onS
 };
 
 export const OrdreRenderer = ({ exercice, value, onChange, phase, correction, seed }) => {
+  const { styles } = useStyles();
+  const { width, fontScale } = useWindowDimensions();
+  const [rowLayouts, setRowLayouts] = useState({});
+  const measureKey = `${width}:${fontScale}`;
+  const rowHeight = Math.max(ROW, ...exercice.contenu.elements.map((e) => rowLayouts[`${measureKey}:${e.id}`] || ROW));
+  const step = rowHeight + GAP;
   const c = exercice.contenu;
   const shuffled = useShuffled(c.elements, seed);
   const corrected = isCorrected(phase);
@@ -130,11 +141,27 @@ export const OrdreRenderer = ({ exercice, value, onChange, phase, correction, se
   return (
     <View>
       {c.libelleHaut ? <Text variant="overline" style={styles.edge}>{c.libelleHaut}</Text> : null}
-      <View style={{ height: order.length * STEP - GAP }}>
+      {/* Mesure invisible de la ligne complète, flèches comprises : pas de texte tronqué au tri. */}
+      <View pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.orderMeasure}>
+        {order.map((id, index) => (
+          <View key={`${measureKey}:${id}`} style={[styles.orderPress, { flex: undefined, minHeight: ROW }]}
+            onLayout={(e) => {
+              const height = Math.ceil(e.nativeEvent.layout.height) + 4;
+              const key = `${measureKey}:${id}`;
+              setRowLayouts((previous) => previous[key] === height ? previous : { ...previous, [key]: height });
+            }}>
+            <View style={styles.rank}><Text variant="caption" style={styles.rankText}>{index + 1}</Text></View>
+            <Text variant="bodyMedium" style={styles.orderText}>{byId[id].texte}</Text>
+            <View style={{ width: 92, height: 44 }} />
+          </View>
+        ))}
+      </View>
+      <View style={{ height: order.length * step - GAP }}>
         {order.map((id, index) => (
           <OrderRow
             key={id}
             item={byId[id]}
+            rowHeight={rowHeight}
             index={index}
             count={order.length}
             positions={positions}
@@ -161,6 +188,7 @@ const curve = (a, b) => {
 
 /** Carte de gauche : glisser depuis l'ancrage trace un trait ; toucher la sélectionne. */
 const LeftCard = ({ item, linkedLabel, active, disabled, onLayout, onTap, onLongPress, onDragStart, onDragMove, onDragEnd }) => {
+  const { styles } = useStyles();
   const latest = useRef({});
   latest.current = { onDragStart, onDragMove, onDragEnd };
   const start = useCallback(() => latest.current.onDragStart(), []);
@@ -193,6 +221,8 @@ const LeftCard = ({ item, linkedLabel, active, disabled, onLayout, onTap, onLong
 };
 
 export const RelierRenderer = ({ exercice, value, onChange, phase, correction, seed }) => {
+  const { colors, brand } = useTheme();
+  const { styles } = useStyles();
   const c = exercice.contenu;
   const gauche = useShuffled(c.gauche, `${seed}:g`);
   const droite = useShuffled(c.droite, `${seed}:d`);
@@ -308,26 +338,30 @@ export const RelierRenderer = ({ exercice, value, onChange, phase, correction, s
   );
 };
 
-const styles = StyleSheet.create({
-  edge: { color: brand.inkMuted, marginBottom: 10 },
-  orderRow: { position: 'absolute', left: 0, right: 0, height: ROW, borderRadius: 12, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet, shadowColor: brand.ink, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } },
-  orderSelected: { borderColor: brand.burgundy, borderWidth: 2 },
-  orderPress: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 12 },
-  rank: { width: 26, height: 26, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paperDim },
-  rankText: { color: brand.ink, fontFamily: theme.fontFamily.bold },
-  orderText: { flex: 1, color: brand.ink, fontSize: 14.5, lineHeight: 19 },
-  expected: { color: colors.success, fontFamily: theme.fontFamily.bold },
-  arrows: { flexDirection: 'row', gap: 4 },
-  arrowBtn: { width: 36, height: 36, borderRadius: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paperDim },
-  matchRoot: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingVertical: 4 },
-  unlinkHint: { width: '100%', marginTop: 14, color: brand.inkMuted, textAlign: 'center' },
-  col: { width: '44%', gap: 12 },
-  matchCard: { minHeight: 52, justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet },
-  matchActive: { borderColor: brand.burgundy, borderWidth: 2 },
-  matchTarget: { borderColor: brand.lineStrong, borderStyle: 'dashed' },
-  matchText: { color: brand.ink, fontSize: 13.5, lineHeight: 18 },
-  anchor: { position: 'absolute', top: '50%', marginTop: -6, width: 12, height: 12, borderRadius: 6, backgroundColor: brand.lineStrong },
-  anchorRight: { right: -6 },
-  anchorLeft: { left: -6 },
-  anchorOn: { backgroundColor: brand.burgundy },
+const useStyles = createThemedStyles(({ brand, theme, colors }) => {
+  const styles = StyleSheet.create({
+    edge: { color: brand.inkMuted, marginBottom: 10 },
+    orderMeasure: { position: 'absolute', top: 0, left: 2, right: 2, opacity: 0 },
+    orderRow: { position: 'absolute', left: 0, right: 0, height: ROW, borderRadius: 12, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet, shadowColor: brand.night, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } },
+    orderSelected: { borderColor: brand.burgundy, borderWidth: 2 },
+    orderPress: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 12, paddingVertical: 12 },
+    rank: { minWidth: 26, minHeight: 26, padding: 4, borderRadius: 13, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paperDim },
+    rankText: { color: brand.ink, fontFamily: theme.fontFamily.bold },
+    orderText: { flex: 1, color: brand.ink, fontSize: 14.5, lineHeight: 19 },
+    expected: { color: colors.success, fontFamily: theme.fontFamily.bold },
+    arrows: { flexDirection: 'row', gap: 4 },
+    arrowBtn: { width: 44, height: 44, borderRadius: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.paperDim },
+    matchRoot: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingVertical: 4 },
+    unlinkHint: { width: '100%', marginTop: 14, color: brand.inkMuted, textAlign: 'center' },
+    col: { width: '44%', gap: 12 },
+    matchCard: { minHeight: 52, justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet },
+    matchActive: { borderColor: brand.burgundy, borderWidth: 2 },
+    matchTarget: { borderColor: brand.lineStrong, borderStyle: 'dashed' },
+    matchText: { color: brand.ink, fontSize: 13.5, lineHeight: 18 },
+    anchor: { position: 'absolute', top: '50%', marginTop: -6, width: 12, height: 12, borderRadius: 6, backgroundColor: brand.lineStrong },
+    anchorRight: { right: -6 },
+    anchorLeft: { left: -6 },
+    anchorOn: { backgroundColor: brand.burgundySolid },
+  });
+  return { styles };
 });

@@ -1,10 +1,14 @@
+import useAsyncAction from '../hooks/useAsyncAction';
+import { SkeletonRows } from '../components/ui/Skeleton';
+import { TouchableOpacity } from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
+
 import { getErrorAlert } from '../utils/userMessages';
 import React, { useState, useContext, useCallback } from 'react';
 import {
   View,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   RefreshControl,
   Alert,
   FlatList,
@@ -19,12 +23,15 @@ import Card from '../components/ui/Card';
 import EmptyState from '../components/ui/EmptyState';
 import AuthContext from '../context/AuthContext';
 import useDrafts from '../hooks/useDrafts';
-import theme from '../theme/tokens';
 
 const AdminDraftsScreen = ({ navigation }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const { user, logout } = useContext(AuthContext);
   const { drafts, loading, deleteDraft, loadDrafts, page, hasMore, loadingMore, error: loadError } = useDrafts();
   const [refreshing, setRefreshing] = useState(false);
+  const [runMutation, mutating] = useAsyncAction();
+  const [mutationId, setMutationId] = useState(null);
 
   useFocusEffect(
     useCallback(() => {
@@ -65,13 +72,14 @@ const AdminDraftsScreen = ({ navigation }) => {
         {
           text: 'Supprimer',
           style: 'destructive',
-          onPress: async () => {
+          onPress: () => runMutation(async () => {
+            setMutationId(draftId);
             try {
               await deleteDraft(draftId);
             } catch (err) {
               Alert.alert(...getErrorAlert(err, 'suppression', 'vous'));
             }
-          },
+          }),
         },
       ]
     );
@@ -129,13 +137,13 @@ const AdminDraftsScreen = ({ navigation }) => {
             onPress={() => navigation.navigate('Upload')}
             activeOpacity={0.8}
           >
-            <Plus size={18} color={theme.colors.textInverse} strokeWidth={2.5} />
+            <Plus size={18} color={theme.colors.textInverse} strokeWidth={2.2} />
             <Text variant="caption" style={styles.primaryActionText}>Nouveau</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {drafts.length === 0 && !loading && !refreshing ? (
+      {loading && !drafts.length ? <SkeletonRows count={4} /> : drafts.length === 0 && !loading && !refreshing ? (
         <View style={styles.contentContainer}>
           <EmptyState
             icon={FileText}
@@ -274,6 +282,8 @@ const AdminDraftsScreen = ({ navigation }) => {
 
                   <TouchableOpacity
                     style={[styles.actionButton, styles.deleteButton]}
+                    loading={mutating && mutationId === (draft._id || draft.id)}
+                    disabled={mutating}
                     onPress={() => handleDeleteDraft(draft._id || draft.id)}
                     activeOpacity={0.75}
                   >
@@ -289,171 +299,178 @@ const AdminDraftsScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: theme.colors.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: '700',
-    letterSpacing: -0.4,
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 14,
-  },
-  headerActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  iconAction: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
-    backgroundColor: theme.colors.primaryWash,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconActionError: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
-    backgroundColor: theme.colors.errorWash,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  primaryAction: {
-    height: 38,
-    paddingHorizontal: 14,
-    borderRadius: 19,
-    backgroundColor: theme.colors.primary,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: theme.colors.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  primaryActionText: {
-    color: theme.colors.textInverse,
-    fontWeight: '700',
-    marginLeft: 4,
-    fontSize: 13,
-  },
-  content: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 32,
-  },
-  draftsList: {
-    gap: 12,
-  },
-  draftCard: {
-    padding: 14,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 1,
-  },
-  draftHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 8,
-  },
-  draftInfo: {
-    flex: 1,
-    marginRight: 8,
-  },
-  draftTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 4,
-    color: theme.colors.textPrimary,
-  },
-  draftMeta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  completionIndicator: {
-    backgroundColor: theme.colors.primaryWash,  
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: theme.radius.full,
-  },
-  completionIndicatorDone: {
-    backgroundColor: theme.colors.successWash,
-  },
-  completionText: {
-    fontWeight: '600',
-  },
-  description: {
-    marginBottom: 8,
-    lineHeight: 18,
-  },
-  metadataPreview: {
-    flexDirection: 'row',
-    gap: 6,
-    marginBottom: 12,
-    flexWrap: 'wrap',
-  },
-  metadataBadge: {
-    backgroundColor: theme.colors.primaryWash,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: theme.radius.full,
-  },
-  draftActions: {
-    flexDirection: 'row',
-    gap: 8,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.borderLight,
-    paddingTop: 12,
-    marginTop: 4,
-  },
-  actionButton: {
-    flex: 1,
-    height: 40,
-    borderRadius: theme.radius.md,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  editButton: {
-    backgroundColor: theme.colors.primaryWash,
-    borderWidth: 1,
-    borderColor: theme.colors.primary,
-  },
-  publishButton: {
-    backgroundColor: theme.colors.primary,
-    flex: 1.2,
-  },
-  deleteButton: {
-    flex: 0.5,
-    backgroundColor: theme.colors.errorWash,
-    borderWidth: 1,
-    borderColor: theme.colors.error,
-  },
-});
-
 export default AdminDraftsScreen;
+
+const useStyles = createThemedStyles(({ theme, studySurface }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      backgroundColor: theme.colors.surface,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+    },
+    title: {
+      fontSize: 26,
+      fontWeight: '700',
+      letterSpacing: -0.4,
+      marginBottom: 4,
+    },
+    subtitle: {
+      fontSize: 14,
+    },
+    headerActions: {
+      flexDirection: 'row', flexWrap: 'wrap',
+      alignItems: 'center',
+      gap: 8,
+    },
+    iconAction: {
+      minWidth: 44,
+      minHeight: 44,
+      paddingVertical: 8,
+      borderRadius: 19,
+      backgroundColor: theme.colors.primaryWash,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    iconActionError: {
+      minWidth: 44,
+      minHeight: 44,
+      paddingVertical: 8,
+      borderRadius: 19,
+      backgroundColor: theme.colors.errorWash,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    primaryAction: {
+      minHeight: 44,
+      paddingVertical: 8,
+      paddingHorizontal: 14,
+      borderRadius: 19,
+      backgroundColor: theme.brand.night,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: theme.brand.night,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.2,
+      shadowRadius: 8,
+      elevation: 4,
+    },
+    primaryActionText: {
+      color: theme.colors.textInverse,
+      fontWeight: '700',
+      marginLeft: 4,
+      fontSize: 13,
+    },
+    content: {
+      flex: 1,
+    },
+    contentContainer: {
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 32,
+    },
+    draftsList: {
+      gap: 12,
+    },
+    draftCard: {
+      padding: 14,
+      borderWidth: 1,
+      borderColor: theme.colors.borderLight,
+      shadowColor: studySurface.adminShadow,
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity: 0.05,
+      shadowRadius: 10,
+      elevation: 1,
+    },
+    draftHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      marginBottom: 8,
+    },
+    draftInfo: {
+      flex: 1,
+      marginRight: 8,
+    },
+    draftTitle: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginBottom: 4,
+      color: theme.colors.textPrimary,
+    },
+    draftMeta: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    completionIndicator: {
+      backgroundColor: theme.colors.primaryWash,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: theme.radius.full,
+    },
+    completionIndicatorDone: {
+      backgroundColor: theme.colors.successWash,
+    },
+    completionText: {
+      fontWeight: '600',
+    },
+    description: {
+      marginBottom: 8,
+      lineHeight: 18,
+    },
+    metadataPreview: {
+      flexDirection: 'row',
+      gap: 6,
+      marginBottom: 12,
+      flexWrap: 'wrap',
+    },
+    metadataBadge: {
+      backgroundColor: theme.colors.primaryWash,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: theme.radius.full,
+    },
+    draftActions: {
+      flexDirection: 'row',
+      gap: 8,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.borderLight,
+      paddingTop: 12,
+      marginTop: 4,
+    },
+    actionButton: {
+      flexGrow: 1, flexBasis: 140,
+      minHeight: 44,
+      paddingVertical: 8,
+      borderRadius: theme.radius.md,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    editButton: {
+      backgroundColor: theme.colors.primaryWash,
+      borderWidth: 1,
+      borderColor: theme.colors.primary,
+    },
+    publishButton: {
+      backgroundColor: theme.brand.night,
+      flex: 1.2,
+    },
+    deleteButton: {
+      flex: 0.5,
+      backgroundColor: theme.colors.errorWash,
+      borderWidth: 1,
+      borderColor: theme.colors.error,
+    },
+  });
+  return { styles };
+});

@@ -1,10 +1,11 @@
+import { createThemedStyles } from '../../theme/ThemeProvider';
 import { getUserMessage } from '../../utils/userMessages';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ExternalLink, Receipt } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import ScreenHeader from '../../components/ui/ScreenHeader';
-import ActionButton from '../../components/ui/ActionButton';
+import { PrepButton as ActionButton } from '../../prep/ui/primitives';
 import StatusPill from '../../components/ui/StatusPill';
 import StateView from '../../components/ui/StateView';
 import { SkeletonRows } from '../../components/ui/Skeleton';
@@ -13,9 +14,6 @@ import { useEntitlements, useSubscription } from '../../hooks/useAccount';
 import { useWebCheckout } from '../../hooks/useWebCheckout';
 import PaymentMethodLogo from '../../components/payments/PaymentMethodLogo';
 import { formatAmount, formatDate, formatLongDate } from '../../utils/format';
-import theme from '../../theme/tokens';
-
-const { brand } = theme;
 
 const TITLES = {
   ACTIVE: 'Abonnement actif',
@@ -27,6 +25,7 @@ const TITLES = {
 const KIND_LABELS = { initial: 'Abonnement', monthly: 'Mensualité' };
 
 const SubscriptionScreen = ({ navigation }) => {
+  const { styles } = useStyles();
   const { data, isLoading, isError, refetch, isRefetching, error: loadError } = useSubscription();
   const { data: entitlements } = useEntitlements();
   const canCheckout = entitlements?.checkout?.mobileWebCheckout !== false;
@@ -61,6 +60,10 @@ const SubscriptionScreen = ({ navigation }) => {
     const next = data.nextPayment;
     return (
       <>
+        <View style={styles.summary}>
+          <StatusPill status={status} />
+          <Text variant="body" style={styles.summaryText}>{subtitle}</Text>
+        </View>
         <Section title="Détails">
           {data.firstActivatedAt ? <Row label="Membre depuis" value={formatDate(data.firstActivatedAt)} /> : null}
           {data.currentPeriodEnd ? <Row label="Accès jusqu’au" value={formatDate(data.currentPeriodEnd)} /> : null}
@@ -89,6 +92,7 @@ const SubscriptionScreen = ({ navigation }) => {
             </View>
             <Text variant="caption" style={styles.webStepLine}>3. Reviens ensuite dans l’application : ton accès s’active tout seul.</Text>
             <ActionButton
+              variant="gold"
               title={`${ctaLabel} sur le site`}
               icon={ExternalLink}
               onPress={() => checkout.open(entitlements?.checkout?.webCheckoutUrl)}
@@ -119,12 +123,8 @@ const SubscriptionScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ScreenHeader
         onBack={() => navigation.goBack()}
-        eyebrow="Mon abonnement"
         title={TITLES[status] || 'Abonnement à vérifier'}
-        subtitle={isLoading ? undefined : subtitle}
-      >
-        {data ? <View style={styles.pill}><StatusPill status={status} /></View> : null}
-      </ScreenHeader>
+      />
       <AccountScroll refreshing={isRefetching} onRefresh={refetch}>
         {renderBody()}
       </AccountScroll>
@@ -132,55 +132,57 @@ const SubscriptionScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  pill: {
-    marginTop: theme.spacing.md,
-  },
-  cta: {
-    marginTop: theme.spacing.md,
-  },
-  webStep: {
-    marginBottom: theme.spacing.xl,
-    padding: theme.spacing.base,
-    borderRadius: theme.radius.md,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: brand.line,
-    backgroundColor: theme.colors.surface,
-  },
-  webStepTitle: {
-    marginBottom: theme.spacing.xs,
-    color: brand.ink,
-    fontSize: 15,
-  },
-  webStepRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    marginTop: 4,
-  },
-  inline: {
-    marginTop: 0,
-  },
-  webStepStrong: {
-    marginTop: 0,
-    color: brand.ink,
-    fontFamily: theme.fontFamily.semiBold,
-  },
-  webStepLine: {
-    marginTop: 4,
-    color: brand.inkSoft,
-    fontFamily: theme.fontFamily.regular,
-    lineHeight: 18,
-  },
-  empty: {
-    padding: theme.spacing.base,
-    color: brand.inkSoft,
-    fontSize: 14,
-  },
-});
-
 export default SubscriptionScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    summary: { gap: 12, marginBottom: 28 },
+    summaryText: { color: brand.inkSoft, lineHeight: 23 },
+
+    cta: {
+      marginTop: theme.spacing.md,
+    },
+    webStep: {
+      marginBottom: theme.spacing.xl,
+      paddingVertical: 20,
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderColor: brand.line,
+    },
+    webStepTitle: {
+      marginBottom: theme.spacing.xs,
+      color: brand.ink,
+      fontSize: 15,
+    },
+    webStepRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 6,
+      marginTop: 4,
+    },
+    inline: {
+      marginTop: 0,
+    },
+    webStepStrong: {
+      marginTop: 0,
+      color: brand.ink,
+      fontFamily: theme.fontFamily.semiBold,
+    },
+    webStepLine: {
+      marginTop: 4,
+      color: brand.inkSoft,
+      fontFamily: theme.fontFamily.regular,
+      lineHeight: 18,
+    },
+    empty: {
+      padding: theme.spacing.base,
+      color: brand.inkSoft,
+      fontSize: 14,
+    },
+  });
+  return { styles };
+});

@@ -1,5 +1,6 @@
+import Pressable from '../ui/FeedbackPressable';
 import React, { useCallback, useRef } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   interpolate,

@@ -1,12 +1,15 @@
+import useAsyncAction from '../hooks/useAsyncAction';
+import Pressable from '../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorAlert, getUserMessage } from '../utils/userMessages';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
   Modal,
-  Pressable,
   ScrollView,
   StyleSheet,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
@@ -25,6 +28,8 @@ import {
   Clock,
 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
+import { PrepButton } from '../prep/ui/primitives';
+import { useReduceMotion } from '../prep/feedback';
 import ScreenHeader, { HeaderIconButton } from '../components/ui/ScreenHeader';
 import StateView from '../components/ui/StateView';
 import ProgressBar from '../components/ui/ProgressBar';
@@ -38,9 +43,6 @@ import { formatDate, formatFileSize, formatNumber, formatRenewal } from '../util
 import { getCorrection, getDocumentTitle, getExtensionLabel, hasIncludedCorrection } from '../utils/document';
 import AuthContext from '../context/AuthContext';
 import { deleteDocument } from '../services/documents';
-import theme from '../theme/tokens';
-
-const { brand } = theme;
 
 const labelOf = (item) => item?.nom || item?.name || '';
 const capitalize = (value) => (value ? value.charAt(0).toLocaleUpperCase() + value.slice(1) : value);
@@ -57,6 +59,7 @@ const nodeChain = (node) => {
 };
 
 const InfoRow = ({ label, value, isLast }) => {
+  const { styles } = useStyles();
   if (!value) return null;
   return (
     <View style={[styles.infoRow, isLast && styles.infoRowLast]}>
@@ -67,9 +70,14 @@ const InfoRow = ({ label, value, isLast }) => {
 };
 
 const DocumentDetailScreen = () => {
+  const [runDelete, deleting] = useAsyncAction();
+  const reduce = useReduceMotion();
+  const { brand, theme } = useTheme();
+  const { styles } = useStyles();
   const route = useRoute();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const { height } = useWindowDimensions();
   const { documentId, document: initialDocument, context } = route.params;
 
   const { data, refetch, isError, error: documentError } = useDocument(documentId);
@@ -83,6 +91,7 @@ const DocumentDetailScreen = () => {
     enabled: promptEnabled,
     setEnabled: setPromptEnabled,
     isLoaded: promptLoaded,
+    saving: promptSaving,
   } = useCorrectionPromptPreference();
   const { user } = useContext(AuthContext);
 
@@ -176,20 +185,19 @@ const DocumentDetailScreen = () => {
 
   const handleToggleDontAskAgain = async () => {
     const nextValue = !dontAskAgain;
-    setDontAskAgain(nextValue);
     await setPromptEnabled(!nextValue);
   };
 
   // Un fichier déjà enregistré s'ouvre toujours ; un téléchargement passe par le contrôle d'accès.
   const handlePrimaryAction = () => {
-    if (isSubjectDownloaded) openSubject();
-    else access.guard(downloadSubject)();
+    if (isSubjectDownloaded) return openSubject();
+    return access.guard(downloadSubject)();
   };
 
   const handleCorrectionAction = () => {
     if (!hasCorrection) return;
-    if (isCorrectionDownloaded) openCorrection();
-    else access.guard(downloadCorrection)();
+    if (isCorrectionDownloaded) return openCorrection();
+    return access.guard(downloadCorrection)();
   };
 
   const handleDelete = () => {
@@ -201,7 +209,7 @@ const DocumentDetailScreen = () => {
         {
           text: 'Supprimer',
           style: 'destructive',
-          onPress: async () => {
+          onPress: () => runDelete(async () => {
             try {
               await deleteDocument(document._id || document.id);
               Alert.alert('Succès', 'Document placé dans la corbeille.');
@@ -209,7 +217,7 @@ const DocumentDetailScreen = () => {
             } catch (error) {
               Alert.alert(...getErrorAlert(error, 'suppression', 'tu'));
             }
-          },
+          }),
         },
       ]
     );
@@ -221,7 +229,7 @@ const DocumentDetailScreen = () => {
       await setPromptEnabled(false);
     }
     if (downloadNow) {
-      downloadCorrection();
+      return downloadCorrection();
     }
   };
 
@@ -256,10 +264,10 @@ const DocumentDetailScreen = () => {
   // Cadenas affiché d'avance ; le serveur reste seul juge et la feuille explique son refus.
   const isLocked = (Boolean(access.locked) || needsSubscription || (freePlan && quotaExhausted)) && !isSubjectDownloaded;
   const primaryLabel = isSubjectDownloading
-    ? `Téléchargement… ${Math.round(subjectProgress * 100)} %`
+    ? (Number.isFinite(subjectProgress) ? `Téléchargement… ${Math.round(subjectProgress * 100)} %` : 'Téléchargement…')
     : isSubjectDownloaded ? `Ouvrir ${subjectNoun}` : isLocked ? `Débloquer ${subjectNoun}` : `Télécharger ${subjectNoun}`;
-  const primaryBusy = isSubjectDownloading || isSubjectInitializing;
-  const correctionBusy = isCorrectionDownloading || isCorrectionInitializing;
+  const primaryBusy = isSubjectDownloading || isSubjectInitializing || subjectDownload.isFilePending;
+  const correctionBusy = isCorrectionDownloading || isCorrectionInitializing || correctionDownload.isFilePending;
 
   return (
     <View style={styles.container}>
@@ -269,14 +277,14 @@ const DocumentDetailScreen = () => {
         title={displayTitle}
         titleLines={3}
         right={canDelete ? (
-          <HeaderIconButton icon={Trash2} label="Supprimer le document" onPress={handleDelete} />
+          <HeaderIconButton icon={Trash2} label="Supprimer le document" loading={deleting} disabled={deleting} onPress={handleDelete} />
         ) : null}
       >
         <View style={styles.headerTags}>
           <Text variant="caption" style={styles.headerTag}>{fileLabel}</Text>
           {hasCorrection || correctionIncluded ? (
             <View style={styles.headerChip}>
-              <FileCheck size={12} color={brand.ink} strokeWidth={2} />
+              <FileCheck size={12} color={brand.onGold} strokeWidth={2} />
               <Text style={styles.headerChipLabel}>Corrigé disponible</Text>
             </View>
           ) : null}
@@ -284,7 +292,7 @@ const DocumentDetailScreen = () => {
       </ScreenHeader>
 
       <ScrollView
-        contentContainerStyle={[styles.scrollContent, { paddingBottom: 120 + Math.max(insets.bottom, theme.spacing.lg) }]}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: theme.spacing.xl }]}
         showsVerticalScrollIndicator={false}
       >
         {isSubjectDownloaded ? (
@@ -296,6 +304,7 @@ const DocumentDetailScreen = () => {
               accessibilityLabel="Partager le document"
               hitSlop={theme.hitSlop}
               onPress={shareSubject}
+              disabled={subjectDownload.isFilePending}
               style={({ pressed }) => [styles.shareLink, pressed && styles.linkPressed]}
             >
               <Share2 size={15} color={brand.burgundy} strokeWidth={2} />
@@ -341,9 +350,9 @@ const DocumentDetailScreen = () => {
         ) : null}
 
         {!isCorrection ? (
-          <Animated.View entering={FadeInDown.duration(260).delay(60)} style={styles.correctionBlock}>
+          <Animated.View entering={reduce ? FadeIn.duration(150) : FadeInDown.duration(260).delay(60)} style={styles.correctionBlock}>
             <View style={[styles.correctionIcon, !hasCorrection && !correctionInSubject && styles.correctionIconMuted]}>
-              <FileCheck size={18} color={hasCorrection || correctionInSubject ? brand.goldInk : brand.inkMuted} strokeWidth={1.8} />
+              <FileCheck size={18} color={hasCorrection || correctionInSubject ? brand.goldInk : brand.inkMuted} strokeWidth={2} />
             </View>
             <View style={styles.correctionCopy}>
               <Text variant="bodyMedium" style={styles.correctionTitle}>
@@ -357,7 +366,7 @@ const DocumentDetailScreen = () => {
                     : 'Le corrigé de ce sujet n’a pas encore été publié.'}
               </Text>
               {isCorrectionDownloading ? (
-                <ProgressBar progress={correctionProgress} color={brand.gold} style={styles.correctionProgress} />
+                <View style={{ gap: 6 }}>{Number.isFinite(correctionProgress) ? <ProgressBar progress={correctionProgress} color={brand.gold} style={styles.correctionProgress} /> : null}<Text variant="caption" style={styles.correctionText}>{Number.isFinite(correctionProgress) ? `Téléchargement… ${Math.round(correctionProgress * 100)} %` : 'Téléchargement…'}</Text></View>
               ) : null}
             </View>
             {hasCorrection ? (
@@ -368,13 +377,12 @@ const DocumentDetailScreen = () => {
                 onPress={handleCorrectionAction}
                 style={({ pressed }) => [styles.correctionAction, pressed && styles.secondaryPressed, correctionBusy && styles.actionDisabled]}
               >
-                {correctionBusy ? (
-                  <ActivityIndicator size="small" color={brand.ink} />
-                ) : (
-                  <Text variant="bodyMedium" style={styles.correctionActionLabel}>
+                {({ pending }) => <>
+                  <Text variant="bodyMedium" style={[styles.correctionActionLabel, (pending || correctionBusy) && { opacity: 0 }]}>
                     {isCorrectionDownloaded ? 'Ouvrir' : 'Télécharger'}
                   </Text>
-                )}
+                  {pending || correctionBusy ? <ActivityIndicator size="small" color={brand.ink} style={StyleSheet.absoluteFill} /> : null}
+                </>}
               </Pressable>
             ) : null}
           </Animated.View>
@@ -405,33 +413,20 @@ const DocumentDetailScreen = () => {
 
       <View style={[styles.actionBar, { paddingBottom: Math.max(insets.bottom, theme.spacing.base) }]}>
         {isSubjectDownloading ? (
-          <ProgressBar progress={subjectProgress} color={brand.burgundy} style={styles.primaryProgress} />
+          <View style={{ gap: 6 }}>
+            {Number.isFinite(subjectProgress) ? <ProgressBar progress={subjectProgress} color={brand.burgundy} style={styles.primaryProgress} /> : null}
+            <Text variant="caption" style={{ color: brand.inkSoft }}>{primaryLabel}</Text>
+          </View>
         ) : null}
-        <Pressable
-          accessibilityRole="button"
+        <PrepButton
+          title={primaryLabel}
           accessibilityLabel={primaryLabel}
           accessibilityState={{ busy: primaryBusy }}
           disabled={primaryBusy}
+          loading={isSubjectInitializing}
           onPress={handlePrimaryAction}
-          style={({ pressed }) => [
-            styles.primaryAction,
-            pressed && styles.primaryActionPressed,
-            primaryBusy && styles.primaryActionBusy,
-          ]}
-        >
-          {isSubjectInitializing ? (
-            <ActivityIndicator size="small" color={brand.onInk} />
-          ) : (
-            <>
-              {isSubjectDownloaded
-                ? <FileText size={18} color={brand.onInk} strokeWidth={1.9} />
-                : isLocked
-                  ? <Lock size={18} color={brand.onInk} strokeWidth={1.9} />
-                  : <Download size={18} color={brand.onInk} strokeWidth={1.9} />}
-              <Text variant="bodyMedium" style={styles.primaryActionLabel}>{primaryLabel}</Text>
-            </>
-          )}
-        </Pressable>
+          iconLeft={isSubjectDownloaded ? FileText : isLocked ? Lock : Download}
+        />
       </View>
 
       <AccessSheet {...access.sheetProps} />
@@ -444,9 +439,9 @@ const DocumentDetailScreen = () => {
         onRequestClose={() => setShowCorrectionModal(false)}
       >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
+          <ScrollView style={[styles.modalContent, { maxHeight: height * 0.85 }]} contentContainerStyle={{ padding: 24 }} keyboardShouldPersistTaps="handled">
             <View style={styles.modalIcon}>
-              <FileCheck size={22} color={brand.goldInk} strokeWidth={1.8} />
+              <FileCheck size={22} color={brand.goldInk} strokeWidth={2} />
             </View>
             <Text variant="h3" align="center" style={styles.modalTitle}>Le corrigé est disponible</Text>
             <Text variant="body" style={styles.modalText} align="center">
@@ -456,10 +451,11 @@ const DocumentDetailScreen = () => {
               accessibilityRole="checkbox"
               accessibilityState={{ checked: dontAskAgain }}
               onPress={handleToggleDontAskAgain}
+              disabled={promptSaving}
               style={styles.checkboxRow}
             >
               <View style={[styles.checkbox, dontAskAgain && styles.checkboxChecked]}>
-                {dontAskAgain ? <Check size={13} color={brand.onInk} strokeWidth={3} /> : null}
+                {dontAskAgain ? <Check size={13} color={brand.onInk} strokeWidth={2.2} /> : null}
               </View>
               <Text variant="caption" style={styles.checkboxLabel}>
                 Ne plus me le proposer
@@ -481,333 +477,320 @@ const DocumentDetailScreen = () => {
                 <Text variant="bodyMedium" style={styles.modalPrimaryLabel}>Télécharger</Text>
               </Pressable>
             </View>
-          </View>
+          </ScrollView>
         </View>
       </Modal>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  headerTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-    marginTop: theme.spacing.md,
-  },
-  headerTag: {
-    color: brand.onInkSoft,
-    fontSize: 12,
-  },
-  headerChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: theme.radius.full,
-    backgroundColor: brand.onInkAccent,
-  },
-  headerChipLabel: {
-    color: brand.ink,
-    fontFamily: theme.fontFamily.semiBold,
-    fontSize: 11,
-    lineHeight: 15,
-  },
-  scrollContent: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.lg,
-  },
-  localNotice: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.sm,
-    marginBottom: theme.spacing.md,
-    paddingHorizontal: theme.spacing.base,
-    paddingVertical: theme.spacing.md,
-    borderRadius: theme.radius.md,
-    backgroundColor: brand.goldWash,
-  },
-  localNoticeTitle: {
-    flex: 1,
-    color: brand.ink,
-    fontSize: 14,
-  },
-  shareLink: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    minHeight: 34,
-    paddingHorizontal: 12,
-    borderRadius: 17,
-    backgroundColor: brand.burgundyWash,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(108,40,56,0.18)',
-  },
-  shareLabel: {
-    color: brand.burgundy,
-    fontFamily: theme.fontFamily.semiBold,
-    fontSize: 13,
-  },
-  linkPressed: {
-    opacity: 0.6,
-  },
-  correctionBlock: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-    padding: theme.spacing.base,
-    borderRadius: theme.radius.md,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: brand.lineStrong,
-    backgroundColor: theme.colors.surface,
-  },
-  lockNotice: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-    marginBottom: theme.spacing.md,
-    padding: theme.spacing.base,
-    borderRadius: theme.radius.md,
-    backgroundColor: brand.goldWash,
-  },
-  lockIcon: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.full,
-    backgroundColor: theme.colors.surface,
-  },
-  correctionIcon: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.sm,
-    backgroundColor: brand.goldWash,
-  },
-  correctionIconMuted: {
-    backgroundColor: brand.paperDim,
-  },
-  correctionCopy: {
-    flex: 1,
-  },
-  correctionTitle: {
-    color: brand.ink,
-    fontSize: 15,
-  },
-  correctionText: {
-    marginTop: 2,
-    color: brand.inkSoft,
-    fontFamily: theme.fontFamily.regular,
-    fontSize: 13,
-    lineHeight: 18,
-  },
-  correctionProgress: {
-    height: 2,
-    marginTop: theme.spacing.sm,
-    backgroundColor: brand.line,
-  },
-  correctionAction: {
-    minWidth: 96,
-    minHeight: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: theme.spacing.base,
-    borderRadius: theme.radius.full,
-    borderWidth: 1,
-    borderColor: brand.ink,
-  },
-  correctionActionLabel: {
-    color: brand.ink,
-    fontSize: 14,
-  },
-  secondaryPressed: {
-    backgroundColor: brand.pressed,
-  },
-  actionDisabled: {
-    opacity: 0.6,
-  },
-  section: {
-    marginTop: theme.spacing.xl,
-  },
-  sectionTitle: {
-    marginBottom: theme.spacing.sm,
-    color: brand.inkSoft,
-  },
-  descriptionText: {
-    color: brand.ink,
-    fontSize: 15,
-    lineHeight: 23,
-  },
-  infoList: {
-    paddingHorizontal: theme.spacing.base,
-    borderRadius: theme.radius.md,
-    backgroundColor: theme.colors.surface,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: brand.line,
-  },
-  infoRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    gap: theme.spacing.base,
-    paddingVertical: 13,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: brand.line,
-  },
-  infoRowLast: {
-    borderBottomWidth: 0,
-  },
-  infoLabel: {
-    color: brand.inkSoft,
-    fontFamily: theme.fontFamily.regular,
-    fontSize: 14,
-  },
-  infoValue: {
-    flexShrink: 1,
-    color: brand.ink,
-    fontSize: 14,
-    textAlign: 'right',
-  },
-  stats: {
-    marginTop: theme.spacing.lg,
-    color: brand.inkMuted,
-    fontFamily: theme.fontFamily.regular,
-    fontSize: 12,
-    textAlign: 'center',
-  },
-  actionBar: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    left: 0,
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.md,
-    backgroundColor: brand.paper,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: brand.line,
-  },
-  primaryProgress: {
-    height: 2,
-    marginBottom: theme.spacing.md,
-    backgroundColor: brand.line,
-  },
-  primaryAction: {
-    minHeight: 52,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: theme.spacing.sm,
-    backgroundColor: brand.ink,
-    borderRadius: theme.radius.md,
-  },
-  primaryActionPressed: {
-    opacity: 0.88,
-  },
-  primaryActionBusy: {
-    backgroundColor: brand.inkSoft,
-  },
-  primaryActionLabel: {
-    color: brand.onInk,
-    fontSize: 15,
-  },
-  modalOverlay: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.spacing.xl,
-    backgroundColor: brand.backdrop,
-  },
-  modalContent: {
-    width: '100%',
-    maxWidth: 380,
-    alignItems: 'center',
-    padding: theme.spacing.xl,
-    backgroundColor: brand.paper,
-    borderRadius: theme.radius.xl,
-  },
-  modalIcon: {
-    width: 48,
-    height: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.full,
-    backgroundColor: brand.goldWash,
-  },
-  modalTitle: {
-    marginTop: theme.spacing.base,
-    color: brand.ink,
-  },
-  modalText: {
-    marginTop: 6,
-    color: brand.inkSoft,
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  checkboxRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
-    minHeight: theme.layout.touch,
-    marginTop: theme.spacing.base,
-  },
-  checkbox: {
-    width: 20,
-    height: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: theme.spacing.sm,
-    borderWidth: 1.5,
-    borderColor: brand.lineStrong,
-    borderRadius: 5,
-  },
-  checkboxChecked: {
-    backgroundColor: brand.ink,
-    borderColor: brand.ink,
-  },
-  checkboxLabel: {
-    color: brand.inkSoft,
-    fontFamily: theme.fontFamily.regular,
-    fontSize: 13,
-  },
-  modalActions: {
-    width: '100%',
-    flexDirection: 'row',
-    gap: theme.spacing.sm,
-    marginTop: theme.spacing.md,
-  },
-  modalSecondary: {
-    flex: 1,
-    minHeight: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.md,
-    borderWidth: 1,
-    borderColor: brand.lineStrong,
-  },
-  modalSecondaryLabel: {
-    color: brand.ink,
-    fontSize: 15,
-  },
-  modalPrimary: {
-    flex: 1,
-    minHeight: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: theme.radius.md,
-    backgroundColor: brand.ink,
-  },
-  modalPrimaryLabel: {
-    color: brand.onInk,
-    fontSize: 15,
-  },
-});
-
 export default DocumentDetailScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    headerTags: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      gap: theme.spacing.md,
+      marginTop: theme.spacing.md,
+    },
+    headerTag: {
+      color: brand.onInkSoft,
+      fontSize: 12,
+    },
+    headerChip: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 5,
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: theme.radius.full,
+      backgroundColor: brand.onInkAccent,
+    },
+    headerChipLabel: {
+      color: brand.onGold,
+      fontFamily: theme.fontFamily.semiBold,
+      fontSize: 11,
+      lineHeight: 15,
+    },
+    scrollContent: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.lg,
+    },
+    localNotice: {
+      flexDirection: 'row', flexWrap: 'wrap',
+      alignItems: 'center',
+      gap: theme.spacing.sm,
+      marginBottom: theme.spacing.md,
+      paddingHorizontal: theme.spacing.base,
+      paddingVertical: theme.spacing.md,
+      borderRadius: theme.radius.md,
+      backgroundColor: brand.goldWash,
+    },
+    localNoticeTitle: {
+      flex: 1,
+      color: brand.ink,
+      fontSize: 14,
+    },
+    shareLink: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 6,
+      minHeight: 44,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      borderRadius: 17,
+      backgroundColor: brand.burgundyWash,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: theme.brand.actionBorderSoft,
+    },
+    shareLabel: {
+      color: brand.burgundy,
+      fontFamily: theme.fontFamily.semiBold,
+      fontSize: 13,
+    },
+    linkPressed: {
+      opacity: brand.inactiveOpacity,
+    },
+    correctionBlock: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.md,
+      padding: theme.spacing.base,
+      borderRadius: theme.radius.md,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: brand.lineStrong,
+      backgroundColor: theme.colors.surface,
+    },
+    lockNotice: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.md,
+      marginBottom: theme.spacing.md,
+      padding: theme.spacing.base,
+      borderRadius: theme.radius.md,
+      backgroundColor: brand.goldWash,
+    },
+    lockIcon: {
+      width: 40,
+      minHeight: 44,
+      paddingVertical: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: theme.radius.full,
+      backgroundColor: theme.colors.surface,
+    },
+    correctionIcon: {
+      width: 40,
+      minHeight: 44,
+      paddingVertical: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: theme.radius.sm,
+      backgroundColor: brand.goldWash,
+    },
+    correctionIconMuted: {
+      backgroundColor: brand.paperDim,
+    },
+    correctionCopy: {
+      flex: 1,
+    },
+    correctionTitle: {
+      color: brand.ink,
+      fontSize: 15,
+    },
+    correctionText: {
+      marginTop: 2,
+      color: brand.inkSoft,
+      fontFamily: theme.fontFamily.regular,
+      fontSize: 13,
+      lineHeight: 18,
+    },
+    correctionProgress: {
+      height: 2,
+      marginTop: theme.spacing.sm,
+      backgroundColor: brand.line,
+    },
+    correctionAction: {
+      minWidth: 96,
+      minHeight: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: theme.spacing.base,
+      borderRadius: theme.radius.full,
+      borderWidth: 1,
+      borderColor: brand.ink,
+    },
+    correctionActionLabel: {
+      color: brand.ink,
+      fontSize: 14,
+    },
+    secondaryPressed: {
+      backgroundColor: brand.pressed,
+    },
+    actionDisabled: {
+      opacity: brand.inactiveOpacity,
+    },
+    section: {
+      marginTop: theme.spacing.xl,
+    },
+    sectionTitle: {
+      marginBottom: theme.spacing.sm,
+      color: brand.inkSoft,
+    },
+    descriptionText: {
+      color: brand.ink,
+      fontSize: 15,
+      lineHeight: 23,
+    },
+    infoList: {
+      paddingHorizontal: theme.spacing.base,
+      borderRadius: theme.radius.md,
+      backgroundColor: theme.colors.surface,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: brand.line,
+    },
+    infoRow: {
+      flexDirection: 'row',
+      alignItems: 'baseline',
+      justifyContent: 'space-between',
+      gap: theme.spacing.base,
+      paddingVertical: 13,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: brand.line,
+    },
+    infoRowLast: {
+      borderBottomWidth: 0,
+    },
+    infoLabel: {
+      color: brand.inkSoft,
+      fontFamily: theme.fontFamily.regular,
+      fontSize: 14,
+    },
+    infoValue: {
+      flexShrink: 1,
+      color: brand.ink,
+      fontSize: 14,
+      textAlign: 'right',
+    },
+    stats: {
+      marginTop: theme.spacing.lg,
+      color: brand.inkMuted,
+      fontFamily: theme.fontFamily.regular,
+      fontSize: 12,
+      textAlign: 'center',
+    },
+    actionBar: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.md,
+      backgroundColor: brand.paper,
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: brand.line,
+    },
+    primaryProgress: {
+      height: 2,
+      marginBottom: theme.spacing.md,
+      backgroundColor: brand.line,
+    },
+    primaryActionPressed: {
+      opacity: 0.88,
+    },
+    modalOverlay: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: theme.spacing.xl,
+      backgroundColor: brand.backdrop,
+    },
+    modalContent: {
+      width: '100%',
+      maxWidth: 380,
+      alignItems: 'center',
+      padding: theme.spacing.xl,
+      backgroundColor: brand.paper,
+      borderRadius: theme.radius.xl,
+    },
+    modalIcon: {
+      width: 48,
+      minHeight: 48,
+      paddingVertical: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: theme.radius.full,
+      backgroundColor: brand.goldWash,
+    },
+    modalTitle: {
+      marginTop: theme.spacing.base,
+      color: brand.ink,
+    },
+    modalText: {
+      marginTop: 6,
+      color: brand.inkSoft,
+      fontSize: 14,
+      lineHeight: 20,
+    },
+    checkboxRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'center',
+      minHeight: theme.layout.touch,
+      marginTop: theme.spacing.base,
+    },
+    checkbox: {
+      width: 20,
+      height: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: theme.spacing.sm,
+      borderWidth: 1.5,
+      borderColor: brand.lineStrong,
+      borderRadius: 5,
+    },
+    checkboxChecked: {
+      backgroundColor: brand.night,
+      borderColor: brand.ink,
+    },
+    checkboxLabel: {
+      color: brand.inkSoft,
+      fontFamily: theme.fontFamily.regular,
+      fontSize: 13,
+    },
+    modalActions: {
+      width: '100%',
+      flexDirection: 'row',
+      gap: theme.spacing.sm,
+      marginTop: theme.spacing.md,
+    },
+    modalSecondary: {
+      flex: 1,
+      minHeight: 48,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: theme.radius.md,
+      borderWidth: 1,
+      borderColor: brand.lineStrong,
+    },
+    modalSecondaryLabel: {
+      color: brand.ink,
+      fontSize: 15,
+    },
+    modalPrimary: {
+      flex: 1,
+      minHeight: 48,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: theme.radius.md,
+      backgroundColor: brand.night,
+    },
+    modalPrimaryLabel: {
+      color: brand.onInk,
+      fontSize: 15,
+    },
+  });
+  return { styles };
+});

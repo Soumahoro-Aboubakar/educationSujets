@@ -1,3 +1,4 @@
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { getErrorMessage } from '../../utils/userMessages';
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
@@ -6,7 +7,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { ArrowDown, CloudOff, PlayCircle, RotateCcw } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import usePrep from '../store';
-import { brand, theme } from '../theme';
+
 import { useReduceMotion } from '../feedback';
 import { InlineAction } from '../ui/primitives';
 import YoutubeEmbed from './YoutubeEmbed';
@@ -29,6 +30,8 @@ const MESSAGES = {
 };
 
 const VideoPanel = forwardRef(({ video, kind = 'lecon', language = 'fr', readLabel, onRead, onLayout, onPlayerChange, style }, ref) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
   const reduce = useReduceMotion();
   const enLigne = usePrep((s) => s.videosEnLigne);
   const loadVideos = usePrep((s) => s.loadVideos);
@@ -75,7 +78,7 @@ const VideoPanel = forwardRef(({ video, kind = 'lecon', language = 'fr', readLab
     setFailure(null);
     setReady(false);
     setAttempt((a) => a + 1);
-    loadVideos(true);
+    return loadVideos(true);
   };
 
   const height = Math.round(width * RATIO);
@@ -131,21 +134,24 @@ const VideoPanel = forwardRef(({ video, kind = 'lecon', language = 'fr', readLab
   );
 });
 
-const styles = StyleSheet.create({
-  card: { borderRadius: 20, overflow: 'hidden', backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  frame: { width: '100%', aspectRatio: 16 / 9, backgroundColor: brand.inkDeep },
-  veil: { backgroundColor: 'rgba(8,18,36,0.38)' },
-  veilStrong: { backgroundColor: 'rgba(8,18,36,0.78)' },
-  loading: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center' },
-  blocked: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center', gap: 10, paddingHorizontal: 28 },
-  blockedText: { color: brand.onInk, textAlign: 'center', maxWidth: 300 },
-  retry: { alignSelf: 'center', backgroundColor: brand.sheet },
-  meta: { gap: 6, paddingHorizontal: 16, paddingTop: 12, paddingBottom: 16 },
-  metaHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, minHeight: 34 },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  shrink: { flexShrink: 1 },
-  kind: { color: brand.burgundy, fontFamily: theme.fontFamily.semiBold },
-  title: { color: brand.ink, fontFamily: theme.fontFamily.semiBold },
-});
-
 export default VideoPanel;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    card: { borderRadius: 20, overflow: 'hidden', backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
+    frame: { width: '100%', aspectRatio: 16 / 9, backgroundColor: brand.inkDeep },
+    veil: { backgroundColor: 'rgba(8,18,36,0.38)' },
+    veilStrong: { backgroundColor: 'rgba(8,18,36,0.78)' },
+    loading: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center' },
+    blocked: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center', gap: 10, paddingHorizontal: 28 },
+    blockedText: { color: brand.onInk, textAlign: 'center', maxWidth: 300 },
+    retry: { alignSelf: 'center', backgroundColor: brand.sheet },
+    meta: { gap: 6, paddingHorizontal: 16, paddingTop: 12, paddingBottom: 16 },
+    metaHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, minHeight: 34 },
+    row: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+    shrink: { flexShrink: 1 },
+    kind: { color: brand.burgundy, fontFamily: theme.fontFamily.semiBold },
+    title: { color: brand.ink, fontFamily: theme.fontFamily.semiBold },
+  });
+  return { styles };
+});

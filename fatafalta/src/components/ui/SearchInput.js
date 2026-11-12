@@ -1,7 +1,9 @@
+import { TouchableOpacity } from './FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, } from 'react-native';
 import { Search, SlidersHorizontal, X } from 'lucide-react-native';
-import theme from '../../theme/tokens';
+
 import Text from './Text';
 
 /**
@@ -17,16 +19,19 @@ const SearchInput = ({
   placeholder = 'Rechercher...',
   style,
 }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   return (
     <View style={[styles.container, style, theme.shadows.md]}>
       <View style={styles.iconContainer}>
         <Search size={20} color={theme.colors.textMuted} />
       </View>
-      
       <TextInput
         style={styles.input}
         value={value}
         onChangeText={onChangeText}
+        accessibilityLabel={placeholder}
+        selectionColor={theme.brand.burgundy}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.textMuted}
         returnKeyType="search"
@@ -36,6 +41,8 @@ const SearchInput = ({
 
       {value ? (
         <TouchableOpacity
+          accessibilityRole="button"
+          accessibilityLabel="Effacer la recherche"
           onPress={onClear}
           style={styles.clearButton}
           hitSlop={theme.hitSlop}
@@ -47,6 +54,8 @@ const SearchInput = ({
       <View style={styles.divider} />
 
       <TouchableOpacity
+        accessibilityRole="button"
+        accessibilityLabel={`Filtres, ${filterCount} actif${filterCount > 1 ? 's' : ''}`}
         onPress={onFilterPress}
         style={[
           styles.filterButton,
@@ -69,60 +78,68 @@ const SearchInput = ({
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.xl,
-    height: 56,
-    paddingHorizontal: theme.spacing.sm,
-    borderWidth: 1,
-    borderColor: theme.colors.borderLight,
-  },
-  iconContainer: {
-    paddingHorizontal: theme.spacing.md,
-  },
-  input: {
-    flex: 1,
-    fontFamily: theme.fontFamily.medium,
-    fontSize: 15,
-    color: theme.colors.textPrimary,
-    height: '100%',
-  },
-  clearButton: {
-    padding: theme.spacing.sm,
-  },
-  divider: {
-    width: 1,
-    height: 24,
-    backgroundColor: theme.colors.border,
-    marginHorizontal: theme.spacing.sm,
-  },
-  filterButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: theme.spacing.sm,
-    borderRadius: theme.radius.lg,
-    backgroundColor: theme.colors.surfaceRaised,
-  },
-  filterButtonActive: {
-    backgroundColor: theme.colors.primary,
-  },
-  badge: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.full,
-    width: 18,
-    height: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: theme.spacing.xs,
-  },
-  badgeText: {
-    fontSize: 10,
-    lineHeight: 12,
-  },
-});
-
 export default SearchInput;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme.colors.surface,
+      borderRadius: theme.radius.xl,
+      minHeight: 56,
+      paddingHorizontal: theme.spacing.sm,
+      borderWidth: 1,
+      borderColor: theme.colors.borderLight,
+    },
+    iconContainer: {
+      paddingHorizontal: theme.spacing.sm,
+    },
+    input: {
+      flex: 1,
+      fontFamily: theme.fontFamily.medium,
+      fontSize: 15,
+      color: theme.colors.textPrimary,
+      minWidth: 0,
+      minHeight: 54,
+      paddingVertical: 12,
+    },
+    clearButton: {
+      minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center',
+      padding: theme.spacing.sm,
+    },
+    divider: {
+      width: 1,
+      height: 24,
+      backgroundColor: theme.colors.border,
+      marginHorizontal: 4,
+    },
+    filterButton: {
+      minWidth: 44, minHeight: 44, justifyContent: 'center',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: theme.spacing.sm,
+      paddingVertical: theme.spacing.sm,
+      borderRadius: theme.radius.lg,
+      backgroundColor: theme.colors.surfaceRaised,
+    },
+    filterButtonActive: {
+      backgroundColor: theme.brand.night,
+    },
+    badge: {
+      backgroundColor: theme.colors.surface,
+      borderRadius: theme.radius.full,
+      minWidth: 18,
+      minHeight: 18,
+      paddingHorizontal: 4, paddingVertical: 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: theme.spacing.xs,
+    },
+    badgeText: {
+      fontSize: 10,
+      lineHeight: 12,
+    },
+  });
+  return { styles };
+});

@@ -71,3 +71,36 @@ export const paperLines = { step: 28, color: 'rgba(228,222,210,0.55)' };
 
 export { theme, brand, colors };
 export default { SUBJECT_TINTS, subjectTint, LEVELS, PODIUM, GRADIENTS, type, motion };
+
+
+export const DARK_SUBJECT_TINTS = [
+  { tint: '#9CBFFF', wash: '#203351', solid: '#264069' },
+  { tint: '#E08B9E', wash: '#302335', solid: '#6C2838' },
+  { tint: '#91D2C8', wash: '#193A39', solid: '#1F5F5B' },
+  { tint: brand.goldLight, wash: '#302A21', solid: '#7A5A24' },
+  { tint: '#C7B4EF', wash: '#302B46', solid: '#4B3A6B' },
+  { tint: '#BBC7D9', wash: '#293344', solid: '#4F5E72' },
+];
+
+// Construit une seule fois par palette ; aucune couleur mutable globale.
+export const createPrepPalette = ({ brand: b, colors: c, isDark }) => {
+  const tints = isDark ? DARK_SUBJECT_TINTS : SUBJECT_TINTS;
+  return {
+    SUBJECT_TINTS: tints,
+    subjectTint: (index = 0) => tints[Math.abs(index) % tints.length],
+    LEVELS: isDark ? {
+      1: { ...LEVELS[1], color: b.inkSoft },
+      2: { ...LEVELS[2], color: '#9CBFFF' },
+      3: LEVELS[3],
+    } : LEVELS,
+    PODIUM,
+    GRADIENTS: { ...GRADIENTS, night: [b.night, b.inkDeep], paperVeil: [b.paperTransparent, b.paper] },
+    paperLines: isDark ? { ...paperLines, color: b.line } : paperLines,
+    STATE_COLORS: {
+      juste: { bg: c.successWash, border: c.success, fg: c.success },
+      faux: { bg: c.errorWash, border: c.error, fg: c.error },
+      oublie: { bg: 'transparent', border: c.success, fg: c.success, dashed: true },
+      neutre: { bg: b.sheet, border: b.line, fg: b.ink },
+    },
+  };
+};

@@ -1,3 +1,4 @@
+import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
 import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, Keyboard, InteractionManager } from 'react-native';
@@ -10,12 +11,13 @@ import FilterBar from '../components/filters/FilterBar';
 import FilterBottomSheet from '../components/filters/FilterBottomSheet';
 import { useInfiniteDocuments } from '../hooks/useDocuments';
 import { useFilterOptions } from '../hooks/useFilterOptions';
-import theme from '../theme/tokens';
 
 /**
  * Dedicated Search Screen
  */
 const SearchScreen = () => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const navigation = useNavigation();
   const bottomSheetRef = useRef(null);
 
@@ -146,44 +148,47 @@ const SearchScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  header: {
-    paddingHorizontal: theme.spacing.lg,
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.md,
-    backgroundColor: theme.colors.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.borderLight,
-  },
-  title: {
-    marginBottom: theme.spacing.md,
-  },
-  searchInput: {
-    elevation: 0,
-    shadowOpacity: 0,
-    backgroundColor: theme.colors.surfaceRaised,
-  },
-  content: {
-    flex: 1,
-  },
-  listHeader: {
-    paddingBottom: theme.spacing.sm,
-  },
-  resultsHeader: {
-    paddingHorizontal: theme.spacing.xs,
-    marginTop: theme.spacing.sm,
-    marginBottom: theme.spacing.sm,
-  },
-  emptyPrompt: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing['2xl'],
-  },
-});
-
 export default SearchScreen;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    header: {
+      paddingHorizontal: theme.spacing.lg,
+      paddingTop: theme.spacing.xl,
+      paddingBottom: theme.spacing.md,
+      backgroundColor: theme.colors.surface,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.borderLight,
+    },
+    title: {
+      marginBottom: theme.spacing.md,
+    },
+    searchInput: {
+      elevation: 0,
+      shadowOpacity: 0,
+      backgroundColor: theme.colors.surfaceRaised,
+    },
+    content: {
+      flex: 1,
+    },
+    listHeader: {
+      paddingBottom: theme.spacing.sm,
+    },
+    resultsHeader: {
+      paddingHorizontal: theme.spacing.xs,
+      marginTop: theme.spacing.sm,
+      marginBottom: theme.spacing.sm,
+    },
+    emptyPrompt: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: theme.spacing['2xl'],
+    },
+  });
+  return { styles };
+});

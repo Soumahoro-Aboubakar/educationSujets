@@ -1,17 +1,9 @@
+import { createThemedStyles } from '../../theme/ThemeProvider';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Text from './Text';
-import theme from '../../theme/tokens';
-
-const { brand, colors } = theme;
 
 // Une seule table de correspondance statut → ton, partagée par tous les écrans du compte.
-const TONES = {
-  positive: { dot: colors.success, bg: colors.successWash, fg: colors.success },
-  pending: { dot: brand.gold, bg: brand.goldWash, fg: brand.goldInk },
-  negative: { dot: colors.error, bg: colors.errorWash, fg: colors.error },
-  neutral: { dot: brand.inkMuted, bg: brand.paperDim, fg: brand.inkSoft },
-};
 
 export const STATUS_LABELS = {
   ACTIVE: ['Actif', 'positive'],
@@ -30,6 +22,7 @@ export const STATUS_LABELS = {
 };
 
 const StatusPill = ({ status, label, tone }) => {
+  const { TONES, styles } = useStyles();
   const [defaultLabel, defaultTone] = Object.prototype.hasOwnProperty.call(STATUS_LABELS, status) ? STATUS_LABELS[status] : ['À vérifier', 'neutral'];
   const palette = TONES[tone || defaultTone];
 
@@ -41,26 +34,36 @@ const StatusPill = ({ status, label, tone }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    gap: 6,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: theme.radius.full,
-  },
-  dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-  },
-  label: {
-    fontFamily: theme.fontFamily.semiBold,
-    fontSize: 12,
-    lineHeight: 16,
-  },
-});
-
 export default StatusPill;
+
+const useStyles = createThemedStyles(({ colors, brand, theme }) => {
+  const TONES = {
+    positive: { dot: colors.success, bg: colors.successWash, fg: colors.success },
+    pending: { dot: brand.gold, bg: brand.goldWash, fg: brand.goldInk },
+    negative: { dot: colors.error, bg: colors.errorWash, fg: colors.error },
+    neutral: { dot: brand.inkMuted, bg: brand.paperDim, fg: brand.inkSoft },
+  };
+
+  const styles = StyleSheet.create({
+    pill: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'flex-start',
+      gap: 6,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: theme.radius.full,
+    },
+    dot: {
+      width: 6,
+      height: 6,
+      borderRadius: 3,
+    },
+    label: {
+      fontFamily: theme.fontFamily.semiBold,
+      fontSize: 12,
+      lineHeight: 16,
+    },
+  });
+  return { TONES, styles };
+});

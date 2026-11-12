@@ -1,19 +1,26 @@
+import StudyLamp from '../../theme/StudyLamp';
+import StatusBar from '../../theme/ThemeStatusBar';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+
+import { ordinal } from '../../utils/ordinal';
 import { getErrorMessage } from '../../utils/userMessages';
-import React, { useCallback, useMemo, useState } from 'react';
-import { Image, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import Svg, { Circle, Line, Path, Rect } from 'react-native-svg';
-import { Check, ChevronRight, Flame, NotebookPen, Target, Timer, Trophy } from 'lucide-react-native';
+import { ChevronRight, NotebookPen, Target, Timer, Trophy } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
-import { getProgramme, programmeModules } from '../content';
+import { programmeModules } from '../content';
 import usePrep, { todayKey, useSummary } from '../store';
 import prepApi from '../api';
-import { brand, colors, subjectTint, theme, type } from '../theme';
+import { type } from '../theme';
 import { haptic } from '../feedback';
-import { AnimatedNumber, Card, Enter, NightBackground, PrepButton, PressScale, ProgressBar, ProgressRing, SectionTitle, Segmented, StatTile, SubjectIcon } from '../ui/primitives';
+import { AnimatedNumber, NightBackground, PrepButton, PressScale, ProgressBar, SectionTitle, SubjectIcon } from '../ui/primitives';
 import ART from '../ui/art';
+import { ProgressScoreboard, ProgressTabs, WeekActivity } from '../components/ProgressPresentation';
+import { HomeChevron } from '../components/HomePresentation';
 import { sessionParams } from './SessionScreen';
 
 const pct = (v) => `${Math.round((v || 0) * 100)} %`;
@@ -21,6 +28,8 @@ const nf = (n) => Number(n || 0).toLocaleString('fr-FR');
 
 // ── Histogramme d'activité 28 jours (une série : pas de légende) ──────────
 const ActivityChart = ({ etat, today }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
   const [w, setW] = useState(0);
   const [sel, setSel] = useState(null);
   const days = Array.from({ length: 28 }, (_, i) => core.addDays(today, i - 27));
@@ -42,7 +51,7 @@ const ActivityChart = ({ etat, today }) => {
             return (
               <React.Fragment key={days[i]}>
                 {bh ? <Path d={`M${x} ${h} V${h - bh + 3} Q${x} ${h - bh} ${x + 3} ${h - bh} H${x + bw - 3} Q${x + bw} ${h - bh} ${x + bw} ${h - bh + 3} V${h} Z`} fill={sel === i ? brand.inkGlow : brand.ink} /> : null}
-                {goal ? <Circle cx={x + bw / 2} cy={h - bh - 7} r={4} fill={brand.gold} stroke="#FFF" strokeWidth={2} /> : null}
+                {goal ? <Circle cx={x + bw / 2} cy={h - bh - 7} r={4} fill={brand.gold} stroke={brand.onInk} strokeWidth={2} /> : null}
                 <Rect x={x - 1} y={0} width={bw + 2} height={h} fill="transparent" onPress={() => { haptic.select(); setSel(i === sel ? null : i); }} />
               </React.Fragment>
             );
@@ -60,6 +69,8 @@ const ActivityChart = ({ etat, today }) => {
 
 // ── Courbe des notes aux concours blancs ──────────────────────────────────
 const MockChart = ({ blancs }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
   const [w, setW] = useState(0);
   const [sel, setSel] = useState(null);
   const pts = blancs.map((b) => (b.sur ? (20 * b.note) / b.sur : 0));
@@ -75,7 +86,7 @@ const MockChart = ({ blancs }) => {
           <Path d={d} stroke={brand.ink} strokeWidth={2} fill="none" strokeLinejoin="round" />
           {pts.map((v, i) => {
             const [x, y] = xy(v, i);
-            return <Circle key={i} cx={x} cy={y} r={sel === i ? 6 : 5} fill={brand.gold} stroke="#FFF" strokeWidth={2} onPress={() => { haptic.select(); setSel(i); }} />;
+            return <Circle key={i} cx={x} cy={y} r={sel === i ? 6 : 5} fill={brand.gold} stroke={brand.onInk} strokeWidth={2} onPress={() => { haptic.select(); setSel(i); }} />;
           })}
         </Svg>
       ) : null}
@@ -88,6 +99,8 @@ const MockChart = ({ blancs }) => {
 
 // ═══ E33 — Onglet Progrès ═══════════════════════════════════════════════
 export const ProgressScreen = ({ navigation }) => {
+  const { brand, rankingTrend, theme, subjectTint, subjectPalette } = useTheme();
+  const { styles } = useStyles();
   const insets = useSafeAreaInsets();
   const programmeCode = usePrep((s) => s.programme);
   const summary = useSummary(programmeCode);
@@ -123,8 +136,8 @@ export const ProgressScreen = ({ navigation }) => {
       <NightBackground />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <View style={[styles.header, { paddingTop: insets.top + 14 }]}>
-          <Text variant="caption" style={styles.headKicker} numberOfLines={1}>{`${programme.organisme.sigle} · ${programme.titre}`}</Text>
           <Text variant="title" style={styles.onInk} accessibilityRole="header">Mon bilan</Text>
+          <Text variant="caption" style={styles.headContext}>{`${programme.organisme.sigle} · ${programme.titre}`}</Text>
           <PressScale onPress={() => navigation.navigate('PrepRanking', { programme: programmeCode })} style={styles.rankCard} accessibilityLabel={rank?.rang ? `Rang ${rank.rang} sur ${rank.total}. Voir le classement` : 'Voir le classement'}>
             <View style={styles.rankLaurel}>
               <Image source={ART.laurels[0]} style={styles.rankLaurelImg} resizeMode="contain" accessible={false} />
@@ -134,10 +147,10 @@ export const ProgressScreen = ({ navigation }) => {
               {rank?.rang ? (
                 <>
                   <View style={styles.rankRow}>
-                    <AnimatedNumber value={rank.rang} suffix="ᵉ" style={[type.numeral, styles.rankNum]} />
+                    <AnimatedNumber value={rank.rang} format={ordinal} style={[type.numeral, styles.rankNum]} />
                     <Text variant="body" style={styles.onSoft}>{`sur ${rank.total} candidat${rank.total > 1 ? 's' : ''}`}</Text>
                   </View>
-                  {rank.variation ? <Text variant="caption" style={{ color: rank.variation > 0 ? '#8FD9B4' : '#F3ADA4', fontFamily: theme.fontFamily.semiBold }}>{`${rank.variation > 0 ? '▲' : '▼'} ${Math.abs(rank.variation)} cette semaine`}</Text> : null}
+                  {rank.variation ? <Text variant="caption" style={{ color: rank.variation > 0 ? rankingTrend.up : rankingTrend.down, fontFamily: theme.fontFamily.semiBold }}>{`${rank.variation > 0 ? '▲' : '▼'} ${Math.abs(rank.variation)} cette semaine`}</Text> : null}
                 </>
               ) : (
                 <Text variant="bodyMedium" style={styles.onInk}>{offline || 'Ton rang n’est pas encore affiché. Réponds à des questions puis consulte le classement.'}</Text>
@@ -148,83 +161,81 @@ export const ProgressScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.sheetWrap}>
+          <StudyLamp />
           <View style={styles.ghost} pointerEvents="none" />
-          <View style={styles.sheet}>
-            <Segmented items={[{ key: 'progression', label: 'Progression' }, { key: 'matieres', label: 'Matières' }, { key: 'activite', label: 'Activité' }]} value={tab} onChange={setTab} />
+          <View style={[styles.sheet, { paddingBottom: Math.max(insets.bottom, 16) + 96 }]}>
+            <ProgressTabs value={tab} onChange={setTab} />
 
             {tab === 'progression' ? (
               <View style={styles.tabBody}>
-                <Enter index={0}>
-                  <View style={styles.globalCard}>
-                    <ProgressRing size={84} stroke={7} value={summary.pourcentage} track={brand.line}>
-                      <AnimatedNumber value={Math.round(summary.pourcentage * 100)} suffix=" %" style={[type.numeral, styles.globalPct]} />
-                    </ProgressRing>
-                    <View style={{ flex: 1 }}>
-                      <Text variant="h2" style={styles.ink}>Progression globale</Text>
-                      <Text variant="caption" style={[styles.muted, { marginTop: 2 }]}>{`${summary.modulesValides} module${summary.modulesValides > 1 ? 's' : ''} validé${summary.modulesValides > 1 ? 's' : ''} sur ${summary.modulesTotal}`}</Text>
-                    </View>
+                <View style={styles.globalProgress}>
+                  <View style={styles.between}>
+                    <Text variant="h2" style={[styles.ink, styles.flexText]}>Progression globale</Text>
+                    <Text style={[type.numeral, styles.globalPct]}>{pct(summary.pourcentage)}</Text>
                   </View>
-                </Enter>
-                <View style={styles.statGrid}>
-                  <StatTile icon={NotebookPen} value={nf(stats.questions)} label="questions" style={styles.statHalf} />
-                  <StatTile icon={Check} value={summary.modulesValides} label={`module${summary.modulesValides > 1 ? 's' : ''} validé${summary.modulesValides > 1 ? 's' : ''}`} tint={colors.success} wash={colors.successWash} style={styles.statHalf} />
-                  <StatTile icon={Target} value={pct(stats.reussite)} label="de réussite du 1ᵉʳ coup" tint={brand.inkGlow} wash="#E9EEF5" style={styles.statHalf} />
-                  <StatTile icon={Flame} value={summary.serie} label="jours de série" tint={brand.goldInk} wash={brand.goldWash} style={styles.statHalf} />
+                  <ProgressBar value={summary.pourcentage} color={brand.gold} height={4} />
+                  <Text variant="caption" style={styles.muted}>{`${summary.modulesValides} module${summary.modulesValides > 1 ? 's' : ''} validé${summary.modulesValides > 1 ? 's' : ''} sur ${summary.modulesTotal}`}</Text>
                 </View>
-                <SectionTitle style={styles.sectionGap}>Résultats</SectionTitle>
-                <Card style={{ paddingHorizontal: 4 }}>
-                  {[[stats.questions, 'Questions répondues'], [etat.compteurs.secondesChancesReussies, 'Secondes chances réussies'], [stats.erreurs, 'Erreurs effectuées'], [stats.erreursCorrigees, 'Erreurs corrigées'], [stats.raisonnementsValides, 'Raisonnements validés par l’IA']].map(([v, l], i, arr) => (
-                    <View key={l} style={[styles.resultRow, i < arr.length - 1 && styles.hair]}>
-                      <Text variant="body" style={styles.ink}>{l}</Text>
-                      <Text style={[type.numeral, styles.resultNum]}>{nf(v)}</Text>
-                    </View>
-                  ))}
-                </Card>
+                <ProgressScoreboard stats={stats} serie={summary.serie} />
+                <WeekActivity etat={etat} today={today} />
               </View>
             ) : null}
 
             {tab === 'matieres' ? (
               <View style={styles.tabBody}>
-                {programme.matieres.map((m, i) => {
+                {programme.matieres.map((m) => {
                   const val = m.modules.filter((x) => x.publie && (etat.modulesValides || []).includes(x.code)).length;
                   const ratio = m.modules.length ? val / m.modules.length : 0;
                   const t = subjectTint(m.teinte);
                   return (
-                    <Enter key={m.nom} index={i}>
+                    <View key={m.nom}>
                       <View style={styles.subjectRow}>
                         <SubjectIcon nom={m.nom} teinte={m.teinte} size={44} soft />
                         <View style={{ flex: 1, gap: 6 }}>
                           <View style={styles.between}>
-                            <Text variant="bodyMedium" style={styles.inkStrong} numberOfLines={1}>{m.nom}</Text>
+                            <Text variant="bodyMedium" style={[styles.inkStrong, styles.flexText]}>{m.nom}</Text>
                             <Text style={[type.numeral, styles.subjectPct]}>{pct(ratio)}</Text>
                           </View>
-                          <ProgressBar value={ratio} color={t.tint} height={5} delay={i * 60} />
+                          <ProgressBar value={ratio} color={t.tint} track={t.wash} height={4} />
                           <Text variant="caption" style={styles.muted}>{`${val} / ${m.modules.length} modules validés`}</Text>
                         </View>
                       </View>
-                    </Enter>
+                    </View>
                   );
                 })}
+                {!programme.matieres.length ? <View style={styles.empty}>
+                  <Text variant="h3">Ton parcours prend forme</Text>
+                  <Text variant="body" style={styles.muted}>Les matières de ton concours apparaîtront ici dès qu’elles seront disponibles.</Text>
+                </View> : null}
                 <View style={styles.noteCard}>
                   <Text variant="bodyMedium" style={styles.inkStrong}>{`Notions maîtrisées : ${notions.size} sur ${notionsTotal}`}</Text>
-                  <Text variant="caption" style={styles.muted}>{`Réussite du 1ᵉʳ coup · ${premierParNiveau.map((p, i) => `Niveau ${i + 1} : ${p == null ? '—' : pct(p)}`).join(' · ')}`}</Text>
+                  <Text variant="caption" style={styles.muted}>{`Réussite du ${ordinal(1)} coup · ${premierParNiveau.map((p, i) => `Niveau ${i + 1} : ${p == null ? '—' : pct(p)}`).join(' · ')}`}</Text>
                 </View>
               </View>
             ) : null}
 
             {tab === 'activite' ? (
               <View style={styles.tabBody}>
-                <Card style={styles.chartCard}>
+                <View style={styles.chartCard}>
                   <Text variant="h3" style={[styles.ink, { marginBottom: 12 }]}>28 derniers jours</Text>
                   <ActivityChart etat={etat} today={today} />
                   <Text variant="caption" style={[styles.muted, { marginTop: 10 }]}>{`Série actuelle : ${summary.serie} · record : ${etat.serie?.record || 0} jours`}</Text>
-                </Card>
+                </View>
+                <SectionTitle style={styles.sectionGap}>Dans ta copie</SectionTitle>
+                <View>
+                  {[[etat.compteurs.secondesChancesReussies, 'Secondes chances réussies'], [stats.erreurs, 'Erreurs effectuées'], [stats.erreursCorrigees, 'Erreurs corrigées'], [stats.raisonnementsValides, 'Raisonnements validés par l’IA']].map(([v, label]) => (
+                    <View key={label} style={styles.resultRow} accessible accessibilityLabel={`${label} : ${nf(v)}`}>
+                      <Text variant="body" style={[styles.muted, styles.flexText]}>{label}</Text>
+                      <Text style={[type.numeral, styles.resultNum]}>{nf(v)}</Text>
+                    </View>
+                  ))}
+                </View>
                 <SectionTitle style={styles.sectionGap}>Concours blancs</SectionTitle>
-                {etat.blancs?.length ? <Card style={styles.chartCard}><MockChart blancs={etat.blancs} /></Card> : (
+                {etat.blancs?.length ? <View style={styles.chartCard}><MockChart blancs={etat.blancs} /></View> : (
                   <PressScale onPress={() => navigation.navigate('PrepMockIntro', { programme: programmeCode })} style={styles.linkRow}>
-                    <View style={[styles.linkIcon, { backgroundColor: brand.ink }]}><Timer size={18} color={brand.goldLight} /></View>
+                    <View style={[styles.linkIcon, { backgroundColor: brand.night }]}><Timer size={18} color={brand.goldLight} /></View>
                     <Text variant="bodyMedium" style={[styles.inkStrong, { flex: 1 }]}>Fais ton premier concours blanc</Text>
-                    <ChevronRight size={18} color={brand.burgundy} />
+                    <HomeChevron />
                   </PressScale>
                 )}
               </View>
@@ -234,11 +245,11 @@ export const ProgressScreen = ({ navigation }) => {
             <View style={{ gap: 10 }}>
               <PressScale onPress={() => navigation.navigate('PrepReviews', { programme: programmeCode, onglet: 'cahier' })} style={styles.linkRow}>
                 <View style={[styles.linkIcon, { backgroundColor: brand.burgundyWash }]}><NotebookPen size={18} color={brand.burgundy} /></View>
-                <Text variant="bodyMedium" style={[styles.inkStrong, { flex: 1 }]}>{`Cahier d’erreurs (${Object.keys(etat.erreurs || {}).length})`}</Text><ChevronRight size={18} color={brand.burgundy} />
+                <Text variant="bodyMedium" style={[styles.inkStrong, { flex: 1 }]}>{`Cahier d’erreurs (${Object.keys(etat.erreurs || {}).length})`}</Text><HomeChevron />
               </PressScale>
               <PressScale onPress={() => navigation.navigate('PrepSession', sessionParams.test(programmeCode))} style={styles.linkRow}>
-                <View style={[styles.linkIcon, { backgroundColor: '#E9EEF5' }]}><Target size={18} color={brand.inkGlow} /></View>
-                <Text variant="bodyMedium" style={[styles.inkStrong, { flex: 1 }]}>Test de positionnement</Text><ChevronRight size={18} color={brand.burgundy} />
+                <View style={[styles.linkIcon, { backgroundColor: subjectPalette.inkWash }]}><Target size={18} color={brand.inkAccent} /></View>
+                <Text variant="bodyMedium" style={[styles.inkStrong, { flex: 1 }]}>Test de positionnement</Text><HomeChevron />
               </PressScale>
             </View>
           </View>
@@ -251,40 +262,42 @@ export const ProgressScreen = ({ navigation }) => {
 // Les écrans du classement partagent leur pagination et leurs composants dédiés.
 export { RankingScreen, CandidateScreen } from '../components/RankingScreens';
 
-const styles = StyleSheet.create({
-  paper: { flex: 1, backgroundColor: brand.paper },
-  root: { flex: 1, backgroundColor: brand.inkDeep },
-  inkStrong: { color: brand.ink, fontFamily: theme.fontFamily.semiBold },
-  headKicker: { color: brand.goldLight, fontFamily: theme.fontFamily.semiBold, marginBottom: 4 },
-  rankCard: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 18, padding: 14, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.07)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(228,201,151,0.3)' },
-  rankLaurel: { width: 56, height: 56, alignItems: 'center', justifyContent: 'center' },
-  rankLaurelImg: { position: 'absolute', width: 56, height: 56 },
-  rankNum: { color: brand.goldLight, fontSize: 36, lineHeight: 42 },
-  rankGo: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.goldLight },
-  sheetWrap: { flexGrow: 1, marginTop: 10 },
-  ghost: { position: 'absolute', top: -10, left: 16, right: 16, height: 48, borderTopLeftRadius: 26, borderTopRightRadius: 26, backgroundColor: 'rgba(244,240,230,0.34)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.25)' },
-  sheet: { flexGrow: 1, minHeight: 620, backgroundColor: brand.paper, borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingHorizontal: 20, paddingTop: 22, paddingBottom: 32 },
-  tabBody: { marginTop: 16, gap: 10 },
-  globalCard: { flexDirection: 'row', alignItems: 'center', gap: 16, padding: 16, borderRadius: 20, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  globalPct: { color: brand.ink, fontSize: 21, lineHeight: 26 },
-  statGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 2 },
-  statHalf: { flexBasis: '47%', flexGrow: 1 },
-  sectionGap: { marginTop: 24, marginBottom: 10 },
-  resultNum: { color: brand.ink, fontSize: 19, lineHeight: 24 },
-  subjectRow: { flexDirection: 'row', alignItems: 'center', gap: 14, padding: 14, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  subjectPct: { color: brand.ink, fontSize: 17, lineHeight: 22 },
-  noteCard: { marginTop: 6, padding: 14, borderRadius: 16, backgroundColor: brand.goldWash, gap: 4, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.35)' },
-  linkIcon: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
-  centerAll: { alignItems: 'center', justifyContent: 'center', gap: 10, padding: 24 },
-  ink: { color: brand.ink },
-  muted: { color: brand.inkSoft },
-  onInk: { color: brand.onInk },
-  onSoft: { color: brand.onInkSoft },
-  between: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  header: { paddingHorizontal: 20, paddingBottom: 20 },
-  rankRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 10, marginTop: 8 },
-  chartCard: { padding: 16 },
-  resultRow: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 14, paddingVertical: 12 },
-  hair: { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
-  linkRow: { minHeight: 60, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    paper: { flex: 1, backgroundColor: brand.paper },
+    root: { ...theme.layout.readingFrame, flex: 1, backgroundColor: brand.inkDeep },
+    inkStrong: { color: brand.ink, fontFamily: theme.fontFamily.semiBold },
+    headContext: { color: brand.goldLight, fontFamily: theme.fontFamily.semiBold, marginTop: 4 },
+    rankCard: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 12, padding: 12, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.07)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(228,201,151,0.3)' },
+    rankLaurel: { width: 56, height: 56, alignItems: 'center', justifyContent: 'center' },
+    rankLaurelImg: { position: 'absolute', width: 56, height: 56 },
+    rankNum: { color: brand.goldLight, fontSize: 36, lineHeight: 44 },
+    rankGo: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: brand.goldLight },
+    sheetWrap: { flexGrow: 1, marginTop: 10 },
+    ghost: { position: 'absolute', top: -10, left: 16, right: 16, height: 48, borderTopLeftRadius: 26, borderTopRightRadius: 26, backgroundColor: theme.brand.ghost, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.25)' },
+    sheet: { flexGrow: 1, backgroundColor: brand.paper, borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingHorizontal: 20, paddingTop: 22, paddingBottom: 32 },
+    tabBody: { marginTop: 16, gap: 10 },
+    globalProgress: { gap: 10, paddingTop: 8, paddingBottom: 2 },
+    globalPct: { color: brand.ink, fontSize: 25, lineHeight: 34 },
+    flexText: { flex: 1 },
+    empty: { paddingVertical: 24, gap: 8 },
+    sectionGap: { marginTop: 24, marginBottom: 10 },
+    resultNum: { color: brand.ink, fontSize: 19, lineHeight: 24 },
+    subjectRow: { flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 18, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    subjectPct: { color: brand.ink, fontSize: 17, lineHeight: 22 },
+    noteCard: { marginTop: 14, paddingVertical: 16, gap: 8, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    linkIcon: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
+    centerAll: { alignItems: 'center', justifyContent: 'center', gap: 10, padding: 24 },
+    ink: { color: brand.ink },
+    muted: { color: brand.inkSoft },
+    onInk: { color: brand.onInk },
+    onSoft: { color: brand.onInkSoft },
+    between: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, justifyContent: 'space-between', alignItems: 'center' },
+    header: { paddingHorizontal: 20, paddingBottom: 16 },
+    rankRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline', columnGap: 10, rowGap: 2 },
+    chartCard: { paddingVertical: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    resultRow: { flexDirection: 'row', alignItems: 'center', gap: 16, justifyContent: 'space-between', paddingVertical: 14, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    linkRow: { minHeight: 64, flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 14, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+  });
+  return { styles };
 });

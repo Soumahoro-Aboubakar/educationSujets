@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Pressable, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeInUp, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withSpring, withTiming } from 'react-native-reanimated';
+import Pressable from '../../components/ui/FeedbackPressable';
+import StatusBar from '../../theme/ThemeStatusBar';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+
+import { useEffect, useRef, useState } from 'react';
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ArrowLeft, ArrowRight, ChevronRight, FileText, GraduationCap, Target } from 'lucide-react-native';
+import { ArrowLeft, ArrowRight, FileText, GraduationCap, Target } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import BrandMark from '../../components/brand/BrandMark';
 import { usePreferences } from '../../context/PreferencesContext';
@@ -12,16 +15,16 @@ import prepApi from '../api';
 import { fetchPublishedOrganismes } from '../../services/catalog';
 import cache from '../../services/cache';
 import usePrep from '../store';
-import { brand, colors, motion, theme, type } from '../theme';
+import { type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
-import { Badge, CornerFold, GoldSwash, PaperStack, PrepButton, PressScale } from '../ui/primitives';
+import { Badge, GoldSwash, PaperStack, PrepButton, PressScale } from '../ui/primitives';
 
 const WELCOME_ART = require('../../../assets/illustrations/welcome-sheet.png');
 import { PaperCompass } from '../ui/Illustrations';
 import BottomSheet from '../ui/BottomSheet';
 import ContestAccordion from '../components/ContestAccordion';
-
-const FLAG = ['#F77F00', '#FFFFFF', '#009E60'];
+import { CopyMargin } from '../components/StudyPresentation';
+import { HomeChevron } from '../components/HomePresentation';
 
 /**
  * Logos des organismes : repris du catalogue des anciens sujets (/api/catalog/organismes), déjà
@@ -86,35 +89,29 @@ export const useCatalogue = () => {
 
 // ═══ E01 — « Que veux-tu faire ? » ══════════════════════════════════════
 // Pile de copies : la marque sur l'encre, la copie notée 18/20 en héros, deux choix nets.
-const ChoiceCard = ({ featured, icon: Icon, title, text, badge, onPress, accessibilityLabel, delay }) => (
-  <Animated.View entering={FadeInUp.delay(delay).duration(460)}>
-    <PressScale onPress={onPress} accessibilityLabel={accessibilityLabel} style={[styles.choice, featured && styles.choiceFeatured]}>
-      {featured ? <CornerFold size={26} radius={20} /> : null}
-      <View style={[styles.choiceIcon, { backgroundColor: featured ? brand.burgundy : brand.ink }]}>
-        <Icon size={22} color={featured ? '#FFF' : brand.goldLight} strokeWidth={1.9} />
-      </View>
-      <View style={styles.choiceText}>
-        <View style={styles.row}>
-          <Text variant="h2" style={[styles.ink, styles.choiceTitle]}>{title}</Text>
-          {badge ? <Badge label={badge} tone="gold" /> : null}
-        </View>
-        <Text variant="caption" style={styles.muted}>{text}</Text>
-      </View>
-      <View style={[styles.choiceGo, featured && styles.choiceGoFeatured]}>
-        <ArrowRight size={18} color={featured ? '#FFF' : brand.burgundy} strokeWidth={2.2} />
-      </View>
-    </PressScale>
-  </Animated.View>
-);
+const ChoiceCard = ({ featured, icon: Icon, title, text, onPress, accessibilityLabel }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
+  return (<View style={[styles.choice, featured && styles.choiceFeatured]}>
+    {featured ? <CopyMargin style={{ left: 12, top: 16, bottom: 16 }} /> : null}
+    <View style={styles.choiceText}>
+      <Text variant="h2" style={[styles.ink, styles.choiceTitle]}>{title}</Text>
+      <Text variant="body" style={styles.muted}>{text}</Text>
+      {featured ? <PrepButton title="Choisir mon concours" icon={ArrowRight} onPress={onPress} accessibilityLabel={accessibilityLabel} style={{ marginTop: 16 }} /> : null}
+    </View>
+    {!featured ? <PressScale onPress={onPress} accessibilityLabel={accessibilityLabel} style={styles.archiveLink}>
+      <Icon size={20} color={brand.burgundy} />
+      <Text variant="bodyMedium" style={styles.archiveLabel}>Explorer les sujets</Text>
+      <HomeChevron />
+    </PressScale> : null}
+  </View>);
+};
 
 export const WelcomeScreen = ({ navigation }) => {
+  const { styles, FLAG } = useStyles();
   const insets = useSafeAreaInsets();
-  const reduce = useReduceMotion();
   const completeOnboarding = usePrep((s) => s.completeOnboarding);
   const { updatePreferences } = usePreferences();
-  const float = useSharedValue(0);
-  useEffect(() => { if (!reduce) float.value = withRepeat(withSequence(withTiming(1, { duration: 2600 }), withTiming(0, { duration: 2600 })), -1); }, [reduce, float]);
-  const floatStyle = useAnimatedStyle(() => ({ transform: [{ translateY: -4 * float.value }, { rotate: `${-3 + float.value * 1.2}deg` }] }));
 
   const choose = (choix) => {
     haptic.select();
@@ -136,29 +133,26 @@ export const WelcomeScreen = ({ navigation }) => {
     <PaperStack header={header}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <ScrollView contentContainerStyle={[styles.welcomeContent, { paddingBottom: insets.bottom + 20 }]} showsVerticalScrollIndicator={false} bounces={false}>
-        <Animated.View entering={FadeIn.duration(500)} style={styles.welcomeArt}>
-          <Animated.Image source={WELCOME_ART} style={[styles.welcomeImg, floatStyle]} resizeMode="contain" accessibilityIgnoresInvertColors accessible={false} />
-        </Animated.View>
-        <Animated.View entering={FadeInDown.delay(120).duration(460)} style={styles.welcomeCopy}>
+        <View style={styles.welcomeArt}>
+          <Image source={WELCOME_ART} style={styles.welcomeImg} resizeMode="contain" accessibilityIgnoresInvertColors accessible={false} />
+        </View>
+        <View style={styles.welcomeCopy}>
           <Text variant="title" style={[styles.ink, styles.center]} accessibilityRole="header">
             {'Réussis ton concours,\n'}<Text variant="title" style={styles.titleAccent}>à ton rythme.</Text>
           </Text>
           <GoldSwash width={132} style={styles.swash} />
           <Text variant="body" style={[styles.muted, styles.center, styles.lead]}>Cours, exercices et anciens sujets, réunis en une seule application.</Text>
-        </Animated.View>
+        </View>
         <View style={styles.choices}>
           <ChoiceCard
             featured
-            delay={220}
             icon={GraduationCap}
             title="Me préparer"
-            badge="Nouveau"
             text="Cours en modules, exercices du simple à l’avancé, suivi de ta progression"
             onPress={() => choose('prepa')}
             accessibilityLabel="Me préparer à un concours. Cours en modules, exercices, suivi de ta progression"
           />
           <ChoiceCard
-            delay={290}
             icon={FileText}
             title="Anciens sujets"
             text="Concours et examens, avec leurs corrigés"
@@ -174,7 +168,10 @@ export const WelcomeScreen = ({ navigation }) => {
 
 // ═══ E02 / E06 — « Quel concours ? » ════════════════════════════════════
 export const ContestPickerScreen = ({ navigation, route }) => {
+  const { brand, theme } = useTheme();
+  const { styles } = useStyles();
   const insets = useSafeAreaInsets();
+  const reduce = useReduceMotion();
   const onboarding = route.params?.onboarding;
   const catalogue = useCatalogue();
   const current = usePrep((s) => s.programme);
@@ -198,7 +195,7 @@ export const ContestPickerScreen = ({ navigation, route }) => {
 
   const header = (
     <View style={styles.stackHeader}>
-      <Pressable onPress={() => navigation.goBack()} accessibilityLabel="Retour" hitSlop={6} style={styles.roundOnInk}><ArrowLeft size={20} color={brand.onInk} /></Pressable>
+      <Pressable onPress={() => navigation.goBack()} accessibilityRole="button" accessibilityLabel="Retour" hitSlop={6} style={styles.roundOnInk}><ArrowLeft size={20} color={brand.onInk} /></Pressable>
       {onboarding ? <StepDots step={1} total={2} /> : <Text variant="bodyMedium" style={styles.headerTitle}>Changer de concours</Text>}
       <View style={styles.headerSpacer} />
     </View>
@@ -209,6 +206,7 @@ export const ContestPickerScreen = ({ navigation, route }) => {
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <ScrollView ref={scroll} contentContainerStyle={styles.pickerContent} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
         <View style={styles.pickerHead}>
+          <CopyMargin style={{ left: -12 }} />
           <View style={{ flex: 1 }}>
             <Text variant="title" style={styles.ink} accessibilityRole="header">Quel concours prépares-tu ?</Text>
             <Text variant="body" style={[styles.muted, { marginTop: 8 }]}>Choisis l’organisme, puis ton cycle.</Text>
@@ -223,49 +221,53 @@ export const ContestPickerScreen = ({ navigation, route }) => {
               if (!c) return null;
               return (
                 <PressScale key={code} onPress={() => { haptic.select(); setSelected(code); }} style={[styles.followed, selected === code && styles.followedSel]} accessibilityState={{ selected: selected === code }}>
-                  <Text variant="bodyMedium" style={styles.ink}>{`${c.sigle} · ${c.nom}`}</Text>
+                  <Text variant="bodyMedium" style={[styles.ink, { flex: 1 }]}>{`${c.sigle} · ${c.nom}`}</Text><HomeChevron />
                 </PressScale>
               );
             })}
             <Text variant="h3" style={[styles.ink, { marginTop: 14 }]}>Tous les concours</Text>
           </View>
         ) : null}
-        <ContestAccordion catalogue={catalogue} selected={selected} onSelect={(c) => setSelected(c.programme)} scrollTo={(y) => scroll.current?.scrollTo({ y: Math.max(0, y + 120), animated: true })} />
+        <ContestAccordion catalogue={catalogue} selected={selected} onSelect={(c) => setSelected(c.programme)} scrollTo={(y) => scroll.current?.scrollTo({ y: Math.max(0, y + 120), animated: !reduce })} />
       </ScrollView>
       <View style={[styles.stickyBottom, { paddingBottom: Math.max(insets.bottom, 12) + 8 }]}>
-        <LinearGradient colors={['rgba(252,250,245,0)', brand.paper]} style={styles.veil} pointerEvents="none" />
-        <PrepButton title={cycle ? `Continuer avec ${cycle.sigle} · ${cycle.nom}` : 'Continuer'} disabled={!selected} onPress={confirm} icon={ArrowRight} />
+        <LinearGradient colors={[theme.brand.paperTransparent, brand.paper]} style={styles.veil} pointerEvents="none" />
+        {cycle ? <Text variant="caption" style={[styles.muted, { marginBottom: 12, textAlign: 'center' }]} accessibilityLiveRegion="polite">{`${cycle.sigle} · ${cycle.nom}`}</Text> : null}
+        <PrepButton title={cycle ? (onboarding ? 'Commencer ma préparation' : 'Choisir ce concours') : 'Choisis un cycle'} accessibilityLabel={cycle ? `Continuer avec ${cycle.sigle} · ${cycle.nom}` : 'Choisis un cycle pour continuer'} disabled={!selected} onPress={confirm} icon={ArrowRight} />
       </View>
     </PaperStack>
   );
 };
 
 /** Progression d'étape : pastille longue pour l'étape en cours (références E01–E03). */
-export const StepDots = ({ step, total, onInk = true }) => (
-  <View style={styles.dots} accessibilityLabel={`Étape ${step} sur ${total}`}>
+export const StepDots = ({ step, total, onInk = true }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
+  return (<View style={styles.dots} accessible accessibilityLabel={`Étape ${step} sur ${total}`}>
+    <Text variant="caption" style={{ color: onInk ? brand.onInk : brand.inkSoft }}>{`Étape ${step} sur ${total}`}</Text>
     {Array.from({ length: total }, (_, i) => (
-      <View key={i} style={[styles.dot, { backgroundColor: onInk ? 'rgba(255,255,255,0.28)' : brand.line }, i + 1 === step && styles.dotOn]} />
+      <View key={i} style={[styles.dot, { backgroundColor: onInk ? brand.onInkSoft : brand.lineStrong }, i + 1 === step && styles.dotOn]} />
     ))}
-  </View>
-);
+  </View>);
+};
 
 // ═══ E03 — Feuille « Ton rythme » ═══════════════════════════════════════
 const PACES = [[5, 'Tranquille'], [10, 'Régulier'], [20, 'Intensif']];
 
 const PaceTile = ({ minutes, label, selected, onPress }) => {
-  const s = useSharedValue(selected ? 1 : 0);
-  useEffect(() => { s.value = withSpring(selected ? 1 : 0, motion.snap); }, [selected, s]);
-  const num = useAnimatedStyle(() => ({ transform: [{ scale: 1 + s.value * 0.04 }] }));
+  const { styles } = useStyles();
   return (
     <PressScale onPress={onPress} accessibilityRole="radio" accessibilityState={{ checked: selected }} accessibilityLabel={`${minutes} minutes par jour, ${label}`} style={[styles.tile, selected && styles.tileSel]}>
       {minutes === 10 ? <Badge label="Conseillé" tone="gold" style={styles.tileBadge} /> : null}
-      <Animated.Text style={[type.display, styles.tileNum, num]}>{minutes}</Animated.Text>
+      <Text style={[type.display, styles.tileNum]}>{minutes}</Text>
       <Text variant="caption" style={styles.muted}>{`min · ${label}`}</Text>
     </PressScale>
   );
 };
 
 export const RhythmSheet = ({ visible, onClose, onPlacementTest }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
   const setPrefs = usePrep((s) => s.setPrefs);
   const objectif = usePrep((s) => s.prefs.objectif);
   const [pace, setPace] = useState(objectif || 10);
@@ -279,67 +281,70 @@ export const RhythmSheet = ({ visible, onClose, onPlacementTest }) => {
     <BottomSheet visible={visible} onClose={() => done(false)} maxHeight={0.8} footer={<PrepButton title="C’est parti" onPress={() => done(false)} />}>
       <StepDots step={2} total={2} onInk={false} />
       <Text variant="title" style={[styles.ink, { marginTop: 12, marginBottom: 18, fontSize: 26, lineHeight: 32 }]}>Combien de temps par jour ?</Text>
-      <View style={styles.tiles}>
+      <View style={styles.tiles} accessibilityRole="radiogroup">
         {PACES.map(([m, l]) => <PaceTile key={m} minutes={m} label={l} selected={pace === m} onPress={() => { haptic.select(); setPace(m); }} />)}
       </View>
       <View style={styles.testBox}>
-        <View style={styles.row}><Target size={20} color={brand.gold} /><Text variant="h3" style={styles.ink}>Faire le test de positionnement ?</Text></View>
+        <View style={styles.row}><Target size={20} color={brand.goldInk} /><Text variant="h3" style={styles.ink}>Faire le test de positionnement ?</Text></View>
         <Text variant="caption" style={styles.muted}>5 minutes pour savoir par où commencer.</Text>
-        <View style={[styles.row, { marginTop: 6 }]}>
-          <PrepButton title="Faire le test" variant="secondary" onPress={() => done(true)} style={{ flex: 1 }} compact />
-          <PrepButton title="Plus tard" variant="link" onPress={() => done(false)} style={{ flex: 1 }} compact />
+        <View style={{ gap: 10, marginTop: 12 }}>
+          <PrepButton title="Faire le test" variant="secondary" onPress={() => done(true)} compact />
+          <PrepButton title="Plus tard" variant="link" onPress={() => done(false)} compact />
         </View>
       </View>
     </BottomSheet>
   );
 };
 
-const styles = StyleSheet.create({
-  paper: { flex: 1, backgroundColor: brand.paper },
-  ink: { color: brand.ink },
-  onInk: { color: brand.onInk },
-  onSoft: { color: brand.onInkSoft, marginTop: 6 },
-  muted: { color: brand.inkSoft },
-  mutedLight: { color: brand.inkMuted },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  center: { textAlign: 'center' },
-  brandRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 22, paddingTop: 10, minHeight: 44 },
-  brandName: { color: brand.onInk, fontFamily: theme.fontFamily.serif, fontSize: 19, letterSpacing: -0.2 },
-  flag: { marginLeft: 4, flexDirection: 'row', overflow: 'hidden', borderRadius: 1 },
-  flagBand: { width: 7, height: 3 },
-  welcomeContent: { flexGrow: 1, justifyContent: 'center', paddingHorizontal: 20, paddingTop: 8 },
-  welcomeArt: { alignItems: 'center', height: 236, justifyContent: 'center' },
-  welcomeImg: { width: 236, height: 236 },
-  welcomeCopy: { alignItems: 'center', marginTop: -4 },
-  titleAccent: { color: brand.burgundy, fontFamily: theme.fontFamily.serifItalic },
-  swash: { marginTop: 4 },
-  lead: { marginTop: 10, maxWidth: 300 },
-  choices: { gap: 12, marginTop: 26 },
-  choice: { minHeight: 92, flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 16, paddingLeft: 16, paddingRight: 14, borderRadius: 20, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, ...theme.shadows.soft },
-  choiceFeatured: { borderColor: 'rgba(108,40,56,0.28)', borderWidth: 1 },
-  choiceIcon: { width: 48, height: 48, borderRadius: 24, alignItems: 'center', justifyContent: 'center' },
-  choiceText: { flex: 1, gap: 4 },
-  choiceTitle: { fontSize: 21, lineHeight: 26 },
-  choiceGo: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', borderWidth: 1.2, borderColor: 'rgba(108,40,56,0.4)' },
-  choiceGoFeatured: { backgroundColor: brand.burgundy, borderColor: brand.burgundy },
-  footNote: { marginTop: 18 },
-  stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
-  roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
-  headerTitle: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold },
-  headerSpacer: { width: 44 },
-  dots: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  dot: { width: 7, height: 7, borderRadius: 4 },
-  dotOn: { width: 22, backgroundColor: brand.gold },
-  pickerContent: { paddingHorizontal: 20, paddingTop: 26, paddingBottom: 150 },
-  pickerHead: { flexDirection: 'row', alignItems: 'flex-start', gap: 12, marginBottom: 22 },
-  followed: { minHeight: 56, justifyContent: 'center', paddingHorizontal: 16, borderRadius: 16, backgroundColor: brand.sheet, borderWidth: 1, borderColor: brand.line },
-  followedSel: { borderColor: 'rgba(108,40,56,0.45)', borderWidth: 1.5, backgroundColor: brand.burgundyWash },
-  stickyBottom: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingHorizontal: 20, paddingTop: 22 },
-  veil: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 },
-  tiles: { flexDirection: 'row', gap: 10 },
-  tile: { flex: 1, height: 116, alignItems: 'center', justifyContent: 'center', borderRadius: 18, backgroundColor: brand.paperDim, borderWidth: 1.5, borderColor: 'transparent' },
-  tileSel: { backgroundColor: brand.sheet, borderColor: brand.burgundy, ...theme.shadows.soft },
-  tileBadge: { position: 'absolute', top: -11, alignSelf: 'center' },
-  tileNum: { color: brand.ink, fontSize: 36, lineHeight: 42 },
-  testBox: { marginTop: 20, padding: 16, borderRadius: 18, backgroundColor: brand.goldWash, gap: 6, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(180,138,72,0.35)' },
+const useStyles = createThemedStyles(({ countryFlag, brand, theme }) => {
+  const FLAG = [countryFlag.orange, brand.onInk, countryFlag.green];
+
+  const styles = StyleSheet.create({
+
+    ink: { color: brand.ink },
+
+    muted: { color: brand.inkSoft },
+    mutedLight: { color: brand.inkSoft },
+    row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+    center: { textAlign: 'center' },
+    brandRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 22, paddingTop: 10, minHeight: 44 },
+    brandName: { color: brand.onInk, fontFamily: theme.fontFamily.serif, fontSize: 19, letterSpacing: -0.2 },
+    flag: { marginLeft: 4, flexDirection: 'row', overflow: 'hidden', borderRadius: 1 },
+    flagBand: { width: 7, height: 3 },
+    welcomeContent: { flexGrow: 1, justifyContent: 'center', paddingHorizontal: 20, paddingTop: 8 },
+    welcomeArt: { alignItems: 'center', height: 180, justifyContent: 'center' },
+    welcomeImg: { width: 180, height: 180 },
+    welcomeCopy: { alignItems: 'center', marginTop: -4 },
+    titleAccent: { color: brand.burgundy, fontFamily: theme.fontFamily.serifItalic },
+    swash: { marginTop: 4 },
+    lead: { marginTop: 10, maxWidth: 300 },
+    choices: { gap: 20, marginTop: 26 },
+    choice: { gap: 12, paddingVertical: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    choiceFeatured: { paddingLeft: 30, paddingRight: 16, paddingVertical: 20, borderRadius: 18, backgroundColor: brand.sheet, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.lineStrong },
+    choiceText: { gap: 6 },
+    choiceTitle: { fontSize: 23, lineHeight: 30 },
+    archiveLink: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 48, padding: 12, borderRadius: 12, backgroundColor: brand.burgundyWash },
+    archiveLabel: { flex: 1, color: brand.burgundy },
+    footNote: { marginTop: 18 },
+    stackHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 6, minHeight: 50 },
+    roundOnInk: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.08)', borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.16)' },
+    headerTitle: { color: brand.onInk, fontFamily: theme.fontFamily.semiBold },
+    headerSpacer: { width: 44 },
+    dots: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+    dot: { width: 7, height: 7, borderRadius: 4 },
+    dotOn: { width: 22, backgroundColor: brand.gold },
+    pickerContent: { paddingHorizontal: 20, paddingTop: 26, paddingBottom: 24 },
+    pickerHead: { flexDirection: 'row', alignItems: 'flex-start', gap: 12, marginBottom: 22 },
+    followed: { minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, borderBottomWidth: 1, borderBottomColor: brand.line },
+    followedSel: { borderColor: theme.brand.actionBorder, borderWidth: 1.5, backgroundColor: brand.burgundyWash },
+    stickyBottom: { paddingHorizontal: 20, paddingTop: 22 },
+    veil: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 },
+    tiles: { gap: 14 },
+    tile: { minHeight: 76, flexDirection: 'row', flexWrap: 'wrap', gap: 14, alignItems: 'center', paddingVertical: 14, paddingHorizontal: 16, borderRadius: 12, borderWidth: 1, borderColor: brand.lineStrong },
+    tileSel: { backgroundColor: brand.sheet, borderColor: brand.burgundy, ...theme.shadows.soft },
+    tileBadge: { marginRight: 'auto' },
+    tileNum: { color: brand.ink, fontSize: 36, lineHeight: 42 },
+    testBox: { marginTop: 24, paddingVertical: 20, gap: 10, borderTopWidth: 1, borderColor: brand.line },
+  });
+  return { FLAG, styles };
 });

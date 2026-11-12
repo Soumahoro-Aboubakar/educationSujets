@@ -1,12 +1,11 @@
+import { createThemedStyles } from '../../theme/ThemeProvider';
+
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useReducedMotion } from 'react-native-reanimated';
 import Text from '../ui/Text';
 import { API_BASE_URL } from '../../types/constants';
-import theme from '../../theme/tokens';
-
-const { brand } = theme;
 
 /*
  * Logo d'un organisme : image (champ `logo`, administré sur le web) ou, à défaut ou si l'image ne
@@ -16,7 +15,6 @@ const { brand } = theme;
  */
 
 // Teintes de la charte (encre, bordeaux, or…) ; texte blanc lisible sur chacune.
-const PALETTE = ['#0D1B32', '#6C2838', '#7A5A24', '#14514C', '#2B4A8B', '#53346B', '#2E5A2E', '#9A4421', '#3A3F4B'];
 
 export const monogramOf = (name = '') => {
   const characters = String(name).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9]/g, '');
@@ -37,6 +35,7 @@ const logoUri = (value) => {
 };
 
 const OrganismeLogo = ({ organisme, size = 44, style }) => {
+  const { styles, PALETTE } = useStyles();
   const reduceMotion = useReducedMotion();
   const [failedLogo, setFailedLogo] = useState(null);
   const logo = organisme?.logo;
@@ -75,26 +74,31 @@ const OrganismeLogo = ({ organisme, size = 44, style }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  box: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  imageBox: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: brand.line,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  monogram: {
-    color: '#FFFFFF',
-    fontFamily: theme.fontFamily.semiBold,
-    letterSpacing: 0.4,
-  },
-});
-
 export default OrganismeLogo;
+
+const useStyles = createThemedStyles(({ brand, organismPalette, theme }) => {
+  const PALETTE = [brand.monogramInk, brand.monogramBurgundy, brand.monogramGold, organismPalette.teal, organismPalette.blue, organismPalette.plum, organismPalette.green, organismPalette.terracotta, organismPalette.slate];
+
+  const styles = StyleSheet.create({
+    box: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+    },
+    imageBox: {
+      backgroundColor: brand.sheet,
+      borderWidth: StyleSheet.hairlineWidth,
+      borderColor: brand.line,
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+    },
+    monogram: {
+      color: brand.onInk,
+      fontFamily: theme.fontFamily.semiBold,
+      letterSpacing: 0.4,
+    },
+  });
+  return { PALETTE, styles };
+});

@@ -1,41 +1,30 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import Animated, { Easing, FadeIn, FadeInDown, useAnimatedProps, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
-import Svg, { Path } from 'react-native-svg';
-import { Bell, ChevronRight, PlayCircle, Search } from 'lucide-react-native';
+import Pressable from '../../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
+import { Check, PlayCircle, Search } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
-import { brand, colors, motion, theme } from '../theme';
-import { haptic, useReduceMotion } from '../feedback';
-import { Badge, InlineAction } from '../ui/primitives';
+
+import { haptic } from '../feedback';
+import { Badge } from '../ui/primitives';
+import { HomeChevron } from './HomePresentation';
 import { findVideo, useVideosIndex } from '../video/useVideos';
 
-const AnimatedPath = Animated.createAnimatedComponent(Path);
 const SEARCH_THRESHOLD = 6;
 const normalize = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
-/** Radio qui se remplit (snap) puis coche qui se dessine (draw 250 ms). */
+/** Sélection immédiate ; le chevron partagé porte le seul mouvement. */
 const Radio = ({ checked }) => {
-  const reduce = useReduceMotion();
-  const fill = useSharedValue(checked ? 1 : 0);
-  const draw = useSharedValue(checked ? 1 : 0);
-  useEffect(() => {
-    fill.value = reduce ? (checked ? 1 : 0) : withSpring(checked ? 1 : 0, motion.snap);
-    draw.value = reduce ? (checked ? 1 : 0) : withTiming(checked ? 1 : 0, { duration: 250 });
-  }, [checked, reduce, fill, draw]);
-  const dot = useAnimatedStyle(() => ({ transform: [{ scale: fill.value }] }));
-  const check = useAnimatedProps(() => ({ strokeDashoffset: 14 * (1 - draw.value) }));
-  return (
-    <View style={styles.radio}>
-      <Animated.View style={[StyleSheet.absoluteFill, styles.radioFill, dot]} />
-      <Svg width={14} height={14} viewBox="0 0 14 14">
-        <AnimatedPath d="M3 7.2L5.8 10L11 4.5" stroke="#FFF" strokeWidth={2.2} fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="14 14" animatedProps={check} />
-      </Svg>
-    </View>
-  );
+  const { brand } = useTheme();
+  const { styles } = useStyles();
+  return (<View style={[styles.radio, checked && styles.radioFill]} accessible={false}>
+    {checked ? <Check size={15} color={brand.onInk} strokeWidth={2.2} /> : null}
+  </View>);
 };
 
 const Highlight = ({ text, query, style }) => {
+  const { styles } = useStyles();
   if (!query) return <Text variant="bodyMedium" style={style}>{text}</Text>;
   const i = normalize(text).indexOf(normalize(query));
   if (i < 0) return <Text variant="bodyMedium" style={style}>{text}</Text>;
@@ -48,21 +37,13 @@ const Highlight = ({ text, query, style }) => {
   );
 };
 
-const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify, index, videos }) => {
-  const reduce = useReduceMotion();
-  const [contentH, setContentH] = useState(0);
-  const progress = useSharedValue(open ? 1 : 0);
-  useEffect(() => {
-    progress.value = reduce ? withTiming(open ? 1 : 0, { duration: 120 }) : withSpring(open ? 1 : 0, { ...motion.sheet, overshootClamping: true });
-  }, [open, reduce, progress]);
-  const body = useAnimatedStyle(() => ({ height: contentH * progress.value, opacity: Math.min(1, progress.value * 1.6) }));
-  const chevron = useAnimatedStyle(() => ({ transform: [{ rotate: `${progress.value * 90}deg` }] }));
-  const card = useAnimatedStyle(() => ({ borderColor: progress.value > 0.5 ? 'rgba(108,40,56,0.55)' : brand.line, borderWidth: 1 + progress.value * 0.3 }));
+const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, videos }) => {
+  const { styles } = useStyles();
   const publies = org.cycles.filter((c) => c.publie).length;
   const direct = org.cycles.length === 1 && !org.cycles[0].nom;
 
   return (
-    <Animated.View entering={FadeInDown.delay(Math.min(index, 8) * motion.stagger).duration(320)} style={[styles.card, open && theme.shadows.soft, card]}>
+    <View style={styles.card}>
       <Pressable
         onPress={() => { haptic.select(); if (direct) onSelect(org.cycles[0]); else onToggle(); }}
         accessibilityRole="button"
@@ -72,29 +53,29 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
       >
         <OrganismeLogo organisme={{ nom: org.sigle, logo: org.logo, abbreviation: org.sigle }} size={44} />
         <View style={styles.headText}>
-          <Text variant="bodyMedium" style={styles.orgName} numberOfLines={1}>{org.sigle}</Text>
-          <Text variant="caption" style={styles.muted} numberOfLines={1}>
-            {org.nom && org.nom !== org.sigle ? `${org.nom.replace(/^[^-–]+[-–]\s*/, '')} · ` : ''}{`${publies} cycle${publies > 1 ? 's' : ''} en préparation`}
+          <Text variant="bodyMedium" style={styles.orgName}>{org.sigle}</Text>
+          <Text variant="caption" style={styles.muted}>
+            {org.nom && org.nom !== org.sigle ? `${org.nom.replace(/^[^-–]+[-–]\s*/, '')} · ` : ''}{`${publies} cycle${publies > 1 ? 's' : ''} disponible${publies > 1 ? 's' : ''}`}
           </Text>
         </View>
-        <Animated.View style={chevron}><ChevronRight size={18} color={brand.burgundy} strokeWidth={2.2} /></Animated.View>
+        <HomeChevron expanded={open} />
       </Pressable>
-      <Animated.View style={[styles.bodyClip, body]}>
-        <View style={styles.bodyInner} onLayout={(e) => setContentH(e.nativeEvent.layout.height)}>
+      <View style={styles.bodyClip} accessibilityElementsHidden={!open} importantForAccessibility={open ? 'auto' : 'no-hide-descendants'}>
+        {open ? <View style={styles.bodyInner}>
           <View style={styles.divider} />
-          {org.cycles.map((cycle, i) => {
+          {org.cycles.map((cycle) => {
             const isSel = selected === cycle.programme;
             return (
-              <Animated.View key={cycle.programme} entering={open ? FadeInDown.delay(i * 35).duration(240) : undefined}>
+              <View key={cycle.programme}>
                 <Pressable
                   disabled={!cycle.publie}
                   onPress={() => { haptic.success(); onSelect(cycle); }}
                   accessibilityRole="radio"
                   accessibilityState={{ checked: isSel, disabled: !cycle.publie }}
                   accessibilityLabel={`${cycle.nom}${cycle.publie ? '' : ', contenu à venir'}`}
-                  style={[styles.cycle, isSel && styles.cycleSel]}
+                  style={[styles.cycle, !cycle.publie && styles.cycleOff, isSel && styles.cycleSel]}
                 >
-                  <View style={[styles.cycleText, !cycle.publie && styles.cycleOff]}>
+                  <View style={styles.cycleText}>
                     <Highlight text={cycle.nom} query={query} style={styles.cycleName} />
                     {cycle.publie && findVideo(videos, 'concours', cycle.programme) ? (
                       // Indicateur : ce concours a une vidéo de présentation.
@@ -109,15 +90,15 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
                     )}
                   </View>
                   {cycle.publie ? <Radio checked={isSel} /> : (
-                    <InlineAction title="Me prévenir" icon={Bell} onPress={() => onNotify?.(cycle)} accessibilityLabel={`Me prévenir quand ${cycle.nom} sera disponible`} />
+                    <Badge label="À venir" tone="neutral" />
                   )}
                 </Pressable>
-              </Animated.View>
+              </View>
             );
           })}
-        </View>
-      </Animated.View>
-    </Animated.View>
+        </View> : null}
+      </View>
+    </View>
   );
 };
 
@@ -126,6 +107,8 @@ const OrganismRow = ({ org, open, onToggle, selected, onSelect, query, onNotify,
  * la recherche porte aussi sur les cycles et ouvre l'organisme correspondant.
  */
 const ContestAccordion = ({ catalogue, selected, onSelect, scrollTo }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
   const [open, setOpen] = useState(() => catalogue.find((o) => o.cycles.some((c) => c.programme === selected))?.sigle || null);
   const [query, setQuery] = useState('');
   const videos = useVideosIndex();
@@ -150,11 +133,11 @@ const ContestAccordion = ({ catalogue, selected, onSelect, scrollTo }) => {
   };
 
   return (
-    <View style={{ gap: 10 }}>
+    <View>
       {catalogue.length > SEARCH_THRESHOLD || query ? (
         <View style={styles.search}>
-          <Search size={18} color={brand.inkMuted} />
-          <TextInput value={query} onChangeText={setQuery} placeholder="Rechercher un organisme ou un cycle" placeholderTextColor={brand.inkMuted} style={styles.searchInput} accessibilityLabel="Rechercher un organisme ou un cycle" />
+          <Search size={18} color={brand.inkSoft} />
+          <TextInput value={query} onChangeText={setQuery} placeholder="Rechercher un organisme ou un cycle" placeholderTextColor={brand.inkSoft} style={styles.searchInput} accessibilityLabel="Rechercher un organisme ou un cycle" />
         </View>
       ) : null}
       {filtered.length ? filtered.map((org, index) => (
@@ -162,7 +145,6 @@ const ContestAccordion = ({ catalogue, selected, onSelect, scrollTo }) => {
           <OrganismRow
             videos={videos}
             org={org}
-            index={index}
             open={open === org.sigle}
             onToggle={() => toggle(org.sigle)}
             selected={selected}
@@ -171,34 +153,37 @@ const ContestAccordion = ({ catalogue, selected, onSelect, scrollTo }) => {
           />
         </View>
       )) : (
-        <Animated.View entering={FadeIn}><Text variant="body" style={[styles.muted, { textAlign: 'center', marginTop: 20 }]}>{`Aucun organisme ne correspond à « ${query} ». Essaie un autre nom ou un sigle.`}</Text></Animated.View>
+        <View><Text variant="body" style={[styles.muted, { textAlign: 'center', marginTop: 20 }]}>{`Aucun organisme ne correspond à « ${query} ». Essaie un autre nom ou un sigle.`}</Text></View>
       )}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  card: { backgroundColor: brand.sheet, borderRadius: 18, overflow: 'hidden', ...theme.shadows.sm },
-  head: { minHeight: 76, flexDirection: 'row', alignItems: 'center', gap: 14, paddingHorizontal: 16 },
-  headText: { flex: 1 },
-  orgName: { color: brand.ink, fontFamily: theme.fontFamily.serif, fontSize: 18, lineHeight: 23 },
-  muted: { color: brand.inkSoft },
-  metaRow: { flexDirection: 'row', alignItems: 'center', gap: 6, flexWrap: 'wrap' },
-  shrink: { flexShrink: 1 },
-  bodyClip: { overflow: 'hidden' },
-  bodyInner: { position: 'absolute', left: 0, right: 0, top: 0, paddingBottom: 10 },
-  divider: { height: StyleSheet.hairlineWidth, backgroundColor: brand.line, marginHorizontal: 16, marginBottom: 2 },
-  cycle: { minHeight: 60, flexDirection: 'row', alignItems: 'center', marginHorizontal: 8, marginTop: 4, paddingLeft: 66, paddingRight: 12, gap: 12, borderRadius: 14, borderWidth: 1, borderColor: 'transparent' },
-  cycleSel: { backgroundColor: brand.burgundyWash, borderColor: 'rgba(108,40,56,0.35)' },
-  cycleOff: { opacity: 0.45 },
-  cycleText: { flex: 1, paddingVertical: 8 },
-  cycleName: { color: brand.ink },
-  hl: { backgroundColor: brand.goldWash, fontFamily: theme.fontFamily.semiBold, color: brand.goldInk },
-  radio: { width: 24, height: 24, borderRadius: 12, borderWidth: 1.5, borderColor: brand.lineStrong, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', backgroundColor: brand.sheet },
-  radioFill: { backgroundColor: brand.burgundy, borderRadius: 12 },
-  notify: { color: brand.burgundy },
-  search: { height: 50, flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 16, borderRadius: 14, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet, ...theme.shadows.sm },
-  searchInput: { flex: 1, color: brand.ink, fontFamily: theme.fontFamily.regular, fontSize: 15 },
-});
-
 export default ContestAccordion;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    card: { borderBottomWidth: 1, borderColor: brand.line },
+    head: { minHeight: 76, flexDirection: 'row', alignItems: 'center', gap: 14, paddingVertical: 16, paddingHorizontal: 0 },
+    headText: { flex: 1 },
+    orgName: { color: brand.ink, fontFamily: theme.fontFamily.serif, fontSize: 18, lineHeight: 23 },
+    muted: { color: brand.inkSoft },
+    metaRow: { flexDirection: 'row', alignItems: 'center', gap: 6, flexWrap: 'wrap' },
+    shrink: { flexShrink: 1 },
+    bodyClip: { overflow: 'hidden' },
+    bodyInner: { paddingBottom: 16 },
+    divider: { height: StyleSheet.hairlineWidth, backgroundColor: brand.line, marginHorizontal: 16, marginBottom: 2 },
+    cycle: { minHeight: 60, flexDirection: 'row', alignItems: 'center', marginHorizontal: 0, marginTop: 4, paddingLeft: 14, paddingRight: 12, gap: 12, borderRadius: 14, borderWidth: 1, borderColor: 'transparent' },
+    cycleSel: { backgroundColor: brand.burgundyWash, borderColor: brand.burgundy },
+    cycleOff: { backgroundColor: brand.paperDim },
+    cycleText: { flex: 1, paddingVertical: 8 },
+    cycleName: { color: brand.ink },
+    hl: { backgroundColor: brand.goldWash, fontFamily: theme.fontFamily.semiBold, color: brand.goldInk },
+    radio: { width: 24, height: 24, borderRadius: 12, borderWidth: 1.5, borderColor: brand.lineStrong, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', backgroundColor: brand.sheet },
+    radioFill: { backgroundColor: brand.burgundySolid, borderRadius: 12 },
+
+    search: { minHeight: 52, marginBottom: 12, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 16, borderRadius: 14, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet },
+    searchInput: { flex: 1, color: brand.ink, fontFamily: theme.fontFamily.regular, fontSize: 15 },
+  });
+  return { styles };
+});

@@ -1,3 +1,4 @@
+import { createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorMessage } from '../utils/userMessages';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -10,14 +11,12 @@ import SearchField from '../components/ui/SearchField';
 import StateView from '../components/ui/StateView';
 import DocumentList from '../components/documents/DocumentList';
 import api from '../services/api';
-import theme from '../theme/tokens';
-
-const { brand } = theme;
 
 const PAGE_SIZE = 12;
 const labelOf = (item) => item?.nom || item?.name || '';
 
 const ContestDocumentsScreen = ({ navigation, route }) => {
+  const { styles } = useStyles();
   const { contestType, catalogNode, institution, organisme, parcoursType, noeud, matiere, taxonomyPath } = route.params || {};
   const [query, setQuery] = useState('');
   const [debounced, setDebounced] = useState('');
@@ -209,24 +208,27 @@ const ContestDocumentsScreen = ({ navigation, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  searchBar: {
-    paddingHorizontal: theme.layout.gutter,
-    paddingTop: theme.spacing.base,
-  },
-  body: {
-    flex: 1,
-  },
-  count: {
-    paddingHorizontal: 2,
-    paddingTop: theme.spacing.sm,
-    paddingBottom: theme.spacing.md,
-    color: brand.ink,
-  },
-});
-
 export default ContestDocumentsScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    searchBar: {
+      paddingHorizontal: theme.layout.gutter,
+      paddingTop: theme.spacing.base,
+    },
+    body: {
+      flex: 1,
+    },
+    count: {
+      paddingHorizontal: 2,
+      paddingTop: theme.spacing.sm,
+      paddingBottom: theme.spacing.md,
+      color: brand.ink,
+    },
+  });
+  return { styles };
+});

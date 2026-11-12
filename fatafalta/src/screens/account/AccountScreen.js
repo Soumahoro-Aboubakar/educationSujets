@@ -1,5 +1,7 @@
+import useAsyncAction from '../../hooks/useAsyncAction';
+import { createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useContext } from 'react';
-import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import {
   CreditCard,
   Download,
@@ -7,12 +9,11 @@ import {
   LogOut,
   Settings,
   ShieldCheck,
-  UserRound,
   Wallet,
 } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import ScreenHeader from '../../components/ui/ScreenHeader';
-import ActionButton from '../../components/ui/ActionButton';
+import { PrepButton as ActionButton } from '../../prep/ui/primitives';
 import StatusPill from '../../components/ui/StatusPill';
 import { AccountScroll, Row, Section } from '../../components/account/AccountLayout';
 import MeCard from '../../prep/components/MeCard';
@@ -20,14 +21,12 @@ import { SkeletonRows } from '../../components/ui/Skeleton';
 import AuthContext from '../../context/AuthContext';
 import { useEntitlements, useWallet } from '../../hooks/useAccount';
 import { formatAmount, formatDate } from '../../utils/format';
-import theme from '../../theme/tokens';
 
-const { brand } = theme;
-
-const GuestAccount = ({ navigation }) => (
-  <View style={styles.container}>
-    <ScreenHeader eyebrow="Moi" title="Ton espace Fatafalta" />
-    <ScrollView contentContainerStyle={styles.guestScroll} showsVerticalScrollIndicator={false}>
+const GuestAccount = ({ navigation }) => {
+  const { styles } = useStyles();
+  return (<View style={styles.container}>
+    <ScreenHeader title="Ton espace Fatafalta" />
+    <AccountScroll tabbed>
     <MeCard navigation={navigation} />
     <View style={styles.guestRows}>
       <Section>
@@ -36,31 +35,30 @@ const GuestAccount = ({ navigation }) => (
       </Section>
     </View>
     <View style={styles.guest}>
-      <View style={styles.guestIcon}>
-        <UserRound size={24} color={brand.ink} strokeWidth={1.7} />
-      </View>
-      <Text variant="h3" align="center" style={styles.guestTitle}>Explore librement, télécharge avec un compte</Text>
-      <Text variant="body" align="center" style={styles.guestText}>
+      <Text variant="h3" style={styles.guestTitle}>Explore librement, télécharge avec un compte</Text>
+      <Text variant="body" style={styles.guestText}>
         Ton compte te permet de télécharger les sujets, de suivre ton abonnement et de parrainer tes amis.
       </Text>
       <View style={styles.guestActions}>
-        <ActionButton title="Créer un compte" onPress={() => navigation.navigate('Register')} />
-        <ActionButton title="Se connecter" variant="secondary" onPress={() => navigation.navigate('Login')} />
+        <ActionButton title="Se connecter" variant="link" onPress={() => navigation.navigate('Login')} />
       </View>
     </View>
-    </ScrollView>
-  </View>
-);
+    </AccountScroll>
+  </View>);
+};
 
 /**
  * Tableau de bord personnel : un résumé par sujet (abonnement, code, portefeuille),
  * le détail est à un appui. Les réglages secondaires restent dans Paramètres.
  */
 const AccountScreen = ({ navigation }) => {
-  const { user, isAuthenticated, logout, isAdmin } = useContext(AuthContext);
+  const { styles } = useStyles();
+  const [runLogout, loggingOut] = useAsyncAction();
+  const { user, isAuthenticated, logout, isAdmin, loading: authLoading } = useContext(AuthContext);
   const entitlements = useEntitlements();
   const wallet = useWallet();
 
+  if (authLoading) return <View style={styles.container}><ScreenHeader title="Mon compte" /><SkeletonRows count={4} /></View>;
   if (!isAuthenticated) return <GuestAccount navigation={navigation} />;
 
   const data = entitlements.data;
@@ -77,14 +75,15 @@ const AccountScreen = ({ navigation }) => {
   const confirmLogout = () => {
     Alert.alert('Se déconnecter', 'Tes documents téléchargés restent disponibles sur cet appareil.', [
       { text: 'Annuler', style: 'cancel' },
-      { text: 'Se déconnecter', style: 'destructive', onPress: logout },
+      { text: 'Se déconnecter', style: 'destructive', onPress: () => runLogout(logout) },
     ]);
   };
 
   return (
     <View style={styles.container}>
-      <ScreenHeader eyebrow="Moi" title={user?.name || 'Mon compte'} subtitle={user?.email} titleLines={1} />
+      <ScreenHeader title={user?.name || 'Mon compte'} subtitle={user?.email} titleLines={1} />
       <AccountScroll
+        tabbed
         refreshing={refreshing}
         onRefresh={() => {
           entitlements.refetch();
@@ -134,7 +133,7 @@ const AccountScreen = ({ navigation }) => {
               ) : null}
               <Row icon={Download} label="Téléchargements" onPress={() => navigation.navigate('Downloads')} />
               <Row icon={Settings} label="Paramètres" onPress={() => navigation.navigate('Settings')} />
-              <Row icon={LogOut} label="Se déconnecter" onPress={confirmLogout} danger isLast />
+              <Row icon={LogOut} label="Se déconnecter" loading={loggingOut} disabled={loggingOut} onPress={confirmLogout} danger isLast />
             </Section>
           </>
         )}
@@ -143,49 +142,41 @@ const AccountScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  guestRows: {
-    marginTop: theme.spacing.sm,
-  },
-  guestScroll: {
-    flexGrow: 1,
-    paddingBottom: theme.spacing['2xl'],
-  },
-  guest: {
-    alignItems: 'center',
-    marginTop: theme.spacing['2xl'],
-    paddingHorizontal: theme.spacing['2xl'],
-    paddingBottom: theme.spacing['3xl'],
-  },
-  guestIcon: {
-    width: 56,
-    height: 56,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: theme.spacing.base,
-    borderRadius: theme.radius.full,
-    backgroundColor: brand.paperDim,
-  },
-  guestTitle: {
-    maxWidth: 300,
-    color: brand.ink,
-  },
-  guestText: {
-    maxWidth: 310,
-    marginTop: theme.spacing.sm,
-    color: brand.inkSoft,
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  guestActions: {
-    alignSelf: 'stretch',
-    gap: theme.spacing.sm,
-    marginTop: theme.spacing.xl,
-  },
-});
-
 export default AccountScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    guestRows: {
+      marginTop: theme.spacing.sm,
+    },
+
+    guest: {
+      alignItems: 'stretch',
+      marginTop: 12,
+      paddingHorizontal: 0,
+      paddingBottom: theme.spacing['3xl'],
+    },
+
+    guestTitle: {
+      maxWidth: 300,
+      color: brand.ink,
+    },
+    guestText: {
+      maxWidth: 310,
+      marginTop: theme.spacing.sm,
+      color: brand.inkSoft,
+      fontSize: 14,
+      lineHeight: 20,
+    },
+    guestActions: {
+      alignSelf: 'stretch',
+      gap: theme.spacing.sm,
+      marginTop: theme.spacing.xl,
+    },
+  });
+  return { styles };
+});

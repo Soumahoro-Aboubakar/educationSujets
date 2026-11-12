@@ -1,6 +1,9 @@
+import { SkeletonRows } from '../../components/ui/Skeleton';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+import { ordinal } from '../../utils/ordinal';
 import { getUserMessage } from '../../utils/userMessages';
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, Keyboard, ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Keyboard, ScrollView, StyleSheet, TextInput, View, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useFocusEffect } from '@react-navigation/native';
@@ -10,16 +13,17 @@ import Text from '../../components/ui/Text';
 import { getProgramme } from '../content';
 import usePrep, { useSummary } from '../store';
 import prepApi from '../api';
-import { brand, GRADIENTS, motion, PODIUM, subjectTint, theme, type } from '../theme';
+import { motion, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
-import { Avatar, Badge, Card, CornerFold, PaperStack, PrepButton, PressScale, ProgressBar, SectionTitle } from '../ui/primitives';
+import { Avatar, Badge, PaperStack, PrepButton, PressScale, ProgressBar, SectionTitle } from '../ui/primitives';
 import ART from '../ui/art';
+import { CopyMargin } from './StudyPresentation';
 import { candidateRank, EMPTY_CANDIDATES, rankingError, useCandidateSearch, useRanking } from './useRanking';
 
 const nf = (n) => Number(n || 0).toLocaleString('fr-FR');
 const value = (n) => n == null ? '—' : nf(n);
 const pct = (n) => n == null ? '—' : `${Math.round(n * 100)} %`;
-const rankLabel = (n) => n == null ? 'Rang indisponible' : `${nf(n)}${n === 1 ? 'ᵉʳ' : 'ᵉ'}`;
+const rankLabel = (n) => n == null ? 'Rang indisponible' : ordinal(n);
 // « 1 question », « 0 erreur », « 3 erreurs » (règle française : pluriel à partir de 2).
 const count = (n, word) => n == null ? `— ${word}s` : `${nf(n)} ${word}${n > 1 ? 's' : ''}`;
 const scoreLabel = (n) => n == null ? '—' : nf(Math.round(n));
@@ -36,31 +40,46 @@ const rankingMessage = (error, context = 'classement') => {
   return { title, detail: message };
 };
 
-const Loading = ({ label = 'Chargement…' }) => (
-  <View style={s.loading} accessibilityRole="progressbar" accessibilityLabel={label}>
-    <ActivityIndicator color={brand.burgundy} /><Text variant="caption" style={s.muted}>{label}</Text>
-  </View>
-);
-const Message = ({ title, detail, retry }) => (
-  <View style={s.message} accessibilityLiveRegion="polite">
+const Loading = ({ label = 'Chargement…' }) => {
+  const { brand } = useTheme();
+  const { s } = useStyles();
+  return (<View style={s.loading} accessibilityRole="progressbar" accessibilityLabel={label}>
+    <View style={{ alignSelf: 'stretch' }}><SkeletonRows count={4} /></View><Text variant="caption" style={s.muted}>{label}</Text>
+  </View>);
+};
+const Message = ({ title, detail, retry }) => {
+  const { s } = useStyles();
+  return (<View style={s.message} accessibilityLiveRegion="polite">
     <Text variant="h3" align="center">{title}</Text>
     {detail ? <Text variant="body" style={s.muted} align="center">{detail}</Text> : null}
     {retry ? <PrepButton title="Réessayer" variant="secondary" onPress={retry} /> : null}
-  </View>
-);
-const BackHeader = ({ navigation, title }) => (
-  <View style={s.header}>
+  </View>);
+};
+const BackHeader = ({ navigation, title }) => {
+  const { brand } = useTheme();
+  const { s } = useStyles();
+  return (<View style={s.header}>
     <PressScale onPress={() => navigation.goBack()} style={s.back} accessibilityLabel="Retour">
       <ArrowLeft size={22} color={brand.onInk} />
     </PressScale>
     <Text variant="h2" style={[s.onInk, s.flex]} align="center" accessibilityRole="header">{title}</Text>
     <View style={{ width: 44 }} />
-  </View>
-);
+  </View>);
+};
 
-const CandidateRow = memo(({ candidate: c, open, ownId, reduced }) => {
+// Une largeur commune pour toute la liste, y compris les grands rangs et les ex æquo.
+const rankColumnWidth = (candidates) => {
+  const digits = candidates.reduce((max, c) => Math.max(max, String(candidateRank(c) ?? '').length), 1);
+  return Math.max(48, digits * 13 + Math.floor((digits - 1) / 3) * 3 + 14);
+};
+
+const CandidateRow = memo(({ candidate: c, open, ownId, reduced, rankWidth = 48, laureate = false }) => {
+  const { brand } = useTheme();
+  const { s } = useStyles();
+  const { fontScale } = useWindowDimensions();
   const stats = c.stats || {};
   const own = c.moi || c.identite === ownId;
+  const rank = candidateRank(c);
   const summary = [
     stats.questions != null && `${nf(stats.questions)} question${stats.questions > 1 ? 's' : ''}`,
     stats.reussies != null && `${nf(stats.reussies)} réussie${stats.reussies > 1 ? 's' : ''}`,
@@ -69,23 +88,28 @@ const CandidateRow = memo(({ candidate: c, open, ownId, reduced }) => {
     stats.serie > 0 && `${nf(stats.serie)} j de série`,
   ].filter(Boolean).join(' · ');
   return (
-    <PressScale onPress={() => open(c)} scaleTo={reduced ? 1 : motion.press.scale}
-      style={[s.candidate, own && s.candidateOwn]}
-      accessibilityLabel={`${own ? 'Toi, ' : ''}${c.pseudonyme}, ${rankLabel(candidateRank(c))}, score ${scoreLabel(c.score)}, ${pct(stats.reussite)} de réussite. ${summary}`}
+    <PressScale onPress={() => open(c)} scaleTo={1}
+      style={[s.candidate, own && s.candidateOwn, fontScale >= 1.3 && s.candidateStack]}
+      accessibilityLabel={`${own ? 'Toi, ' : ''}${c.pseudonyme}, ${rankLabel(rank)}, score ${scoreLabel(c.score)}, ${pct(stats.reussite)} de réussite. ${summary}`}
       accessibilityHint="Ouvrir les résultats du candidat">
-      <View style={s.row}>
-        <Avatar name={c.pseudonyme} tint={c.avatarTeinte} size={36} />
-        <View style={s.flex}>
-          <Text variant="bodyMedium" numberOfLines={1}>{own ? `Toi · ${c.pseudonyme}` : c.pseudonyme}</Text>
-          <Text variant="caption" style={[s.rank, type.tabular]}>{rankLabel(candidateRank(c))}</Text>
-        </View>
-        <View style={s.score}>
-          <Text style={[type.numeral, s.scoreNumber]}>{scoreLabel(c.score)}</Text>
-          <Text variant="caption" style={s.muted}>score</Text>
-        </View>
-        <View style={s.chevron}><ChevronRight size={18} color={brand.burgundy} /></View>
+      <View style={[s.rankColumn, fontScale >= 1.3 ? { alignSelf: 'stretch' } : { width: rankWidth * fontScale }]}>
+        <Text style={[type.numeral, s.boardRank, fontScale >= 1.3 && { textAlign: 'left' }, laureate && s.laureateRank]}>{rank == null ? '—' : rankLabel(rank)}</Text>
       </View>
-      <Text variant="caption" style={[s.muted, type.tabular]}>{`${pct(stats.reussite)} de réussite${summary ? ` · ${summary}` : ''}`}</Text>
+      <CopyMargin style={{ left: fontScale >= 1.3 ? 8 : rankWidth * fontScale + 8, top: 14, bottom: 14 }} />
+      <View style={s.candidateBody}>
+        <View style={s.row}>
+          {fontScale < 1.3 ? <View style={s.laurel}>
+            {laureate ? <Image source={ART.laurels[rank - 1]} style={StyleSheet.absoluteFill} resizeMode="contain" accessible={false} /> : null}
+            <Avatar name={c.pseudonyme} tint={c.avatarTeinte} size={28} />
+          </View> : null}
+          <View style={s.flex}>
+            <Text variant="bodyMedium">{own ? `Toi · ${c.pseudonyme}` : c.pseudonyme}</Text>
+            <Text variant="caption" style={[s.muted, type.tabular]}><Text style={[type.numeral, s.scoreNumber]}>{scoreLabel(c.score)}</Text> points</Text>
+          </View>
+          <View style={s.chevron}><ChevronRight size={16} color={brand.burgundy} /></View>
+        </View>
+        <Text variant="caption" style={[s.muted, type.tabular]}>{`${pct(stats.reussite)} de réussite${summary ? ` · ${summary}` : ''}`}</Text>
+      </View>
     </PressScale>
   );
 });
@@ -96,35 +120,21 @@ const podiumOf = (candidates) => {
   const top = candidates.slice(0, 3);
   return top.some((c) => candidateRank(c) > 3 || candidateRank(c) == null) ? null : top;
 };
-const Podium = memo(({ candidates, open, reduced }) => {
+const Podium = memo(({ candidates, open, ownId, reduced, rankWidth }) => {
+  const { s } = useStyles();
   const top = podiumOf(candidates);
   if (!top) return null;
   return (
     <View style={s.podium}>
-      {[top[1], top[0], top[2]].map((c) => {
-        const rank = candidateRank(c);
-        return (
-          <PressScale key={c.identite} onPress={() => open(c)} scaleTo={reduced ? 1 : motion.press.scale}
-            style={[s.podiumColumn, { paddingTop: rank === 1 ? 0 : 20 }]}
-            accessibilityLabel={`${c.pseudonyme}, ${rankLabel(rank)}, score ${scoreLabel(c.score)}`}>
-            <View style={s.laurel}>
-              <Image source={ART.laurels[rank - 1]} style={StyleSheet.absoluteFill} resizeMode="contain" accessible={false} />
-              <Avatar name={c.pseudonyme} tint={c.avatarTeinte} size={40} />
-            </View>
-            <Text variant="caption" numberOfLines={1} style={s.podiumName}>{c.pseudonyme}</Text>
-            <Text variant="caption" style={[s.muted, type.tabular]}>{scoreLabel(c.score)} pts</Text>
-            <View style={[s.podiumPaper, { minHeight: rank === 1 ? 62 : 44 }]}>
-              <Text style={[type.numeral, s.podiumRank]}>{rankLabel(rank)}</Text>
-              <CornerFold size={18} />
-            </View>
-          </PressScale>
-        );
-      })}
+      <View style={s.podiumHeading}><SectionTitle>En tête</SectionTitle></View>
+      {top.map((c) => <CandidateRow key={c.identite} candidate={c} open={open} ownId={ownId} reduced={reduced} rankWidth={rankWidth} laureate />)}
     </View>
   );
 });
 
 const FollowedCandidates = memo(({ programme, periode, revision, open }) => {
+  const { brand } = useTheme();
+  const { s } = useStyles();
   const followed = usePrep((state) => state.candidatsSuivis?.[programme] || EMPTY_CANDIDATES);
   const remove = usePrep((state) => state.unfollowCandidate);
   const [profiles, setProfiles] = useState({});
@@ -179,6 +189,9 @@ const FollowedCandidates = memo(({ programme, periode, revision, open }) => {
 });
 
 const PinnedMe = memo(({ data, loading, error, locate, retry, reduced, bottom }) => {
+  const { GRADIENTS, brand } = useTheme();
+  const { s } = useStyles();
+  const { fontScale } = useWindowDimensions();
   const mine = data?.moi;
   const stats = mine?.stats || {};
   return (
@@ -193,7 +206,7 @@ const PinnedMe = memo(({ data, loading, error, locate, retry, reduced, bottom })
             <View style={s.row}>{loading ? <ActivityIndicator size="small" color={brand.burgundy} /> : null}<Text variant="caption" style={s.rank}>Me situer</Text><View style={s.chevron}><ChevronRight size={16} color={brand.burgundy} /></View></View>
           </View>
           <Text style={[type.numeral, s.pinnedRank]}>{rankLabel(data.rang ?? mine.rang)}<Text variant="body" style={s.muted}> sur {nf(data.total)}</Text></Text>
-          <Text variant="caption" style={[s.muted, type.tabular]}>{`Score ${scoreLabel(mine.score)} · ${pct(stats.reussite)} de réussite · ${count(stats.questions, 'question')}${stats.reussies != null ? ` · ${count(stats.reussies, 'réussie')}` : ''} · ${count(stats.erreurs, 'erreur')}`}</Text>
+          <Text variant="caption" style={[s.muted, type.tabular]}>{fontScale >= 1.3 ? `Score ${scoreLabel(mine.score)}` : `Score ${scoreLabel(mine.score)} · ${pct(stats.reussite)} de réussite · ${count(stats.questions, 'question')}${stats.reussies != null ? ` · ${count(stats.reussies, 'réussie')}` : ''} · ${count(stats.erreurs, 'erreur')}`}</Text>
           {mine.visible === false ? <View style={s.row}><EyeOff size={14} color={brand.inkSoft} /><Text variant="caption" style={[s.muted, s.flex]}>Ton rang reste privé. Les autres ne te voient pas.</Text></View> : null}
           {error ? <Text variant="caption" style={s.rank}>Rang précédent affiché. Réessaie pour l’actualiser.</Text> : null}
         </PressScale>
@@ -205,13 +218,15 @@ const PinnedMe = memo(({ data, loading, error, locate, retry, reduced, bottom })
 });
 
 const SearchResults = memo(({ query, programme, periode, open, ownId, reduced }) => {
+  const { s } = useStyles();
   const { valid, current, retry } = useCandidateSearch(programme, periode, query);
-  const renderItem = useCallback(({ item }) => <CandidateRow candidate={item} open={open} ownId={ownId} reduced={reduced} />, [open, ownId, reduced]);
+  const rankWidth = useMemo(() => rankColumnWidth(current?.candidates || EMPTY_CANDIDATES), [current?.candidates]);
+  const renderItem = useCallback(({ item }) => <CandidateRow candidate={item} open={open} ownId={ownId} reduced={reduced} rankWidth={rankWidth} />, [open, ownId, reduced, rankWidth]);
   return (
     <FlatList style={s.flex} data={valid ? current?.candidates || EMPTY_CANDIDATES : EMPTY_CANDIDATES}
       keyExtractor={keyExtractor} renderItem={renderItem} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag"
       contentContainerStyle={s.listContent} initialNumToRender={8}
-      refreshing={false} onRefresh={retry}
+      refreshing={valid && !current} onRefresh={retry}
       ListHeaderComponent={<Text variant="caption" style={s.searchHelp}>Parent ? Retrouve ton enfant grâce à son pseudonyme, visible dans son profil. Saisis le début du pseudonyme ou son numéro, par exemple « 1172 ».</Text>}
       ListEmptyComponent={!valid ? <Message title="Quel candidat cherches-tu ?" detail="Saisis au moins 2 caractères." /> : !current ? <Loading label="Recherche des candidats…" /> : current.error ? (
         <Message {...rankingMessage(current.error, 'recherche')} retry={retry} />
@@ -221,6 +236,8 @@ const SearchResults = memo(({ query, programme, periode, open, ownId, reduced })
 });
 
 const RankingContent = ({ navigation, programmeCode, periode, setPeriode }) => {
+  const { brand } = useTheme();
+  const { s } = useStyles();
   const programme = getProgramme(programmeCode);
   const insets = useSafeAreaInsets();
   const reduced = useReduceMotion();
@@ -235,6 +252,7 @@ const RankingContent = ({ navigation, programmeCode, periode, setPeriode }) => {
   const attempts = useRef(0);
   const headerHeight = useRef(0);
   const candidates = data?.candidats || EMPTY_CANDIDATES;
+  const rankWidth = useMemo(() => rankColumnWidth(candidates), [candidates]);
   // Les trois premiers sont sur le podium : la liste reprend au 4ᵉ, sans doublon.
   const podiumCount = podiumOf(candidates) ? 3 : 0;
   const listRows = useMemo(() => (podiumCount ? candidates.slice(podiumCount) : candidates), [candidates, podiumCount]);
@@ -243,7 +261,7 @@ const RankingContent = ({ navigation, programmeCode, periode, setPeriode }) => {
     haptic.select();
     navigation.navigate('PrepCandidate', { programme: programmeCode, identite: candidate.identite, periode, total: data?.total, moi: candidate.moi || candidate.identite === ownId });
   }, [navigation, programmeCode, periode, data?.total, ownId]);
-  const renderItem = useCallback(({ item }) => <CandidateRow candidate={item} open={open} ownId={ownId} reduced={reduced} />, [open, ownId, reduced]);
+  const renderItem = useCallback(({ item }) => <CandidateRow candidate={item} open={open} ownId={ownId} reduced={reduced} rankWidth={rankWidth} />, [open, ownId, reduced, rankWidth]);
   const tryScroll = useCallback(() => {
     if (scrollTarget.current == null || !list.current) return;
     list.current.scrollToIndex({ index: scrollTarget.current, viewPosition: 0.5, animated: !reduced });
@@ -284,14 +302,14 @@ const RankingContent = ({ navigation, programmeCode, periode, setPeriode }) => {
       <Text variant="caption" style={s.searchHelp}>Parent ? Recherche le pseudonyme de ton enfant, visible dans son profil.</Text>
       <FollowedCandidates programme={programmeCode} periode={periode} revision={revision} open={open} />
       {error ? <Message {...rankingMessage(error)} detail={`${data ? 'Les derniers résultats restent affichés. ' : ''}${rankingMessage(error).detail}`} retry={() => load()} /> : null}
-      <Podium candidates={candidates} open={open} reduced={reduced} />
+      <Podium candidates={candidates} open={open} ownId={ownId} reduced={reduced} rankWidth={rankWidth} />
       <Text variant="caption" style={s.searchHelp}>Scores cumulés · la période filtre les participants actifs.</Text>
-      <View style={s.listHeading}><SectionTitle right={data ? `${nf(data.total)} candidats` : undefined}>Les candidats</SectionTitle></View>
+      <View style={s.listHeading}><SectionTitle right={data ? `${nf(data.total)} candidats` : undefined}>{podiumOf(candidates) ? 'La suite du classement' : 'Les candidats'}</SectionTitle></View>
       {locationNote ? <Text variant="caption" style={s.searchHelp} accessibilityLiveRegion="polite">{locationNote}</Text> : null}
       {data?.precedent ? <View style={s.pageButton}><PrepButton title="Voir les mieux classés" variant="secondary" loading={paging === 'before'} disabled={loading || Boolean(paging)} onPress={() => loadPage('before')} /></View> : null}
       {pageError === 'before' ? <Message title="Chargement interrompu" detail="Les candidats précédents n’ont pas pu être chargés. Réessaie dans quelques instants." retry={() => loadPage('before')} /> : null}
     </View>
-  ), [programmeCode, periode, revision, open, error, data, candidates, reduced, locationNote, paging, pageError, loading, load, loadPage]);
+  ), [programmeCode, periode, revision, open, error, data, candidates, ownId, reduced, rankWidth, locationNote, paging, pageError, loading, load, loadPage, s]);
   return (
     <PaperStack header={<BackHeader navigation={navigation} title="Classement" />}>
       <View style={s.controls}>
@@ -338,6 +356,8 @@ export const RankingScreen = ({ navigation, route }) => {
 };
 
 export const CandidateScreen = ({ navigation, route }) => {
+  const { PODIUM, brand, subjectTint } = useTheme();
+  const { s } = useStyles();
   const { programme: programmeCode, identite, periode = 'tout' } = route.params;
   const programme = getProgramme(programmeCode);
   const insets = useSafeAreaInsets();
@@ -376,13 +396,13 @@ export const CandidateScreen = ({ navigation, route }) => {
   const compare = profile && mine ? [
     ['Questions répondues', mine.stats.questions || 0, stats.questions || 0, ''],
     ['Modules validés', mine.modulesValides || 0, stats.modulesValides || 0, ''],
-    ['Réussite du 1ᵉʳ coup', Math.round((mine.stats.reussite || 0) * 100), Math.round((stats.reussite || 0) * 100), ' %'],
+    [`Réussite du ${ordinal(1)} coup`, Math.round((mine.stats.reussite || 0) * 100), Math.round((stats.reussite || 0) * 100), ' %'],
     ['Série record', mine.etat.serie?.record || 0, stats.serieRecord || 0, ' j'],
   ] : [];
   const biggestGap = compare.reduce((best, item) => !best || Math.abs(item[2] - item[1]) / Math.max(1, item[1], item[2]) > Math.abs(best[2] - best[1]) / Math.max(1, best[1], best[2]) ? item : best, null);
   const metrics = [
     [value(stats.questions), 'Questions répondues'],
-    ...(stats.reussies != null ? [[nf(stats.reussies), 'Réussies du 1ᵉʳ coup']] : []),
+    ...(stats.reussies != null ? [[nf(stats.reussies), `Réussies du ${ordinal(1)} coup`]] : []),
     [value(stats.erreurs), 'Erreurs effectuées'],
     [pct(stats.reussite), 'Taux de réussite'],
     [value(stats.modulesValides), 'Modules validés'],
@@ -398,9 +418,17 @@ export const CandidateScreen = ({ navigation, route }) => {
             <View style={s.profileHero}>
               <Avatar name={profile.pseudonyme} tint={profile.avatarTeinte} size={72} ring={PODIUM[profile.rang - 1] || brand.lineStrong} />
               <Text variant="h1" align="center">{profile.pseudonyme}</Text>
-              <Text variant="bodyMedium" style={[s.rank, type.tabular]}>{rankLabel(profile.rang)}{total != null ? ` sur ${nf(total)}` : ''}</Text>
               <Text variant="caption" align="center" style={s.muted}>{programmeLabel(programme)} · {periodLabel(periode)}</Text>
-              <Text style={[type.numeral, s.profileScore]}>{scoreLabel(profile.score)}<Text variant="body" style={s.muted}> points</Text></Text>
+              <View style={s.profileBoard}>
+                <View style={s.profileStat} accessible accessibilityLabel={`${rankLabel(profile.rang)}${total != null ? ` sur ${nf(total)} candidats` : ''}`}>
+                  <Text style={[type.numeral, s.profileScore]}>{profile.rang == null ? '—' : rankLabel(profile.rang)}</Text>
+                  <Text variant="caption" style={s.muted}>{total != null ? `sur ${nf(total)} candidats` : 'rang indisponible'}</Text>
+                </View>
+                <View style={[s.profileStat, s.profileStatDivider]} accessible accessibilityLabel={`${scoreLabel(profile.score)} points`}>
+                  <Text style={[type.numeral, s.profileScore]}>{scoreLabel(profile.score)}</Text>
+                  <Text variant="caption" style={s.muted}>points cumulés</Text>
+                </View>
+              </View>
             </View>
             {totalError ? <Message title="Nombre de participants indisponible" detail={total != null ? 'Le nombre affiché provient du dernier classement consulté. Réessaie pour l’actualiser.' : 'Le nombre de participants n’a pas pu être chargé. Réessaie dans quelques instants.'} retry={retry} /> : null}
             {!own ? <PrepButton title={followed ? 'Ne plus suivre' : 'Suivre'} variant={followed ? 'secondary' : 'primary'} iconLeft={followed ? Check : UserPlus} onPress={() => {
@@ -408,11 +436,11 @@ export const CandidateScreen = ({ navigation, route }) => {
             }} accessibilityLabel={followed ? `Ne plus suivre ${profile.pseudonyme}` : `Suivre ${profile.pseudonyme} sur cet appareil`} /> : null}
             <SectionTitle style={s.sectionTitle}>{own ? 'Tes résultats' : 'Ses résultats'}</SectionTitle>
             <Text variant="caption" style={s.muted}>Résultats cumulés. La période sélectionne les participants au classement.</Text>
-            <Card style={s.metrics}>
+            <View style={s.metrics}>
               {metrics.map(([number, label]) => <View key={label} style={s.metric} accessible accessibilityLabel={`${label} : ${number}`}>
                 <Text variant="body" style={[s.muted, s.flex]}>{label}</Text><Text style={[type.numeral, s.metricNumber]}>{number}</Text>
               </View>)}
-            </Card>
+            </View>
             <SectionTitle style={s.sectionTitle}>Matières fortes</SectionTitle>
             {profile.matieresFortes?.length ? <View style={s.subjects}>{profile.matieresFortes.map((subject, index) => {
               const tint = subjectTint(index);
@@ -442,59 +470,66 @@ export const CandidateScreen = ({ navigation, route }) => {
   );
 };
 
-const s = StyleSheet.create({
-  flex: { flex: 1 },
-  muted: { color: brand.inkSoft },
-  rank: { color: brand.burgundy },
-  onInk: { color: brand.onInk },
-  row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  between: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
-  header: { paddingHorizontal: 16, minHeight: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  back: { width: 44, height: 44, borderRadius: 22, backgroundColor: brand.inkGlow, alignItems: 'center', justifyContent: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: brand.onInkSoft },
-  controls: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 8, gap: 10 },
-  periods: { padding: 4, borderRadius: 26, flexDirection: 'row', backgroundColor: brand.paperDim },
-  period: { flex: 1, minHeight: 44, borderRadius: 22, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 4, paddingVertical: 6 },
-  periodOn: { backgroundColor: brand.burgundy },
-  search: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 12, minHeight: 48, borderRadius: 12, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet },
-  input: { flex: 1, minHeight: 48, paddingVertical: 10, color: brand.ink, fontFamily: theme.fontFamily.regular, fontSize: 15 },
-  clear: { width: 44, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
-  listContent: { paddingBottom: 24 },
-  searchHelp: { paddingHorizontal: 20, paddingVertical: 12, color: brand.inkSoft },
-  listHeading: { paddingHorizontal: 20, paddingTop: 20, paddingBottom: 12 },
-  pageButton: { marginHorizontal: 20, marginBottom: 12 },
-  candidate: { marginHorizontal: 20, marginBottom: 8, padding: 12, borderRadius: 18, borderWidth: 1, borderColor: brand.line, backgroundColor: brand.sheet, gap: 8, minHeight: 96 },
-  candidateOwn: { backgroundColor: brand.goldWash, borderColor: brand.gold },
-  score: { alignItems: 'flex-end' },
-  scoreNumber: { color: brand.ink, fontSize: 22, lineHeight: 28 },
-  chevron: { width: 28, height: 28, borderRadius: 14, backgroundColor: brand.burgundyWash, alignItems: 'center', justifyContent: 'center' },
-  loading: { padding: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 10 },
-  message: { padding: 20, gap: 12 },
-  podium: { flexDirection: 'row', gap: 8, marginHorizontal: 20, alignItems: 'flex-end', marginTop: 16 },
-  podiumColumn: { flex: 1, minWidth: 0, alignItems: 'center', gap: 4 },
-  laurel: { width: 80, height: 80, justifyContent: 'center', alignItems: 'center' },
-  podiumName: { color: brand.ink, textAlign: 'center', alignSelf: 'stretch' },
-  podiumPaper: { alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: brand.lineStrong, borderTopLeftRadius: 14, borderTopRightRadius: 14, backgroundColor: brand.sheet, marginTop: 4 },
-  podiumRank: { color: brand.goldInk, fontSize: 24, lineHeight: 30 },
-  followed: { gap: 8, paddingTop: 12, paddingHorizontal: 20 },
-  followedList: { gap: 10, paddingVertical: 4 },
-  followCard: { width: 228, borderWidth: 1, borderColor: brand.line, borderRadius: 16, backgroundColor: brand.sheet, overflow: 'hidden' },
-  followOpen: { padding: 12, gap: 8, minHeight: 76 },
-  remove: { minHeight: 44, backgroundColor: brand.burgundyWash, flexDirection: 'row', gap: 6, alignItems: 'center', justifyContent: 'center' },
-  veil: { position: 'absolute', top: -20, left: 0, right: 0, height: 40 },
-  pinned: { marginHorizontal: 16, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 18, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet, gap: 4, ...theme.shadows.soft },
-  pinnedRank: { fontSize: 26, lineHeight: 34, color: brand.ink },
-  invitation: { flexDirection: 'row', gap: 12, alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12 },
-  profileContent: { padding: 20, gap: 12 },
-  profileHero: { alignItems: 'center', gap: 8, paddingVertical: 8 },
-  profileScore: { color: brand.ink, fontSize: 36, lineHeight: 44 },
-  sectionTitle: { marginTop: 16 },
-  metrics: { paddingHorizontal: 16, overflow: 'hidden' },
-  metric: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, alignItems: 'center', justifyContent: 'space-between', paddingVertical: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
-  metricNumber: { color: brand.ink, fontSize: 22, lineHeight: 28, flexShrink: 1 },
-  subjects: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  subject: { borderRadius: 14, paddingHorizontal: 12, paddingVertical: 8 },
-  compareButton: { marginTop: 20, borderRadius: 16, borderWidth: 1, borderColor: brand.burgundy, minHeight: 52, padding: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8, backgroundColor: brand.sheet },
-  comparison: { gap: 20, paddingTop: 8 },
-  comparisonMetric: { gap: 8 },
-  advice: { padding: 16, borderRadius: 18, backgroundColor: brand.goldWash, flexDirection: 'row', gap: 10 },
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const s = StyleSheet.create({
+    flex: { flex: 1 },
+    muted: { color: brand.inkSoft },
+    rank: { color: brand.burgundy },
+    onInk: { color: brand.onInk },
+    row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+    between: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
+    header: { paddingHorizontal: 16, minHeight: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+    back: { width: 44, height: 44, borderRadius: 22, backgroundColor: brand.inkGlow, alignItems: 'center', justifyContent: 'center', borderWidth: StyleSheet.hairlineWidth, borderColor: brand.onInkSoft },
+    controls: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 8, gap: 10 },
+    periods: { padding: 4, borderRadius: 26, flexDirection: 'row', backgroundColor: brand.paperDim },
+    period: { flex: 1, minHeight: 44, borderRadius: 22, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 4, paddingVertical: 6 },
+    periodOn: { backgroundColor: brand.burgundySolid },
+    search: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingLeft: 12, minHeight: 48, borderRadius: 12, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.sheet },
+    input: { flex: 1, minHeight: 48, paddingVertical: 10, color: brand.ink, fontFamily: theme.fontFamily.regular, fontSize: 15 },
+    clear: { width: 44, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
+    listContent: { paddingBottom: 24 },
+    searchHelp: { paddingHorizontal: 20, paddingVertical: 12, color: brand.inkSoft },
+    listHeading: { paddingHorizontal: 20, paddingTop: 20, paddingBottom: 12 },
+    pageButton: { marginHorizontal: 20, marginBottom: 12 },
+    candidate: { marginHorizontal: 20, paddingVertical: 16, paddingRight: 4, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line, flexDirection: 'row', alignItems: 'center', gap: 24, minHeight: 108 },
+    candidateStack: { flexDirection: 'column', alignItems: 'stretch', gap: 10, paddingLeft: 24 },
+    candidateOwn: { backgroundColor: brand.goldWash },
+    rankColumn: { flexShrink: 0 },
+    boardRank: { color: brand.ink, fontSize: 24, lineHeight: 34, textAlign: 'right' },
+    laureateRank: { color: brand.goldInk },
+    candidateBody: { flex: 1, gap: 8 },
+    scoreNumber: { color: brand.ink, fontSize: 19, lineHeight: 26 },
+    chevron: { width: 28, height: 28, borderRadius: 14, backgroundColor: brand.burgundyWash, alignItems: 'center', justifyContent: 'center' },
+    loading: { padding: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 10 },
+    message: { padding: 20, gap: 12 },
+    podiumHeading: { paddingHorizontal: 20, paddingBottom: 8 },
+    podium: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: brand.line, marginTop: 12 },
+    laurel: { width: 44, height: 44, justifyContent: 'center', alignItems: 'center', flexShrink: 0 },
+    followed: { gap: 8, paddingTop: 12, paddingHorizontal: 20 },
+    followedList: { gap: 10, paddingVertical: 4 },
+    followCard: { width: 228, borderWidth: 1, borderColor: brand.line, borderRadius: 16, backgroundColor: brand.sheet, overflow: 'hidden' },
+    followOpen: { padding: 12, gap: 8, minHeight: 76 },
+    remove: { minHeight: 44, backgroundColor: brand.burgundyWash, flexDirection: 'row', gap: 6, alignItems: 'center', justifyContent: 'center' },
+    veil: { position: 'absolute', top: -20, left: 0, right: 0, height: 40 },
+    pinned: { marginHorizontal: 16, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 18, borderWidth: 1, borderColor: brand.lineStrong, backgroundColor: brand.goldWash, gap: 4, ...theme.shadows.soft },
+    pinnedRank: { fontSize: 26, lineHeight: 34, color: brand.ink },
+    invitation: { flexDirection: 'row', gap: 12, alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12 },
+    profileContent: { padding: 20, gap: 12 },
+    profileHero: { alignItems: 'center', gap: 10, paddingTop: 8 },
+    profileScore: { color: brand.ink, fontSize: 28, lineHeight: 38, textAlign: 'center' },
+    profileBoard: { alignSelf: 'stretch', flexDirection: 'row', flexWrap: 'wrap', rowGap: 20, paddingVertical: 20, marginTop: 8, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: brand.line, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    profileStat: { flexGrow: 1, flexBasis: 140, alignItems: 'center', paddingHorizontal: 10, gap: 4 },
+    profileStatDivider: { borderLeftWidth: StyleSheet.hairlineWidth, borderLeftColor: brand.line },
+    sectionTitle: { marginTop: 16 },
+    metrics: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: brand.line },
+    metric: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, alignItems: 'center', justifyContent: 'space-between', paddingVertical: 16, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
+    metricNumber: { color: brand.ink, fontSize: 22, lineHeight: 30, textAlign: 'right', flexShrink: 1 },
+    subjects: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+    subject: { borderRadius: 14, paddingHorizontal: 12, paddingVertical: 8 },
+    compareButton: { marginTop: 20, borderRadius: 16, borderWidth: 1, borderColor: brand.burgundy, minHeight: 52, padding: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8, backgroundColor: brand.sheet },
+    comparison: { gap: 20, paddingTop: 8 },
+    comparisonMetric: { gap: 8 },
+    advice: { padding: 16, borderRadius: 18, backgroundColor: brand.goldWash, flexDirection: 'row', gap: 10 },
+  });
+  return { s };
 });

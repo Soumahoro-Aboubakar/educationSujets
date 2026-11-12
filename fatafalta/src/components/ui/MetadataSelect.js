@@ -1,9 +1,10 @@
+import { TouchableOpacity } from './FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { getErrorMessage } from '../../utils/userMessages';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text as RNText,
-  TouchableOpacity,
   Modal,
   FlatList,
   TextInput,
@@ -13,8 +14,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Plus, X, Check, Search } from 'lucide-react-native';
-import theme from '../../theme/tokens';
+
 import Text from './Text';
+import { useReduceMotion } from '../../prep/feedback';
 
 /**
  * Mobile-optimized CreatableSelect component
@@ -29,7 +31,11 @@ const MetadataSelect = ({
   onCreate,
   error,
   disabled = false,
+  loading = false,
 }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
+  const reduce = useReduceMotion();
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [isCreating, setIsCreating] = useState(false);
@@ -52,7 +58,6 @@ const MetadataSelect = ({
 
   const handleCreateOption = async () => {
     const trimmedName = search.trim() || newOptionName.trim();
-    
     if (!trimmedName) {
       setCreatingError('Nom requis. Saisissez un nom pour continuer.');
       return;
@@ -92,16 +97,20 @@ const MetadataSelect = ({
         )}
 
         <TouchableOpacity
+          accessibilityRole="button"
+          accessibilityLabel={[label, selectedOption?.name || placeholder].filter(Boolean).join(', ')}
+          accessibilityState={{ disabled, expanded: isOpen }}
           style={[
             styles.selectButton,
             {
               borderColor: error ? theme.colors.error : theme.colors.border,
               backgroundColor: disabled ? theme.colors.surfaceRaised : theme.colors.surface,
-              opacity: disabled ? 0.6 : 1,
+              opacity: disabled ? theme.brand.inactiveOpacity : 1,
             }
           ]}
           onPress={() => !disabled && setIsOpen(true)}
-          disabled={disabled}
+          disabled={disabled || loading}
+          loading={loading}
         >
           <RNText 
             style={[
@@ -111,12 +120,15 @@ const MetadataSelect = ({
                 fontWeight: selectedOption ? '600' : '400',
               }
             ]}
-            numberOfLines={1}
+            numberOfLines={0}
           >
             {selectedOption ? selectedOption.name : placeholder}
           </RNText>
           {selectedOption && (
             <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel={`Effacer ${label || 'la sélection'}`}
+              style={{ minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' }}
               onPress={() => {
                 onChange(null);
                 setSearch('');
@@ -143,14 +155,14 @@ const MetadataSelect = ({
         visible={isOpen}
         onRequestClose={() => setIsOpen(false)}
         transparent
-        animationType="slide"
+        animationType={reduce ? 'fade' : 'slide'}
       >
         <SafeAreaView style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             {/* Header */}
             <View style={styles.modalHeader}>
               <RNText style={styles.modalTitle}>{label}</RNText>
-              <TouchableOpacity onPress={() => setIsOpen(false)}>
+              <TouchableOpacity accessibilityRole="button" accessibilityLabel="Fermer" style={{ minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' }} onPress={() => setIsOpen(false)}>
                 <X size={24} color={theme.colors.textPrimary} />
               </TouchableOpacity>
             </View>
@@ -160,6 +172,7 @@ const MetadataSelect = ({
               <Search size={18} color={theme.colors.textMuted} />
               <TextInput
                 style={styles.searchInput}
+                accessibilityLabel={`Rechercher : ${label || placeholder}`}
                 placeholder="Rechercher..."
                 placeholderTextColor={theme.colors.textMuted}
                 value={search}
@@ -211,7 +224,7 @@ const MetadataSelect = ({
                 <TouchableOpacity
                   style={[
                     styles.createButton,
-                    { opacity: isCreating ? 0.6 : 1 }
+                    { opacity: isCreating ? theme.brand.inactiveOpacity : 1 }
                   ]}
                   onPress={handleCreateOption}
                   disabled={isCreating}
@@ -240,136 +253,146 @@ const MetadataSelect = ({
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 4,
-  },
-  label: {
-    marginBottom: 8,
-    fontWeight: '600',
-  },
-  selectButton: {
-    height: 56,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    borderWidth: 1.5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: theme.colors.surface,
-  },
-  selectButtonText: {
-    flex: 1,
-    fontSize: 16,
-    color: theme.colors.textPrimary,
-  },
-  errorText: {
-    marginTop: 6,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    marginTop: 'auto',
-  },
-  modalHeader: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: theme.colors.textPrimary,
-  },
-  searchContainer: {
-    marginHorizontal: 16,
-    marginVertical: 12,
-    paddingHorizontal: 12,
-    height: 44,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.surfaceRaised,
-    borderRadius: 12,
-    gap: 8,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: theme.colors.textPrimary,
-  },
-  optionsList: {
-    flex: 1,
-    paddingHorizontal: 16,
-  },
-  optionItem: {
-    paddingVertical: 12,
-    paddingHorizontal: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
-  },
-  optionText: {
-    fontSize: 16,
-    color: theme.colors.textPrimary,
-    fontWeight: '500',
-  },
-  emptyState: {
-    padding: 20,
-    alignItems: 'center',
-  },
-  emptyStateText: {
-    fontSize: 14,
-    color: theme.colors.textMuted,
-  },
-  createContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.border,
-  },
-  createButton: {
-    height: 56,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  createButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: theme.colors.textInverse,
-  },
-  closeButtonContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    paddingBottom: 32,
-  },
-  closeButton: {
-    height: 56,
-    backgroundColor: theme.colors.surfaceRaised,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  closeButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: theme.colors.textPrimary,
-  },
-});
-
 export default MetadataSelect;
+
+const useStyles = createThemedStyles(({ theme }) => {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 4,
+    },
+    label: {
+      marginBottom: 8,
+      fontWeight: '600',
+    },
+    selectButton: {
+      minHeight: 56,
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      borderRadius: 12,
+      borderWidth: 1.5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: theme.colors.surface,
+    },
+    selectButtonText: {
+      flex: 1,
+      fontSize: 16,
+      color: theme.colors.textPrimary,
+    },
+    errorText: {
+      marginTop: 6,
+    },
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+      ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: theme.colors.background,
+      borderTopLeftRadius: 24,
+      borderTopRightRadius: 24,
+      marginTop: 'auto',
+    },
+    modalHeader: {
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.border,
+    },
+    modalTitle: {
+      flex: 1,
+      fontSize: 18,
+      fontWeight: '700',
+      color: theme.colors.textPrimary,
+    },
+    searchContainer: {
+      marginHorizontal: 16,
+      marginVertical: 12,
+      paddingHorizontal: 12,
+      minHeight: 44,
+      paddingVertical: 8,
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme.colors.surfaceRaised,
+      borderRadius: 12,
+      gap: 8,
+    },
+    searchInput: {
+      flex: 1,
+      fontSize: 16,
+      color: theme.colors.textPrimary,
+    },
+    optionsList: {
+      flex: 1,
+      paddingHorizontal: 16,
+    },
+    optionItem: {
+      paddingVertical: 12,
+      paddingHorizontal: 12,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.border,
+    },
+    optionText: {
+      flex: 1,
+      fontSize: 16,
+      color: theme.colors.textPrimary,
+      fontWeight: '500',
+    },
+    emptyState: {
+      padding: 20,
+      alignItems: 'center',
+    },
+    emptyStateText: {
+      fontSize: 14,
+      color: theme.colors.textMuted,
+    },
+    createContainer: {
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderTopWidth: 1,
+      borderTopColor: theme.colors.border,
+    },
+    createButton: {
+      minHeight: 56,
+      paddingVertical: 12,
+      backgroundColor: theme.brand.night,
+      borderRadius: 12,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
+    },
+    createButtonText: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: theme.colors.textInverse,
+    },
+    closeButtonContainer: {
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      paddingBottom: 32,
+    },
+    closeButton: {
+      minHeight: 56,
+      paddingVertical: 12,
+      backgroundColor: theme.colors.surfaceRaised,
+      borderRadius: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    closeButtonText: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: theme.colors.textPrimary,
+    },
+  });
+  return { styles };
+});

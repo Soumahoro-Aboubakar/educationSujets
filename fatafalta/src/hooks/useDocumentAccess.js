@@ -45,7 +45,7 @@ export const useDocumentAccess = (navigation) => {
       setReason(locked);
       return;
     }
-    action();
+    return action();
   }, [locked]);
 
   const close = useCallback(() => setReason(null), []);

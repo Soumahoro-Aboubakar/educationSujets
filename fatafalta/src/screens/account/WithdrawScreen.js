@@ -1,28 +1,28 @@
+import { SkeletonRows } from '../../components/ui/Skeleton';
+import StateView from '../../components/ui/StateView';
+import { getUserMessage } from '../../utils/userMessages';
+import Pressable from '../../components/ui/FeedbackPressable';
+import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useContext, useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
+import { AccountField } from '../../components/account/AccountPresentation';
+import { Metric } from '../../components/account/AccountLayout';
 import * as Haptics from 'expo-haptics';
 import { CheckCircle2 } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import ScreenHeader from '../../components/ui/ScreenHeader';
-import ActionButton from '../../components/ui/ActionButton';
+import { PrepButton as ActionButton } from '../../prep/ui/primitives';
 import Sheet from '../../components/ui/Sheet';
 import { AccountScroll, Row, Section } from '../../components/account/AccountLayout';
 import AuthContext from '../../context/AuthContext';
 import { useRefreshAccount, useWallet } from '../../hooks/useAccount';
 import { getErrorMessage, requestWithdrawal } from '../../services/billing';
 import { formatAmount } from '../../utils/format';
-import theme from '../../theme/tokens';
 
-const { brand } = theme;
-
-const Field = ({ label, error, ...props }) => (
-  <View style={styles.field}>
-    <Text variant="caption" style={styles.fieldLabel}>{label}</Text>
-    <TextInput placeholderTextColor={brand.inkMuted} style={[styles.input, error && styles.inputError]} {...props} />
-    {error ? <Text variant="caption" style={styles.fieldError}>{error}</Text> : null}
-  </View>
-);
+const Field = ({ label, error, ...props }) => {
+  const { styles } = useStyles();
+  return (<View style={styles.field}><AccountField label={label} error={error} {...props} /></View>);
+};
 
 const splitName = (name = '') => {
   const [first = '', ...rest] = name.trim().split(/\s+/);
@@ -34,8 +34,10 @@ const splitName = (name = '') => {
  * Le serveur revalide tout (solde, opérateur, numéro) : ce formulaire n'est qu'un guide.
  */
 const WithdrawScreen = ({ navigation }) => {
+  const { theme } = useTheme();
+  const { styles } = useStyles();
   const { user } = useContext(AuthContext);
-  const { data } = useWallet();
+  const { data, isLoading, isError, error: loadError, refetch } = useWallet();
   const refreshAccount = useRefreshAccount();
   const [form, setForm] = useState(() => ({ operator: null, phone: user?.phone || '', amount: '', ...splitName(user?.name) }));
   const [errors, setErrors] = useState({});
@@ -90,18 +92,25 @@ const WithdrawScreen = ({ navigation }) => {
 
   const operatorLabel = rules?.operators.find((operator) => operator.id === form.operator)?.label;
 
+  if (!data) {
+    return <View style={styles.container}>
+      <ScreenHeader title="Retirer mes gains" onBack={() => navigation.goBack()} />
+      {isLoading ? <SkeletonRows count={5} /> : isError ? <StateView title={getUserMessage(loadError, 'portefeuille').title} description={getUserMessage(loadError, 'portefeuille').message} onRetry={refetch} /> : null}
+    </View>;
+  }
+
   if (done) {
     return (
       <View style={styles.container}>
         <ScreenHeader onBack={() => navigation.goBack()} eyebrow="Portefeuille" title="Demande envoyée" />
-        <Animated.View entering={FadeIn.duration(300)} style={styles.success}>
-          <CheckCircle2 size={44} color={theme.colors.success} strokeWidth={1.6} />
+        <View style={styles.success}>
+          <CheckCircle2 size={44} color={theme.colors.success} strokeWidth={2} />
           <Text variant="h2" align="center" style={styles.successTitle}>{formatAmount(done.amount)}</Text>
           <Text variant="body" align="center" style={styles.successText}>
             {`Ton retrait vers ${done.operatorLabel} (${done.phone}) est en attente de traitement. Tu peux suivre son statut dans ton portefeuille.`}
           </Text>
           <ActionButton title="Retour au portefeuille" onPress={() => navigation.goBack()} style={styles.successButton} />
-        </Animated.View>
+        </View>
       </View>
     );
   }
@@ -110,12 +119,11 @@ const WithdrawScreen = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScreenHeader
         onBack={() => navigation.goBack()}
-        eyebrow="Retirer mes gains"
-        title={formatAmount(available)}
-        subtitle="Solde disponible"
+        title="Retirer mes gains"
       />
       <AccountScroll>
-        <Text variant="overline" style={styles.label}>Opérateur</Text>
+        <Metric paper label="Solde disponible" value={formatAmount(available)} />
+        <Text variant="h2" style={styles.label}>Opérateur</Text>
         <View style={styles.operators}>
           {(rules?.operators || []).map((operator) => {
             const selected = form.operator === operator.id;
@@ -123,7 +131,8 @@ const WithdrawScreen = ({ navigation }) => {
               <Pressable
                 key={operator.id}
                 accessibilityRole="radio"
-                accessibilityState={{ selected }}
+                accessibilityLabel={operator.label}
+                accessibilityState={{ checked: selected }}
                 onPress={() => set('operator')(operator.id)}
                 style={[styles.operator, selected && styles.operatorSelected]}
               >
@@ -149,7 +158,7 @@ const WithdrawScreen = ({ navigation }) => {
           Les frais de transfert éventuels de l’opérateur sont à ta charge. Le nom doit correspondre au titulaire du compte Mobile Money.
         </Text>
 
-        <ActionButton title="Continuer" onPress={review} disabled={!data} style={styles.submit} />
+        <ActionButton title="Vérifier mon retrait" onPress={review} disabled={!data} style={styles.submit} />
       </AccountScroll>
 
       <Sheet visible={confirming} onClose={() => !submitting && setConfirming(false)}>
@@ -160,7 +169,7 @@ const WithdrawScreen = ({ navigation }) => {
           <Row label="Numéro" value={form.phone} />
           <Row label="Bénéficiaire" value={`${form.firstName} ${form.lastName}`} isLast />
         </Section>
-        {serverError ? <Text variant="caption" style={styles.serverError}>{serverError}</Text> : null}
+        {serverError ? <Text variant="caption" accessibilityLiveRegion="polite" style={styles.serverError}>{serverError}</Text> : null}
         <View style={styles.sheetActions}>
           <ActionButton title="Confirmer" onPress={submit} loading={submitting} />
           <ActionButton title="Modifier" variant="secondary" onPress={() => setConfirming(false)} disabled={submitting} />
@@ -170,115 +179,103 @@ const WithdrawScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: brand.paper,
-  },
-  label: {
-    marginBottom: theme.spacing.sm,
-    color: brand.inkSoft,
-  },
-  operators: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: theme.spacing.sm,
-  },
-  operator: {
-    minHeight: theme.layout.touch,
-    justifyContent: 'center',
-    paddingHorizontal: theme.spacing.base,
-    borderRadius: theme.radius.full,
-    borderWidth: 1,
-    borderColor: brand.lineStrong,
-    backgroundColor: theme.colors.surface,
-  },
-  operatorSelected: {
-    borderColor: brand.ink,
-    backgroundColor: brand.ink,
-  },
-  operatorLabel: {
-    color: brand.ink,
-    fontSize: 14,
-  },
-  operatorLabelSelected: {
-    color: brand.onInk,
-  },
-  field: {
-    marginTop: theme.spacing.lg,
-  },
-  fieldLabel: {
-    marginBottom: 6,
-    color: brand.inkSoft,
-  },
-  input: {
-    minHeight: 50,
-    paddingHorizontal: theme.spacing.base,
-    borderRadius: theme.radius.md,
-    borderWidth: 1,
-    borderColor: brand.line,
-    backgroundColor: theme.colors.surface,
-    color: brand.ink,
-    fontFamily: theme.fontFamily.medium,
-    fontSize: 15,
-  },
-  inputError: {
-    borderColor: theme.colors.error,
-  },
-  fieldError: {
-    marginTop: 4,
-    color: theme.colors.error,
-    fontFamily: theme.fontFamily.regular,
-  },
-  inline: {
-    flexDirection: 'row',
-    gap: theme.spacing.md,
-  },
-  inlineItem: {
-    flex: 1,
-  },
-  notice: {
-    marginTop: theme.spacing.lg,
-    color: brand.inkSoft,
-    fontFamily: theme.fontFamily.regular,
-    lineHeight: 18,
-  },
-  submit: {
-    marginTop: theme.spacing.xl,
-  },
-  sheetTitle: {
-    marginBottom: theme.spacing.base,
-    color: brand.ink,
-  },
-  serverError: {
-    marginTop: -theme.spacing.sm,
-    marginBottom: theme.spacing.md,
-    color: theme.colors.error,
-  },
-  sheetActions: {
-    gap: theme.spacing.sm,
-  },
-  success: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: theme.spacing['2xl'],
-  },
-  successTitle: {
-    marginTop: theme.spacing.base,
-    color: brand.ink,
-  },
-  successText: {
-    maxWidth: 320,
-    marginTop: theme.spacing.sm,
-    color: brand.inkSoft,
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  successButton: {
-    alignSelf: 'stretch',
-    marginTop: theme.spacing.xl,
-  },
-});
-
 export default WithdrawScreen;
+
+const useStyles = createThemedStyles(({ brand, theme }) => {
+  const styles = StyleSheet.create({
+    container: { ...theme.layout.readingFrame,
+      flex: 1,
+      backgroundColor: brand.paper,
+    },
+    label: {
+      marginBottom: theme.spacing.sm,
+      color: brand.inkSoft,
+    },
+    operators: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: theme.spacing.sm,
+    },
+    operator: {
+      minHeight: theme.layout.touch,
+      justifyContent: 'center',
+      paddingHorizontal: theme.spacing.base,
+      borderRadius: theme.radius.full,
+      borderWidth: 1,
+      borderColor: brand.lineStrong,
+      backgroundColor: theme.colors.surface,
+    },
+    operatorSelected: {
+      borderColor: brand.burgundy,
+      backgroundColor: brand.burgundySolid,
+    },
+    operatorLabel: {
+      color: brand.ink,
+      fontSize: 14,
+    },
+    operatorLabelSelected: {
+      color: brand.onInk,
+    },
+    field: {
+      marginTop: theme.spacing.lg,
+    },
+
+    fieldError: {
+      marginTop: 4,
+      color: theme.colors.error,
+      fontFamily: theme.fontFamily.regular,
+    },
+    inline: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: theme.spacing.md,
+    },
+    inlineItem: {
+      flex: 1,
+      minWidth: 130,
+    },
+    notice: {
+      marginTop: theme.spacing.lg,
+      color: brand.inkSoft,
+      fontFamily: theme.fontFamily.regular,
+      lineHeight: 18,
+    },
+    submit: {
+      marginTop: theme.spacing.xl,
+    },
+    sheetTitle: {
+      marginBottom: theme.spacing.base,
+      color: brand.ink,
+    },
+    serverError: {
+      marginTop: -theme.spacing.sm,
+      marginBottom: theme.spacing.md,
+      color: theme.colors.error,
+    },
+    sheetActions: {
+      gap: theme.spacing.sm,
+    },
+    success: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: theme.spacing['2xl'],
+    },
+    successTitle: {
+      marginTop: theme.spacing.base,
+      color: brand.ink,
+    },
+    successText: {
+      maxWidth: 320,
+      marginTop: theme.spacing.sm,
+      color: brand.inkSoft,
+      fontSize: 14,
+      lineHeight: 20,
+    },
+    successButton: {
+      alignSelf: 'stretch',
+      marginTop: theme.spacing.xl,
+    },
+  });
+  return { styles };
+});
