@@ -112,6 +112,16 @@ sheet (ressort 22/220) · snap (14/260) · count 600 ms. Reanimated uniquement (
 Haptique via `src/prep/feedback.js` (`haptic.select/success/error/celebrate`), jamais pendant la lecture.
 Un seul moment animé signature par écran (ex. copie qui flotte, médaille qui « pop »).
 
+## 6 bis. Composition (refonte 2026-11, voir `docs/design/refonte-2026-11/`)
+
+- Un seul héros par écran ; le reste en listes nues sur papier avec filets, pas en cartes.
+- Carte = objet manipulable (copie, module, document). Stat, réglage, info = ligne, pas carte.
+- `CornerFold` uniquement sur le maîtrisé / validé, jamais sur « à venir ».
+- Modules non publiés regroupés en une ligne dépliable (« N modules en préparation »).
+- Ordinaux via `ordinal(n)` : « 1ᵉʳ », jamais « 1ᵉ ».
+- État désactivé lisible (`paperDim` + texte `inkSoft`), libellé qui dit pourquoi.
+- En-tête sur encre ≤ ~22 % de la hauteur (hors écrans « moment ») ; contexte en petit dans l'en-tête.
+
 ## 7. Contrôle avant livraison
 
 1. Rendu réel vérifié (Expo web 390 × 844 au minimum ; natif dès que possible), captures relues.

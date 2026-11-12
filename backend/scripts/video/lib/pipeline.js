@@ -39,6 +39,27 @@ const lireFichier = async (chemin) => {
 const SANS_GENERATEUR = 'Étape « génération » : aucun générateur de vidéo n’est branché pour l’instant. '
   + 'Fournis la vidéo avec --fichier <mp4> (dossier de génération : npm run video:brief -- --type … --id …).';
 
+/** Contrat d'enregistrement partagé par publish.js et le pipeline social. */
+const documentVideo = ({ cible, video, youtubeId, fichierSha256, titre, generateur = 'fichier', visibilites = ['public'], now = Date.now }) => {
+  if (!/^[A-Za-z0-9_-]{11}$/.test(youtubeId)) throw new Error('Identifiant YouTube invalide.');
+  if (!visibilites.includes(video.privacyStatus) || !video.embeddable || video.uploadStatus !== 'processed') {
+    throw new Error('Vidéo YouTube pas encore traitée, non intégrable ou de visibilité incompatible : aucune écriture en base.');
+  }
+  return { youtubeId, url: watchUrl(youtubeId), title: video.titre || titre,
+    durationSec: video.dureeSec, publishedAt: video.publieLe ? new Date(video.publieLe) : new Date(now()),
+    status: 'published', source: { empreinteContenu: cible.empreinte, fichierSha256, generateur } };
+};
+
+const enregistrerVideo = async (db, cible, doc, { remplacer = false } = {}) => {
+  const existing = await db.trouver(cible);
+  if (existing && existing.source?.fichierSha256 !== doc.source.fichierSha256 && !remplacer) {
+    throw new Error('Cette cible a déjà une autre vidéo : --remplacer requis.');
+  }
+  if (existing?.status === 'published' && existing.youtubeId === doc.youtubeId
+    && existing.source?.fichierSha256 === doc.source.fichierSha256) return existing;
+  return db.ecrire(cible, doc);
+};
+
 const publier = async (opts, deps) => {
   const { log, etat, confirm, db, youtube } = deps;
   const sleep = deps.sleep || ((ms) => new Promise((r) => setTimeout(r, ms)));
@@ -139,21 +160,13 @@ const publier = async (opts, deps) => {
   if (['failed', 'rejected', 'deleted'].includes(v.uploadStatus)) throw new Error(`YouTube a refusé la vidéo ${youtubeId} (${v.uploadStatus}${v.rejet ? ` : ${v.rejet}` : ''}).`);
   if (v.privacyStatus !== 'public') {
     throw new Error(`La vidéo ${youtubeId} est « ${v.privacyStatus} » et non publique : l’application ne pourrait pas la lire, rien n’est écrit en base. `
-      + 'Cause probable : projet Google Cloud non audité (les envois par API y restent privés). Demande l’audit de l’API YouTube, ou passe la vidéo en public dans YouTube Studio, puis relance.');
+      + 'Vérifie les réglages de visibilité et les restrictions de la chaîne dans YouTube Studio, puis relance.');
   }
   if (!v.embeddable) throw new Error(`La vidéo ${youtubeId} n’autorise pas l’intégration : active-la dans YouTube Studio puis relance.`);
   log.etape(5, 'YouTube', `${v.uploadStatus === 'processed' ? 'traitement terminé' : `statut ${v.uploadStatus}`} · ${duree(v.dureeSec)} · public · intégrable`);
 
   // 6. Confirmation ─────────────────────────────────────────────────────
-  const doc = {
-    youtubeId,
-    url: watchUrl(youtubeId),
-    title: v.titre || meta.snippet.title,
-    durationSec: v.dureeSec,
-    publishedAt: v.publieLe ? new Date(v.publieLe) : new Date(now()),
-    status: 'published',
-    source: { empreinteContenu: cible.empreinte, fichierSha256, generateur: opts.generateur || 'fichier' },
-  };
+  const doc = documentVideo({ cible, video: v, youtubeId, fichierSha256, titre: meta.snippet.title, generateur: opts.generateur, now });
   const operation = existante ? `remplacement de ${existante.youtubeId}` : 'création';
   if (opts.dryRun) {
     log.etape(6, 'Confirmation', '[dry-run] aucune confirmation demandée');
@@ -168,7 +181,7 @@ const publier = async (opts, deps) => {
   }
 
   // 7. Production (écriture) ────────────────────────────────────────────
-  await db.ecrire(cible, doc);
+  await enregistrerVideo(db, cible, doc, { remplacer: opts.remplacer });
   etat.ecrire(cible, { termine: true, ecritEnBaseLe: new Date(now()).toISOString() });
   log.etape(7, 'Production', 'enregistrée ✓ — visible dans l’application sous 5 minutes, sans nouvelle version');
   log.ok(doc.url);
@@ -214,4 +227,4 @@ const listerEtat = async (deps) => {
   return lignes;
 };
 
-module.exports = { publier, masquer, listerEtat, lireFichier, hashFile, expandHome, SANS_GENERATEUR };
+module.exports = { publier, masquer, listerEtat, lireFichier, hashFile, expandHome, SANS_GENERATEUR, documentVideo, enregistrerVideo };

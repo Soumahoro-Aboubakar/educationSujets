@@ -1,5 +1,9 @@
 # Vidéos explicatives — architecture et procédure
 
+Pour le nouveau flux **YouTube + Page Facebook**, avec configuration globale hors dépôt
+et essai à blanc par défaut, suivre [Publication des vidéos](../publication-videos.md).
+La procédure ci-dessous décrit l'ancien outil YouTube seul et ses fichiers de configuration.
+
 Vidéo d'explication d'une **leçon** (une par leçon et par version de langue, optionnelle), affichée en
 tête de la leçon **dès son ouverture**, et vidéo de présentation d'un **concours** (une par programme,
 optionnelle). Aucune durée imposée (viser court). Décisions du 2026-11-07 (cahier des charges,
@@ -47,18 +51,19 @@ contenu du pack ──► npm run video:brief ──► dossier de génération 
 1. **Google Cloud** : projet, API « YouTube Data API v3 » activée, écran de consentement OAuth
    **en mode « En production »** (en mode test, le refresh token expire au bout de 7 jours), puis un
    identifiant OAuth de type **Application de bureau**.
-2. **Audit de l'API YouTube** : les vidéos envoyées par un projet non audité restent **privées**, quelle
-   que soit la visibilité demandée — l'application ne pourrait pas les lire. Demander l'audit
-   (formulaire « YouTube API Services — Audit and Quota Extension »). Le script détecte ce cas et
-   s'arrête avant d'écrire en base.
+2. **Visibilité YouTube** : l'ancien outil exige une vidéo publique et intégrable avant d'écrire
+   en base. Le blocage automatique en privé des projets non vérifiés a été levé le 2 novembre 2026
+   ([historique Google](https://developers.google.com/youtube/data/revision_history#november-2-2026)).
+   Un audit peut rester nécessaire pour une extension de quota.
 3. **Secrets locaux** (jamais commités : règle `.env.*.local` du `.gitignore`) :
    - `backend/.env.video.local` : copier `backend/scripts/video/video.env.exemple`, remplir
      `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, `YOUTUBE_CHANNEL_ID` ;
    - `npm run video:auth` (dans `backend/`) : ouvre le consentement Google, affiche le
      `YOUTUBE_REFRESH_TOKEN` à coller dans ce fichier ;
    - `backend/.env.production.local` : une ligne `MONGODB_URI=<URI de la base de production>`.
-4. **Quota** : un envoi consomme une grande part du quota quotidien par défaut ; prévoir quelques
-   vidéos par jour.
+4. **Quota** : consulter les quotas actuels dans le [nouveau guide](../publication-videos.md).
+   Les uploads disposent désormais d'un quota distinct ; les anciens coûts de 1 600 unités
+   par vidéo ne s'appliquent plus.
 
 ## 3. Publier une vidéo
 

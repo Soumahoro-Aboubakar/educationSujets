@@ -1,0 +1,61 @@
+[
+  {
+    "url": "https://ens-abidjan.ci/concours-professionnel/",
+    "type": "catalogue institutionnel",
+    "decision": "10 familles repérées ; ne prouve pas leur ouverture chaque année",
+    "consultation": "2026-11-04"
+  },
+  {
+    "url": "https://fr.scribd.com/document/884501871/Sujet-Sgfp",
+    "annee": 2020,
+    "type": "candidat professionnel",
+    "decision": "à confirmer",
+    "motif": "En-tête CAFOP Français, session 10 octobre 2020 ; aperçu consulté, PDF non téléchargé, droits réservés",
+    "consultation": "2026-11-04"
+  },
+  {
+    "url": "https://www.scribd.com/document/737006819/SUJETS-de-LOGIQUE-Ministere-de-La-Fonction-Publique",
+    "annee": 2018,
+    "type": "piste professionnelle",
+    "decision": "à confirmer",
+    "motif": "Résultat indexé CAFOP AEC 29 septembre 2018 ; fichier non inspecté",
+    "consultation": "2026-11-04"
+  },
+  {
+    "url": "https://www.scribd.com/document/670740289/Professeur-de-Cafop-Option-HG",
+    "annee": 2023,
+    "type": "préparation",
+    "decision": "rejeté comme annale authentique",
+    "motif": "Le document annonce concours blanc n°3",
+    "consultation": "2026-11-04"
+  },
+  {
+    "url": "https://www.laurore.net/wp-content/uploads/2022/05/CP-PROF.-CAFOP-HISTOIRE-GEO.pdf",
+    "annee": 2022,
+    "type": "communiqué",
+    "decision": "référence documentaire, pas un sujet",
+    "motif": "PDF ouvert (2 pages), texte non extrait ; résultat indexé annonce ouverture CAFOP HG",
+    "consultation": "2026-11-04"
+  },
+  {
+    "url": "https://www.fomesoutra.com/sujets/sujet-concours/ens-sujet/professeur-de-cafop",
+    "type": "catalogue archives",
+    "decision": "6 entrées repérées, non importées",
+    "motif": "ECM et 5 psychologie, 2004–2005 ou année non déterminée ; doublons possibles sous organisme CAFOP",
+    "consultation": "2026-11-04"
+  },
+  {
+    "url": "https://www.fomesoutra.com/condition",
+    "type": "conditions de diffusion",
+    "decision": "reproduction suspendue",
+    "motif": "Autorisation écrite expressément exigée par la source",
+    "consultation": "2026-11-04"
+  },
+  {
+    "url": "https://www.facebook.com/",
+    "type": "Facebook",
+    "decision": "accès limité",
+    "motif": "Requêtes indexées renvoient surtout pages de connexion ; aucune image source obtenue",
+    "consultation": "2026-11-04"
+  }
+]

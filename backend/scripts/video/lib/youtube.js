@@ -22,10 +22,11 @@ const parseIsoDuration = (iso) => {
 
 const watchUrl = (id) => `https://www.youtube.com/watch?v=${id}`;
 
-const createYoutubeClient = ({ clientId, clientSecret, refreshToken, fetchImpl = fetch, log = () => {} }) => {
+const createYoutubeClient = ({ clientId, clientSecret, refreshToken, tokenProvider, fetchImpl = fetch, log = () => {} }) => {
   let token = null;
 
   const accessToken = async () => {
+    if (tokenProvider) return tokenProvider();
     if (token && token.expiresAt - Date.now() > 60000) return token.value;
     const body = new URLSearchParams({ client_id: clientId, client_secret: clientSecret, refresh_token: refreshToken, grant_type: 'refresh_token' });
     const res = await fetchImpl(TOKEN_URL, { method: 'POST', body });
@@ -115,9 +116,12 @@ const createYoutubeClient = ({ clientId, clientSecret, refreshToken, fetchImpl =
     if (res.status === 200 || res.status === 201) return { termine: true, video: await res.json() };
     if (res.status === 308) {
       const range = res.headers.get('range');
-      return { termine: false, offset: range ? Number(range.split('-')[1]) + 1 : 0 };
+      const offset = range ? Number(range.split('-')[1]) + 1 : 0;
+      if (!Number.isSafeInteger(offset) || offset < 0 || offset > taille) throw new Error('Offset de session YouTube invalide.');
+      return { termine: false, offset };
     }
-    return null; // 404 / 410 : session expirée
+    if ([404, 410].includes(res.status)) return null;
+    throw new Error(`Vérification de la session YouTube impossible (HTTP ${res.status}) : relance pour reprendre.`);
   };
 
   /** Envoie le fichier à partir de `offset` ; renvoie la ressource vidéo créée. */
@@ -128,7 +132,7 @@ const createYoutubeClient = ({ clientId, clientSecret, refreshToken, fetchImpl =
       while (start < taille) {
         const len = Math.min(CHUNK, taille - start);
         const buffer = Buffer.alloc(len);
-        fs.readSync(fd, buffer, 0, len, start);
+        if (fs.readSync(fd, buffer, 0, len, start) !== len) throw new Error('Fichier vidéo tronqué pendant l’envoi.');
         const end = start + len - 1;
         // eslint-disable-next-line no-await-in-loop
         const res = await fetchImpl(sessionUrl, {
@@ -144,7 +148,9 @@ const createYoutubeClient = ({ clientId, clientSecret, refreshToken, fetchImpl =
           throw err;
         }
         const range = res.headers.get('range');
-        start = range ? Number(range.split('-')[1]) + 1 : end + 1;
+        const next = range ? Number(range.split('-')[1]) + 1 : 0;
+        if (!Number.isSafeInteger(next) || next <= start || next > taille) throw new Error('Progression YouTube invalide : relance pour vérifier la session.');
+        start = next;
         onProgress(start, taille);
       }
       throw new Error('Envoi terminé sans réponse finale de YouTube : relance le script pour vérifier la session');

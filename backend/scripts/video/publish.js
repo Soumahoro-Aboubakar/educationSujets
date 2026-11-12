@@ -56,4 +56,7 @@ const main = async () => {
   }
 };
 
-main().then((code) => { process.exitCode = code; });
+if (require.main === module) main().then((code) => { process.exitCode = code; });
+
+// Réutilisable sans lancer le CLI ni charger les fichiers d'environnement historiques.
+module.exports = { ...require('./lib/pipeline'), main };
