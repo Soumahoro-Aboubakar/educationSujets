@@ -124,7 +124,8 @@ test('API module : version demandée, versions disponibles, jamais la version ci
 });
 
 test('API raisonnement : la référence suit la version lue', () => {
-  const found = content.getExercise('ANG-GRAM-E07');
+  const found = { exercice: { code: 'TEST-RAISONNEMENT', raisonnement: { actif: true, reference: 'Un passé imaginaire' } }, module: { versionCible: { langue: 'en', exercices: { 'TEST-RAISONNEMENT': { raisonnement: { actif: true, reference: 'An unreal past' } } } } } };
+  assert.deepEqual(core.publicExercise(found.exercice).raisonnement, { actif: true });
   assert.match(content.exerciseIn(found, 'fr').raisonnement.reference, /passé imaginaire/);
   assert.match(content.exerciseIn(found, 'en').raisonnement.reference, /unreal past/);
 });
@@ -135,7 +136,9 @@ const run = (handler, req) => new Promise((resolve, reject) => {
   handler({ params: {}, query: {}, body: {}, ...req }, res, reject);
 });
 
-test('GET /modules/:code : chaque leçon porte son champ video (null sans vidéo), dans la version demandée', async () => {
+test('GET /modules/:code : chaque leçon porte son champ video (null sans vidéo), dans la version demandée', async (t) => {
+  t.mock.method(require('../services/prep/identityService'), 'fromRequest', async () => ({ _id: 'fixture' }));
+  t.mock.method(require('../services/prep/progressService'), 'rights', async () => ({ accesPreparation: true }));
   const { body } = await run(prep.getModule, { params: { code: 'ANG-GRAM' }, query: { version: 'en' } });
   assert.equal(body.data.version, 'en');
   assert.equal(body.data.video, undefined, 'plus de vidéo au niveau du module');

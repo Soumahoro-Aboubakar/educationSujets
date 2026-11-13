@@ -1,4 +1,7 @@
 const Subscription = require('../../models/Subscription');
+const User = require('../../models/User');
+const AppError = require('../../utils/errors');
+const log = require('../security/securityLogger');
 const Payment = require('../../models/Payment');
 const billingConfig = require('../../config/billing');
 const { quoteNextPayment, resolveSubscriptionStatus, computeCycleEnd, addMonthsUTC } = require('./pricing');
@@ -14,6 +17,8 @@ const describeSubscription = async (userId, now = new Date()) => {
 
   return {
     status,
+    accessState: subscription?.accessState || 'enabled',
+    version: subscription?.accessVersion || 0,
     firstActivatedAt: subscription?.firstActivatedAt || null,
     cycleStart: subscription?.cycleStart || null,
     currentPeriodEnd: subscription?.currentPeriodEnd || null,
@@ -23,6 +28,8 @@ const describeSubscription = async (userId, now = new Date()) => {
 };
 
 const isSubscriptionActive = async (userId, now = new Date()) => {
+  const user = await User.findById(userId).select('accountStatus').lean();
+  if (!user || (user.accountStatus && user.accountStatus !== 'ACTIVE')) return false;
   const subscription = await getSubscription(userId);
   return resolveSubscriptionStatus({ subscription, now }) === 'ACTIVE';
 };
@@ -55,6 +62,7 @@ const applyPaymentToSubscription = async (payment, now = new Date(), attempt = 0
   const update = {
     $set: { currentPeriodEnd: addMonthsUTC(periodStart, plan.months) },
     $push: { appliedPayments: payment._id },
+    $inc: { accessVersion: 1 },
   };
 
   if (payment.kind === 'initial') {
@@ -81,7 +89,35 @@ const applyPaymentToSubscription = async (payment, now = new Date(), attempt = 0
   return updated;
 };
 
+/** Même instant et même source pour les capacités PREP et téléchargement. */
+const accessSnapshot = async (user, now = new Date()) => {
+  const subscription = user ? await describeSubscription(user._id, now) : null;
+  const accountActive = !user || !user.accountStatus || user.accountStatus === 'ACTIVE';
+  const accessState = !accountActive ? 'suspended' : subscription?.accessState || 'enabled';
+  const blocked = accessState !== 'enabled';
+  const admin = Boolean(user && accountActive && !blocked && billingConfig.downloads.exemptRoles.includes(user.role));
+  const premium = !blocked && (admin || subscription?.status === 'ACTIVE');
+  const validUntil = premium ? new Date(Math.min(now.getTime() + 86400000,
+    admin ? Infinity : new Date(subscription.currentPeriodEnd).getTime())) : now;
+  return { serverTime: now, checkedAt: now, validUntil, accessState, version: subscription?.version || 0,
+    capabilities: { premium, prep: premium, download: premium }, admin, subscription };
+};
+const setAccessState = async (userId, { accessState, reason }, actor) => {
+  if (!['enabled', 'suspended', 'revoked'].includes(accessState) || typeof reason !== 'string' || !reason.trim() || reason.length > 500) {
+    throw new AppError('État et motif (1 à 500 caractères) obligatoires', 400);
+  }
+  if (!await User.exists({ _id: userId })) throw new AppError('Utilisateur introuvable', 404);
+  await Subscription.findOneAndUpdate({ user: userId }, {
+    $set: { accessState, accessReason: reason.trim(), accessChangedAt: new Date(), accessChangedBy: actor._id },
+    $inc: { accessVersion: 1 },
+  }, { upsert: true, new: true, runValidators: true });
+  log.info('subscription.access_changed', { userId, actorId: actor._id, status: accessState });
+  return describeSubscription(userId);
+};
+
 module.exports = {
+  accessSnapshot,
+  setAccessState,
   getSubscription,
   describeSubscription,
   isSubscriptionActive,

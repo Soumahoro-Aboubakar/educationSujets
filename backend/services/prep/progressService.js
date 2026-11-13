@@ -1,6 +1,6 @@
 const PrepProgression = require('../../models/PrepProgression');
 const PrepTentative = require('../../models/PrepTentative');
-const { isSubscriptionActive } = require('../billing/subscriptionService');
+const { accessSnapshot } = require('../billing/subscriptionService');
 const content = require('./contentService');
 const core = require('./shared/prepCore');
 const leaderboard = require('./rankingService');
@@ -25,17 +25,19 @@ const trustedDay = (jour) => {
 const PREP_ACTIONS = new Set(['tentative', 'lecon', 'session', 'blanc']);
 
 const rights = async (identite, user) => {
-  const userId = user?._id || identite?.user || null;
-  const abonne = Boolean(userId) && await isSubscriptionActive(userId);
-  const admin = user && ['admin', 'sub-admin'].includes(user.role);
+  const snapshot = await accessSnapshot(user);
+  const owned = !identite?.user || (user && String(identite.user) === String(user._id));
+  const blocked = !owned || snapshot.accessState !== 'enabled';
+  const abonne = !blocked && snapshot.capabilities.premium;
   const essai = core.trialState(identite?.essai?.jours || [], identite?.essai?.iaUtilisees || 0, today());
+  const accesPreparation = !blocked && Boolean(abonne || (identite && essai.actif));
+  const endOfDay = new Date(`${core.addDays(today(), 1)}T00:00:00Z`);
   return {
-    abonne: abonne || Boolean(admin),
-    admin: Boolean(admin),
-    compte: Boolean(userId),
-    essai,
-    accesPreparation: abonne || Boolean(admin) || essai.actif,
-    iaDisponibles: abonne || admin ? null : essai.iaRestantes,
+    ...snapshot,
+    validUntil: abonne ? snapshot.validUntil : accesPreparation ? endOfDay : snapshot.checkedAt,
+    capabilities: { ...snapshot.capabilities, prep: accesPreparation },
+    abonne: Boolean(abonne), admin: !blocked && snapshot.admin, compte: Boolean(user), essai,
+    accesPreparation, iaDisponibles: blocked ? 0 : abonne ? null : essai.iaRestantes,
   };
 };
 
@@ -103,6 +105,7 @@ const ingest = async (identite, user, actions) => {
   for (const action of actions.slice(0, 200)) {
     const jour = trustedDay(action.jour);
     try {
+      if (!droits.accesPreparation) throw Object.assign(new Error('Accès à la préparation indisponible'), { code: 'ESSAI_EPUISE' });
       if (!content.getProgramme(action.programme) && action.type !== 'jour') throw Object.assign(new Error('Programme inconnu'), { code: 'PROGRAMME' });
 
       if (PREP_ACTIONS.has(action.type) && !droits.abonne) {

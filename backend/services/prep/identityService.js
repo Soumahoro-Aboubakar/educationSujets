@@ -1,5 +1,7 @@
 const crypto = require('crypto');
 const PrepIdentite = require('../../models/PrepIdentite');
+const AppError = require('../../utils/errors');
+const log = require('../security/securityLogger');
 const core = require('./shared/prepCore');
 
 /**
@@ -32,7 +34,16 @@ const clean = (value, max = 120) => (typeof value === 'string' && value.trim() ?
  * Déclare ou restaure l'identité d'un appareil.
  * @returns {{ identite, retour: boolean }}
  */
-const declare = async ({ appareilId, androidId, vendorId, empreinte }) => {
+const declare = async ({ appareilId, androidId, vendorId, empreinte }, user, token) => {
+  if (token) {
+    const existing = await fromRequest({ headers: { [HEADER]: token }, user });
+    if (!existing) throw new AppError('Identité de préparation invalide', 401);
+    return { identite: user ? await attach(existing, user) : existing, retour: true };
+  }
+  if (user) {
+    const canonical = await canonicalFor(user);
+    if (canonical) return { identite: canonical, retour: true };
+  }
   const ids = { appareilId: clean(appareilId, 64), androidId: clean(androidId, 64), vendorId: clean(vendorId, 64) };
   if (!ids.appareilId) {
     const error = new Error('Identifiant d’appareil manquant');
@@ -40,7 +51,7 @@ const declare = async ({ appareilId, androidId, vendorId, empreinte }) => {
     throw error;
   }
   const or = Object.entries(ids).filter(([, v]) => v).map(([k, v]) => ({ [`identifiants.${k}`]: v }));
-  const candidats = await PrepIdentite.find({ $or: or, fusionneeDans: null }).sort({ createdAt: 1 }).limit(5);
+  const candidats = await PrepIdentite.find({ $or: or, fusionneeDans: null, user: null, mergeTarget: null }).sort({ createdAt: 1 }).limit(5);
 
   if (candidats.length) {
     // Plusieurs identités possibles (identifiants divergents) : on retient le compteur le plus consommé (§ 25.4).
@@ -52,24 +63,68 @@ const declare = async ({ appareilId, androidId, vendorId, empreinte }) => {
     if (empreinte && !identite.empreinte) { identite.empreinte = clean(empreinte, 300); changed = true; }
     if (changed) await identite.save();
     const retour = identite.identifiants.appareilId !== ids.appareilId || identite.essai.jours.length > 0;
+    // Un identifiant d'appareil déclaré n'est pas une preuve pour rattacher ses données.
+    if (user) throw new AppError('Jeton invité requis pour rattacher cet appareil', 409);
     return { identite, retour };
   }
 
-  const identite = new PrepIdentite({ identifiants: ids, empreinte: clean(empreinte, 300) || '', pseudonyme: 'tmp' });
+  const previousTrials = await PrepIdentite.find({ $or: or, user: { $ne: null } }).select('essai').lean();
+  const essai = { jours: [...new Set(previousTrials.flatMap((item) => item.essai?.jours || []))].sort(),
+    iaUtilisees: Math.max(0, ...previousTrials.map((item) => item.essai?.iaUtilisees || 0)) };
+  const identite = new PrepIdentite({ essai, identifiants: ids, empreinte: clean(empreinte, 300) || '', pseudonyme: 'tmp' });
   // Même graine que l'application : le pseudonyme affiché hors ligne est conservé.
   identite.pseudonyme = core.pseudonymFromSeed(ids.appareilId);
   identite.avatarTeinte = Math.floor(core.seededRandom(`avatar:${ids.appareilId}`)() * 6);
   await identite.save();
-  return { identite, retour: false };
+  return { identite: user ? await attach(identite, user) : identite, retour: false };
 };
 
+const assertOwner = (identite, user) => {
+  if (identite.user && (!user || String(identite.user) !== String(user._id))) {
+    throw new AppError('Connecte-toi au compte propriétaire de cette préparation', 403, undefined, 'PREP_OWNER');
+  }
+};
 const fromRequest = async (req) => {
-  const id = verifyToken(req.headers[HEADER]);
+  const id = verifyToken(req.headers?.[HEADER]);
   if (!id) return null;
-  const identite = await PrepIdentite.findById(id);
+  let identite = await PrepIdentite.findById(id);
   if (!identite) return null;
-  if (identite.fusionneeDans) return PrepIdentite.findById(identite.fusionneeDans);
+  assertOwner(identite, req.user);
+  if (identite.mergeTarget && !identite.fusionneeDans) {
+    throw new AppError('Rattachement en cours, réessaie dans un instant', 409, undefined, 'PREP_MERGING');
+  }
+  if (identite.fusionneeDans) {
+    identite = await PrepIdentite.findById(identite.fusionneeDans);
+    if (!identite) return null;
+    assertOwner(identite, req.user);
+  }
   return identite;
 };
+const canonicalFor = async (user) => {
+  const found = await PrepIdentite.findOne({ user: user._id, canonical: true, fusionneeDans: null });
+  if (found) return found;
+  const legacy = await PrepIdentite.findOne({ user: user._id, fusionneeDans: null, mergeTarget: null }).sort({ createdAt: 1, _id: 1 });
+  if (!legacy) return null;
+  try {
+    return await PrepIdentite.findOneAndUpdate({ _id: legacy._id, fusionneeDans: null }, { $set: { canonical: true } }, { new: true });
+  } catch (error) {
+    if (error.code !== 11000) throw error;
+    return PrepIdentite.findOne({ user: user._id, canonical: true });
+  }
+};
 
-module.exports = { HEADER, issueToken, verifyToken, declare, fromRequest };
+// La propriété est réservée atomiquement AVANT toute fusion : A ne peut jamais devenir B.
+const attach = async (source, user) => {
+  assertOwner(source, user);
+  const claimed = await PrepIdentite.findOneAndUpdate({ _id: source._id, $or: [{ user: null }, { user: user._id }] },
+    { $set: { user: user._id } }, { new: true });
+  if (!claimed) throw new AppError('Cette préparation appartient à un autre compte', 403);
+  const target = await canonicalFor(user);
+  if (String(target._id) === String(claimed._id)) return target;
+  await PrepIdentite.updateOne({ _id: claimed._id, user: user._id }, { $set: { mergeTarget: target._id } });
+  await require('./identityMerge').merge(claimed, target);
+  await PrepIdentite.updateOne({ _id: claimed._id }, { $set: { fusionneeDans: target._id, canonical: false } });
+  log.info('prep.identity_attached', { userId: user._id });
+  return PrepIdentite.findById(target._id);
+};
+module.exports = { HEADER, issueToken, verifyToken, declare, fromRequest, attach, canonicalFor, assertOwner };

@@ -3,6 +3,7 @@ const {
   register,
   login,
   logout,
+  revokeSessions,
   getMe,
   refreshToken,
   createHandoff,
@@ -26,6 +27,7 @@ router.post('/register', limits.register, registerValidator, validate, register)
 // Seuls les échecs (401) sont comptés : par IP + email, par IP, et par email (attaque distribuée).
 router.post('/login', limits.loginIp, limits.loginEmail, limits.loginIpEmail, loginValidator, validate, login);
 router.post('/logout', logout);
+router.post('/sessions/revoke', protect, revokeSessions);
 router.get('/me', protect, getMe);
 router.post('/handoff', protect, restrictSensitive, limits.handoffCreate, createHandoff);
 router.post('/handoff/exchange', limits.handoffExchange, handoffExchangeValidator, validate, exchangeHandoff);

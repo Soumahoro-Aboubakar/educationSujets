@@ -50,13 +50,13 @@ test('production requires live keys; webhook secret and https only raise warning
     GENIUSPAY_API_KEY: KEYS.production.apiKey,
     GENIUSPAY_API_SECRET: KEYS.production.apiSecret,
     GENIUSPAY_WEBHOOK_SECRET: WEBHOOK_SECRET,
-    FRONTEND_URL: process.env.FRONTEND_URL,
+    FRONTEND_URL: 'https://test.invalid',
   };
   assert.equal(new GeniusPayProvider(configFor(live)).environment, 'live');
   assert.deepEqual(configWarnings(configFor(live)), []);
 
   // Production locale sans webhook ni https : utilisable, avec avertissements explicites.
-  const local = configFor({ ...live, GENIUSPAY_WEBHOOK_SECRET: '', FRONTEND_URL: process.env.FRONTEND_URL?.replace(/^https:/, 'http:') });
+  const local = configFor({ ...live, GENIUSPAY_WEBHOOK_SECRET: '', FRONTEND_URL: 'http://test.invalid' });
   assert.equal(new GeniusPayProvider(local).environment, 'live');
   const warnings = configWarnings(local);
   assert.equal(warnings.length, 2);
@@ -196,7 +196,7 @@ test('switching to production only takes environment variables', async () => {
       GENIUSPAY_API_SECRET: KEYS.production.apiSecret,
       GENIUSPAY_WEBHOOK_SECRET: WEBHOOK_SECRET,
       GENIUSPAY_BASE_URL: liveServer.baseUrl,
-      FRONTEND_URL: process.env.FRONTEND_URL,
+      FRONTEND_URL: 'https://test.invalid',
     }));
     const started = await live.initiate({ payment, phone: '0701020304', method });
     assert.equal(started.environment, 'live');

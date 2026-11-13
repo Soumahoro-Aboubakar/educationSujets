@@ -1,19 +1,8 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
 const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { extractToken } = require('../utils/request');
 
-const resolveUser = async (token) => {
-  if (!token) {
-    return null;
-  }
-
-  const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
-  // Un jeton de renouvellement ne donne jamais accès aux ressources.
-  if (decoded.typ === 'refresh') return null;
-  return User.findById(decoded.id);
-};
+const resolveUser = require('../services/auth/sessionService').resolveAccess;
 
 const protect = asyncHandler(async (req, res, next) => {
   const token = extractToken(req);
@@ -46,7 +35,10 @@ const optionalAuth = async (req, res, next) => {
     }
 
     const user = await resolveUser(token);
-    req.user = user && (!user.accountStatus || user.accountStatus === 'ACTIVE') ? user : null;
+    if (user?.accountStatus && user.accountStatus !== 'ACTIVE') {
+      return next(new AppError('Ce compte est désactivé', 403, undefined, 'ACCOUNT_DISABLED'));
+    }
+    req.user = user;
     return next();
   } catch (error) {
     req.user = null;

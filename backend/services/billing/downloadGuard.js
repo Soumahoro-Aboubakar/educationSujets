@@ -4,7 +4,7 @@ const DownloadLog = require('../../models/DownloadLog');
 const billingConfig = require('../../config/billing');
 const AppError = require('../../utils/errors');
 const { clientIp } = require('../../utils/request');
-const { isSubscriptionActive } = require('./subscriptionService');
+const { accessSnapshot } = require('./subscriptionService');
 const { dayKey } = require('./pricing');
 const quota = require('./quotaService');
 const { resolveAccessForDocument } = require('../access/documentYear');
@@ -42,8 +42,9 @@ const buildActorForUser = async (user, { ipKey = null } = {}) => {
   if (user?.accountStatus && user.accountStatus !== 'ACTIVE') {
     throw new AppError('Ce compte est désactivé. Contactez le support Fatafalta.', 403, undefined, 'ACCOUNT_DISABLED');
   }
-  const exempt = isExempt(user);
-  const subscribed = !exempt && await isSubscriptionActive(user._id);
+  const snapshot = await accessSnapshot(user);
+  const exempt = snapshot.admin;
+  const subscribed = snapshot.capabilities.premium;
   return {
     [ACTOR]: true,
     user,

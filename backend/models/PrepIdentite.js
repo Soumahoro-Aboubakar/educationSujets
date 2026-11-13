@@ -23,6 +23,8 @@ const PrepIdentiteSchema = new mongoose.Schema({
   pseudonymeNumero: { type: String, index: true },
   avatarTeinte: { type: Number, default: 0 },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null, index: true },
+  canonical: { type: Boolean, default: false },
+  mergeTarget: { type: mongoose.Schema.Types.ObjectId, ref: 'PrepIdentite', default: null },
   visibleClassement: { type: Boolean, default: true },
   essai: {
     jours: { type: [String], default: [] }, // AAAA-MM-JJ, jours d'interaction distincts
@@ -37,5 +39,7 @@ const PrepIdentiteSchema = new mongoose.Schema({
 PrepIdentiteSchema.pre('validate', function normalizeSearchFields() {
   if (this.pseudonyme) Object.assign(this, pseudonymFields(this.pseudonyme));
 });
+
+PrepIdentiteSchema.index({ user: 1 }, { unique: true, name: 'canonical_user_unique', partialFilterExpression: { canonical: true, user: { $type: 'objectId' } } });
 
 module.exports = mongoose.model('PrepIdentite', PrepIdentiteSchema);

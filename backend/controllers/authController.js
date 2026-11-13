@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const sessions = require('../services/auth/sessionService');
+const { extractToken, parseCookies } = require('../utils/request');
 const User = require('../models/User');
 const securityConfig = require('../config/security');
 const abuse = require('../services/security/abuseTracker');
@@ -13,9 +14,11 @@ const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
 const { ensurePromoCode } = require('../services/billing/promoCodeService');
 
-const sendTokenResponse = (user, statusCode, res) => {
-  const token = user.getSignedJwtToken();
-  const refreshToken = user.getRefreshToken();
+const sendTokenResponse = async (user, statusCode, res, req, rotated) => {
+  await require('../services/prep/identityService').canonicalFor(user);
+  const { token, refreshToken, session } = rotated || await sessions.create(user, req.body?.platform);
+  res.set('Cache-Control', 'private, no-store');
+  res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', path: '/api/auth', expires: session.expiresAt });
   const cookieExpireDays = Number.parseInt(process.env.JWT_COOKIE_EXPIRE, 10) || 30;
 
   res
@@ -75,7 +78,7 @@ exports.register = asyncHandler(async (req, res) => {
   });
 
   securityLog.info('auth.register', { requestId: req.id, ip: clientIp(req), userId: user._id });
-  sendTokenResponse(user, 201, res);
+  await sendTokenResponse(user, 201, res, req);
 });
 
 exports.login = asyncHandler(async (req, res) => {
@@ -111,48 +114,38 @@ exports.login = asyncHandler(async (req, res) => {
   }
 
   securityLog.info('auth.login_success', { requestId: req.id, ip, userId: user._id });
-  sendTokenResponse(user, 200, res);
+  await sendTokenResponse(user, 200, res, req);
 });
 
-// Sessions sans état (JWT) : rien à révoquer côté serveur. On efface le cookie du web ; le
-// mobile supprime lui-même son jeton. Pas d'authentification exigée : un jeton expiré doit
-// aussi pouvoir se déconnecter proprement.
-exports.logout = (req, res) => {
-  res.clearCookie('token', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-  });
-  sendSuccess(res, { message: 'Déconnecté' });
+// Les appels cookie sensibles exigent une origine connue ; les clients natifs utilisent le corps/header.
+const checkCookieOrigin = (req) => {
+  const origin = req.get('origin');
+  const allowed = [process.env.FRONTEND_URL, ...(process.env.CORS_ORIGINS || '').split(',')].filter(Boolean);
+  if (!origin || !allowed.includes(origin)) throw new AppError('Origine non autorisée', 403);
 };
+exports.logout = asyncHandler(async (req, res) => {
+  if (!req.headers.authorization && req.headers.cookie) checkCookieOrigin(req);
+  await sessions.revokeToken(extractToken(req));
+  await sessions.revokeToken(req.body?.refreshToken || parseCookies(req.headers.cookie).refreshToken, true);
+  res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
+  res.clearCookie('refreshToken', { path: '/api/auth', httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict' });
+  sendSuccess(res, { message: 'Déconnecté' });
+});
+exports.revokeSessions = asyncHandler(async (req, res) => {
+  if (!req.headers.authorization) checkCookieOrigin(req);
+  await sessions.revokeAll(req.user._id);
+  sendSuccess(res, { message: 'Sessions révoquées' });
+});
 
 exports.getMe = asyncHandler(async (req, res) => {
   sendSuccess(res, { data: req.user });
 });
 
 exports.refreshToken = asyncHandler(async (req, res) => {
-  const decoded = jwt.verify(
-    req.body.refreshToken,
-    process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET,
-    { algorithms: ['HS256'] }
-  );
-
-  // Un jeton d'accès ne peut pas servir à se renouveler une session.
-  if (decoded.typ === 'access') {
-    throw new AppError('Session invalide ou expiree', 401);
-  }
-
-  const user = await User.findById(decoded.id);
-
-  if (!user) {
-    throw new AppError('Utilisateur non trouve', 401);
-  }
-
-  if (user.accountStatus && user.accountStatus !== 'ACTIVE') {
-    throw new AppError('Ce compte est desactive. Contactez le support.', 403, undefined, 'ACCOUNT_DISABLED');
-  }
-
-  sendTokenResponse(user, 200, res);
+  const cookieToken = parseCookies(req.headers.cookie).refreshToken;
+  if (!req.body.refreshToken) checkCookieOrigin(req);
+  const rotated = await sessions.rotate(req.body.refreshToken || cookieToken);
+  await sendTokenResponse(rotated.user, 200, res, req, rotated);
 });
 
 const HANDOFF_TTL_MS = 2 * 60 * 1000;
@@ -186,5 +179,5 @@ exports.exchangeHandoff = asyncHandler(async (req, res) => {
     throw new AppError('Ce compte est desactive. Contactez le support.', 403, undefined, 'ACCOUNT_DISABLED');
   }
 
-  sendTokenResponse(user, 200, res);
+  await sendTokenResponse(user, 200, res, req);
 });

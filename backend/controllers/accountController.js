@@ -1,10 +1,10 @@
 const asyncHandler = require('../utils/asyncHandler');
 const { sendSuccess } = require('../utils/api');
 const billingConfig = require('../config/billing');
-const { describeSubscription, quoteForUser } = require('../services/billing/subscriptionService');
+const { describeSubscription, quoteForUser, accessSnapshot } = require('../services/billing/subscriptionService');
 const { describeMyPromoCode, ensurePromoCode, resolvePromoStatus } = require('../services/billing/promoCodeService');
 const { describeWallet, requestWithdrawal, cancelMyWithdrawal } = require('../services/billing/walletService');
-const { getQuotaStatus, isExempt } = require('../services/billing/downloadGuard');
+const { getQuotaStatus } = require('../services/billing/downloadGuard');
 const { listMyPayments, syncOpenPayment } = require('../services/payments/paymentService');
 const DownloadLog = require('../models/DownloadLog');
 const User = require('../models/User');
@@ -24,14 +24,17 @@ exports.getEntitlements = asyncHandler(async (req, res) => {
     ensurePromoCode(user._id),
     quoteForUser(user._id),
   ]);
-  const exempt = isExempt(user);
+  const snapshot = await accessSnapshot(user);
+  const exempt = snapshot.admin;
+  res.set('Cache-Control', 'private, no-store');
 
   sendSuccess(res, {
     data: {
+      ...snapshot,
       account: { status: user.accountStatus || 'ACTIVE', role: user.role, mustChangePassword: Boolean(user.mustChangePassword) },
       subscription,
       // Accès complet (abonnement actif). Les sujets gratuits et le quota gratuit restent ouverts sans lui.
-      canDownload: exempt || subscription.status === 'ACTIVE',
+      canDownload: snapshot.capabilities.download,
       downloads: (({ documentIds, ...status }) => ({ ...status, resetsAt: status.nextRenewalAt, unlimited: exempt }))(usage),
       promoCode: { code: promoCode.code, status: await resolvePromoStatus(promoCode) },
       nextPayment: { kind: nextPayment.kind, amount: nextPayment.amount, currency: nextPayment.currency },
@@ -139,5 +142,6 @@ exports.changePassword = asyncHandler(async (req, res) => {
   user.password = newPassword;
   user.mustChangePassword = false;
   await user.save();
+  await require('../services/auth/sessionService').revokeAll(user._id);
   sendSuccess(res, { message: 'Mot de passe modifié' });
 });

@@ -46,7 +46,7 @@ class MockProvider extends PaymentProvider {
       return { status: 'PENDING' };
     }
 
-    return { status: scenario, reason: FAILURE_REASONS[scenario] };
+    return { status: scenario, reason: FAILURE_REASONS[scenario], providerRef: payment.providerRef, amount: payment.amount, currency: payment.currency };
   }
 
   async parseWebhook(req) {
@@ -54,7 +54,7 @@ class MockProvider extends PaymentProvider {
     if (process.env.NODE_ENV === 'production') {
       throw new Error('Webhook mock desactive en production');
     }
-    return { providerRef: req.body.providerRef, status: req.body.status, reason: req.body.reason };
+    return { providerRef: req.body.providerRef, status: req.body.status, reason: req.body.reason, amount: req.body.amount, currency: req.body.currency };
   }
 }
 

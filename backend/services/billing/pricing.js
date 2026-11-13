@@ -91,6 +91,8 @@ const quoteNextPayment = ({ subscription, now = new Date(), promoApplicable = fa
  * ACTIVE | EXPIRED | PENDING | NONE
  */
 const resolveSubscriptionStatus = ({ subscription, now = new Date(), hasPendingPayment = false }) => {
+  if (subscription?.accessState === 'suspended') return 'SUSPENDED';
+  if (subscription?.accessState === 'revoked') return 'REVOKED';
   if (subscription?.currentPeriodEnd && new Date(subscription.currentPeriodEnd) > now) {
     return 'ACTIVE';
   }

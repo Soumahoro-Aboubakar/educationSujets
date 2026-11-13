@@ -13,12 +13,19 @@ const PaymentWebhookEventSchema = new mongoose.Schema(
     reference: { type: String, index: true },
     environment: { type: String },
     payment: { type: mongoose.Schema.Types.ObjectId, ref: 'Payment', default: null },
+    state: { type: String, enum: ['received', 'processing', 'completed'], default: 'received' },
+    leaseUntil: { type: Date, default: null },
+    leaseToken: String,
+    completedAt: { type: Date, default: null },
+    // Projection vérifiée uniquement : aucun corps brut, signature, secret ni donnée client.
+    verifiedEvent: { type: mongoose.Schema.Types.Mixed },
     outcome: { type: String },
   },
   { timestamps: true }
 );
 
 PaymentWebhookEventSchema.index({ provider: 1, eventId: 1 }, { unique: true });
+PaymentWebhookEventSchema.index({ state: 1, leaseUntil: 1 });
 // Les traces n'ont plus d'utilité au-delà de 90 jours.
 PaymentWebhookEventSchema.index({ createdAt: 1 }, { expireAfterSeconds: 90 * 24 * 3600 });
 

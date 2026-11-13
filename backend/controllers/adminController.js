@@ -80,3 +80,8 @@ exports.liftSecurityBlock = asyncHandler(async (req, res) => {
   securityLog.info('abuse.unblocked', { userId: req.user._id, reason: `${req.params.type}:${removed ? 'lifted' : 'none'}` });
   sendSuccess(res, { message: removed ? 'Blocage levé' : 'Aucun blocage actif', data: { removed } });
 });
+
+exports.updateAccess = asyncHandler(async (req, res) => {
+  const data = await require('../services/billing/subscriptionService').setAccessState(req.params.id, req.body, req.user);
+  sendSuccess(res, { data, message: 'Accès mis à jour' });
+});

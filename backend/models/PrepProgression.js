@@ -10,6 +10,7 @@ const PrepProgressionSchema = new mongoose.Schema({
   identite: { type: mongoose.Schema.Types.ObjectId, ref: 'PrepIdentite', required: true },
   programme: { type: String, required: true },
   etat: { type: mongoose.Schema.Types.Mixed, default: {} },
+  mergedIdentities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PrepIdentite' }],
   score: { type: Number, default: 0 },
   scoreSemainePrecedente: { type: Number, default: null },
   rangSemainePrecedente: { type: Number, default: null },

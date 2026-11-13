@@ -7,7 +7,7 @@ const crypto = require('crypto');
  * (empreinte courte) : on peut corréler les tentatives sans stocker l'adresse en clair.
  */
 const ALLOWED_FIELDS = [
-  'requestId', 'ip', 'userId', 'emailHash', 'method', 'path', 'status', 'limiter', 'key', 'hits', 'limit',
+  'actorId', 'sessionId', 'requestId', 'ip', 'userId', 'emailHash', 'method', 'path', 'status', 'limiter', 'key', 'hits', 'limit',
   'retryAfter', 'reason', 'blockMs', 'strikes', 'count', 'userAgent', 'durationMs', 'requests', 'errors5xx',
   'rateLimited', 'authFailures', 'errorCode', 'paymentId',
 ];

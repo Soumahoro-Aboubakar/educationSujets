@@ -74,7 +74,8 @@ test('catalogue : les 6 organismes pilotes', { skip }, async () => {
 });
 
 test('module public : aucune clé de correction exposée', { skip }, async () => {
-  const r = await call('GET', '/modules/MATH-LNEXP');
+  const { token } = await tokenFor('uuid-module');
+  const r = await call('GET', '/modules/MATH-LNEXP', null, { 'X-Prep-Token': token });
   assert.equal(r.status, 200);
   r.body.data.exercices.forEach((ex) => { assert.equal(ex.cle, undefined); assert.equal(ex.explication, undefined); });
 });
@@ -115,9 +116,14 @@ test('sync idempotente et classement « Xᵉ sur N »', { skip }, async () => {
   assert.ok(rank.body.data.total >= rank.body.data.rang);
 });
 
-test('raisonnement sans fournisseur IA : référence affichée, non décompté', { skip }, async () => {
+test('raisonnement sans fournisseur IA : référence affichée, non décompté', { skip }, async (t) => {
+  const exercise = require('../services/prep/contentService').getExercise('MATH-LNEXP-E07').exercice;
+  const previous = exercise.raisonnement;
+  exercise.raisonnement = { actif: true, reference: 'Factoriser puis étudier le signe.', etapesCles: ['Factorisation', 'Signe'] };
+  t.after(() => { exercise.raisonnement = previous; });
   const { token } = await tokenFor('uuid-ia');
   const r = await call('POST', '/exercices/MATH-LNEXP-E07/raisonnement', { programme: 'ENSEA-AS', texte: 'Je pose x² − 4 > 0 puis je factorise.' }, { 'X-Prep-Token': token });
+  assert.equal(r.status, 200);
   assert.equal(r.body.data.disponible, false);
   assert.ok(r.body.data.reference);
   assert.equal(r.body.data.droits.essai.iaRestantes, 3);

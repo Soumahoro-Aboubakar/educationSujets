@@ -17,6 +17,7 @@ router.get('/stats', controller.getStats);
 router.get('/users', controller.listUsers);
 router.post('/users', controller.createUser);
 router.get('/users/:id', idParam, controller.getUser);
+router.patch('/users/:id/access', idParam, controller.updateAccess);
 router.patch('/users/:id', idParam, controller.updateUser);
 router.post('/users/:id/reset-password', idParam, controller.resetPassword);
 router.post('/users/:id/promo-code', idParam, controller.overridePromoCode);

@@ -53,6 +53,7 @@ const UserSchema = new mongoose.Schema({
   verificationExpire: Date,
   resetPasswordToken: String,
   resetPasswordExpire: Date,
+  tokenVersion: { type: Number, default: 0 },
   isPremium: {
     type: Boolean,
     default: false,
@@ -79,14 +80,14 @@ UserSchema.pre('save', async function handlePasswordHash(next) {
 
 UserSchema.methods.getSignedJwtToken = function getSignedJwtToken() {
   // `typ` empêche d'utiliser un jeton d'accès comme jeton de renouvellement, et inversement.
-  return jwt.sign({ id: this._id, typ: 'access' }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: this._id, typ: 'access', ver: this.tokenVersion || 0 }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE || '30d',
     algorithm: 'HS256',
   });
 };
 
 UserSchema.methods.getRefreshToken = function getRefreshToken() {
-  return jwt.sign({ id: this._id, typ: 'refresh' }, process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET, {
+  return jwt.sign({ id: this._id, typ: 'refresh', ver: this.tokenVersion || 0 }, process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_REFRESH_EXPIRE || '30d',
     algorithm: 'HS256',
   });

@@ -1,6 +1,6 @@
 const Payment = require('../../models/Payment');
 const log = require('./paymentLogger');
-const { refreshPayment } = require('./paymentService');
+const { refreshPayment, resumeWebhookEvents } = require('./paymentService');
 
 /*
  * Réconciliation serveur des paiements ouverts : interroge le fournisseur à intervalle régulier.
@@ -14,8 +14,10 @@ const MIN_AGE_MS = 30 * 1000;
 
 const reconcileOpenPayments = async () => {
   const payments = await Payment.find({
-    status: { $in: Payment.OPEN_STATUSES },
-    createdAt: { $lt: new Date(Date.now() - MIN_AGE_MS) },
+    $or: [
+      { status: { $in: Payment.OPEN_STATUSES }, createdAt: { $lt: new Date(Date.now() - MIN_AGE_MS) } },
+      { status: 'SUCCEEDED', fulfilledAt: null },
+    ],
   }).sort({ updatedAt: 1 }).limit(BATCH_SIZE);
 
   let closed = 0;
@@ -30,6 +32,7 @@ const reconcileOpenPayments = async () => {
   }
 
   if (payments.length) log.info('reconcile.run', { status: `${closed}/${payments.length} clos` });
+  await resumeWebhookEvents();
   return { checked: payments.length, closed };
 };
 

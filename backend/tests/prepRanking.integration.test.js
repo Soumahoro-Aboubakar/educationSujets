@@ -9,6 +9,8 @@ const assert = require('node:assert/strict');
 const http = require('node:http');
 const express = require('express');
 const mongoose = require('mongoose');
+const User = require('../models/User');
+const users = [];
 const Identity = require('../models/PrepIdentite');
 const Progress = require('../models/PrepProgression');
 const service = require('../services/prep/rankingService');
@@ -22,14 +24,15 @@ const identities = [];
 const progressions = [];
 let fixtures; let server; let base;
 const ids = (rows) => rows.map((r) => r.identite);
-const call = (path, viewer) => new Promise((resolve, reject) => {
-  const req = http.get(`${base}/programmes/${programme}/${path}`, { headers: viewer ? { 'X-Prep-Token': issueToken(viewer._id) } : {} }, (res) => {
+const call = (path, viewer, accessToken) => new Promise((resolve, reject) => {
+  const req = http.get(`${base}/programmes/${programme}/${path}`, { headers: viewer ? { 'X-Prep-Token': issueToken(viewer._id), ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) } : {} }, (res) => {
     let raw = ''; res.on('data', (chunk) => { raw += chunk; });
     res.on('end', () => resolve({ status: res.statusCode, body: JSON.parse(raw), headers: res.headers }));
   });
   req.on('error', reject);
 });
 const clean = async () => {
+  await User.deleteMany({ _id: { $in: users } });
   await Progress.deleteMany({ _id: { $in: progressions } });
   await Identity.deleteMany({ _id: { $in: identities } });
   service.invalidateRanking();
@@ -174,7 +177,9 @@ test('recherche : injection regex littérale, taille validée et erreurs HTTP 40
 
 test('profil public : visibilité modifiée et pseudonyme synchronisent recherche/cache', { skip }, async () => {
   const viewer = fixtures[2].identity;
-  viewer.user = new mongoose.Types.ObjectId(); await viewer.save();
+  const user = await User.create({ name: 'Classement', email: `ranking-${Date.now()}@test.ci`, password: 'secret123' });
+  users.push(user._id);
+  viewer.user = user._id; await viewer.save();
   await service.ranking(null, programme);
   await new Promise((resolve, reject) => controller.updatePublicProfile({
     headers: { 'x-prep-token': issueToken(viewer._id) }, user: { _id: viewer.user },
@@ -182,7 +187,10 @@ test('profil public : visibilité modifiée et pseudonyme synchronisent recherch
   }, { json: resolve }, reject));
   assert.equal((await call('candidats?q=nouveau')).body.data.candidats.length, 0);
   assert.ok(!(await call('classement')).body.data.candidats.some((r) => r.identite === String(viewer._id)));
-  assert.equal((await call('classement', viewer)).body.data.moi.pseudonyme, 'Nouveau-1172');
+  assert.equal((await call('classement', viewer)).status, 403, 'le jeton PREP seul ne donne pas accès au profil privé lié');
+  const own = await call('classement', viewer, user.getSignedJwtToken());
+  assert.equal(own.status, 200);
+  assert.equal(own.body.data.moi.pseudonyme, 'Nouveau-1172');
 });
 
 test('projection Mongo : aucun etat demandé par classement, recherche ou profil', { skip }, async () => {

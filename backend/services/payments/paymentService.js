@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Payment = require('../../models/Payment');
 const PaymentWebhookEvent = require('../../models/PaymentWebhookEvent');
 const Commission = require('../../models/Commission');
@@ -176,12 +177,10 @@ const fulfil = async (payment) => {
  */
 const verifyProviderSuccess = (payment, result, provider) => {
   const problems = [];
-  if (result.providerRef && result.providerRef !== payment.providerRef) problems.push('reference');
+  if (!result.providerRef || result.providerRef !== payment.providerRef) problems.push('reference');
   if (provider.environment && result.environment !== provider.environment) problems.push('environment');
-  if (provider.environment || result.amount !== undefined) {
-    if (!Number.isFinite(result.amount) || Math.round(result.amount) !== payment.amount) problems.push('amount');
-  }
-  if (result.currency && result.currency !== payment.currency) problems.push('currency');
+  if (!Number.isFinite(result.amount) || result.amount !== payment.amount) problems.push('amount');
+  if (!result.currency || result.currency !== payment.currency) problems.push('currency');
   if (result.metadata?.payment_id && String(result.metadata.payment_id) !== String(payment._id)) problems.push('metadata');
   return problems;
 };
@@ -602,62 +601,70 @@ const handleWebhook = async (providerName, req) => {
     throw new AppError('Webhook refusé', error.statusCode || 401);
   }
 
-  const eventId = event.eventId || `${providerName}:${event.providerRef}:${event.status}`;
+  const eventId = String(event.eventId || `${providerName}:${event.providerRef}:${event.status}`).slice(0, 250);
+  // Seuls les champs nécessaires à une reprise sont conservés, après signature vérifiée.
+  const verifiedEvent = Object.fromEntries(['providerRef', 'status', 'providerStatus', 'amount', 'currency', 'environment', 'event']
+    .filter((key) => event[key] !== undefined).map((key) => [key, event[key]]));
+  if (event.metadata?.payment_id) verifiedEvent.metadata = { payment_id: String(event.metadata.payment_id).slice(0, 24) };
   let record;
   try {
-    record = await PaymentWebhookEvent.create({
-      provider: providerName,
-      eventId,
-      event: event.event,
-      reference: event.providerRef,
-      environment: event.environment,
-    });
+    record = await PaymentWebhookEvent.create({ provider: providerName, eventId, event: event.event,
+      reference: event.providerRef, environment: event.environment, verifiedEvent });
   } catch (error) {
-    if (error.code === 11000) {
-      log.info('webhook.duplicate', { provider: providerName, eventId, reference: event.providerRef });
-      return { duplicate: true };
-    }
-    throw error;
+    if (error.code !== 11000) throw error;
+    record = await PaymentWebhookEvent.findOne({ provider: providerName, eventId });
   }
+  return processWebhookRecord(record);
+};
 
-  log.info('webhook.received', { provider: providerName, eventId, event: event.event, reference: event.providerRef, providerStatus: event.providerStatus });
-
+const processWebhookRecord = async (record) => {
+  const leaseToken = crypto.randomUUID();
+  const claimed = await PaymentWebhookEvent.findOneAndUpdate({ _id: record._id, state: { $ne: 'completed' },
+    $or: [{ leaseUntil: null }, { leaseUntil: { $lte: new Date() } }] },
+  { $set: { state: 'processing', leaseToken, leaseUntil: new Date(Date.now() + 60000) } }, { new: true });
+  if (!claimed) return { duplicate: true };
+  const providerName = claimed.provider;
+  const provider = getProviderByName(providerName);
+  const event = claimed.verifiedEvent || { providerRef: claimed.reference };
+  const owned = { _id: claimed._id, leaseToken };
   try {
     const payment = await findWebhookPayment(providerName, event);
-    if (!payment) {
-      log.warn('webhook.unknown_payment', { provider: providerName, eventId, reference: event.providerRef });
-      await PaymentWebhookEvent.updateOne({ _id: record._id }, { $set: { outcome: 'unknown_payment' } });
-      return { ignored: true };
-    }
-
+    if (!payment) throw new Error('Paiement du webhook pas encore disponible');
     if (!payment.providerRef && event.providerRef) {
       await Payment.updateOne({ _id: payment._id, providerRef: null }, { $set: { providerRef: event.providerRef } });
       payment.providerRef = event.providerRef;
     }
-
-    // Le statut faisant autorité est celui de l'API ; à défaut (API injoignable), celui du webhook signé.
     let result = event;
-    if (event.status && event.status !== 'PENDING' && payment.providerRef) {
+    if (payment.providerRef && event.status !== 'PENDING') {
       const confirmed = await queryProvider(payment);
       if (confirmed.result?.status) result = confirmed.result;
+      else if (!claimed.verifiedEvent) throw new Error('Ancienne trace : confirmation API nécessaire');
     }
-
     let outcome = 'no_change';
     if (result.status && result.status !== 'PENDING' && (OPEN_STATUSES.includes(payment.status) || (result.status === 'SUCCEEDED' && LATE_SUCCESS_FROM.includes(payment.status)))) {
       const updated = await applyProviderResult(payment, result, provider, 'webhook');
       outcome = updated?.status || outcome;
     } else if (payment.status === 'SUCCEEDED' && !payment.fulfilledAt) {
       await fulfil(payment);
+      outcome = 'SUCCEEDED';
     }
-
-    await PaymentWebhookEvent.updateOne({ _id: record._id }, { $set: { payment: payment._id, outcome } });
+    await PaymentWebhookEvent.updateOne(owned, { $set: { payment: payment._id, outcome, state: 'completed', completedAt: new Date(), leaseUntil: null }, $unset: { leaseToken: 1 } });
     return { paymentId: payment._id, outcome };
   } catch (error) {
-    // Échec de traitement : on libère l'événement pour que la relivraison soit retraitée.
-    await PaymentWebhookEvent.deleteOne({ _id: record._id });
-    log.error('webhook.processing_failed', { provider: providerName, eventId, reference: event.providerRef, reason: error.message });
+    // Backoff ; la trace survit au crash et le réconciliateur reprend sans relivraison.
+    await PaymentWebhookEvent.updateOne(owned, { $set: { state: 'received', leaseUntil: new Date(Date.now() + 30000) }, $unset: { leaseToken: 1 } });
+    log.error('webhook.processing_failed', { provider: providerName, eventId: claimed.eventId, reason: error.message });
     throw error;
   }
+};
+const resumeWebhookEvents = async () => {
+  const records = await PaymentWebhookEvent.find({ state: { $ne: 'completed' },
+    $or: [{ leaseUntil: null }, { leaseUntil: { $lte: new Date() } }] }).sort({ updatedAt: 1 }).limit(50);
+  for (const record of records) {
+    try { await processWebhookRecord(record); }
+    catch { /* Déjà journalisé, une prochaine passe réessaiera. */ }
+  }
+  return records.length;
 };
 
 const getPublicPlans = async () => {
@@ -689,6 +696,7 @@ const getPublicPlans = async () => {
 };
 
 module.exports = {
+  resumeWebhookEvents,
   normalizePhone,
   quote,
   initiatePayment,

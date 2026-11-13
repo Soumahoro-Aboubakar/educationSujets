@@ -311,7 +311,9 @@ const updateUser = async (userId, payload, admin) => {
     user.statusReason = payload.statusReason ? String(payload.statusReason).trim() : undefined;
   }
 
+  const invalidateSessions = user.isModified('accountStatus') || user.isModified('role');
   await user.save();
+  if (invalidateSessions) await require('../auth/sessionService').revokeAll(user._id);
   console.info(`[ADMIN] user_updated by=${admin._id} user=${user._id} fields=${Object.keys(payload).join(',')}`);
   return getUserDetails(user._id);
 };
@@ -323,6 +325,7 @@ const resetPassword = async (userId, admin) => {
   user.password = tempPassword;
   user.mustChangePassword = true;
   await user.save();
+  await require('../auth/sessionService').revokeAll(user._id);
   console.info(`[ADMIN] password_reset by=${admin._id} user=${user._id}`);
   return { tempPassword };
 };

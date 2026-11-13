@@ -650,3 +650,89 @@ test('disabled operators keep their full configuration and can be re-enabled fro
   assert.ok((await paymentService.getPublicPlans()).methods.some((m) => m.code === 'mtn_money'));
   await methodService.adminUpdate('mtn_money', { enabled: false }, admin);
 });
+
+test('lot 1 : montant/devise/référence absents ou montant fractionné ne donnent aucun droit', { skip }, async () => {
+  for (const patch of [{ amount: undefined }, { currency: undefined }, { reference: undefined }, { amount: 2000.4 }]) {
+    const user = await newUser();
+    const { payment } = await start(user);
+    const reference = await referenceOf(payment.id);
+    fake.setStatus(reference, 'completed', patch);
+    const result = await paymentService.getMyPayment(user, payment.id);
+    assert.equal(result.status, 'FAILED');
+    assert.equal(await isActive(user), false);
+    assert.equal(await appliedCount(user), 0);
+  }
+});
+
+test('lot 1 : crash après SUCCEEDED avant activation, puis après activation avant fulfilledAt', { skip }, async (t) => {
+  const { reconcileOpenPayments } = require('../services/payments/reconciler');
+  for (const stage of ['before-subscription', 'before-fulfilled']) {
+    const user = await newUser(); const { payment } = await start(user);
+    fake.setStatus(await referenceOf(payment.id), 'completed');
+    const model = stage === 'before-subscription' ? Subscription : Payment;
+    const original = model.updateOne.bind(model);
+    const mocked = t.mock.method(model, 'updateOne', (filter, update, options) => {
+      if (stage === 'before-subscription' || update.$set?.fulfilledAt) throw new Error('crash local simulé');
+      return original(filter, update, options);
+    });
+    await assert.rejects(paymentService.getMyPayment(user, payment.id), /crash local/);
+    mocked.mock.restore();
+    const stopped = await Payment.findById(payment.id);
+    assert.equal(stopped.status, 'SUCCEEDED'); assert.equal(stopped.fulfilledAt, null);
+    assert.equal(await appliedCount(user), stage === 'before-subscription' ? 0 : 1);
+    await reconcileOpenPayments(); await reconcileOpenPayments();
+    assert.equal(await appliedCount(user), 1);
+    assert.ok((await Payment.findById(payment.id)).fulfilledAt);
+  }
+});
+
+test('lot 1 : trace webhook interrompue et ancien reçu sans état repris sans relivraison', { skip }, async () => {
+  const { reconcileOpenPayments } = require('../services/payments/reconciler');
+  const provider = require('../services/payments').getProviderByName('geniuspay');
+  for (const legacy of [false, true]) {
+    const user = await newUser(); const { payment } = await start(user);
+    const reference = await referenceOf(payment.id); fake.setStatus(reference, 'completed');
+    const event = await provider.parseWebhook(toExpressRequest(fake.webhook(reference, 'payment.success')));
+    const record = { provider: 'geniuspay', eventId: event.eventId, reference, createdAt: new Date(), updatedAt: new Date() };
+    if (!legacy) Object.assign(record, { state: 'processing', leaseUntil: new Date(Date.now() - 1000), leaseToken: 'interrupted', verifiedEvent: event });
+    const inserted = await PaymentWebhookEvent.collection.insertOne(record);
+    await Promise.all([reconcileOpenPayments(), reconcileOpenPayments()]);
+    const done = await PaymentWebhookEvent.findById(inserted.insertedId);
+    assert.equal(done.state, 'completed');
+    assert.equal(await appliedCount(user), 1);
+    assert.ok((await Payment.findById(payment.id)).fulfilledAt);
+  }
+});
+
+test('lot 1 : un bail webhook actif est respecté, puis repris à son expiration', { skip }, async () => {
+  const provider = require('../services/payments').getProviderByName('geniuspay');
+  const user = await newUser(); const { payment } = await start(user);
+  const reference = await referenceOf(payment.id); fake.setStatus(reference, 'completed');
+  const webhook = fake.webhook(reference, 'payment.success', { id: 'lot1-lease' });
+  const event = await provider.parseWebhook(toExpressRequest(webhook));
+  await PaymentWebhookEvent.create({ provider: 'geniuspay', eventId: event.eventId, reference, state: 'processing',
+    leaseUntil: new Date(Date.now() + 60000), verifiedEvent: event });
+  assert.equal((await postWebhook(webhook)).status, 200);
+  assert.equal(await appliedCount(user), 0);
+  await PaymentWebhookEvent.updateOne({ eventId: event.eventId }, { $set: { leaseUntil: new Date(Date.now() - 1) } });
+  await paymentService.resumeWebhookEvents();
+  assert.equal(await appliedCount(user), 1);
+});
+
+test('lot 1 : un nouveau paiement ne lève pas une suspension et une annulation préserve la période acquise', { skip }, async () => {
+  const user = await newUser(); const first = await start(user);
+  fake.setStatus(await referenceOf(first.payment.id), 'completed');
+  await paymentService.getMyPayment(user, first.payment.id);
+  const service = require('../services/billing/subscriptionService');
+  await service.setAccessState(user._id, { accessState: 'suspended', reason: 'Vérification locale' }, admin);
+  const before = await Subscription.findOne({ user: user._id });
+  const next = await start(user);
+  await paymentService.cancelMyPayment(user, next.payment.id);
+  const after = await Subscription.findOne({ user: user._id });
+  assert.equal(after.currentPeriodEnd.getTime(), before.currentPeriodEnd.getTime());
+  assert.equal(after.accessState, 'suspended');
+  fake.setStatus(await referenceOf(next.payment.id), 'completed');
+  await paymentService.getMyPayment(user, next.payment.id);
+  assert.equal((await describeSubscription(user._id)).status, 'SUSPENDED');
+  assert.equal(await appliedCount(user), 2);
+});

@@ -31,9 +31,7 @@ const publicIdentity = (identite) => ({
 
 // POST /api/prep/appareils
 exports.declareDevice = asyncHandler(async (req, res) => {
-  const { identite, retour } = await identity.declare(req.body || {});
-  // Un utilisateur connecté qui déclare son appareil y rattache l'identité (§ 25.5).
-  if (req.user && !identite.user) { identite.user = req.user._id; await identite.save(); }
+  const { identite, retour } = await identity.declare(req.body || {}, req.user, req.headers['x-prep-token']);
   const droits = await progress.rights(identite, req.user);
   const progressions = await PrepProgression.find({ identite: identite._id }).select('programme etat score').lean();
   res.json({
@@ -52,6 +50,7 @@ exports.declareDevice = asyncHandler(async (req, res) => {
 // GET /api/prep/droits
 exports.getRights = asyncHandler(async (req, res) => {
   const identite = await requireIdentity(req);
+  res.set('Cache-Control', 'private, no-store');
   res.json({ success: true, data: { droits: await progress.rights(identite, req.user), serveurJour: progress.today() } });
 });
 
@@ -93,6 +92,10 @@ exports.getProgramme = asyncHandler(async (req, res) => {
 exports.getModule = asyncHandler(async (req, res) => {
   const mod = content.getModule(req.params.code);
   if (!mod) throw new AppError('Module introuvable', 404);
+  const identite = await requireIdentity(req);
+  const droits = await progress.rights(identite, req.user);
+  if (!droits.accesPreparation) throw new AppError('Accès à la préparation indisponible', 403);
+  res.set('Cache-Control', 'private, no-store');
   const data = content.publicModule(mod, versionOf(req.query.version));
   const index = await videos.index();
   res.json({ success: true, data: { ...data, lecons: data.lecons.map((l) => ({ ...l, video: videos.find(index, 'lecon', l.code, data.version) })) } });
@@ -125,7 +128,7 @@ exports.reasoning = asyncHandler(async (req, res) => {
   if (texte.length < 10) throw new AppError('Explique ton raisonnement en quelques phrases.', 400);
 
   const droits = await progress.rights(identite, req.user);
-  if (!droits.abonne && droits.essai.iaRestantes <= 0) {
+  if (!droits.accesPreparation || (!droits.abonne && droits.essai.iaRestantes <= 0)) {
     throw new AppError('Vérification réservée aux abonnés', 402, undefined, 'IA_ABONNES');
   }
   // Cours de langue : la référence est celle de la version lue par l'élève (fr ou langue étudiée).
@@ -186,38 +189,12 @@ exports.report = asyncHandler(async (req, res) => {
 
 // POST /api/prep/rattachement (compte requis) — § 25.5
 exports.attach = asyncHandler(async (req, res) => {
-  const identite = await requireIdentity(req);
-  const existing = await PrepIdentite.findOne({ user: req.user._id, _id: { $ne: identite._id }, fusionneeDans: null });
-  if (existing) {
-    // Le compte possède déjà une identité : on fusionne l'essai de l'appareil dans celle du compte.
-    const docs = await PrepProgression.find({ identite: identite._id });
-    for (const doc of docs) {
-      // eslint-disable-next-line no-await-in-loop
-      const target = await PrepProgression.findOne({ identite: existing._id, programme: doc.programme });
-      if (!target) { doc.identite = existing._id; await doc.save(); progress.invalidateRanking(doc.programme); continue; } // eslint-disable-line no-await-in-loop
-      const a = target.etat; const b = doc.etat;
-      ['questions', 'erreurs', 'erreursCorrigees', 'secondesChancesReussies', 'raisonnementsValides'].forEach((k) => { a.compteurs[k] += b.compteurs[k] || 0; });
-      [1, 2, 3].forEach((n) => { a.premierCoup[n] = [a.premierCoup[n][0] + b.premierCoup[n][0], a.premierCoup[n][1] + b.premierCoup[n][1]]; });
-      Object.entries(b.scores || {}).forEach(([m, niv]) => { a.scores[m] = a.scores[m] || {}; Object.entries(niv).forEach(([n, v]) => { a.scores[m][n] = Math.max(a.scores[m][n] || 0, v); }); });
-      a.modulesValides = [...new Set([...(a.modulesValides || []), ...(b.modulesValides || [])])];
-      Object.assign(a.erreurs, b.erreurs); Object.assign(a.revisions, b.revisions); Object.assign(a.lecons, { ...b.lecons, ...a.lecons });
-      a.joursActifs = [...new Set([...a.joursActifs, ...b.joursActifs])].sort();
-      a.blancs = [...a.blancs, ...b.blancs];
-      target.markModified('etat');
-      await progress.finalize(target); // eslint-disable-line no-await-in-loop
-      await doc.deleteOne(); // eslint-disable-line no-await-in-loop
-    }
-    existing.essai.jours = [...new Set([...existing.essai.jours, ...identite.essai.jours])].sort();
-    existing.essai.iaUtilisees = Math.max(existing.essai.iaUtilisees, identite.essai.iaUtilisees);
-    await existing.save();
-    progress.invalidateRanking();
-    identite.fusionneeDans = existing._id;
-    await identite.save();
-    return res.json({ success: true, data: { token: identity.issueToken(String(existing._id)), identite: publicIdentity(existing), fusion: true } });
-  }
-  identite.user = req.user._id;
-  await identite.save();
-  res.json({ success: true, data: { token: identity.issueToken(String(identite._id)), identite: publicIdentity(identite), fusion: false } });
+  // Charge aussi une fusion interrompue afin de pouvoir la reprendre.
+  const id = identity.verifyToken(req.headers['x-prep-token']);
+  const source = id && await PrepIdentite.findById(id);
+  if (!source) throw new AppError('Identité de préparation invalide', 401);
+  const identite = await identity.attach(source, req.user);
+  res.json({ success: true, data: { token: identity.issueToken(String(identite._id)), identite: publicIdentity(identite), fusion: String(source._id) !== String(identite._id) } });
 });
 
 // PATCH /api/prep/profil-public (compte requis) — § 25.6

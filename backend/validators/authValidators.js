@@ -24,7 +24,7 @@ const loginValidator = [
 ];
 
 const refreshTokenValidator = [
-  body('refreshToken').isString().notEmpty().isLength({ max: 2048 }).withMessage('Le refresh token est obligatoire'),
+  body('refreshToken').optional().isString().notEmpty().isLength({ max: 2048 }).withMessage('Le refresh token est obligatoire'),
 ];
 
 const handoffExchangeValidator = [

@@ -90,7 +90,7 @@ test('cible : leçon, concours et version de langue vérifiés dans le pack', ()
   assert.equal(l1.type, 'lecon');
   assert.equal(l1.module.code, 'MATH-LNEXP');
   assert.equal(resolveCible({ type: 'concours', id: 'ENSEA-AS' }).sigle, 'ENSEA');
-  assert.equal(resolveCible({ type: 'lecon', id: 'ANG-GRAM-L1', langue: 'en' }).titre, 'Tenses: present, past and present perfect');
+  assert.equal(resolveCible({ type: 'lecon', id: 'ANG-GRAM-L1', langue: 'en' }).titre, 'Build a sentence: who does what?');
   assert.notEqual(resolveCible({ type: 'lecon', id: 'ANG-GRAM-L1' }).empreinte, resolveCible({ type: 'lecon', id: 'ANG-GRAM-L2' }).empreinte);
   assert.throws(() => resolveCible({ type: 'lecon', id: 'MATH-LNEXP-L1', langue: 'en' }), /version « en » inexistante/);
   assert.throws(() => resolveCible({ type: 'lecon', id: 'MATH-LNEXP' }), /introuvable/);
@@ -101,7 +101,9 @@ test('cible : leçon, concours et version de langue vérifiés dans le pack', ()
 test('métadonnées YouTube : public, intégrable, marqueur d’idempotence, titre ≤ 100', () => {
   const cible = resolveCible({ type: 'lecon', id: 'MATH-LNEXP-L1' });
   const meta = metadonnees(cible, { fichierSha256: SHA });
-  assert.match(meta.snippet.title, /La fonction logarithme népérien — Logarithme et exponentielle/);
+  assert.ok(meta.snippet.title.includes(cible.titre));
+  const fixture = metadonnees({ ...cible, titre: 'Titre stable', module: { ...cible.module, titre: 'Module stable' } }, { fichierSha256: SHA });
+  assert.match(fixture.snippet.title, /Titre stable — Module stable/);
   assert.match(meta.snippet.description, /fatafalta:lecon:MATH-LNEXP-L1:fr:/);
   assert.equal(meta.status.privacyStatus, 'public');
   assert.equal(meta.status.embeddable, true);
@@ -244,8 +246,11 @@ test('storyboard : un terme utilisé avant d’être défini est refusé', () =>
 test('dossier de génération : issu de la leçon, glossaire ordonné, consignes qualité', () => {
   const { brief, markdown } = construireBrief({ type: 'lecon', id: 'ANG-GRAM-L1', langue: 'fr' });
   assert.equal(brief.module.code, 'ANG-GRAM');
-  assert.ok(brief.plan.some((p) => p.titre === 'For, since, ago : dire « depuis » et « il y a »'));
-  const termes = brief.glossaire.map((g) => g.terme);
+  const cible = resolveCible({ type: 'lecon', id: 'ANG-GRAM-L1' });
+  for (const bloc of cible.contenu.lecon.blocs.filter((b) => b.type === 'titre')) assert.ok(brief.plan.some((p) => p.titre === bloc.texte));
+  const { glossaireLecon } = require('../scripts/video/generation/brief');
+  const termes = glossaireLecon({ blocs: [{ md: '**auxiliaire**' }, { md: '**present perfect** puis **auxiliaire**' }] }).map((g) => g.terme);
+  assert.deepEqual(termes, ['auxiliaire', 'present perfect']);
   assert.ok(termes.indexOf('auxiliaire') < termes.indexOf('present perfect'));
   assert.match(markdown, /Expliquer AVANT d'utiliser/);
   assert.match(markdown, /Aucune durée imposée/);
