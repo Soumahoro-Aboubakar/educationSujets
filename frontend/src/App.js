@@ -28,6 +28,13 @@ import {
 
 // L'administration (graphiques, éditeurs) n'est chargée que par l'équipe.
 const Dashboard = lazy(() => import('./pages/Dashboard'));
+// Préparation aux concours (lot 6) : chargée seulement quand on l'ouvre.
+const prepPages = () => import('./pages/prep/PrepPages');
+const PrepHomePage = lazy(() => prepPages().then((m) => ({ default: m.PrepHomePage })));
+const PrepProgrammePage = lazy(() => prepPages().then((m) => ({ default: m.PrepProgrammePage })));
+const PrepLessonPage = lazy(() => prepPages().then((m) => ({ default: m.PrepLessonPage })));
+const PrepSessionPage = lazy(() => prepPages().then((m) => ({ default: m.PrepSessionPage })));
+const Lazy = ({ children }) => <Suspense fallback={<Container className="flex justify-center py-24"><Spinner /></Container>}>{children}</Suspense>;
 
 /** Métadonnées d'une page fixe (titre, description, indexation) : voir lib/pagesSeo.js. */
 const Page = ({ seo, children }) => {
@@ -107,6 +114,10 @@ function App() {
             <Route path="/recherche" element={<Page seo="search"><SearchPage /></Page>} />
             <Route path="/telecharger" element={<BulkDownloadPage />} />
             <Route path="/abonnement" element={<Page seo="subscribe"><SubscribePage /></Page>} />
+            <Route path="/preparation" element={<Lazy><PrepHomePage /></Lazy>} />
+            <Route path="/preparation/:programme" element={<Lazy><PrepProgrammePage /></Lazy>} />
+            <Route path="/preparation/:programme/:module/lecon/:lecon" element={<Lazy><PrepLessonPage /></Lazy>} />
+            <Route path="/preparation/:programme/:module/niveau/:niveau" element={<Lazy><PrepSessionPage /></Lazy>} />
             <Route path="/login" element={<Page seo="login"><Login /></Page>} />
             <Route path="/register" element={<Page seo="register"><Register /></Page>} />
             <Route path="/compte" element={<Page seo="account"><AccountLayout /></Page>}>

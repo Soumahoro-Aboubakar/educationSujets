@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, ChevronDown, ChevronRight, CreditCard, Download, Gift, LayoutDashboard, LogOut, Menu, Search, ShieldCheck, Sparkles, UserRound, Wallet, X } from 'lucide-react';
+import { BookOpen, ChevronDown, ChevronRight, CreditCard, Download, Gift, LayoutDashboard, LogOut, Menu, Search, ShieldCheck, Sparkles, UserRound, Wallet, X, GraduationCap } from 'lucide-react';
 import AuthContext, { isStaff } from '../../context/AuthContext';
 import { Button, Container, cx } from '../ui';
 import Logo from './Logo';
 
 const PRIMARY_LINKS = [
   { to: '/sujets', label: 'Sujets', icon: BookOpen },
+  { to: '/preparation', label: 'Préparation', icon: GraduationCap },
   { to: '/recherche', label: 'Recherche', icon: Search },
   { to: '/abonnement', label: 'Abonnement', icon: Sparkles },
 ];

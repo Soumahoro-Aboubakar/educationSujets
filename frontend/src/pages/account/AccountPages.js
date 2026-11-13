@@ -8,6 +8,7 @@ import useEntitlements from '../../hooks/useEntitlements';
 import { account, errorMessage } from '../../lib/api';
 import { documentTitle, formatAmount, formatDate, formatLongDate } from '../../lib/format';
 import { PageTitle } from './AccountLayout';
+import { AccountPrepResume } from '../prep/PrepPages';
 
 const SUBSCRIPTION_TITLES = {
   ACTIVE: 'Abonnement actif',
@@ -72,6 +73,8 @@ export const AccountOverview = () => {
         <SummaryCard to="/compte/code-promo" icon={Gift} label="Code promotionnel" value={promoCode.code} pill={<StatusPill status={promoCode.status} />} />
         <SummaryCard to="/compte/portefeuille" icon={Wallet} label="Solde disponible" value={wallet.data ? formatAmount(wallet.data.balances.available) : '—'} />
       </div>
+
+      <AccountPrepResume />
 
       {!downloads.unlimited ? (
         <Card className="mt-4 flex items-center justify-between gap-4 p-5">

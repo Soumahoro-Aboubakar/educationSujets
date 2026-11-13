@@ -66,6 +66,9 @@ fs.writeFileSync(path.join(DATA, 'build/pack.json'), `${JSON.stringify(pack, nul
 fs.mkdirSync(path.join(MOBILE, 'shared'), { recursive: true });
 fs.mkdirSync(path.join(MOBILE, 'content'), { recursive: true });
 fs.copyFileSync(path.join(ROOT, 'services/prep/shared/prepCore.js'), path.join(MOBILE, 'shared/prepCore.js'));
+// Copie contrôlée pour le site (lot 6) : même moteur que l'API et le mobile.
+const WEB = path.resolve(ROOT, '../frontend/src/prep/shared');
+if (fs.existsSync(path.dirname(WEB))) { fs.mkdirSync(WEB, { recursive: true }); fs.copyFileSync(path.join(ROOT, 'services/prep/shared/prepCore.js'), path.join(WEB, 'prepCore.js')); }
 fs.writeFileSync(path.join(MOBILE, 'content/pack.json'), JSON.stringify(pack));
 const size = fs.statSync(path.join(MOBILE, 'content/pack.json')).size;
 console.log(`📦 Pack écrit (${(size / 1024).toFixed(0)} Ko) : backend/data/prep/build/pack.json et fatafalta/src/prep/content/pack.json`);

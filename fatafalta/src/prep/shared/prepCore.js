@@ -3,7 +3,7 @@
  * Fatafalta · Préparation — logique pure partagée entre l'API et l'application mobile.
  *
  * SOURCE UNIQUE : backend/services/prep/shared/prepCore.js
- * Copie générée  : fatafalta/src/prep/shared/prepCore.js (npm run prep:pack, côté backend).
+ * Copies générées : fatafalta/src/prep/shared/prepCore.js et frontend/src/prep/shared/prepCore.js (npm run prep:pack).
  * Ne pas modifier la copie mobile : un test vérifie que les deux fichiers sont identiques.
  *
  * Écrit en CommonJS sans dépendance pour être lu par Node et par Metro.

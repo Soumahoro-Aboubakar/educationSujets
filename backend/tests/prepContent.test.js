@@ -31,6 +31,13 @@ test('La copie mobile du moteur partagé est identique à la source', () => {
   assert.equal(fs.readFileSync(mobilePath, 'utf8'), source, 'Lancer « npm run prep:pack » pour resynchroniser la copie mobile.');
 });
 
+test('La copie web du moteur partagé est identique à la source', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'services/prep/shared/prepCore.js'), 'utf8');
+  const webPath = path.resolve(ROOT, '../frontend/src/prep/shared/prepCore.js');
+  if (!fs.existsSync(webPath)) return; // dépôt backend déployé seul
+  assert.equal(fs.readFileSync(webPath, 'utf8'), source, 'Lancer « npm run prep:pack » pour resynchroniser la copie web.');
+});
+
 test('Chaque programme pilote couvre les 6 organismes demandés', () => {
   const programmes = require('../data/prep/programmes');
   const sigles = new Set(programmes.map((p) => p.organisme.sigle));
