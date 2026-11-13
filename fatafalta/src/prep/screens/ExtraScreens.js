@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ArrowLeft, CheckCircle2, ExternalLink, FileText, GraduationCap, ShieldCheck, Sparkles, Timer, X } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import AuthContext from '../../context/AuthContext';
-import { getProgramme, packInfo } from '../content';
+import { getProgramme, packInfo, useContentGeneration } from '../content';
 import usePrep, { useSummary } from '../store';
 import { type } from '../theme';
 import { Badge, NightBackground, PaperStack, PrepButton } from '../ui/primitives';
@@ -28,6 +28,7 @@ import useAsyncAction from '../../hooks/useAsyncAction';
 
 // ═══ E32 — Concours blanc : introduction ════════════════════════════════
 export const MockIntroScreen = ({ navigation, route }) => {
+  useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { brand } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();
@@ -74,6 +75,7 @@ export const MockIntroScreen = ({ navigation, route }) => {
 
 // ═══ Épreuves officielles et sources ════════════════════════════════════
 export const ProgramInfoScreen = ({ navigation, route }) => {
+  useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { brand } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();

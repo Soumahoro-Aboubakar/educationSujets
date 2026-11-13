@@ -12,7 +12,7 @@ import {
 import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import core from '../shared/prepCore';
-import { getLesson, getModule, getProgramme, programmeModules } from '../content';
+import { getLesson, getModule, getProgramme, programmeModules, useContentGeneration } from '../content';
 import usePrep, { useRights, useSummary } from '../store';
 import prepApi from '../api';
 import { motion, type } from '../theme';
@@ -182,6 +182,7 @@ const TrialSheet = ({ visible, onClose, rights, onSubscribe }) => {
 
 // ═════════════════════════════════════════════════════════════════════════
 const PrepHomeScreen = ({ navigation, route }) => {
+  useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { brand, colors } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();

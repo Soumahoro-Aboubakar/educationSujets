@@ -26,6 +26,7 @@ const bibliotheque = fs.readdirSync(path.join(DATA, 'bibliotheque'))
 const programmes = require(path.join(DATA, 'programmes'));
 
 const { validateContent } = require('../../services/prep/contentValidator');
+const { hash } = require('../../services/prep/publicationService');
 const normalized = programmes.map(prog => ({ ...prog, matieres: prog.matieres.map((matiere, teinte) => ({
   nom: matiere.nom, teinte, modules: matiere.modules.map(ref => typeof ref === 'string'
     ? { code: ref, publie: true }
@@ -54,6 +55,9 @@ const pack = {
   },
   programmes: packProgrammes,
   modules,
+  // Empreintes SHA-256 de chaque module, calculées comme le registre de publication (lot 3) :
+  // l'app garde le module embarqué tant que le manifeste publié porte la même empreinte.
+  empreintes: { modules: Object.fromEntries(Object.entries(modules).map(([code, mod]) => [code, hash(mod)])) },
 };
 
 fs.mkdirSync(path.join(DATA, 'build'), { recursive: true });

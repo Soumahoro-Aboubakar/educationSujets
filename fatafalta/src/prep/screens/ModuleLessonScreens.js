@@ -11,7 +11,7 @@ import Svg, { Path } from 'react-native-svg';
 import { ArrowLeft, ArrowRight, Check, Lock, PlayCircle, Type as TypeIcon, X } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
-import { getLesson, getModule, getProgramme, levelExercises, programmeModules } from '../content';
+import { getLesson, getModule, getProgramme, levelExercises, programmeModules, useContentGeneration } from '../content';
 import usePrep, { todayKey, useModuleVersion, useProgress, useRights } from '../store';
 import LangToggle from '../ui/LangToggle';
 import VideoPanel from '../video/VideoPanel';
@@ -33,6 +33,7 @@ import { PURCHASE_FLOW_AVAILABLE } from '../../utils/storePolicy';
 
 // ═══ E08 — Module ═══════════════════════════════════════════════════════
 export const ModuleScreen = ({ navigation, route }) => {
+  useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { subjectTint, brand, colors, LEVELS, theme } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();
@@ -221,6 +222,7 @@ const LinedPaper = ({ height }) => {
 const SIZES = [15, 17, 19, 21];
 
 export const LessonScreen = ({ navigation, route }) => {
+  useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { subjectTint, brand, theme } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();

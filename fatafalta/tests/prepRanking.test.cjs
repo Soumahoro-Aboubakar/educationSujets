@@ -164,7 +164,7 @@ test('suivis locaux persistés par programme, idempotents, sans statistiques en 
     zustand: { create: (factory) => { state = factory((patch) => { state = { ...state, ...patch }; }, () => state); return { getState: () => state }; } },
     'zustand/react/shallow': { useShallow: (f) => f },
     './shared/prepCore': {}, './storage': { saveState: (s) => snapshots.push(s) },
-    './device': {}, './api': {}, './content': {},
+    './device': {}, './api': {}, './content': {}, './contentRepo': {}, './contentSync': {},
   }).default;
   store.getState().followCandidate('ENSEA-AS', { identite: 'child', pseudonyme: 'Cauri-1172', rang: 20, stats: { questions: 10 } });
   store.getState().followCandidate('ENSEA-AS', { identite: 'child', pseudonyme: 'Cauri-1172' });

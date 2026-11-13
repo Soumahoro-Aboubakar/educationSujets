@@ -12,7 +12,7 @@ import Svg, { Circle, Line, Path, Rect } from 'react-native-svg';
 import { ChevronRight, NotebookPen, Target, Timer, Trophy } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
-import { programmeModules } from '../content';
+import { programmeModules, useContentGeneration } from '../content';
 import usePrep, { todayKey, useSummary } from '../store';
 import prepApi from '../api';
 import { type } from '../theme';
@@ -99,6 +99,7 @@ const MockChart = ({ blancs }) => {
 
 // ═══ E33 — Onglet Progrès ═══════════════════════════════════════════════
 export const ProgressScreen = ({ navigation }) => {
+  useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { brand, rankingTrend, theme, subjectTint, subjectPalette } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();

@@ -2,7 +2,7 @@ import Pressable from '../../components/ui/FeedbackPressable';
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -10,7 +10,8 @@ import { ArrowLeft, ArrowRight, FileText, GraduationCap, Target } from 'lucide-r
 import Text from '../../components/ui/Text';
 import BrandMark from '../../components/brand/BrandMark';
 import { usePreferences } from '../../context/PreferencesContext';
-import { localCatalogue } from '../content';
+import { localCatalogue, useContentGeneration } from '../content';
+import { mergeCatalogue } from '../contentRepo';
 import prepApi from '../api';
 import { fetchPublishedOrganismes } from '../../services/catalog';
 import cache from '../../services/cache';
@@ -69,22 +70,32 @@ const withLogos = (catalogue, index) => catalogue.map((o) => {
   return found ? { ...o, logo: o.logo || found.logo, organismeId: o.organismeId || found.organismeId } : o;
 });
 
-/** Catalogue « organismes → cycles » : embarqué tout de suite, enrichi par l'API (logos). */
+/** Toutes les pages du catalogue publié (100 organismes par page). */
+const fetchRemoteCatalogue = async () => {
+  const all = [];
+  for (let page = 1; page <= 20; page += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    const { data, pagination } = await prepApi.catalogue(page);
+    if (!Array.isArray(data)) break;
+    all.push(...data);
+    if (!pagination || page >= pagination.pages) break;
+  }
+  return all;
+};
+
+/** Catalogue « organismes → cycles » : embarqué tout de suite, complété par l'API (nouveaux cycles, logos). */
 export const useCatalogue = () => {
-  const [catalogue, setCatalogue] = useState(() => withLogos(localCatalogue(), logoIndex));
+  const generation = useContentGeneration();
+  const [remote, setRemote] = useState(null);
+  const [logos, setLogos] = useState(logoIndex);
   useEffect(() => {
     let alive = true;
-    loadLogoIndex().then((index) => { if (alive) setCatalogue((current) => withLogos(current, index)); });
-    prepApi.catalogue().then((remote) => {
-      if (!alive || !Array.isArray(remote)) return;
-      setCatalogue((local) => withLogos(local.map((o) => {
-        const r = remote.find((x) => x.sigle === o.sigle);
-        return r ? { ...o, nom: r.nom || o.nom, logo: r.logo || o.logo || null, organismeId: r.organismeId || o.organismeId, cycles: o.cycles.map((c) => ({ ...c, parcoursTypeId: r.cycles.find((rc) => rc.programme === c.programme)?.parcoursTypeId || null })) } : o;
-      }), logoIndex));
-    }).catch(() => {});
+    loadLogoIndex().then((index) => { if (alive) setLogos(index); });
+    fetchRemoteCatalogue().then((list) => { if (alive) setRemote(list); }).catch(() => {});
     return () => { alive = false; };
   }, []);
-  return catalogue;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useMemo(() => withLogos(mergeCatalogue(localCatalogue(), remote), logos), [remote, logos, generation]);
 };
 
 // ═══ E01 — « Que veux-tu faire ? » ══════════════════════════════════════

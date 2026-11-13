@@ -1,19 +1,56 @@
+import { useSyncExternalStore } from 'react';
 import pack from './content/pack.json';
 import core from './shared/prepCore';
+import {
+  emptyCache, listProgrammes, resolveModule, resolveProgramme,
+} from './contentRepo';
 
 /**
- * Accès au contenu de préparation embarqué (pack hors ligne, § 22). Le pack est produit et
- * validé côté serveur par « npm run prep:pack » ; l'API sert exactement le même contenu.
+ * Accès au contenu de préparation. Source : le cache des contenus publiés (téléchargé d'après
+ * le manifeste, voir contentSync.js), puis le pack embarqué produit par « npm run prep:pack ».
+ * Les accesseurs restent synchrones : les écrans s'abonnent aux changements avec
+ * useContentGeneration() et se redessinent quand une nouvelle publication arrive.
  */
-const exercises = new Map();
-const lessons = new Map();
-Object.values(pack.modules).forEach((mod) => {
-  mod.exercices.forEach((ex) => exercises.set(ex.code, { exercice: ex, module: mod }));
-  mod.lecons.forEach((lecon, index) => lessons.set(lecon.code, { lecon, module: mod, index }));
-});
+const bundle = { modules: pack.modules, programmes: pack.programmes.map((p) => p.code), empreintes: pack.empreintes?.modules || {} };
+let cache = emptyCache();
+let tick = 0;
+const listeners = new Set();
+let exercises = new Map();
+let lessons = new Map();
+const versioned = new Map();
 
-export const programmes = pack.programmes;
-export const getProgramme = (code) => pack.programmes.find((p) => p.code === code) || null;
+const effectiveModules = () => {
+  const codes = new Set([...Object.keys(pack.modules), ...Object.keys(cache.modules)]);
+  return [...codes].map((code) => resolveModule(cache, bundle, code)?.module).filter(Boolean);
+};
+const reindex = () => {
+  exercises = new Map();
+  lessons = new Map();
+  versioned.clear();
+  effectiveModules().forEach((mod) => {
+    mod.exercices.forEach((ex) => exercises.set(ex.code, { exercice: ex, module: mod }));
+    mod.lecons.forEach((lecon, index) => lessons.set(lecon.code, { lecon, module: mod, index }));
+  });
+};
+reindex();
+
+export const bundleInfo = bundle;
+export const getContentCache = () => cache;
+/** Remplace le cache publié (après hydratation ou mise à jour) et prévient les écrans. */
+export const setContentCache = (next) => {
+  if (next === cache) return;
+  cache = next;
+  reindex();
+  tick += 1;
+  listeners.forEach((listener) => listener());
+};
+const subscribe = (listener) => { listeners.add(listener); return () => listeners.delete(listener); };
+const snapshot = () => tick;
+/** Hook : redessine l'écran à chaque changement de contenu publié. */
+export const useContentGeneration = () => useSyncExternalStore(subscribe, snapshot, snapshot);
+
+export const getProgrammes = () => listProgrammes(cache, pack.programmes);
+export const getProgramme = (code) => (code ? resolveProgramme(cache, pack.programmes, code) : null);
 
 /**
  * Cours de langue étrangère : deux versions (« fr » par défaut, explications en français ;
@@ -21,12 +58,15 @@ export const getProgramme = (code) => pack.programmes.find((p) => p.code === cod
  * `version` est un code de langue, ou la table des préférences { [codeModule]: langue }.
  */
 const versionFor = (moduleCode, version) => (typeof version === 'string' ? version : version?.[moduleCode]) || core.VERSION_PAR_DEFAUT;
-const versioned = new Map();
-export const moduleVersions = (mod) => core.moduleVersions(mod);
+export const moduleVersions = (mod) => (mod?.distant ? mod.versions || [core.VERSION_PAR_DEFAUT] : core.moduleVersions(mod));
 export const getModule = (code, version) => {
-  const mod = pack.modules[code] || null;
   const v = versionFor(code, version);
-  if (!mod || !moduleVersions(mod).includes(v) || v === core.VERSION_PAR_DEFAUT) return mod;
+  const resolved = resolveModule(cache, bundle, code, v);
+  if (!resolved) return null;
+  const mod = resolved.module;
+  // Module téléchargé : chaque version est déjà appliquée par le serveur.
+  if (resolved.distant) return mod;
+  if (!core.moduleVersions(mod).includes(v) || v === core.VERSION_PAR_DEFAUT) return mod;
   const key = `${code}:${v}`;
   if (!versioned.has(key)) versioned.set(key, core.moduleVersion(mod, v));
   return versioned.get(key);
@@ -35,19 +75,19 @@ export const getExercise = (code, version) => {
   const found = exercises.get(code) || null;
   if (!found || !version) return found;
   const mod = getModule(found.module.code, version);
-  return mod === found.module ? found : { exercice: mod.exercices.find((ex) => ex.code === code) || found.exercice, module: mod };
+  return !mod || mod === found.module ? found : { exercice: mod.exercices.find((ex) => ex.code === code) || found.exercice, module: mod };
 };
 export const getLesson = (code, version) => {
   const found = lessons.get(code) || null;
   if (!found || !version) return found;
   const mod = getModule(found.module.code, version);
-  return mod === found.module ? found : { lecon: mod.lecons[found.index], module: mod, index: found.index };
+  return !mod || mod === found.module ? found : { lecon: mod.lecons[found.index], module: mod, index: found.index };
 };
 
 /** Organismes → cycles (même forme que GET /api/prep/catalogue, sans logos). */
 export const localCatalogue = () => {
   const groups = new Map();
-  pack.programmes.forEach((p) => {
+  getProgrammes().forEach((p) => {
     const key = p.organisme.sigle;
     if (!groups.has(key)) groups.set(key, { sigle: key, nom: key, logo: null, organismeId: null, cycles: [] });
     groups.get(key).cycles.push({
@@ -67,14 +107,14 @@ export const programmeModules = (programme) => {
     matiere.modules.forEach((ref) => {
       if (seen.has(ref.code)) return;
       seen.add(ref.code);
-      const mod = ref.publie ? pack.modules[ref.code] : null;
+      const mod = ref.publie ? getModule(ref.code) : null;
       list.push({
         code: ref.code,
         titre: mod ? mod.titre : ref.titre,
         resume: mod ? mod.resume : ref.notions.map((n) => n.libelle).join(' · '),
         matiere: matiere.nom,
         teinte: matiere.teinte,
-        publie: Boolean(ref.publie),
+        publie: Boolean(ref.publie && mod),
         module: mod,
       });
     });
@@ -107,4 +147,5 @@ export const pickAcrossProgramme = (programme, { nombre, mode, graine }) => {
 };
 
 export const packInfo = { version: pack.version, genereLe: pack.genereLe, provenance: pack.provenance };
+export const contentInfo = () => ({ generation: cache.generation, majLe: cache.majLe });
 export default pack;

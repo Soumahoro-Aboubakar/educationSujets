@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ArrowLeft, Play, RotateCcw } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
-import { getExercise, getProgramme, programmeModules } from '../content';
+import { getExercise, getProgramme, programmeModules, useContentGeneration } from '../content';
 import usePrep, { todayKey, useProgress, useRights } from '../store';
 import { type } from '../theme';
 import { haptic } from '../feedback';
@@ -37,6 +37,7 @@ const describeAnswer = (ex, cle) => {
 
 /** E29 — Révisions du jour / Cahier d'erreurs, E30 — Fiche d'erreur. */
 const ReviewsScreen = ({ navigation, route }) => {
+  useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { brand, subjectTint, colors, theme } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();

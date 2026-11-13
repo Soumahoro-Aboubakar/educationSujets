@@ -5,7 +5,9 @@ import core from './shared/prepCore';
 import { loadState, saveState } from './storage';
 import { deviceIdentifiers } from './device';
 import prepApi, { setPrepToken } from './api';
-import { getLesson, getModule, getProgramme, moduleVersions, publishedModuleDefs } from './content';
+import { getExercise, getLesson, getModule, getProgramme, moduleVersions, publishedModuleDefs } from './content';
+import { needsServerGrading } from './contentRepo';
+import { hydrateContent, releaseContent, syncContent } from './contentSync';
 
 /**
  * État de la préparation (§ 25.5) : le serveur est la référence, le téléphone garde une copie
@@ -43,6 +45,29 @@ const withDemo = (index) => {
   } : base;
 };
 let videosRequest = null;
+
+/**
+ * Corrections attendues du serveur (exercices de modules téléchargés, dont la clé n'est pas
+ * sur l'appareil) : clé d'action → résolveurs. Rien n'est noté côté client pour ces exercices.
+ */
+const waiters = new Map();
+const settle = (cle, result) => {
+  const list = waiters.get(cle);
+  if (!list) return;
+  waiters.delete(cle);
+  list.forEach((resolve) => resolve(result));
+};
+
+/** Modules utilisés par une session non terminée : leur mise à jour attend la fin de la session. */
+export const busyModules = (sessions) => {
+  const out = new Set();
+  Object.values(sessions || {}).forEach((session) => {
+    if (!session || session.termine) return;
+    if (session.module) out.add(session.module);
+    (session.codes || []).forEach((code) => { const found = getExercise(code); if (found) out.add(found.module.code); });
+  });
+  return [...out];
+};
 
 const usePrep = create((set, get) => ({
   ready: false,
@@ -115,6 +140,8 @@ const usePrep = create((set, get) => ({
   },
 
   hydrate: async () => {
+    // Contenus publiés déjà téléchargés : disponibles hors ligne avant même le réseau.
+    await hydrateContent();
     const stored = await loadState();
     const today = todayKey();
     const patch = stored ? { ...stored, prefs: { ...DEFAULT_PREFS, ...(stored.prefs || {}) } } : {};
@@ -123,7 +150,18 @@ const usePrep = create((set, get) => ({
     const suspect = Boolean(stored?.derniereDate && today < stored.derniereDate);
     set({ ...patch, ready: true, horlogeSuspecte: suspect, derniereDate: suspect ? stored.derniereDate : today });
     if (patch.token) setPrepToken(patch.token);
-    get().ensureIdentity();
+    await get().ensureIdentity();
+    get().refreshContent(true);
+  },
+
+  /**
+   * Met à jour les contenus publiés (nouveaux programmes, modules, leçons, exercices) sans
+   * nouvelle version de l'app. Hors connexion, le cache précédent reste utilisé.
+   */
+  refreshContent: (force = false) => {
+    const s = get();
+    const programmes = [...new Set([...(s.programmesSuivis || []), s.programme].filter(Boolean))];
+    return syncContent({ programmes, busy: busyModules(s.sessions), force });
   },
 
   /** Identité automatique, sans saisie (§ 25.1) ; restaurée après réinstallation (§ 25.4). */
@@ -175,6 +213,8 @@ const usePrep = create((set, get) => ({
     const suivis = s.programmesSuivis.includes(code) ? s.programmesSuivis : [...s.programmesSuivis, code];
     set({ programme: code, programmesSuivis: suivis, progressions: { ...s.progressions, [code]: s.progressions[code] || core.emptyProgress(s.prefs.objectif) } });
     get().persist();
+    // Programme publié après la sortie de l'app : ses modules sont téléchargés maintenant.
+    get().refreshContent(true);
   },
 
   completeOnboarding: (choix) => { set({ onboarding: { fait: true, choix } }); get().persist(); },
@@ -217,7 +257,7 @@ const usePrep = create((set, get) => ({
   },
 
   enqueue: (action) => {
-    set({ queue: [...get().queue, { cle: newKey(), jour: todayKey(), ...action }].slice(-2000), derniereDate: todayKey() });
+    set({ queue: [...get().queue, { cle: action.cle || newKey(), jour: todayKey(), ...action }].slice(-2000), derniereDate: todayKey() });
     get().persist();
     clearTimeout(flushTimer);
     flushTimer = setTimeout(() => get().flush(), 1500);
@@ -233,6 +273,7 @@ const usePrep = create((set, get) => ({
       const out = await prepApi.sync(batch);
       const sent = new Set(batch.map((a) => a.cle));
       const restant = get().queue.filter((a) => !sent.has(a.cle));
+      (out.resultats || []).forEach((r) => { if (r?.cle) settle(r.cle, r); });
       const patch = { queue: restant, droitsServeur: out.droits, online: true };
       if (!restant.length) {
         patch.progressions = { ...get().progressions };
@@ -272,12 +313,29 @@ const usePrep = create((set, get) => ({
 
   // ── Sessions d'exercices (§ 10) ────────────────────────────────────────
   saveSession: (session) => { set({ sessions: { ...get().sessions, [session.id]: session } }); get().persist(); },
-  dropSession: (id) => { const next = { ...get().sessions }; delete next[id]; set({ sessions: next }); get().persist(); },
+  dropSession: (id) => {
+    const next = { ...get().sessions };
+    delete next[id];
+    set({ sessions: next });
+    get().persist();
+    releaseContent(busyModules(next));
+  },
 
-  /** Tentative corrigée localement (validateur partagé) puis envoyée au serveur. */
+  /**
+   * Tentative corrigée localement (validateur partagé) puis envoyée au serveur.
+   * Exercice d'un module téléchargé (clé absente de l'appareil) : aucune note n'est calculée
+   * ici ; renvoie { pending, cle } et la correction arrive avec awaitResult().
+   */
   attempt: ({ programme, exercice, module, reponse, essai, indices, contexte, session, duree }) => {
     const found = getModule(module)?.exercices.find((e) => e.code === exercice);
     if (!found) return null;
+    if (needsServerGrading(found)) {
+      const cle = newKey();
+      const ok = get().act({ cle, type: 'tentative', programme, exercice, reponse, essai, indices, contexte, session, duree }, null);
+      if (!ok.ok) return { locked: true };
+      get().flush();
+      return { pending: true, cle };
+    }
     const result = core.validate(found, reponse);
     const ok = get().act(
       { type: 'tentative', programme, exercice, reponse, essai, indices, contexte, session, duree },
@@ -311,6 +369,21 @@ const usePrep = create((set, get) => ({
     set({ progressions: { ...get().progressions, [programme]: etat } });
     get().persist();
   },
+
+  /**
+   * Attend la correction serveur d'une tentative en file. `null` au-delà du délai (hors
+   * connexion) : la réponse reste en file et sera corrigée à la prochaine synchronisation.
+   */
+  awaitResult: (cle, delai = 8000) => new Promise((resolve) => {
+    const timer = setTimeout(() => {
+      const list = (waiters.get(cle) || []).filter((r) => r !== done);
+      if (list.length) waiters.set(cle, list); else waiters.delete(cle);
+      resolve(null);
+    }, delai);
+    function done(result) { clearTimeout(timer); resolve(result); }
+    waiters.set(cle, [...(waiters.get(cle) || []), done]);
+    if (get().online === false) get().flush();
+  }),
 
   useIA: () => { set({ essai: { ...get().essai, ia: get().essai.ia + 1 } }); get().persist(); },
 

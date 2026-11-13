@@ -20,7 +20,13 @@ export const isServiceMissing = (error) => error?.response?.status === 404;
 export const prepApi = {
   declare: (identifiants) => api.post('/api/prep/appareils', identifiants, { ...quiet, timeout: 12000 }).then(data),
   rights: () => api.get('/api/prep/droits', { ...quiet, headers: headers(), timeout: 10000 }).then(data),
-  catalogue: () => api.get('/api/prep/catalogue', { ...quiet, timeout: 10000 }).then(data),
+  catalogue: (page = 1) => api.get('/api/prep/catalogue', { ...quiet, params: { page, limit: 100 }, timeout: 10000 }).then((r) => ({ data: data(r), pagination: r.data?.meta?.pagination || null })),
+  /** Manifeste des contenus publiés : génération, révisions et empreintes (lot 3). */
+  manifest: () => api.get('/api/prep/manifest', { ...quiet, timeout: 10000 }).then(data),
+  /** Programme dans une révision publiée précise (pas de mélange si une publication arrive entre-temps). */
+  programme: (code, revision) => api.get(`/api/prep/programmes/${encodeURIComponent(code)}`, { ...quiet, params: { revision }, timeout: 15000 }).then(data),
+  /** Module publié (sans les clés des exercices notés) ; exige des droits de préparation. */
+  module: (code, revision, version) => api.get(`/api/prep/modules/${encodeURIComponent(code)}`, { quietStatuses: [401, 403, 404], params: { revision, version }, headers: headers(), timeout: 20000 }).then(data),
   /** Index des vidéos publiées { modules: { CODE: { fr, en } }, concours: { CODE: { fr } } } (lecture seule). */
   videos: () => api.get('/api/prep/videos', { ...quiet, timeout: 10000 }).then(data),
   sync: (actions) => api.post('/api/prep/sync', { actions }, { ...quiet, headers: headers(), timeout: 20000 }).then(data),

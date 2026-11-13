@@ -57,7 +57,12 @@ const PrepBridge = () => {
   }, [isAuthenticated, token]);
   // Retour au premier plan : envoi des réponses faites hors ligne (§ 22).
   useEffect(() => {
-    const sub = AppState.addEventListener('change', (state) => { if (state === 'active') usePrep.getState().flush(); });
+    // Retour au premier plan : envoi des réponses en file, puis contenus publiés depuis la dernière ouverture.
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state !== 'active') return;
+      usePrep.getState().flush();
+      usePrep.getState().refreshContent();
+    });
     return () => sub.remove();
   }, []);
   return null;

@@ -95,19 +95,23 @@ const CorrectionBanner = ({ item, exercice, mode, onShowRecall, onReason, onNext
   const { styles } = useStyles();
   const r = item.result;
   const { height, fontScale } = useWindowDimensions();
-  useResultAnnouncement(r ? `${r.correct ? (item.essai === 1 ? 'Bien joué' : 'Bien rattrapé') : item.final ? 'La bonne réponse' : 'Pas tout à fait'}. ${item.final ? exercice.explication || '' : 'Petit rappel avant de réessayer.'}` : null);
+  useResultAnnouncement(r ? (r.pending ? 'Réponse enregistrée. Elle sera corrigée dès le retour de la connexion.' : `${r.correct ? (item.essai === 1 ? 'Bien joué' : 'Bien rattrapé') : item.final ? 'La bonne réponse' : 'Pas tout à fait'}. ${item.final ? r.explication || exercice.explication || '' : 'Petit rappel avant de réessayer.'}`) : null);
   if (!r) return null;
   const canReason = exercice.raisonnement?.actif && r.correct;
+  const explication = r.explication || exercice.explication;
   let tone; let title; let body; let actions;
-  if (r.correct && item.essai === 1) {
-    tone = { bg: colors.successWash, fg: colors.success }; title = 'Bien joué'; body = exercice.explication;
+  if (r.pending) {
+    tone = { bg: colors.warningWash, fg: colors.warning }; title = 'Réponse enregistrée';
+    body = 'Pas de connexion pour la corriger maintenant. Elle sera corrigée dès que tu seras de nouveau en ligne, et comptera dans ta progression.';
+  } else if (r.correct && item.essai === 1) {
+    tone = { bg: colors.successWash, fg: colors.success }; title = 'Bien joué'; body = explication;
   } else if (r.correct) {
-    tone = { bg: colors.warningWash, fg: colors.warning }; title = 'Bien rattrapé'; body = `50 % des points. ${exercice.explication}`;
+    tone = { bg: colors.warningWash, fg: colors.warning }; title = 'Bien rattrapé'; body = `50 % des points. ${explication || ''}`;
   } else if (!item.final) {
     tone = { bg: colors.errorWash, fg: colors.error }; title = 'Pas tout à fait'; body = 'Petit rappel avant de réessayer.';
     actions = <PrepButton title="Voir le rappel" onPress={onShowRecall} />;
   } else {
-    tone = { bg: colors.errorWash, fg: colors.error }; title = 'La bonne réponse'; body = exercice.explication;
+    tone = { bg: colors.errorWash, fg: colors.error }; title = 'La bonne réponse'; body = explication;
   }
   if (!actions) {
     actions = canReason ? (
@@ -149,7 +153,8 @@ const SessionReview = ({ session, navigation, onRestart, celebrations }) => {
   const ratio = total ? pts / total : 0;
   const premier = items.filter((it) => it.result?.correct && it.essai === 1).length;
   const rattrapees = items.filter((it) => it.result?.correct && it.essai === 2).length;
-  const auCahier = items.filter((it) => it.final && !it.result?.correct).length;
+  const auCahier = items.filter((it) => it.final && !it.result?.correct && !it.result?.pending).length;
+  const enAttente = items.filter((it) => it.result?.pending).length;
   const [rank, setRank] = useState(null);
   useEffect(() => { prepApi.ranking(session.programme, 'tout').then(setRank).catch(() => {}); }, [session.programme]);
   const versions = usePrep((s) => s.prefs.versions);
@@ -188,7 +193,7 @@ const SessionReview = ({ session, navigation, onRestart, celebrations }) => {
               <Text style={[type.numeral, styles.reviewScoreSur]}>{`/ ${total}`}</Text>
             </View>
           )}
-          <Text variant="bodyMedium" style={styles.reviewPct}>{`${pct} % de réussite`}</Text>
+          <Text variant="bodyMedium" style={styles.reviewPct}>{enAttente ? `${session.mode === 'blanc' ? 'Note provisoire' : 'Score provisoire'} · ${enAttente} réponse${enAttente > 1 ? 's' : ''} en attente de correction` : `${pct} % de réussite`}</Text>
         </View>
         {rows.length || rank?.rang ? (
           <View style={styles.reviewCard}>
@@ -347,7 +352,8 @@ const SessionScreen = ({ navigation, route }) => {
         const f = getExercise(c);
         if (!f) return;
         const r = it.value ? store.attempt({ programme: final.programme, exercice: c, module: f.module.code, reponse: it.value, essai: 1, indices: 0, contexte: 'blanc', session: final.id }) : null;
-        final.items[c] = { ...it, result: r || { correct: false, score: 0 }, points: r?.points || 0, final: true };
+        // Exercice corrigé par le serveur : réponse en file, note recalculée par le serveur.
+        final.items[c] = { ...it, result: r?.pending ? { pending: true, correct: false, score: 0 } : (r || { correct: false, score: 0 }), points: r?.pending ? 0 : r?.points || 0, final: true };
       });
       const total = final.codes.reduce((a, c) => a + (final.items[c].points || 0), 0);
       store.finishMockExam({ programme: final.programme, session: final.id, note: Math.round((20 * total / Math.max(1, final.codes.length)) * 10) / 10, nbQuestions: final.codes.length, duree: Math.round((Date.now() - final.debut) / 60000) });
@@ -383,10 +389,20 @@ const SessionScreen = ({ navigation, route }) => {
   const complete = core.isComplete(exercice, item.value);
   const corrected = item.phase === 'corrected';
 
-  const verify = () => {
+  // Exercice d'un module téléchargé : la correction vient du serveur. Hors connexion, la réponse
+  // est gardée en file et marquée « en attente » : aucun score n'est inventé sur l'appareil.
+  const resolveAttempt = async (r) => {
+    if (!r?.pending) return r;
+    const server = await store.awaitResult(r.cle);
+    if (!server) return { pending: true, correct: false, score: 0, points: 0 };
+    if (server.ok === false) return server.erreur === 'ESSAI_EPUISE' ? { locked: true } : { pending: true, correct: false, score: 0, points: 0 };
+    return { ...server, cle: server.correction?.cle, explication: server.correction?.explication };
+  };
+
+  const verify = async () => {
     countMinutes();
     if (mode === 'test') {
-      const r = store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value, essai: 1, indices: 0, contexte: 'test', session: session.id });
+      const r = await resolveAttempt(store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value, essai: 1, indices: 0, contexte: 'test', session: session.id }));
       if (r?.locked) { setSheet('locked'); return; }
       const nextItems = { ...session.items, [code]: { ...item, result: r, final: true, phase: 'corrected', points: r.points } };
       haptic.select();
@@ -394,11 +410,17 @@ const SessionScreen = ({ navigation, route }) => {
       else setSession({ ...session, items: nextItems, index: session.index + 1 });
       return;
     }
-    const r = store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value, essai: item.essai, indices: item.indices, contexte: mode, session: session.id, duree: Math.round((Date.now() - item.debut) / 1000) });
+    const r = await resolveAttempt(store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value, essai: item.essai, indices: item.indices, contexte: mode, session: session.id, duree: Math.round((Date.now() - item.debut) / 1000) }));
     if (r?.locked) { setSheet('locked'); return; }
+    if (r.pending) {
+      haptic.select();
+      update({ result: r, phase: 'corrected', final: true, points: 0 });
+      setHint(false);
+      return;
+    }
     const final = r.correct || item.essai === 2;
     if (r.correct) haptic.success(); else haptic.error();
-    update({ result: { ...r, cle: exercice.cle }, phase: 'corrected', final, points: final ? r.points : 0, premierCoup: item.essai === 1 ? r.correct : item.premierCoup });
+    update({ result: { ...r, cle: r.cle ?? exercice.cle }, phase: 'corrected', final, points: final ? r.points : 0, premierCoup: item.essai === 1 ? r.correct : item.premierCoup });
     setHint(false);
   };
 
@@ -406,11 +428,11 @@ const SessionScreen = ({ navigation, route }) => {
     setSheet(null);
     update({ essai: 2, value: null, phase: 'answer', result: null });
   };
-  const skipSecond = () => {
+  const skipSecond = async () => {
     setSheet(null);
     // Passer la seconde chance : la question est comptée fausse et entre au cahier d'erreurs (§ 12.1).
-    const r = store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value || {}, essai: 2, indices: item.indices, contexte: mode, session: session.id });
-    update({ essai: 2, result: { ...(r || { correct: false }), cle: exercice.cle, correct: false }, phase: 'corrected', final: true, points: 0 });
+    const r = await resolveAttempt(store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value || {}, essai: 2, indices: item.indices, contexte: mode, session: session.id }));
+    update({ essai: 2, result: { ...(r || { correct: false }), cle: r?.cle ?? exercice.cle, correct: false }, phase: 'corrected', final: true, points: 0 });
   };
   const next = () => {
     setHint(false);
@@ -482,13 +504,13 @@ const SessionScreen = ({ navigation, route }) => {
             </Animated.View>
           ) : null}
           {/* Après une 1re erreur, rien n'est révélé (§ 12.1) : la réponse est figée jusqu'au rappel. */}
-          <View style={styles.zone} pointerEvents={corrected && !item.final ? 'none' : 'auto'}>
+          <View style={styles.zone} pointerEvents={corrected && (!item.final || item.result?.pending) ? 'none' : 'auto'}>
             <Renderer
               exercice={exercice}
               value={item.value}
               onChange={(v) => update({ value: v })}
-              phase={mode === 'blanc' || (corrected && !item.final) ? 'answer' : item.phase}
-              correction={mode === 'blanc' || !item.final ? null : item.result}
+              phase={mode === 'blanc' || (corrected && !item.final) || item.result?.pending ? 'answer' : item.phase}
+              correction={mode === 'blanc' || !item.final || item.result?.pending ? null : item.result}
               seed={itemSeed}
             />
           </View>
