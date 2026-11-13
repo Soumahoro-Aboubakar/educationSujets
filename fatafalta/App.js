@@ -27,6 +27,7 @@ import AuthContext, { AuthProvider } from './src/context/AuthContext';
 import { PreferencesProvider } from './src/context/PreferencesContext';
 import useDownloadStore from './src/store/useDownloadStore';
 import usePrep from './src/prep/store';
+import { flushState } from './src/prep/storage';
 import prepApi, { setPrepToken } from './src/prep/api';
 import { useEntitlements } from './src/hooks/useAccount';
 
@@ -59,8 +60,11 @@ const PrepBridge = () => {
   useEffect(() => {
     // Retour au premier plan : envoi des réponses en file, puis contenus publiés depuis la dernière ouverture.
     const sub = AppState.addEventListener('change', (state) => {
+      // Arrière-plan : écriture locale immédiate (l'OS peut arrêter l'app sans prévenir).
+      if (state === 'background' || state === 'inactive') { flushState(); return; }
       if (state !== 'active') return;
       usePrep.getState().flush();
+      usePrep.getState().pullProgress();
       usePrep.getState().refreshContent();
     });
     return () => sub.remove();

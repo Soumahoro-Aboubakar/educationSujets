@@ -29,6 +29,8 @@ export const prepApi = {
   module: (code, revision, version) => api.get(`/api/prep/modules/${encodeURIComponent(code)}`, { quietStatuses: [401, 403, 404], params: { revision, version }, headers: headers(), timeout: 20000 }).then(data),
   /** Index des vidéos publiées { modules: { CODE: { fr, en } }, concours: { CODE: { fr } } } (lecture seule). */
   videos: () => api.get('/api/prep/videos', { ...quiet, timeout: 10000 }).then(data),
+  /** Progressions privées de l'identité (lecture seule, lot 5) ; `depuis` = curseur de la page précédente. */
+  progressions: (depuis) => api.get('/api/prep/progressions', { quietStatuses: [401, 404], params: depuis ? { depuis } : {}, headers: headers(), timeout: 12000 }).then(data),
   sync: (actions) => api.post('/api/prep/sync', { actions }, { ...quiet, headers: headers(), timeout: 20000 }).then(data),
   reasoning: (exercice, body) => api.post(`/api/prep/exercices/${exercice}/raisonnement`, body, { headers: headers(), timeout: 9000 }).then(data),
   ranking: (programme, periode = 'tout', { signal, ...page } = {}) => api.get(`/api/prep/programmes/${programme}/classement`, { ...quiet, params: { ...page, periode }, signal, headers: headers(), timeout: 12000 }).then(data),

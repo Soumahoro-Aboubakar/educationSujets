@@ -136,6 +136,14 @@ exports.sync = asyncHandler(async (req, res) => {
   res.json({ success: true, data: { ...out, serveurJour: progress.today() } });
 });
 
+// GET /api/prep/progressions?depuis=ISO&limit=50 — états privés de l'identité (lot 5, lecture seule)
+exports.getProgressions = asyncHandler(async (req, res) => {
+  const identite = await requireIdentity(req);
+  const out = await progress.listProgress(identite, { since: typeof req.query.depuis === 'string' && !Number.isNaN(Date.parse(req.query.depuis)) ? req.query.depuis : null, limit: parseInt(req.query.limit, 10) || 50 });
+  res.set('Cache-Control', 'private, no-store');
+  res.json({ success: true, data: { ...out, serveurJour: progress.today() } });
+});
+
 // POST /api/prep/exercices/:code/raisonnement (§ 13)
 exports.reasoning = asyncHandler(async (req, res) => {
   const identite = await requireIdentity(req);
@@ -165,8 +173,14 @@ exports.reasoning = asyncHandler(async (req, res) => {
   if (doc.programme) {
     if (verdict.verdict === 'exact') doc.etat.compteurs.raisonnementsValides += 1;
     else doc.etat = core.markFragile(doc.etat, req.params.code, (found.exercice.notions || [])[0], jour);
-    doc.markModified('etat');
-    await doc.save();
+    // Écriture conditionnelle (lot 5) : un conflit avec un autre appareil se rejoue une fois.
+    try { await progress.finalize(doc); } catch (error) {
+      if (error.code !== 'CONFLIT_REVISION') throw error;
+      const fresh = await progress.loadProgress(identite, doc.programme);
+      if (verdict.verdict === 'exact') fresh.etat.compteurs.raisonnementsValides += 1;
+      else fresh.etat = core.markFragile(fresh.etat, req.params.code, (found.exercice.notions || [])[0], jour);
+      await progress.finalize(fresh);
+    }
   }
   res.json({ success: true, data: { disponible: true, ...verdict, ...reference, droits: await progress.rights(identite, req.user) } });
 });

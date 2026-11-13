@@ -595,7 +595,9 @@ function markFragile(state, exercice, notion, jour) {
 function applyLesson(state, lecon, position, terminee, jour) {
   var s = clone(state);
   var prev = s.lecons[lecon] || { position: 0, terminee: false };
-  s.lecons[lecon] = { position: Math.max(0, Math.min(1, position == null ? prev.position : position)), terminee: prev.terminee || Boolean(terminee), le: jour };
+  var pos = Math.max(0, Math.min(1, position == null ? (prev.derniere != null ? prev.derniere : prev.position) : Number(position) || 0));
+  // position = plus loin atteint (monotone) ; derniere = endroit où l'élève s'est arrêté, même plus haut.
+  s.lecons[lecon] = { position: Math.max(prev.position || 0, pos), derniere: pos, terminee: prev.terminee || Boolean(terminee), le: jour };
   markActiveDay(s, jour);
   return s;
 }

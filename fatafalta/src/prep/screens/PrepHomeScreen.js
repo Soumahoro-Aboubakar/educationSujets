@@ -13,7 +13,8 @@ import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import core from '../shared/prepCore';
 import { getLesson, getModule, getProgramme, programmeModules, useContentGeneration } from '../content';
-import usePrep, { useRights, useSummary } from '../store';
+import usePrep, { useRights, useSummary, currentDevice } from '../store';
+import { lastStorageError } from '../storage';
 import prepApi from '../api';
 import { motion, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
@@ -239,6 +240,9 @@ const PrepHomeScreen = ({ navigation, route }) => {
   const locked = !rights.peutEtudier;
   const reviews = summary.reviews;
   const trialAlert = !rights.abonne && rights.essai.alerte;
+  // Écriture locale impossible (stockage plein) : signalée ; la file hors ligne a déjà son indicateur.
+  const storageError = lastStorageError();
+  const syncNote = storageError ? 'Espace de stockage insuffisant : ta progression récente est gardée en mémoire et envoyée dès que possible.' : null;
 
   // Module conseillé : le premier publié non validé ; les suivants « en avance » le signalent.
   const recommendedIndex = modules.findIndex((m) => m.publie && !core.moduleStatus(m.module, etat).valide);
@@ -253,7 +257,18 @@ const PrepHomeScreen = ({ navigation, route }) => {
     }
     if (enCours?.type === 'lecon') {
       const l = getLesson(enCours.lecon);
-      if (l) return { label: `Leçon ${l.index + 1} · ${l.lecon.titre}`, sub: `${l.module.matiere} · ${l.module.titre}`, progress: etat.lecons?.[l.lecon.code]?.position || 0, go: () => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.lecon.code }) };
+      if (l) return { label: `Leçon ${l.index + 1} · ${l.lecon.titre}`, sub: `${l.module.matiere} · ${l.module.titre}`, progress: etat.lecons?.[l.lecon.code]?.derniere ?? etat.lecons?.[l.lecon.code]?.position ?? 0, go: () => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.lecon.code }) };
+    }
+    // Rien en cours sur cet appareil : reprise enregistrée sur le serveur (autre appareil, lot 5).
+    const reprise = etat.derniereReprise?.appareil && etat.derniereReprise.appareil !== currentDevice() ? etat.derniereReprise : null;
+    if (!enCours && reprise?.type === 'lecon' && !etat.lecons?.[reprise.lecon]?.terminee) {
+      const l = getLesson(reprise.lecon);
+      if (l) return { label: `Leçon ${l.index + 1} · ${l.lecon.titre}`, sub: `${l.module.matiere} · ${l.module.titre}`, progress: reprise.position ?? etat.lecons?.[l.lecon.code]?.derniere ?? 0, go: () => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.lecon.code }) };
+    }
+    if (!enCours && reprise?.type === 'session' && reprise.module && getModule(reprise.module)) {
+      const mod = getModule(reprise.module);
+      // Les réponses en cours d'une session restent sur l'appareil qui les a saisies : on rouvre le module.
+      return { label: `Niveau ${reprise.niveau || 1} · ${mod.titre}`, sub: 'Commencé sur un autre appareil', progress: (reprise.index || 0) / Math.max(1, reprise.total || 1), go: () => navigation.navigate('PrepModule', { programme: programmeCode, module: reprise.module }) };
     }
     return null;
   })();
@@ -339,6 +354,11 @@ const PrepHomeScreen = ({ navigation, route }) => {
                 <Text variant="caption" style={[styles.trialText, (trialAlert || !rights.essai.actif) && { color: colors.warning }]}>{trialLabel}</Text>
                 <HomeChevron />
               </PressScale>
+            ) : null}
+            {syncNote ? (
+              <View style={styles.syncNote} accessibilityLiveRegion="polite">
+                <Text variant="caption" style={{ color: storageError ? colors.warning : brand.inkSoft }}>{syncNote}</Text>
+              </View>
             ) : null}
 
             {/* ── Puces + modules ── */}
@@ -436,6 +456,7 @@ const useStyles = createThemedStyles(({ brand, theme, colors }) => {
     goalBar: { flex: 1, minWidth: 32 },
     trial: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 14, paddingHorizontal: 12, minHeight: 44, paddingVertical: 8, borderRadius: 12, backgroundColor: brand.paperDim },
     trialAlert: { backgroundColor: colors.warningWash, borderColor: colors.warningWash },
+    syncNote: { marginTop: 10, paddingHorizontal: 4 },
     trialText: { flex: 1, color: brand.inkSoft },
     sheetWrap: { flexGrow: 1, marginTop: 10 },
     ghost: { position: 'absolute', top: -10, left: 16, right: 16, height: 48, borderTopLeftRadius: 26, borderTopRightRadius: 26, backgroundColor: theme.brand.ghost, borderWidth: StyleSheet.hairlineWidth, borderColor: 'rgba(255,255,255,0.25)' },

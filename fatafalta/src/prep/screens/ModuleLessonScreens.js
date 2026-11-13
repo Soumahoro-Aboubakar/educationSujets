@@ -2,7 +2,7 @@ import Pressable from '../../components/ui/FeedbackPressable';
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { AppState, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -261,7 +261,10 @@ export const LessonScreen = ({ navigation, route }) => {
   const [player, setPlayer] = useState({ playing: false, started: false });
   const [dockHold, setDockHold] = useState(false);
   useEffect(() => { if (!vs.panelOut) setDockHold(false); }, [vs.panelOut]);
-  const lastPos = useRef(etat.lecons?.[leconCode]?.position || 0);
+  // Reprise là où l'élève s'est arrêté (même s'il était remonté), pas au plus loin atteint.
+  const lastPos = useRef(etat.lecons?.[leconCode]?.derniere ?? etat.lecons?.[leconCode]?.position ?? 0);
+  const savedPos = useRef(lastPos.current);
+  const resumeTarget = useRef(lastPos.current); // figé : les premiers défilements ne le modifient pas
   const started = useRef(Date.now());
   const opened = useRef(false);
   const size = prefs.tailleTexte || 17;
@@ -279,10 +282,21 @@ export const LessonScreen = ({ navigation, route }) => {
     const minutes = Math.min(30, (Date.now() - started.current) / 60000);
     started.current = Date.now();
     addMinutes(programmeCode, minutes);
+    savedPos.current = lastPos.current;
     lessonProgress(programmeCode, leconCode, lastPos.current, terminee);
   }, [addMinutes, lessonProgress, programmeCode, leconCode]);
 
   useFocusEffect(useCallback(() => () => save(false), [save]));
+
+  // Sauvegarde automatique (lot 5) : toutes les 5 s si la position a changé de façon significative,
+  // et immédiatement au passage en arrière-plan (appel, verrouillage, autre app).
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!done && Math.abs(lastPos.current - savedPos.current) >= 0.05) save(false);
+    }, 5000);
+    const sub = AppState.addEventListener('change', (state) => { if (state !== 'active' && !done) save(false); });
+    return () => { clearInterval(timer); sub.remove(); };
+  }, [save, done]);
 
   // Changement de version : on garde le passage lu (même proportion du texte).
   const [versionBubble, setVersionBubble] = useState(null);
@@ -305,10 +319,10 @@ export const LessonScreen = ({ navigation, route }) => {
       if (h > viewH) requestAnimationFrame(() => scroll.current?.scrollTo({ y: ratio * (h - viewH), animated: false }));
       return;
     }
-    if (!resumed.current && lastPos.current > 0.04 && lastPos.current < 0.98 && h > viewH) {
+    if (!resumed.current && resumeTarget.current > 0.04 && resumeTarget.current < 0.98 && h > viewH) {
       resumed.current = true;
       setTimeout(() => {
-        scroll.current?.scrollTo({ y: lastPos.current * (h - viewH), animated: !reduce });
+        scroll.current?.scrollTo({ y: resumeTarget.current * (h - viewH), animated: !reduce });
         setResumeBubble(true);
         setTimeout(() => setResumeBubble(false), 2000);
       }, 250);
@@ -316,7 +330,7 @@ export const LessonScreen = ({ navigation, route }) => {
   };
 
   const onPos = useCallback((p) => {
-    lastPos.current = Math.max(lastPos.current, p);
+    lastPos.current = p;
     if (p > 0.9 && !nearEnd) setNearEnd(true);
   }, [nearEnd]);
   const handler = useAnimatedScrollHandler((e) => {

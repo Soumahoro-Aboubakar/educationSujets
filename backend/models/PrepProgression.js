@@ -18,6 +18,11 @@ const PrepProgressionSchema = new mongoose.Schema({
   stats: { type: mongoose.Schema.Types.Mixed, default: {} },
   matieresFortes: { type: [String], default: [] },
   derniereActivite: { type: Date, default: null },
+  // Lot 5 : révision pour l'écriture conditionnelle (deux appareils, deux requêtes concurrentes)
+  // et clés des dernières actions appliquées, écrites avec l'état (aucune double application).
+  revision: { type: Number, default: 0 },
+  schemaVersion: { type: Number, default: 2 },
+  appliquees: { type: [String], default: [] },
 }, { timestamps: true, minimize: false });
 
 PrepProgressionSchema.index({ identite: 1, programme: 1 }, { unique: true });

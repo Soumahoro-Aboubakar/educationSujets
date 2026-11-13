@@ -19,6 +19,7 @@ router.get('/modules/:code', prep.getModule);
 router.post('/exercices/:code/tentative', limits.publicWrite, prep.attempt);
 router.post('/exercices/:code/raisonnement', limits.publicWrite, prep.reasoning);
 router.post('/sync', limits.publicWrite, prep.sync);
+router.get('/progressions', prep.getProgressions);
 router.get('/programmes/:code/classement', prep.ranking);
 router.get('/programmes/:code/candidats', limits.search, prep.searchCandidates);
 router.get('/programmes/:code/candidats/:identite', prep.candidate);

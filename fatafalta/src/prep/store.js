@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { create } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import core from './shared/prepCore';
-import { loadState, saveState } from './storage';
+import { loadState, loadToken, saveState, saveToken } from './storage';
 import { deviceIdentifiers } from './device';
 import prepApi, { setPrepToken } from './api';
 import { getExercise, getLesson, getModule, getProgramme, moduleVersions, publishedModuleDefs } from './content';
@@ -21,10 +21,15 @@ export const todayKey = () => core.dayKey(new Date(), -new Date().getTimezoneOff
 const PREP_ACTIONS = new Set(['tentative', 'lecon', 'session', 'blanc']);
 let flushTimer = null;
 let flushing = false;
+let retryDelay = 1000;
+let appareilId = null;
+let inFlight = new Set();
+/** Réponses refusées définitivement : diagnostic conservé (les 20 dernières), jamais renvoyées. */
+const MAX_REJETS = 20;
 let counter = 0;
 const newKey = () => `${Date.now().toString(36)}-${(counter += 1).toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 
-const PERSISTED = ['identite', 'token', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'candidatsSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding', 'videos'];
+const PERSISTED = ['identite', 'sequence', 'rejets', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'candidatsSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding', 'videos'];
 
 // versions : version choisie par cours de langue { [codeModule]: 'en' } ; « fr » par défaut.
 const DEFAULT_PREFS = { objectif: 10, tailleTexte: 17, puce: {}, rythmeFait: false, testPropose: {}, notifications: true, versions: {} };
@@ -58,6 +63,9 @@ const settle = (cle, result) => {
   list.forEach((resolve) => resolve(result));
 };
 
+/** Identifiant de cet appareil (reprise partagée) ; null avant la déclaration. */
+export const currentDevice = () => appareilId;
+
 /** Modules utilisés par une session non terminée : leur mise à jour attend la fin de la session. */
 export const busyModules = (sessions) => {
   const out = new Set();
@@ -83,6 +91,8 @@ const usePrep = create((set, get) => ({
   queue: [],
   prefs: DEFAULT_PREFS,
   enCours: {},
+  sequence: 0,
+  rejets: [],
   sessions: {},
   online: null,
   derniereDate: null,
@@ -149,9 +159,52 @@ const usePrep = create((set, get) => ({
     // Manipulation de l'horloge (§ 25.8) : une date antérieure à la dernière connue est suspecte.
     const suspect = Boolean(stored?.derniereDate && today < stored.derniereDate);
     set({ ...patch, ready: true, horlogeSuspecte: suspect, derniereDate: suspect ? stored.derniereDate : today });
-    if (patch.token) setPrepToken(patch.token);
+    // Jeton d'identité : SecureStore (lot 5) ; reprise de l'ancien emplacement dans le fichier JSON.
+    const token = (await loadToken()) || stored?.token || null;
+    if (stored?.token) { await saveToken(stored.token); get().persist(); }
+    if (token) { set({ token }); setPrepToken(token); }
     await get().ensureIdentity();
+    get().pullProgress();
     get().refreshContent(true);
+  },
+
+  /**
+   * Relit les progressions du serveur (lot 5) : un deuxième appareil retrouve le parcours sans
+   * action locale. Tant que des actions locales attendent, la copie locale est gardée : elle
+   * sera remplacée par l'état serveur après leur envoi.
+   */
+  pullProgress: async () => {
+    if (!get().token) return;
+    try {
+      const recu = {};
+      let depuis;
+      for (let page = 0; page < 10; page += 1) {
+        // eslint-disable-next-line no-await-in-loop
+        const out = await prepApi.progressions(depuis);
+        Object.assign(recu, out?.progressions || {});
+        if (!out || out.complet || !out.curseur) break;
+        depuis = out.curseur;
+      }
+      if (get().queue.length || !Object.keys(recu).length) return;
+      const progressions = { ...get().progressions };
+      Object.entries(recu).forEach(([code, p]) => { if (p?.etat) progressions[code] = p.etat; });
+      set({ progressions, online: true });
+      get().persist();
+    } catch (error) {
+      if (!error?.response) set({ online: false });
+    }
+  },
+
+  /**
+   * Reprise partagée entre appareils : dernière leçon ou session ouverte. `vu` est la version de
+   * reprise serveur connue ; le serveur refuse d'écraser une reprise plus récente d'un autre appareil.
+   */
+  shareResume: (programme, cible) => {
+    if (!programme || !cible || !appareilId) return;
+    const sequence = (get().sequence || 0) + 1;
+    set({ sequence });
+    const vu = get().progressions[programme]?.derniereReprise?.version || 0;
+    get().enqueue({ type: 'reprise', programme, appareil: appareilId, seq: sequence, vu, cible });
   },
 
   /**
@@ -166,6 +219,7 @@ const usePrep = create((set, get) => ({
 
   /** Identité automatique, sans saisie (§ 25.1) ; restaurée après réinstallation (§ 25.4). */
   ensureIdentity: async () => {
+    if (!appareilId) appareilId = (await deviceIdentifiers()).appareilId;
     const s = get();
     if (!s.identite) {
       // Pseudonyme local immédiat (même graine que le serveur) : rien n'attend le réseau.
@@ -178,6 +232,7 @@ const usePrep = create((set, get) => ({
       const ids = await deviceIdentifiers();
       const out = await prepApi.declare(ids);
       setPrepToken(out.token);
+      await saveToken(out.token);
       const local = get();
       const progressions = { ...local.progressions };
       // Données retrouvées sur le serveur (réinstallation) : elles priment si la copie locale est vide.
@@ -257,7 +312,12 @@ const usePrep = create((set, get) => ({
   },
 
   enqueue: (action) => {
-    set({ queue: [...get().queue, { cle: action.cle || newKey(), jour: todayKey(), ...action }].slice(-2000), derniereDate: todayKey() });
+    // Aucune troncature silencieuse (lot 5) : seules les reprises non envoyées d'un même programme
+    // sont compactées (la plus récente suffit). Réponses et soumissions ne sont jamais compactées.
+    const base = action.type === 'reprise'
+      ? get().queue.filter((a) => !(a.type === 'reprise' && a.programme === action.programme && !inFlight.has(a.cle)))
+      : get().queue;
+    set({ queue: [...base, { cle: action.cle || newKey(), jour: todayKey(), ...action }], derniereDate: todayKey() });
     get().persist();
     clearTimeout(flushTimer);
     flushTimer = setTimeout(() => get().flush(), 1500);
@@ -269,12 +329,22 @@ const usePrep = create((set, get) => ({
     if (flushing || !s.token || !s.queue.length) return;
     flushing = true;
     const batch = s.queue.slice(0, 200);
+    inFlight = new Set(batch.map((a) => a.cle));
+    let retryLater = false;
     try {
       const out = await prepApi.sync(batch);
-      const sent = new Set(batch.map((a) => a.cle));
+      // Acquittement individuel (lot 5) : appliquée, doublon, refus définitif ou conflit → retirée ;
+      // « retry » ou sans réponse → gardée et renvoyée plus tard (délai croissant).
+      const byKey = new Map((out.resultats || []).filter((r) => r?.cle).map((r) => [r.cle, r]));
+      const acked = (a) => byKey.has(a.cle) && byKey.get(a.cle).statut !== 'retry';
+      const sent = new Set(batch.filter(acked).map((a) => a.cle));
+      retryLater = sent.size < batch.length;
+      byKey.forEach((r, cle) => { if (r.statut !== 'retry') settle(cle, r); });
+      const refus = batch.filter((a) => sent.has(a.cle) && byKey.get(a.cle).ok === false)
+        .map((a) => ({ cle: a.cle, type: a.type, programme: a.programme, erreur: byKey.get(a.cle).erreur || 'ERREUR', message: byKey.get(a.cle).message || '', le: new Date().toISOString() }));
       const restant = get().queue.filter((a) => !sent.has(a.cle));
-      (out.resultats || []).forEach((r) => { if (r?.cle) settle(r.cle, r); });
       const patch = { queue: restant, droitsServeur: out.droits, online: true };
+      if (refus.length) patch.rejets = [...(get().rejets || []), ...refus].slice(-MAX_REJETS);
       if (!restant.length) {
         patch.progressions = { ...get().progressions };
         Object.entries(out.progressions || {}).forEach(([code, p]) => { patch.progressions[code] = p.etat; });
@@ -283,10 +353,17 @@ const usePrep = create((set, get) => ({
       patch.essai = { ...get().essai, jours: [...new Set([...get().essai.jours, ...joursServeur])].sort() };
       set(patch);
       get().persist();
-      if (restant.length) setTimeout(() => get().flush(), 300);
+      if (retryLater) {
+        setTimeout(() => get().flush(), retryDelay);
+        retryDelay = Math.min(60000, retryDelay * 2);
+      } else {
+        retryDelay = 1000;
+        if (restant.length) setTimeout(() => get().flush(), 300);
+      }
     } catch (error) {
       set({ online: false });
     } finally {
+      inFlight = new Set();
       flushing = false;
     }
   },
@@ -294,6 +371,7 @@ const usePrep = create((set, get) => ({
   // ── Leçons (§ 9) ───────────────────────────────────────────────────────
   lessonProgress: (programme, lecon, position, terminee) => {
     const found = getLesson(lecon);
+    if (found && !terminee) get().shareResume(programme, { type: 'lecon', module: found.module.code, lecon, position });
     return get().act({ type: 'lecon', programme, lecon, position, terminee }, (etat, jour) => {
       let next = core.applyLesson(etat, lecon, position, terminee, jour);
       if (found) next = core.refreshModule(next, found.module);
@@ -309,7 +387,15 @@ const usePrep = create((set, get) => ({
     get().enqueue({ type: 'minutes', programme, minutes: Math.round(minutes * 100) / 100 });
   },
 
-  setEnCours: (programme, value) => { set({ enCours: { ...get().enCours, [programme]: value } }); get().persist(); },
+  setEnCours: (programme, value) => {
+    const previous = get().enCours[programme];
+    set({ enCours: { ...get().enCours, [programme]: value } });
+    get().persist();
+    // Session : la reprise est partagée au changement de question (pas à chaque geste).
+    if (value?.type === 'session' && (previous?.id !== value.id || previous?.index !== value.index)) {
+      get().shareResume(programme, { type: 'session', module: value.module || null, session: value.id, mode: value.mode, niveau: value.niveau || null, index: value.index, total: value.total });
+    }
+  },
 
   // ── Sessions d'exercices (§ 10) ────────────────────────────────────────
   saveSession: (session) => { set({ sessions: { ...get().sessions, [session.id]: session } }); get().persist(); },

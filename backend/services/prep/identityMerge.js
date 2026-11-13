@@ -39,7 +39,7 @@ const merge = async (source, target) => {
       if (current.mergedIdentities.some((id) => String(id) === String(source._id))) { done = true; break; }
       const etat = combine(current.etat, doc.etat);
       const result = await PrepProgression.updateOne({ _id: current._id, __v: current.__v, mergedIdentities: { $ne: source._id } },
-        { $set: { etat }, $addToSet: { mergedIdentities: source._id }, $inc: { __v: 1 } });
+        { $set: { etat }, $addToSet: { mergedIdentities: source._id, appliquees: { $each: doc.appliquees || [] } }, $inc: { __v: 1, revision: 1 } });
       done = Boolean(result.modifiedCount);
     }
     if (!done) throw new Error('Fusion concurrente : réessayer le rattachement');
