@@ -100,7 +100,7 @@ const SubscribeOffer = ({ status, checkoutPath }) => {
   const plans = useAsync(() => payments.plans(), []);
   const plan = plans.data;
   return (
-    <div className="mb-6 overflow-hidden rounded-2xl bg-ink text-white shadow-lift">
+    <div className="overflow-hidden rounded-2xl bg-ink text-white shadow-lift">
       <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-7">
         <div>
           <p className="text-sm font-medium text-gold-light">{status === 'EXPIRED' ? 'Ton abonnement est arrivé à terme' : 'Aucun abonnement actif'}</p>
@@ -147,7 +147,7 @@ export const AccountSubscription = () => {
           <ArrowLeft size={15} />Revenir dans l’application
         </a>
       ) : null}
-      {!active && data.status !== 'PENDING' ? <SubscribeOffer status={data.status} checkoutPath={checkoutPath} /> : null}
+      {/* D'abord les informations de l'abonnement, puis l'invitation à s'abonner. */}
       <Card className="px-5">
         <InfoRow label="Statut"><StatusPill status={data.status} /></InfoRow>
         {data.firstActivatedAt ? <InfoRow label="Date de début" value={formatLongDate(data.firstActivatedAt)} /> : null}
@@ -155,6 +155,7 @@ export const AccountSubscription = () => {
         {data.renewalDate ? <InfoRow label="Renouvellement annuel" value={formatLongDate(data.renewalDate)} /> : null}
         <InfoRow label="Prochain paiement" value={`${formatAmount(data.nextPayment.amount)} · ${data.nextPayment.label}`} />
       </Card>
+      {!active && data.status !== 'PENDING' ? <div className="mt-6"><SubscribeOffer status={data.status} checkoutPath={checkoutPath} /></div> : null}
 
       <h2 className="mb-3 mt-10 text-lg font-bold text-ink">Historique des paiements</h2>
       <Card className="overflow-hidden">

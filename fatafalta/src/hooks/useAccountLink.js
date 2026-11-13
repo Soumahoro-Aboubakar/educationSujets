@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { Alert } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import useAsyncAction from './useAsyncAction';
 import { createWebHandoff } from '../services/billing';
@@ -9,9 +8,10 @@ import { canOpenAccount } from '../utils/storePolicy';
 import { getErrorAlert } from '../utils/userMessages';
 
 /**
- * « Voir mon abonnement » : ouvre la page « Mon abonnement » du compte sur le site, déjà connecté
+ * « Voir mon abonnement » : ouvre directement le site (navigateur du téléphone) sur la page
+ * « Mon abonnement » du compte, déjà connecté
  * grâce à un code de passage à usage unique (le jeton de session n'est jamais dans l'adresse).
- * Au retour dans l'application, les droits sont relus depuis le serveur.
+ * Au retour dans l'application, les droits sont relus depuis le serveur (premier plan).
  */
 export const useAccountLink = () => {
   const [run, opening] = useAsyncAction();
@@ -26,10 +26,11 @@ export const useAccountLink = () => {
       const { code } = await createWebHandoff();
       const returnUrl = Linking.createURL('abonnement-retour');
       const params = new URLSearchParams({ handoff: code, source: 'app', return: returnUrl });
-      await WebBrowser.openAuthSessionAsync(`${checkout.webAccountUrl}?${params.toString()}`, returnUrl);
+      // Ouverture directe du site dans le navigateur du téléphone ; au retour dans l'app,
+      // les droits sont relus automatiquement (retour au premier plan).
+      await Linking.openURL(`${checkout.webAccountUrl}?${params.toString()}`);
     } catch (error) {
       Alert.alert(...getErrorAlert(error, 'abonnement', 'tu'));
-    } finally {
       refreshAccount();
     }
   }), [run, checkout, refreshAccount]);
