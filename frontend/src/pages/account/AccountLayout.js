@@ -27,12 +27,19 @@ const AccountLayout = () => {
     const next = new URLSearchParams(params);
     next.delete('handoff');
     setParams(next, { replace: true });
-    exchangeHandoff(code).then(() => setHandoff('done'));
+    exchangeHandoff(code).then((result) => {
+      // Lien expiré ou déjà utilisé : on le signale (connexion, puis vérification du compte).
+      if (!result.success) { next.set('lien', 'expire'); setParams(next, { replace: true }); }
+      setHandoff('done');
+    });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading || handoff === 'pending') return <Container className="flex justify-center py-24"><Spinner /></Container>;
   // Page protégée : connexion, puis retour exact à la page demandée (chemin et paramètres).
-  if (!user) return <Navigate to={`/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`} replace />;
+  if (!user) {
+    const fromApp = new URLSearchParams(location.search).get('source') === 'app';
+    return <Navigate to={`/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}${fromApp ? '&raison=lien-app' : ''}`} replace />;
+  }
 
   return (
     <Container className="py-8 md:py-12">

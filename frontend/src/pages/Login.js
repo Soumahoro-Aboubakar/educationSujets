@@ -10,6 +10,13 @@ const Login = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const next = params.get('next');
+  // Arrivée depuis l'application avec un lien expiré, ou changement de compte demandé.
+  const raison = params.get('raison');
+  const notice = raison === 'lien-app'
+    ? 'Le lien depuis l’application a expiré. Connecte-toi avec le même compte que dans l’application : ton abonnement y sera rattaché.'
+    : raison === 'autre-compte'
+      ? 'Connecte-toi avec le compte que tu utilises dans l’application.'
+      : null;
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,7 +33,7 @@ const Login = () => {
     else setError(result.error);
   };
 
-  const suffix = next ? `?next=${encodeURIComponent(next)}` : '';
+  const suffix = next ? `?next=${encodeURIComponent(next)}${raison ? `&raison=${encodeURIComponent(raison)}` : ''}` : '';
 
   return (
     <AuthShell
@@ -34,6 +41,7 @@ const Login = () => {
       subtitle="Connectez-vous pour accéder à vos sujets et à votre abonnement."
       footer={<>Pas encore de compte ? <Link to={`/register${suffix}`} className="inline-block py-2 font-semibold text-burgundy hover:underline">Créer un compte</Link></>}
     >
+      {notice ? <p role="status" className="mb-5 rounded-xl border border-gold/30 bg-gold-wash px-4 py-3 text-sm leading-relaxed text-ink">{notice}</p> : null}
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <Field label="Email" type="email" autoComplete="email" required value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
         <PasswordField label="Mot de passe" autoComplete="current-password" required value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} />

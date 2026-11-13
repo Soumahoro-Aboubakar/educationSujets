@@ -9,6 +9,7 @@ import { account, errorMessage, payments } from '../../lib/api';
 import { documentTitle, formatAmount, formatDate, formatLongDate } from '../../lib/format';
 import { PageTitle } from './AccountLayout';
 import { AccountPrepResume } from '../prep/PrepPages';
+import AppAccountCheck from '../../components/account/AppAccountCheck';
 
 const SUBSCRIPTION_TITLES = {
   ACTIVE: 'Abonnement actif',
@@ -127,7 +128,12 @@ export const AccountSubscription = () => {
   const [params] = useSearchParams();
   const fromApp = appReturnUrl(params.get('return'));
   // Le paiement garde l'adresse de retour : la confirmation propose de revenir dans l'application.
-  const checkoutPath = fromApp ? `/abonnement?${new URLSearchParams({ source: 'app', return: fromApp }).toString()}` : '/abonnement';
+  // Empreinte du compte et état du lien : la page de paiement refait la même vérification.
+  const checkoutPath = fromApp ? `/abonnement?${new URLSearchParams({
+    source: 'app', return: fromApp,
+    ...(params.get('compte') ? { compte: params.get('compte') } : {}),
+    ...(params.get('lien') ? { lien: params.get('lien') } : {}),
+  }).toString()}` : '/abonnement';
 
   if (loading && !data) return <Loading />;
   if (error) return <Failed onRetry={reload} />;
@@ -147,6 +153,7 @@ export const AccountSubscription = () => {
           <ArrowLeft size={15} />Revenir dans l’application
         </a>
       ) : null}
+      <AppAccountCheck className="mb-6" />
       {/* D'abord les informations de l'abonnement, puis l'invitation à s'abonner. */}
       <Card className="px-5">
         <InfoRow label="Statut"><StatusPill status={data.status} /></InfoRow>

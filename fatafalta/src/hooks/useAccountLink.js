@@ -16,9 +16,12 @@ import { getErrorAlert } from '../utils/userMessages';
  */
 /** Ouvre la page « Mon abonnement » ; renvoie false si le serveur ne la propose pas. */
 const openAccountUrl = async (webAccountUrl) => {
-  const { code } = await createWebHandoff();
+  const { code, accountHint } = await createWebHandoff();
   const returnUrl = Linking.createURL('abonnement-retour');
   const params = new URLSearchParams({ handoff: code, source: 'app', return: returnUrl });
+  // Empreinte du compte (non réversible) : si le lien a expiré, le site vérifie qu'on paie bien
+  // avec le même compte que dans l'application.
+  if (accountHint) params.set('compte', accountHint);
   // Ouverture directe du site dans le navigateur du téléphone ; au retour dans l'app,
   // les droits sont relus automatiquement (retour au premier plan).
   await Linking.openURL(`${webAccountUrl}?${params.toString()}`);

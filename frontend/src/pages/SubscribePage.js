@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import AppAccountCheck from '../components/account/AppAccountCheck';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, ExternalLink, Loader2, Lock, ShieldCheck, Smartphone, Tag, X } from 'lucide-react';
 import { Button, Card, Container, ErrorNote, Eyebrow, Field, InfoRow, Skeleton, Spinner, cx } from '../components/ui';
@@ -293,7 +294,10 @@ const SubscribePage = () => {
     const nextParams = new URLSearchParams(params);
     nextParams.delete('handoff');
     setParams(nextParams, { replace: true });
-    exchangeHandoff(code).then((result) => setHandoffState(result.success ? 'done' : 'failed'));
+    exchangeHandoff(code).then((result) => {
+      if (!result.success) { nextParams.set('lien', 'expire'); setParams(nextParams, { replace: true }); }
+      setHandoffState(result.success ? 'done' : 'failed');
+    });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Retour depuis la page GeniusPay (success_url / error_url). Ce retour ne prouve rien :
@@ -458,7 +462,7 @@ const SubscribePage = () => {
           </div>
         )}
         {handoffState === 'failed' ? (
-          <ErrorNote className="mt-6">Le lien depuis l’application a expiré. Connectez-vous pour continuer.</ErrorNote>
+          <ErrorNote className="mt-6">Le lien depuis l’application a expiré. Connectez-vous avec le même compte que dans l’application.</ErrorNote>
         ) : null}
       </section>
 
@@ -469,6 +473,7 @@ const SubscribePage = () => {
 
       {/* Paiement */}
       <section ref={panelRef} className="scroll-mt-20 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+        <AppAccountCheck className="mb-4" />
         <Card className="animate-rise-in p-5 shadow-lift [animation-delay:80ms] sm:p-8">
           {user ? <Stepper current={stepIndex} /> : null}
           {!user ? (

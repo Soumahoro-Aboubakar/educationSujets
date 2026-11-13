@@ -139,3 +139,19 @@ test('scénarios 6 à 8 : progression commencée sur l’app, reprise sur le sit
   // Le jeton PREP n'est jamais accepté dans l'adresse.
   assert.equal((await call('GET', `/prep/progressions?token=${encodeURIComponent(siteIdentity.token)}`)).status, 401);
 });
+
+test('lien app → site : empreinte de compte stable, différente par compte, sans donnée personnelle', { skip }, async () => {
+  const mobile = await login('mobile');
+  const me = (await call('GET', '/auth/me', undefined, mobile)).body.data;
+  const handoff = (await call('POST', '/auth/handoff', {}, mobile)).body.data;
+  assert.match(me.accountHint, /^[A-Za-z0-9_-]{16}$/);
+  assert.equal(handoff.accountHint, me.accountHint);
+  assert.ok(!me.accountHint.includes(String(me._id)) && !me.accountHint.includes('recette'));
+  await call('POST', '/auth/register', { name: 'Autre', email: 'autre-recette@test.invalid', password: 'Autre-2026!x' });
+  const other = await call('POST', '/auth/login', { email: 'autre-recette@test.invalid', password: 'Autre-2026!x' });
+  assert.notEqual(other.body.user.accountHint, me.accountHint);
+  // Code expiré ou inconnu : refusé, aucune session délivrée.
+  const expired = await call('POST', '/auth/handoff/exchange', { code: 'code-expire-inexistant-0000000' });
+  assert.equal(expired.status, 401);
+  assert.equal(expired.body.token, undefined);
+});

@@ -43,6 +43,7 @@ const sendTokenResponse = async (user, statusCode, res, req, rotated) => {
         isVerified: user.isVerified,
         accountStatus: user.accountStatus || 'ACTIVE',
         mustChangePassword: Boolean(user.mustChangePassword),
+        accountHint: accountHint(user._id),
       },
     });
 };
@@ -137,8 +138,18 @@ exports.revokeSessions = asyncHandler(async (req, res) => {
   sendSuccess(res, { message: 'Sessions révoquées' });
 });
 
+/**
+ * Empreinte courte et non réversible du compte (aucune donnée personnelle) : l'application la
+ * joint au lien « Voir mon abonnement » pour que le site détecte un navigateur connecté à un
+ * AUTRE compte avant un paiement. Ce n'est pas un secret ni une preuve d'identité.
+ */
+const accountHint = (userId) => crypto.createHmac('sha256', process.env.JWT_SECRET || 'fatafalta-account-hint')
+  .update(`account-hint:${userId}`).digest('base64url').slice(0, 16);
+exports.accountHint = accountHint;
+
 exports.getMe = asyncHandler(async (req, res) => {
-  sendSuccess(res, { data: req.user });
+  const data = typeof req.user?.toObject === 'function' ? req.user.toObject() : { ...req.user };
+  sendSuccess(res, { data: { ...data, accountHint: accountHint(req.user._id) } });
 });
 
 exports.refreshToken = asyncHandler(async (req, res) => {
@@ -159,7 +170,7 @@ exports.createHandoff = asyncHandler(async (req, res) => {
     user: req.user._id,
     expiresAt: new Date(Date.now() + HANDOFF_TTL_MS),
   });
-  sendSuccess(res, { statusCode: 201, data: { code, expiresIn: HANDOFF_TTL_MS / 1000 } });
+  sendSuccess(res, { statusCode: 201, data: { code, expiresIn: HANDOFF_TTL_MS / 1000, accountHint: accountHint(req.user._id) } });
 });
 
 // Échangé une seule fois par le site web contre une session normale.
