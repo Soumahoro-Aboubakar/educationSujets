@@ -137,3 +137,31 @@ Aucun résultat de store ou de fournisseur réel n'est prétendu : les paiements
 | ESLint web (fichiers modifiés) | 0 erreur |
 | Simulateur iOS (Expo Go, backend local) | démarrage, Prépa, manifeste et progressions OK |
 | Site local (Chrome headless, backend local) | pages de préparation, correction serveur d'une réponse, reprise dans `/compte` |
+
+## Évolution demandée après la mission (13 novembre 2026)
+
+**Bouton « Voir mon abonnement » dans l'app (décision du propriétaire).**
+
+- **Où** : écran « Mon accès », écran Premium de la préparation, et feuille d'accès aux téléchargements (compte connecté).
+- **Ce qu'il fait** : il ouvre la page `/compte/abonnement` du site dans le navigateur intégré, déjà connecté grâce au code de passage à usage unique. Le jeton de session n'apparaît jamais dans l'adresse.
+- **Sur le site** : sans abonnement actif ou à son terme, la page affiche l'offre avec son prix et « Prendre un abonnement » (ou « Renouveler mon abonnement »). Ce bouton mène au parcours de paiement existant ; l'adresse de retour vers l'app est conservée jusqu'à la confirmation.
+- **Au retour** : l'app relit les droits du serveur.
+- **Dans l'app elle-même** : aucun prix ni mot d'achat (vérifié par `storePolicy.test`).
+
+⚠️ **Risque Google Play à connaître.** La règle Paiements interdit de mener l'utilisateur vers un autre moyen de paiement que Google Play Billing, notamment par un bouton ou un parcours de compte. Aucun programme d'exception ne couvre la Côte d'Ivoire. Ce parcours peut entraîner le rejet de la mise à jour, le retrait de l'app ou une sanction du compte développeur.
+
+**Interrupteur serveur** : `MOBILE_ACCOUNT_LINK=false` retire le bouton de **toutes** les versions de l'app, sans republication. Un ancien serveur qui ne fournit pas `webAccountUrl` le masque aussi.
+
+**Icônes d'état**, dans l'app (`StatusMark`) et sur le site :
+
+| État | Rendu |
+| --- | --- |
+| Terminé / validé | disque vert, coche blanche et mention « Terminée », « Module maîtrisé » ou « Validé » |
+| Commencé | anneau bordeaux proportionnel à l'avancement, avec « Commencée · N % » ou « En cours » |
+| Suivant conseillé | disque bordeaux plein |
+| Pas encore ouvert | cercle neutre |
+| Accès requis | cadenas |
+
+Elles s'appliquent aux leçons, aux modules et aux niveaux d'exercices (badge « Validé »).
+
+**Tests** : backend 336/336, mobile 60/60, web 15/15. Les rendus ont été vérifiés en local (app via Expo web, site via Chrome headless). Le passage de session de l'app vers le site a été testé de bout en bout, jusqu'à la page de paiement.

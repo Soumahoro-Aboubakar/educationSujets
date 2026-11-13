@@ -41,6 +41,8 @@ exports.getEntitlements = asyncHandler(async (req, res) => {
       checkout: {
         mobileWebCheckout: billingConfig.payments.mobileWebCheckout,
         webCheckoutUrl: billingConfig.payments.webCheckoutUrl,
+        mobileAccountLink: billingConfig.payments.mobileAccountLink,
+        webAccountUrl: billingConfig.payments.webAccountUrl,
       },
     },
   });

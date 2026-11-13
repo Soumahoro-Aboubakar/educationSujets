@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDownLeft, ArrowUpRight, Check, ChevronDown, Copy, CreditCard, Download, FileText, Gift, Wallet } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, ArrowDownLeft, ArrowUpRight, Check, ChevronDown, Copy, CreditCard, Download, FileText, Gift, Wallet } from 'lucide-react';
 import { Button, Card, EmptyState, Field, InfoRow, Modal, PasswordField, SkeletonRows, StatusPill } from '../../components/ui';
 import AuthContext from '../../context/AuthContext';
 import useAsync from '../../hooks/useAsync';
 import useEntitlements from '../../hooks/useEntitlements';
-import { account, errorMessage } from '../../lib/api';
+import { account, errorMessage, payments } from '../../lib/api';
 import { documentTitle, formatAmount, formatDate, formatLongDate } from '../../lib/format';
 import { PageTitle } from './AccountLayout';
 import { AccountPrepResume } from '../prep/PrepPages';
@@ -92,21 +92,62 @@ export const AccountOverview = () => {
 };
 
 // ── Abonnement ─────────────────────────────────────────
+// Adresse de retour vers l'application (schéma de l'app uniquement), conservée jusqu'au paiement.
+const appReturnUrl = (value) => (value && /^(fatafalta|exp|exps):\/\//i.test(value) ? value : null);
+
+/** Offre affichée quand aucun abonnement n'est actif : prix serveur, puis parcours de paiement. */
+const SubscribeOffer = ({ status, checkoutPath }) => {
+  const plans = useAsync(() => payments.plans(), []);
+  const plan = plans.data;
+  return (
+    <div className="mb-6 overflow-hidden rounded-2xl bg-ink text-white shadow-lift">
+      <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-7">
+        <div>
+          <p className="text-sm font-medium text-gold-light">{status === 'EXPIRED' ? 'Ton abonnement est arrivé à terme' : 'Aucun abonnement actif'}</p>
+          {plan ? (
+            <>
+              <p className="mt-2 text-[clamp(2rem,1.6rem+1.8vw,2.75rem)] font-extrabold leading-none tracking-[-0.035em] tabular-nums">{formatAmount(plan.initial.amount)}</p>
+              <p className="mt-2 text-sm text-white/75">{`${plan.initial.months} mois d’accès complet, puis ${formatAmount(plan.monthly.amount)} par mois.`}</p>
+            </>
+          ) : <div className="mt-3 h-10 w-44 animate-pulse rounded-lg bg-white/10" aria-hidden />}
+          <ul className="mt-4 space-y-1.5 text-sm text-white/85">
+            <li className="flex items-center gap-2"><Check size={15} className="text-gold-light" />Tous les sujets et corrigés</li>
+            <li className="flex items-center gap-2"><Check size={15} className="text-gold-light" />Cours et exercices de préparation</li>
+            <li className="flex items-center gap-2"><Check size={15} className="text-gold-light" />Le même accès sur le site et l’application</li>
+          </ul>
+        </div>
+        <Button to={checkoutPath} variant="gold" size="lg" className="shrink-0">{status === 'EXPIRED' ? 'Renouveler mon abonnement' : 'Prendre un abonnement'}</Button>
+      </div>
+    </div>
+  );
+};
+
 export const AccountSubscription = () => {
   const { data, loading, error, reload } = useAsync(() => account.subscription(), []);
+  const [params] = useSearchParams();
+  const fromApp = appReturnUrl(params.get('return'));
+  // Le paiement garde l'adresse de retour : la confirmation propose de revenir dans l'application.
+  const checkoutPath = fromApp ? `/abonnement?${new URLSearchParams({ source: 'app', return: fromApp }).toString()}` : '/abonnement';
 
   if (loading && !data) return <Loading />;
   if (error) return <Failed onRetry={reload} />;
 
-  const cta = data.status === 'ACTIVE' ? 'Prolonger mon accès' : data.status === 'EXPIRED' ? 'Renouveler' : 'S’abonner';
+  const active = data.status === 'ACTIVE';
 
   return (
     <>
       <PageTitle
         title="Mon abonnement"
-        description={data.status === 'ACTIVE' ? `Actif jusqu’au ${formatLongDate(data.currentPeriodEnd)}` : SUBSCRIPTION_TITLES[data.status]}
-        action={<Button to="/abonnement">{cta}</Button>}
+        description={active ? `Actif jusqu’au ${formatLongDate(data.currentPeriodEnd)}` : SUBSCRIPTION_TITLES[data.status]}
+        action={active ? <Button to={checkoutPath} variant="secondary">Prolonger mon accès</Button>
+          : data.status === 'PENDING' ? <Button to={checkoutPath}>Suivre mon paiement</Button> : null}
       />
+      {fromApp ? (
+        <a href={fromApp} className="mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-burgundy hover:underline">
+          <ArrowLeft size={15} />Revenir dans l’application
+        </a>
+      ) : null}
+      {!active && data.status !== 'PENDING' ? <SubscribeOffer status={data.status} checkoutPath={checkoutPath} /> : null}
       <Card className="px-5">
         <InfoRow label="Statut"><StatusPill status={data.status} /></InfoRow>
         {data.firstActivatedAt ? <InfoRow label="Date de début" value={formatLongDate(data.firstActivatedAt)} /> : null}

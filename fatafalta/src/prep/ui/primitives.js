@@ -560,3 +560,38 @@ const useStyles = createThemedStyles(({ brand, colors, illustration, subjectPale
   });
   return { BADGE, FOLD_TONES, AVATAR_TINTS, styles };
 });
+
+/**
+ * Pastille d'état d'une leçon, d'un module ou d'un niveau (même code visuel partout) :
+ *  - « done »     : terminé / validé — disque vert plein + coche blanche ;
+ *  - « progress » : commencé, pas terminé — anneau bordeaux proportionnel à l'avancement, numéro bordeaux ;
+ *  - « current »  : suivant conseillé — disque bordeaux plein, numéro blanc ;
+ *  - « todo »     : pas encore ouvert — cercle neutre, numéro discret ;
+ *  - « locked »   : accès requis — disque pâle + cadenas.
+ * L'état est aussi annoncé au lecteur d'écran par la ligne qui l'utilise.
+ */
+export const StatusMark = ({ state = 'todo', label, value = 0, size = 40 }) => {
+  const { brand, colors } = useTheme();
+  const numStyle = { fontFamily: 'Inter-Bold', fontSize: size >= 40 ? 15 : 14, lineHeight: 20, fontVariant: ['tabular-nums'] };
+  if (state === 'progress') {
+    // Fond plein : le filet du parcours ne doit pas traverser le numéro.
+    return (
+      <View style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: brand.sheet }}>
+        <ProgressRing size={size} stroke={3} value={Math.max(0.08, value)} color={brand.burgundy} track={brand.lineStrong} gradient={false} duration={500}>
+          <Text style={[numStyle, { color: brand.burgundy }]}>{label}</Text>
+        </ProgressRing>
+      </View>
+    );
+  }
+  const base = { width: size, height: size, borderRadius: size / 2, alignItems: 'center', justifyContent: 'center', borderWidth: 1.5 };
+  if (state === 'done') {
+    return <View style={[base, { backgroundColor: colors.successSolid, borderColor: colors.success }]}><Check size={size * 0.46} color={brand.onInk} strokeWidth={2.6} /></View>;
+  }
+  if (state === 'locked') {
+    return <View style={[base, { backgroundColor: brand.paperDim, borderColor: brand.line }]}><Lock size={size * 0.42} color={brand.inkSoft} /></View>;
+  }
+  if (state === 'current') {
+    return <View style={[base, { backgroundColor: brand.burgundySolid, borderColor: brand.burgundy }]}><Text style={[numStyle, { color: brand.onInk }]}>{label}</Text></View>;
+  }
+  return <View style={[base, { backgroundColor: brand.sheet, borderColor: brand.lineStrong }]}><Text style={[numStyle, { color: brand.inkSoft }]}>{label}</Text></View>;
+};

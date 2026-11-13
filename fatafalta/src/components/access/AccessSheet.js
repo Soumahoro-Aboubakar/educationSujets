@@ -7,6 +7,7 @@ import Sheet from '../ui/Sheet';
 import ActionButton from '../ui/ActionButton';
 import { usePlans } from '../../hooks/useAccount';
 import { formatAmount, formatRenewal } from '../../utils/format';
+import { useAccountLink } from '../../hooks/useAccountLink';
 import { canOfferPurchase } from '../../utils/storePolicy';
 
 const Benefit = ({ children }) => {
@@ -38,6 +39,9 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
   const { styles } = useStyles();
   const { data: plans } = usePlans();
   const canCheckout = canOfferPurchase(entitlements?.checkout?.mobileWebCheckout);
+  // Build store : pas d'achat dans l'app, mais accès à la page « Mon abonnement » du compte.
+  const accountLink = useAccountLink();
+  const showAccount = !canCheckout && Boolean(entitlements) && accountLink.available;
   const amount = entitlements?.nextPayment?.amount ?? plans?.initial?.amount;
   const isRenewal = entitlements?.subscription?.status === 'EXPIRED';
   const freeUntilYear = limitInfo?.freeUntilYear || plans?.downloadPolicy?.freeUntilYear || 2009;
@@ -104,6 +108,7 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
                 <Text variant="body" align="center" style={styles.footnote}>
                   Ce sujet se débloque automatiquement dès que ton compte dispose d’un accès Premium actif.
                 </Text>
+                {showAccount ? <ActionButton title="Voir mon abonnement" onPress={accountLink.open} loading={accountLink.opening} /> : null}
                 <ActionButton title="Compris" variant="secondary" onPress={onClose} />
               </>
             )}
@@ -131,6 +136,9 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
             <View style={styles.actions}>
               {limitInfo?.canSubscribe && canCheckout ? (
                 <ActionButton title="Prendre mon abonnement" onPress={onSubscribe} loading={subscribing} />
+              ) : null}
+              {limitInfo?.canSubscribe && showAccount ? (
+                <ActionButton title="Voir mon abonnement" onPress={accountLink.open} loading={accountLink.opening} />
               ) : null}
               {limitInfo?.sharedConnection && !entitlements ? (
                 <ActionButton title="Créer un compte gratuit" variant="secondary" onPress={onRegister} />

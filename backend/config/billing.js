@@ -139,6 +139,11 @@ const billing = {
     mobileWebCheckout: process.env.MOBILE_WEB_CHECKOUT !== 'false',
     // Page d'abonnement ouverte depuis le mobile, et adresse de retour après un paiement GeniusPay.
     webCheckoutUrl: `${publicWebUrl()}/abonnement`,
+    // Bouton « Voir mon abonnement » de l'application : ouvre la page du compte sur le site
+    // (statut ; abonnement si aucun accès actif). MOBILE_ACCOUNT_LINK=false le retire de toutes
+    // les versions de l'app sans republication.
+    mobileAccountLink: process.env.MOBILE_ACCOUNT_LINK !== 'false',
+    webAccountUrl: `${publicWebUrl()}/compte/abonnement`,
   },
 
   withdrawals: {

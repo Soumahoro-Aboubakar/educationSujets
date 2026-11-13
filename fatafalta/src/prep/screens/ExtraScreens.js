@@ -5,9 +5,12 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Image, Linking, ScrollView, StyleSheet, View } from 'react-native';
 import Animated from'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ArrowLeft, CheckCircle2, ExternalLink, FileText, GraduationCap, ShieldCheck, Sparkles, Timer, X } from 'lucide-react-native';
+import {
+  ArrowLeft, CheckCircle2, ExternalLink, FileText, GraduationCap, ShieldCheck, Sparkles, Timer, X,
+} from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import AuthContext from '../../context/AuthContext';
+import { useAccountLink } from '../../hooks/useAccountLink';
 import { getProgramme, packInfo, useContentGeneration } from '../content';
 import usePrep, { useSummary } from '../store';
 import { type } from '../theme';
@@ -167,6 +170,7 @@ export const PrepSubscriptionScreen = ({ navigation }) => {
     else navigation.navigate('Subscription');
   };
   // Builds stores : aucune vente. On relit seulement les droits du compte auprès du serveur.
+  const accountLink = useAccountLink();
   const refreshRights = () => runRefresh(async () => {
     await Promise.allSettled([refreshAccount(), usePrep.getState().flush()]);
   });
@@ -218,7 +222,10 @@ export const PrepSubscriptionScreen = ({ navigation }) => {
             </Text>
           </>
         ) : isAuthenticated ? (
-          <PrepButton title="Actualiser mes droits" onPress={refreshRights} loading={refreshing} style={{ marginTop: 12 }} />
+          <>
+            {accountLink.available ? <PrepButton title="Voir mon abonnement" variant="gold" icon={ExternalLink} onPress={accountLink.open} loading={accountLink.opening} style={{ marginTop: 12 }} /> : null}
+            <PrepButton title="Actualiser mes droits" variant={accountLink.available ? 'secondary' : 'primary'} onPress={refreshRights} loading={refreshing} style={{ marginTop: accountLink.available ? 8 : 12 }} />
+          </>
         ) : (
           <PrepButton title="Me connecter" onPress={() => navigation.navigate('Login', { returnTo: 'back' })} style={{ marginTop: 12 }} />
         )}

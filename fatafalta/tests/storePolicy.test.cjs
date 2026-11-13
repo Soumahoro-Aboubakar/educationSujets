@@ -69,3 +69,27 @@ test('libellés d’achat : tous protégés par la politique des stores', () => 
     });
   }
 });
+
+test('« Voir mon abonnement » : piloté par le serveur, coupable sans republication', () => {
+  for (const os of ['android', 'ios', 'web']) {
+    const policy = loadPolicy(os);
+    assert.equal(policy.canOpenAccount({ webAccountUrl: 'https://exemple.test/compte/abonnement' }), true, os);
+    assert.equal(policy.canOpenAccount({ webAccountUrl: 'https://exemple.test/compte/abonnement', mobileAccountLink: false }), false, os);
+    assert.equal(policy.canOpenAccount({}), false, `${os} : ancien serveur sans adresse`);
+    assert.equal(policy.canOpenAccount(undefined), false, os);
+  }
+});
+
+test('« Voir mon abonnement » : aucun prix ni mot d’achat dans l’app, jeton jamais dans l’adresse', () => {
+  const hook = read('src/hooks/useAccountLink.js');
+  assert.match(hook, /createWebHandoff\(\)/);
+  assert.doesNotMatch(hook.replace(/^\s*(\/\/|\*|\/\*\*).*$/gm, ''), /token|prix|payer|paiement|abonne-toi|S’abonner/i);
+  for (const file of ['src/screens/account/SubscriptionScreen.js', 'src/prep/screens/ExtraScreens.js', 'src/components/access/AccessSheet.js']) {
+    const lines = read(file).split('\n');
+    lines.forEach((line, i) => {
+      if (!/Voir mon abonnement/.test(line)) return;
+      const context = lines.slice(Math.max(0, i - 8), i + 1).join('\n');
+      assert.match(context, /accountLink\.available|showAccount/, `${file}:${i + 1} bouton non protégé par l’interrupteur serveur`);
+    });
+  }
+});

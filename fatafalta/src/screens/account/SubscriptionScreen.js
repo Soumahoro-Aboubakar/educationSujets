@@ -15,6 +15,7 @@ import { useWebCheckout } from '../../hooks/useWebCheckout';
 import PaymentMethodLogo from '../../components/payments/PaymentMethodLogo';
 import { formatAmount, formatDate, formatLongDate } from '../../utils/format';
 import { canOfferPurchase } from '../../utils/storePolicy';
+import { useAccountLink } from '../../hooks/useAccountLink';
 
 const TITLES = {
   ACTIVE: 'Abonnement actif',
@@ -31,6 +32,7 @@ const SubscriptionScreen = ({ navigation }) => {
   const { data: entitlements } = useEntitlements();
   const canCheckout = canOfferPurchase(entitlements?.checkout?.mobileWebCheckout);
   const checkout = useWebCheckout();
+  const accountLink = useAccountLink();
 
   const status = data?.status || 'NONE';
   // Suspension ou révocation décidée par le serveur : prioritaire sur la date de fin.
@@ -72,13 +74,22 @@ const SubscriptionScreen = ({ navigation }) => {
           <StatusPill status={status} />
           <Text variant="body" style={styles.summaryText}>{subtitle}</Text>
         </View>
+        {!canCheckout && accountLink.available ? (
+          <ActionButton
+            title="Voir mon abonnement"
+            icon={ExternalLink}
+            onPress={accountLink.open}
+            loading={accountLink.opening}
+            style={styles.cta}
+          />
+        ) : null}
         {!canCheckout ? (
           <ActionButton
             variant="secondary"
             title="Actualiser mes droits"
             onPress={() => refetch()}
             loading={isRefetching}
-            style={styles.cta}
+            style={accountLink.available ? styles.ctaSecond : styles.cta}
           />
         ) : null}
         <Section title="Détails">
@@ -162,6 +173,9 @@ const useStyles = createThemedStyles(({ brand, theme }) => {
 
     cta: {
       marginTop: theme.spacing.md,
+    },
+    ctaSecond: {
+      marginTop: theme.spacing.sm,
     },
     webStep: {
       marginBottom: theme.spacing.xl,

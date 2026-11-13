@@ -17,6 +17,23 @@ import useSeo from '../../hooks/useSeo';
 const SEO = { title: 'Préparation aux concours', description: 'Cours, exercices corrigés et suivi de progression pour préparer les concours, sur le site et sur l’application.', noindex: true };
 const pct = (x) => `${Math.round((x || 0) * 100)} %`;
 
+/**
+ * Pastille d'état (même code que l'application) : terminé = disque vert + coche ;
+ * commencé = anneau bordeaux proportionnel ; pas encore ouvert = cercle neutre.
+ */
+const StatusMark = ({ state, label, value = 0 }) => {
+  if (state === 'done') return <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-700 text-white" aria-hidden><Check size={15} strokeWidth={2.8} /></span>;
+  if (state === 'progress') {
+    const deg = Math.round(Math.max(0.08, value) * 360);
+    return (
+      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full" style={{ background: `conic-gradient(#6C2838 ${deg}deg, #E4DED2 0deg)` }} aria-hidden>
+        <span className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-white text-xs font-semibold tabular-nums text-burgundy">{label}</span>
+      </span>
+    );
+  }
+  return <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line-strong bg-white text-xs font-semibold tabular-nums text-ink-soft" aria-hidden>{label}</span>;
+};
+
 const Shell = ({ children, crumbs }) => (
   <Container className="py-8 sm:py-12">
     {crumbs ? <div className="mb-6"><Breadcrumbs crumbs={crumbs} /></div> : null}
@@ -189,16 +206,20 @@ export const PrepProgrammePage = () => {
                         <h3 className="text-lg font-semibold text-ink">{mod.titre}</h3>
                         <p className="mt-1 text-sm text-ink-muted">{`${done} / ${mod.lecons.length} leçons terminées${valide ? ' · module validé' : ''}`}</p>
                       </div>
-                      {valide ? <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-wash px-3 py-1 text-sm font-medium text-gold-ink"><CircleCheck size={15} />Validé</span> : null}
+                      {valide ? <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-800"><CircleCheck size={15} />Module validé</span>
+                        : done || mod.lecons.some((l) => etat.lecons?.[l.code]) ? <span className="inline-flex items-center gap-1.5 rounded-full bg-burgundy-wash px-3 py-1 text-sm font-semibold text-burgundy">En cours</span> : null}
                     </div>
                     <ol className="mt-4 grid gap-1 sm:grid-cols-2">
                       {mod.lecons.map((l, i) => {
                         const p = etat.lecons?.[l.code];
+                        const lu = p ? Math.max(p.derniere ?? 0, p.position ?? 0) : 0;
+                        const state = p?.terminee ? 'done' : p ? 'progress' : 'todo';
                         const content = (
                           <>
-                            <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold tabular-nums ${p?.terminee ? 'bg-ink text-white' : 'bg-paper-dim text-ink'}`}>{p?.terminee ? <Check size={14} /> : i + 1}</span>
+                            <StatusMark state={state} label={i + 1} value={lu} />
                             <span className="min-w-0 flex-1 truncate">{l.titre}</span>
-                            <span className="shrink-0 text-xs text-ink-muted">{`${l.duree} min`}</span>
+                            <span className="sr-only">{state === 'done' ? 'terminée' : state === 'progress' ? `commencée, ${pct(lu)}` : 'pas encore ouverte'}</span>
+                            <span className={`shrink-0 text-xs ${state === 'done' ? 'font-semibold text-emerald-800' : state === 'progress' ? 'font-semibold text-burgundy' : 'text-ink-muted'}`}>{state === 'done' ? 'Terminée' : state === 'progress' ? pct(lu) : `${l.duree} min`}</span>
                           </>
                         );
                         return (

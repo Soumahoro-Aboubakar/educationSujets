@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Navigate, NavLink, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { CreditCard, Download, Gift, LayoutDashboard, UserRound, Wallet } from 'lucide-react';
 import AuthContext from '../../context/AuthContext';
 import { Container, Spinner, cx } from '../../components/ui';
@@ -15,10 +15,22 @@ const LINKS = [
 
 /** Espace personnel : navigation latérale sur ordinateur, onglets défilants sur mobile. */
 const AccountLayout = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, exchangeHandoff } = useContext(AuthContext);
   const location = useLocation();
+  const [params, setParams] = useSearchParams();
+  // Arrivée depuis l'application (« Voir mon abonnement ») : connexion transparente par code à
+  // usage unique, retiré aussitôt de l'adresse. Le jeton de session n'apparaît jamais dans l'URL.
+  const [handoff, setHandoff] = useState(params.get('handoff') ? 'pending' : 'none');
+  useEffect(() => {
+    const code = params.get('handoff');
+    if (!code) return;
+    const next = new URLSearchParams(params);
+    next.delete('handoff');
+    setParams(next, { replace: true });
+    exchangeHandoff(code).then(() => setHandoff('done'));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (loading) return <Container className="flex justify-center py-24"><Spinner /></Container>;
+  if (loading || handoff === 'pending') return <Container className="flex justify-center py-24"><Spinner /></Container>;
   // Page protégée : connexion, puis retour exact à la page demandée (chemin et paramètres).
   if (!user) return <Navigate to={`/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`} replace />;
 

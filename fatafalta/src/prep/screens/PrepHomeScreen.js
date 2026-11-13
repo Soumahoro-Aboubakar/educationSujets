@@ -20,7 +20,7 @@ import { motion, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
 import { DailyCopy, HomeChevron, HomeScoreboard, HomeVideoBadge } from '../components/HomePresentation';
 import {
-  CornerFold, NightBackground, PrepButton, PressScale, ProgressBar, SectionTitle,
+  CornerFold, NightBackground, PrepButton, PressScale, ProgressBar, SectionTitle, StatusMark,
 } from '../ui/primitives';
 import ART from '../ui/art';
 import BottomSheet from '../ui/BottomSheet';
@@ -84,11 +84,12 @@ const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, video, 
         accessibilityLabel={`Module ${item.numero}, ${item.matiere}, ${item.titre}${item.publie ? `, ${pct} %` : ', en préparation'}${st?.valide ? ', maîtrisé' : ''}${current ? (pct ? ', en cours' : ', point de départ') : ''}${locked ? ', verrouillé, abonnement nécessaire pour étudier' : ''}${video ? ', vidéo disponible' : ''}`}
         style={styles.moduleRow}
       >
-        <View style={[styles.moduleState, current && styles.moduleNumberCurrent, st?.valide && styles.moduleDone, locked && !st?.valide && styles.moduleLocked]}>
-          {st?.valide ? <Check size={19} color={brand.onInk} strokeWidth={2.2} /> : locked ? <Lock size={17} color={brand.inkSoft} /> : (
-            <Text style={[styles.ringNum, type.tabular, { color: current ? brand.onInk : brand.inkSoft }]}>{item.numero}</Text>
-          )}
-        </View>
+        <StatusMark
+          size={36}
+          label={item.numero}
+          value={pct / 100}
+          state={st?.valide ? 'done' : locked ? 'locked' : pct > 0 ? 'progress' : current ? 'current' : 'todo'}
+        />
         <View style={[styles.moduleText, st?.valide && styles.moduleMastered]}>
           {st?.valide ? <CornerFold size={24} radius={0} cut={brand.paper} /> : null}
           <Text variant="bodyMedium" style={[styles.moduleTitle, current && !locked && { color: brand.burgundy }]}>{item.titre}</Text>
@@ -98,8 +99,9 @@ const ModuleRow = ({ item, etat, index, conseilleApres, locked, current, video, 
             {current ? <Text variant="caption" style={styles.currentLabel}>{pct ? 'En cours' : 'Point de départ'}</Text> : null}
           </View>
           <View style={styles.moduleMeta}>
+            {st?.valide ? <Text variant="caption" style={styles.doneLabel}>Module maîtrisé</Text> : null}
             <Text variant="caption" style={styles.muted}>
-              {st?.valide ? 'Module maîtrisé' : `${st?.leconsTotal || 0} leçons${n2 != null ? ` · Niveau 2 : ${Math.round(n2 * 100)} %` : pct ? ` · ${pct} %` : ''}`}
+              {st?.valide ? '' : `${st?.leconsTotal || 0} leçons${n2 != null ? ` · Niveau 2 : ${Math.round(n2 * 100)} %` : pct ? ` · ${pct} %` : ''}`}
             </Text>
             {video ? <HomeVideoBadge /> : null}
           </View>
@@ -485,6 +487,7 @@ const useStyles = createThemedStyles(({ brand, theme, colors }) => {
     moduleNumberCurrent: { borderColor: brand.burgundy, backgroundColor: brand.burgundySolid },
     moduleDone: { borderColor: colors.success, backgroundColor: colors.successSolid },
     moduleLocked: { backgroundColor: brand.paperDim },
+    doneLabel: { color: colors.success, fontFamily: theme.fontFamily.semiBold },
     ringNum: { fontFamily: theme.fontFamily.bold, fontSize: 14, lineHeight: 20 },
     tintDot: { width: 5, height: 5, borderRadius: 3 },
     upcoming: { marginTop: 12, backgroundColor: brand.paperDim, borderRadius: 12, overflow: 'hidden' },

@@ -20,7 +20,9 @@ import useVideoScroll from '../video/useVideoScroll';
 import { findVideo, useVideo, useVideosIndex } from '../video/useVideos';
 import { type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
-import { Badge, CornerFold, GoldSwash, LevelDots, NightBackground, PaperStack, PrepButton, PressScale, ProgressBar, ProgressRing, Segmented, SubjectIcon } from '../ui/primitives';
+import {
+  Badge, CornerFold, GoldSwash, LevelDots, NightBackground, PaperStack, PrepButton, PressScale, ProgressBar, ProgressRing, Segmented, SubjectIcon, StatusMark,
+} from '../ui/primitives';
 import { LinearGradient } from 'expo-linear-gradient';
 import { LessonBlock } from '../components/LessonBlocks';
 import { LockedSheet } from '../components/Sheets';
@@ -115,13 +117,13 @@ export const ModuleScreen = ({ navigation, route }) => {
               const p = etat.lecons?.[l.code];
               const isNext = nextLesson?.code === l.code;
               const lessonVideo = findVideo(videos, 'lecon', l.code, version);
+              const lu = p ? (p.derniere ?? p.position ?? 0) : 0;
+              const etatLecon = p?.terminee ? 'done' : isNext && !lu ? 'current' : p ? 'progress' : 'todo';
               return (
                 <View key={l.code}>
-                  <PressScale onPress={go(() => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.code }))} style={[styles.lessonRow, isNext && styles.rowCurrent]} accessibilityLabel={`Leçon ${i + 1}, ${l.titre}, ${l.duree} minutes${lessonVideo ? ', avec vidéo' : ''}${p?.terminee ? ', terminée' : ''}`}>
+                  <PressScale onPress={go(() => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: l.code }))} style={[styles.lessonRow, isNext && styles.rowCurrent]} accessibilityLabel={`Leçon ${i + 1}, ${l.titre}, ${l.duree} minutes${lessonVideo ? ', avec vidéo' : ''}${p?.terminee ? ', terminée' : p ? ', commencée' : ', pas encore ouverte'}`}>
                     {p?.terminee ? <CornerFold radius={18} size={22} /> : null}
-                    <View style={[styles.lessonNum, p?.terminee && styles.lessonDone, isNext && styles.lessonNext]}>
-                      {p?.terminee ? <Check size={18} color={brand.onInk} strokeWidth={2.2} /> : <Text style={[styles.lessonNumText, isNext && { color: brand.onInk }]}>{i + 1}</Text>}
-                    </View>
+                    <StatusMark state={etatLecon} label={i + 1} value={Math.max(lu, p?.position || 0)} />
                     <View style={{ flex: 1, gap: 2 }}>
                       {lessonVideo ? (
                         // Indicateur : cette leçon s'ouvre sur une vidéo (sinon, ligne inchangée).
@@ -131,7 +133,8 @@ export const ModuleScreen = ({ navigation, route }) => {
                         </View>
                       ) : <Text variant="caption" style={styles.muted}>{`Leçon ${i + 1} · ${l.duree} min`}</Text>}
                       <Text variant="bodyMedium" style={styles.rowTitle}>{l.titre}</Text>
-                      {p && !p.terminee ? <ProgressBar value={p.position} height={3} color={brand.burgundy} style={{ marginTop: 6, width: 120 }} /> : null}
+                      {p?.terminee ? <Text variant="caption" style={styles.doneLabel}>Terminée</Text>
+                        : p ? <Text variant="caption" style={styles.progressLabel}>{`Commencée · ${Math.round(Math.max(lu, p.position || 0) * 100)} %`}</Text> : null}
                     </View>
                     <HomeChevron />
                   </PressScale>
@@ -161,6 +164,7 @@ export const ModuleScreen = ({ navigation, route }) => {
                       <View style={styles.row}>
                         <Text variant="h3" style={styles.ink}>{`Niveau ${n}`}</Text>
                         <Text variant="caption" style={styles.muted}>{`· ${LEVELS[n].label}`}</Text>
+                        {best >= seuil ? <View style={styles.levelValid}><Check size={12} color={colors.success} strokeWidth={2.8} /><Text variant="caption" style={styles.doneLabel}>Validé</Text></View> : null}
                       </View>
                       <Text variant="caption" style={styles.muted}>
                         {!count ? 'Exercices à venir. Choisis un autre niveau en attendant.' : lockedLevel ? `Atteins ${Math.round(seuil * 100)} % au niveau 2 pour débloquer` : `${n === 1 ? 'Questions directes sur chaque leçon' : n === 2 ? 'Les notions du module mélangées' : 'Cas pratiques, pièges, format concours'} · ${count} questions`}
@@ -521,6 +525,9 @@ const useStyles = createThemedStyles(({ brand, theme, colors }) => {
     lessonNumText: { fontFamily: theme.fontFamily.bold, fontSize: 15, color: brand.inkSoft },
     lessonNext: { borderColor: brand.burgundy, backgroundColor: brand.burgundySolid },
     lessonDone: { backgroundColor: colors.successSolid, borderColor: colors.success },
+    doneLabel: { color: colors.success, fontFamily: theme.fontFamily.semiBold },
+    progressLabel: { color: brand.burgundy, fontFamily: theme.fontFamily.semiBold },
+    levelValid: { flexDirection: 'row', alignItems: 'center', gap: 3, marginLeft: 4, paddingHorizontal: 7, paddingVertical: 2, borderRadius: 999, backgroundColor: colors.successWash },
     levelCard: { minHeight: 100, flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 8, paddingVertical: 18, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: brand.line },
     levelLocked: { backgroundColor: brand.paperDim, shadowOpacity: 0, elevation: 0 },
     levelGold: { borderBottomColor: brand.gold },

@@ -15,3 +15,11 @@ export const PURCHASE_FLOW_AVAILABLE = Platform.OS === 'web';
 
 /** Vrai seulement si la plateforme l'autorise et que le serveur ne l'a pas explicitement désactivé. */
 export const canOfferPurchase = (serverAllows) => PURCHASE_FLOW_AVAILABLE && serverAllows !== false;
+
+/**
+ * Bouton « Voir mon abonnement » : ouvre la page du compte sur le site (statut de l'abonnement).
+ * Disponible sur toutes les plateformes tant que le serveur fournit l'adresse et ne l'a pas coupé
+ * (MOBILE_ACCOUNT_LINK=false côté serveur le retire de toutes les versions sans republication).
+ * L'application elle-même n'affiche ni prix ni appel à l'achat.
+ */
+export const canOpenAccount = (checkout) => Boolean(checkout?.webAccountUrl) && checkout?.mobileAccountLink !== false;
