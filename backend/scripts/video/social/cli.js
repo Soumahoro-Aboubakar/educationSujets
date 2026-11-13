@@ -17,8 +17,14 @@ async function run(action, argv = process.argv.slice(2)) {
     assertLocalMachine();
     const store = createStore();
     const config = loadConfig(store);
+    let snapshot;
+    if (action === 'publish') {
+      required(config, ['MONGODB_URI']);
+      db = await require('../lib/db').createDb(config.MONGODB_URI);
+      snapshot = await db.snapshot();
+    }
     if (opts?.dryRun) {
-      console.log(JSON.stringify(await publishSocial(opts, config, {}), null, 2)); return 0;
+      console.log(JSON.stringify(await publishSocial(opts, config, {}, snapshot), null, 2)); return 0;
     }
     release = store.lock();
     if (action === 'youtube') {
@@ -42,7 +48,7 @@ async function run(action, argv = process.argv.slice(2)) {
     }
     const enabled = platforms(opts, config);
     // Valider tous les fichiers et la cible avant toute connexion externe.
-    await prepare(opts, config);
+    await prepare(opts, config, snapshot);
     const clients = {};
     if (enabled.youtube) {
       required(config, ['YOUTUBE_CLIENT_ID', 'YOUTUBE_CLIENT_SECRET', 'YOUTUBE_CHANNEL_ID', 'MONGODB_URI']);
@@ -62,7 +68,7 @@ async function run(action, argv = process.argv.slice(2)) {
     let safeDb;
     if (enabled.youtube) {
       // Même connexion dédiée et même collection que publish.js. Aucun fichier .env chargé.
-      try { db = await require('../lib/db').createDb(config.MONGODB_URI); }
+      try { if (!db) db = await require('../lib/db').createDb(config.MONGODB_URI); }
       catch { throw new Error('Connexion MongoDB impossible : vérifier MONGODB_URI et les accès réseau.'); }
       safeDb = { trouver: async (...args) => {
         try { return await db.trouver(...args); } catch { throw new Error('Lecture MongoDB impossible.'); }
@@ -70,7 +76,7 @@ async function run(action, argv = process.argv.slice(2)) {
         try { return await db.ecrire(...args); } catch { throw new Error('Écriture MongoDB impossible. Relancer : les identifiants sociaux sont conservés.'); }
       } };
     }
-    console.log(JSON.stringify(await publishSocial(opts, config, { store, db: safeDb, ...clients }), null, 2));
+    console.log(JSON.stringify(await publishSocial(opts, config, { store, db: safeDb, ...clients }, snapshot), null, 2));
     return 0;
   } catch (error) {
     // Les clients sociaux filtrent les erreurs réseau ; aucune réponse OAuth brute n'est affichée.

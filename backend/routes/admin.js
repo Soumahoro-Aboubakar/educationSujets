@@ -11,6 +11,16 @@ const router = express.Router();
 // Limites propres : un jeton administrateur volé ne doit pas permettre d'aspirer la base.
 router.use(protect, authorize('admin'), limits.admin, limits.adminWrite);
 
+const prep = require('../controllers/prepAdminController');
+router.get('/prep/contenus', prep.list);
+router.post('/prep/contenus', prep.create);
+router.get('/prep/contenus/:kind/:code', prep.get);
+router.patch('/prep/contenus/:kind/:code', prep.patch);
+router.post('/prep/contenus/:kind/:code/valider', prep.validate);
+router.post('/prep/publications', prep.publish);
+router.post('/prep/contenus/:kind/:code/archiver', prep.archive);
+router.delete('/prep/contenus/:kind/:code/brouillon', prep.remove);
+
 const idParam = [param('id').isMongoId(), validate];
 
 router.get('/stats', controller.getStats);

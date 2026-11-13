@@ -4,9 +4,10 @@ import { Building2, Info, Plus, RefreshCw, Save } from 'lucide-react';
 import DynamicDocumentWizard from './DynamicDocumentWizard';
 import DocumentManagementPanel from './DocumentManagementPanel';
 import OrganismeLogoEditor from './admin/OrganismeLogoEditor';
+import CatalogLifecycleEditor from './admin/CatalogLifecycleEditor';
 import YearIssuesPanel from './admin/YearIssuesPanel';
 
-const emptyOrganisme = { nom: '', logo: '', description: '' };
+const emptyOrganisme = { nom: '', logo: '', description: '', status: 'draft' };
 const errorMessage = (error, fallback) => error.response?.data?.error || fallback;
 const levelsWithOrder = (levels) => levels.map((level, index) => ({ ...level, ordre: index + 1 }));
 
@@ -29,8 +30,15 @@ const AdminCatalogPanel = () => {
   const loadOrganismes = async (preferred = '') => {
     setLoading(true); setError('');
     try {
-      const response = await axios.get('/api/organismes', { params: { limit: 100 } });
-      const data = response.data.data || [];
+      const data = [];
+      let page = 1;
+      let pages = 1;
+      do {
+        const response = await axios.get('/api/organismes', { params: { limit: 100, page, scope: 'admin' } });
+        data.push(...(response.data.data || []));
+        pages = response.data.meta?.pagination?.pages || 1;
+        page += 1;
+      } while (page <= pages);
       setOrganismes(data); setSelectedId(preferred || selectedId || data[0]?._id || '');
     } catch (requestError) { setError(errorMessage(requestError, 'Impossible de charger les organismes.')); }
     finally { setLoading(false); }
@@ -134,7 +142,13 @@ const AdminCatalogPanel = () => {
               <option value="">Sélectionner un organisme</option>
               {organismes.map((item) => <option key={item._id} value={item._id}>{item.nom}</option>)}
             </select>
-            {selected && <p className="mt-3 text-sm text-slate-500">Actif : <strong>{selected.nom}</strong></p>}
+            {selected && <div className="mt-3 space-y-2"><p>Statut : {selected.status || 'published'}</p>
+              <select aria-label="Statut de publication" value={selected.status || 'published'} disabled={saving} className="rounded-xl border border-slate-200 p-2" onChange={async e => {
+                setSaving(true); setError('');
+                try { await axios.patch(`/api/organismes/${selectedId}`, { status: e.target.value }); await loadOrganismes(selectedId); setNotice('Visibilité mise à jour. Un organisme publié sans sujet apparaît en découverte.'); }
+                catch (requestError) { setError(errorMessage(requestError, 'Impossible de modifier la visibilité.')); }
+                finally { setSaving(false); }
+              }}><option value="draft">Brouillon</option><option value="published">Publié</option><option value="archived">Archivé</option></select></div>}
           </div>
         </div>
       </div>
@@ -145,6 +159,8 @@ const AdminCatalogPanel = () => {
           onSaved={(updated) => setOrganismes((items) => items.map((item) => (item._id === updated._id ? { ...item, ...updated } : item)))}
         />
       )}
+
+      {selectedId && <CatalogLifecycleEditor key={selectedId} organismeId={selectedId} />}
 
       {selectedId && (
         <form onSubmit={saveStructure} className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">

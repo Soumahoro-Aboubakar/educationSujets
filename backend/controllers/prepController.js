@@ -13,6 +13,19 @@ const core = require('../services/prep/shared/prepCore');
 /** Version linguistique demandée (?version=en) ; « fr » par défaut. */
 const versionOf = (value) => (typeof value === 'string' && /^[a-z]{2}$/.test(value) ? value : core.VERSION_PAR_DEFAUT);
 
+
+// ETag calculé sur la représentation exacte (langue et associations vidéo comprises).
+const sendVersioned = (req, res, data, meta = {}, privateContent = false) => {
+  const body = { success: true, data, meta: { generation: content.load().manifest.generation, schemaVersion: 1, ...meta } };
+  const etag = `"${require('../services/prep/publicationService').hash(body)}"`;
+  res.set('Cache-Control', privateContent ? 'private, no-cache' : 'public, max-age=0, must-revalidate');
+  res.set('ETag', etag);
+  if (privateContent) res.vary('Authorization').vary('X-Prep-Token');
+  if (req.headers['if-none-match']?.split(',').map(v => v.trim()).includes(etag)) return res.status(304).end();
+  return res.json(body);
+};
+exports.getManifest = asyncHandler(async (req, res) => sendVersioned(req, res, content.load().manifest));
+
 /** API de la préparation aux concours — cahier des charges § 29. */
 
 const requireIdentity = async (req) => {
@@ -59,38 +72,42 @@ exports.getCatalogue = asyncHandler(async (req, res) => {
   const [catalogue, index] = await Promise.all([content.catalogue(), videos.index()]);
   const data = catalogue.map((org) => ({
     ...org,
-    cycles: org.cycles.map((cycle) => ({ ...cycle, video: videos.find(index, 'concours', cycle.programme) })),
+    cycles: org.cycles.map((cycle) => ({ ...cycle, video: videos.find(index, 'concours', cycle.programme, 'fr', content.getProgramme(cycle.programme)?.revision) })),
   }));
-  res.json({ success: true, data });
+  const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+  const limit = Math.min(100, Math.max(1, parseInt(req.query.limit, 10) || 100));
+  sendVersioned(req, res, data.slice((page - 1) * limit, page * limit), { pagination: { page, limit, total: data.length, pages: Math.ceil(data.length / limit) } });
 });
 
 // GET /api/prep/videos — index compact des vidéos publiées (lecture seule ; écriture : script local)
 exports.getVideos = asyncHandler(async (req, res) => {
   res.set('Cache-Control', 'public, max-age=300');
-  res.json({ success: true, data: await videos.index() });
+  res.json({ success: true, data: videos.forSnapshot(await videos.index(), content.load()) });
 });
 
 // GET /api/prep/programmes/:code
 exports.getProgramme = asyncHandler(async (req, res) => {
-  const programme = content.getProgramme(req.params.code);
+  const programme = await content.historical('programme', req.params.code, req.query.revision);
   if (!programme) throw new AppError('Programme introuvable', 404);
   const index = await videos.index();
   const modules = {};
+  const linkedModules = await content.programmeModules(programme, req.query.revision);
   content.publishedModules(programme).forEach((code) => {
-    const m = content.getModule(code);
+    const m = linkedModules[code];
+    if (!m) return;
     modules[code] = {
-      code, titre: m.titre, resume: m.resume, matiere: m.matiere, duree: m.duree, stats: m.stats,
+      code, revision: m.revision || 0, hash: m.hash, titre: m.titre, resume: m.resume, matiere: m.matiere, duree: m.duree, stats: m.stats,
       versions: core.moduleVersions(m),
       // Vidéo explicative de chaque leçon (version par défaut) ; null sans vidéo.
-      lecons: m.lecons.map((l) => ({ code: l.code, titre: l.titre, duree: l.duree, video: videos.find(index, 'lecon', l.code) })),
+      lecons: m.lecons.map((l) => ({ code: l.code, titre: l.titre, duree: l.duree, video: videos.find(index, 'lecon', l.code, 'fr', m.revision) })),
     };
   });
-  res.json({ success: true, data: { programme: { ...programme, video: videos.find(index, 'concours', programme.code) }, modules } });
+  sendVersioned(req, res, { programme: { ...programme, video: videos.find(index, 'concours', programme.code, 'fr', programme.revision) }, modules });
 });
 
 // GET /api/prep/modules/:code?version=en — chaque leçon porte sa vidéo (null sans vidéo)
 exports.getModule = asyncHandler(async (req, res) => {
-  const mod = content.getModule(req.params.code);
+  const mod = await content.historical('module', req.params.code, req.query.revision);
   if (!mod) throw new AppError('Module introuvable', 404);
   const identite = await requireIdentity(req);
   const droits = await progress.rights(identite, req.user);
@@ -98,7 +115,7 @@ exports.getModule = asyncHandler(async (req, res) => {
   res.set('Cache-Control', 'private, no-store');
   const data = content.publicModule(mod, versionOf(req.query.version));
   const index = await videos.index();
-  res.json({ success: true, data: { ...data, lecons: data.lecons.map((l) => ({ ...l, video: videos.find(index, 'lecon', l.code, data.version) })) } });
+  sendVersioned(req, res, { ...data, lecons: data.lecons.map((l) => ({ ...l, video: videos.find(index, 'lecon', l.code, data.version, mod.revision) })) }, {}, true);
 });
 
 // POST /api/prep/exercices/:code/tentative — correction en ligne immédiate

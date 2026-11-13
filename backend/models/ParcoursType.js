@@ -46,4 +46,6 @@ ParcoursTypeSchema.pre('validate', function normalizeName(next) {
   next();
 });
 
+ParcoursTypeSchema.plugin(require('./catalogLifecycle'));
+
 module.exports = mongoose.model('ParcoursType', ParcoursTypeSchema);

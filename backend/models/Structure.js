@@ -59,4 +59,9 @@ const StructureSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// La publication d’un sujet et les libellés de structure modifient les listes publiques.
+for (const event of ['save', 'findOneAndUpdate', 'updateOne', 'updateMany', 'deleteOne', 'deleteMany', 'insertMany']) {
+  StructureSchema.post(event, require('./catalogLifecycle').bump);
+}
+
 module.exports = mongoose.model('Structure', StructureSchema);

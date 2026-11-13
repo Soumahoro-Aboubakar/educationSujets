@@ -3,20 +3,31 @@ const { sendSuccess } = require('../utils/api');
 const service = require('../services/dynamicCatalogService');
 const Noeud = require('../models/Noeud');
 const logos = require('../services/organismeLogoService');
+const Revision = require('../models/CatalogRevision');
+const scope = req => ({ ...req.query, includeUnpublished: req.query.scope === 'admin' && req.user?.role === 'admin' });
+const catalogRevision = async () => (await Revision.findById('catalog').lean())?.revision || 0;
+exports.patchCatalog = kind => asyncHandler(async (req, res) => {
+  const data = await require('../services/catalogLifecycleService').patch(kind, req.params.id, req.body, req.user._id);
+  sendSuccess(res, { data, meta: { revision: await catalogRevision() } });
+});
+
 const AppError = require('../utils/errors');
 
 exports.listOrganismes = asyncHandler(async (req, res) => {
-  const result = await service.listOrganismes(req.query);
-  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+  const result = await service.listOrganismes(scope(req));
+  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination, revision: await catalogRevision() } });
 });
 
 exports.listParcoursTypes = asyncHandler(async (req, res) => {
-  const data = await service.listParcoursTypes({ organismeId: req.params.organismeId });
-  sendSuccess(res, { data });
+  const data = await service.listParcoursTypes({ organismeId: req.params.organismeId, ...scope(req) });
+  const total = await require('../models/ParcoursType').countDocuments({ organismeId: req.params.organismeId, ...(scope(req).includeUnpublished ? {} : { status: { $nin: ['draft', 'archived'] } }) });
+  const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+  const limit = Math.min(100, Math.max(1, parseInt(req.query.limit, 10) || 100));
+  sendSuccess(res, { data, meta: { pagination: { page, limit, total, pages: Math.ceil(total / limit) }, revision: await catalogRevision() } });
 });
 
 exports.createParcoursType = asyncHandler(async (req, res) => {
-  const data = await service.createParcoursType({ organismeId: req.params.organismeId, nom: req.body.nom, isDefault: req.body.isDefault !== false });
+  const data = await service.createParcoursType({ organismeId: req.params.organismeId, nom: req.body.nom, isDefault: req.body.isDefault !== false, status: req.body.status });
   sendSuccess(res, { statusCode: 201, data, message: 'Type de parcours cree' });
 });
 
@@ -40,8 +51,8 @@ exports.saveStructure = asyncHandler(async (req, res) => {
 });
 
 exports.listNoeuds = asyncHandler(async (req, res) => {
-  const result = await service.listNoeuds(req.query);
-  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+  const result = await service.listNoeuds(scope(req));
+  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination, revision: await catalogRevision() } });
 });
 
 exports.upsertNoeud = asyncHandler(async (req, res) => {
@@ -50,8 +61,8 @@ exports.upsertNoeud = asyncHandler(async (req, res) => {
 });
 
 exports.listMatieres = asyncHandler(async (req, res) => {
-  const result = await service.listMatieres(req.query);
-  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+  const result = await service.listMatieres(scope(req));
+  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination, revision: await catalogRevision() } });
 });
 
 exports.upsertMatiere = asyncHandler(async (req, res) => {
@@ -61,20 +72,20 @@ exports.upsertMatiere = asyncHandler(async (req, res) => {
 
 exports.listPublishedOrganismes = asyncHandler(async (req, res) => {
   const result = await service.listPublishedOrganismes(req.query);
-  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination, revision: await catalogRevision() } });
 });
 
 exports.listPublishedNoeuds = asyncHandler(async (req, res) => {
   const result = await service.listPublishedNoeuds(req.query);
   sendSuccess(res, {
     data: result.data,
-    meta: { pagination: result.pagination, organisme: result.organisme, structure: result.structure },
+    meta: { pagination: result.pagination, revision: await catalogRevision(), organisme: result.organisme, structure: result.structure },
   });
 });
 
 exports.listPublishedMatieres = asyncHandler(async (req, res) => {
   const result = await service.listPublishedMatieres(req.query);
-  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination } });
+  sendSuccess(res, { data: result.data, meta: { pagination: result.pagination, revision: await catalogRevision() } });
 });
 
 // ── Logos des organismes (administration web) ─────────────────────────────

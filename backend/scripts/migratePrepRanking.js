@@ -10,7 +10,7 @@ const { pseudonymFields } = require('../services/prep/pseudonymSearch');
 const core = require('../services/prep/shared/prepCore');
 const content = require('../services/prep/contentService');
 
-const migrate = async () => {
+const migrateSnapshot = async () => {
   let identities = 0; let progressions = 0;
   const batch = [];
   const flush = async (model) => { if (batch.length) { await model.bulkWrite(batch, { ordered: false }); batch.length = 0; } };
@@ -40,6 +40,8 @@ const migrate = async () => {
   await PrepProgression.createIndexes();
   return { identities, progressions };
 };
+
+const migrate = () => content.withSnapshot(migrateSnapshot);
 
 if (require.main === module) {
   const uri = process.env.PREP_MIGRATION_MONGODB_URI;

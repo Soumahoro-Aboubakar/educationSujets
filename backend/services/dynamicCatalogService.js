@@ -6,6 +6,12 @@ const Matiere = require('../models/Matiere');
 const ParcoursType = require('../models/ParcoursType');
 const Document = require('../models/Document');
 const AppError = require('../utils/errors');
+const visible = { $nin: ['draft', 'archived'] };
+const statusOf = value => {
+  if (value !== undefined && !['draft', 'published', 'archived'].includes(value)) throw new AppError('Statut invalide', 400);
+  return value || 'published';
+};
+const assertPublished = row => { if (!row || ['draft', 'archived'].includes(row.status)) throw new AppError('Élément non publié', 404); };
 const normalizeText = require('../utils/normalizeText');
 const { slugify } = require('../utils/slug');
 const { assertLogoUrl, publicLogo, withPublicLogo } = require('./organismeLogoService');
@@ -69,16 +75,25 @@ const assertStructureCanChange = async (organismeId, niveaux) => {
   }
 };
 
-const listOrganismes = async ({ recherche = '', page = 1, limit = 20 } = {}) => {
+const listOrganismes = async ({ recherche = '', page = 1, limit = 20, includeUnpublished = false } = {}) => {
   const normalizedSearch = normalizeText(recherche);
   const numericPage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   const numericLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 20, 1), 100);
   const filter = normalizedSearch ? { nomNormalise: { $regex: normalizedSearch, $options: 'i' } } : {};
+  if (!includeUnpublished) filter.status = visible;
   const [data, total] = await Promise.all([
-    Organisme.find(filter).sort('nom').skip((numericPage - 1) * numericLimit).limit(numericLimit).lean(),
+    Organisme.find(filter).select('nom slug logo description hasParcoursType parcoursTypeId status').sort('nom').skip((numericPage - 1) * numericLimit).limit(numericLimit).lean(),
     Organisme.countDocuments(filter),
   ]);
-  return { data: data.map(withPublicLogo), pagination: { page: numericPage, limit: numericLimit, total, pages: Math.ceil(total / numericLimit) } };
+  const counts = data.length ? await Document.aggregate([
+    { $match: { status: 'approved', type: 'sujet', isDeleted: { $ne: true } } },
+    { $lookup: { from: Noeud.collection.name, localField: 'noeudId', foreignField: '_id', as: 'leaf' } },
+    { $unwind: '$leaf' },
+    { $match: { 'leaf.organismeId': { $in: data.map(row => row._id) }, 'leaf.status': visible } },
+    { $group: { _id: '$leaf.organismeId', count: { $sum: 1 } } },
+  ]) : [];
+  const countById = new Map(counts.map(row => [String(row._id), row.count]));
+  return { data: data.map(row => ({ ...withPublicLogo(row), subjectCount: countById.get(String(row._id)) || 0 })), pagination: { page: numericPage, limit: numericLimit, total, pages: Math.ceil(total / numericLimit) } };
 };
 
 const computeParcoursFlow = ({ hasParcoursType, selectedParcoursType, existingParcoursTypes = [] }) => {
@@ -169,6 +184,7 @@ const createOrganisme = async (payload) => {
     {
       $setOnInsert: {
         nom,
+        status: statusOf(payload.status),
         nomNormalise: normalizeText(nom),
         logo: payload.logo?.trim() ? assertLogoUrl(payload.logo) : undefined,
         description: payload.description?.trim() || '',
@@ -184,13 +200,14 @@ const createOrganisme = async (payload) => {
   return { ...withPublicLogo(organisme.toObject()), parcoursType: parcoursType ? { ...parcoursType } : null };
 };
 
-const listParcoursTypes = async ({ organismeId } = {}) => {
+const listParcoursTypes = async ({ organismeId, includeUnpublished = false, page = 1, limit = 100 } = {}) => {
   const organisme = await getOrganismeOrThrow(organismeId);
-  const parcoursTypes = await ParcoursType.find({ organismeId: organisme._id }).sort('nom').lean();
+  if (!includeUnpublished) assertPublished(organisme);
+  const parcoursTypes = await ParcoursType.find({ organismeId: organisme._id, ...(!includeUnpublished ? { status: visible } : {}) }).sort('nom').skip((Math.max(1, parseInt(page, 10) || 1) - 1) * Math.min(100, Math.max(1, parseInt(limit, 10) || 100))).limit(Math.min(100, Math.max(1, parseInt(limit, 10) || 100))).lean();
   return parcoursTypes;
 };
 
-const createParcoursType = async ({ organismeId, nom, isDefault = true } = {}) => {
+const createParcoursType = async ({ organismeId, nom, isDefault = true, status } = {}) => {
   const organisme = await getOrganismeOrThrow(organismeId);
   if (!nom?.trim()) throw new AppError('Le nom du type de parcours est obligatoire', 400);
   const cleanName = nom.trim();
@@ -202,6 +219,7 @@ const createParcoursType = async ({ organismeId, nom, isDefault = true } = {}) =
         nom: cleanName,
         nomNormalise: normalizeText(cleanName),
         isDefault,
+        status: statusOf(status),
       },
     },
     { upsert: true, new: true, setDefaultsOnInsert: true, collation: { locale: 'fr', strength: 2 } }
@@ -233,11 +251,13 @@ const saveStructure = async (organismeId, niveaux) => {
   );
 };
 
-const listNoeuds = async ({ organismeId, parentId, recherche = '', page = 1, limit = 50 }) => {
+const listNoeuds = async ({ organismeId, parentId, recherche = '', page = 1, limit = 50, includeUnpublished = false }) => {
   const organism = toObjectId(organismeId, 'Organisme');
+  if (!includeUnpublished) assertPublished(await getOrganismeOrThrow(organismeId));
   const numericPage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   const numericLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 50, 1), 100);
-  const filter = { organismeId, parentId: parentId ? toObjectId(parentId, 'Parent') : null };
+  if (parentId && !includeUnpublished) assertPublished(await Noeud.findOne({ _id: toObjectId(parentId, 'Parent'), organismeId: organism }).lean());
+  const filter = { ...(!includeUnpublished ? { status: visible } : {}), organismeId, parentId: parentId ? toObjectId(parentId, 'Parent') : null };
   const normalizedSearch = normalizeText(recherche);
   if (normalizedSearch) filter.nomNormalise = { $regex: normalizedSearch, $options: 'i' };
   const [data, total] = await Promise.all([
@@ -287,16 +307,17 @@ const upsertNoeud = async (payload) => {
   }
   return findOneAndUpdateWithDuplicateRetry(Noeud,
     { organismeId: organisme._id, parentId, nomNormalise: normalizeText(nom) },
-    { $setOnInsert: { organismeId: organisme._id, parentId, ordreNiveau: expectedOrder, nom, nomNormalise: normalizeText(nom) } },
+    { $setOnInsert: { organismeId: organisme._id, parentId, ordreNiveau: expectedOrder, status: statusOf(payload.status), nom, nomNormalise: normalizeText(nom) } },
     { upsert: true, new: true, setDefaultsOnInsert: true, collation: { locale: 'fr', strength: 2 } }
   );
 };
 
-const listMatieres = async ({ organismeId, recherche = '', page = 1, limit = 50 }) => {
+const listMatieres = async ({ organismeId, recherche = '', page = 1, limit = 50, includeUnpublished = false }) => {
   const organism = toObjectId(organismeId, 'Organisme');
+  if (!includeUnpublished) assertPublished(await getOrganismeOrThrow(organismeId));
   const numericPage = Math.min(Math.max(Number.parseInt(page, 10) || 1, 1), 500);
   const numericLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 50, 1), 100);
-  const filter = { organismeId: organism };
+  const filter = { organismeId: organism, ...(!includeUnpublished ? { status: visible } : {}) };
   const normalizedSearch = normalizeText(recherche);
   if (normalizedSearch) filter.nomNormalise = { $regex: normalizedSearch, $options: 'i' };
   const [data, total] = await Promise.all([
@@ -306,7 +327,7 @@ const listMatieres = async ({ organismeId, recherche = '', page = 1, limit = 50 
   return { data, pagination: { page: numericPage, limit: numericLimit, total, pages: Math.ceil(total / numericLimit) } };
 };
 
-const upsertMatiere = async ({ organismeId, nom }) => {
+const upsertMatiere = async ({ organismeId, nom, status }) => {
   const organisme = await getOrganismeOrThrow(organismeId);
   if (!nom?.trim()) throw new AppError('Le nom de la matiere est obligatoire', 400);
   const cleanName = nom.trim();
@@ -318,7 +339,7 @@ const upsertMatiere = async ({ organismeId, nom }) => {
   }
   return findOneAndUpdateWithDuplicateRetry(Matiere,
     { organismeId: organisme._id, nomNormalise: normalizeText(cleanName) },
-    { $setOnInsert: { organismeId: organisme._id, nom: cleanName, nomNormalise: normalizeText(cleanName) } },
+    { $setOnInsert: { organismeId: organisme._id, nom: cleanName, status: statusOf(status), nomNormalise: normalizeText(cleanName) } },
     { upsert: true, new: true, setDefaultsOnInsert: true, collation: { locale: 'fr', strength: 2 } }
   );
 };
@@ -326,10 +347,13 @@ const upsertMatiere = async ({ organismeId, nom }) => {
 const getLeafContext = async ({ noeudId, matiereId }) => {
   const node = await Noeud.findById(toObjectId(noeudId, 'Noeud'));
   if (!node) throw new AppError('Noeud introuvable', 404);
+  assertPublished(node);
+  assertPublished(await Organisme.findById(node.organismeId).lean());
   const structure = await getStructureOrThrow(node.organismeId);
   if (node.ordreNiveau !== structure.niveaux.length) throw new AppError('Les documents doivent etre rattaches a un noeud feuille', 400);
   const matiere = await Matiere.findOne({ _id: toObjectId(matiereId, 'Matiere'), organismeId: node.organismeId });
   if (!matiere) throw new AppError('Matiere introuvable pour cet organisme', 400);
+  assertPublished(matiere);
   return { node, matiere };
 };
 
@@ -369,7 +393,7 @@ const listPublishedOrganismes = async ({ page, limit } = {}) => {
   const subjectCountByLeaf = new Map(
     leafRows.map((row) => [String(row._id), Number(row.subjectCount) || 0])
   );
-  const populatedLeafNodes = await Noeud.find({ _id: { $in: leafRows.map((row) => row._id) } })
+  const populatedLeafNodes = await Noeud.find({ _id: { $in: leafRows.map((row) => row._id) }, status: visible })
     .select('organismeId')
     .lean();
 
@@ -382,7 +406,7 @@ const listPublishedOrganismes = async ({ page, limit } = {}) => {
 
   const organismeIds = [...subjectCountByOrganisme.keys()].map((id) => new mongoose.Types.ObjectId(id));
   const [organismes, structures] = await Promise.all([
-    Organisme.find({ _id: { $in: organismeIds } }).sort('nom').lean(),
+    Organisme.find({ _id: { $in: organismeIds }, status: visible }).sort('nom').lean(),
     Structure.find({ organismeId: { $in: organismeIds } }).lean(),
   ]);
   const structureByOrganisme = new Map(structures.map((structure) => [String(structure.organismeId), structure]));
@@ -417,8 +441,10 @@ const listPublishedOrganismes = async ({ page, limit } = {}) => {
 
 const listPublishedNoeuds = async ({ organismeId, parentId, parcoursTypeId, recherche = '', page, limit } = {}) => {
   const organisme = await getOrganismeOrThrow(organismeId);
+  assertPublished(organisme);
   const structure = await getStructureOrThrow(organisme._id);
   const parcoursType = await getParcoursTypeOrThrow(organisme._id, parcoursTypeId);
+  if (parcoursType) assertPublished(parcoursType);
   const parent = parentId && parentId !== 'root'
     ? await Noeud.findOne({ _id: toObjectId(parentId, 'Parent'), organismeId: organisme._id }).lean()
     : null;
@@ -427,6 +453,7 @@ const listPublishedNoeuds = async ({ organismeId, parentId, parcoursTypeId, rech
     throw new AppError('Parent introuvable pour cet organisme', 400);
   }
 
+  if (parent) assertPublished(parent);
   const [leafRows, nodes] = await Promise.all([
     Document.aggregate([
       { $match: { ...publishedSubjectFilter, ...(parcoursType ? { parcoursTypeId: parcoursType._id } : {}) } },
@@ -442,7 +469,7 @@ const listPublishedNoeuds = async ({ organismeId, parentId, parcoursTypeId, rech
       { $match: { 'leaf.organismeId': organisme._id } },
       { $group: { _id: '$noeudId', subjectCount: { $sum: 1 } } },
     ]),
-    Noeud.find({ organismeId: organisme._id }).sort('nom').lean(),
+    Noeud.find({ organismeId: organisme._id, status: visible }).sort('nom').lean(),
   ]);
 
   const nodesById = new Map(nodes.map((node) => [String(node._id), node]));
@@ -491,6 +518,7 @@ const listPublishedNoeuds = async ({ organismeId, parentId, parcoursTypeId, rech
 
 const listPublishedMatieres = async ({ organismeId, noeudId, parcoursTypeId, recherche = '', page, limit } = {}) => {
   const organisme = await getOrganismeOrThrow(organismeId);
+  assertPublished(organisme);
   const structure = await getStructureOrThrow(organisme._id);
   const parcoursType = await getParcoursTypeOrThrow(organisme._id, parcoursTypeId);
   const node = await Noeud.findOne({
@@ -498,6 +526,8 @@ const listPublishedMatieres = async ({ organismeId, noeudId, parcoursTypeId, rec
     organismeId: organisme._id,
   }).lean();
 
+  assertPublished(node);
+  if (parcoursType) assertPublished(parcoursType);
   if (!node) throw new AppError('Noeud introuvable pour cet organisme', 404);
   if (node.ordreNiveau !== structure.niveaux.length) {
     throw new AppError('Les matières ne sont disponibles qu après le dernier niveau', 400);
@@ -515,7 +545,7 @@ const listPublishedMatieres = async ({ organismeId, noeudId, parcoursTypeId, rec
   ]);
   const subjectCountByMatiere = new Map(rows.map((row) => [String(row._id), Number(row.subjectCount) || 0]));
   const matieres = rows.length
-    ? await Matiere.find({ _id: { $in: rows.map((row) => row._id) }, organismeId: organisme._id }).lean()
+    ? await Matiere.find({ _id: { $in: rows.map((row) => row._id) }, organismeId: organisme._id, status: visible }).lean()
     : [];
   const normalizedSearch = normalizeText(recherche);
   const items = matieres

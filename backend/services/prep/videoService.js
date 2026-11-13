@@ -21,6 +21,7 @@ const publicVideo = (doc) => (doc ? {
   durationSec: doc.durationSec ?? null,
   publishedAt: doc.publishedAt || null,
   status: doc.status,
+  ...(doc.source?.contentRevision ? { contentRevision: doc.source.contentRevision, contentGeneration: doc.source.contentGeneration, needsReview: Boolean(doc.source.needsReview) } : {}),
 } : null);
 
 const emptyIndex = () => ({ lecons: {}, concours: {} });
@@ -52,7 +53,7 @@ const createVideoService = ({
     try {
       const docs = await Model()
         .find({ status: 'published' })
-        .select('cible code langue youtubeId url title durationSec publishedAt status')
+        .select('cible code langue youtubeId url title durationSec publishedAt status source.contentRevision source.contentGeneration source.needsReview')
         .lean();
       cache = { at: now(), index: buildIndex(docs) };
     } catch (error) {
@@ -62,7 +63,11 @@ const createVideoService = ({
     return cache.index;
   };
 
-  const find = (idx, cible, code, langue = 'fr') => idx[CIBLES[cible]]?.[code]?.[langue] || null;
+  const find = (idx, cible, code, langue = 'fr', revision) => {
+    const video = idx[CIBLES[cible]]?.[code]?.[langue] || null;
+    if (revision && (video?.contentRevision !== revision || video?.needsReview)) return null;
+    return video;
+  };
 
   return {
     index,
@@ -73,6 +78,21 @@ const createVideoService = ({
   };
 };
 
+const forSnapshot = (index, snapshot) => {
+  if (!snapshot.manifest.generation) return index;
+  const filtered = emptyIndex();
+  const put = (kind, code, revision) => {
+    const versions = index[kind]?.[code] || {};
+    for (const [language, video] of Object.entries(versions)) {
+      if (video.contentRevision === revision && !video.needsReview) {
+        filtered[kind][code] ||= {}; filtered[kind][code][language] = video;
+      }
+    }
+  };
+  snapshot.pack.programmes.forEach(p => put('concours', p.code, p.revision));
+  Object.values(snapshot.pack.modules).forEach(m => m.lecons.forEach(l => put('lecons', l.code, m.revision)));
+  return filtered;
+};
 const defaultService = createVideoService();
 
-module.exports = { ...defaultService, createVideoService, publicVideo, buildIndex, emptyIndex, TTL_MS };
+module.exports = { ...defaultService, forSnapshot, createVideoService, publicVideo, buildIndex, emptyIndex, TTL_MS };

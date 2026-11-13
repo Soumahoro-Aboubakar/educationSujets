@@ -67,3 +67,15 @@ export const payments = {
   get: (id) => axios.get(`/api/payments/${id}`).then(unwrap),
   cancel: (id) => axios.post(`/api/payments/${id}/cancel`).then(unwrap),
 };
+
+const prepPath = (kind, code) => `/api/admin/prep/contenus/${encodeURIComponent(kind)}/${encodeURIComponent(code)}`;
+export const prepAdmin = {
+  list: params => axios.get('/api/admin/prep/contenus', { params }).then(response => ({ data: response.data.data, ...response.data.meta })),
+  get: (kind, code) => axios.get(prepPath(kind, code)).then(unwrap),
+  create: payload => axios.post('/api/admin/prep/contenus', payload).then(unwrap),
+  save: (kind, code, payload, expectedRevision) => axios.patch(prepPath(kind, code), { payload, expectedRevision }).then(unwrap),
+  validate: (kind, code, revision) => axios.post(`${prepPath(kind, code)}/valider`, { revision }).then(unwrap),
+  publish: payload => axios.post('/api/admin/prep/publications', payload).then(unwrap),
+  archive: (kind, code, expectedGeneration) => axios.post(`${prepPath(kind, code)}/archiver`, { expectedGeneration }).then(unwrap),
+  remove: (kind, code, expectedRevision) => axios.delete(`${prepPath(kind, code)}/brouillon`, { data: { expectedRevision } }).then(unwrap),
+};

@@ -53,4 +53,6 @@ OrganismeSchema.pre('validate', function normalizeName(next) {
   next();
 });
 
+OrganismeSchema.plugin(require('./catalogLifecycle'));
+
 module.exports = mongoose.model('Organisme', OrganismeSchema);

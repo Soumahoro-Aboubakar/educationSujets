@@ -45,4 +45,6 @@ NoeudSchema.pre('validate', function normalizeName(next) {
   next();
 });
 
+NoeudSchema.plugin(require('./catalogLifecycle'));
+
 module.exports = mongoose.model('Noeud', NoeudSchema);

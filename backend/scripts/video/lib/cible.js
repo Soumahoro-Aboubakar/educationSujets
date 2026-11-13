@@ -37,7 +37,7 @@ const resolveLecon = (pack, code, langue) => {
   const lecon = v.lecons[index];
   const programmes = pack.programmes.filter((p) => p.matieres.some((m) => m.modules.some((x) => x.code === mod.code && x.publie)));
   return {
-    type: 'lecon', code, langue, titre: lecon.titre, matiere: v.matiere,
+    type: 'lecon', code, langue, contentRevision: mod.revision || null, contentGeneration: pack.generation || null, titre: lecon.titre, matiere: v.matiere,
     resume: `Leçon ${index + 1} sur ${v.lecons.length} du module « ${v.titre} » (${v.matiere}).`,
     retenir: (lecon.blocs.find((b) => b.type === 'recap')?.items || []).map((x) => String(x).replace(/\*\*/g, '')),
     module: { code: mod.code, titre: v.titre, numero: index + 1, total: v.lecons.length },
@@ -51,7 +51,7 @@ const resolveConcours = (pack, code) => {
   const prog = pack.programmes.find((p) => p.code === code);
   if (!prog) throw new Error(`Concours (programme) ${code} introuvable dans le pack`);
   return {
-    type: 'concours', code, langue: 'fr', titre: prog.titre, resume: prog.description, sigle: prog.organisme.sigle,
+    type: 'concours', code, langue: 'fr', contentRevision: prog.revision || null, contentGeneration: pack.generation || null, titre: prog.titre, resume: prog.description, sigle: prog.organisme.sigle,
     empreinte: empreinte({ titre: prog.titre, description: prog.description, epreuves: prog.epreuves, matieres: prog.matieres }),
     contenu: prog,
   };

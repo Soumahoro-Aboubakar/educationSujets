@@ -28,6 +28,9 @@ const PrepVideoSchema = new mongoose.Schema({
   // Traçabilité (§ 26.3) : contenu et fichier ayant servi à la vidéo, pour repérer les vidéos
   // devenues obsolètes quand la leçon est modifiée.
   source: {
+    contentRevision: { type: Number, default: null },
+    contentGeneration: { type: Number, default: null },
+    needsReview: { type: Boolean, default: true },
     empreinteContenu: { type: String, default: null },
     fichierSha256: { type: String, default: null },
     generateur: { type: String, default: null },

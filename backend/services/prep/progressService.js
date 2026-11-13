@@ -211,4 +211,4 @@ const ingest = async (identite, user, actions) => {
   return { resultats, droits, progressions };
 };
 
-module.exports = { rights, ingest, gradeAttempt, ...leaderboard, loadProgress, finalize, trustedDay, today };
+module.exports = { rights, ingest: (...args) => content.withSnapshot(() => ingest(...args)), gradeAttempt, ...leaderboard, loadProgress, finalize: (...args) => content.withSnapshot(() => finalize(...args)), trustedDay, today };

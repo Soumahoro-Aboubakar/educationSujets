@@ -39,7 +39,8 @@ const main = async () => {
     const baseAffichee = env.maskMongoUri(production.mongoUri);
     if (opts.dryRun) log.info('Mode --dry-run : aucun envoi, aucune écriture.');
     db = await createDb(production.mongoUri);
-    const deps = { log, db, baseAffichee, resoudreCible: resolveCible, confirm: createConfirm({ preconfirme: opts.confirmer ?? null }) };
+    const snapshot = await db.snapshot();
+    const deps = { log, db, baseAffichee, resoudreCible: cible => resolveCible(cible, snapshot), confirm: createConfirm({ preconfirme: opts.confirmer ?? null }) };
 
     if (opts.etat) { await listerEtat(deps); return 0; }
     if (opts.masquer) { await masquer(opts, deps); return 0; }

@@ -47,7 +47,7 @@ const documentVideo = ({ cible, video, youtubeId, fichierSha256, titre, generate
   }
   return { youtubeId, url: watchUrl(youtubeId), title: video.titre || titre,
     durationSec: video.dureeSec, publishedAt: video.publieLe ? new Date(video.publieLe) : new Date(now()),
-    status: 'published', source: { empreinteContenu: cible.empreinte, fichierSha256, generateur } };
+    status: 'published', source: { contentRevision: cible.contentRevision || null, contentGeneration: cible.contentGeneration || null, needsReview: !cible.contentRevision, empreinteContenu: cible.empreinte, fichierSha256, generateur } };
 };
 
 const enregistrerVideo = async (db, cible, doc, { remplacer = false } = {}) => {

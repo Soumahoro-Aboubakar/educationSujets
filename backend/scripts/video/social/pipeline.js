@@ -63,9 +63,9 @@ const permittedFile = (file) => {
   if (path.basename(resolved).startsWith('.env') || path.basename(resolved) === 'keys.text') throw new Error('Lecture de ce fichier interdite.');
   return resolved;
 };
-async function prepare(opts, config) {
+async function prepare(opts, config, snapshot = loadPack()) {
   const enabled = platforms(opts, config);
-  const cible = resolveCible(opts);
+  const cible = resolveCible(opts, snapshot);
   let input = {};
   if (opts.metadonnees) {
     const file = permittedFile(opts.metadonnees);
@@ -85,7 +85,7 @@ async function prepare(opts, config) {
   if (meta.snippet.tags.some((x) => typeof x !== 'string') || meta.snippet.tags.join(',').length > 450) throw new Error('Tags invalides ou trop longs (450 caractères maximum).');
   meta.status.privacyStatus = input.visibilite || config.YOUTUBE_PRIVACY || 'unlisted';
   if (!['unlisted', 'public', 'private'].includes(meta.status.privacyStatus)) throw new Error('Visibilité attendue : unlisted, public ou private.');
-  const programmes = cible.type === 'concours' ? [cible.code] : loadPack().programmes.filter((p) => p.matieres.some((m) => m.modules.some((v) => v.code === cible.module.code && v.publie))).map((p) => p.code);
+  const programmes = cible.type === 'concours' ? [cible.code] : snapshot.programmes.filter((p) => p.matieres.some((m) => m.modules.some((v) => v.code === cible.module.code && v.publie))).map((p) => p.code);
   if (input.concours && !programmes.includes(input.concours)) throw new Error('Ce concours ne correspond pas à cette cible dans le pack.');
   const matiere = input.matiere || cible.matiere || 'Présentation';
   if (typeof matiere !== 'string' || !matiere.trim() || matiere.length > 100) throw new Error('Matière invalide (1 à 100 caractères).');
@@ -117,8 +117,8 @@ async function prepare(opts, config) {
   return { cible, fichier, meta, marker, playlists, miniature, enabled, tiktok };
 }
 
-async function publishSocial(opts, config, deps) {
-  const plan = await prepare(opts, config);
+async function publishSocial(opts, config, deps, snapshot) {
+  const plan = await prepare(opts, config, snapshot);
   const { cible, fichier, meta, marker, playlists, miniature, enabled } = plan;
   if (opts.dryRun !== false || opts.publier !== true) return { action: 'dry-run',
     cible: `${cible.type}:${cible.code}:${cible.langue}`, fichier: fichier.chemin, sha256: fichier.sha256,

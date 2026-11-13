@@ -18,6 +18,7 @@ import {
 import CreatableSelect from '../components/CreatableSelect';
 import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
 import AdminCatalogPanel from '../components/AdminCatalogPanel';
+import AdminPrepContent from '../components/admin/AdminPrepContent';
 import AdminOrganismeLogos from '../components/admin/AdminOrganismeLogos';
 import YearIssuesPanel from '../components/admin/YearIssuesPanel';
 import AdminFreeDownloads from '../components/admin/AdminFreeDownloads';
@@ -260,7 +261,7 @@ const Dashboard = () => {
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'validate', label: 'Valider', icon: CheckCircle, badge: pendingDocs.length }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'analytics', label: 'Analytiques', icon: BarChart3 }] : []),
     ...(user?.isSuperAdmin ? [{ id: 'referentials', label: 'Gestion des référentiels', icon: Layers }] : []),
-   // ...(user?.role === 'admin' ? [{ id: 'catalog', label: 'Institutions et structures', icon: Building2 }] : []),
+    ...(user?.role === 'admin' ? [{ id: 'catalog', label: 'Institutions et structures', icon: Building2 }, { id: 'prep', label: 'Préparation', icon: BookOpen }] : []),
     ...(user?.role === 'admin' ? [{ id: 'organisme-logos', label: 'Logos des organismes', icon: Building2 }] : []),
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'year-issues', label: 'Années à vérifier', icon: Calendar }] : []),
     // Gestion commerciale (utilisateurs, abonnements, paiements, parrainage) : super admin uniquement.
@@ -1234,6 +1235,8 @@ const Dashboard = () => {
               <ReferentialAdminPanel />
             </motion.div>
           )}
+
+          {activeTab === 'prep' && user?.role === 'admin' && <AdminPrepContent />}
 
           {activeTab === 'catalog' && user?.role === 'admin' && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">

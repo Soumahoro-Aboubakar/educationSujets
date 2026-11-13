@@ -108,19 +108,25 @@ const markdown = (b) => [
   CONSIGNES,
 ].join('\n');
 
-const construireBrief = (opts) => {
-  const cible = resolveCible(opts);
+const construireBrief = (opts, snapshot) => {
+  const cible = resolveCible(opts, snapshot);
   const brief = cible.type === 'lecon' ? briefLecon(cible) : briefConcours(cible);
   return { brief, markdown: markdown(brief) };
 };
 
 if (require.main === module) {
+  (async () => {
+  let db;
   const args = process.argv.slice(2);
   const val = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
   try {
     const opts = { type: val('--type'), id: val('--id'), langue: val('--langue', 'fr') };
     if (!['lecon', 'concours'].includes(opts.type) || !opts.id) throw new Error('Usage : --type lecon|concours --id <code> [--langue en] [--stdout]');
-    const { brief, markdown: md } = construireBrief(opts);
+    const uri = val('--uri');
+    require('../../migrations/lot3').assertLocalUri(uri);
+    db = await require('../lib/db').createDb(uri);
+    const snapshot = await db.snapshot();
+    const { brief, markdown: md } = construireBrief(opts, snapshot);
     if (args.includes('--stdout')) { process.stdout.write(md); } else {
       fs.mkdirSync(OUT, { recursive: true });
       const base = path.join(OUT, `${opts.type}-${opts.id}-${opts.langue}`);
@@ -131,7 +137,8 @@ if (require.main === module) {
   } catch (error) {
     console.error(`✗ ${error.message}`);
     process.exitCode = 1;
-  }
+  } finally { if (db) await db.fermer(); }
+  })();
 }
 
 module.exports = { construireBrief, glossaireLecon };

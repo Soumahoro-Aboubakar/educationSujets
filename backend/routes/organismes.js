@@ -19,6 +19,9 @@ const logoUpload = multer({
 const organismeId = param('organismeId').isMongoId().withMessage('Organisme invalide');
 
 const router = express.Router();
+router.use((req, res, next) => req.method === 'GET' && req.query.scope === 'admin' ? protect(req, res, () => authorize('admin')(req, res, next)) : next());
+router.patch('/:id', protect, authorize('admin'), controller.patchCatalog('organismes'));
+router.post('/:id/archiver', protect, authorize('admin'), (req, res, next) => { req.body = { status: 'archived' }; next(); }, controller.patchCatalog('organismes'));
 
 router.get('/', controller.listOrganismes);
 router.post('/', protect, authorize('admin'), controller.createOrganisme);

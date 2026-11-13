@@ -132,8 +132,8 @@ test('API raisonnement : la référence suit la version lue', () => {
 
 /** Appelle un contrôleur Express avec une fausse réponse. */
 const run = (handler, req) => new Promise((resolve, reject) => {
-  const res = { headers: {}, set(k, v) { this.headers[k] = v; return this; }, json(body) { resolve({ body, headers: this.headers }); } };
-  handler({ params: {}, query: {}, body: {}, ...req }, res, reject);
+  const res = { headers: {}, vary(value) { this.headers.Vary = [this.headers.Vary, value].filter(Boolean).join(', '); return this; }, set(k, v) { this.headers[k] = v; return this; }, json(body) { resolve({ body, headers: this.headers }); } };
+  handler({ params: {}, query: {}, body: {}, headers: {}, ...req }, res, reject);
 });
 
 test('GET /modules/:code : chaque leçon porte son champ video (null sans vidéo), dans la version demandée', async (t) => {

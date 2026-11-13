@@ -248,4 +248,9 @@ DocumentSchema.index({ noeudId: 1, matiereId: 1, type: 1, status: 1, isDeleted: 
 DocumentSchema.index({ sujetParentId: 1, type: 1 });
 DocumentSchema.index({ storageKey: 1 }, { unique: true, sparse: true });
 
+// La publication d’un sujet et les libellés de structure modifient les listes publiques.
+for (const event of ['save', 'findOneAndUpdate', 'updateOne', 'updateMany', 'deleteOne', 'deleteMany', 'insertMany']) {
+  DocumentSchema.post(event, require('./catalogLifecycle').bump);
+}
+
 module.exports = mongoose.model('Document', DocumentSchema);

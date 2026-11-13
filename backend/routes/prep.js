@@ -7,6 +7,8 @@ const limits = require('../middleware/rateLimit');
 const router = express.Router();
 
 router.use(optionalAuth);
+router.use(require('../services/prep/contentService').middleware);
+router.get('/manifest', prep.getManifest);
 
 router.post('/appareils', limits.publicWrite, prep.declareDevice);
 router.get('/droits', prep.getRights);

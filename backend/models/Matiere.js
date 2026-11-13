@@ -33,4 +33,6 @@ MatiereSchema.pre('validate', function normalizeName(next) {
   next();
 });
 
+MatiereSchema.plugin(require('./catalogLifecycle'));
+
 module.exports = mongoose.model('Matiere', MatiereSchema);
