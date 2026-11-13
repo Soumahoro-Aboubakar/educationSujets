@@ -3,7 +3,7 @@
  *   assets/brand/*.svg           logo et symbole (clair, inversé, monochrome)
  *   assets/icon.png              icône iOS / fallback (1024, opaque)
  *   assets/android-icon-*.png    couches de l'icône adaptative Android
- *   assets/splash-icon.png       symbole du splash natif (coin déplié)
+ *   assets/splash-icon.png       symbole du splash natif (F « éteint », coin déplié)
  *   assets/favicon.png           favicon de la version web Expo
  *
  * Usage : npm run brand:assets
@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { Resvg } from '@resvg/resvg-js';
 import opentype from 'opentype.js';
-import { brand, logo } from '../src/theme/brand.js';
+import { brand, launch, logo } from '../src/theme/brand.js';
 
 const require = createRequire(import.meta.url);
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -47,6 +47,12 @@ const svg = (viewBox, body, extra = '') =>
 const mark = ({ letter, flap, folded = true }) => folded
   ? `<path d="${logo.body}" fill="${letter}"/><path d="${logo.flap}" fill="${flap}"/>`
   : `<path d="${logo.bodyUnfolded}" fill="${letter}"/>`;
+
+// F « éteint » du splash natif : contour discret et aplat à peine visible, coin déplié.
+// L'expérience de lancement (src/launch) redessine la même image puis l'allume.
+const dormantMark = () =>
+  `<path d="${logo.bodyUnfolded}" fill="${launch.dormant.color}" fill-opacity="${launch.dormant.fillOpacity}" `
+  + `stroke="${launch.dormant.color}" stroke-opacity="${launch.dormant.strokeOpacity}" stroke-width="${launch.dormant.strokeWidth}" stroke-linejoin="round"/>`;
 
 // Version monochrome : le revers est détaché du corps par un liseré vide.
 const monoMark = (color, id = 'fold') =>
@@ -109,8 +115,8 @@ const rasters = {
   'android-icon-background.png': [svg(`0 0 ${S} ${S}`, `${glow}<rect width="${S}" height="${S}" fill="url(#glow)"/>`), S],
   'android-icon-foreground.png': [svg(`0 0 ${S} ${S}`, centered(S, adaptiveScale, mark({ letter: brand.paper, flap: brand.goldLight }))), S],
   'android-icon-monochrome.png': [svg(`0 0 ${S} ${S}`, centered(S, adaptiveScale, monoMark('#FFFFFF'))), S],
-  // Coin déplié : l'intro animée le replie au premier rendu (voir BrandIntro).
-  'splash-icon.png': [svg(logo.viewBox, mark({ letter: brand.paper, flap: brand.goldLight, folded: false })), S],
+  // F éteint, coin déplié : l'expérience de lancement l'allume puis corne la feuille (src/launch).
+  'splash-icon.png': [svg(logo.viewBox, dormantMark()), S],
   'favicon.png': [files['brand/fatafalta-symbol.svg'], 48],
 };
 

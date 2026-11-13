@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
-import { SkeletonRows } from './src/components/ui/Skeleton';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { AppState, Platform, StyleSheet, View } from 'react-native';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { AppState, Platform, StyleSheet } from 'react-native';
+import { isRunningInExpoGo } from 'expo';
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { ThemeProvider, useTheme, useThemePreference } from './src/theme/ThemeProvider';
 import ThemeStatusBar from './src/theme/ThemeStatusBar';
@@ -22,10 +22,11 @@ import { PlayfairDisplay_700Bold_Italic } from '@expo-google-fonts/playfair-disp
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationBar } from 'expo-navigation-bar';
 import RootNavigator from './src/navigation/RootNavigator';
-import BrandIntro from './src/components/brand/BrandIntro';
+import LaunchExperience from './src/launch/LaunchExperience';
+import useLaunchReadiness from './src/launch/useLaunchReadiness';
+import { launch as launchColors } from './src/theme/brand';
 import AuthContext, { AuthProvider } from './src/context/AuthContext';
 import { PreferencesProvider } from './src/context/PreferencesContext';
-import useDownloadStore from './src/store/useDownloadStore';
 import usePrep from './src/prep/store';
 import { flushState } from './src/prep/storage';
 import prepApi, { setPrepToken } from './src/prep/api';
@@ -95,8 +96,16 @@ const ImmersiveNavigationBar = () => {
   return Platform.OS === 'android' ? <NavigationBar hidden style={isDark ? "light" : "dark"} /> : null;
 };
 
-// Keep the splash screen visible while we fetch resources
+/*
+ * Démarrage en deux temps, sans écran vide entre les deux :
+ *  1. le splash natif (app.json → expo-splash-screen) s'affiche dès le lancement du processus,
+ *     avant JavaScript : l'encre et le F « éteint » ;
+ *  2. l'expérience de lancement (src/launch) le masque dès qu'elle est posée — sa première image
+ *     est identique — puis joue pendant que l'application se prépare réellement dessous.
+ */
 SplashScreen.preventAutoHideAsync();
+// Relais natif → animé en fondu court : il absorbe l'écart d'un pixel éventuel entre les deux rendus.
+if (!isRunningInExpoGo()) SplashScreen.setOptions({ duration: 180, fade: true });
 
 // Retour de l'app au premier plan (ex. après un paiement sur le site) = « focus » pour React
 // Query : les requêtes qui l'acceptent (état du compte) sont relues auprès du serveur.
@@ -128,13 +137,13 @@ const queryClient = new QueryClient({
   },
 });
 
-function ThemedNavigation({ children }) {
+function ThemedNavigation({ children, onReady }) {
   const { isDark, brand } = useTheme();
   const navigationTheme = React.useMemo(() => {
     const base = isDark ? DarkTheme : DefaultTheme;
     return { ...base, colors: { ...base.colors, primary: brand.burgundy, background: brand.paper, card: brand.sheet, text: brand.ink, border: brand.line, notification: brand.burgundy } };
   }, [isDark, brand]);
-  return <NavigationContainer theme={navigationTheme} linking={linking} documentTitle={{ formatter: () => 'Fatafalta' }}>{children}</NavigationContainer>;
+  return <NavigationContainer theme={navigationTheme} linking={linking} onReady={onReady} documentTitle={{ formatter: () => 'Fatafalta' }}>{children}</NavigationContainer>;
 }
 
 export default function App() {
@@ -144,12 +153,11 @@ export default function App() {
 function AppContent() {
   const { isDark, brand } = useTheme();
   const { isReady: isThemeReady } = useThemePreference();
-  const [appIsReady, setAppIsReady] = useState(false);
-  // Intro animée : jouée une fois par lancement à froid, jamais au retour d'un autre écran.
-  const [introVisible, setIntroVisible] = useState(true);
-  const hydrateStore = useDownloadStore((state) => state.hydrate);
+  // Expérience de lancement : jouée une fois par démarrage, jamais au retour d'un autre écran.
+  const [launchVisible, setLaunchVisible] = useState(true);
+  const hideLaunch = useCallback(() => setLaunchVisible(false), []);
 
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     'Inter-Regular': Inter_400Regular,
     'Inter-Medium': Inter_500Medium,
     'Inter-SemiBold': Inter_600SemiBold,
@@ -160,46 +168,45 @@ function AppContent() {
     'Playfair-BoldItalic': PlayfairDisplay_700Bold_Italic,
   });
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        // Hydrate offline downloads state
-        await hydrateStore();
-        // Copie locale de la préparation (identité, progression, file hors ligne).
-        await usePrep.getState().hydrate();
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // Tell the application to render
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
-  }, []);
-
-  // Le splash natif est masqué par BrandIntro dès sa première mise en page,
-  // pour que l'intro prenne le relais sans écran vide entre les deux.
-
-  if (!appIsReady || !fontsLoaded || !isThemeReady) {
-    return Platform.OS === 'web' ? <View style={{ flex: 1, backgroundColor: brand.paper, paddingTop: 60 }}><SkeletonRows count={5} /></View> : null;
-  }
+  // Préférences, polices, fichiers hors ligne, copie locale de la préparation, navigation :
+  // le démarrage réel, suivi étape par étape (aucune ne dépend du réseau).
+  const launch = useLaunchReadiness({ preferencesReady: isThemeReady, fontsLoaded, fontError });
 
   return (
-    <GestureHandlerRootView style={[styles.container, isDark && { backgroundColor: brand.paper }]}>
-      <ThemeStatusBar barStyle="default" />
-      <ImmersiveNavigationBar />
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-            <PrepBridge />
-            {/* Web/PWA : sans formatter, React Navigation met le nom technique de l'écran
-                (« ExploreTab ») en titre d'onglet, repris par « Sur l'écran d'accueil » d'iOS. */}
-            <ThemedNavigation>
-              <RootNavigator />
-            </ThemedNavigation>
-        </AuthProvider>
-      </QueryClientProvider>
-      {introVisible ? <BrandIntro onFinish={() => setIntroVisible(false)} /> : null}
+    <GestureHandlerRootView
+      style={[
+        styles.container,
+        // Encre sous l'expérience de lancement : aucun éclair clair possible avant le premier écran.
+        launchVisible ? { backgroundColor: launchColors.base } : isDark && { backgroundColor: brand.paper },
+      ]}
+    >
+      {launch.core ? (
+        <>
+          <ThemeStatusBar barStyle="default" />
+          <ImmersiveNavigationBar />
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+                <PrepBridge />
+                {/* Web/PWA : sans formatter, React Navigation met le nom technique de l'écran
+                    (« ExploreTab ») en titre d'onglet, repris par « Sur l'écran d'accueil » d'iOS. */}
+                <ThemedNavigation onReady={launch.onNavigationReady}>
+                  <RootNavigator />
+                </ThemedNavigation>
+            </AuthProvider>
+          </QueryClientProvider>
+        </>
+      ) : null}
+      {launchVisible ? (
+        <LaunchExperience
+          ready={launch.ready}
+          progress={launch.progress}
+          fault={launch.fault}
+          slow={launch.slow}
+          onRetry={launch.retry}
+          onFinish={hideLaunch}
+          fontsReady={fontsLoaded}
+        />
+      ) : null}
     </GestureHandlerRootView>
   );
 }

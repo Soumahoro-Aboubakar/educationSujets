@@ -1304,6 +1304,7 @@ Chaque composant est documenté (rôle, propriétés, états) et testé isoléme
 | 2026-11-07 | Vidéos explicatives et de présentation (concours), optionnelles, hébergées sur YouTube, lues dans l'application ; aucune trace à l'écran sans vidéo ; publication par script local uniquement (§ 9 bis.1) |
 | 2026-11-07 | Une vidéo par **leçon**, visible dès l'ouverture de la leçon, en tête du texte (remplace la vidéo par module) (§ 9 bis.1) |
 | 2026-11-07 | Cours de langue étrangère en deux versions : expliqué en français par défaut, ou entièrement dans la langue étudiée, bascule depuis l'interface du cours (§ 9 bis.2) |
+| 2026-11-13 | Expérience de lancement (E00) refaite à la demande du propriétaire : la consigne « ne pas modifier » de la maquette E00 est levée ; palette de marque conservée, une seule lumière ajoutée (`launch.light`) |
 
 ---
 
@@ -1328,6 +1329,7 @@ Chaque composant est documenté (rôle, propriétés, états) et testé isoléme
 
 | Version | Date | Évolution |
 |---|---|---|
+| 0.9 | 2026-11-13 | Refonte de l'expérience de lancement (E00) demandée par le propriétaire : splash natif « F éteint », séquence lumineuse, filet de chargement lié au démarrage réel, sortie en fondu ; le démarrage n'attend plus le réseau (`fatafalta/src/launch/`, maquettes E00) |
 | 0.8 | 2026-11-07 | Vidéo par leçon, visible à l'ouverture de la leçon (remplace la vidéo par module) ; API `lecons[].video` (§ 9 bis.1, § 28, § 29) |
 | 0.7 | 2026-11-07 | Vidéos explicatives et de présentation (§ 9 bis.1, `docs/videos/README.md`) ; cours de langue bilingues (§ 9 bis.2) ; modèle `PrepVideo` (§ 28) et API vidéo (§ 29) |
 | 0.6 | 2026-11-05 | Consigne de collaboration Claude Code ↔ ChatGPT Plus via Codex CLI (§ 0, règle 5) et décision correspondante (§ 32) |

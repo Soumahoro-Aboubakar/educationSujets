@@ -62,8 +62,29 @@ export const logo = {
   tileRadius: 22,
 };
 
-// Taille du symbole sur le splash natif (dp/pt) ; l'intro animée la reprend
+// Taille du symbole sur le splash natif (dp/pt) ; l'expérience de lancement la reprend
 // à l'identique pour enchaîner sans saut. Gardée en phase avec app.json.
 export const SPLASH_IMAGE_WIDTH = 160;
+
+// ── Lancement (écran E00) ───────────────────────
+// La copie sous la lampe qui s'allume : la famille de l'encre poussée vers la lumière
+// (même teinte, ≈ 218°), réchauffée par l'or du coin corné. Ces couleurs ne servent
+// qu'à l'expérience de lancement ; le reste de l'application garde la palette ci-dessus.
+export const launch = {
+  // Fond du splash natif (app.json) et première image de l'expérience animée.
+  base: brand.ink,
+  // Bords et bas de l'écran : la nuit se referme autour de la lumière.
+  depth: brand.inkDeep,
+  // Lumière froide : halos, départ du tracé et du filet de chargement.
+  light: '#3978F6',
+  lightSoft: '#9CBFFF',
+  // Lumière chaude : revers du coin, étincelles, arrivée du filet de chargement.
+  warm: brand.goldLight,
+  paper: brand.paper,
+  // Le F « éteint » : image du splash natif, redessinée à l'identique au premier rendu
+  // (scripts/generate-*-assets.mjs et src/launch/LaunchMark.js lisent ces valeurs).
+  // Contour bleuté plutôt que gris : un néon éteint, pas un état désactivé.
+  dormant: { color: '#9CBFFF', fillOpacity: 0.06, strokeOpacity: 0.42, strokeWidth: 1.1 },
+};
 
 export default brand;

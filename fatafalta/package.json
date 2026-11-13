@@ -53,15 +53,15 @@
   "scripts": {
     "start": "expo start",
     "start:videos-demo": "EXPO_PUBLIC_VIDEOS_DEMO=1 expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "build:web": "expo export --platform web",
     "serve:web": "expo serve",
     "build:android:apk": "npx eas-cli build --platform android --profile production",
     "build:android:aab": "npx eas-cli build --platform android --profile production-aab",
     "build:android:apk:local": "npx eas-cli build --platform android --profile production --local",
-    "brand:assets": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/generate-brand-assets.mjs"
+    "brand:assets": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/generate-brand-assets.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/generate-launch-assets.mjs"
   },
   "private": true,
   "devDependencies": {

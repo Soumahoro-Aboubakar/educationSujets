@@ -321,7 +321,7 @@ Les écrans sont listés **dans l'ordre du parcours**, du premier lancement à l
 
 | N° | Écran | Type |
 |---|---|---|
-| E00 | Intro animée (existante) | Moment |
+| E00 | Expérience de lancement | Moment |
 | E01 | Que veux-tu faire ? | Moment |
 | E02 | Quel concours ? (accordéon) | Étude |
 | E03 | Ton rythme (objectif quotidien + test proposé) | Feuille |
@@ -365,14 +365,26 @@ Les écrans sont listés **dans l'ordre du parcours**, du premier lancement à l
 
 ---
 
-## E00 — Intro animée (existante, conservée)
+## E00 — Expérience de lancement (refonte du 2026-11-13, demandée par le propriétaire)
 
-- **Rôle** : relais du splash natif, une fois par lancement à froid.
-- **Fond** : `ink` uni.
-- **Contenu** : symbole F (160 pt) centré ; le coin se plie (le revers or apparaît), puis « Fatafalta »
-  apparaît sous le symbole ; fondu vers E01 ou vers l'onglet d'ouverture.
-- **Animation** : ~1,3 s (pliure 520 ms, mot-symbole 380 ms, sortie 320 ms) ; un appui l'abrège ;
-  « Réduire les animations » → simple fondu. **Ne pas modifier.**
+- **Rôle** : relais animé du splash natif, une fois par démarrage à froid. Code : `fatafalta/src/launch/`.
+- **Splash natif** (`app.json`) : fond `ink`, **F « éteint »** (contour bleuté, aplat à peine visible), 160 pt.
+  La première image animée lui est identique : le relais ne se voit pas.
+- **Fond** : `ink` + profondeur (`inkDeep` en haut et en bas), halo froid derrière le symbole
+  (`launch.light` #3978F6, même teinte que l'encre), deux lumières lointaines qui dérivent (froide, or),
+  une dizaine de poussières diffuses, grain de papier (iOS, web). Jetons : `theme/brand.js` → `launch`.
+- **Séquence** (~1,7 s, `launchTimeline.js`) : la lumière s'éveille (0–250 ms) → deux traits lumineux
+  dessinent le contour du F, du pied au coin (240–760) → ils se rejoignent, la feuille s'allume (690–960)
+  → **le coin se corne, le revers or apparaît** (860–1 280), reflet sur la pliure → « Fatafalta » lettre à
+  lettre (900–1 540) → « Apprendre. Progresser. *Réussir.* » (Inter + Playfair italique `goldLight`).
+- **Chargement** : filet « Learning Pulse » en bas (132 × 3 pt, `launch.light` → `goldLight`). Sa longueur
+  suit les étapes réelles du démarrage ; jamais de pourcentage. > 6 s : phrase d'attente ; > 14 s ou
+  échec de lecture locale : message clair + bouton « Réessayer ».
+- **Sortie** (520 ms, dès que l'application est prête et jamais avant 1,72 s) : texte, halo et poussières
+  s'éteignent, le F se réduit, l'encre se retire sur l'accueil déjà rendu dessous.
+- **Règles** : un appui abrège l'ouverture ; « Réduire les animations » et redémarrage à chaud → fondus
+  courts (~0,8 s), aucun déplacement ; appareil modeste → sans ambiance. Le démarrage n'attend jamais le
+  réseau. Transform et opacity uniquement, tout sur le thread UI.
 
 ---
 
