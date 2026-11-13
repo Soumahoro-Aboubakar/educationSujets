@@ -1,4 +1,5 @@
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
+import { SUBSCRIPTION_BUTTON_LABEL } from '../../hooks/useAccountLink';
 import { getErrorMessage } from '../../utils/userMessages';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
@@ -134,7 +135,7 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
           <View style={styles.lockIcon}><Sparkles size={26} color={brand.goldInk} /></View>
           <Text variant="h3" style={styles.center}>{PURCHASE_FLOW_AVAILABLE ? 'Vérification réservée aux abonnés' : 'Vérification réservée à l’accès Premium'}</Text>
           <Text variant="body" style={[styles.muted, styles.center]}>Tes 3 vérifications offertes sont utilisées. Ta démarche reste importante : compare-la à la correction.</Text>
-          {PURCHASE_FLOW_AVAILABLE ? <PrepButton title="S’abonner" variant="gold" onPress={onSubscribe} style={{ alignSelf: 'stretch' }} /> : null}
+          <PrepButton title={PURCHASE_FLOW_AVAILABLE ? 'S’abonner' : SUBSCRIPTION_BUTTON_LABEL} variant="gold" onPress={onSubscribe} style={{ alignSelf: 'stretch' }} />
           <PrepButton title="Question suivante" variant={PURCHASE_FLOW_AVAILABLE ? 'link' : 'primary'} onPress={onClose} />
         </View>
       ) : null}
@@ -219,7 +220,7 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
 };
 
 // ═══ Verrou « Abonnés » (E37) ═══════════════════════════════════════════
-export const LockedSheet = ({ visible, onClose, onSubscribe, message }) => {
+export const LockedSheet = ({ visible, onClose, onSubscribe, message, subscribing }) => {
   const { brand } = useTheme();
   const { styles } = useStyles();
   return (<BottomSheet visible={visible} onClose={onClose} maxHeight={0.6}>
@@ -227,7 +228,7 @@ export const LockedSheet = ({ visible, onClose, onSubscribe, message }) => {
       <View style={styles.lockIcon}><Lock size={24} color={brand.goldInk} /></View>
       <Text variant="h2" style={[styles.center, { color: brand.ink }]}>{PURCHASE_FLOW_AVAILABLE ? 'Réservé aux abonnés' : 'Accès Premium requis'}</Text>
       <Text variant="body" style={[styles.muted, styles.center]}>{message || 'Ton essai gratuit est terminé. Ta progression, ton cahier d’erreurs et ton rang sont conservés.'}</Text>
-      <PrepButton title={PURCHASE_FLOW_AVAILABLE ? 'Voir l’abonnement' : 'Mon accès'} variant={PURCHASE_FLOW_AVAILABLE ? 'gold' : 'primary'} onPress={onSubscribe} style={{ alignSelf: 'stretch' }} />
+      <PrepButton title={SUBSCRIPTION_BUTTON_LABEL} variant={PURCHASE_FLOW_AVAILABLE ? 'gold' : 'primary'} onPress={onSubscribe} loading={subscribing} style={{ alignSelf: 'stretch' }} />
       <PrepButton title="Plus tard" variant="link" onPress={onClose} />
     </View>
   </BottomSheet>);

@@ -4,7 +4,7 @@ import * as Linking from 'expo-linking';
 import useAsyncAction from './useAsyncAction';
 import { createWebHandoff } from '../services/billing';
 import { useEntitlements, useRefreshAccount } from './useAccount';
-import { canOpenAccount } from '../utils/storePolicy';
+import { canOpenAccount, PURCHASE_FLOW_AVAILABLE } from '../utils/storePolicy';
 import { getErrorAlert } from '../utils/userMessages';
 
 /**
@@ -39,3 +39,21 @@ export const useAccountLink = () => {
 };
 
 export default useAccountLink;
+
+/**
+ * Action commune de tous les boutons « Voir mon abonnement » de l'application (essai, verrous,
+ * écran Premium…). Build store, compte connecté : ouverture directe du site. Sinon (non connecté,
+ * serveur ancien ou interrupteur coupé) : écran interne qui propose de se connecter.
+ * Version Web (PWA) : parcours d'abonnement interne inchangé.
+ */
+export const useOpenSubscription = (navigation, fallback = 'PrepSubscription') => {
+  const link = useAccountLink();
+  const go = useCallback(() => {
+    if (!PURCHASE_FLOW_AVAILABLE && link.available) link.open();
+    else navigation.navigate(fallback);
+  }, [link, navigation, fallback]);
+  return { go, opening: link.opening };
+};
+
+/** Libellé unique du bouton (build store : jamais de mot d'achat). */
+export const SUBSCRIPTION_BUTTON_LABEL = PURCHASE_FLOW_AVAILABLE ? 'Voir l’abonnement' : 'Voir mon abonnement';

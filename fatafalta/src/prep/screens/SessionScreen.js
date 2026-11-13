@@ -1,4 +1,5 @@
 import Pressable from '../../components/ui/FeedbackPressable';
+import { useOpenSubscription } from '../../hooks/useAccountLink';
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 
@@ -288,6 +289,7 @@ const PlacementReview = ({ result, navigation }) => {
 
 // ═════════════════════════════════════════════════════════════════════════
 const SessionScreen = ({ navigation, route }) => {
+  const subscription = useOpenSubscription(navigation);
   const { brand, LEVELS, theme, colors } = useTheme();
   const { styles } = useStyles();
   const { fontScale } = useWindowDimensions();
@@ -557,9 +559,9 @@ const SessionScreen = ({ navigation, route }) => {
         programme={session.programme}
         onClose={() => setSheet(null)}
         onDone={() => setTimeout(next, 250)}
-        onSubscribe={() => { setSheet(null); navigation.navigate('PrepSubscription'); }}
+        onSubscribe={() => { setSheet(null); subscription.go(); }}
       />
-      <LockedSheet visible={sheet === 'locked'} onClose={() => setSheet(null)} onSubscribe={() => { setSheet(null); navigation.navigate('PrepSubscription'); }} />
+      <LockedSheet visible={sheet === 'locked'} onClose={() => setSheet(null)} onSubscribe={() => { setSheet(null); subscription.go(); }} />
       <Dialog
         visible={sheet === 'quit'}
         title="Quitter la session ?"

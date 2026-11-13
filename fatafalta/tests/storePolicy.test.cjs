@@ -93,3 +93,17 @@ test('« Voir mon abonnement » : aucun prix ni mot d’achat dans l’app, jeto
     });
   }
 });
+
+test('tous les boutons « Voir mon abonnement » de la préparation passent par l’action commune (site direct)', () => {
+  const hook = read('src/hooks/useAccountLink.js');
+  assert.match(hook, /if \(!PURCHASE_FLOW_AVAILABLE && link\.available\) link\.open\(\);/);
+  for (const file of ['src/prep/screens/PrepHomeScreen.js', 'src/prep/screens/ReviewsScreen.js', 'src/prep/screens/SessionScreen.js', 'src/prep/screens/ModuleLessonScreens.js']) {
+    const source = read(file);
+    assert.match(source, /useOpenSubscription\(navigation\)/, `${file} doit utiliser l’action commune`);
+    source.split('\n').forEach((line, i) => {
+      if (/navigat\w*\.(navigate|replace)\('PrepSubscription'\)/.test(line)) {
+        assert.match(line, /PURCHASE_FLOW_AVAILABLE \?/, `${file}:${i + 1} ouverture directe de l’écran interne sur build store`);
+      }
+    });
+  }
+});

@@ -1,4 +1,5 @@
 import Pressable from '../../components/ui/FeedbackPressable';
+import { SUBSCRIPTION_BUTTON_LABEL, useOpenSubscription } from '../../hooks/useAccountLink';
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -35,6 +36,7 @@ import { PURCHASE_FLOW_AVAILABLE } from '../../utils/storePolicy';
 
 // ═══ E08 — Module ═══════════════════════════════════════════════════════
 export const ModuleScreen = ({ navigation, route }) => {
+  const subscription = useOpenSubscription(navigation);
   useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { subjectTint, brand, colors, LEVELS, theme } = useTheme();
   const { styles } = useStyles();
@@ -198,9 +200,9 @@ export const ModuleScreen = ({ navigation, route }) => {
         <LinearGradient colors={[theme.brand.paperTransparent, brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
         {rights.peutEtudier
           ? <PrepButton title={primary.title} icon={ArrowRight} onPress={go(primary.run)} />
-          : <PrepButton title={PURCHASE_FLOW_AVAILABLE ? 'Débloquer avec l’abonnement' : 'Mon accès Premium'} variant={PURCHASE_FLOW_AVAILABLE ? 'gold' : 'primary'} onPress={() => navigation.navigate('PrepSubscription')} />}
+          : <PrepButton title={PURCHASE_FLOW_AVAILABLE ? 'Débloquer avec l’abonnement' : SUBSCRIPTION_BUTTON_LABEL} variant={PURCHASE_FLOW_AVAILABLE ? 'gold' : 'primary'} onPress={subscription.go} loading={subscription.opening} />}
       </View>
-      <LockedSheet visible={locked} onClose={() => setLocked(false)} onSubscribe={() => { setLocked(false); navigation.navigate('PrepSubscription'); }} />
+      <LockedSheet visible={locked} onClose={() => setLocked(false)} subscribing={subscription.opening} onSubscribe={() => { setLocked(false); subscription.go(); }} />
     </PaperStack>
   );
 };
@@ -226,6 +228,7 @@ const LinedPaper = ({ height }) => {
 const SIZES = [15, 17, 19, 21];
 
 export const LessonScreen = ({ navigation, route }) => {
+  const subscription = useOpenSubscription(navigation);
   useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { subjectTint, brand, theme } = useTheme();
   const { styles } = useStyles();
@@ -486,7 +489,7 @@ export const LessonScreen = ({ navigation, route }) => {
           <PrepButton title="Terminer la leçon" icon={Check} onPress={finish} />
         </Animated.View>
       ) : null}
-      <LockedSheet visible={locked && !rights.peutEtudier} onClose={() => navigation.goBack()} onSubscribe={() => navigation.replace('PrepSubscription')} />
+      <LockedSheet visible={locked && !rights.peutEtudier} onClose={() => navigation.goBack()} subscribing={subscription.opening} onSubscribe={PURCHASE_FLOW_AVAILABLE ? () => navigation.replace('PrepSubscription') : subscription.go} />
     </PaperStack>
   );
 };

@@ -1,4 +1,5 @@
 import StudyLamp from '../../theme/StudyLamp';
+import { SUBSCRIPTION_BUTTON_LABEL, useOpenSubscription } from '../../hooks/useAccountLink';
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -144,14 +145,14 @@ const UpcomingModules = ({ modules }) => {
 };
 
 // ── Feuille « Essai » (E07) ───────────────────────────────────────────────
-const TrialSheet = ({ visible, onClose, rights, onSubscribe }) => {
+const TrialSheet = ({ visible, onClose, rights, onSubscribe, subscribing }) => {
   const { brand } = useTheme();
   const { styles } = useStyles();
   const reduce = useReduceMotion();
   const days = rights.essai.jours;
   const fmt = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
   return (
-    <BottomSheet visible={visible} onClose={onClose} maxHeight={0.82} footer={<View><PrepButton title="Voir l’abonnement" variant="gold" onPress={onSubscribe} /><PrepButton title="Plus tard" variant="link" onPress={onClose} /></View>}>
+    <BottomSheet visible={visible} onClose={onClose} maxHeight={0.82} footer={<View><PrepButton title={SUBSCRIPTION_BUTTON_LABEL} variant="gold" onPress={onSubscribe} loading={subscribing} /><PrepButton title="Plus tard" variant="link" onPress={onClose} /></View>}>
       <Text variant="title" style={styles.ink}>Ton essai gratuit</Text>
       <Text variant="body" style={[styles.muted, { marginTop: 4 }]}>Un jour n’est compté que lorsque tu étudies.</Text>
       <View style={styles.frise}>
@@ -186,6 +187,7 @@ const TrialSheet = ({ visible, onClose, rights, onSubscribe }) => {
 // ═════════════════════════════════════════════════════════════════════════
 const PrepHomeScreen = ({ navigation, route }) => {
   useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
+  const subscription = useOpenSubscription(navigation);
   const { brand, colors } = useTheme();
   const { styles } = useStyles();
   const insets = useSafeAreaInsets();
@@ -342,9 +344,9 @@ const PrepHomeScreen = ({ navigation, route }) => {
                 : continueTarget ? (currentLesson ? continueTarget.sub : 'Reprends là où tu t’es arrêté.')
                   : firstPublished ? `${firstPublished.matiere} · ${firstPublished.titre} · ${firstPublished.module.duree} min`
                     : 'Tu peux déjà découvrir les épreuves officielles de ton concours.'}
-              action={locked ? 'Voir l’abonnement' : continueTarget ? 'Continuer' : 'Commencer la leçon 1'}
-              actionLabel={locked ? 'Essai terminé : voir l’abonnement' : continueTarget ? `Continuer : ${continueTarget.label}, ${Math.round(continueTarget.progress * 100)} %` : `Commencer : leçon 1, ${copyTitle}`}
-              onPress={locked ? () => navigation.navigate('PrepSubscription') : continueTarget ? continueTarget.go
+              action={locked ? SUBSCRIPTION_BUTTON_LABEL : continueTarget ? 'Continuer' : 'Commencer la leçon 1'}
+              actionLabel={locked ? `Essai terminé : ${SUBSCRIPTION_BUTTON_LABEL.toLowerCase()}` : continueTarget ? `Continuer : ${continueTarget.label}, ${Math.round(continueTarget.progress * 100)} %` : `Commencer : leçon 1, ${copyTitle}`}
+              onPress={locked ? subscription.go : continueTarget ? continueTarget.go
                 : firstPublished ? guard(() => navigation.navigate('PrepLesson', { programme: programmeCode, lecon: firstPublished.module.lecons[0].code })) : null}
               locked={locked} started={started} reviews={reviews}
               onReviews={() => navigation.navigate('PrepReviews', { programme: programmeCode })}
@@ -416,8 +418,8 @@ const PrepHomeScreen = ({ navigation, route }) => {
       </ScrollView>
 
       <RhythmSheet visible={sheet === 'rythme'} onClose={() => setSheet(null)} onPlacementTest={() => navigation.navigate('PrepSession', sessionParams.test(programmeCode))} />
-      <TrialSheet visible={sheet === 'trial'} rights={rights} onClose={() => setSheet(null)} onSubscribe={() => { setSheet(null); navigation.navigate('PrepSubscription'); }} />
-      <LockedSheet visible={sheet === 'locked'} onClose={() => setSheet(null)} onSubscribe={() => { setSheet(null); navigation.navigate('PrepSubscription'); }} />
+      <TrialSheet visible={sheet === 'trial'} rights={rights} onClose={() => setSheet(null)} subscribing={subscription.opening} onSubscribe={() => { setSheet(null); subscription.go(); }} />
+      <LockedSheet visible={sheet === 'locked'} onClose={() => setSheet(null)} subscribing={subscription.opening} onSubscribe={() => { setSheet(null); subscription.go(); }} />
       <BottomSheet visible={sheet === 'retour'} onClose={() => { usePrep.setState({ retour: null }); setSheet(null); }} maxHeight={0.6} footer={<PrepButton title="Reprendre" onPress={() => { usePrep.setState({ retour: null }); setSheet(null); }} />}>
         <View style={{ alignItems: 'center', gap: 8 }}>
           <GraduationCap size={30} color={brand.gold} />

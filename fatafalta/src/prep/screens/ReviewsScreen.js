@@ -1,4 +1,5 @@
 import Pressable from '../../components/ui/FeedbackPressable';
+import { useOpenSubscription } from '../../hooks/useAccountLink';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -37,6 +38,7 @@ const describeAnswer = (ex, cle) => {
 
 /** E29 — Révisions du jour / Cahier d'erreurs, E30 — Fiche d'erreur. */
 const ReviewsScreen = ({ navigation, route }) => {
+  const subscription = useOpenSubscription(navigation);
   useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
   const { brand, subjectTint, colors, theme } = useTheme();
   const { styles } = useStyles();
@@ -177,7 +179,7 @@ const ReviewsScreen = ({ navigation, route }) => {
           </View>
         ) : null}
       </BottomSheet>
-      <LockedSheet visible={locked} onClose={() => setLocked(false)} message="Les fiches restent consultables ; les sessions de révision sont réservées aux abonnés après l’essai." onSubscribe={() => { setLocked(false); navigation.navigate('PrepSubscription'); }} />
+      <LockedSheet visible={locked} onClose={() => setLocked(false)} message="Les fiches restent consultables ; les sessions de révision sont réservées aux abonnés après l’essai." onSubscribe={() => { setLocked(false); subscription.go(); }} />
     </PaperStack>
   );
 };
