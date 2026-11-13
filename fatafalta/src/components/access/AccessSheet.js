@@ -7,6 +7,7 @@ import Sheet from '../ui/Sheet';
 import ActionButton from '../ui/ActionButton';
 import { usePlans } from '../../hooks/useAccount';
 import { formatAmount, formatRenewal } from '../../utils/format';
+import { canOfferPurchase } from '../../utils/storePolicy';
 
 const Benefit = ({ children }) => {
   const { brand } = useTheme();
@@ -36,7 +37,7 @@ const Header = ({ icon: Icon, title, description }) => {
 const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscribe, subscribing, entitlements, limitInfo, onOpenDownloads }) => {
   const { styles } = useStyles();
   const { data: plans } = usePlans();
-  const canCheckout = entitlements?.checkout?.mobileWebCheckout !== false;
+  const canCheckout = canOfferPurchase(entitlements?.checkout?.mobileWebCheckout);
   const amount = entitlements?.nextPayment?.amount ?? plans?.initial?.amount;
   const isRenewal = entitlements?.subscription?.status === 'EXPIRED';
   const freeUntilYear = limitInfo?.freeUntilYear || plans?.downloadPolicy?.freeUntilYear || 2009;
@@ -86,11 +87,11 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
                 )}
               </View>
             ) : null}
-            <View style={styles.benefits}>
+            {canCheckout ? <View style={styles.benefits}>
               <Benefit>Tous les sujets et leurs corrigés, y compris les plus récents</Benefit>
               <Benefit>{`Jusqu’à ${subscriberLimit} sujets par période de ${windowHours} heures`}</Benefit>
               <Benefit>Consultation hors ligne après téléchargement</Benefit>
-            </View>
+            </View> : null}
             {canCheckout ? (
               <>
                 <ActionButton title={isRenewal ? 'Renouveler mon abonnement' : 'Prendre mon abonnement'} onPress={onSubscribe} loading={subscribing} />
@@ -101,7 +102,7 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
             ) : (
               <>
                 <Text variant="body" align="center" style={styles.footnote}>
-                  Les téléchargements se débloquent automatiquement dès que ton compte dispose d’un abonnement actif.
+                  Ce sujet se débloque automatiquement dès que ton compte dispose d’un accès Premium actif.
                 </Text>
                 <ActionButton title="Compris" variant="secondary" onPress={onClose} />
               </>

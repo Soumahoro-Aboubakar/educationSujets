@@ -14,6 +14,7 @@ import { useEntitlements, useSubscription } from '../../hooks/useAccount';
 import { useWebCheckout } from '../../hooks/useWebCheckout';
 import PaymentMethodLogo from '../../components/payments/PaymentMethodLogo';
 import { formatAmount, formatDate, formatLongDate } from '../../utils/format';
+import { canOfferPurchase } from '../../utils/storePolicy';
 
 const TITLES = {
   ACTIVE: 'Abonnement actif',
@@ -28,11 +29,18 @@ const SubscriptionScreen = ({ navigation }) => {
   const { styles } = useStyles();
   const { data, isLoading, isError, refetch, isRefetching, error: loadError } = useSubscription();
   const { data: entitlements } = useEntitlements();
-  const canCheckout = entitlements?.checkout?.mobileWebCheckout !== false;
+  const canCheckout = canOfferPurchase(entitlements?.checkout?.mobileWebCheckout);
   const checkout = useWebCheckout();
 
   const status = data?.status || 'NONE';
-  const subtitle = status === 'ACTIVE'
+  // Suspension ou révocation décidée par le serveur : prioritaire sur la date de fin.
+  const accessState = data?.accessState || 'enabled';
+  const blocked = accessState !== 'enabled';
+  const subtitle = blocked
+    ? accessState === 'revoked'
+      ? 'Ton accès Premium a été retiré. Contacte le support Fatafalta pour en savoir plus.'
+      : 'Ton accès Premium est suspendu. Contacte le support Fatafalta pour en savoir plus.'
+    : status === 'ACTIVE'
     ? `Expire le ${formatLongDate(data.currentPeriodEnd)}`
     : status === 'EXPIRED'
       ? `Expiré depuis le ${formatLongDate(data.currentPeriodEnd)}`
@@ -64,6 +72,15 @@ const SubscriptionScreen = ({ navigation }) => {
           <StatusPill status={status} />
           <Text variant="body" style={styles.summaryText}>{subtitle}</Text>
         </View>
+        {!canCheckout ? (
+          <ActionButton
+            variant="secondary"
+            title="Actualiser mes droits"
+            onPress={() => refetch()}
+            loading={isRefetching}
+            style={styles.cta}
+          />
+        ) : null}
         <Section title="Détails">
           {data.firstActivatedAt ? <Row label="Membre depuis" value={formatDate(data.firstActivatedAt)} /> : null}
           {data.currentPeriodEnd ? <Row label="Accès jusqu’au" value={formatDate(data.currentPeriodEnd)} /> : null}
@@ -81,7 +98,7 @@ const SubscriptionScreen = ({ navigation }) => {
           )}
         </Section>
 
-        {canCheckout && status !== 'PENDING' ? (
+        {canCheckout && !blocked && status !== 'PENDING' ? (
           <View style={styles.webStep}>
             <Text variant="bodyMedium" style={styles.webStepTitle}>Le paiement se fait sur le site Fatafalta</Text>
             <Text variant="caption" style={styles.webStepLine}>1. Tu y seras connecté automatiquement, avec ce compte.</Text>
@@ -123,7 +140,7 @@ const SubscriptionScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ScreenHeader
         onBack={() => navigation.goBack()}
-        title={TITLES[status] || 'Abonnement à vérifier'}
+        title={data?.accessState && data.accessState !== 'enabled' ? (data.accessState === 'revoked' ? 'Accès retiré' : 'Accès suspendu') : TITLES[status] || 'Abonnement à vérifier'}
       />
       <AccountScroll refreshing={isRefetching} onRefresh={refetch}>
         {renderBody()}

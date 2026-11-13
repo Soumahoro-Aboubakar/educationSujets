@@ -6,6 +6,7 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import { createWebHandoff } from '../services/billing';
 import { useRefreshAccount } from './useAccount';
+import { PURCHASE_FLOW_AVAILABLE } from '../utils/storePolicy';
 
 /**
  * Ouvre la souscription web dans un navigateur intégré, déjà connecté grâce à un code de
@@ -17,7 +18,8 @@ export const useWebCheckout = () => {
   const refreshAccount = useRefreshAccount();
 
   const open = useCallback((checkoutUrl, { promoCode } = {}) => run(async () => {
-    if (!checkoutUrl) return;
+    // Builds stores : aucun parcours d'achat, quelle que soit l'URL reçue (voir utils/storePolicy).
+    if (!PURCHASE_FLOW_AVAILABLE || !checkoutUrl) return;
     try {
       const { code } = await createWebHandoff();
       const returnUrl = Linking.createURL('abonnement-retour');

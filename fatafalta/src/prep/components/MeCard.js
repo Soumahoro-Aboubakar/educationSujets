@@ -6,6 +6,7 @@ import Text from '../../components/ui/Text';
 import usePrep, { useRights } from '../store';
 import { type } from '../theme';
 import { Avatar, Badge, PrepButton } from '../ui/primitives';
+import { PURCHASE_FLOW_AVAILABLE } from '../../utils/storePolicy';
 
 /**
  * Onglet Moi, partie préparation (E39) : identité automatique (§ 25.1) et état de l'essai
@@ -38,7 +39,7 @@ const MeCard = ({ navigation, email }) => {
               <Sparkles size={15} color={brand.goldInk} />
               <Text variant="caption" style={styles.muted}>{`${rights.essai.iaRestantes} vérification${rights.essai.iaRestantes > 1 ? 's' : ''} IA offerte${rights.essai.iaRestantes > 1 ? 's' : ''}`}</Text>
             </View>
-            <PrepButton title="S’abonner" variant="gold" onPress={() => navigation.navigate('PrepSubscription')} />
+            {PURCHASE_FLOW_AVAILABLE ? <PrepButton title="S’abonner" variant="gold" onPress={() => navigation.navigate('PrepSubscription')} /> : null}
             {!email ? <PrepButton title="Créer mon compte" variant="link" onPress={() => navigation.navigate('Register', { returnTo: 'back' })} compact style={{ alignSelf: 'center' }} /> : null}
           </View>
         ) : null}

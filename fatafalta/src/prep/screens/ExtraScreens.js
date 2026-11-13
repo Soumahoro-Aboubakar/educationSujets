@@ -22,6 +22,9 @@ import VideoPanel from '../video/VideoPanel';
 import VideoDock from '../video/VideoDock';
 import useVideoScroll from '../video/useVideoScroll';
 import { useVideo } from '../video/useVideos';
+import { PURCHASE_FLOW_AVAILABLE } from '../../utils/storePolicy';
+import { useRefreshAccount } from '../../hooks/useAccount';
+import useAsyncAction from '../../hooks/useAsyncAction';
 
 // ═══ E32 — Concours blanc : introduction ════════════════════════════════
 export const MockIntroScreen = ({ navigation, route }) => {
@@ -154,11 +157,17 @@ export const PrepSubscriptionScreen = ({ navigation }) => {
   const { isAuthenticated } = useContext(AuthContext);
   const programme = usePrep((s) => s.programme);
   const summary = useSummary(programme);
+  const refreshAccount = useRefreshAccount();
+  const [runRefresh, refreshing] = useAsyncAction();
   const subscribe = () => {
     // Même abonnement que les anciens sujets (§ 24) : le paiement passe par le compte (§ 25.5).
     if (!isAuthenticated) navigation.navigate('Register', { returnTo: 'back' });
     else navigation.navigate('Subscription');
   };
+  // Builds stores : aucune vente. On relit seulement les droits du compte auprès du serveur.
+  const refreshRights = () => runRefresh(async () => {
+    await Promise.allSettled([refreshAccount(), usePrep.getState().flush()]);
+  });
   return (
     <View style={styles.night}>
       <StatusBar barStyle="light-content" />
@@ -170,9 +179,15 @@ export const PrepSubscriptionScreen = ({ navigation }) => {
         </View>
         <Image source={ART.emblem} style={styles.emblem} resizeMode="contain" accessible={false} />
         <Text style={[type.hero, styles.onInk, { textAlign: 'center', marginTop: 6 }]} accessibilityRole="header">Continue ta préparation</Text>
-        <Text variant="body" style={[styles.onSoft, { textAlign: 'center', marginTop: 6 }]}>
-          Un seul abonnement pour la préparation <Text style={{ fontFamily: theme.fontFamily.bold, color: brand.onInk }}>et</Text> tous les anciens sujets.
-        </Text>
+        {PURCHASE_FLOW_AVAILABLE ? (
+          <Text variant="body" style={[styles.onSoft, { textAlign: 'center', marginTop: 6 }]}>
+            Un seul abonnement pour la préparation <Text style={{ fontFamily: theme.fontFamily.bold, color: brand.onInk }}>et</Text> tous les anciens sujets.
+          </Text>
+        ) : (
+          <Text variant="body" style={[styles.onSoft, { textAlign: 'center', marginTop: 6 }]}>
+            {isAuthenticated ? 'La suite de ta préparation nécessite un accès Premium actif sur ton compte.' : 'Connecte-toi pour retrouver ton accès et ta progression.'}
+          </Text>
+        )}
         {summary && summary.stats.questions ? (
           <View style={styles.subscriptionStats}>
             {[[summary.modulesValides, 'modules validés'], [summary.stats.questions, 'questions'], [summary.serie, 'jours de série']].map(([v, l]) => (
@@ -183,20 +198,28 @@ export const PrepSubscriptionScreen = ({ navigation }) => {
             ))}
           </View>
         ) : null}
-        <View style={{ gap: 14, marginTop: 24 }}>
+        {PURCHASE_FLOW_AVAILABLE ? <View style={{ gap: 14, marginTop: 24 }}>
           {[[GraduationCap, 'Préparation illimitée : leçons, exercices, révisions'], [Sparkles, 'Vérification du raisonnement par IA'], [Timer, 'Concours blancs et test de positionnement'], [FileText, 'Tous les anciens sujets et corrigés']].map(([Icon, label]) => (
             <View key={label} style={styles.subscriptionBenefit}>
               <View style={styles.benefitIcon}><Icon size={18} color={brand.goldLight} /></View>
               <Text variant="bodyMedium" style={[styles.onInk, { flex: 1 }]}>{label}</Text>
             </View>
           ))}
-        </View>
+        </View> : null}
       <View style={[styles.panel, { marginTop: 28, paddingBottom: Math.max(insets.bottom, 16) + 8 }]}>
         <View style={styles.row}><CheckCircle2 size={18} color={colors.success} /><Text variant="caption" style={[styles.muted, { flex: 1 }]}>Ta progression, ton rang et ton pseudonyme sont conservés.</Text></View>
-        <PrepButton title="S’abonner" variant="gold" onPress={subscribe} style={{ marginTop: 12 }} />
-        <Text variant="caption" style={[styles.muted, { textAlign: 'center', marginTop: 8 }]}>
-          {isAuthenticated ? 'Paiement sécurisé · formules et moyens de paiement à l’étape suivante' : 'Paiement sécurisé · ton compte sera créé à l’étape suivante'}
-        </Text>
+        {PURCHASE_FLOW_AVAILABLE ? (
+          <>
+            <PrepButton title="S’abonner" variant="gold" onPress={subscribe} style={{ marginTop: 12 }} />
+            <Text variant="caption" style={[styles.muted, { textAlign: 'center', marginTop: 8 }]}>
+              {isAuthenticated ? 'Paiement sécurisé · formules et moyens de paiement à l’étape suivante' : 'Paiement sécurisé · ton compte sera créé à l’étape suivante'}
+            </Text>
+          </>
+        ) : isAuthenticated ? (
+          <PrepButton title="Actualiser mes droits" onPress={refreshRights} loading={refreshing} style={{ marginTop: 12 }} />
+        ) : (
+          <PrepButton title="Me connecter" onPress={() => navigation.navigate('Login', { returnTo: 'back' })} style={{ marginTop: 12 }} />
+        )}
       </View>
       </ScrollView>
     </View>

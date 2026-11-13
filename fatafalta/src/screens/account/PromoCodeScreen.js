@@ -15,6 +15,7 @@ import { SkeletonRows } from '../../components/ui/Skeleton';
 import { AccountScroll, Metric, Row, Section } from '../../components/account/AccountLayout';
 import { usePromoCode } from '../../hooks/useAccount';
 import { formatAmount, formatDate } from '../../utils/format';
+import { PURCHASE_FLOW_AVAILABLE } from '../../utils/storePolicy';
 
 // Liste des filleuls repliée par défaut : le résumé suffit dans la plupart des cas.
 const PREVIEW_COUNT = 3;
@@ -35,7 +36,10 @@ const PromoCodeScreen = ({ navigation }) => {
   };
 
   const share = () => Share.share({
-    message: `Prépare tes concours avec Fatafalta : anciens sujets et corrigés. Avec mon code ${data.code}, ton abonnement passe à ${formatAmount(data.terms.discountedPrice)}.`,
+    // Builds stores : le partage ne contient aucun prix d'offre.
+    message: PURCHASE_FLOW_AVAILABLE
+      ? `Prépare tes concours avec Fatafalta : anciens sujets et corrigés. Avec mon code ${data.code}, ton abonnement passe à ${formatAmount(data.terms.discountedPrice)}.`
+      : `Prépare tes concours avec Fatafalta : anciens sujets et corrigés. Mon code : ${data.code}.`,
   });
 
   const toggle = (setter) => {
@@ -56,7 +60,7 @@ const PromoCodeScreen = ({ navigation }) => {
         {!isActive ? (
           <View style={styles.notice}>
             <Text variant="body" style={styles.noticeText}>
-              Ton code promotionnel est actuellement inactif. Active ton abonnement pour bénéficier des commissions générées par les nouveaux utilisateurs utilisant ton code.
+              {PURCHASE_FLOW_AVAILABLE ? 'Ton code promotionnel est actuellement inactif. Active ton abonnement pour bénéficier des commissions générées par les nouveaux utilisateurs utilisant ton code.' : 'Ton code promotionnel est actuellement inactif. Il devient actif dès que ton compte dispose d’un accès Premium actif.'}
             </Text>
           </View>
         ) : null}
@@ -104,7 +108,7 @@ const PromoCodeScreen = ({ navigation }) => {
         </Pressable>
         {showHelp ? (
           <Text variant="body" style={styles.helpText}>
-            {`Ton ami saisit ton code lors de son premier abonnement et le paie ${formatAmount(data.terms.discountedPrice)}. Tu reçois ${formatAmount(data.terms.commission)} sur ce premier paiement, disponibles dans ton portefeuille après un court délai de sécurité. ${data.alwaysActive ? 'En tant que partenaire, ton code reste actif en permanence.' : 'Ton code n’est actif que pendant ton abonnement.'}`}
+            {`${PURCHASE_FLOW_AVAILABLE ? `Ton ami saisit ton code lors de son premier abonnement et le paie ${formatAmount(data.terms.discountedPrice)}.` : 'Ton ami saisit ton code lors de son premier abonnement.'} Tu reçois ${formatAmount(data.terms.commission)} sur ce premier paiement, disponibles dans ton portefeuille après un court délai de sécurité. ${data.alwaysActive ? 'En tant que partenaire, ton code reste actif en permanence.' : 'Ton code n’est actif que pendant ton abonnement.'}`}
           </Text>
         ) : null}
       </>

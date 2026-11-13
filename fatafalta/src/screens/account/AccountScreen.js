@@ -21,6 +21,7 @@ import { SkeletonRows } from '../../components/ui/Skeleton';
 import AuthContext from '../../context/AuthContext';
 import { useEntitlements, useWallet } from '../../hooks/useAccount';
 import { formatAmount, formatDate } from '../../utils/format';
+import { PURCHASE_FLOW_AVAILABLE } from '../../utils/storePolicy';
 
 const GuestAccount = ({ navigation }) => {
   const { styles } = useStyles();
@@ -70,7 +71,7 @@ const AccountScreen = ({ navigation }) => {
     ? `Expire le ${formatDate(subscription.currentPeriodEnd)}`
     : subscription?.status === 'EXPIRED'
       ? `Expiré le ${formatDate(subscription.currentPeriodEnd)}`
-      : 'Débloque tous les sujets et corrigés';
+      : PURCHASE_FLOW_AVAILABLE ? 'Débloque tous les sujets et corrigés' : 'Aucun accès Premium actif';
 
   const confirmLogout = () => {
     Alert.alert('Se déconnecter', 'Tes documents téléchargés restent disponibles sur cet appareil.', [
@@ -96,7 +97,7 @@ const AccountScreen = ({ navigation }) => {
             <Section>
               <Row
                 icon={CreditCard}
-                label="Abonnement"
+                label={PURCHASE_FLOW_AVAILABLE ? 'Abonnement' : 'Mon accès'}
                 hint={subscriptionHint}
                 trailing={subscription ? <StatusPill status={subscription.status} /> : null}
                 onPress={() => navigation.navigate('Subscription')}

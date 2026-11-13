@@ -20,6 +20,7 @@ import { fetchBundleFiles, fetchDownloadScope, previewDownloadSelection } from '
 import { getErrorCode, getErrorMessage } from '../services/billing';
 import useDownloadStore from '../store/useDownloadStore';
 import { formatFileSize, formatRenewal } from '../utils/format';
+import { PURCHASE_FLOW_AVAILABLE } from '../utils/storePolicy';
 
 /*
  * Téléchargement groupé (mobile) : organisme → cycle (un seul par opération) → années, matières.
@@ -396,7 +397,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
               {overflow > 0 && quota.remaining > 0 ? (
                 <ActionButton title={`Garder ${quota.remaining} ${quota.lifetime ? 'du quota' : `récent${quota.remaining > 1 ? 's' : ''}`} + gratuits`} variant="secondary" onPress={keepWithinQuota} />
               ) : null}
-              {(overflow > 0 || counts?.blocked > 0) && quota?.plan !== 'subscriber' ? (
+              {PURCHASE_FLOW_AVAILABLE && (overflow > 0 || counts?.blocked > 0) && quota?.plan !== 'subscriber' ? (
                 <ActionButton title="Prendre mon abonnement" variant="secondary" onPress={access.sheetProps.onSubscribe} loading={access.sheetProps.subscribing} />
               ) : null}
               <ActionButton

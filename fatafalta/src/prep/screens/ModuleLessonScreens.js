@@ -29,6 +29,7 @@ import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import { sessionParams } from './SessionScreen';
 import { CompletionStamp, CopyMargin, useResultAnnouncement } from '../components/StudyPresentation';
 import { HomeChevron } from '../components/HomePresentation';
+import { PURCHASE_FLOW_AVAILABLE } from '../../utils/storePolicy';
 
 // ═══ E08 — Module ═══════════════════════════════════════════════════════
 export const ModuleScreen = ({ navigation, route }) => {
@@ -192,7 +193,7 @@ export const ModuleScreen = ({ navigation, route }) => {
         <LinearGradient colors={[theme.brand.paperTransparent, brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
         {rights.peutEtudier
           ? <PrepButton title={primary.title} icon={ArrowRight} onPress={go(primary.run)} />
-          : <PrepButton title="Débloquer avec l’abonnement" variant="gold" onPress={() => navigation.navigate('PrepSubscription')} />}
+          : <PrepButton title={PURCHASE_FLOW_AVAILABLE ? 'Débloquer avec l’abonnement' : 'Mon accès Premium'} variant={PURCHASE_FLOW_AVAILABLE ? 'gold' : 'primary'} onPress={() => navigation.navigate('PrepSubscription')} />}
       </View>
       <LockedSheet visible={locked} onClose={() => setLocked(false)} onSubscribe={() => { setLocked(false); navigation.navigate('PrepSubscription'); }} />
     </PaperStack>
