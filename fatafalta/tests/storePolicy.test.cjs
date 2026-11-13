@@ -107,3 +107,14 @@ test('tous les boutons « Voir mon abonnement » de la préparation passent par 
     });
   }
 });
+
+test('« Voir mon abonnement » sans compte : création de compte puis ouverture automatique du site', () => {
+  const hook = read('src/hooks/useAccountLink.js');
+  assert.match(hook, /navigation\.navigate\('Register', \{ returnTo: 'back', then: THEN_SUBSCRIPTION \}\)/);
+  const redirect = read('src/hooks/useAuthRedirect.js');
+  assert.match(redirect, /route\?\.params\?\.then === THEN_SUBSCRIPTION\) setTimeout\(\(\) => \{ openAccountPageAfterAuth\(\); \}/);
+  // Le passage entre « Créer un compte » et « Se connecter » conserve la demande.
+  for (const file of ['src/screens/LoginScreen.js', 'src/screens/RegisterScreen.js']) {
+    assert.match(read(file), /navigation\.replace\('(Register|Login)', route\.params\)/, file);
+  }
+});

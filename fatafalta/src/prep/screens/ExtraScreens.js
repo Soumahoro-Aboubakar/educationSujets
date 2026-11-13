@@ -10,7 +10,7 @@ import {
 } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import AuthContext from '../../context/AuthContext';
-import { useAccountLink } from '../../hooks/useAccountLink';
+import { THEN_SUBSCRIPTION, useAccountLink } from '../../hooks/useAccountLink';
 import { getProgramme, packInfo, useContentGeneration } from '../content';
 import usePrep, { useSummary } from '../store';
 import { type } from '../theme';
@@ -227,7 +227,7 @@ export const PrepSubscriptionScreen = ({ navigation }) => {
             <PrepButton title="Actualiser mes droits" variant={accountLink.available ? 'secondary' : 'primary'} onPress={refreshRights} loading={refreshing} style={{ marginTop: accountLink.available ? 8 : 12 }} />
           </>
         ) : (
-          <PrepButton title="Me connecter" onPress={() => navigation.navigate('Login', { returnTo: 'back' })} style={{ marginTop: 12 }} />
+          <PrepButton title="Me connecter" onPress={() => navigation.navigate('Login', { returnTo: 'back', then: THEN_SUBSCRIPTION })} style={{ marginTop: 12 }} />
         )}
       </View>
       </ScrollView>
