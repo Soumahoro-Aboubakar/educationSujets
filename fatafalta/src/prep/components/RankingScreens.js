@@ -30,6 +30,7 @@ const scoreLabel = (n) => n == null ? '—' : nf(Math.round(n));
 const PERIODS = [{ key: 'semaine', label: 'Semaine' }, { key: 'mois', label: 'Mois' }, { key: 'tout', label: 'Depuis le début' }];
 const periodLabel = (period) => PERIODS.find((p) => p.key === period)?.label || 'Depuis le début';
 const keyExtractor = (c) => c.identite;
+const LAUREL = 50; // couronne autour d'un avatar de 28 : les feuilles intérieures restent visibles
 const KEEP_POSITION = { minIndexForVisible: 1 };
 const programmeLabel = (programme) => programme ? `${programme.organisme.sigle} · ${programme.titre}` : 'Préparation';
 
@@ -99,7 +100,7 @@ const CandidateRow = memo(({ candidate: c, open, ownId, reduced, rankWidth = 48,
       <View style={s.candidateBody}>
         <View style={s.row}>
           {fontScale < 1.3 ? <View style={s.laurel}>
-            {laureate ? <Image source={ART.laurels[rank - 1]} style={StyleSheet.absoluteFill} resizeMode="contain" accessible={false} /> : null}
+            {laureate ? <Image source={ART.laurels[rank - 1]} style={s.laurelArt} resizeMode="contain" accessible={false} /> : null}
             <Avatar name={c.pseudonyme} tint={c.avatarTeinte} size={28} />
           </View> : null}
           <View style={s.flex}>
@@ -504,7 +505,9 @@ const useStyles = createThemedStyles(({ brand, theme }) => {
     message: { padding: 20, gap: 12 },
     podiumHeading: { paddingHorizontal: 20, paddingBottom: 8 },
     podium: { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: brand.line, marginTop: 12 },
-    laurel: { width: 44, height: 44, justifyContent: 'center', alignItems: 'center', flexShrink: 0 },
+    laurel: { width: LAUREL, height: LAUREL, justifyContent: 'center', alignItems: 'center', flexShrink: 0 },
+    // Taille explicite : sans elle, Android affiche l'image à sa taille d'origine, calée en haut à gauche.
+    laurelArt: { position: 'absolute', top: 0, left: 0, width: LAUREL, height: LAUREL },
     followed: { gap: 8, paddingTop: 12, paddingHorizontal: 20 },
     followedList: { gap: 10, paddingVertical: 4 },
     followCard: { width: 228, borderWidth: 1, borderColor: brand.line, borderRadius: 16, backgroundColor: brand.sheet, overflow: 'hidden' },

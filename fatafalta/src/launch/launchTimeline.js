@@ -13,9 +13,13 @@ import { SPLASH_IMAGE_WIDTH } from '../theme/brand';
 export const MARK = SPLASH_IMAGE_WIDTH; // cadre du F, identique au splash natif
 export const UNIT = MARK / 100; // une unité du cadre 100 × 100 du symbole
 
+// Le F part du centre exact (comme le splash natif), puis l'ensemble F + nom + signature
+// s'élève pour être centré verticalement : du haut de la feuille (y = 18 dans le cadre 100)
+// à la ligne de base de la signature.
+const MARK_TOP = (18 - 50) * UNIT;
+
 export const LAYOUT = {
-  // Le symbole s'élève quand le nom arrive : l'ensemble F + nom + signature finit centré.
-  lift: 38,
+  lift: 0, // calculé ci-dessous
   wordSize: 28, // corps du mot-symbole
   wordTop: 80, // du centre de l'écran au haut du mot-symbole
   tagSize: 13, // corps de la signature
@@ -25,6 +29,7 @@ export const LAYOUT = {
   pulseBottom: 56, // au-dessus de la zone sûre basse
   gutter: 24,
 };
+LAYOUT.lift = Math.round((MARK_TOP + LAYOUT.tagBaseline) / 2);
 
 // ── Pistes : [début, fin] en ms depuis la première image animée ──
 // `full` : la séquence complète. `calm` : « Réduire les animations » et redémarrage à chaud —

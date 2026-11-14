@@ -210,7 +210,7 @@ const LaunchExperience = ({ ready, progress, fault, slow, onRetry, onFinish, fon
   // Appui : la fin de l'ouverture défile en accéléré (la sortie attend toujours que l'app soit prête).
   const skip = useCallback(() => { speed.set(ENGINE.skipSpeed); }, [speed]);
 
-  // Le symbole s'élève quand le nom arrive : l'ensemble finit centré.
+  // Le symbole part du centre du splash, puis s'élève quand le nom arrive : l'ensemble finit centré.
   const [liftFrom, liftTo] = tracks.lift;
   const lockupStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: motion ? -LAYOUT.lift * easeInOut(span(clock.get(), liftFrom, liftTo)) : 0 }],
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   stage: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     alignItems: 'center',
     justifyContent: 'center',
   },

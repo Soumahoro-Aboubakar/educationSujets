@@ -47,6 +47,6 @@ export default FeedbackPressable;
 
 const styles = StyleSheet.create({
   pressed: { opacity: 0.72 },
-  pending: { ...StyleSheet.absoluteFillObject, alignItems: 'flex-end', justifyContent: 'center', paddingHorizontal: 4 },
+  pending: { ...StyleSheet.absoluteFill, alignItems: 'flex-end', justifyContent: 'center', paddingHorizontal: 4 },
   indicator: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
 });
