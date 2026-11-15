@@ -1,0 +1,364 @@
+{
+  "module": "ISE-ECO-ALGLIN",
+  "titre": "Calcul matriciel et algèbre linéaire",
+  "matiere": "Mathématiques",
+  "resume": "Des tableaux de nombres aux systèmes, espaces vectoriels et bases de vecteurs propres, avec calculs expliqués pas à pas.",
+  "concours": [
+    "ENSEA — ISE option économie"
+  ],
+  "lecons": [
+    {
+      "code": "ISE-ECO-ALGLIN-L1",
+      "titre": "Lire un tableau de nombres : la matrice",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "1/15",
+      "precedente": null,
+      "suivante": "Calculer coefficient par coefficient",
+      "explication": "Nous allons ranger des nombres dans une matrice pour représenter plusieurs quantités à la fois. Une lettre comme x représente un nombre ; ℝ désigne l’ensemble des nombres réels, dont les entiers et les décimaux. Une matrice est un tableau rectangulaire. Une ligne se lit horizontalement ; une colonne verticalement. Chaque nombre est un coefficient. La taille m × n indique m lignes et n colonnes.",
+      "formules": [],
+      "exemples": [
+        "Écriture compacte",
+        "Une seule colonne"
+      ],
+      "pieges": [
+        "2 × 3 et 3 × 2 sont deux tailles différentes, même si chacune contient six coefficients."
+      ],
+      "aRetenir": [
+        "Une matrice range des coefficients.",
+        "Taille : lignes × colonnes.",
+        "aᵢⱼ : ligne i, colonne j."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L2",
+      "titre": "Calculer coefficient par coefficient",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "2/15",
+      "precedente": "Lire un tableau de nombres : la matrice",
+      "suivante": "Multiplier une ligne par une colonne",
+      "explication": "Nous allons additionner des tableaux et modifier leur présentation. Ces opérations servent à regrouper des données ou changer leur échelle. Deux matrices de même taille s’additionnent case par case. Un scalaire est ici un réel : multiplier A par 3 multiplie chaque case par 3. La matrice nulle a toutes ses cases nulles. La transposée Aᵀ échange lignes et colonnes : ici Aᵀ = [1, 0 ; 2, 3]. La diagonale principale d’une matrice carrée va du coin supérieur gauche au coin inférieur droit ; la trace est la somme de ses coefficients.",
+      "formules": [],
+      "exemples": [
+        "Somme et facteur",
+        "Reconnaître une forme"
+      ],
+      "pieges": [
+        "La trace ne se définit ici que pour les matrices carrées. La transposée, elle, existe aussi pour une matrice rectangulaire."
+      ],
+      "aRetenir": [
+        "Somme : mêmes tailles.",
+        "Scalaire : multiplier toutes les cases.",
+        "Transposée : échanger lignes et colonnes ; trace : additionner la diagonale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L3",
+      "titre": "Multiplier une ligne par une colonne",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "3/15",
+      "precedente": "Calculer coefficient par coefficient",
+      "suivante": "Traduire plusieurs équations en AX = B",
+      "explication": "Nous allons multiplier des matrices. Ce produit permet de transformer ensemble plusieurs quantités. Pour AB, le nombre de colonnes de A doit égaler le nombre de lignes de B. La case (i,j) du résultat est la somme des produits des coefficients correspondants de la ligne i de A et de la colonne j de B.",
+      "formules": [],
+      "exemples": [
+        "Prix de deux paniers",
+        "Produit carré"
+      ],
+      "pieges": [
+        "Le produit se fait ligne par colonne, pas case par case. En général AB ≠ BA."
+      ],
+      "aRetenir": [
+        "Vérifier les dimensions intérieures.",
+        "Chaque case : ligne × colonne.",
+        "L’identité conserve la matrice."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L4",
+      "titre": "Traduire plusieurs équations en AX = B",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "4/15",
+      "precedente": "Multiplier une ligne par une colonne",
+      "suivante": "Éliminer avec le pivot de Gauss",
+      "explication": "Nous allons décrire plusieurs conditions par un système. Résoudre signifie trouver les nombres qui satisfont toutes les conditions simultanément. Une équation est linéaire en x et y si elle s’écrit ax + by = c, avec a, b, c fixés. Ni x² ni xy n’y apparaissent. Un système rassemble plusieurs équations.",
+      "formules": [
+        "A = [2, 1 ; 1, 1], X = [x ; y], B = [7 ; 4] : AX = B."
+      ],
+      "exemples": [
+        "Deux achats",
+        "Vérifier une solution"
+      ],
+      "pieges": [
+        "Un couple qui vérifie seulement une des équations n’est pas solution du système."
+      ],
+      "aRetenir": [
+        "Un système impose toutes ses équations.",
+        "AX regroupe les membres avec inconnues.",
+        "B regroupe les seconds membres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L5",
+      "titre": "Éliminer avec le pivot de Gauss",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "5/15",
+      "precedente": "Traduire plusieurs équations en AX = B",
+      "suivante": "Lire le rang et les solutions après Gauss",
+      "explication": "Nous allons remplacer un système par un autre ayant les mêmes solutions, mais plus facile à résoudre. On peut échanger deux lignes, multiplier une ligne par un réel non nul, ou lui ajouter un multiple d’une autre ligne. Ces opérations sont réversibles : elles conservent les solutions. Un pivot est un coefficient non nul utilisé pour annuler les coefficients sous lui.",
+      "formules": [],
+      "exemples": [
+        "Premier pivot",
+        "Remonter"
+      ],
+      "pieges": [
+        "Si le pivot prévu vaut zéro, chercher une ligne à échanger. Ne jamais diviser par zéro."
+      ],
+      "aRetenir": [
+        "Choisir un pivot non nul.",
+        "Annuler sous le pivot avec des opérations de lignes.",
+        "Remonter pour trouver les inconnues."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L6",
+      "titre": "Lire le rang et les solutions après Gauss",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "6/15",
+      "precedente": "Éliminer avec le pivot de Gauss",
+      "suivante": "Construire l’inverse par Gauss",
+      "explication": "Nous allons compter les contraintes indépendantes d’un système. Cela permet de savoir s’il a zéro, une ou plusieurs solutions. Après Gauss, une matrice est échelonnée si le premier coefficient non nul de chaque ligne se décale vers la droite et si les lignes nulles sont en bas. Le rang de A est le nombre de pivots de ses coefficients.",
+      "formules": [],
+      "exemples": [
+        "Une équation répétée",
+        "Une contradiction"
+      ],
+      "pieges": [
+        "Ne pas compter un pivot situé dans la colonne du second membre pour calculer le rang de A."
+      ],
+      "aRetenir": [
+        "Rang = nombre de pivots des coefficients.",
+        "0 = nombre non nul : aucune solution.",
+        "Sans contradiction : n−r paramètres libres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L7",
+      "titre": "Construire l’inverse par Gauss",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "7/15",
+      "precedente": "Lire le rang et les solutions après Gauss",
+      "suivante": "Tester l’inversibilité par un déterminant",
+      "explication": "Nous allons construire une matrice qui annule l’effet d’une autre. Elle servira à résoudre AX = B par X = A⁻¹B. Une matrice carrée A est inversible s’il existe A⁻¹ telle que AA⁻¹ = A⁻¹A = I. Pour la calculer, placer l’identité à droite de A et effectuer les mêmes opérations sur les deux blocs.",
+      "formules": [],
+      "exemples": [
+        "Annuler sous le pivot",
+        "Obtenir l’identité à gauche"
+      ],
+      "pieges": [
+        "L’inverse n’est pas le tableau des inverses des coefficients."
+      ],
+      "aRetenir": [
+        "Partir de [A | I].",
+        "Réduire A en I ; lire A⁻¹ à droite.",
+        "Contrôler par multiplication."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L8",
+      "titre": "Tester l’inversibilité par un déterminant",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "8/15",
+      "precedente": "Construire l’inverse par Gauss",
+      "suivante": "Reconnaître un espace vectoriel et un sous-espace",
+      "explication": "Nous allons associer un nombre à une matrice carrée. Son annulation signale que les colonnes ne fournissent pas toutes des directions indépendantes. En ordre 3, développer sur la première ligne : pour A = [a,b,c ; d,e,f ; g,h,i], det A = a(ei−fh) − b(di−fg) + c(dh−eg). Chaque parenthèse est le déterminant obtenu en supprimant la première ligne et la colonne choisie.",
+      "formules": [
+        "det([a,b ; c,d]) = ad − bc."
+      ],
+      "exemples": [
+        "Ordre 2",
+        "Ordre 3"
+      ],
+      "pieges": [
+        "Un déterminant négatif reste non nul : il n’empêche pas l’inversion. Sur la première ligne, les signes sont +, −, +."
+      ],
+      "aRetenir": [
+        "Ordre 2 : ad−bc.",
+        "Ordre 3 : développer avec +,−,+.",
+        "Déterminant non nul : inverse possible."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L9",
+      "titre": "Reconnaître un espace vectoriel et un sous-espace",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "9/15",
+      "precedente": "Tester l’inversibilité par un déterminant",
+      "suivante": "Choisir une base pour donner des coordonnées",
+      "explication": "Nous allons décrire des ensembles de vecteurs qui restent cohérents avec les calculs. Dans ℝ², un vecteur (x,y) est un couple de réels ; dans ℝⁿ, il a n coordonnées. On additionne coordonnée par coordonnée : (1,2)+(3,1) = (4,3). On multiplie par un scalaire : 2(1,2) = (2,4). Un espace vectoriel réel permet ces deux opérations avec les règles usuelles : addition associative et commutative, zéro, opposés, distributivité, 1u = u et (ab)u = a(bu). Un sous-espace F d’un espace E contient 0 et est stable par addition et multiplication par un réel. Le symbole ∈ signifie « appartient à » ; F ⊂ E signifie que tous les éléments de F sont dans E.",
+      "formules": [],
+      "exemples": [
+        "Une droite passant par zéro",
+        "Des objets autres que des couples"
+      ],
+      "pieges": [
+        "La droite x+y=1 ne contient pas (0,0) : ce n’est pas un sous-espace."
+      ],
+      "aRetenir": [
+        "Les coordonnées s’additionnent terme à terme.",
+        "Un sous-espace contient zéro.",
+        "Il est stable par somme et par multiplication par tout réel."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L10",
+      "titre": "Choisir une base pour donner des coordonnées",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "10/15",
+      "precedente": "Reconnaître un espace vectoriel et un sous-espace",
+      "suivante": "Relier noyau, image et rang",
+      "explication": "Nous allons choisir les directions nécessaires pour décrire chaque vecteur sans ambiguïté. Une combinaison linéaire de u et v est au+bv, avec a et b réels. Une famille est génératrice si ses combinaisons donnent tout l’espace étudié. Elle est libre si une combinaison nulle impose que tous les coefficients soient nuls. Une base possède les deux propriétés ; la dimension est le nombre de vecteurs d’une base.",
+      "formules": [],
+      "exemples": [
+        "Base habituelle",
+        "Changer de directions"
+      ],
+      "pieges": [
+        "Deux vecteurs non nuls peuvent être liés : (1,2) et (2,4) donnent 2(1,2)−(2,4)=0."
+      ],
+      "aRetenir": [
+        "Génératrice : couvrir tout l’espace.",
+        "Libre : aucune combinaison nulle non triviale.",
+        "Base : coordonnées uniques ; dimension : taille d’une base."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L11",
+      "titre": "Relier noyau, image et rang",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "11/15",
+      "precedente": "Choisir une base pour donner des coordonnées",
+      "suivante": "Décomposer un vecteur et le projeter",
+      "explication": "Nous allons mesurer ce qu’une transformation linéaire conserve ou écrase. Une application T associe à chaque entrée une sortie. T est linéaire si T(u+v)=T(u)+T(v) et T(au)=aT(u). Le noyau, noté ker T, contient les entrées envoyées sur zéro. L’image, notée Im T, contient toutes les sorties possibles. Ce sont des sous-espaces.",
+      "formules": [
+        "dim E = dim(ker T) + rang T, où rang T = dim(Im T)."
+      ],
+      "exemples": [
+        "Une transformation qui réduit",
+        "Retrouver le rang"
+      ],
+      "pieges": [
+        "Le noyau contient des vecteurs du départ ; l’image des vecteurs d’arrivée. Le rang n’est pas le nombre de coefficients non nuls."
+      ],
+      "aRetenir": [
+        "Noyau : résoudre AX=0.",
+        "Image : espace engendré par les colonnes.",
+        "Dimension du départ = dimension du noyau + rang."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L12",
+      "titre": "Décomposer un vecteur et le projeter",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "12/15",
+      "precedente": "Relier noyau, image et rang",
+      "suivante": "Chercher les directions propres",
+      "explication": "Nous allons séparer un vecteur en deux composantes. Cela donnera un sens précis aux projections et aux symétries. La somme F+G regroupe les f+g avec f∈F, g∈G. Elle est directe, notée F⊕G, si F∩G={0} : seul zéro est commun. Si E=F⊕G, F et G sont supplémentaires et chaque vecteur a une décomposition unique. Pour u=f+g, la projection sur F parallèlement à G est p(u)=f. La symétrie par rapport à F le long de G est s(u)=f−g. Ces deux applications sont linéaires.",
+      "formules": [],
+      "exemples": [
+        "Deux axes",
+        "Garder ou retourner"
+      ],
+      "pieges": [
+        "Deux sous-espaces de dimensions dont la somme vaut dim E ne sont pas forcément supplémentaires : vérifier aussi leur intersection."
+      ],
+      "aRetenir": [
+        "Somme directe : intersection réduite à zéro.",
+        "Supplémentaires : décomposition unique de tout E.",
+        "Projection p²=p ; symétrie s²=I."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L13",
+      "titre": "Chercher les directions propres",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "13/15",
+      "precedente": "Décomposer un vecteur et le projeter",
+      "suivante": "Construire une base de vecteurs propres",
+      "explication": "Nous allons chercher les directions qu’une matrice transforme sans les mélanger avec d’autres. Cela prépare le calcul de grandes puissances. Un vecteur propre u est non nul et vérifie Au=λu. Le réel λ est sa valeur propre : il mesure le facteur appliqué dans cette direction. L’ensemble des valeurs propres est le spectre. Chercher Au=λu revient à résoudre (A−λI)u=0 avec u≠0. C’est possible exactement quand det(A−λI)=0. Les solutions, avec zéro ajouté, forment l’espace propre associé à λ.",
+      "formules": [],
+      "exemples": [
+        "Vérifier un candidat",
+        "Trouver puis résoudre"
+      ],
+      "pieges": [
+        "Si M et N commutent (MN=NM), M(Nu)=λNu pour u propre de M. Mais Nu n’est un vecteur propre que s’il est non nul : N peut l’annuler."
+      ],
+      "aRetenir": [
+        "Vecteur propre : toujours non nul.",
+        "Chercher det(A−λI)=0 puis les noyaux.",
+        "Une valeur propre nulle signifie que A n’est pas inversible."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L14",
+      "titre": "Construire une base de vecteurs propres",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "14/15",
+      "precedente": "Chercher les directions propres",
+      "suivante": "Changer de coordonnées pour calculer Aⁿ",
+      "explication": "Nous allons remplacer une matrice par une matrice diagonale dans une base adaptée. Cela s’appelle diagonaliser. Une matrice n × n est diagonalisable sur ℝ si elle possède une base de n vecteurs propres réels. Des vecteurs propres associés à des valeurs propres distinctes sont indépendants (théorème admis). Avec une valeur répétée, compter la dimension de son espace propre.",
+      "formules": [
+        "P⁻¹AP=D ; A=PDP⁻¹."
+      ],
+      "exemples": [
+        "Former P et D",
+        "Un échec instructif"
+      ],
+      "pieges": [
+        "Avoir trouvé toutes les valeurs propres ne prouve pas encore qu’il existe assez de vecteurs propres indépendants."
+      ],
+      "aRetenir": [
+        "Former une base entière de vecteurs propres.",
+        "P : vecteurs en colonnes ; D : valeurs dans le même ordre.",
+        "Valeurs répétées : vérifier les dimensions des espaces propres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-ALGLIN-L15",
+      "titre": "Changer de coordonnées pour calculer Aⁿ",
+      "module": "Calcul matriciel et algèbre linéaire (Mathématiques)",
+      "position": "15/15",
+      "precedente": "Construire une base de vecteurs propres",
+      "suivante": null,
+      "explication": "Nous allons exploiter une nouvelle base pour répéter une transformation. Rappel : la matrice d’une application linéaire a pour colonnes les images des vecteurs de base, exprimées dans la base d’arrivée. Si P contient une nouvelle base en anciennes coordonnées, un vecteur vérifie Xancien=P Xnouveau. Pour une application du plan dans lui-même de matrice A, on transforme puis on revient aux nouvelles coordonnées : Anouveau=P⁻¹AP. Si A=PDP⁻¹, alors A²=PD(P⁻¹P)DP⁻¹=PD²P⁻¹. En répétant, Aⁿ=PDⁿP⁻¹ pour tout entier n≥0, avec A⁰=I. Dⁿ se calcule en élevant chaque coefficient diagonal à la puissance n.",
+      "formules": [],
+      "exemples": [
+        "Lire des coordonnées",
+        "Une puissance explicite"
+      ],
+      "pieges": [
+        "En général, élever chaque case de A à la puissance n ne donne pas Aⁿ. Cette facilité vaut pour une matrice diagonale."
+      ],
+      "aRetenir": [
+        "Anciennes coordonnées = P × nouvelles coordonnées.",
+        "Nouvelle matrice : P⁻¹AP.",
+        "Puissances : calculer Dⁿ puis revenir par P et P⁻¹."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "module": "DROIT-CONTRAT",
+  "titre": "Le contrat : formation et effets",
+  "matiere": "Droit civil",
+  "resume": "De l’obligation à la formation du contrat, aux nullités, à l’inexécution et au paiement de l’indu.",
+  "concours": [
+    "INFJ — École de la Magistrature"
+  ],
+  "lecons": [
+    {
+      "code": "DROIT-CONTRAT-L1",
+      "titre": "Comprendre une obligation",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Acte juridique ou fait juridique ?",
+      "explication": "Nous allons commencer par les mots du droit civil pour comprendre qui peut réclamer quoi à qui. Le droit civil organise notamment les rapports entre personnes privées. Il repose sur des textes, dont les dispositions civiles applicables en Côte d’Ivoire, interprétées par les juges. Une obligation est un lien juridique : le créancier peut demander une prestation au débiteur. La prestation peut être un paiement, une livraison ou une autre conduite déterminée. Le contrat est un accord de volontés créant des obligations. Une obligation peut aussi naître sans contrat.",
+      "formules": [],
+      "exemples": [
+        "Un prix à payer",
+        "Sans accord préalable"
+      ],
+      "pieges": [
+        "Créancier ne signifie pas toujours banque et débiteur ne signifie pas coupable. Ce sont les deux positions d’un rapport d’obligation."
+      ],
+      "aRetenir": [
+        "Créancier : réclame une prestation.",
+        "Débiteur : doit la prestation.",
+        "Une obligation peut naître avec ou sans contrat."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L2",
+      "titre": "Acte juridique ou fait juridique ?",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "2/9",
+      "precedente": "Comprendre une obligation",
+      "suivante": "Quand les volontés se rencontrent-elles ?",
+      "explication": "Nous allons distinguer une volonté de produire des effets juridiques d’un événement auquel le droit attache ces effets. Un acte juridique est une manifestation de volonté destinée à produire des effets de droit ; le contrat est un acte fondé sur un accord. Un fait juridique est un événement ou comportement auquel le droit attache des effets qui ne sont pas recherchés comme tels. Un fait peut être volontaire matériellement sans être un acte juridique : vouloir un geste n’est pas nécessairement vouloir l’obligation qui en résulte.",
+      "formules": [],
+      "exemples": [
+        "Créer une dette par accord",
+        "Créer une dette par dommage"
+      ],
+      "pieges": [
+        "Acte juridique ne signifie pas obligatoirement document écrit. L’acte et son moyen de preuve sont deux questions distinctes."
+      ],
+      "aRetenir": [
+        "Acte : effets de droit voulus.",
+        "Fait : effets attachés par la règle.",
+        "Ne pas confondre acte et preuve écrite."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L3",
+      "titre": "Quand les volontés se rencontrent-elles ?",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "3/9",
+      "precedente": "Acte juridique ou fait juridique ?",
+      "suivante": "Vérifier la validité du contrat",
+      "explication": "Nous allons reconnaître un accord sans confondre discussion et acceptation. Une offre propose la conclusion d’un contrat avec ses éléments nécessaires. L’acceptation exprime l’accord avec cette offre. Une réponse qui modifie le prix n’est pas l’acceptation pure de l’offre initiale : elle propose d’autres conditions. Un contrat synallagmatique crée des obligations réciproques ; un contrat unilatéral ne fait naître une obligation qu’à la charge d’une partie. Même un contrat unilatéral suppose un accord de volontés.",
+      "formules": [],
+      "exemples": [
+        "Même prix",
+        "Prix différent"
+      ],
+      "pieges": [
+        "« Unilatéral » qualifie les obligations du contrat, pas le nombre de volontés nécessaires à sa formation."
+      ],
+      "aRetenir": [
+        "Comparer offre et réponse.",
+        "Une modification essentielle appelle un nouvel accord.",
+        "Contrat unilatéral ne signifie pas volonté unique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L4",
+      "titre": "Vérifier la validité du contrat",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "4/9",
+      "precedente": "Quand les volontés se rencontrent-elles ?",
+      "suivante": "Un consentement libre et éclairé",
+      "explication": "Nous allons distinguer l’existence d’un accord de sa validité juridique. Dans le droit civil ivoirien des obligations étudié ici, on vérifie le consentement, la capacité de contracter, un objet certain et une cause licite. Le consentement est l’accord réel ; la capacité est l’aptitude légale à s’engager soi-même. L’objet concerne ce qui est promis. La cause est la justification juridique de l’engagement, dont la licéité doit être examinée. Certaines conventions demandent aussi une forme particulière.",
+      "formules": [],
+      "exemples": [
+        "Une prestation identifiable",
+        "Une opération interdite"
+      ],
+      "pieges": [
+        "Ne pas appliquer automatiquement les articles du Code civil français réformé en 2016. La formulation et la numérotation ivoiriennes doivent…"
+      ],
+      "aRetenir": [
+        "Consentement, capacité, objet, cause licite.",
+        "Vérifier les formes exigées pour l’opération.",
+        "Utiliser les textes applicables en Côte d’Ivoire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L5",
+      "titre": "Un consentement libre et éclairé",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "5/9",
+      "precedente": "Vérifier la validité du contrat",
+      "suivante": "Que sanctionne la nullité ?",
+      "explication": "Nous allons distinguer trois défauts possibles de consentement pour ne pas les appeler tous « erreur ». Un vice du consentement affecte la liberté ou la compréhension de l’accord. L’erreur est une représentation inexacte, pertinente dans les conditions du droit applicable. Le dol est une tromperie intentionnelle déterminante du consentement. La violence est une contrainte qui conduit à contracter. Il faut relier le vice invoqué à la décision de s’engager ; toute déception ou négociation difficile ne suffit pas.",
+      "formules": [],
+      "exemples": [
+        "Tromper pour vendre",
+        "Contraindre à signer"
+      ],
+      "pieges": [
+        "Une mauvaise affaire n’est pas automatiquement un vice. Le regret ne prouve ni erreur juridiquement pertinente, ni dol, ni violence."
+      ],
+      "aRetenir": [
+        "Erreur : représentation inexacte.",
+        "Dol : tromperie intentionnelle déterminante.",
+        "Violence : contrainte affectant l’accord."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L6",
+      "titre": "Que sanctionne la nullité ?",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "6/9",
+      "precedente": "Un consentement libre et éclairé",
+      "suivante": "Ce que le contrat oblige à faire",
+      "explication": "Nous allons distinguer un défaut de formation d’un problème d’exécution. La nullité sanctionne un défaut qui affecte la formation du contrat. Elle est dite relative lorsque la règle protège principalement un intérêt privé ; absolue lorsqu’elle protège l’intérêt général. Cette distinction influence notamment les personnes qui peuvent agir et la possibilité d’une confirmation. L’annulation peut imposer des restitutions, c’est-à-dire rendre ce qui a été reçu, sous réserve des règles et exceptions applicables.",
+      "formules": [],
+      "exemples": [
+        "Protéger une personne trompée",
+        "Une opération prohibée"
+      ],
+      "pieges": [
+        "La nullité n’est pas une peine pénale. L’absence de paiement après une formation valable relève d’abord de l’inexécution, pas d’une nullité…"
+      ],
+      "aRetenir": [
+        "Nullité : défaut de formation.",
+        "Relative ou absolue selon l’intérêt protégé.",
+        "Examiner les restitutions et les exceptions."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L7",
+      "titre": "Ce que le contrat oblige à faire",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "7/9",
+      "precedente": "Que sanctionne la nullité ?",
+      "suivante": "Que faire face à une obligation inexécutée ?",
+      "explication": "Nous allons comprendre pourquoi un contrat valable engage les parties sans imposer automatiquement une dette à leurs voisins. La force obligatoire signifie que le contrat valablement formé lie ses parties. La bonne foi exige une conduite loyale dans son exécution. L’effet relatif signifie qu’en principe les obligations contractuelles lient ceux qui ont contracté, pas tous les tiers, personnes étrangères au contrat. Il existe des mécanismes particuliers prévus par le droit. La modification ou la rupture doit respecter l’accord et les causes autorisées par la loi.",
+      "formules": [],
+      "exemples": [
+        "Tenir la date",
+        "Un voisin non signataire"
+      ],
+      "pieges": [
+        "L’effet relatif ne rend pas le contrat invisible pour les tiers. Il distingue l’obligation de contracter de la prise en compte d’une situat…"
+      ],
+      "aRetenir": [
+        "Le contrat valable lie ses parties.",
+        "Exécution loyale : bonne foi.",
+        "Un tiers n’est pas automatiquement débiteur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L8",
+      "titre": "Que faire face à une obligation inexécutée ?",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "8/9",
+      "precedente": "Ce que le contrat oblige à faire",
+      "suivante": "Un paiement sans dette doit-il être rendu ?",
+      "explication": "Nous allons analyser un manquement sans supposer qu’il annule ou pénalise automatiquement tout le contrat. L’inexécution est l’absence ou le défaut d’exécution d’une obligation due. Selon les conditions applicables, le créancier peut rechercher l’exécution, la résolution du contrat ou des dommages-intérêts, somme réparant un préjudice. La mise en demeure demande formellement l’exécution selon les règles requises. La résolution sanctionne une inexécution ; elle se distingue de la nullité liée à la formation. La force majeure peut exonérer dans les conditions du droit applicable.",
+      "formules": [],
+      "exemples": [
+        "Livraison manquante",
+        "Préjudice à prouver"
+      ],
+      "pieges": [
+        "Un obstacle simplement gênant n’est pas automatiquement une force majeure. Ne pas confondre nullité, résolution et peine pénale."
+      ],
+      "aRetenir": [
+        "Identifier obligation, échéance et manquement.",
+        "Vérifier démarches et sanction adaptée.",
+        "Réparation : préjudice et lien causal à établir."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-CONTRAT-L9",
+      "titre": "Un paiement sans dette doit-il être rendu ?",
+      "module": "Le contrat : formation et effets (Droit civil)",
+      "position": "9/9",
+      "precedente": "Que faire face à une obligation inexécutée ?",
+      "suivante": null,
+      "explication": "Nous allons découvrir une obligation sans contrat à travers le paiement de l’indu, thème du sujet civil INFJ de 2025. Un paiement exécute une obligation ; il ne se limite pas toujours à remettre de l’argent. L’indu est ce qui a été payé sans être dû dans la situation examinée. La répétition de l’indu est la demande de restitution. Le texte de l’article 1376 proposé au concours indique que celui qui reçoit ce qui ne lui est pas dû doit le restituer. Une réception de bonne foi n’autorise pas, à elle seule, à garder un paiement injustifié.",
+      "formules": [],
+      "exemples": [
+        "Double virement",
+        "Vérifier la dette"
+      ],
+      "pieges": [
+        "La restitution d’un paiement indu n’est pas nécessairement l’annulation d’un contrat. La bonne foi peut influencer d’autres effets, sans cr…"
+      ],
+      "aRetenir": [
+        "Chercher d’abord si le paiement était dû.",
+        "Répétition : demande de restitution.",
+        "L’indu peut créer une obligation sans contrat."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

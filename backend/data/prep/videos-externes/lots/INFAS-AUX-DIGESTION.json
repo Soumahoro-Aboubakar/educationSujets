@@ -1,0 +1,191 @@
+{
+  "module": "INFAS-AUX-DIGESTION",
+  "titre": "Digestion et nutrition",
+  "matiere": "Biologie",
+  "resume": "Du trajet des aliments à leur transformation, puis à l’absorption, à l’équilibre alimentaire et aux carences.",
+  "concours": [
+    "INFAS — Auxiliaires de santé"
+  ],
+  "lecons": [
+    {
+      "code": "INFAS-AUX-DIGESTION-L1",
+      "titre": "De l’aliment au nutriment",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Suivre le tube digestif",
+      "explication": "Nous allons comprendre ce que le corps peut utiliser dans les aliments. BIO-COEUR a présenté les cellules et le transport sanguin ; nous cherchons maintenant d’où viennent les nutriments transportés. Un aliment est ce que l’on mange ou boit. Une molécule est un assemblage d’atomes, très petites unités de matière. Les aliments contiennent de grosses molécules souvent trop grandes pour être absorbées. La digestion en transforme une partie en molécules plus petites, les nutriments.",
+      "formules": [],
+      "exemples": [
+        "Un morceau de pain"
+      ],
+      "pieges": [
+        "Ne pas confondre un aliment avec une seule famille chimique : les haricots apportent à la fois des glucides, des protéines, des fibres et d…"
+      ],
+      "aRetenir": [
+        "Aliment : mélange consommé.",
+        "Digestion : transformation en molécules absorbables.",
+        "Nutriment : substance utilisable après absorption."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-DIGESTION-L2",
+      "titre": "Suivre le tube digestif",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "2/8",
+      "precedente": "De l’aliment au nutriment",
+      "suivante": "Deux façons de digérer",
+      "explication": "Nous allons situer les organes dans l’ordre de passage des aliments. Cet ordre aide à comprendre leurs rôles. Le pharynx est un carrefour de la gorge ; l’œsophage conduit le contenu avalé à l’estomac. L’estomac est une poche musculaire ; l’intestin grêle est un long conduit ; le côlon constitue la majeure partie du gros intestin. Le rectum stocke les selles avant leur évacuation.",
+      "formules": [
+        "Bouche → pharynx → œsophage → estomac → intestin grêle → côlon → rectum → anus."
+      ],
+      "exemples": [
+        "Après avoir avalé"
+      ],
+      "pieges": [
+        "L’œsophage n’est pas la trachée : la trachée conduit l’air vers les poumons, pas les aliments vers l’estomac."
+      ],
+      "aRetenir": [
+        "Le contenu suit un tube continu.",
+        "Péristaltisme : poussée par contractions.",
+        "Les organes annexes envoient des sécrétions."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-DIGESTION-L3",
+      "titre": "Deux façons de digérer",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "3/8",
+      "precedente": "Suivre le tube digestif",
+      "suivante": "Glandes, sucs et enzymes",
+      "explication": "Nous allons séparer la fragmentation mécanique du découpage chimique. Les deux actions coopèrent. La digestion mécanique change la taille des morceaux et les mélange : mastication par les dents, brassage de l’estomac. La digestion chimique transforme les molécules, notamment grâce aux enzymes, protéines qui facilitent des réactions ciblées.",
+      "formules": [],
+      "exemples": [
+        "Mâcher puis transformer",
+        "Dans l’estomac"
+      ],
+      "pieges": [
+        "La mastication ne transforme pas à elle seule les protéines en acides aminés. Réduire un morceau et transformer une molécule sont deux opér…"
+      ],
+      "aRetenir": [
+        "Mécanique : fragmenter et brasser.",
+        "Chimique : transformer les molécules.",
+        "Chyme : contenu issu du brassage gastrique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-DIGESTION-L4",
+      "titre": "Glandes, sucs et enzymes",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "4/8",
+      "precedente": "Deux façons de digérer",
+      "suivante": "L’absorption dans l’intestin grêle",
+      "explication": "Nous allons distinguer l’organe producteur, sa sécrétion et les molécules actives. Ces mots sont souvent opposés dans les QCM. Une glande fabrique une sécrétion. Un suc digestif est une sécrétion déversée dans le tube digestif, contenant notamment des molécules qui aident la digestion. Une enzyme digestive peut être un constituant de ce suc.",
+      "formules": [],
+      "exemples": [
+        "Le trio à ne pas confondre"
+      ],
+      "pieges": [
+        "Ne pas attribuer la production de bile à la vésicule : elle la stocke. Le pancréas envoie un suc digestif, pas de la bile."
+      ],
+      "aRetenir": [
+        "Glande : producteur.",
+        "Suc : sécrétion ; enzyme : molécule active.",
+        "Foie : production de bile ; vésicule : stockage."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-DIGESTION-L5",
+      "titre": "L’absorption dans l’intestin grêle",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "5/8",
+      "precedente": "Glandes, sucs et enzymes",
+      "suivante": "Du côlon aux selles",
+      "explication": "Nous allons expliquer comment les nutriments rejoignent les transports internes. La digestion les prépare ; l’absorption leur fait franchir la paroi. L’absorption intestinale est le passage de substances depuis le contenu du tube vers le milieu intérieur. Elle a lieu surtout dans l’intestin grêle. Les villosités, petits replis en forme de doigts, augmentent sa surface d’échange. La lymphe est un liquide circulant dans un réseau de vaisseaux distinct du sang, qui finit par rejoindre le réseau veineux. La majeure partie des lipides à longue chaîne est transportée sous forme de particules vers les capillaires lymphatiques des villosités, puis vers le sang.",
+      "formules": [],
+      "exemples": [
+        "Le glucose",
+        "Le mot chyle"
+      ],
+      "pieges": [
+        "Les produits lipidiques n’empruntent pas tous une voie identique : certains acides gras plus courts passent directement vers le sang. La rè…"
+      ],
+      "aRetenir": [
+        "Digérer : transformer ; absorber : faire passer.",
+        "Villosités : grande surface.",
+        "Glucose : sang ; majorité des lipides longs : lymphe puis sang."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-DIGESTION-L6",
+      "titre": "Du côlon aux selles",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "6/8",
+      "precedente": "L’absorption dans l’intestin grêle",
+      "suivante": "Construire un équilibre alimentaire",
+      "explication": "Nous allons comprendre le devenir des résidus non absorbés et distinguer deux voies d’élimination. Le côlon reçoit ce qui reste après l’intestin grêle. Il absorbe encore de l’eau et des sels minéraux. Son microbiote, ensemble de micro-organismes, transforme certaines substances, notamment une partie des fibres. Le rectum stocke les selles ; la défécation les évacue par l’anus. Les reins, au contraire, filtrent le sang et participent à la formation de l’urine : la miction évacue cette urine par les voies urinaires.",
+      "formules": [],
+      "exemples": [
+        "Former les selles"
+      ],
+      "pieges": [
+        "L’urine ne provient pas directement des aliments restés dans le côlon. Tube digestif et voies urinaires sont deux circuits distincts."
+      ],
+      "aRetenir": [
+        "Côlon : récupération d’eau et de sels.",
+        "Rectum : stockage des selles.",
+        "Défécation et miction sont distinctes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-DIGESTION-L7",
+      "titre": "Construire un équilibre alimentaire",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "7/8",
+      "precedente": "Du côlon aux selles",
+      "suivante": "Identifier quelques carences",
+      "explication": "Nous allons relier les familles d’aliments aux besoins du corps. Un repas se comprend par la complémentarité des apports. Les glucides et les lipides apportent notamment de l’énergie ; les protéines fournissent des acides aminés nécessaires aux tissus. Vitamines et minéraux sont des micronutriments, nécessaires en petites quantités. L’eau est indispensable aux échanges. L’équilibre alimentaire s’apprécie dans la durée : varier les aliments, adapter les quantités aux besoins et limiter les excès de sel, de sucres libres et de certaines graisses. Les besoins varient avec l’âge, l’activité et l’état physiologique.",
+      "formules": [],
+      "exemples": [
+        "Compléter un repas"
+      ],
+      "pieges": [
+        "« Beaucoup manger » et « couvrir tous ses besoins » ne sont pas synonymes. Aucun aliment isolé ne résume à lui seul l’équilibre d’une alime…"
+      ],
+      "aRetenir": [
+        "Besoins : énergie, matériaux, micronutriments et eau.",
+        "Diversité et quantités adaptées.",
+        "Malnutrition : déficit, excès ou déséquilibre."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-DIGESTION-L8",
+      "titre": "Identifier quelques carences",
+      "module": "Digestion et nutrition (Biologie)",
+      "position": "8/8",
+      "precedente": "Construire un équilibre alimentaire",
+      "suivante": null,
+      "explication": "Nous allons associer quelques manques nutritionnels à leurs conséquences classiques, sans réduire une maladie à une seule cause possible. Une carence est un manque prolongé d’une substance nécessaire. Une vitamine hydrosoluble se dissout dans l’eau : vitamines B et C. Une vitamine liposoluble est soluble dans les graisses : A, D, E et K. Le marasme nutritionnel est une dénutrition sévère avec amaigrissement important, liée à des apports énergétiques globaux insuffisants. Il ne se définit pas comme un simple déficit isolé en glucides.",
+      "formules": [],
+      "exemples": [
+        "B1 et C"
+      ],
+      "pieges": [
+        "Une anémie est une insuffisance d’hémoglobine ; elle peut avoir d’autres causes qu’un manque de fer. Les associations de ce tableau ne remp…"
+      ],
+      "aRetenir": [
+        "Carence : manque d’un nutriment.",
+        "B/C hydrosolubles ; A/D/E/K liposolubles.",
+        "B1-béribéri ; C-scorbut ; D-rachitisme."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

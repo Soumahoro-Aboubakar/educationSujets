@@ -1,0 +1,198 @@
+{
+  "module": "FR-RESUME",
+  "titre": "Résumé et contraction de texte",
+  "matiere": "Français",
+  "resume": "Comprendre un texte, conserver son raisonnement, reformuler et contrôler la longueur.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)",
+    "INFJ — Greffes — cycle moyen supérieur",
+    "ENS — Éducateurs",
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)",
+    "INFAS — Auxiliaires de santé"
+  ],
+  "lecons": [
+    {
+      "code": "FR-RESUME-L1",
+      "titre": "Comprendre ce que demande un résumé",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Distinguer thème, thèse et exemple",
+      "explication": "Tu vas reconnaître la tâche du résumé pour éviter de rédiger un autre devoir. Un texte est un ensemble de phrases liées ; une idée est ce qu’une phrase fait comprendre. Résumer, ou contracter, c’est produire un texte plus court qui conserve les idées importantes et leur enchaînement. La consigne indique le travail demandé et la longueur à respecter.",
+      "formules": [],
+      "exemples": [
+        "Un message raccourci",
+        "Une consigne composée"
+      ],
+      "pieges": [
+        "Ton accord ou ton désaccord n’appartient pas au résumé. Même si une information paraît discutable, restitue ce que le texte affirme sans la…"
+      ],
+      "aRetenir": [
+        "Lire toute la consigne.",
+        "Réduire le texte en conservant son sens.",
+        "Séparer résumé et discussion si les deux sont demandés."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "FR-RESUME-L2",
+      "titre": "Distinguer thème, thèse et exemple",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "2/8",
+      "precedente": "Comprendre ce que demande un résumé",
+      "suivante": "Comprendre les liens entre les idées",
+      "explication": "Tu vas trier les informations pour savoir quoi conserver. Le thème est le sujet abordé ; la thèse est la position défendue à son propos. Un argument donne une raison de soutenir la thèse. Un exemple rend cette raison concrète. Dans un texte surtout explicatif, cherche plutôt l’idée directrice : ce que le passage explique.",
+      "formules": [],
+      "exemples": [
+        "Du thème à la thèse",
+        "Que supprimer ?"
+      ],
+      "pieges": [
+        "Une information précise n’est pas automatiquement inutile. Si le texte explique qui a fait une découverte, supprimer tous les noms détruit …"
+      ],
+      "aRetenir": [
+        "Nommer le thème.",
+        "Formuler la thèse ou l’idée directrice.",
+        "Garder les raisons et les précisions indispensables."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "FR-RESUME-L3",
+      "titre": "Comprendre les liens entre les idées",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "3/8",
+      "precedente": "Distinguer thème, thèse et exemple",
+      "suivante": "Retrouver les mouvements du texte",
+      "explication": "Tu vas reconnaître les relations logiques : elles expliquent pourquoi les idées se suivent. Un connecteur est un mot ou un groupe de mots qui rend ce lien visible. La concession reconnaît un fait qui pourrait gêner la position défendue, puis maintient celle-ci : « Certes, lire prend du temps, mais cela enrichit le vocabulaire. » Une addition ajoute une idée ; une illustration donne un exemple.",
+      "formules": [],
+      "exemples": [
+        "Deux sens de lecture"
+      ],
+      "pieges": [
+        "« Ainsi » peut introduire un résultat ou un exemple. Lis les deux phrases : ne choisis pas le lien à partir du seul mot."
+      ],
+      "aRetenir": [
+        "Cause : raison ; conséquence : résultat.",
+        "Opposition : contraste ; concession : fait admis malgré une réserve.",
+        "Conserver les relations quand on raccourcit."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "FR-RESUME-L4",
+      "titre": "Retrouver les mouvements du texte",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "4/8",
+      "precedente": "Comprendre les liens entre les idées",
+      "suivante": "Raccourcir sans changer le sens",
+      "explication": "Tu vas dessiner le parcours du texte avant de rédiger. Un paragraphe est une portion séparée visuellement ; un mouvement est une étape du raisonnement, parfois étendue sur plusieurs paragraphes. Après une lecture complète, écris une phrase courte par mouvement. Note sa fonction : constater, expliquer, discuter une objection, proposer une réponse. Repère aussi qui soutient chaque idée.",
+      "formules": [],
+      "exemples": [
+        "Trois étapes",
+        "Une opinion rapportée"
+      ],
+      "pieges": [
+        "Ne réserve pas tous les mots au début du texte. Vérifie la dernière partie : elle peut porter la réponse ou la nuance décisive."
+      ],
+      "aRetenir": [
+        "Lire jusqu’au bout.",
+        "Une phrase par mouvement.",
+        "Garder l’ordre et distinguer les voix."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "FR-RESUME-L5",
+      "titre": "Raccourcir sans changer le sens",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "5/8",
+      "precedente": "Retrouver les mouvements du texte",
+      "suivante": "Conserver la manière de parler du texte",
+      "explication": "Tu vas reformuler : exprimer une idée avec une autre construction. Cela permet de raccourcir sans recopier une suite de phrases. Repère d’abord l’idée et ses limites. Supprime une répétition, remplace une liste par un terme commun ou transforme une expression longue. Relis ensuite les deux versions : affirment-elles la même chose ?",
+      "formules": [],
+      "exemples": [
+        "Regrouper",
+        "Garder une condition"
+      ],
+      "pieges": [
+        "« Nombreux » ne veut pas dire « majoritaires » ; « peut » ne veut pas dire « doit » ; « parfois » ne veut pas dire « toujours ». Une phrase…"
+      ],
+      "aRetenir": [
+        "Transformer la construction.",
+        "Éliminer les répétitions.",
+        "Conserver les limites et conditions."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "FR-RESUME-L6",
+      "titre": "Conserver la manière de parler du texte",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "6/8",
+      "precedente": "Raccourcir sans changer le sens",
+      "suivante": "Calculer et vérifier le nombre de mots",
+      "explication": "Tu vas conserver l’énonciation, c’est-à-dire la situation de parole : qui parle, à qui, avec quels pronoms et quel point de vue. Le résumé prolonge le discours du texte. Repère « je », « nous », les destinataires et les temps dominants. Conserve la même perspective sans transformer le résumé en commentaire extérieur. Une opinion citée et contestée doit rester attribuée à ceux qui la soutiennent.",
+      "formules": [],
+      "exemples": [
+        "Garder le nous",
+        "Distinguer des voix"
+      ],
+      "pieges": [
+        "Ne supprime pas mécaniquement les noms propres. « L’auteur affirme que » est une formule de commentaire ; le nom d’un chercheur dont le tex…"
+      ],
+      "aRetenir": [
+        "Identifier qui parle.",
+        "Garder le point de vue.",
+        "Éviter les formules de commentaire extérieur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "FR-RESUME-L7",
+      "titre": "Calculer et vérifier le nombre de mots",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "7/8",
+      "precedente": "Conserver la manière de parler du texte",
+      "suivante": "Rédiger puis relire un résumé complet",
+      "explication": "Tu vas contrôler la longueur pour respecter une contrainte chiffrée. Une tolérance est un écart autorisé ; elle existe seulement si la consigne l’indique. Pour une marge de 10 %, divise la longueur cible par 10. Retire ce résultat pour trouver le minimum, ajoute-le pour trouver le maximum. Les deux bornes sont incluses. Lis la convention de comptage propre au sujet. Si elle précise que « l’ » compte pour un mot, « l’école » compte pour deux. Pour les traits d’union, nombres et sigles, applique les précisions fournies ; ne transforme pas une convention locale en règle universelle.",
+      "formules": [],
+      "exemples": [
+        "Deux formats"
+      ],
+      "pieges": [
+        "Après une modification, recompte. Indique le total réel en fin de copie si la consigne le demande. Un nombre déclaré ne remplace pas le com…"
+      ],
+      "aRetenir": [
+        "Calculer les deux bornes.",
+        "Appliquer la convention annoncée.",
+        "Recompter et indiquer le total réel."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "FR-RESUME-L8",
+      "titre": "Rédiger puis relire un résumé complet",
+      "module": "Résumé et contraction de texte (Français)",
+      "position": "8/8",
+      "precedente": "Calculer et vérifier le nombre de mots",
+      "suivante": null,
+      "explication": "Tu vas assembler la méthode sur un texte entier. Relis au besoin les mouvements (L4), la reformulation (L5) et le comptage (L7). Brouillon : accès gratuit → obstacle de la distance → réponse mobile. La gratuité et la desserte sont deux réponses différentes : il faut garder les deux et le lien entre obstacle et solution.",
+      "formules": [],
+      "exemples": [
+        "Texte original d’entraînement",
+        "Résumé possible"
+      ],
+      "pieges": [
+        "Retirer seulement la fin pour gagner des mots supprime souvent la réponse. Réduis plutôt les formulations dans l’ensemble du résumé."
+      ],
+      "aRetenir": [
+        "Comprendre et découper avant de rédiger.",
+        "Reformuler en conservant tous les mouvements.",
+        "Vérifier le sens avant le dernier comptage."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

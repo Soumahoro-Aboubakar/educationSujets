@@ -1,0 +1,255 @@
+{
+  "module": "ENSEA-AS-INTEGR",
+  "titre": "Intégration et équations différentielles",
+  "matiere": "Mathématiques",
+  "resume": "Retrouver une fonction par sa dérivée, calculer une accumulation et résoudre une équation différentielle simple.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)"
+  ],
+  "lecons": [
+    {
+      "code": "ENSEA-AS-INTEGR-L1",
+      "titre": "Remonter d’une dérivée à une primitive",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Reconnaître les primitives usuelles",
+      "explication": "Nous allons retrouver une fonction dont on connaît la dérivée. Les règles de dérivation du module ENSEA-AS-ANALYSE permettront de vérifier chaque résultat. Une primitive de f sur un intervalle I est une fonction F dérivable sur I telle que F′(x) = f(x). C’est une opération inverse de la dérivation.",
+      "formules": [],
+      "exemples": [
+        "Retrouver x²",
+        "Fixer une valeur"
+      ],
+      "pieges": [
+        "Le terme constant ne se retrouve pas par dérivation. Une condition sur une valeur est nécessaire pour choisir une seule primitive."
+      ],
+      "aRetenir": [
+        "F est primitive de f si F′ = f.",
+        "Sur un intervalle, toutes les primitives diffèrent d’une constante.",
+        "Une valeur imposée détermine cette constante."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L2",
+      "titre": "Reconnaître les primitives usuelles",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "2/10",
+      "precedente": "Remonter d’une dérivée à une primitive",
+      "suivante": "L’intégrale mesure une accumulation",
+      "explication": "Nous allons constituer une petite table de primitives. Chaque ligne vient d’une règle de dérivation déjà apprise. Pour une composée, rechercher un facteur u′ : u′eᵘ a pour primitive eᵘ ; u′/u a pour primitive ln|u| si u ne s’annule pas. Pour n ≠ −1, u′uⁿ a pour primitive u^(n + 1)/(n + 1).",
+      "formules": [],
+      "exemples": [
+        "La bonne constante",
+        "Reconnaître une dérivée intérieure"
+      ],
+      "pieges": [
+        "La formule des puissances exclut n = −1 : elle ferait diviser par zéro. Dans ce cas, on utilise le logarithme."
+      ],
+      "aRetenir": [
+        "Lire la table dans le sens inverse de la dérivation.",
+        "Repérer u et u′.",
+        "Ajuster les facteurs constants et vérifier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L3",
+      "titre": "L’intégrale mesure une accumulation",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "3/10",
+      "precedente": "Reconnaître les primitives usuelles",
+      "suivante": "Découper, combiner et encadrer",
+      "explication": "Nous allons calculer une quantité accumulée entre deux bornes. Une vitesse intégrée dans le temps donne par exemple un déplacement. Pour une fonction continue f sur le segment [a ; b], l’intégrale ∫ₐᵇ f(x) dx additionne les petites contributions f(x) fois une petite largeur. x est la variable de calcul ; a et b sont les bornes.",
+      "formules": [
+        "∫ₐᵇ f(x) dx = F(b) − F(a) = [F(x)]ₐᵇ, où F′ = f."
+      ],
+      "exemples": [
+        "Une aire positive",
+        "Une aire signée"
+      ],
+      "pieges": [
+        "Le résultat d’une intégrale à bornes fixées est un nombre. La constante C de la primitive s’annule dans F(b) − F(a)."
+      ],
+      "aRetenir": [
+        "Intégrale : accumulation signée.",
+        "Calcul : primitive à la borne haute moins à la borne basse.",
+        "Une aire géométrique est positive ou nulle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L4",
+      "titre": "Découper, combiner et encadrer",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "4/10",
+      "precedente": "L’intégrale mesure une accumulation",
+      "suivante": "Moyenne et borne qui varie",
+      "explication": "Nous allons transformer un calcul d’intégrale et contrôler la taille du résultat. On suppose ici les fonctions continues sur les segments utilisés.",
+      "formules": [
+        "∫ₐᵇ (αf + βg) = α∫ₐᵇ f + β∫ₐᵇ g ; ∫ₐᶜ f + ∫꜀ᵇ f = ∫ₐᵇ f."
+      ],
+      "exemples": [
+        "Combiner sans tout recalculer",
+        "Encadrer"
+      ],
+      "pieges": [
+        "L’intégrale d’un produit n’est pas en général le produit des intégrales. La linéarité concerne les sommes et les facteurs constants."
+      ],
+      "aRetenir": [
+        "Linéarité : addition et facteurs constants.",
+        "Chasles : découper aux bornes.",
+        "Encadrer une fonction permet d’encadrer son intégrale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L5",
+      "titre": "Moyenne et borne qui varie",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "5/10",
+      "precedente": "Découper, combiner et encadrer",
+      "suivante": "Intégrer par parties",
+      "explication": "Nous allons traduire une accumulation en valeur moyenne, puis voir ce qui se passe quand on déplace sa borne finale. Si f est continue, A(x) = ∫ₐˣ f(t) dt est une fonction de x. Pour un petit pas h, l’accumulation ajoutée vaut environ f(x)h ; le théorème fondamental donne exactement A′(x) = f(x). De plus A(a) = 0.",
+      "formules": [
+        "Valeur moyenne de f sur [a ; b], a < b : μ = (1/(b − a))∫ₐᵇ f(x) dx."
+      ],
+      "exemples": [
+        "Une vitesse moyenne",
+        "Construire une primitive"
+      ],
+      "pieges": [
+        "La moyenne intégrale ne vaut pas en général (f(a) + f(b))/2. Cette formule fonctionne pour les fonctions affines, mais pas pour toutes les …"
+      ],
+      "aRetenir": [
+        "Moyenne = intégrale / longueur.",
+        "Une borne de f borne aussi sa moyenne.",
+        "La dérivée de ∫ₐˣ f(t) dt est f(x)."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L6",
+      "titre": "Intégrer par parties",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "6/10",
+      "precedente": "Moyenne et borne qui varie",
+      "suivante": "Changer une variable affine",
+      "explication": "Nous allons remplacer l’intégrale d’un produit difficile par une intégrale plus simple. La règle vient de la dérivée d’un produit. Puisque (uv)′ = u′v + uv′, intégrer donne [uv]ₐᵇ = ∫ₐᵇ u′v + ∫ₐᵇ uv′. En isolant le dernier terme, on obtient la formule suivante pour u et v à dérivées continues.",
+      "formules": [
+        "∫ₐᵇ u(x)v′(x) dx = [u(x)v(x)]ₐᵇ − ∫ₐᵇ u′(x)v(x) dx."
+      ],
+      "exemples": [
+        "Un produit avec x",
+        "Une primitive de ln"
+      ],
+      "pieges": [
+        "Ne pas oublier le terme [uv] aux bornes ni le signe moins devant la nouvelle intégrale."
+      ],
+      "aRetenir": [
+        "Partir de la dérivée du produit.",
+        "Choisir u et v′.",
+        "Évaluer [uv] puis soustraire la nouvelle intégrale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L7",
+      "titre": "Changer une variable affine",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "7/10",
+      "precedente": "Intégrer par parties",
+      "suivante": "Résoudre y′ = ay",
+      "explication": "Nous allons simplifier une expression comme 2x + 1 dans une intégrale. Il faut transformer l’expression, la largeur et les bornes ensemble. Une expression affine est αx + β avec α et β constants. Poser u = αx + β, α ≠ 0, donne du = α dx, donc dx = du/α. Cela exprime le changement d’échelle des petites largeurs.",
+      "formules": [
+        "∫ₐᵇ f(αx + β) dx = (1/α)∫_(αa + β)^(αb + β) f(u) du."
+      ],
+      "exemples": [
+        "Une exponentielle",
+        "Un coefficient négatif"
+      ],
+      "pieges": [
+        "Après le changement, toutes les bornes et tous les termes doivent utiliser u. Ne pas garder des bornes en x avec une expression en u."
+      ],
+      "aRetenir": [
+        "Poser u = αx + β.",
+        "Remplacer dx par du/α.",
+        "Transformer les deux bornes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L8",
+      "titre": "Résoudre y′ = ay",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "8/10",
+      "precedente": "Changer une variable affine",
+      "suivante": "Résoudre y′ = ay + b",
+      "explication": "Nous allons chercher une fonction dont la vitesse de variation est proportionnelle à sa valeur. Ce modèle décrit notamment des croissances ou des décroissances. Une équation différentielle relie une fonction inconnue y et ses dérivées. Son ordre est le rang de la plus haute dérivée présente : y′ = ay est du premier ordre. Une solution est une fonction qui vérifie l’égalité en chaque point de l’intervalle. Pourquoi toutes ces solutions ? La dérivée de e^(−ax)y(x) vaut e^(−ax)(y′ − ay), donc 0 pour une solution. Ce produit est constant : on retrouve y = Ce^(ax), y = 0 compris.",
+      "formules": [
+        "Pour a constant réel : y′ = ay ⇔ y(x) = Ce^(ax), C réel."
+      ],
+      "exemples": [
+        "Une condition initiale",
+        "Condition en un autre point"
+      ],
+      "pieges": [
+        "Ne pas diviser par y : cela ferait perdre la solution nulle. Une condition initiale peut être donnée ailleurs qu’en 0."
+      ],
+      "aRetenir": [
+        "Ordre : plus haute dérivée.",
+        "y′ = ay donne Ce^(ax).",
+        "La condition initiale fixe C."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L9",
+      "titre": "Résoudre y′ = ay + b",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "9/10",
+      "precedente": "Résoudre y′ = ay",
+      "suivante": "Vérifier une solution avec une dérivée seconde",
+      "explication": "Nous allons ajouter un apport constant au modèle précédent. Un changement d’inconnue ramène à l’équation déjà résolue. Pour a ≠ 0, une solution constante y* vérifie 0 = ay* + b, donc y* = −b/a. On l’appelle l’équilibre. Poser z = y − y* donne z′ = az.",
+      "formules": [
+        "Si a ≠ 0 : y(x) = −b/a + Ce^(ax). Si a = 0 : y(x) = bx + C."
+      ],
+      "exemples": [
+        "Un équilibre stable",
+        "Sans terme en y"
+      ],
+      "pieges": [
+        "L’équilibre vaut −b/a : le signe moins vient du passage de b dans l’autre membre."
+      ],
+      "aRetenir": [
+        "Chercher une solution constante.",
+        "Soustraire l’équilibre pour obtenir z′ = az.",
+        "Traiter a = 0 séparément."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L10",
+      "titre": "Vérifier une solution avec une dérivée seconde",
+      "module": "Intégration et équations différentielles (Mathématiques)",
+      "position": "10/10",
+      "precedente": "Résoudre y′ = ay + b",
+      "suivante": null,
+      "explication": "Nous allons vérifier une proposition dans une équation du second ordre. Cela prépare les QCM où une fonction candidate est donnée. Dans y″ + py′ + qy = 0, l’ordre est 2 car y″ est la plus haute dérivée. Le degré de cette équation polynomiale en les dérivées est 1 : les dérivées y′ et y″ y sont à la puissance 1. Ordre et degré désignent deux choses différentes. Remplaçons dans y″ + 2y′ + 2y : e^(−x)[−2cos x + 2cos x − 2sin x + 2sin x] = 0. La fonction est donc bien une solution sur ℝ.",
+      "formules": [],
+      "exemples": [
+        "Une oscillation",
+        "Un produit à dériver deux fois"
+      ],
+      "pieges": [
+        "Vérifier une solution ne prouve pas qu’elle est la seule. Une équation du second ordre demande généralement deux conditions pour sélectionn…"
+      ],
+      "aRetenir": [
+        "Ordre : dérivée de rang le plus élevé.",
+        "Calculer y′ puis y″.",
+        "Substituer et simplifier tous les termes."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

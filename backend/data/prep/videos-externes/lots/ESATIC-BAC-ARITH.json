@@ -1,0 +1,222 @@
+{
+  "module": "ESATIC-BAC-ARITH",
+  "titre": "Arithmétique",
+  "matiere": "Mathématiques",
+  "resume": "Des multiples et des restes aux PGCD, à Bézout et aux congruences pour résoudre des problèmes entiers.",
+  "concours": [
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "ESATIC-BAC-ARITH-L1",
+      "titre": "Diviser en gardant un reste",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Décomposer en nombres premiers",
+      "explication": "Nous allons décrire les partages qui doivent rester entiers. C’est utile pour des lots, des calendriers ou des numéros cycliques. ℤ est l’ensemble des entiers relatifs : …, −2, −1, 0, 1, 2, … Un entier non nul d divise a s’il existe un entier k tel que a = dk. On écrit d | a. Ainsi 3 | 12 car 12 = 3 × 4.",
+      "formules": [
+        "Division euclidienne : a = bq + r, avec a entier, b entier positif, q entier et 0 ≤ r < b."
+      ],
+      "exemples": [
+        "Faire des lots",
+        "Un entier négatif"
+      ],
+      "pieges": [
+        "Une égalité a = bq + r ne suffit pas : il faut aussi contrôler 0 ≤ r < b."
+      ],
+      "aRetenir": [
+        "Divisibilité : être un multiple entier.",
+        "Division : quotient et reste uniques.",
+        "Le reste est positif ou nul et inférieur au diviseur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L2",
+      "titre": "Décomposer en nombres premiers",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "2/9",
+      "precedente": "Diviser en gardant un reste",
+      "suivante": "Trouver le PGCD avec Euclide",
+      "explication": "Nous allons décomposer un entier en facteurs élémentaires. Cette écriture facilite la recherche des diviseurs communs. Un nombre premier est un entier au moins égal à 2 dont les seuls diviseurs positifs sont 1 et lui-même. 2, 3, 5, 7, 11 sont premiers. 1 n’est pas premier ; 9 ne l’est pas car 9 = 3 × 3.",
+      "formules": [],
+      "exemples": [
+        "Diviser successivement",
+        "Tester 29"
+      ],
+      "pieges": [
+        "Un nombre impair n’est pas forcément premier : 15 et 21 sont impairs mais ont des facteurs non triviaux."
+      ],
+      "aRetenir": [
+        "Un premier a exactement deux diviseurs positifs.",
+        "1 n’est pas premier.",
+        "La décomposition première est unique à l’ordre près."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L3",
+      "titre": "Trouver le PGCD avec Euclide",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "3/9",
+      "precedente": "Décomposer en nombres premiers",
+      "suivante": "Trouver le premier multiple commun",
+      "explication": "Nous allons trouver la plus grande taille de lot qui partage deux quantités sans reste. Cet entier est le PGCD. Pour a et b positifs, le plus grand commun diviseur, noté PGCD(a, b), est leur plus grand diviseur positif commun. S’il vaut 1, les deux entiers sont premiers entre eux, même si chacun n’est pas premier.",
+      "formules": [],
+      "exemples": [
+        "Algorithme d’Euclide",
+        "Avec les facteurs premiers"
+      ],
+      "pieges": [
+        "Le dernier reste est 0, mais le PGCD est le dernier reste NON NUL. Deux nombres premiers entre eux ne sont pas nécessairement tous deux pre…"
+      ],
+      "aRetenir": [
+        "PGCD : plus grand diviseur positif commun.",
+        "Une division conserve les diviseurs communs.",
+        "Euclide s’arrête au reste nul."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L4",
+      "titre": "Trouver le premier multiple commun",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "4/9",
+      "precedente": "Trouver le PGCD avec Euclide",
+      "suivante": "Bézout : écrire le PGCD comme combinaison",
+      "explication": "Nous allons prévoir quand deux cycles se retrouvent ensemble. Il faut leur premier multiple positif commun. Le plus petit commun multiple, noté PPCM(a, b), est le plus petit entier strictement positif divisible par a et par b, pour a et b positifs.",
+      "formules": [
+        "PGCD(a, b) × PPCM(a, b) = ab ; donc PPCM(a, b) = ab/PGCD(a, b)."
+      ],
+      "exemples": [
+        "Deux sonneries",
+        "Facteurs premiers"
+      ],
+      "pieges": [
+        "Le produit ab est un multiple commun, mais n’est le plus petit que si a et b sont premiers entre eux."
+      ],
+      "aRetenir": [
+        "PPCM : plus petit multiple positif commun.",
+        "PPCM = produit / PGCD.",
+        "Des cycles repartant ensemble se rejoignent au PPCM."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L5",
+      "titre": "Bézout : écrire le PGCD comme combinaison",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "5/9",
+      "precedente": "Trouver le premier multiple commun",
+      "suivante": "Résoudre une équation en entiers",
+      "explication": "Nous allons exprimer le PGCD avec les deux nombres de départ. Cette identité servira à résoudre des équations entières. La remontée d’Euclide prouve l’existence : on remplace chaque reste par une différence utilisant les lignes précédentes. Inversement, tout diviseur commun de a et b divise chaque combinaison au + bv ; s’il divise 1, il vaut 1.",
+      "formules": [],
+      "exemples": [
+        "Remonter les divisions",
+        "Un PGCD supérieur à 1"
+      ],
+      "pieges": [
+        "Les coefficients de Bézout peuvent être négatifs et ne sont pas uniques. Vérifier l’égalité en remplaçant les coefficients trouvés."
+      ],
+      "aRetenir": [
+        "Bézout exprime le PGCD comme combinaison entière.",
+        "Remonter les restes d’Euclide.",
+        "Une combinaison égale à 1 prouve la coprimalité."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L6",
+      "titre": "Résoudre une équation en entiers",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "6/9",
+      "precedente": "Bézout : écrire le PGCD comme combinaison",
+      "suivante": "Calculer avec des congruences",
+      "explication": "Nous allons chercher des solutions entières, ce qui impose plus de contraintes qu’une équation réelle. Le lemme de Gauss aide à toutes les décrire. Pour ax + by = c avec a et b positifs, une solution entière existe exactement quand d = PGCD(a, b) divise c. La nécessité vient des diviseurs communs ; pour la réciproque, multiplier une identité de Bézout par c/d.",
+      "formules": [],
+      "exemples": [
+        "Trouver une solution",
+        "Trouver toutes les solutions"
+      ],
+      "pieges": [
+        "On ne peut pas supprimer un facteur dans une divisibilité sans la condition de coprimalité : 6 divise 2 × 3, mais 6 ne divise pas 3."
+      ],
+      "aRetenir": [
+        "Gauss permet une simplification sous coprimalité.",
+        "PGCD(a, b) doit diviser c.",
+        "Une solution particulière permet de paramétrer toutes les autres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L7",
+      "titre": "Calculer avec des congruences",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "7/9",
+      "precedente": "Résoudre une équation en entiers",
+      "suivante": "Repérer le cycle des puissances",
+      "explication": "Nous allons travailler uniquement avec des restes. Cela simplifie des questions sur des horloges ou de grands entiers. Pour m entier au moins égal à 2, a est congru à b modulo m, noté a ≡ b [m], si m divise a − b. Cela équivaut à dire que a et b ont le même reste de division euclidienne par m.",
+      "formules": [],
+      "exemples": [
+        "Même position dans un cycle",
+        "Réduire avant de multiplier"
+      ],
+      "pieges": [
+        "Une congruence n’est pas une égalité ordinaire. Et on ne peut pas toujours diviser une congruence : 2 × 1 ≡ 2 × 4 [6], mais 1 et 4 ne sont …"
+      ],
+      "aRetenir": [
+        "Congruence : différence divisible par m.",
+        "Addition et multiplication conservent la congruence.",
+        "Ramener le résultat au reste euclidien."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L8",
+      "titre": "Repérer le cycle des puissances",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "8/9",
+      "precedente": "Calculer avec des congruences",
+      "suivante": "Résoudre une congruence linéaire",
+      "explication": "Nous allons trouver un reste de grande puissance sans écrire le nombre. Les puissances reviennent souvent dans un cycle court. On divise l’exposant par la longueur du cycle. Pour n = 4q + r, 2ⁿ = (2⁴)ᵠ2ʳ ≡ 1ᵠ2ʳ [5]. Il reste seulement la petite puissance 2ʳ à calculer.",
+      "formules": [],
+      "exemples": [
+        "Puissances de 2 modulo 5",
+        "Une grande puissance"
+      ],
+      "pieges": [
+        "Vérifier le cycle au module choisi. Il n’a pas toujours longueur 4 : pour 2 modulo 8, les restes deviennent 2, 4, 0, 0, … et ne reviennent …"
+      ],
+      "aRetenir": [
+        "Calculer les premiers restes.",
+        "Justifier le cycle utilisé.",
+        "Réduire l’exposant et conclure avec un reste autorisé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ARITH-L9",
+      "titre": "Résoudre une congruence linéaire",
+      "module": "Arithmétique (Mathématiques)",
+      "position": "9/9",
+      "precedente": "Repérer le cycle des puissances",
+      "suivante": null,
+      "explication": "Nous allons résoudre ax ≡ b [m]. La division ordinaire est remplacée par la recherche d’un inverse modulo m. Un inverse de a modulo m est un entier u tel que au ≡ 1 [m]. Il existe exactement quand PGCD(a, m) = 1 : l’identité de Bézout au + mv = 1 donne cet inverse. Si d = PGCD(a, m) > 1, il faut d | b pour avoir une solution. Dans ce cas, l’égalité ax − b = mq permet de diviser les trois coefficients par d : on résout (a/d)x ≡ b/d [m/d].",
+      "formules": [],
+      "exemples": [
+        "Multiplier par l’inverse",
+        "Réduire aussi le module"
+      ],
+      "pieges": [
+        "Quand on divise par un diviseur commun, le module doit aussi être divisé. Écrire simplement x ≡ b/a [m] n’est pas valide."
+      ],
+      "aRetenir": [
+        "Tester le PGCD avec le module.",
+        "Si le PGCD vaut 1, utiliser un inverse.",
+        "Sinon contrôler la divisibilité puis réduire tous les coefficients et le module."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

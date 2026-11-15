@@ -129,6 +129,8 @@ const VideoPanel = forwardRef(({ video, kind = 'lecon', language = 'fr', readLab
           {onRead ? <InlineAction title={readLabel || 'Lire le cours'} icon={ArrowDown} onPress={onRead} accessibilityLabel={`${readLabel || 'Lire le cours'} : aller au contenu sous la vidéo`} /> : null}
         </View>
         {video.title ? <Text variant="bodyMedium" style={styles.title} numberOfLines={2}>{video.title}</Text> : null}
+        {/* Vidéo d'une autre chaîne (en attendant une vidéo Fatafalta) : le créateur est crédité. */}
+        {video.auteur ? <Text variant="caption" style={styles.credit} numberOfLines={1}>{`Chaîne YouTube : ${video.auteur}`}</Text> : null}
       </View>
     </View>
   );
@@ -152,6 +154,7 @@ const useStyles = createThemedStyles(({ brand, theme }) => {
     shrink: { flexShrink: 1 },
     kind: { color: brand.burgundy, fontFamily: theme.fontFamily.semiBold },
     title: { color: brand.ink, fontFamily: theme.fontFamily.semiBold },
+    credit: { color: brand.inkSoft },
   });
   return { styles };
 });

@@ -1,0 +1,170 @@
+{
+  "module": "EDU-SEI",
+  "titre": "Le système éducatif ivoirien et l’éducateur",
+  "matiere": "Psychopédagogie et système éducatif",
+  "resume": "Comprendre les parcours scolaires, l’obligation de scolarité, les acteurs, la vie scolaire et les enjeux d’orientation.",
+  "concours": [
+    "ENS — Éducateurs"
+  ],
+  "lecons": [
+    {
+      "code": "EDU-SEI-L1",
+      "titre": "Lire le parcours de l’enseignement général",
+      "module": "Le système éducatif ivoirien et l’éducateur (Psychopédagogie et système éducatif)",
+      "position": "1/7",
+      "precedente": null,
+      "suivante": "Rendre la scolarisation effective",
+      "explication": "Nous allons situer un élève dans le système éducatif, ensemble organisé des formations, institutions et acteurs de l’éducation. Cela aide à comprendre les transitions et les besoins d’accompagnement. Un cycle regroupe plusieurs années de formation. Une classe est une étape annuelle. L’enseignement général apporte une formation large ; d’autres parcours techniques et professionnels seront présentés plus loin.",
+      "formules": [],
+      "exemples": [
+        "Du primaire au collège"
+      ],
+      "pieges": [
+        "Les durées décrivent un parcours habituel, pas l’âge exact de chaque élève. Une entrée tardive ou une interruption peut modifier la traject…"
+      ],
+      "aRetenir": [
+        "Situer une classe dans son cycle.",
+        "Primaire : 6 ans ; secondaire : 4 puis 3 ans.",
+        "CEPE, BEPC et baccalauréat jalonnent le parcours."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "EDU-SEI-L2",
+      "titre": "Rendre la scolarisation effective",
+      "module": "Le système éducatif ivoirien et l’éducateur (Psychopédagogie et système éducatif)",
+      "position": "2/7",
+      "precedente": "Lire le parcours de l’enseignement général",
+      "suivante": "Identifier les acteurs de l’école",
+      "explication": "Nous allons distinguer une règle de scolarisation et les conditions de sa réalisation. Une inscription ne garantit pas à elle seule une scolarité suivie. L’accès est la possibilité d’entrer à l’école. Le maintien est la poursuite de la scolarité. L’assiduité est la présence régulière. Le décrochage est un processus de désengagement pouvant conduire à sortir de formation.",
+      "formules": [],
+      "exemples": [
+        "Inscrit, mais souvent absent",
+        "Une réponse coordonnée"
+      ],
+      "pieges": [
+        "L’obligation ne rend pas automatiquement réels l’accès, les apprentissages ou la sécurité. Accuser d’emblée l’élève peut masquer un obstacl…"
+      ],
+      "aRetenir": [
+        "Repère légal : 6–16 ans, loi de 2015.",
+        "Accès, présence et maintien se complètent.",
+        "Rechercher les obstacles et coordonner la réponse."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "EDU-SEI-L3",
+      "titre": "Identifier les acteurs de l’école",
+      "module": "Le système éducatif ivoirien et l’éducateur (Psychopédagogie et système éducatif)",
+      "position": "3/7",
+      "precedente": "Rendre la scolarisation effective",
+      "suivante": "Suivre un élève à partir de faits",
+      "explication": "Nous allons attribuer les rôles pour savoir à qui adresser une question. La gouvernance scolaire organise les responsabilités et décisions relatives à l’école. Le ministère chargé de l’éducation définit les orientations nationales et ses services territoriaux assurent les relais. Le chef d’établissement organise le fonctionnement local dans le cadre applicable. Le COGES, comité de gestion des établissements scolaires, associe des acteurs et partenaires de l’école. Il contribue à mobiliser la communauté autour de son fonctionnement et de la réussite scolaire.",
+      "formules": [],
+      "exemples": [
+        "Des absences répétées"
+      ],
+      "pieges": [
+        "Participer ne donne pas toutes les compétences : un COGES ne remplace pas l’enseignant pour attribuer une note disciplinaire."
+      ],
+      "aRetenir": [
+        "Identifier les responsabilités.",
+        "Le COGES soutient la participation communautaire.",
+        "Coopérer en respectant les missions."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "EDU-SEI-L4",
+      "titre": "Suivre un élève à partir de faits",
+      "module": "Le système éducatif ivoirien et l’éducateur (Psychopédagogie et système éducatif)",
+      "position": "4/7",
+      "precedente": "Identifier les acteurs de l’école",
+      "suivante": "Poser un cadre qui protège",
+      "explication": "La vie scolaire concerne notamment la présence, les relations, la sécurité et la participation à l’établissement. Nous allons construire un suivi utile au parcours de l’élève. Une observation décrit un fait vérifiable ; une interprétation propose une explication. « Trois retards cette semaine » décrit un fait. « Il méprise l’école » est une interprétation à vérifier.",
+      "formules": [],
+      "exemples": [
+        "Un changement récent",
+        "Un objectif observable"
+      ],
+      "pieges": [
+        "La discrétion n’est pas un secret absolu. Une information nécessaire à la protection se transmet aux personnes compétentes, en limitant sa …"
+      ],
+      "aRetenir": [
+        "Observer avant d’interpréter.",
+        "Écouter et coordonner.",
+        "Agir puis vérifier l’effet de l’aide."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "EDU-SEI-L5",
+      "titre": "Poser un cadre qui protège",
+      "module": "Le système éducatif ivoirien et l’éducateur (Psychopédagogie et système éducatif)",
+      "position": "5/7",
+      "precedente": "Suivre un élève à partir de faits",
+      "suivante": "Orienter vers des parcours de formation",
+      "explication": "Nous allons comprendre la fonction éducative d’une règle. Le règlement intérieur explicite des droits, des devoirs et les procédures de l’établissement. Une sanction éducative répond à un acte établi. Elle doit rester respectueuse, proportionnée et conforme au cadre applicable, avec l’intervention de l’autorité compétente.",
+      "formules": [],
+      "exemples": [
+        "Un matériel dégradé",
+        "Une violence en cours"
+      ],
+      "pieges": [
+        "Une violence répétée ou une emprise n’est pas un désaccord entre personnes de force égale. La médiation ne remplace ni la protection ni les…"
+      ],
+      "aRetenir": [
+        "La règle organise la sécurité commune.",
+        "La réponse vise un acte, dans le respect de la dignité.",
+        "Protéger avant d’analyser une urgence."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "EDU-SEI-L6",
+      "titre": "Orienter vers des parcours de formation",
+      "module": "Le système éducatif ivoirien et l’éducateur (Psychopédagogie et système éducatif)",
+      "position": "6/7",
+      "precedente": "Poser un cadre qui protège",
+      "suivante": "Construire une réponse sur un enjeu éducatif",
+      "explication": "L’orientation accompagne un choix de parcours en tenant compte des intérêts, acquis et possibilités de formation. Nous allons distinguer les voies sans les hiérarchiser par des stéréotypes. L’enseignement général apporte une formation large ; l’enseignement technique étudie notamment des domaines technologiques ; la formation professionnelle prépare des compétences liées à des métiers. Les articulations et conditions d’accès varient selon les filières. L’insertion professionnelle est l’entrée et la stabilisation dans une activité de travail. Compétences, stages encadrés et liens avec les entreprises peuvent la faciliter ; les débouchés dépendent aussi de l’économie.",
+      "formules": [],
+      "exemples": [
+        "Un projet dans l’électricité",
+        "Une faible participation"
+      ],
+      "pieges": [
+        "Réserver une voie aux « mauvais élèves » entretient un stéréotype. Décrire plutôt ses exigences, ses compétences et ses perspectives vérifi…"
+      ],
+      "aRetenir": [
+        "Informer et accompagner un projet.",
+        "Distinguer les voies de formation.",
+        "Relier compétences et insertion sans garantie automatique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "EDU-SEI-L7",
+      "titre": "Construire une réponse sur un enjeu éducatif",
+      "module": "Le système éducatif ivoirien et l’éducateur (Psychopédagogie et système éducatif)",
+      "position": "7/7",
+      "precedente": "Orienter vers des parcours de formation",
+      "suivante": null,
+      "explication": "Nous allons transformer des connaissances en réponse de concours. Une argumentation relie une idée, un mécanisme et un exemple ; elle ne se limite pas à une liste de slogans. Définir les mots et repérer la demande : expliquer des causes, montrer des enjeux et proposer des actions sont des tâches différentes. Distinguer ensuite faits du document, connaissances établies et hypothèses.",
+      "formules": [],
+      "exemples": [
+        "Un obstacle d’information",
+        "Construire un centre"
+      ],
+      "pieges": [
+        "Ne pas inventer un chiffre ou une loi. Un pourcentage donné dans un sujet s’attribue au document ; il ne devient pas une statistique actuel…"
+      ],
+      "aRetenir": [
+        "Définir, expliquer, illustrer.",
+        "Relier problème, acteurs et actions.",
+        "Attribuer les chiffres et reconnaître les limites."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

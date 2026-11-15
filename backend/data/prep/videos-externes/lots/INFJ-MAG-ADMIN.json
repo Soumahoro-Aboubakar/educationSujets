@@ -1,0 +1,242 @@
+{
+  "module": "INFJ-MAG-ADMIN",
+  "titre": "Droit administratif",
+  "matiere": "Droit administratif",
+  "resume": "Comprendre l’administration, son organisation, ses décisions, ses contrats et les recours qui encadrent son action en Côte d’Ivoire.",
+  "concours": [
+    "INFJ — École de la Magistrature",
+    "INFJ — Greffes — cycle moyen supérieur"
+  ],
+  "lecons": [
+    {
+      "code": "INFJ-MAG-ADMIN-L1",
+      "titre": "Pourquoi l’administration est-elle soumise au droit ?",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "La déconcentration rapproche l’État des habitants",
+      "explication": "Nous partons de zéro : identifier l’administration et comprendre pourquoi une décision publique doit avoir un fondement juridique. Le droit organise la vie sociale par des règles obligatoires. L’administration réunit des autorités et services chargés de missions publiques. L’intérêt général vise les besoins collectifs ; il ne se confond pas avec l’intérêt personnel d’un agent. Le droit administratif encadre cette action, avec des pouvoirs et des obligations particuliers. La légalité exige le respect des règles applicables : Constitution, engagements internationaux, lois, règlements et principes reconnus par les juges. Un administré est une personne en relation avec l’administration.",
+      "formules": [],
+      "exemples": [
+        "Un document officiel",
+        "Un texte inférieur"
+      ],
+      "pieges": [
+        "Toute relation avec une personne publique ne relève pas automatiquement du même régime administratif. L’objet de l’activité et les textes c…"
+      ],
+      "aRetenir": [
+        "Administration : autorités et services de missions publiques.",
+        "Intérêt général distinct de l’intérêt personnel.",
+        "Les pouvoirs administratifs restent encadrés."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L2",
+      "titre": "La déconcentration rapproche l’État des habitants",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "2/10",
+      "precedente": "Pourquoi l’administration est-elle soumise au droit ?",
+      "suivante": "La décentralisation donne une autonomie encadrée",
+      "explication": "Nous allons reconnaître une autorité locale qui agit au nom de l’État, thème fréquent de la présélection INFJ. Une personne morale est une organisation reconnue comme titulaire de droits et d’obligations ; l’État en est une. La centralisation concentre la décision dans l’État. La déconcentration confie des pouvoirs de décision à ses représentants territoriaux : ils restent dans la même personne morale. En Côte d’Ivoire, préfets et sous-préfets interviennent dans les circonscriptions administratives selon leurs attributions. Le contrôle hiérarchique s’exerce entre autorités d’une même organisation, suivant les compétences légales.",
+      "formules": [],
+      "exemples": [
+        "Une décision locale de l’État",
+        "Une chaîne administrative"
+      ],
+      "pieges": [
+        "Un service déconcentré ne transmet pas seulement du courrier : il peut disposer de pouvoirs de décision. Déconcentrer ne signifie pas créer…"
+      ],
+      "aRetenir": [
+        "Déconcentration : pouvoirs au sein de l’État.",
+        "Préfets et sous-préfets : représentants territoriaux.",
+        "Hiérarchie : relation interne à l’organisation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L3",
+      "titre": "La décentralisation donne une autonomie encadrée",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "3/10",
+      "precedente": "La déconcentration rapproche l’État des habitants",
+      "suivante": "Comment doit fonctionner un service public ?",
+      "explication": "Nous allons distinguer une commune d’un service de l’État pour choisir le bon vocabulaire de contrôle. La décentralisation confie des compétences à des personnes publiques distinctes de l’État. Les collectivités territoriales, notamment régions et communes, disposent d’organes propres et d’une autonomie dans le cadre légal. La région peut aussi désigner une circonscription de l’État : on précise toujours en quelle qualité l’autorité agit. La tutelle est le contrôle de l’État sur une collectivité selon les textes ; elle se distingue du pouvoir hiérarchique interne et ne permet pas n’importe quelle intervention.",
+      "formules": [],
+      "exemples": [
+        "La commune",
+        "Deux fonctions à distinguer"
+      ],
+      "pieges": [
+        "Autonomie ne signifie pas souveraineté. La commune reste soumise à la loi et aux contrôles prévus, sans devenir un service sous hiérarchie …"
+      ],
+      "aRetenir": [
+        "Collectivité : personne publique distincte.",
+        "Autonomie dans les compétences attribuées.",
+        "Tutelle légale distincte de la hiérarchie."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L4",
+      "titre": "Comment doit fonctionner un service public ?",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "4/10",
+      "precedente": "La décentralisation donne une autonomie encadrée",
+      "suivante": "Prévenir un trouble en respectant les libertés",
+      "explication": "Nous allons comprendre les principes qui organisent une activité destinée aux besoins collectifs. Un service public est une activité d’intérêt général assumée ou encadrée par une personne publique selon le régime applicable. L’usager bénéficie du service. La continuité vise son fonctionnement régulier ; elle ne signifie pas ouverture permanente de tout guichet. L’égalité impose un traitement conforme aux règles, sans favoritisme ; des situations différentes ou un intérêt général pertinent peuvent justifier des différences légales. L’adaptation, ou mutabilité, permet de faire évoluer l’organisation pour répondre aux besoins.",
+      "formules": [],
+      "exemples": [
+        "Une file d’attente",
+        "Un service qui évolue"
+      ],
+      "pieges": [
+        "Service public ne signifie pas nécessairement gratuité. Égalité ne veut pas dire identité de traitement quelles que soient les situations."
+      ],
+      "aRetenir": [
+        "Continuité : fonctionnement régulier.",
+        "Égalité : pas de favoritisme.",
+        "Adaptation : évolution encadrée des modalités."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L5",
+      "titre": "Prévenir un trouble en respectant les libertés",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "5/10",
+      "precedente": "Comment doit fonctionner un service public ?",
+      "suivante": "Une décision unilatérale peut-elle être arbitraire ?",
+      "explication": "Nous allons distinguer une mesure de prévention d’une recherche des auteurs d’infraction. La police administrative vise à prévenir les troubles à l’ordre public, notamment sécurité, tranquillité et salubrité publiques. La police judiciaire recherche et constate des infractions et leurs auteurs. La distinction dépend de la finalité de l’opération, pas seulement de l’uniforme de l’agent. Une restriction de liberté demande une autorité compétente, un fondement et une mesure nécessaire et proportionnée au risque. Les polices spéciales obéissent à leurs textes propres.",
+      "formules": [],
+      "exemples": [
+        "Prévenir un danger",
+        "Rechercher un auteur"
+      ],
+      "pieges": [
+        "L’ordre public ne justifie pas automatiquement une interdiction générale et permanente. On doit expliquer pourquoi une mesure moins restric…"
+      ],
+      "aRetenir": [
+        "Administrative : prévention.",
+        "Judiciaire : infraction et recherche des auteurs.",
+        "Restriction : compétence, nécessité, proportion."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L6",
+      "titre": "Une décision unilatérale peut-elle être arbitraire ?",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "6/10",
+      "precedente": "Prévenir un trouble en respectant les libertés",
+      "suivante": "L’administration peut aussi agir par contrat",
+      "explication": "Nous allons analyser une décision imposée par l’administration, puis les limites de sa liberté de choix. Un acte administratif unilatéral modifie une situation juridique sans exiger l’accord de son destinataire. Il peut être réglementaire, règle générale, ou individuel, visant une situation déterminée. Sa légalité demande notamment compétence, formes et procédure régulières, faits exacts et fondement juridique. Le pouvoir discrétionnaire laisse un choix entre plusieurs décisions légales ; la compétence liée impose une décision lorsque les conditions sont réunies. Un détournement de pouvoir utilise un pouvoir pour une fin étrangère à celle pour laquelle il a été confié.",
+      "formules": [],
+      "exemples": [
+        "Une nomination",
+        "Un choix encadré"
+      ],
+      "pieges": [
+        "Une décision unilatérale n’est pas un contrat. Discrétionnaire ne signifie ni sans règle ni sans contrôle du juge."
+      ],
+      "aRetenir": [
+        "Unilatéral : accord du destinataire non nécessaire.",
+        "Réglementaire et individuel : portées différentes.",
+        "Choix discrétionnaire toujours soumis à la légalité."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L7",
+      "titre": "L’administration peut aussi agir par contrat",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "7/10",
+      "precedente": "Une décision unilatérale peut-elle être arbitraire ?",
+      "suivante": "Un dommage appelle-t-il une réparation ?",
+      "explication": "Nous allons distinguer décision imposée et accord, puis reconnaître les contraintes d’un marché public. Un contrat est un accord créant des obligations ; un cocontractant en est une partie. Tous les contrats d’une administration ne relèvent pas automatiquement du même régime. Le marché public est un contrat à titre onéreux portant notamment sur travaux, fournitures ou services dans le champ du Code ivoirien de 2019. Ce Code encadre la mise en concurrence, la passation et l’exécution. Les pouvoirs de modification ou de résiliation sont soumis à des conditions et garanties : ce ne sont pas des libertés sans limite.",
+      "formules": [],
+      "exemples": [
+        "Acheter une prestation",
+        "Un bouleversement économique"
+      ],
+      "pieges": [
+        "Ne pas transposer automatiquement une jurisprudence étrangère. La qualification du contrat, les clauses et le texte ivoirien déterminent le…"
+      ],
+      "aRetenir": [
+        "Contrat : accord ; décision unilatérale : autre mécanisme.",
+        "Marché public : passation et exécution encadrées.",
+        "Difficulté économique et impossibilité sont distinctes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L8",
+      "titre": "Un dommage appelle-t-il une réparation ?",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "8/10",
+      "precedente": "L’administration peut aussi agir par contrat",
+      "suivante": "Contester un acte par la voie prévue",
+      "explication": "Nous allons construire un raisonnement de responsabilité sans confondre annuler et indemniser. La responsabilité peut obliger une personne à réparer un dommage qui lui est juridiquement imputable. Dans un raisonnement pour faute, on établit une faute, manquement à une obligation, un préjudice réparable et un lien de causalité entre les deux. Une faute de service se rattache au fonctionnement du service ; une faute personnelle demande l’examen du comportement propre de l’agent et de ses liens avec le service. Il existe aussi des régimes sans faute dans des conditions particulières. Le juge compétent et le fondement doivent être identifiés.",
+      "formules": [],
+      "exemples": [
+        "Un dossier mal traité",
+        "Une décision annulée"
+      ],
+      "pieges": [
+        "Un dommage survenu dans un bâtiment public ne prouve pas à lui seul la faute du service. Inversement, ne pas affirmer que toute réparation …"
+      ],
+      "aRetenir": [
+        "Identifier le fondement et la personne responsable.",
+        "Pour faute : manquement, préjudice, causalité.",
+        "Annulation et indemnisation sont distinctes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L9",
+      "titre": "Contester un acte par la voie prévue",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "9/10",
+      "precedente": "Un dommage appelle-t-il une réparation ?",
+      "suivante": "Urgence : suspendre ou obtenir une mesure utile ?",
+      "explication": "Nous allons distinguer la demande adressée à l’administration de la demande d’annulation adressée au juge. Le recours pour excès de pouvoir demande l’annulation d’une décision administrative illégale. Le Conseil d’État est la juridiction suprême administrative ; on vérifie ses attributions et celles des autres juridictions. Pour le recours régi par les articles 71 à 74 de sa loi organique de 2020, un recours administratif préalable est exigé : gracieux devant l’auteur de l’acte ou hiérarchique devant son supérieur. Il doit être écrit et formé dans les deux mois de la publication, notification ou connaissance acquise. Le rejet ouvre une nouvelle étape juridictionnelle selon les délais légaux.",
+      "formules": [],
+      "exemples": [
+        "Choisir le destinataire",
+        "Reconstituer le calendrier"
+      ],
+      "pieges": [
+        "L’article 70 prévoit l’irrecevabilité si un recours ordinaire de pleine juridiction permet de faire valoir le droit. Ce n’est pas une oblig…"
+      ],
+      "aRetenir": [
+        "Identifier acte, grief et juge compétent.",
+        "Recours préalable écrit : gracieux ou hiérarchique.",
+        "Reconstituer les délais et vérifier les règles spéciales."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-ADMIN-L10",
+      "titre": "Urgence : suspendre ou obtenir une mesure utile ?",
+      "module": "Droit administratif (Droit administratif)",
+      "position": "10/10",
+      "precedente": "Contester un acte par la voie prévue",
+      "suivante": null,
+      "explication": "Nous allons distinguer deux voies urgentes qui ne produisent pas le même effet sur une décision. Le sursis à exécution vise la suspension des effets d’une décision. Les articles 87 et 88 de la loi organique du Conseil d’État l’encadrent : recours administratif préalable, champ autorisé, urgence et moyen créant un doute sérieux sur la légalité. Le référé administratif de l’article 91 permet notamment un constat d’expert ou une mesure utile, sans trancher le fond ni faire obstacle à l’exécution d’une décision administrative. Un moyen est un argument juridique. L’urgence ne donne pas au juge tous les pouvoirs.",
+      "formules": [],
+      "exemples": [
+        "Garder une preuve",
+        "Suspendre un effet"
+      ],
+      "pieges": [
+        "Ne pas importer les noms et pouvoirs des référés français. Une simple requête en annulation ne permet pas de supposer que l’acte est suspen…"
+      ],
+      "aRetenir": [
+        "Sursis : suspension sous conditions.",
+        "Référé : constat ou mesure utile dans ses limites.",
+        "Urgence, compétence et objet de la demande à distinguer."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

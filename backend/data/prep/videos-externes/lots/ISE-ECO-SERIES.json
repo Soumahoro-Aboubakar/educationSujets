@@ -1,0 +1,368 @@
+{
+  "module": "ISE-ECO-SERIES",
+  "titre": "Suites, séries et intégrales généralisées",
+  "matiere": "Mathématiques",
+  "resume": "Rappeler les suites, comprendre les sommes infinies, choisir un critère de convergence et calculer des intégrales à bornes impropres.",
+  "concours": [
+    "ENSEA — ISE option économie"
+  ],
+  "lecons": [
+    {
+      "code": "ISE-ECO-SERIES-L1",
+      "titre": "Rappeler ce qu’est une suite et sa limite",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "1/15",
+      "precedente": null,
+      "suivante": "Prouver la convergence d’une suite récurrente",
+      "explication": "Nous allons lire une suite, pour pouvoir ensuite additionner ses termes. Les modules MATH-SUITES et MATH-LNEXP développent les bases ; nous rappelons ici les outils utilisés dans ce module. Une suite associe un réel uₙ à chaque entier n=0,1,2,… Le nombre n est le rang ; uₙ le terme de ce rang. uₙ→ℓ signifie que les termes finissent par rester à une distance de ℓ aussi petite que l’on veut : la suite converge vers ℓ.",
+      "formules": [],
+      "exemples": [
+        "Une limite finie",
+        "Deux comportements"
+      ],
+      "pieges": [
+        "Les premiers termes suggèrent une limite, mais ne la prouvent pas. Une suite géométrique avec q=1 reste constante."
+      ],
+      "aRetenir": [
+        "uₙ est le terme au rang n.",
+        "Converger : approcher une limite finie unique.",
+        "Une puissance de raison de valeur absolue <1 tend vers zéro."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L2",
+      "titre": "Prouver la convergence d’une suite récurrente",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "2/15",
+      "precedente": "Rappeler ce qu’est une suite et sa limite",
+      "suivante": "Passer des termes aux sommes partielles",
+      "explication": "Nous allons justifier qu’une suite définie de proche en proche converge. Une suite récurrente donne uₙ₊₁ en fonction de uₙ. Croissante signifie uₙ₊₁≥uₙ ; décroissante, uₙ₊₁≤uₙ. Une suite est majorée si tous ses termes restent sous un même réel M ; minorée s’ils restent au-dessus d’un réel m. Plus généralement, pour uₙ₊₁=auₙ+b et a≠1, le point fixe c=b/(1−a) vérifie c=ac+b. Alors vₙ=uₙ−c est géométrique de raison a. Si a=1, la suite est arithmétique.",
+      "formules": [],
+      "exemples": [
+        "Encadrer puis comparer",
+        "Identifier la limite"
+      ],
+      "pieges": [
+        "L’équation ℓ=f(ℓ) donne seulement des limites possibles. Prouver d’abord la convergence et vérifier que f conserve la limite au point étudi…"
+      ],
+      "aRetenir": [
+        "Encadrer les termes par récurrence.",
+        "Comparer deux termes successifs.",
+        "Prouver la convergence, puis chercher la limite."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L3",
+      "titre": "Passer des termes aux sommes partielles",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "3/15",
+      "precedente": "Prouver la convergence d’une suite récurrente",
+      "suivante": "Additionner une série géométrique",
+      "explication": "Nous allons donner un sens à une somme infinie. On ne l’obtient pas en effectuant une infinité d’additions d’un seul coup : on regarde une suite de sommes finies. Le symbole Σ signifie « additionner ». Ainsi Sₙ=Σ(k=1 à n) uₖ=u₁+…+uₙ est une somme partielle. La série Σuₙ converge si Sₙ tend vers un réel fini ; ce réel est sa somme.",
+      "formules": [],
+      "exemples": [
+        "Termes et sommes",
+        "Télescopage"
+      ],
+      "pieges": [
+        "uₙ→0 n’assure pas la convergence de Σuₙ. La série de terme 1/n fournira un contre-exemple."
+      ],
+      "aRetenir": [
+        "Une série s’étudie par ses sommes partielles.",
+        "Convergence : limite finie de Sₙ.",
+        "uₙ→0 est nécessaire, pas suffisant."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L4",
+      "titre": "Additionner une série géométrique",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "4/15",
+      "precedente": "Passer des termes aux sommes partielles",
+      "suivante": "Comparer des séries à termes positifs",
+      "explication": "Nous allons calculer une somme infinie dont chaque terme est multiplié par la même raison q. C’est un modèle fréquent pour des flux qui diminuent régulièrement. Posons Sₙ=1+q+…+qⁿ. Alors qSₙ=q+q²+…+qⁿ⁺¹. En soustrayant, (1−q)Sₙ=1−qⁿ⁺¹.",
+      "formules": [
+        "Pour q≠1 : Σ(k=0 à n) qᵏ = (1−qⁿ⁺¹)/(1−q)."
+      ],
+      "exemples": [
+        "Une somme depuis zéro",
+        "Un autre premier rang"
+      ],
+      "pieges": [
+        "La formule de somme finie demande seulement q≠1 ; la formule de somme infinie demande |q|<1."
+      ],
+      "aRetenir": [
+        "Soustraire qSₙ à Sₙ explique la formule.",
+        "Somme infinie : |q|<1.",
+        "Somme = premier terme / (1−q)."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L5",
+      "titre": "Comparer des séries à termes positifs",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "5/15",
+      "precedente": "Additionner une série géométrique",
+      "suivante": "Trouver un équivalent positif",
+      "explication": "Nous allons décider si une somme positive reste finie, même sans calculer sa valeur. Si uₙ≥0, les sommes partielles sont croissantes ; elles convergent exactement lorsqu’elles sont majorées.",
+      "formules": [
+        "Série de Riemann : Σ(n≥1) 1/nᵖ converge exactement pour p>1."
+      ],
+      "exemples": [
+        "Pourquoi le seuil 1 est sensible",
+        "Une majoration utile"
+      ],
+      "pieges": [
+        "Être inférieur à une série divergente ne permet pas de conclure. Pour une convergence, chercher un majorant dont la série converge."
+      ],
+      "aRetenir": [
+        "Vérifier la positivité.",
+        "Convergence : majorer ; divergence : minorer.",
+        "Riemann : p>1 pour les séries."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L6",
+      "titre": "Trouver un équivalent positif",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "6/15",
+      "precedente": "Comparer des séries à termes positifs",
+      "suivante": "Contrôler les signes : absolue ou alternée",
+      "explication": "Nous allons remplacer un terme positif compliqué par un terme de référence ayant la même vitesse de décroissance. uₙ∼vₙ signifie uₙ/vₙ→1 ; le symbole ∼ se lit « est équivalent à ». Si uₙ et vₙ sont positifs pour n assez grand, leurs séries convergent ou divergent ensemble. Pourquoi ? Dès que le quotient est entre 1/2 et 3/2, on a vₙ/2≤uₙ≤3vₙ/2. Les comparaisons de la leçon précédente donnent alors la même nature.",
+      "formules": [],
+      "exemples": [
+        "Une fraction de polynômes",
+        "Un terme divergent"
+      ],
+      "pieges": [
+        "Ne pas soustraire des équivalents : n+1∼n et n∼n, mais leur différence vaut 1, pas une expression « équivalente à zéro ». Pour une série si…"
+      ],
+      "aRetenir": [
+        "Équivalence : quotient →1.",
+        "Pour les séries, contrôler le signe des termes.",
+        "Factoriser les puissances dominantes de n."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L7",
+      "titre": "Contrôler les signes : absolue ou alternée",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "7/15",
+      "precedente": "Trouver un équivalent positif",
+      "suivante": "Décomposer un terme signé sans perdre le reste",
+      "explication": "Nous allons étudier une série dont les termes changent de signe. Les compensations peuvent permettre une convergence qui disparaît si l’on prend les valeurs absolues. Σuₙ est absolument convergente si Σ|uₙ| converge. Théorème admis : la convergence absolue implique la convergence. Exemple : |(−1)ⁿ/n²|=1/n², dont la série converge.",
+      "formules": [],
+      "exemples": [
+        "Une convergence sans convergence absolue",
+        "Contrôler une précision"
+      ],
+      "pieges": [
+        "Le changement de signe seul ne suffit pas : vérifier aussi la décroissance des amplitudes et leur limite nulle."
+      ],
+      "aRetenir": [
+        "Commencer par la série des valeurs absolues.",
+        "Alternée : amplitude positive, décroissante, de limite 0.",
+        "Erreur ≤ première amplitude omise."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L8",
+      "titre": "Décomposer un terme signé sans perdre le reste",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "8/15",
+      "precedente": "Contrôler les signes : absolue ou alternée",
+      "suivante": "Rappeler dérivées et primitives",
+      "explication": "Nous allons voir pourquoi une petite correction peut changer la nature d’une série signée. L’idée est de transformer exactement le terme avant de conclure. Pour vérifier, mettre à droite au même dénominateur : (t−t²)(1+t)+t³=t. Cette identité sépare deux termes simples et un reste dont on peut contrôler la série.",
+      "formules": [
+        "Pour t≠−1 : t/(1+t) = t − t² + t³/(1+t)."
+      ],
+      "exemples": [
+        "Un terme alterné dominant",
+        "Contrôler le reste"
+      ],
+      "pieges": [
+        "Ici uₙ/tₙ=1/(1+tₙ)→1, mais Σuₙ et Σtₙ n’ont pas la même nature. Le critère d’équivalence pour séries positives ne s’applique pas à ces term…"
+      ],
+      "aRetenir": [
+        "Chercher une identité exacte.",
+        "Étudier la série de chaque contribution.",
+        "Un reste plus petit terme à terme peut encore accumuler une divergence."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L9",
+      "titre": "Rappeler dérivées et primitives",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "9/15",
+      "precedente": "Décomposer un terme signé sans perdre le reste",
+      "suivante": "Calculer une intégrale sur un segment",
+      "explication": "Nous allons retrouver une fonction à partir de sa dérivée pour calculer ensuite une intégrale. MATH-LNEXP explique les dérivées en détail ; voici le rappel nécessaire. La dérivée f′(x) est la limite du taux [f(x+h)−f(x)]/h quand h→0 : elle mesure la pente locale. Une fonction est continue si f(x)→f(a) quand x→a dans son domaine. Une primitive F de f vérifie F′=f. Rappels : xᵃ est une puissance ; pour x>0 et a réel, xᵃ=e^(a ln x). ln transforme un produit en somme et (ln x)′=1/x ; exp, sa réciproque, vérifie (eˣ)′=eˣ. On conserve les facteurs constants et on additionne les dérivées. Pour une composition, (F(g(x)))′=F′(g(x))g′(x).",
+      "formules": [],
+      "exemples": [
+        "Vérifier une primitive",
+        "Une exponentielle composée"
+      ],
+      "pieges": [
+        "La formule des puissances exclut a=−1, car elle diviserait par zéro. Pour 1/x sur x>0, utiliser ln x."
+      ],
+      "aRetenir": [
+        "Primitive : sa dérivée redonne la fonction.",
+        "Puissance : ajouter 1 à l’exposant puis diviser par ce nouvel exposant.",
+        "Cas 1/x : ln x sur x>0."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L10",
+      "titre": "Calculer une intégrale sur un segment",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "10/15",
+      "precedente": "Rappeler dérivées et primitives",
+      "suivante": "Remplacer une borne infinie par une limite",
+      "explication": "Nous allons additionner des contributions réparties sur un intervalle. L’intégrale de f entre a et b se note ∫[a,b] f(x) dx ; dx indique la variable parcourue. Pour f continue, l’intégrale est la limite de sommes « hauteur f × petite largeur » lorsque le découpage devient de plus en plus fin. Si f≥0 et a<b, elle représente l’aire sous la courbe ; sous l’axe, les contributions sont négatives.",
+      "formules": [
+        "∫[a,b] f(x) dx = F(b)−F(a), si F′=f."
+      ],
+      "exemples": [
+        "Une aire positive",
+        "Une fonction qui change de signe"
+      ],
+      "pieges": [
+        "Calculer F(b)−F(a), pas f(b)−f(a). Une intégrale signée n’est pas toujours une aire positive."
+      ],
+      "aRetenir": [
+        "L’intégrale additionne des contributions signées.",
+        "Sur un segment régulier : F(b)−F(a).",
+        "On peut découper l’intervalle et additionner les résultats."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L11",
+      "titre": "Remplacer une borne infinie par une limite",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "11/15",
+      "precedente": "Calculer une intégrale sur un segment",
+      "suivante": "Approcher une borne où la fonction n’existe pas",
+      "explication": "Nous allons donner un sens à une intégrale sur un intervalle sans borne supérieure. On commence toujours par une borne réelle R.",
+      "formules": [
+        "∫[a,+∞[ f = limite de ∫[a,R] f quand R→+∞."
+      ],
+      "exemples": [
+        "Une aire infiniment étendue mais finie",
+        "Un contraste"
+      ],
+      "pieges": [
+        "Ne pas écrire une valeur comme 1/∞ dans un calcul de primitive : écrire d’abord 1/R puis sa limite."
+      ],
+      "aRetenir": [
+        "Travailler avec une borne R finie.",
+        "Passer à la limite après le calcul.",
+        "Riemann à l’infini : p>1."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L12",
+      "titre": "Approcher une borne où la fonction n’existe pas",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "12/15",
+      "precedente": "Remplacer une borne infinie par une limite",
+      "suivante": "Comparer des intégrales impropres",
+      "explication": "Nous allons traiter une autre difficulté : l’intervalle est borné, mais la fonction devient infinie près d’une extrémité. Si f n’existe pas en 0, ∫]0,1] f est la limite de ∫[ε,1] f quand ε→0⁺. Le petit réel ε reste strictement positif. On parle de borne singulière.",
+      "formules": [],
+      "exemples": [
+        "Une singularité intégrable",
+        "Une singularité trop forte"
+      ],
+      "pieges": [
+        "À l’infini on exige p>1 ; près de zéro on exige p<1. Si plusieurs bornes sont impropres, étudier chaque contribution séparément : on ne com…"
+      ],
+      "aRetenir": [
+        "Remplacer la borne singulière par ε.",
+        "Calculer puis faire tendre ε vers la borne.",
+        "Riemann près de zéro : p<1."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L13",
+      "titre": "Comparer des intégrales impropres",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "13/15",
+      "precedente": "Approcher une borne où la fonction n’existe pas",
+      "suivante": "Intégrer par parties avant de passer à la limite",
+      "explication": "Nous allons décider de la convergence sans primitive explicite. La comparaison porte sur les fonctions près de chaque borne impropre. Une intégrale est absolument convergente si l’intégrale de la valeur absolue converge. Cela entraîne sa convergence. On peut donc traiter une fonction signée en majorant sa valeur absolue.",
+      "formules": [],
+      "exemples": [
+        "Comparer à l’infini",
+        "Une oscillation dominée"
+      ],
+      "pieges": [
+        "f≤g ne suffit pas si les fonctions peuvent être négatives. Pour une convergence absolue, majorer |f| par une fonction positive d’intégrale …"
+      ],
+      "aRetenir": [
+        "Localiser chaque borne impropre.",
+        "Comparer à un modèle de Riemann ou exponentiel.",
+        "Une majoration de |f| peut prouver la convergence absolue."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L14",
+      "titre": "Intégrer par parties avant de passer à la limite",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "14/15",
+      "precedente": "Comparer des intégrales impropres",
+      "suivante": "Transformer l’intégrale avec sa variable et ses bornes",
+      "explication": "Nous allons transformer une intégrale de produit. Cette méthode permet notamment de retirer un logarithme en le dérivant. La règle (uv)′=u′v+uv′ donne, après intégration sur un segment où les fonctions sont régulièrement dérivables : ∫u v′=[uv]−∫u′v. C’est l’intégration par parties, ou IPP. Le crochet [uv] indique la valeur à la borne haute moins celle à la borne basse. Pour a>−1, le même contrôle donne x^(a+1)ln x→0 en 0⁺ : en posant x=e⁻ᵗ, l’expression vaut −t e^(−(a+1)t)→0. L’exponentielle décroissante domine toute puissance de t, limite usuelle de MATH-LNEXP.",
+      "formules": [],
+      "exemples": [
+        "Un segment régulier",
+        "Une borne singulière"
+      ],
+      "pieges": [
+        "Faire une IPP directement avec une borne où ln n’existe pas masque les termes de bord. Introduire ε ou R, puis justifier les limites."
+      ],
+      "aRetenir": [
+        "Choisir u à dériver et v′ à intégrer.",
+        "Écrire le terme de bord et l’intégrale restante.",
+        "Pour une borne impropre, contrôler toutes les limites."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-SERIES-L15",
+      "titre": "Transformer l’intégrale avec sa variable et ses bornes",
+      "module": "Suites, séries et intégrales généralisées (Mathématiques)",
+      "position": "15/15",
+      "precedente": "Intégrer par parties avant de passer à la limite",
+      "suivante": null,
+      "explication": "Nous allons remplacer une variable par une autre pour reconnaître une intégrale plus simple. Le changement doit porter à la fois sur la fonction, la petite largeur dx et les bornes. Le remplacement t=ln x est possible car ln est strictement croissante sur x>0, et sa réciproque est x=eᵗ. Pour un intervalle ]0,+∞[, ce changement conduit à ]−∞,+∞[ : il faut séparer les deux bornes impropres.",
+      "formules": [
+        "Si x=φ(t), alors dx=φ′(t)dt et ∫ f(x)dx devient ∫ f(φ(t))φ′(t)dt."
+      ],
+      "exemples": [
+        "Un changement affine",
+        "Un logarithme dans l’intégrande"
+      ],
+      "pieges": [
+        "Ne conserver ni les anciennes bornes ni dx après avoir tout exprimé en t. Pour une substitution décroissante, respecter l’orientation ou in…"
+      ],
+      "aRetenir": [
+        "Exprimer la nouvelle variable et son facteur dérivé.",
+        "Transformer les deux bornes.",
+        "Passer ensuite aux limites impropres."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

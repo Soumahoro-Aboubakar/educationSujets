@@ -1,0 +1,299 @@
+{
+  "module": "ENSEA-AS-ANALYSE",
+  "titre": "Limites, continuité, dérivation",
+  "matiere": "Mathématiques",
+  "resume": "Contrôler les limites, prouver l’existence de solutions et mener une étude de fonction avec les théorèmes adaptés.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)",
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "ENSEA-AS-ANALYSE-L1",
+      "titre": "Décrire une limite",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "1/12",
+      "precedente": null,
+      "suivante": "Lever une forme indéterminée",
+      "explication": "Nous allons préciser le comportement d’une fonction près d’une entrée ou très loin. Le module MATH-LNEXP a introduit les fonctions, les domaines et les limites de ln et exp ; nous élargissons ces outils. Le domaine contient les entrées autorisées. Pour une fraction, le dénominateur ne doit pas être nul ; pour √u, il faut u ≥ 0 ; pour ln u, u > 0. On étudie la limite en restant dans le domaine. lim f(x) = ℓ quand x → a signifie que f(x) devient aussi proche que voulu du réel ℓ quand x se rapproche de a. x → a⁺ signifie par la droite ; x → a⁻ par la gauche. Une limite bilatérale existe seulement si les deux côtés coïncident.",
+      "formules": [],
+      "exemples": [
+        "Valeur et voisinage",
+        "Sans borne"
+      ],
+      "pieges": [
+        "∞ désigne un comportement sans borne, pas un nombre à remplacer dans une formule."
+      ],
+      "aRetenir": [
+        "Rester dans le domaine.",
+        "Préciser le côté si nécessaire.",
+        "Opérer sur les limites sous leurs conditions."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L2",
+      "titre": "Lever une forme indéterminée",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "2/12",
+      "precedente": "Décrire une limite",
+      "suivante": "Encadrer une fonction pour trouver sa limite",
+      "explication": "Nous allons transformer une expression avant de conclure sur sa limite. Cela évite de prendre 0/0 pour une réponse. Les formes indéterminées 0/0, ∞/∞, ∞ − ∞ et 0 × ∞ ne déterminent pas la limite. Il faut factoriser, mettre au même dénominateur ou diviser par un terme dominant.",
+      "formules": [],
+      "exemples": [
+        "Factoriser près d’un point",
+        "Diviser à l’infini"
+      ],
+      "pieges": [
+        "Deux quantités qui tendent vers +∞ n’ont pas forcément un quotient de limite 1 : x²/x → +∞ mais x/x² → 0."
+      ],
+      "aRetenir": [
+        "Indéterminée signifie : transformer avant de conclure.",
+        "Factoriser près d’un point.",
+        "Diviser par la plus grande puissance à l’infini."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L3",
+      "titre": "Encadrer une fonction pour trouver sa limite",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "3/12",
+      "precedente": "Lever une forme indéterminée",
+      "suivante": "Raccorder sans saut : la continuité",
+      "explication": "Nous allons trouver une limite même si une partie de l’expression oscille. Deux bornes peuvent forcer la même destination. Pour une limite infinie, une comparaison suffit : si f ≥ g et g → +∞, alors f → +∞. Pour une composée, si u(x) → ℓ et v est continue en ℓ, alors v(u(x)) → v(ℓ). La continuité sera précisée en L4.",
+      "formules": [],
+      "exemples": [
+        "Une oscillation écrasée",
+        "Comparer les croissances"
+      ],
+      "pieges": [
+        "Être bornée ne suffit pas pour converger. sin x reste entre −1 et 1 mais oscille ; ce sont des bornes ayant la même limite qui permettent l…"
+      ],
+      "aRetenir": [
+        "Deux bornes de même limite imposent la limite.",
+        "Une borne divergente peut imposer une limite infinie.",
+        "Réutiliser les croissances de ln et exp."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L4",
+      "titre": "Raccorder sans saut : la continuité",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "4/12",
+      "precedente": "Encadrer une fonction pour trouver sa limite",
+      "suivante": "Prouver qu’une solution existe et qu’elle est unique",
+      "explication": "Nous allons vérifier qu’une formule rejoint bien sa valeur en un point. Cette propriété permettra de prouver qu’une courbe traverse un niveau. f est continue en a si f(a) est définie et si lim f(x) = f(a) quand x → a. Aux extrémités d’un intervalle, on prend le côté appartenant à l’intervalle. Une fonction continue sur un intervalle l’est en chacun de ses points.",
+      "formules": [],
+      "exemples": [
+        "Prolonger une fraction",
+        "Un angle, sans saut"
+      ],
+      "pieges": [
+        "Dérivable implique continue, mais continue n’implique pas dérivable. Un angle pointu peut être continu."
+      ],
+      "aRetenir": [
+        "Continuité : f(a) existe et égale la limite.",
+        "Étudier les deux côtés d’un raccord.",
+        "Continuité et dérivabilité sont différentes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L5",
+      "titre": "Prouver qu’une solution existe et qu’elle est unique",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "5/12",
+      "precedente": "Raccorder sans saut : la continuité",
+      "suivante": "Dériver une puissance ou une racine",
+      "explication": "Nous allons prouver l’existence d’une solution sans connaître sa formule. C’est fréquent dans les problèmes de concours. Le TVI assure l’existence. Pour l’unicité, montrer que f est strictement croissante ou strictement décroissante sur l’intervalle : elle ne peut pas prendre deux fois la même valeur.",
+      "formules": [],
+      "exemples": [
+        "Existence",
+        "Unicité et précision"
+      ],
+      "pieges": [
+        "Deux valeurs de signes contraires sans continuité ne suffisent pas : 1/x passe d’un signe à l’autre autour de 0 sans jamais s’annuler."
+      ],
+      "aRetenir": [
+        "TVI : continuité et niveau compris entre les valeurs aux bornes.",
+        "Unicité : stricte monotonie.",
+        "Dichotomie : resserrer l’intervalle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L6",
+      "titre": "Dériver une puissance ou une racine",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "6/12",
+      "precedente": "Prouver qu’une solution existe et qu’elle est unique",
+      "suivante": "Dériver une fonction composée",
+      "explication": "Nous allons étendre la dérivation aux puissances entières et aux racines. MATH-LNEXP-L7 a défini la dérivée comme pente limite ; L8 y donne déjà les règles du produit et du quotient, que nous réutilisons ici.",
+      "formules": [
+        "(uv)′ = u′v + uv′ ; (u/v)′ = (u′v − uv′)/v², si v ≠ 0."
+      ],
+      "exemples": [
+        "Produit",
+        "Quotient"
+      ],
+      "pieges": [
+        "(uv)′ n’est pas u′v′. Dans le quotient, l’ordre u′v − uv′ fixe le signe."
+      ],
+      "aRetenir": [
+        "Identifier u et v.",
+        "Choisir produit ou quotient.",
+        "Simplifier et rappeler le domaine."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L7",
+      "titre": "Dériver une fonction composée",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "7/12",
+      "precedente": "Dériver une puissance ou une racine",
+      "suivante": "Dériver une fonction réciproque",
+      "explication": "Nous allons dériver une fonction appliquée à une autre. Les angles et le cercle unité sont rappelés dans ENSEA-AS-COMPLEXES-L5. Dans f(x) = v(u(x)), u est la fonction intérieure et v l’extérieure. La variation intérieure multiplie la pente extérieure : f′(x) = u′(x) × v′(u(x)).",
+      "formules": [
+        "(uⁿ)′ = n u^(n − 1)u′ ; (ln u)′ = u′/u si u > 0 ; (eᵘ)′ = u′eᵘ."
+      ],
+      "exemples": [
+        "Un angle qui varie trois fois plus vite",
+        "Un logarithme de cosinus"
+      ],
+      "pieges": [
+        "Oublier u′ est oublier la vitesse de la fonction intérieure. Les dérivées trigonométriques données ici demandent des angles en radians."
+      ],
+      "aRetenir": [
+        "Identifier intérieur et extérieur.",
+        "Multiplier par la dérivée intérieure.",
+        "Avec sin et cos, utiliser les radians."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L8",
+      "titre": "Dériver une fonction réciproque",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "8/12",
+      "precedente": "Dériver une fonction composée",
+      "suivante": "La dérivée seconde décrit la pente",
+      "explication": "Nous allons retrouver la pente de la fonction qui effectue le trajet inverse. ln et exp en sont un premier exemple connu. Une bijection de I vers J associe à chaque entrée de I une sortie de J et atteint chaque sortie exactement une fois. Sa réciproque g retrouve l’entrée : g(f(x)) = x et f(g(y)) = y. Une fonction continue strictement monotone sur I est une bijection de I vers son image J.",
+      "formules": [
+        "g′(y) = 1/f′(g(y)), si f est dérivable au point g(y) et f′(g(y)) ≠ 0."
+      ],
+      "exemples": [
+        "La racine carrée",
+        "Sans formule explicite"
+      ],
+      "pieges": [
+        "f⁻¹ est ici la réciproque, pas le quotient 1/f. Et si f′ s’annule, on ne peut pas appliquer la formule de dérivation en ce point."
+      ],
+      "aRetenir": [
+        "Vérifier la bijection.",
+        "Retrouver l’entrée associée à y.",
+        "Inverser une dérivée non nulle au bon point."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L9",
+      "titre": "La dérivée seconde décrit la pente",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "9/12",
+      "precedente": "Dériver une fonction réciproque",
+      "suivante": "Contrôler un écart avec les accroissements finis",
+      "explication": "Nous allons étudier si les pentes augmentent ou diminuent. Cela affine la forme d’une courbe. La dérivée seconde, notée f″, est la dérivée de f′. Si f″ ≥ 0 sur un intervalle, les pentes augmentent : f est convexe. Si f″ ≤ 0, les pentes diminuent : f est concave.",
+      "formules": [],
+      "exemples": [
+        "Un bol",
+        "Un changement de courbure"
+      ],
+      "pieges": [
+        "f″ = 0 en un point ne prouve pas une inflexion : x⁴ a f″(0) = 0, mais f″(x) = 12x² reste positif ou nul des deux côtés."
+      ],
+      "aRetenir": [
+        "f″ = dérivée de f′.",
+        "Signe de f″ : variation des pentes.",
+        "Un changement de signe peut marquer une inflexion."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L10",
+      "titre": "Contrôler un écart avec les accroissements finis",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "10/12",
+      "precedente": "La dérivée seconde décrit la pente",
+      "suivante": "Reconnaître une asymptote",
+      "explication": "Nous allons relier une variation totale à une pente. Cela permet de majorer une erreur sans calculer exactement toutes les valeurs.",
+      "formules": [
+        "Si |f′(x)| ≤ M à l’intérieur du segment, alors |f(b) − f(a)| ≤ M|b − a|."
+      ],
+      "exemples": [
+        "Une pente intermédiaire",
+        "Une erreur contrôlée"
+      ],
+      "pieges": [
+        "La borne de |f′| doit tenir sur tout le segment concerné, pas seulement aux extrémités."
+      ],
+      "aRetenir": [
+        "Vérifier continuité et dérivabilité.",
+        "Borner |f′| sur tout le segment.",
+        "Multiplier cette borne par la longueur du segment."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L11",
+      "titre": "Reconnaître une asymptote",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "11/12",
+      "precedente": "Contrôler un écart avec les accroissements finis",
+      "suivante": "Organiser une étude de fonction",
+      "explication": "Nous allons trouver une droite dont une courbe se rapproche. C’est une information essentielle pour la dessiner à grande échelle. Une asymptote verticale x = a apparaît si f(x) tend vers +∞ ou −∞ d’au moins un côté de a. Une asymptote horizontale y = ℓ apparaît si f(x) → ℓ quand x → +∞ ou −∞.",
+      "formules": [
+        "y = ax + b est une asymptote oblique si f(x) − (ax + b) → 0 à l’infini, avec a ≠ 0."
+      ],
+      "exemples": [
+        "Une décomposition utile",
+        "De quel côté ?"
+      ],
+      "pieges": [
+        "f(x)/(ax + b) → 1 ne suffit pas pour une asymptote oblique. Il faut que la DIFFÉRENCE tende vers 0."
+      ],
+      "aRetenir": [
+        "Divergence près de a : verticale.",
+        "Limite finie à l’infini : horizontale.",
+        "Différence avec une droite → 0 : oblique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L12",
+      "titre": "Organiser une étude de fonction",
+      "module": "Limites, continuité, dérivation (Mathématiques)",
+      "position": "12/12",
+      "precedente": "Reconnaître une asymptote",
+      "suivante": null,
+      "explication": "Nous allons réunir les outils précédents dans un ordre qui rend le dessin et les conclusions fiables. f′(x) = 1 − 1/x² = (x − 1)(x + 1)/x². Sur x > 0, x + 1 et x² sont positifs ; le signe dépend de x − 1. Donc f décroît sur ]0 ; 1], puis croît sur [1 ; +∞[.",
+      "formules": [],
+      "exemples": [
+        "Étudier f(x) = x + 1/x sur ]0 ; +∞[",
+        "Relier les informations"
+      ],
+      "pieges": [
+        "Un tableau de variations ne donne pas les signes de f : ici f est positive même quand elle décroît."
+      ],
+      "aRetenir": [
+        "Domaine → limites → dérivée → variations.",
+        "Calculer les valeurs utiles.",
+        "Justifier asymptotes et position de la courbe."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

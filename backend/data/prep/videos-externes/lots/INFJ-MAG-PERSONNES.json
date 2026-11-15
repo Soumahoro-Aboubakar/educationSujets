@@ -1,0 +1,195 @@
+{
+  "module": "INFJ-MAG-PERSONNES",
+  "titre": "Les personnes et la famille",
+  "matiere": "Droit civil",
+  "resume": "Personnalité, capacité, état civil, mariage, patrimoine familial et filiation en droit ivoirien.",
+  "concours": [
+    "INFJ — École de la Magistrature"
+  ],
+  "lecons": [
+    {
+      "code": "INFJ-MAG-PERSONNES-L1",
+      "titre": "Qui peut avoir des droits ?",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Avoir un droit et l’exercer soi-même",
+      "explication": "Nous allons distinguer la personne au sens du droit et la simple chose, pour comprendre qui peut être créancier ou débiteur. La personnalité juridique est l’aptitude à être titulaire de droits et d’obligations. La personne physique est un être humain ; la personne morale est un groupement ou une organisation auquel le droit reconnaît cette personnalité dans les conditions légales. Être titulaire d’un droit ne signifie pas pouvoir l’exercer seul : cette seconde question relève de la capacité, étudiée ensuite. Une obligation relie un créancier, qui peut réclamer, à un débiteur, qui doit la prestation.",
+      "formules": [],
+      "exemples": [
+        "Un enfant propriétaire",
+        "Une société"
+      ],
+      "pieges": [
+        "Une personne morale n’est pas une personne « vertueuse ». Le mot moral désigne ici une personnalité reconnue à une organisation."
+      ],
+      "aRetenir": [
+        "Personnalité : aptitude à avoir des droits.",
+        "Personne physique : être humain.",
+        "Personne morale : organisation reconnue par le droit."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PERSONNES-L2",
+      "titre": "Avoir un droit et l’exercer soi-même",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "2/8",
+      "precedente": "Qui peut avoir des droits ?",
+      "suivante": "Identifier une personne par l’état civil",
+      "explication": "Nous allons comprendre pourquoi une protection peut encadrer les actes d’une personne sans lui retirer tous ses droits. La capacité de jouissance concerne l’aptitude à avoir un droit ; la capacité d’exercice, l’aptitude à l’exercer soi-même. La loi ivoirienne relative à la minorité de 2019 retient le seuil de dix-huit ans accomplis. Le mineur bénéficie de mécanismes de protection, notamment représentation ou autorisation selon l’acte et sa situation. La représentation permet à une personne habilitée d’agir au nom d’une autre. Chaque acte doit être examiné selon son régime.",
+      "formules": [],
+      "exemples": [
+        "Une opération patrimoniale",
+        "Un droit maintenu"
+      ],
+      "pieges": [
+        "« Incapacité d’exercice » ne veut pas dire absence de personnalité. Ne pas supposer non plus qu’un représentant peut accomplir librement to…"
+      ],
+      "aRetenir": [
+        "Jouissance : avoir le droit ; exercice : agir soi-même.",
+        "Minorité civile : moins de dix-huit ans accomplis.",
+        "Représentation et autorisations à vérifier pour l’acte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PERSONNES-L3",
+      "titre": "Identifier une personne par l’état civil",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "3/8",
+      "precedente": "Avoir un droit et l’exercer soi-même",
+      "suivante": "Vérifier les conditions du mariage",
+      "explication": "Nous allons repérer les informations qui identifient une personne et les actes qui les constatent. L’état civil regroupe les qualités relatives à la situation d’une personne et les actes qui les constatent, notamment naissance, mariage et décès. Le nom identifie la personne selon les règles légales. Le domicile est un rattachement juridique ; il se distingue de la résidence, lieu où l’on vit en fait. Une copie d’acte ne crée pas librement une nouvelle identité : les corrections d’erreurs suivent les procédures de rectification applicables.",
+      "formules": [],
+      "exemples": [
+        "Deux documents différents",
+        "Une adresse temporaire"
+      ],
+      "pieges": [
+        "Ne pas corriger soi-même une copie d’acte pour régler une erreur : on vérifie la voie de rectification et l’autorité compétente."
+      ],
+      "aRetenir": [
+        "État civil : situation et actes de la personne.",
+        "Domicile et résidence ne sont pas synonymes.",
+        "Une erreur appelle une procédure de rectification."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PERSONNES-L4",
+      "titre": "Vérifier les conditions du mariage",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "4/8",
+      "precedente": "Identifier une personne par l’état civil",
+      "suivante": "Célébration et devoirs des époux",
+      "explication": "Nous allons appliquer les premières conditions de la loi ivoirienne de 2019 avant de parler des effets du mariage. La loi n° 2019-570 du 26 juin 2019 définit le mariage comme l’union d’un homme et d’une femme célébrée devant l’officier de l’état civil. Les futurs époux doivent avoir dix-huit ans révolus et consentir personnellement. La loi encadre les vices de ce consentement. Un nouveau mariage ne peut être contracté tant que le précédent n’est pas dissous dans les conditions légales. D’autres empêchements, notamment familiaux, doivent aussi être vérifiés.",
+      "formules": [],
+      "exemples": [
+        "L’âge",
+        "Un premier mariage"
+      ],
+      "pieges": [
+        "Ne pas reprendre l’ancien âge différent selon le sexe. Une séparation de fait ne vaut pas à elle seule divorce."
+      ],
+      "aRetenir": [
+        "Loi sur le mariage de 2019.",
+        "Dix-huit ans pour les deux époux.",
+        "Consentement personnel et absence d’empêchement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PERSONNES-L5",
+      "titre": "Célébration et devoirs des époux",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "5/8",
+      "precedente": "Vérifier les conditions du mariage",
+      "suivante": "Distinguer mariage et régime des biens",
+      "explication": "Nous allons distinguer la formation légale du mariage des devoirs qu’il fait naître. La célébration devant l’officier de l’état civil, autorité habilitée à recevoir le mariage civil, s’inscrit dans les formes légales. Le mariage crée notamment des devoirs mutuels de respect, fidélité, secours et assistance, ainsi qu’une communauté de vie. Le secours porte notamment sur l’aide matérielle ; l’assistance, sur le soutien à l’autre. Les époux ne perdent pas leur personnalité juridique en se mariant.",
+      "formules": [],
+      "exemples": [
+        "Cérémonie et statut",
+        "Devoir réciproque"
+      ],
+      "pieges": [
+        "La communauté de vie n’autorise pas les violences. La loi prévoit des mesures de résidence séparée en cas de danger, selon leurs conditions."
+      ],
+      "aRetenir": [
+        "Célébration civile dans les formes légales.",
+        "Respect, fidélité, secours et assistance mutuels.",
+        "Le mariage ne supprime pas les droits de la personne."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PERSONNES-L6",
+      "titre": "Distinguer mariage et régime des biens",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "6/8",
+      "precedente": "Célébration et devoirs des époux",
+      "suivante": "Séparation, divorce et dissolution",
+      "explication": "Nous allons poser la bonne question sur un bien : à qui appartient-il et selon quel régime ? Le régime matrimonial organise les rapports patrimoniaux des époux. Le patrimoine regroupe leurs droits et obligations évaluables en argent. La loi distingue notamment communauté de biens et séparation de biens. Un bien propre appartient personnellement à un époux ; un bien commun relève de la masse commune selon les règles du régime. La date, l’origine du bien et le régime choisi doivent être examinés avant de le classer.",
+      "formules": [],
+      "exemples": [
+        "Ne pas tout confondre",
+        "Un titre et un financement"
+      ],
+      "pieges": [
+        "Les devoirs du mariage et les règles de propriété sont deux plans différents. La séparation de biens ne supprime pas les devoirs de secours…"
+      ],
+      "aRetenir": [
+        "Régime matrimonial : organisation du patrimoine.",
+        "Distinguer bien propre et masse commune.",
+        "Vérifier régime, date et origine du bien."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PERSONNES-L7",
+      "titre": "Séparation, divorce et dissolution",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "7/8",
+      "precedente": "Distinguer mariage et régime des biens",
+      "suivante": "Établir un lien de filiation",
+      "explication": "Nous allons distinguer trois situations que le langage courant appelle parfois toutes « séparation ». La séparation de fait est une situation matérielle de vie séparée. La séparation de corps est un mécanisme juridique qui aménage notamment la vie commune sans dissoudre le mariage. Le divorce dissout le mariage selon la procédure légale ; la loi ivoirienne relative au divorce et à la séparation de corps date de 2022. La liquidation d’un régime matrimonial règle les comptes patrimoniaux. Le sort des enfants constitue une question distincte à traiter selon les textes.",
+      "formules": [],
+      "exemples": [
+        "Partir du domicile",
+        "Plusieurs conséquences"
+      ],
+      "pieges": [
+        "La séparation de corps ne permet pas de se dire automatiquement libre de se remarier. Une décision doit être examinée avec ses effets et so…"
+      ],
+      "aRetenir": [
+        "Fait matériel et statut juridique sont distincts.",
+        "Séparation de corps : mariage maintenu.",
+        "Divorce : dissolution et conséquences à régler."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PERSONNES-L8",
+      "titre": "Établir un lien de filiation",
+      "module": "Les personnes et la famille (Droit civil)",
+      "position": "8/8",
+      "precedente": "Séparation, divorce et dissolution",
+      "suivante": null,
+      "explication": "Nous allons reconnaître les principaux modes d’établissement du lien juridique parent-enfant. La filiation est le lien juridique entre un enfant et un parent. La loi n° 2019-571 du 26 juin 2019 organise son établissement. La présomption permet de tenir un fait pour établi selon une règle, sous les conditions de celle-ci : une présomption de paternité intervient pour les enfants dans le mariage. Hors mariage, la filiation paternelle se prouve par une reconnaissance ou un jugement. Une reconnaissance est un acte juridique établissant le lien dans les conditions légales.",
+      "formules": [],
+      "exemples": [
+        "Un acte pertinent",
+        "Lien et exercice"
+      ],
+      "pieges": [
+        "Ne pas déduire toute filiation d’un nom porté. Chaque mode d’établissement et chaque contestation ont leurs conditions."
+      ],
+      "aRetenir": [
+        "Filiation : lien juridique parent-enfant.",
+        "Vérifier le mode légal d’établissement.",
+        "Distinguer filiation et modalités d’autorité parentale."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

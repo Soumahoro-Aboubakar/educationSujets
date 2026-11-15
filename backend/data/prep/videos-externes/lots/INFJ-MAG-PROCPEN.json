@@ -1,0 +1,218 @@
+{
+  "module": "INFJ-MAG-PROCPEN",
+  "titre": "Procédure pénale",
+  "matiere": "Droit pénal",
+  "resume": "Garanties, actions, enquête, instruction, liberté, jugement et recours dans le procès pénal ivoirien.",
+  "concours": [
+    "INFJ — École de la Magistrature"
+  ],
+  "lecons": [
+    {
+      "code": "INFJ-MAG-PROCPEN-L1",
+      "titre": "Poursuivre sans présumer la culpabilité",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Deux actions pour deux objectifs",
+      "explication": "Nous allons passer de l’infraction étudiée dans DROIT-PENAL aux garanties de la personne mise en cause. Le droit pénal définit infractions et peines ; la procédure pénale organise leur recherche, les poursuites et le jugement. Le Code ivoirien est issu de la loi du 27 décembre 2018, modifiée depuis. La présomption d’innocence interdit de traiter la culpabilité comme établie avant qu’elle le soit judiciairement. Les droits de la défense comprennent notamment information sur les charges et assistance d’un conseil. Les fonctions de poursuite, d’instruction et de jugement sont en principe séparées.",
+      "formules": [],
+      "exemples": [
+        "Un soupçon",
+        "Un procès contradictoire"
+      ],
+      "pieges": [
+        "La présomption d’innocence n’interdit pas toute enquête ou contrainte légale. Elle impose de ne pas transformer ces mesures en condamnation…"
+      ],
+      "aRetenir": [
+        "Procédure : recherche, poursuite, jugement.",
+        "Soupçon et culpabilité ne se confondent pas.",
+        "Défense et séparation des fonctions sont des garanties."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L2",
+      "titre": "Deux actions pour deux objectifs",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "2/9",
+      "precedente": "Poursuivre sans présumer la culpabilité",
+      "suivante": "Que devient une plainte ?",
+      "explication": "Nous allons distinguer punir une infraction et réparer le dommage qu’elle a causé. L’action publique vise l’application de la loi pénale ; elle est exercée par les autorités auxquelles la loi la confie, notamment le ministère public. L’action civile vise la réparation du dommage personnel directement causé par l’infraction. La partie civile est la personne qui demande cette réparation dans la procédure pénale selon ses conditions. La victime peut, dans les cas prévus, mettre en mouvement l’action publique, sans devenir pour autant le magistrat qui l’exerce.",
+      "formules": [],
+      "exemples": [
+        "Un bien endommagé",
+        "Une plainte"
+      ],
+      "pieges": [
+        "Une réparation versée à la victime n’éteint pas automatiquement l’action publique. Il faut un mécanisme légal d’extinction applicable."
+      ],
+      "aRetenir": [
+        "Action publique : application de la loi pénale.",
+        "Action civile : réparation du dommage.",
+        "Victime et ministère public ont des rôles distincts."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L3",
+      "titre": "Que devient une plainte ?",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "3/9",
+      "precedente": "Deux actions pour deux objectifs",
+      "suivante": "L’enquête et la garde à vue",
+      "explication": "Nous allons éviter de confondre dépôt de plainte, poursuite et condamnation. Une plainte signale à l’autorité des faits dont une personne se dit victime. Le procureur de la République, magistrat du parquet, apprécie la suite à donner dans le cadre légal : enquête, poursuites ou classement notamment. Le classement sans suite n’est pas un jugement d’acquittement. Une constitution de partie civile demande réparation dans les formes prévues ; ses effets sur la mise en mouvement des poursuites dépendent de la voie utilisée et de ses conditions.",
+      "formules": [],
+      "exemples": [
+        "Vérifier avant de poursuivre",
+        "Une suite distincte"
+      ],
+      "pieges": [
+        "Ni la plainte ni son retrait ne commandent automatiquement l’issue de toutes les poursuites. Certaines infractions obéissent à des règles p…"
+      ],
+      "aRetenir": [
+        "Plainte : signaler des faits.",
+        "Parquet : apprécier la suite selon le droit.",
+        "Classement et acquittement sont distincts."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L4",
+      "titre": "L’enquête et la garde à vue",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "4/9",
+      "precedente": "Que devient une plainte ?",
+      "suivante": "Le juge d’instruction cherche dans les deux sens",
+      "explication": "Nous allons définir la recherche initiale des faits et une mesure de contrainte qui peut l’accompagner. L’enquête recherche des éléments sur les faits et leurs auteurs. Elle peut relever notamment du cadre préliminaire ou de la flagrance, situation définie par la loi autour d’une infraction en cours ou très récente et de certains indices. Les officiers de police judiciaire agissent dans leurs pouvoirs, sous le contrôle prévu. La garde à vue retient temporairement une personne pour les nécessités légales de l’enquête. Elle exige un fondement, des droits, des durées et un contrôle ; ce n’est pas une peine.",
+      "formules": [],
+      "exemples": [
+        "Infraction en cours",
+        "Une privation provisoire"
+      ],
+      "pieges": [
+        "La gravité alléguée ne crée pas à elle seule la flagrance. Ne pas appliquer un délai unique de garde à vue à toutes les infractions et régi…"
+      ],
+      "aRetenir": [
+        "Enquête : rechercher les faits et indices.",
+        "Flagrance : critères légaux précis.",
+        "Garde à vue : fondement, droits, durée et contrôle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L5",
+      "titre": "Le juge d’instruction cherche dans les deux sens",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "5/9",
+      "precedente": "L’enquête et la garde à vue",
+      "suivante": "La liberté reste le principe",
+      "explication": "Nous allons distinguer l’information judiciaire d’une recherche destinée seulement à accuser. L’information judiciaire, ou instruction préparatoire, est une phase conduite par le juge d’instruction lorsqu’elle est ouverte selon la loi. Ce magistrat du siège agit dans les limites de sa saisine, faits dont il est juridiquement chargé. Il instruit à charge, éléments soutenant l’accusation, et à décharge, éléments qui la contredisent ou la relativisent. Il peut notamment interroger, entendre des témoins et ordonner des expertises selon ses pouvoirs.",
+      "formules": [],
+      "exemples": [
+        "Une preuve favorable",
+        "Faits nouveaux"
+      ],
+      "pieges": [
+        "Le juge d’instruction n’est pas le procureur et ne doit pas uniquement rechercher une condamnation. Toute affaire ne suit pas nécessairemen…"
+      ],
+      "aRetenir": [
+        "Instruction : phase juridictionnelle selon la loi.",
+        "À charge et à décharge.",
+        "Pouvoirs limités par la saisine et les textes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L6",
+      "titre": "La liberté reste le principe",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "6/9",
+      "precedente": "Le juge d’instruction cherche dans les deux sens",
+      "suivante": "Qui juge et quelle décision peut suivre ?",
+      "explication": "Nous allons distinguer jugement de culpabilité et mesure prise avant ce jugement. Le Code pose la liberté comme principe et le contrôle judiciaire et la détention préventive comme mesures exceptionnelles. Le contrôle judiciaire impose des obligations sous décision judiciaire sans être nécessairement une incarcération. La détention préventive prive de liberté avant la décision définitive dans les conditions légales. La nécessité, la motivation, les durées et les recours doivent être vérifiés. Une mesure préventive n’est pas une peine déjà infligée.",
+      "formules": [],
+      "exemples": [
+        "Une obligation encadrée",
+        "Une décision à justifier"
+      ],
+      "pieges": [
+        "Garde à vue et détention préventive appartiennent à des cadres distincts. Le temps écoulé doit être vérifié dans le régime précis, sans add…"
+      ],
+      "aRetenir": [
+        "Liberté : principe.",
+        "Contrôle judiciaire et détention : exceptions encadrées.",
+        "Une mesure préventive n’est pas une condamnation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L7",
+      "titre": "Qui juge et quelle décision peut suivre ?",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "7/9",
+      "precedente": "La liberté reste le principe",
+      "suivante": "Contester une décision pénale",
+      "explication": "Nous allons relier la catégorie d’infraction au jugement, puis distinguer les issues du procès. Le jugement examine l’accusation et les défenses dans le cadre légal. Les délits relèvent en principe du tribunal correctionnel ; les crimes du tribunal criminel au premier ressort, sous réserve des compétences spéciales. Le prévenu est poursuivi en matière correctionnelle ou contraventionnelle ; l’accusé en matière criminelle. La relaxe écarte la culpabilité en matière correctionnelle ou contraventionnelle ; l’acquittement en matière criminelle. Une condamnation suppose les éléments juridiquement établis.",
+      "formules": [],
+      "exemples": [
+        "Un délit",
+        "Un crime"
+      ],
+      "pieges": [
+        "Les réquisitions du procureur ne sont pas le jugement. Une juridiction pénale spécialisée peut modifier le parcours de droit commun."
+      ],
+      "aRetenir": [
+        "Catégorie d’infraction et compétence à vérifier.",
+        "Relaxe : correctionnel ou contraventionnel.",
+        "Acquittement : criminel ; réquisitions distinctes du jugement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L8",
+      "titre": "Contester une décision pénale",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "8/9",
+      "precedente": "Qui juge et quelle décision peut suivre ?",
+      "suivante": "Quand l’action publique s’éteint-elle ?",
+      "explication": "Nous allons choisir la question à poser avant de former un recours : quelle décision, quel auteur, quel grief ? L’appel permet un réexamen selon les droits de l’appelant et les limites légales. L’opposition peut être ouverte contre certaines décisions par défaut. Le pourvoi en cassation contrôle le droit d’une décision en dernier ressort. Un grief est la critique formulée contre la décision. Les personnes autorisées à agir, les délais, le point de départ et les effets sur l’exécution dépendent du texte et de la décision.",
+      "formules": [],
+      "exemples": [
+        "Une erreur juridique",
+        "La demande de la victime"
+      ],
+      "pieges": [
+        "Ne pas supposer que chaque partie peut contester toute partie du jugement, ni que tous les recours suspendent automatiquement la détention …"
+      ],
+      "aRetenir": [
+        "Identifier décision, auteur et grief.",
+        "Vérifier ouverture, délai et effets.",
+        "Partie civile et parquet n’ont pas des droits identiques."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCPEN-L9",
+      "titre": "Quand l’action publique s’éteint-elle ?",
+      "module": "Procédure pénale (Droit pénal)",
+      "position": "9/9",
+      "precedente": "Contester une décision pénale",
+      "suivante": null,
+      "explication": "Nous allons distinguer l’extinction des poursuites d’une simple préférence de la victime. L’extinction de l’action publique met fin au pouvoir de poursuivre dans la situation visée. Le Code prévoit notamment décès de la personne poursuivie, prescription, amnistie, abrogation de la loi pénale et chose jugée, selon leurs conditions. La prescription repose sur l’écoulement du temps avec des règles de point de départ, interruption et suspension. Le retrait de plainte ou une transaction, accord produisant les effets autorisés, n’éteignent l’action publique que dans les cas prévus par la loi.",
+      "formules": [],
+      "exemples": [
+        "Accord privé",
+        "Temps écoulé"
+      ],
+      "pieges": [
+        "Prescription de l’action publique et prescription d’une peine déjà prononcée sont distinctes. La grâce, étudiée dans DROIT-PENAL, n’efface …"
+      ],
+      "aRetenir": [
+        "Chercher la cause légale d’extinction.",
+        "Prescription : calcul et événements à vérifier.",
+        "Accord ou retrait de plainte : pas d’effet général automatique."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

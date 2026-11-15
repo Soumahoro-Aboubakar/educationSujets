@@ -1,0 +1,380 @@
+{
+  "module": "MATH-LNEXP",
+  "titre": "Logarithme et exponentielle",
+  "matiere": "Mathématiques",
+  "resume": "Des puissances aux logarithmes, puis aux dérivées, limites et équations avec ln et exp.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)",
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "MATH-LNEXP-L1",
+      "titre": "Lire et calculer une puissance",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "1/15",
+      "precedente": null,
+      "suivante": "Pourquoi inventer un logarithme ?",
+      "explication": "Nous allons écrire des multiplications répétées sous une forme courte. Cela permettra ensuite de comprendre les règles des logarithmes et de l’exponentielle. Une puissance aⁿ multiplie n fois le nombre a par lui-même, pour n entier positif. a est la base et n l’exposant. Ainsi 2³ = 2 × 2 × 2 = 8. Une lettre représente un nombre que l’on peut remplacer par une valeur.",
+      "formules": [
+        "aᵐ × aⁿ = a^(m + n) ; (aᵐ)ⁿ = a^(mn)"
+      ],
+      "exemples": [
+        "Regrouper les facteurs",
+        "Un exposant négatif"
+      ],
+      "pieges": [
+        "2³ signifie 2 × 2 × 2, pas 2 × 3. Dans (aᵐ)ⁿ on multiplie les exposants ; dans aᵐ × aⁿ on les additionne."
+      ],
+      "aRetenir": [
+        "Une puissance compte des facteurs égaux.",
+        "Exposant nul : 1 ; exposant négatif : inverse.",
+        "Même base et produit : additionner les exposants."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L2",
+      "titre": "Pourquoi inventer un logarithme ?",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "2/15",
+      "precedente": "Lire et calculer une puissance",
+      "suivante": "Le logarithme d’un produit",
+      "explication": "Nous allons découvrir une fonction qui transforme les produits en sommes. Elle permettra de retrouver un exposant inconnu. Une fonction associe à chaque nombre autorisé une seule valeur. f(x) se lit « f de x » ; x est l’entrée et f(x) la sortie. Par exemple, si f(x) = 2x, alors f(3) = 6. Le symbole × peut être omis : 2x signifie 2 × x. Le logarithme népérien, noté ln, prolonge cette idée aux nombres strictement positifs, avec une échelle particulière. On admet son existence : ln(ab) = ln a + ln b, ln 1 = 0, et ln est strictement croissante (une entrée plus grande donne une sortie plus grande).",
+      "formules": [],
+      "exemples": [
+        "Passer des nombres aux exposants",
+        "Un premier repère"
+      ],
+      "pieges": [
+        "ln est le nom d’une fonction, pas le produit de deux lettres. ln 0 et ln d’un nombre négatif n’existent pas dans les nombres réels."
+      ],
+      "aRetenir": [
+        "Fonction : une entrée autorisée donne une sortie.",
+        "ln transforme un produit en somme.",
+        "ln 1 = 0 et ln e = 1."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L3",
+      "titre": "Le logarithme d’un produit",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "3/15",
+      "precedente": "Pourquoi inventer un logarithme ?",
+      "suivante": "Quotient et inverse dans un logarithme",
+      "explication": "Nous allons développer ou regrouper le logarithme d’un produit. Cette règle raccourcit les calculs et les équations.",
+      "formules": [
+        "ln(ab) = ln a + ln b, pour a > 0 et b > 0."
+      ],
+      "exemples": [
+        "Développer",
+        "Regrouper"
+      ],
+      "pieges": [
+        "La règle ne porte pas sur une somme : ln(2 + 3) = ln 5, tandis que ln 2 + ln 3 = ln 6. Ce ne sont pas les mêmes nombres."
+      ],
+      "aRetenir": [
+        "Produit dans ln → somme de logarithmes.",
+        "Somme de logarithmes → logarithme du produit.",
+        "Aucune règle analogue pour ln(a + b)."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L4",
+      "titre": "Quotient et inverse dans un logarithme",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "4/15",
+      "precedente": "Le logarithme d’un produit",
+      "suivante": "Puissances et racines dans un logarithme",
+      "explication": "Nous allons transformer une soustraction de logarithmes en logarithme d’un quotient. C’est utile pour simplifier une expression. Pour a > 0 et b > 0, on a a = (a/b) × b. La règle du produit donne ln a = ln(a/b) + ln b. En retirant ln b aux deux membres, on obtient la règle du quotient.",
+      "formules": [
+        "ln(a/b) = ln a − ln b ; ln(1/b) = −ln b."
+      ],
+      "exemples": [
+        "Simplifier une différence",
+        "Prendre un inverse"
+      ],
+      "pieges": [
+        "ln a / ln b est une division de deux logarithmes. Ce n’est pas ln(a/b)."
+      ],
+      "aRetenir": [
+        "Soustraire les logarithmes revient à diviser les arguments.",
+        "Le logarithme d’un inverse est l’opposé du logarithme."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L5",
+      "titre": "Puissances et racines dans un logarithme",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "5/15",
+      "precedente": "Quotient et inverse dans un logarithme",
+      "suivante": "Où le logarithme existe-t-il, et quel est son signe ?",
+      "explication": "Nous allons faire sortir un exposant du logarithme. Cela permettra de calculer avec de grandes puissances. Si a > 0, ln(a³) = ln(a × a × a) = ln a + ln a + ln a = 3 ln a. Le même comptage fonctionne pour tout entier positif ; l’inverse traité en L4 permet les exposants négatifs. Pour la racine, (√a)² = a. Donc 2 ln √a = ln a : on divise les deux membres par 2.",
+      "formules": [
+        "ln(aⁿ) = n ln a (n entier, a > 0) ; ln √a = (ln a)/2."
+      ],
+      "exemples": [
+        "Une puissance",
+        "Une racine"
+      ],
+      "pieges": [
+        "ln(a²) n’est pas (ln a)². Par ailleurs, ln(x²) peut exister pour x négatif, mais 2 ln x exige x > 0 : vérifier les conditions avant de tran…"
+      ],
+      "aRetenir": [
+        "Exposant entier → facteur devant ln.",
+        "Racine carrée → moitié du logarithme.",
+        "La base doit être positive pour utiliser ces écritures."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L6",
+      "titre": "Où le logarithme existe-t-il, et quel est son signe ?",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "6/15",
+      "precedente": "Puissances et racines dans un logarithme",
+      "suivante": "Comprendre une dérivée",
+      "explication": "Nous allons trouver les entrées autorisées d’une expression avec ln, puis son signe. Ce contrôle évite d’accepter des calculs impossibles. Le domaine de définition est l’ensemble des valeurs autorisées. ℝ désigne les nombres réels, y compris négatifs et décimaux. x ∈ ]a ; b[ signifie a < x < b : les crochets ouverts excluent les bornes. +∞ indique qu’il n’y a pas de borne supérieure. Pour une inégalité, ajouter le même nombre conserve le sens. Multiplier ou diviser par un nombre négatif inverse le sens. Comme ln est croissante et ln 1 = 0, comparer son argument à 1 donne son signe.",
+      "formules": [],
+      "exemples": [
+        "Une expression affine",
+        "Domaine et signe ensemble"
+      ],
+      "pieges": [
+        "Argument positif ne signifie pas logarithme positif : ln(1/2) est défini mais négatif."
+      ],
+      "aRetenir": [
+        "Domaine : argument strictement positif.",
+        "ln est négatif entre 0 et 1, nul en 1, positif au-delà.",
+        "Diviser une inégalité par un négatif inverse son sens."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L7",
+      "titre": "Comprendre une dérivée",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "7/15",
+      "precedente": "Où le logarithme existe-t-il, et quel est son signe ?",
+      "suivante": "Dériver un logarithme pour étudier les variations",
+      "explication": "Nous allons mesurer la pente d’une courbe en un point. Cette mesure, appelée dérivée, servira à repérer les intervalles où une fonction augmente ou diminue. Quand l’entrée passe de x à x + h, le taux de variation est (f(x + h) − f(x))/h, pour h ≠ 0. C’est la variation de la sortie divisée par celle de l’entrée. Lorsque h se rapproche de 0, si le taux se rapproche d’un nombre fini, ce nombre est la dérivée f′(x). « Se rapproche de » décrit une limite, notée →. Une fonction dérivable possède cette dérivée en chaque point du domaine étudié.",
+      "formules": [],
+      "exemples": [
+        "Une droite",
+        "Une courbe"
+      ],
+      "pieges": [
+        "Le signe de f′ décrit les variations de f, pas le signe de f. Une fonction peut être négative et augmenter."
+      ],
+      "aRetenir": [
+        "La dérivée mesure une pente locale.",
+        "Le signe de la dérivée donne les variations sur un intervalle.",
+        "Pour dériver une somme, dériver chaque terme."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L8",
+      "titre": "Dériver un logarithme pour étudier les variations",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "8/15",
+      "precedente": "Comprendre une dérivée",
+      "suivante": "Lire les limites du logarithme",
+      "explication": "Nous allons calculer la dérivée d’une expression avec ln. Elle permettra de démontrer ses variations et de trouver un maximum. La fonction ln est précisément l’unique fonction dérivable sur ]0 ; +∞[ dont la dérivée vaut 1/x et dont la valeur en 1 est 0. Cela fixe l’échelle népérienne présentée en L2. Comme 1/x > 0 sur ce domaine, ln est strictement croissante. On admet les règles suivantes pour des fonctions dérivables u et v. Pour le quotient, on exige aussi v ≠ 0. Les parenthèses précisent ce que l’on dérive.",
+      "formules": [
+        "(ln x)′ = 1/x ; (ln(u(x)))′ = u′(x)/u(x), là où u > 0 et u est dérivable.",
+        "(uv)′ = u′v + uv′ ; (u/v)′ = (u′v − uv′)/v²."
+      ],
+      "exemples": [
+        "Un logarithme composé",
+        "Étudier f(x) = (ln x)/x"
+      ],
+      "pieges": [
+        "Un maximum est une valeur de f, pas de f′. Et une dérivée nulle ne garantit pas à elle seule un maximum : vérifier le changement de signe."
+      ],
+      "aRetenir": [
+        "Déterminer le domaine avant de dériver.",
+        "Dérivée de ln u : u′/u.",
+        "Étudier le signe de f′, puis calculer f au point d’extremum."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L9",
+      "titre": "Lire les limites du logarithme",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "9/15",
+      "precedente": "Dériver un logarithme pour étudier les variations",
+      "suivante": "L’exponentielle : revenir de ln à son entrée",
+      "explication": "Nous allons décrire ln près de zéro et pour de très grandes entrées. Une limite indique le comportement d’une expression quand l’entrée se rapproche d’une borne. x → 0⁺ signifie que x reste positif et s’approche de 0 ; x → +∞ signifie que x grandit sans borne. Une sortie qui tend vers −∞ devient négative avec une valeur absolue aussi grande que l’on veut. Une limite finie est un nombre dont les sorties se rapprochent autant que l’on veut.",
+      "formules": [
+        "ln x → −∞ quand x → 0⁺ ; ln x → +∞ quand x → +∞."
+      ],
+      "exemples": [
+        "Voir les deux directions",
+        "Une forme à transformer"
+      ],
+      "pieges": [
+        "∞/∞ et 0 × ∞ ne donnent aucune réponse automatique : ce sont des formes indéterminées. Transformer l’expression ou employer une limite conn…"
+      ],
+      "aRetenir": [
+        "ln diverge vers −∞ en 0⁺ et vers +∞ en +∞.",
+        "(ln x)/x → 0 en +∞.",
+        "x ln x → 0 en 0⁺."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L10",
+      "titre": "L’exponentielle : revenir de ln à son entrée",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "10/15",
+      "precedente": "Lire les limites du logarithme",
+      "suivante": "Calculer avec des exponentielles",
+      "explication": "Nous allons inverser la fonction ln. Cela permettra de retrouver un nombre à partir de son logarithme. ln est strictement croissante, continue (si x s’approche de a > 0, ln x s’approche de ln a), et ses sorties parcourent tous les réels. Chaque réel y est donc ln x pour un unique x > 0. On appelle ce x exp(y), ou eʸ : exp est la fonction réciproque de ln.",
+      "formules": [
+        "ln(eʸ) = y pour tout réel y ; e^(ln x) = x pour x > 0."
+      ],
+      "exemples": [
+        "Retrouver des repères",
+        "Lire une composition"
+      ],
+      "pieges": [
+        "e^(ln x) = x demande x > 0. En revanche ln(eˣ) est défini pour tout réel x, car eˣ est positif."
+      ],
+      "aRetenir": [
+        "exp et ln effectuent des trajets inverses.",
+        "eˣ existe pour tout réel x et reste positif.",
+        "exp est strictement croissante."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L11",
+      "titre": "Calculer avec des exponentielles",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "11/15",
+      "precedente": "L’exponentielle : revenir de ln à son entrée",
+      "suivante": "Dériver une exponentielle",
+      "explication": "Nous allons prolonger les règles des puissances aux exposants réels. Elles servent à regrouper les facteurs exponentiels. Pour des réels a et b, ln(eᵃeᵇ) = ln(eᵃ) + ln(eᵇ) = a + b. En appliquant exp, on obtient eᵃeᵇ = e^(a + b).",
+      "formules": [
+        "e^(a + b) = eᵃeᵇ ; e^(a − b) = eᵃ/eᵇ ; e⁻ᵃ = 1/eᵃ ; (eᵃ)ⁿ = e^(na), pour n entier."
+      ],
+      "exemples": [
+        "Regrouper",
+        "Développer"
+      ],
+      "pieges": [
+        "e^(a + b) est un produit, pas eᵃ + eᵇ. Par exemple e^(0 + 0) = 1, alors que e⁰ + e⁰ = 2."
+      ],
+      "aRetenir": [
+        "Une somme en exposant devient un produit.",
+        "Une différence en exposant devient un quotient.",
+        "L’exponentielle d’un opposé est un inverse."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L12",
+      "titre": "Dériver une exponentielle",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "12/15",
+      "precedente": "Calculer avec des exponentielles",
+      "suivante": "Lire les limites de l’exponentielle",
+      "explication": "Nous allons calculer la pente d’une expression exponentielle, puis lire ses variations. Rappel de L7 : c’est le signe de la dérivée qui décrit la montée ou la descente. L’exponentielle est sa propre dérivée. Pour une fonction intérieure u, il faut aussi multiplier par u′ : c’est la règle de dérivation d’une composition, déjà rencontrée avec ln en L8.",
+      "formules": [
+        "(eˣ)′ = eˣ ; (e^(u(x)))′ = u′(x)e^(u(x)), pour u dérivable."
+      ],
+      "exemples": [
+        "Un exposant affine",
+        "Un produit"
+      ],
+      "pieges": [
+        "e^(u(x)) reste positif, mais sa dérivée peut être négative à cause du facteur u′."
+      ],
+      "aRetenir": [
+        "exp est sa propre dérivée.",
+        "Dans eᵘ, multiplier par u′.",
+        "La positivité de eᵘ simplifie l’étude du signe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L13",
+      "titre": "Lire les limites de l’exponentielle",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "13/15",
+      "precedente": "Dériver une exponentielle",
+      "suivante": "Résoudre une équation avec ln ou exp",
+      "explication": "Nous allons comparer l’exponentielle à une puissance. Cela permet de lever des formes indéterminées dans les calculs de limites. La limite en −∞ concorde avec e⁻ᵗ = 1/eᵗ : quand t grandit, le dénominateur grandit sans borne et l’inverse se rapproche de zéro.",
+      "formules": [
+        "eˣ → +∞ en +∞ ; eˣ → 0 en −∞ ; eˣ → 1 quand x → 0."
+      ],
+      "exemples": [
+        "Transformer un produit",
+        "À l’autre extrémité"
+      ],
+      "pieges": [
+        "x eˣ ne tend pas vers 0 en +∞ : ses deux facteurs y grandissent. Toujours préciser la direction de la limite."
+      ],
+      "aRetenir": [
+        "exp tend vers 0 en −∞ et vers +∞ en +∞.",
+        "xᵐ/eˣ tend vers 0 en +∞.",
+        "Préciser la direction et transformer les produits."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L14",
+      "titre": "Résoudre une équation avec ln ou exp",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "14/15",
+      "precedente": "Lire les limites de l’exponentielle",
+      "suivante": "Résoudre une inéquation avec ln ou exp",
+      "explication": "Nous allons isoler une inconnue dans une équation logarithmique ou exponentielle. Les fonctions réciproques permettent de supprimer ln ou exp. Pour résoudre une équation simple, on effectue la même opération des deux côtés. Développer (x − 2)(x + 1) donne x² + x − 2x − 2 = x² − x − 2 : cela vérifie la factorisation utilisée.",
+      "formules": [],
+      "exemples": [
+        "Une exponentielle",
+        "Deux logarithmes"
+      ],
+      "pieges": [
+        "Les solutions d’une équation transformée doivent encore appartenir au domaine de l’équation de départ."
+      ],
+      "aRetenir": [
+        "Commencer par le domaine.",
+        "Utiliser ln et exp comme fonctions réciproques.",
+        "Vérifier les solutions dans l’expression initiale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-LNEXP-L15",
+      "titre": "Résoudre une inéquation avec ln ou exp",
+      "module": "Logarithme et exponentielle (Mathématiques)",
+      "position": "15/15",
+      "precedente": "Résoudre une équation avec ln ou exp",
+      "suivante": null,
+      "explication": "Nous allons comparer deux expressions avec ln ou exp. Leur croissance conserve le sens de l’inégalité. Une inéquation eᵘ ≤ k n’a aucune solution si k ≤ 0. Une inéquation eᵘ > k est vraie pour tout réel où u existe si k ≤ 0, puisque l’exponentielle est positive.",
+      "formules": [
+        "Pour A, B > 0 : ln A ≤ ln B ⇔ A ≤ B. Pour u, v réels : eᵘ ≤ eᵛ ⇔ u ≤ v."
+      ],
+      "exemples": [
+        "Une inégalité avec ln",
+        "Une exponentielle décroissante"
+      ],
+      "pieges": [
+        "Conserver le domaine jusqu’à la fin. Une borne qui annule l’argument d’un logarithme reste toujours exclue."
+      ],
+      "aRetenir": [
+        "ln et exp conservent le sens des comparaisons.",
+        "Croiser la condition obtenue avec le domaine.",
+        "Un facteur négatif peut inverser le sens ensuite."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

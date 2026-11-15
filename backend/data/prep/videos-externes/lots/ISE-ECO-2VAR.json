@@ -1,0 +1,264 @@
+{
+  "module": "ISE-ECO-2VAR",
+  "titre": "Fonctions de deux variables",
+  "matiere": "Mathématiques",
+  "resume": "D’une courbe à une surface : domaine, lignes de niveau, dérivées partielles et recherche rigoureuse des extremums.",
+  "concours": [
+    "ENSEA — ISE option économie"
+  ],
+  "lecons": [
+    {
+      "code": "ISE-ECO-2VAR-L1",
+      "titre": "Rappeler le trajet d’une entrée vers une sortie",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "1/11",
+      "precedente": null,
+      "suivante": "Rappeler la pente et les extremums en une variable",
+      "explication": "Nous allons rappeler les fonctions d’une variable avant d’utiliser deux entrées. MATH-LNEXP et ISE-ECO-SERIES développent ces outils ; ce rappel évite de les supposer connus ici. Une fonction f associe à chaque entrée autorisée x une seule sortie f(x). Son domaine est l’ensemble des entrées autorisées. Son graphe est la courbe formée par les points (x,f(x)). ℝ représente l’ensemble des réels. Une limite décrit ce que deviennent les sorties lorsque x approche une valeur a. La fonction est continue en a si f(x) tend vers f(a). Les polynômes (sommes de puissances entières positives de x, multipliées par des constantes) sont continus sur ℝ.",
+      "formules": [],
+      "exemples": [
+        "Calculer puis placer",
+        "Une restriction"
+      ],
+      "pieges": [
+        "f(x) est une sortie ; x est une entrée. Trouver f(2) n’est pas résoudre l’équation f(x)=2."
+      ],
+      "aRetenir": [
+        "Une entrée autorisée donne une sortie unique.",
+        "Le domaine précise les entrées.",
+        "La continuité relie la limite à la valeur au point."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L2",
+      "titre": "Rappeler la pente et les extremums en une variable",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "2/11",
+      "precedente": "Rappeler le trajet d’une entrée vers une sortie",
+      "suivante": "Lire une surface et ses lignes de niveau",
+      "explication": "Nous allons rappeler comment une dérivée aide à trouver un minimum ou un maximum. Ces outils seront ensuite appliqués en figeant une des deux variables. La dérivée f′(x) est la limite de [f(x+h)−f(x)]/h quand h→0. Pour x², ce taux vaut 2x+h, donc la dérivée est 2x. La dérivée seconde f″ est la dérivée de f′. On dérive une somme terme à terme et on conserve les facteurs constants. Pour un produit, (uv)′=u′v+uv′. Pour une composition, (F(u))′=F′(u)u′. ln est le logarithme népérien, défini pour un argument positif ; eˣ est sa fonction réciproque, toujours positive.",
+      "formules": [],
+      "exemples": [
+        "Lire un minimum",
+        "Une dérivée nulle sans minimum"
+      ],
+      "pieges": [
+        "Un minimum local ne compare que les points proches ; un minimum global compare toutes les entrées du domaine."
+      ],
+      "aRetenir": [
+        "Dérivée : pente ; signe : variations.",
+        "Dérivée seconde : dériver une deuxième fois.",
+        "Une dérivée nulle seule ne prouve pas un extremum."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L3",
+      "titre": "Lire une surface et ses lignes de niveau",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "3/11",
+      "precedente": "Rappeler la pente et les extremums en une variable",
+      "suivante": "Approcher un point par tous les chemins",
+      "explication": "Nous allons donner deux entrées à une fonction. Cela permet de décrire, par exemple, un coût dépendant de deux quantités produites. Une fonction f(x,y) associe un réel à chaque couple autorisé (x,y). ℝ² est l’ensemble des couples de réels. Le graphe est la surface des points (x,y,z) avec z=f(x,y). Le domaine est une région du plan des entrées. Une ligne de niveau c est l’ensemble des entrées vérifiant f(x,y)=c. Elle se trace dans le plan (x,y), comme une courbe d’égale altitude sur une carte.",
+      "formules": [],
+      "exemples": [
+        "Un domaine à contrôler",
+        "Des cercles de niveau"
+      ],
+      "pieges": [
+        "Le graphe se situe dans l’espace à trois coordonnées ; les lignes de niveau se tracent dans le plan des deux entrées."
+      ],
+      "aRetenir": [
+        "Deux entrées (x,y), une sortie f(x,y).",
+        "Domaine : toutes les conditions simultanées.",
+        "Niveau c : f(x,y)=c dans le plan."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L4",
+      "titre": "Approcher un point par tous les chemins",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "4/11",
+      "precedente": "Lire une surface et ses lignes de niveau",
+      "suivante": "Dériver en gardant l’autre variable fixe",
+      "explication": "Nous allons comprendre la continuité dans le plan. Il y a maintenant de nombreuses façons de se rapprocher du même couple. Dire (x,y)→(a,b) signifie que la distance √((x−a)²+(y−b)²) tend vers zéro. Une limite L de f doit être obtenue quelle que soit la façon d’approcher le point dans le domaine.",
+      "formules": [],
+      "exemples": [
+        "Deux chemins qui se contredisent",
+        "Un encadrement valable partout"
+      ],
+      "pieges": [
+        "Tester les deux axes et trouver la même limite ne prouve pas l’existence d’une limite : il reste d’autres chemins."
+      ],
+      "aRetenir": [
+        "Une limite dans le plan doit valoir pour toutes les approches.",
+        "Deux chemins incompatibles prouvent l’absence de limite.",
+        "Un encadrement uniforme peut prouver une limite."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L5",
+      "titre": "Dériver en gardant l’autre variable fixe",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "5/11",
+      "precedente": "Approcher un point par tous les chemins",
+      "suivante": "Dériver deux fois et appliquer Schwarz",
+      "explication": "Nous allons mesurer une variation selon x seulement, puis selon y seulement. En économie, cela mesure un effet marginal lorsque l’autre quantité reste fixe. La dérivée partielle selon x, notée fₓ ou ∂f/∂x, est la dérivée de la fonction x↦f(x,y) avec y fixé. Pour fᵧ, on fait l’inverse. Le symbole ↦ indique le trajet de l’entrée vers la sortie. Au point (1,2), la première fonction a fₓ(1,2)=8 : pour une petite augmentation h de x, y restant à 2, la variation est proche de 8h. Cela décrit une pente selon un axe, pas toutes les directions à la fois.",
+      "formules": [],
+      "exemples": [
+        "Un polynôme",
+        "Une composition"
+      ],
+      "pieges": [
+        "Quand on dérive selon x, xy donne y, et non 0. Le facteur y est constant mais multiplie bien x."
+      ],
+      "aRetenir": [
+        "Une variable bouge, l’autre reste fixe.",
+        "Appliquer les règles usuelles de dérivation.",
+        "Dériver d’abord, puis remplacer les coordonnées."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L6",
+      "titre": "Dériver deux fois et appliquer Schwarz",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "6/11",
+      "precedente": "Dériver en gardant l’autre variable fixe",
+      "suivante": "Trouver les points critiques par un système",
+      "explication": "Nous allons comparer les dérivations dans deux ordres différents. Elles interviennent dans le test des extremums. Convention : fₓᵧ désigne ici la dérivée selon y de fₓ. Ainsi fₓₓ dérive deux fois selon x ; fᵧᵧ deux fois selon y. Les dérivées fₓᵧ et fᵧₓ sont dites mixtes.",
+      "formules": [],
+      "exemples": [
+        "Calculer les quatre dérivées",
+        "Justifier avant de calculer"
+      ],
+      "pieges": [
+        "L’égalité des dérivées mixtes ne s’affirme pas sans hypothèse. Vérifier la régularité près du point, surtout pour une fonction définie par …"
+      ],
+      "aRetenir": [
+        "Préciser l’ordre de dérivation.",
+        "Calculer les dérivées secondes.",
+        "Schwarz : continuité des dérivées secondes dans un voisinage."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L7",
+      "titre": "Trouver les points critiques par un système",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "7/11",
+      "precedente": "Dériver deux fois et appliquer Schwarz",
+      "suivante": "Classer un point critique avec le critère de Monge",
+      "explication": "Nous allons trouver les candidats aux extremums intérieurs. À un tel extremum, les pentes dans les deux directions coordonnées doivent s’annuler. Un point critique est un point intérieur du domaine où fₓ=0 et fᵧ=0. « Intérieur » signifie qu’un petit disque autour du point reste dans le domaine. On doit résoudre les deux équations simultanément.",
+      "formules": [],
+      "exemples": [
+        "Un système linéaire",
+        "Vérifier le candidat"
+      ],
+      "pieges": [
+        "Annuler seulement fₓ ne suffit pas. Sur un bord du domaine, un extremum peut exister sans annulation des deux dérivées."
+      ],
+      "aRetenir": [
+        "Chercher fₓ=fᵧ=0 ensemble.",
+        "Vérifier le domaine et les équations.",
+        "Un point critique est encore seulement un candidat."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L8",
+      "titre": "Classer un point critique avec le critère de Monge",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "8/11",
+      "precedente": "Trouver les points critiques par un système",
+      "suivante": "Décider directement quand le test est muet",
+      "explication": "Nous allons déterminer si un point critique ressemble au fond d’un bol, au sommet d’une bosse ou à une selle. Le test utilise les dérivées secondes. En un point critique (a,b) d’une fonction C², on pose r=fₓₓ(a,b), s=fₓᵧ(a,b), t=fᵧᵧ(a,b). La matrice [r,s ; s,t] est la hessienne. Son déterminant est D=rt−s². Un minimum local compare f(a,b) aux valeurs proches ; il est strict si toutes les autres valeurs assez proches sont plus grandes. Un point selle a des valeurs plus petites et plus grandes arbitrairement proches. Le test de Monge est admis : la forme quadratique rh²+2shk+tk² décrit le signe de la variation au voisinage quand D≠0.",
+      "formules": [],
+      "exemples": [
+        "Un minimum",
+        "Une selle"
+      ],
+      "pieges": [
+        "Le signe de D seul ne distingue pas minimum et maximum lorsque D>0. Lire aussi le signe de r. Utiliser le test seulement après avoir vérifi…"
+      ],
+      "aRetenir": [
+        "Calculer r,s,t au point critique.",
+        "D=rt−s² ; si D>0, regarder r.",
+        "D<0 : selle ; D=0 : changer de méthode."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L9",
+      "titre": "Décider directement quand le test est muet",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "9/11",
+      "precedente": "Classer un point critique avec le critère de Monge",
+      "suivante": "Prouver qu’un minimum est global",
+      "explication": "Nous allons poursuivre l’étude lorsque le déterminant de la hessienne est nul. Ce cas demande une comparaison directe des valeurs. Pour étudier (a,b), poser x=a+h, y=b+k et regarder f(a+h,b+k)−f(a,b) pour h,k proches de zéro. Une expression toujours ≥0 donne un minimum ; toujours ≤0 donne un maximum.",
+      "formules": [],
+      "exemples": [
+        "Un minimum malgré D=0",
+        "Une selle malgré D=0"
+      ],
+      "pieges": [
+        "Pour prouver un minimum, tester quelques axes ne suffit pas. Il faut une inégalité valable pour tous les couples proches."
+      ],
+      "aRetenir": [
+        "D=0 signifie seulement que le test est muet.",
+        "Chercher une inégalité valable dans un voisinage.",
+        "Deux directions de signes opposés excluent un extremum."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L10",
+      "titre": "Prouver qu’un minimum est global",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "10/11",
+      "precedente": "Décider directement quand le test est muet",
+      "suivante": "Chercher aussi les extremums sur le bord",
+      "explication": "Nous allons comparer un candidat à toutes les valeurs de la fonction. Une écriture en carrés permet souvent cette preuve sans nouvelle dérivation. Un minimum est global si f(x,y)≥f(a,b) pour chaque couple du domaine. Si l’égalité n’a lieu qu’en (a,b), il est strict. Une somme de carrés est toujours positive ou nulle. Pour une expression quadratique, poser h=x−a et k=y−b autour du point critique peut faire disparaître les termes de degré 1. Par exemple h²+hk+k²=(h+k/2)²+3k²/4 : le signe est alors contrôlé partout.",
+      "formules": [],
+      "exemples": [
+        "Compléter le carré",
+        "Plusieurs points minimaux"
+      ],
+      "pieges": [
+        "Un minimum local trouvé par Monge ne devient global qu’après une preuve sur tout le domaine. Il peut aussi ne pas y avoir de maximum global…"
+      ],
+      "aRetenir": [
+        "Global : comparer à tous les points du domaine.",
+        "Une somme de carrés fournit une borne.",
+        "Vérifier que la borne peut être atteinte, et où."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-2VAR-L11",
+      "titre": "Chercher aussi les extremums sur le bord",
+      "module": "Fonctions de deux variables (Mathématiques)",
+      "position": "11/11",
+      "precedente": "Prouver qu’un minimum est global",
+      "suivante": null,
+      "explication": "Nous allons éviter d’oublier les bords d’un domaine. Une quantité produite peut par exemple être contrainte entre 0 et 1. Théorème admis : une fonction continue sur un rectangle fermé et borné [a,b]×[c,d] atteint un minimum et un maximum. Fermé signifie que les côtés sont inclus ; borné que les coordonnées restent entre des bornes finies.",
+      "formules": [],
+      "exemples": [
+        "Un bord décisif",
+        "Comparer les valeurs"
+      ],
+      "pieges": [
+        "Sur un domaine ouvert, une borne peut être approchée sans être atteinte. Sur ]0,1[², x²+y² n’a ni minimum ni maximum, bien que ses valeurs …"
+      ],
+      "aRetenir": [
+        "Sur un domaine avec bord, ne pas se limiter aux points critiques intérieurs.",
+        "Un côté se traite en une variable.",
+        "Inclure les coins puis comparer les valeurs."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

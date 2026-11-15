@@ -1,0 +1,274 @@
+{
+  "module": "ESATIC-BAC-ONDES",
+  "titre": "Ondes et signaux",
+  "matiere": "Sciences physiques",
+  "resume": "Propagation, retards, signaux périodiques et diffraction, puis échanges d’énergie LC et oscillations RLC.",
+  "concours": [
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "ESATIC-BAC-ONDES-L1",
+      "titre": "Une perturbation qui se propage",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "1/11",
+      "precedente": null,
+      "suivante": "Célérité et retard",
+      "explication": "Nous allons distinguer l’avancée d’une onde du mouvement de la matière. Ce parcours utilise les unités et les condensateurs étudiés dans PC-ELEC ; les relations nécessaires seront rappelées. Une perturbation est une modification locale d’un état, comme soulever un point d’une corde. Une onde progressive est la propagation de cette perturbation. Elle transporte de l’énergie sans déplacement global de matière. Une onde mécanique nécessite un milieu matériel. Une onde est transversale si le mouvement local est perpendiculaire à la propagation ; elle est longitudinale s’il est parallèle. Le son dans l’air est une succession de compressions longitudinales.",
+      "formules": [],
+      "exemples": [
+        "Une corde",
+        "Deux familles"
+      ],
+      "pieges": [
+        "Confondre onde et vent : le vent déplace globalement l’air ; une onde sonore fait surtout osciller l’air localement."
+      ],
+      "aRetenir": [
+        "Onde : propagation d’une perturbation.",
+        "Pas de transport global de matière.",
+        "Mécanique : milieu nécessaire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L2",
+      "titre": "Célérité et retard",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "2/11",
+      "precedente": "Une perturbation qui se propage",
+      "suivante": "Compter des cycles : période et fréquence",
+      "explication": "Nous allons calculer quand une perturbation arrive à un point. Sa vitesse de propagation s’appelle la célérité. Dans le modèle sans déformation ni atténuation, le signal au second point est le même, reçu plus tard. La célérité dépend du milieu et de ses conditions ; elle ne doit pas être confondue avec la vitesse d’un point qui oscille.",
+      "formules": [
+        "c = d/Δt ; retard Δt = d/c."
+      ],
+      "exemples": [
+        "Sur une corde",
+        "Un écho"
+      ],
+      "pieges": [
+        "Pour un écho, d dans c = d/Δt est le trajet aller-retour, pas seulement la distance de l’obstacle."
+      ],
+      "aRetenir": [
+        "Célérité = distance/durée.",
+        "Retard = distance/célérité.",
+        "Écho : tenir compte des deux trajets."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L3",
+      "titre": "Compter des cycles : période et fréquence",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "3/11",
+      "precedente": "Célérité et retard",
+      "suivante": "La longueur d’onde : une période dans l’espace",
+      "explication": "Nous allons mesurer la répétition d’un signal. Cela sert aussi bien pour une vibration que pour une tension électrique. Un signal est une grandeur qui porte une information, par exemple une tension en fonction du temps. Il est périodique s’il se répète identiquement après une durée T appelée période. La fréquence f compte le nombre de cycles par seconde ; son unité est le hertz (Hz).",
+      "formules": [
+        "f = 1/T ; T = 1/f ; si N cycles durent Δt, T = Δt/N."
+      ],
+      "exemples": [
+        "Dix cycles observés",
+        "Lire un graphe"
+      ],
+      "pieges": [
+        "Un cycle comprend un retour au même état, avec le même sens de variation. Entre deux passages par zéro de sens opposés, il peut ne s’écoule…"
+      ],
+      "aRetenir": [
+        "Période : durée d’un cycle.",
+        "Fréquence : cycles par seconde.",
+        "Convertir les ms en s avant f = 1/T."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L4",
+      "titre": "La longueur d’onde : une période dans l’espace",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "4/11",
+      "precedente": "Compter des cycles : période et fréquence",
+      "suivante": "La diffraction par une fente",
+      "explication": "Nous allons relier la répétition dans le temps à la répétition dans l’espace. La longueur d’onde rend ce lien visible. La longueur d’onde λ, lettre grecque lambda, est la distance parcourue pendant une période. À un instant donné, deux crêtes successives d’une onde sinusoïdale sont séparées par λ.",
+      "formules": [
+        "λ = cT = c/f."
+      ],
+      "exemples": [
+        "Des vagues régulières",
+        "Changer de milieu"
+      ],
+      "pieges": [
+        "Sur un graphe en fonction du temps, l’écart entre crêtes donne T ; sur une image en fonction de la position, il donne λ."
+      ],
+      "aRetenir": [
+        "λ : longueur ; T : durée.",
+        "λ = c/f.",
+        "La source impose la fréquence."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L5",
+      "titre": "La diffraction par une fente",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "5/11",
+      "precedente": "La longueur d’onde : une période dans l’espace",
+      "suivante": "Lire une tension sinusoïdale",
+      "explication": "Nous allons prévoir l’élargissement d’une onde après une ouverture. La diffraction apparaît dans le sujet ESATIC 2024 consulté. La diffraction est l’étalement d’une onde après une ouverture ou près d’un obstacle. Elle est particulièrement marquée quand la largeur a de l’ouverture est comparable à λ. Pour un laser, la tache centrale est encadrée par deux zones sombres, les premiers minima. Le radian est une unité d’angle : un tour vaut 2π radians, avec π ≈ 3,14. Aux petits angles, la demi-largeur sur l’écran est environ Dθ ; la largeur entière vaut donc 2Dθ.",
+      "formules": [
+        "Petit angle : θ ≈ λ/a ; largeur centrale L ≈ 2Dλ/a."
+      ],
+      "exemples": [
+        "Une tache centrale"
+      ],
+      "pieges": [
+        "θ décrit la demi-largeur angulaire : oublier le facteur 2 donne seulement la moitié de la largeur centrale. Diffraction et réfraction (chan…"
+      ],
+      "aRetenir": [
+        "Une ouverture étroite peut étaler l’onde.",
+        "À petits angles : L ≈ 2Dλ/a.",
+        "Largeur de fente et largeur de tache évoluent en sens inverse."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L6",
+      "titre": "Lire une tension sinusoïdale",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "6/11",
+      "precedente": "La diffraction par une fente",
+      "suivante": "L’échange d’énergie entre C et L",
+      "explication": "Nous allons reconnaître les paramètres d’une oscillation régulière. Ils décrivent une tension qui change de signe périodiquement. Une sinusoïde est une courbe périodique lisse. Pour une tension centrée sur zéro, son amplitude Umax est sa valeur maximale positive ; son minimum est −Umax. Une tension alternative change de signe. Le cosinus se lit sur un cercle : cos 0 = 1, cos(π/2) = 0, cos π = −1, cos(2π) = 1. La phase ωt + φ indique l’avancement dans le cycle. Pour φ = 0, le signal commence au maximum.",
+      "formules": [
+        "u(t) = Umax cos(ωt + φ) ; ω = 2πf = 2π/T."
+      ],
+      "exemples": [
+        "u(t) = 3 cos(100πt), en V"
+      ],
+      "pieges": [
+        "La valeur crête à crête vaut 2Umax pour cette sinusoïde centrée. L’amplitude ne vaut donc pas tout l’écart entre minimum et maximum."
+      ],
+      "aRetenir": [
+        "Amplitude : écart maximal à la moyenne.",
+        "ω = 2πf.",
+        "Phase : position dans le cycle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L7",
+      "titre": "L’échange d’énergie entre C et L",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "7/11",
+      "precedente": "Lire une tension sinusoïdale",
+      "suivante": "La période propre d’un circuit LC",
+      "explication": "Nous allons comprendre pourquoi un condensateur relié à une bobine peut osciller. PC-ELEC a introduit q = Cu et l’énergie d’un condensateur. Une bobine est un enroulement conducteur. Son inductance L, mesurée en henrys (H), caractérise son opposition aux variations du courant. Elle peut stocker de l’énergie magnétique. Ici la lettre L désigne l’inductance, sans lien avec la largeur de tache de L5.",
+      "formules": [
+        "Énergie électrique = ½Cu² ; énergie magnétique = ½Li²."
+      ],
+      "exemples": [
+        "Début d’une oscillation LC idéale",
+        "Le passage par u = 0"
+      ],
+      "pieges": [],
+      "aRetenir": [
+        "C stocke une énergie électrique.",
+        "L stocke une énergie magnétique.",
+        "LC idéal : échange sans perte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L8",
+      "titre": "La période propre d’un circuit LC",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "8/11",
+      "precedente": "L’échange d’énergie entre C et L",
+      "suivante": "Pourquoi une oscillation s’amortit",
+      "explication": "Nous allons calculer la durée d’une oscillation électrique libre. « Libre » signifie que le circuit évolue après l’excitation initiale, sans générateur qui lui impose un rythme. On admet cette loi du circuit LC idéal. La période dépend de L et C, pas de l’amplitude initiale dans ce modèle linéaire. Si LC est multiplié par 4, sa racine est multipliée par 2 et T₀ aussi.",
+      "formules": [
+        "T₀ = 2π√(LC) ; f₀ = 1/T₀."
+      ],
+      "exemples": [
+        "Une conversion complète",
+        "Modifier la capacité"
+      ],
+      "pieges": [
+        "Ne pas oublier la racine. Le produit LC seul n’est pas une durée : c’est T₀/(2π) au carré."
+      ],
+      "aRetenir": [
+        "T₀ = 2π√(LC).",
+        "Préfixes : convertir avant de calculer.",
+        "f₀ est l’inverse de T₀."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L9",
+      "titre": "Pourquoi une oscillation s’amortit",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "9/11",
+      "precedente": "La période propre d’un circuit LC",
+      "suivante": "Oscillations forcées et résonance",
+      "explication": "Nous allons expliquer la diminution des oscillations dans un circuit réel. Une résistance transforme une partie de l’énergie électrique en chaleur. Un circuit RLC contient une résistance R, une inductance L et une capacité C. Sans générateur, l’énergie stockée diminue par effet Joule dans R. Une oscillation amortie a des maxima de plus en plus petits. Avec une résistance suffisamment grande, le retour à l’équilibre peut se faire sans oscillation : régime apériodique. La frontière est le régime critique. La nature du régime dépend de R, L et C.",
+      "formules": [],
+      "exemples": [
+        "Faible amortissement"
+      ],
+      "pieges": [
+        "Le mot RLC ne garantit pas des oscillations. Et une pseudo-période n’est pas exactement la période propre du LC idéal ; elles sont proches …"
+      ],
+      "aRetenir": [
+        "Résistance : pertes par effet Joule.",
+        "Faible amortissement : oscillations décroissantes.",
+        "Fort amortissement : retour possible sans oscillation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L10",
+      "titre": "Oscillations forcées et résonance",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "10/11",
+      "precedente": "Pourquoi une oscillation s’amortit",
+      "suivante": "Calculer le courant à la résonance",
+      "explication": "Nous allons distinguer le rythme naturel d’un circuit du rythme imposé par un générateur. Cela permet de comprendre la résonance. Un générateur alternatif alimente un RLC série à une fréquence f choisie. Après le régime de démarrage, le régime forcé établi oscille à cette fréquence. Si on varie f à amplitude de tension fixe, l’amplitude du courant varie.",
+      "formules": [],
+      "exemples": [
+        "Balayer la fréquence",
+        "Le rôle de la résistance"
+      ],
+      "pieges": [
+        "Cette formule décrit la résonance du courant d’un RLC série. Les maxima de tension de chaque composant ne se déduisent pas automatiquement …"
+      ],
+      "aRetenir": [
+        "Libre : rythme propre après excitation initiale.",
+        "Forcé établi : rythme du générateur.",
+        "RLC série : maximum du courant à f₀."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ESATIC-BAC-ONDES-L11",
+      "titre": "Calculer le courant à la résonance",
+      "module": "Ondes et signaux (Sciences physiques)",
+      "position": "11/11",
+      "precedente": "Oscillations forcées et résonance",
+      "suivante": null,
+      "explication": "Nous allons mesurer l’opposition globale d’un RLC série au courant alternatif. Cela permet de calculer le courant maximal lors d’un balayage en fréquence. La valeur efficace d’un courant alternatif est celle du courant continu qui produirait la même puissance moyenne dans une résistance. Pour une sinusoïde, Ieff = Imax/√2 et Ueff = Umax/√2, avec √2 ≈ 1,414. Il faut distinguer amplitude et valeur efficace. L’impédance dépend généralement de la fréquence. À la résonance d’intensité du RLC série idéal, les effets de L et C se compensent : Z = R. Le courant efficace atteint donc Ueff/R à tension efficace fixée.",
+      "formules": [
+        "Impédance Z = Ueff/Ieff ; Ieff = Ueff/Z."
+      ],
+      "exemples": [
+        "Une valeur de courant"
+      ],
+      "pieges": [
+        "Ueff/Imax ne donne pas Z : associer les deux valeurs efficaces, ou les deux amplitudes. Une simple mesure à l’ohmmètre ne donne pas l’impéd…"
+      ],
+      "aRetenir": [
+        "Sinusoïde : valeur efficace = amplitude/√2.",
+        "Ieff = Ueff/Z.",
+        "À la résonance série : Z = R."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

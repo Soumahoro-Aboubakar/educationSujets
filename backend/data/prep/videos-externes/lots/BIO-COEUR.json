@@ -1,0 +1,213 @@
+{
+  "module": "BIO-COEUR",
+  "titre": "Le cœur, la circulation et le sang",
+  "matiere": "Biologie",
+  "resume": "Des cellules aux organes, puis aux circuits sanguins, aux constituants du sang et aux groupes ABO/RhD.",
+  "concours": [
+    "INFAS — Auxiliaires de santé"
+  ],
+  "lecons": [
+    {
+      "code": "BIO-COEUR-L1",
+      "titre": "Pourquoi le corps a besoin de transports",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Le cœur : recevoir puis éjecter",
+      "explication": "Nous allons comprendre pourquoi le sang circule. Il relie les besoins des petites unités vivantes aux organes qui les approvisionnent. Une cellule est une petite unité vivante. Un tissu rassemble des cellules organisées ; un organe, comme le cœur, associe plusieurs tissus pour une fonction. L’organisme est l’être vivant entier. L’anatomie décrit la structure et la disposition des organes ; la physiologie étudie leur fonctionnement. Les cellules ont besoin de nutriments, substances utilisables issues de l’alimentation, et le plus souvent de dioxygène (O₂), gaz apporté par les poumons. Elles rejettent notamment du dioxyde de carbone (CO₂).",
+      "formules": [],
+      "exemples": [
+        "Un muscle qui travaille"
+      ],
+      "pieges": [
+        "Le sang transporte les substances ; il ne remplace ni les poumons qui échangent les gaz, ni l’intestin qui absorbe les nutriments."
+      ],
+      "aRetenir": [
+        "Cellules → tissus → organes → organisme.",
+        "Les cellules échangent des substances.",
+        "La circulation relie les organes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L2",
+      "titre": "Le cœur : recevoir puis éjecter",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "2/9",
+      "precedente": "Pourquoi le corps a besoin de transports",
+      "suivante": "Distinguer artères, veines et capillaires",
+      "explication": "Nous allons repérer les quatre cavités du cœur pour pouvoir suivre le sang sans les confondre. Le cœur est un muscle creux ; son tissu musculaire est le myocarde. Une cloison sépare les côtés droit et gauche. Chaque côté contient une oreillette, qui reçoit le sang, puis un ventricule, qui l’éjecte.",
+      "formules": [],
+      "exemples": [
+        "Le rôle d’un clapet"
+      ],
+      "pieges": [
+        "Droite et gauche sont celles de la personne observée. Le schéma de face peut donc placer son cœur droit à gauche de l’image."
+      ],
+      "aRetenir": [
+        "Deux oreillettes et deux ventricules.",
+        "Valves : passage à sens unique.",
+        "Contraction et relâchement alternent."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L3",
+      "titre": "Distinguer artères, veines et capillaires",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "3/9",
+      "precedente": "Le cœur : recevoir puis éjecter",
+      "suivante": "La circulation entre cœur et poumons",
+      "explication": "Nous allons nommer les vaisseaux selon leur rôle. Leur nom dépend du sens de circulation, ce qui évite un piège fréquent des QCM. Une artère conduit le sang en s’éloignant du cœur. Une veine le ramène vers le cœur. Les capillaires sont de très petits vaisseaux à paroi mince, situés entre les réseaux artériel et veineux ; ils permettent les échanges.",
+      "formules": [],
+      "exemples": [
+        "Dans un muscle",
+        "L’exception apparente"
+      ],
+      "pieges": [
+        "Rouge et bleu sont des conventions de schéma. Les veines ne contiennent pas du sang bleu."
+      ],
+      "aRetenir": [
+        "Nommer d’après le sens du trajet.",
+        "Échanges au niveau des capillaires."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L4",
+      "titre": "La circulation entre cœur et poumons",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "4/9",
+      "precedente": "Distinguer artères, veines et capillaires",
+      "suivante": "La circulation entre cœur et organes",
+      "explication": "Nous allons suivre la petite circulation. Elle renouvelle les gaz transportés par le sang. La circulation pulmonaire, ou petite circulation, part du ventricule droit et aboutit à l’oreillette gauche. Dans les poumons, le sang cède du CO₂ et reçoit du O₂ au contact de l’air des alvéoles, petites poches pulmonaires.",
+      "formules": [
+        "Ventricule droit → artères pulmonaires → capillaires des poumons → veines pulmonaires → oreillette gauche."
+      ],
+      "exemples": [
+        "Suivre une petite quantité de sang"
+      ],
+      "pieges": [
+        "La petite circulation ne se termine pas au ventricule gauche. Elle arrive d’abord dans l’oreillette gauche."
+      ],
+      "aRetenir": [
+        "Cœur droit → poumons → cœur gauche.",
+        "Échanges : sortie de CO₂, entrée de O₂."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L5",
+      "titre": "La circulation entre cœur et organes",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "5/9",
+      "precedente": "La circulation entre cœur et poumons",
+      "suivante": "Les composants du sang et leurs rôles",
+      "explication": "Nous allons suivre la grande circulation puis raccorder les deux circuits pour former une boucle. La circulation générale, ou systémique, distribue le sang aux organes. Elle part du ventricule gauche dans l’aorte, la grande artère de sortie, puis revient à l’oreillette droite par les veines caves.",
+      "formules": [
+        "Ventricule gauche → aorte → artères des organes → capillaires → veines → veines caves → oreillette droite."
+      ],
+      "exemples": [
+        "Du cœur au muscle puis retour"
+      ],
+      "pieges": [
+        "L’aorte quitte le ventricule gauche ; les veines caves arrivent à l’oreillette droite. Le mot « gauche » ne désigne pas tous les vaisseaux …"
+      ],
+      "aRetenir": [
+        "Grande circulation : ventricule gauche → organes → oreillette droite.",
+        "Les deux circulations sont reliées en série."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L6",
+      "titre": "Les composants du sang et leurs rôles",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "6/9",
+      "precedente": "La circulation entre cœur et organes",
+      "suivante": "Comprendre les groupes ABO",
+      "explication": "Nous allons reconnaître les composants du sang par leur fonction, comme le demandent les QCM INFAS. Le plasma est la partie liquide, surtout constituée d’eau. Il transporte les éléments figurés et des substances dissoutes. Les éléments figurés sont les cellules sanguines et les plaquettes. L’hémoglobine est une protéine des hématies qui fixe le dioxygène. L’hémostase arrête un saignement : les plaquettes forment un premier bouchon, puis des protéines du plasma participent à la coagulation, qui le consolide.",
+      "formules": [],
+      "exemples": [
+        "Trois problèmes différents"
+      ],
+      "pieges": [
+        "Les plaquettes ne sont pas des globules blancs. Le plasma n’est pas seulement de l’eau : il contient aussi des protéines et d’autres substa…"
+      ],
+      "aRetenir": [
+        "Plasma : liquide de transport.",
+        "Hématies : O₂ ; leucocytes : défense.",
+        "Plaquettes et protéines plasmatiques : hémostase."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L7",
+      "titre": "Comprendre les groupes ABO",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "7/9",
+      "precedente": "Les composants du sang et leurs rôles",
+      "suivante": "Raisonner sur une transfusion de globules rouges",
+      "explication": "Nous allons distinguer les marqueurs des hématies et les anticorps du plasma. Cela explique la compatibilité ABO. Un antigène est une structure reconnue par les défenses. Un anticorps est une protéine capable de reconnaître un antigène particulier. Dans le système ABO, les hématies portent A, B, les deux ou aucun de ces deux antigènes.",
+      "formules": [],
+      "exemples": [
+        "Groupe A"
+      ],
+      "pieges": [
+        "Le groupe O ne signifie pas absence de tous les antigènes. Il signifie absence de A et de B."
+      ],
+      "aRetenir": [
+        "Antigènes : marqueurs des hématies.",
+        "Anticorps : reconnaissance dans le plasma.",
+        "AB : A et B ; O : ni A ni B."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L8",
+      "titre": "Raisonner sur une transfusion de globules rouges",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "8/9",
+      "precedente": "Comprendre les groupes ABO",
+      "suivante": "Ajouter le Rhésus D au raisonnement",
+      "explication": "Nous allons utiliser le tableau ABO pour choisir des globules rouges théoriquement compatibles. Le produit transfusé compte. Lors d’un apport de globules rouges, on compare leurs antigènes aux anticorps du receveur. Un anticorps du receveur ne doit pas rencontrer sa cible sur les globules rouges apportés.",
+      "formules": [],
+      "exemples": [
+        "Receveur A",
+        "Receveurs O et AB"
+      ],
+      "pieges": [
+        "« Donneur » et « receveur » ne s’inversent pas librement : A peut recevoir des hématies O, mais O ne peut pas recevoir des hématies A."
+      ],
+      "aRetenir": [
+        "Identifier le produit : ici, globules rouges.",
+        "Lire les anticorps du receveur.",
+        "Exclure les hématies qui portent leur cible."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "BIO-COEUR-L9",
+      "titre": "Ajouter le Rhésus D au raisonnement",
+      "module": "Le cœur, la circulation et le sang (Biologie)",
+      "position": "9/9",
+      "precedente": "Raisonner sur une transfusion de globules rouges",
+      "suivante": null,
+      "explication": "Nous allons ajouter Rh+ et Rh− à la compatibilité ABO. Cela explique les huit groupes courants, de O− à AB+. Dans le modèle RhD, Rh+ signifie que l’hématie porte l’antigène D ; Rh− signifie qu’elle ne le porte pas. Une personne Rh− n’a pas nécessairement des anti-D au départ : elle peut en fabriquer après exposition à des hématies Rh+, par exemple lors d’une transfusion ou d’une grossesse.",
+      "formules": [],
+      "exemples": [
+        "Receveur A+",
+        "Receveur A−"
+      ],
+      "pieges": [
+        "O− « donneur universel de globules rouges » et AB+ « receveur universel » sont des raccourcis du modèle ABO/RhD. D’autres antigènes et des …"
+      ],
+      "aRetenir": [
+        "Rh+ : D présent ; Rh− : D absent.",
+        "Anti-D : possible après exposition.",
+        "Appliquer ABO puis RhD pour les hématies."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

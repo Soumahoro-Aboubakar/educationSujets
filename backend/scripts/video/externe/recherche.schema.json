@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["module", "lecons"],
+  "properties": {
+    "module": { "type": "string" },
+    "lecons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "requetes", "candidats", "justification"],
+        "properties": {
+          "code": { "type": "string" },
+          "requetes": { "type": "array", "items": { "type": "string" } },
+          "candidats": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["url", "titre", "chaine", "dureeVue", "langue", "couverture", "pourquoi"],
+              "properties": {
+                "url": { "type": "string" },
+                "titre": { "type": "string" },
+                "chaine": { "type": "string" },
+                "dureeVue": { "type": "string" },
+                "langue": { "type": "string" },
+                "couverture": { "type": "string", "enum": ["exacte", "partielle"] },
+                "pourquoi": { "type": "string" }
+              }
+            }
+          },
+          "justification": { "type": "string" }
+        }
+      }
+    }
+  }
+}

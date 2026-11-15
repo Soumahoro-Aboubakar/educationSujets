@@ -1,0 +1,242 @@
+{
+  "module": "DROIT-PENAL",
+  "titre": "Droit pénal général : l’infraction",
+  "matiere": "Droit pénal",
+  "resume": "Du texte pénal à la responsabilité : éléments, tentative, participation, justification et effets sur la peine.",
+  "concours": [
+    "INFJ — École de la Magistrature",
+    "INFJ — Greffes — cycle moyen supérieur"
+  ],
+  "lecons": [
+    {
+      "code": "DROIT-PENAL-L1",
+      "titre": "Pourquoi faut-il un texte pour punir ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Quelle loi appliquer si le texte change ?",
+      "explication": "Nous allons partir de zéro : comprendre ce qu’est une infraction et comment la distinguer d’un simple comportement désapprouvé. Le droit organise la vie sociale par des règles. Le droit pénal définit les infractions, comportements interdits, et les peines, sanctions qui leur sont attachées. Le Code pénal ivoirien est issu de la loi du 26 juin 2019, modifiée depuis. Le principe de légalité interdit de punir un fait sans texte applicable qui le définit et le sanctionne. L’interprétation stricte interdit d’étendre une incrimination par simple ressemblance avec un autre comportement.",
+      "formules": [],
+      "exemples": [
+        "Désaccord moral",
+        "Une ressemblance insuffisante"
+      ],
+      "pieges": [
+        "Un dommage peut entraîner réparation civile sans justifier une peine pénale. Les deux responsabilités ne se confondent pas."
+      ],
+      "aRetenir": [
+        "Infraction : comportement défini et sanctionné.",
+        "Pas de peine inventée par le juge.",
+        "Code de 2019 à lire avec ses modifications."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L2",
+      "titre": "Quelle loi appliquer si le texte change ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "2/10",
+      "precedente": "Pourquoi faut-il un texte pour punir ?",
+      "suivante": "Crime, délit ou contravention ?",
+      "explication": "Nous allons construire une petite chronologie pour choisir entre loi ancienne et loi nouvelle. Une loi entre en vigueur à une date déterminée. La rétroactivité consiste à appliquer une règle à des faits antérieurs. Pour les règles pénales de fond étudiées ici, la loi plus sévère ne rétroagit pas ; la disposition plus douce s’applique aux faits non définitivement condamnés lors de son entrée en vigueur. Une condamnation définitive n’est plus susceptible des recours visés par la loi. Les règles de procédure ont un régime distinct.",
+      "formules": [],
+      "exemples": [
+        "Peine augmentée",
+        "Peine diminuée"
+      ],
+      "pieges": [
+        "Comparer seulement les dates ne suffit pas : il faut aussi comparer la sévérité et vérifier le caractère définitif de la condamnation. La s…"
+      ],
+      "aRetenir": [
+        "Date des faits, entrée en vigueur, décision définitive.",
+        "Loi de fond plus sévère : pas de rétroactivité.",
+        "Loi plus douce : bénéfice avant condamnation définitive."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L3",
+      "titre": "Crime, délit ou contravention ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "3/10",
+      "precedente": "Quelle loi appliquer si le texte change ?",
+      "suivante": "Que s’est-il matériellement passé ?",
+      "explication": "Nous allons classer juridiquement les infractions pour comprendre les règles qui varient selon leur catégorie. Les infractions se répartissent en crimes, délits et contraventions, d’après la classification légale et les peines prévues. Le crime relève de la catégorie criminelle, le délit de la catégorie correctionnelle, la contravention de sa catégorie propre. La peine encourue est celle prévue par le texte ; la peine prononcée est celle retenue pour la personne condamnée. Une peine réduite ne change pas automatiquement la qualification de l’infraction.",
+      "formules": [],
+      "exemples": [
+        "Le langage courant",
+        "Encourue et prononcée"
+      ],
+      "pieges": [
+        "Ne pas importer sans vérification les seuils d’un code étranger. On ne classe pas à partir du seul dommage ni de la seule peine finalement …"
+      ],
+      "aRetenir": [
+        "Trois catégories légales d’infractions.",
+        "Encourue : prévue ; prononcée : retenue.",
+        "Éviter les seuils étrangers non vérifiés."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L4",
+      "titre": "Que s’est-il matériellement passé ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "4/10",
+      "precedente": "Crime, délit ou contravention ?",
+      "suivante": "Intention et faute ne se confondent pas",
+      "explication": "Nous allons isoler les faits avant de chercher l’intention de leur auteur. Pour une infraction, on vérifie un fondement légal, un élément matériel et un élément moral. L’élément matériel est le comportement extérieur décrit par le texte : un acte ou, si le texte le prévoit, une abstention. Certains textes exigent aussi un résultat et un lien de causalité, rapport entre le comportement et ce résultat. Une pensée seule ne réalise pas un acte matériel.",
+      "formules": [],
+      "exemples": [
+        "Distinguer pensée et acte",
+        "Relier un dommage aux faits"
+      ],
+      "pieges": [
+        "L’absence d’action ne suffit pas à exclure toute infraction : certains textes répriment précisément une abstention."
+      ],
+      "aRetenir": [
+        "Décrire les actes ou omissions visés par le texte.",
+        "Vérifier le résultat si le texte l’exige.",
+        "Établir le lien causal nécessaire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L5",
+      "titre": "Intention et faute ne se confondent pas",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "5/10",
+      "precedente": "Que s’est-il matériellement passé ?",
+      "suivante": "Préparer ou tenter une infraction ?",
+      "explication": "Nous allons examiner l’état d’esprit ou la faute requis par le texte, sans les déduire automatiquement du dommage. L’élément moral est l’intention ou la faute exigée. L’intention suppose la conscience et la volonté du comportement incriminé selon le texte. Une infraction non intentionnelle peut reposer sur une imprudence ou une négligence lorsque la loi le prévoit. Le mobile est la raison personnelle d’agir ; il se distingue de l’intention, même s’il peut parfois être pris en compte par un texte.",
+      "formules": [],
+      "exemples": [
+        "Erreur sur le bien",
+        "Imprudence"
+      ],
+      "pieges": [
+        "Un mobile jugé généreux ne supprime pas automatiquement l’intention. À l’inverse, tout dommage accidentel n’est pas automatiquement pénal."
+      ],
+      "aRetenir": [
+        "Intention : conscience et volonté selon le texte.",
+        "Imprudence : seulement si elle est pénalement prévue.",
+        "Mobile et intention sont distincts."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L6",
+      "titre": "Préparer ou tenter une infraction ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "6/10",
+      "precedente": "Intention et faute ne se confondent pas",
+      "suivante": "Auteur ou complice en droit ivoirien ?",
+      "explication": "Nous allons repérer le passage de la préparation à la tentative punissable. Selon l’article 27 du Code de 2019, les actes simplement préparatoires ne sont pas punissables à ce titre, sauf infraction autonome. L’article 28 vise la tentative de crime manifestée par un acte montrant sans équivoque l’intention irrévocable de commettre l’infraction, interrompue ou échouée pour une cause indépendante de l’auteur. La tentative de délit n’est punissable que si un texte le prévoit. Les tentatives de contravention ne sont pas punissables.",
+      "formules": [],
+      "exemples": [
+        "Préparer",
+        "Interruption extérieure"
+      ],
+      "pieges": [
+        "Le désistement volontaire doit intervenir avant la consommation. Regretter après l’infraction ne l’efface pas. Un acte préparatoire peut co…"
+      ],
+      "aRetenir": [
+        "Préparation seule : pas de tentative par principe.",
+        "Vérifier acte non équivoque et cause extérieure.",
+        "Délit : texte spécial ; contravention : pas de tentative punissable."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L7",
+      "titre": "Auteur ou complice en droit ivoirien ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "7/10",
+      "precedente": "Préparer ou tenter une infraction ?",
+      "suivante": "Quand une défense est-elle légitime ?",
+      "explication": "Nous allons qualifier la participation de chacun à partir du Code ivoirien, sans reprendre mécaniquement une définition étrangère. L’auteur commet matériellement l’infraction ou relève d’une autre hypothèse de l’article 29. Ce texte inclut notamment certaines incitations non équivoques par instructions ou moyens énumérés, même si l’infraction n’a pas été tentée ni commise. Le coauteur participe à la commission avec un autre auteur. Le complice, selon l’article 30, fournit sciemment des moyens ou une aide sans participation directe à la réalisation du crime ou délit. Il faut établir la connaissance et le rôle précis.",
+      "formules": [],
+      "exemples": [
+        "Fournir un moyen",
+        "Donner des instructions"
+      ],
+      "pieges": [
+        "La simple présence ou l’amitié avec l’auteur ne suffisent pas à établir une complicité. « Instructions = complicité » serait une simplifica…"
+      ],
+      "aRetenir": [
+        "Décrire le rôle et la connaissance de chacun.",
+        "Certaines instigations relèvent de l’auteur : article 29.",
+        "Complicité : aide consciente dans les conditions de l’article 30."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L8",
+      "titre": "Quand une défense est-elle légitime ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "8/10",
+      "precedente": "Auteur ou complice en droit ivoirien ?",
+      "suivante": "La responsabilité pénale s’examine pour chacun",
+      "explication": "Nous allons examiner une justification à l’aide de conditions cumulatives, plutôt que du seul mot « agression ». Un fait justificatif retire au fait son caractère d’infraction dans les conditions légales. La légitime défense répond à une attaque injuste par une défense actuellement nécessaire. L’article 97 exige notamment une attaque qui ne puisse être écartée autrement, une défense concomitante et proportionnée aux circonstances. Concomitante signifie au moment de l’attaque ; proportionnée, adaptée au danger et au bien protégé.",
+      "formules": [],
+      "exemples": [
+        "Écarter une attaque",
+        "Après le danger"
+      ],
+      "pieges": [
+        "Un vol ou une dispute ne justifie pas toute violence en retour. Chaque condition doit être reliée à des faits précis."
+      ],
+      "aRetenir": [
+        "Attaque injuste et défense nécessaire.",
+        "Défense concomitante et proportionnée.",
+        "Relier chaque condition aux faits."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L9",
+      "titre": "La responsabilité pénale s’examine pour chacun",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "9/10",
+      "precedente": "Quand une défense est-elle légitime ?",
+      "suivante": "Grâce et amnistie : quels effets ?",
+      "explication": "Nous allons séparer justification, responsabilité et minorité pour éviter les conclusions automatiques. La responsabilité pénale est l’obligation de répondre pénalement d’un comportement imputable. Elle s’examine personnellement : le seul lien familial avec un auteur ne rend pas coupable. La minorité dépend de l’âge ; elle ne se confond pas avec l’absence d’antécédent. Le discernement, aptitude à comprendre et vouloir, et les règles spéciales de responsabilité doivent être vérifiés. Une personne morale, organisation reconnue par le droit, peut aussi engager sa responsabilité dans les conditions du Code.",
+      "formules": [],
+      "exemples": [
+        "Un parent et un acte",
+        "Deux questions différentes"
+      ],
+      "pieges": [
+        "Ne pas transformer un trouble mental quelconque en irresponsabilité automatique, ni importer des seuils d’âge d’un autre pays."
+      ],
+      "aRetenir": [
+        "Responsabilité examinée pour chaque personne.",
+        "Minorité et antécédents sont distincts.",
+        "Vérifier les conditions particulières du Code."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-PENAL-L10",
+      "titre": "Grâce et amnistie : quels effets ?",
+      "module": "Droit pénal général : l’infraction (Droit pénal)",
+      "position": "10/10",
+      "precedente": "La responsabilité pénale s’examine pour chacun",
+      "suivante": null,
+      "explication": "Nous allons distinguer deux mécanismes après avoir compris infraction et peine. Cette comparaison apparaît dans les sujets INFJ. Une peine sanctionne une infraction ; une mesure de sûreté poursuit une finalité préventive selon le Code. La grâce, relevant du Président, remet ou commue une peine dans les conditions du décret ; elle n’efface pas la condamnation. L’amnistie, relevant de la loi, éteint l’action publique et efface les condamnations visées dans les conditions légales. Elle n’établit pas l’innocence et ne supprime pas, par principe, les droits à réparation de la victime.",
+      "formules": [],
+      "exemples": [
+        "Remettre la peine",
+        "Effacer des effets pénaux"
+      ],
+      "pieges": [
+        "La grâce ne vaut pas acquittement. L’amnistie ne signifie pas remboursement automatique des amendes déjà payées."
+      ],
+      "aRetenir": [
+        "Grâce : effet sur la peine, par décision présidentielle.",
+        "Amnistie : effet pénal défini par la loi.",
+        "Ne pas confondre avec une décision d’innocence."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

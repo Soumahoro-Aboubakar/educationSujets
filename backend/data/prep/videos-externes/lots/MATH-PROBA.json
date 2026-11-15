@@ -1,0 +1,352 @@
+{
+  "module": "MATH-PROBA",
+  "titre": "Dénombrement et probabilités",
+  "matiere": "Mathématiques",
+  "resume": "Du vocabulaire du hasard aux arbres, variables aléatoires et lois binomiales.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)",
+    "ENSEA — ISE option économie",
+    "INPHB — Concours bacheliers"
+  ],
+  "lecons": [
+    {
+      "code": "MATH-PROBA-L1",
+      "titre": "Décrire une expérience aléatoire",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "1/14",
+      "precedente": null,
+      "suivante": "Calculer une probabilité en équiprobabilité",
+      "explication": "Nous allons donner un nom aux résultats possibles d’une expérience de hasard. Ce vocabulaire permet de traduire un énoncé en objets précis. Une expérience aléatoire est une expérience dont le résultat n’est pas connu à l’avance. Une issue est un résultat possible. L’univers, noté Ω, rassemble toutes les issues. Un événement est un ensemble d’issues qui vérifient une condition. A = « obtenir un nombre pair » rassemble {2 ; 4 ; 6}. L’événement A est réalisé si l’issue obtenue appartient à A.",
+      "formules": [],
+      "exemples": [
+        "Lancer un dé",
+        "Événements particuliers"
+      ],
+      "pieges": [
+        "Une issue et un événement ne jouent pas le même rôle : l’événement « pair » contient plusieurs issues."
+      ],
+      "aRetenir": [
+        "Expérience : ce que l’on fait.",
+        "Univers : tous les résultats possibles.",
+        "Événement : résultats qui vérifient une condition."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L2",
+      "titre": "Calculer une probabilité en équiprobabilité",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "2/14",
+      "precedente": "Décrire une expérience aléatoire",
+      "suivante": "Compter des choix successifs",
+      "explication": "Nous allons mesurer la chance qu’un événement se réalise lorsque les issues ont toutes la même chance. Ce cas se nomme équiprobabilité. Une probabilité P(A) est un nombre entre 0 et 1 : 0 pour l’impossible, 1 pour le certain. La fraction a/b représente a divisé par b. Par exemple 1/4 = 0,25 = 25 %, car un pourcentage compte des parts sur 100. L’événement contraire de A, noté Ā, rassemble exactement les issues qui ne sont pas dans A. Comme A et Ā se partagent tout l’univers, P(Ā) = 1 − P(A).",
+      "formules": [
+        "P(A) = nombre d’issues favorables / nombre total d’issues, en équiprobabilité sur un univers fini non vide."
+      ],
+      "exemples": [
+        "Un dé équilibré",
+        "Au moins un résultat"
+      ],
+      "pieges": [
+        "Ne pas appliquer le rapport des nombres d’issues à un dé truqué. L’équiprobabilité doit être justifiée, par exemple par « équilibré » ou pa…"
+      ],
+      "aRetenir": [
+        "Justifier l’équiprobabilité.",
+        "Diviser les favorables par les possibles.",
+        "Le contraire a pour probabilité 1 − P(A)."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L3",
+      "titre": "Compter des choix successifs",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "3/14",
+      "precedente": "Calculer une probabilité en équiprobabilité",
+      "suivante": "Choisir un groupe sans tenir compte de l’ordre",
+      "explication": "Nous allons compter les résultats d’une succession de choix. Multiplier les nombres de possibilités évite d’écrire chaque résultat. Un choix ordonné sans répétition de p objets parmi n est un arrangement : A(n, p) = n × (n − 1) × … × (n − p + 1). Si on range tous les n objets distincts, c’est une permutation, comptée par n! = n × (n − 1) × … × 1. Le signe ! se lit « factorielle » et 0! = 1 par convention.",
+      "formules": [
+        "A(n, p) = n!/(n − p)!, pour 0 ≤ p ≤ n ; permutations : n!."
+      ],
+      "exemples": [
+        "Deux étapes",
+        "Code ou podium"
+      ],
+      "pieges": [
+        "Demander si l’ordre compte et si la répétition est possible. Avec remise, un objet est replacé et peut être repris ; sans remise, les choix…"
+      ],
+      "aRetenir": [
+        "Multiplier les choix successifs.",
+        "Avec répétition : même nombre de choix à chaque étape.",
+        "Sans répétition : arrangements ; tout ranger : permutations."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L4",
+      "titre": "Choisir un groupe sans tenir compte de l’ordre",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "4/14",
+      "precedente": "Compter des choix successifs",
+      "suivante": "Traduire « et » et « ou »",
+      "explication": "Nous allons compter des groupes où les positions ne jouent aucun rôle. On évitera ainsi de compter plusieurs fois le même groupe. Une combinaison choisit p objets distincts parmi n sans ordre. Chaque groupe de p objets admet p! ordres ; on divise donc le nombre d’arrangements par p!.",
+      "formules": [
+        "C(n, p) = n!/[p!(n − p)!], pour 0 ≤ p ≤ n."
+      ],
+      "exemples": [
+        "Deux délégués sans rôles distincts",
+        "Trois personnes parmi six"
+      ],
+      "pieges": [
+        "Un président et un adjoint ont des rôles différents : ce n’est pas une combinaison. Dans une urne, deux boules de même couleur restent deux…"
+      ],
+      "aRetenir": [
+        "Sans ordre et sans répétition : combinaison.",
+        "Diviser par les p! ordres d’un même groupe.",
+        "Compter les objets distincts, même s’ils ont la même couleur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L5",
+      "titre": "Traduire « et » et « ou »",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "5/14",
+      "precedente": "Choisir un groupe sans tenir compte de l’ordre",
+      "suivante": "Calculer une probabilité sachant une information",
+      "explication": "Nous allons combiner deux événements. Bien traduire « et » et « ou » empêche de compter deux fois les mêmes issues. A ∩ B, l’intersection, signifie « A et B ». A ∪ B, l’union, signifie « A ou B, éventuellement les deux ». Deux événements sont incompatibles si leur intersection est vide.",
+      "formules": [
+        "P(A ∪ B) = P(A) + P(B) − P(A ∩ B)."
+      ],
+      "exemples": [
+        "Deux conditions sur un dé",
+        "Corriger le double comptage"
+      ],
+      "pieges": [
+        "Le mot « ou » en probabilités inclut les deux événements à la fois, sauf précision contraire."
+      ],
+      "aRetenir": [
+        "Et : intersection ∩.",
+        "Ou : union ∪.",
+        "Additionner puis retirer l’intersection ; si elle est vide, additionner seulement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L6",
+      "titre": "Calculer une probabilité sachant une information",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "6/14",
+      "precedente": "Traduire « et » et « ou »",
+      "suivante": "Utiliser un arbre pour additionner les bons chemins",
+      "explication": "Nous allons recalculer une probabilité quand une information réduit les cas possibles. C’est la probabilité conditionnelle. P_B(A), aussi noté P(A | B), signifie « probabilité de A sachant B ». On se limite à B, qui doit avoir une probabilité non nulle.",
+      "formules": [
+        "P_B(A) = P(A ∩ B)/P(B) si P(B) > 0 ; donc P(A ∩ B) = P(B)P_B(A)."
+      ],
+      "exemples": [
+        "Se restreindre aux cas annoncés",
+        "Depuis des probabilités"
+      ],
+      "pieges": [
+        "P_B(A) et P_A(B) ne sont généralement pas égales. L’événement après « sachant » fixe le dénominateur."
+      ],
+      "aRetenir": [
+        "Lire précisément ce qui est connu.",
+        "La condition doit avoir une probabilité non nulle.",
+        "Intersection = probabilité du cas × probabilité conditionnelle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L7",
+      "titre": "Utiliser un arbre pour additionner les bons chemins",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "7/14",
+      "precedente": "Calculer une probabilité sachant une information",
+      "suivante": "Distinguer indépendance et incompatibilité",
+      "explication": "Nous allons organiser plusieurs cas dans un arbre pondéré. Cette représentation donne les probabilités totales et permet de remonter à l’origine d’un résultat. Un arbre pondéré place une probabilité sur chaque branche. Les branches qui partent d’un même nœud totalisent 1. Au second étage, les probabilités sont conditionnelles au premier choix. Des cas forment une partition s’ils sont incompatibles deux à deux et couvrent tout l’univers. Pour une partition B₁, …, Bᵣ, on additionne P(Bᵢ)P_Bᵢ(A) sur tous les cas de probabilité non nulle : c’est la formule des probabilités totales.",
+      "formules": [],
+      "exemples": [
+        "Deux machines",
+        "Probabilité totale puis origine"
+      ],
+      "pieges": [
+        "Les taux 2 % et 5 % concernent des productions de tailles différentes : on ne prend pas leur moyenne simple."
+      ],
+      "aRetenir": [
+        "Chaque nœud répartit une probabilité totale de 1.",
+        "Multiplier le long du chemin et additionner les chemins adaptés.",
+        "Pour remonter à une origine, diviser l’intersection par le résultat observé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L8",
+      "titre": "Distinguer indépendance et incompatibilité",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "8/14",
+      "precedente": "Utiliser un arbre pour additionner les bons chemins",
+      "suivante": "Décrire la loi d’une variable aléatoire",
+      "explication": "Nous allons reconnaître quand une information ne change pas une probabilité. Cette indépendance permet de multiplier des probabilités simples. Deux événements A et B sont indépendants si P(A ∩ B) = P(A)P(B). Si P(B) > 0, cela revient à P_B(A) = P(A) : savoir B ne change pas la probabilité de A.",
+      "formules": [],
+      "exemples": [
+        "Deux lancers indépendants",
+        "Sans remise"
+      ],
+      "pieges": [
+        "« Au hasard » ne veut pas dire « indépendant ». Une remise rétablit la composition de l’urne ; pour multiplier les probabilités simples, il…"
+      ],
+      "aRetenir": [
+        "Indépendance : intersection = produit des probabilités.",
+        "Incompatibilité : intersection vide.",
+        "Sans remise, les probabilités dépendent généralement des tirages précédents."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L9",
+      "titre": "Décrire la loi d’une variable aléatoire",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "9/14",
+      "precedente": "Distinguer indépendance et incompatibilité",
+      "suivante": "L’espérance : une moyenne pondérée",
+      "explication": "Nous allons associer un nombre à chaque résultat de hasard, puis indiquer la probabilité de chaque valeur. Cela décrit un gain ou un nombre de succès. Une variable aléatoire X attribue un nombre à chaque issue. Dans le cas discret étudié ici, ses valeurs peuvent être listées. Sa loi de probabilité associe chaque valeur x à la probabilité P(X = x). La fonction de répartition est F(t) = P(X ≤ t) : on additionne les probabilités des valeurs inférieures ou égales à t. Dans l’exemple, F(0) = 5/6, F(5) = 1 et F(−2) = 0.",
+      "formules": [],
+      "exemples": [
+        "Un gain sur un dé"
+      ],
+      "pieges": [
+        "Les valeurs de X ne sont pas forcément équiprobables, même si les issues de l’expérience le sont : plusieurs issues peuvent donner le même …"
+      ],
+      "aRetenir": [
+        "X associe un nombre à chaque issue.",
+        "La loi liste les valeurs et leurs probabilités, de somme 1.",
+        "La répartition cumule jusqu’au seuil inclus."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L10",
+      "titre": "L’espérance : une moyenne pondérée",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "10/14",
+      "precedente": "Décrire la loi d’une variable aléatoire",
+      "suivante": "Variance et écart-type : mesurer la dispersion",
+      "explication": "Nous allons calculer le résultat moyen prévu par une loi. L’espérance aide à comparer des jeux ou des coûts répétés. L’espérance E(X) est une moyenne pondérée : chaque valeur est multipliée par sa probabilité, puis on additionne les produits. Pour la loi finie étudiée ici, cette somme est toujours définie.",
+      "formules": [
+        "E(X) = x₁p₁ + x₂p₂ + … + xᵣpᵣ, avec pᵢ = P(X = xᵢ)."
+      ],
+      "exemples": [
+        "Un jeu simple",
+        "Changer l’échelle et ajouter un coût"
+      ],
+      "pieges": [
+        "L’espérance n’est ni forcément une valeur possible, ni une garantie sur une seule expérience. Elle décrit la moyenne attendue lors d’un gra…"
+      ],
+      "aRetenir": [
+        "L’espérance est une moyenne pondérée.",
+        "Inclure les gains négatifs avec leur signe.",
+        "E(aX + b) = aE(X) + b."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L11",
+      "titre": "Variance et écart-type : mesurer la dispersion",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "11/14",
+      "precedente": "L’espérance : une moyenne pondérée",
+      "suivante": "Reconnaître et calculer une loi binomiale",
+      "explication": "Nous allons mesurer l’écart des valeurs autour de leur moyenne. Deux jeux peuvent avoir la même espérance et des risques très différents. Si m = E(X), les écarts sont X − m. Les mettre au carré évite que des écarts opposés s’annulent. La variance V(X) est l’espérance de ces écarts carrés ; elle est toujours positive ou nulle. L’écart-type σ(X) est la racine carrée de la variance : σ(X) = √V(X). La racine est le nombre positif ou nul dont le carré donne la variance. Dans l’exemple, σ = √4 = 2, dans la même unité que X.",
+      "formules": [
+        "V(X) = E((X − m)²) = E(X²) − [E(X)]² ; E(X²) = somme des xᵢ²pᵢ."
+      ],
+      "exemples": [
+        "Calculer pas à pas",
+        "Transformer une variable"
+      ],
+      "pieges": [
+        "E(X²) n’est pas [E(X)]². Une variance négative révèle une erreur de calcul."
+      ],
+      "aRetenir": [
+        "La variance moyenne les écarts carrés.",
+        "V = E(X²) − E(X)² ; écart-type = √V.",
+        "V(aX + b) = a²V(X)."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L12",
+      "titre": "Reconnaître et calculer une loi binomiale",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "12/14",
+      "precedente": "Variance et écart-type : mesurer la dispersion",
+      "suivante": "Moyenne et dispersion d’une loi binomiale",
+      "explication": "Nous allons compter des succès dans un nombre fixé d’essais. Le modèle binomial donne la probabilité d’obtenir exactement k succès. Une épreuve de Bernoulli n’a que deux résultats : succès, de probabilité p, et échec, de probabilité 1 − p. « Succès » est seulement le nom de l’événement que l’on compte, même s’il s’agit d’un défaut. Pour une position donnée des k succès, l’indépendance permet de multiplier k facteurs p et n − k facteurs 1 − p. Il y a C(n, k) choix des positions de succès : on multiplie par ce nombre.",
+      "formules": [
+        "P(X = k) = C(n, k) pᵏ (1 − p)^(n − k)."
+      ],
+      "exemples": [
+        "Deux succès sur trois",
+        "Un cas qui ne convient pas"
+      ],
+      "pieges": [
+        "Un tirage avec deux couleurs ne suffit pas : vérifier nombre fixé d’essais, indépendance et probabilité constante. Pour p = 0 ou p = 1, le …"
+      ],
+      "aRetenir": [
+        "X compte les succès, pas le nombre d’essais.",
+        "Vérifier les trois conditions du modèle.",
+        "Positions des succès × probabilité d’une position."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L13",
+      "titre": "Moyenne et dispersion d’une loi binomiale",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "13/14",
+      "precedente": "Reconnaître et calculer une loi binomiale",
+      "suivante": "Calculer « au moins » et « au plus »",
+      "explication": "Nous allons prévoir le nombre moyen de succès et sa dispersion. Ces deux mesures résument une loi binomiale sans détailler toutes ses probabilités. Chaque essai contribue 1 en cas de succès et 0 sinon. Sa moyenne vaut 1 × p + 0 × (1 − p) = p. L’espérance d’une somme étant la somme des espérances (L10), n essais donnent une moyenne np. Pour un essai, la contribution X vaut 0 ou 1, donc X² = X. Ainsi V(X) = E(X²) − E(X)² = p − p² = p(1 − p). Pour les essais indépendants du modèle binomial, on admet que les variances s’additionnent : n essais donnent np(1 − p).",
+      "formules": [
+        "Si X suit B(n, p) : E(X) = np ; V(X) = np(1 − p) ; σ(X) = √[np(1 − p)]."
+      ],
+      "exemples": [
+        "Une série de dix essais",
+        "Changer le nombre d’essais"
+      ],
+      "pieges": [
+        "L’espérance est un nombre moyen de succès, pas une probabilité. Elle peut dépasser 1 et ne garantit pas le nombre obtenu à chaque série."
+      ],
+      "aRetenir": [
+        "Chaque essai contribue en moyenne p succès.",
+        "Espérance np ; variance np(1 − p).",
+        "L’écart-type est la racine de la variance."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-PROBA-L14",
+      "titre": "Calculer « au moins » et « au plus »",
+      "module": "Dénombrement et probabilités (Mathématiques)",
+      "position": "14/14",
+      "precedente": "Moyenne et dispersion d’une loi binomiale",
+      "suivante": null,
+      "explication": "Nous allons traduire une plage de valeurs en événement. « Exactement », « au moins » et « au plus » ne demandent pas le même calcul. Pour un nombre de succès X, « au plus k » signifie X ≤ k et « au moins k » signifie X ≥ k. Les événements X = 0, X = 1, etc. sont incompatibles : leurs probabilités peuvent s’additionner.",
+      "formules": [],
+      "exemples": [
+        "Au plus un succès",
+        "Au moins un succès"
+      ],
+      "pieges": [
+        "Le contraire de X ≥ 2 est X ≤ 1, pas X ≤ 2. Une borne entière doit être incluse dans un seul des deux événements contraires."
+      ],
+      "aRetenir": [
+        "Au plus k : inclure 0, 1, …, k.",
+        "Au moins un : 1 moins la probabilité de zéro.",
+        "Vérifier de quel côté se trouve l’égalité."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

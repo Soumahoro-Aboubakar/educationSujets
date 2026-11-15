@@ -1,0 +1,243 @@
+{
+  "module": "ANG-QCM",
+  "titre": "Anglais : réussir le QCM",
+  "matiere": "Anglais",
+  "resume": "Après ANG-GRAM, comprendre les constructions complexes et choisir une réponse grâce à la forme, au contexte et aux preuves du texte.",
+  "concours": [
+    "ENSEA — ISE option économie",
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "ANG-QCM-L1",
+      "titre": "Exprimer une condition réelle",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Imaginer une autre situation présente",
+      "explication": "Tu vas prévoir un résultat sous condition. Termine d’abord ANG-GRAM : on réutilise le présent simple, will et la base verbale, c’est-à-dire le verbe sans to. Une proposition est un groupe organisé autour d’un verbe conjugué. Une phrase avec if (= si) relie une proposition condition à une proposition résultat. Unless signifie « sauf si », souvent « si… ne… pas ». « Unless you study, you will fail » = Si tu ne travailles pas, tu échoueras. Fail signifie échouer ; pass an exam signifie réussir un examen.",
+      "formules": [],
+      "exemples": [
+        "Un fait général : type 0",
+        "Un avenir possible : type 1"
+      ],
+      "pieges": [
+        "Dans ces conditions futures ordinaires, on met le présent après if, pas will. Ce n’est pas une interdiction universelle : dans « I wonder i…"
+      ],
+      "aRetenir": [
+        "Type 0 : présent / présent.",
+        "Type 1 : if + présent / will + base.",
+        "Unless : sauf si, souvent if…not."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L2",
+      "titre": "Imaginer une autre situation présente",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "2/10",
+      "precedente": "Exprimer une condition réelle",
+      "suivante": "Imaginer un passé différent",
+      "explication": "Tu vas reconnaître une hypothèse qui ne décrit pas le présent réel. Le conditionnel de type 2 sert à imaginer une situation différente ou jugée peu probable. Construction : if + prétérit, puis would + base verbale. Would est un auxiliaire invariable : il ne prend pas -s. Would not = wouldn’t.",
+      "formules": [],
+      "exemples": [
+        "Une situation différente",
+        "Un conseil imaginé"
+      ],
+      "pieges": [
+        "Ne déduis pas « passé » du seul prétérit. Avec if…would, il peut marquer la distance par rapport à la réalité. Le contexte indique si l’on …"
+      ],
+      "aRetenir": [
+        "Type 2 : présent imaginaire ou peu probable.",
+        "If + prétérit ; would + base.",
+        "If I were you sert à donner un conseil."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L3",
+      "titre": "Imaginer un passé différent",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "3/10",
+      "precedente": "Imaginer une autre situation présente",
+      "suivante": "Faire du destinataire de l’action le sujet",
+      "explication": "Tu vas reconnaître un regret sur un événement déjà terminé. Le past perfect se construit avec had + participe passé. Rappel : le participe régulier prend -ed ; certains irréguliers changent, comme see → seen. Dans le conditionnel de type 3, on imagine changer le passé : if + had + participe, puis would have + participe. Les deux parties parlent d’un passé contraire aux faits.",
+      "formules": [],
+      "exemples": [
+        "Un passé avant un autre",
+        "Refaire une décision"
+      ],
+      "pieges": [
+        "Type 2 : une autre situation maintenant, would + base. Type 3 : un autre passé, would have + participe. Il faut lire toute la condition ava…"
+      ],
+      "aRetenir": [
+        "Past perfect : had + participe.",
+        "Type 3 : if + past perfect / would have + participe.",
+        "Choisir selon le moment imaginé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L4",
+      "titre": "Faire du destinataire de l’action le sujet",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "4/10",
+      "precedente": "Imaginer un passé différent",
+      "suivante": "Rapporter les paroles de quelqu’un",
+      "explication": "Tu vas comprendre les phrases où le sujet reçoit l’action. À la voix active, le sujet agit. À la voix passive, le sujet reçoit l’action. On choisit le passif pour parler d’un résultat ou quand l’auteur est inconnu. Méthode : repère ce qui reçoit l’action ; place-le en sujet ; conjugue be au temps de l’action ; ajoute le participe passé du verbe. By + auteur (= par) est facultatif. Deux participes utiles : write → written (écrire) ; send → sent (envoyer). On conserve aussi les auxiliaires déjà appris : futur will be + participe ; present perfect has/have been + participe. « The letter will be sent » = La lettre sera envoyée ; sent est le participe de send.",
+      "formules": [],
+      "exemples": [
+        "Changer le point de départ",
+        "Une date passée"
+      ],
+      "pieges": [
+        "« The bridge built » n’a pas l’auxiliaire be : ce n’est pas une phrase passive complète. « Is building » présente une action en cours, pas …"
+      ],
+      "aRetenir": [
+        "Passif : sujet qui reçoit l’action.",
+        "Be au bon temps + participe passé.",
+        "By indique l’auteur si nécessaire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L5",
+      "titre": "Rapporter les paroles de quelqu’un",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "5/10",
+      "precedente": "Faire du destinataire de l’action le sujet",
+      "suivante": "Relier correctement deux informations",
+      "explication": "Tu vas rapporter un message sans le citer mot pour mot : c’est le discours indirect. Say signifie dire ; tell someone signifie dire à quelqu’un. Leurs prétérits sont said et told. Après un introducteur au passé, les temps reculent souvent si le point de vue est passé : am/is → was ; are → were ; présent simple → prétérit ; will → would ; present perfect → past perfect. Avec tell, indique le destinataire : « She told me that… » Avec say : « She said that… » ou « She said to me that… ». Les pronoms et les mots comme here/there (ici/là-bas) changent selon la situation.",
+      "formules": [],
+      "exemples": [
+        "Adapter les personnes",
+        "Adapter le moment"
+      ],
+      "pieges": [
+        "Le recul des temps n’est pas automatique pour une vérité encore valable : « The teacher said that the Earth orbits the Sun. » Dans un QCM, …"
+      ],
+      "aRetenir": [
+        "Adapter les personnes et les repères.",
+        "Au passé, les temps reculent souvent selon le contexte.",
+        "Said that… ; told someone that…"
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L6",
+      "titre": "Relier correctement deux informations",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "6/10",
+      "precedente": "Rapporter les paroles de quelqu’un",
+      "suivante": "Choisir un mot de quantité",
+      "explication": "Tu vas choisir un mot de liaison selon son rôle. Un relatif rattache une précision à un nom ; un connecteur indique un lien de sens entre deux idées. Who reprend une personne ; which une chose ou un animal ; where un lieu ; whose indique à qui appartient quelque chose. Dans certaines relatives sans virgule, that peut remplacer who ou which. Pour le sens : because = parce que (cause) ; therefore = donc (résultat) ; although = bien que et whereas = tandis que (contraste). During + nom = pendant ; while + sujet + verbe = pendant que. Rappel utile pour lire une annale : be au passé + verbe-ing décrit une action en cours dans le passé. « We were driving » = Nous étions en train de rouler. Pendant cette action, un autre événement peut survenir.",
+      "formules": [],
+      "exemples": [
+        "Une précision",
+        "La forme compte aussi"
+      ],
+      "pieges": [
+        "Un mot français peut correspondre à plusieurs constructions anglaises. Lis ce qui suit le blanc : nom seul, personne, lieu ou proposition c…"
+      ],
+      "aRetenir": [
+        "Relatif : préciser un nom.",
+        "Connecteur : cause, résultat, contraste ou temps.",
+        "During + nom ; while + proposition."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L7",
+      "titre": "Choisir un mot de quantité",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "7/10",
+      "precedente": "Relier correctement deux informations",
+      "suivante": "Trouver le mot qui convient au contexte",
+      "explication": "Tu vas éviter un piège fréquent : compter des éléments ou parler d’une quantité globale. Un nom dénombrable accepte un nombre : one book, two books. Un nom indénombrable est traité comme une masse ou une idée sans unités séparées : water, information, advice, homework. Many accompagne un pluriel dénombrable ; much un indénombrable. Pour une petite quantité : a few + pluriel, a little + indénombrable. Sans a, few/little insiste souvent sur le manque. Some présente généralement une quantité dans une affirmation ; any se rencontre souvent dans les questions et les négations. « We have some water. » ; « Do we have any water? » ; « We don’t have any water. »",
+      "formules": [],
+      "exemples": [
+        "Compter ou mesurer",
+        "Un peu de conseil"
+      ],
+      "pieges": [
+        "Some existe aussi dans les offres : « Would you like some water? » (= Veux-tu de l’eau ?) Ne décide pas uniquement parce qu’un point d’inte…"
+      ],
+      "aRetenir": [
+        "Many/few : pluriel dénombrable.",
+        "Much/little : indénombrable.",
+        "Some/any : lire le type de message."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L8",
+      "titre": "Trouver le mot qui convient au contexte",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "8/10",
+      "precedente": "Choisir un mot de quantité",
+      "suivante": "Lire pour trouver une preuve",
+      "explication": "Tu vas combiner la grammaire et le sens pour choisir un mot. Rappel : un nom désigne une chose ; un adjectif la décrit. Un adverbe précise notamment comment se fait une action. Une famille de mots rassemble des formes liées : success = réussite (nom), successful = qui réussit (adjectif), successfully = avec succès (adverbe). La terminaison -ly indique souvent un adverbe, mais pas toujours : friendly est un adjectif. Un faux ami ressemble au français mais a un autre sens : actually = en fait (actuellement = currently) ; library = bibliothèque (librairie = bookshop) ; pass an exam = réussir, et non simplement se présenter.",
+      "formules": [],
+      "exemples": [
+        "Quelle place compléter ?",
+        "Un groupe de mots à apprendre"
+      ],
+      "pieges": [
+        "Un mot proche du français n’est pas automatiquement correct. Élimine d’abord les catégories grammaticales impossibles, puis vérifie le sens…"
+      ],
+      "aRetenir": [
+        "Repérer le rôle grammatical du blanc.",
+        "Vérifier le sens en contexte et les faux amis.",
+        "Apprendre des groupes de mots usuels."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L9",
+      "titre": "Lire pour trouver une preuve",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "9/10",
+      "precedente": "Trouver le mot qui convient au contexte",
+      "suivante": "Éliminer les distracteurs et gérer le QCM",
+      "explication": "Tu vas répondre à partir d’un texte, même sans comprendre chaque mot. Repère d’abord le thème, puis ce que demande la question. According to the text signifie d’après le texte ; main idea signifie idée principale. Trois tâches : détail = retrouver une information ; référence = retrouver ce que remplace un pronom ; inférence = déduire prudemment une idée à partir d’indices. Une inférence reste limitée par le texte. They reprend students ; them reprend tablets. However (= cependant) annonce une limite. On peut conclure que le prêt des tablettes ne règle pas à lui seul le problème de connexion ; on ne peut pas affirmer que tous les élèves sont connectés.",
+      "formules": [],
+      "exemples": [
+        "Un court passage",
+        "Une question négative"
+      ],
+      "pieges": [
+        "Une paraphrase reformule la même idée avec d’autres mots. La bonne option n’a pas besoin de recopier le texte. Méfie-toi de all, only, neve…"
+      ],
+      "aRetenir": [
+        "Lire la tâche : détail, référence ou inférence.",
+        "Chercher une preuve, y compris pour les paraphrases.",
+        "NOT inverse la recherche ; surveiller les absolus."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-QCM-L10",
+      "titre": "Éliminer les distracteurs et gérer le QCM",
+      "module": "Anglais : réussir le QCM (Anglais)",
+      "position": "10/10",
+      "precedente": "Lire pour trouver une preuve",
+      "suivante": null,
+      "explication": "Tu vas organiser ta réponse sous contrainte de temps. Un distracteur est une proposition incorrecte mais plausible. Lis d’abord la consigne : une ou plusieurs réponses ? réponse vraie, fausse ou absente ? Pour une phrase à trou : repère le sujet, les repères de temps, la forme attendue et le sens. Pour un texte : cherche la ligne qui soutient l’option. Chaque élimination doit avoir une raison précise. Au premier passage, traite les questions accessibles et note les numéros à revoir. Réserve du temps à la grille : vérifie à chaque report le numéro et la lettre pour éviter un décalage de ligne.",
+      "formules": [],
+      "exemples": [
+        "Éliminer dans l’ordre",
+        "Un budget d’entraînement"
+      ],
+      "pieges": [
+        "Lis le barème de ta session. Si une erreur vaut 0 et une bonne réponse rapporte des points, un choix final raisonné vaut mieux qu’une case …"
+      ],
+      "aRetenir": [
+        "Lire la consigne et le barème.",
+        "Éliminer par une règle ou une preuve.",
+        "Avancer, revenir, puis vérifier la grille."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

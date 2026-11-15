@@ -1,0 +1,266 @@
+{
+  "module": "ANG-GRAM",
+  "titre": "Grammaire anglaise essentielle",
+  "matiere": "Anglais",
+  "resume": "Partir de la phrase simple pour construire les principaux temps, exprimer une obligation et comparer.",
+  "concours": [
+    "ENSEA — ISE option économie",
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "ANG-GRAM-L1",
+      "titre": "Construire une phrase : qui fait quoi ?",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "1/11",
+      "precedente": null,
+      "suivante": "Dire qui on est avec to be",
+      "explication": "Tu vas repérer les pièces d’une phrase pour comprendre un énoncé anglais. Le sujet désigne de qui ou de quoi on parle ; le verbe exprime une action ou un état. Dans une affirmation simple, l’ordre habituel est sujet + verbe + complément. Le complément ajoute une information : quoi, où ou quand. Un pronom remplace un nom : I = je ; you = tu/vous ; he = il ; she = elle ; it = il/elle pour une chose ou un animal ; we = nous ; they = ils/elles. I s’écrit toujours avec une majuscule.",
+      "formules": [],
+      "exemples": [
+        "Une action",
+        "Un groupe de mots"
+      ],
+      "pieges": [
+        "Une phrase anglaise ordinaire garde son sujet : « Read a book » est un ordre, alors que « I read a book » est une affirmation."
+      ],
+      "aRetenir": [
+        "Sujet : de qui parle-t-on ?",
+        "Verbe : action ou état.",
+        "Affirmation simple : sujet avant le verbe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L2",
+      "titre": "Dire qui on est avec to be",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "2/11",
+      "precedente": "Construire une phrase : qui fait quoi ?",
+      "suivante": "Dire ce qu’on a : have et les noms",
+      "explication": "Tu vas te présenter et poser une question avec be, le verbe « être ». La base verbale est la forme du dictionnaire sans to : be, read, work. Au présent : I am ; you/we/they are ; he/she/it is. Un adjectif décrit une personne ou une chose : ready = prêt, tired = fatigué. La négation dit que quelque chose n’est pas vrai : place not après be. Une question demande une information : place be avant le sujet. is not = isn’t ; are not = aren’t ; I am = I’m.",
+      "formules": [],
+      "exemples": [
+        "Présenter",
+        "Transformer"
+      ],
+      "pieges": [
+        "« Are you tired? » est correct. On n’ajoute pas do devant be. Pour l’âge, on dit « I am 18 », avec be, même si le français emploie avoir."
+      ],
+      "aRetenir": [
+        "I am ; he/she/it is ; you/we/they are.",
+        "Négation : be + not.",
+        "Question : be + sujet."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L3",
+      "titre": "Dire ce qu’on a : have et les noms",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "3/11",
+      "precedente": "Dire qui on est avec to be",
+      "suivante": "Exprimer une habitude au présent simple",
+      "explication": "Tu vas exprimer la possession : have signifie avoir. Au présent affirmatif : I/you/we/they have ; he/she/it has. Un nom désigne une personne ou une chose. a/an désigne un élément non encore identifié ; the désigne un élément identifié. Devant un son consonne : a book. Devant un son voyelle : an apple. Le pluriel indique plusieurs éléments : a book → two books. En général, ajoute -s ; après des terminaisons comme -sh, ajoute -es : dish → dishes. Quelques formes changent : child → children.",
+      "formules": [],
+      "exemples": [
+        "Un objet",
+        "Plusieurs objets"
+      ],
+      "pieges": [
+        "Le choix a/an dépend du son : « an hour » car le h est muet, mais « a university » car le premier son est celui de you. A/an ne précède pas…"
+      ],
+      "aRetenir": [
+        "He/she/it has ; les autres sujets have.",
+        "a/an : un élément ; the : un élément identifié.",
+        "Un pluriel prend souvent -s."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L4",
+      "titre": "Exprimer une habitude au présent simple",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "4/11",
+      "precedente": "Dire ce qu’on a : have et les noms",
+      "suivante": "Questionner et nier avec do",
+      "explication": "Tu vas dire ce qui se répète. Le présent simple sert aux habitudes et aux faits généraux. Every day signifie tous les jours ; usually signifie habituellement. Avec I/you/we/they, emploie la base verbale. Avec he/she/it, ajoute -s : work → works. Go devient goes ; study devient studies, car une consonne précède le y.",
+      "formules": [],
+      "exemples": [
+        "Une habitude",
+        "Une fréquence"
+      ],
+      "pieges": [
+        "Le -s concerne he/she/it, pas le pluriel du sujet : « The students work », car the students se remplace par they."
+      ],
+      "aRetenir": [
+        "Habitude ou fait général : présent simple.",
+        "He/she/it : -s, parfois -es ou -ies.",
+        "I/you/we/they : base verbale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L5",
+      "titre": "Questionner et nier avec do",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "5/11",
+      "precedente": "Exprimer une habitude au présent simple",
+      "suivante": "Décrire ce qui se passe maintenant",
+      "explication": "Tu vas transformer une phrase au présent simple. Un auxiliaire aide à construire une question ou une négation. Pour un verbe comme work, on utilise do ou does. Question : Do + I/you/we/they + base ? ou Does + he/she/it + base ? Négation : do not = don’t ; does not = doesn’t, puis la base verbale.",
+      "formules": [],
+      "exemples": [
+        "Déplacer la marque du sujet",
+        "Avoir et demander où"
+      ],
+      "pieges": [
+        "Ne mélange pas les constructions : « Is she ready? » emploie be seul ; « Does she work? » emploie do + un autre verbe."
+      ],
+      "aRetenir": [
+        "Question : do/does + sujet + base.",
+        "Négation : don’t/doesn’t + base.",
+        "Avec be : pas de do."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L6",
+      "titre": "Décrire ce qui se passe maintenant",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "6/11",
+      "precedente": "Questionner et nier avec do",
+      "suivante": "Raconter un fait terminé au prétérit",
+      "explication": "Tu vas distinguer une habitude d’une action en cours. Le présent continu utilise be au présent + verbe en -ing. Now et right now signifient maintenant. Construis d’abord am/is/are à partir du sujet, puis ajoute -ing au verbe : read → reading ; write → writing (on retire le e final) ; run → running (on double ici le n).",
+      "formules": [],
+      "exemples": [
+        "Habitude ou action en cours ?",
+        "Question et négation"
+      ],
+      "pieges": [
+        "Avec un état comme know (savoir/connaître) ou like (aimer), on emploie normalement le présent simple : « I know », même maintenant."
+      ],
+      "aRetenir": [
+        "En cours : am/is/are + verbe-ing.",
+        "Habitude : présent simple.",
+        "Be porte not et passe devant le sujet."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L7",
+      "titre": "Raconter un fait terminé au prétérit",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "7/11",
+      "precedente": "Décrire ce qui se passe maintenant",
+      "suivante": "Relier le passé au présent : present perfect",
+      "explication": "Tu vas situer un événement dans un passé terminé. Le prétérit, ou past simple, convient avec yesterday (hier), last year (l’an dernier), in 2020, two days ago (il y a deux jours). Un verbe régulier prend généralement -ed : work → worked ; live → lived ; study → studied. Un verbe irrégulier change autrement : go → went ; see → saw ; have → had ; meet → met (rencontrer). Ces formes s’apprennent. Question et négation : did + sujet + base ? et sujet + didn’t + base. Pour be au passé : I/he/she/it was ; you/we/they were. Be garde sa propre construction : « Was she ready? »",
+      "formules": [],
+      "exemples": [
+        "Un fait daté",
+        "Retour à la base"
+      ],
+      "pieges": [
+        "N’écris pas « did went » ni « didn’t worked ». Après did/didn’t, retrouve go ou work."
+      ],
+      "aRetenir": [
+        "Passé terminé : prétérit.",
+        "Régulier : -ed ; irrégulier : forme à apprendre.",
+        "Après did/didn’t : base verbale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L8",
+      "titre": "Relier le passé au présent : present perfect",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "8/11",
+      "precedente": "Raconter un fait terminé au prétérit",
+      "suivante": "Parler de l’avenir",
+      "explication": "Tu vas parler d’une expérience ou d’une situation qui continue aujourd’hui. Le present perfect relie un fait passé au présent : have/has + participe passé. Le participe passé est une forme du verbe. Pour un régulier, c’est souvent la même forme en -ed que le prétérit. Pour un irrégulier, distingue base / prétérit / participe : go/went/gone ; see/saw/seen ; be/was ou were/been ; know/knew/known. Since introduit le point de départ : since 2020. For introduit une durée : for two years. Ago se place après une durée et situe un fait terminé : two years ago.",
+      "formules": [],
+      "exemples": [
+        "Une expérience sans date terminée",
+        "Depuis ou il y a ?"
+      ],
+      "pieges": [
+        "Avec un repère passé terminé comme yesterday, choisis normalement le prétérit : « I saw her yesterday. » For ne suffit pas à décider du tem…"
+      ],
+      "aRetenir": [
+        "Present perfect : have/has + participe passé.",
+        "Since : départ ; for : durée.",
+        "Ago et moment terminé : prétérit."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L9",
+      "titre": "Parler de l’avenir",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "9/11",
+      "precedente": "Relier le passé au présent : present perfect",
+      "suivante": "Exprimer capacité, conseil et obligation",
+      "explication": "Tu vas annoncer une décision ou un projet. Will + base verbale exprime notamment une prévision ou une décision prise au moment où l’on parle. Be going to + base présente souvent une intention déjà décidée ou une prévision fondée sur un indice visible. Conjugue be : am/is/are going to.",
+      "formules": [],
+      "exemples": [
+        "Décider maintenant",
+        "Un projet préparé"
+      ],
+      "pieges": [
+        "Will n’est suivi ni de to ni d’un -s : « she will work ». Will et going to se recouvrent parfois ; un bon QCM fournit le contexte ou teste …"
+      ],
+      "aRetenir": [
+        "Will + base : prévision ou décision.",
+        "Be going to + base : intention ou indice visible.",
+        "Will not = won’t."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L10",
+      "titre": "Exprimer capacité, conseil et obligation",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "10/11",
+      "precedente": "Parler de l’avenir",
+      "suivante": "Comparer deux éléments ou tout un groupe",
+      "explication": "Tu vas comprendre ce qui est possible, conseillé ou obligatoire. Un modal est un auxiliaire qui ajoute ce sens au verbe : can, must, should. Can : capacité ou permission ; should : conseil ; must : obligation forte. Ils sont suivis de la base verbale sans to, et ne prennent pas -s. Have to + base exprime aussi une obligation : « He has to work. » Avec do : « Does he have to work? » ; « He doesn’t have to work. » La dernière phrase signifie qu’il n’est pas obligé.",
+      "formules": [],
+      "exemples": [
+        "Capacité et conseil",
+        "Deux négations différentes"
+      ],
+      "pieges": [
+        "Ne traduis pas mustn’t par « pas obligé ». Le premier interdit ; don’t have to laisse le choix."
+      ],
+      "aRetenir": [
+        "Can : capacité ; should : conseil ; must : obligation.",
+        "Modal + base, sans to.",
+        "Mustn’t : interdit ; don’t have to : facultatif."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ANG-GRAM-L11",
+      "titre": "Comparer deux éléments ou tout un groupe",
+      "module": "Grammaire anglaise essentielle (Anglais)",
+      "position": "11/11",
+      "precedente": "Exprimer capacité, conseil et obligation",
+      "suivante": null,
+      "explication": "Tu vas comparer des personnes ou des choses. Le comparatif situe un élément par rapport à un autre ; le superlatif le situe dans tout un groupe. Adjectif court : ajoute -er + than au comparatif et the + -est au superlatif : small → smaller → the smallest. Happy devient happier et the happiest ; big devient bigger et the biggest. Adjectif long : more + adjectif + than et the most + adjectif. Good (bon) est irrégulier : better / the best ; bad (mauvais) : worse / the worst. L’égalité se dit as + adjectif + as.",
+      "formules": [],
+      "exemples": [
+        "Comparer des tailles",
+        "Comparer des coûts"
+      ],
+      "pieges": [
+        "N’ajoute pas more à une forme déjà comparative : smaller, pas more smaller. Ne confonds pas than (que, comparaison) et then (puis)."
+      ],
+      "aRetenir": [
+        "Deux éléments : comparatif + than.",
+        "Tout le groupe : the + superlatif.",
+        "Égalité : as…as ; good → better → best."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

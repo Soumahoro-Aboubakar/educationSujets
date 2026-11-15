@@ -21,6 +21,7 @@ const publicVideo = (doc) => (doc ? {
   durationSec: doc.durationSec ?? null,
   publishedAt: doc.publishedAt || null,
   status: doc.status,
+  ...(doc.externe?.chaine ? { auteur: doc.externe.chaine } : {}),
   ...(doc.source?.contentRevision ? { contentRevision: doc.source.contentRevision, contentGeneration: doc.source.contentGeneration, needsReview: Boolean(doc.source.needsReview) } : {}),
 } : null);
 
@@ -53,7 +54,7 @@ const createVideoService = ({
     try {
       const docs = await Model()
         .find({ status: 'published' })
-        .select('cible code langue youtubeId url title durationSec publishedAt status source.contentRevision source.contentGeneration source.needsReview')
+        .select('cible code langue youtubeId url title durationSec publishedAt status source.contentRevision source.contentGeneration source.needsReview externe.chaine')
         .lean();
       cache = { at: now(), index: buildIndex(docs) };
     } catch (error) {

@@ -1,0 +1,254 @@
+{
+  "module": "PC-ELEC",
+  "titre": "Électricité : dipôles et circuits",
+  "matiere": "Sciences physiques",
+  "resume": "Des grandeurs et unités aux circuits résistifs, puis aux condensateurs et à la charge RC.",
+  "concours": [
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "PC-ELEC-L1",
+      "titre": "Mesurer une grandeur électrique",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Suivre le courant dans un circuit",
+      "explication": "Nous allons lire une mesure et convertir son unité. Cela évite de confondre courant, tension et énergie dans un calcul. Une grandeur est ce que l’on mesure. Sa valeur associe un nombre et une unité : 3 V signifie trois volts. Une lettre, comme U, représente cette valeur dans une formule. Le signe × signifie multiplier ; / signifie diviser. La charge électrique est une propriété de la matière qui peut être positive ou négative. Un déplacement ordonné de charges forme un courant électrique. L’intensité mesure la quantité de charge qui passe chaque seconde.",
+      "formules": [],
+      "exemples": [
+        "Convertir"
+      ],
+      "pieges": [
+        "La lettre m signifie milli, pas « million ». Conserver la grandeur : une conversion ne transforme pas des ampères en volts."
+      ],
+      "aRetenir": [
+        "Mesure = nombre × unité.",
+        "U en V, I en A, R en Ω.",
+        "Écrire la conversion avant la formule."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L2",
+      "titre": "Suivre le courant dans un circuit",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "2/10",
+      "precedente": "Mesurer une grandeur électrique",
+      "suivante": "Utiliser la loi d’Ohm",
+      "explication": "Nous allons repérer les chemins du courant. C’est la première étape pour comprendre un montage. Un dipôle possède deux bornes. Un générateur, comme une pile, fournit de l’énergie ; un récepteur en reçoit. Un circuit fermé forme un chemin continu entre les bornes du générateur. En courant continu, le sens conventionnel du courant dans le circuit extérieur va du + vers le −. Une branche est un chemin entre deux jonctions ; une jonction de plusieurs branches est un nœud. En série, les dipôles se suivent dans la même branche. En dérivation (ou parallèle), ils relient les deux mêmes nœuds.",
+      "formules": [],
+      "exemples": [
+        "Une lampe et un interrupteur"
+      ],
+      "pieges": [
+        "Ne jamais relier directement les bornes d’une pile par un fil : ce court-circuit peut provoquer un courant très élevé."
+      ],
+      "aRetenir": [
+        "Circuit fermé : chemin continu.",
+        "Série : même branche ; parallèle : mêmes nœuds.",
+        "Ampèremètre en série ; voltmètre en dérivation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L3",
+      "titre": "Utiliser la loi d’Ohm",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "3/10",
+      "precedente": "Suivre le courant dans un circuit",
+      "suivante": "Additionner des résistances en série",
+      "explication": "Nous allons calculer une tension ou une intensité dans un résistor, autre nom du conducteur ohmique. À température constante, doubler la tension d’un conducteur ohmique double son intensité : elles sont proportionnelles. Leur quotient U/I reste constant et vaut la résistance R.",
+      "formules": [
+        "U = R × I ; I = U/R ; R = U/I"
+      ],
+      "exemples": [
+        "Trouver U",
+        "Trouver I"
+      ],
+      "pieges": [
+        "U = RI décrit le conducteur ohmique dans ces conditions ; on ne l’applique pas à tous les dipôles, par exemple à une diode."
+      ],
+      "aRetenir": [
+        "Identifier la grandeur inconnue.",
+        "Convertir en V, A, Ω.",
+        "Isoler cette grandeur puis remplacer les lettres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L4",
+      "titre": "Additionner des résistances en série",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "4/10",
+      "precedente": "Utiliser la loi d’Ohm",
+      "suivante": "Répartir le courant en parallèle",
+      "explication": "Nous allons remplacer deux résistances en série par une seule. Le circuit devient plus facile à calculer. Le courant ne dispose que d’un chemin : la même intensité traverse chaque résistor. Une maille est un parcours fermé. Dans une maille simple, la tension fournie est la somme des chutes de tension des récepteurs, avec les orientations choisies.",
+      "formules": [
+        "U = U₁ + U₂ = R₁I + R₂I ; R équivalente = R₁ + R₂."
+      ],
+      "exemples": [
+        "Une résistance unique",
+        "Retrouver les tensions"
+      ],
+      "pieges": [
+        "Même courant ne signifie pas même tension : la résistance la plus grande reçoit ici la plus grande chute de tension."
+      ],
+      "aRetenir": [
+        "Série : même I.",
+        "Addition des tensions.",
+        "R équivalente = somme des résistances."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L5",
+      "titre": "Répartir le courant en parallèle",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "5/10",
+      "precedente": "Additionner des résistances en série",
+      "suivante": "Distinguer puissance et énergie",
+      "explication": "Nous allons calculer le courant dans des branches parallèles. Chaque branche dispose de la même tension. Aux deux mêmes nœuds, la différence de potentiel est identique. La charge ne s’accumule pas au nœud : le courant entrant égale la somme des courants sortants. C’est la loi des nœuds.",
+      "formules": [
+        "I = I₁ + I₂ ; 1/R = 1/R₁ + 1/R₂ ; pour deux résistances, R = R₁R₂/(R₁ + R₂)."
+      ],
+      "exemples": [
+        "30 Ω et 60 Ω sous 6 V"
+      ],
+      "pieges": [
+        "La formule R₁ + R₂ appartient au montage en série. Repérer les nœuds avant de choisir la formule."
+      ],
+      "aRetenir": [
+        "Parallèle : même U.",
+        "Au nœud : addition des courants.",
+        "R équivalente plus petite que chaque R."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L6",
+      "titre": "Distinguer puissance et énergie",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "6/10",
+      "precedente": "Répartir le courant en parallèle",
+      "suivante": "Comprendre la capacité d’un condensateur",
+      "explication": "Nous allons calculer ce que consomme un appareil pendant une durée. La puissance décrit le rythme, l’énergie le total. La puissance P est l’énergie transférée chaque seconde : un watt (W) vaut un joule par seconde. L’énergie E est la quantité transférée, en joules (J). À puissance constante, prolonger la durée augmente l’énergie.",
+      "formules": [
+        "P = UI ; E = Pt ; pour un résistor : P = RI² = U²/R."
+      ],
+      "exemples": [
+        "Chauffage résistif",
+        "Lire des wattheures"
+      ],
+      "pieges": [
+        "Un watt n’est pas une unité d’énergie. Des watts multipliés par des heures donnent des Wh, pas directement des joules."
+      ],
+      "aRetenir": [
+        "P en W : rythme du transfert.",
+        "E = Pt si P constante.",
+        "J avec des secondes ; Wh avec des heures."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L7",
+      "titre": "Comprendre la capacité d’un condensateur",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "7/10",
+      "precedente": "Distinguer puissance et énergie",
+      "suivante": "Associer des condensateurs",
+      "explication": "Nous allons relier la charge stockée à la tension d’un condensateur. Cela prépare l’étude de sa charge dans le temps. Un condensateur possède deux conducteurs séparés par un isolant. Ils portent des charges opposées. La charge q d’une armature se mesure en coulombs (C). La capacité C, en farads (F), mesure la charge stockée par volt.",
+      "formules": [
+        "q = C × u ; 1 µF = 0,000001 F."
+      ],
+      "exemples": [
+        "Une capacité simple"
+      ],
+      "pieges": [
+        "C peut désigner la capacité dans une formule et le coulomb dans une unité. Lire le contexte : 2 µF est une capacité, 10 µC est une charge."
+      ],
+      "aRetenir": [
+        "Condensateur : stockage de charges opposées.",
+        "q = Cu.",
+        "Capacité en F, charge en C."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L8",
+      "titre": "Associer des condensateurs",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "8/10",
+      "precedente": "Comprendre la capacité d’un condensateur",
+      "suivante": "Lire la charge d’un circuit RC",
+      "explication": "Nous allons remplacer plusieurs condensateurs par une capacité équivalente, comme dans certains QCM ESATIC. En parallèle, les condensateurs ont la même tension et leurs charges s’ajoutent : la capacité équivalente est la somme. En série, pour des armatures intermédiaires initialement neutres, les charges ont la même valeur absolue et les tensions s’ajoutent.",
+      "formules": [
+        "Parallèle : C = C₁ + C₂. Série : 1/C = 1/C₁ + 1/C₂ ; à deux : C = C₁C₂/(C₁ + C₂)."
+      ],
+      "exemples": [
+        "En parallèle",
+        "Un montage mixte"
+      ],
+      "pieges": [
+        "Pour les capacités, les règles série/parallèle sont inversées par rapport aux résistances. Justifier avec charge et tension."
+      ],
+      "aRetenir": [
+        "Parallèle : capacités qui s’ajoutent.",
+        "Série : inverses qui s’ajoutent.",
+        "Simplifier un groupe à la fois."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L9",
+      "titre": "Lire la charge d’un circuit RC",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "9/10",
+      "precedente": "Associer des condensateurs",
+      "suivante": "Énergie stockée et décharge",
+      "explication": "Nous allons décrire la charge progressive d’un condensateur à travers une résistance. La constante de temps indique la rapidité de cette évolution. Le dipôle RC associe une résistance R et une capacité C. Une pile de tension U₀ charge un condensateur initialement déchargé. La tension du condensateur commence à zéro puis se rapproche de U₀ ; le courant diminue.",
+      "formules": [
+        "τ = RC ; u(t) = U₀ × (1 − exp(−t/τ))."
+      ],
+      "exemples": [
+        "Calculer l’échelle de temps",
+        "Lire un instant repère"
+      ],
+      "pieges": [
+        "τ n’est pas le temps de charge complète. La formule approche U₀ sans l’atteindre exactement en un temps fini."
+      ],
+      "aRetenir": [
+        "τ = RC en unités SI.",
+        "À τ : 63,2 % de la tension finale.",
+        "Vers 5τ : charge presque achevée."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "PC-ELEC-L10",
+      "titre": "Énergie stockée et décharge",
+      "module": "Électricité : dipôles et circuits (Sciences physiques)",
+      "position": "10/10",
+      "precedente": "Lire la charge d’un circuit RC",
+      "suivante": null,
+      "explication": "Nous allons calculer l’énergie stockée, puis comprendre ce qu’elle devient quand le condensateur se décharge dans une résistance. Après retrait du générateur, une résistance branchée aux bornes reçoit cette énergie sous forme de chaleur. La tension décroît selon u(t) = U initiale × exp(−t/RC). À t = RC, elle vaut environ 36,8 % de sa valeur initiale.",
+      "formules": [
+        "E condensateur = ½ × C × u²."
+      ],
+      "exemples": [
+        "Stocker de l’énergie",
+        "Effet d’une tension doublée"
+      ],
+      "pieges": [
+        "La tension de décharge et celle de charge n’ont pas la même expression. Repérer la tension initiale et la présence du générateur."
+      ],
+      "aRetenir": [
+        "Énergie stockée : ½Cu².",
+        "Décharge RC : tension décroissante.",
+        "L’énergie est dissipée dans la résistance."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

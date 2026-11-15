@@ -1,0 +1,258 @@
+{
+  "module": "ISE-ECO-CN",
+  "titre": "Comptabilité nationale",
+  "matiere": "Économie",
+  "resume": "Passer des échanges élémentaires aux comptes de production, revenus, financement et ressources-emplois, puis interpréter les agrégats.",
+  "concours": [
+    "ENSEA — ISE option économie"
+  ],
+  "lecons": [
+    {
+      "code": "ISE-ECO-CN-L1",
+      "titre": "Compter la valeur réellement ajoutée",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Mesurer le PIB par trois approches",
+      "explication": "Dans ECO-MONNAIE, nous avons distingué production, valeur et flux. La comptabilité nationale décrit les opérations économiques d’un territoire sur une période dans un cadre cohérent. Nous allons éviter de compter plusieurs fois une même production. La consommation intermédiaire, ou CI, désigne les biens et services transformés ou consommés pendant la production. La valeur ajoutée, VA, mesure ce que le producteur ajoute à ces achats.",
+      "formules": [
+        "VA = valeur de la production − consommations intermédiaires"
+      ],
+      "exemples": [
+        "Du grain au pain",
+        "Éviter le double compte"
+      ],
+      "pieges": [
+        "Le salaire n’est pas une CI : il rémunère le travail contribuant à la VA. Une machine utilisée plusieurs années est du capital fixe, pas un…"
+      ],
+      "aRetenir": [
+        "Identifier la production et les CI.",
+        "VA = production − CI.",
+        "Ne pas compter deux fois les produits intermédiaires."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L2",
+      "titre": "Mesurer le PIB par trois approches",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "2/10",
+      "precedente": "Compter la valeur réellement ajoutée",
+      "suivante": "Classer les unités en secteurs institutionnels",
+      "explication": "Le produit intérieur brut, PIB, mesure la production finale des unités résidentes pendant une période. Nous allons comprendre pourquoi production, dépenses et revenus en donnent trois lectures cohérentes. Par les dépenses : PIB = consommation finale + formation brute de capital + exportations − importations. La formation brute de capital comprend notamment investissements fixes et variation de stocks. Les exportations sont vendues au reste du monde ; les importations en proviennent. Par les revenus : PIB = rémunération des salariés + excédent brut d’exploitation + revenu mixte brut + impôts sur la production et les importations nets de subventions. L’excédent d’exploitation rémunère notamment le capital ; le revenu mixte des indépendants mêle travail et capital.",
+      "formules": [
+        "PIB = somme des VA brutes aux prix de base + impôts sur les produits − subventions sur les produits"
+      ],
+      "exemples": [
+        "Lecture par la production",
+        "Lecture par la dépense"
+      ],
+      "pieges": [
+        "Les impôts ajoutés à la somme des VA sont ceux sur les produits. La formule par les revenus emploie un champ plus large d’impôts sur la pro…"
+      ],
+      "aRetenir": [
+        "Production, dépenses et revenus décrivent le même circuit.",
+        "Ajouter les impôts nets pertinents.",
+        "Retirer les importations dans les dépenses."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L3",
+      "titre": "Classer les unités en secteurs institutionnels",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "3/10",
+      "precedente": "Mesurer le PIB par trois approches",
+      "suivante": "Passer des revenus primaires au revenu disponible",
+      "explication": "Nous allons passer des agents vus dans ECO-MONNAIE aux secteurs institutionnels, regroupements d’unités autonomes ayant des fonctions et ressources principales comparables. Une unité est résidente si elle a son centre d’intérêt économique prédominant dans le territoire. La résidence économique ne dépend pas du passeport ; une présence durable, souvent appréciée autour d’un an, sert de repère selon les cas.",
+      "formules": [],
+      "exemples": [
+        "Résidence et propriété",
+        "Le reste du monde"
+      ],
+      "pieges": [
+        "Une entreprise individuelle appartient généralement au secteur des ménages si elle n’est pas traitée comme une quasi-société. « Producteur …"
+      ],
+      "aRetenir": [
+        "Classer selon les fonctions et les ressources.",
+        "Résidence économique ≠ nationalité.",
+        "Secteur institutionnel et branche sont distincts."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L4",
+      "titre": "Passer des revenus primaires au revenu disponible",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "4/10",
+      "precedente": "Classer les unités en secteurs institutionnels",
+      "suivante": "Lire la chaîne des comptes économiques intégrés",
+      "explication": "Nous allons suivre ce qui peut être consommé ou épargné. Un revenu primaire est reçu en participant à la production ou en mettant un actif à disposition : salaire, profit, intérêt ou rente notamment. Une rente rémunère ici la mise à disposition d’une ressource naturelle, comme une terre. La redistribution modifie ces revenus par des prélèvements et des transferts. Un transfert courant est une opération sans contrepartie directe destinée aux dépenses courantes, comme certaines prestations sociales.",
+      "formules": [
+        "Revenu disponible = solde des revenus primaires + transferts courants reçus − transferts courants versés"
+      ],
+      "exemples": [
+        "Un ménage",
+        "Utiliser ce revenu"
+      ],
+      "pieges": [
+        "Un emprunt reçu n’est pas un revenu courant : il crée aussi une dette. Une vente de patrimoine n’est pas non plus un salaire nouveau."
+      ],
+      "aRetenir": [
+        "Identifier les revenus primaires.",
+        "Ajouter et retrancher les transferts courants.",
+        "Revenu disponible : consommation et épargne."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L5",
+      "titre": "Lire la chaîne des comptes économiques intégrés",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "5/10",
+      "precedente": "Passer des revenus primaires au revenu disponible",
+      "suivante": "De l’épargne au financement de l’investissement",
+      "explication": "Le TCEI, tableau des comptes économiques intégrés, relie les comptes des secteurs. Nous allons lire sa logique sans reproduire un tableau trop large : un solde devient le point de départ du compte suivant. Un compte met en regard des ressources et des emplois. Son solde est la différence qui équilibre les deux côtés. Ce mot ne signifie pas nécessairement bénéfice commercial.",
+      "formules": [],
+      "exemples": [
+        "Une chaîne simple",
+        "Vérifier une cohérence"
+      ],
+      "pieges": [
+        "On n’additionne pas VA, revenu disponible et épargne comme trois productions nouvelles : ce sont des étapes d’un même enchaînement."
+      ],
+      "aRetenir": [
+        "Lire les étapes, pas une somme de soldes.",
+        "Repérer ressources et emplois.",
+        "Contrôler les contreparties entre secteurs."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L6",
+      "titre": "De l’épargne au financement de l’investissement",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "6/10",
+      "precedente": "Lire la chaîne des comptes économiques intégrés",
+      "suivante": "Lire les opérations financières dans le TOF",
+      "explication": "Nous allons expliquer le compte de capital. Un actif est un élément de patrimoine procurant des avantages économiques. L’investissement en capital fixe acquiert des actifs productifs utilisés plusieurs années. La FBCF, formation brute de capital fixe, mesure les acquisitions moins cessions d’actifs fixes. La formation brute de capital comprend aussi les variations de stocks et les acquisitions nettes d’objets de valeur.",
+      "formules": [
+        "Capacité de financement = épargne + transferts nets en capital − formation brute de capital − acquisitions nettes d’actifs non produits"
+      ],
+      "exemples": [
+        "Un cas simplifié",
+        "Un besoin"
+      ],
+      "pieges": [
+        "Acheter des actions est un placement financier, pas de la FBCF. La FBCF désigne l’investissement productif non financier, pas toute dépense…"
+      ],
+      "aRetenir": [
+        "Distinguer investissement productif et placement.",
+        "Un solde positif est une capacité.",
+        "Un solde négatif est un besoin."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L7",
+      "titre": "Lire les opérations financières dans le TOF",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "7/10",
+      "precedente": "De l’épargne au financement de l’investissement",
+      "suivante": "Équilibrer les ressources et les emplois d’un produit",
+      "explication": "Le TOF, tableau des opérations financières, décrit comment les secteurs acquièrent des actifs financiers et contractent des dettes. Nous allons relier cette lecture au compte de capital. Un actif financier est un droit financier : dépôt, prêt accordé ou titre notamment. Un passif est une obligation financière, comme une dette envers un prêteur.",
+      "formules": [
+        "Solde financier = acquisitions nettes d’actifs financiers − accroissement net des passifs"
+      ],
+      "exemples": [
+        "Un secteur prêteur",
+        "Un emprunt"
+      ],
+      "pieges": [
+        "La hausse du cours d’une action augmente la valeur du patrimoine, mais n’est pas un achat supplémentaire. Distinguer transactions, réévalua…"
+      ],
+      "aRetenir": [
+        "Actifs acquis moins passifs contractés.",
+        "Relier le solde au compte de capital.",
+        "Transactions et gains de valeur ne se confondent pas."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L8",
+      "titre": "Équilibrer les ressources et les emplois d’un produit",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "8/10",
+      "precedente": "Lire les opérations financières dans le TOF",
+      "suivante": "Distinguer intérieur, national, brut et net",
+      "explication": "Le TRE, tableau ressources-emplois, relie l’origine et l’utilisation des produits. Nous allons lire une ligne simplifiée pour détecter un manque ou une incohérence. Les ressources d’un produit sont sa production intérieure et ses importations. Les emplois indiquent ses utilisations : CI, consommation finale, accumulation et exportations.",
+      "formules": [
+        "Production + importations = CI + consommation finale + formation brute de capital + exportations"
+      ],
+      "exemples": [
+        "Un produit alimentaire",
+        "Une utilisation analytique"
+      ],
+      "pieges": [
+        "Une baisse de stocks est un emploi négatif dans la variation de stocks. Il faut conserver le signe pour équilibrer la ligne. Ne pas mélange…"
+      ],
+      "aRetenir": [
+        "Origines = utilisations.",
+        "Garder les valorisations cohérentes.",
+        "La variation de stocks peut être négative."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L9",
+      "titre": "Distinguer intérieur, national, brut et net",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "9/10",
+      "precedente": "Équilibrer les ressources et les emplois d’un produit",
+      "suivante": "Mesurer la croissance en volume",
+      "explication": "Nous allons comparer des agrégats, grandeurs résumant l’activité. « Intérieur » situe la production ; « national » rattache les revenus aux unités résidentes, pas aux personnes d’une nationalité donnée. Le terme brut signifie que l’on n’a pas retranché la consommation de capital fixe, perte de valeur économique des actifs fixes par usure et obsolescence. L’amortissement comptable en est une approximation selon les règles utilisées.",
+      "formules": [
+        "RNB = PIB + revenus primaires reçus du reste du monde − revenus primaires versés au reste du monde",
+        "Produit intérieur net = PIB − consommation de capital fixe ; revenu national net = RNB − consommation de capital fixe"
+      ],
+      "exemples": [
+        "Revenus avec l’extérieur",
+        "Passer au net"
+      ],
+      "pieges": [
+        "Un transfert familial courant reçu de l’extérieur n’est pas automatiquement un revenu primaire. Identifier sa nature avant de le placer dan…"
+      ],
+      "aRetenir": [
+        "Résidence économique, pas passeport.",
+        "RNB : ajouter le solde primaire extérieur.",
+        "Net : retrancher la consommation de capital fixe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-CN-L10",
+      "titre": "Mesurer la croissance en volume",
+      "module": "Comptabilité nationale (Économie)",
+      "position": "10/10",
+      "precedente": "Distinguer intérieur, national, brut et net",
+      "suivante": null,
+      "explication": "Nous allons distinguer une hausse de production d’une hausse de prix. Le PIB nominal, ou en valeur, utilise les prix courants ; le PIB en volume retire l’effet des variations de prix. Le PIB par habitant divise le PIB par la population. Il décrit une moyenne, pas la répartition. Le PIB mesure une production, pas directement le bien-être, la qualité de l’environnement ni toutes les activités domestiques non rémunérées.",
+      "formules": [
+        "Dans un exercice à prix de base fixes : PIB en volume = PIB nominal / (indice de prix / 100)"
+      ],
+      "exemples": [
+        "Un seul produit",
+        "Retirer l’effet des prix"
+      ],
+      "pieges": [
+        "Une hausse du PIB total peut s’accompagner d’une baisse par habitant si la population augmente plus vite. Pour comparer des niveaux de vie …"
+      ],
+      "aRetenir": [
+        "Séparer prix et quantités.",
+        "La croissance se mesure en volume.",
+        "Une moyenne de production ne résume pas le développement."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "module": "DROIT-ORGJUD",
+  "titre": "L’organisation judiciaire ivoirienne",
+  "matiere": "Organisation judiciaire",
+  "resume": "Comprendre un litige, les garanties du procès, les juridictions, les recours et les métiers de la justice.",
+  "concours": [
+    "INFJ — École de la Magistrature",
+    "INFJ — Greffes — cycle moyen supérieur"
+  ],
+  "lecons": [
+    {
+      "code": "DROIT-ORGJUD-L1",
+      "titre": "D’un désaccord à un litige",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Pourquoi le procès doit-il être équitable ?",
+      "explication": "Nous allons découvrir les mots du procès. Aucun vocabulaire juridique préalable n’est nécessaire. Le droit organise la vie sociale par des règles obligatoires. Ses textes comprennent la Constitution, les lois et les règlements ; les juges les appliquent et les interprètent. Un litige est un désaccord juridique. Une juridiction est un organe qui rend la justice. En matière civile, le demandeur formule une demande ; le défendeur y répond. Ce sont les parties au procès. Une prétention est ce qu’une partie demande au juge.",
+      "formules": [],
+      "exemples": [
+        "Une dette discutée",
+        "Qualifier la demande"
+      ],
+      "pieges": [
+        "« Défendeur » désigne une partie au procès ; « défenseur » peut désigner la personne qui l’assiste. Une personne poursuivie n’est pas autom…"
+      ],
+      "aRetenir": [
+        "Juridiction : organe de justice.",
+        "Parties : demandeur et défendeur au civil.",
+        "Une demande doit encore être examinée au fond."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-ORGJUD-L2",
+      "titre": "Pourquoi le procès doit-il être équitable ?",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "2/8",
+      "precedente": "D’un désaccord à un litige",
+      "suivante": "Trouver le juge du premier degré",
+      "explication": "Nous allons expliquer trois garanties qui permettent à chacun de défendre sa position. Un juge indépendant décide selon le droit sans recevoir d’ordre sur l’issue du litige. Un juge impartial ne favorise aucune partie. Le contradictoire permet à chacun de connaître les demandes et pièces discutées et d’y répondre. La publicité ouvre en principe les débats au public ; le huis clos les ferme dans les cas prévus par la loi. La motivation expose les raisons juridiques et factuelles de la décision.",
+      "formules": [],
+      "exemples": [
+        "Une pièce nouvelle",
+        "Une audience protégée"
+      ],
+      "pieges": [
+        "Publicité ne signifie pas que chaque acte d’enquête est public. Égalité devant la justice ne signifie pas absence de toute règle spéciale."
+      ],
+      "aRetenir": [
+        "Indépendance : pas d’ordre sur le jugement.",
+        "Impartialité : pas de parti pris.",
+        "Contradiction et motivation rendent le procès contrôlable."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-ORGJUD-L3",
+      "titre": "Trouver le juge du premier degré",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "3/8",
+      "precedente": "Pourquoi le procès doit-il être équitable ?",
+      "suivante": "Distinguer appel et cassation",
+      "explication": "Nous allons comprendre où commence une affaire et ce que signifie la compétence. La compétence est le pouvoir légal d’une juridiction de traiter une affaire. Elle dépend notamment de la matière et du territoire. Le premier degré est le premier examen juridictionnel. Le tribunal de première instance est une juridiction de droit commun : il connaît des affaires que les textes ne confient pas spécialement à une autre juridiction. Une juridiction spécialisée, comme un tribunal de commerce, reçoit certaines affaires définies par la loi.",
+      "formules": [],
+      "exemples": [
+        "Commencer au bon niveau",
+        "Vérifier une spécialité"
+      ],
+      "pieges": [
+        "« Droit commun » ne veut pas dire « toutes les affaires sans exception ». Les compétences spéciales restent à respecter."
+      ],
+      "aRetenir": [
+        "Premier degré : premier examen.",
+        "Droit commun sous réserve des compétences spéciales.",
+        "Vérifier matière puis territoire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-ORGJUD-L4",
+      "titre": "Distinguer appel et cassation",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "4/8",
+      "precedente": "Trouver le juge du premier degré",
+      "suivante": "Siège et parquet : deux rôles distincts",
+      "explication": "Nous allons distinguer deux contrôles d’une décision pour choisir le bon recours. Un recours permet de contester une décision dans les conditions prévues. L’appel, lorsqu’il est ouvert, permet un réexamen en fait et en droit dans ses limites. La cassation contrôle la conformité juridique d’une décision rendue en dernier ressort : elle ne constitue pas un troisième degré de jugement des faits. Une décision en dernier ressort n’est pas susceptible d’appel ; elle n’est pas nécessairement à l’abri d’un pourvoi.",
+      "formules": [],
+      "exemples": [
+        "Discuter les faits",
+        "Discuter le droit"
+      ],
+      "pieges": [
+        "Un recours n’est pas toujours ouvert et un pourvoi n’est pas un nouvel appel. La CCJA présente une particularité étudiée en L8."
+      ],
+      "aRetenir": [
+        "Appel : réexamen en fait et en droit.",
+        "Cassation : contrôle juridique.",
+        "Toujours vérifier ouverture et délai du recours."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-ORGJUD-L5",
+      "titre": "Siège et parquet : deux rôles distincts",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "5/8",
+      "precedente": "Distinguer appel et cassation",
+      "suivante": "Le greffe garantit la trace du procès",
+      "explication": "Nous allons identifier les magistrats qui décident et ceux qui requièrent, distinction fréquente à l’INFJ. Un magistrat exerce une fonction judiciaire définie par les textes. Les magistrats du siège rendent des décisions : juges, présidents ou conseillers. Le juge d’instruction appartient au siège, même s’il ne prononce pas la culpabilité au procès. Les magistrats du parquet, ou ministère public, exercent notamment l’action publique et prennent des réquisitions, demandes adressées à la juridiction. Procureur, substitut et avocat général appartiennent au parquet.",
+      "formules": [],
+      "exemples": [
+        "À l’audience pénale",
+        "Un titre trompeur"
+      ],
+      "pieges": [
+        "La hiérarchie du parquet ne permet pas de donner au juge du siège un ordre sur le sens de son jugement."
+      ],
+      "aRetenir": [
+        "Siège : décisions juridictionnelles.",
+        "Parquet : action publique et réquisitions.",
+        "Avocat général : magistrat du parquet."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-ORGJUD-L6",
+      "titre": "Le greffe garantit la trace du procès",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "6/8",
+      "precedente": "Siège et parquet : deux rôles distincts",
+      "suivante": "Plusieurs contentieux, plusieurs juges",
+      "explication": "Nous allons distinguer le travail du greffier de celui du juge et des auxiliaires. Le greffier assiste la juridiction, tient les actes et procès-verbaux, conserve les minutes, originaux des décisions, et délivre les copies selon les textes. Il contribue à l’authenticité de la procédure sans trancher le litige. L’avocat conseille et défend une partie. Le commissaire de justice signifie les actes et participe à l’exécution des décisions ; cette profession réunit les fonctions issues notamment des huissiers de justice. Le notaire reçoit des actes authentiques.",
+      "formules": [],
+      "exemples": [
+        "Après le jugement",
+        "Porter un acte à connaissance"
+      ],
+      "pieges": [
+        "Le greffier n’est ni le juge ni l’avocat d’une partie. Une copie et la minute ne sont pas le même support."
+      ],
+      "aRetenir": [
+        "Greffe : assistance, authenticité et conservation.",
+        "Avocat : conseil et défense.",
+        "Commissaire de justice : signification et exécution."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-ORGJUD-L7",
+      "titre": "Plusieurs contentieux, plusieurs juges",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "7/8",
+      "precedente": "Le greffe garantit la trace du procès",
+      "suivante": "La CCJA et le droit OHADA",
+      "explication": "Nous allons reconnaître les grandes familles de litiges sans dresser une carte locale non vérifiée des tribunaux. Le contentieux désigne les litiges d’un domaine. L’ordre judiciaire traite notamment les affaires civiles et pénales. Le Conseil d’État est la juridiction suprême de l’ordre administratif et exerce les attributions définies par sa loi organique. La Cour des comptes exerce le contrôle juridictionnel financier. Le Conseil constitutionnel contrôle les lois et certaines opérations électorales. La compétence exacte dépend du texte, de l’objet de la demande et, parfois, de dispositions transitoires.",
+      "formules": [],
+      "exemples": [
+        "Une décision administrative",
+        "Une question électorale"
+      ],
+      "pieges": [
+        "L’existence d’une juridiction dans les textes ne prouve pas son installation effective. Ne pas inventer un tribunal administratif local ouv…"
+      ],
+      "aRetenir": [
+        "Qualifier la nature du contentieux.",
+        "Vérifier le texte de compétence.",
+        "Distinguer institution prévue et implantation effective."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "DROIT-ORGJUD-L8",
+      "titre": "La CCJA et le droit OHADA",
+      "module": "L’organisation judiciaire ivoirienne (Organisation judiciaire)",
+      "position": "8/8",
+      "precedente": "Plusieurs contentieux, plusieurs juges",
+      "suivante": null,
+      "explication": "Nous allons repérer la particularité d’un litige relevant du droit OHADA, sans apprendre encore le droit commercial. L’OHADA, Organisation pour l’harmonisation en Afrique du droit des affaires, adopte des Actes uniformes, règles communes aux États parties dans les domaines concernés. Sa Cour commune de justice et d’arbitrage (CCJA) siège à Abidjan. Les juridictions nationales jugent les litiges en première instance et en appel ; la CCJA assure la cassation dans son domaine OHADA, sauf les décisions appliquant des sanctions pénales. En cas de cassation, elle évoque l’affaire et statue au fond : elle tranche alors le litige, selon l’article 14 du Traité.",
+      "formules": [],
+      "exemples": [
+        "Un litige de société",
+        "Une particularité"
+      ],
+      "pieges": [
+        "Le siège à Abidjan ne fait pas de la CCJA une juridiction uniquement ivoirienne. Tout litige commercial ne relève pas automatiquement d’un …"
+      ],
+      "aRetenir": [
+        "OHADA : règles communes du droit des affaires.",
+        "Juges nationaux en première instance et en appel.",
+        "CCJA : en cas de cassation, évocation et jugement au fond."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

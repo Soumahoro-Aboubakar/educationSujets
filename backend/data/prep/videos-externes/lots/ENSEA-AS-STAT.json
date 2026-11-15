@@ -1,0 +1,229 @@
+{
+  "module": "ENSEA-AS-STAT",
+  "titre": "Statistique descriptive",
+  "matiere": "Mathématiques",
+  "resume": "Résumer une série observée puis décrire le lien entre deux variables par un nuage et une droite ajustée.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)"
+  ],
+  "lecons": [
+    {
+      "code": "ENSEA-AS-STAT-L1",
+      "titre": "Compter des observations",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "La moyenne partage un total",
+      "explication": "Nous allons organiser des données réellement observées. La statistique descriptive résume ces observations ; le module MATH-PROBA étudie, lui, les issues d’expériences aléatoires. La population est l’ensemble étudié. Un individu est un de ses éléments : personne, objet ou mesure. Un échantillon est une partie observée de cette population. Le caractère est la propriété relevée ; une modalité est une de ses valeurs possibles.",
+      "formules": [
+        "Fréquence d’une modalité = son effectif / effectif total N."
+      ],
+      "exemples": [
+        "Une enquête"
+      ],
+      "pieges": [
+        "Un effectif est un nombre d’individus ; une fréquence est une proportion. « 4 » et « 20 % » ne sont pas interchangeables."
+      ],
+      "aRetenir": [
+        "Identifier population, individu et caractère.",
+        "Effectif : compter.",
+        "Fréquence : diviser par le total."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L2",
+      "titre": "La moyenne partage un total",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "2/9",
+      "precedente": "Compter des observations",
+      "suivante": "La médiane repère le milieu",
+      "explication": "Nous allons remplacer des valeurs numériques par un partage égal de leur total. C’est le sens de la moyenne.",
+      "formules": [
+        "Moyenne x̄ = (x₁ + … + xₙ)/N ; avec effectifs : x̄ = (n₁x₁ + … + nₖxₖ)/N."
+      ],
+      "exemples": [
+        "Des valeurs individuelles",
+        "Des valeurs répétées"
+      ],
+      "pieges": [
+        "Une moyenne peut ne figurer nulle part dans les données. Elle est sensible à une valeur exceptionnellement grande ou petite."
+      ],
+      "aRetenir": [
+        "Moyenne : total / effectif.",
+        "Avec des effectifs, pondérer chaque valeur.",
+        "Une valeur extrême influence la moyenne."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L3",
+      "titre": "La médiane repère le milieu",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "3/9",
+      "precedente": "La moyenne partage un total",
+      "suivante": "Les quartiles délimitent la moitié centrale",
+      "explication": "Nous allons repérer le centre d’une série par la position des valeurs. Il faut d’abord ranger la série par ordre croissant. La médiane sépare la série ordonnée en deux moitiés. Pour N impair, on prend la valeur de rang (N + 1)/2. Pour N pair, on adopte ici la moyenne des valeurs de rangs N/2 et N/2 + 1. Le rang commence à 1.",
+      "formules": [],
+      "exemples": [
+        "Effectif impair",
+        "Effectif pair"
+      ],
+      "pieges": [
+        "Le rang médian n’est pas la médiane : le rang est une position, la médiane est une valeur de la série ou la moyenne de deux valeurs central…"
+      ],
+      "aRetenir": [
+        "Trier les valeurs.",
+        "Effectif impair : rang central.",
+        "Effectif pair : moyenne des deux valeurs centrales ici."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L4",
+      "titre": "Les quartiles délimitent la moitié centrale",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "4/9",
+      "precedente": "La médiane repère le milieu",
+      "suivante": "Mesurer la dispersion autour de la moyenne",
+      "explication": "Nous allons repérer les seuils de 25 % et de 75 % d’une série. Ils décrivent sa zone centrale. Convention utilisée ici : dans la série ordonnée, Q₁ est la valeur au rang plafond(N/4), Q₃ celle au rang plafond(3N/4). Le plafond est le plus petit entier supérieur ou égal au nombre : plafond(2,25) = 3.",
+      "formules": [],
+      "exemples": [
+        "Huit valeurs",
+        "Un rang non entier"
+      ],
+      "pieges": [
+        "Les logiciels peuvent utiliser d’autres conventions avec interpolation. Dans un exercice, suivre la convention annoncée ; ne pas mélanger l…"
+      ],
+      "aRetenir": [
+        "Rangs : plafonds de N/4 et 3N/4.",
+        "Lire les valeurs à ces rangs.",
+        "Soustraire Q₁ à Q₃ pour mesurer l’étalement central."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L5",
+      "titre": "Mesurer la dispersion autour de la moyenne",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "5/9",
+      "precedente": "Les quartiles délimitent la moitié centrale",
+      "suivante": "Observer deux caractères ensemble",
+      "explication": "Nous allons distinguer deux séries ayant la même moyenne mais des valeurs plus ou moins dispersées. Comme pour la dispersion d’une variable aléatoire dans MATH-PROBA, on utilise les carrés des écarts. Ici, la variance descriptive V est leur moyenne sur les observations, pondérées par leurs effectifs plutôt que par une loi de probabilité. Les carrés empêchent les écarts positifs et négatifs de s’annuler. L’écart-type σ est la racine positive de V ; il revient dans l’unité des données.",
+      "formules": [
+        "V = (1/N)Σ(xᵢ − x̄)² = (1/N)Σxᵢ² − x̄² ; σ = √V."
+      ],
+      "exemples": [
+        "Une série dispersée",
+        "Une série concentrée"
+      ],
+      "pieges": [
+        "La variance est positive ou nulle. Si une formule donne une valeur négative sensible, vérifier les calculs ; conserver assez de décimales a…"
+      ],
+      "aRetenir": [
+        "Variance : moyenne des carrés des écarts.",
+        "Écart-type : racine de la variance.",
+        "Même moyenne ne signifie pas même dispersion."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L6",
+      "titre": "Observer deux caractères ensemble",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "6/9",
+      "precedente": "Mesurer la dispersion autour de la moyenne",
+      "suivante": "La covariance décrit le sens d’une liaison",
+      "explication": "Nous allons conserver le lien entre deux informations relevées sur les mêmes individus. Les données ne sont plus deux listes indépendantes. Un tableau à double entrée croise deux caractères. Chaque case compte les individus possédant ensemble les deux modalités. Les totaux de lignes et de colonnes sont les effectifs marginaux : ils décrivent chaque caractère séparément. Pour deux caractères numériques, on peut placer un point de coordonnées (xᵢ ; yᵢ) pour chaque individu. L’ensemble forme un nuage de points. Le point moyen G a pour coordonnées (x̄ ; ȳ).",
+      "formules": [],
+      "exemples": [
+        "Lire les marges",
+        "Un nuage"
+      ],
+      "pieges": [
+        "Il faut garder les paires : associer la plus petite valeur de x à la plus petite valeur de y après deux tris indépendants inventerait de no…"
+      ],
+      "aRetenir": [
+        "Un tableau croisé conserve les associations.",
+        "Les marges décrivent un caractère à la fois.",
+        "Un nuage place une paire numérique par point."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L7",
+      "titre": "La covariance décrit le sens d’une liaison",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "7/9",
+      "precedente": "Observer deux caractères ensemble",
+      "suivante": "Ajuster une droite par les moindres carrés",
+      "explication": "Nous allons mesurer si deux variables numériques s’écartent de leur moyenne dans le même sens. Cette mesure servira à ajuster une droite. Un produit d’écarts est positif si les deux valeurs sont ensemble au-dessus ou ensemble au-dessous de leurs moyennes. Il est négatif si elles sont de part et d’autre. La covariance fait la moyenne de ces produits.",
+      "formules": [
+        "Cov(x, y) = (1/N)Σ(xᵢ − x̄)(yᵢ − ȳ) = (1/N)Σxᵢyᵢ − x̄ȳ."
+      ],
+      "exemples": [
+        "Calcul avec les produits",
+        "Interpréter le signe"
+      ],
+      "pieges": [
+        "Covariance nulle ne signifie pas absence de toute relation : pour les points (−1 ; 1), (0 ; 0), (1 ; 1), on a y = x² mais la covariance vau…"
+      ],
+      "aRetenir": [
+        "Centrer les deux variables sur leurs moyennes.",
+        "Multiplier les écarts puis moyenner.",
+        "Le signe décrit le sens de la tendance linéaire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L8",
+      "titre": "Ajuster une droite par les moindres carrés",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "8/9",
+      "precedente": "La covariance décrit le sens d’une liaison",
+      "suivante": "Interpréter la corrélation sans surinterpréter",
+      "explication": "Nous allons résumer un nuage par une droite permettant d’estimer y à partir de x. Les paramètres se calculent à partir des résumés précédents. Sur une droite ŷ = ax + b, ŷ est la valeur prédite de y. Le résidu est yᵢ − ŷᵢ, écart vertical observé moins prédit. La droite des moindres carrés minimise la somme des carrés de ces résidus.",
+      "formules": [
+        "Si V(x) > 0 : a = Cov(x, y)/V(x) ; b = ȳ − ax̄."
+      ],
+      "exemples": [
+        "Calculer les deux paramètres",
+        "Prédire et contrôler"
+      ],
+      "pieges": [
+        "La régression de y en x minimise les écarts verticaux. Échanger les deux variables ne donne pas en général la même droite."
+      ],
+      "aRetenir": [
+        "Minimiser les carrés des écarts verticaux.",
+        "a = covariance / variance de x.",
+        "b se déduit du passage par le point moyen."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-STAT-L9",
+      "titre": "Interpréter la corrélation sans surinterpréter",
+      "module": "Statistique descriptive (Mathématiques)",
+      "position": "9/9",
+      "precedente": "Ajuster une droite par les moindres carrés",
+      "suivante": null,
+      "explication": "Nous allons apprécier la qualité d’un lien linéaire et les limites d’une prédiction. Un calcul exact ne garantit pas un modèle pertinent. Un r proche de 1 indique des points proches d’une droite croissante ; proche de −1, d’une droite décroissante. r = ±1 signifie un alignement exact avec pente non nulle. r proche de 0 ne détecte pas une liaison linéaire forte.",
+      "formules": [
+        "r = Cov(x, y)/(σₓσᵧ), si σₓ > 0 et σᵧ > 0 ; −1 ≤ r ≤ 1."
+      ],
+      "exemples": [
+        "Un alignement parfait",
+        "Une liaison courbe"
+      ],
+      "pieges": [
+        "Ne pas choisir un modèle sur r seul : regarder le nuage, les valeurs extrêmes et le contexte. Si une variable est constante, r n’est pas dé…"
+      ],
+      "aRetenir": [
+        "r est sans unité et compris entre −1 et 1.",
+        "Le nuage reste indispensable.",
+        "Prédiction et causalité demandent plus qu’une corrélation."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

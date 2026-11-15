@@ -1,0 +1,247 @@
+{
+  "module": "ECO-MONNAIE",
+  "titre": "Monnaie et politique monétaire dans l’UEMOA",
+  "matiere": "Économie",
+  "resume": "Des choix économiques aux agents et aux marchés, puis aux fonctions de la monnaie, aux banques et à la politique monétaire.",
+  "concours": [
+    "ENSEA — ISE option économie"
+  ],
+  "lecons": [
+    {
+      "code": "ECO-MONNAIE-L1",
+      "titre": "Pourquoi l’économie étudie-t-elle des choix ?",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Qui produit et qui consomme ?",
+      "explication": "L’économie étudie comment les personnes et les sociétés utilisent des ressources limitées pour satisfaire leurs besoins. Comprendre un choix permet d’expliquer une décision d’achat ou un projet public. Une ressource est un moyen disponible : temps, travail, terre ou argent. La rareté signifie que ces moyens ne permettent pas de réaliser simultanément tous les projets souhaités.",
+      "formules": [],
+      "exemples": [
+        "Un budget limité",
+        "Deux heures disponibles"
+      ],
+      "pieges": [
+        "« Le prix augmente » décrit une évolution. « Il faut bloquer le prix » recommande une action. Distinguer description et jugement permet de …"
+      ],
+      "aRetenir": [
+        "Des ressources limitées imposent des choix.",
+        "Choisir implique un renoncement.",
+        "Décrire et recommander sont deux démarches distinctes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L2",
+      "titre": "Qui produit et qui consomme ?",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "2/10",
+      "precedente": "Pourquoi l’économie étudie-t-elle des choix ?",
+      "suivante": "Lire l’offre et la demande sur un marché",
+      "explication": "Nous allons identifier les agents économiques, personnes ou organisations qui décident. Leurs relations forment un circuit économique : une représentation des échanges. Un bien est un objet, comme un cahier. Un service est une prestation, comme un transport. Produire, c’est créer ces biens ou services ; consommer, c’est les utiliser pour satisfaire un besoin.",
+      "formules": [],
+      "exemples": [
+        "La boulangerie"
+      ],
+      "pieges": [
+        "Une personne peut exercer plusieurs rôles : consommer comme membre d’un ménage et produire dans son entreprise. On classe l’opération étudi…"
+      ],
+      "aRetenir": [
+        "Identifier les acteurs et les opérations.",
+        "La production comprend des services.",
+        "Distinguer la prestation et son paiement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L3",
+      "titre": "Lire l’offre et la demande sur un marché",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "3/10",
+      "precedente": "Qui produit et qui consomme ?",
+      "suivante": "Mesurer une quantité, une valeur et une variation",
+      "explication": "Un marché met en relation vendeurs et acheteurs d’un bien ou service, sur place ou à distance. Nous allons comparer leurs intentions au même prix. Le prix est la somme payée par unité. La demande indique les quantités que les acheteurs souhaitent et peuvent acheter à différents prix. L’offre indique les quantités que les vendeurs souhaitent et peuvent vendre.",
+      "formules": [],
+      "exemples": [
+        "Des mangues",
+        "Un autre prix"
+      ],
+      "pieges": [
+        "Un besoin ne constitue pas à lui seul une demande au prix proposé : il faut une capacité d’achat. Les déterminants de l’offre et de la dema…"
+      ],
+      "aRetenir": [
+        "Comparer au même prix.",
+        "Équilibre : offre = demande.",
+        "Un prix d’équilibre n’est pas une garantie d’accès pour tous."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L4",
+      "titre": "Mesurer une quantité, une valeur et une variation",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "4/10",
+      "precedente": "Lire l’offre et la demande sur un marché",
+      "suivante": "Pourquoi utilise-t-on de la monnaie ?",
+      "explication": "Nous allons préciser les unités et les dates d’un nombre économique : elles conditionnent toute comparaison. Un stock est mesuré à une date, comme une dette au 31 décembre. Un flux est mesuré sur une période, comme les ventes de novembre. La quantité compte des unités physiques ; la valeur exprime une somme monétaire.",
+      "formules": [
+        "Valeur = prix unitaire × quantité",
+        "Variation en % = (valeur finale − valeur initiale) / valeur initiale × 100"
+      ],
+      "exemples": [
+        "Des ventes",
+        "Un panier de produits"
+      ],
+      "pieges": [
+        "Une hausse de 10 % suivie d’une baisse de 10 % ne s’annule pas : 100 devient 110, puis 99. La base de calcul a changé."
+      ],
+      "aRetenir": [
+        "Stock : date ; flux : période.",
+        "Valeur = prix × quantité.",
+        "Pourcentage : préciser la base."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L5",
+      "titre": "Pourquoi utilise-t-on de la monnaie ?",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "5/10",
+      "precedente": "Mesurer une quantité, une valeur et une variation",
+      "suivante": "Comment un crédit crée-t-il un dépôt ?",
+      "explication": "La monnaie est un moyen de paiement généralement accepté. Nous allons expliquer ses fonctions et distinguer monnaie et instrument de paiement. Les billets sont dits fiduciaires, les pièces divisionnaires. Dans les statistiques, la circulation fiduciaire regroupe billets et pièces. Les dépôts disponibles sur les comptes bancaires sont de la monnaie scripturale.",
+      "formules": [],
+      "exemples": [
+        "La difficulté du troc",
+        "Carte et compte"
+      ],
+      "pieges": [
+        "Un terrain peut conserver de la valeur sans être directement accepté pour payer un repas. Tout patrimoine n’est pas de la monnaie."
+      ],
+      "aRetenir": [
+        "Mesurer, payer, conserver.",
+        "La carte mobilise un dépôt.",
+        "L’inflation réduit le pouvoir d’achat d’une somme fixe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L6",
+      "titre": "Comment un crédit crée-t-il un dépôt ?",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "6/10",
+      "precedente": "Pourquoi utilise-t-on de la monnaie ?",
+      "suivante": "Mesurer la masse monétaire sans double compte",
+      "explication": "Un crédit met une somme à disposition contre une obligation de remboursement. Nous allons suivre la monnaie créée à cette occasion, puis détruite lors du remboursement du principal. La banque centrale émet les billets et pièces et fournit la monnaie centrale utilisée entre banques. Un paiement vers une autre banque exige un règlement entre établissements.",
+      "formules": [],
+      "exemples": [
+        "Un prêt de 100 000 FCFA",
+        "Un remboursement partiel"
+      ],
+      "pieges": [
+        "Créer un dépôt ne donne pas un pouvoir illimité : la banque doit gérer les risques, disposer de fonds propres, ressources absorbant notamme…"
+      ],
+      "aRetenir": [
+        "Crédit nouveau : dépôt et créance nouveaux.",
+        "Principal remboursé : destruction monétaire.",
+        "La banque gère risque et liquidité."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L7",
+      "titre": "Mesurer la masse monétaire sans double compte",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "7/10",
+      "precedente": "Comment un crédit crée-t-il un dépôt ?",
+      "suivante": "Financer un projet par banque ou par titres",
+      "explication": "La masse monétaire est un stock à une date donnée. Nous allons construire des agrégats, ensembles emboîtés regroupant des formes de monnaie et des dépôts selon leur disponibilité. Dans la présentation simplifiée de l’UEMOA utilisée ici, M1 réunit billets et pièces hors banques et dépôts transférables. M2 ajoute les autres dépôts inclus dans le cadre statistique. Un dépôt transférable peut être directement mobilisé pour payer. Les contreparties retracent les postes de bilan associés : avoirs extérieurs nets, créances intérieures et autres postes nets notamment. « Net » signifie que des engagements sont déduits des avoirs.",
+      "formules": [
+        "M1 = circulation fiduciaire hors banques + dépôts transférables ; M2 = M1 + autres dépôts inclus"
+      ],
+      "exemples": [
+        "Deux agrégats",
+        "Un retrait"
+      ],
+      "pieges": [
+        "Les réserves des banques à la banque centrale servent aux règlements bancaires. Les ajouter aux dépôts des ménages pour mesurer M1 comptera…"
+      ],
+      "aRetenir": [
+        "Les agrégats sont emboîtés.",
+        "Un retrait change la forme monétaire.",
+        "Distinguer monnaie détenue et contreparties bancaires."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L8",
+      "titre": "Financer un projet par banque ou par titres",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "8/10",
+      "precedente": "Mesurer la masse monétaire sans double compte",
+      "suivante": "Suivre une décision de politique monétaire",
+      "explication": "Le financement fournit les ressources nécessaires à une dépense. Nous allons distinguer le prêt bancaire et l’émission de titres, documents qui constatent des droits financiers. Le financement est intermédié lorsqu’une banque prête ; il est dit direct lorsqu’un financeur achète un titre émis par l’agent qui cherche des fonds. Une action est une part de propriété ; une obligation est un titre de dette.",
+      "formules": [],
+      "exemples": [
+        "Acheter une obligation",
+        "Émission et revente"
+      ],
+      "pieges": [
+        "Acheter un titre avec un dépôt existant transfère généralement ce dépôt. Ce n’est pas automatiquement une création monétaire comme un crédi…"
+      ],
+      "aRetenir": [
+        "Banque : intermédiation.",
+        "Action : propriété ; obligation : dette.",
+        "Primaire : émission ; secondaire : revente."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L9",
+      "titre": "Suivre une décision de politique monétaire",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "9/10",
+      "precedente": "Financer un projet par banque ou par titres",
+      "suivante": "Partager une monnaie : avantages et contraintes",
+      "explication": "Nous allons suivre une décision de la BCEAO, Banque centrale des États de l’Afrique de l’Ouest. Elle conduit la politique monétaire commune de l’UMOA ; son objectif principal est la stabilité des prix. Le taux d’intérêt exprime le coût du crédit sur une période, en proportion de la somme prêtée. Les taux directeurs influencent le coût du refinancement, apport de liquidités aux banques par la banque centrale. Les réserves obligatoires imposent aux banques de conserver une fraction de certains dépôts en monnaie centrale. Les opérations de fourniture ou de retrait de liquidités font aussi partie des instruments disponibles.",
+      "formules": [
+        "Taux directeurs ↑ → coût du crédit souvent ↑ → dépenses sensibles au crédit ↓ → pressions inflationnistes atténuées"
+      ],
+      "exemples": [
+        "Une hausse des taux",
+        "Une baisse des taux"
+      ],
+      "pieges": [
+        "Une sécheresse peut pousser les prix alimentaires à la hausse malgré une politique restrictive. La banque centrale ne produit ni récoltes n…"
+      ],
+      "aRetenir": [
+        "Objectif principal : stabilité des prix.",
+        "Taux et liquidité orientent le crédit.",
+        "Effets soumis au contexte et aux délais."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ECO-MONNAIE-L10",
+      "titre": "Partager une monnaie : avantages et contraintes",
+      "module": "Monnaie et politique monétaire dans l’UEMOA (Économie)",
+      "position": "10/10",
+      "precedente": "Suivre une décision de politique monétaire",
+      "suivante": null,
+      "explication": "Une union monétaire partage une monnaie et une politique monétaire. Nous allons comprendre pourquoi elle facilite certains échanges mais impose aussi des arbitrages. L’UEMOA, Union économique et monétaire ouest-africaine, correspond aux huit États de l’UMOA : Bénin, Burkina Faso, Côte d’Ivoire, Guinée-Bissau, Mali, Niger, Sénégal et Togo. La BCEAO a son siège à Dakar. Un choc asymétrique touche différemment les membres. Face à une sécheresse localisée, le pays concerné ne peut pas décider seul de dévaluer la monnaie commune, c’est-à-dire d’en réduire la parité externe.",
+      "formules": [],
+      "exemples": [
+        "Commerce régional",
+        "Autres réponses"
+      ],
+      "pieges": [
+        "Une monnaie commune ne remplace pas les routes, l’énergie ou les compétences. Une analyse d’union monétaire doit discuter à la fois les éch…"
+      ],
+      "aRetenir": [
+        "Moins de coûts de change internes.",
+        "Politique monétaire commune.",
+        "Besoin de réponses aux chocs différents."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

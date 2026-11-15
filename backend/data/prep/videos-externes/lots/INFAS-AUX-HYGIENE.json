@@ -1,0 +1,192 @@
+{
+  "module": "INFAS-AUX-HYGIENE",
+  "titre": "Hygiène et santé publique",
+  "matiere": "Biologie",
+  "resume": "Comprendre les infections et leurs voies, choisir la prévention adaptée et expliquer vaccination et surveillance collective.",
+  "concours": [
+    "INFAS — Auxiliaires de santé"
+  ],
+  "lecons": [
+    {
+      "code": "INFAS-AUX-HYGIENE-L1",
+      "titre": "Microbe, infection et maladie",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "La chaîne de transmission",
+      "explication": "Nous allons distinguer la présence d’un agent et la maladie qu’il peut provoquer. Cela aide à comprendre pourquoi l’hygiène doit agir avant les symptômes. Le mot microbe regroupe couramment bactéries, virus et champignons microscopiques. Certains parasites sont aussi microscopiques. Tous ne sont pas dangereux : le microbiote intestinal, vu dans Digestion et nutrition, inclut de nombreux micro-organismes utiles. Un agent pathogène peut provoquer une maladie. Une contamination est l’exposition ou l’apport d’un agent. Une infection est son installation et sa multiplication dans l’organisme. Les symptômes sont les manifestations ressenties ou observées ; une infection peut rester sans symptômes.",
+      "formules": [],
+      "exemples": [
+        "Deux situations"
+      ],
+      "pieges": [
+        "L’absence de symptômes ne démontre pas l’absence d’infection ni l’impossibilité de transmission."
+      ],
+      "aRetenir": [
+        "Pathogène : peut provoquer une maladie.",
+        "Contamination et infection sont distinctes.",
+        "Les antibiotiques ne traitent pas les virus."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-HYGIENE-L2",
+      "titre": "La chaîne de transmission",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "2/8",
+      "precedente": "Microbe, infection et maladie",
+      "suivante": "Les mains et les surfaces",
+      "explication": "Nous allons repérer comment un agent passe d’une source à une nouvelle personne. La prévention consiste à couper un maillon de ce trajet. Le réservoir est le milieu où l’agent peut se maintenir. Une porte de sortie lui permet de quitter une source ; une voie de transmission le transporte ; une porte d’entrée lui permet de pénétrer chez une personne sensible.",
+      "formules": [
+        "Source → sortie → voie de transmission → entrée → personne sensible."
+      ],
+      "exemples": [
+        "Voie digestive",
+        "Différentes voies"
+      ],
+      "pieges": [
+        "Une maladie infectieuse n’est pas toujours contagieuse d’une personne à l’autre. Le tétanos suit une contamination d’une plaie par des spor…"
+      ],
+      "aRetenir": [
+        "Décrire le trajet avant de choisir une mesure.",
+        "Transmission directe ou par un intermédiaire.",
+        "Infectieux ne signifie pas toujours contagieux."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-HYGIENE-L3",
+      "titre": "Les mains et les surfaces",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "3/8",
+      "precedente": "La chaîne de transmission",
+      "suivante": "Eau, aliments et assainissement",
+      "explication": "Nous allons comprendre le rôle de l’hygiène des mains et distinguer les niveaux de traitement d’un support. Les mains peuvent transporter des agents entre surfaces, aliments et personnes. Le lavage à l’eau et au savon enlève les salissures et réduit les agents présents. Il est notamment utile avant de préparer ou manger un repas et après les toilettes.",
+      "formules": [],
+      "exemples": [
+        "Rompre un trajet"
+      ],
+      "pieges": [
+        "Une surface propre à l’œil n’est pas nécessairement désinfectée ; un objet désinfecté n’est pas nécessairement stérile."
+      ],
+      "aRetenir": [
+        "Les mains peuvent transporter les agents.",
+        "Nettoyer, désinfecter et stériliser diffèrent.",
+        "Gants et hygiène des mains se complètent."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-HYGIENE-L4",
+      "titre": "Eau, aliments et assainissement",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "4/8",
+      "precedente": "Les mains et les surfaces",
+      "suivante": "Le paludisme : agent et vecteur",
+      "explication": "Nous allons relier l’hygiène alimentaire à la prévention de certaines infections digestives. Une eau potable peut être bue sans danger sanitaire dans les conditions prévues. Une eau claire peut contenir des agents invisibles. L’assainissement organise notamment l’évacuation sûre des excréments et eaux usées pour éviter la contamination de l’environnement.",
+      "formules": [],
+      "exemples": [
+        "La contamination croisée",
+        "Un puits exposé"
+      ],
+      "pieges": [
+        "Une bonne odeur ou une belle apparence ne prouve pas la sécurité microbiologique d’un aliment ou d’une eau."
+      ],
+      "aRetenir": [
+        "Eau claire ≠ preuve de potabilité.",
+        "Séparer cru et prêt à manger.",
+        "Assainissement : protection collective."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-HYGIENE-L5",
+      "titre": "Le paludisme : agent et vecteur",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "5/8",
+      "precedente": "Eau, aliments et assainissement",
+      "suivante": "Le VIH et les défenses de l’organisme",
+      "explication": "Nous allons distinguer la cause du paludisme de l’insecte qui la transmet. Cette distinction guide la prévention. Le paludisme est causé par un parasite, organisme vivant aux dépens d’un hôte, du genre Plasmodium. Il est transmis principalement par la piqûre d’un moustique Anopheles femelle infecté. Le moustique est le vecteur, pas le parasite. La prévention associe des moyens adaptés : moustiquaires imprégnées, lutte contre les vecteurs et, selon les programmes, autres moyens préventifs. Des vaccins antipaludiques existent pour certains enfants des zones concernées ; ils complètent les autres moyens.",
+      "formules": [],
+      "exemples": [
+        "Une chaîne vectorielle"
+      ],
+      "pieges": [
+        "Le paludisme n’est pas causé par un virus et tout moustique n’est pas forcément infecté. Une moustiquaire ne cible pas la voie de transmiss…"
+      ],
+      "aRetenir": [
+        "Agent et vecteur sont différents.",
+        "Prévenir les piqûres réduit le risque.",
+        "Les moyens de prévention peuvent se compléter."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-HYGIENE-L6",
+      "titre": "Le VIH et les défenses de l’organisme",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "6/8",
+      "precedente": "Le paludisme : agent et vecteur",
+      "suivante": "La vaccination prépare une mémoire",
+      "explication": "Nous allons expliquer le lien entre VIH et déficit des défenses. Les leucocytes ont été présentés dans BIO-COEUR. Le VIH est le virus de l’immunodéficience humaine. Il atteint notamment les lymphocytes CD4, aussi appelés T4, une catégorie de globules blancs qui coordonnent des défenses. Le sida est un stade avancé de l’infection avec forte altération de ces défenses. Les voies de transmission comprennent certains rapports sexuels, le sang contaminé et la transmission mère-enfant pendant grossesse, accouchement ou allaitement. Poignées de main, repas partagés et moustiques ne transmettent pas le VIH.",
+      "formules": [],
+      "exemples": [
+        "Cause puis conséquence"
+      ],
+      "pieges": [
+        "VIH et sida ne sont pas synonymes. Une personne vivant avec le VIH sous traitement efficace peut ne jamais atteindre le stade sida."
+      ],
+      "aRetenir": [
+        "VIH : virus ; sida : stade avancé.",
+        "Atteinte notamment des lymphocytes CD4.",
+        "Connaître les voies réelles évite les fausses croyances."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-HYGIENE-L7",
+      "titre": "La vaccination prépare une mémoire",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "7/8",
+      "precedente": "Le VIH et les défenses de l’organisme",
+      "suivante": "De la prévention individuelle à la santé publique",
+      "explication": "Nous allons comprendre la vaccination comme une préparation des défenses avant une exposition future. Un antigène est une structure reconnue par les défenses ; un anticorps est une protéine qui peut la reconnaître. La vaccination présente un antigène, ou l’information pour le fabriquer, afin de déclencher une réponse spécifique et une mémoire immunitaire. La protection n’est pas forcément immédiate ni complète. Plusieurs doses ou des rappels peuvent être nécessaires. Pour certaines infections transmissibles, réduire leur circulation protège aussi des personnes vulnérables : c’est un effet collectif.",
+      "formules": [],
+      "exemples": [
+        "Une réponse préparée"
+      ],
+      "pieges": [
+        "Un vaccin n’est pas un antibiotique ni un traitement universel d’une maladie déjà installée. La protection collective ne s’applique pas de …"
+      ],
+      "aRetenir": [
+        "Préparation spécifique et mémoire.",
+        "Protection parfois progressive et rappels possibles.",
+        "Calendrier à vérifier dans les sources nationales actuelles."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFAS-AUX-HYGIENE-L8",
+      "titre": "De la prévention individuelle à la santé publique",
+      "module": "Hygiène et santé publique (Biologie)",
+      "position": "8/8",
+      "precedente": "La vaccination prépare une mémoire",
+      "suivante": null,
+      "explication": "Nous allons passer du geste d’une personne à l’action pour une population. Les deux approches se complètent. La santé publique organise prévention, surveillance et moyens pour la santé des populations. La surveillance suit les cas dans le temps et l’espace. Une épidémie est une fréquence de cas supérieure à ce qui est attendu dans une population et une période données. Un dépistage recherche une infection ou une maladie avant les symptômes chez des personnes concernées. Prévention, dépistage et traitement sont différents : éviter l’exposition, détecter tôt et prendre en charge n’agissent pas au même moment.",
+      "formules": [],
+      "exemples": [
+        "Plusieurs diarrhées après un événement",
+        "Comparer avec prudence"
+      ],
+      "pieges": [
+        "Un nombre isolé de cas ne suffit pas à déclarer une épidémie. Il faut un contexte, une population, une période et une comparaison avec l’at…"
+      ],
+      "aRetenir": [
+        "Santé publique : population et organisation.",
+        "Surveiller selon lieu, temps et population.",
+        "Prévenir, dépister et traiter se complètent."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

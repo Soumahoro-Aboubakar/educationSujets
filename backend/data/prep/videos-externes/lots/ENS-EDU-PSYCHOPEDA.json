@@ -1,0 +1,218 @@
+{
+  "module": "ENS-EDU-PSYCHOPEDA",
+  "titre": "Psychopédagogie de l’adolescent",
+  "matiere": "Psychopédagogie et système éducatif",
+  "resume": "Comprendre le développement et l’apprentissage, soutenir la motivation et accompagner les relations sans réduire un élève à une étiquette.",
+  "concours": [
+    "ENS — Éducateurs"
+  ],
+  "lecons": [
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L1",
+      "titre": "Comprendre l’adolescence sans étiqueter",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Passer du concret au raisonnement sur des hypothèses",
+      "explication": "La psychopédagogie relie les connaissances sur le fonctionnement psychologique aux situations d’éducation. Après le cadre scolaire d’EDU-SEI, nous allons examiner les besoins d’un adolescent. La puberté désigne les transformations corporelles conduisant à la maturité sexuelle. L’adolescence est une période plus large de changements corporels, affectifs, cognitifs et sociaux. Le calendrier et les expériences diffèrent selon les personnes et les contextes. L’identité est la manière de se définir et de se situer dans ses relations. Erik Erikson a notamment décrit l’adolescence comme une période de recherche identitaire. C’est un repère théorique, pas un diagnostic à appliquer automatiquement.",
+      "formules": [],
+      "exemples": [
+        "Deux camarades différents",
+        "Tester une place"
+      ],
+      "pieges": [
+        "Un comportement isolé ne prouve ni une maladie ni une « crise obligatoire ». Décrire les faits et demander un relais compétent si la situat…"
+      ],
+      "aRetenir": [
+        "Distinguer transformation corporelle et période de développement.",
+        "Respecter la diversité des rythmes.",
+        "Comprendre sans diagnostiquer à partir d’un signe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L2",
+      "titre": "Passer du concret au raisonnement sur des hypothèses",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "2/9",
+      "precedente": "Comprendre l’adolescence sans étiqueter",
+      "suivante": "Faire apprendre au-delà de la répétition immédiate",
+      "explication": "Nous allons utiliser un repère de Jean Piaget pour adapter une explication. Le développement cognitif concerne la façon de connaître, comprendre et raisonner. Chez Piaget, l’enfant construit des manières d’agir et de penser, les schèmes. L’assimilation intègre une situation à un schème existant ; l’accommodation modifie le schème quand il ne convient plus.",
+      "formules": [],
+      "exemples": [
+        "Conserver une quantité",
+        "Tester une hypothèse"
+      ],
+      "pieges": [
+        "Les âges sont des repères historiques, pas une grille de tri des élèves. Le raisonnement dépend aussi des connaissances, de la tâche, du co…"
+      ],
+      "aRetenir": [
+        "Piaget décrit une construction des raisonnements.",
+        "Concret et hypothèses sont des repères utiles.",
+        "Adapter l’aide à la tâche, pas seulement à l’âge."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L3",
+      "titre": "Faire apprendre au-delà de la répétition immédiate",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "3/9",
+      "precedente": "Passer du concret au raisonnement sur des hypothèses",
+      "suivante": "Aider juste assez, puis retirer l’aide",
+      "explication": "Apprendre est construire une capacité ou une connaissance relativement durable par l’expérience et l’activité. Nous allons distinguer une réussite immédiate d’un apprentissage qui reste disponible. L’attention sélectionne des informations. La mémoire de travail maintient et traite temporairement une quantité limitée d’informations. La mémoire à long terme conserve des connaissances réutilisables. Dans le conditionnement opérant, associé notamment à Skinner, une conséquence qui augmente la fréquence d’un comportement est un renforcement. Positif signifie ajout d’un stimulus ; négatif signifie retrait d’un stimulus désagréable, pas punition.",
+      "formules": [],
+      "exemples": [
+        "Une consigne chargée",
+        "Un retour précis"
+      ],
+      "pieges": [
+        "Réciter juste après la démonstration ne garantit ni rappel durable ni transfert à un problème nouveau. Observer des performances différées …"
+      ],
+      "aRetenir": [
+        "Limiter la surcharge de consigne.",
+        "Rappeler, vérifier et réutiliser dans le temps.",
+        "Renforcement : effet sur la fréquence du comportement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L4",
+      "titre": "Aider juste assez, puis retirer l’aide",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "4/9",
+      "precedente": "Faire apprendre au-delà de la répétition immédiate",
+      "suivante": "Soutenir une motivation qui dure",
+      "explication": "Nous allons organiser une aide qui développe l’autonomie. Lev Vygotski souligne le rôle des interactions sociales et du langage dans l’apprentissage. La zone proximale de développement est l’écart entre ce qu’un élève réussit seul et ce qu’il peut réussir avec un accompagnement approprié. Une tâche trop facile ne sollicite guère de progrès ; une tâche hors de portée malgré l’aide demande une adaptation. L’étayage, notion développée notamment par Wood, Bruner et Ross, désigne des aides ajustées et temporaires : indice, exemple, découpage ou question. Elles sont progressivement retirées lorsque l’élève peut agir seul.",
+      "formules": [],
+      "exemples": [
+        "Comprendre une consigne",
+        "Réduire l’aide"
+      ],
+      "pieges": [
+        "Donner systématiquement la réponse peut améliorer la production du jour sans construire la compétence. Un camarade tuteur doit expliquer et…"
+      ],
+      "aRetenir": [
+        "Identifier seul / avec aide.",
+        "Ajuster des aides temporaires.",
+        "Vérifier la réussite autonome."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L5",
+      "titre": "Soutenir une motivation qui dure",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "5/9",
+      "precedente": "Aider juste assez, puis retirer l’aide",
+      "suivante": "Utiliser l’erreur pour ajuster l’aide",
+      "explication": "La motivation oriente et soutient l’engagement. Nous allons chercher des leviers sans supposer qu’un élève non engagé est paresseux. La motivation intrinsèque correspond à l’intérêt pour l’activité elle-même ; la motivation extrinsèque vise une conséquence distincte, par exemple une note ou un projet professionnel. Elles peuvent coexister. Ryan et Deci mettent en avant les besoins de compétence, se sentir capable de progresser, d’autonomie, comprendre et s’approprier ses actions, et de lien social, se sentir relié aux autres. Choix limités, défis accessibles et retours précis peuvent les soutenir. Le modèle de Maslow distingue besoins physiologiques, sécurité, appartenance, estime et accomplissement. Il attire l’attention sur les conditions de vie, mais ne démontre pas un ordre rigide valable pour chaque personne et chaque situation.",
+      "formules": [],
+      "exemples": [
+        "Deux raisons de s’exercer",
+        "Une tâche inaccessible"
+      ],
+      "pieges": [
+        "L’autonomie ne signifie pas absence de règles. Les récompenses ne sont pas non plus toujours efficaces : leurs effets dépendent notamment d…"
+      ],
+      "aRetenir": [
+        "Comprendre les raisons de l’engagement.",
+        "Soutenir compétence, autonomie et lien.",
+        "Les besoins ne forment pas un escalier rigide universel."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L6",
+      "titre": "Utiliser l’erreur pour ajuster l’aide",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "6/9",
+      "precedente": "Soutenir une motivation qui dure",
+      "suivante": "Adapter les moyens sans enfermer les élèves",
+      "explication": "Nous allons distinguer les fonctions de l’évaluation, recueil et interprétation d’informations sur des acquis pour prendre une décision. Une erreur renseigne sur une étape du raisonnement, pas sur la valeur d’une personne. La remédiation est une aide ciblant une difficulté repérée. Un critère précise ce qui est attendu ; un indicateur est un signe observable de sa réalisation. « Justifier » peut avoir pour indicateur « expliquer le lien entre la donnée et la conclusion ».",
+      "formules": [],
+      "exemples": [
+        "Avant d’aider",
+        "Vérifier le progrès"
+      ],
+      "pieges": [
+        "L’éducateur contribue au suivi et au relais ; l’évaluation disciplinaire relève de l’enseignant, comme vu dans EDU-SEI. Une note seule ne s…"
+      ],
+      "aRetenir": [
+        "Identifier la fonction de l’évaluation.",
+        "Chercher l’obstacle précis.",
+        "Cibler l’aide puis vérifier son effet."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L7",
+      "titre": "Adapter les moyens sans enfermer les élèves",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "7/9",
+      "precedente": "Utiliser l’erreur pour ajuster l’aide",
+      "suivante": "Conduire un groupe avec un cadre partagé",
+      "explication": "L’inclusion vise la participation et les apprentissages de tous en réduisant les obstacles. Nous allons distinguer un objectif partagé et des moyens ajustés pour l’atteindre. La différenciation pédagogique adapte supports, rythme ou accompagnement aux besoins observés. Elle ne suppose pas de classer définitivement des élèves « visuels », « auditifs » ou incapables : ces étiquettes ne suffisent pas à guider une aide efficace. Les attentes de l’adulte influencent les occasions offertes, les questions et les retours. Des attentes systématiquement faibles peuvent limiter les expériences de réussite ; cela ne permet pas de prédire mécaniquement le parcours d’un élève.",
+      "formules": [],
+      "exemples": [
+        "Même objectif, autre support",
+        "Prévenir une exclusion du groupe"
+      ],
+      "pieges": [
+        "Une adaptation ne se décide pas à partir d’un diagnostic improvisé. Pour un besoin particulier persistant, coopérer avec les professionnels…"
+      ],
+      "aRetenir": [
+        "Observer les obstacles.",
+        "Adapter les moyens avec un objectif clair.",
+        "Éviter les étiquettes définitives."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L8",
+      "titre": "Conduire un groupe avec un cadre partagé",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "8/9",
+      "precedente": "Adapter les moyens sans enfermer les élèves",
+      "suivante": "Traiter un conflit et repérer la violence",
+      "explication": "Nous allons distinguer autorité, cadre reconnu pour agir, et autoritarisme, imposition qui réduit fortement la participation. Un groupe a besoin de règles et de possibilités d’engagement. Les travaux associés à Lewin, Lippitt et White comparent notamment des conduites autocratique, démocratique et de laisser-faire. Ce sont des repères pour analyser des pratiques, pas des portraits immuables de personnes.",
+      "formules": [],
+      "exemples": [
+        "Organiser une activité",
+        "Une urgence"
+      ],
+      "pieges": [
+        "La conduite démocratique n’est ni un vote sur tous les droits ni l’abandon du cadre. L’efficacité d’une conduite dépend de la tâche, du con…"
+      ],
+      "aRetenir": [
+        "Un cadre clair permet la participation.",
+        "Distinguer trois conduites du groupe.",
+        "Adapter la fermeté aux situations sans humilier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L9",
+      "titre": "Traiter un conflit et repérer la violence",
+      "module": "Psychopédagogie de l’adolescent (Psychopédagogie et système éducatif)",
+      "position": "9/9",
+      "precedente": "Conduire un groupe avec un cadre partagé",
+      "suivante": null,
+      "explication": "Nous allons choisir une réponse selon la situation. Un conflit oppose des intérêts ou points de vue. Il ne constitue pas nécessairement une violence et peut être travaillé par un dialogue encadré. La médiation fait intervenir un tiers pour aider les personnes à comprendre le désaccord et chercher une solution acceptable, lorsque la sécurité et les conditions d’un dialogue libre sont réunies. Le harcèlement comporte des violences répétées et un déséquilibre de pouvoir ou une difficulté à se défendre. Il demande une protection et un relais selon les procédures. La répétition ne rend jamais la violence normale.",
+      "formules": [],
+      "exemples": [
+        "Un désaccord sur un rôle",
+        "Une victime ciblée"
+      ],
+      "pieges": [
+        "Faire rencontrer les parties à tout prix peut augmenter le danger ou l’emprise. La médiation est un outil conditionnel ; elle ne remplace p…"
+      ],
+      "aRetenir": [
+        "Désaccord et violence sont distincts.",
+        "Médiation si sécurité et dialogue libre.",
+        "Violences répétées : protéger et relayer."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

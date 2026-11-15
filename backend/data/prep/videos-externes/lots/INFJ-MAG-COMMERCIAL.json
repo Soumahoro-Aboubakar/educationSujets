@@ -1,0 +1,218 @@
+{
+  "module": "INFJ-MAG-COMMERCIAL",
+  "titre": "Droit commercial général (OHADA)",
+  "matiere": "Droit commercial",
+  "resume": "Sources OHADA, actes de commerce, commerçant, RCCM, fonds, bail professionnel, vente, sociétés et intermédiaires.",
+  "concours": [
+    "INFJ — École de la Magistrature"
+  ],
+  "lecons": [
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L1",
+      "titre": "Pourquoi des règles OHADA ?",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Qu’est-ce qu’un acte de commerce ?",
+      "explication": "Nous allons découvrir les sources du droit des affaires avant d’apprendre les statuts et opérations commerciales. Le droit organise les activités par des règles obligatoires. Le droit des affaires comporte des règles sur les professionnels et leurs opérations. L’OHADA est l’Organisation pour l’harmonisation en Afrique du droit des affaires. Les États parties appliquent les Actes uniformes dans leurs domaines : ils sont directement applicables et obligatoires malgré une disposition interne contraire. L’AUDCG régit le droit commercial général ; l’AUSCGIE, les sociétés commerciales et le groupement d’intérêt économique. Il faut identifier le domaine et la version du texte.",
+      "formules": [],
+      "exemples": [
+        "Un statut",
+        "Une réforme distincte"
+      ],
+      "pieges": [
+        "OHADA ne signifie pas que tous les domaines du droit civil, fiscal et pénal ont été remplacés par un seul code commercial."
+      ],
+      "aRetenir": [
+        "OHADA : harmoniser le droit des affaires.",
+        "Actes uniformes : application directe dans leur domaine.",
+        "AUDCG, AUSCGIE et recouvrement sont distincts."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L2",
+      "titre": "Qu’est-ce qu’un acte de commerce ?",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "2/9",
+      "precedente": "Pourquoi des règles OHADA ?",
+      "suivante": "Quand devient-on commerçant ?",
+      "explication": "Nous allons distinguer le caractère commercial d’une opération du statut de la personne qui l’accomplit. Un acte de commerce est qualifié commercial selon les critères du texte. L’acte par nature dépend de l’opération : acheter un bien dans l’intention de le revendre en est un exemple. L’acte par forme dépend de son instrument juridique : l’AUDCG vise notamment la lettre de change, le billet à ordre et le warrant. La lettre de change est un titre par lequel une personne donne à une autre l’ordre de payer une somme à un bénéficiaire selon ses mentions légales.",
+      "formules": [],
+      "exemples": [
+        "Acheter pour revendre",
+        "Un titre commercial"
+      ],
+      "pieges": [
+        "Un achat isolé pour son usage personnel n’est pas un achat pour revendre. Un acte commercial isolé ne donne pas automatiquement le statut d…"
+      ],
+      "aRetenir": [
+        "Nature : opération ; forme : instrument visé.",
+        "Revente : intention présente lors de l’achat.",
+        "Acte commercial et statut de commerçant sont distincts."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L3",
+      "titre": "Quand devient-on commerçant ?",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "3/9",
+      "precedente": "Qu’est-ce qu’un acte de commerce ?",
+      "suivante": "À quoi sert le RCCM ?",
+      "explication": "Nous allons construire une qualification professionnelle à partir de l’activité réellement exercée. Selon l’AUDCG, le commerçant fait de l’accomplissement d’actes de commerce par nature sa profession. On examine l’exercice professionnel, la capacité et les incompatibilités applicables. Une incompatibilité interdit de cumuler certaines fonctions avec le commerce. La capacité est l’aptitude légale à agir ; la minorité et les protections exigent leurs règles spécifiques. Une activité exercée pour le compte de l’employeur n’attribue pas automatiquement au salarié son statut commercial.",
+      "formules": [],
+      "exemples": [
+        "Une activité répétée",
+        "Un acte isolé"
+      ],
+      "pieges": [
+        "L’immatriculation ne remplace pas toute analyse de l’activité. Une irrégularité de statut ne permet pas automatiquement d’échapper à toutes…"
+      ],
+      "aRetenir": [
+        "Commerçant : actes par nature à titre professionnel.",
+        "Vérifier capacité et incompatibilités.",
+        "Distinguer activité personnelle et activité pour l’employeur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L4",
+      "titre": "À quoi sert le RCCM ?",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "4/9",
+      "precedente": "Quand devient-on commerçant ?",
+      "suivante": "Le fonds de commerce n’est pas le bâtiment",
+      "explication": "Nous allons comprendre la publicité de l’activité commerciale sans confondre immatriculation et simple déclaration. Le Registre du commerce et du crédit mobilier (RCCM) reçoit notamment les immatriculations des commerçants et sociétés ainsi que certaines inscriptions de garanties. Une publicité légale rend une information accessible avec les effets prévus. L’entreprenant est un entrepreneur individuel relevant du statut simplifié de l’AUDCG, sur déclaration d’activité, pour une activité professionnelle civile, commerciale, artisanale ou agricole dans ses conditions. Déclaration d’entreprenant et immatriculation commerciale sont deux mécanismes distincts.",
+      "formules": [],
+      "exemples": [
+        "Identifier une entreprise",
+        "Choisir le statut exact"
+      ],
+      "pieges": [
+        "Une inscription au RCCM n’est pas un certificat général de solvabilité. « Entreprenant » n’est pas simplement un synonyme de toute société …"
+      ],
+      "aRetenir": [
+        "RCCM : registre et publicité légale.",
+        "Immatriculation et déclaration se distinguent.",
+        "Vérifier les conditions du statut d’entreprenant."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L5",
+      "titre": "Le fonds de commerce n’est pas le bâtiment",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "5/9",
+      "precedente": "À quoi sert le RCCM ?",
+      "suivante": "Le bail à usage professionnel",
+      "explication": "Nous allons identifier ce qui permet d’attirer et conserver une clientèle. Le fonds de commerce est l’ensemble des moyens permettant au commerçant d’attirer et conserver une clientèle, personnes qui recourent à son activité. L’AUDCG exige notamment la clientèle et l’enseigne ou le nom commercial ; d’autres éléments peuvent s’y ajouter selon l’activité. L’enseigne identifie le lieu d’exploitation ; le nom commercial identifie l’activité. Un immeuble, bâtiment ou terrain, se distingue du fonds qui y est exploité.",
+      "formules": [],
+      "exemples": [
+        "Même local, autre activité",
+        "Vendre le fonds"
+      ],
+      "pieges": [
+        "Ne pas réduire le fonds au stock ni assimiler la clientèle à la simple liste de meubles. La cession doit être analysée avec ses éléments et…"
+      ],
+      "aRetenir": [
+        "Fonds : moyens d’attirer et conserver la clientèle.",
+        "Clientèle et identification commerciale sont centrales.",
+        "Fonds et murs ne se confondent pas."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L6",
+      "titre": "Le bail à usage professionnel",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "6/9",
+      "precedente": "Le fonds de commerce n’est pas le bâtiment",
+      "suivante": "Livrer, payer, recevoir les marchandises",
+      "explication": "Nous allons distinguer le droit d’occuper un local de la propriété de ce local. Le bail permet au preneur, locataire, d’utiliser un bien contre un loyer versé au bailleur. Le bail à usage professionnel de l’AUDCG dépasse les seuls commerçants. Son article 123 accorde le droit au renouvellement après au moins deux ans d’exploitation conforme au bail. Pour un bail à durée déterminée, l’article 124 exige une demande au plus tard trois mois avant l’expiration, par signification ou notification permettant de prouver la réception effective. À défaut, le preneur perd ce droit. Une indemnité d’éviction peut être due en cas de refus du bailleur, selon les conditions et exceptions du texte.",
+      "formules": [],
+      "exemples": [
+        "Occuper sans posséder",
+        "Deux contrôles distincts"
+      ],
+      "pieges": [
+        "Ne pas appliquer les règles d’un bail d’habitation à toute location professionnelle. Le régime et son champ doivent être identifiés."
+      ],
+      "aRetenir": [
+        "Bailleur et preneur : deux positions.",
+        "Usage du local distinct de sa propriété.",
+        "Renouvellement et éviction : conditions à vérifier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L7",
+      "titre": "Livrer, payer, recevoir les marchandises",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "7/9",
+      "precedente": "Le bail à usage professionnel",
+      "suivante": "La société et les risques des associés",
+      "explication": "Nous allons appliquer les obligations du contrat à la vente commerciale dans le champ de l’AUDCG. Un contrat est un accord créant des obligations. La vente commerciale de l’AUDCG vise notamment la vente de marchandises entre commerçants dans son champ. Le vendeur doit livrer et fournir des marchandises conformes, correspondant aux exigences convenues et légales. L’acheteur doit payer le prix et prendre livraison. L’inexécution est le manquement à une obligation. Ses sanctions demandent de vérifier le contrat, le texte, les notifications et les délais pertinents.",
+      "formules": [],
+      "exemples": [
+        "Conformité",
+        "Deux obligations de l’acheteur"
+      ],
+      "pieges": [
+        "Toute vente réalisée dans un magasin ne relève pas automatiquement du régime OHADA de la vente commerciale entre commerçants. Il faut vérif…"
+      ],
+      "aRetenir": [
+        "Vendeur : livraison et conformité.",
+        "Acheteur : paiement et prise de livraison.",
+        "Champ du régime et sanctions à vérifier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L8",
+      "titre": "La société et les risques des associés",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "8/9",
+      "precedente": "Livrer, payer, recevoir les marchandises",
+      "suivante": "Qui rapproche et qui conclut le contrat ?",
+      "explication": "Nous allons distinguer l’organisation sociale et les personnes qui y participent. Une société organise une activité avec des apports, biens, argent ou industrie selon la forme, et des associés qui partagent les résultats et contribuent aux pertes selon les textes. La personnalité morale s’acquiert en principe à l’immatriculation au RCCM, sous réserve des formes sans personnalité. L’AUSCGIE reconnaît des sociétés commerciales par la forme, dont SNC, SCS, SARL, SA et SAS. Les règles de responsabilité varient : en SNC, les associés répondent indéfiniment et solidairement des dettes sociales ; en SARL, le risque est en principe limité aux apports.",
+      "formules": [],
+      "exemples": [
+        "Deux patrimoines",
+        "Comparer les formes"
+      ],
+      "pieges": [
+        "Responsabilité limitée ne signifie pas absence de tout risque personnel, ni capital minimal identique dans tous les États. On vérifie forme…"
+      ],
+      "aRetenir": [
+        "Personnalité en principe liée à l’immatriculation.",
+        "La forme sociale détermine une partie du risque.",
+        "Patrimoine social et patrimoine personnel se distinguent."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-COMMERCIAL-L9",
+      "titre": "Qui rapproche et qui conclut le contrat ?",
+      "module": "Droit commercial général (OHADA) (Droit commercial)",
+      "position": "9/9",
+      "precedente": "La société et les risques des associés",
+      "suivante": null,
+      "explication": "Nous allons distinguer trois intermédiaires qui interviennent entre des professionnels. Un intermédiaire de commerce intervient professionnellement pour une autre personne dans les conditions de l’AUDCG. Le courtier rapproche les personnes en vue de faciliter leur contrat. Le commissionnaire agit en son propre nom mais pour le compte d’un commettant, personne dont il sert les intérêts. L’agent commercial est un mandataire indépendant chargé durablement de négocier et éventuellement conclure des contrats au nom et pour le compte du mandant. Un mandat donne pouvoir d’agir pour une autre personne.",
+      "formules": [],
+      "exemples": [
+        "Rapprocher",
+        "Signer en son nom"
+      ],
+      "pieges": [
+        "Tous les intermédiaires ne signent pas au nom du client. Le statut, les pouvoirs et le contrat conclu doivent être examinés."
+      ],
+      "aRetenir": [
+        "Courtier : rapprocher.",
+        "Commissionnaire : son nom, compte du commettant.",
+        "Agent commercial : mandat indépendant et durable."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

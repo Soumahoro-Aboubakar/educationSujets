@@ -35,6 +35,15 @@ const PrepVideoSchema = new mongoose.Schema({
     fichierSha256: { type: String, default: null },
     generateur: { type: String, default: null },
   },
+  // Vidéo d'une AUTRE chaîne (source.generateur = « youtube-externe »), choisie pour expliquer la
+  // leçon en attendant une vidéo Fatafalta : créditée dans l'application, revérifiée périodiquement.
+  // Écriture : scripts/video/externe/attacher.js (procédure : docs/videos/videos-externes.md).
+  externe: {
+    chaine: { type: String, trim: true, maxlength: 120, default: null },
+    chaineId: { type: String, trim: true, maxlength: 40, default: null },
+    langueAudio: { type: String, trim: true, maxlength: 10, default: null },
+    verifieLe: { type: Date, default: null },
+  },
 }, { timestamps: true });
 
 PrepVideoSchema.index({ cible: 1, code: 1, langue: 1 }, { unique: true });

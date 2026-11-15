@@ -1,0 +1,221 @@
+{
+  "module": "ENSEA-AS-OG",
+  "titre": "Ordre général : la dissertation",
+  "matiere": "Français",
+  "resume": "Passer d’un sujet à une réponse justifiée : analyse, problématique, plan et rédaction.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)",
+    "INFJ — École de la Magistrature",
+    "INFJ — Greffes — cycle moyen supérieur",
+    "ENS — Éducateurs"
+  ],
+  "lecons": [
+    {
+      "code": "ENSEA-AS-OG-L1",
+      "titre": "Reconnaître la tâche et choisir un sujet",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Définir les mots et délimiter la question",
+      "explication": "Tu vas comprendre ce qu’est une dissertation : un texte organisé qui répond à une question en donnant des raisons et des exemples. Elle permet de défendre une réponse que le lecteur peut examiner. Le sujet est l’énoncé proposé ; la consigne précise l’action attendue. « Expliquez » demande de rendre une idée compréhensible. « Discutez » ou « Qu’en pensez-vous ? » demande d’examiner sa valeur et ses limites avant de répondre.",
+      "formules": [],
+      "exemples": [
+        "Une question précise",
+        "Choisir entre plusieurs sujets"
+      ],
+      "pieges": [
+        "Une opinion personnelle sans justification ne forme pas une dissertation. Une citation connue ne remplace pas non plus une explication."
+      ],
+      "aRetenir": [
+        "Identifier l’action demandée.",
+        "Choisir selon sa compréhension et ses arguments.",
+        "Répondre à une question précise."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L2",
+      "titre": "Définir les mots et délimiter la question",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "2/9",
+      "precedente": "Reconnaître la tâche et choisir un sujet",
+      "suivante": "Construire une problématique",
+      "explication": "Tu vas analyser les mots du sujet pour éviter le hors-sujet : traiter une autre question. Définir un terme consiste à préciser le sens qu’il prend ici.",
+      "formules": [],
+      "exemples": [
+        "Un mot qui change tout",
+        "Deux échelles à respecter"
+      ],
+      "pieges": [
+        "Une définition sert le raisonnement ; une longue suite de définitions de dictionnaire éloigne de la question. Explique surtout les termes d…"
+      ],
+      "aRetenir": [
+        "Définir les termes dans leur contexte.",
+        "Respecter toutes les limites.",
+        "Examiner les mots de portée."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L3",
+      "titre": "Construire une problématique",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "3/9",
+      "precedente": "Définir les mots et délimiter la question",
+      "suivante": "Construire un argument avec un exemple",
+      "explication": "Tu vas formuler la problématique : la question directrice qui met en évidence la difficulté du sujet. Elle guide la réponse au lieu d’annoncer un simple thème. Cherche une première réponse plausible, puis ce qui l’empêche d’être entièrement satisfaisante. Cette tension fait apparaître ce qu’il faut résoudre. Si le sujet contient déjà une bonne question, tu peux la préciser sans inventer un autre problème.",
+      "formules": [],
+      "exemples": [
+        "D’un thème à une tension",
+        "Une demande de moyens"
+      ],
+      "pieges": [
+        "« Nous parlerons de l’eau » annonce un thème, pas une difficulté. À l’inverse, ne force pas une opposition oui/non quand le sujet demande d…"
+      ],
+      "aRetenir": [
+        "Partir de la question du sujet.",
+        "Chercher une difficulté réelle.",
+        "Formuler une question qui guidera le devoir."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L4",
+      "titre": "Construire un argument avec un exemple",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "4/9",
+      "precedente": "Construire une problématique",
+      "suivante": "Organiser un plan qui répond au sujet",
+      "explication": "Tu vas justifier une idée. Un argument est une raison qui soutient une réponse ; un exemple est un cas concret qui permet de comprendre cette raison. Au brouillon, écris l’idée puis demande « Pourquoi ? » et « Comment cela agit-il ? ». Ajoute un exemple et explique ce qu’il montre. Une objection est une raison qui conteste une affirmation ; l’examiner permet d’en préciser les limites.",
+      "formules": [],
+      "exemples": [
+        "Un mécanisme expliqué",
+        "Une limite utile"
+      ],
+      "pieges": [
+        "Un cas isolé ne prouve pas que tous les élèves progressent. N’invente ni statistique, ni citation, ni événement : un exemple imaginé doit ê…"
+      ],
+      "aRetenir": [
+        "Expliquer pourquoi et comment.",
+        "Commenter ce que montre l’exemple.",
+        "Examiner une limite sans caricaturer."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L5",
+      "titre": "Organiser un plan qui répond au sujet",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "5/9",
+      "precedente": "Construire un argument avec un exemple",
+      "suivante": "Rédiger une introduction utile",
+      "explication": "Tu vas construire un plan : l’ordre des grandes étapes de ta réponse. Une partie regroupe plusieurs arguments qui défendent une même idée centrale. Classe tes arguments par fonction, puis formule une réponse pour chaque groupe. Vérifie que chaque partie apporte une étape nouvelle et que leur ensemble répond à toute la question. Le nombre de parties dépend du sujet et des consignes, pas d’une recette universelle.",
+      "formules": [],
+      "exemples": [
+        "Discuter une affirmation",
+        "Répondre à une demande de moyens"
+      ],
+      "pieges": [
+        "« Avantages / inconvénients » convient à certains sujets, pas à tous. « Oui / non » sans réponse finale produit une contradiction, pas une …"
+      ],
+      "aRetenir": [
+        "Grouper les arguments par idée.",
+        "Donner une fonction à chaque partie.",
+        "Vérifier la couverture du sujet."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L6",
+      "titre": "Rédiger une introduction utile",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "6/9",
+      "precedente": "Organiser un plan qui répond au sujet",
+      "suivante": "Rédiger un paragraphe et une transition",
+      "explication": "Tu vas rédiger l’introduction, le début du devoir qui conduit le lecteur du sujet à la question puis au parcours de réponse. Prépare d’abord ton plan : tu pourras ainsi annoncer celui que tu suivras réellement.",
+      "formules": [],
+      "exemples": [
+        "Un début ciblé",
+        "Question et annonce"
+      ],
+      "pieges": [
+        "Évite « Depuis la nuit des temps… » et les citations dont tu ignores la formulation exacte. Une entrée directe et pertinente vaut mieux qu’…"
+      ],
+      "aRetenir": [
+        "Entrer précisément dans le sujet.",
+        "Expliquer la difficulté.",
+        "Annoncer le plan réellement suivi."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L7",
+      "titre": "Rédiger un paragraphe et une transition",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "7/9",
+      "precedente": "Rédiger une introduction utile",
+      "suivante": "Conclure en répondant vraiment",
+      "explication": "Tu vas transformer ton plan en raisonnement rédigé. Un paragraphe développe une idée principale. Une transition résume ce qui vient d’être établi et explique pourquoi l’étape suivante est nécessaire. Construis le paragraphe dans cet ordre : idée liée au sujet, raison expliquée, exemple commenté, résultat pour la réponse. Ce canevas aide à développer un argument ; il ne doit pas devenir une formule répétée mot pour mot.",
+      "formules": [],
+      "exemples": [
+        "Paragraphe possible",
+        "Transition vers la limite"
+      ],
+      "pieges": [
+        "Un connecteur comme « ensuite » ne remplace pas le lien entre les idées. À l’ENSEA, les recommandations du jury 2026 demandent une disserta…"
+      ],
+      "aRetenir": [
+        "Une idée expliquée par paragraphe.",
+        "Relier l’exemple à l’argument.",
+        "Faire progresser la réponse par les transitions."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L8",
+      "titre": "Conclure en répondant vraiment",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "8/9",
+      "precedente": "Rédiger un paragraphe et une transition",
+      "suivante": "Organiser son temps et relire sa copie",
+      "explication": "Tu vas rédiger la conclusion : la fin du devoir qui répond à la question directrice à partir du raisonnement effectué. Elle ne se limite pas à répéter les titres du plan. Relis ta problématique. Résume en une phrase ce que tes arguments ont permis d’établir, puis formule une réponse précise, éventuellement assortie de conditions. Une ouverture est possible si elle prolonge le résultat ; elle n’est pas une obligation.",
+      "formules": [],
+      "exemples": [
+        "Réponse construite",
+        "Éviter une fausse ouverture"
+      ],
+      "pieges": [
+        "N’introduis pas une preuve importante que le développement n’a pas examinée. Le lecteur ne pourrait pas vérifier comment elle soutient la c…"
+      ],
+      "aRetenir": [
+        "Revenir à la problématique.",
+        "Formuler le résultat de la démonstration.",
+        "Garder une ouverture seulement si elle est utile."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-OG-L9",
+      "titre": "Organiser son temps et relire sa copie",
+      "module": "Ordre général : la dissertation (Français)",
+      "position": "9/9",
+      "precedente": "Conclure en répondant vraiment",
+      "suivante": null,
+      "explication": "Tu vas réserver du temps à chaque tâche pour rendre un devoir complet. Les étapes des leçons précédentes servent de points de contrôle. La relecture du sens vérifie : ai-je répondu à tous les aspects du sujet ? Le développement suit-il le plan annoncé ? La conclusion répond-elle à la question ? La relecture de langue vérifie ensuite phrases, accords, ponctuation et lisibilité.",
+      "formules": [],
+      "exemples": [
+        "Répartition d’entraînement sur 3 heures",
+        "Réparer un écart"
+      ],
+      "pieges": [
+        "Ne passe pas toute l’épreuve au brouillon. Fixe une heure de passage à la rédaction et garde un temps pour une vraie conclusion."
+      ],
+      "aRetenir": [
+        "Prévoir des repères de temps.",
+        "Finir le raisonnement et la conclusion.",
+        "Relire la cohérence puis la langue."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

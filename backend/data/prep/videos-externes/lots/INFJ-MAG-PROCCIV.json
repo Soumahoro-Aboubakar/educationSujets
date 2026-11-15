@@ -1,0 +1,195 @@
+{
+  "module": "INFJ-MAG-PROCCIV",
+  "titre": "Procédure civile",
+  "matiere": "Droit civil",
+  "resume": "De l’action en justice au jugement : recevabilité, compétence, saisine, preuve, urgence et recours.",
+  "concours": [
+    "INFJ — École de la Magistrature"
+  ],
+  "lecons": [
+    {
+      "code": "INFJ-MAG-PROCCIV-L1",
+      "titre": "Du droit invoqué à l’action en justice",
+      "module": "Procédure civile (Droit civil)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Qui peut agir et pour quel intérêt ?",
+      "explication": "Nous allons passer des obligations étudiées dans DROIT-CONTRAT à la manière de les faire examiner par un juge. Une obligation permet au créancier de réclamer une prestation au débiteur. L’action en justice permet de soumettre une prétention au juge. La procédure fixe la manière d’agir : forme, délais et échanges. Le droit ivoirien s’appuie notamment sur le Code de procédure civile, commerciale et administrative de 1972, modifié depuis, ainsi que sur les textes spéciaux et OHADA applicables. Une action recevable peut être examinée ; elle n’est pas nécessairement fondée, c’est-à-dire justifiée sur le fond.",
+      "formules": [],
+      "exemples": [
+        "Deux examens",
+        "Un obstacle préalable"
+      ],
+      "pieges": [
+        "Une bonne argumentation sur la dette ne corrige pas automatiquement un recours tardif ou une autre condition de recevabilité manquante."
+      ],
+      "aRetenir": [
+        "Procédure : règles pour agir.",
+        "Recevabilité et bien-fondé sont distincts.",
+        "Textes généraux et spéciaux à articuler."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCCIV-L2",
+      "titre": "Qui peut agir et pour quel intérêt ?",
+      "module": "Procédure civile (Droit civil)",
+      "position": "2/8",
+      "precedente": "Du droit invoqué à l’action en justice",
+      "suivante": "Quel juge peut connaître de l’affaire ?",
+      "explication": "Nous allons contrôler la situation du demandeur avant d’examiner le juge à saisir. L’intérêt à agir est l’utilité juridiquement protégée recherchée par l’action. La qualité à agir est le titre permettant de présenter la demande lorsque le droit le requiert. La capacité d’exercice, rappelée dans PERSONNES, est l’aptitude à agir soi-même ; la représentation peut être nécessaire. L’habilitation du représentant détermine ses pouvoirs. Ces contrôles se distinguent de la preuve du droit invoqué.",
+      "formules": [],
+      "exemples": [
+        "Un droit personnel",
+        "Représenter un mineur"
+      ],
+      "pieges": [
+        "Avoir un intérêt affectif pour un conflit ne donne pas automatiquement qualité pour présenter toutes les demandes. Être titulaire d’un droi…"
+      ],
+      "aRetenir": [
+        "Intérêt, qualité et capacité se vérifient séparément.",
+        "Le représentant doit être habilité.",
+        "Ces conditions ne prouvent pas encore le fond."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCCIV-L3",
+      "titre": "Quel juge peut connaître de l’affaire ?",
+      "module": "Procédure civile (Droit civil)",
+      "position": "3/8",
+      "precedente": "Qui peut agir et pour quel intérêt ?",
+      "suivante": "Saisir le juge et informer l’adversaire",
+      "explication": "Nous allons utiliser les distinctions de DROIT-ORGJUD dans un raisonnement de compétence concret. La compétence matérielle dépend du type de litige et des attributions légales. La compétence territoriale détermine le ressort pertinent. La juridiction de droit commun traite les affaires non attribuées spécialement ; une juridiction spécialisée reçoit les matières définies par la loi. Le domicile du défendeur est un repère de droit commun territorial, mais des règles spéciales ou options existent, notamment selon l’objet du litige. Il faut vérifier le texte applicable.",
+      "formules": [],
+      "exemples": [
+        "Deux contrôles",
+        "Un immeuble"
+      ],
+      "pieges": [
+        "Droit commun ne signifie pas compétence universelle. La présence d’une clause contractuelle de compétence exige aussi d’en vérifier la vali…"
+      ],
+      "aRetenir": [
+        "Matière : quel type de juridiction ?",
+        "Territoire : quel ressort ?",
+        "Vérifier les règles et exceptions de la demande."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCCIV-L4",
+      "titre": "Saisir le juge et informer l’adversaire",
+      "module": "Procédure civile (Droit civil)",
+      "position": "4/8",
+      "precedente": "Quel juge peut connaître de l’affaire ?",
+      "suivante": "Demander, argumenter, prouver",
+      "explication": "Nous allons suivre l’entrée d’une demande dans le procès sans supposer une forme identique pour toutes les affaires. La saisine porte une demande devant une juridiction selon une forme légale. L’assignation est un acte qui appelle l’adversaire à comparaître ; d’autres procédures utilisent une requête ou une autre forme prévue. L’instance est le déroulement procédural du procès. La notification porte officiellement un acte à connaissance ; la signification en est une forme accomplie par un professionnel habilité. Le contradictoire permet à chacun de discuter demandes, arguments et pièces.",
+      "formules": [],
+      "exemples": [
+        "Un acte précis",
+        "Un dossier échangé"
+      ],
+      "pieges": [
+        "Tous les procès ne commencent pas par la même forme. Une audience publique ne remplace pas la communication des pièces entre les parties."
+      ],
+      "aRetenir": [
+        "Vérifier la forme légale de saisine.",
+        "Notification et signification portent l’acte à connaissance.",
+        "Échanger les pièces et arguments."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCCIV-L5",
+      "titre": "Demander, argumenter, prouver",
+      "module": "Procédure civile (Droit civil)",
+      "position": "5/8",
+      "precedente": "Saisir le juge et informer l’adversaire",
+      "suivante": "Trois manières de contester une demande",
+      "explication": "Nous allons distinguer ce qu’on réclame, pourquoi on le réclame et comment on l’établit. Une prétention est le résultat demandé au juge. Un moyen est un argument de fait ou de droit qui la soutient. Une preuve établit un fait pertinent dans les conditions légales. La charge de la preuve indique qui doit démontrer quoi : celui qui réclame l’exécution doit établir l’obligation ; celui qui se dit libéré doit justifier le paiement ou le fait qui éteint la dette, sous réserve des règles spéciales.",
+      "formules": [],
+      "exemples": [
+        "Demander un remboursement",
+        "Opposer le paiement"
+      ],
+      "pieges": [
+        "Une affirmation répétée n’est pas une preuve. Les règles sur l’admissibilité des moyens de preuve varient ; tout support n’est pas automati…"
+      ],
+      "aRetenir": [
+        "Prétention : résultat ; moyen : argument.",
+        "Preuve : établir le fait pertinent.",
+        "Distinguer obligation alléguée et libération alléguée."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCCIV-L6",
+      "titre": "Trois manières de contester une demande",
+      "module": "Procédure civile (Droit civil)",
+      "position": "6/8",
+      "precedente": "Demander, argumenter, prouver",
+      "suivante": "Le référé répond à certaines urgences",
+      "explication": "Nous allons classer les objections pour comprendre ce que le juge doit examiner. La défense au fond conteste le bien-fondé : la dette n’existe pas ou a été payée. Une exception de procédure conteste notamment la régularité de la procédure ou la compétence. Une fin de non-recevoir vise la recevabilité sans faire trancher le fond, par exemple un défaut de qualité dans les conditions applicables. Le moment et la forme pour soulever chaque objection doivent être vérifiés dans les textes.",
+      "formules": [],
+      "exemples": [
+        "Mauvais juge",
+        "Pas de dette"
+      ],
+      "pieges": [
+        "Ne pas confondre nullité du contrat et nullité d’un acte de procédure. La première concerne l’opération civile, la seconde la régularité du…"
+      ],
+      "aRetenir": [
+        "Fond : droit invoqué.",
+        "Exception : procédure.",
+        "Non-recevoir : recevabilité ; calendrier à vérifier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCCIV-L7",
+      "titre": "Le référé répond à certaines urgences",
+      "module": "Procédure civile (Droit civil)",
+      "position": "7/8",
+      "precedente": "Trois manières de contester une demande",
+      "suivante": "Choisir une voie de recours",
+      "explication": "Nous allons comprendre pourquoi une mesure rapide ne tranche pas forcément tout le litige. Le référé est une procédure permettant d’obtenir des mesures dans les conditions prévues, notamment d’urgence. Le juge statue par ordonnance, nom donné à certaines décisions. Il ne doit pas préjudicier au principal, c’est-à-dire trancher définitivement le fond du droit à la place du juge du fond. Les pouvoirs exacts et l’existence d’une contestation sérieuse doivent être vérifiés au regard de la mesure demandée.",
+      "formules": [],
+      "exemples": [
+        "Conserver une situation",
+        "Deux demandes"
+      ],
+      "pieges": [
+        "Urgence ne signifie pas compétence illimitée. Une ordonnance de référé ne règle pas automatiquement toutes les demandes d’argent."
+      ],
+      "aRetenir": [
+        "Référé : pouvoirs définis par les textes.",
+        "Mesure provisoire et fond sont distincts.",
+        "Examiner chaque demande séparément."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-PROCCIV-L8",
+      "titre": "Choisir une voie de recours",
+      "module": "Procédure civile (Droit civil)",
+      "position": "8/8",
+      "precedente": "Le référé répond à certaines urgences",
+      "suivante": null,
+      "explication": "Nous allons construire une méthode de choix du recours sans mémoriser un délai unique inexistant. Un jugement est une décision juridictionnelle ; un arrêt est notamment rendu par une cour. L’opposition, dans les cas où elle est ouverte, permet de faire réexaminer une décision par défaut par la juridiction qui l’a rendue. L’appel réexamine en fait et en droit dans ses limites. Le pourvoi contrôle le droit d’une décision en dernier ressort. La nature de la décision, sa notification, les textes et les délais déterminent le recours ouvert.",
+      "formules": [],
+      "exemples": [
+        "Décision par défaut",
+        "Après l’appel"
+      ],
+      "pieges": [
+        "Ne pas appliquer un délai d’appel unique à toute matière ni supposer que tout recours suspend l’exécution. Ces effets dépendent du régime a…"
+      ],
+      "aRetenir": [
+        "Opposition, appel et pourvoi : objets différents.",
+        "Vérifier ouverture, point de départ et délai.",
+        "Pas d’effet suspensif supposé sans texte."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

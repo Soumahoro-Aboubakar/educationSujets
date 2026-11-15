@@ -1,0 +1,281 @@
+{
+  "module": "ENSEA-AS-COMPLEXES",
+  "titre": "Nombres complexes",
+  "matiere": "Mathématiques",
+  "resume": "De i et du plan aux formes exponentielles, aux équations complexes et aux transformations géométriques.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)",
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "ENSEA-AS-COMPLEXES-L1",
+      "titre": "Un nombre qui se place dans le plan",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "1/11",
+      "precedente": null,
+      "suivante": "Additionner et multiplier",
+      "explication": "Nous allons élargir les nombres réels pour résoudre des équations comme z² = −1. Chaque nouveau nombre pourra se dessiner comme un point. Dans ℝ, ensemble des nombres réels, tout carré est positif ou nul. On introduit un nombre i tel que i² = −1. Un nombre complexe est une écriture z = a + ib, avec a et b réels. Leur ensemble se note ℂ. Dans un repère du plan, les coordonnées (a ; b) indiquent le déplacement horizontal puis vertical depuis l’origine O. Le point M(a ; b) a pour affixe z = a + ib ; M est l’image de z.",
+      "formules": [],
+      "exemples": [
+        "Lire les deux parties",
+        "Placer un point"
+      ],
+      "pieges": [
+        "i² = −1, mais i n’est pas un réel négatif. On n’ordonne pas ℂ comme ℝ : écrire i > 0 n’a pas ce sens."
+      ],
+      "aRetenir": [
+        "i² = −1.",
+        "a + ib correspond au point (a ; b).",
+        "L’égalité se vérifie partie par partie."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L2",
+      "titre": "Additionner et multiplier",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "2/11",
+      "precedente": "Un nombre qui se place dans le plan",
+      "suivante": "Le conjugué pour diviser",
+      "explication": "Nous allons calculer dans ℂ en conservant les règles de développement usuelles. La seule nouvelle règle est i² = −1. Développer un produit consiste à multiplier chaque terme de la première parenthèse par chaque terme de la seconde, puis à remplacer i² par −1.",
+      "formules": [
+        "(a + ib) + (c + id) = (a + c) + i(b + d)."
+      ],
+      "exemples": [
+        "Addition",
+        "Produit"
+      ],
+      "pieges": [
+        "(a + ib)² = a² − b² + 2abi. Le terme 2abi ne disparaît pas."
+      ],
+      "aRetenir": [
+        "Addition : regrouper les deux parties.",
+        "Produit : développer puis utiliser i² = −1."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L3",
+      "titre": "Le conjugué pour diviser",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "3/11",
+      "precedente": "Additionner et multiplier",
+      "suivante": "Le module mesure une distance",
+      "explication": "Nous allons faire disparaître i d’un dénominateur. Le conjugué rend cette division possible avec des calculs réels. Le conjugué de z = a + ib est z̄ = a − ib. Son image est le reflet de celle de z par rapport à l’axe horizontal.",
+      "formules": [
+        "z z̄ = (a + ib)(a − ib) = a² + b²."
+      ],
+      "exemples": [
+        "Un produit réel",
+        "Un quotient"
+      ],
+      "pieges": [
+        "Le conjugué de 2 − 3i est 2 + 3i : seule la partie imaginaire change de signe."
+      ],
+      "aRetenir": [
+        "Conjuguer : remplacer b par −b.",
+        "Pour un quotient, conjuguer le dénominateur en haut et en bas."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L4",
+      "titre": "Le module mesure une distance",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "4/11",
+      "precedente": "Le conjugué pour diviser",
+      "suivante": "Un angle sur le cercle unité",
+      "explication": "Nous allons associer une longueur à un complexe. Cela permet de reconnaître des cercles et de calculer des distances. Le module |z| est la distance entre l’origine O et l’image de z. Dans le triangle rectangle formé par les axes, le théorème de Pythagore donne le carré de cette distance.",
+      "formules": [
+        "|a + ib| = √(a² + b²) ; |z|² = z z̄."
+      ],
+      "exemples": [
+        "Depuis l’origine",
+        "Entre deux points"
+      ],
+      "pieges": [
+        "|a + ib| n’est pas a + b. Une longueur ne peut pas être négative."
+      ],
+      "aRetenir": [
+        "|z| = √(a² + b²).",
+        "AB = |b − a|.",
+        "|z − a| = R décrit un cercle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L5",
+      "titre": "Un angle sur le cercle unité",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "5/11",
+      "precedente": "Le module mesure une distance",
+      "suivante": "Passer à la forme exponentielle",
+      "explication": "Nous allons décrire une direction par un angle. Cela prépare une seconde manière d’écrire les complexes. Sur le cercle de centre O et de rayon 1, on part du point (1 ; 0). Un angle positif tourne dans le sens inverse des aiguilles d’une montre. En radians, un tour vaut 2π et un demi-tour π ; π vaut environ 3,14. Le point atteint à l’angle θ a pour coordonnées (cos θ ; sin θ). Cosinus est sa coordonnée horizontale, sinus sa coordonnée verticale. Pythagore donne cos² θ + sin² θ = 1.",
+      "formules": [],
+      "exemples": [
+        "Quart de tour",
+        "Tourner vers le bas"
+      ],
+      "pieges": [
+        "Ajouter 2π ramène au même point : les angles θ et θ + 2π ont le même sinus et le même cosinus. En calculatrice, sélectionner le mode radian…"
+      ],
+      "aRetenir": [
+        "Un tour = 2π radians.",
+        "cos : horizontal ; sin : vertical.",
+        "Retenir les angles usuels et utiliser les symétries."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L6",
+      "titre": "Passer à la forme exponentielle",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "6/11",
+      "precedente": "Un angle sur le cercle unité",
+      "suivante": "Multiplier les modules, additionner les angles",
+      "explication": "Nous allons écrire un complexe avec sa longueur et sa direction. Cette forme facilitera les puissances. Pour z ≠ 0, un argument θ est un angle de la direction de son image. Si r = |z|, alors a = r cos θ et b = r sin θ. Tous les arguments sont θ + 2kπ, k entier relatif (positif, négatif ou nul).",
+      "formules": [
+        "z = r(cos θ + i sin θ) = r e^(iθ), avec r > 0."
+      ],
+      "exemples": [
+        "Sur un axe",
+        "Reconnaître deux coordonnées"
+      ],
+      "pieges": [
+        "Le complexe 0 n’a pas d’argument. Pour choisir un angle, vérifier les DEUX coordonnées ; le cosinus seul laisse deux directions possibles."
+      ],
+      "aRetenir": [
+        "Forme trigonométrique : r(cos θ + i sin θ).",
+        "Forme exponentielle : r e^(iθ).",
+        "Arguments définis à un nombre entier de tours près."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L7",
+      "titre": "Multiplier les modules, additionner les angles",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "7/11",
+      "precedente": "Passer à la forme exponentielle",
+      "suivante": "Trouver les racines carrées d’un complexe",
+      "explication": "Nous allons calculer des produits et de grandes puissances sans tout développer. La forme exponentielle transforme les angles en sommes. La multiplication combine un agrandissement de rapport s et une rotation d’angle φ. En répétant n fois le produit, on multiplie le module n fois et on additionne n fois l’angle.",
+      "formules": [
+        "(r e^(iθ))(s e^(iφ)) = rs e^(i(θ + φ)) ; (r e^(iθ))/(s e^(iφ)) = (r/s)e^(i(θ − φ)), si s > 0.",
+        "(r e^(iθ))ⁿ = rⁿe^(inθ) ; (cos θ + i sin θ)ⁿ = cos(nθ) + i sin(nθ)."
+      ],
+      "exemples": [
+        "Un quotient",
+        "Une puissance"
+      ],
+      "pieges": [
+        "Ces règles concernent les produits et les quotients. Les arguments ne s’additionnent pas pour z + w."
+      ],
+      "aRetenir": [
+        "Produit : modules multipliés, angles additionnés.",
+        "Quotient : modules divisés, angles soustraits.",
+        "Puissance : rⁿ et nθ."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L8",
+      "titre": "Trouver les racines carrées d’un complexe",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "8/11",
+      "precedente": "Multiplier les modules, additionner les angles",
+      "suivante": "Résoudre une équation du second degré",
+      "explication": "Nous allons chercher tous les nombres dont le carré est un complexe donné. Ce sera la première étape des équations du second degré. Une racine carrée complexe de w est un z tel que z² = w. Si w ≠ 0, ses racines sont opposées. Pour w = 0, la seule racine est 0.",
+      "formules": [
+        "Si z = a + ib et w = u + iv : a² − b² = u et 2ab = v. De plus a² + b² = |w|."
+      ],
+      "exemples": [
+        "Une racine simple",
+        "Une racine non réelle"
+      ],
+      "pieges": [
+        "Pour des complexes, on n’utilise pas sans condition √(uv) = √u √v. La vérification par le carré évite ce piège."
+      ],
+      "aRetenir": [
+        "Chercher z² = w.",
+        "Identifier les parties et le module.",
+        "Garder les deux racines opposées si w ≠ 0."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L9",
+      "titre": "Résoudre une équation du second degré",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "9/11",
+      "precedente": "Trouver les racines carrées d’un complexe",
+      "suivante": "Répartir les racines n-ièmes sur un cercle",
+      "explication": "Nous allons résoudre Az² + Bz + C = 0, avec A ≠ 0. Les racines carrées complexes permettent de traiter tout discriminant. Le discriminant est Δ = B² − 4AC. Compléter le carré transforme l’équation en (2Az + B)² = Δ. Ainsi, si δ² = Δ, alors 2Az + B = δ ou −δ.",
+      "formules": [
+        "z₁ = (−B + δ)/(2A) ; z₂ = (−B − δ)/(2A), où δ² = Δ."
+      ],
+      "exemples": [
+        "Coefficients réels",
+        "Coefficients complexes"
+      ],
+      "pieges": [
+        "Dans ℝ, Δ < 0 empêche des solutions réelles. Dans ℂ, il donne deux solutions non réelles conjuguées si les coefficients sont réels."
+      ],
+      "aRetenir": [
+        "Calculer Δ = B² − 4AC.",
+        "Trouver δ tel que δ² = Δ.",
+        "Utiliser les deux signes puis vérifier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L10",
+      "titre": "Répartir les racines n-ièmes sur un cercle",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "10/11",
+      "precedente": "Résoudre une équation du second degré",
+      "suivante": "Lire une transformation du plan",
+      "explication": "Nous allons résoudre zⁿ = w pour n entier positif. Les solutions seront régulièrement réparties sur un cercle. Si w = r e^(iθ) ≠ 0 et z = ρe^(iα), l’égalité zⁿ = w impose ρⁿ = r et nα = θ + 2kπ. On prend ρ = r^(1/n), la racine positive réelle de r.",
+      "formules": [
+        "zₖ = r^(1/n)e^(i(θ + 2kπ)/n), pour k = 0, 1, …, n − 1."
+      ],
+      "exemples": [
+        "Racines cubiques de 1",
+        "Séparer un facteur nul"
+      ],
+      "pieges": [
+        "k = n redonne la racine k = 0 : un tour complet après division par n. Pour w = 0, l’unique solution est z = 0."
+      ],
+      "aRetenir": [
+        "Module : racine n-ième de r.",
+        "Angles : (θ + 2kπ)/n.",
+        "n racines distinctes sur un cercle si w ≠ 0."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L11",
+      "titre": "Lire une transformation du plan",
+      "module": "Nombres complexes (Mathématiques)",
+      "position": "11/11",
+      "precedente": "Répartir les racines n-ièmes sur un cercle",
+      "suivante": null,
+      "explication": "Nous allons reconnaître ce que fait une formule z′ = az + b aux points du plan. Elle décrit des translations, rotations et agrandissements. Le déplacement de A vers B a pour affixe b − a ; le milieu a pour affixe (a + b)/2. Ajouter un complexe c à toutes les affixes déplace tous les points du même déplacement : c’est une translation. Pour a ≠ 0 et a ≠ 1, la transformation z′ = az + b possède un centre ω = b/(1 − a), solution de ω = aω + b. En retirant cette égalité, on obtient z′ − ω = a(z − ω).",
+      "formules": [],
+      "exemples": [
+        "Milieu",
+        "Retrouver un centre"
+      ],
+      "pieges": [
+        "Le centre ne se lit pas directement dans le terme constant b. Il se calcule en résolvant z′ = z."
+      ],
+      "aRetenir": [
+        "Translation : ajouter la même affixe.",
+        "Similitude : chercher le centre fixe.",
+        "Multiplier par a change l’échelle et la direction."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

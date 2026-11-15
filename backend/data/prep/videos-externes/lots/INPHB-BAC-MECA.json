@@ -1,0 +1,252 @@
+{
+  "module": "INPHB-BAC-MECA",
+  "titre": "Mécanique : lois de Newton",
+  "matiere": "Sciences physiques",
+  "resume": "Décrire un mouvement, représenter les forces et appliquer Newton dans les champs de pesanteur et électrique uniformes.",
+  "concours": [
+    "INPHB — Concours bacheliers",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "INPHB-BAC-MECA-L1",
+      "titre": "Choisir ce que l’on observe",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Lire et additionner des vecteurs",
+      "explication": "Nous allons préciser l’objet étudié et les unités de son mouvement. Dire « il bouge » n’a de sens que par rapport à un repère de référence. Le système est l’objet étudié. Le référentiel est l’objet de référence auquel on associe une horloge. Un repère lui associe une origine O et des axes orientés. Une position sur un axe est une distance signée depuis O : + à droite si l’axe pointe à droite, − à gauche.",
+      "formules": [],
+      "exemples": [
+        "Un passager assis"
+      ],
+      "pieges": [
+        "La masse se mesure en kg et le poids, qui est une force, en newtons. Une conversion change le nombre, pas la quantité."
+      ],
+      "aRetenir": [
+        "Choisir système et référentiel.",
+        "Fixer origine, axes et horloge.",
+        "Convertir en m, s et kg."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L2",
+      "titre": "Lire et additionner des vecteurs",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "2/10",
+      "precedente": "Choisir ce que l’on observe",
+      "suivante": "Calculer une vitesse et son signe",
+      "explication": "Nous allons représenter une grandeur qui possède un sens. Cela servira pour la vitesse et les forces. Une grandeur scalaire, comme une masse, est donnée par une valeur et une unité. Un vecteur, dessiné par une flèche, possède une direction (la droite support), un sens et une norme (sa longueur représentant sa valeur). On note F⃗ un vecteur force. Une composante est la valeur signée sur un axe. Avec x vers la droite et y vers le haut, une flèche horizontale de 3 unités vers la gauche a pour composantes (−3 ; 0). Pour additionner des vecteurs, additionner leurs composantes correspondantes.",
+      "formules": [],
+      "exemples": [
+        "Sur le même axe",
+        "Sur deux axes"
+      ],
+      "pieges": [
+        "La somme des normes 3 + 4 = 7 n’est pas la norme de la somme de deux vecteurs perpendiculaires."
+      ],
+      "aRetenir": [
+        "Direction, sens et norme.",
+        "Composantes signées.",
+        "Addition axe par axe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L3",
+      "titre": "Calculer une vitesse et son signe",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "3/10",
+      "precedente": "Lire et additionner des vecteurs",
+      "suivante": "Décrire une accélération constante",
+      "explication": "Nous allons comparer des déplacements réalisés pendant des durées différentes. La vitesse rend cette comparaison possible. La vitesse instantanée décrit le mouvement à un instant. En mouvement rectiligne uniforme, la trajectoire est droite et la vitesse vectorielle est constante : x(t) = x₀ + vt. x₀ est la position à t = 0.",
+      "formules": [
+        "Vitesse moyenne = distance parcourue/durée ; vitesse algébrique moyenne sur x = (x final − x initial)/durée."
+      ],
+      "exemples": [
+        "Une vitesse moyenne",
+        "Un sens négatif"
+      ],
+      "pieges": [
+        "Distance parcourue et déplacement signé diffèrent. Sur un aller-retour, la distance est positive même si la position finale est celle du dé…"
+      ],
+      "aRetenir": [
+        "Vitesse moyenne : distance/durée.",
+        "Une vitesse algébrique peut être négative.",
+        "m/s → km/h : × 3,6."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L4",
+      "titre": "Décrire une accélération constante",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "4/10",
+      "precedente": "Calculer une vitesse et son signe",
+      "suivante": "Faire le bilan des forces",
+      "explication": "Nous allons calculer une vitesse qui change régulièrement. L’accélération décrit cette variation, pas la position. L’accélération est la variation de vitesse par durée : a = (v finale − v initiale)/durée si elle est constante. Son unité m/s² signifie « mètre par seconde gagné ou perdu à chaque seconde ». La première relation ajoute à v₀ une variation at. Avec une accélération constante, la vitesse moyenne algébrique entre 0 et t vaut (v₀ + v(t))/2 : le déplacement vaut donc v₀t + ½at².",
+      "formules": [
+        "v(t) = v₀ + at ; x(t) = x₀ + v₀t + ½at²."
+      ],
+      "exemples": [
+        "Un départ arrêté",
+        "Un freinage"
+      ],
+      "pieges": [
+        "Une accélération négative ne signifie pas toujours ralentir : si la vitesse est aussi négative, sa valeur absolue augmente."
+      ],
+      "aRetenir": [
+        "a mesure la variation de v.",
+        "Si a constante : v = v₀ + at.",
+        "Position : ajouter v₀t et ½at² à x₀."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L5",
+      "titre": "Faire le bilan des forces",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "5/10",
+      "precedente": "Décrire une accélération constante",
+      "suivante": "L’inertie : conserver son mouvement",
+      "explication": "Nous allons identifier les actions reçues par un objet. Ce bilan permet ensuite d’appliquer les lois de Newton. Une force modélise l’action d’un autre objet : elle peut déformer ou modifier le mouvement. Elle se représente par un vecteur et se mesure en newtons (N). Les forces extérieures viennent d’objets hors du système choisi.",
+      "formules": [],
+      "exemples": [
+        "Un livre posé"
+      ],
+      "pieges": [
+        "Dans le bilan du livre, on compte la force de la table sur le livre, pas la force du livre sur la table. Elles ne s’annulent pas dans le bi…"
+      ],
+      "aRetenir": [
+        "Choisir un seul système.",
+        "Lister ce qu’il reçoit.",
+        "Action-réaction : objets différents."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L6",
+      "titre": "L’inertie : conserver son mouvement",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "6/10",
+      "precedente": "Faire le bilan des forces",
+      "suivante": "Relier résultante et accélération",
+      "explication": "Nous allons comprendre pourquoi une force n’est pas nécessaire pour entretenir une vitesse constante dans le modèle sans frottement. Un référentiel galiléen est un référentiel où le principe d’inertie s’applique. Pour les expériences courtes près du sol, on assimile souvent le référentiel terrestre à un référentiel galiléen.",
+      "formules": [],
+      "exemples": [
+        "Un palet idéal",
+        "Un livre immobile"
+      ],
+      "pieges": [
+        "Somme nulle ne veut pas dire absence de forces. Et une vitesse de norme constante sur un cercle change de direction : ce n’est pas un mouve…"
+      ],
+      "aRetenir": [
+        "Résultante nulle → vitesse vectorielle constante.",
+        "Repos et mouvement rectiligne uniforme sont possibles.",
+        "Préciser le référentiel."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L7",
+      "titre": "Relier résultante et accélération",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "7/10",
+      "precedente": "L’inertie : conserver son mouvement",
+      "suivante": "La chute libre sur un axe vertical",
+      "explication": "Nous allons calculer la variation du mouvement à partir des forces. C’est la deuxième loi de Newton. La résultante est la somme vectorielle des forces reçues. On choisit un axe, on écrit les composantes avec leur signe puis on divise la résultante par la masse.",
+      "formules": [
+        "ΣF⃗ extérieures = m a⃗ ; sur un axe : ΣFₓ = maₓ."
+      ],
+      "exemples": [
+        "Traction avec frottement",
+        "Masse doublée"
+      ],
+      "pieges": [
+        "Utiliser la résultante, pas seulement la force motrice. Une vitesse initiale n’entre pas dans ΣF = ma ; elle sert ensuite à trouver v(t)."
+      ],
+      "aRetenir": [
+        "Bilan des forces → somme signée.",
+        "a = résultante/masse.",
+        "Puis utiliser les lois du mouvement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L8",
+      "titre": "La chute libre sur un axe vertical",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "8/10",
+      "precedente": "Relier résultante et accélération",
+      "suivante": "Séparer les axes d’un projectile",
+      "explication": "Nous allons prévoir une chute quand le poids est la seule force retenue. Cette hypothèse exclut la résistance de l’air et la poussée d’Archimède. Près du sol, le champ de pesanteur uniforme garde la même valeur g et pointe vers le bas. Newton donne ma⃗ = mg⃗, donc a⃗ = g⃗ : la masse se simplifie. Dans ce modèle, l’accélération de chute est indépendante de la masse.",
+      "formules": [
+        "Axe z vers le haut : a_z = −g ; v_z = v₀z − gt ; z = z₀ + v₀z t − ½gt²."
+      ],
+      "exemples": [
+        "Lâcher sans vitesse",
+        "Lancer vers le haut"
+      ],
+      "pieges": [
+        "Vitesse nulle au sommet ne signifie pas accélération nulle. Choisir le signe de g après avoir orienté l’axe."
+      ],
+      "aRetenir": [
+        "Poids seul → accélération g vers le bas.",
+        "Axe vers le haut : a_z = −g.",
+        "Une durée physique est positive."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L9",
+      "titre": "Séparer les axes d’un projectile",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "9/10",
+      "precedente": "La chute libre sur un axe vertical",
+      "suivante": "Une particule dans un champ électrique uniforme",
+      "explication": "Nous allons décomposer un lancer en mouvement horizontal et mouvement vertical. Les deux coordonnées utilisent le même temps. On néglige l’air. Avec x horizontal et z vers le haut, le poids n’a pas de composante horizontale : aₓ = 0 et a_z = −g. Les composantes initiales v₀x et v₀z sont les parts horizontale et verticale de la vitesse. Si l’angle α est mesuré depuis l’horizontale, v₀x = v₀ cos α et v₀z = v₀ sin α. Dans le triangle rectangle des composantes, cos α est côté horizontal/hypoténuse et sin α côté vertical/hypoténuse. Un angle depuis la verticale échange ces rôles.",
+      "formules": [
+        "x = x₀ + v₀x t ; z = z₀ + v₀z t − ½gt²."
+      ],
+      "exemples": [
+        "Un lancer depuis le sol",
+        "Équation de trajectoire"
+      ],
+      "pieges": [
+        "Ne pas prendre le temps horizontal et le temps vertical comme deux durées indépendantes : c’est le même objet au même instant."
+      ],
+      "aRetenir": [
+        "Un seul temps pour les deux axes.",
+        "Horizontal : vitesse constante.",
+        "Vertical : accélération −g ; portée au retour au sol."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INPHB-BAC-MECA-L10",
+      "titre": "Une particule dans un champ électrique uniforme",
+      "module": "Mécanique : lois de Newton (Sciences physiques)",
+      "position": "10/10",
+      "precedente": "Séparer les axes d’un projectile",
+      "suivante": null,
+      "explication": "Nous allons appliquer la même méthode à une particule chargée. La différence vient de la force et du signe de la charge. La charge électrique q, positive ou négative, se mesure en coulombs (C). Le champ électrique E⃗ représente la force par coulomb : F⃗ électrique = qE⃗. Dans un champ uniforme, E⃗ est constant. On néglige ici poids et autres forces.",
+      "formules": [
+        "a⃗ = qE⃗/m."
+      ],
+      "exemples": [
+        "Le signe de la déviation",
+        "Un calcul sur un axe"
+      ],
+      "pieges": [
+        "Le signe de q change le sens de la force, pas la direction du champ imposé. La masse est toujours positive."
+      ],
+      "aRetenir": [
+        "Champ uniforme → force électrique constante.",
+        "F⃗ = qE⃗ puis a⃗ = qE⃗/m.",
+        "Même méthode cinématique, attention au signe de q."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

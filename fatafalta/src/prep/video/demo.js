@@ -7,8 +7,9 @@
  *
  * Une vidéo par LEÇON (affichée à l'ouverture de la leçon) ; une vidéo de présentation par concours.
  */
-const v = (youtubeId, title, durationSec) => ({
+const v = (youtubeId, title, durationSec, auteur) => ({
   youtubeId,
+  ...(auteur ? { auteur } : {}),
   url: `https://www.youtube.com/watch?v=${youtubeId}`,
   title,
   durationSec,
@@ -18,9 +19,10 @@ const v = (youtubeId, title, durationSec) => ({
 
 export default {
   lecons: {
-    // Module « Logarithme et exponentielle » : une vidéo pour chacune des deux leçons
-    'MATH-LNEXP-L1': { fr: v('VJns0RfVWGg', 'LE COURS : Logarithme népérien - Terminale', 1095) },
-    'MATH-LNEXP-L2': { fr: v('sCcy4IQKits', 'LE COURS : Fonction exponentielle - Terminale', 1354) },
+    // Module « Logarithme et exponentielle » : vidéos externes réellement sélectionnées (pilote du
+    // 2026-11-15, backend/data/prep/videos-externes/selections.json), créditées à leur chaîne.
+    'MATH-LNEXP-L1': { fr: v('FBmVDGvUtJ4', 'Appliquer les formules sur les puissances - Seconde', 385, 'Yvan Monka') },
+    'MATH-LNEXP-L3': { fr: v('HGrK77-SCl4', 'Appliquer les formules sur les logarithmes - Terminale', 458, 'Yvan Monka') },
     // Cours de langue : une vidéo par version de la leçon 1 (la leçon 2 n'en a pas)
     'ANG-GRAM-L1': {
       fr: v('PpRiS0LtOUs', 'Le Present Perfect en anglais enfin expliqué concrètement', 889),

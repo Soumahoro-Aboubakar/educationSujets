@@ -1,0 +1,228 @@
+{
+  "module": "CALC-SANTE",
+  "titre": "Calculs de base pour la santé",
+  "matiere": "Mathématiques",
+  "resume": "Lire un calcul, convertir les unités, raisonner par proportion puis calculer pourcentages, concentrations, doses et débits.",
+  "concours": [
+    "INFAS — Auxiliaires de santé"
+  ],
+  "lecons": [
+    {
+      "code": "CALC-SANTE-L1",
+      "titre": "Lire et organiser un calcul",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Convertir masses et volumes",
+      "explication": "Nous allons comprendre les opérations nécessaires aux calculs de santé. Les situations chiffrées de ce module sont des exercices, avec toutes les données utiles fournies. Additionner (+) réunit des quantités ; soustraire (−) trouve un reste ou un écart. Multiplier (×) compte des groupes identiques ; diviser (÷ ou /) partage en parts égales. Le signe = indique que les deux écritures ont la même valeur. Un nombre décimal comporte une partie après la virgule : 0,5 est une moitié ; 0,25 un quart. Une fraction a/b représente a divisé par b, avec b non nul : 1/2 = 0,5. Le carré x² signifie x × x.",
+      "formules": [],
+      "exemples": [
+        "Partager puis regrouper",
+        "Respecter les parenthèses"
+      ],
+      "pieges": [],
+      "aRetenir": [
+        "Comprendre l’opération avant de la poser.",
+        "Une fraction est une division.",
+        "Parenthèses avant multiplication, puis addition."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L2",
+      "titre": "Convertir masses et volumes",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "2/9",
+      "precedente": "Lire et organiser un calcul",
+      "suivante": "Convertir une durée",
+      "explication": "Nous allons changer d’unité sans changer la quantité. Cette étape doit précéder les calculs où plusieurs unités se mélangent. La masse indique une quantité de matière, mesurée ici en grammes. Le volume est l’espace occupé, mesuré ici en litres. Un milligramme (mg) est un millième de gramme ; un microgramme (µg) un millième de milligramme.",
+      "formules": [],
+      "exemples": [
+        "Une masse",
+        "Un volume"
+      ],
+      "pieges": [
+        "Masse et volume sont différents. On ne transforme pas des mg en mL sans connaître la concentration ou la masse volumique."
+      ],
+      "aRetenir": [
+        "Même quantité, autre unité.",
+        "g → mg et L → mL : × 1 000.",
+        "Ne pas convertir une masse en volume sans donnée supplémentaire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L3",
+      "titre": "Convertir une durée",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "3/9",
+      "precedente": "Convertir masses et volumes",
+      "suivante": "La proportionnalité : passer par un",
+      "explication": "Nous allons exprimer des heures en minutes pour éviter les erreurs de débit.",
+      "formules": [
+        "1 h = 60 min ; 1 min = 60 s."
+      ],
+      "exemples": [
+        "Durée composée",
+        "Heures décimales"
+      ],
+      "pieges": [
+        "1 h 30 min s’écrit 1,5 h, pas 1,30 h. Le temps utilise des groupes de 60, pas de 100."
+      ],
+      "aRetenir": [
+        "Heures → minutes : × 60.",
+        "Séparer heures entières et minutes restantes.",
+        "Une écriture décimale n’est pas un horaire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L4",
+      "titre": "La proportionnalité : passer par un",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "4/9",
+      "precedente": "Convertir une durée",
+      "suivante": "Calculer un pourcentage et une évolution",
+      "explication": "Nous allons retrouver une quantité inconnue quand deux quantités sont proportionnelles. Cette méthode explique la règle de trois. Deux quantités sont proportionnelles si elles sont multipliées par le même facteur. Pour des comprimés identiques, doubler leur nombre double la masse totale de principe actif, substance responsable de l’effet du médicament.",
+      "formules": [
+        "Quantité pour b unités = (quantité pour a unités)/a × b."
+      ],
+      "exemples": [
+        "De quatre à un, puis à trois",
+        "Trouver une inconnue"
+      ],
+      "pieges": [
+        "Toutes les situations ne sont pas proportionnelles : un tarif avec des frais fixes ne double pas nécessairement quand la quantité double."
+      ],
+      "aRetenir": [
+        "Vérifier que le rapport reste constant.",
+        "Diviser pour une unité.",
+        "Multiplier pour le nombre demandé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L5",
+      "titre": "Calculer un pourcentage et une évolution",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "5/9",
+      "precedente": "La proportionnalité : passer par un",
+      "suivante": "Comprendre une concentration",
+      "explication": "Nous allons lire « pour cent » comme une fraction de 100. Cela permet de calculer une part ou une variation de prix. p % signifie p/100. Pour prendre p % d’une quantité N, on calcule N × p/100. Un taux d’évolution compare un changement à la valeur de départ.",
+      "formules": [
+        "Taux d’évolution en % = (valeur finale − valeur initiale)/valeur initiale × 100."
+      ],
+      "exemples": [
+        "Une part",
+        "Une hausse"
+      ],
+      "pieges": [
+        "Diviser par le prix final donnerait un autre rapport. Une baisse de 20 % après une hausse de 20 % ne ramène généralement pas au départ."
+      ],
+      "aRetenir": [
+        "p % = p/100.",
+        "Part = total × proportion.",
+        "Évolution : variation divisée par le départ."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L6",
+      "titre": "Comprendre une concentration",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "6/9",
+      "precedente": "Calculer un pourcentage et une évolution",
+      "suivante": "Calculer une quantité par kilogramme",
+      "explication": "Nous allons exprimer la quantité de produit contenue dans un volume. Cela relie les calculs de masse aux calculs de volume. Une solution contient un produit dissous, le soluté, dans un liquide, le solvant. La concentration massique c est la masse de soluté par volume de solution : c = m/V. mg/mL se lit milligrammes par millilitre.",
+      "formules": [],
+      "exemples": [
+        "Passer au millilitre",
+        "Un % m/V"
+      ],
+      "pieges": [
+        "Un signe % isolé ne précise pas son type. Dans ce module, on indique m/V quand on utilise des grammes pour 100 mL."
+      ],
+      "aRetenir": [
+        "c = m/V ; m = cV ; V = m/c.",
+        "% m/V = grammes pour 100 mL.",
+        "Accorder les unités avant de diviser."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L7",
+      "titre": "Calculer une quantité par kilogramme",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "7/9",
+      "precedente": "Comprendre une concentration",
+      "suivante": "Calculer un débit en volume",
+      "explication": "Nous allons interpréter une quantité exprimée par kilogramme. Les doses de cette leçon sont des données fictives de calcul. « 12 mg/kg pour une prise » signifie que chaque kilogramme de masse corporelle correspond à 12 mg pour cette prise. On multiplie par la masse en kg ; les kg se simplifient et il reste des mg.",
+      "formules": [
+        "Dose pour une prise = dose par kg pour une prise × masse en kg."
+      ],
+      "exemples": [
+        "Une prise",
+        "Une journée partagée"
+      ],
+      "pieges": [
+        "mg/kg/prise et mg/kg/jour ne sont pas interchangeables. Repérer la période avant de multiplier ou de partager."
+      ],
+      "aRetenir": [
+        "Lire la période : prise ou journée.",
+        "Multiplier la quantité par kg par la masse en kg.",
+        "Pour un volume, diviser ensuite par la concentration."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L8",
+      "titre": "Calculer un débit en volume",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "8/9",
+      "precedente": "Calculer une quantité par kilogramme",
+      "suivante": "Passer aux gouttes par minute",
+      "explication": "Nous allons calculer combien de liquide passe pendant une unité de temps. C’est le sens du mot débit. Le débit D est le volume V divisé par la durée t. Un débit de 100 mL/h signifie que 100 mL passent en une heure. On suppose ici un débit constant.",
+      "formules": [
+        "D = V/t ; V = Dt ; t = V/D."
+      ],
+      "exemples": [
+        "Chercher le débit",
+        "Chercher la durée"
+      ],
+      "pieges": [
+        "125 mL/h n’est pas 125 mL/min. La même quantité passe en 60 fois plus de temps."
+      ],
+      "aRetenir": [
+        "Débit = volume/durée.",
+        "Vérifier l’unité de temps.",
+        "Inverser la relation pour trouver volume ou durée."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CALC-SANTE-L9",
+      "titre": "Passer aux gouttes par minute",
+      "module": "Calculs de base pour la santé (Mathématiques)",
+      "position": "9/9",
+      "precedente": "Calculer un débit en volume",
+      "suivante": null,
+      "explication": "Nous allons convertir un débit en gouttes/minute en utilisant le facteur du dispositif fourni par l’énoncé. Le facteur de gouttes f indique combien de gouttes correspondent à 1 mL pour le matériel utilisé. Il peut être de 20 gouttes/mL dans un exercice, ou prendre une autre valeur. Ce facteur n’est pas universel.",
+      "formules": [
+        "Débit en gouttes/min = volume en mL × f en gouttes/mL / durée en min."
+      ],
+      "exemples": [
+        "Avec f = 20 gouttes/mL",
+        "Changer le facteur"
+      ],
+      "pieges": [
+        "Ne pas insérer automatiquement 20. Lire le facteur fourni et la règle d’arrondi ; conserver les décimales jusqu’à la fin."
+      ],
+      "aRetenir": [
+        "Lire le facteur du matériel.",
+        "Convertir la durée en minutes.",
+        "Arrondir le résultat final selon la consigne."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

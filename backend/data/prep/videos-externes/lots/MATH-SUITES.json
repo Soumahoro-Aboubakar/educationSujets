@@ -1,0 +1,277 @@
+{
+  "module": "MATH-SUITES",
+  "titre": "Suites numériques",
+  "matiere": "Mathématiques",
+  "resume": "Des termes d’une suite aux sommes, variations, récurrences et limites.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)",
+    "ESATIC — Concours bacheliers (Licence 1)"
+  ],
+  "lecons": [
+    {
+      "code": "MATH-SUITES-L1",
+      "titre": "Une suite : un nombre à chaque rang",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "1/11",
+      "precedente": null,
+      "suivante": "Formule directe ou calcul de proche en proche",
+      "explication": "Nous allons lire une liste de nombres repérés par leur rang. Cela sert à suivre une quantité jour après jour ou étape après étape. Une suite numérique associe un nombre à chaque entier d’un ensemble de rangs : 0, 1, 2, 3… L’ensemble ℕ désigne ici les entiers à partir de 0. Le nombre uₙ est le terme de rang n ; (uₙ) désigne la suite entière.",
+      "formules": [],
+      "exemples": [
+        "Lire un terme",
+        "Calculer depuis une formule"
+      ],
+      "pieges": [
+        "Si la suite commence à u₀, u₃ est le quatrième terme écrit. Si elle commence à u₁, u₃ est le troisième."
+      ],
+      "aRetenir": [
+        "Une suite attribue un terme à chaque rang.",
+        "uₙ est un nombre ; (uₙ) est la liste.",
+        "Toujours repérer le premier indice."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L2",
+      "titre": "Formule directe ou calcul de proche en proche",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "2/11",
+      "precedente": "Une suite : un nombre à chaque rang",
+      "suivante": "Suite arithmétique : ajouter toujours le même nombre",
+      "explication": "Nous allons distinguer deux façons de définir une suite. Cette lecture indique comment calculer le terme demandé. Une formule explicite donne directement uₙ en fonction de n. Une définition par récurrence donne le premier terme et une règle pour calculer le suivant à partir du précédent. uₙ₊₁ se lit « terme de rang n + 1 ».",
+      "formules": [],
+      "exemples": [
+        "Accès direct",
+        "Proche en proche"
+      ],
+      "pieges": [
+        "La règle vₙ₊₁ = 2vₙ + 1 ne signifie pas vₙ = 2n + 1. L’indice n et le terme vₙ ont des rôles différents."
+      ],
+      "aRetenir": [
+        "Explicite : calcul direct depuis le rang.",
+        "Par récurrence : terme initial puis règle de passage.",
+        "Ne pas confondre n et uₙ."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L3",
+      "titre": "Suite arithmétique : ajouter toujours le même nombre",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "3/11",
+      "precedente": "Formule directe ou calcul de proche en proche",
+      "suivante": "Additionner des termes arithmétiques",
+      "explication": "Nous allons reconnaître une suite qui avance par ajout constant. C’est le modèle d’une quantité qui augmente chaque jour du même montant. Une suite est arithmétique si uₙ₊₁ = uₙ + r, où r est constant. Ce nombre r est la raison. Pour la trouver, on calcule la différence entre deux termes consécutifs.",
+      "formules": [
+        "uₙ = u₀ + nr ; plus généralement uₙ = uₚ + (n − p)r."
+      ],
+      "exemples": [
+        "Des ajouts réguliers",
+        "Un départ au rang 1"
+      ],
+      "pieges": [
+        "Trois premiers termes peuvent suggérer une nature, mais il faut une règle valable à tous les rangs pour prouver qu’une suite est arithmétiq…"
+      ],
+      "aRetenir": [
+        "Arithmétique : différence constante r.",
+        "Compter les étapes depuis le rang connu.",
+        "Formule au rang 0 : u₀ + nr."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L4",
+      "titre": "Additionner des termes arithmétiques",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "4/11",
+      "precedente": "Suite arithmétique : ajouter toujours le même nombre",
+      "suivante": "Suite géométrique : multiplier toujours par le même nombre",
+      "explication": "Nous allons additionner des termes arithmétiques sans les écrire tous. Le regroupement du premier et du dernier terme donne une méthode rapide. Dans toute suite arithmétique, premier + dernier = deuxième + avant-dernier. Écrire la somme dans les deux sens produit donc autant de fois cette valeur qu’il y a de termes.",
+      "formules": [
+        "Somme = nombre de termes × (premier + dernier)/2."
+      ],
+      "exemples": [
+        "Deux écritures d’une somme",
+        "Compter avant de sommer"
+      ],
+      "pieges": [
+        "Le nombre de termes est différent du nombre d’étapes : de u₀ à uₙ, n étapes mais n + 1 termes."
+      ],
+      "aRetenir": [
+        "Compter les termes inclus.",
+        "Repérer le premier et le dernier.",
+        "Multiplier leur moyenne par le nombre de termes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L5",
+      "titre": "Suite géométrique : multiplier toujours par le même nombre",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "5/11",
+      "precedente": "Additionner des termes arithmétiques",
+      "suivante": "Additionner des termes géométriques",
+      "explication": "Nous allons reconnaître une suite définie par multiplication constante. C’est le modèle d’une quantité qui double à chaque étape ou conserve une même fraction. Une suite est géométrique si vₙ₊₁ = qvₙ, pour une constante q appelée raison. Rappel des puissances de MATH-LNEXP-L1 : qⁿ représente n facteurs q, et q⁰ = 1 pour q ≠ 0. Pour une raison négative, une puissance entière reste un produit : (−2)² = (−2) × (−2) = 4. Si les termes sont non nuls, vₙ₊₁/vₙ vaut q. Pour q = 0, tous les termes après le terme initial valent 0 : on les traite directement, sans division.",
+      "formules": [
+        "vₙ = v₀qⁿ ; depuis un rang p : vₙ = vₚq^(n − p), pour n ≥ p et q ≠ 0."
+      ],
+      "exemples": [
+        "Doublement",
+        "Une diminution"
+      ],
+      "pieges": [
+        "Ajouter toujours 2 est arithmétique ; multiplier toujours par 2 est géométrique."
+      ],
+      "aRetenir": [
+        "Géométrique : multiplier par une raison constante.",
+        "Compter les multiplications depuis le rang connu.",
+        "Éviter les quotients si un terme est nul."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L6",
+      "titre": "Additionner des termes géométriques",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "6/11",
+      "precedente": "Suite géométrique : multiplier toujours par le même nombre",
+      "suivante": "Savoir si une suite monte ou descend",
+      "explication": "Nous allons sommer des termes géométriques. Une soustraction fait disparaître les termes du milieu. Posons S = 1 + q + q² + … + qⁿ. Alors qS = q + q² + … + qⁿ⁺¹. La différence S − qS conserve seulement 1 − qⁿ⁺¹. Donc (1 − q)S = 1 − qⁿ⁺¹.",
+      "formules": [
+        "Pour N termes et q ≠ 1 : somme = premier terme × (1 − qᴺ)/(1 − q)."
+      ],
+      "exemples": [
+        "Une raison supérieure à 1",
+        "Une raison égale à 1"
+      ],
+      "pieges": [
+        "Le premier terme de la somme n’est pas toujours u₀. Une somme commençant en u₃ doit utiliser u₃."
+      ],
+      "aRetenir": [
+        "Compter N termes.",
+        "Utiliser le premier terme inclus dans la somme.",
+        "Traiter q = 1 séparément."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L7",
+      "titre": "Savoir si une suite monte ou descend",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "7/11",
+      "precedente": "Additionner des termes géométriques",
+      "suivante": "Comprendre une limite de suite",
+      "explication": "Nous allons prouver les variations d’une suite à tous les rangs. Quelques valeurs donnent une intuition, mais pas une preuve générale. Une suite est croissante si uₙ₊₁ ≥ uₙ pour chaque rang ; décroissante si uₙ₊₁ ≤ uₙ. Elle est monotone si elle garde l’un de ces deux sens. « Strictement » remplace ≥ par >, ou ≤ par <.",
+      "formules": [
+        "Étudier le signe de uₙ₊₁ − uₙ : positif → croissance ; négatif → décroissance."
+      ],
+      "exemples": [
+        "Une suite explicite",
+        "Une suite géométrique"
+      ],
+      "pieges": [
+        "Une raison géométrique supérieure à 1 ne garantit pas une suite croissante si le premier terme est négatif : −1, −2, −4… décroît. Avec une …"
+      ],
+      "aRetenir": [
+        "Étudier la différence uₙ₊₁ − uₙ.",
+        "Tenir compte du signe des termes pour une suite géométrique.",
+        "Quelques termes ne prouvent pas les variations générales."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L8",
+      "titre": "Comprendre une limite de suite",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "8/11",
+      "precedente": "Savoir si une suite monte ou descend",
+      "suivante": "Prouver une propriété par récurrence",
+      "explication": "Nous allons décrire ce qui arrive quand le rang grandit sans fin. Une suite peut se rapprocher d’un nombre sans jamais l’atteindre. Une suite converge vers ℓ si, à partir d’un rang assez grand, tous ses termes sont aussi proches que l’on veut du nombre réel ℓ. On note uₙ → ℓ quand n → +∞. Elle diverge si elle ne converge vers aucun nombre réel. Ces résultats sont admis. Pour q < 0, les signes alternent ; si −1 < q < 0, leur amplitude diminue quand même vers zéro. Pour q = 0, on considère les rangs n ≥ 1, où qⁿ = 0.",
+      "formules": [],
+      "exemples": [
+        "Se rapprocher de zéro",
+        "Tenir compte du facteur initial"
+      ],
+      "pieges": [
+        "Tendre vers +∞ est une divergence, pas une convergence vers un nombre réel. La suite (−1)ⁿ, qui alterne entre 1 et −1, n’a aucune limite."
+      ],
+      "aRetenir": [
+        "Converger signifie se rapprocher d’un nombre réel.",
+        "qⁿ → 0 si −1 < q < 1.",
+        "Vérifier les signes et le facteur devant la puissance."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L9",
+      "titre": "Prouver une propriété par récurrence",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "9/11",
+      "precedente": "Comprendre une limite de suite",
+      "suivante": "Prouver la convergence avant de chercher la limite",
+      "explication": "Nous allons prouver une affirmation à tous les rangs. Le raisonnement par récurrence combine un départ vérifié et un passage garanti au rang suivant. Une propriété P(n) est une affirmation qui dépend de l’entier n. La récurrence est une méthode de preuve ; une suite définie par récurrence est un mode de calcul. Les deux expressions ne désignent pas la même chose.",
+      "formules": [],
+      "exemples": [
+        "Une propriété à conserver",
+        "Passer au rang suivant"
+      ],
+      "pieges": [
+        "Dans l’hérédité, on suppose P(n), pas P(n + 1). Vérifier dix premiers termes ne remplace pas le passage général."
+      ],
+      "aRetenir": [
+        "Vérifier le point de départ.",
+        "Supposer au rang n et démontrer au rang n + 1.",
+        "Conclure pour tous les rangs annoncés."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L10",
+      "titre": "Prouver la convergence avant de chercher la limite",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "10/11",
+      "precedente": "Prouver une propriété par récurrence",
+      "suivante": "Transformer une récurrence affine en suite géométrique",
+      "explication": "Nous allons garantir qu’une suite converge, puis calculer sa limite. Résoudre seulement une équation de limite ne prouve pas que la suite converge. Une suite est majorée si tous ses termes sont ≤ un même nombre M ; minorée s’ils sont ≥ un même nombre m ; bornée si les deux conditions sont réunies. Si uₙ₊₁ = f(uₙ) converge vers ℓ et si f est continue en ℓ (f(x) s’approche de f(ℓ) quand x s’approche de ℓ), alors ℓ = f(ℓ). Un tel nombre est un point fixe. Les fonctions affines x ↦ ax + b sont continues : multiplier et ajouter transmettent les limites.",
+      "formules": [],
+      "exemples": [
+        "Démontrer les conditions",
+        "Calculer après avoir justifié"
+      ],
+      "pieges": [
+        "Une suite bornée peut ne pas converger : (−1)ⁿ reste entre −1 et 1 et alterne sans fin. Une suite croissante peut aussi tendre vers +∞ : uₙ…"
+      ],
+      "aRetenir": [
+        "Définir une borne valable à tous les rangs.",
+        "Croissante et majorée, ou décroissante et minorée : convergence.",
+        "Passer ensuite à ℓ = f(ℓ), si f est continue en ℓ."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "MATH-SUITES-L11",
+      "titre": "Transformer une récurrence affine en suite géométrique",
+      "module": "Suites numériques (Mathématiques)",
+      "position": "11/11",
+      "precedente": "Prouver la convergence avant de chercher la limite",
+      "suivante": null,
+      "explication": "Nous allons étudier uₙ₊₁ = auₙ + b, appelée récurrence affine. En retirant un point fixe, on retrouve une suite géométrique déjà connue. Pour a ≠ 1, on cherche L = aL + b. En regroupant les termes, (1 − a)L = b, donc L = b/(1 − a). Cette étape trouve un nombre utile ; elle ne suppose pas que la suite converge. En effet, vₙ₊₁ = auₙ + b − L. Comme b − L = −aL, cela donne a(uₙ − L) = avₙ. On applique alors la formule géométrique de L5.",
+      "formules": [
+        "Si vₙ = uₙ − L, alors vₙ₊₁ = a vₙ et uₙ = L + (u₀ − L)aⁿ."
+      ],
+      "exemples": [
+        "Un terme général",
+        "Une limite justifiée"
+      ],
+      "pieges": [
+        "Si a = 1, on ne divise pas par 1 − a : la suite est arithmétique de raison b. Si |a| < 1, la formule assure la convergence vers L ; pour le…"
+      ],
+      "aRetenir": [
+        "Trouver L sans supposer la convergence.",
+        "Poser vₙ = uₙ − L pour obtenir une suite géométrique.",
+        "Revenir à uₙ et utiliser la limite de la puissance."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

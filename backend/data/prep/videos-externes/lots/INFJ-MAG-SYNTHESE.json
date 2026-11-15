@@ -1,0 +1,193 @@
+{
+  "module": "INFJ-MAG-SYNTHESE",
+  "titre": "Dissertation et note de synthèse",
+  "matiere": "Culture générale",
+  "resume": "Distinguer les tâches, exploiter un dossier sans ajout et exercer un raisonnement précis en culture générale et juridique.",
+  "concours": [
+    "INFJ — École de la Magistrature"
+  ],
+  "lecons": [
+    {
+      "code": "INFJ-MAG-SYNTHESE-L1",
+      "titre": "Identifier ce que la copie doit produire",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Faire la carte des documents",
+      "explication": "Tu vas distinguer trois travaux pour choisir la bonne méthode. Pour apprendre la dissertation depuis le début, suis d’abord ENSEA-AS-OG, ajouté avant ce module dans le programme. Il enseigne une seule fois l’analyse du sujet, la problématique et la rédaction. Un dossier est un ensemble de documents réunis pour traiter un sujet. Synthétiser, c’est rapprocher leurs informations pour produire une présentation d’ensemble. La consigne précise le thème, la longueur, le destinataire éventuel et la forme attendue.",
+      "formules": [],
+      "exemples": [
+        "Deux commandes différentes"
+      ],
+      "pieges": [
+        "La page officielle des matières INFJ mentionne « SOG ou note de synthèse » en magistrature. Elle ne fixe pas ici un format détaillé daté po…"
+      ],
+      "aRetenir": [
+        "Lire la commande complète.",
+        "Distinguer argumentation et restitution de dossier.",
+        "Appliquer le format de la session."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-SYNTHESE-L2",
+      "titre": "Faire la carte des documents",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "2/8",
+      "precedente": "Identifier ce que la copie doit produire",
+      "suivante": "Prendre des notes utiles et traçables",
+      "explication": "Tu vas repérer les documents avant de prendre des notes détaillées. Pour chacun, relève son auteur ou institution, sa date, sa nature et sa question principale. La nature indique le type : règle, bilan, opinion, décision ou projet. Une règle énonce ce qui est permis, interdit ou demandé dans un cadre donné. Un bilan décrit une situation ; un avis exprime un jugement ; un projet présente une mesure envisagée. Ils ne disent donc pas la même chose et n’ont pas la même portée.",
+      "formules": [],
+      "exemples": [
+        "Petit dossier entièrement fictif",
+        "Une première carte"
+      ],
+      "pieges": [
+        "Le document le plus récent n’annule pas automatiquement les plus anciens. Un projet récent n’est pas une règle appliquée. Vérifie les indic…"
+      ],
+      "aRetenir": [
+        "Identifier auteur, date et nature.",
+        "Distinguer constat, avis et projet.",
+        "Ne pas attribuer une portée absente du document."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-SYNTHESE-L3",
+      "titre": "Prendre des notes utiles et traçables",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "3/8",
+      "precedente": "Faire la carte des documents",
+      "suivante": "Croiser les documents au lieu de les empiler",
+      "explication": "Tu vas sélectionner les informations utiles sans recopier chaque page. Une information est pertinente si elle aide à répondre au thème précis de la commande. Elle est traçable si tu sais dans quel document la retrouver. Après la première carte, choisis un ordre de lecture qui aide à comprendre le dossier : un document de présentation peut éclairer les textes plus techniques. Lis ensuite tous les documents. Pour chaque note, garde une idée brève, sa référence et son statut.",
+      "formules": [],
+      "exemples": [
+        "Commande d’entraînement"
+      ],
+      "pieges": [
+        "« Tout le monde est satisfait » ne peut pas remplacer une note sur des déplacements réduits : tu ajouterais une généralisation. Conserve au…"
+      ],
+      "aRetenir": [
+        "Lire tous les documents.",
+        "Sélectionner selon la commande.",
+        "Noter l’idée, sa limite et sa référence."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-SYNTHESE-L4",
+      "titre": "Croiser les documents au lieu de les empiler",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "4/8",
+      "precedente": "Prendre des notes utiles et traçables",
+      "suivante": "Construire le plan de la note",
+      "explication": "Tu vas rapprocher les notes sur une même question. Croiser les documents, c’est identifier leurs accords, leurs compléments ou leurs divergences. Un désaccord doit être décrit, pas tranché selon ton opinion. Crée des groupes thématiques : principes d’accès, obstacles, réponses. Place chaque note dans le groupe utile avec son numéro de document. Un document peut apporter des éléments à plusieurs groupes.",
+      "formules": [],
+      "exemples": [
+        "Un complément",
+        "Une tension à conserver"
+      ],
+      "pieges": [
+        "Deux documents qui utilisent le mot « accès » ne disent pas forcément la même chose. Vérifie le public, le service, la date et l’indicateur…"
+      ],
+      "aRetenir": [
+        "Regrouper les informations par question.",
+        "Faire apparaître compléments et tensions.",
+        "Conserver les attributions et les limites."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-SYNTHESE-L5",
+      "titre": "Construire le plan de la note",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "5/8",
+      "precedente": "Croiser les documents au lieu de les empiler",
+      "suivante": "Rédiger une synthèse neutre",
+      "explication": "Tu vas organiser les informations pour un lecteur qui ne connaît pas le dossier. Le plan de synthèse suit les questions communes aux documents, plutôt que leur ordre matériel. Pour chaque groupe de notes, formule un titre précis. Vérifie ensuite que chaque information importante a une place et que chaque partie repose sur le dossier. Un plan en deux parties est un outil possible, pas une obligation générale de l’INFJ vérifiée pour toute session.",
+      "formules": [],
+      "exemples": [
+        "Plan pour le dossier fictif",
+        "Vérifier les titres"
+      ],
+      "pieges": [
+        "N’utilise pas une partie « Mes solutions » si la commande demande uniquement une synthèse. Tu peux présenter les solutions proposées dans l…"
+      ],
+      "aRetenir": [
+        "Partir des questions du dossier.",
+        "Choisir des titres informatifs.",
+        "Vérifier la couverture sans apport personnel."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-SYNTHESE-L6",
+      "titre": "Rédiger une synthèse neutre",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "6/8",
+      "precedente": "Construire le plan de la note",
+      "suivante": "Raisonner avec précision en culture générale et juridique",
+      "explication": "Tu vas reformuler, c’est-à-dire exprimer les informations avec tes phrases, et rester neutre, sans approuver ni condamner les positions du dossier. La copie doit faire comprendre leur articulation. Présente brièvement l’objet et les axes de la note. Dans les paragraphes, rapproche les documents en précisant les attributions utiles. Pour cet entraînement, les références D1, D2… assurent la traçabilité ; dans une épreuve, suis la convention demandée. Les titres peuvent rendre le plan visible si le format l’autorise.",
+      "formules": [],
+      "exemples": [
+        "Une phrase fidèle",
+        "Un projet reste un projet"
+      ],
+      "pieges": [
+        "Évite les adjectifs comme « scandaleux » ou « excellent » qui ajoutent ton jugement. Si un document emploie un jugement, attribue-le claire…"
+      ],
+      "aRetenir": [
+        "Reformuler sans modifier la portée.",
+        "Attribuer constats, opinions et projets.",
+        "Respecter les conventions de présentation de l’épreuve."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-SYNTHESE-L7",
+      "titre": "Raisonner avec précision en culture générale et juridique",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "7/8",
+      "precedente": "Rédiger une synthèse neutre",
+      "suivante": "Achever et contrôler une note complète",
+      "explication": "Tu vas adapter le socle ENSEA-AS-OG-L2 à L8 aux sujets proches de la justice. Rappel : analyse les termes, formule la difficulté, organise des arguments, puis conclus. Ces habitudes de précision sont des choix de préparation ; elles ne constituent pas un barème officiel INFJ. Distingue un fait, présenté comme constat, une opinion, jugement discutable, et une règle, énoncé qui prescrit dans un cadre donné. Le droit en vigueur désigne les règles applicables à un lieu et une date ; une réforme souhaitée n’en fait pas partie par le seul fait qu’elle est proposée.",
+      "formules": [],
+      "exemples": [
+        "Ne pas changer de tâche",
+        "Justifier une affirmation juridique"
+      ],
+      "pieges": [
+        "« Je souhaite que cette mesure existe » et « cette mesure s’applique » sont deux affirmations différentes. Dans une dissertation, une propo…"
+      ],
+      "aRetenir": [
+        "Réutiliser le socle de dissertation.",
+        "Distinguer faits, opinions et règles.",
+        "Vérifier le cadre et ne pas inventer de référence."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "INFJ-MAG-SYNTHESE-L8",
+      "titre": "Achever et contrôler une note complète",
+      "module": "Dissertation et note de synthèse (Culture générale)",
+      "position": "8/8",
+      "precedente": "Raisonner avec précision en culture générale et juridique",
+      "suivante": null,
+      "explication": "Tu vas vérifier le résultat complet sur le dossier fictif de L2. Commande d’entraînement : « Présentez les acquis, obstacles et réponses envisagées. Utilisez deux parties titrées, des références D1–D4, sans avis ni conclusion séparée. » Ce format est propre à cet entraînement. Pour une séance d’entraînement de 4 h : 15 min de commande et repérage, 75 min de lecture et notes, 30 min de regroupement et plan, 100 min de rédaction, 20 min de relecture. Total : 240 min. Ajuste après un essai ; ce partage n’est pas une prescription INFJ.",
+      "formules": [],
+      "exemples": [
+        "Introduction et première partie possibles",
+        "Seconde partie possible"
+      ],
+      "pieges": [
+        "Ne généralise pas l’absence de conclusion de cet entraînement : la fin de note, les titres et les références dépendent du format demandé. N…"
+      ],
+      "aRetenir": [
+        "Achever une réponse à toute la commande.",
+        "Vérifier source et portée de chaque phrase.",
+        "Respecter le format et garder un temps de relecture."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "module": "CG-INSTIT",
+  "titre": "Les institutions de la Côte d’Ivoire",
+  "matiere": "Culture générale",
+  "resume": "De la règle de droit aux institutions : Constitution de 2016 révisée en 2020 et 2023, pouvoirs et contrôles.",
+  "concours": [
+    "INFJ — École de la Magistrature",
+    "INFJ — Greffes — cycle moyen supérieur",
+    "ENS — Éducateurs",
+    "INPHB — Concours bacheliers",
+    "INFAS — Auxiliaires de santé"
+  ],
+  "lecons": [
+    {
+      "code": "CG-INSTIT-L1",
+      "titre": "À quoi sert le droit ?",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "D’où viennent les règles de droit ?",
+      "explication": "Nous allons distinguer une règle juridique d’un conseil. Cela aide à comprendre pourquoi l’État peut imposer certaines obligations. Le droit est un ensemble de règles qui organise la vie en société. Une règle juridique reconnaît des droits ou impose des obligations ; les autorités publiques peuvent en assurer le respect. Un droit est aussi une prérogative reconnue à une personne. Une obligation est ce qu’elle doit faire ou ne pas faire.",
+      "formules": [],
+      "exemples": [
+        "Dans la rue",
+        "Entre deux personnes"
+      ],
+      "pieges": [
+        "Une sanction juridique n’est pas toujours une peine de prison : payer une dette ou réparer un dommage sont aussi des conséquences juridique…"
+      ],
+      "aRetenir": [
+        "Le droit organise la vie collective.",
+        "Droit reconnu et obligation imposée se répondent.",
+        "Une sanction n’est pas nécessairement pénale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CG-INSTIT-L2",
+      "titre": "D’où viennent les règles de droit ?",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "2/8",
+      "precedente": "À quoi sert le droit ?",
+      "suivante": "La Constitution protège et organise",
+      "explication": "Nous allons repérer l’auteur et la place d’une règle. C’est utile lorsqu’un énoncé oppose une loi à un décret. Une source du droit est une manière de produire ou de reconnaître une règle. La Constitution organise l’État et garantit les droits. La loi est votée par le Parlement, sous réserve du référendum. Un règlement, comme un décret ou un arrêté, est pris par une autorité exécutive ou administrative. Les traités sont des engagements internationaux. La jurisprudence rassemble les décisions des juges qui interprètent et appliquent les textes.",
+      "formules": [],
+      "exemples": [
+        "Reconnaître un texte",
+        "Résoudre une contradiction"
+      ],
+      "pieges": [
+        "Un traité n’est pas un décret. Son autorité et son application répondent aux conditions constitutionnelles ; on ne classe pas tous les docu…"
+      ],
+      "aRetenir": [
+        "Identifier l’auteur, la nature et la date du texte.",
+        "Le règlement doit respecter les normes supérieures.",
+        "La jurisprudence aide à interpréter les règles."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CG-INSTIT-L3",
+      "titre": "La Constitution protège et organise",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "3/8",
+      "precedente": "D’où viennent les règles de droit ?",
+      "suivante": "Qui exerce le pouvoir exécutif ?",
+      "explication": "Nous allons comprendre le rôle de la Constitution, avant de mémoriser les noms des pouvoirs. Un État organise une population sur un territoire avec un pouvoir public. Dans un État de droit, les autorités sont elles-mêmes soumises au droit. La Constitution ivoirienne du 8 novembre 2016, révisée en 2020 puis en 2023, fixe les institutions et garantit des droits. La souveraineté, pouvoir de décider au sein de l’État, appartient au peuple : il l’exerce notamment par ses élus et par le référendum, vote direct sur une question.",
+      "formules": [],
+      "exemples": [
+        "Des pouvoirs limités",
+        "Deux modes de participation"
+      ],
+      "pieges": [
+        "La version initiale de 2016 ne suffit pas pour les dispositions modifiées. Il faut lire le texte avec ses révisions, dont celle du 25 juill…"
+      ],
+      "aRetenir": [
+        "Constitution : droits et organisation de l’État.",
+        "Souveraineté : peuple, élus et référendum.",
+        "Lire 2016 avec les révisions de 2020 et 2023."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CG-INSTIT-L4",
+      "titre": "Qui exerce le pouvoir exécutif ?",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "4/8",
+      "precedente": "La Constitution protège et organise",
+      "suivante": "Pourquoi deux chambres au Parlement ?",
+      "explication": "Nous allons distinguer trois fonctions de l’exécutif pour éviter de les attribuer toutes au Premier ministre. Le pouvoir exécutif conduit la politique nationale et assure l’exécution des lois. Le Président est chef de l’État, détenteur exclusif du pouvoir exécutif et chef de l’Administration. Il est élu pour cinq ans et n’est rééligible qu’une fois. Depuis 2020, il nomme le vice-Président avec l’accord du Parlement. Il nomme le Premier ministre, chef du Gouvernement, qui anime et coordonne l’action gouvernementale. Le Président préside le Conseil des ministres.",
+      "formules": [],
+      "exemples": [
+        "Deux chefs, deux fonctions",
+        "Nommer le vice-Président"
+      ],
+      "pieges": [
+        "Ne pas reprendre le système initial de 2016 dans lequel Président et vice-Président étaient élus ensemble."
+      ],
+      "aRetenir": [
+        "Président : chef de l’État et de l’Administration.",
+        "Premier ministre : chef du Gouvernement.",
+        "Vice-Président : nomination avec accord du Parlement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CG-INSTIT-L5",
+      "titre": "Pourquoi deux chambres au Parlement ?",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "5/8",
+      "precedente": "Qui exerce le pouvoir exécutif ?",
+      "suivante": "Juger les litiges et contrôler la Constitution",
+      "explication": "Nous allons lire la composition du Parlement et ses missions. Cela permet de répondre à une question d’attributions institutionnelles. Le Parlement est l’institution qui vote la loi, consent l’impôt et contrôle l’action du Gouvernement. Il est bicaméral, donc composé de deux chambres : Assemblée nationale et Sénat. Les députés sont élus au suffrage universel direct : les électeurs votent pour eux. Les sénateurs sont élus pour deux tiers au suffrage indirect, par des élus ; un tiers est désigné par le Président. Le Sénat représente les collectivités territoriales et les Ivoiriens établis hors du pays.",
+      "formules": [],
+      "exemples": [
+        "Direct et indirect",
+        "Contrôler sans juger"
+      ],
+      "pieges": [
+        "Le Parlement n’est pas seulement l’Assemblée nationale. Une question portant sur les sénateurs ne se résout pas avec le mode d’élection des…"
+      ],
+      "aRetenir": [
+        "Parlement = Assemblée nationale et Sénat.",
+        "Voter la loi, consentir l’impôt, contrôler le Gouvernement.",
+        "Sénat : deux tiers élus indirectement, un tiers désigné."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CG-INSTIT-L6",
+      "titre": "Juger les litiges et contrôler la Constitution",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "6/8",
+      "precedente": "Pourquoi deux chambres au Parlement ?",
+      "suivante": "Conseiller et rechercher un accord",
+      "explication": "Nous allons associer chaque contrôle à son institution. Cela évite de saisir le Conseil constitutionnel pour une simple dette. Une juridiction est un organe chargé de rendre la justice. Un litige est un désaccord soumis au droit. La Cour de cassation est la juridiction suprême de l’ordre judiciaire ; le Conseil d’État, celle de l’ordre administratif. La Cour des comptes contrôle les finances publiques et exerce des fonctions juridictionnelles financières. Le Conseil constitutionnel contrôle notamment la conformité des lois à la Constitution et la régularité des élections présidentielle et parlementaires. Ces institutions n’exercent pas la même mission.",
+      "formules": [],
+      "exemples": [
+        "Une loi contestée",
+        "Une dette privée"
+      ],
+      "pieges": [
+        "Le Conseil d’État et le Conseil constitutionnel ne sont pas deux noms de la même institution. La cassation n’est pas un nouveau vote de la …"
+      ],
+      "aRetenir": [
+        "Distinguer contrôle constitutionnel et jugement d’un litige.",
+        "Cassation : ordre judiciaire ; Conseil d’État : ordre administratif.",
+        "Cour des comptes : finances publiques."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CG-INSTIT-L7",
+      "titre": "Conseiller et rechercher un accord",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "7/8",
+      "precedente": "Juger les litiges et contrôler la Constitution",
+      "suivante": "Reconnaître les symboles de la République",
+      "explication": "Nous allons distinguer avis, médiation et jugement. Ces mots ne donnent pas la même portée à l’intervention d’une institution. Un avis éclaire une décision sans être lui-même cette décision. Le Conseil économique, social, environnemental et culturel (CESEC) donne des avis dans ces domaines. Une médiation recherche une solution amiable : le Médiateur de la République intervient notamment dans les difficultés entre administrés et administration. La Chambre nationale des Rois et Chefs traditionnels valorise les us et coutumes et contribue au règlement non juridictionnel des conflits. « Non juridictionnel » signifie sans jugement d’un tribunal.",
+      "formules": [],
+      "exemples": [
+        "Éclairer un choix",
+        "Chercher un accord"
+      ],
+      "pieges": [
+        "Ne pas supposer qu’une médiation suspend automatiquement les délais pour saisir un juge : cela dépend des textes applicables."
+      ],
+      "aRetenir": [
+        "Avis : éclairer ; médiation : rechercher un accord.",
+        "CESEC : rôle consultatif.",
+        "Les chefs traditionnels ne remplacent pas les tribunaux."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CG-INSTIT-L8",
+      "titre": "Reconnaître les symboles de la République",
+      "module": "Les institutions de la Côte d’Ivoire (Culture générale)",
+      "position": "8/8",
+      "precedente": "Conseiller et rechercher un accord",
+      "suivante": null,
+      "explication": "Nous allons relier chaque symbole à son sens pour répondre sans confondre devise, hymne et emblème. Un symbole national représente la République. L’emblème est le drapeau à trois bandes verticales égales orange, blanc, vert. L’hymne est L’Abidjanaise, chant national. La devise est Union – Discipline – Travail, expression des valeurs affichées par la République. Le français est la langue officielle. La République est une et indivisible, laïque, démocratique et sociale : la laïcité signifie notamment que l’État ne se confond pas avec une religion.",
+      "formules": [],
+      "exemples": [
+        "Lire une question",
+        "Situer la République"
+      ],
+      "pieges": [
+        "La disposition des bandes est verticale. Une bonne liste de couleurs dans un mauvais ordre ne décrit pas exactement l’emblème."
+      ],
+      "aRetenir": [
+        "Devise : Union – Discipline – Travail.",
+        "Hymne : L’Abidjanaise.",
+        "Drapeau : orange, blanc, vert en bandes verticales."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

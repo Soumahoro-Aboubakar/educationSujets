@@ -1,0 +1,270 @@
+{
+  "module": "ISE-ECO-MICRO",
+  "titre": "Microéconomie",
+  "matiere": "Économie",
+  "resume": "Expliquer les choix du consommateur et du producteur, les prix, les structures de marché et les interactions stratégiques.",
+  "concours": [
+    "ENSEA — ISE option économie"
+  ],
+  "lecons": [
+    {
+      "code": "ISE-ECO-MICRO-L1",
+      "titre": "Choisir un panier dans un budget",
+      "module": "Microéconomie (Économie)",
+      "position": "1/11",
+      "precedente": null,
+      "suivante": "Raisonner à la marge pour choisir",
+      "explication": "ECO-MONNAIE a présenté rareté, agents et marché. La microéconomie étudie leurs décisions individuelles et leurs interactions. Nous allons déterminer les achats accessibles à un consommateur. Un panier est un ensemble de quantités achetées. Les préférences classent les paniers. Une fonction d’utilité, notée U, attribue des nombres qui représentent ce classement : un nombre plus élevé désigne un panier préféré. Une courbe d’indifférence rassemble les paniers donnant le même niveau d’utilité. Elle représente un classement, sans imposer une unité mesurable de bonheur.",
+      "formules": [
+        "pₓx + pᵧy ≤ R"
+      ],
+      "exemples": [
+        "Deux produits",
+        "Lire le classement"
+      ],
+      "pieges": [
+        "Un panier apprécié mais inaccessible n’est pas un choix réalisable. Vérifier d’abord prix, quantités et budget, puis comparer les préférenc…"
+      ],
+      "aRetenir": [
+        "Un panier décrit des quantités.",
+        "Le budget limite les choix.",
+        "L’utilité représente un ordre de préférence."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L2",
+      "titre": "Raisonner à la marge pour choisir",
+      "module": "Microéconomie (Économie)",
+      "position": "2/11",
+      "precedente": "Choisir un panier dans un budget",
+      "suivante": "Mesurer la réaction de la demande",
+      "explication": "Nous allons choisir entre deux usages du prochain franc dépensé. Un raisonnement marginal compare l’effet d’une petite unité supplémentaire, plutôt que les moyennes de toutes les unités. L’utilité marginale d’un bien est le supplément d’utilité lié à une unité supplémentaire, l’autre quantité restant fixe. Dans un modèle où cette utilité diminue avec la consommation, les premières unités apportent plus que les suivantes. Le taux marginal de substitution, TMS, mesure la quantité de y que l’on est prêt à abandonner pour un peu plus de x à utilité constante. En valeur absolue, il vaut UMₓ/UMᵧ ; à l’optimum intérieur, TMS = pₓ/pᵧ.",
+      "formules": [],
+      "exemples": [
+        "Comparer par franc",
+        "Un arbitrage"
+      ],
+      "pieges": [
+        "Pour des biens indivisibles ou un optimum sur un axe, cette égalité n’est pas une recette universelle. Comparer les paniers accessibles res…"
+      ],
+      "aRetenir": [
+        "Comparer des suppléments.",
+        "Rapporter le gain marginal au prix.",
+        "Vérifier les hypothèses et les choix de bord."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L3",
+      "titre": "Mesurer la réaction de la demande",
+      "module": "Microéconomie (Économie)",
+      "position": "3/11",
+      "precedente": "Raisonner à la marge pour choisir",
+      "suivante": "Combiner travail et capital",
+      "explication": "Nous allons expliquer pourquoi une hausse de prix peut modifier plus ou moins fortement les ventes. Une fonction de demande relie quantité demandée et déterminants, notamment prix et revenu. Une variation du prix du bien déplace le choix sur sa courbe de demande, toutes choses égales par ailleurs. Une variation de revenu ou des préférences peut déplacer la courbe elle-même. Une élasticité en valeur absolue inférieure à 1 indique une demande peu sensible, dite inélastique. L’élasticité-revenu compare la variation de quantité au revenu : un bien normal a une réponse positive, un bien inférieur une réponse négative, dans la situation étudiée.",
+      "formules": [
+        "Élasticité-prix approchée = variation de quantité en % / variation de prix en %"
+      ],
+      "exemples": [
+        "Une demande sensible",
+        "Recette totale"
+      ],
+      "pieges": [
+        "Une pente dépend des unités ; l’élasticité utilise des variations relatives. Pour une grande variation, la méthode de calcul doit être préc…"
+      ],
+      "aRetenir": [
+        "Prix propre : déplacement sur la courbe.",
+        "Revenu ou préférences : déplacement de la courbe.",
+        "Élasticité : rapport de variations relatives."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L4",
+      "titre": "Combiner travail et capital",
+      "module": "Microéconomie (Économie)",
+      "position": "4/11",
+      "precedente": "Mesurer la réaction de la demande",
+      "suivante": "Distinguer rendement marginal et rendement d’échelle",
+      "explication": "Nous allons relier la production aux moyens utilisés. Une fonction de production, Q = f(K,L), indique la quantité produite avec du capital K, équipements durables, et du travail L. La productivité moyenne du travail est Q/L. Sa productivité marginale mesure le supplément de Q obtenu avec une unité de travail supplémentaire, à capital constant. En modèle continu, on considère une variation très petite. Une isoquante rassemble les combinaisons K,L produisant la même quantité. Une droite d’isocoût rassemble celles qui coûtent le même montant : coût = wL + rK, où w est le coût unitaire du travail et r celui du capital.",
+      "formules": [],
+      "exemples": [
+        "Un atelier",
+        "Comparer deux techniques"
+      ],
+      "pieges": [
+        "Le capital productif est un équipement, pas simplement l’argent sur le compte. Comparer productivité marginale et moyenne demande aussi de …"
+      ],
+      "aRetenir": [
+        "Production : combinaison de facteurs.",
+        "Moyenne et marge répondent à deux questions.",
+        "Comparer les techniques à production identique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L5",
+      "titre": "Distinguer rendement marginal et rendement d’échelle",
+      "module": "Microéconomie (Économie)",
+      "position": "5/11",
+      "precedente": "Combiner travail et capital",
+      "suivante": "Calculer coûts, recette et profit",
+      "explication": "Nous allons distinguer deux expériences souvent confondues. À court terme, au moins un facteur est fixe ; à long terme, tous les facteurs peuvent être ajustés dans le modèle. Les rendements marginaux décroissants concernent l’ajout d’un facteur, les autres restant fixes. Les rendements d’échelle concernent une multiplication de tous les facteurs dans la même proportion.",
+      "formules": [],
+      "exemples": [
+        "Une machine fixe",
+        "Changer d’échelle"
+      ],
+      "pieges": [
+        "Des rendements marginaux décroissants d’un facteur peuvent coexister avec des rendements d’échelle constants : les autres facteurs ne sont …"
+      ],
+      "aRetenir": [
+        "Court terme : au moins un facteur fixe.",
+        "Marge : un facteur change.",
+        "Échelle : tous les facteurs changent proportionnellement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L6",
+      "titre": "Calculer coûts, recette et profit",
+      "module": "Microéconomie (Économie)",
+      "position": "6/11",
+      "precedente": "Distinguer rendement marginal et rendement d’échelle",
+      "suivante": "Choisir la production en concurrence",
+      "explication": "Nous allons distinguer ventes et résultat. La recette totale, RT, est le prix multiplié par la quantité vendue. Le profit retire les coûts de cette recette. Le coût marginal est le supplément de CT causé par une unité supplémentaire. En modèle continu, il mesure le coût d’une variation très petite, souvent calculé par une dérivée, c’est-à-dire un taux de variation instantané.",
+      "formules": [
+        "CT = CF + CV ; profit = RT − CT ; coût moyen = CT/Q pour Q > 0"
+      ],
+      "exemples": [
+        "Produire quatre unités",
+        "La cinquième unité"
+      ],
+      "pieges": [
+        "Le profit économique intègre les coûts d’opportunité pertinents, y compris certains usages alternatifs des ressources propres. Un profit co…"
+      ],
+      "aRetenir": [
+        "Recette ≠ profit.",
+        "Fixe, variable, moyen et marginal sont distincts.",
+        "Préciser les coûts inclus."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L7",
+      "titre": "Choisir la production en concurrence",
+      "module": "Microéconomie (Économie)",
+      "position": "7/11",
+      "precedente": "Calculer coûts, recette et profit",
+      "suivante": "Pourquoi le monopole raisonne-t-il autrement ?",
+      "explication": "Nous allons déterminer l’offre d’une entreprise preneuse de prix : elle ne peut pas modifier le prix du marché par ses seules ventes. Une unité supplémentaire lui rapporte alors ce prix. À court terme, avec coûts fixes déjà engagés, l’entreprise peut continuer malgré une perte si elle couvre ses coûts variables. Dans le modèle concurrentiel usuel, sa courbe d’offre suit la partie du coût marginal croissant située au-dessus du minimum du coût variable moyen.",
+      "formules": [],
+      "exemples": [
+        "Comparer les profits",
+        "Équilibrer le marché"
+      ],
+      "pieges": [
+        "Égaliser prix et coût marginal sans vérifier les pertes, la fermeture éventuelle et le caractère optimal de la solution peut donner un mauv…"
+      ],
+      "aRetenir": [
+        "Comparer recette et coût à la marge.",
+        "Vérifier le profit et la fermeture.",
+        "Marché : égaliser demande et offre."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L8",
+      "titre": "Pourquoi le monopole raisonne-t-il autrement ?",
+      "module": "Microéconomie (Économie)",
+      "position": "8/11",
+      "precedente": "Choisir la production en concurrence",
+      "suivante": "Comprendre la structure d’un marché et le long terme",
+      "explication": "Un monopole est le seul offreur sur le marché défini. Nous allons comprendre pourquoi son choix ne suit pas simplement prix = coût marginal. Face à une demande décroissante et avec un prix unique pour toutes les unités, vendre davantage impose de baisser ce prix. La baisse affecte aussi les unités qui auraient été vendues plus cher.",
+      "formules": [],
+      "exemples": [
+        "Calculer la recette marginale",
+        "Comparer deux quantités"
+      ],
+      "pieges": [
+        "Être seul ne permet pas de vendre une quantité quelconque à n’importe quel prix. Le monopole reste limité par la demande et peut subir une …"
+      ],
+      "aRetenir": [
+        "Le prix dépend de la quantité vendue.",
+        "Recette marginale ≠ prix en général.",
+        "Comparer les profits et vérifier les limites."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L9",
+      "titre": "Comprendre la structure d’un marché et le long terme",
+      "module": "Microéconomie (Économie)",
+      "position": "9/11",
+      "precedente": "Pourquoi le monopole raisonne-t-il autrement ?",
+      "suivante": "Du marché isolé à l’équilibre général",
+      "explication": "Nous allons relier le nombre d’offreurs, les obstacles à l’entrée et la durée d’ajustement. La structure de marché décrit notamment ces caractéristiques et la différenciation des produits. Une barrière à l’entrée rend l’arrivée de concurrents difficile : coût initial élevé, contrôle d’une ressource, droit exclusif ou avantage de réseau. La concentration augmente quand l’activité se regroupe dans moins d’entreprises, par croissance ou fusion notamment.",
+      "formules": [],
+      "exemples": [
+        "Entrée concurrentielle",
+        "Pourquoi une firme ?"
+      ],
+      "pieges": [
+        "Un profit économique nul rémunère déjà les usages alternatifs des ressources comptés dans les coûts. Il ne signifie ni recette nulle ni dis…"
+      ],
+      "aRetenir": [
+        "Définir le marché et ses obstacles.",
+        "Distinguer court et long terme.",
+        "Libre entrée et concurrence modifient les profits."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L10",
+      "titre": "Du marché isolé à l’équilibre général",
+      "module": "Microéconomie (Économie)",
+      "position": "10/11",
+      "precedente": "Comprendre la structure d’un marché et le long terme",
+      "suivante": "Trouver un équilibre de Nash",
+      "explication": "Nous allons relier plusieurs marchés. L’équilibre partiel étudie un marché en tenant les autres conditions données. L’équilibre général recherche leur compatibilité simultanée. Une allocation est efficace au sens de Pareto si l’on ne peut améliorer la situation d’une personne sans détériorer celle d’au moins une autre. Cela ne dit pas si les ressources sont réparties équitablement. Une externalité est un effet sur autrui non pris en compte dans le prix ou la décision privée. Un bien public pur est non rival, l’usage de l’un ne réduit pas celui des autres, et non excluable, empêcher l’accès est difficile.",
+      "formules": [],
+      "exemples": [
+        "L’énergie et le transport",
+        "Un rejet polluant"
+      ],
+      "pieges": [
+        "Constater une défaillance du marché ne prouve pas que toute intervention est efficace. Il faut comparer les instruments, leurs coûts, l’inf…"
+      ],
+      "aRetenir": [
+        "Les marchés interagissent.",
+        "Efficacité et équité sont distinctes.",
+        "Examiner externalités et conditions d’intervention."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ISE-ECO-MICRO-L11",
+      "titre": "Trouver un équilibre de Nash",
+      "module": "Microéconomie (Économie)",
+      "position": "11/11",
+      "precedente": "Du marché isolé à l’équilibre général",
+      "suivante": null,
+      "explication": "La théorie des jeux étudie les décisions interdépendantes. Nous allons chercher un équilibre de Nash : aucun joueur ne gagne à changer seul de décision quand les autres maintiennent la leur. Une stratégie est un choix ou une règle de conduite. Un gain représente ce que le joueur cherche à obtenir. Une meilleure réponse maximise son gain pour les choix donnés des autres.",
+      "formules": [],
+      "exemples": [
+        "Examiner A",
+        "Examiner B"
+      ],
+      "pieges": [
+        "Une stratégie dominante n’existe pas dans tous les jeux. Chercher toutes les meilleures réponses ; plusieurs équilibres ou aucun équilibre …"
+      ],
+      "aRetenir": [
+        "Lire le gain de chaque joueur.",
+        "Chercher les meilleures réponses.",
+        "Tester les changements unilatéraux, pas seulement le gain total."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

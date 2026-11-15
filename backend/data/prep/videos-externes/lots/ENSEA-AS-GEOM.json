@@ -1,0 +1,233 @@
+{
+  "module": "ENSEA-AS-GEOM",
+  "titre": "Géométrie dans l’espace",
+  "matiere": "Mathématiques",
+  "resume": "Décrire des déplacements, des droites et des plans, puis calculer intersections et projections orthogonales.",
+  "concours": [
+    "ENSEA — Analystes statisticiens (AS)"
+  ],
+  "lecons": [
+    {
+      "code": "ENSEA-AS-GEOM-L1",
+      "titre": "Repérer un déplacement dans l’espace",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Combiner des vecteurs et reconnaître une direction",
+      "explication": "Nous allons donner trois coordonnées à un point ou à un déplacement. Cela permet de calculer dans l’espace sans dépendre d’un dessin en perspective. Un repère fixe une origine O et trois directions de référence. Dans un repère orthonormé, les trois axes sont perpendiculaires deux à deux et utilisent la même unité. Un point A(x ; y ; z) est repéré par ses trois coordonnées. Le vecteur AB représente le déplacement qui mène de A vers B, indépendamment de son point de départ. Si A(xₐ ; yₐ ; zₐ) et B(xᵦ ; yᵦ ; zᵦ), ses coordonnées sont celles de B moins celles de A.",
+      "formules": [
+        "AB = (xᵦ − xₐ ; yᵦ − yₐ ; zᵦ − zₐ) ; ‖u‖ = √(u₁² + u₂² + u₃²)."
+      ],
+      "exemples": [
+        "Du point au vecteur",
+        "Translater"
+      ],
+      "pieges": [
+        "Un point est une position ; un vecteur est un déplacement. Le vecteur BA est l’opposé de AB."
+      ],
+      "aRetenir": [
+        "Un point possède trois coordonnées.",
+        "AB se calcule par arrivée moins départ.",
+        "La norme mesure la longueur du déplacement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L2",
+      "titre": "Combiner des vecteurs et reconnaître une direction",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "2/9",
+      "precedente": "Repérer un déplacement dans l’espace",
+      "suivante": "Le produit scalaire détecte un angle droit",
+      "explication": "Nous allons additionner des déplacements et reconnaître ceux qui suivent la même direction. Ces calculs serviront à décrire droites et plans. On additionne les vecteurs coordonnée par coordonnée. Multiplier u par un réel λ multiplie toutes ses coordonnées par λ. Une combinaison linéaire est une somme de multiples de vecteurs, comme 2u − 3v. Une base de l’espace est un triplet de vecteurs permettant d’écrire chaque vecteur d’une manière unique comme combinaison linéaire. La base usuelle est i = (1 ; 0 ; 0), j = (0 ; 1 ; 0), k = (0 ; 0 ; 1) : u = u₁i + u₂j + u₃k.",
+      "formules": [],
+      "exemples": [
+        "Deux déplacements successifs",
+        "Tester sans diviser par zéro"
+      ],
+      "pieges": [
+        "Pour prouver une colinéarité, un même coefficient doit convenir aux trois coordonnées. Ne pas diviser par une coordonnée nulle."
+      ],
+      "aRetenir": [
+        "Combiner : additionner des multiples.",
+        "Colinéaires : même direction.",
+        "Une base donne une décomposition unique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L3",
+      "titre": "Le produit scalaire détecte un angle droit",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "3/9",
+      "precedente": "Combiner des vecteurs et reconnaître une direction",
+      "suivante": "Décrire une droite avec un paramètre",
+      "explication": "Nous allons tester une perpendicularité avec un calcul de coordonnées. Le résultat du produit scalaire est un nombre réel. La bilinéarité signifie que l’on peut distribuer les sommes et sortir les coefficients dans chaque facteur : (αu + βv) · w = α(u · w) + β(v · w), et de même dans l’autre facteur.",
+      "formules": [
+        "u · v = u₁v₁ + u₂v₂ + u₃v₃ = ‖u‖ ‖v‖ cos θ.",
+        "‖u + v‖² = ‖u‖² + 2u · v + ‖v‖² ; u · v = (‖u + v‖² − ‖u − v‖²)/4."
+      ],
+      "exemples": [
+        "Tester une perpendicularité",
+        "Utiliser les longueurs"
+      ],
+      "pieges": [
+        "u · v = 0 ne signifie pas que u ou v est nul : deux directions non nulles peuvent être perpendiculaires."
+      ],
+      "aRetenir": [
+        "Produit scalaire : somme de trois produits.",
+        "Orthogonalité : produit nul.",
+        "Les identités sur les normes viennent du développement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L4",
+      "titre": "Décrire une droite avec un paramètre",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "4/9",
+      "precedente": "Le produit scalaire détecte un angle droit",
+      "suivante": "Décrire un plan avec deux directions",
+      "explication": "Nous allons décrire tous les points d’une droite par une seule variable réelle. Cela rend les tests d’appartenance précis. Une droite D est fixée par un point A et un vecteur directeur u non nul, qui donne sa direction. Ses points M vérifient AM = tu pour un réel t appelé paramètre.",
+      "formules": [
+        "D : M = A + tu ; soit x = xₐ + tu₁, y = yₐ + tu₂, z = zₐ + tu₃, t ∈ ℝ."
+      ],
+      "exemples": [
+        "Décrire tous les points",
+        "Tester un candidat"
+      ],
+      "pieges": [
+        "Le même paramètre doit convenir aux trois coordonnées d’un point. Pour deux droites différentes, utiliser deux paramètres indépendants."
+      ],
+      "aRetenir": [
+        "Une droite = un point + une direction non nulle.",
+        "Un paramètre réel parcourt tous ses points.",
+        "Un candidat doit satisfaire les trois équations ensemble."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L5",
+      "titre": "Décrire un plan avec deux directions",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "5/9",
+      "precedente": "Décrire une droite avec un paramètre",
+      "suivante": "Une équation cartésienne pour un plan",
+      "explication": "Nous allons passer d’une droite à un plan. Deux directions indépendantes permettent de se déplacer sur toute sa surface. Un plan P est déterminé par un point A et deux vecteurs u et v non colinéaires. Tout point M du plan s’écrit M = A + su + tv, où s et t sont deux réels indépendants. Les combinaisons su + tv forment la direction du plan.",
+      "formules": [],
+      "exemples": [
+        "Un plan horizontal",
+        "Tester un point"
+      ],
+      "pieges": [
+        "Deux directions colinéaires ne donnent qu’une droite. Elles ne suffisent pas pour décrire un plan."
+      ],
+      "aRetenir": [
+        "Plan : un point et deux vecteurs non colinéaires.",
+        "Deux paramètres parcourent ses points.",
+        "Trois points non alignés déterminent un plan."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L6",
+      "titre": "Une équation cartésienne pour un plan",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "6/9",
+      "precedente": "Décrire un plan avec deux directions",
+      "suivante": "Trouver une intersection",
+      "explication": "Nous allons remplacer les deux paramètres d’un plan par une seule équation. Un vecteur perpendiculaire au plan fournit les coefficients. Un vecteur normal n non nul est orthogonal à toutes les directions du plan. Il suffit qu’il soit orthogonal à deux directions non colinéaires. Le plan passant par A vérifie n · AM = 0.",
+      "formules": [
+        "Si n = (a ; b ; c), P : ax + by + cz + d = 0, avec d = −axₐ − byₐ − czₐ."
+      ],
+      "exemples": [
+        "Construire l’équation",
+        "Trouver un normal"
+      ],
+      "pieges": [
+        "Un normal n’est pas une direction située dans le plan. Multiplier tous les coefficients d’une équation par un réel non nul décrit le même p…"
+      ],
+      "aRetenir": [
+        "Un normal est orthogonal aux directions du plan.",
+        "Équation : n · AM = 0.",
+        "Les trois coefficients variables donnent le normal."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L7",
+      "titre": "Trouver une intersection",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "7/9",
+      "precedente": "Une équation cartésienne pour un plan",
+      "suivante": "Projeter un point sur une droite",
+      "explication": "Nous allons décider si deux objets se rencontrent. Une intersection est l’ensemble des points qui vérifient simultanément les deux descriptions. Deux droites qui se coupent sont dans un même plan : elles sont coplanaires. Des droites parallèles sont aussi coplanaires. Dans l’espace, deux droites ni parallèles ni sécantes sont dites gauches : aucun plan ne les contient ensemble.",
+      "formules": [],
+      "exemples": [
+        "Droite et plan",
+        "Deux droites",
+        "Reconnaître des droites gauches"
+      ],
+      "pieges": [
+        "Dans l’espace, « pas d’intersection » ne signifie pas « parallèles ». Vérifier aussi les directions."
+      ],
+      "aRetenir": [
+        "Substituer puis résoudre.",
+        "Un point, aucun point ou inclusion.",
+        "Deux droites gauches existent dans l’espace."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L8",
+      "titre": "Projeter un point sur une droite",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "8/9",
+      "precedente": "Trouver une intersection",
+      "suivante": "Projeter sur un plan et mesurer une distance",
+      "explication": "Nous allons trouver le point d’une droite le plus proche d’un point M. Le segment qui les relie doit former un angle droit avec la droite. Le projeté orthogonal H de M sur D appartient à D et vérifie MH · u = 0, où u dirige D. Écrire H = A + tu transforme cette condition en une équation pour t.",
+      "formules": [
+        "t = (AM · u)/(u · u) ; H = A + tu."
+      ],
+      "exemples": [
+        "Projection sur un axe",
+        "Une droite oblique"
+      ],
+      "pieges": [
+        "Il faut vérifier à la fois que H est sur la droite et que MH lui est orthogonal. Une seule de ces conditions ne suffit pas."
+      ],
+      "aRetenir": [
+        "H appartient à D.",
+        "MH est orthogonal au directeur.",
+        "La longueur MH est la distance à D."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L9",
+      "titre": "Projeter sur un plan et mesurer une distance",
+      "module": "Géométrie dans l’espace (Mathématiques)",
+      "position": "9/9",
+      "precedente": "Projeter un point sur une droite",
+      "suivante": null,
+      "explication": "Nous allons trouver le point d’un plan le plus proche de M. Cette fois le déplacement de M vers le plan suit le vecteur normal. Pour P : ax + by + cz + d = 0 et n = (a ; b ; c), poser H = M − λn. Ce choix rend MH parallèle au normal, donc perpendiculaire au plan. Il reste à imposer H ∈ P.",
+      "formules": [
+        "λ = (axₘ + byₘ + czₘ + d)/(a² + b² + c²) ; H = M − λn.",
+        "Distance de M à P : |axₘ + byₘ + czₘ + d|/√(a² + b² + c²)."
+      ],
+      "exemples": [
+        "Un plan simple",
+        "Un plan oblique"
+      ],
+      "pieges": [
+        "La valeur axₘ + byₘ + czₘ + d seule n’est pas une distance : il faut diviser par la norme du normal. Vérifier aussi que H satisfait l’équat…"
+      ],
+      "aRetenir": [
+        "Le projeté est sur le plan.",
+        "Le déplacement suit le normal.",
+        "Distance = valeur absolue de l’équation / norme du normal."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}
