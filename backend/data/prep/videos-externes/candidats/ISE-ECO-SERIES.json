@@ -1,0 +1,1165 @@
+{
+ "ISE-ECO-SERIES-L1": {
+  "titre": "Rappeler ce qu’est une suite et sa limite",
+  "candidats": [
+   {
+    "id": "rNUYAhqIiVs",
+    "titre": "Etude de la limite d'une suite - Le rappel de cours - Maths terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "2:26",
+    "sec": 146,
+    "vues": "72 490 vues"
+   },
+   {
+    "id": "Eo6cc3344PQ",
+    "titre": "Calculer la LIMITE d'une suite - COMPRENDRE",
+    "chaine": "Hedacademy",
+    "duree": "10:35",
+    "sec": 635,
+    "vues": "44 337 vues"
+   },
+   {
+    "id": "Vks5eX8QMD8",
+    "titre": "Les suites : TOUT LE PROGRAMME EN 5 MINUTES - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "356 692 vues"
+   },
+   {
+    "id": "jAbYd8cP-Q0",
+    "titre": "Généralités sur les limites de suite - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "3:29",
+    "sec": 209,
+    "vues": "576 vues"
+   },
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "GZnXze0Uh9Q",
+    "titre": "limite d'une suite • comprendre la définition cours • Terminale S",
+    "chaine": "jaicompris Maths",
+    "duree": "8:21",
+    "sec": 501,
+    "vues": "46 093 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "4NENIm65f68",
+    "titre": "LIMITE SUITES avec cos(n), sin(n) ou (-1)^n - THÉORÈME de COMPARAISON - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "8:15",
+    "sec": 495,
+    "vues": "21 459 vues"
+   },
+   {
+    "id": "7ATDHczA_5A",
+    "titre": "SUITES : Limite d'une suite, convergence, divergence",
+    "chaine": "Campus XYZ",
+    "duree": "5:15",
+    "sec": 315,
+    "vues": "3 403 vues"
+   },
+   {
+    "id": "OLif031CZPA",
+    "titre": "suite et intégrale • exercice de révision • Limite • inégalité • Bac S Asie • IMPORTANT",
+    "chaine": "jaicompris Maths",
+    "duree": "14:47",
+    "sec": 887,
+    "vues": "81 493 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L2": {
+  "titre": "Prouver la convergence d’une suite récurrente",
+  "candidats": [
+   {
+    "id": "gO-MQUlBAfo",
+    "titre": "Appliquer le théorème de convergence monotone - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "9:03",
+    "sec": 543,
+    "vues": "401 392 vues"
+   },
+   {
+    "id": "00WMMoTUQAs",
+    "titre": "Comment montrer qu'une suite est convergente avec le théorème de convergence monotone ?",
+    "chaine": "Mathemax",
+    "duree": "5:26",
+    "sec": 326,
+    "vues": "74 789 vues"
+   },
+   {
+    "id": "mo5Ay_ZxM20",
+    "titre": "SUITES - CONVERGENCE - Définition",
+    "chaine": "AM Maths (FaisonsDesMaths)",
+    "duree": "6:31",
+    "sec": 391,
+    "vues": "17 694 vues"
+   },
+   {
+    "id": "tk4XtFEuU4o",
+    "titre": "Suite convergente, divergente : COMPRENDRE",
+    "chaine": "Hedacademy",
+    "duree": "4:54",
+    "sec": 294,
+    "vues": "12 156 vues"
+   },
+   {
+    "id": "P3vwDSTqsXQ",
+    "titre": "Démonstration par recurrence",
+    "chaine": "Éducation Plus",
+    "duree": "14:12",
+    "sec": 852,
+    "vues": "93 151 vues"
+   },
+   {
+    "id": "s4GAo4iz0FQ",
+    "titre": "✅ MONTRER QU'UNE SUITE CONVERGE PAR LA DÉFINITION (ET EPSILON). Convergence d'une suite. Un-l inf e",
+    "chaine": "Professeur Raoul",
+    "duree": "3:26",
+    "sec": 206,
+    "vues": "8 931 vues"
+   },
+   {
+    "id": "iL2Ordgl2ZQ",
+    "titre": "Suites récurrentes : la méthode pour étudier la convergence",
+    "chaine": "saga math",
+    "duree": "8:20",
+    "sec": 500,
+    "vues": "42 vues"
+   },
+   {
+    "id": "gDmzyERl2yc",
+    "titre": "ÉTUDIER LA CONVERGENCE D'UNE SUITE : 6 EXERCICES POUR BIEN COMPRENDRE",
+    "chaine": "Mathemat'Exos",
+    "duree": "9:51",
+    "sec": 591,
+    "vues": "21 986 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L3": {
+  "titre": "Passer des termes aux sommes partielles",
+  "candidats": [
+   {
+    "id": "DbHUNh1xSLY",
+    "titre": "Sommes partielles 2",
+    "chaine": "Olivier Levyne",
+    "duree": "9:43",
+    "sec": 583,
+    "vues": "369 vues"
+   },
+   {
+    "id": "VlUbPCuRAoY",
+    "titre": "Comprendre les Sommes",
+    "chaine": "Le Raton",
+    "duree": "9:12",
+    "sec": 552,
+    "vues": "68 628 vues"
+   },
+   {
+    "id": "WeDtB9ZUTHs",
+    "titre": "Calculer la somme des termes d'une suite arithmétique (1) - Première",
+    "chaine": "Yvan Monka",
+    "duree": "3:10",
+    "sec": 190,
+    "vues": "729 701 vues"
+   },
+   {
+    "id": "IeW2YTOtwys",
+    "titre": "additionner, soustraire 2 matrices ou multiplier par un réel - Spé maths - Cours",
+    "chaine": "jaicompris Maths",
+    "duree": "8:03",
+    "sec": 483,
+    "vues": "136 721 vues"
+   },
+   {
+    "id": "cc5cKHn-AU8",
+    "titre": "Sommes partielles convergentes (Analyse) - Vrai ou faux",
+    "chaine": "CBMathéLisa - CAPES de Mathématiques",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "68 vues"
+   },
+   {
+    "id": "E8ULXISW1-E",
+    "titre": "les #séries #numériques : la suite des sommes #partielles + Exemples #1",
+    "chaine": "Premiers pas vers l'Algèbre et l'Analyse",
+    "duree": "9:27",
+    "sec": 567,
+    "vues": "22 517 vues"
+   },
+   {
+    "id": "0IWVZn56jPk",
+    "titre": "Sommes partielles 1",
+    "chaine": "Olivier Levyne",
+    "duree": "10:53",
+    "sec": 653,
+    "vues": "1 368 vues"
+   },
+   {
+    "id": "Q22u-s6msGk",
+    "titre": "Suite des sommes partielles et séries (cours et démonstration) pour prépa ECG et ECT",
+    "chaine": "Greg du Chemin de la Prépa | Grégory Boublil",
+    "duree": "10:18",
+    "sec": 618,
+    "vues": "11 413 vues"
+   },
+   {
+    "id": "DMkA1kSQ1-8",
+    "titre": "[UT#49] La comparaison série-intégrale (Explication)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "11:40",
+    "sec": 700,
+    "vues": "66 600 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L4": {
+  "titre": "Additionner une série géométrique",
+  "candidats": [
+   {
+    "id": "vMWfLKUU1ac",
+    "titre": "convergence pour une série géométrique",
+    "chaine": "SophieGuichard",
+    "duree": "7:01",
+    "sec": 421,
+    "vues": "27 251 vues"
+   },
+   {
+    "id": "WoTrgd8np40",
+    "titre": "Séries géométriques et séries télescopiques Cours",
+    "chaine": "Maths avec Ammar",
+    "duree": "13:34",
+    "sec": 814,
+    "vues": "23 691 vues"
+   },
+   {
+    "id": "jB-PfBvoZXs",
+    "titre": "Séries géométriques cours et exemples",
+    "chaine": "Ennajisciences",
+    "duree": "9:54",
+    "sec": 594,
+    "vues": "5 450 vues"
+   },
+   {
+    "id": "Fs94-SGTAwc",
+    "titre": "Démonstration de la formule de la somme d'une série géométrique",
+    "chaine": "AnecdotesMaths",
+    "duree": "1:41",
+    "sec": 101,
+    "vues": "10 924 vues"
+   },
+   {
+    "id": "GEfnvaIF6_0",
+    "titre": "SÉRIES GÉOMÉTRIQUES - Formule & exemples - Séries - Maths Bac+1 / Bac+2",
+    "chaine": "Fabinou",
+    "duree": "3:09",
+    "sec": 189,
+    "vues": "41 748 vues"
+   },
+   {
+    "id": "HHcMFPf1sZk",
+    "titre": "Définition d'une série géométrique",
+    "chaine": "SophieGuichard",
+    "duree": "1:58",
+    "sec": 118,
+    "vues": "3 671 vues"
+   },
+   {
+    "id": "_BjEOTi-2z8",
+    "titre": "Calculer la somme des termes d'une suite géométrique (1) - Terminale Techno",
+    "chaine": "Yvan Monka",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "193 841 vues"
+   },
+   {
+    "id": "gUkOjvAiZGA",
+    "titre": "Calculer la somme des termes d'une suite géométrique (3) - Première",
+    "chaine": "Yvan Monka",
+    "duree": "3:13",
+    "sec": 193,
+    "vues": "429 548 vues"
+   },
+   {
+    "id": "Gs1Qc8XKtqM",
+    "titre": "Séries géométriques | Convergence, dérivation et exemple",
+    "chaine": "Dr. Trefor Bazett",
+    "duree": "6:28",
+    "sec": 388,
+    "vues": "189 775 vues"
+   },
+   {
+    "id": "c1TsaSf0cPY",
+    "titre": "(Séries numériques) Séries géométriques",
+    "chaine": "F Maalouf",
+    "duree": "12:50",
+    "sec": 770,
+    "vues": "2 880 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L5": {
+  "titre": "Comparer des séries à termes positifs",
+  "candidats": [
+   {
+    "id": "Y_xJuN7BRWg",
+    "titre": "Séries à termes positifs : comparaison, domination, équivalents | Cours MP · Séries 1.5",
+    "chaine": "mizan maths",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "10 vues"
+   },
+   {
+    "id": "KTMs7edg1S0",
+    "titre": "Cours #6 : Séries à termes POSITIFS (ECG Appro/Appli, HEC, MPSI, PCSI, PTSI, BCPST)",
+    "chaine": "Cogitamus",
+    "duree": "8:43",
+    "sec": 523,
+    "vues": "2 355 vues"
+   },
+   {
+    "id": "fVygFmeDDpE",
+    "titre": "Séries à termes positifs : théorèmes de comparaison",
+    "chaine": "Les cours de maths de MPSI",
+    "duree": "8:46",
+    "sec": 526,
+    "vues": "5 945 vues"
+   },
+   {
+    "id": "lVRO0ovwr5E",
+    "titre": "Series numériques §2 séries à termes positifs",
+    "chaine": "Objectif Maths",
+    "duree": "9:52",
+    "sec": 592,
+    "vues": "482 vues"
+   },
+   {
+    "id": "Q1v4cWgcLoE",
+    "titre": "Les séries 4: Les séries à termes positifs",
+    "chaine": "Alexandre mizrahi",
+    "duree": "6:23",
+    "sec": 383,
+    "vues": "920 vues"
+   },
+   {
+    "id": "q8TDeBobloE",
+    "titre": "Le Critère de COMPARAISON - Explication intuitive, Méthode & exemples - Séries - Maths Bac+1 / Bac+2",
+    "chaine": "Fabinou",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "33 311 vues"
+   },
+   {
+    "id": "exjJtzIP-Wg",
+    "titre": "Chapitre 20 Comparaison de séries à termes positifs suite",
+    "chaine": "Arnaud Bégyn",
+    "duree": "3:57",
+    "sec": 237,
+    "vues": "188 vues"
+   },
+   {
+    "id": "Nou0W3M0roY",
+    "titre": "🔴MATHSCLIC EXERCICE POST BAC | CONVERGENCE DE SÉRIES À TERMES POSITIVES",
+    "chaine": "MathsClic",
+    "duree": "1:42",
+    "sec": 102,
+    "vues": "29 vues"
+   },
+   {
+    "id": "DMkA1kSQ1-8",
+    "titre": "[UT#49] La comparaison série-intégrale (Explication)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "11:40",
+    "sec": 700,
+    "vues": "66 600 vues"
+   },
+   {
+    "id": "-VxEkBM9G-c",
+    "titre": "EXERCICE QUI COMPARE SÉRIES / INTÉGRALES GÉNÉRALISÉES (MÊME NATURE)",
+    "chaine": "Mathemat'Exos",
+    "duree": "3:55",
+    "sec": 235,
+    "vues": "975 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L6": {
+  "titre": "Trouver un équivalent positif",
+  "candidats": [
+   {
+    "id": "Y_xJuN7BRWg",
+    "titre": "Séries à termes positifs : comparaison, domination, équivalents | Cours MP · Séries 1.5",
+    "chaine": "mizan maths",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "10 vues"
+   },
+   {
+    "id": "-iw4OkMhgCA",
+    "titre": "Prouver que des programmes de calcul sont équivalents - Quatrième",
+    "chaine": "Yvan Monka",
+    "duree": "7:26",
+    "sec": 446,
+    "vues": "113 852 vues"
+   },
+   {
+    "id": "FG4PmpTdOXA",
+    "titre": "Comment trouver les classes d'équivalence d'une relation d'équivalence",
+    "chaine": "Méthode Maths",
+    "duree": "12:09",
+    "sec": 729,
+    "vues": "90 417 vues"
+   },
+   {
+    "id": "tojekSSaTyc",
+    "titre": "Le Critère d’ÉQUIVALENCE - Méthode & exemples - Séries - Maths Bac+1 / Bac+2",
+    "chaine": "Fabinou",
+    "duree": "9:14",
+    "sec": 554,
+    "vues": "52 894 vues"
+   },
+   {
+    "id": "h7-fnr8pooE",
+    "titre": "Fonctions équivalentes : définitions et exemples",
+    "chaine": "Make maths easier",
+    "duree": "13:35",
+    "sec": 815,
+    "vues": "50 986 vues"
+   },
+   {
+    "id": "FMEdNDNAe7U",
+    "titre": "Logique : implication et équivalence - Maths Seconde - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "11:33",
+    "sec": 693,
+    "vues": "63 656 vues"
+   },
+   {
+    "id": "WdCKVssbtdU",
+    "titre": "Implications - Maths - MPSI 1ère année - Les Bons Profs",
+    "chaine": "Les Bons Profs SUP",
+    "duree": "3:16",
+    "sec": 196,
+    "vues": "73 736 vues"
+   },
+   {
+    "id": "l1gtKTLDIEg",
+    "titre": "Les fractions équivalentes | Mathématiques | Primaire",
+    "chaine": "Alloprof",
+    "duree": "2:17",
+    "sec": 137,
+    "vues": "76 290 vues"
+   },
+   {
+    "id": "7P6uVdOPgww",
+    "titre": "les intégrales généralisées: critère d'équivalence",
+    "chaine": "Prof Salma BENAZZOU",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "15 547 vues"
+   },
+   {
+    "id": "DMkA1kSQ1-8",
+    "titre": "[UT#49] La comparaison série-intégrale (Explication)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "11:40",
+    "sec": 700,
+    "vues": "66 600 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L7": {
+  "titre": "Contrôler les signes : absolue ou alternée",
+  "candidats": [
+   {
+    "id": "oewLwpwUtIE",
+    "titre": "Cours - Seconde - Mathématiques : Calcul dans R / Valeur absolue / Définition",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "14:06",
+    "sec": 846,
+    "vues": "113 511 vues"
+   },
+   {
+    "id": "MhJdWAmX3sc",
+    "titre": "ÉCRIRE UNE EXPRESSION SANS SYMBOLES DES VALEURS ABSOLUES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "12:21",
+    "sec": 741,
+    "vues": "23 511 vues"
+   },
+   {
+    "id": "1KPPkUvCkYE",
+    "titre": "Comment Ecrire sans le symbole de la valeur avsolue ?",
+    "chaine": "Académie de Sciences et Éducation Plus",
+    "duree": "7:09",
+    "sec": 429,
+    "vues": "6 577 vues"
+   },
+   {
+    "id": "LMXWokpKEzQ",
+    "titre": "♦️♦️ÉCRIRE SANS VALEUR ABSOLUE. abs(x-1)+abs(X+2)+abs(2x-1). simplifie les valeurs absolues sans abs",
+    "chaine": "Professeur Raoul",
+    "duree": "4:59",
+    "sec": 299,
+    "vues": "41 027 vues"
+   },
+   {
+    "id": "q9YgM8aQIUE",
+    "titre": "Équation avec Valeurs absolues en mode IMPOSSIBLE - 2nde",
+    "chaine": "Hedacademy",
+    "duree": "8:29",
+    "sec": 509,
+    "vues": "27 232 vues"
+   },
+   {
+    "id": "jKfQVv2TNa4",
+    "titre": "VALEUR ABSOLUE ✅ Cours + Exemples simples 💪 Math | Seconde",
+    "chaine": "Paul Olivier",
+    "duree": "4:28",
+    "sec": 268,
+    "vues": "15 360 vues"
+   },
+   {
+    "id": "T2HYGrWiMKw",
+    "titre": "Equations avec valeur absolue",
+    "chaine": "Éducation Plus et Académie de Sciences",
+    "duree": "6:07",
+    "sec": 367,
+    "vues": "32 971 vues"
+   },
+   {
+    "id": "3WnOoxMiMxE",
+    "titre": "Analyse 1 : Nombres réel. Valeur absolue et intervalles de IR. Cours",
+    "chaine": "Maths avec Ammar",
+    "duree": "14:14",
+    "sec": 854,
+    "vues": "158 059 vues"
+   },
+   {
+    "id": "-VxEkBM9G-c",
+    "titre": "EXERCICE QUI COMPARE SÉRIES / INTÉGRALES GÉNÉRALISÉES (MÊME NATURE)",
+    "chaine": "Mathemat'Exos",
+    "duree": "3:55",
+    "sec": 235,
+    "vues": "975 vues"
+   },
+   {
+    "id": "DMkA1kSQ1-8",
+    "titre": "[UT#49] La comparaison série-intégrale (Explication)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "11:40",
+    "sec": 700,
+    "vues": "66 600 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L8": {
+  "titre": "Décomposer un terme signé sans perdre le reste",
+  "candidats": [
+   {
+    "id": "9pBCOs_ZoG8",
+    "titre": "Comment décomposer une fraction ? CM2/6e",
+    "chaine": "Hedacademy",
+    "duree": "5:59",
+    "sec": 359,
+    "vues": "9 301 vues"
+   },
+   {
+    "id": "cUGXbYjNgaU",
+    "titre": "LE RESTE DE LA DIVISION EUCLIDIENNE 💥",
+    "chaine": "TON MAX",
+    "duree": "11:30",
+    "sec": 690,
+    "vues": "18 578 vues"
+   },
+   {
+    "id": "uVS-oeibDJ4",
+    "titre": "Calculer un reste à l'aide d'une congruence - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "7:50",
+    "sec": 470,
+    "vues": "242 481 vues"
+   },
+   {
+    "id": "ZpC70i2FUDY",
+    "titre": "division euclidienne dans Z • piège classique sur le reste • arithmétique • spé maths terminale S",
+    "chaine": "jaicompris Maths",
+    "duree": "11:10",
+    "sec": 670,
+    "vues": "35 011 vues"
+   },
+   {
+    "id": "eybC6mHr5bU",
+    "titre": "CRPE Maths - Division Euclidienne (quotient, reste, dividende,diviseur)",
+    "chaine": "MATHS-CRPE",
+    "duree": "3:41",
+    "sec": 221,
+    "vues": "143 vues"
+   },
+   {
+    "id": "EcEzTAX8zw8",
+    "titre": "Décomposition en éléments simples (MPSI/PCSI)",
+    "chaine": "TugMaths",
+    "duree": "14:46",
+    "sec": 886,
+    "vues": "131 338 vues"
+   },
+   {
+    "id": "bwS45UeOZrg",
+    "titre": "Déterminer le quotient et le reste d'une division euclidienne - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "262 695 vues"
+   },
+   {
+    "id": "fv5uhr8JP3U",
+    "titre": "Déterminer quotient et reste d'une division euclidienne (fct de n) - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "7:16",
+    "sec": 436,
+    "vues": "83 468 vues"
+   },
+   {
+    "id": "EI3qsHe-K5s",
+    "titre": "intégrales généralisées exercice corrigé",
+    "chaine": "Ennajisciences",
+    "duree": "12:52",
+    "sec": 772,
+    "vues": "3 579 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L9": {
+  "titre": "Rappeler dérivées et primitives",
+  "candidats": [
+   {
+    "id": "RLEE-iSBimc",
+    "titre": "Comment comprendre FACILEMENT les dérivées",
+    "chaine": "ParaMaths",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "1 100 356 vues"
+   },
+   {
+    "id": "utM8TKG90r8",
+    "titre": "Les intégrales",
+    "chaine": "Hedacademy",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "940 319 vues"
+   },
+   {
+    "id": "Z3vKJJE57Uw",
+    "titre": "Calculer une intégrale (1) -Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:46",
+    "sec": 226,
+    "vues": "1 299 260 vues"
+   },
+   {
+    "id": "t9njtHfs6QM",
+    "titre": "Cours intégrales généralisées. Généralités",
+    "chaine": "Maths avec Ammar",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "55 270 vues"
+   },
+   {
+    "id": "7LH87VVgG-o",
+    "titre": "🔴INTÉGRALES GÉNÉRALISÉES OU IMPROPRES | L'INTÉGRALE ENTRE 0 ET L'INFINI DE LA FONCTION SINUS",
+    "chaine": "MathsClic",
+    "duree": "1:32",
+    "sec": 92,
+    "vues": "139 vues"
+   },
+   {
+    "id": "fjUZdYriVXE",
+    "titre": "Primitives et forme générale – Intégrale indéfinie",
+    "chaine": "Mathéma-TIC",
+    "duree": "7:17",
+    "sec": 437,
+    "vues": "48 690 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L10": {
+  "titre": "Calculer une intégrale sur un segment",
+  "candidats": [
+   {
+    "id": "Z3vKJJE57Uw",
+    "titre": "Calculer une intégrale (1) -Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:46",
+    "sec": 226,
+    "vues": "1 299 260 vues"
+   },
+   {
+    "id": "utM8TKG90r8",
+    "titre": "Les intégrales",
+    "chaine": "Hedacademy",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "940 319 vues"
+   },
+   {
+    "id": "Xcjqeri7cH0",
+    "titre": "CALCULER UNE INTÉGRALE : mode d'emploi - Term Spé Maths",
+    "chaine": "Hedacademy",
+    "duree": "5:52",
+    "sec": 352,
+    "vues": "87 882 vues"
+   },
+   {
+    "id": "R6ge0QBu3Nk",
+    "titre": "[UT#1] Comprendre les sommes de Riemann (L'idée)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "8:45",
+    "sec": 525,
+    "vues": "149 695 vues"
+   },
+   {
+    "id": "_OQTjDxP9YY",
+    "titre": "2_partage_seg_3e",
+    "chaine": "Kristen Montrésor maths channel",
+    "duree": "3:21",
+    "sec": 201,
+    "vues": "4 958 vues"
+   },
+   {
+    "id": "jkxNKkmEXZA",
+    "titre": "Déterminer une intégrale par calculs d'aire (1) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:48",
+    "sec": 408,
+    "vues": "423 380 vues"
+   },
+   {
+    "id": "-kqVYkdy4Dc",
+    "titre": "2 minutes pour (enfin) comprendre l'integration par changement de variable.",
+    "chaine": "Le Raton",
+    "duree": "3:54",
+    "sec": 234,
+    "vues": "131 694 vues"
+   },
+   {
+    "id": "96AGY3tt4UA",
+    "titre": "Intégration sur un segment intégrales généralisées",
+    "chaine": "La prepa Cours",
+    "duree": "1:35",
+    "sec": 95,
+    "vues": "255 vues"
+   },
+   {
+    "id": "YmJj9uIkC78",
+    "titre": "[UT#4] Introduction aux intégrales impropres",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "32 894 vues"
+   },
+   {
+    "id": "eomVqtP96Ik",
+    "titre": "INTÉGRALES GÉNÉRALISÉES : Définitions + Exemples #1",
+    "chaine": "Premiers pas vers l'Algèbre et l'Analyse",
+    "duree": "10:07",
+    "sec": 607,
+    "vues": "42 734 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L11": {
+  "titre": "Remplacer une borne infinie par une limite",
+  "candidats": [
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "ovIRv587bq4",
+    "titre": "Calcul de limite d'une fonction rationnelle",
+    "chaine": "Éducation Plus",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "344 530 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "zlS94VUlCA0",
+    "titre": "Opération sur les limites - Maths - Terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:15",
+    "sec": 375,
+    "vues": "6 228 vues"
+   },
+   {
+    "id": "6borPjPXfaE",
+    "titre": "LIMITE aux BORNES de DÉFINITION - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "2:24",
+    "sec": 144,
+    "vues": "68 793 vues"
+   },
+   {
+    "id": "33CreRZlkkQ",
+    "titre": "[EM#5] Unicité de la limite & Caractère borné des suites convergentes (Démonstration)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "7:49",
+    "sec": 469,
+    "vues": "36 355 vues"
+   },
+   {
+    "id": "hSMTD6AH4OE",
+    "titre": "Les limites à l'infini",
+    "chaine": "Mathéma-TIC",
+    "duree": "7:38",
+    "sec": 458,
+    "vues": "16 458 vues"
+   },
+   {
+    "id": "N_do5XPz6AQ",
+    "titre": "LIMITES DE FONCTIONS : LES FORMES INDÉTERMINÉES - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "10:21",
+    "sec": 621,
+    "vues": "90 510 vues"
+   },
+   {
+    "id": "HLLYRib798I",
+    "titre": "Intégrales généralisées :critère de Riemann au voisinage de l infini",
+    "chaine": "Prof Salma BENAZZOU",
+    "duree": "9:22",
+    "sec": 562,
+    "vues": "15 971 vues"
+   },
+   {
+    "id": "EI3qsHe-K5s",
+    "titre": "intégrales généralisées exercice corrigé",
+    "chaine": "Ennajisciences",
+    "duree": "12:52",
+    "sec": 772,
+    "vues": "3 579 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L12": {
+  "titre": "Approcher une borne où la fonction n’existe pas",
+  "candidats": [
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "ovIRv587bq4",
+    "titre": "Calcul de limite d'une fonction rationnelle",
+    "chaine": "Éducation Plus",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "344 530 vues"
+   },
+   {
+    "id": "lE2CvF_xf5k",
+    "titre": "MONTRER QU'UNE INTÉGRALE GÉNÉRALISÉE EST BIEN DÉFINIE / CONVERGE / EXISTE",
+    "chaine": "Mathemat'Exos",
+    "duree": "3:25",
+    "sec": 205,
+    "vues": "10 631 vues"
+   },
+   {
+    "id": "t9njtHfs6QM",
+    "titre": "Cours intégrales généralisées. Généralités",
+    "chaine": "Maths avec Ammar",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "55 270 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L13": {
+  "titre": "Comparer des intégrales impropres",
+  "candidats": [
+   {
+    "id": "YmJj9uIkC78",
+    "titre": "[UT#4] Introduction aux intégrales impropres",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "32 894 vues"
+   },
+   {
+    "id": "DMkA1kSQ1-8",
+    "titre": "[UT#49] La comparaison série-intégrale (Explication)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "11:40",
+    "sec": 700,
+    "vues": "66 600 vues"
+   },
+   {
+    "id": "icwdd1gWN5M",
+    "titre": "Le théorème de comparaison séries / intégrales impropres",
+    "chaine": "Bibmath",
+    "duree": "7:03",
+    "sec": 423,
+    "vues": "9 498 vues"
+   },
+   {
+    "id": "FrlUn_X8WM0",
+    "titre": "Continuité, dérivabilité des intégrales impropres dépendant d'un paramètre",
+    "chaine": "Around Mathematics",
+    "duree": "14:17",
+    "sec": 857,
+    "vues": "1 293 vues"
+   },
+   {
+    "id": "FdweGGz1g4Y",
+    "titre": "[RévisionsBac.com] - Intégrales impropres : règle de comparaison",
+    "chaine": "Revisions Bac",
+    "duree": "4:42",
+    "sec": 282,
+    "vues": "562 vues"
+   },
+   {
+    "id": "IFVcosOh5gw",
+    "titre": "Intégrales impropres (généralisées): définitions et exemples",
+    "chaine": "TeSla Net",
+    "duree": "10:54",
+    "sec": 654,
+    "vues": "17 673 vues"
+   },
+   {
+    "id": "Lbta1QyvbQU",
+    "titre": "2020 - intégrales impropres -part3 -cycle universitaire",
+    "chaine": "abdelkader LAGGOUNE",
+    "duree": "11:32",
+    "sec": 692,
+    "vues": "605 vues"
+   },
+   {
+    "id": "OoQVP-OJ6z4",
+    "titre": "Nature d'une intégrale impropre : utiliser les critères de comparaison (prépa ECG maths Appliquées)",
+    "chaine": "Stephane Preteseille",
+    "duree": "12:52",
+    "sec": 772,
+    "vues": "187 vues"
+   },
+   {
+    "id": "XnrXjwQmQjc",
+    "titre": "Théorème de comparaison pour les intégrales généralisées",
+    "chaine": "Chic des maths!!!",
+    "duree": "3:32",
+    "sec": 212,
+    "vues": "482 vues"
+   },
+   {
+    "id": "SeAo7GPO0SA",
+    "titre": "COMMENT DÉTERMINER LA NATURE DES INTÉGRALES GÉNÉRALISÉES / IMPROPRES",
+    "chaine": "Mathemat'Exos",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "9 500 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L14": {
+  "titre": "Intégrer par parties avant de passer à la limite",
+  "candidats": [
+   {
+    "id": "uNIpYeaNfsg",
+    "titre": "Effectuer une intégration par parties (1) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "986 674 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "CrjfuFGqvTU",
+    "titre": "COMPRENDRE L'INTÉGRATION PAR PARTIES (IPP)",
+    "chaine": "Hedacademy",
+    "duree": "13:31",
+    "sec": 811,
+    "vues": "78 502 vues"
+   },
+   {
+    "id": "1jnKf8lziNo",
+    "titre": "INTEGRALE PAR PARTIE",
+    "chaine": "Éducation Plus",
+    "duree": "9:34",
+    "sec": 574,
+    "vues": "5 360 vues"
+   },
+   {
+    "id": "g5XyiVlN0fg",
+    "titre": "L’INTÉGRATION PAR PARTIES : Formule + Exemple - Maths Prépa Licence",
+    "chaine": "Fabinou",
+    "duree": "6:01",
+    "sec": 361,
+    "vues": "191 629 vues"
+   },
+   {
+    "id": "waddmGDS6Ts",
+    "titre": "Comprendre l'intégration par parties - Méthode + Exercices",
+    "chaine": "Le Raton",
+    "duree": "11:31",
+    "sec": 691,
+    "vues": "49 244 vues"
+   },
+   {
+    "id": "DB2CdFr6O_E",
+    "titre": "INTÉGRATIONS par PARTIES ⎢ lnx",
+    "chaine": "Hedacademy",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "17 319 vues"
+   },
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "jv5dIqLC99Q",
+    "titre": "EXERCICE ANALYSE : INTÉGRALES GÉNÉRALISÉES ET INTÉGRATION PAR PARTIES (IPP)",
+    "chaine": "Mathemat'Exos",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "1 346 vues"
+   },
+   {
+    "id": "tWS7bubONBU",
+    "titre": "ECG 2 : Chapitre 4 - Convergence des intégrales généralisées",
+    "chaine": "Guillaume Leboucher",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "63 vues"
+   }
+  ]
+ },
+ "ISE-ECO-SERIES-L15": {
+  "titre": "Transformer l’intégrale avec sa variable et ses bornes",
+  "candidats": [
+   {
+    "id": "-kqVYkdy4Dc",
+    "titre": "2 minutes pour (enfin) comprendre l'integration par changement de variable.",
+    "chaine": "Le Raton",
+    "duree": "3:54",
+    "sec": 234,
+    "vues": "131 694 vues"
+   },
+   {
+    "id": "fj_1DFEmbiE",
+    "titre": "Le CHANGEMENT DE VARIABLE pour RÉSOUDRE des INTÉGRALES : Méthode + Exemple - Maths Prépa Licence",
+    "chaine": "Fabinou",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "275 275 vues"
+   },
+   {
+    "id": "cUN5OWJbAtM",
+    "titre": "Intégration par changements variables #1",
+    "chaine": "Arnaud-maths",
+    "duree": "5:54",
+    "sec": 354,
+    "vues": "104 474 vues"
+   },
+   {
+    "id": "Z3vKJJE57Uw",
+    "titre": "Calculer une intégrale (1) -Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:46",
+    "sec": 226,
+    "vues": "1 299 260 vues"
+   },
+   {
+    "id": "AEilqmFMOME",
+    "titre": "CALCUL D'UNE INTEGRALE PAR CHANGEMENT DE VARIABLE AFFINE",
+    "chaine": "Sissa-maths",
+    "duree": "8:29",
+    "sec": 509,
+    "vues": "2 052 vues"
+   },
+   {
+    "id": "jjwDCIGwHP0",
+    "titre": "Gestion des bornes lors d'un changement de variable dans une intégrale définie",
+    "chaine": "Eric Gaul",
+    "duree": "5:09",
+    "sec": 309,
+    "vues": "8 483 vues"
+   },
+   {
+    "id": "utM8TKG90r8",
+    "titre": "Les intégrales",
+    "chaine": "Hedacademy",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "940 319 vues"
+   },
+   {
+    "id": "LsKa-u1ZkZ0",
+    "titre": "Comment calculer une intégrale en effectuant un changement de variables?",
+    "chaine": "Bibmath",
+    "duree": "13:59",
+    "sec": 839,
+    "vues": "13 823 vues"
+   },
+   {
+    "id": "t9njtHfs6QM",
+    "titre": "Cours intégrales généralisées. Généralités",
+    "chaine": "Maths avec Ammar",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "55 270 vues"
+   }
+  ]
+ }
+}

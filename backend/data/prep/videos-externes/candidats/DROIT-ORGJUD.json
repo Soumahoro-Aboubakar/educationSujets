@@ -1,0 +1,601 @@
+{
+ "DROIT-ORGJUD-L1": {
+  "titre": "D’un désaccord à un litige",
+  "candidats": [
+   {
+    "id": "jqEsqJ73Ef8",
+    "titre": "Le fonctionnement de la justice française expliqué en quatre minutes",
+    "chaine": "Le Monde",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "918 972 vues"
+   },
+   {
+    "id": "IaFFfI81A3M",
+    "titre": "Le recours au juge : les grands principes de l'organisation judiciaire - Droit - digiSchool",
+    "chaine": "digiSchool Orientation",
+    "duree": "6:52",
+    "sec": 412,
+    "vues": "36 950 vues"
+   },
+   {
+    "id": "JJHD0bdVo8E",
+    "titre": "Système judiciaire en Côte d'Ivoire: quel rôle pour le greffier?",
+    "chaine": "Medi1TV Afrique",
+    "duree": "10:09",
+    "sec": 609,
+    "vues": "11 044 vues"
+   },
+   {
+    "id": "sDlaBUy-Onw",
+    "titre": "ORGANISATION JUDICIARE L1 INGENIEURIE JURIDIQUE",
+    "chaine": "Lus Nostrum Officiel",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "638 vues"
+   },
+   {
+    "id": "kPyrSotiQPE",
+    "titre": "Bac Général - DGEMC Terminale - 07 - L'organisation judiciaire en France",
+    "chaine": "MrWalker",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "178 vues"
+   },
+   {
+    "id": "YJzSbo8tpzY",
+    "titre": "Les juridictions Françaises en schéma : l'organisation de la justice en France | Le droit animé",
+    "chaine": "Lextenso",
+    "duree": "9:24",
+    "sec": 564,
+    "vues": "122 966 vues"
+   },
+   {
+    "id": "mF4MzEICIDU",
+    "titre": "Institutions judiciaires : l’organisation du pouvoir judiciaire",
+    "chaine": "Le Droit En Fac ⚖️",
+    "duree": "8:59",
+    "sec": 539,
+    "vues": "816 vues"
+   },
+   {
+    "id": "upVMklUiV98",
+    "titre": "Le principe de collégialité en droit : Partager la décision #cours de droit #licence 1",
+    "chaine": "TOUT EN UN TV",
+    "duree": "1:47",
+    "sec": 107,
+    "vues": "1 467 vues"
+   },
+   {
+    "id": "kD85KOsLaLg",
+    "titre": "Rôle des élus en Côte d'Ivoire: vidéo 1: séparation des pouvoirs, rôle du président de la République",
+    "chaine": "KAS Dialogue Politique en Afrique de l'Ouest",
+    "duree": "5:03",
+    "sec": 303,
+    "vues": "1 935 vues"
+   },
+   {
+    "id": "260efyee2Gc",
+    "titre": "5ème Partie/Conférence sur \"l'organisation judiciaire en Côte d'Ivoire\"",
+    "chaine": "Université Evangélique Internationale de Man UEIM",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "3 105 vues"
+   }
+  ]
+ },
+ "DROIT-ORGJUD-L2": {
+  "titre": "Pourquoi le procès doit-il être équitable ?",
+  "candidats": [
+   {
+    "id": "IaFFfI81A3M",
+    "titre": "Le recours au juge : les grands principes de l'organisation judiciaire - Droit - digiSchool",
+    "chaine": "digiSchool Orientation",
+    "duree": "6:52",
+    "sec": 412,
+    "vues": "36 950 vues"
+   },
+   {
+    "id": "sDlaBUy-Onw",
+    "titre": "ORGANISATION JUDICIARE L1 INGENIEURIE JURIDIQUE",
+    "chaine": "Lus Nostrum Officiel",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "638 vues"
+   },
+   {
+    "id": "JJHD0bdVo8E",
+    "titre": "Système judiciaire en Côte d'Ivoire: quel rôle pour le greffier?",
+    "chaine": "Medi1TV Afrique",
+    "duree": "10:09",
+    "sec": 609,
+    "vues": "11 044 vues"
+   },
+   {
+    "id": "ByaAOx5Xobw",
+    "titre": "COURS D'INSTITUTIONS JUDICIAIRES (LES 3 PRINCIPES FONDAMENTAUX)",
+    "chaine": "SenDroit",
+    "duree": "8:00",
+    "sec": 480,
+    "vues": "76 175 vues"
+   },
+   {
+    "id": "mF4MzEICIDU",
+    "titre": "Institutions judiciaires : l’organisation du pouvoir judiciaire",
+    "chaine": "Le Droit En Fac ⚖️",
+    "duree": "8:59",
+    "sec": 539,
+    "vues": "816 vues"
+   },
+   {
+    "id": "jqEsqJ73Ef8",
+    "titre": "Le fonctionnement de la justice française expliqué en quatre minutes",
+    "chaine": "Le Monde",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "918 972 vues"
+   },
+   {
+    "id": "1vBfBTG4msw",
+    "titre": "Le droit au procès équitable : Fondements et garanties #cours de droit #licence 1",
+    "chaine": "TOUT EN UN TV",
+    "duree": "2:07",
+    "sec": 127,
+    "vues": "723 vues"
+   },
+   {
+    "id": "G08oJeueP6s",
+    "titre": "Epreuve d'organisation judiciaire et administrative des juridictions par M K. Basile (1)",
+    "chaine": "PrepaOnlineAcademy",
+    "duree": "7:14",
+    "sec": 434,
+    "vues": "25 vues"
+   },
+   {
+    "id": "vzF1Ipi_Gu4",
+    "titre": "Qu'est-ce qu'un procès équitable ?",
+    "chaine": "Cabinet TATOUEIX",
+    "duree": "3:06",
+    "sec": 186,
+    "vues": "10 098 vues"
+   },
+   {
+    "id": "M1TRUDnrNmw",
+    "titre": "COUR D'APPEL D'ABIDJAN, RENTREE JUDICIAIRE 2012-2013: \"LE PROCES EQUITABLE\"",
+    "chaine": "Gouvernement de Côte d'Ivoire",
+    "duree": "1:34",
+    "sec": 94,
+    "vues": "392 vues"
+   }
+  ]
+ },
+ "DROIT-ORGJUD-L3": {
+  "titre": "Trouver le juge du premier degré",
+  "candidats": []
+ },
+ "DROIT-ORGJUD-L4": {
+  "titre": "Distinguer appel et cassation",
+  "candidats": [
+   {
+    "id": "jqEsqJ73Ef8",
+    "titre": "Le fonctionnement de la justice française expliqué en quatre minutes",
+    "chaine": "Le Monde",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "918 972 vues"
+   },
+   {
+    "id": "HDhWA2KCvWE",
+    "titre": "La Cour de cassation, juge du droit",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "4:20",
+    "sec": 260,
+    "vues": "109 363 vues"
+   },
+   {
+    "id": "AATOJ9P5RxU",
+    "titre": "La cour de cassation, c'est quoi ? (définition, aide, lexique, tuto, explication)",
+    "chaine": "Infonet",
+    "duree": "1:35",
+    "sec": 95,
+    "vues": "29 606 vues"
+   },
+   {
+    "id": "gxAv2NRRCoE",
+    "titre": "Droit organisation judiciaire Pourvoi en Cassation 4/4",
+    "chaine": "Dominique T.",
+    "duree": "3:06",
+    "sec": 186,
+    "vues": "761 vues"
+   },
+   {
+    "id": "ZzLgbdAlSG4",
+    "titre": "La Cour de cassation (introduction au droit)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "1:59",
+    "sec": 119,
+    "vues": "10 837 vues"
+   },
+   {
+    "id": "6bEXiQozBGE",
+    "titre": "Appel et Cassation - Le Dico",
+    "chaine": "Le Tiroir",
+    "duree": "4:23",
+    "sec": 263,
+    "vues": "136 vues"
+   },
+   {
+    "id": "2gk4CBj5QHk",
+    "titre": "Lire et comprendre un arrêt de la Cour de cassation",
+    "chaine": "Prépa Dalloz",
+    "duree": "14:37",
+    "sec": 877,
+    "vues": "141 810 vues"
+   },
+   {
+    "id": "kPyrSotiQPE",
+    "titre": "Bac Général - DGEMC Terminale - 07 - L'organisation judiciaire en France",
+    "chaine": "MrWalker",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "178 vues"
+   },
+   {
+    "id": "hDMYp6lNu-E",
+    "titre": "Droit L'organisation judiciaire",
+    "chaine": "Jean Michel Colomba",
+    "duree": "13:55",
+    "sec": 835,
+    "vues": "3 114 vues"
+   },
+   {
+    "id": "KunUc_meeUc",
+    "titre": "L'ORGANISATION JURIDICTIONNELLE : QU'EN DIT LA LOI?",
+    "chaine": "Lux TV Officiel",
+    "duree": "14:55",
+    "sec": 895,
+    "vues": "845 vues"
+   }
+  ]
+ },
+ "DROIT-ORGJUD-L5": {
+  "titre": "Siège et parquet : deux rôles distincts",
+  "candidats": [
+   {
+    "id": "3-abAnYT9XI",
+    "titre": "[Droit / DGEMC] Magistrats du siège et magistrats du parquet",
+    "chaine": "Vincent Pauthier",
+    "duree": "3:20",
+    "sec": 200,
+    "vues": "43 827 vues"
+   },
+   {
+    "id": "FZt89_7166Y",
+    "titre": "Magistrats du Siege et magistrats du Parquet",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "2:56",
+    "sec": 176,
+    "vues": "105 066 vues"
+   },
+   {
+    "id": "LgqXA7vU-hc",
+    "titre": "Magistrat du parquet / Magistrat du siège",
+    "chaine": "Tribunal FRRP",
+    "duree": "2:33",
+    "sec": 153,
+    "vues": "663 vues"
+   },
+   {
+    "id": "ipEzgf1v7p0",
+    "titre": "Magistrats du siège et Magistrats du parquet",
+    "chaine": "قناة بري للعلوم القانونية",
+    "duree": "3:03",
+    "sec": 183,
+    "vues": "1 018 vues"
+   },
+   {
+    "id": "ZJpjphLJqWo",
+    "titre": "LA DIFFÉRENCE ENTRE LE MAGISTRAT DU SIÈGE ET CELUI DU PARQUET",
+    "chaine": "Cours-de-Droit",
+    "duree": "3:11",
+    "sec": 191,
+    "vues": "735 vues"
+   },
+   {
+    "id": "yWbBgXkAG-g",
+    "titre": "Culture juridique : Magistrats du siège Vs Magistrats Parquet. Quelles différences ?",
+    "chaine": "Legal237 net",
+    "duree": "13:07",
+    "sec": 787,
+    "vues": "164 vues"
+   },
+   {
+    "id": "dYoxnl6xJV8",
+    "titre": "Justice : qu'est-ce que le \"parquet\" ?",
+    "chaine": "La Quotidienne",
+    "duree": "1:52",
+    "sec": 112,
+    "vues": "14 756 vues"
+   },
+   {
+    "id": "JJHD0bdVo8E",
+    "titre": "Système judiciaire en Côte d'Ivoire: quel rôle pour le greffier?",
+    "chaine": "Medi1TV Afrique",
+    "duree": "10:09",
+    "sec": 609,
+    "vues": "11 044 vues"
+   },
+   {
+    "id": "kqP1B4UiW98",
+    "titre": "Les greffiers Ivoiriens et le fonctionnement de l'appareil judicaire.",
+    "chaine": "Life TV",
+    "duree": "3:20",
+    "sec": 200,
+    "vues": "3 518 vues"
+   },
+   {
+    "id": "XO5XOJLHyuI",
+    "titre": "LE TRIBUNAL ET LE PARQUET,Quelle est la différence ?",
+    "chaine": "Parlons du Droit🇨🇩",
+    "duree": "3:01",
+    "sec": 181,
+    "vues": "396 vues"
+   }
+  ]
+ },
+ "DROIT-ORGJUD-L6": {
+  "titre": "Le greffe garantit la trace du procès",
+  "candidats": [
+   {
+    "id": "JJHD0bdVo8E",
+    "titre": "Système judiciaire en Côte d'Ivoire: quel rôle pour le greffier?",
+    "chaine": "Medi1TV Afrique",
+    "duree": "10:09",
+    "sec": 609,
+    "vues": "11 044 vues"
+   },
+   {
+    "id": "kPyrSotiQPE",
+    "titre": "Bac Général - DGEMC Terminale - 07 - L'organisation judiciaire en France",
+    "chaine": "MrWalker",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "178 vues"
+   },
+   {
+    "id": "ByaAOx5Xobw",
+    "titre": "COURS D'INSTITUTIONS JUDICIAIRES (LES 3 PRINCIPES FONDAMENTAUX)",
+    "chaine": "SenDroit",
+    "duree": "8:00",
+    "sec": 480,
+    "vues": "76 175 vues"
+   },
+   {
+    "id": "l8epO-2yeSM",
+    "titre": "L'ORGANISATION JUDICIAIRE",
+    "chaine": "LOGISTIQUE GESTION LP CEVERT",
+    "duree": "4:52",
+    "sec": 292,
+    "vues": "39 615 vues"
+   },
+   {
+    "id": "G-1KuDMjy0s",
+    "titre": "cours Droit français s4 : L'organisation judiciaire",
+    "chaine": "abdellah tihirte",
+    "duree": "13:55",
+    "sec": 835,
+    "vues": "1 482 vues"
+   },
+   {
+    "id": "sDlaBUy-Onw",
+    "titre": "ORGANISATION JUDICIARE L1 INGENIEURIE JURIDIQUE",
+    "chaine": "Lus Nostrum Officiel",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "638 vues"
+   },
+   {
+    "id": "7EE0uUBMYyI",
+    "titre": "Quels sont les rôles des greffiers dans le système judiciaire ?#enseignement #droit",
+    "chaine": "Le Cabinet du juriste",
+    "duree": "1:07",
+    "sec": 67,
+    "vues": "159 vues"
+   },
+   {
+    "id": "jqEsqJ73Ef8",
+    "titre": "Le fonctionnement de la justice française expliqué en quatre minutes",
+    "chaine": "Le Monde",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "918 972 vues"
+   },
+   {
+    "id": "260efyee2Gc",
+    "titre": "5ème Partie/Conférence sur \"l'organisation judiciaire en Côte d'Ivoire\"",
+    "chaine": "Université Evangélique Internationale de Man UEIM",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "3 105 vues"
+   },
+   {
+    "id": "RalRkdD4H8E",
+    "titre": "3ème Partie/Conférence sur \"l'organisation judiciaire en Côte d'Ivoire\"",
+    "chaine": "Université Evangélique Internationale de Man UEIM",
+    "duree": "11:58",
+    "sec": 718,
+    "vues": "5 361 vues"
+   }
+  ]
+ },
+ "DROIT-ORGJUD-L7": {
+  "titre": "Plusieurs contentieux, plusieurs juges",
+  "candidats": [
+   {
+    "id": "hDMYp6lNu-E",
+    "titre": "Droit L'organisation judiciaire",
+    "chaine": "Jean Michel Colomba",
+    "duree": "13:55",
+    "sec": 835,
+    "vues": "3 114 vues"
+   },
+   {
+    "id": "guog1TKRR9Y",
+    "titre": "Organisation judiciaire￼: la procédure au sein des juridictions de proximité ￼￼",
+    "chaine": "Droit 212 (Maroc)",
+    "duree": "12:39",
+    "sec": 759,
+    "vues": "1 169 vues"
+   },
+   {
+    "id": "zVfMaNNvlkA",
+    "titre": "Droit L'organisation judiciaire YouTube",
+    "chaine": "YASSINE EL ALOUI",
+    "duree": "13:55",
+    "sec": 835,
+    "vues": "2 695 vues"
+   },
+   {
+    "id": "G-1KuDMjy0s",
+    "titre": "cours Droit français s4 : L'organisation judiciaire",
+    "chaine": "abdellah tihirte",
+    "duree": "13:55",
+    "sec": 835,
+    "vues": "1 482 vues"
+   },
+   {
+    "id": "kTKc2E3ydP8",
+    "titre": "Les institutions judiciaires : #institution #judiciaire #lesinstitutionjudiciaires#",
+    "chaine": "DÉCLIC 🟨⬛ Pédagogie",
+    "duree": "13:02",
+    "sec": 782,
+    "vues": "6 681 vues"
+   },
+   {
+    "id": "F_iQ2OrTu1A",
+    "titre": "S4- Les compétences pénales du juge de proximité (Organisation Judiciaire)",
+    "chaine": "Le Coin Des Juristes",
+    "duree": "6:51",
+    "sec": 411,
+    "vues": "4 225 vues"
+   },
+   {
+    "id": "fn4N1uwc7bk",
+    "titre": "Résumé de L'organisation judiciaire",
+    "chaine": "Droit français",
+    "duree": "5:11",
+    "sec": 311,
+    "vues": "1 455 vues"
+   },
+   {
+    "id": "QRODn3ZJFIE",
+    "titre": "PARLONS DROIT: Cours Institutions Judiciaires",
+    "chaine": "PARLONS DROIT",
+    "duree": "6:18",
+    "sec": 378,
+    "vues": "7 686 vues"
+   },
+   {
+    "id": "JJHD0bdVo8E",
+    "titre": "Système judiciaire en Côte d'Ivoire: quel rôle pour le greffier?",
+    "chaine": "Medi1TV Afrique",
+    "duree": "10:09",
+    "sec": 609,
+    "vues": "11 044 vues"
+   },
+   {
+    "id": "8uzA0A8yEx0",
+    "titre": "Le commissaire de justice, quel est son rôle - Côte d'Ivoire",
+    "chaine": "IVOIRE JURISTE",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "1 693 vues"
+   }
+  ]
+ },
+ "DROIT-ORGJUD-L8": {
+  "titre": "La CCJA et le droit OHADA",
+  "candidats": [
+   {
+    "id": "UMgukM8SB2U",
+    "titre": "OHADA : ATTITUDE DE LA CCJA FACE AUX DÉCISIONS APPLIQUANT DES SANCTIONS PÉNALES",
+    "chaine": "CASSATION TOGE NOIRE TV",
+    "duree": "2:57",
+    "sec": 177,
+    "vues": "318 vues"
+   },
+   {
+    "id": "wh-aNWrMcPs",
+    "titre": "Le droit OHADA en pratique - DAC RDC",
+    "chaine": "DiasporaAuditCompta RDC",
+    "duree": "8:54",
+    "sec": 534,
+    "vues": "7 985 vues"
+   },
+   {
+    "id": "aMFtPsSR6As",
+    "titre": "Cour Commune de Justice et d'Arbitrage de L'OHADA: Installation du Nouveau Bureau du CCJA",
+    "chaine": "Gouvernement de Côte d'Ivoire",
+    "duree": "1:34",
+    "sec": 94,
+    "vues": "597 vues"
+   },
+   {
+    "id": "cvDCkWHyrNo",
+    "titre": "LA COUR COMMUNE DE JUSTICE ET D’ARBITRAGE DE L’OHADA",
+    "chaine": "Académie Juridique",
+    "duree": "8:52",
+    "sec": 532,
+    "vues": "394 vues"
+   },
+   {
+    "id": "kCrRgmTDQ7A",
+    "titre": "LE COMMERÇANT EN DROIT OHADA",
+    "chaine": "Juristudes",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "38 978 vues"
+   },
+   {
+    "id": "sDlaBUy-Onw",
+    "titre": "ORGANISATION JUDICIARE L1 INGENIEURIE JURIDIQUE",
+    "chaine": "Lus Nostrum Officiel",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "638 vues"
+   },
+   {
+    "id": "Mcm5sdG0xiY",
+    "titre": "L'Ordre de Juridiction Judiciaire : [Introduction au Droit]",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "4:51",
+    "sec": 291,
+    "vues": "10 837 vues"
+   },
+   {
+    "id": "kv1Ojy55vBQ",
+    "titre": "Qu'est ce que l'OHADA ? La Minute de Droit ⏱️",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "1:39",
+    "sec": 99,
+    "vues": "626 vues"
+   },
+   {
+    "id": "vyUAcyGpkNo",
+    "titre": "LES DEFENSES A L'EXECUTION PROVISOIRE A LA LUMIERE DE LA JURISPRUDENCE DE LA CCJA PAR LANDRY PONGO",
+    "chaine": "Talk's RDC",
+    "duree": "10:55",
+    "sec": 655,
+    "vues": "1 805 vues"
+   },
+   {
+    "id": "BLDniXJN0Rw",
+    "titre": "Droit OHADA:Interview Me Jérémie WAMBO sur la procédure devant la CCJA/OHADA",
+    "chaine": "wambojt",
+    "duree": "1:10",
+    "sec": 70,
+    "vues": "216 vues"
+   }
+  ]
+ }
+}

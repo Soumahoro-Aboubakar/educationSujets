@@ -1,0 +1,836 @@
+{
+ "ANG-QCM-L1": {
+  "titre": "Exprimer une condition réelle",
+  "candidats": [
+   {
+    "id": "3VtyH_nr_ZU",
+    "titre": "La Condition et l’Hypothèse en Français : 14 Exercices Pratiques avec Explications",
+    "chaine": "Français avec Pierre",
+    "duree": "14:59",
+    "sec": 899,
+    "vues": "146 678 vues"
+   },
+   {
+    "id": "Kwi0iBSiXhs",
+    "titre": "Exprimer une condition (\"si\" 1/2)",
+    "chaine": "Bien écrire - Katia Nugnes",
+    "duree": "3:26",
+    "sec": 206,
+    "vues": "1 122 vues"
+   },
+   {
+    "id": "ILyL7fN3dY4",
+    "titre": "L’hypothèse en français, CONDITIONNEL ou SUBJONCTIF 🤔⁉️",
+    "chaine": "French School TV",
+    "duree": "7:47",
+    "sec": 467,
+    "vues": "107 482 vues"
+   },
+   {
+    "id": "Gt9pZIL2s5E",
+    "titre": "La condition avec SI - Hypothèse probable - English captions available😉",
+    "chaine": "La prof Elisabeth",
+    "duree": "2:07",
+    "sec": 127,
+    "vues": "41 592 vues"
+   },
+   {
+    "id": "S8gR1X5-KBY",
+    "titre": "L'expression de la condition - Français - Collège - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:38",
+    "sec": 398,
+    "vues": "8 564 vues"
+   },
+   {
+    "id": "Nm6x6IfsDHA",
+    "titre": "L'hypothèse - Leçon de français (Niveau A2/B1) - Cours de grammaire",
+    "chaine": "L'atelier du français | Paris",
+    "duree": "4:09",
+    "sec": 249,
+    "vues": "25 181 vues"
+   },
+   {
+    "id": "z0fNSADzB3Y",
+    "titre": "Construire Une Phrase En Français Avec SI pour Exprimer la Condition, l'Hypothèse et le Regret.",
+    "chaine": "Le français by Alex",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "20 320 vues"
+   },
+   {
+    "id": "3VS50sM3kg4",
+    "titre": "Exprimer la condition - Français niveau autonome",
+    "chaine": "Et voilà ! Cours de français",
+    "duree": "1:31",
+    "sec": 91,
+    "vues": "208 vues"
+   },
+   {
+    "id": "y2CsvYn0m1s",
+    "titre": "If en Anglais : Comment Exprimer une Condition, Supposition ou un Regret ?",
+    "chaine": "ISpeakSpokeSpoken",
+    "duree": "14:07",
+    "sec": 847,
+    "vues": "19 817 vues"
+   },
+   {
+    "id": "BnC-NSEyfs8",
+    "titre": "LE CONDITIONNEL EN ANGLAIS",
+    "chaine": "L'Anglais au Collège et au Lycée",
+    "duree": "3:19",
+    "sec": 199,
+    "vues": "82 302 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L2": {
+  "titre": "Imaginer une autre situation présente",
+  "candidats": [
+   {
+    "id": "aOeGJJSwGxk",
+    "titre": "La grammaire avec Vincent I Imaginer une autre situation avec si",
+    "chaine": "LEARN FRENCH WITH VINCENT & FRIENDS",
+    "duree": "0:39",
+    "sec": 39,
+    "vues": "2 vues"
+   },
+   {
+    "id": "2u_5Tcvt5Sg",
+    "titre": "Imaginer, sentir, raisonner — Français 5e",
+    "chaine": "Maï Lan Study",
+    "duree": "6:27",
+    "sec": 387,
+    "vues": "Aucune vue"
+   },
+   {
+    "id": "Lju_2IFbMto",
+    "titre": "RÉUSSISSEZ LE SUJET D'IMAGINATION AU BREVET ! Toute la méthode et les conseils !",
+    "chaine": "Les rouages du français",
+    "duree": "12:51",
+    "sec": 771,
+    "vues": "89 157 vues"
+   },
+   {
+    "id": "Hp5C0w2YUII",
+    "titre": "LA MÉTHODE LA PLUS PUISSANTE POUR RE-PROGRAMMER TON CERVEAU (UTILISE 100% DE TON CERVEAU)",
+    "chaine": "SONNY COURT",
+    "duree": "12:49",
+    "sec": 769,
+    "vues": "3 004 746 vues"
+   },
+   {
+    "id": "rkl08aepG78",
+    "titre": "D'UNE SITUATION A L'AUTRE - J'imagINES BOUTIQUE",
+    "chaine": "J'imagINES",
+    "duree": "2:35",
+    "sec": 155,
+    "vues": "393 vues"
+   },
+   {
+    "id": "3VtyH_nr_ZU",
+    "titre": "La Condition et l’Hypothèse en Français : 14 Exercices Pratiques avec Explications",
+    "chaine": "Français avec Pierre",
+    "duree": "14:59",
+    "sec": 899,
+    "vues": "146 678 vues"
+   },
+   {
+    "id": "nY1bAiKrFaw",
+    "titre": "Créer une IDENTITÉ GRAPHIQUE de A à Z",
+    "chaine": "cubi",
+    "duree": "10:48",
+    "sec": 648,
+    "vues": "91 578 vues"
+   },
+   {
+    "id": "jxV5KF8uuxU",
+    "titre": "Concours Gardien de la Paix : réussir le QCM anglais (vocabulaire + stratégie)",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 418 vues"
+   },
+   {
+    "id": "tL25N9_bruw",
+    "titre": "Epreuve Anglais Gardien de la Paix - 10 QCM d'entraînement",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "3:58",
+    "sec": 238,
+    "vues": "51 vues"
+   },
+   {
+    "id": "pfiGakHb8UY",
+    "titre": "Correction de QCM d’anglais (ENA CI)",
+    "chaine": "Domichrist Deli",
+    "duree": "10:51",
+    "sec": 651,
+    "vues": "1 408 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L3": {
+  "titre": "Imaginer un passé différent",
+  "candidats": [
+   {
+    "id": "r-zcRg0k9LM",
+    "titre": "Ne mélange plus les temps du passé ! Français B1/B2",
+    "chaine": "French School TV",
+    "duree": "7:47",
+    "sec": 467,
+    "vues": "32 133 vues"
+   },
+   {
+    "id": "7ZdMEP3VsHQ",
+    "titre": "Si j'avais su : imaginer un autre passé en français",
+    "chaine": "Français limpide",
+    "duree": "3:19",
+    "sec": 199,
+    "vues": "8 vues"
+   },
+   {
+    "id": "Nm6x6IfsDHA",
+    "titre": "L'hypothèse - Leçon de français (Niveau A2/B1) - Cours de grammaire",
+    "chaine": "L'atelier du français | Paris",
+    "duree": "4:09",
+    "sec": 249,
+    "vues": "25 181 vues"
+   },
+   {
+    "id": "o4Y7BHqHdys",
+    "titre": "🇫🇷 Français B1/B2 - Les temps du conditionnel",
+    "chaine": "French School TV",
+    "duree": "10:20",
+    "sec": 620,
+    "vues": "66 065 vues"
+   },
+   {
+    "id": "DWKGppX5duo",
+    "titre": "🇫🇷 Le conditionnel passé en FRANÇAIS 🤩 | Français niveau C1/C2",
+    "chaine": "French School TV",
+    "duree": "6:31",
+    "sec": 391,
+    "vues": "123 378 vues"
+   },
+   {
+    "id": "ciFf9tSz8jU",
+    "titre": "Conjuguons ensemble I Imaginer I Conditionnel Passé",
+    "chaine": "LEARN FRENCH WITH VINCENT & FRIENDS",
+    "duree": "0:31",
+    "sec": 31,
+    "vues": "Aucune vue"
+   },
+   {
+    "id": "N0qHnQceP8k",
+    "titre": "Comment faire des hypothèses dans le passé ?",
+    "chaine": "Petit Café Français",
+    "duree": "3:22",
+    "sec": 202,
+    "vues": "704 vues"
+   },
+   {
+    "id": "A_PxgkxlGW8",
+    "titre": "🔮 Maitriser L'Hypothèse au Passé & Exprimer le Regret| Odyssée B2 (Unité 8 - Leçon 2) 📜💡",
+    "chaine": "Prof Yortch",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "35 vues"
+   },
+   {
+    "id": "pfiGakHb8UY",
+    "titre": "Correction de QCM d’anglais (ENA CI)",
+    "chaine": "Domichrist Deli",
+    "duree": "10:51",
+    "sec": 651,
+    "vues": "1 408 vues"
+   },
+   {
+    "id": "jxV5KF8uuxU",
+    "titre": "Concours Gardien de la Paix : réussir le QCM anglais (vocabulaire + stratégie)",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 418 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L4": {
+  "titre": "Faire du destinataire de l’action le sujet",
+  "candidats": [
+   {
+    "id": "RX0SoaJ-nrg",
+    "titre": "Le Sujet en français 🇫🇷 (CM1-CM2) | C’est QUI qui fait l’action ? 🤔✨",
+    "chaine": "Coach Janilce",
+    "duree": "4:02",
+    "sec": 242,
+    "vues": "418 vues"
+   },
+   {
+    "id": "WyQcS4sXJ_g",
+    "titre": "Le sujet CE1 - CE2 - Cycle 2 - français - étude de la langue",
+    "chaine": "Maître Lucas",
+    "duree": "3:22",
+    "sec": 202,
+    "vues": "219 720 vues"
+   },
+   {
+    "id": "R0URG_gzkkg",
+    "titre": "Révisions sur le sujet et le verbe CM1 - CM2 - Cycle 3 - Français - Grammaire - Étude de la langue",
+    "chaine": "Maître Lucas",
+    "duree": "5:21",
+    "sec": 321,
+    "vues": "15 665 vues"
+   },
+   {
+    "id": "rTXQA4PXMZs",
+    "titre": "Les accords sujet / verbe - Français - Collège - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:52",
+    "sec": 412,
+    "vues": "15 677 vues"
+   },
+   {
+    "id": "69yR-MRacn4",
+    "titre": "Le sujet du verbe. GRAMMAIRE EXPRESS. Niveau CE1.",
+    "chaine": "Didascool Formation",
+    "duree": "1:57",
+    "sec": 117,
+    "vues": "25 784 vues"
+   },
+   {
+    "id": "cJ7Kr6TY5JQ",
+    "titre": "\"Sujet introuvable ? Découvrez l’astuce choc pour le dénicher à coup sûr !\"🔍",
+    "chaine": "Français facile et clair",
+    "duree": "4:53",
+    "sec": 293,
+    "vues": "655 vues"
+   },
+   {
+    "id": "IUxs-B3wTuI",
+    "titre": "La phrase : sujet, verbe et complément CE2 - CM1 - Cycle 2 et 3 - Francais - Grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "5:32",
+    "sec": 332,
+    "vues": "262 711 vues"
+   },
+   {
+    "id": "Q5AlkOb05us",
+    "titre": "Les bases de la grammaire : le SUJET",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:59",
+    "sec": 419,
+    "vues": "9 208 vues"
+   },
+   {
+    "id": "cceA_XTOvEQ",
+    "titre": "EXERCICE D'ANGLAIS TYPE BAC 2026",
+    "chaine": "PRÉPA BAC EN LIGNE",
+    "duree": "9:04",
+    "sec": 544,
+    "vues": "1 223 vues"
+   },
+   {
+    "id": "kL1RjWH-RWc",
+    "titre": "TOEIC : 10 questions à maîtriser pour dépasser +950 !",
+    "chaine": "Flow Exam - Plateforme TOEIC",
+    "duree": "4:52",
+    "sec": 292,
+    "vues": "113 475 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L5": {
+  "titre": "Rapporter les paroles de quelqu’un",
+  "candidats": [
+   {
+    "id": "zBvsXpl5njc",
+    "titre": "PAROLES RAPPORTÉES : les discours direct, discours indirect et discours indirect libre",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:00",
+    "sec": 300,
+    "vues": "301 483 vues"
+   },
+   {
+    "id": "w-OU9wFhYcc",
+    "titre": "Discours DIRECT et INDIRECT en français : Leçon complète",
+    "chaine": "Parlez-vous FRENCH : Cours de français",
+    "duree": "10:34",
+    "sec": 634,
+    "vues": "906 475 vues"
+   },
+   {
+    "id": "mIYGwhwJH64",
+    "titre": "Le discours direct et le discours indirect - Le discours rapporté",
+    "chaine": "J'aimerais savoir !",
+    "duree": "12:53",
+    "sec": 773,
+    "vues": "715 359 vues"
+   },
+   {
+    "id": "A5tuZg5L_qQ",
+    "titre": "Rapporter les paroles de quelqu'un",
+    "chaine": "Ribambelle Burgos",
+    "duree": "2:17",
+    "sec": 137,
+    "vues": "869 vues"
+   },
+   {
+    "id": "3n0ni5OG-PY",
+    "titre": "Cours de français (B1 et +) : rapporter des paroles",
+    "chaine": "ifMaroc",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "1 149 vues"
+   },
+   {
+    "id": "xk1ynO5koCM",
+    "titre": "les paroles rapportées",
+    "chaine": "Nadia Elghozi",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "10 902 vues"
+   },
+   {
+    "id": "nu5IzwF1ABE",
+    "titre": "rapporter les paroles (2/4) : le discours indirect",
+    "chaine": "pat jedusor",
+    "duree": "3:51",
+    "sec": 231,
+    "vues": "3 120 vues"
+   },
+   {
+    "id": "bsBKsdO1JLk",
+    "titre": "Rapporter des paroles 4/4 : le discours narrativisé",
+    "chaine": "pat jedusor",
+    "duree": "3:10",
+    "sec": 190,
+    "vues": "24 145 vues"
+   },
+   {
+    "id": "jxV5KF8uuxU",
+    "titre": "Concours Gardien de la Paix : réussir le QCM anglais (vocabulaire + stratégie)",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 418 vues"
+   },
+   {
+    "id": "QJmAysP7jo4",
+    "titre": "Anglais - Discours DIRECT et INdirect en anglais - expliqué en 2 minutes - n83",
+    "chaine": "L'anglais expliqué en 2 minutes - Top chrono",
+    "duree": "2:51",
+    "sec": 171,
+    "vues": "27 514 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L6": {
+  "titre": "Relier correctement deux informations",
+  "candidats": [
+   {
+    "id": "5zkPpNM_Y6M",
+    "titre": "Créer un Connexion Entre Deux Classeur Excel / Importer des Données [TUTORIEL]",
+    "chaine": "Numelion IT",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "118 655 vues"
+   },
+   {
+    "id": "5pvdWXvaVQg",
+    "titre": "GÉRER les PARAGRAPHES dans WORD : interligne, retrait, espacement... (Tutoriel Office)",
+    "chaine": "Thom Reo",
+    "duree": "7:05",
+    "sec": 425,
+    "vues": "293 941 vues"
+   },
+   {
+    "id": "bDKKhkzZFPQ",
+    "titre": "Configuration manuelle des composants du réseau",
+    "chaine": "Explania",
+    "duree": "4:48",
+    "sec": 288,
+    "vues": "238 764 vues"
+   },
+   {
+    "id": "jxV5KF8uuxU",
+    "titre": "Concours Gardien de la Paix : réussir le QCM anglais (vocabulaire + stratégie)",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 418 vues"
+   },
+   {
+    "id": "VerzZC9_vxs",
+    "titre": "QCM d'Anglais du Concours Advance - Conseils des Jurys",
+    "chaine": "Concours Advance",
+    "duree": "4:18",
+    "sec": 258,
+    "vues": "4 104 vues"
+   },
+   {
+    "id": "5Yvu2htHKL4",
+    "titre": "COMMENT REUSSIR LES QCM",
+    "chaine": "Potion de vie",
+    "duree": "8:26",
+    "sec": 506,
+    "vues": "195 910 vues"
+   },
+   {
+    "id": "Pg9L7rOfW2c",
+    "titre": "Epreuve Anglais Gardien de la Paix - 10 QCM d'entraînement",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "4:01",
+    "sec": 241,
+    "vues": "69 vues"
+   },
+   {
+    "id": "Fd9cyO0s5zw",
+    "titre": "Epreuve Anglais Concours Gardien de la Paix - 10 QCM d'entraînement",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "4:02",
+    "sec": 242,
+    "vues": "223 vues"
+   },
+   {
+    "id": "-PpsfHGmkcw",
+    "titre": "Epreuve Anglais Concours Gardien de la Paix - 10 QCM d'entraînement",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "4:03",
+    "sec": 243,
+    "vues": "72 vues"
+   },
+   {
+    "id": "Pt1dVoesX8c",
+    "titre": "Entraînement ANGLAIS Concours Gardien de la Paix - 10 QCM",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "4:03",
+    "sec": 243,
+    "vues": "65 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L7": {
+  "titre": "Choisir un mot de quantité",
+  "candidats": [
+   {
+    "id": "EwUFibjalQs",
+    "titre": "De, du, des... la quantité avec \"DE\" - Apprendre le français Cours de grammaire",
+    "chaine": "Destination France",
+    "duree": "3:45",
+    "sec": 225,
+    "vues": "448 vues"
+   },
+   {
+    "id": "xWovUaRzUpU",
+    "titre": "Grammar tuto : Évoquer des quantités",
+    "chaine": "Nathan plus",
+    "duree": "2:43",
+    "sec": 163,
+    "vues": "368 vues"
+   },
+   {
+    "id": "bNbUeWll5Fo",
+    "titre": "les expressions de la quantité",
+    "chaine": "Français avec Fati",
+    "duree": "1:25",
+    "sec": 85,
+    "vues": "10 757 vues"
+   },
+   {
+    "id": "K0G68E9JMKs",
+    "titre": "Exprimer la quantité en français",
+    "chaine": "FrenchFacile : Learn French grammar & conjugation",
+    "duree": "2:41",
+    "sec": 161,
+    "vues": "8 373 vues"
+   },
+   {
+    "id": "alhIWowFmwo",
+    "titre": "Expression de quantité , comment apprendre à parler en employant l'expression de quantité, (Du,de",
+    "chaine": "français avec Aly",
+    "duree": "7:30",
+    "sec": 450,
+    "vues": "325 vues"
+   },
+   {
+    "id": "k-lnEMq3gqg",
+    "titre": "Leçon 135 Adverbes de quantité ou d'intensité",
+    "chaine": "Nous étudions le français MT Rivière",
+    "duree": "2:00",
+    "sec": 120,
+    "vues": "95 vues"
+   },
+   {
+    "id": "QAcuZZCeCZw",
+    "titre": "Les adverbes de quantité ✅",
+    "chaine": "Vidéos éducatives en français",
+    "duree": "6:48",
+    "sec": 408,
+    "vues": "139 vues"
+   },
+   {
+    "id": "o3uofi8Zw-M",
+    "titre": "Les quantités et le mot de | Cours de français · niveau A2 #046",
+    "chaine": "French it up daily",
+    "duree": "10:05",
+    "sec": 605,
+    "vues": "57 vues"
+   },
+   {
+    "id": "A8V-xW8Aw2g",
+    "titre": "Quantifieurs - Niveau 1",
+    "chaine": "My English Teacher",
+    "duree": "3:08",
+    "sec": 188,
+    "vues": "4 946 vues"
+   },
+   {
+    "id": "t-39OnTOiJY",
+    "titre": "Cours d'Anglais Gratuit sur Les Quantifieurs / Quantifiers",
+    "chaine": "Facileanglais",
+    "duree": "0:59",
+    "sec": 59,
+    "vues": "1 296 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L8": {
+  "titre": "Trouver le mot qui convient au contexte",
+  "candidats": [
+   {
+    "id": "hNRMPE9a8ig",
+    "titre": "Lecture fluide : lire et comprendre un mot grâce au contexte CM1 - CM2 - Cycle 3 - Français",
+    "chaine": "Maître Lucas",
+    "duree": "5:01",
+    "sec": 301,
+    "vues": "11 850 vues"
+   },
+   {
+    "id": "XDW18P0CjPo",
+    "titre": "Le contexte et le sens d'un mot فهم الكلمة من السياق",
+    "chaine": "boutaina bennouna TV بثينة بنونة",
+    "duree": "6:19",
+    "sec": 379,
+    "vues": "25 220 vues"
+   },
+   {
+    "id": "KdrvzsEoEWg",
+    "titre": "Vocabulaire : le contexte",
+    "chaine": "Laure CAILLY",
+    "duree": "1:33",
+    "sec": 93,
+    "vues": "9 544 vues"
+   },
+   {
+    "id": "8pktbBlTZ4g",
+    "titre": "Les différents sens d'un mot selon le contexte CE1 CE2 Carte mentale en vidéo",
+    "chaine": "Pass Education FR",
+    "duree": "2:23",
+    "sec": 143,
+    "vues": "1 099 vues"
+   },
+   {
+    "id": "pUolU1CKR-Y",
+    "titre": "DECLIC : S'aider du contexte pour trouver le sens d'un mot",
+    "chaine": "La classe des cagous",
+    "duree": "3:47",
+    "sec": 227,
+    "vues": "439 vues"
+   },
+   {
+    "id": "28GbAcHjrrw",
+    "titre": "Les natures et les fonctions des mots CM1 - CM2 - 6ème - Cycle 3 - Français, Grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "297 026 vues"
+   },
+   {
+    "id": "vHzPEveV0TE",
+    "titre": "Stratégie de compréhension : Comprendre les mots nouveaux à l'aide du contexte",
+    "chaine": "Anne Boulanger",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "5 695 vues"
+   },
+   {
+    "id": "6CoDWkerYdo",
+    "titre": "le contexte pour comprendre un mot inconnu CM1",
+    "chaine": "SteveJobs School",
+    "duree": "6:17",
+    "sec": 377,
+    "vues": "992 vues"
+   },
+   {
+    "id": "jxV5KF8uuxU",
+    "titre": "Concours Gardien de la Paix : réussir le QCM anglais (vocabulaire + stratégie)",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 418 vues"
+   },
+   {
+    "id": "niSjKZRbHUw",
+    "titre": "Comment répondre à un QCM d'anglais?",
+    "chaine": "tacopiedanglais",
+    "duree": "4:36",
+    "sec": 276,
+    "vues": "2 025 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L9": {
+  "titre": "Lire pour trouver une preuve",
+  "candidats": [
+   {
+    "id": "aiZG8eNOohM",
+    "titre": "Les preuves - Introduction au droit privé",
+    "chaine": "Student Law",
+    "duree": "11:16",
+    "sec": 676,
+    "vues": "6 559 vues"
+   },
+   {
+    "id": "b4yXoKWdccc",
+    "titre": "Les modes de preuve et l’admissibilité des modes de preuve",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "12:06",
+    "sec": 726,
+    "vues": "18 557 vues"
+   },
+   {
+    "id": "3q6_eB-e9_g",
+    "titre": "La preuve en droit : qui prouve ? | Introduction générale au droit L1",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "12:28",
+    "sec": 748,
+    "vues": "4 vues"
+   },
+   {
+    "id": "v9zf2qCkixk",
+    "titre": "Comment LIRE de manière EFFICACE : Ma méthode en 3 techniques !",
+    "chaine": "Evolution Factory",
+    "duree": "5:13",
+    "sec": 313,
+    "vues": "442 690 vues"
+   },
+   {
+    "id": "j_Ilg2BmC0s",
+    "titre": "Comment j’apprends 10 pages de cours en 30 minutes ?",
+    "chaine": "Fafaa en Droit",
+    "duree": "7:00",
+    "sec": 420,
+    "vues": "582 097 vues"
+   },
+   {
+    "id": "okcq1CqoYT0",
+    "titre": "La preuve en droit civil",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "4:31",
+    "sec": 271,
+    "vues": "110 662 vues"
+   },
+   {
+    "id": "ghhxy2uy2Oo",
+    "titre": "Exemple de cas pratique en Droit civil 1ere année (Partie 1 - La preuve)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "11:41",
+    "sec": 701,
+    "vues": "926 vues"
+   },
+   {
+    "id": "-HstviraeUo",
+    "titre": "Cet athée ose demander qui a créé Dieu ?! - Zakir Naik en français",
+    "chaine": "La minute islamique 🕋 ⏲️",
+    "duree": "12:26",
+    "sec": 746,
+    "vues": "2 088 604 vues"
+   }
+  ]
+ },
+ "ANG-QCM-L10": {
+  "titre": "Éliminer les distracteurs et gérer le QCM",
+  "candidats": [
+   {
+    "id": "ySazRnJtbZ8",
+    "titre": "Améliorer l'efficacité de ses QCM en ligne (validité des distracteurs)",
+    "chaine": "CANOPÉ NORMANDIE",
+    "duree": "1:59",
+    "sec": 119,
+    "vues": "111 vues"
+   },
+   {
+    "id": "susAhQ-AMDU",
+    "titre": "ADOPTEZ CETTE MÉTHODE POUR RÉUSSIR VOS QCM",
+    "chaine": "JuriXio",
+    "duree": "6:02",
+    "sec": 362,
+    "vues": "69 764 vues"
+   },
+   {
+    "id": "0XTs8vwik_c",
+    "titre": "Créer un test, une question (ici un QCM) dans un cours Moodle",
+    "chaine": "Le Id",
+    "duree": "4:31",
+    "sec": 271,
+    "vues": "1 095 vues"
+   },
+   {
+    "id": "5Yvu2htHKL4",
+    "titre": "COMMENT REUSSIR LES QCM",
+    "chaine": "Potion de vie",
+    "duree": "8:26",
+    "sec": 506,
+    "vues": "195 910 vues"
+   },
+   {
+    "id": "rx30cpSBL3s",
+    "titre": "QCM 1 – Concours Médecine 2026-2027 | Limite et taux d'accroissement – Correction détaillée",
+    "chaine": "Maths Animées",
+    "duree": "13:49",
+    "sec": 829,
+    "vues": "99 vues"
+   },
+   {
+    "id": "esVj2XEpBV8",
+    "titre": "PACES - Les 9 pièges les + courants dans les QCM",
+    "chaine": "Raphaël CARTENI",
+    "duree": "8:18",
+    "sec": 498,
+    "vues": "49 568 vues"
+   },
+   {
+    "id": "nsQnyiacOnc",
+    "titre": "Réussir un bon QCM",
+    "chaine": "UIZ OPEN COURSE",
+    "duree": "13:31",
+    "sec": 811,
+    "vues": "1 331 vues"
+   },
+   {
+    "id": "03c-2soRAtc",
+    "titre": "QCM 2 – Concours Médecine 2026-2027 | Dérivées : produit trigonométrique – Correction détaillée",
+    "chaine": "Maths Animées",
+    "duree": "14:14",
+    "sec": 854,
+    "vues": "64 vues"
+   },
+   {
+    "id": "jxV5KF8uuxU",
+    "titre": "Concours Gardien de la Paix : réussir le QCM anglais (vocabulaire + stratégie)",
+    "chaine": "Gardien de la Paix Facile avec QuizzyLearning",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 418 vues"
+   },
+   {
+    "id": "ym31d9YXJSQ",
+    "titre": "Comment réussir un bon QCM ?",
+    "chaine": "ALMAKARI AHMED",
+    "duree": "13:11",
+    "sec": 791,
+    "vues": "595 vues"
+   }
+  ]
+ }
+}

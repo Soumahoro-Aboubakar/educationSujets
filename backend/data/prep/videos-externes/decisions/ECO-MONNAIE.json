@@ -1,0 +1,92 @@
+[
+  {
+    "code": "ECO-MONNAIE-L1",
+    "youtubeId": "m_zvi-2PbZs",
+    "couverture": "partielle",
+    "justification": "Rareté des ressources et nécessité de faire des choix, avec des exemples.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L2",
+    "youtubeId": "06DnEsZJt9M",
+    "couverture": "exacte",
+    "justification": "Citéco : le circuit économique reliant ménages, entreprises, production, revenus et consommation.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L3",
+    "youtubeId": "Z895aSaMev4",
+    "couverture": "exacte",
+    "justification": "Khan Academy construit les courbes d’offre et de demande et leur point d’équilibre.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L4",
+    "youtubeId": "R7szOtN1RD8",
+    "couverture": "partielle",
+    "justification": "Mesurer une évolution : taux de variation, coefficient multiplicateur, indice.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L5",
+    "youtubeId": "zIIyCHw04ew",
+    "couverture": "exacte",
+    "justification": "Fonctions (intermédiaire des échanges, unité de compte, réserve de valeur) et formes de la monnaie.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L6",
+    "youtubeId": "9cSujzEo4A8",
+    "couverture": "exacte",
+    "justification": "Citéco : les crédits font les dépôts, mécanisme de création monétaire par les banques.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L7",
+    "youtubeId": "Om9ko4VXImQ",
+    "couverture": "partielle",
+    "justification": "Banque de France : agrégats monétaires et masse monétaire (exemple de la zone euro, logique identique pour la BCEAO).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L8",
+    "youtubeId": "vl02qjffotg",
+    "couverture": "partielle",
+    "justification": "Financement des entreprises : crédit bancaire (intermédié) ou émission de titres sur les marchés.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L9",
+    "youtubeId": "cTN6MDn1aVg",
+    "couverture": "partielle",
+    "justification": "Politique monétaire conventionnelle : taux directeurs et transmission à l’économie (exemple BCE, mécanisme identique BCEAO).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ECO-MONNAIE-L10",
+    "youtubeId": "I38USLbut6g",
+    "couverture": "partielle",
+    "justification": "À quoi sert une union monétaire : avantages d’une monnaie commune et perte de la politique monétaire nationale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

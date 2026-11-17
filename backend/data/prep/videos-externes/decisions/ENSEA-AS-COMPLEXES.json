@@ -1,0 +1,101 @@
+[
+  {
+    "code": "ENSEA-AS-COMPLEXES-L1",
+    "youtubeId": "VfoLnhTRrSw",
+    "couverture": "exacte",
+    "justification": "Introduction des nombres complexes : i² = −1, forme algébrique et point image dans le plan.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L2",
+    "youtubeId": "7ZlWPGm4wiA",
+    "couverture": "exacte",
+    "justification": "Forme algébrique : additions et multiplications de nombres complexes.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L3",
+    "youtubeId": "xaRaauQeqpY",
+    "couverture": "exacte",
+    "justification": "Le conjugué, son interprétation et son usage pour diviser (z z̄ = a² + b²).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L4",
+    "youtubeId": "RtVON0mv0Hc",
+    "couverture": "partielle",
+    "justification": "Le module comme distance de l’origine au point image, lu graphiquement.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L5",
+    "youtubeId": "NX3pzPL2gwc",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : déterminer un argument d’un nombre complexe (angle sur le cercle).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L6",
+    "youtubeId": "J7EakBGt_aA",
+    "couverture": "exacte",
+    "justification": "Méthode pour écrire un complexe sous forme exponentielle r e^(iθ).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L7",
+    "youtubeId": "npZPLoLIij4",
+    "couverture": "exacte",
+    "justification": "Forme exponentielle d’un produit, d’une puissance et d’un quotient : modules multipliés, arguments additionnés.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L8",
+    "youtubeId": "e0-7KsGT7AM",
+    "couverture": "exacte",
+    "justification": "Racines carrées d’un nombre complexe : méthode algébrique avec exemple corrigé.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L9",
+    "youtubeId": "4PttHtdEyf0",
+    "couverture": "partielle",
+    "justification": "Équation du second degré à coefficients réels avec Δ < 0, solutions complexes.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L10",
+    "youtubeId": "pMj_3iGExVc",
+    "couverture": "exacte",
+    "justification": "Racines n-ièmes d’un complexe et leur répartition régulière sur un cercle.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-COMPLEXES-L11",
+    "youtubeId": "V0UmkWSPLl0",
+    "couverture": "partielle",
+    "justification": "Écriture complexe d’une similitude directe (rotation, homothétie) et son interprétation.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

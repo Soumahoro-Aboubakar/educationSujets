@@ -1,0 +1,666 @@
+{
+ "INFJ-MAG-PERSONNES-L1": {
+  "titre": "Qui peut avoir des droits ?",
+  "candidats": [
+   {
+    "id": "S1vMcUm3s5E",
+    "titre": "Le droit civil - Définition",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "109 342 vues"
+   },
+   {
+    "id": "cCxhyqefwnY",
+    "titre": "Le droit civil et le droit pénal, c'est quoi ? - Comprendre le droit",
+    "chaine": "Pour comprendre le droit",
+    "duree": "4:56",
+    "sec": 296,
+    "vues": "42 044 vues"
+   },
+   {
+    "id": "dxrDF81OAso",
+    "titre": "L3 DROIT : DROIT PRIVÉ/DROIT PUBLIC, DÉBOUCHÉS ET CONSEILS",
+    "chaine": "JuriXio",
+    "duree": "12:52",
+    "sec": 772,
+    "vues": "68 982 vues"
+   },
+   {
+    "id": "6nlklp7OKgM",
+    "titre": "Droit des obligations",
+    "chaine": "Juristudes",
+    "duree": "7:06",
+    "sec": 426,
+    "vues": "149 055 vues"
+   },
+   {
+    "id": "N1Ssbx-9ZKs",
+    "titre": "Le Droit civil expliqué simplement 🇸🇳 | Définition, sources et grands domaines",
+    "chaine": "Le Droit Facile",
+    "duree": "5:08",
+    "sec": 308,
+    "vues": "2 774 vues"
+   },
+   {
+    "id": "WHlVx-xZsh0",
+    "titre": "Explique moi un droit : le droit civil",
+    "chaine": "Juris Planet",
+    "duree": "4:24",
+    "sec": 264,
+    "vues": "42 082 vues"
+   },
+   {
+    "id": "S8ei43cKQd8",
+    "titre": "Le droit des contrats (introduction au droit des contrats)",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "8:27",
+    "sec": 507,
+    "vues": "215 560 vues"
+   },
+   {
+    "id": "tfuccIXwU3E",
+    "titre": "Droit objectif et droit subjectif (définition et exemples) - Cours de droit",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "2:53",
+    "sec": 173,
+    "vues": "337 243 vues"
+   },
+   {
+    "id": "9BVAm5jqKdI",
+    "titre": "L'attribution du nom de famille et la filiation : Droit des personnes L1 droit",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "1 513 vues"
+   },
+   {
+    "id": "3MFN0MnvIxk",
+    "titre": "DROIT DES PERSONNES ET DE LA FAMILLE",
+    "chaine": "Le Droit En Fac ⚖️",
+    "duree": "7:19",
+    "sec": 439,
+    "vues": "100 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PERSONNES-L2": {
+  "titre": "Avoir un droit et l’exercer soi-même",
+  "candidats": [
+   {
+    "id": "9BVAm5jqKdI",
+    "titre": "L'attribution du nom de famille et la filiation : Droit des personnes L1 droit",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "1 513 vues"
+   },
+   {
+    "id": "3MFN0MnvIxk",
+    "titre": "DROIT DES PERSONNES ET DE LA FAMILLE",
+    "chaine": "Le Droit En Fac ⚖️",
+    "duree": "7:19",
+    "sec": 439,
+    "vues": "100 vues"
+   },
+   {
+    "id": "EYKFIAQ6_WU",
+    "titre": "Quelques éléments introductifs au droit de la famille",
+    "chaine": "Madame fait du droit",
+    "duree": "4:00",
+    "sec": 240,
+    "vues": "101 vues"
+   },
+   {
+    "id": "ngu-MKmMnGc",
+    "titre": "Comprendre le Droit de la Famille en 6 minutes",
+    "chaine": "Juristudes",
+    "duree": "6:43",
+    "sec": 403,
+    "vues": "1 677 vues"
+   },
+   {
+    "id": "jOlsw5H_qFw",
+    "titre": "CONSEILS PRATIQUES EN DROIT DE LA FAMILLE",
+    "chaine": "Caroline Yadan",
+    "duree": "0:43",
+    "sec": 43,
+    "vues": "2 474 vues"
+   },
+   {
+    "id": "LRAuYJdGNsw",
+    "titre": "La filiation (définition, modes d'établissement) - Cours de droit de la famille",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:16",
+    "sec": 556,
+    "vues": "141 752 vues"
+   },
+   {
+    "id": "wcfOQdnKPZk",
+    "titre": "Introduction au droit de la famille",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "12:59",
+    "sec": 779,
+    "vues": "168 924 vues"
+   },
+   {
+    "id": "IsuItXNM1rI",
+    "titre": "Chapitre 0) Introduction Droit des personnes, de la famille et des incapacités",
+    "chaine": "FOALENG LOWE Rene",
+    "duree": "1:27",
+    "sec": 87,
+    "vues": "64 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PERSONNES-L3": {
+  "titre": "Identifier une personne par l’état civil",
+  "candidats": [
+   {
+    "id": "BocEzFc7M-A",
+    "titre": "La personnalité juridique (définition, début et fin)",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "129 426 vues"
+   },
+   {
+    "id": "XEsB0Urbb2g",
+    "titre": "Le changement de sexe sur l'état civil : Droit des personnes L1 droit",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "4:49",
+    "sec": 289,
+    "vues": "779 vues"
+   },
+   {
+    "id": "SU4Wu5_hKn8",
+    "titre": "La personnalité juridique (définition, début et fin)",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "5:58",
+    "sec": 358,
+    "vues": "9 364 vues"
+   },
+   {
+    "id": "lOngh6cfZj8",
+    "titre": "L'Essentiel sur les Actes d’État Civil Comprendre leur Rôle et leur Gestion.",
+    "chaine": "Univers Dans Une Main",
+    "duree": "10:29",
+    "sec": 629,
+    "vues": "693 vues"
+   },
+   {
+    "id": "Kng3l2qaHH0",
+    "titre": "Livre / Kahou Bi, \"L'état civil regroupe les informations permettant d'identifier une personne\"",
+    "chaine": "Abidjan.netTV",
+    "duree": "8:10",
+    "sec": 490,
+    "vues": "155 vues"
+   },
+   {
+    "id": "0j0WOPFHTZM",
+    "titre": "Les Composants de l'État des Personnes : [Droit des Personnes]",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "3:37",
+    "sec": 217,
+    "vues": "12 589 vues"
+   },
+   {
+    "id": "9BVAm5jqKdI",
+    "titre": "L'attribution du nom de famille et la filiation : Droit des personnes L1 droit",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "1 513 vues"
+   },
+   {
+    "id": "S1vMcUm3s5E",
+    "titre": "Le droit civil - Définition",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "109 342 vues"
+   },
+   {
+    "id": "1IMznCnFP60",
+    "titre": "L'identité de la personne physique",
+    "chaine": "Madame fait du droit",
+    "duree": "10:38",
+    "sec": 638,
+    "vues": "1 178 vues"
+   },
+   {
+    "id": "IgvA11lUjTE",
+    "titre": "L'état civil et le nom de famille : actes, principes, choix et changement de nom (L1)",
+    "chaine": "Droit au Tableau",
+    "duree": "8:05",
+    "sec": 485,
+    "vues": "155 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PERSONNES-L4": {
+  "titre": "Vérifier les conditions du mariage",
+  "candidats": [
+   {
+    "id": "8_CAT8kY7x4",
+    "titre": "Les conditions du mariage - Cours de droit de la famille",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "10:46",
+    "sec": 646,
+    "vues": "18 582 vues"
+   },
+   {
+    "id": "XP9LEW4lcdY",
+    "titre": "La Formation du Mariage : [Droit de la Famille]",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "4:39",
+    "sec": 279,
+    "vues": "50 927 vues"
+   },
+   {
+    "id": "mSpoI06APMs",
+    "titre": "Conditions de fond du mariage (Droit de la famille)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "2:21",
+    "sec": 141,
+    "vues": "1 289 vues"
+   },
+   {
+    "id": "xm1wMiZXh6Y",
+    "titre": "Les empêchements à mariage (Droit de la famille)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "2:14",
+    "sec": 134,
+    "vues": "1 227 vues"
+   },
+   {
+    "id": "0SxH3wq__y0",
+    "titre": "Les Régimes Matrimoniaux en Droit : Explication Simple et Complète ! 💍⚖️",
+    "chaine": "Juristudes",
+    "duree": "7:36",
+    "sec": 456,
+    "vues": "5 452 vues"
+   },
+   {
+    "id": "v6LSe_rPK8w",
+    "titre": "Voici les conditions de formation du mariage",
+    "chaine": "Dire le Droit",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "8 197 vues"
+   },
+   {
+    "id": "haNmOyQoutA",
+    "titre": "7. Les conditions et piliers du mariage",
+    "chaine": "Zawaj Sounnah",
+    "duree": "11:14",
+    "sec": 674,
+    "vues": "24 723 vues"
+   },
+   {
+    "id": "hOa4rn2HqW8",
+    "titre": "La nullité du mariage : définition, causes et effets",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "7:13",
+    "sec": 433,
+    "vues": "12 377 vues"
+   },
+   {
+    "id": "jFgphV9H0jw",
+    "titre": "7 en Droit : Les conditions du mariage.",
+    "chaine": "Kanal Sept",
+    "duree": "5:22",
+    "sec": 322,
+    "vues": "250 vues"
+   },
+   {
+    "id": "DkE1B8uetn8",
+    "titre": "Les effets personnels du mariage",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "5:04",
+    "sec": 304,
+    "vues": "9 025 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PERSONNES-L5": {
+  "titre": "Célébration et devoirs des époux",
+  "candidats": [
+   {
+    "id": "8_CAT8kY7x4",
+    "titre": "Les conditions du mariage - Cours de droit de la famille",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "10:46",
+    "sec": 646,
+    "vues": "18 582 vues"
+   },
+   {
+    "id": "lIi_WIaKglA",
+    "titre": "Les devoirs du mariage - Le devoir de communauté de vie",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "1:45",
+    "sec": 105,
+    "vues": "45 822 vues"
+   },
+   {
+    "id": "dl0C1JRuN60",
+    "titre": "Les effets du mariage et les devoirs des époux",
+    "chaine": "Madame fait du droit",
+    "duree": "9:44",
+    "sec": 584,
+    "vues": "1 121 vues"
+   },
+   {
+    "id": "mPXrlsq6JcY",
+    "titre": "les devoirs des époux dans le mariage - Partie 1",
+    "chaine": "Droit accessible",
+    "duree": "6:28",
+    "sec": 388,
+    "vues": "6 301 vues"
+   },
+   {
+    "id": "0SxH3wq__y0",
+    "titre": "Les Régimes Matrimoniaux en Droit : Explication Simple et Complète ! 💍⚖️",
+    "chaine": "Juristudes",
+    "duree": "7:36",
+    "sec": 456,
+    "vues": "5 464 vues"
+   },
+   {
+    "id": "XP9LEW4lcdY",
+    "titre": "La Formation du Mariage : [Droit de la Famille]",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "4:39",
+    "sec": 279,
+    "vues": "50 927 vues"
+   },
+   {
+    "id": "LFZv4fBRP0A",
+    "titre": "Le devoir de communauté de vie des époux (Droit de la famille)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "1:55",
+    "sec": 115,
+    "vues": "636 vues"
+   },
+   {
+    "id": "6nlklp7OKgM",
+    "titre": "Droit des obligations",
+    "chaine": "Juristudes",
+    "duree": "7:06",
+    "sec": 426,
+    "vues": "149 055 vues"
+   },
+   {
+    "id": "3BtY6scXtPY",
+    "titre": "Quelles sont les obligations du mariage en islam ? | Droits et Devoirs 🤲",
+    "chaine": "Al Wakt",
+    "duree": "1:21",
+    "sec": 81,
+    "vues": "1 423 vues"
+   },
+   {
+    "id": "JbVWwqR88eE",
+    "titre": "Droit de la famille",
+    "chaine": "Francotnl",
+    "duree": "1:56",
+    "sec": 116,
+    "vues": "5 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PERSONNES-L6": {
+  "titre": "Distinguer mariage et régime des biens",
+  "candidats": [
+   {
+    "id": "0SxH3wq__y0",
+    "titre": "Les Régimes Matrimoniaux en Droit : Explication Simple et Complète ! 💍⚖️",
+    "chaine": "Juristudes",
+    "duree": "7:36",
+    "sec": 456,
+    "vues": "5 464 vues"
+   },
+   {
+    "id": "ooIcmkfVB4w",
+    "titre": "Le Régime de la Communauté de Biens Réduite aux Acquêts : Régimes matrimoniaux",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "6:18",
+    "sec": 378,
+    "vues": "37 287 vues"
+   },
+   {
+    "id": "xrog4xKGPf0",
+    "titre": "La distinction meubles/immeubles",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "4:55",
+    "sec": 295,
+    "vues": "108 413 vues"
+   },
+   {
+    "id": "BWZXYijRtOs",
+    "titre": "Les Régimes Matrimoniaux : types, fonctionnement et choix expliqués",
+    "chaine": "Juristudes",
+    "duree": "7:24",
+    "sec": 444,
+    "vues": "1 629 vues"
+   },
+   {
+    "id": "30jWkzBPkZ4",
+    "titre": "Tout Savoir Sur : Les régimes matrimoniaux en Côte d'Ivoire",
+    "chaine": "Gouvernement de Côte d'Ivoire",
+    "duree": "9:55",
+    "sec": 595,
+    "vues": "4 517 vues"
+   },
+   {
+    "id": "QyoPViffKgc",
+    "titre": "Biens et patrimoine- cours de droit",
+    "chaine": "Flore Jallerat",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "10 109 vues"
+   },
+   {
+    "id": "o8VzbTVmFj0",
+    "titre": "La mitoyenneté : définition, établissement et régime",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "7:35",
+    "sec": 455,
+    "vues": "6 852 vues"
+   },
+   {
+    "id": "WYQxSj8F0U8",
+    "titre": "L’usufruit : définition et régime",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "8 594 vues"
+   },
+   {
+    "id": "t1IqKB6b4po",
+    "titre": "Contrat de mariage : le régime de la communauté universelle",
+    "chaine": "Sud Radio",
+    "duree": "2:51",
+    "sec": 171,
+    "vues": "4 072 vues"
+   },
+   {
+    "id": "Vob2a31i7mU",
+    "titre": "QUEL RÉGIME MATRIMONIAL CHOISIR ? (Droit de la Famille) - Conseil Notarial",
+    "chaine": "Conseil Notarial",
+    "duree": "5:28",
+    "sec": 328,
+    "vues": "3 883 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PERSONNES-L7": {
+  "titre": "Séparation, divorce et dissolution",
+  "candidats": [
+   {
+    "id": "j8m6ycYDM_4",
+    "titre": "Les causes de divorce",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "6:23",
+    "sec": 383,
+    "vues": "102 989 vues"
+   },
+   {
+    "id": "8iCoOSrZ7-M",
+    "titre": "Séparation de corps et séparation de fait",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "2:02",
+    "sec": 122,
+    "vues": "52 003 vues"
+   },
+   {
+    "id": "GEUl0HZJ_t8",
+    "titre": "La séparation de fait (mariage, divorce)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "2:10",
+    "sec": 130,
+    "vues": "4 199 vues"
+   },
+   {
+    "id": "qsUOI91cYro",
+    "titre": "Les causes de divorce - Cours de droit de la famille",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "6:35",
+    "sec": 395,
+    "vues": "11 504 vues"
+   },
+   {
+    "id": "0IJS96ATfXk",
+    "titre": "La séparation de corps : définition, conditions et effets",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "3:35",
+    "sec": 215,
+    "vues": "7 855 vues"
+   },
+   {
+    "id": "awwO3mYeyL8",
+    "titre": "La séparation des pouvoirs en droit constitutionnel : le cours complet (L1)",
+    "chaine": "Droit au Tableau",
+    "duree": "9:06",
+    "sec": 546,
+    "vues": "1 559 vues"
+   },
+   {
+    "id": "51a4l_GlJ2Y",
+    "titre": "La Dissolution du Mariage, Causes, Procédures et Conséquences Leçon 14 Droit Vers Le Droit Univers D",
+    "chaine": "Univers Dans Une Main",
+    "duree": "10:26",
+    "sec": 626,
+    "vues": "182 vues"
+   },
+   {
+    "id": "cESQcYTECjA",
+    "titre": "Divorce et Séparation de corps en droit gabonais : Épisode 3",
+    "chaine": "Les Editions NTSAME",
+    "duree": "2:24",
+    "sec": 144,
+    "vues": "23 vues"
+   },
+   {
+    "id": "VI6BcHeetSw",
+    "titre": "Le conseil choc d’une avocate pour éviter une guerre de séparation de 6 ans - Droit de la famille",
+    "chaine": "Karine DE LUCA",
+    "duree": "13:49",
+    "sec": 829,
+    "vues": "173 vues"
+   },
+   {
+    "id": "Bex4IZRUL0g",
+    "titre": "Le relâchement du lien conjugal : séparation de fait et séparation de corps",
+    "chaine": "Madame fait du droit",
+    "duree": "7:15",
+    "sec": 435,
+    "vues": "556 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PERSONNES-L8": {
+  "titre": "Établir un lien de filiation",
+  "candidats": [
+   {
+    "id": "9qAtucg06qQ",
+    "titre": "La filiation : définition et modes d'établissement",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "10:47",
+    "sec": 647,
+    "vues": "17 140 vues"
+   },
+   {
+    "id": "LRAuYJdGNsw",
+    "titre": "La filiation (définition, modes d'établissement) - Cours de droit de la famille",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:16",
+    "sec": 556,
+    "vues": "141 752 vues"
+   },
+   {
+    "id": "1Camg48k7NY",
+    "titre": "GPA : établissement du lien de filiation entre les parents d'intention et l'enfant",
+    "chaine": "L’Envers du Droit",
+    "duree": "14:58",
+    "sec": 898,
+    "vues": "620 vues"
+   },
+   {
+    "id": "9BVAm5jqKdI",
+    "titre": "L'attribution du nom de famille et la filiation : Droit des personnes L1 droit",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "1 513 vues"
+   },
+   {
+    "id": "Zu3nMKPdjMc",
+    "titre": "La contestation de la filiation",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "11:18",
+    "sec": 678,
+    "vues": "11 511 vues"
+   },
+   {
+    "id": "8_CAT8kY7x4",
+    "titre": "Les conditions du mariage - Cours de droit de la famille",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "10:46",
+    "sec": 646,
+    "vues": "18 582 vues"
+   },
+   {
+    "id": "mXjMxKstlM4",
+    "titre": "L'adoption plénière : définition, conditions et effets",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "9:56",
+    "sec": 596,
+    "vues": "4 927 vues"
+   },
+   {
+    "id": "wfOEJYtJjIw",
+    "titre": "Droit privé : L’attribution du nom",
+    "chaine": "Major Droit",
+    "duree": "4:16",
+    "sec": 256,
+    "vues": "62 514 vues"
+   },
+   {
+    "id": "j9zsiPlZ-J8",
+    "titre": "Adoption, PMA : comment établir la filiation ? Le podcast de la Chambre des Notaires du Bas-Rhin",
+    "chaine": "Top Music",
+    "duree": "14:38",
+    "sec": 878,
+    "vues": "3 126 vues"
+   },
+   {
+    "id": "Yx1aguNYqBc",
+    "titre": "Filiation paternelle : reconnaître, contester, faire établir",
+    "chaine": "Océane Goursaud | Avocate en droit de la famille",
+    "duree": "12:27",
+    "sec": 747,
+    "vues": "794 vues"
+   }
+  ]
+ }
+}

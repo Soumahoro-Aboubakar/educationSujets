@@ -1,0 +1,646 @@
+{
+ "INFJ-MAG-PROCPEN-L1": {
+  "titre": "Poursuivre sans présumer la culpabilité",
+  "candidats": [
+   {
+    "id": "zzw8OcM0muc",
+    "titre": "Procédure Pénale |La comparution sur reconnaissance préalable de culpabilité |CRPC",
+    "chaine": "Cours de Droit",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "1 939 vues"
+   },
+   {
+    "id": "-LhQCpsY_tk",
+    "titre": "L'élément moral en droit pénal : imputabilité et culpabilité - Pénal #5",
+    "chaine": "Juris Internetus",
+    "duree": "12:39",
+    "sec": 759,
+    "vues": "75 582 vues"
+   },
+   {
+    "id": "MZtTWBSyBYo",
+    "titre": "Imputabilité et trouble mental | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "9:28",
+    "sec": 568,
+    "vues": "7 vues"
+   },
+   {
+    "id": "tAVvNAPBvyU",
+    "titre": "Les causes d'irresponsabilité pénale [Droit Pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "8 670 vues"
+   },
+   {
+    "id": "HIX8Oh0wZu4",
+    "titre": "INFRACTION INVOLONTAIRE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "12 092 vues"
+   },
+   {
+    "id": "CoIs6eQxsNM",
+    "titre": "[ Comparution sur reconnaissance préalable de culpabilité ]",
+    "chaine": "LES AVOCATS REUNIS AARPI",
+    "duree": "4:54",
+    "sec": 294,
+    "vues": "4 538 vues"
+   },
+   {
+    "id": "6J3gXoyANmc",
+    "titre": "Faute caractérisée et faute délibérée | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "11:39",
+    "sec": 699,
+    "vues": "13 vues"
+   },
+   {
+    "id": "BDjxQmaQmes",
+    "titre": "Franck Koubi Avocat (Nice) droit pénal CRPC comparution sur reconnaissance préalable de culpabilité",
+    "chaine": "Franck Koubi",
+    "duree": "1:05",
+    "sec": 65,
+    "vues": "1 083 vues"
+   },
+   {
+    "id": "BDwjm1Xf7bw",
+    "titre": "La comparution sur reconnaissance préalable de culpabilité - Maître Neveu",
+    "chaine": "Jennifer Neveu",
+    "duree": "2:27",
+    "sec": 147,
+    "vues": "450 vues"
+   },
+   {
+    "id": "_b8l0mnVn88",
+    "titre": "[DECRYPTAGE] - 3 minutes pour comprendre la Comparution sur Reconnaissance Préalable de Culpabilité",
+    "chaine": "Tribunal judiciaire de Nanterre",
+    "duree": "3:07",
+    "sec": 187,
+    "vues": "1 766 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PROCPEN-L2": {
+  "titre": "Deux actions pour deux objectifs",
+  "candidats": [
+   {
+    "id": "pTVRX4fECtQ",
+    "titre": "Cas pratique : l’Action Civile en droit pénal (méthode et correction)",
+    "chaine": "Juristudes",
+    "duree": "5:32",
+    "sec": 332,
+    "vues": "1 328 vues"
+   },
+   {
+    "id": "nlxkIWGKe-k",
+    "titre": "DIFFÉRENCE ENTRE ACTION PUBLIQUE ET ACTION CIVILE",
+    "chaine": "korat kama Tv",
+    "duree": "4:55",
+    "sec": 295,
+    "vues": "71 vues"
+   },
+   {
+    "id": "nqAjV2pTKmA",
+    "titre": "Cours de Procédure pénale : introduction et notions clefs",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "9:31",
+    "sec": 571,
+    "vues": "24 637 vues"
+   },
+   {
+    "id": "iAJP8qLAQg8",
+    "titre": "⚖️ Introduction au Code Pénal : Structure, Principes et Grandes Parties (Cours complet)",
+    "chaine": "Juristudes",
+    "duree": "4:36",
+    "sec": 276,
+    "vues": "1 343 vues"
+   },
+   {
+    "id": "nYk195uekBI",
+    "titre": "Faits justificatifs : l'ordre de la loi | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "10:38",
+    "sec": 638,
+    "vues": "19 vues"
+   },
+   {
+    "id": "903FzXvOKYk",
+    "titre": "L'ACTION PUBLIQUE ET L’ACTION CIVILE: quelle différence ?",
+    "chaine": "Juristudes",
+    "duree": "4:47",
+    "sec": 287,
+    "vues": "56 711 vues"
+   },
+   {
+    "id": "pwHFprIBPCA",
+    "titre": "À quoi sert la peine ? Peine et sûreté | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "9:40",
+    "sec": 580,
+    "vues": "15 vues"
+   },
+   {
+    "id": "Z1AykKdSS00",
+    "titre": "La prescription de l'action publique [Droit pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "8:57",
+    "sec": 537,
+    "vues": "10 682 vues"
+   },
+   {
+    "id": "daf1oAKDvXU",
+    "titre": "Procédure pénale et action publique",
+    "chaine": "École de droit en bande organisée",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 554 vues"
+   },
+   {
+    "id": "meWQFEQWccQ",
+    "titre": "2. LES POURSUITES PENALES (alternatives, accélérées)",
+    "chaine": "A Travers Le Droit",
+    "duree": "7:49",
+    "sec": 469,
+    "vues": "1 994 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PROCPEN-L3": {
+  "titre": "Que devient une plainte ?",
+  "candidats": [
+   {
+    "id": "JhCVqzda_Q4",
+    "titre": "Les acteurs de l'enquête : police judiciaire, procureur, juge d'instruction - Comprendre le droit",
+    "chaine": "Pour comprendre le droit",
+    "duree": "6:19",
+    "sec": 379,
+    "vues": "88 863 vues"
+   },
+   {
+    "id": "daf1oAKDvXU",
+    "titre": "Procédure pénale et action publique",
+    "chaine": "École de droit en bande organisée",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 554 vues"
+   },
+   {
+    "id": "ZZX_pdN3rRk",
+    "titre": "Les suites d'une plainte",
+    "chaine": "L'Autonome de Solidarité Laïque",
+    "duree": "2:46",
+    "sec": 166,
+    "vues": "17 472 vues"
+   },
+   {
+    "id": "ZpJ1OjBN3-g",
+    "titre": "Comment est instruite une plainte ?",
+    "chaine": "Olivier d'Ardalhon - Avocat en Droit du Travail",
+    "duree": "4:24",
+    "sec": 264,
+    "vues": "31 324 vues"
+   },
+   {
+    "id": "wJ3NWqPsjU0",
+    "titre": "Comment se passe une plainte ? Quelles sont les suites ? Notre juriste vous explique (guide offert)",
+    "chaine": "Julien Goirand - Juriste",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "6 127 vues"
+   },
+   {
+    "id": "y-jZvSLScHY",
+    "titre": "Procédure pénale - Comment déposer une plainte?",
+    "chaine": "CoachingJudiciaire",
+    "duree": "7:08",
+    "sec": 428,
+    "vues": "15 163 vues"
+   },
+   {
+    "id": "-jWH5ZlH1IU",
+    "titre": "Procédure Pénale : Comment obtenir une nullité de la Procédure",
+    "chaine": "Cabinet Pujol & Avocats",
+    "duree": "1:26",
+    "sec": 86,
+    "vues": "9 156 vues"
+   },
+   {
+    "id": "U07AJip8l8U",
+    "titre": "Justice Civile et Justice Pénale",
+    "chaine": "Olivier d'Ardalhon - Avocat en Droit du Travail",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "16 185 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PROCPEN-L4": {
+  "titre": "L’enquête et la garde à vue",
+  "candidats": [
+   {
+    "id": "pixeZ0hd5LQ",
+    "titre": "Garde à vue en procédure pénale",
+    "chaine": "École de droit en bande organisée",
+    "duree": "10:35",
+    "sec": 635,
+    "vues": "1 637 vues"
+   },
+   {
+    "id": "kBwHBbwR2mA",
+    "titre": "La garde à vue : Procédure Pénale (CRFPA)",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "1 223 vues"
+   },
+   {
+    "id": "_hM8sv-VhAk",
+    "titre": "Comprendre la GARDE À VUE en 10 minutes",
+    "chaine": "Justilaw Cours",
+    "duree": "12:46",
+    "sec": 766,
+    "vues": "4 500 vues"
+   },
+   {
+    "id": "cbeXpOXNfTo",
+    "titre": "L'instruction préparatoire (ouverture et déroulement) - procédure pénale 2026",
+    "chaine": "École de droit en bande organisée",
+    "duree": "12:30",
+    "sec": 750,
+    "vues": "1 717 vues"
+   },
+   {
+    "id": "Ummsl-Cs0w0",
+    "titre": "GARDE À VUE ou GAV en procédure pénale 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "8 474 vues"
+   },
+   {
+    "id": "JhCVqzda_Q4",
+    "titre": "Les acteurs de l'enquête : police judiciaire, procureur, juge d'instruction - Comprendre le droit",
+    "chaine": "Pour comprendre le droit",
+    "duree": "6:19",
+    "sec": 379,
+    "vues": "88 863 vues"
+   },
+   {
+    "id": "g5Lk-QVepps",
+    "titre": "La perquisition expliquée simplement",
+    "chaine": "Justilaw Cours",
+    "duree": "14:22",
+    "sec": 862,
+    "vues": "658 vues"
+   },
+   {
+    "id": "gUZA3lrw4zg",
+    "titre": "Procédure pénale : les perquisitions",
+    "chaine": "Juristudes",
+    "duree": "6:16",
+    "sec": 376,
+    "vues": "35 810 vues"
+   },
+   {
+    "id": "tIUb7Cb-k1A",
+    "titre": "La pratique pénale : le secret de l'enquête et de l'instruction",
+    "chaine": "Mikaël BENILLOUCHE Avocat",
+    "duree": "2:17",
+    "sec": 137,
+    "vues": "2 242 vues"
+   },
+   {
+    "id": "Vo8ZMciYTmQ",
+    "titre": "L'enquête préliminaire (définition, durée) - Procédure pénale",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "4:32",
+    "sec": 272,
+    "vues": "58 281 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PROCPEN-L5": {
+  "titre": "Le juge d’instruction cherche dans les deux sens",
+  "candidats": []
+ },
+ "INFJ-MAG-PROCPEN-L6": {
+  "titre": "La liberté reste le principe",
+  "candidats": [
+   {
+    "id": "xxNctLvQhqc",
+    "titre": "Les grands principes du droit pénal.",
+    "chaine": "JURISTUBE",
+    "duree": "2:24",
+    "sec": 144,
+    "vues": "836 vues"
+   },
+   {
+    "id": "q1N51Z9zFok",
+    "titre": "L'application de la loi pénale dans l'espace (territorialité, personnalité active/passive...)",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "14:23",
+    "sec": 863,
+    "vues": "29 318 vues"
+   },
+   {
+    "id": "tAVvNAPBvyU",
+    "titre": "Les causes d'irresponsabilité pénale [Droit Pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "8 670 vues"
+   },
+   {
+    "id": "-YVYxAdrz2M",
+    "titre": "Comprendre le Droit Pénal en 6 minutes",
+    "chaine": "Juristudes",
+    "duree": "6:16",
+    "sec": 376,
+    "vues": "242 912 vues"
+   },
+   {
+    "id": "OqIJMADrQb8",
+    "titre": "Comprendre le Droit Pénal en 6 minutes | Notions clés et exemples simples",
+    "chaine": "Juristudes",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "1 075 vues"
+   },
+   {
+    "id": "bQTGwbQFmvU",
+    "titre": "La loi pénale dans le temps et l'espace | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "14:43",
+    "sec": 883,
+    "vues": "8 vues"
+   },
+   {
+    "id": "pwHFprIBPCA",
+    "titre": "À quoi sert la peine ? Peine et sûreté | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "9:40",
+    "sec": 580,
+    "vues": "15 vues"
+   },
+   {
+    "id": "6orhMwQ9r_A",
+    "titre": "L'application de la loi pénale dans le temps - Présentation générale",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "8:24",
+    "sec": 504,
+    "vues": "27 425 vues"
+   },
+   {
+    "id": "I9UVb26vR7A",
+    "titre": "Qu'est ce qu'une enquête sur mise en liberté provisoire ?",
+    "chaine": "CrystalCyrLaw",
+    "duree": "1:43",
+    "sec": 103,
+    "vues": "1 024 vues"
+   },
+   {
+    "id": "rCx6K3sPKUI",
+    "titre": "2| Effectuer une demande de mise en liberté provisoire, quelques points à connaître",
+    "chaine": "Bertrand MARIAUX",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "3 566 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PROCPEN-L7": {
+  "titre": "Qui juge et quelle décision peut suivre ?",
+  "candidats": [
+   {
+    "id": "CWbeO0Y-l1g",
+    "titre": "Le fonctionnement de la justice pénale des mineurs",
+    "chaine": "Guacalor - Fraîcheur juridique",
+    "duree": "14:51",
+    "sec": 891,
+    "vues": "429 vues"
+   },
+   {
+    "id": "meWQFEQWccQ",
+    "titre": "2. LES POURSUITES PENALES (alternatives, accélérées)",
+    "chaine": "A Travers Le Droit",
+    "duree": "7:49",
+    "sec": 469,
+    "vues": "1 994 vues"
+   },
+   {
+    "id": "tAVvNAPBvyU",
+    "titre": "Les causes d'irresponsabilité pénale [Droit Pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "8 670 vues"
+   },
+   {
+    "id": "5gO1MQjGfTo",
+    "titre": "6. Signification d'un jugement pénal",
+    "chaine": "Commissaires de justice",
+    "duree": "0:37",
+    "sec": 37,
+    "vues": "119 vues"
+   },
+   {
+    "id": "_1HTqKe2-yo",
+    "titre": "Appel pénal ou pourvoi : délais et effet suspensif 2026",
+    "chaine": "Kohen Avocats",
+    "duree": "9:48",
+    "sec": 588,
+    "vues": "343 vues"
+   },
+   {
+    "id": "JhCVqzda_Q4",
+    "titre": "Les acteurs de l'enquête : police judiciaire, procureur, juge d'instruction - Comprendre le droit",
+    "chaine": "Pour comprendre le droit",
+    "duree": "6:19",
+    "sec": 379,
+    "vues": "88 863 vues"
+   },
+   {
+    "id": "Dej6Y5RleOI",
+    "titre": "Les juridictions de jugement [Procédure pénale]",
+    "chaine": "Juris-Dico",
+    "duree": "7:38",
+    "sec": 458,
+    "vues": "3 614 vues"
+   },
+   {
+    "id": "xxNctLvQhqc",
+    "titre": "Les grands principes du droit pénal.",
+    "chaine": "JURISTUBE",
+    "duree": "2:24",
+    "sec": 144,
+    "vues": "836 vues"
+   },
+   {
+    "id": "8Yt69YJqHo0",
+    "titre": "Les voies de recours",
+    "chaine": "Djénéba EUDARIC",
+    "duree": "4:13",
+    "sec": 253,
+    "vues": "13 414 vues"
+   },
+   {
+    "id": "rjfPfFGskio",
+    "titre": "Juges laxistes ? Peines émeutiers 17 octobre : peut-on sanctionner un juge, appel du parquet, CSM",
+    "chaine": "Kohen Avocats",
+    "duree": "2:55",
+    "sec": 175,
+    "vues": "29 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PROCPEN-L8": {
+  "titre": "Contester une décision pénale",
+  "candidats": [
+   {
+    "id": "BI6nPCHOzPg",
+    "titre": "Contester une décision de justice",
+    "chaine": "Ministère de la Justice",
+    "duree": "2:22",
+    "sec": 142,
+    "vues": "15 301 vues"
+   },
+   {
+    "id": "_1HTqKe2-yo",
+    "titre": "Appel pénal ou pourvoi : délais et effet suspensif 2026",
+    "chaine": "Kohen Avocats",
+    "duree": "9:48",
+    "sec": 588,
+    "vues": "343 vues"
+   },
+   {
+    "id": "96q4w2-_BwI",
+    "titre": "Les tribunaux et instances : contester une décision de justice - Comprendre le droit",
+    "chaine": "Pour comprendre le droit",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "7 338 vues"
+   },
+   {
+    "id": "DgFrZHsZSvk",
+    "titre": "La tentative en droit pénal",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "8:53",
+    "sec": 533,
+    "vues": "46 486 vues"
+   },
+   {
+    "id": "meWQFEQWccQ",
+    "titre": "2. LES POURSUITES PENALES (alternatives, accélérées)",
+    "chaine": "A Travers Le Droit",
+    "duree": "7:49",
+    "sec": 469,
+    "vues": "1 994 vues"
+   },
+   {
+    "id": "pTVRX4fECtQ",
+    "titre": "Cas pratique : l’Action Civile en droit pénal (méthode et correction)",
+    "chaine": "Juristudes",
+    "duree": "5:32",
+    "sec": 332,
+    "vues": "1 328 vues"
+   },
+   {
+    "id": "5RzK_h-YV8k",
+    "titre": "Au Cœur du Code Pénal : notions clés et fonctionnement expliqué",
+    "chaine": "Juristudes",
+    "duree": "6:29",
+    "sec": 389,
+    "vues": "1 435 vues"
+   },
+   {
+    "id": "q1N51Z9zFok",
+    "titre": "L'application de la loi pénale dans l'espace (territorialité, personnalité active/passive...)",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "14:23",
+    "sec": 863,
+    "vues": "29 318 vues"
+   }
+  ]
+ },
+ "INFJ-MAG-PROCPEN-L9": {
+  "titre": "Quand l’action publique s’éteint-elle ?",
+  "candidats": [
+   {
+    "id": "903FzXvOKYk",
+    "titre": "L'ACTION PUBLIQUE ET L’ACTION CIVILE: quelle différence ?",
+    "chaine": "Juristudes",
+    "duree": "4:47",
+    "sec": 287,
+    "vues": "56 711 vues"
+   },
+   {
+    "id": "oWTTys3h_lA",
+    "titre": "ACTION PUBLIQUE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "2:52",
+    "sec": 172,
+    "vues": "12 326 vues"
+   },
+   {
+    "id": "CbmBTDoN_0I",
+    "titre": "L'action publique",
+    "chaine": "Djénéba EUDARIC",
+    "duree": "8:16",
+    "sec": 496,
+    "vues": "35 567 vues"
+   },
+   {
+    "id": "Z1AykKdSS00",
+    "titre": "La prescription de l'action publique [Droit pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "8:57",
+    "sec": 537,
+    "vues": "10 682 vues"
+   },
+   {
+    "id": "daf1oAKDvXU",
+    "titre": "Procédure pénale et action publique",
+    "chaine": "École de droit en bande organisée",
+    "duree": "7:57",
+    "sec": 477,
+    "vues": "1 554 vues"
+   },
+   {
+    "id": "eJ-yaeEQVrc",
+    "titre": "Quand est-ce qu'on éteint l'action publique? (la mort, la prescription, l'abrogation de la loi...) #",
+    "chaine": "Échec de l'ignorance WL",
+    "duree": "7:59",
+    "sec": 479,
+    "vues": "376 vues"
+   },
+   {
+    "id": "Mk3q2v2oNio",
+    "titre": "L'extinction de l'action publique du fait de l'écoulement du temps par le procureur de la république",
+    "chaine": "Djénéba EUDARIC",
+    "duree": "7:22",
+    "sec": 442,
+    "vues": "15 668 vues"
+   },
+   {
+    "id": "CDkz0ohikH8",
+    "titre": "L'exercice de l'action publique par le procureur de la république",
+    "chaine": "Djénéba EUDARIC",
+    "duree": "12:46",
+    "sec": 766,
+    "vues": "35 120 vues"
+   },
+   {
+    "id": "bn98otQpXR4",
+    "titre": "L’action publique (mise en mouvement et l’exercice ) : Procédure Pénale (CRFPA)",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "7:31",
+    "sec": 451,
+    "vues": "784 vues"
+   }
+  ]
+ }
+}

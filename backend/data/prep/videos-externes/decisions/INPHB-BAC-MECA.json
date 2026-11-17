@@ -1,0 +1,92 @@
+[
+  {
+    "code": "INPHB-BAC-MECA-L1",
+    "youtubeId": "EJ4iGS5G5Ec",
+    "couverture": "exacte",
+    "justification": "Système étudié, référentiel et relativité du mouvement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L2",
+    "youtubeId": "1-Gbq52jyxY",
+    "couverture": "exacte",
+    "justification": "Additionner des vecteurs (méthode graphique) en moins de 2 minutes.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L3",
+    "youtubeId": "t0Cxf-jyzcE",
+    "couverture": "exacte",
+    "justification": "Vitesse moyenne et vitesse instantanée, avec le signe selon le sens de l’axe.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L4",
+    "youtubeId": "8hV5wbIfpVY",
+    "couverture": "exacte",
+    "justification": "Mouvement rectiligne uniformément varié : v = at + v₀, accélération constante.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L5",
+    "youtubeId": "i6JDT1jTEV8",
+    "couverture": "exacte",
+    "justification": "Faire un bilan des forces sans rien oublier.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L6",
+    "youtubeId": "It2l9G_BIBw",
+    "couverture": "exacte",
+    "justification": "Principe d’inertie : sans force résultante, le mouvement se conserve.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L7",
+    "youtubeId": "YebURH6uD_Q",
+    "couverture": "exacte",
+    "justification": "Deuxième loi de Newton : somme des forces = m·a.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L8",
+    "youtubeId": "xdPCEB5jYRw",
+    "couverture": "exacte",
+    "justification": "Équation horaire d’un objet en chute libre verticale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L9",
+    "youtubeId": "7Pe3TiMSSic",
+    "couverture": "partielle",
+    "justification": "Vecteur vitesse et mouvement parabolique : composantes horizontale et verticale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INPHB-BAC-MECA-L10",
+    "youtubeId": "scBN3nqsf7E",
+    "couverture": "exacte",
+    "justification": "Mouvement d’une particule chargée dans un champ électrique uniforme.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

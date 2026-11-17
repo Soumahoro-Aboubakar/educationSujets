@@ -1,0 +1,74 @@
+[
+  {
+    "code": "INFJ-MAG-SYNTHESE-L1",
+    "youtubeId": "0dIlS7SGMRI",
+    "couverture": "partielle",
+    "justification": "Comprendre et analyser le sujet d’une note de synthèse : savoir ce que la copie doit produire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-SYNTHESE-L2",
+    "youtubeId": "sXXHtCHmav0",
+    "couverture": "exacte",
+    "justification": "Lire un dossier efficacement : faire la carte des documents avant les notes détaillées.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-SYNTHESE-L3",
+    "youtubeId": "aVeZSMIqYg8",
+    "couverture": "exacte",
+    "justification": "La prise de notes en note de synthèse : sélectionner sans recopier, garder la source.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-SYNTHESE-L4",
+    "youtubeId": "QtDqiwihbGk",
+    "couverture": "exacte",
+    "justification": "Utiliser les documents : les croiser par idée plutôt que les résumer un par un.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-SYNTHESE-L5",
+    "youtubeId": "o7F8LKcIuhs",
+    "couverture": "exacte",
+    "justification": "Exemple de plan type de note de synthèse.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-SYNTHESE-L6",
+    "youtubeId": "4aDTegITLG8",
+    "couverture": "exacte",
+    "justification": "La rédaction pas à pas d’une note de synthèse, neutre et reformulée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-SYNTHESE-L7",
+    "youtubeId": "GoTWmEFdqdU",
+    "couverture": "partielle",
+    "justification": "Trouver des idées précises en dissertation de culture générale (prolonge le socle ENSEA-AS-OG).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-SYNTHESE-L8",
+    "youtubeId": "sWX9FPKVic8",
+    "couverture": "partielle",
+    "justification": "Erreurs fatales et contrôle final d’une note de synthèse de concours.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

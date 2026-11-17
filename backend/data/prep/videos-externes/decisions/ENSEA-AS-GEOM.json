@@ -1,0 +1,83 @@
+[
+  {
+    "code": "ENSEA-AS-GEOM-L1",
+    "youtubeId": "rRmS4mJXx3s",
+    "couverture": "partielle",
+    "justification": "Coordonnées d’un vecteur AB de l’espace et calcul de sa norme.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L2",
+    "youtubeId": "nfddVNIuj3E",
+    "couverture": "exacte",
+    "justification": "Exprimer un vecteur comme combinaison linéaire d’autres vecteurs : direction et coplanarité.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L3",
+    "youtubeId": "8Obh6cIZeEw",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : utiliser le produit scalaire pour démontrer l’orthogonalité dans l’espace.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L4",
+    "youtubeId": "3Am3_EBGd_w",
+    "couverture": "exacte",
+    "justification": "Représentation paramétrique d’une droite : M = A + t·u.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L5",
+    "youtubeId": "yLyPoQk6cE0",
+    "couverture": "exacte",
+    "justification": "Représentation paramétrique d’un plan à partir d’un point et de deux vecteurs directeurs.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L6",
+    "youtubeId": "s4xqI6IPQBY",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : déterminer une équation cartésienne d’un plan ax + by + cz + d = 0 à partir d’un vecteur normal.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L7",
+    "youtubeId": "GRaFBWBjeuE",
+    "couverture": "exacte",
+    "justification": "Intersection d’une droite et d’un plan : substituer la représentation paramétrique dans l’équation du plan.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L8",
+    "youtubeId": "RoacrySlUAU",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : coordonnées du projeté orthogonal d’un point sur une droite.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-GEOM-L9",
+    "youtubeId": "115By_2Sr38",
+    "couverture": "exacte",
+    "justification": "Calcul de la distance d’un point à un plan par la projection orthogonale et la formule.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "code": "ISE-ECO-CN-L1",
+    "youtubeId": "HaHtYrDA_9c",
+    "couverture": "exacte",
+    "justification": "La valeur ajoutée en 2 minutes : production moins consommations intermédiaires.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L2",
+    "youtubeId": "lgo3e3Mpn4c",
+    "couverture": "exacte",
+    "justification": "Les trois approches du PIB (production, revenus, dépenses).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L3",
+    "youtubeId": "FWuuBGsrmx0",
+    "couverture": "exacte",
+    "justification": "Les secteurs institutionnels de la comptabilité nationale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L4",
+    "youtubeId": "CZNHrHIjOjw",
+    "couverture": "exacte",
+    "justification": "Des revenus primaires au revenu disponible par les transferts.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L5",
+    "youtubeId": "F5aUe57Ftk0",
+    "couverture": "partielle",
+    "justification": "Le tableau économique d’ensemble (comptes économiques intégrés) présenté brièvement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L6",
+    "youtubeId": "UupRdZ_pdBA",
+    "couverture": "exacte",
+    "justification": "Capacité et besoin de financement : épargne comparée à l’investissement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L7",
+    "youtubeId": "d8Kr6IpyU-8",
+    "couverture": "exacte",
+    "justification": "Le tableau des opérations financières (TOF) en comptabilité nationale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L8",
+    "youtubeId": "Gc3d6SJnL-A",
+    "couverture": "exacte",
+    "justification": "L’équilibre emplois-ressources : production + importations = emplois.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L9",
+    "youtubeId": "xkuHkcKZB00",
+    "couverture": "exacte",
+    "justification": "Le revenu national brut : passer du PIB au RNB avec les revenus du reste du monde.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-CN-L10",
+    "youtubeId": "q0NrZ4-8OmY",
+    "couverture": "exacte",
+    "justification": "PIB en volume et en valeur : mesurer la croissance réelle.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

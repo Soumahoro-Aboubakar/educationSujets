@@ -1,0 +1,74 @@
+[
+  {
+    "code": "INFJ-MAG-PROCCIV-L1",
+    "youtubeId": "RvW1E3izaLM",
+    "couverture": "partielle",
+    "justification": "L’action en justice : du droit invoqué au droit d’agir devant le juge (cadre français, notions identiques).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCCIV-L2",
+    "youtubeId": "LF9YLvYZhLQ",
+    "couverture": "exacte",
+    "justification": "Intérêt et qualité pour agir : conditions de recevabilité de l’action.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCCIV-L3",
+    "youtubeId": "IJn0DPVxhY4",
+    "couverture": "partielle",
+    "justification": "Compétence juridictionnelle d’attribution et territoriale (règles françaises, même raisonnement).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCCIV-L4",
+    "youtubeId": "qL2orrzGDjw",
+    "couverture": "partielle",
+    "justification": "L’assignation : saisir le juge et informer l’adversaire (procédure française).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCCIV-L5",
+    "youtubeId": "P1o2gv8xNOE",
+    "couverture": "partielle",
+    "justification": "La preuve en procédure civile : qui doit prouver et comment.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCCIV-L6",
+    "youtubeId": "53ZRCawvs5U",
+    "couverture": "exacte",
+    "justification": "Les moyens de défense : défense au fond, exceptions de procédure, fins de non-recevoir.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCCIV-L7",
+    "youtubeId": "L7VL8xKexA4",
+    "couverture": "partielle",
+    "justification": "Procédure de référé : une mesure rapide qui ne tranche pas le fond.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCCIV-L8",
+    "youtubeId": "2Bh6K1Pz4dA",
+    "couverture": "exacte",
+    "justification": "Les voies de recours (appel, opposition, pourvoi) et leur rôle.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

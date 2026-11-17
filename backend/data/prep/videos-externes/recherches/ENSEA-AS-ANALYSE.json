@@ -1,0 +1,265 @@
+{
+  "module": "ENSEA-AS-ANALYSE",
+  "lecons": [
+    {
+      "code": "ENSEA-AS-ANALYSE-L1",
+      "requetes": [
+        "site:youtube.com limite fonction explication simple gauche droite cours",
+        "limite gauche droite explication simple youtube Monka",
+        "site:youtube.com \"Déterminer graphiquement des limites\"",
+        "\"Déterminer graphiquement des limites d'une fonction\" Monka vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=9nEJCL3s2eU",
+          "titre": "Déterminer graphiquement des limites d'une fonction - Terminale",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo apprend à lire les limites aux bornes d'une fonction sur sa courbe, mais ne reprend pas toutes les conditions de domaine de la leçon."
+        }
+      ],
+      "justification": "La lecture graphique rend le comportement limite accessible aux débutants. Le cours général repéré dépasse 15 minutes ; ce candidat cible une compétence précise, avec une durée non affichée dans les résultats."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L2",
+      "requetes": [
+        "site:youtube.com formes indéterminées limites factoriser cours exemple",
+        "formes indéterminées factorisation limite exemple youtube Monka",
+        "site:youtube.com limites formes indéterminées factorisation exemple cours",
+        "lever indétermination factoriser Yvan Monka youtube",
+        "\"Les formes indéterminées à connaître\" \"Campus XYZ\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=GvmpQb6clk8",
+          "titre": "Les formes indéterminées à connaître",
+          "chaine": "Campus XYZ",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente quatre formes indéterminées et plusieurs exemples pour les lever, avec un complément sur les croissances comparées."
+        }
+      ],
+      "justification": "Le découpage annoncé distingue les formes indéterminées et leurs exemples, ce qui correspond au besoin de transformer avant de conclure. Les résultats ne permettent toutefois pas de confirmer toutes les techniques algébriques demandées ni la durée totale."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L3",
+      "requetes": [
+        "site:youtube.com théorème gendarmes comparaison limites cours",
+        "théorème gendarmes limite fonction youtube Monka",
+        "site:youtube.com/watch \"théorème des gendarmes\" \"fonction\"",
+        "limites fonctions théorème gendarmes exemple en 5 minutes youtube",
+        "\"Calculer la limite d'une fonction à l'aide du théorème de comparaison\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=OAtkpYMdu7Y",
+          "titre": "Calculer la limite d'une fonction à l'aide du théorème de comparaison - Terminale",
+          "chaine": "Yvan Monka",
+          "dureeVue": "5:53",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo utilise une minoration pour imposer une limite infinie à une fonction oscillante, conformément au volet comparaison de la leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=0j2OE0V2w60",
+          "titre": "Théorème des Gendarmes - Limites d'une Fonction - Mathrix",
+          "chaine": "Mathrix",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique l'encadrement d'une fonction par deux fonctions de même limite, sans couvrir à elle seule les limites par composition."
+        }
+      ],
+      "justification": "Le premier candidat fournit une application ciblée avec une durée explicitement indiquée. Le second complète la comparaison par le théorème des gendarmes, mais sa durée n'est pas affichée."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L4",
+      "requetes": [
+        "site:youtube.com continuité fonction en un point explication simple",
+        "continuité en un point cours youtube Monka",
+        "\"continuité\" \"Monka\" youtube cours",
+        "Etudier continuité fonction Yvan Monka youtube",
+        "\"Raccorder sans saut : la continuité\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=gLmACk8BpAE",
+          "titre": "Étudier la continuité d'une fonction - Terminale",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L'étude d'une fonction définie par morceaux montre comment vérifier un raccordement en comparant les expressions de part et d'autre du point."
+        }
+      ],
+      "justification": "L'exercice de raccordement répond directement au cœur de la leçon. La distinction entre continuité et dérivabilité n'est pas attestée par la description disponible, et la durée du lien précis reste inconnue."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L5",
+      "requetes": [
+        "site:youtube.com TVI existence unique solution Monka",
+        "\"TVI\" \"unique solution\" youtube",
+        "Appliquer théorème valeurs intermédiaires 2 Yvan Monka youtube",
+        "\"Prouver qu’une solution existe et qu’elle est unique\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=UmGQf7gkvLg",
+          "titre": "Appliquer le théorème des valeurs intermédiaires (2) - Terminale",
+          "chaine": "Yvan Monka",
+          "dureeVue": "7:50",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo applique le théorème des valeurs intermédiaires dans un exercice de terminale, mais sa présentation ne confirme pas un traitement de la dichotomie."
+        }
+      ],
+      "justification": "Ce deuxième exercice est explicitement annoncé à 7:50, tandis que le premier dépasse 15 minutes. Il constitue un support ciblé pour rédiger une application du TVI."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L6",
+      "requetes": [
+        "site:youtube.com dérivée puissance racine produit quotient cours",
+        "\"dériver\" \"puissance\" \"racine\" youtube cours",
+        "\"Dériver une puissance ou une racine\"",
+        "dériver produit quotient racine puissance Monka exemple youtube",
+        "dériver produit quotient en 5 minutes youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ICGk7evzoUA",
+          "titre": "Dérivée d'un Quotient, Produit et d'une Somme - Dérivation - Mathrix",
+          "chaine": "Mathrix",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente les règles du produit et du quotient, qui correspondent aux formules et aux exemples effectivement fournis dans cette leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=_fBiH_H7W1g",
+          "titre": "1ère S Dériver une fonction avec une puissance et une racine carrée",
+          "chaine": "Roman",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L'exercice porte sur une fonction contenant une puissance et une racine carrée, conformément au titre de la leçon."
+        }
+      ],
+      "justification": "Le titre du fichier annonce puissances et racines, tandis que son contenu insiste sur produit et quotient : le premier candidat privilégie ce contenu explicite. Le second complète le titre, avec des durées non affichées pour les deux liens."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L7",
+      "requetes": [
+        "site:youtube.com/watch dérivée fonction composée cours",
+        "dériver fonction composée Yvan Monka youtube",
+        "\"Dériver une fonction composée\" \"en 5 minutes\"",
+        "\"Dériver une fonction composée\" explication simple youtube",
+        "\"Comment dériver une fonction composée ?\" Mathemax durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=v3WP4cxxYm4",
+          "titre": "Comment dériver une fonction composée ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique explicitement la règle (v ∘ u)' = u' × (v' ∘ u), centrale pour identifier intérieur et extérieur sans oublier u'."
+        }
+      ],
+      "justification": "La formule annoncée correspond exactement au mécanisme enseigné. Les applications trigonométriques et la condition sur les radians ne sont pas confirmées par la description ; la durée n'est pas affichée."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L8",
+      "requetes": [
+        "\"dérivée fonction réciproque\" youtube cours",
+        "dérivée réciproque explication simple en 5 minutes youtube",
+        "\"Dérivée de la fonction réciproque\" \"BAUCOUR\" minutes",
+        "\"Dérivée de la fonction réciproque\" \"Philippe\" youtube",
+        "Dérivée fonction réciproque vidéo courte français"
+      ],
+      "candidats": [],
+      "justification": "Les résultats pertinents expliquent la formule de dérivation de la réciproque, mais leur durée n'a pas pu être établie ; un autre cours annonce explicitement 19 minutes. Aucun candidat n'est retenu faute de pouvoir sécuriser la limite de 15 minutes sur cette notion."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L9",
+      "requetes": [
+        "\"dérivée seconde\" convexité youtube cours",
+        "\"La dérivée seconde décrit la pente\"",
+        "\"Comment montrer qu'une fonction est convexe\" Mathemax durée",
+        "dérivée seconde convexité en 5 minutes youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=mjsqElwfXbg",
+          "titre": "Comment montrer qu'une fonction est convexe ou concave avec la dérivée seconde ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo relie le signe de la dérivée seconde à la convexité ou à la concavité, ce qui correspond au critère principal de la leçon."
+        }
+      ],
+      "justification": "Le sujet est précisément centré sur l'utilisation de f″. La description ne confirme pas le contre-exemple x⁴ ni l'étude des points d'inflexion ; la durée reste inconnue."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L10",
+      "requetes": [
+        "\"inégalité des accroissements finis\" youtube exemple",
+        "\"Contrôler un écart avec les accroissements finis\"",
+        "\"Inégalité des accroissements finis\" \"5\" youtube",
+        "inégalité accroissements finis explication simple courte youtube",
+        "Exo7 dérivées théorème accroissements finis youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=VdsiZNpZs2A",
+          "titre": "Dérivées - partie 4 : théorème des accroissements finis",
+          "chaine": "Exo7Math",
+          "dureeVue": "13:34",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le cours présente le théorème et l'inégalité des accroissements finis permettant de borner un écart, avec des développements supplémentaires sur monotonie et règle de l'Hospital."
+        }
+      ],
+      "justification": "La copie universitaire de cette même vidéo indique 13:34 et confirme la présence de l'inégalité recherchée. Ce format plus long est retenu faute de candidat plus court suffisamment documenté."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L11",
+      "requetes": [
+        "site:youtube.com \"asymptotes\" \"cours\" \"minutes\"",
+        "asymptote verticale horizontale oblique cours youtube 5 minutes",
+        "\"Reconnaître une asymptote\" youtube",
+        "\"Comment lire graphiquement une limite et reconnaître des asymptotes\" \"minutes\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=KCmOxAkmZiA",
+          "titre": "Comment lire graphiquement une limite et reconnaître des asymptotes ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo apprend à reconnaître graphiquement les asymptotes verticales, horizontales et obliques, sans attester une démonstration par la différence f(x) − (ax + b)."
+        }
+      ],
+      "justification": "La reconnaissance des trois types d'asymptotes correspond directement à l'objectif de la leçon. La justification algébrique d'une asymptote oblique devra être complétée ; la durée n'est pas affichée."
+    },
+    {
+      "code": "ENSEA-AS-ANALYSE-L12",
+      "requetes": [
+        "site:youtube.com \"étude de fonction\" \"x + 1/x\"",
+        "étude fonction complète exemple youtube 10 minutes",
+        "\"Organiser une étude de fonction\"",
+        "étude fonction méthode cours court youtube",
+        "étudier fonction x plus un sur x youtube",
+        "étude de fonction méthode domaine limites dérivée variations site:youtube.com",
+        "Etude fonction x+1/x vidéo courte français"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo YouTube suffisamment documentée ne réunit en moins de 15 minutes domaine, limites, dérivée, variations et asymptotes au niveau demandé. Les ressources courtes trouvées traitent surtout du tableau de variations ou sont hébergées hors YouTube."
+    }
+  ]
+}

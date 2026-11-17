@@ -9,7 +9,7 @@
  *   source: "d'où vient le candidat", recherchePar: claude|chatgpt, ecartes?: [{ youtubeId, motif }] }
  * youtubeId null = aucune vidéo satisfaisante (statut « a_rechercher », trace conservée).
  *
- * Règles : une vidéo refusée par la vérification (introuvable, intégration interdite, > 10 min…)
+ * Règles : une vidéo refusée par la vérification (introuvable, intégration interdite, > 15 min…)
  * n'est jamais retenue ; une leçon déjà « validee » n'est remplacée qu'avec "remplacer": true.
  */
 const fs = require('fs');

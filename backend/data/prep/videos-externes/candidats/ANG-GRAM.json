@@ -1,0 +1,889 @@
+{
+ "ANG-GRAM-L1": {
+  "titre": "Construire une phrase : qui fait quoi ?",
+  "candidats": [
+   {
+    "id": "nHA05XiuNJM",
+    "titre": "Construire une phrase correcte | Français CE1",
+    "chaine": "Le Coin du Français Facile",
+    "duree": "4:02",
+    "sec": 242,
+    "vues": "237 vues"
+   },
+   {
+    "id": "83SuxQS0IhM",
+    "titre": "Construire une phrase qui❓fait quoi ❓où❓",
+    "chaine": "On apprend en s'amusant",
+    "duree": "1:55",
+    "sec": 115,
+    "vues": "236 vues"
+   },
+   {
+    "id": "KoR3qJK_wEc",
+    "titre": "Qu'est-ce qu'une phrase CP - CE1 - Cycle 2 - Français - FLE - Etude de la langue",
+    "chaine": "Maître Lucas",
+    "duree": "4:09",
+    "sec": 249,
+    "vues": "221 000 vues"
+   },
+   {
+    "id": "MzC5BmKyd7g",
+    "titre": "Truc de pro — La syntaxe et la phrase de base",
+    "chaine": "Alloprof",
+    "duree": "4:14",
+    "sec": 254,
+    "vues": "16 394 vues"
+   },
+   {
+    "id": "SWQYNKd45xg",
+    "titre": "Construire une phrase",
+    "chaine": "Laurence Caron",
+    "duree": "2:01",
+    "sec": 121,
+    "vues": "1 646 vues"
+   },
+   {
+    "id": "tNhFwY4xbhU",
+    "titre": "EP 6 : Apprends à construire des phrases en français étape par étape !",
+    "chaine": "Classe de français",
+    "duree": "11:54",
+    "sec": 714,
+    "vues": "22 108 vues"
+   },
+   {
+    "id": "IVa5P-NDpyQ",
+    "titre": "Les phrases simples et complexes CM1 - CM2 - 6e - Cycle 3 - Français : grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "177 366 vues"
+   },
+   {
+    "id": "zq4C4ocGqH0",
+    "titre": "La phrase complexe... c'est SIMPLE ! (juxtaposition, coordination & subordination)",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:50",
+    "sec": 350,
+    "vues": "249 976 vues"
+   },
+   {
+    "id": "11_g_JPY7CY",
+    "titre": "Comment Structurer les Phrases en Anglais: Grammaire",
+    "chaine": "KodjoEnglish",
+    "duree": "14:06",
+    "sec": 846,
+    "vues": "59 662 vues"
+   },
+   {
+    "id": "GeS-CyxrB8U",
+    "titre": "Comment Construire des Phrases en Anglais Simplement",
+    "chaine": "ISpeakSpokeSpoken",
+    "duree": "13:39",
+    "sec": 819,
+    "vues": "47 423 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L2": {
+  "titre": "Dire qui on est avec to be",
+  "candidats": [
+   {
+    "id": "ddixQBXtHtw",
+    "titre": "Do - Have ou Be : Lequel Utiliser en Anglais ?",
+    "chaine": "ISpeakSpokeSpoken",
+    "duree": "13:23",
+    "sec": 803,
+    "vues": "42 121 vues"
+   },
+   {
+    "id": "nBPrb8TfkIM",
+    "titre": "LES PREPOSITIONS IN, ON, AT, TO en anglais : comprendre quand les utiliser et comment s'en servir",
+    "chaine": "Léa English",
+    "duree": "13:47",
+    "sec": 827,
+    "vues": "432 556 vues"
+   },
+   {
+    "id": "3TTV6_usEwQ",
+    "titre": ": 🚩Le verbe être en Anglais: [ to be ] Niveau débutant ( Present simple, 🚩 partie 1)",
+    "chaine": "Anglais avec Iliass",
+    "duree": "5:57",
+    "sec": 357,
+    "vues": "251 398 vues"
+   },
+   {
+    "id": "ZOApbt3t4o8",
+    "titre": "WHO | WHOM | WHOSE | WHO'S - Grammaire Anglaise",
+    "chaine": "KodjoEnglish",
+    "duree": "11:44",
+    "sec": 704,
+    "vues": "108 844 vues"
+   },
+   {
+    "id": "60lfvpDDFII",
+    "titre": "Le PIRE de la grammaire ANGLAISE! (subordonnée en WHEN + concordance des temps)",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "7:47",
+    "sec": 467,
+    "vues": "8 611 vues"
+   },
+   {
+    "id": "Gc1qo_ViktU",
+    "titre": "TOP 25 des EXPRESSIONS Anglaises que Vous Devez Connaître !",
+    "chaine": "KodjoEnglish",
+    "duree": "14:04",
+    "sec": 844,
+    "vues": "469 625 vues"
+   },
+   {
+    "id": "V9A4uV7jNTI",
+    "titre": "Used to, Be Used to, Get used to | Grammaire Anglaise!",
+    "chaine": "KodjoEnglish",
+    "duree": "10:29",
+    "sec": 629,
+    "vues": "38 914 vues"
+   },
+   {
+    "id": "09vFYlIigLY",
+    "titre": "REVOIR LES BASES EN ANGLAIS : quoi apprendre pour réviser les bases en anglais quand on est débutant",
+    "chaine": "Léa English",
+    "duree": "7:12",
+    "sec": 432,
+    "vues": "333 461 vues"
+   },
+   {
+    "id": "R8CbyfGTggU",
+    "titre": "Les bases de l'anglais : Logique de Am Is Are (To Be) - 1 #anglais",
+    "chaine": "Slowingo : Learn English Word by Word",
+    "duree": "4:21",
+    "sec": 261,
+    "vues": "2 060 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L3": {
+  "titre": "Dire ce qu’on a : have et les noms",
+  "candidats": [
+   {
+    "id": "F-eyM0-vrY8",
+    "titre": "Apprendre l'anglais avec Huito #12: HAVE, Parler de ce que l'on possède",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "14:07",
+    "sec": 847,
+    "vues": "192 143 vues"
+   },
+   {
+    "id": "8b7EVw5N_XY",
+    "titre": "Les noms - Anglais - Sixième - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "2:48",
+    "sec": 168,
+    "vues": "6 372 vues"
+   },
+   {
+    "id": "ddixQBXtHtw",
+    "titre": "Do - Have ou Be : Lequel Utiliser en Anglais ?",
+    "chaine": "ISpeakSpokeSpoken",
+    "duree": "13:23",
+    "sec": 803,
+    "vues": "42 122 vues"
+   },
+   {
+    "id": "nBPrb8TfkIM",
+    "titre": "LES PREPOSITIONS IN, ON, AT, TO en anglais : comprendre quand les utiliser et comment s'en servir",
+    "chaine": "Léa English",
+    "duree": "13:47",
+    "sec": 827,
+    "vues": "432 556 vues"
+   },
+   {
+    "id": "IpWESe0ghEI",
+    "titre": "Nom propre et nom commun CP - CE1 - Cycle 2 - Français : étude de la langue, Orthographe",
+    "chaine": "Maître Lucas",
+    "duree": "4:03",
+    "sec": 243,
+    "vues": "168 163 vues"
+   },
+   {
+    "id": "uXz4a_thd60",
+    "titre": "TO HAVE EN ANGLAIS (le verbe que tu dois absolument connaître)",
+    "chaine": "My English Safe Place",
+    "duree": "7:31",
+    "sec": 451,
+    "vues": "189 vues"
+   },
+   {
+    "id": "krJveuYf-Bg",
+    "titre": "Anglais – Grammaire | Leçon 4 : Les noms dénombrables et indénombrables",
+    "chaine": "OuiSpeak",
+    "duree": "11:30",
+    "sec": 690,
+    "vues": "88 vues"
+   },
+   {
+    "id": "EOqPX77WxfI",
+    "titre": "DO, HAVE, BE: quel auxiliaire choisir pour poser une question?",
+    "chaine": "AnglaisCours Club",
+    "duree": "6:36",
+    "sec": 396,
+    "vues": "75 345 vues"
+   },
+   {
+    "id": "vzjr4PLrYUE",
+    "titre": "Grammaire anglaise : Comment retenir la conjugaison de \"to have\" - forme affirmative ? A0 #16",
+    "chaine": "Grammaire anglaise Express",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "313 vues"
+   },
+   {
+    "id": "n70ZQoiq8iI",
+    "titre": "Cours d'anglais: Have & Have got",
+    "chaine": "Apprendre l'anglais avec English 4 Frogs",
+    "duree": "9:31",
+    "sec": 571,
+    "vues": "71 718 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L4": {
+  "titre": "Exprimer une habitude au présent simple",
+  "candidats": [
+   {
+    "id": "LTDjVjNSHZQ",
+    "titre": "Le présent simple en ANGLAIS en 3 minutes",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "3:17",
+    "sec": 197,
+    "vues": "242 465 vues"
+   },
+   {
+    "id": "h0d5WkQRfdI",
+    "titre": "Comment exprimer les habitudes au présent et au passé en anglais",
+    "chaine": "AnglaisCours Club",
+    "duree": "10:52",
+    "sec": 652,
+    "vues": "7 279 vues"
+   },
+   {
+    "id": "tUSla2-6aiI",
+    "titre": "Quelle différence entre le présent forme simple et -ing pour les habitudes?",
+    "chaine": "be-lingue",
+    "duree": "7:05",
+    "sec": 425,
+    "vues": "647 vues"
+   },
+   {
+    "id": "i0AfEVAN3NY",
+    "titre": "𝐂𝐨𝐦𝐦𝐞𝐧𝐭 𝐩𝐚𝐫𝐥𝐞𝐫 𝐝𝐞 𝐜𝐞 𝐚̀ 𝐪𝐮𝐨𝐢 𝐣𝐞 𝐬𝐮𝐢𝐬 𝐡𝐚𝐛𝐢𝐭𝐮𝐞́(𝐞) et 𝐝'𝐮𝐧𝐞 𝐡𝐚𝐛𝐢𝐭𝐮𝐝𝐞 𝐪𝐮𝐞 𝐣'𝐚𝐢 𝐚𝐜𝐭𝐮𝐞𝐥𝐥𝐞𝐦𝐞𝐧𝐭",
+    "chaine": "Mountain Top Vision Li (English-French-Fon) 🇧🇯",
+    "duree": "1:48",
+    "sec": 108,
+    "vues": "19 vues"
+   },
+   {
+    "id": "vkm5KRVMaTY",
+    "titre": "Le présent simple & le présent continu en anglais - Cours complet niveau débutant",
+    "chaine": "Léa English",
+    "duree": "4:30",
+    "sec": 270,
+    "vues": "34 309 vues"
+   },
+   {
+    "id": "xk-lJlol0LQ",
+    "titre": "Anglais lycée : savoir utiliser le présent simple",
+    "chaine": "LesEditionsHatier",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "34 979 vues"
+   },
+   {
+    "id": "8c0BV_B1s7M",
+    "titre": "✨ Le présent simple en anglais : facile et rapide !",
+    "chaine": "Un Jour, Un cours, Une minute",
+    "duree": "1:31",
+    "sec": 91,
+    "vues": "73 vues"
+   },
+   {
+    "id": "RUVLRliAO5o",
+    "titre": "Le Présent Simple en Anglais ( Niveau Débutant )",
+    "chaine": "WILLIAMS ESL",
+    "duree": "13:36",
+    "sec": 816,
+    "vues": "13 869 vues"
+   },
+   {
+    "id": "YL9p5PD_myk",
+    "titre": "Quiz d’anglais : les erreurs à éviter au présent simple (forme affirmative) ! | Correction expliquée",
+    "chaine": "Brick by Brick English | Grammaire LEGO",
+    "duree": "2:13",
+    "sec": 133,
+    "vues": "71 vues"
+   },
+   {
+    "id": "yv1L4h98qxk",
+    "titre": "Les TEMPS en anglais en 6 minutes : SIMPLE et EFFICACE",
+    "chaine": "English with Maud",
+    "duree": "6:24",
+    "sec": 384,
+    "vues": "213 542 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L5": {
+  "titre": "Questionner et nier avec do",
+  "candidats": [
+   {
+    "id": "bu_-SuWLnRA",
+    "titre": "Pourquoi utiliser “do” dans les questions en Anglais",
+    "chaine": "ie school",
+    "duree": "13:42",
+    "sec": 822,
+    "vues": "6 804 vues"
+   },
+   {
+    "id": "zE1cSE3BpUw",
+    "titre": "YES/NO questions en anglais : exercices corrigés (do / does / did)",
+    "chaine": "Dr GRAMMAR - cours d'anglais",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "408 vues"
+   },
+   {
+    "id": "M4DoOyYmhHg",
+    "titre": "LES MOTS DE QUESTION EN ANGLAIS|| WH-questions",
+    "chaine": "ie school",
+    "duree": "13:13",
+    "sec": 793,
+    "vues": "96 106 vues"
+   },
+   {
+    "id": "MF4mDLHagSU",
+    "titre": "Questions et négations « à faire » : FAIRE, FAIRE, NE PAS, NE PAS",
+    "chaine": "English with Ronnie · EnglishLessons4U with engVid",
+    "duree": "12:16",
+    "sec": 736,
+    "vues": "143 107 vues"
+   },
+   {
+    "id": "_JnD8y7SMF0",
+    "titre": "Questions fermées en anglais : YES/NO questions (cours simple + exemples)",
+    "chaine": "Dr GRAMMAR - cours d'anglais",
+    "duree": "5:09",
+    "sec": 309,
+    "vues": "561 vues"
+   },
+   {
+    "id": "kkbt9-4BLRk",
+    "titre": "Poser une question en anglais (partie 1) : WHAT-WHERE-WHEN-WHO,...",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "7:26",
+    "sec": 446,
+    "vues": "961 708 vues"
+   },
+   {
+    "id": "EOqPX77WxfI",
+    "titre": "DO, HAVE, BE: quel auxiliaire choisir pour poser une question?",
+    "chaine": "AnglaisCours Club",
+    "duree": "6:36",
+    "sec": 396,
+    "vues": "75 349 vues"
+   },
+   {
+    "id": "5ONTiHXFmsM",
+    "titre": "Exercice de logique : nier une proposition avec des quantificateurs",
+    "chaine": "Bibmath",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "1 662 vues"
+   },
+   {
+    "id": "nxZTVaLZolw",
+    "titre": "Anglais sans stress #10 — DO, DOES, DID : l'ordre des mots pour poser une question",
+    "chaine": "L'anglais sans stress",
+    "duree": "13:11",
+    "sec": 791,
+    "vues": "76 vues"
+   },
+   {
+    "id": "VZql9E2TGnM",
+    "titre": "MAKE ou DO - Quelle est la différence et quand les utiliser?",
+    "chaine": "Peasy Anglais",
+    "duree": "4:21",
+    "sec": 261,
+    "vues": "2 305 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L6": {
+  "titre": "Décrire ce qui se passe maintenant",
+  "candidats": [
+   {
+    "id": "uR_4TusOjrw",
+    "titre": "ICI ET MAINTENANT | DAVID-JUNIOR DIAMBANZA FEAT ATHOMS MBUMA @AthomsetNadège-g3c",
+    "chaine": "David-Junior D. Officiel",
+    "duree": "9:52",
+    "sec": 592,
+    "vues": "3 155 256 vues"
+   },
+   {
+    "id": "iVQL5Tg8tVs",
+    "titre": "Une belle production d'écrit d'un élève au CFEE 2021",
+    "chaine": "Pédagogie de l'école Primaire",
+    "duree": "0:07",
+    "sec": 7,
+    "vues": "516 654 vues"
+   },
+   {
+    "id": "yv1L4h98qxk",
+    "titre": "Les TEMPS en anglais en 6 minutes : SIMPLE et EFFICACE",
+    "chaine": "English with Maud",
+    "duree": "6:24",
+    "sec": 384,
+    "vues": "213 591 vues"
+   },
+   {
+    "id": "09vFYlIigLY",
+    "titre": "REVOIR LES BASES EN ANGLAIS : quoi apprendre pour réviser les bases en anglais quand on est débutant",
+    "chaine": "Léa English",
+    "duree": "7:12",
+    "sec": 432,
+    "vues": "333 461 vues"
+   },
+   {
+    "id": "Gc1qo_ViktU",
+    "titre": "TOP 25 des EXPRESSIONS Anglaises que Vous Devez Connaître !",
+    "chaine": "KodjoEnglish",
+    "duree": "14:04",
+    "sec": 844,
+    "vues": "469 625 vues"
+   },
+   {
+    "id": "xDkoEugqnj4",
+    "titre": "La méthode SPP pour trouver le bon temps en anglais à tous les coups",
+    "chaine": "ISpeakSpokeSpoken",
+    "duree": "14:14",
+    "sec": 854,
+    "vues": "186 722 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L7": {
+  "titre": "Raconter un fait terminé au prétérit",
+  "candidats": [
+   {
+    "id": "ZNRNm-9FBAE",
+    "titre": "Le PRETERIT simple en ANGLAIS en 5 minutes",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "6:16",
+    "sec": 376,
+    "vues": "162 578 vues"
+   },
+   {
+    "id": "saJDQKTm1No",
+    "titre": "5 minutes pour comprendre la différence entre PRETERIT et PRESENT PERFECT",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "6:59",
+    "sec": 419,
+    "vues": "289 459 vues"
+   },
+   {
+    "id": "v0_t20zU89g",
+    "titre": "Grammaire : Le prétérit",
+    "chaine": "myMaxicours",
+    "duree": "2:15",
+    "sec": 135,
+    "vues": "658 vues"
+   },
+   {
+    "id": "8uSNTPeEksg",
+    "titre": "Le prétérit ou comment parler du passé en anglais",
+    "chaine": "Mrs Alves",
+    "duree": "2:15",
+    "sec": 135,
+    "vues": "176 203 vues"
+   },
+   {
+    "id": "I0sYFu-L3IQ",
+    "titre": "LE PRÉTÉRIT SIMPLE DES VERBES RÉGULIERS",
+    "chaine": "Nadia Steiner",
+    "duree": "2:43",
+    "sec": 163,
+    "vues": "6 270 vues"
+   },
+   {
+    "id": "ds0uXQODuZ0",
+    "titre": "Prétérit Simple : Explications",
+    "chaine": "My English Teacher",
+    "duree": "11:31",
+    "sec": 691,
+    "vues": "37 394 vues"
+   },
+   {
+    "id": "kE6g9ojMq54",
+    "titre": "Prétérit be+ing Anglais Facile",
+    "chaine": "Annabelle Atelier Anglais",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "58 185 vues"
+   },
+   {
+    "id": "VC0J9ot-DRE",
+    "titre": "PRETERIT BE + ING ou PRETERIT SIMPLE",
+    "chaine": "Nadia Steiner",
+    "duree": "2:00",
+    "sec": 120,
+    "vues": "74 511 vues"
+   },
+   {
+    "id": "1UKPmkWP_FE",
+    "titre": "🎯 Exercices de grammaire anglaise : PRETERIT EN ING (avec corrections)",
+    "chaine": "Dr GRAMMAR - cours d'anglais",
+    "duree": "3:18",
+    "sec": 198,
+    "vues": "1 950 vues"
+   },
+   {
+    "id": "u7YH0QwES9A",
+    "titre": "🇬🇧 Cours d'anglais : 6 MINUTES POUR MAÎTRISER LE PRÉTÉRIT EN ING (grammaire anglaise)",
+    "chaine": "Dr GRAMMAR - cours d'anglais",
+    "duree": "6:26",
+    "sec": 386,
+    "vues": "2 327 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L8": {
+  "titre": "Relier le passé au présent : present perfect",
+  "candidats": [
+   {
+    "id": "2ofdHokX2Xc",
+    "titre": "Comprendre le PRESENT PERFECT en moins de 10 minutes",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "9:36",
+    "sec": 576,
+    "vues": "134 130 vues"
+   },
+   {
+    "id": "ThZuIIxk3vE",
+    "titre": "Le present perfect - Anglais - Lycée - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:36",
+    "sec": 276,
+    "vues": "1 439 vues"
+   },
+   {
+    "id": "saJDQKTm1No",
+    "titre": "5 minutes pour comprendre la différence entre PRETERIT et PRESENT PERFECT",
+    "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+    "duree": "6:59",
+    "sec": 419,
+    "vues": "289 512 vues"
+   },
+   {
+    "id": "PpRiS0LtOUs",
+    "titre": "Le Present Perfect en anglais enfin expliqué concrètement (facile à appliquer)",
+    "chaine": "ISpeakSpokeSpoken",
+    "duree": "14:49",
+    "sec": 889,
+    "vues": "23 133 vues"
+   },
+   {
+    "id": "4jTZuqbg-js",
+    "titre": "Le present perfect - Anglais - 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:32",
+    "sec": 272,
+    "vues": "322 960 vues"
+   },
+   {
+    "id": "3W9v5KRjV9A",
+    "titre": "Present Perfect Anglais (4ème-3ème-lycée-Adultes A2/B1/B2) Capsule Grammaire",
+    "chaine": "Annabelle Atelier Anglais",
+    "duree": "3:23",
+    "sec": 203,
+    "vues": "39 492 vues"
+   },
+   {
+    "id": "BjviYamJNaA",
+    "titre": "Différence Entre: Present Perfect Progressive et Present Perfect",
+    "chaine": "KodjoEnglish",
+    "duree": "11:27",
+    "sec": 687,
+    "vues": "33 970 vues"
+   },
+   {
+    "id": "MzS58YFKhzo",
+    "titre": "Quand utiliser le prétérit ou le present perfect ? - Anglais - Lycée - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "8:41",
+    "sec": 521,
+    "vues": "1 366 vues"
+   },
+   {
+    "id": "Z9znJdb5WZ0",
+    "titre": "Grammar tuto : Present perfect et present perfect be + V-ing",
+    "chaine": "Nathan plus",
+    "duree": "2:58",
+    "sec": 178,
+    "vues": "1 155 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L9": {
+  "titre": "Parler de l’avenir",
+  "candidats": [
+   {
+    "id": "AeVV5ZSxRV8",
+    "titre": "Français - Parler de l'avenir",
+    "chaine": "Loescher Editore video",
+    "duree": "1:56",
+    "sec": 116,
+    "vues": "35 338 vues"
+   },
+   {
+    "id": "lIRD5iCPQg4",
+    "titre": "Cours de français (A2 et +) : parler de l'avenir",
+    "chaine": "ifMaroc",
+    "duree": "3:13",
+    "sec": 193,
+    "vues": "1 404 vues"
+   },
+   {
+    "id": "irhdbbmTCK0",
+    "titre": "Parler de l'avenir",
+    "chaine": "cat cours",
+    "duree": "1:15",
+    "sec": 75,
+    "vues": "3 645 vues"
+   },
+   {
+    "id": "ekAURqDiECg",
+    "titre": "Mes projets pour l'avenir en français | Facile et simple | B1",
+    "chaine": "Parle Avec Moi",
+    "duree": "10:15",
+    "sec": 615,
+    "vues": "2 851 vues"
+   },
+   {
+    "id": "6ReraUgOiqI",
+    "titre": "Futur simple : parler de l'avenir sans erreurs avec des exemples concrets",
+    "chaine": "French Avenue",
+    "duree": "13:46",
+    "sec": 826,
+    "vues": "1 240 vues"
+   },
+   {
+    "id": "njj5kLXJXfU",
+    "titre": "Parler de l'avenir [Introducción] - Curso de Francés A2",
+    "chaine": "Edutin Academy",
+    "duree": "1:53",
+    "sec": 113,
+    "vues": "3 685 vues"
+   },
+   {
+    "id": "c7SnDt-FSDE",
+    "titre": "Se présenter en français (parler de l'avenir)",
+    "chaine": "cat cours",
+    "duree": "0:34",
+    "sec": 34,
+    "vues": "169 vues"
+   },
+   {
+    "id": "oga56kZhIVE",
+    "titre": "2º sec Parler de l'avenir.",
+    "chaine": "Linda Vargas",
+    "duree": "3:18",
+    "sec": 198,
+    "vues": "27 vues"
+   },
+   {
+    "id": "09vFYlIigLY",
+    "titre": "REVOIR LES BASES EN ANGLAIS : quoi apprendre pour réviser les bases en anglais quand on est débutant",
+    "chaine": "Léa English",
+    "duree": "7:12",
+    "sec": 432,
+    "vues": "333 461 vues"
+   },
+   {
+    "id": "yxIJ4i86E48",
+    "titre": "Apprendre l'Anglais ☆ Parler de l'avenir",
+    "chaine": "Lernvideos und Vorträge",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "167 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L10": {
+  "titre": "Exprimer capacité, conseil et obligation",
+  "candidats": [
+   {
+    "id": "qKxsw45tWKA",
+    "titre": "Anglais lycée : Modaux - Savoir exprimer la capacité, l'Obligation et l'interdiction",
+    "chaine": "LesEditionsHatier",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "13 801 vues"
+   },
+   {
+    "id": "yxq2TAH4-84",
+    "titre": "CAPSULE VIDÉO L'expression de l'obligation et de la nécessité",
+    "chaine": "Isabel Alvarado",
+    "duree": "8:02",
+    "sec": 482,
+    "vues": "529 vues"
+   },
+   {
+    "id": "R4KXs-hgVmY",
+    "titre": "Exprimer l'obligation en français | IL FAUT 🗣🇫🇷👨‍🏫",
+    "chaine": "French School TV",
+    "duree": "1:01",
+    "sec": 61,
+    "vues": "9 051 vues"
+   },
+   {
+    "id": "3wsIjxFPshU",
+    "titre": "Exprimer l'obligation",
+    "chaine": "Pas à pas vers le français avec Khadija SABER (SABER français)",
+    "duree": "1:49",
+    "sec": 109,
+    "vues": "1 837 vues"
+   },
+   {
+    "id": "VMQGpG4LASQ",
+    "titre": "Exprimer l'obligation et l'interdiction en français. Devoir et falloir. English captions available 😉",
+    "chaine": "La prof Elisabeth",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "62 281 vues"
+   },
+   {
+    "id": "1GxtTjyLL0U",
+    "titre": "15 formes pour exprimer l'obligation et l'interdiction",
+    "chaine": "Ask the French teacher",
+    "duree": "9:50",
+    "sec": 590,
+    "vues": "27 311 vues"
+   },
+   {
+    "id": "IWjBoIAbMKg",
+    "titre": "L'obligation et le conseil (la modalité)",
+    "chaine": "crewprod",
+    "duree": "4:23",
+    "sec": 263,
+    "vues": "311 vues"
+   },
+   {
+    "id": "y8GsOBUwUYM",
+    "titre": "EXPRIMER L'OBLIGATION",
+    "chaine": "Ànnia Bosch",
+    "duree": "4:37",
+    "sec": 277,
+    "vues": "1 360 vues"
+   },
+   {
+    "id": "Gc1qo_ViktU",
+    "titre": "TOP 25 des EXPRESSIONS Anglaises que Vous Devez Connaître !",
+    "chaine": "KodjoEnglish",
+    "duree": "14:04",
+    "sec": 844,
+    "vues": "469 625 vues"
+   },
+   {
+    "id": "_0xsuOUTgJw",
+    "titre": "Anglais lycée : Modaux - savoir exprimer la capacité, l'interdiction, l'obligation Niveau B2",
+    "chaine": "LesEditionsHatier",
+    "duree": "5:38",
+    "sec": 338,
+    "vues": "3 686 vues"
+   }
+  ]
+ },
+ "ANG-GRAM-L11": {
+  "titre": "Comparer deux éléments ou tout un groupe",
+  "candidats": [
+   {
+    "id": "TEHHP5P2nbY",
+    "titre": "Grammar tuto : Comparer des éléments entre eux",
+    "chaine": "Nathan plus",
+    "duree": "2:24",
+    "sec": 144,
+    "vues": "366 vues"
+   },
+   {
+    "id": "_6MkRgO5Pbc",
+    "titre": "Comment peut on comparer deux personnes ou choses?",
+    "chaine": "Sint-Aloysiuscollege Menen",
+    "duree": "1:14",
+    "sec": 74,
+    "vues": "737 vues"
+   },
+   {
+    "id": "ou8uved60pQ",
+    "titre": "🧠 Grammaire : La Comparaison en Français (Niveau A2) | Outils FLE",
+    "chaine": "La prof Elisabeth",
+    "duree": "4:32",
+    "sec": 272,
+    "vues": "135 297 vues"
+   },
+   {
+    "id": "cLWEodLxRl0",
+    "titre": "Langue et communication la comparaison",
+    "chaine": "Prof Hassan Moumni حسن مومني",
+    "duree": "5:30",
+    "sec": 330,
+    "vues": "330 vues"
+   },
+   {
+    "id": "jcrLNMnEpXQ",
+    "titre": "Comment utiliser les comparatifs et superlatifs sans te tromper ?",
+    "chaine": "Français Authentique",
+    "duree": "9:38",
+    "sec": 578,
+    "vues": "86 653 vues"
+   },
+   {
+    "id": "_ztCvNtDXpU",
+    "titre": "ACE - Groupement/dégroupement et comparaison de deux écritures",
+    "chaine": "Samantha Kosinski",
+    "duree": "2:21",
+    "sec": 141,
+    "vues": "632 vues"
+   },
+   {
+    "id": "92U8KvsX9W8",
+    "titre": "Leçon 81 Grammaire L'expression de la comparaison",
+    "chaine": "EDUNOTE",
+    "duree": "6:26",
+    "sec": 386,
+    "vues": "264 vues"
+   },
+   {
+    "id": "l8diFc10prc",
+    "titre": "Comment Comparer 2 classeurs Excel",
+    "chaine": "Excel Exercice",
+    "duree": "5:08",
+    "sec": 308,
+    "vues": "86 381 vues"
+   },
+   {
+    "id": "WxrTJrSMlxQ",
+    "titre": "COURS D'ANGLAIS (grammaire). Le COMPARATIF partie 3 : l'équivalence (aussi..que / as...as)",
+    "chaine": "Dr GRAMMAR - cours d'anglais",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "7 500 vues"
+   },
+   {
+    "id": "LhbvmZ6T_6Q",
+    "titre": "🇬🇧Comprendre le COMPARATIF en ANGLAIS en 5 MINUTES🧭",
+    "chaine": "FAB VH - Réussir en Anglais",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "83 306 vues"
+   }
+  ]
+ }
+}

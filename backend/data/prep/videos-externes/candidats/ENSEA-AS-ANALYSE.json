@@ -1,0 +1,1022 @@
+{
+ "ENSEA-AS-ANALYSE-L1": {
+  "titre": "Décrire une limite",
+  "candidats": [
+   {
+    "id": "ovIRv587bq4",
+    "titre": "Calcul de limite d'une fonction rationnelle",
+    "chaine": "Éducation Plus",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "344 524 vues"
+   },
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "QfMYYAhIejk",
+    "titre": "Introduction aux limites",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "7:30",
+    "sec": 450,
+    "vues": "8 188 vues"
+   },
+   {
+    "id": "k8SZFgCEv2w",
+    "titre": "Comprendre la notion de limite... avec une pizza !",
+    "chaine": "Hedacademy",
+    "duree": "4:05",
+    "sec": 245,
+    "vues": "352 389 vues"
+   },
+   {
+    "id": "4SzUib7QMdU",
+    "titre": "Asymptote à la courbe - Définition & Application",
+    "chaine": "Hedacademy",
+    "duree": "11:00",
+    "sec": 660,
+    "vues": "326 656 vues"
+   },
+   {
+    "id": "VYdI-z4exck",
+    "titre": "Limite par la définition - Technique d'utilisation avec \"epsilon\" | El Mahdi El Mhamdi",
+    "chaine": "Wandida, EPFL",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "125 291 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "Q5qlmocksw4",
+    "titre": "Cours - Terminale L - Mathématiques: Limite et continuité / MBOW",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "9:12",
+    "sec": 552,
+    "vues": "416 713 vues"
+   },
+   {
+    "id": "euQcmDDE3HY",
+    "titre": "Comment utiliser le nombre dérivé pour calculer la limite d'une fonction. 1S-TS",
+    "chaine": "MathsClaires",
+    "duree": "4:34",
+    "sec": 274,
+    "vues": "39 622 vues"
+   },
+   {
+    "id": "ql0YLQVicMg",
+    "titre": "Comment calculer la limite d'une fonction polynôme",
+    "chaine": "Éducation Plus",
+    "duree": "7:42",
+    "sec": 462,
+    "vues": "74 161 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L2": {
+  "titre": "Lever une forme indéterminée",
+  "candidats": [
+   {
+    "id": "YDx0avBsDJg",
+    "titre": "Lever une forme indéterminée - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "4:28",
+    "sec": 268,
+    "vues": "4 523 vues"
+   },
+   {
+    "id": "4NQbGdXThrk",
+    "titre": "Calculer la limite d'une fonction avec une forme indéterminée (1) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "9:36",
+    "sec": 576,
+    "vues": "745 396 vues"
+   },
+   {
+    "id": "N_do5XPz6AQ",
+    "titre": "LIMITES DE FONCTIONS : LES FORMES INDÉTERMINÉES - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "10:21",
+    "sec": 621,
+    "vues": "90 510 vues"
+   },
+   {
+    "id": "U6l-MjqH4dk",
+    "titre": "Lever une forme indéterminée - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "5:00",
+    "sec": 300,
+    "vues": "528 vues"
+   },
+   {
+    "id": "RQhdU7-KLMA",
+    "titre": "Calculer la limite d'une suite avec une forme indéterminée (1) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:38",
+    "sec": 458,
+    "vues": "357 253 vues"
+   },
+   {
+    "id": "xyRQYqjQ4nI",
+    "titre": "Lever une forme indéterminée à l’aide de la factorisation (quotient) - Terminale",
+    "chaine": "J'ai 20 en maths",
+    "duree": "12:22",
+    "sec": 742,
+    "vues": "6 351 vues"
+   },
+   {
+    "id": "NOexnruvvp0",
+    "titre": "Lever une forme indéterminée à l’aide de la factorisation - Limites de fonctions - Terminale",
+    "chaine": "J'ai 20 en maths",
+    "duree": "10:56",
+    "sec": 656,
+    "vues": "9 083 vues"
+   },
+   {
+    "id": "GXRKX5udr2M",
+    "titre": "Comment lever cette forme indéterminée impossible ?",
+    "chaine": "Romain - L'élégance des maths",
+    "duree": "12:30",
+    "sec": 750,
+    "vues": "2 679 vues"
+   },
+   {
+    "id": "gWr80upZfZ4",
+    "titre": "LIMITES : Lever une indétermination",
+    "chaine": "Campus XYZ",
+    "duree": "9:35",
+    "sec": 575,
+    "vues": "4 371 vues"
+   },
+   {
+    "id": "ovIRv587bq4",
+    "titre": "Calcul de limite d'une fonction rationnelle",
+    "chaine": "Éducation Plus",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "344 524 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L3": {
+  "titre": "Encadrer une fonction pour trouver sa limite",
+  "candidats": [
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "mc7iLprXA5Y",
+    "titre": "Une limite de fonction en mode IMPOSSIBLE - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "19 445 vues"
+   },
+   {
+    "id": "LJTwcusfNu4",
+    "titre": "Limites de fonctions - Exercice 2 - Maths terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "3:46",
+    "sec": 226,
+    "vues": "148 670 vues"
+   },
+   {
+    "id": "Eo1jvPphja0",
+    "titre": "Calculer une limite à l'aide du théorème d'encadrement - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:21",
+    "sec": 441,
+    "vues": "300 107 vues"
+   },
+   {
+    "id": "zV95w708gRs",
+    "titre": "Encadrement",
+    "chaine": "Éducation Plus",
+    "duree": "14:51",
+    "sec": 891,
+    "vues": "65 964 vues"
+   },
+   {
+    "id": "ixn7w9IY43U",
+    "titre": "Méthode de balayage : comment encadrer la solution d’une équation facilement",
+    "chaine": "Maths Accessibles",
+    "duree": "13:29",
+    "sec": 809,
+    "vues": "3 852 vues"
+   },
+   {
+    "id": "jOyBpZ16tYE",
+    "titre": "Terminale Spé Maths-Les limites- Le théorème des gendarmes Exemples encadrement",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "11:13",
+    "sec": 673,
+    "vues": "140 793 vues"
+   },
+   {
+    "id": "euQcmDDE3HY",
+    "titre": "Comment utiliser le nombre dérivé pour calculer la limite d'une fonction. 1S-TS",
+    "chaine": "MathsClaires",
+    "duree": "4:34",
+    "sec": 274,
+    "vues": "39 622 vues"
+   },
+   {
+    "id": "1JVdJWQC6z8",
+    "titre": "Comment étudier la continuité d'une fonction en un point?",
+    "chaine": "MathsClaires",
+    "duree": "3:35",
+    "sec": 215,
+    "vues": "117 073 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L4": {
+  "titre": "Raccorder sans saut : la continuité",
+  "candidats": [
+   {
+    "id": "1JVdJWQC6z8",
+    "titre": "Comment étudier la continuité d'une fonction en un point?",
+    "chaine": "MathsClaires",
+    "duree": "3:35",
+    "sec": 215,
+    "vues": "117 073 vues"
+   },
+   {
+    "id": "gLmACk8BpAE",
+    "titre": "Etudier la continuité d'une fonction - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "5:59",
+    "sec": 359,
+    "vues": "407 233 vues"
+   },
+   {
+    "id": "CwRs51ra-CU",
+    "titre": "Continuité - Maths - MPSI 1ère année - Les Bons Profs",
+    "chaine": "Les Bons Profs SUP",
+    "duree": "6:04",
+    "sec": 364,
+    "vues": "21 852 vues"
+   },
+   {
+    "id": "zqicFrWIN7Q",
+    "titre": "4 Exercices Continuité d'une fonction en un point (corrigés)",
+    "chaine": "Simon Semaan",
+    "duree": "10:30",
+    "sec": 630,
+    "vues": "311 006 vues"
+   },
+   {
+    "id": "uSm7hIvWAEw",
+    "titre": "Continuité en un point : vérifie et raccorde (Terminale S) | Raccordement, BAC",
+    "chaine": "Mathzone Teranga",
+    "duree": "6:37",
+    "sec": 397,
+    "vues": "13 vues"
+   },
+   {
+    "id": "JaXtoyzmpIs",
+    "titre": "Continuité Sur Un Intervalle",
+    "chaine": "Tchitcha",
+    "duree": "14:25",
+    "sec": 865,
+    "vues": "9 331 vues"
+   },
+   {
+    "id": "03WMLyc7rLE",
+    "titre": "Etudier la continuité d'une fonction - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:21",
+    "sec": 441,
+    "vues": "307 045 vues"
+   },
+   {
+    "id": "ugu-fpasmIc",
+    "titre": "La continuité, cours de maths Terminale : continuité en un point en 4 min",
+    "chaine": "Quizélia",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "2 vues"
+   },
+   {
+    "id": "XNEob4mym9s",
+    "titre": "Exercice 1 - Série 1 - Cours Limites et continuité - 2BACSE",
+    "chaine": "space2study",
+    "duree": "0:06",
+    "sec": 6,
+    "vues": "416 049 vues"
+   },
+   {
+    "id": "Syb9N7nR-kM",
+    "titre": "Exercice 14 - Série 1 - Cours Limites et continuité - 2BACSE",
+    "chaine": "space2study",
+    "duree": "0:06",
+    "sec": 6,
+    "vues": "104 997 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L5": {
+  "titre": "Prouver qu’une solution existe et qu’elle est unique",
+  "candidats": [
+   {
+    "id": "_GiOoUocT3s",
+    "titre": "Drôles 2 Maths - Théorème des Valeurs Intermédiaires",
+    "chaine": "Droles2Maths",
+    "duree": "2:20",
+    "sec": 140,
+    "vues": "114 926 vues"
+   },
+   {
+    "id": "2bMFI7vBCr0",
+    "titre": "QUESTION TYPE DU BAC #17 : le TVI",
+    "chaine": "Hedacademy",
+    "duree": "10:07",
+    "sec": 607,
+    "vues": "122 943 vues"
+   },
+   {
+    "id": "Brj1LC42vLM",
+    "titre": "Le théorème de Gödel | Voyages au pays des maths | ARTE",
+    "chaine": "ARTE",
+    "duree": "9:56",
+    "sec": 596,
+    "vues": "552 970 vues"
+   },
+   {
+    "id": "9OFciwVru98",
+    "titre": "Négation du quantificateur il existe un unique (Nier le quantificateur : il existe un et un seul )",
+    "chaine": "SupMath",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "7 052 vues"
+   },
+   {
+    "id": "tygtsVbfgwM",
+    "titre": "Prouver que Dieu existe grâce aux maths",
+    "chaine": "ChadSciences",
+    "duree": "13:18",
+    "sec": 798,
+    "vues": "309 671 vues"
+   },
+   {
+    "id": "yQ1Y8sapqKY",
+    "titre": "Comment montrer qu'un nombre complexe est réel ou imaginaire pur ?",
+    "chaine": "Mathemax",
+    "duree": "6:26",
+    "sec": 386,
+    "vues": "16 980 vues"
+   },
+   {
+    "id": "rqw74giklms",
+    "titre": "Cette équation possède une INFINITÉ de solutions ?! 🤯 | Défi mathématique",
+    "chaine": "mathematiquema",
+    "duree": "5:27",
+    "sec": 327,
+    "vues": "56 vues"
+   },
+   {
+    "id": "a7W6hv2y4rY",
+    "titre": "🔥 CHALLENGE MATHÉMATIQUE : UNE ÉQUATION D'ENSEMBLES À SOLUTION UNIQUE ?",
+    "chaine": "mathematiquema",
+    "duree": "4:13",
+    "sec": 253,
+    "vues": "17 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "euQcmDDE3HY",
+    "titre": "Comment utiliser le nombre dérivé pour calculer la limite d'une fonction. 1S-TS",
+    "chaine": "MathsClaires",
+    "duree": "4:34",
+    "sec": 274,
+    "vues": "39 622 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L6": {
+  "titre": "Dériver une puissance ou une racine",
+  "candidats": [
+   {
+    "id": "_fBiH_H7W1g",
+    "titre": "1ère S Dériver une fonction avec une puissance et une racine carrée",
+    "chaine": "Roman",
+    "duree": "8:53",
+    "sec": 533,
+    "vues": "1 507 vues"
+   },
+   {
+    "id": "Nyb8az2dbnk",
+    "titre": "Dérivation-Racine carrée et composée -Racine de U 10 exemples simples",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "9:54",
+    "sec": 594,
+    "vues": "125 654 vues"
+   },
+   {
+    "id": "lwcFgnbs0Ew",
+    "titre": "Dériver une fonction composée (Cas général) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "8:40",
+    "sec": 520,
+    "vues": "350 041 vues"
+   },
+   {
+    "id": "pxfvAV7Jyhs",
+    "titre": "Simplifier une racine carrée - JE T'EXPLIQUE !",
+    "chaine": "Hedacademy",
+    "duree": "7:08",
+    "sec": 428,
+    "vues": "426 278 vues"
+   },
+   {
+    "id": "DDggHd9m51A",
+    "titre": "DÉRIVÉES de fonctions COMPOSÉES avec la RACINE CARRÉE - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "2:58",
+    "sec": 178,
+    "vues": "25 878 vues"
+   },
+   {
+    "id": "OtRensLKpHs",
+    "titre": "Dérivées des fonctions exponentielles",
+    "chaine": "Éducation Plus",
+    "duree": "11:55",
+    "sec": 715,
+    "vues": "109 791 vues"
+   },
+   {
+    "id": "93RzKRJsV7U",
+    "titre": "Calcul d'une fonction dérivée avec racines carrées et puissance - Terminale",
+    "chaine": "EXERCICES MATHS",
+    "duree": "3:28",
+    "sec": 208,
+    "vues": "910 vues"
+   },
+   {
+    "id": "0wAl9u6_M-8",
+    "titre": "RACINES CARRÉES ✅ Calculs & formules 💪 Exercice corrigé",
+    "chaine": "Paul Olivier",
+    "duree": "5:52",
+    "sec": 352,
+    "vues": "87 286 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "euQcmDDE3HY",
+    "titre": "Comment utiliser le nombre dérivé pour calculer la limite d'une fonction. 1S-TS",
+    "chaine": "MathsClaires",
+    "duree": "4:34",
+    "sec": 274,
+    "vues": "39 622 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L7": {
+  "titre": "Dériver une fonction composée",
+  "candidats": [
+   {
+    "id": "lwcFgnbs0Ew",
+    "titre": "Dériver une fonction composée (Cas général) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "8:40",
+    "sec": 520,
+    "vues": "350 041 vues"
+   },
+   {
+    "id": "PSLvKPBGB4A",
+    "titre": "Comment DÉRIVER une fonction composée ? u(v(x)) - 1ère Spé",
+    "chaine": "Hedacademy",
+    "duree": "6:07",
+    "sec": 367,
+    "vues": "24 393 vues"
+   },
+   {
+    "id": "BuMovdugGjA",
+    "titre": "DÉRIVER une FONCTION COMPOSÉE - Formule + Exemple - Maths Prépa Licence",
+    "chaine": "Fabinou",
+    "duree": "4:21",
+    "sec": 261,
+    "vues": "94 653 vues"
+   },
+   {
+    "id": "5ZO83G9raxY",
+    "titre": "Comment calculer fog(x) en maths.",
+    "chaine": "Éducation Plus",
+    "duree": "5:55",
+    "sec": 355,
+    "vues": "149 143 vues"
+   },
+   {
+    "id": "aFkPQkg0p-A",
+    "titre": "DÉRIVER une FONCTION COMPOSÉE f(ax+b)",
+    "chaine": "Yvan Monka",
+    "duree": "4:59",
+    "sec": 299,
+    "vues": "75 754 vues"
+   },
+   {
+    "id": "kE32Ek8BXvs",
+    "titre": "Calculer la dérivée d'une fonction composée - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "4:52",
+    "sec": 292,
+    "vues": "353 333 vues"
+   },
+   {
+    "id": "OtRensLKpHs",
+    "titre": "Dérivées des fonctions exponentielles",
+    "chaine": "Éducation Plus",
+    "duree": "11:55",
+    "sec": 715,
+    "vues": "109 791 vues"
+   },
+   {
+    "id": "yiQ4Z5FdFQ8",
+    "titre": "Dériver une fonction logarithme - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:09",
+    "sec": 369,
+    "vues": "361 423 vues"
+   },
+   {
+    "id": "DNU1M3Ii76k",
+    "titre": "Calculer la limite d'une fonction composée - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "11:08",
+    "sec": 668,
+    "vues": "334 224 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L8": {
+  "titre": "Dériver une fonction réciproque",
+  "candidats": [
+   {
+    "id": "bgINubYekqo",
+    "titre": "Déterminer la fonction réciproque d'une fonction - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "303 097 vues"
+   },
+   {
+    "id": "YYbObtC6brk",
+    "titre": "Comment determiner la fonction reciproque ?",
+    "chaine": "Éducation Plus",
+    "duree": "8:40",
+    "sec": 520,
+    "vues": "21 309 vues"
+   },
+   {
+    "id": "JiwpYHtyS_s",
+    "titre": "Domaine De Dérivabilité Et Calcul De La Dérivée D'une Fonction Réciproque",
+    "chaine": "Tchitcha",
+    "duree": "13:16",
+    "sec": 796,
+    "vues": "2 841 vues"
+   },
+   {
+    "id": "xYdISOeUASk",
+    "titre": "[UT#44] Dérivée d'une fonction réciproque",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "8:21",
+    "sec": 501,
+    "vues": "23 776 vues"
+   },
+   {
+    "id": "fj5jvLZPKgQ",
+    "titre": "Comment calculer la dérivée d'une fonction réciproque",
+    "chaine": "Maths Idy",
+    "duree": "7:27",
+    "sec": 447,
+    "vues": "35 490 vues"
+   },
+   {
+    "id": "ezoOhsuW49g",
+    "titre": "TROUVER LA FONCTION RÉCIPROQUE",
+    "chaine": "Hedacademy",
+    "duree": "11:41",
+    "sec": 701,
+    "vues": "117 590 vues"
+   },
+   {
+    "id": "i87f8yoGg_8",
+    "titre": "Trouver la fonction réciproque d'une fonction bijective. POST BAC",
+    "chaine": "EXERCICES MATHS",
+    "duree": "4:07",
+    "sec": 247,
+    "vues": "62 578 vues"
+   },
+   {
+    "id": "2LCA8UWshVA",
+    "titre": "Application: Montrer que la fonction est une application bijective puis déterminer sa réciproque. 1S",
+    "chaine": "MathsClaires",
+    "duree": "8:34",
+    "sec": 514,
+    "vues": "122 561 vues"
+   },
+   {
+    "id": "K3mrsi5kK5Q",
+    "titre": "Limite et continuité- Bijection réciproque- première année Prépa MPSI -PCSI -MP2I",
+    "chaine": "Maths en licence et prépa avec Hans Amble",
+    "duree": "7:33",
+    "sec": 453,
+    "vues": "6 509 vues"
+   },
+   {
+    "id": "3oklX1qhcl4",
+    "titre": "Fonctions circulaires réciproques -arcsin((1+x)/(1-x)) Définition dérivée limites",
+    "chaine": "Maths en licence et prépa avec Hans Amble",
+    "duree": "14:41",
+    "sec": 881,
+    "vues": "7 035 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L9": {
+  "titre": "La dérivée seconde décrit la pente",
+  "candidats": [
+   {
+    "id": "W6rypabq8uA",
+    "titre": "Déterminer la DÉRIVÉE SECONDE d'une fonction - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "84 014 vues"
+   },
+   {
+    "id": "J11iF15GRHA",
+    "titre": "Convexité et dérivée seconde - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "3:26",
+    "sec": 206,
+    "vues": "2 172 vues"
+   },
+   {
+    "id": "UVoaxq-tHxk",
+    "titre": "La dérivée est la pente de la tangente | Lê Nguyên Hoang",
+    "chaine": "Wandida, EPFL",
+    "duree": "1:08",
+    "sec": 68,
+    "vues": "13 639 vues"
+   },
+   {
+    "id": "r_GiBr_r66o",
+    "titre": "[Seconde] [Droites] Déterminer la pente d'une droite",
+    "chaine": "Augustin PARIS",
+    "duree": "1:18",
+    "sec": 78,
+    "vues": "292 vues"
+   },
+   {
+    "id": "RLEE-iSBimc",
+    "titre": "Comment comprendre FACILEMENT les dérivées",
+    "chaine": "ParaMaths",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "1 100 356 vues"
+   },
+   {
+    "id": "0L-BUPdTSqA",
+    "titre": "La dérivée, c’est juste une pente (enfin compris !)",
+    "chaine": "Mathiscope",
+    "duree": "2:04",
+    "sec": 124,
+    "vues": "10 vues"
+   },
+   {
+    "id": "c11DLGL7qU8",
+    "titre": "La dérivée seconde en 2 minutes - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "2:02",
+    "sec": 122,
+    "vues": "29 530 vues"
+   },
+   {
+    "id": "uwjp-r8e1kg",
+    "titre": "LA PENTE D'UNE DROITE, LE TAUX D'ACCROISSEMENT, C'EST QUOI?",
+    "chaine": "SC Math",
+    "duree": "6:44",
+    "sec": 404,
+    "vues": "580 vues"
+   },
+   {
+    "id": "euQcmDDE3HY",
+    "titre": "Comment utiliser le nombre dérivé pour calculer la limite d'une fonction. 1S-TS",
+    "chaine": "MathsClaires",
+    "duree": "4:34",
+    "sec": 274,
+    "vues": "39 622 vues"
+   },
+   {
+    "id": "3Q_0B54d5L4",
+    "titre": "Liaison Terminale-Supérieur. Limites, continuité, dérivabilité. Application 2.",
+    "chaine": "mathsnick",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "219 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L10": {
+  "titre": "Contrôler un écart avec les accroissements finis",
+  "candidats": [
+   {
+    "id": "J3flHWuHmt4",
+    "titre": "Maîtrisez le théorème des inégalités des accroissements finis",
+    "chaine": "Académie de Sciences et Éducation Plus",
+    "duree": "13:39",
+    "sec": 819,
+    "vues": "30 637 vues"
+   },
+   {
+    "id": "u3pY1CICkBA",
+    "titre": "[EM#26] Théorème des accroissements finis (Démonstration)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "9:05",
+    "sec": 545,
+    "vues": "120 836 vues"
+   },
+   {
+    "id": "_jc8opnW1SE",
+    "titre": "Théorème des Accroissements Finis (TAF) et Inégalité des Accroissements Finis | 2 Bac SM",
+    "chaine": "Math by Hind",
+    "duree": "11:59",
+    "sec": 719,
+    "vues": "91 vues"
+   },
+   {
+    "id": "2ScxjlECXbI",
+    "titre": "THÉORÈME DES ACCROISSEMENTS FINIS FINIS APPLICATION 1",
+    "chaine": "Saïd Chermak",
+    "duree": "9:31",
+    "sec": 571,
+    "vues": "586 vues"
+   },
+   {
+    "id": "ZZpdkp9CcX4",
+    "titre": "Application théorème des accroissement finis #Ep_1",
+    "chaine": "Tioh Academy",
+    "duree": "6:35",
+    "sec": 395,
+    "vues": "4 816 vues"
+   },
+   {
+    "id": "jYNXlMXvf-Q",
+    "titre": "THÉORÈME DES ACCROISSEMENTS FINIS",
+    "chaine": "Saïd Chermak",
+    "duree": "9:38",
+    "sec": 578,
+    "vues": "1 471 vues"
+   },
+   {
+    "id": "yMGg8-9uxAw",
+    "titre": "📝 Le théorème des accroissements finis enfin expliqué avec un exercice corrigé détaillé ! TAF dans R",
+    "chaine": "Mathématic's",
+    "duree": "5:53",
+    "sec": 353,
+    "vues": "285 vues"
+   },
+   {
+    "id": "dHqzUYHWfEM",
+    "titre": "Théoreme de l'inegalite des accroissements finis application",
+    "chaine": "edunumerique sn",
+    "duree": "6:57",
+    "sec": 417,
+    "vues": "67 951 vues"
+   },
+   {
+    "id": "1_2yd3uwLEQ",
+    "titre": "Accroissements finis - Maths - MPSI 1ère année - Les Bons Profs",
+    "chaine": "Les Bons Profs SUP",
+    "duree": "8:53",
+    "sec": 533,
+    "vues": "62 469 vues"
+   },
+   {
+    "id": "qsCQ_IT_44Q",
+    "titre": "Calcul d'une limite à l'aide du théorème des accroissements finis - Exercice",
+    "chaine": "Mathuvu",
+    "duree": "12:17",
+    "sec": 737,
+    "vues": "7 504 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L11": {
+  "titre": "Reconnaître une asymptote",
+  "candidats": [
+   {
+    "id": "4SzUib7QMdU",
+    "titre": "Asymptote à la courbe - Définition & Application",
+    "chaine": "Hedacademy",
+    "duree": "11:00",
+    "sec": 660,
+    "vues": "326 656 vues"
+   },
+   {
+    "id": "PvSyr9Iz2yM",
+    "titre": "Asymptote à la courbe : TOUT comprendre",
+    "chaine": "Hedacademy",
+    "duree": "12:56",
+    "sec": 776,
+    "vues": "22 209 vues"
+   },
+   {
+    "id": "okjCzGs9uQU",
+    "titre": "Mémo - Les asymptotes",
+    "chaine": "Droles2Maths",
+    "duree": "1:42",
+    "sec": 102,
+    "vues": "51 927 vues"
+   },
+   {
+    "id": "D3UadRr9U40",
+    "titre": "Asymptotes Verticale Et Horizontale",
+    "chaine": "Tchitcha",
+    "duree": "7:45",
+    "sec": 465,
+    "vues": "9 852 vues"
+   },
+   {
+    "id": "m9XEGYeY47c",
+    "titre": "Remédiation: Asymptotes d'une fonction",
+    "chaine": "Remédiation A.P.M.W",
+    "duree": "9:09",
+    "sec": 549,
+    "vues": "215 007 vues"
+   },
+   {
+    "id": "jvWmPlhmkmk",
+    "titre": "Comment Rechercher et Prouver l'existence d'une asymptote H, V et O.",
+    "chaine": "KMS DIGITAL LEARNING",
+    "duree": "10:16",
+    "sec": 616,
+    "vues": "37 331 vues"
+   },
+   {
+    "id": "0LDGK-QkL80",
+    "titre": "Démontrer qu'une droite est asymptote horizontale - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "8:24",
+    "sec": 504,
+    "vues": "450 257 vues"
+   },
+   {
+    "id": "Er2yw3jlhgU",
+    "titre": "LIMITE : les ASYMPTOTES OBLIQUES - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "3:16",
+    "sec": 196,
+    "vues": "58 664 vues"
+   },
+   {
+    "id": "ovIRv587bq4",
+    "titre": "Calcul de limite d'une fonction rationnelle",
+    "chaine": "Éducation Plus",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "344 527 vues"
+   },
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-ANALYSE-L12": {
+  "titre": "Organiser une étude de fonction",
+  "candidats": [
+   {
+    "id": "pRQTKgnB82w",
+    "titre": "Comment réaliser une étude de fonctions : Tout savoir en 8 minutes !",
+    "chaine": "Catherine Absil",
+    "duree": "7:48",
+    "sec": 468,
+    "vues": "6 531 vues"
+   },
+   {
+    "id": "5ZO83G9raxY",
+    "titre": "Comment calculer fog(x) en maths.",
+    "chaine": "Éducation Plus",
+    "duree": "5:55",
+    "sec": 355,
+    "vues": "149 146 vues"
+   },
+   {
+    "id": "0MwFVTHZdpo",
+    "titre": "Etudier une fonction composée 1/6 : Ensemble de définition - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "5:20",
+    "sec": 320,
+    "vues": "357 052 vues"
+   },
+   {
+    "id": "YgejIlm6IaM",
+    "titre": "TOUT SUR LES FONCTIONS, en 5 minutes !! ⏱️ - Maths Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "125 871 vues"
+   },
+   {
+    "id": "vkfpsiqMydY",
+    "titre": "Tracer une courbe à partir du tableau de variations - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "13:56",
+    "sec": 836,
+    "vues": "578 115 vues"
+   },
+   {
+    "id": "Y_vI0Y7sgAc",
+    "titre": "Cours - Terminale L - Mathématiques : Etude de fonctions / M. Mbow",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "10:36",
+    "sec": 636,
+    "vues": "133 676 vues"
+   },
+   {
+    "id": "1JVdJWQC6z8",
+    "titre": "Comment étudier la continuité d'une fonction en un point?",
+    "chaine": "MathsClaires",
+    "duree": "3:35",
+    "sec": 215,
+    "vues": "117 073 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "oSUZPbfWe5A",
+    "titre": "(1eS2/MATHS) Suite épreuve: Exo 3 : ANALYSE: limites, continuité, dérivabilité, fonction raccordées",
+    "chaine": "Elite Science",
+    "duree": "11:46",
+    "sec": 706,
+    "vues": "61 318 vues"
+   }
+  ]
+ }
+}

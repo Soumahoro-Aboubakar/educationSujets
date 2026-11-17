@@ -1,0 +1,83 @@
+[
+  {
+    "code": "CALC-SANTE-L1",
+    "youtubeId": "ZD_hIvp7RSE",
+    "couverture": "partielle",
+    "justification": "Priorités opératoires avec parenthèses : l’ordre dans lequel organiser un calcul.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L2",
+    "youtubeId": "lOmbKXEa91Y",
+    "couverture": "partielle",
+    "justification": "Alloprof : conversions des unités de masse et de capacité (g, mg, L, mL) avec le tableau.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L3",
+    "youtubeId": "VDzwWNPTyL8",
+    "couverture": "exacte",
+    "justification": "Conversions heures, minutes et heures décimales (1 h = 60 min), en questions flash.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L4",
+    "youtubeId": "w9TwOuxqlHo",
+    "couverture": "exacte",
+    "justification": "Proportionnalité et passage à l’unité, exactement la méthode de la leçon.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L5",
+    "youtubeId": "qnTxNgL1HZw",
+    "couverture": "partielle",
+    "justification": "Calcul d’un taux d’évolution : (valeur finale − valeur initiale) / valeur initiale × 100.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L6",
+    "youtubeId": "yASWjmEg2q0",
+    "couverture": "partielle",
+    "justification": "Définition de la concentration massique (masse de soluté / volume de solution).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L7",
+    "youtubeId": "YkPHUSAV9Fo",
+    "couverture": "partielle",
+    "justification": "Cours de calcul de doses pour infirmiers : dose selon le poids et produit en croix, avec exercices.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L8",
+    "youtubeId": "TqbHR12ScaI",
+    "couverture": "partielle",
+    "justification": "Débit volumique D = V/t et ses formules dérivées, avec les unités.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CALC-SANTE-L9",
+    "youtubeId": "8YGa1I9OJX0",
+    "couverture": "exacte",
+    "justification": "Calcul du débit d’une perfusion en gouttes par minute à partir du volume, du temps et du nombre de gouttes par mL.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

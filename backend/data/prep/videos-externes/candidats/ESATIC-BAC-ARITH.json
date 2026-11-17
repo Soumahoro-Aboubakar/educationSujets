@@ -1,0 +1,727 @@
+{
+ "ESATIC-BAC-ARITH-L1": {
+  "titre": "Diviser en gardant un reste",
+  "candidats": [
+   {
+    "id": "ki_P6QYYmPk",
+    "titre": "LA DIVISION À 1 CHIFFRE AU DIVISEUR avec reste non nul",
+    "chaine": "Lydie PLUMAIN",
+    "duree": "3:38",
+    "sec": 218,
+    "vues": "870 217 vues"
+   },
+   {
+    "id": "IQFKMnvwFPM",
+    "titre": "Division posée CM2 - CM1 (par un nombre à 2 chiffres avec reste) - Cycle 3 - Maths",
+    "chaine": "Maître Lucas",
+    "duree": "7:05",
+    "sec": 425,
+    "vues": "654 608 vues"
+   },
+   {
+    "id": "uVS-oeibDJ4",
+    "titre": "Calculer un reste à l'aide d'une congruence - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "7:50",
+    "sec": 470,
+    "vues": "242 481 vues"
+   },
+   {
+    "id": "pbwoawMMEhU",
+    "titre": "CM1 : LA DIVISION À 2 CHIFFRES AU DIVISEUR 1/2",
+    "chaine": "Adeline GOSSET",
+    "duree": "10:40",
+    "sec": 640,
+    "vues": "435 868 vues"
+   },
+   {
+    "id": "Y8ODy-1nzKY",
+    "titre": "LA DIVISION EUCLIDIENNE - avec reste",
+    "chaine": "Hedacademy",
+    "duree": "3:31",
+    "sec": 211,
+    "vues": "40 894 vues"
+   },
+   {
+    "id": "T0IPInBxrpA",
+    "titre": "Comprendre le sens de la division : Partages et regroupements CE1 - CE2 - Cycle 2 - Maths",
+    "chaine": "Maître Lucas",
+    "duree": "6:55",
+    "sec": 415,
+    "vues": "228 272 vues"
+   },
+   {
+    "id": "cUGXbYjNgaU",
+    "titre": "LE RESTE DE LA DIVISION EUCLIDIENNE 💥",
+    "chaine": "TON MAX",
+    "duree": "11:30",
+    "sec": 690,
+    "vues": "18 576 vues"
+   },
+   {
+    "id": "i0Q6aAAZe0U",
+    "titre": "Poser une division à un chiffre au diviseur CM1 - CM2 - Cycle 3 - Maths - Calculs",
+    "chaine": "Maître Lucas",
+    "duree": "7:06",
+    "sec": 426,
+    "vues": "1 135 710 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L2": {
+  "titre": "Décomposer en nombres premiers",
+  "candidats": [
+   {
+    "id": "NGrAFTa1TFA",
+    "titre": "Comment DÉCOMPOSER UN NOMBRE en FACTEURS PREMIERS ? ✅ Troisième",
+    "chaine": "Paul Olivier",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "71 610 vues"
+   },
+   {
+    "id": "RBE2wPIKagI",
+    "titre": "Décomposer un nombre en un produit de facteurs premiers",
+    "chaine": "Yvan Monka",
+    "duree": "9:01",
+    "sec": 541,
+    "vues": "1 142 594 vues"
+   },
+   {
+    "id": "BlGaIqNz_pk",
+    "titre": "Décomposer un nombre en produits de facteurs premiers - Quatrième",
+    "chaine": "Yvan Monka",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "334 731 vues"
+   },
+   {
+    "id": "zGj-Dzwyk-U",
+    "titre": "Décomposer en facteurs premiers.",
+    "chaine": "Hedacademy",
+    "duree": "7:44",
+    "sec": 464,
+    "vues": "84 930 vues"
+   },
+   {
+    "id": "s5iEJzloiwU",
+    "titre": "COMPRENDRE les nombres premiers",
+    "chaine": "Hedacademy",
+    "duree": "9:10",
+    "sec": 550,
+    "vues": "24 872 vues"
+   },
+   {
+    "id": "zX53yP6vR2c",
+    "titre": "La décomposition d’un nombre",
+    "chaine": "Laurence Gratton",
+    "duree": "1:56",
+    "sec": 116,
+    "vues": "1 864 vues"
+   },
+   {
+    "id": "pSDme0OLyuU",
+    "titre": "La décomposition en facteurs premiers - Maths",
+    "chaine": "digiSchool Collège",
+    "duree": "1:36",
+    "sec": 96,
+    "vues": "269 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "107 314 vues"
+   },
+   {
+    "id": "DM9o9TMZUAk",
+    "titre": "Les nombres premiers | Arithmétique dans ℕ | Décomposition en facteurs premiers | TC",
+    "chaine": "Prof HAMZA",
+    "duree": "11:19",
+    "sec": 679,
+    "vues": "412 vues"
+   },
+   {
+    "id": "U77pxVvh_CE",
+    "titre": "Comment décomposer en produit de facteurs premiers sur calculatrice",
+    "chaine": "ZiZWiT",
+    "duree": "0:56",
+    "sec": 56,
+    "vues": "1 056 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L3": {
+  "titre": "Trouver le PGCD avec Euclide",
+  "candidats": [
+   {
+    "id": "npG_apkI18o",
+    "titre": "Déterminer le PGCD de deux nombres (Algorithme d'Euclide) - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "5:59",
+    "sec": 359,
+    "vues": "176 675 vues"
+   },
+   {
+    "id": "ZICUfgw5vik",
+    "titre": "Calcul Du Pgcd À L'aide De L'algorithme D'Euclide",
+    "chaine": "Tchitcha",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "568 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "107 314 vues"
+   },
+   {
+    "id": "EVQY8DG5_es",
+    "titre": "algorithme d'Euclide • comprendre et savoir l'appliquer pour calculer un PGCD • arithmétique",
+    "chaine": "jaicompris Maths",
+    "duree": "7:09",
+    "sec": 429,
+    "vues": "131 574 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 100 184 vues"
+   },
+   {
+    "id": "GRspofhTrfQ",
+    "titre": "Appliquer l'algorithme d'Euclide (Version collège) - Tale Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "6:56",
+    "sec": 416,
+    "vues": "286 506 vues"
+   },
+   {
+    "id": "ESIWfW9aSow",
+    "titre": "Arithmétique - partie 1 : division euclidienne et pgcd",
+    "chaine": "Exo7Math",
+    "duree": "14:06",
+    "sec": 846,
+    "vues": "349 117 vues"
+   },
+   {
+    "id": "uoigpLGek4Y",
+    "titre": "Calculer le PGCD à l'aide de l'algorithme d'Euclide",
+    "chaine": "mathsollivier",
+    "duree": "2:17",
+    "sec": 137,
+    "vues": "627 vues"
+   },
+   {
+    "id": "8YUSAl4BzsY",
+    "titre": "Démonstration PGCD(a;b)=PGCD(b;r) • lien avec l'algorithme d'Euclide • arithmétique",
+    "chaine": "jaicompris Maths",
+    "duree": "14:00",
+    "sec": 840,
+    "vues": "36 818 vues"
+   },
+   {
+    "id": "9nDQzF4jmBs",
+    "titre": "Méthode • TRES rapide pour trouver les coefficients de Bézout (Euclide étendu) • Maths expert prépa",
+    "chaine": "jaicompris Maths",
+    "duree": "6:04",
+    "sec": 364,
+    "vues": "71 173 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L4": {
+  "titre": "Trouver le premier multiple commun",
+  "candidats": [
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "107 314 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 100 184 vues"
+   },
+   {
+    "id": "NGrAFTa1TFA",
+    "titre": "Comment DÉCOMPOSER UN NOMBRE en FACTEURS PREMIERS ? ✅ Troisième",
+    "chaine": "Paul Olivier",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "71 610 vues"
+   },
+   {
+    "id": "Axmr-mg3UII",
+    "titre": "CRPE Maths – PGCD et PPCM avec la décomposition en facteurs premiers",
+    "chaine": "MATHS-CRPE",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "1 061 vues"
+   },
+   {
+    "id": "0Gyp-Rdku-w",
+    "titre": "PGCD et PPCM - Décomposition en produit de facteurs premiers",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "8:51",
+    "sec": 531,
+    "vues": "32 526 vues"
+   },
+   {
+    "id": "cbW0mdCsQgc",
+    "titre": "3e Trouver le Plus Petit Commun Multiple (PPCM) de deux nombres",
+    "chaine": "Cours de Maths Saber",
+    "duree": "3:33",
+    "sec": 213,
+    "vues": "88 919 vues"
+   },
+   {
+    "id": "30vF8qPsGiw",
+    "titre": "J'explique comment calculer rapidement le PPCM - Les leçons de Monsieur Sébastien",
+    "chaine": "Les leçons de Monsieur Sébastien",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "187 312 vues"
+   },
+   {
+    "id": "VUEyQoCeB0Q",
+    "titre": "PPCM et PGCD des nombres entiers",
+    "chaine": "Éducation Plus",
+    "duree": "12:33",
+    "sec": 753,
+    "vues": "50 277 vues"
+   },
+   {
+    "id": "leI0FUKjEcs",
+    "titre": "Chercher tous les diviseurs communs à deux nombres - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "4:14",
+    "sec": 254,
+    "vues": "127 477 vues"
+   },
+   {
+    "id": "al9oHwrlTNo",
+    "titre": "LE COURS : Arithmétique - Quatrième/Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "14:41",
+    "sec": 881,
+    "vues": "777 413 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L5": {
+  "titre": "Bézout : écrire le PGCD comme combinaison",
+  "candidats": [
+   {
+    "id": "Rp5Qm2PDpzQ",
+    "titre": "Si a divise b et c, pourquoi divise-t-il leur PGCD ? | Théorème de Bézout",
+    "chaine": "mathematiquema",
+    "duree": "2:25",
+    "sec": 145,
+    "vues": "54 vues"
+   },
+   {
+    "id": "bWHY9Eto2wU",
+    "titre": "théorème de Bézout - comment trouver u,v dans au+bv=1 - arithmétique - spé Maths",
+    "chaine": "jaicompris Maths",
+    "duree": "13:44",
+    "sec": 824,
+    "vues": "279 054 vues"
+   },
+   {
+    "id": "OqrLJXDmFHw",
+    "titre": "TS-spé-PGCD,Bézout,Gauss-caractérisation du PGCD - cours",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "10:04",
+    "sec": 604,
+    "vues": "1 203 vues"
+   },
+   {
+    "id": "BbgEV2yVLe8",
+    "titre": "TS- spécialité- Polynésie juin 2000 (1/2)- Diophantienne PGCD égalité de Bézout -maths",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "9:38",
+    "sec": 578,
+    "vues": "271 vues"
+   },
+   {
+    "id": "OaLtS0C1fds",
+    "titre": "TS - spécialité - Bézout,Gauss,PGCD - L'identité de Bézout et une autre caractérisation du PGCD",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "11:36",
+    "sec": 696,
+    "vues": "1 286 vues"
+   },
+   {
+    "id": "8YUSAl4BzsY",
+    "titre": "Démonstration PGCD(a;b)=PGCD(b;r) • lien avec l'algorithme d'Euclide • arithmétique",
+    "chaine": "jaicompris Maths",
+    "duree": "14:00",
+    "sec": 840,
+    "vues": "36 818 vues"
+   },
+   {
+    "id": "s5cf-9VnZ0M",
+    "titre": "TS-spé - PGCD,Bézout , Gauss - caractérisation du PGCD exercices (liste 1)",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "6:17",
+    "sec": 377,
+    "vues": "688 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "107 314 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L6": {
+  "titre": "Résoudre une équation en entiers",
+  "candidats": [
+   {
+    "id": "ezGlju-nR6s",
+    "titre": "Résoudre une équation ✅ Méthode simple | Maths | 3e | Brevet",
+    "chaine": "Paul Olivier",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "429 188 vues"
+   },
+   {
+    "id": "nHTkblWvjrc",
+    "titre": "Résoudre une équation (niveau débutant) Mathématiques collège, lycée. 4ème",
+    "chaine": "Bonnes Notes en Maths",
+    "duree": "5:02",
+    "sec": 302,
+    "vues": "33 328 vues"
+   },
+   {
+    "id": "VlUbPCuRAoY",
+    "titre": "Comprendre les Sommes",
+    "chaine": "Le Raton",
+    "duree": "9:12",
+    "sec": 552,
+    "vues": "68 628 vues"
+   },
+   {
+    "id": "c-akR4NJhh0",
+    "titre": "COMPRENDRE les intervalles",
+    "chaine": "Hedacademy",
+    "duree": "7:42",
+    "sec": 462,
+    "vues": "279 132 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "107 314 vues"
+   },
+   {
+    "id": "_vu2XGWwM6o",
+    "titre": "Partie entière: Comment résoudre une équation avec partie entière. Classe: Seconde S",
+    "chaine": "MathsClaires",
+    "duree": "4:51",
+    "sec": 291,
+    "vues": "17 191 vues"
+   },
+   {
+    "id": "u-C_uNRbCkU",
+    "titre": "Equations trigonométrique",
+    "chaine": "Éducation Plus et Académie de Sciences",
+    "duree": "13:02",
+    "sec": 782,
+    "vues": "31 006 vues"
+   },
+   {
+    "id": "maTlI0jw52c",
+    "titre": "Expert - Arithm. - Th. Gauss Congruences - Ex Type 3C : résoudre un système de congruences",
+    "chaine": "Prodesmaths",
+    "duree": "6:03",
+    "sec": 363,
+    "vues": "6 937 vues"
+   },
+   {
+    "id": "Hb39SqG6nbg",
+    "titre": "Résoudre une équation avec des congruences (1) - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "2:54",
+    "sec": 174,
+    "vues": "177 496 vues"
+   },
+   {
+    "id": "14X_6AfFl4Y",
+    "titre": "Opérations dans IN || résoudre les équations dans les #entiers #naturels - arithmétique (Tle)",
+    "chaine": "MAAUTECH",
+    "duree": "8:15",
+    "sec": 495,
+    "vues": "1 494 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L7": {
+  "titre": "Calculer avec des congruences",
+  "candidats": [
+   {
+    "id": "BTCsGN6xwXg",
+    "titre": "Utiliser les congruences - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:57",
+    "sec": 717,
+    "vues": "309 399 vues"
+   },
+   {
+    "id": "sKHISntBYt0",
+    "titre": "Congruences-Maths Expertes - travail sur les congruences 3 exemples",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "10:37",
+    "sec": 637,
+    "vues": "75 173 vues"
+   },
+   {
+    "id": "YvQ6uHqHUxc",
+    "titre": "Exercice sur la congruence l'arithmétique dans Z",
+    "chaine": "u math",
+    "duree": "10:45",
+    "sec": 645,
+    "vues": "57 239 vues"
+   },
+   {
+    "id": "BByKm1u16qs",
+    "titre": "Congruence - comprendre la définition - arithmétique - Terminale Option Maths expertes - Cours",
+    "chaine": "jaicompris Maths",
+    "duree": "10:42",
+    "sec": 642,
+    "vues": "221 541 vues"
+   },
+   {
+    "id": "uVS-oeibDJ4",
+    "titre": "Calculer un reste à l'aide d'une congruence - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "7:50",
+    "sec": 470,
+    "vues": "242 481 vues"
+   },
+   {
+    "id": "MFKgMcTS-Jk",
+    "titre": "Comment résoudre une équation de second degré avec congruence - mathématiques terminale",
+    "chaine": "all for math",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "13 162 vues"
+   },
+   {
+    "id": "SdKhHF9v9zo",
+    "titre": "congruence • Savoir calculer avec modulo • Règles à connaitre et erreurs à éviter • arithmétique",
+    "chaine": "jaicompris Maths",
+    "duree": "13:03",
+    "sec": 783,
+    "vues": "122 218 vues"
+   },
+   {
+    "id": "maTlI0jw52c",
+    "titre": "Expert - Arithm. - Th. Gauss Congruences - Ex Type 3C : résoudre un système de congruences",
+    "chaine": "Prodesmaths",
+    "duree": "6:03",
+    "sec": 363,
+    "vues": "6 937 vues"
+   },
+   {
+    "id": "HxcyqNbdVUI",
+    "titre": "Notion de CONGRUENCE [en 1min⏱]",
+    "chaine": "Yvan Monka",
+    "duree": "1:29",
+    "sec": 89,
+    "vues": "252 587 vues"
+   },
+   {
+    "id": "RatyJuTdO9M",
+    "titre": "Comment utiliser un tableau de congruences ?",
+    "chaine": "Mathemax",
+    "duree": "9:40",
+    "sec": 580,
+    "vues": "12 136 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L8": {
+  "titre": "Repérer le cycle des puissances",
+  "candidats": [
+   {
+    "id": "TrHxDAN9UmA",
+    "titre": "CALCULER avec des puissances | Mathématiques",
+    "chaine": "Paul Olivier",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "180 095 vues"
+   },
+   {
+    "id": "X9LSQICY97k",
+    "titre": "LES PUISSANCES ✅ Explications simples ! 💪 Math | Collège (4e, 3e, ...)",
+    "chaine": "Paul Olivier",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "15 073 vues"
+   },
+   {
+    "id": "XA-JkXirNz4",
+    "titre": "LE COURS : Les puissances - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "13:43",
+    "sec": 823,
+    "vues": "373 684 vues"
+   },
+   {
+    "id": "fAr2RPh6n08",
+    "titre": "Les puissances carré et cube - CE5 - CM2",
+    "chaine": "Pr. Yassir Oukarmoud",
+    "duree": "3:38",
+    "sec": 218,
+    "vues": "8 178 vues"
+   },
+   {
+    "id": "TX51-QmSZhk",
+    "titre": "PUISSANCES de 10",
+    "chaine": "Hedacademy",
+    "duree": "8:25",
+    "sec": 505,
+    "vues": "107 751 vues"
+   },
+   {
+    "id": "UL5cgbvDvNQ",
+    "titre": "Qu'est- ce qu'une puissance ?",
+    "chaine": "Hedacademy",
+    "duree": "8:13",
+    "sec": 493,
+    "vues": "128 827 vues"
+   },
+   {
+    "id": "IKmReDkNGp8",
+    "titre": "Effectuer des calculs de puissances (1) - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "6:59",
+    "sec": 419,
+    "vues": "641 954 vues"
+   },
+   {
+    "id": "Fc5Nl9m3MZA",
+    "titre": "CALCULER avec des PUISSANCES de 10 ? 💪 Facile ! ✅ 3e | Seconde | Math",
+    "chaine": "Paul Olivier",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "18 923 vues"
+   },
+   {
+    "id": "89rXg7MFlnI",
+    "titre": "Congruence • Trouver le chiffre des unités de 3^2015 • Arithmétique Terminale S Spécialité",
+    "chaine": "jaicompris Maths",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "78 384 vues"
+   }
+  ]
+ },
+ "ESATIC-BAC-ARITH-L9": {
+  "titre": "Résoudre une congruence linéaire",
+  "candidats": [
+   {
+    "id": "HxcyqNbdVUI",
+    "titre": "Notion de CONGRUENCE [en 1min⏱]",
+    "chaine": "Yvan Monka",
+    "duree": "1:29",
+    "sec": 89,
+    "vues": "252 587 vues"
+   },
+   {
+    "id": "Hb39SqG6nbg",
+    "titre": "Résoudre une équation avec des congruences (1) - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "2:54",
+    "sec": 174,
+    "vues": "177 496 vues"
+   },
+   {
+    "id": "BTCsGN6xwXg",
+    "titre": "Utiliser les congruences - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:57",
+    "sec": 717,
+    "vues": "309 399 vues"
+   },
+   {
+    "id": "XZCKnMY6oiA",
+    "titre": "Comment résoudre une équation avec des congruences ?",
+    "chaine": "Mathemax",
+    "duree": "7:11",
+    "sec": 431,
+    "vues": "8 548 vues"
+   },
+   {
+    "id": "MFKgMcTS-Jk",
+    "titre": "Comment résoudre une équation de second degré avec congruence - mathématiques terminale",
+    "chaine": "all for math",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "13 162 vues"
+   },
+   {
+    "id": "6m3gtVyXn-w",
+    "titre": "Résoudre un système avec des congruences (1)",
+    "chaine": "mathsetmethodes",
+    "duree": "6:09",
+    "sec": 369,
+    "vues": "21 834 vues"
+   },
+   {
+    "id": "maTlI0jw52c",
+    "titre": "Expert - Arithm. - Th. Gauss Congruences - Ex Type 3C : résoudre un système de congruences",
+    "chaine": "Prodesmaths",
+    "duree": "6:03",
+    "sec": 363,
+    "vues": "6 937 vues"
+   },
+   {
+    "id": "BByKm1u16qs",
+    "titre": "Congruence - comprendre la définition - arithmétique - Terminale Option Maths expertes - Cours",
+    "chaine": "jaicompris Maths",
+    "duree": "10:42",
+    "sec": 642,
+    "vues": "221 541 vues"
+   },
+   {
+    "id": "RbNLlesUg5I",
+    "titre": "Comment résoudre une équation modulaire ax congru à b modulo n ?",
+    "chaine": "Mathemax",
+    "duree": "9:15",
+    "sec": 555,
+    "vues": "15 679 vues"
+   },
+   {
+    "id": "VNDrKugnyuE",
+    "titre": "ARITHMÉTIQUE - Résoudre une Équation de Congruence - 2 BAC SM - [Exercice 1]",
+    "chaine": "Math & Phys",
+    "duree": "7:10",
+    "sec": 430,
+    "vues": "82 115 vues"
+   }
+  ]
+ }
+}

@@ -1,0 +1,253 @@
+{
+  "module": "ENSEA-AS-COMPLEXES",
+  "lecons": [
+    {
+      "code": "ENSEA-AS-COMPLEXES-L1",
+      "requetes": [
+        "\"Un nombre qui se place dans le plan\" complexes",
+        "nombres complexes affixe explication simple vidéo",
+        "site:youtube.com nombres complexes forme algébrique affixe introduction cours",
+        "nombres complexes affixe point introduction cours YouTube",
+        "nombres complexes introduction plan complexe 5 minutes vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=VfoLnhTRrSw",
+          "titre": "NOMBRES COMPLEXES - Introduction - Maths Expertes / PostBac",
+          "chaine": "Médématiques",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo introduit les complexes à partir d’une équation impossible dans les réels, puis présente le plan complexe et les affixes."
+        }
+      ],
+      "justification": "Le sommaire suit précisément la progression de la leçon et annonce la conclusion à 5:16 ; la durée totale exacte n’est pas affichée."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L2",
+      "requetes": [
+        "\"Additionner et multiplier\" complexes vidéo",
+        "site:youtube.com nombres complexes addition multiplication explication simple",
+        "addition multiplication complexes Yvan Monka vidéo",
+        "additionner multiplier nombres complexes cours YouTube",
+        "Les Nombres Complexes Additionner et Multiplier Mathrix durée vidéo",
+        "nombres complexes addition multiplication Mathrix minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=7ZlWPGm4wiA",
+          "titre": "Nombre Complexe Forme Algébrique - Mathrix",
+          "chaine": "Mathrix",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La transcription présente explicitement des additions, soustractions et multiplications de complexes avec réduction sous forme a + ib et utilisation de i² = −1."
+        }
+      ],
+      "justification": "Malgré son titre général, la transcription confirme une vidéo consacrée aux opérations demandées, illustrées par des exemples. La durée totale n’a pas pu être vérifiée."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L3",
+      "requetes": [
+        "\"Le conjugué pour diviser\"",
+        "site:youtube.com conjugué complexe quotient exemple",
+        "conjugué quotient nombre complexe explication simple vidéo",
+        "nombres complexes conjugué quotient cours 5 minutes youtube",
+        "Les NOMBRES COMPLEXES Partie 2/5 Conjugué Inverse quotient YouTube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=xaRaauQeqpY",
+          "titre": "LES NOMBRES COMPLEXES - PARTIE 2",
+          "chaine": "BosseTesMaths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo définit le conjugué, montre son interprétation graphique et explique le calcul d’un inverse puis d’un quotient avec des exercices."
+        }
+      ],
+      "justification": "Le déroulé couvre les notions algébriques et géométriques de la leçon, avec un complément sur le module. La conclusion est annoncée à 9:23, sans durée totale exacte visible."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L4",
+      "requetes": [
+        "\"Le module mesure une distance\"",
+        "site:youtube.com module complexe distance cercle cours",
+        "module complexe distance cercle Yvan Monka vidéo",
+        "module nombre complexe distance cercle YouTube",
+        "module nombre complexe cours 5 minutes youtube",
+        "Comment déterminer graphiquement le module d'un nombre complexe Mathemax YouTube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=RtVON0mv0Hc",
+          "titre": "Comment déterminer graphiquement le module d'un nombre complexe ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique que le module est la distance entre l’origine et le point représentant le complexe, mais sa description ne confirme pas le traitement des cercles et des distances AB."
+        }
+      ],
+      "justification": "Le candidat cible directement l’interprétation géométrique essentielle pour un débutant. La couverture des autres applications et la durée totale restent non vérifiées."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L5",
+      "requetes": [
+        "\"Un angle sur le cercle unité\"",
+        "cercle trigonométrique radians sinus cosinus explication simple vidéo",
+        "cercle trigonométrique en 5 minutes vidéo",
+        "cercle trigonométrique Yvan Monka YouTube cours",
+        "Apprendre à lire sur le cercle trigonométrique Première YouTube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ECNX9hnhG9U",
+          "titre": "Apprendre à lire sur le cercle trigonométrique - Première",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo apprend à lire le cercle trigonométrique et à déterminer le cosinus et le sinus d’un angle, sans que la description confirme toute l’introduction aux radians."
+        }
+      ],
+      "justification": "La lecture du cercle et des coordonnées trigonométriques correspond au cœur de la leçon. La durée totale et le traitement explicite de tous les prérequis ne sont pas visibles."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L6",
+      "requetes": [
+        "\"Passer à la forme exponentielle\" complexe",
+        "forme exponentielle nombre complexe cours vidéo",
+        "site:youtube.com/watch \"forme exponentielle\" \"Monka\"",
+        "forme exponentielle complexe exemple YouTube",
+        "Mettre un complexe sous forme exponentielle YouTube Hedacademy",
+        "Mettre un complexe sous forme exponentielle Hedacademy durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=OclRGJNcfzM",
+          "titre": "Mettre un complexe sous forme exponentielle",
+          "chaine": "Hedacademy",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Un exercice corrigé explique le calcul du module et de l’argument pour passer de la forme algébrique à la forme exponentielle."
+        }
+      ],
+      "justification": "La description confirme une méthode directement applicable aux exemples de la leçon, avec recours au cercle trigonométrique. La durée totale n’a pas pu être vérifiée."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L7",
+      "requetes": [
+        "\"Multiplier les modules, additionner les angles\"",
+        "complexes produit quotient puissance forme exponentielle cours vidéo",
+        "site:youtube.com/watch \"complexes\" \"Moivre\"",
+        "produit quotient puissance complexes exponentielle YouTube",
+        "Comment déterminer la forme exponentielle d'un produit puissance inverse quotient YouTube Mathemax"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=npZPLoLIij4",
+          "titre": "Comment déterminer la forme exponentielle d'un produit/puissance/inverse/quotient ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo applique les propriétés de l’exponentielle complexe aux produits, puissances, inverses et quotients, qui sont précisément les calculs enseignés."
+        }
+      ],
+      "justification": "Le sujet annoncé correspond très étroitement aux opérations de la leçon au niveau maths expertes. La durée totale n’est pas disponible dans les résultats consultés."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L8",
+      "requetes": [
+        "\"Trouver les racines carrées d’un complexe\"",
+        "racine carrée complexe méthode algébrique exemple vidéo",
+        "Racines carrées d'un nombre complexe YouTube méthode exemple cours",
+        "racine carrée complexe méthode jaicompris YouTube",
+        "EXO10 Racines carrées nombre complexe méthode",
+        "racines carrées complexe jaicompris minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=e0-7KsGT7AM",
+          "titre": "racines carrées d'un nombre complexe • Méthode + exemple corrigé en détail • prépa MPSI PCSI ECS",
+          "chaine": "jaicompris Maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo présente une méthode détaillée pour déterminer les racines carrées d’un complexe et l’applique à −5 + 12i."
+        }
+      ],
+      "justification": "Le candidat traite directement la recherche de racines carrées non réelles ; la durée totale reste inconnue. La vidéo EXO#10 a été écartée, car son sommaire dépasse explicitement quinze minutes."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L9",
+      "requetes": [
+        "\"Résoudre une équation du second degré\" \"complexes\" vidéo",
+        "équation second degré coefficients complexes delta cours vidéo",
+        "équation second degré coefficients complexes vidéo exemple",
+        "équation second degré coefficient complexe exemple YouTube 108",
+        "108- Comment résoudre une équation du second degré à coefficient complexes YouTube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=4PttHtdEyf0",
+          "titre": "Comment résoudre une équation du second degré avec les nombres complexes ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la résolution du second degré dans les complexes au niveau maths expertes, mais sa description ne confirme pas le cas général des coefficients complexes."
+        }
+      ],
+      "justification": "Ce candidat fournit une introduction ciblée à la résolution dans ℂ. La partie concernant un discriminant complexe général ainsi que la durée totale restent non vérifiées."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L10",
+      "requetes": [
+        "\"Répartir les racines n-ièmes sur un cercle\"",
+        "racines nièmes complexe cours exemple vidéo",
+        "racines nièmes complexe 5 minutes YouTube",
+        "Racines n-ièmes nombre complexe Christian Côté",
+        "Racines n-ièmes d’un nombre complexe Christian Côté YouTube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=pMj_3iGExVc",
+          "titre": "Racines n-ièmes d’un nombre complexe",
+          "chaine": "Mathéma-TIC",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Le cours de Christian Côté présente le calcul des racines n-ièmes, leur interprétation géométrique et un exemple suivi d’une représentation."
+        }
+      ],
+      "justification": "Le sommaire couvre exactement le calcul et la répartition géométrique demandés, avec un résumé annoncé à 7:18. La durée totale exacte n’est pas affichée."
+    },
+    {
+      "code": "ENSEA-AS-COMPLEXES-L11",
+      "requetes": [
+        "\"Lire une transformation du plan\" complexe",
+        "similitude directe complexe centre az+b cours vidéo",
+        "similitude directe déterminer centre complexe YouTube",
+        "similitudes complexes centre rapport angle vidéo cours",
+        "similitude directe écriture complexe centre vidéo 5 minutes",
+        "reconnaitre similitude nombres complexes video",
+        "transformation plan complexe az b video cours"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=V0UmkWSPLl0",
+          "titre": "SIMILITUDES DIRECTES 🔰",
+          "chaine": "TON MAX",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Un exercice explique comment obtenir l’écriture complexe d’une transformation puis identifier la nature et les éléments caractéristiques de la similitude."
+        }
+      ],
+      "justification": "L’exercice correspond à la reconnaissance d’une similitude et de ses caractéristiques, mais ne couvre pas explicitement les rappels sur les milieux et les translations. La durée totale n’a pas pu être vérifiée."
+    }
+  ]
+}

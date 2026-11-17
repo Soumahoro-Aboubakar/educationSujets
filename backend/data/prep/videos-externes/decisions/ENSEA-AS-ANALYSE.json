@@ -1,0 +1,110 @@
+[
+  {
+    "code": "ENSEA-AS-ANALYSE-L1",
+    "youtubeId": "wV_V1EiI3eI",
+    "couverture": "exacte",
+    "justification": "Comprendre la notion de limite d’une fonction (en l’infini et en un point), niveau terminale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L2",
+    "youtubeId": "4NQbGdXThrk",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : lever une forme indéterminée pour calculer une limite.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L3",
+    "youtubeId": "Eo1jvPphja0",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : calculer une limite à l’aide du théorème d’encadrement (gendarmes).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L4",
+    "youtubeId": "03WMLyc7rLE",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : étudier la continuité d’une fonction (raccord sans saut).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L5",
+    "youtubeId": "6beqdRe2g-4",
+    "couverture": "exacte",
+    "justification": "Corollaire du théorème des valeurs intermédiaires : existence et unicité d’une solution pour une fonction continue strictement monotone.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L6",
+    "youtubeId": "z1Xw6OfrHn4",
+    "couverture": "partielle",
+    "justification": "Les Bons Profs : dérivées d’une somme, d’un produit et d’un quotient, formules de la leçon.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L7",
+    "youtubeId": "kE32Ek8BXvs",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : calculer la dérivée d’une fonction composée (uⁿ, ln u, eᵘ).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L8",
+    "youtubeId": "fj5jvLZPKgQ",
+    "couverture": "exacte",
+    "justification": "Calcul de la dérivée d’une fonction réciproque : g′(y) = 1/f′(g(y)).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L9",
+    "youtubeId": "2P8wlCe9poY",
+    "couverture": "exacte",
+    "justification": "Convexité et dérivée seconde : ce que f″ dit de la pente.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L10",
+    "youtubeId": "NVJJ1IWvoSs",
+    "couverture": "exacte",
+    "justification": "Théorème de l’inégalité des accroissements finis : si",
+    "source": "f′",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L11",
+    "youtubeId": "zbyGXpKTI_k",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : démontrer qu’une droite est asymptote oblique.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-ANALYSE-L12",
+    "youtubeId": "q--2n6__HCo",
+    "couverture": "partielle",
+    "justification": "Étude de fonction type bac : dérivée, variations, limites et TVI enchaînés.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

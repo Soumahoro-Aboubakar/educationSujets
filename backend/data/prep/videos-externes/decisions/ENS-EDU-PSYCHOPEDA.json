@@ -1,0 +1,83 @@
+[
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L1",
+    "youtubeId": "8dFPmhSJEWE",
+    "couverture": "partielle",
+    "justification": "Transformations physiques et psychologiques de l’adolescence (puberté).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L2",
+    "youtubeId": "_2p1Pd_QDXg",
+    "couverture": "partielle",
+    "justification": "Stades de Piaget : des opérations concrètes au raisonnement formel sur des hypothèses.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L3",
+    "youtubeId": "tDzTtgfqKM0",
+    "couverture": "partielle",
+    "justification": "Académie Aix-Marseille : comment la mémorisation transforme une réussite immédiate en apprentissage durable.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L4",
+    "youtubeId": "YNQSVgDbaco",
+    "couverture": "exacte",
+    "justification": "Zone proximale de développement : aider juste assez pour que l’élève progresse sans échec.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L5",
+    "youtubeId": "PoLlQ_tzbkU",
+    "couverture": "exacte",
+    "justification": "Motivation intrinsèque et extrinsèque : ce qui soutient une motivation durable.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L6",
+    "youtubeId": "5KSZtzU1pi8",
+    "couverture": "partielle",
+    "justification": "Évaluation formative : utiliser les erreurs pour ajuster l’enseignement, en 3 minutes.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L7",
+    "youtubeId": "soLtgmIfPII",
+    "couverture": "partielle",
+    "justification": "Différencier simplement : adapter les moyens aux besoins des élèves.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L8",
+    "youtubeId": "HKQ_FrWxCGY",
+    "couverture": "exacte",
+    "justification": "Les trois styles de leadership de Kurt Lewin (autoritaire, démocratique, laisser-faire), cités par la leçon.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENS-EDU-PSYCHOPEDA-L9",
+    "youtubeId": "zeAjp6B_DNs",
+    "couverture": "partielle",
+    "justification": "Le harcèlement à l’école : repérer une violence répétée, en moins de 2 minutes.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

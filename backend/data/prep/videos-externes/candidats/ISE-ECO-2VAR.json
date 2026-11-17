@@ -1,0 +1,801 @@
+{
+ "ISE-ECO-2VAR-L1": {
+  "titre": "Rappeler le trajet d’une entrée vers une sortie",
+  "candidats": [
+   {
+    "id": "1GTFsdBvnRE",
+    "titre": "⭐️ Astuce pour additionner deux fractions ayant 1 au numérateur #maths #fraction",
+    "chaine": "Campus XYZ",
+    "duree": "0:25",
+    "sec": 25,
+    "vues": "1 174 190 vues"
+   },
+   {
+    "id": "T6odCc1t2bg",
+    "titre": "Domaine d'une fonction de deux variables 1",
+    "chaine": "Mathématiques CSF",
+    "duree": "2:38",
+    "sec": 158,
+    "vues": "45 588 vues"
+   },
+   {
+    "id": "SV5E3wCifmo",
+    "titre": "Graphe d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "12:14",
+    "sec": 734,
+    "vues": "24 925 vues"
+   },
+   {
+    "id": "nJ1Jv9G_WPs",
+    "titre": "Lignes de niveau d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "10:32",
+    "sec": 632,
+    "vues": "35 043 vues"
+   },
+   {
+    "id": "mpoGMPGN4zM",
+    "titre": "fonctions à deux variables - La Différentiabilité",
+    "chaine": "Dr. BOUATELLI",
+    "duree": "14:36",
+    "sec": 876,
+    "vues": "19 878 vues"
+   },
+   {
+    "id": "hObIxEcESPg",
+    "titre": "#EP1 Le cours en 10 min: Fonctions de deux variables réelles et leur domaine de définition",
+    "chaine": "Hamilton De Araujo",
+    "duree": "11:36",
+    "sec": 696,
+    "vues": "11 076 vues"
+   },
+   {
+    "id": "r34Q6Y9pJts",
+    "titre": "Continuité et derivées partielles d'une fonction à 2 variables-partie 1",
+    "chaine": "salah-eddine barki",
+    "duree": "0:34",
+    "sec": 34,
+    "vues": "5 787 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L2": {
+  "titre": "Rappeler la pente et les extremums en une variable",
+  "candidats": [
+   {
+    "id": "L-3MEUTKUkY",
+    "titre": "Extremum d’une fonction à deux variables",
+    "chaine": "AMINE OUACHI MATHEMATICS",
+    "duree": "13:52",
+    "sec": 832,
+    "vues": "21 154 vues"
+   },
+   {
+    "id": "SV5E3wCifmo",
+    "titre": "Graphe d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "12:14",
+    "sec": 734,
+    "vues": "24 925 vues"
+   },
+   {
+    "id": "C7td0T2WILQ",
+    "titre": "Trouver les points critiques et déterminer leur nature - partie 1/2",
+    "chaine": "Méthode Maths",
+    "duree": "11:01",
+    "sec": 661,
+    "vues": "177 299 vues"
+   },
+   {
+    "id": "7zKrJdtJ8qY",
+    "titre": "Valeurs extrêmes des fonctions de deux variables",
+    "chaine": "Mathématiques CSF",
+    "duree": "5:47",
+    "sec": 347,
+    "vues": "11 977 vues"
+   },
+   {
+    "id": "IRozDzOI6gI",
+    "titre": "Calculer un DÉVELOPPEMENT LIMITÉ d'une FONCTION à PLUSIEURS VAR - Méthode & Exemple - Bac+1 / Bac+2",
+    "chaine": "Fabinou",
+    "duree": "9:43",
+    "sec": 583,
+    "vues": "32 235 vues"
+   },
+   {
+    "id": "cRZU2VXRH6w",
+    "titre": "Part1 Recherche des extrema locaux d'une fonction à 2 variables",
+    "chaine": "CONTINUITE, DERIVATION, CALCUL DIFFERENTIEL",
+    "duree": "5:25",
+    "sec": 325,
+    "vues": "708 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L3": {
+  "titre": "Lire une surface et ses lignes de niveau",
+  "candidats": [
+   {
+    "id": "4iCasn9TI34",
+    "titre": "LIGNES DE NIVEAU ET BARYCENTRE: PLEIN D'EXEMPLES",
+    "chaine": "The Professor Math Academy",
+    "duree": "13:43",
+    "sec": 823,
+    "vues": "108 011 vues"
+   },
+   {
+    "id": "dscGdo_m9Yo",
+    "titre": "Barycentres et lignes de niveau | Mastering Barycenters and Level Lines in Geometry",
+    "chaine": "ÉDUCATION_Infini.com♾️",
+    "duree": "10:27",
+    "sec": 627,
+    "vues": "846 vues"
+   },
+   {
+    "id": "FMZXB4tMY5k",
+    "titre": "Déterminer les LIGNES de NIVEAU - Fonctions à plusieurs var - Méthode & Exemple -Maths Bac+1 / Bac+2",
+    "chaine": "Fabinou",
+    "duree": "7:46",
+    "sec": 466,
+    "vues": "68 909 vues"
+   },
+   {
+    "id": "odpwoTRwdEg",
+    "titre": "Qu'est ce qu'une ligne de niveau ?",
+    "chaine": "Sissa-maths",
+    "duree": "6:13",
+    "sec": 373,
+    "vues": "1 054 vues"
+   },
+   {
+    "id": "dqGAh8GyHvk",
+    "titre": "Lignes de niveau 1",
+    "chaine": "le mathématicien",
+    "duree": "8:31",
+    "sec": 511,
+    "vues": "20 250 vues"
+   },
+   {
+    "id": "8X0db3RLHi8",
+    "titre": "Ligne De Niveau Barycentre",
+    "chaine": "all for math",
+    "duree": "2:44",
+    "sec": 164,
+    "vues": "676 vues"
+   },
+   {
+    "id": "Qq3_j8c5Vvo",
+    "titre": "Lignes de niveau a MA2 - b MB2",
+    "chaine": "Tchitcha",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "1 091 vues"
+   },
+   {
+    "id": "h7mYo1EWeA4",
+    "titre": "Lignes de niveau 4 : MA/MB=3",
+    "chaine": "le mathématicien",
+    "duree": "12:04",
+    "sec": 724,
+    "vues": "20 373 vues"
+   },
+   {
+    "id": "nJ1Jv9G_WPs",
+    "titre": "Lignes de niveau d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "10:32",
+    "sec": 632,
+    "vues": "35 043 vues"
+   },
+   {
+    "id": "14VaSawzPnE",
+    "titre": "Fonctions à PLUSIEURS VARIABLES : Visualiser le GRAPHE et les COURBES DE NIVEAU + Explications",
+    "chaine": "Fabinou",
+    "duree": "13:39",
+    "sec": 819,
+    "vues": "107 169 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L4": {
+  "titre": "Approcher un point par tous les chemins",
+  "candidats": [
+   {
+    "id": "q1x7eDu-fUU",
+    "titre": "Cours - Quatrième - Mathématiques : Chap 1 / La Distance / M. Ndour",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "14:09",
+    "sec": 849,
+    "vues": "44 434 vues"
+   },
+   {
+    "id": "lFFnaFPsZ2A",
+    "titre": "Distance d'un point à une droite",
+    "chaine": "Jean-Yves Labouche",
+    "duree": "3:17",
+    "sec": 197,
+    "vues": "41 446 vues"
+   },
+   {
+    "id": "T6odCc1t2bg",
+    "titre": "Domaine d'une fonction de deux variables 1",
+    "chaine": "Mathématiques CSF",
+    "duree": "2:38",
+    "sec": 158,
+    "vues": "45 590 vues"
+   },
+   {
+    "id": "3EO6jThuNvs",
+    "titre": "✅ Dérivées partielles. Dérivée partielle. Fonctions de R^2. fonctions à deux variables g(x;y).",
+    "chaine": "Professeur Raoul",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "9 011 vues"
+   },
+   {
+    "id": "SV5E3wCifmo",
+    "titre": "Graphe d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "12:14",
+    "sec": 734,
+    "vues": "24 925 vues"
+   },
+   {
+    "id": "nJ1Jv9G_WPs",
+    "titre": "Lignes de niveau d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "10:32",
+    "sec": 632,
+    "vues": "35 043 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L5": {
+  "titre": "Dériver en gardant l’autre variable fixe",
+  "candidats": [
+   {
+    "id": "hxidsqoSQMA",
+    "titre": "Dérivées partielles premières d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "10:13",
+    "sec": 613,
+    "vues": "93 047 vues"
+   },
+   {
+    "id": "_QOlABG_OEo",
+    "titre": "Calcul des dérivées partielles 1",
+    "chaine": "u math",
+    "duree": "6:44",
+    "sec": 404,
+    "vues": "224 128 vues"
+   },
+   {
+    "id": "RLEE-iSBimc",
+    "titre": "Comment comprendre FACILEMENT les dérivées",
+    "chaine": "ParaMaths",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "1 100 356 vues"
+   },
+   {
+    "id": "VRmoxoR4TrU",
+    "titre": "Dérivation (1/3) - Dérivée d'une Fonction en un Point - Maths Première S",
+    "chaine": "starfannnn",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "8 323 vues"
+   },
+   {
+    "id": "OtRensLKpHs",
+    "titre": "Dérivées des fonctions exponentielles",
+    "chaine": "Éducation Plus",
+    "duree": "11:55",
+    "sec": 715,
+    "vues": "109 791 vues"
+   },
+   {
+    "id": "3EO6jThuNvs",
+    "titre": "✅ Dérivées partielles. Dérivée partielle. Fonctions de R^2. fonctions à deux variables g(x;y).",
+    "chaine": "Professeur Raoul",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "9 011 vues"
+   },
+   {
+    "id": "VkylRwE0XMM",
+    "titre": "Dérivées partielles et différentielle",
+    "chaine": "Enseignement Supérieur et Lycée",
+    "duree": "5:02",
+    "sec": 302,
+    "vues": "102 813 vues"
+   },
+   {
+    "id": "0jhxK55jONs",
+    "titre": "Déterminer graphiquement le nombre dérivé et l'équation de la tangente - Première",
+    "chaine": "Yvan Monka",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "1 563 925 vues"
+   },
+   {
+    "id": "SV5E3wCifmo",
+    "titre": "Graphe d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "12:14",
+    "sec": 734,
+    "vues": "24 925 vues"
+   },
+   {
+    "id": "T6odCc1t2bg",
+    "titre": "Domaine d'une fonction de deux variables 1",
+    "chaine": "Mathématiques CSF",
+    "duree": "2:38",
+    "sec": 158,
+    "vues": "45 590 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L6": {
+  "titre": "Dériver deux fois et appliquer Schwarz",
+  "candidats": [
+   {
+    "id": "W6rypabq8uA",
+    "titre": "Déterminer la DÉRIVÉE SECONDE d'une fonction - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "84 014 vues"
+   },
+   {
+    "id": "65cFAm2Sftc",
+    "titre": "Dérivées partielles secondes d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "81 646 vues"
+   },
+   {
+    "id": "ziqrCCr4dgE",
+    "titre": "Appliquer deux fois la règle de dérivation des fonctions composées",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "4:42",
+    "sec": 282,
+    "vues": "553 vues"
+   },
+   {
+    "id": "c11DLGL7qU8",
+    "titre": "La dérivée seconde en 2 minutes - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "2:02",
+    "sec": 122,
+    "vues": "29 530 vues"
+   },
+   {
+    "id": "ze1yngvRzV8",
+    "titre": "Théorème de Schwarz",
+    "chaine": "Bibmath",
+    "duree": "12:27",
+    "sec": 747,
+    "vues": "4 020 vues"
+   },
+   {
+    "id": "gxNe7exmI70",
+    "titre": "Terminale IMPORTANT dérivée de U² 2U'U Cours et 10 exemples ex13",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "9:53",
+    "sec": 593,
+    "vues": "2 312 vues"
+   },
+   {
+    "id": "UdOFrVGcmsA",
+    "titre": "Calcul de la dérivée partielle 2",
+    "chaine": "u math",
+    "duree": "4:28",
+    "sec": 268,
+    "vues": "36 867 vues"
+   },
+   {
+    "id": "-oiK8bf-Edo",
+    "titre": "Comment appliquer les formules de dérivation ? (somme, produit, quotient)",
+    "chaine": "Mathemax",
+    "duree": "9:55",
+    "sec": 595,
+    "vues": "7 458 vues"
+   },
+   {
+    "id": "hObIxEcESPg",
+    "titre": "#EP1 Le cours en 10 min: Fonctions de deux variables réelles et leur domaine de définition",
+    "chaine": "Hamilton De Araujo",
+    "duree": "11:36",
+    "sec": 696,
+    "vues": "11 076 vues"
+   },
+   {
+    "id": "3EO6jThuNvs",
+    "titre": "✅ Dérivées partielles. Dérivée partielle. Fonctions de R^2. fonctions à deux variables g(x;y).",
+    "chaine": "Professeur Raoul",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "9 011 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L7": {
+  "titre": "Trouver les points critiques par un système",
+  "candidats": [
+   {
+    "id": "C7td0T2WILQ",
+    "titre": "Trouver les points critiques et déterminer leur nature - partie 1/2",
+    "chaine": "Méthode Maths",
+    "duree": "11:01",
+    "sec": 661,
+    "vues": "177 299 vues"
+   },
+   {
+    "id": "8ySffGMyQeg",
+    "titre": "Optimisation : nature des points critiques. Trouverez vous le maximum ?",
+    "chaine": "Pays des maths",
+    "duree": "4:35",
+    "sec": 275,
+    "vues": "33 796 vues"
+   },
+   {
+    "id": "_4GilSFpE6I",
+    "titre": "Comment trouver les points critiques d’une fonction ? Mathématiques 1",
+    "chaine": "Les Bons Étudiants",
+    "duree": "13:31",
+    "sec": 811,
+    "vues": "43 262 vues"
+   },
+   {
+    "id": "nNKh_uu8N3c",
+    "titre": "Comment déterminer la nature du point critique",
+    "chaine": "Marquez Ln(X) Maths 🙌",
+    "duree": "9:26",
+    "sec": 566,
+    "vues": "95 vues"
+   },
+   {
+    "id": "qIJMGFqhV_I",
+    "titre": "[Comment] déterminer les points critiques d'une fonction à plusieurs variables - exercices corrigés",
+    "chaine": "classe 8 قسم",
+    "duree": "9:51",
+    "sec": 591,
+    "vues": "105 367 vues"
+   },
+   {
+    "id": "6oevmOvpD_E",
+    "titre": "Points critiques d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "13:48",
+    "sec": 828,
+    "vues": "17 392 vues"
+   },
+   {
+    "id": "EkSinQf-ArM",
+    "titre": "Optimisation : nature des points critiques. Maximum- minimum ou point selle ?",
+    "chaine": "Pays des maths",
+    "duree": "9:34",
+    "sec": 574,
+    "vues": "12 567 vues"
+   },
+   {
+    "id": "iX1M4dy4Opo",
+    "titre": "Fonction à plusieurs variables- points critiques (post-bac Maths)",
+    "chaine": "JNX 65",
+    "duree": "14:33",
+    "sec": 873,
+    "vues": "127 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L8": {
+  "titre": "Classer un point critique avec le critère de Monge",
+  "candidats": [
+   {
+    "id": "C7td0T2WILQ",
+    "titre": "Trouver les points critiques et déterminer leur nature - partie 1/2",
+    "chaine": "Méthode Maths",
+    "duree": "11:01",
+    "sec": 661,
+    "vues": "177 299 vues"
+   },
+   {
+    "id": "8ySffGMyQeg",
+    "titre": "Optimisation : nature des points critiques. Trouverez vous le maximum ?",
+    "chaine": "Pays des maths",
+    "duree": "4:35",
+    "sec": 275,
+    "vues": "33 796 vues"
+   },
+   {
+    "id": "HxcyqNbdVUI",
+    "titre": "Notion de CONGRUENCE [en 1min⏱]",
+    "chaine": "Yvan Monka",
+    "duree": "1:29",
+    "sec": 89,
+    "vues": "252 587 vues"
+   },
+   {
+    "id": "_4GilSFpE6I",
+    "titre": "Comment trouver les points critiques d’une fonction ? Mathématiques 1",
+    "chaine": "Les Bons Étudiants",
+    "duree": "13:31",
+    "sec": 811,
+    "vues": "43 262 vues"
+   },
+   {
+    "id": "_nAF2xnL2XY",
+    "titre": "🔴MATHSCLIC COURS | MATHÉMATIQUES SUPÉRIEURES | POINTS STATIONNAIRES",
+    "chaine": "MathsClic",
+    "duree": "1:57",
+    "sec": 117,
+    "vues": "2 563 vues"
+   },
+   {
+    "id": "EkSinQf-ArM",
+    "titre": "Optimisation : nature des points critiques. Maximum- minimum ou point selle ?",
+    "chaine": "Pays des maths",
+    "duree": "9:34",
+    "sec": 574,
+    "vues": "12 567 vues"
+   },
+   {
+    "id": "PObQttkQFOk",
+    "titre": "MAJORANTS, MINORANTS, MAXIMUM, MINIMUM D'UN ENSEMBLE : 2nd C et 1ère Année Maths-info.",
+    "chaine": "ACADÉMIE DES MATHS OLYMPIQUES ( A.M.O )",
+    "duree": "14:56",
+    "sec": 896,
+    "vues": "6 535 vues"
+   },
+   {
+    "id": "y1AdnBZDsfk",
+    "titre": "Optimisation sous contrainte avec le Lagrangien",
+    "chaine": "Méthode Maths",
+    "duree": "14:32",
+    "sec": 872,
+    "vues": "25 311 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L9": {
+  "titre": "Décider directement quand le test est muet",
+  "candidats": [
+   {
+    "id": "b58zL5kPVbc",
+    "titre": "Test Harvard",
+    "chaine": "Éducation Plus",
+    "duree": "7:51",
+    "sec": 471,
+    "vues": "330 570 vues"
+   },
+   {
+    "id": "AxwE7WBnwkA",
+    "titre": "Test d'entrée à l'université de Harvard",
+    "chaine": "Éducation Plus",
+    "duree": "12:52",
+    "sec": 772,
+    "vues": "973 257 vues"
+   },
+   {
+    "id": "1GTFsdBvnRE",
+    "titre": "⭐️ Astuce pour additionner deux fractions ayant 1 au numérateur #maths #fraction",
+    "chaine": "Campus XYZ",
+    "duree": "0:25",
+    "sec": 25,
+    "vues": "1 174 190 vues"
+   },
+   {
+    "id": "WG1r8lebeLo",
+    "titre": "Compte jusqu’à 1000 en français #apprendre #enfants #débutant #chiffres #math #maternelle",
+    "chaine": "Kidi Fun",
+    "duree": "0:41",
+    "sec": 41,
+    "vues": "27 660 526 vues"
+   },
+   {
+    "id": "mpoGMPGN4zM",
+    "titre": "fonctions à deux variables - La Différentiabilité",
+    "chaine": "Dr. BOUATELLI",
+    "duree": "14:36",
+    "sec": 876,
+    "vues": "19 878 vues"
+   },
+   {
+    "id": "6TzWZnVJ8k8",
+    "titre": "Mathématiques I - Cours 7.1 - Fonctions de deux variables (part I) - définitions",
+    "chaine": "Maths1js",
+    "duree": "11:27",
+    "sec": 687,
+    "vues": "1 424 vues"
+   },
+   {
+    "id": "SV5E3wCifmo",
+    "titre": "Graphe d'une fonction de deux variables",
+    "chaine": "Opikaë",
+    "duree": "12:14",
+    "sec": 734,
+    "vues": "24 925 vues"
+   },
+   {
+    "id": "T6odCc1t2bg",
+    "titre": "Domaine d'une fonction de deux variables 1",
+    "chaine": "Mathématiques CSF",
+    "duree": "2:38",
+    "sec": 158,
+    "vues": "45 590 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L10": {
+  "titre": "Prouver qu’un minimum est global",
+  "candidats": [
+   {
+    "id": "8gb3PQjHEIw",
+    "titre": "Montrer que la fonction f admet un maximum",
+    "chaine": "Hedacademy",
+    "duree": "7:31",
+    "sec": 451,
+    "vues": "126 915 vues"
+   },
+   {
+    "id": "TcZC1VD7xxo",
+    "titre": "Qu'est-ce qu'un minimum global d'une fonction ?",
+    "chaine": "les Maths en Tongs",
+    "duree": "2:09",
+    "sec": 129,
+    "vues": "7 887 vues"
+   },
+   {
+    "id": "Q29vkYOurpI",
+    "titre": "Qu'est-ce qu'un maximum global d'une fonction ?",
+    "chaine": "les Maths en Tongs",
+    "duree": "2:24",
+    "sec": 144,
+    "vues": "18 206 vues"
+   },
+   {
+    "id": "AApqbYT6feA",
+    "titre": "Qu'est-ce qu'un maximum local d'une fonction ?",
+    "chaine": "les Maths en Tongs",
+    "duree": "2:27",
+    "sec": 147,
+    "vues": "25 395 vues"
+   },
+   {
+    "id": "2KvTfWd5bf0",
+    "titre": "1ère et tle : notion d'extremum local ou global d'une fonction sur un intervalle",
+    "chaine": "Paroles de Prof",
+    "duree": "3:26",
+    "sec": 206,
+    "vues": "5 072 vues"
+   },
+   {
+    "id": "eUypF0utV0E",
+    "titre": "1ère - Minimum et maximum locaux",
+    "chaine": "Prodesmaths",
+    "duree": "4:18",
+    "sec": 258,
+    "vues": "492 vues"
+   },
+   {
+    "id": "PObQttkQFOk",
+    "titre": "MAJORANTS, MINORANTS, MAXIMUM, MINIMUM D'UN ENSEMBLE : 2nd C et 1ère Année Maths-info.",
+    "chaine": "ACADÉMIE DES MATHS OLYMPIQUES ( A.M.O )",
+    "duree": "14:56",
+    "sec": 896,
+    "vues": "6 535 vues"
+   },
+   {
+    "id": "zxyKLqnlMIk",
+    "titre": "Déterminer un extremum - Première",
+    "chaine": "Yvan Monka",
+    "duree": "5:05",
+    "sec": 305,
+    "vues": "552 509 vues"
+   },
+   {
+    "id": "L-3MEUTKUkY",
+    "titre": "Extremum d’une fonction à deux variables",
+    "chaine": "AMINE OUACHI MATHEMATICS",
+    "duree": "13:52",
+    "sec": 832,
+    "vues": "21 154 vues"
+   },
+   {
+    "id": "ZaDR_aglTpM",
+    "titre": "Extremums d'une fonction de deux variables 2",
+    "chaine": "Mathématiques CSF",
+    "duree": "3:40",
+    "sec": 220,
+    "vues": "34 177 vues"
+   }
+  ]
+ },
+ "ISE-ECO-2VAR-L11": {
+  "titre": "Chercher aussi les extremums sur le bord",
+  "candidats": [
+   {
+    "id": "PmL6oMiARNU",
+    "titre": "Déterminer les extrema locaux d’une fonction et leurs natures - mathématiques 1",
+    "chaine": "Les Bons Étudiants",
+    "duree": "12:01",
+    "sec": 721,
+    "vues": "38 150 vues"
+   },
+   {
+    "id": "33HStJJi8Bs",
+    "titre": "Comment déterminer les extremums d'une fonction ?",
+    "chaine": "Mathemax",
+    "duree": "6:27",
+    "sec": 387,
+    "vues": "82 405 vues"
+   },
+   {
+    "id": "zxyKLqnlMIk",
+    "titre": "Déterminer un extremum - Première",
+    "chaine": "Yvan Monka",
+    "duree": "5:05",
+    "sec": 305,
+    "vues": "552 509 vues"
+   },
+   {
+    "id": "NW3GvxnLV0s",
+    "titre": "Trouver les EXTREMUMS d'une fonction - Première",
+    "chaine": "Galilee ac",
+    "duree": "3:43",
+    "sec": 223,
+    "vues": "5 596 vues"
+   },
+   {
+    "id": "Mz9goJkOk3o",
+    "titre": "Comment déterminer maximum, minimum, extremum d'une fonction à l'aide de la dérivation • Cours",
+    "chaine": "jaicompris Maths",
+    "duree": "13:07",
+    "sec": 787,
+    "vues": "155 505 vues"
+   },
+   {
+    "id": "MsA4l3UyJoc",
+    "titre": "Comment déterminer l'extrémum d'une fonction f (méthodologie) !",
+    "chaine": "Xerebro",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "505 vues"
+   },
+   {
+    "id": "P_d556WWXM8",
+    "titre": "les EXTREMUMS d'une FONCTION - Exercice Corrigé - Seconde",
+    "chaine": "Galilee ac",
+    "duree": "2:35",
+    "sec": 155,
+    "vues": "17 595 vues"
+   },
+   {
+    "id": "AApqbYT6feA",
+    "titre": "Qu'est-ce qu'un maximum local d'une fonction ?",
+    "chaine": "les Maths en Tongs",
+    "duree": "2:27",
+    "sec": 147,
+    "vues": "25 395 vues"
+   },
+   {
+    "id": "L-3MEUTKUkY",
+    "titre": "Extremum d’une fonction à deux variables",
+    "chaine": "AMINE OUACHI MATHEMATICS",
+    "duree": "13:52",
+    "sec": 832,
+    "vues": "21 154 vues"
+   },
+   {
+    "id": "yR7H1eoO4sA",
+    "titre": "Recherche des extremums locaux d'une fct de 2 var - Exemple 1",
+    "chaine": "Opikaë",
+    "duree": "14:10",
+    "sec": 850,
+    "vues": "24 230 vues"
+   }
+  ]
+ }
+}

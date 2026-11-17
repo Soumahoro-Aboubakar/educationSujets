@@ -1,0 +1,144 @@
+{
+  "module": "DROIT-PENAL",
+  "lecons": [
+    {
+      "code": "DROIT-PENAL-L1",
+      "requetes": [
+        "site:youtube.com \"Pourquoi faut-il un texte pour punir ?\"",
+        "site:youtube.com \"principe de légalité\" \"pénal\"",
+        "principe légalité pénale explication simple vidéo Côte Ivoire",
+        "\"6DXRxILlCzc\" durée",
+        "\"Le principe de légalité\" \"3 minutes\" vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=6DXRxILlCzc",
+          "titre": "Le principe de légalité criminelle",
+          "chaine": "Maxime Bizeau - Fiches-droit.com",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette présentation française explique la légalité criminelle et ses conséquences, principes communs à la leçon ivoirienne, mais ajoute des développements propres au droit français."
+        }
+      ],
+      "justification": "Le plan annoncé cible directement le principe étudié ; une page de référencement indique environ 12 minutes, sans durée exacte vérifiable. À utiliser pour le principe général, en conservant les références au Code ivoirien du cours."
+    },
+    {
+      "code": "DROIT-PENAL-L2",
+      "requetes": [
+        "site:youtube.com \"Quelle loi appliquer si le texte change ?\"",
+        "site:youtube.com \"loi pénale dans le temps\" rétroactivité",
+        "youtube loi pénale dans le temps rétroactivité in mitius explication simple",
+        "loi pénale temps explication simple vidéo courte",
+        "\"8-X1kYm_Q1k\" durée",
+        "\"loi pénale dans le temps\" \"Major Droit\" durée"
+      ],
+      "candidats": [],
+      "justification": "Des vidéos françaises ciblant la non-rétroactivité et la loi plus douce ont été repérées, notamment chez Major Droit. Leur durée totale n’a pas pu être vérifiée suffisamment pour garantir le plafond de 15 minutes."
+    },
+    {
+      "code": "DROIT-PENAL-L3",
+      "requetes": [
+        "site:youtube.com \"Crime, délit ou contravention ?\"",
+        "site:youtube.com \"crime délit contravention\" \"ivoirien\"",
+        "youtube crime délit contravention explication simple",
+        "classification infractions droit ivoirien video",
+        "crime délit contravention cours vidéo Côte Ivoire"
+      ],
+      "candidats": [],
+      "justification": "La vidéo française repérée ne permet pas de vérifier l’absence de seuils de peine ou de références juridictionnelles inadaptés à la Côte d’Ivoire. Aucune alternative ivoirienne suffisamment vérifiable n’a été trouvée."
+    },
+    {
+      "code": "DROIT-PENAL-L4",
+      "requetes": [
+        "site:youtube.com \"Que s’est-il matériellement passé ?\"",
+        "site:youtube.com \"élément matériel\" infraction",
+        "site:youtube.com \"élément matériel\" \"explication\"",
+        "élément matériel infraction youtube",
+        "\"SCuds5j2m8M\"",
+        "élément matériel infraction explication simple vidéo"
+      ],
+      "candidats": [],
+      "justification": "Une vidéo annoncée comme durant environ sept minutes a été référencée, mais sa page n’a pas permis de confirmer sa chaîne et son contenu. La couverture des omissions, du résultat et du lien causal reste donc insuffisamment établie."
+    },
+    {
+      "code": "DROIT-PENAL-L5",
+      "requetes": [
+        "site:youtube.com \"Intention et faute ne se confondent pas\"",
+        "site:youtube.com \"élément moral\" \"infraction\"",
+        "site:youtube.com \"intention\" \"mobile\" \"pénal\"",
+        "\"élément moral\" youtube cours",
+        "droit penal element moral video cours court",
+        "intention faute mobile droit pénal explication simple vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les cours repérés sur l’élément moral ne permettent pas de vérifier simultanément une durée inférieure à 15 minutes et le traitement de l’intention, de l’imprudence et du mobile. Aucun candidat n’est suffisamment établi pour cette leçon."
+    },
+    {
+      "code": "DROIT-PENAL-L6",
+      "requetes": [
+        "site:youtube.com \"Préparer ou tenter une infraction ?\"",
+        "site:youtube.com \"tentative\" \"droit pénal\" \"ivoirien\"",
+        "site:youtube.com \"tentative\" \"droit pénal\" \"5 minutes\"",
+        "tentative infraction youtube",
+        "\"K_rcRR7_yYo\"",
+        "\"La tentative\" \"5 minutes\" vidéo",
+        "tentative infraction droit ivoirien cours exemple vidéo"
+      ],
+      "candidats": [],
+      "justification": "Le cours détaillé d’Aide aux TD dépasse 15 minutes ; une autre vidéo annoncée comme durant cinq minutes reste insuffisamment vérifiable. Aucun candidat ne permet de contrôler correctement l’articulation avec les articles 27 et 28 ivoiriens."
+    },
+    {
+      "code": "DROIT-PENAL-L7",
+      "requetes": [
+        "site:youtube.com \"Auteur ou complice en droit ivoirien ?\"",
+        "complicité droit ivoirien youtube",
+        "site:youtube.com \"complicité\" \"ivoirien\"",
+        "\"complicité\" \"Côte d'Ivoire\" vidéo",
+        "auteur complice article 29 30 ivoirien cours vidéo"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte vérifiable n’a été trouvée sur les articles 29 et 30 ivoiriens. Une présentation française classant systématiquement les instructions parmi les actes de complicité risquerait de contredire le point central de cette leçon."
+    },
+    {
+      "code": "DROIT-PENAL-L8",
+      "requetes": [
+        "site:youtube.com \"Quand une défense est-elle légitime ?\"",
+        "site:youtube.com \"légitime défense\" \"Côte\"",
+        "\"légitime défense\" youtube explication simple",
+        "\"légitime défense\" \"explication simple\" site:youtube.com",
+        "legitime defense cours droit video 5 minutes",
+        "légitime défense article 97 ivoirien cours vidéo"
+      ],
+      "candidats": [],
+      "justification": "Une vidéo française présente des conditions générales proches, mais sa durée et la précision de ses explications n’ont pas pu être confirmées. Aucun support court suffisamment vérifiable sur l’article 97 ivoirien n’a été trouvé."
+    },
+    {
+      "code": "DROIT-PENAL-L9",
+      "requetes": [
+        "site:youtube.com \"La responsabilité pénale s’examine pour chacun\"",
+        "site:youtube.com responsabilité pénale personnelle mineur ivoirien",
+        "site:youtube.com \"responsabilité pénale\" \"personnelle\"",
+        "\"responsabilité pénale\" youtube cours 5 minutes",
+        "responsabilite penale cote ivoire cours video",
+        "responsabilité pénale minorité discernement ivoirien vidéo"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte vérifiable ne couvre suffisamment la responsabilité personnelle, le discernement, la minorité et les personnes morales dans le cadre ivoirien. Les présentations étrangères risquent notamment d’introduire des seuils d’âge inadaptés."
+    },
+    {
+      "code": "DROIT-PENAL-L10",
+      "requetes": [
+        "site:youtube.com \"Grâce et amnistie : quels effets ?\"",
+        "site:youtube.com \"grâce\" \"amnistie\"",
+        "\"grâce et amnistie\" youtube",
+        "\"amnistie\" \"YouTube\" \"différence\"",
+        "\"Grâce présidentielle et amnistie : la différence\"",
+        "grace amnistie 7info youtube",
+        "grâce amnistie différence Côte Ivoire explication vidéo"
+      ],
+      "candidats": [],
+      "justification": "Un reportage ivoirien de 7Info intitulé « Grâce présidentielle et amnistie : la différence » a été retrouvé sur Abidjan.net. Son URL YouTube canonique et sa durée n’ont pas été exposées dans les résultats consultables, ce qui empêche de le retenir selon les règles demandées."
+    }
+  ]
+}

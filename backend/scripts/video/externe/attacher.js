@@ -23,7 +23,9 @@ const GENERATEUR = 'youtube-externe';
 const documentVideo = (sel, cible, v) => ({
   youtubeId: v.youtubeId,
   url: `https://www.youtube.com/watch?v=${v.youtubeId}`,
-  title: String(v.titre || sel.titre || '').slice(0, 200),
+  // Les emojis des titres YouTube (💪, ✅…) s'affichent en carrés dans la police de l'app : on les retire.
+  title: String(v.titre || sel.titre || '').replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}\u{20E3}]/gu, '')
+    .replace(/\s+([|,.:!?])/g, ' $1').replace(/\s{2,}/g, ' ').trim().slice(0, 200),
   durationSec: v.durationSec,
   publishedAt: v.publieeLe ? new Date(v.publieeLe) : null,
   status: 'published',

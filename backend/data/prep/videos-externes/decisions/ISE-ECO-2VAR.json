@@ -1,0 +1,101 @@
+[
+  {
+    "code": "ISE-ECO-2VAR-L1",
+    "youtubeId": "klqqakZvIY4",
+    "couverture": "partielle",
+    "justification": "Rappel : une fonction associe une sortie à chaque entrée (image, antécédent), base avant les fonctions de deux variables.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L2",
+    "youtubeId": "zxyKLqnlMIk",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : déterminer un extremum d’une fonction d’une variable avec la dérivée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L3",
+    "youtubeId": "nJ1Jv9G_WPs",
+    "couverture": "exacte",
+    "justification": "Lignes de niveau d’une fonction de deux variables et lecture de la surface.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L4",
+    "youtubeId": "X0s6Cw85SLY",
+    "couverture": "exacte",
+    "justification": "Limite d’une fonction de plusieurs variables par différents chemins (limite directionnelle).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L5",
+    "youtubeId": "_QOlABG_OEo",
+    "couverture": "exacte",
+    "justification": "Calcul des dérivées partielles en gardant l’autre variable fixe.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L6",
+    "youtubeId": "65cFAm2Sftc",
+    "couverture": "exacte",
+    "justification": "Dérivées partielles secondes d’une fonction de deux variables (égalité des dérivées croisées).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L7",
+    "youtubeId": "6oevmOvpD_E",
+    "couverture": "exacte",
+    "justification": "Points critiques d’une fonction de deux variables : résoudre le système des dérivées nulles.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L8",
+    "youtubeId": "8ySffGMyQeg",
+    "couverture": "exacte",
+    "justification": "Nature des points critiques avec le critère rt − s² (Monge).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L9",
+    "youtubeId": null,
+    "couverture": null,
+    "justification": "Aucune vidéo courte ne traite le cas où rt − s² = 0 et l’étude directe du signe de f(x, y) − f(a, b).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L10",
+    "youtubeId": null,
+    "couverture": null,
+    "justification": "Aucune vidéo courte trouvée sur la preuve d’un minimum global (inégalité directe) pour une fonction de deux variables.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-2VAR-L11",
+    "youtubeId": "K3acvU6wv4c",
+    "couverture": "partielle",
+    "justification": "Extremums qui ne sont pas sur un ouvert : penser à étudier le bord du domaine.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

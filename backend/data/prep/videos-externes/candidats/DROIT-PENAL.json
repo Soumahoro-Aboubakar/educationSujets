@@ -1,0 +1,812 @@
+{
+ "DROIT-PENAL-L1": {
+  "titre": "Pourquoi faut-il un texte pour punir ?",
+  "candidats": [
+   {
+    "id": "OqIJMADrQb8",
+    "titre": "Comprendre le Droit Pénal en 6 minutes | Notions clés et exemples simples",
+    "chaine": "Juristudes",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "1 075 vues"
+   },
+   {
+    "id": "pwHFprIBPCA",
+    "titre": "À quoi sert la peine ? Peine et sûreté | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "9:40",
+    "sec": 580,
+    "vues": "15 vues"
+   },
+   {
+    "id": "-YVYxAdrz2M",
+    "titre": "Comprendre le Droit Pénal en 6 minutes",
+    "chaine": "Juristudes",
+    "duree": "6:16",
+    "sec": 376,
+    "vues": "242 909 vues"
+   },
+   {
+    "id": "pYcUsaPtd98",
+    "titre": "Comprendre le Droit Pénal Général en 4 minutes",
+    "chaine": "Juristudes",
+    "duree": "4:43",
+    "sec": 283,
+    "vues": "39 246 vues"
+   },
+   {
+    "id": "gx1H2LyZoPE",
+    "titre": "L'INFRACTION EN DROIT PÉNAL : je t'explique tout en 10 minutes",
+    "chaine": "Justilaw Cours",
+    "duree": "11:01",
+    "sec": 661,
+    "vues": "1 109 vues"
+   },
+   {
+    "id": "kVdrWPH3_iQ",
+    "titre": "Légalité pénale : pas de crime sans texte | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "11:05",
+    "sec": 665,
+    "vues": "18 vues"
+   },
+   {
+    "id": "mmyoR7QAN60",
+    "titre": "Les Peines en Droit : Tout Comprendre sur les Sanctions Pénales | Cours Complet",
+    "chaine": "Juristudes",
+    "duree": "5:58",
+    "sec": 358,
+    "vues": "2 248 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 799 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "QBSxjkt2e8o",
+    "titre": "Les éléments constitutifs de l'infraction en 3 minutes",
+    "chaine": "Juristudes",
+    "duree": "3:06",
+    "sec": 186,
+    "vues": "60 251 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L2": {
+  "titre": "Quelle loi appliquer si le texte change ?",
+  "candidats": [
+   {
+    "id": "6orhMwQ9r_A",
+    "titre": "L'application de la loi pénale dans le temps - Présentation générale",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "8:24",
+    "sec": 504,
+    "vues": "27 429 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "Yetz-mYzpyY",
+    "titre": "L'application de la loi pénale dans le temps - Les lois de fond",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "12:33",
+    "sec": 753,
+    "vues": "22 147 vues"
+   },
+   {
+    "id": "tAVvNAPBvyU",
+    "titre": "Les causes d'irresponsabilité pénale [Droit Pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "8 671 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 799 vues"
+   },
+   {
+    "id": "AsLdudLPqtc",
+    "titre": "Le concours réel d'infractions",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:03",
+    "sec": 543,
+    "vues": "26 741 vues"
+   },
+   {
+    "id": "meWQFEQWccQ",
+    "titre": "2. LES POURSUITES PENALES (alternatives, accélérées)",
+    "chaine": "A Travers Le Droit",
+    "duree": "7:49",
+    "sec": 469,
+    "vues": "1 993 vues"
+   },
+   {
+    "id": "q1N51Z9zFok",
+    "titre": "L'application de la loi pénale dans l'espace (territorialité, personnalité active/passive...)",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "14:23",
+    "sec": 863,
+    "vues": "29 318 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L3": {
+  "titre": "Crime, délit ou contravention ?",
+  "candidats": [
+   {
+    "id": "37GHJQzagY8",
+    "titre": "⚖️ Contravention, Délit, Crime : Comprendre les 3 Catégories d’Infractions en Droit Pénal",
+    "chaine": "Juristudes",
+    "duree": "6:28",
+    "sec": 388,
+    "vues": "2 030 vues"
+   },
+   {
+    "id": "_n3mYpIaAL4",
+    "titre": "Contravention, délit, crime : quelles différences ?",
+    "chaine": "L'Autonome de Solidarité Laïque",
+    "duree": "2:03",
+    "sec": 123,
+    "vues": "12 797 vues"
+   },
+   {
+    "id": "zxRxONK4Q6Q",
+    "titre": "Les infractions : contraventions, délits ou crimes ? - Comprendre le droit",
+    "chaine": "Pour comprendre le droit",
+    "duree": "6:38",
+    "sec": 398,
+    "vues": "38 760 vues"
+   },
+   {
+    "id": "PwEfxezQaY8",
+    "titre": "Infraction : contravention, délit, crime… quelle différence ? 🤔",
+    "chaine": "Civinat France",
+    "duree": "6:08",
+    "sec": 368,
+    "vues": "53 vues"
+   },
+   {
+    "id": "bW2o6ttAfjU",
+    "titre": "Crime, Délit, Contravention : Comprendre les Différences Essentielles",
+    "chaine": "Blay's Office",
+    "duree": "1:25",
+    "sec": 85,
+    "vues": "615 vues"
+   },
+   {
+    "id": "NFFwomXLhts",
+    "titre": "Crime, délit, contravention : 3 catégories | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "12:10",
+    "sec": 730,
+    "vues": "6 vues"
+   },
+   {
+    "id": "qvjD8xx22qA",
+    "titre": "Crime, délit ou contravention ? | Droit pénal suisse",
+    "chaine": "L'étude du droit",
+    "duree": "6:45",
+    "sec": 405,
+    "vues": "20 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "k690bB_w3O8",
+    "titre": "Le Droit Pénal Expliqué : Contravention, Délit, Crime et Fraude",
+    "chaine": "pawol edikatif",
+    "duree": "10:33",
+    "sec": 633,
+    "vues": "11 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L4": {
+  "titre": "Que s’est-il matériellement passé ?",
+  "candidats": [
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "5RzK_h-YV8k",
+    "titre": "Au Cœur du Code Pénal : notions clés et fonctionnement expliqué",
+    "chaine": "Juristudes",
+    "duree": "6:29",
+    "sec": 389,
+    "vues": "1 435 vues"
+   },
+   {
+    "id": "-YVYxAdrz2M",
+    "titre": "Comprendre le Droit Pénal en 6 minutes",
+    "chaine": "Juristudes",
+    "duree": "6:16",
+    "sec": 376,
+    "vues": "242 906 vues"
+   },
+   {
+    "id": "mmyoR7QAN60",
+    "titre": "Les Peines en Droit : Tout Comprendre sur les Sanctions Pénales | Cours Complet",
+    "chaine": "Juristudes",
+    "duree": "5:58",
+    "sec": 358,
+    "vues": "2 248 vues"
+   },
+   {
+    "id": "iAJP8qLAQg8",
+    "titre": "⚖️ Introduction au Code Pénal : Structure, Principes et Grandes Parties (Cours complet)",
+    "chaine": "Juristudes",
+    "duree": "4:36",
+    "sec": 276,
+    "vues": "1 343 vues"
+   },
+   {
+    "id": "q1N51Z9zFok",
+    "titre": "L'application de la loi pénale dans l'espace (territorialité, personnalité active/passive...)",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "14:23",
+    "sec": 863,
+    "vues": "29 318 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 801 vues"
+   },
+   {
+    "id": "gx1H2LyZoPE",
+    "titre": "L'INFRACTION EN DROIT PÉNAL : je t'explique tout en 10 minutes",
+    "chaine": "Justilaw Cours",
+    "duree": "11:01",
+    "sec": 661,
+    "vues": "1 110 vues"
+   },
+   {
+    "id": "6orhMwQ9r_A",
+    "titre": "L'application de la loi pénale dans le temps - Présentation générale",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "8:24",
+    "sec": 504,
+    "vues": "27 425 vues"
+   },
+   {
+    "id": "xWOKSJ9T7B8",
+    "titre": "Droit pénal général et droit pénal spécial",
+    "chaine": "CRIMINOCORPUS | Histoire de la justice",
+    "duree": "1:38",
+    "sec": 98,
+    "vues": "6 687 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L5": {
+  "titre": "Intention et faute ne se confondent pas",
+  "candidats": [
+   {
+    "id": "6J3gXoyANmc",
+    "titre": "Faute caractérisée et faute délibérée | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "11:39",
+    "sec": 699,
+    "vues": "13 vues"
+   },
+   {
+    "id": "HIX8Oh0wZu4",
+    "titre": "INFRACTION INVOLONTAIRE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "12 092 vues"
+   },
+   {
+    "id": "NKCrO5Nh6dU",
+    "titre": "La faute intentionnelle en droit pénal - Dol général et dol spécial",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "11:36",
+    "sec": 696,
+    "vues": "32 436 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 801 vues"
+   },
+   {
+    "id": "f8cnTgNKhaw",
+    "titre": "[Immo Sapiens] Faute intentionnelle ou faute dolosive : quelle distinction ?",
+    "chaine": "Lex TV - La chaîne juridique signée Lexbase",
+    "duree": "5:04",
+    "sec": 304,
+    "vues": "5 544 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "Oj-zpBNrvuM",
+    "titre": "Faute volontaire, faute involontaire",
+    "chaine": "L'Autonome de Solidarité Laïque",
+    "duree": "3:00",
+    "sec": 180,
+    "vues": "936 vues"
+   },
+   {
+    "id": "zZm4QgPgbu4",
+    "titre": "Mise en danger et imprudence : art. 121-3 | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "8:26",
+    "sec": 506,
+    "vues": "30 vues"
+   },
+   {
+    "id": "gx1H2LyZoPE",
+    "titre": "L'INFRACTION EN DROIT PÉNAL : je t'explique tout en 10 minutes",
+    "chaine": "Justilaw Cours",
+    "duree": "11:01",
+    "sec": 661,
+    "vues": "1 110 vues"
+   },
+   {
+    "id": "oXS3ZgbtLkk",
+    "titre": "L'infraction impossible (Droit pénal)",
+    "chaine": "Maître Soilahouddine Soule",
+    "duree": "3:30",
+    "sec": 210,
+    "vues": "1 472 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L6": {
+  "titre": "Préparer ou tenter une infraction ?",
+  "candidats": [
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "DgFrZHsZSvk",
+    "titre": "La tentative en droit pénal",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "8:53",
+    "sec": 533,
+    "vues": "46 486 vues"
+   },
+   {
+    "id": "QBSxjkt2e8o",
+    "titre": "Les éléments constitutifs de l'infraction en 3 minutes",
+    "chaine": "Juristudes",
+    "duree": "3:06",
+    "sec": 186,
+    "vues": "60 251 vues"
+   },
+   {
+    "id": "gx1H2LyZoPE",
+    "titre": "L'INFRACTION EN DROIT PÉNAL : je t'explique tout en 10 minutes",
+    "chaine": "Justilaw Cours",
+    "duree": "11:01",
+    "sec": 661,
+    "vues": "1 110 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 801 vues"
+   },
+   {
+    "id": "tAVvNAPBvyU",
+    "titre": "Les causes d'irresponsabilité pénale [Droit Pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "8 670 vues"
+   },
+   {
+    "id": "1ABrnTVlWcM",
+    "titre": "INFRACTION CONSOMMEE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "5:05",
+    "sec": 305,
+    "vues": "8 758 vues"
+   },
+   {
+    "id": "YUz3eygBB3Y",
+    "titre": "LA TENTATIVE EN DROIT PÉNAL expliquée simplement",
+    "chaine": "Justilaw Cours",
+    "duree": "11:32",
+    "sec": 692,
+    "vues": "1 241 vues"
+   },
+   {
+    "id": "oXS3ZgbtLkk",
+    "titre": "L'infraction impossible (Droit pénal)",
+    "chaine": "Maître Soilahouddine Soule",
+    "duree": "3:30",
+    "sec": 210,
+    "vues": "1 472 vues"
+   },
+   {
+    "id": "HIX8Oh0wZu4",
+    "titre": "INFRACTION INVOLONTAIRE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "12 092 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L7": {
+  "titre": "Auteur ou complice en droit ivoirien ?",
+  "candidats": [
+   {
+    "id": "5ZwKHMP1wqI",
+    "titre": "AUTEUR ET COMPLICE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "16 275 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "BkOlBZsuMNg",
+    "titre": "Imputation de l’infraction : Auteur, Complice et Responsabilité Pénale",
+    "chaine": "Juristudes",
+    "duree": "4:31",
+    "sec": 271,
+    "vues": "1 130 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 801 vues"
+   },
+   {
+    "id": "ECJvDbNPp9A",
+    "titre": "Auteur, coauteur et complice [Droit pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "8:06",
+    "sec": 486,
+    "vues": "15 935 vues"
+   },
+   {
+    "id": "UYBR6MCytmU",
+    "titre": "MOBILE de l'auteur d'une infraction en DROIT PÉNAL 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:16",
+    "sec": 256,
+    "vues": "2 336 vues"
+   },
+   {
+    "id": "QniU84wOhfA",
+    "titre": "La complicité : punie comme l'auteur | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "9:33",
+    "sec": 573,
+    "vues": "7 vues"
+   },
+   {
+    "id": "O5mfKa0VQRc",
+    "titre": "LES DIFFERENTES CATEGORIES D'INFRACTIONS EN DROIT PENAL EN CÔTE D'IVOIRE . #droit #africa #info",
+    "chaine": "ACTU JURIDIQUE NYC",
+    "duree": "7:02",
+    "sec": 422,
+    "vues": "683 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L8": {
+  "titre": "Quand une défense est-elle légitime ?",
+  "candidats": [
+   {
+    "id": "HfohSpPOUWQ",
+    "titre": "Légitime défense : conditions et limites | Droit pénal général L2",
+    "chaine": "Réussir le droit — Cours de licence",
+    "duree": "9:05",
+    "sec": 545,
+    "vues": "7 vues"
+   },
+   {
+    "id": "QW-F7SQFoRw",
+    "titre": "Les faits justificatifs : la légitime défense",
+    "chaine": "Madame fait du droit",
+    "duree": "2:44",
+    "sec": 164,
+    "vues": "860 vues"
+   },
+   {
+    "id": "LErwRS8ExeM",
+    "titre": "La Légitime Défense [Droit pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "18 298 vues"
+   },
+   {
+    "id": "fP8pTZnXMEc",
+    "titre": "LÉGITIME DÉFENSE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "2:11",
+    "sec": 131,
+    "vues": "14 710 vues"
+   },
+   {
+    "id": "VncjWKyIRzw",
+    "titre": "ATF 122 IV 1 — Un mari violent, tué pendant son sommeil : légitime défense ? | Droit pénal suisse",
+    "chaine": "L'étude du droit",
+    "duree": "6:04",
+    "sec": 364,
+    "vues": "5 vues"
+   },
+   {
+    "id": "n5tjbp7T0j0",
+    "titre": "La Légitime Défense (Droit Pénal)",
+    "chaine": "Juris Univers Academy",
+    "duree": "0:18",
+    "sec": 18,
+    "vues": "20 vues"
+   },
+   {
+    "id": "JZ8UHwTrNkg",
+    "titre": "Les faits justificatifs : l'état de nécessité",
+    "chaine": "Madame fait du droit",
+    "duree": "2:21",
+    "sec": 141,
+    "vues": "1 948 vues"
+   },
+   {
+    "id": "L43gLIRo1rE",
+    "titre": "Légitime défense, tout ce qu'il faut savoir",
+    "chaine": "Anas Mzz",
+    "duree": "2:13",
+    "sec": 133,
+    "vues": "38 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 801 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L9": {
+  "titre": "La responsabilité pénale s’examine pour chacun",
+  "candidats": [
+   {
+    "id": "BkOlBZsuMNg",
+    "titre": "Imputation de l’infraction : Auteur, Complice et Responsabilité Pénale",
+    "chaine": "Juristudes",
+    "duree": "4:31",
+    "sec": 271,
+    "vues": "1 130 vues"
+   },
+   {
+    "id": "bBQY7Twm9qY",
+    "titre": "Responsabilité civile et responsabilité pénale",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "2:17",
+    "sec": 137,
+    "vues": "75 357 vues"
+   },
+   {
+    "id": "NvulMkQbz9k",
+    "titre": "La responsabilité pénale des personnes morales",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "14:24",
+    "sec": 864,
+    "vues": "11 905 vues"
+   },
+   {
+    "id": "o1vTAPJfZfI",
+    "titre": "RESPONSABILITÉ PÉNALE DES PERSONNES MORALES 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "6:52",
+    "sec": 412,
+    "vues": "15 464 vues"
+   },
+   {
+    "id": "Wl5_27FjjNk",
+    "titre": "RESPONSABILITÉ PÉNALE du chef d'entreprise 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "2:59",
+    "sec": 179,
+    "vues": "11 551 vues"
+   },
+   {
+    "id": "STDkyRh2oK8",
+    "titre": "Ce que vous devez savoir! La responsabilité pénale",
+    "chaine": "Étudions Le Droit",
+    "duree": "0:11",
+    "sec": 11,
+    "vues": "5 vues"
+   },
+   {
+    "id": "3L_IpxMcuBE",
+    "titre": "Responsabilité civile et responsabilité pénale",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "6 780 vues"
+   },
+   {
+    "id": "tAVvNAPBvyU",
+    "titre": "Les causes d'irresponsabilité pénale [Droit Pénal]",
+    "chaine": "Juris-Dico",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "8 670 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 801 vues"
+   }
+  ]
+ },
+ "DROIT-PENAL-L10": {
+  "titre": "Grâce et amnistie : quels effets ?",
+  "candidats": [
+   {
+    "id": "hzPX78UvJlg",
+    "titre": "La grâce et l’amnistie : Quelle différence?",
+    "chaine": "Juristudes",
+    "duree": "3:59",
+    "sec": 239,
+    "vues": "8 422 vues"
+   },
+   {
+    "id": "M7v3aACvV4U",
+    "titre": "GRÂCE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "3:27",
+    "sec": 207,
+    "vues": "1 304 vues"
+   },
+   {
+    "id": "RT8kKDeek48",
+    "titre": "AMNISTIE en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "3:46",
+    "sec": 226,
+    "vues": "1 983 vues"
+   },
+   {
+    "id": "UJn_TNwA4Kw",
+    "titre": "C'EST QUOI LA GRÂCE PRÉSIDENTIELLE ? C'EST QUOI L'AMNISTIE ?",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:33",
+    "sec": 513,
+    "vues": "287 vues"
+   },
+   {
+    "id": "ET20kiYOC4w",
+    "titre": "Loi sur la grâce amnistiante : les explications du Ministre de la Justice",
+    "chaine": "RTB - Radiodiffusion Télévision du Burkina",
+    "duree": "4:57",
+    "sec": 297,
+    "vues": "1 051 vues"
+   },
+   {
+    "id": "l1lb5Cj2VXo",
+    "titre": "Quelle est la différence entre la grâce présidentielle et l’amnistie générale ?",
+    "chaine": "Business News",
+    "duree": "0:59",
+    "sec": 59,
+    "vues": "450 vues"
+   },
+   {
+    "id": "UcPQeJ6KZQU",
+    "titre": "Justice Burkina : grâce présidentielle, amnistie, et grâce amnistiante, quelle différence ?",
+    "chaine": "BF1 TELEVISION",
+    "duree": "3:51",
+    "sec": 231,
+    "vues": "10 909 vues"
+   },
+   {
+    "id": "na8trrThoKM",
+    "titre": "LES GRANDS PRINCIPES DU DROIT PENAL FRANÇAIS",
+    "chaine": "Just ice",
+    "duree": "1:37",
+    "sec": 97,
+    "vues": "1 646 vues"
+   },
+   {
+    "id": "e2fb-vrCkDE",
+    "titre": "Les éléments constitutifs de l'infraction",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "38 583 vues"
+   },
+   {
+    "id": "vyJFsOBt_o4",
+    "titre": "ÉLÉMENT MORAL de l'infraction en droit pénal 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "7 801 vues"
+   }
+  ]
+ }
+}

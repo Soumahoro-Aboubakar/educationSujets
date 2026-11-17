@@ -1,0 +1,682 @@
+{
+ "CG-INSTIT-L1": {
+  "titre": "À quoi sert le droit ?",
+  "candidats": [
+   {
+    "id": "lsxHTYMSJWI",
+    "titre": "À quoi sert le droit ? - François Ost",
+    "chaine": "Larcier-Intersentia",
+    "duree": "3:40",
+    "sec": 220,
+    "vues": "6 776 vues"
+   },
+   {
+    "id": "9Mgw1PPOPV4",
+    "titre": "C'est quoi le droit ?",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "3:20",
+    "sec": 200,
+    "vues": "163 572 vues"
+   },
+   {
+    "id": "d7ypGC9hryM",
+    "titre": "Qu’est-ce que le droit (Cours d'introduction au droit)",
+    "chaine": "Madame fait du droit",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "2 268 vues"
+   },
+   {
+    "id": "RNe1wzdgqeA",
+    "titre": "Tout comprendre sur le Droit, ses Fonctions et la Règle de Droit (Cours 1ère STMG / Droit)",
+    "chaine": "Christophe le Prof STMG",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "1 267 vues"
+   },
+   {
+    "id": "L_UDgMeMqPw",
+    "titre": "[Droit / DGEMC] Qu'est ce que le droit ?",
+    "chaine": "Vincent Pauthier",
+    "duree": "4:49",
+    "sec": 289,
+    "vues": "16 245 vues"
+   },
+   {
+    "id": "bf6MFnr-OTY",
+    "titre": "Module 1 : le droit, c’est quoi ?",
+    "chaine": "Défenseur des droits",
+    "duree": "1:22",
+    "sec": 82,
+    "vues": "28 426 vues"
+   },
+   {
+    "id": "n2Lb0FF9wHY",
+    "titre": "À quoi sert le droit canonique ? - Un cours en ligne du Campus des Bernardins",
+    "chaine": "Le Campus des Bernardins",
+    "duree": "2:06",
+    "sec": 126,
+    "vues": "1 545 vues"
+   },
+   {
+    "id": "uhK0Z5kKfPs",
+    "titre": "Clinique juridique de Paris 8 - À quoi sert le droit ?",
+    "chaine": "Défenseur des droits",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "1 939 vues"
+   },
+   {
+    "id": "NslYLcxrxXk",
+    "titre": "LES INSTITUTIONS POLITIQUES DE LA COTE D'IVOIRE",
+    "chaine": "Eni Luwawu",
+    "duree": "2:28",
+    "sec": 148,
+    "vues": "977 vues"
+   },
+   {
+    "id": "iIgRBwVgcY0",
+    "titre": "Les institutions de Côte d'Ivoire : Assemblée nationale et Sénat, quelle est la différence ?",
+    "chaine": "ivoireinfotvnet",
+    "duree": "6:25",
+    "sec": 385,
+    "vues": "1 621 vues"
+   }
+  ]
+ },
+ "CG-INSTIT-L2": {
+  "titre": "D’où viennent les règles de droit ?",
+  "candidats": [
+   {
+    "id": "6HmgA9C2fzQ",
+    "titre": "La règle de droit (1) - Le caractère général",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "3:40",
+    "sec": 220,
+    "vues": "255 251 vues"
+   },
+   {
+    "id": "9VdXuaFsPNg",
+    "titre": "La Règle de Droit : définition, caractéristiques et exemples simples",
+    "chaine": "Juristudes",
+    "duree": "5:32",
+    "sec": 332,
+    "vues": "2 007 vues"
+   },
+   {
+    "id": "RNe1wzdgqeA",
+    "titre": "Tout comprendre sur le Droit, ses Fonctions et la Règle de Droit (Cours 1ère STMG / Droit)",
+    "chaine": "Christophe le Prof STMG",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "1 267 vues"
+   },
+   {
+    "id": "d7ypGC9hryM",
+    "titre": "Qu’est-ce que le droit (Cours d'introduction au droit)",
+    "chaine": "Madame fait du droit",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "2 268 vues"
+   },
+   {
+    "id": "mt0n8hmE1Fc",
+    "titre": "Les Sources du Droit : loi, coutume, jurisprudence, doctrine.... explications simples",
+    "chaine": "Juristudes",
+    "duree": "7:38",
+    "sec": 458,
+    "vues": "6 807 vues"
+   },
+   {
+    "id": "f-4tRcUCeT8",
+    "titre": "La règle de droit (caractères) | Introduction au droit",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "51 983 vues"
+   },
+   {
+    "id": "e2hB3XpxUVo",
+    "titre": "La règle de droit : définition et caractères",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "6:34",
+    "sec": 394,
+    "vues": "10 065 vues"
+   },
+   {
+    "id": "tfuccIXwU3E",
+    "titre": "Droit objectif et droit subjectif (définition et exemples) - Cours de droit",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "2:53",
+    "sec": 173,
+    "vues": "337 243 vues"
+   },
+   {
+    "id": "kD85KOsLaLg",
+    "titre": "Rôle des élus en Côte d'Ivoire: vidéo 1: séparation des pouvoirs, rôle du président de la République",
+    "chaine": "KAS Dialogue Politique en Afrique de l'Ouest",
+    "duree": "5:03",
+    "sec": 303,
+    "vues": "1 935 vues"
+   },
+   {
+    "id": "NslYLcxrxXk",
+    "titre": "LES INSTITUTIONS POLITIQUES DE LA COTE D'IVOIRE",
+    "chaine": "Eni Luwawu",
+    "duree": "2:28",
+    "sec": 148,
+    "vues": "977 vues"
+   }
+  ]
+ },
+ "CG-INSTIT-L3": {
+  "titre": "La Constitution protège et organise",
+  "candidats": [
+   {
+    "id": "1JXktjYCOhY",
+    "titre": "La Constitution",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "287 205 vues"
+   },
+   {
+    "id": "JKunfJXzbp8",
+    "titre": "\"La cour de justice de la #CEDEAO n'est pas une cour constitutionnelle régionale\" - Pr. Dandi Gnamou",
+    "chaine": "PorteParoleTG",
+    "duree": "14:41",
+    "sec": 881,
+    "vues": "5 120 vues"
+   },
+   {
+    "id": "5h3nESk6Ero",
+    "titre": "La constitution et la pyramide de Kelsen : le cours complet (L1)",
+    "chaine": "Droit au Tableau",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "824 vues"
+   },
+   {
+    "id": "wr3pwngFDDI",
+    "titre": "L'État en droit constitutionnel : le cours complet (L1)",
+    "chaine": "Droit au Tableau",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "3 004 vues"
+   },
+   {
+    "id": "RpMksme9pT8",
+    "titre": "Élaboration de la Constitution de 1958 : [Droit Constitutionnel]",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "6:02",
+    "sec": 362,
+    "vues": "21 849 vues"
+   },
+   {
+    "id": "zESIsxDgStU",
+    "titre": "La Constitution : définition juridique",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "11:45",
+    "sec": 705,
+    "vues": "30 243 vues"
+   },
+   {
+    "id": "awwO3mYeyL8",
+    "titre": "La séparation des pouvoirs en droit constitutionnel : le cours complet (L1)",
+    "chaine": "Droit au Tableau",
+    "duree": "9:06",
+    "sec": 546,
+    "vues": "1 559 vues"
+   },
+   {
+    "id": "KfkTSIyFu5c",
+    "titre": "C'est quoi LA CONSTITUTION ?! | Camille décode",
+    "chaine": "Camille Décode",
+    "duree": "2:56",
+    "sec": 176,
+    "vues": "23 571 vues"
+   },
+   {
+    "id": "kD85KOsLaLg",
+    "titre": "Rôle des élus en Côte d'Ivoire: vidéo 1: séparation des pouvoirs, rôle du président de la République",
+    "chaine": "KAS Dialogue Politique en Afrique de l'Ouest",
+    "duree": "5:03",
+    "sec": 303,
+    "vues": "1 935 vues"
+   },
+   {
+    "id": "NslYLcxrxXk",
+    "titre": "LES INSTITUTIONS POLITIQUES DE LA COTE D'IVOIRE",
+    "chaine": "Eni Luwawu",
+    "duree": "2:28",
+    "sec": 148,
+    "vues": "977 vues"
+   }
+  ]
+ },
+ "CG-INSTIT-L4": {
+  "titre": "Qui exerce le pouvoir exécutif ?",
+  "candidats": [
+   {
+    "id": "Ux6y82s3Kbk",
+    "titre": "Les 3 Pouvoirs ( exécutif, législatif et juridictionnel) : [Introduction au Droit]",
+    "chaine": "Constance Mosnier - Cours de droit en vidéos",
+    "duree": "3:15",
+    "sec": 195,
+    "vues": "25 108 vues"
+   },
+   {
+    "id": "p0AengQUxuA",
+    "titre": "Le pouvoir exécutif et le rôle du gouvernement",
+    "chaine": "Histoire Fermat",
+    "duree": "4:54",
+    "sec": 294,
+    "vues": "8 782 vues"
+   },
+   {
+    "id": "RLXA0iV9dlg",
+    "titre": "La séparation des pouvoirs en France - vidéo animée",
+    "chaine": "Fonctionnaire territorial",
+    "duree": "3:35",
+    "sec": 215,
+    "vues": "127 839 vues"
+   },
+   {
+    "id": "8BwZBDW0XHA",
+    "titre": "Le Pouvoir Législatif : définition, rôle et fonctionnement",
+    "chaine": "Juristudes",
+    "duree": "6:57",
+    "sec": 417,
+    "vues": "1 382 vues"
+   },
+   {
+    "id": "Xg1f3FyOpZM",
+    "titre": "Les pouvoirs du président de la République",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "11:05",
+    "sec": 665,
+    "vues": "18 016 vues"
+   },
+   {
+    "id": "kiDdjHMejg0",
+    "titre": "Pouvoir exécutif, législatif et judiciaire | Examen Civique · Ep. 4",
+    "chaine": "Just One More Fact",
+    "duree": "2:22",
+    "sec": 142,
+    "vues": "16 vues"
+   },
+   {
+    "id": "aeY-EUCivAk",
+    "titre": "Les pouvoirs du gouvernement - Cours de droit constitutionnel",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "11:41",
+    "sec": 701,
+    "vues": "12 992 vues"
+   },
+   {
+    "id": "wa7y_IkX_0s",
+    "titre": "3°- Pouvoir Législatif Et Exécutif Sous La Vème république",
+    "chaine": "La Classe d'Histoire",
+    "duree": "4:31",
+    "sec": 271,
+    "vues": "56 011 vues"
+   },
+   {
+    "id": "Lsn7zq9HoMo",
+    "titre": "Institutions de la République",
+    "chaine": "Mon Dossier Français",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "870 vues"
+   },
+   {
+    "id": "ApY5mQNQ04k",
+    "titre": "Décryptage du Gouvernement Ivoirien : Institutions, Acteurs & Initiatives",
+    "chaine": "L'ivoirien",
+    "duree": "1:19",
+    "sec": 79,
+    "vues": "26 vues"
+   }
+  ]
+ },
+ "CG-INSTIT-L5": {
+  "titre": "Pourquoi deux chambres au Parlement ?",
+  "candidats": [
+   {
+    "id": "EdKce6zhWrw",
+    "titre": "Pourquoi le Parlement comporte-t-il deux chambres ?",
+    "chaine": "Droit devant !",
+    "duree": "11:06",
+    "sec": 666,
+    "vues": "130 vues"
+   },
+   {
+    "id": "hnwZ9rKjiTk",
+    "titre": "Qu'est ce qu'un Parlement bicaméral?",
+    "chaine": "Le Droit avec Madou 🇲🇱",
+    "duree": "1:38",
+    "sec": 98,
+    "vues": "1 098 vues"
+   },
+   {
+    "id": "nt2VqFPb13M",
+    "titre": "Qu’est-ce que le système bicaméral ?",
+    "chaine": "7 jours",
+    "duree": "1:45",
+    "sec": 105,
+    "vues": "4 459 vues"
+   },
+   {
+    "id": "ZTCDcuNlXKI",
+    "titre": "Tout savoir sur le droit parlementaire en 3 minutes",
+    "chaine": "Dire le Droit",
+    "duree": "3:41",
+    "sec": 221,
+    "vues": "2 219 vues"
+   },
+   {
+    "id": "ZOa3sqhTVdE",
+    "titre": "La différence entre l'Assemblée nationale et le Sénat - Histoire Po.",
+    "chaine": "Le French Débat",
+    "duree": "5:28",
+    "sec": 328,
+    "vues": "80 373 vues"
+   },
+   {
+    "id": "jn_5jTxrHOA",
+    "titre": "CHAMBRE DES COMMUNES ou House of Commons du Parlement britannique 🇬🇧 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "2:10",
+    "sec": 130,
+    "vues": "6 685 vues"
+   },
+   {
+    "id": "okZBvGSpmQw",
+    "titre": "C'est quoi l'assemblée nationale ? - 1 jour, 1 question",
+    "chaine": "1 jour, 1 question",
+    "duree": "1:42",
+    "sec": 102,
+    "vues": "193 522 vues"
+   },
+   {
+    "id": "TuQOCPL8pAQ",
+    "titre": "CHAMBRE DES LORDS ou HOUSE OF LORDS du Parlement britannique 🇬🇧 🔤",
+    "chaine": "Dictionnaire juridique en vidéo",
+    "duree": "2:10",
+    "sec": 130,
+    "vues": "7 132 vues"
+   },
+   {
+    "id": "_iMdSuC28hE",
+    "titre": "Côte d'Ivoire/Nouvelle constitution: Le Sénat, qu’est-ce que c’est ?",
+    "chaine": "RTI Officiel",
+    "duree": "1:42",
+    "sec": 102,
+    "vues": "4 499 vues"
+   },
+   {
+    "id": "iIgRBwVgcY0",
+    "titre": "Les institutions de Côte d'Ivoire : Assemblée nationale et Sénat, quelle est la différence ?",
+    "chaine": "ivoireinfotvnet",
+    "duree": "6:25",
+    "sec": 385,
+    "vues": "1 621 vues"
+   }
+  ]
+ },
+ "CG-INSTIT-L6": {
+  "titre": "Juger les litiges et contrôler la Constitution",
+  "candidats": [
+   {
+    "id": "f_2cQGWQkZo",
+    "titre": "LE JUGE DE LA CONSTITUTIONNALITÉ DES LOIS",
+    "chaine": "L'étudiant en Droit",
+    "duree": "8:24",
+    "sec": 504,
+    "vues": "545 vues"
+   },
+   {
+    "id": "2NxoaNX7pDM",
+    "titre": "Le contrôle de constitutionnalité des lois",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "254 842 vues"
+   },
+   {
+    "id": "xwbPrBoJ0eA",
+    "titre": "Le contrôle de constitutionnalité (Droit constitutionnel)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "3:05",
+    "sec": 185,
+    "vues": "2 897 vues"
+   },
+   {
+    "id": "lBNkcGHzdhg",
+    "titre": "Les pouvoirs du juge administratif dans le contrôle de constitutionnalité",
+    "chaine": "Licence Plus",
+    "duree": "7:26",
+    "sec": 446,
+    "vues": "61 981 vues"
+   },
+   {
+    "id": "9wM65RPE8tQ",
+    "titre": "Contrôle de constitutionnalité par voie d'action / par voie d'exception",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "6:01",
+    "sec": 361,
+    "vues": "41 112 vues"
+   },
+   {
+    "id": "_TF9xu5pcGY",
+    "titre": "Le Conseil constitutionnel, gouvernement des juges ?",
+    "chaine": "JurisMana",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "4 666 vues"
+   },
+   {
+    "id": "w_0Y-BkPI9o",
+    "titre": "Le contrôle de constitutionnalité des lois",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "13:37",
+    "sec": 817,
+    "vues": "9 578 vues"
+   },
+   {
+    "id": "bw8LLIyXQMI",
+    "titre": "Droit Public : Le contrôle de constitutionnalité des lois",
+    "chaine": "FAQs de droit",
+    "duree": "1:37",
+    "sec": 97,
+    "vues": "1 118 vues"
+   },
+   {
+    "id": "NslYLcxrxXk",
+    "titre": "LES INSTITUTIONS POLITIQUES DE LA COTE D'IVOIRE",
+    "chaine": "Eni Luwawu",
+    "duree": "2:28",
+    "sec": 148,
+    "vues": "977 vues"
+   },
+   {
+    "id": "kD85KOsLaLg",
+    "titre": "Rôle des élus en Côte d'Ivoire: vidéo 1: séparation des pouvoirs, rôle du président de la République",
+    "chaine": "KAS Dialogue Politique en Afrique de l'Ouest",
+    "duree": "5:03",
+    "sec": 303,
+    "vues": "1 935 vues"
+   }
+  ]
+ },
+ "CG-INSTIT-L7": {
+  "titre": "Conseiller et rechercher un accord",
+  "candidats": [
+   {
+    "id": "KEHkUhm8mPI",
+    "titre": "Les ACCORDS au PIANO : Tout ce que vous devez savoir",
+    "chaine": "Piano en ligne",
+    "duree": "3:41",
+    "sec": 221,
+    "vues": "387 921 vues"
+   },
+   {
+    "id": "Uwk0ZKOsBx8",
+    "titre": "13 minutes pour comprendre LES ACCORDS en musique",
+    "chaine": "Composer sa Musique",
+    "duree": "13:51",
+    "sec": 831,
+    "vues": "20 000 vues"
+   },
+   {
+    "id": "_FBdT88cRLM",
+    "titre": "Comment fonctionnent les suites d'accords ?",
+    "chaine": "Piano en ligne",
+    "duree": "4:05",
+    "sec": 245,
+    "vues": "171 467 vues"
+   },
+   {
+    "id": "WFbQQoxS4u8",
+    "titre": "Improviser sur accords, tu ne joueras plus jamais pareil",
+    "chaine": "Joris Amann",
+    "duree": "9:58",
+    "sec": 598,
+    "vues": "48 659 vues"
+   },
+   {
+    "id": "iAAMu8LDMEU",
+    "titre": "Mémoriser tous les accords majeurs et mineurs au piano",
+    "chaine": "Piano en ligne",
+    "duree": "10:38",
+    "sec": 638,
+    "vues": "173 586 vues"
+   },
+   {
+    "id": "jWhDRnzCcyM",
+    "titre": "ENRICHIR UNE SUITE D'ACCORDS (pour se libérer des 4 accords traditionnels en boucle)",
+    "chaine": "Le Piano Grand Ouvert",
+    "duree": "6:15",
+    "sec": 375,
+    "vues": "144 931 vues"
+   },
+   {
+    "id": "W3MIufioTJU",
+    "titre": "Les accords Majeurs & mineurs au piano",
+    "chaine": "Piano en ligne",
+    "duree": "3:56",
+    "sec": 236,
+    "vues": "257 213 vues"
+   },
+   {
+    "id": "yM8AW9JbMBU",
+    "titre": "Comment travailler efficacement ses accords ?",
+    "chaine": "MyGuitare - Cours de guitare en ligne",
+    "duree": "10:52",
+    "sec": 652,
+    "vues": "128 419 vues"
+   },
+   {
+    "id": "hSFeD5aqHt4",
+    "titre": "LA CREDIBILITE DES INSTITUTIONS IVOIRIENNES : LE CAS DU CONSEIL CONSTITUTIONNEL",
+    "chaine": "PPA CI TV",
+    "duree": "3:27",
+    "sec": 207,
+    "vues": "2 591 vues"
+   },
+   {
+    "id": "8SaLMA6GTRM",
+    "titre": "Rentrée solennelle du conseil économique et social de Côte d'Ivoire",
+    "chaine": "RTI Officiel",
+    "duree": "1:55",
+    "sec": 115,
+    "vues": "139 vues"
+   }
+  ]
+ },
+ "CG-INSTIT-L8": {
+  "titre": "Reconnaître les symboles de la République",
+  "candidats": [
+   {
+    "id": "nMX0NbKCWmg",
+    "titre": "Les symboles de la République CP - CE1 - CE2 - CM1 - CM2 - Enseignement moral et civique",
+    "chaine": "Maître Lucas",
+    "duree": "5:27",
+    "sec": 327,
+    "vues": "303 112 vues"
+   },
+   {
+    "id": "T_YFUhR66n8",
+    "titre": "Les symboles de la République – Cours 1 | Cap Étapes",
+    "chaine": "Cap Étapes",
+    "duree": "5:23",
+    "sec": 323,
+    "vues": "1 205 vues"
+   },
+   {
+    "id": "MupbMqPW0kk",
+    "titre": "21- Les Symboles de la République - Les Clés de la République",
+    "chaine": "Les Clés",
+    "duree": "2:53",
+    "sec": 173,
+    "vues": "3 429 vues"
+   },
+   {
+    "id": "uiAe8cm_VrQ",
+    "titre": "VALEURS, PRINCIPES ET SYMBOLES DE LA REPUBLIQUE FRANCAISE",
+    "chaine": "LE PROF PRESENTE, LA CHAINE D'HISTOIRE",
+    "duree": "9:36",
+    "sec": 576,
+    "vues": "57 870 vues"
+   },
+   {
+    "id": "FvUtRaj5FyE",
+    "titre": "T1 C'est quoi les symboles de la République",
+    "chaine": "Kelly Charmant",
+    "duree": "1:45",
+    "sec": 105,
+    "vues": "904 vues"
+   },
+   {
+    "id": "8CRN8arH9xI",
+    "titre": "Les symboles de la France",
+    "chaine": "Eveiller mon enfant",
+    "duree": "5:23",
+    "sec": 323,
+    "vues": "177 134 vues"
+   },
+   {
+    "id": "TCeKBklkSek",
+    "titre": "3e EMC / Les valeurs, les principes et les symboles de la République française",
+    "chaine": "Julien Ferrand Professeur d'Histoire-Géographie",
+    "duree": "4:20",
+    "sec": 260,
+    "vues": "76 127 vues"
+   },
+   {
+    "id": "pADtspDGt8k",
+    "titre": "FLS EANA CAP EMC 1 Reconnaître les symboles de la République française",
+    "chaine": "FLS EANA CAP BAC PRO",
+    "duree": "4:23",
+    "sec": 263,
+    "vues": "28 vues"
+   },
+   {
+    "id": "kFfsQKdssy8",
+    "titre": "CODE CITOYEN | Les symboles de la République",
+    "chaine": "RTI Officiel",
+    "duree": "10:12",
+    "sec": 612,
+    "vues": "2 800 vues"
+   },
+   {
+    "id": "7doV-qP36ao",
+    "titre": "CIVISME & CITOYENNETÉ: Que signifient les 5 symboles de République de Côte d’Ivoire",
+    "chaine": "Sidi Tiemoko TOURE",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "3 402 vues"
+   }
+  ]
+ }
+}

@@ -1,0 +1,241 @@
+{
+  "module": "CALC-SANTE",
+  "lecons": [
+    {
+      "code": "CALC-SANTE-L1",
+      "requetes": [
+        "site:youtube.com \"Lire et organiser un calcul\"",
+        "site:youtube.com priorités opératoires explication simple fractions décimaux",
+        "site:youtube.com priorités opératoires cours en 5 minutes",
+        "site:youtube.com/watch priorités opératoires Yvan Monka",
+        "priorités opératoires explication simple youtube",
+        "YouTube priorites operatoires parentheses",
+        "Priorités opératoires Calculs un niveau parenthèses Jean Yves Labouche durée",
+        "\"ZD_hIvp7RSE\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ZD_hIvp7RSE",
+          "titre": "Priorités opératoires : Calculs avec un niveau de parenthèses",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique l’ordre des opérations avec parenthèses et propose des exemples détaillés, sans reprendre toutes les notions de fractions et de décimaux."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=6-uMKGAKuJ0",
+          "titre": "Vocabulaire des opérations : enchaînement de 2 calculs",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle apprend à traduire une phrase en calcul avec somme, différence, produit et quotient, en montrant le rôle des parenthèses."
+        }
+      ],
+      "justification": "Le premier candidat correspond directement à l’organisation du calcul et aux priorités à retenir. La couverture reste partielle et la durée exacte n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CALC-SANTE-L2",
+      "requetes": [
+        "site:youtube.com \"Convertir masses et volumes\"",
+        "site:youtube.com conversions g mg microgrammes litres millilitres cours",
+        "site:youtube.com conversion masse volume calcul dose en 5 minutes",
+        "conversion masses volumes mg µg ml infirmier youtube",
+        "site:youtube.com/watch conversion unités calcul dose infirmier",
+        "conversions unités infirmier youtube",
+        "YouTube convertir masses capacités Alloprof",
+        "\"lOmbKXEa91Y\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=lOmbKXEa91Y",
+          "titre": "La conversion des unités de capacité, de masse et de mesure | Mathématiques | Alloprof",
+          "chaine": "Alloprof",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette courte capsule explique les conversions de masses et de capacités, mais le traitement des microgrammes et la distinction entre mg et mL ne sont pas attestés."
+        }
+      ],
+      "justification": "Une capsule francophone accessible pour acquérir la méthode de conversion avant les calculs de santé. La durée exacte et la couverture des microgrammes ne sont pas visibles dans les résultats."
+    },
+    {
+      "code": "CALC-SANTE-L3",
+      "requetes": [
+        "site:youtube.com \"Convertir une durée\" heures décimales",
+        "site:youtube.com convertir heures minutes explication simple exemple",
+        "convertir durée heures décimales minutes cours youtube",
+        "YouTube conversion unités de temps",
+        "YouTube convertir heures décimales heures minutes",
+        "\"qXhEzXRq7ZA\" durée",
+        "Durées Addition Conversion heures MCMaths durée vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=VDzwWNPTyL8",
+          "titre": "Conversions d'heures et minutes en heures décimales⏰ Questions flash",
+          "chaine": "Games of mathematics",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo traite les conversions heures-minutes, la base 60 et le passage entre heures décimales et heures composées, conformément au piège central de la leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=ouvlkHb-n08",
+          "titre": "La conversion des unités de mesure de temps | Mathématiques | Primaire",
+          "chaine": "Alloprof",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule présente des exemples de conversion des minutes en heures et des secondes en minutes, sans annoncer le traitement des heures décimales."
+        }
+      ],
+      "justification": "Le premier candidat couvre explicitement la différence entre écriture décimale et système sexagésimal. Le second constitue une introduction plus élémentaire ; les durées totales ne sont pas affichées."
+    },
+    {
+      "code": "CALC-SANTE-L4",
+      "requetes": [
+        "site:youtube.com \"proportionnalité\" \"passage par l'unité\"",
+        "site:youtube.com proportionnalité règle de trois explication simple",
+        "proportionnalité passage par unité explication simple youtube",
+        "site:youtube.com/watch proportionnalité passage unité Yvan Monka",
+        "Proportionnalité Utiliser passage unité Prof de CM durée vidéo",
+        "\"w9TwOuxqlHo\" durée",
+        "\"La proportionnalité : passage à l'unité et tableaux\" minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=w9TwOuxqlHo",
+          "titre": "La proportionnalité : passage à l'unité et tableaux CM1 - CM2 - 6e - Maths - Cycle 3",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique comment reconnaître une situation proportionnelle, diviser pour obtenir une unité puis multiplier pour trouver la quantité demandée."
+        }
+      ],
+      "justification": "L’explication progressive et les exemples concrets correspondent précisément à la méthode enseignée et conviennent aux débutants. Le chapitrage atteint la fiche finale à 6:40, mais la durée totale exacte n’est pas indiquée."
+    },
+    {
+      "code": "CALC-SANTE-L5",
+      "requetes": [
+        "site:youtube.com \"Calculer un pourcentage et une évolution\"",
+        "site:youtube.com pourcentage taux évolution cours exemple",
+        "pourcentage taux évolution cours exemple youtube",
+        "site:youtube.com/watch pourcentage taux évolution Yvan Monka",
+        "YouTube calculer pourcentage nombre Yvan Monka",
+        "\"Calculer un taux\" \"Y48-iK7Cp20\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=qnTxNgL1HZw",
+          "titre": "TAUX et POURCENTAGE d'ÉVOLUTION - Exercice Corrigé - Seconde",
+          "chaine": "Galilee ac",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’exercice explique le calcul de la variation divisée par la valeur initiale puis sa conversion en pourcentage, avec interprétation du signe."
+        }
+      ],
+      "justification": "Le candidat traite explicitement la formule du taux d’évolution et son dénominateur, point essentiel de la leçon. Le calcul d’une part et les évolutions successives ne sont pas annoncés ; la durée exacte reste inconnue."
+    },
+    {
+      "code": "CALC-SANTE-L6",
+      "requetes": [
+        "site:youtube.com \"Comprendre une concentration\"",
+        "site:youtube.com concentration massique mg ml pourcentage calcul dose",
+        "concentration massique mg ml pourcentage calcul dose youtube",
+        "site:youtube.com/watch concentration massique cours",
+        "concentration massique youtube physique chimie",
+        "concentration massique physique chimie vidéo 2 minutes",
+        "YouTube concentration massique en 2 minutes",
+        "\"Qu'est-ce que la concentration massique\" \"Nathan\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=yASWjmEg2q0",
+          "titre": "⌚🧪 Qu'est-ce que la concentration massique ? ‖ Physique-chimie ‖ Lycée",
+          "chaine": "Nathan FV",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette vidéo flash définit la concentration massique, présente sa formule et un exemple simple, sans annoncer les pourcentages masse-volume."
+        }
+      ],
+      "justification": "La capsule cible directement la notion c = m/V au niveau lycée, avec un exemple accessible. Les pourcentages m/V et les trois formes de la relation ne sont pas tous attestés, et la durée exacte n’est pas affichée."
+    },
+    {
+      "code": "CALC-SANTE-L7",
+      "requetes": [
+        "site:youtube.com \"Calculer une quantité par kilogramme\"",
+        "site:youtube.com calcul dose mg kg jour prise exemple",
+        "site:youtube.com/watch calcul dose mg/kg",
+        "calcul dose poids enfant youtube",
+        "YouTube calcul de dose pédiatrique mg kg infirmier",
+        "calcul dose mg kg youtube explication simple",
+        "YouTube calculs de doses mg kg par prise",
+        "calcul de dose enfant mg kg vidéo courte",
+        "calcul de dose pediatrie youtube exemple corrigé",
+        "YouTube calcul de doses pédiatriques 3 minutes",
+        "weight based dosage calculations mg kg short RegisteredNurseRN youtube",
+        "\"Weight-Based Dosage Calculations Desired-Over-Have\" duration"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo française suffisamment ciblée et vérifiable n’a été retenue pour distinguer mg/kg/prise et mg/kg/jour. Le cours anglais identifié dure 15:08 et dépasse la limite ; l’autre résultat est un Short, également exclu."
+    },
+    {
+      "code": "CALC-SANTE-L8",
+      "requetes": [
+        "site:youtube.com \"Calculer un débit en volume\"",
+        "site:youtube.com débit ml h calcul perfusion explication simple",
+        "calcul débit ml h perfusion explication simple youtube",
+        "site:youtube.com/watch débit perfusion ml/h",
+        "YouTube calculer un débit volumique",
+        "calcul débit ml h youtube exemple",
+        "YouTube débit volume durée explication simple",
+        "YouTube calculer débit volume durée cours 5 minutes",
+        "\"débit volumique\" \"e-profs\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=TqbHR12ScaI",
+          "titre": "💦 Débit VOLUMIQUE - Formules à connaitre ❤️ -Terminale spécialité Physique chimie | Lycée",
+          "chaine": "e-profs - Physique Chimie",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo définit le débit volumique et ses formules, mais son contexte de mécanique des fluides dépasse les seuls calculs en mL/h de la leçon."
+        }
+      ],
+      "justification": "Le candidat explique directement la grandeur débit volumique et les relations utiles. La couverture est partielle pour les conversions propres aux exercices de santé, et la durée exacte n’a pas pu être établie."
+    },
+    {
+      "code": "CALC-SANTE-L9",
+      "requetes": [
+        "site:youtube.com \"Passer aux gouttes par minute\"",
+        "site:youtube.com calcul débit gouttes minute facteur 20 60 exemple",
+        "calcul débit gouttes minute facteur gouttes ml youtube",
+        "site:youtube.com/watch débit gouttes minute",
+        "YouTube calcul debit perfusion gouttes",
+        "YouTube débit gouttes par minute calcul",
+        "YouTube calcul débit perfusion 20 gouttes 60 gouttes",
+        "IV drip rate calculation drop factor youtube 5 minutes",
+        "\"IV Drip Flow Rates Drop Factor\" \"minutes\"",
+        "\"IV Drip Flow Rates Drop Factor\" \"11:08\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=kza8QKqjnPM",
+          "titre": "IV Drip Flow Rates Drop Factor gtts/minute Dosage Calculations Nursing | NCLEX Review",
+          "chaine": "RegisteredNurseRN",
+          "dureeVue": "11:08",
+          "langue": "anglais",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique le facteur de gouttes inscrit sur la tubulure et résout des exercices avec la formule volume × facteur / durée en minutes."
+        }
+      ],
+      "justification": "Retenue en dernier recours en anglais, faute de vidéo française validée explicitant suffisamment le caractère variable du facteur de gouttes. La durée de 11:08 est corroborée par le catalogue vidéo consulté."
+    }
+  ]
+}

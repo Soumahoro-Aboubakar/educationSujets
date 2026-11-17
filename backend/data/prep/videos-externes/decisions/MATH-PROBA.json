@@ -1,0 +1,128 @@
+[
+  {
+    "code": "MATH-PROBA-L1",
+    "youtubeId": "ytLG6HijPhk",
+    "couverture": "exacte",
+    "justification": "Vocabulaire des probabilités : expérience aléatoire, issue, univers, événement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L2",
+    "youtubeId": "9nxxlprh_aE",
+    "couverture": "exacte",
+    "justification": "Calculer une probabilité en situation d’équiprobabilité (favorables / total).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L3",
+    "youtubeId": "2fKdO9t8wfo",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : utiliser les arrangements pour dénombrer des choix successifs.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L4",
+    "youtubeId": "_ip2dV_BUTM",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : utiliser les combinaisons pour dénombrer sans tenir compte de l’ordre.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L5",
+    "youtubeId": "y4P_BP-ldxk",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : probabilité d’une réunion P(A ∪ B) = P(A) + P(B) − P(A ∩ B).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L6",
+    "youtubeId": "qD_7BaFpEP8",
+    "couverture": "exacte",
+    "justification": "Probabilités conditionnelles : P_B(A) = P(A ∩ B)/P(B).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L7",
+    "youtubeId": "qTpTBoZA7zY",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : arbre pondéré et formule des probabilités totales.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L8",
+    "youtubeId": "LOaipIBp4us",
+    "couverture": "exacte",
+    "justification": "Événements incompatibles et événements indépendants : ne pas les confondre.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L9",
+    "youtubeId": "2Ge_4hclPnI",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : déterminer la loi de probabilité d’une variable aléatoire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L10",
+    "youtubeId": "mP2IqYSb1XU",
+    "couverture": "exacte",
+    "justification": "Espérance d’une variable aléatoire comme moyenne pondérée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L11",
+    "youtubeId": "ko59gT4ffho",
+    "couverture": "exacte",
+    "justification": "Calculer la variance et l’écart-type d’une variable aléatoire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L12",
+    "youtubeId": "B7oH3ahNtOM",
+    "couverture": "exacte",
+    "justification": "Loi binomiale : reconnaître le schéma et calculer P(X = k).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L13",
+    "youtubeId": "ljWJfGLRgJE",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : espérance np et variance np(1 − p) d’une loi binomiale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-PROBA-L14",
+    "youtubeId": "89AUsOJ0o4A",
+    "couverture": "exacte",
+    "justification": "Exercice classique de loi binomiale : « au moins » par l’événement contraire, « au plus » par cumul.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

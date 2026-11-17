@@ -1,0 +1,820 @@
+{
+ "INPHB-BAC-MECA-L1": {
+  "titre": "Choisir ce que l’on observe",
+  "candidats": [
+   {
+    "id": "lFmzlwVFegE",
+    "titre": "\"Comprendre la physique: matière, mouvement, interactions\" Cours (Sciences)2 - UNIL",
+    "chaine": "Université de Lausanne",
+    "duree": "2:41",
+    "sec": 161,
+    "vues": "19 025 vues"
+   },
+   {
+    "id": "GTuB2d2ot2A",
+    "titre": "Présentation de la Licence de Physique",
+    "chaine": "Aix Marseille Université",
+    "duree": "3:11",
+    "sec": 191,
+    "vues": "6 049 vues"
+   },
+   {
+    "id": "xb8_58ZJBrA",
+    "titre": "Puissance et énergie - Physique-Chimie - 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "315 569 vues"
+   },
+   {
+    "id": "Gfxzxef5AfM",
+    "titre": "Présentation de la Licence de Physique-Chimie",
+    "chaine": "Aix Marseille Université",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "6 129 vues"
+   },
+   {
+    "id": "EJ4iGS5G5Ec",
+    "titre": "Relativité du mouvement et référentiel | Physique Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "209 053 vues"
+   },
+   {
+    "id": "DuuIyS7cup8",
+    "titre": "La formation des ions : physique-chimie 3e",
+    "chaine": "digiSchool Collège",
+    "duree": "2:21",
+    "sec": 141,
+    "vues": "235 767 vues"
+   },
+   {
+    "id": "J85fb5RiAxk",
+    "titre": "Décrire un mouvement - cours de seconde de physique chimie",
+    "chaine": "Les génies des sciences",
+    "duree": "9:36",
+    "sec": 576,
+    "vues": "143 452 vues"
+   },
+   {
+    "id": "5LdYJ_589vc",
+    "titre": "Règles du DUET et OCTET (Stabilité, LEWIS) | Seconde | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "4:49",
+    "sec": 289,
+    "vues": "544 701 vues"
+   },
+   {
+    "id": "dhVXGV_j6Sw",
+    "titre": "Les 3 lois de Newton - cours de lycée",
+    "chaine": "Les génies des sciences",
+    "duree": "10:25",
+    "sec": 625,
+    "vues": "189 865 vues"
+   },
+   {
+    "id": "_AmE-82BX8I",
+    "titre": "Physique générale 1 - Les 3 lois de Newton EXPLIQUÉES (simplement)",
+    "chaine": "Phassyl - Maths & Physique à l'université",
+    "duree": "2:04",
+    "sec": 124,
+    "vues": "9 777 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L2": {
+  "titre": "Lire et additionner des vecteurs",
+  "candidats": [
+   {
+    "id": "WA-IfjFftZA",
+    "titre": "Additionner des vecteurs (somme des forces) | Rappel mathématiques pour la physique n°1",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "1:33",
+    "sec": 93,
+    "vues": "82 903 vues"
+   },
+   {
+    "id": "Rj8M6s_dRwc",
+    "titre": "Additionner des vecteurs (ayant même direction) I Rappels mathématiques pour la physique",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "2:08",
+    "sec": 128,
+    "vues": "26 280 vues"
+   },
+   {
+    "id": "ciEQANTBk-0",
+    "titre": "Le vecteur vitesse | Seconde | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:20",
+    "sec": 320,
+    "vues": "647 073 vues"
+   },
+   {
+    "id": "1-Gbq52jyxY",
+    "titre": "Additionner des vecteurs en moins de 2 (minutes)",
+    "chaine": "Prof O.Mejean",
+    "duree": "1:38",
+    "sec": 98,
+    "vues": "434 vues"
+   },
+   {
+    "id": "LdJTaKBoVNA",
+    "titre": "L'addition de vecteurs",
+    "chaine": "La physique à la chaîne",
+    "duree": "3:21",
+    "sec": 201,
+    "vues": "5 476 vues"
+   },
+   {
+    "id": "0T3Ny4bY2gE",
+    "titre": "L'addition de vecteurs (exemple)",
+    "chaine": "La physique à la chaîne",
+    "duree": "4:56",
+    "sec": 296,
+    "vues": "4 423 vues"
+   },
+   {
+    "id": "nFHuglLbClc",
+    "titre": "COMPRENDRE LES VECTEURS",
+    "chaine": "Hedacademy",
+    "duree": "14:01",
+    "sec": 841,
+    "vues": "436 963 vues"
+   },
+   {
+    "id": "hQKS3lnmFVY",
+    "titre": "Soustraction de Vecteurs - ∆v |Rappel mathématique pour la physique | Lycée",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "1:28",
+    "sec": 88,
+    "vues": "27 513 vues"
+   },
+   {
+    "id": "YebURH6uD_Q",
+    "titre": "2e loi de Newton 💪 Terminale spécialité | Mécanique",
+    "chaine": "Paul Olivier",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "244 306 vues"
+   },
+   {
+    "id": "ysDfX9nt6aU",
+    "titre": "PROJECTION DE VECTEUR ✅ Méthode simple | 1ère | Terminale",
+    "chaine": "Paul Olivier",
+    "duree": "7:06",
+    "sec": 426,
+    "vues": "425 928 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L3": {
+  "titre": "Calculer une vitesse et son signe",
+  "candidats": [
+   {
+    "id": "hJiBJnFDSVg",
+    "titre": "Comment calculer : VITESSE, DISTANCE, TEMPS ? | Physique-Chimie (collège, lycée)",
+    "chaine": "Paul Olivier",
+    "duree": "4:09",
+    "sec": 249,
+    "vues": "403 670 vues"
+   },
+   {
+    "id": "t0Cxf-jyzcE",
+    "titre": "Vitesse instantanée et vitesse moyenne | Lycée Physique Seconde",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "2:40",
+    "sec": 160,
+    "vues": "124 598 vues"
+   },
+   {
+    "id": "gE1E1f3EDxs",
+    "titre": "VITESSE instantanée et chronophotographie - méthode | 2nde physique",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "1:36",
+    "sec": 96,
+    "vues": "64 329 vues"
+   },
+   {
+    "id": "ciEQANTBk-0",
+    "titre": "Le vecteur vitesse | Seconde | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:20",
+    "sec": 320,
+    "vues": "647 073 vues"
+   },
+   {
+    "id": "0s52QOJgnPc",
+    "titre": "MOUVEMENT ✅ Vitesse et trajectoire | Physique - Chimie | 6e | Sciences",
+    "chaine": "Paul Olivier",
+    "duree": "3:38",
+    "sec": 218,
+    "vues": "77 339 vues"
+   },
+   {
+    "id": "DKrnx2h30kE",
+    "titre": "Vitesse, Distance et Temps -🚴‍♀️ Manipuler la formule | Calculer la vitesse, la distance et le temps",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "3:05",
+    "sec": 185,
+    "vues": "118 584 vues"
+   },
+   {
+    "id": "zlyIYtWWCkg",
+    "titre": "Énergie cinétique et vitesse | Collège | Lycée | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "5:35",
+    "sec": 335,
+    "vues": "397 774 vues"
+   },
+   {
+    "id": "0FtGS43p4FE",
+    "titre": "Le vecteur vitesse ✅ Exercice pour réviser ! 💪 Seconde | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "7:16",
+    "sec": 436,
+    "vues": "143 220 vues"
+   },
+   {
+    "id": "TQ-h9CzOECo",
+    "titre": "MOUVEMENT 🥎 CHAMP DE PESANTEUR UNIFORME ✅ Cours complet 💪 Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "14:52",
+    "sec": 892,
+    "vues": "370 951 vues"
+   },
+   {
+    "id": "dhVXGV_j6Sw",
+    "titre": "Les 3 lois de Newton - cours de lycée",
+    "chaine": "Les génies des sciences",
+    "duree": "10:25",
+    "sec": 625,
+    "vues": "189 865 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L4": {
+  "titre": "Décrire une accélération constante",
+  "candidats": [
+   {
+    "id": "RtUhTv25qEE",
+    "titre": "Coordonnées vecteur ✅ POSITION, VITESSE & ACCÉLÉRATION 💪 Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "6:26",
+    "sec": 386,
+    "vues": "201 408 vues"
+   },
+   {
+    "id": "ciEQANTBk-0",
+    "titre": "Le vecteur vitesse | Seconde | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:20",
+    "sec": 320,
+    "vues": "647 073 vues"
+   },
+   {
+    "id": "fXbyxk0gMd4",
+    "titre": "Vecteur position, vitesse et accélération pour décrire un mouvement | Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "4:14",
+    "sec": 254,
+    "vues": "456 568 vues"
+   },
+   {
+    "id": "t0Cxf-jyzcE",
+    "titre": "Vitesse instantanée et vitesse moyenne | Lycée Physique Seconde",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "2:40",
+    "sec": 160,
+    "vues": "124 598 vues"
+   },
+   {
+    "id": "UXDGsW2rd-Y",
+    "titre": "Décrire un mouvement (vecteurs position, accélération, repère de Frenet)",
+    "chaine": "Les génies des sciences",
+    "duree": "9:03",
+    "sec": 543,
+    "vues": "7 826 vues"
+   },
+   {
+    "id": "0s52QOJgnPc",
+    "titre": "MOUVEMENT ✅ Vitesse et trajectoire | Physique - Chimie | 6e | Sciences",
+    "chaine": "Paul Olivier",
+    "duree": "3:38",
+    "sec": 218,
+    "vues": "77 339 vues"
+   },
+   {
+    "id": "GNqKdFiJjOw",
+    "titre": "Physique Terminale S : L’accélération",
+    "chaine": "Leprofduweb : Retrouve-nous sur notre site",
+    "duree": "4:39",
+    "sec": 279,
+    "vues": "127 274 vues"
+   },
+   {
+    "id": "-o_voY7rLBQ",
+    "titre": "Comment calculer l‘ACCELERATION? Physique mécanique et cinématique",
+    "chaine": "Phassyl - Maths & Physique à l'université",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "23 033 vues"
+   },
+   {
+    "id": "dhVXGV_j6Sw",
+    "titre": "Les 3 lois de Newton - cours de lycée",
+    "chaine": "Les génies des sciences",
+    "duree": "10:25",
+    "sec": 625,
+    "vues": "189 865 vues"
+   },
+   {
+    "id": "YebURH6uD_Q",
+    "titre": "2e loi de Newton 💪 Terminale spécialité | Mécanique",
+    "chaine": "Paul Olivier",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "244 306 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L5": {
+  "titre": "Faire le bilan des forces",
+  "candidats": [
+   {
+    "id": "dhVXGV_j6Sw",
+    "titre": "Les 3 lois de Newton - cours de lycée",
+    "chaine": "Les génies des sciences",
+    "duree": "10:25",
+    "sec": 625,
+    "vues": "189 865 vues"
+   },
+   {
+    "id": "YebURH6uD_Q",
+    "titre": "2e loi de Newton 💪 Terminale spécialité | Mécanique",
+    "chaine": "Paul Olivier",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "244 306 vues"
+   },
+   {
+    "id": "TQ-h9CzOECo",
+    "titre": "MOUVEMENT 🥎 CHAMP DE PESANTEUR UNIFORME ✅ Cours complet 💪 Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "14:52",
+    "sec": 892,
+    "vues": "370 951 vues"
+   },
+   {
+    "id": "i6JDT1jTEV8",
+    "titre": "Comment faire un BILAN DES FORCES sans rien oublier ? -- Physique -- Première & Terminale",
+    "chaine": "COACH-EXAM",
+    "duree": "4:14",
+    "sec": 254,
+    "vues": "16 832 vues"
+   },
+   {
+    "id": "1q6FWw0QmJg",
+    "titre": "Lois de Newton et bilan des forces - Physique Terminale S",
+    "chaine": "digiSchool Lycée",
+    "duree": "3:24",
+    "sec": 204,
+    "vues": "17 196 vues"
+   },
+   {
+    "id": "ysDfX9nt6aU",
+    "titre": "PROJECTION DE VECTEUR ✅ Méthode simple | 1ère | Terminale",
+    "chaine": "Paul Olivier",
+    "duree": "7:06",
+    "sec": 426,
+    "vues": "425 928 vues"
+   },
+   {
+    "id": "mqK1v7kldq4",
+    "titre": "3ème loi de Newton ou Principe des actions réciproques - PHYSIQUE - SECONDE",
+    "chaine": "Florence RAFFIN la physique chimie au lycée",
+    "duree": "4:34",
+    "sec": 274,
+    "vues": "76 999 vues"
+   },
+   {
+    "id": "aCM62SsWzos",
+    "titre": "Mouvements et seconde loi de NEWTON - Spé physique terminale",
+    "chaine": "Physique Chimie HD",
+    "duree": "7:01",
+    "sec": 421,
+    "vues": "52 840 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L6": {
+  "titre": "L’inertie : conserver son mouvement",
+  "candidats": [
+   {
+    "id": "It2l9G_BIBw",
+    "titre": "Comment utiliser le principe d'inertie ? | Seconde | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:19",
+    "sec": 319,
+    "vues": "482 761 vues"
+   },
+   {
+    "id": "mkUrxuKoMF8",
+    "titre": "Principe d'inertie et sa réciproque | 2nde Lycée | Physique chimie",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "1:56",
+    "sec": 116,
+    "vues": "33 653 vues"
+   },
+   {
+    "id": "if-YOfs2h_4",
+    "titre": "TP de Physique 2 : le moment d'inertie (1 : Le mouvement d'un anneau et d'un cylindre)",
+    "chaine": "Université de Namur",
+    "duree": "2:34",
+    "sec": 154,
+    "vues": "70 362 vues"
+   },
+   {
+    "id": "-WhtfqoStNw",
+    "titre": "TP de Physique 3 : le moment cinétique (3 : la conservation du mouvement cinétique)",
+    "chaine": "Université de Namur",
+    "duree": "4:59",
+    "sec": 299,
+    "vues": "73 540 vues"
+   },
+   {
+    "id": "5HmQM6ykP80",
+    "titre": "Le principe d’inertie - Physique-Chimie - Seconde - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:07",
+    "sec": 367,
+    "vues": "26 205 vues"
+   },
+   {
+    "id": "kYSIrurSFv8",
+    "titre": "Le Principe d'Inertie / Physique Chimie Lycée / Niveau Seconde",
+    "chaine": "nicolas galiot",
+    "duree": "5:58",
+    "sec": 358,
+    "vues": "82 754 vues"
+   },
+   {
+    "id": "pV-LWmLN9_E",
+    "titre": "(1èreS) Quantité de mouvement exercice corrigé : Mouvement du centre d'inertie",
+    "chaine": "Physique Chimie à Domicile",
+    "duree": "11:59",
+    "sec": 719,
+    "vues": "1 485 vues"
+   },
+   {
+    "id": "_iFxa_DHowA",
+    "titre": "Le principe d'inertie (première loi de Newton) - cours de seconde",
+    "chaine": "Les génies des sciences",
+    "duree": "8:59",
+    "sec": 539,
+    "vues": "53 065 vues"
+   },
+   {
+    "id": "dhVXGV_j6Sw",
+    "titre": "Les 3 lois de Newton - cours de lycée",
+    "chaine": "Les génies des sciences",
+    "duree": "10:25",
+    "sec": 625,
+    "vues": "189 865 vues"
+   },
+   {
+    "id": "a13yjBz-jWc",
+    "titre": "Première Loi de Newton - L'inertie",
+    "chaine": "Christopher Nicolae",
+    "duree": "1:57",
+    "sec": 117,
+    "vues": "10 167 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L7": {
+  "titre": "Relier résultante et accélération",
+  "candidats": [
+   {
+    "id": "RtUhTv25qEE",
+    "titre": "Coordonnées vecteur ✅ POSITION, VITESSE & ACCÉLÉRATION 💪 Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "6:26",
+    "sec": 386,
+    "vues": "201 408 vues"
+   },
+   {
+    "id": "GNqKdFiJjOw",
+    "titre": "Physique Terminale S : L’accélération",
+    "chaine": "Leprofduweb : Retrouve-nous sur notre site",
+    "duree": "4:39",
+    "sec": 279,
+    "vues": "127 276 vues"
+   },
+   {
+    "id": "fXbyxk0gMd4",
+    "titre": "Vecteur position, vitesse et accélération pour décrire un mouvement | Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "4:14",
+    "sec": 254,
+    "vues": "456 568 vues"
+   },
+   {
+    "id": "ciEQANTBk-0",
+    "titre": "Le vecteur vitesse | Seconde | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:20",
+    "sec": 320,
+    "vues": "647 073 vues"
+   },
+   {
+    "id": "-o_voY7rLBQ",
+    "titre": "Comment calculer l‘ACCELERATION? Physique mécanique et cinématique",
+    "chaine": "Phassyl - Maths & Physique à l'université",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "23 038 vues"
+   },
+   {
+    "id": "d64z4RU6eEM",
+    "titre": "Vecteur position, vitesse et accélération - Physique-Chimie - Terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "11:29",
+    "sec": 689,
+    "vues": "106 494 vues"
+   },
+   {
+    "id": "U-n7tPFSBoo",
+    "titre": "Physique-Chimie - Tracés de vecteurs vitesse et accélération",
+    "chaine": "Eric Menonville PHySiK-CHIMIE",
+    "duree": "5:04",
+    "sec": 304,
+    "vues": "4 060 vues"
+   },
+   {
+    "id": "N-RagDZKsbY",
+    "titre": "[RévisionsBac.com] - Relation entre accélération et vitesse",
+    "chaine": "Revisions Bac",
+    "duree": "1:49",
+    "sec": 109,
+    "vues": "14 615 vues"
+   },
+   {
+    "id": "TQ-h9CzOECo",
+    "titre": "MOUVEMENT 🥎 CHAMP DE PESANTEUR UNIFORME ✅ Cours complet 💪 Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "14:52",
+    "sec": 892,
+    "vues": "370 951 vues"
+   },
+   {
+    "id": "XbYM4plP3So",
+    "titre": "Physique Terminale #31: Résumé du cours sur les lois de Newton sur le mouvement",
+    "chaine": "EcoleTresFacile",
+    "duree": "14:32",
+    "sec": 872,
+    "vues": "11 940 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L8": {
+  "titre": "La chute libre sur un axe vertical",
+  "candidats": [
+   {
+    "id": "dotEnKu3vuc",
+    "titre": "Physiques-Chimie - Seconde - Chap 11.1 - Chute Libre Verticale - Cours",
+    "chaine": "M.P-C Lycée",
+    "duree": "0:49",
+    "sec": 49,
+    "vues": "39 vues"
+   },
+   {
+    "id": "PN1tudmLgcw",
+    "titre": "Chute libre et contraposée du principe d'inertie | Seconde | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "3:41",
+    "sec": 221,
+    "vues": "123 792 vues"
+   },
+   {
+    "id": "JWQQWFpgN_4",
+    "titre": "4HS PHYS La chute libre",
+    "chaine": "PEQPESU",
+    "duree": "9:32",
+    "sec": 572,
+    "vues": "4 168 vues"
+   },
+   {
+    "id": "xdPCEB5jYRw",
+    "titre": "Equation horaire d'un objet en chute libre verticale sans vitesse initiale - exercice corrigé",
+    "chaine": "Les génies des sciences",
+    "duree": "6:19",
+    "sec": 379,
+    "vues": "25 328 vues"
+   },
+   {
+    "id": "XKIp1HF4Bog",
+    "titre": "Physique Terminale S : La chute libre 1/2",
+    "chaine": "Leprofduweb : Retrouve-nous sur notre site",
+    "duree": "7:46",
+    "sec": 466,
+    "vues": "88 835 vues"
+   },
+   {
+    "id": "8hpvOxZmjq0",
+    "titre": "Chute libre – 2Bac PC | Physique | Cours au tableau blanc | Oustadi",
+    "chaine": "Oustadi AI",
+    "duree": "1:22",
+    "sec": 82,
+    "vues": "8 vues"
+   },
+   {
+    "id": "HCgEuoB_w3E",
+    "titre": "CHUTE LIBRE - Projectile préalablement lancé vers le haut (physique 5e sec.)",
+    "chaine": "Véronique Fabi",
+    "duree": "11:35",
+    "sec": 695,
+    "vues": "1 110 vues"
+   },
+   {
+    "id": "8p976woAeCA",
+    "titre": "La Chute Libre verticale d'un objet - MRUA - Exercice",
+    "chaine": "Sed - Academy",
+    "duree": "14:11",
+    "sec": 851,
+    "vues": "17 309 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L9": {
+  "titre": "Séparer les axes d’un projectile",
+  "candidats": [
+   {
+    "id": "ysDfX9nt6aU",
+    "titre": "PROJECTION DE VECTEUR ✅ Méthode simple | 1ère | Terminale",
+    "chaine": "Paul Olivier",
+    "duree": "7:06",
+    "sec": 426,
+    "vues": "425 928 vues"
+   },
+   {
+    "id": "TQ-h9CzOECo",
+    "titre": "MOUVEMENT 🥎 CHAMP DE PESANTEUR UNIFORME ✅ Cours complet 💪 Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "14:52",
+    "sec": 892,
+    "vues": "370 951 vues"
+   },
+   {
+    "id": "VTLrbG4KZjI",
+    "titre": "Rappel de la théorie du projectile lancé horizontalement.",
+    "chaine": "jacques fortier",
+    "duree": "4:10",
+    "sec": 250,
+    "vues": "3 550 vues"
+   },
+   {
+    "id": "ukiSnRYeQDU",
+    "titre": "équation de la trajectoire d'un projectile - exercice corrigé physique chimie",
+    "chaine": "Les génies des sciences",
+    "duree": "3:31",
+    "sec": 211,
+    "vues": "11 511 vues"
+   },
+   {
+    "id": "e4wwE5RFFok",
+    "titre": "📐Projection de VECTEUR sur plan incliné - Trigonométrie | Terminale spécialité | Physique chimie",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "5:45",
+    "sec": 345,
+    "vues": "109 147 vues"
+   },
+   {
+    "id": "1Q4ruuLwwz0",
+    "titre": "Projectiles : Équations de la trajectoire, portée et flèche",
+    "chaine": "LA MINE DES SCIENCES",
+    "duree": "7:41",
+    "sec": 461,
+    "vues": "407 vues"
+   },
+   {
+    "id": "_uNlvvK16KQ",
+    "titre": "PROJECTILE Terminale - Exercice : Portée d'un projectile facile",
+    "chaine": "Maîtrise Scientifique",
+    "duree": "12:05",
+    "sec": 725,
+    "vues": "239 vues"
+   },
+   {
+    "id": "6wVxGmP2Zh4",
+    "titre": "projectile : Équation de la trajectoire, sommet et portée ...",
+    "chaine": "Scilya",
+    "duree": "11:33",
+    "sec": 693,
+    "vues": "141 734 vues"
+   },
+   {
+    "id": "YebURH6uD_Q",
+    "titre": "2e loi de Newton 💪 Terminale spécialité | Mécanique",
+    "chaine": "Paul Olivier",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "244 306 vues"
+   },
+   {
+    "id": "aCM62SsWzos",
+    "titre": "Mouvements et seconde loi de NEWTON - Spé physique terminale",
+    "chaine": "Physique Chimie HD",
+    "duree": "7:01",
+    "sec": 421,
+    "vues": "52 840 vues"
+   }
+  ]
+ },
+ "INPHB-BAC-MECA-L10": {
+  "titre": "Une particule dans un champ électrique uniforme",
+  "candidats": [
+   {
+    "id": "scBN3nqsf7E",
+    "titre": "Mouvement dans un CHAMP ÉLECTRIQUE UNIFORME ✅ Terminale Spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "7:12",
+    "sec": 432,
+    "vues": "351 517 vues"
+   },
+   {
+    "id": "buY7lcMZkeA",
+    "titre": "Cours 4 - Mouvement dans un champ électrique uniforme",
+    "chaine": "Sciences physiques à Stella",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "211 022 vues"
+   },
+   {
+    "id": "JyM2r-dak3U",
+    "titre": "Champ Électrique",
+    "chaine": "Académie de Sciences",
+    "duree": "6:37",
+    "sec": 397,
+    "vues": "44 833 vues"
+   },
+   {
+    "id": "H-e2IULx-4I",
+    "titre": "Cours PC TleD Physique Chapitre09 Séq04 Mouvement d’une particule chargée dans un champ magnétique",
+    "chaine": "Ecoles au Burkina",
+    "duree": "9:35",
+    "sec": 575,
+    "vues": "968 vues"
+   },
+   {
+    "id": "D6XODjhVsN0",
+    "titre": "Cours PC TleD Physique Chapitre08 Séq01 Mouvement d'une particule dans un champ Electrique uniforme",
+    "chaine": "Ecoles au Burkina",
+    "duree": "9:03",
+    "sec": 543,
+    "vues": "260 vues"
+   },
+   {
+    "id": "jUjw8LhOoPk",
+    "titre": "Mouvement dans un champ uniforme - cours de physique chimie spé terminale",
+    "chaine": "Les génies des sciences",
+    "duree": "13:51",
+    "sec": 831,
+    "vues": "150 757 vues"
+   },
+   {
+    "id": "HrRIRbiNV_I",
+    "titre": "FORCE électrique et CHAMPS électrique | 1ère et Terminale spécialité physique chimie",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "3:18",
+    "sec": 198,
+    "vues": "117 241 vues"
+   },
+   {
+    "id": "cUzPTd8a5Wo",
+    "titre": "mouvement d'une particule chargée dans un champ électrique uniforme (1)",
+    "chaine": "groupe RALM",
+    "duree": "5:18",
+    "sec": 318,
+    "vues": "2 187 vues"
+   },
+   {
+    "id": "TQ-h9CzOECo",
+    "titre": "MOUVEMENT 🥎 CHAMP DE PESANTEUR UNIFORME ✅ Cours complet 💪 Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "14:52",
+    "sec": 892,
+    "vues": "370 951 vues"
+   },
+   {
+    "id": "LSX_AUg_MNQ",
+    "titre": "Mouvement dans un CHAMP ÉLECTRIQUE UNIFORME 🎯 Exercice BAC ✅ Terminale Spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "5:06",
+    "sec": 306,
+    "vues": "88 166 vues"
+   }
+  ]
+ }
+}

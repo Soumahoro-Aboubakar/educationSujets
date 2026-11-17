@@ -1,0 +1,156 @@
+{
+  "module": "CG-INSTIT",
+  "lecons": [
+    {
+      "code": "CG-INSTIT-L1",
+      "requetes": [
+        "site:youtube.com/watch \"À quoi sert le droit\"",
+        "site:youtube.com/watch règle de droit explication simple",
+        "à quoi sert le droit Les clés de la République youtube",
+        "\"La règle de droit : définition et caractères\" youtube minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=e2hB3XpxUVo",
+          "titre": "La règle de droit : définition et caractères",
+          "chaine": "Maxime Bizeau - Fiches-droit.com",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette présentation définit la règle juridique et ses caractères dans un cadre français dont les principes généraux sont transposables en Côte d’Ivoire, mais développe moins les droits subjectifs et les obligations."
+        }
+      ],
+      "justification": "Le sommaire confirme une explication ciblée sur la définition et les caractères de la règle de droit, adaptée à une introduction. La durée totale n’était pas affichée dans les résultats consultés ; le respect du plafond de 15 minutes reste à vérifier."
+    },
+    {
+      "code": "CG-INSTIT-L2",
+      "requetes": [
+        "site:youtube.com/watch \"D’où viennent les règles de droit\"",
+        "site:youtube.com/watch sources du droit cours explication simple",
+        "sources du droit cours youtube hiérarchie normes",
+        "sources du droit en 5 minutes youtube",
+        "sources du droit Côte Ivoire vidéo cours",
+        "sources du droit explication simple Afrique youtube"
+      ],
+      "candidats": [],
+      "justification": "Les résultats identifiés renvoient surtout à des cours français, parfois longs, dont les développements sur les normes européennes ne se transposent pas directement au contexte ivoirien. Aucune vidéo suffisamment vérifiée sur le contenu et le format demandé n’a été retenue."
+    },
+    {
+      "code": "CG-INSTIT-L3",
+      "requetes": [
+        "site:youtube.com \"La Constitution protège et organise\"",
+        "site:youtube.com constitution Côte Ivoire explication simple",
+        "site:youtube.com constitution ivoirienne 2023 cours",
+        "constitution Côte d'Ivoire explication youtube",
+        "\"constitution ivoirienne\" \"2023\" youtube cours",
+        "constitution Côte Ivoire 2023 explication simple vidéo"
+      ],
+      "candidats": [],
+      "justification": "La présentation ivoirienne trouvée sur la définition de la Constitution date de septembre 2016, avant l’adoption du texte étudié. Aucun résultat suffisamment vérifié ne relie les notions de la leçon à la Constitution de novembre 2016 et à ses révisions de 2020 et 2023."
+    },
+    {
+      "code": "CG-INSTIT-L4",
+      "requetes": [
+        "\"Qui exerce le pouvoir exécutif ?\" Côte Ivoire youtube",
+        "pouvoir exécutif Côte d'Ivoire cours youtube",
+        "président vice-président premier ministre Côte d'Ivoire explication vidéo",
+        "pouvoir exécutif ivoirien en 5 minutes youtube",
+        "RFI Côte d’Ivoire quel est le rôle du nouveau vice-président 21 avril 2022"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=FX73Qu3FkAI",
+          "titre": "Côte d’Ivoire : quel est le rôle du nouveau vice-président ? • RFI",
+          "chaine": "RFI",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette explication consacrée à la Côte d’Ivoire examine le rôle du vice-président et son articulation avec le Président et le Premier ministre à partir de la nomination de 2022."
+        }
+      ],
+      "justification": "Le sujet correspond directement à la distinction entre les trois fonctions de l’exécutif et se situe après la réforme de 2020, mais comporte aussi une analyse politique datée. La durée n’était pas affichée dans les résultats consultés ; le plafond de 15 minutes reste à vérifier."
+    },
+    {
+      "code": "CG-INSTIT-L5",
+      "requetes": [
+        "\"Pourquoi deux chambres au Parlement ?\" youtube",
+        "parlement sénat Côte Ivoire rôle deux tiers site:youtube.com/watch",
+        "sénat ivoirien rôle explication youtube",
+        "sénat Côte d'Ivoire c'est quoi vidéo",
+        "parlement ivoirien explication simple vidéo",
+        "sénat ivoirien composition 66 33 youtube"
+      ],
+      "candidats": [],
+      "justification": "Les principaux résultats sont des émissions « 52 minutes pour Comprendre », incompatibles avec le format demandé. Une présentation du Sénat datant d’octobre 2016 a également été trouvée, mais son traitement de la composition et des attributions actuelles n’a pas pu être vérifié."
+    },
+    {
+      "code": "CG-INSTIT-L6",
+      "requetes": [
+        "\"Juger les litiges et contrôler la Constitution\" youtube",
+        "organisation judiciaire Côte d'Ivoire youtube",
+        "conseil constitutionnel Côte d'Ivoire rôle vidéo youtube",
+        "cour cassation conseil Etat Côte d'Ivoire cours vidéo",
+        "\"Côte d'Ivoire\" \"Cour de cassation\" youtube",
+        "\"Cour de Cassation de la Côte d'Ivoire\" vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=mLr90PVcn1U",
+          "titre": "Cour de Cassation de la Côte d'Ivoire",
+          "chaine": "Cour de Cassation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette présentation situe la Cour de cassation au sommet de l’ordre judiciaire ivoirien et renvoie à ses attributions légales, sans couvrir les trois autres institutions étudiées."
+        }
+      ],
+      "justification": "La description confirme un contenu spécifiquement ivoirien correspondant à la partie de la leçon sur la cassation. La durée n’était pas affichée dans les résultats consultés ; le plafond de 15 minutes reste à vérifier."
+    },
+    {
+      "code": "CG-INSTIT-L7",
+      "requetes": [
+        "site:youtube.com \"Conseiller et rechercher un accord\"",
+        "site:youtube.com Médiateur République Côte Ivoire rôle explication",
+        "site:youtube.com CESEC Côte Ivoire missions",
+        "médiateur république Côte d'Ivoire rôle vidéo youtube",
+        "CESEC missions explication vidéo Côte d'Ivoire",
+        "\"CESEC\" youtube rôle"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=lbvXP3ch7sA",
+          "titre": "Médiateur de la république : rôle et mission de l'institution",
+          "chaine": "7info",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce sujet d’une chaîne ivoirienne présente le rôle et les missions du Médiateur de la République, correspondant au volet médiation de la leçon."
+        }
+      ],
+      "justification": "Le résultat est directement consacré à l’institution ivoirienne, mais ne documente pas les rôles du CESEC et des chefs traditionnels. La durée n’était pas affichée dans les résultats consultés ; le plafond de 15 minutes reste à vérifier."
+    },
+    {
+      "code": "CG-INSTIT-L8",
+      "requetes": [
+        "site:youtube.com \"Reconnaître les symboles de la République\"",
+        "site:youtube.com symboles République Côte Ivoire cours",
+        "site:youtube.com symboles Côte Ivoire explication simple",
+        "symboles république Côte d'Ivoire vidéo youtube",
+        "drapeau devise hymne Côte d'Ivoire cours vidéo",
+        "symboles Côte Ivoire en 5 minutes youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=PexsyY7IOFE",
+          "titre": "l'histoire des symboles de la République de CI",
+          "chaine": "Ministere de la Jeunesse",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce documentaire du ministère ivoirien présente l’histoire du drapeau et de l’emblème national, mais sa description ne confirme pas le traitement de l’hymne, de la devise et de la laïcité."
+        }
+      ],
+      "justification": "La provenance ministérielle et le sujet explicitement ivoirien en font une ressource pertinente pour le volet consacré au drapeau. La durée n’était pas affichée dans les résultats consultés ; le plafond de 15 minutes reste à vérifier."
+    }
+  ]
+}

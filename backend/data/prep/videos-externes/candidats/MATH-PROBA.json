@@ -1,0 +1,1128 @@
+{
+ "MATH-PROBA-L1": {
+  "titre": "Décrire une expérience aléatoire",
+  "candidats": [
+   {
+    "id": "CBtj0nLx-N4",
+    "titre": "LE COURS : Probabilités - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "975 656 vues"
+   },
+   {
+    "id": "9ZotRINrylQ",
+    "titre": "EXPÉRIENCE ALÉATOIRE et UNIVERS - Exercice Corrigé - Seconde",
+    "chaine": "Galilee ac",
+    "duree": "3:35",
+    "sec": 215,
+    "vues": "14 072 vues"
+   },
+   {
+    "id": "ytLG6HijPhk",
+    "titre": "Probabilités 🎲 Vocabulaire : expérience aléatoire, issue et événement 🚀 Cours + Exemples 💪",
+    "chaine": "jaicompris Maths",
+    "duree": "3:13",
+    "sec": 193,
+    "vues": "11 265 vues"
+   },
+   {
+    "id": "5ZNYG3e2g_k",
+    "titre": "Dénombrer pour calculer une probabilité - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "173 359 vues"
+   },
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   },
+   {
+    "id": "8JFN-xWwtPw",
+    "titre": "#1. Expériences et événements aléatoires",
+    "chaine": "Maths PlusUn",
+    "duree": "7:53",
+    "sec": 473,
+    "vues": "113 721 vues"
+   },
+   {
+    "id": "Zuw96cBgu3M",
+    "titre": "Expérience aléatoire : définition et exemples faciles à retenir !",
+    "chaine": "Jean-Yves Labouche",
+    "duree": "4:18",
+    "sec": 258,
+    "vues": "6 309 vues"
+   },
+   {
+    "id": "FvcrD--qym8",
+    "titre": "Probabilités et Dénombrement - Une Minute Pour Comprendre",
+    "chaine": "Umpc Production",
+    "duree": "3:21",
+    "sec": 201,
+    "vues": "107 501 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L2": {
+  "titre": "Calculer une probabilité en équiprobabilité",
+  "candidats": [
+   {
+    "id": "ZV-mQBHIEnw",
+    "titre": "Notion de probabilité : équiprobabilité - Maths 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:21",
+    "sec": 261,
+    "vues": "109 235 vues"
+   },
+   {
+    "id": "9nxxlprh_aE",
+    "titre": "PROBABILITÉ : EQUIPROBABILITE",
+    "chaine": "Madame K",
+    "duree": "4:01",
+    "sec": 241,
+    "vues": "10 922 vues"
+   },
+   {
+    "id": "4mNUzKUaZcI",
+    "titre": "Calculs de probabilités dans les situations d'équiprobabilité",
+    "chaine": "charmuzelle",
+    "duree": "7:42",
+    "sec": 462,
+    "vues": "20 612 vues"
+   },
+   {
+    "id": "bSLpDzDElCY",
+    "titre": "Comment étudier une situation d'équiprobabilité ?",
+    "chaine": "Mathemax",
+    "duree": "5:05",
+    "sec": 305,
+    "vues": "1 312 vues"
+   },
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   },
+   {
+    "id": "PIvD35w7jIA",
+    "titre": "Équiprobabilité : c) calcul de la probabilité d'un événement non singulier",
+    "chaine": "SophieGuichard",
+    "duree": "1:08",
+    "sec": 68,
+    "vues": "2 483 vues"
+   },
+   {
+    "id": "CBtj0nLx-N4",
+    "titre": "LE COURS : Probabilités - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "975 656 vues"
+   },
+   {
+    "id": "F-_SS9ghPLI",
+    "titre": "🎯 Objectif 36 Calculer des probabilités dans des situations simples d’équiprobabilité",
+    "chaine": "Julien Legrand",
+    "duree": "3:28",
+    "sec": 208,
+    "vues": "45 vues"
+   },
+   {
+    "id": "5ZNYG3e2g_k",
+    "titre": "Dénombrer pour calculer une probabilité - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "173 359 vues"
+   },
+   {
+    "id": "SBLxsvdi6AI",
+    "titre": "Cours - Première - Mathématiques : Dénombrement / Théorie des ensembles / Tirage successif ...",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:25",
+    "sec": 745,
+    "vues": "204 485 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L3": {
+  "titre": "Compter des choix successifs",
+  "candidats": [
+   {
+    "id": "BO1XoQW26pY",
+    "titre": "Tirages SUCCESSIFS VS SIMULTANÉS",
+    "chaine": "Hedacademy",
+    "duree": "7:39",
+    "sec": 459,
+    "vues": "13 529 vues"
+   },
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   },
+   {
+    "id": "SBLxsvdi6AI",
+    "titre": "Cours - Première - Mathématiques : Dénombrement / Théorie des ensembles / Tirage successif ...",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:25",
+    "sec": 745,
+    "vues": "204 485 vues"
+   },
+   {
+    "id": "3iJKLJ7AQWM",
+    "titre": "Dénombrement • Savoir compter les anagrammes d'un mot • Terminale spécialité maths • Permutations",
+    "chaine": "jaicompris Maths",
+    "duree": "7:47",
+    "sec": 467,
+    "vues": "49 062 vues"
+   },
+   {
+    "id": "NVCTTlNLSbY",
+    "titre": "Cours articulé de mathématiques — Leçon : dénombrer pour compter (article 145)",
+    "chaine": "Éditions Clementinium",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "9 vues"
+   },
+   {
+    "id": "fO3T4njqyAs",
+    "titre": "DÉNOMBREMENT - JE T'APPRENDS À COMPTER 😉",
+    "chaine": "Hedacademy",
+    "duree": "7:11",
+    "sec": 431,
+    "vues": "56 046 vues"
+   },
+   {
+    "id": "o2GrW2Q46og",
+    "titre": "DÉNOMBREMENT 1ère : ARBRE DE CHOIX | Méthode Facile + Exercice Corrigé !",
+    "chaine": "grandprof.org+",
+    "duree": "9:54",
+    "sec": 594,
+    "vues": "786 vues"
+   },
+   {
+    "id": "P21QdTvuzio",
+    "titre": "Permutations et choix",
+    "chaine": "Thivent Besson",
+    "duree": "14:26",
+    "sec": 866,
+    "vues": "259 vues"
+   },
+   {
+    "id": "5ZNYG3e2g_k",
+    "titre": "Dénombrer pour calculer une probabilité - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "173 364 vues"
+   },
+   {
+    "id": "RB_XZyt-p0U",
+    "titre": "Cours - Première - Mathématiques : Dénombrement / Théorie des ensembles / Tirage successif. Exemples",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:47",
+    "sec": 767,
+    "vues": "130 658 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L4": {
+  "titre": "Choisir un groupe sans tenir compte de l’ordre",
+  "candidats": [
+   {
+    "id": "ZumwBc_pNZI",
+    "titre": "ORDRE D'UN ÉLÉMENT DANS UN GROUPE (l'ordre de a^k)",
+    "chaine": "Mathématiques d'élite",
+    "duree": "7:49",
+    "sec": 469,
+    "vues": "7 815 vues"
+   },
+   {
+    "id": "EK7o29M6AaY",
+    "titre": "Ordre d’un élément dans un groupe : Définition et exemples",
+    "chaine": "AMINE OUACHI MATHEMATICS",
+    "duree": "12:37",
+    "sec": 757,
+    "vues": "11 666 vues"
+   },
+   {
+    "id": "uKumTd0tZmA",
+    "titre": "Ordre d'un élément dans un groupe",
+    "chaine": "Mathématiques d'élite",
+    "duree": "13:12",
+    "sec": 792,
+    "vues": "3 736 vues"
+   },
+   {
+    "id": "VpRIFYMpAcM",
+    "titre": "Choisir le bon modèle : l'ordre compte-t-il, peut-on répéter ?",
+    "chaine": "ParaMaths Training et ParaMaths",
+    "duree": "9:09",
+    "sec": 549,
+    "vues": "2 105 vues"
+   },
+   {
+    "id": "SBLxsvdi6AI",
+    "titre": "Cours - Première - Mathématiques : Dénombrement / Théorie des ensembles / Tirage successif ...",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:25",
+    "sec": 745,
+    "vues": "204 485 vues"
+   },
+   {
+    "id": "1GTFsdBvnRE",
+    "titre": "⭐️ Astuce pour additionner deux fractions ayant 1 au numérateur #maths #fraction",
+    "chaine": "Campus XYZ",
+    "duree": "0:25",
+    "sec": 25,
+    "vues": "1 174 190 vues"
+   },
+   {
+    "id": "oOcj8rRyWd0",
+    "titre": "Exercice 2 2) Bac Mathématiques Métropole 16/06/2026",
+    "chaine": "Génération Cours",
+    "duree": "9:38",
+    "sec": 578,
+    "vues": "50 vues"
+   },
+   {
+    "id": "kL-eMNZiARM",
+    "titre": "LE COURS - Les ensembles de nombres",
+    "chaine": "Yvan Monka",
+    "duree": "8:02",
+    "sec": 482,
+    "vues": "1 796 241 vues"
+   },
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   },
+   {
+    "id": "5J5j-lTfKF8",
+    "titre": "A propos du \" coefficient d'ordre \".denombrement",
+    "chaine": "ouikrim mohamed",
+    "duree": "7:17",
+    "sec": 437,
+    "vues": "9 035 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L5": {
+  "titre": "Traduire « et » et « ou »",
+  "candidats": [
+   {
+    "id": "VDoKt5iFbm8",
+    "titre": "LE COURS : Translation - Quatrième",
+    "chaine": "Yvan Monka",
+    "duree": "13:33",
+    "sec": 813,
+    "vues": "506 019 vues"
+   },
+   {
+    "id": "_yF5ItbcN28",
+    "titre": "Traduire une expression numérique par une phrase - Cinquième",
+    "chaine": "Yvan Monka",
+    "duree": "5:22",
+    "sec": 322,
+    "vues": "243 492 vues"
+   },
+   {
+    "id": "_-JrucpCd8U",
+    "titre": "TRADUIRE une EXPRESSION numérique par une PHRASE (et inversement) – 5ème",
+    "chaine": "CQFE maths",
+    "duree": "7:52",
+    "sec": 472,
+    "vues": "11 575 vues"
+   },
+   {
+    "id": "TeDNAsBonEc",
+    "titre": "Traduire le Français en Quantificateurs (∀, ∃) : Cours & Exercices | Logique #13",
+    "chaine": "Soutien-Efficace",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "9 vues"
+   },
+   {
+    "id": "kURSugqacdg",
+    "titre": "Translation : premières notions",
+    "chaine": "Jean-Yves Labouche",
+    "duree": "3:32",
+    "sec": 212,
+    "vues": "51 061 vues"
+   },
+   {
+    "id": "c-akR4NJhh0",
+    "titre": "COMPRENDRE les intervalles",
+    "chaine": "Hedacademy",
+    "duree": "7:42",
+    "sec": 462,
+    "vues": "279 132 vues"
+   },
+   {
+    "id": "_LHtkQVI8bg",
+    "titre": "Cours articulé de mathématiques — Méthode 1 : traduire une valeur absolue en intervalle (chapitre 2)",
+    "chaine": "Éditions Clementinium",
+    "duree": "5:02",
+    "sec": 302,
+    "vues": "14 vues"
+   },
+   {
+    "id": "d3bHeeKf-Y8",
+    "titre": "5e -Traduire une phrase en expression",
+    "chaine": "Le Quart d'Heure Maths",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "243 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L6": {
+  "titre": "Calculer une probabilité sachant une information",
+  "candidats": [
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   },
+   {
+    "id": "TqaAxnld66M",
+    "titre": "PROBABILITÉS - Evénements indépendants",
+    "chaine": "Hedacademy",
+    "duree": "5:06",
+    "sec": 306,
+    "vues": "210 261 vues"
+   },
+   {
+    "id": "Rc0zZUNfSL0",
+    "titre": "Probabilité : Résumé du cours complet 1ère & Terminal - Spé Maths",
+    "chaine": "Le génie des maths",
+    "duree": "8:37",
+    "sec": 517,
+    "vues": "171 294 vues"
+   },
+   {
+    "id": "9XSRzUGu-7k",
+    "titre": "MAÎTRISER UNION ET INTERSECTION",
+    "chaine": "Hedacademy",
+    "duree": "8:57",
+    "sec": 537,
+    "vues": "245 045 vues"
+   },
+   {
+    "id": "R8bjZpJFeHg",
+    "titre": "PROBABILITÉS - Maîtriser les arbres !",
+    "chaine": "Hedacademy",
+    "duree": "11:50",
+    "sec": 710,
+    "vues": "387 332 vues"
+   },
+   {
+    "id": "qD_7BaFpEP8",
+    "titre": "Probabilités conditionnelles",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "4 589 vues"
+   },
+   {
+    "id": "FR49wu-pVmE",
+    "titre": "Calculer une probabilité conditionnelle à l'aide de la formule",
+    "chaine": "Yvan Monka",
+    "duree": "6:47",
+    "sec": 407,
+    "vues": "36 151 vues"
+   },
+   {
+    "id": "JEL4hxtnw0Q",
+    "titre": "Calculer une probabilité conditionnelle (Tableau) - Première - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "8:35",
+    "sec": 515,
+    "vues": "905 970 vues"
+   },
+   {
+    "id": "5ZNYG3e2g_k",
+    "titre": "Dénombrer pour calculer une probabilité - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "173 364 vues"
+   },
+   {
+    "id": "f65lfuajUe4",
+    "titre": "Dénombrement-Probabilité : Probabilités conditionnelles, intersection et indépendances",
+    "chaine": "Science-fonction",
+    "duree": "12:10",
+    "sec": 730,
+    "vues": "159 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L7": {
+  "titre": "Utiliser un arbre pour additionner les bons chemins",
+  "candidats": [
+   {
+    "id": "R8bjZpJFeHg",
+    "titre": "PROBABILITÉS - Maîtriser les arbres !",
+    "chaine": "Hedacademy",
+    "duree": "11:50",
+    "sec": 710,
+    "vues": "387 332 vues"
+   },
+   {
+    "id": "m0cwoBLU8nk",
+    "titre": "Épreuves, arbres et modèle du produit — multiplier le long d'un chemin, additionner les chemins",
+    "chaine": "CommeUnJeu",
+    "duree": "8:28",
+    "sec": 508,
+    "vues": "21 vues"
+   },
+   {
+    "id": "9QcMMqqLWxw",
+    "titre": "Calcul en ligne: L'arbre à calcul pour réussir les additions.",
+    "chaine": "Classe de CE1 à la maison",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "35 237 vues"
+   },
+   {
+    "id": "mLZXd8sINHU",
+    "titre": "Calculer la probabilité d’une réunion avec un arbre",
+    "chaine": "Neige",
+    "duree": "8:31",
+    "sec": 511,
+    "vues": "685 vues"
+   },
+   {
+    "id": "6-SWjelwO3A",
+    "titre": "Cours articulé de mathématiques — Méthode 4 : arbre pour un problème à étapes (chapitre 21)",
+    "chaine": "Éditions Clementinium",
+    "duree": "4:17",
+    "sec": 257,
+    "vues": "5 vues"
+   },
+   {
+    "id": "vOgSZWi_tHk",
+    "titre": "probabilité conditionnelle • savoir utiliser un arbre pour calculer des probabilité • Un classique!",
+    "chaine": "jaicompris Maths",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "12 384 vues"
+   },
+   {
+    "id": "YPlxufhIrGA",
+    "titre": "Arbre de probabilités - MATHS ET MA FICHE",
+    "chaine": "MATHS ET MA TEAM",
+    "duree": "0:14",
+    "sec": 14,
+    "vues": "2 291 vues"
+   },
+   {
+    "id": "yZsu7YXNY5c",
+    "titre": "Coefficients binomiaux et triangle de Pascal — compter les chemins d'un arbre",
+    "chaine": "CommeUnJeu",
+    "duree": "7:27",
+    "sec": 447,
+    "vues": "11 vues"
+   },
+   {
+    "id": "nxeABdLJTB8",
+    "titre": "Dénombrement : faut-il utiliser un arbre ou un tableau ?",
+    "chaine": "Pikomath",
+    "duree": "3:10",
+    "sec": 190,
+    "vues": "9 940 vues"
+   },
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L8": {
+  "titre": "Distinguer indépendance et incompatibilité",
+  "candidats": [
+   {
+    "id": "LOaipIBp4us",
+    "titre": "Événements Incompatibles vs Événements Indépendants : Le Guide Clair",
+    "chaine": "Omni School",
+    "duree": "1:48",
+    "sec": 108,
+    "vues": "42 610 vues"
+   },
+   {
+    "id": "OPuoB5EuOAQ",
+    "titre": "Démontrer que deux évènements sont indépendants - Première - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "5:43",
+    "sec": 343,
+    "vues": "136 980 vues"
+   },
+   {
+    "id": "pwgiMfT_S5c",
+    "titre": "Difference entre evenement independant et incompatible",
+    "chaine": "Éducation Plus",
+    "duree": "12:43",
+    "sec": 763,
+    "vues": "837 vues"
+   },
+   {
+    "id": "TqaAxnld66M",
+    "titre": "PROBABILITÉS - Evénements indépendants",
+    "chaine": "Hedacademy",
+    "duree": "5:06",
+    "sec": 306,
+    "vues": "210 261 vues"
+   },
+   {
+    "id": "xe6Yn05Qz10",
+    "titre": "Incompatibilité VS indépendance (ECG Appro/Appli, HEC, MPSI, PCSI, PTSI, BCPST, BL)",
+    "chaine": "Cogitamus",
+    "duree": "6:44",
+    "sec": 404,
+    "vues": "553 vues"
+   },
+   {
+    "id": "IZDIkIKaG2Q",
+    "titre": "Indépendance et incompatibilité( probabilités)",
+    "chaine": "Anne-Marie Picart",
+    "duree": "10:02",
+    "sec": 602,
+    "vues": "6 707 vues"
+   },
+   {
+    "id": "SD9H5OYYLz0",
+    "titre": "Utiliser l'indépendance entre deux événements (1) - Première/Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "4:20",
+    "sec": 260,
+    "vues": "153 632 vues"
+   },
+   {
+    "id": "L2izzjrJy8E",
+    "titre": "Une confusion classique en probabilité - événements indépendants et incompatibles !",
+    "chaine": "Bibmath",
+    "duree": "6:41",
+    "sec": 401,
+    "vues": "1 697 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L9": {
+  "titre": "Décrire la loi d’une variable aléatoire",
+  "candidats": [
+   {
+    "id": "MA0ox9nvgxM",
+    "titre": "Variable aléatoire X",
+    "chaine": "Hedacademy",
+    "duree": "13:05",
+    "sec": 785,
+    "vues": "165 964 vues"
+   },
+   {
+    "id": "2Ge_4hclPnI",
+    "titre": "Déterminer la loi de probabilité d'une variable aléatoire (1) - Première",
+    "chaine": "Yvan Monka",
+    "duree": "10:09",
+    "sec": 609,
+    "vues": "762 333 vues"
+   },
+   {
+    "id": "frDKyCscVfc",
+    "titre": "Explications De La Notion De Variable Aléatoire",
+    "chaine": "Tchitcha",
+    "duree": "12:57",
+    "sec": 777,
+    "vues": "1 236 vues"
+   },
+   {
+    "id": "nRCaPsE35mg",
+    "titre": "variable aléatoire • loi de probabilité • Comprendre le cours • première spécialité mathématiques",
+    "chaine": "jaicompris Maths",
+    "duree": "8:52",
+    "sec": 532,
+    "vues": "288 238 vues"
+   },
+   {
+    "id": "Q52TTEzbyV0",
+    "titre": "Variable aléatoire : la définition enfin claire",
+    "chaine": "ParaMaths",
+    "duree": "6:28",
+    "sec": 388,
+    "vues": "68 358 vues"
+   },
+   {
+    "id": "_-uEp-gG5T0",
+    "titre": "Variable aléatoire et loi de probabilité",
+    "chaine": "El khader",
+    "duree": "6:26",
+    "sec": 386,
+    "vues": "12 507 vues"
+   },
+   {
+    "id": "UGhCQ-uLcoA",
+    "titre": "Variable Aléatoire discrète (Bac & concours postbac)",
+    "chaine": "Maths PlusUn",
+    "duree": "6:01",
+    "sec": 361,
+    "vues": "72 166 vues"
+   },
+   {
+    "id": "8pkao1GYXtA",
+    "titre": "Introduction aux variables aléatoires",
+    "chaine": "Promath",
+    "duree": "11:07",
+    "sec": 667,
+    "vues": "29 154 vues"
+   },
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   },
+   {
+    "id": "dD1D4-TDLEc",
+    "titre": "VARIABLES ALÉATOIRES - Lois de Bernoulli - Terminale / Maths Complémentaires",
+    "chaine": "Médématiques",
+    "duree": "11:10",
+    "sec": 670,
+    "vues": "2 545 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L10": {
+  "titre": "L’espérance : une moyenne pondérée",
+  "candidats": [
+   {
+    "id": "o67OOavrbHQ",
+    "titre": "Calculer espérance, variance et écart-type d'une variable aléatoire moyenne - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:21",
+    "sec": 441,
+    "vues": "184 854 vues"
+   },
+   {
+    "id": "Cc-Cs6561l8",
+    "titre": "✅Variable aléatoire Loi de probabilité espérance mathématique variance écart type loi de probabilité",
+    "chaine": "Professeur Raoul",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "1 016 vues"
+   },
+   {
+    "id": "bFNxMB_lRPA",
+    "titre": "Interprétation de l'espérance mathématique",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "4:21",
+    "sec": 261,
+    "vues": "693 vues"
+   },
+   {
+    "id": "RNpBdNNO9mo",
+    "titre": "Première - Probabilités - Arbre pondéré",
+    "chaine": "Prodesmaths",
+    "duree": "4:01",
+    "sec": 241,
+    "vues": "392 vues"
+   },
+   {
+    "id": "KHhHq3fon1k",
+    "titre": "Espérance, variance, écart type",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "1:26",
+    "sec": 86,
+    "vues": "16 277 vues"
+   },
+   {
+    "id": "d6jtN0aJaqs",
+    "titre": "Dénombrement-Probabilité : Variables aléatoires",
+    "chaine": "Science-fonction",
+    "duree": "5:03",
+    "sec": 303,
+    "vues": "209 vues"
+   },
+   {
+    "id": "MPK7zWeBlYE",
+    "titre": "Calculer et Interpréter l'ESPÉRANCE d'une VARIABLE ALÉATOIRE - Exercice Corrigé - Première",
+    "chaine": "Galilee ac",
+    "duree": "4:35",
+    "sec": 275,
+    "vues": "11 021 vues"
+   },
+   {
+    "id": "U1NamiLxBaI",
+    "titre": "Calculer une moyenne pondérée - Quatrième",
+    "chaine": "Yvan Monka",
+    "duree": "5:25",
+    "sec": 325,
+    "vues": "128 075 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L11": {
+  "titre": "Variance et écart-type : mesurer la dispersion",
+  "candidats": [
+   {
+    "id": "o67OOavrbHQ",
+    "titre": "Calculer espérance, variance et écart-type d'une variable aléatoire moyenne - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:21",
+    "sec": 441,
+    "vues": "184 854 vues"
+   },
+   {
+    "id": "CiFoBkipJQk",
+    "titre": "Calculer la variance et l'écart-type - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "7:27",
+    "sec": 447,
+    "vues": "1 324 208 vues"
+   },
+   {
+    "id": "PknQyaYYAwQ",
+    "titre": "Moyenne, variance et écart type -Terminale S",
+    "chaine": "20/20",
+    "duree": "10:14",
+    "sec": 614,
+    "vues": "577 168 vues"
+   },
+   {
+    "id": "JEBPoEbYsro",
+    "titre": "Variance, écart type et interprétation (Statistiques)",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "2:25",
+    "sec": 145,
+    "vues": "17 968 vues"
+   },
+   {
+    "id": "aY2KPqOSV_I",
+    "titre": "Calculer la variance et l'écart-type en moins de 2 min.",
+    "chaine": "mathsollivier",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "7 255 vues"
+   },
+   {
+    "id": "KHhHq3fon1k",
+    "titre": "Espérance, variance, écart type",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "1:26",
+    "sec": 86,
+    "vues": "16 277 vues"
+   },
+   {
+    "id": "_dLCqxRDsTE",
+    "titre": "📍MOYENNE, VARIANCE, ÉCART TYPE. Statistique. Statistique descriptive. Variance et écart type.",
+    "chaine": "Professeur Raoul",
+    "duree": "7:54",
+    "sec": 474,
+    "vues": "3 980 vues"
+   },
+   {
+    "id": "jMJQcOO7vnI",
+    "titre": "VARIANCE ET ECART-TYPE - (STATISTIQUES DSCRIPTIVES - Série statistique continue)",
+    "chaine": "L'Économie-Gestion Simplement",
+    "duree": "11:15",
+    "sec": 675,
+    "vues": "54 246 vues"
+   },
+   {
+    "id": "jSwRUlhsZFM",
+    "titre": "Variance et écart-type : mesurer la dispersion",
+    "chaine": "CommeUnJeu",
+    "duree": "2:07",
+    "sec": 127,
+    "vues": "11 vues"
+   },
+   {
+    "id": "xg870rFNiDI",
+    "titre": "Leçon 115 Probabilité Variance et écart type d'une variable aléatoire",
+    "chaine": "EDUNOTE",
+    "duree": "7:30",
+    "sec": 450,
+    "vues": "375 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L12": {
+  "titre": "Reconnaître et calculer une loi binomiale",
+  "candidats": [
+   {
+    "id": "BeVZfHsAUg0",
+    "titre": "Mémo - La loi binomiale",
+    "chaine": "Droles2Maths",
+    "duree": "3:11",
+    "sec": 191,
+    "vues": "79 055 vues"
+   },
+   {
+    "id": "1gMq2TJwSh0",
+    "titre": "Calculer une probabilité avec une loi binomiale - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "9:17",
+    "sec": 557,
+    "vues": "718 456 vues"
+   },
+   {
+    "id": "5BKE0Ldl4r4",
+    "titre": "Mathématiques : c'est quoi une loi binomiale ?",
+    "chaine": "digiSchool Lycée",
+    "duree": "9:51",
+    "sec": 591,
+    "vues": "12 624 vues"
+   },
+   {
+    "id": "89AUsOJ0o4A",
+    "titre": "BINOMIALE - LE CLASSIQUE À MAÎTRISER - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "87 344 vues"
+   },
+   {
+    "id": "8cQ4a2mOvy8",
+    "titre": "Loi binomiale • reconnaître les paramètres • calculer des probabilités • Terminale spécialité maths",
+    "chaine": "jaicompris Maths",
+    "duree": "7:45",
+    "sec": 465,
+    "vues": "58 912 vues"
+   },
+   {
+    "id": "qz2yUS-OvVk",
+    "titre": "Reconnaître une loi binomiale et la rédaction associée - Loi binomiale -Terminale",
+    "chaine": "J'ai 20 en maths",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "20 825 vues"
+   },
+   {
+    "id": "zfYDAveKnnM",
+    "titre": "Loi binomiale - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "4:57",
+    "sec": 297,
+    "vues": "212 vues"
+   },
+   {
+    "id": "Ve3lZqtMCIE",
+    "titre": "LA LOI DE POISSON : ➗ Approximation de la LOI BINOMIALE ! Ok mais comment l'appliquer ?",
+    "chaine": "Ton Prof Anty",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "119 467 vues"
+   },
+   {
+    "id": "d8YAbeWou1E",
+    "titre": "Calculer une probabilité associée à une épreuve de Bernoulli - Première Techno",
+    "chaine": "Yvan Monka",
+    "duree": "8:49",
+    "sec": 529,
+    "vues": "129 168 vues"
+   },
+   {
+    "id": "7k4ZYdfWEY8",
+    "titre": "PROBA : Calculer une probabilité pour une loi binomiale - Tutoriel TI",
+    "chaine": "Yvan Monka",
+    "duree": "4:48",
+    "sec": 288,
+    "vues": "369 498 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L13": {
+  "titre": "Moyenne et dispersion d’une loi binomiale",
+  "candidats": [
+   {
+    "id": "BeVZfHsAUg0",
+    "titre": "Mémo - La loi binomiale",
+    "chaine": "Droles2Maths",
+    "duree": "3:11",
+    "sec": 191,
+    "vues": "79 055 vues"
+   },
+   {
+    "id": "89AUsOJ0o4A",
+    "titre": "BINOMIALE - LE CLASSIQUE À MAÎTRISER - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "87 344 vues"
+   },
+   {
+    "id": "0UKzAP99R18",
+    "titre": "[DET#31] Loi binomiale | Espérance & Variance (Démonstration)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "7:52",
+    "sec": 472,
+    "vues": "19 648 vues"
+   },
+   {
+    "id": "1gMq2TJwSh0",
+    "titre": "Calculer une probabilité avec une loi binomiale - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "9:17",
+    "sec": 557,
+    "vues": "718 456 vues"
+   },
+   {
+    "id": "sJ28iaWWiAA",
+    "titre": "LA LOI BINOMIALE : ➗ Épreuve de BERNOULLI ❌ ECHEC ✔️SUCCES ➡️ Les conditions pour l'utiliser !",
+    "chaine": "Ton Prof Anty",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "64 377 vues"
+   },
+   {
+    "id": "5BKE0Ldl4r4",
+    "titre": "Mathématiques : c'est quoi une loi binomiale ?",
+    "chaine": "digiSchool Lycée",
+    "duree": "9:51",
+    "sec": 591,
+    "vues": "12 624 vues"
+   },
+   {
+    "id": "y5DOhH4K3l0",
+    "titre": "Loi Binomiale et Schéma de Bernoulli - Cours de Probabilité - Mathrix",
+    "chaine": "Mathrix",
+    "duree": "8:54",
+    "sec": 534,
+    "vues": "155 560 vues"
+   },
+   {
+    "id": "TMsBitYO5fc",
+    "titre": "LOI BINOMIALE : Épreuve de Bernoulli, loi de Bernoulli",
+    "chaine": "Campus XYZ",
+    "duree": "6:32",
+    "sec": 392,
+    "vues": "1 200 vues"
+   },
+   {
+    "id": "4Y12jMMYyVM",
+    "titre": "Approcher une loi binomiale par une loi normale (Moivre-Laplace) - Postbac",
+    "chaine": "Yvan Monka",
+    "duree": "8:56",
+    "sec": 536,
+    "vues": "107 361 vues"
+   },
+   {
+    "id": "ljWJfGLRgJE",
+    "titre": "DEMONSTRATION : Loi binomiale : Formules espérance et variance - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "4:07",
+    "sec": 247,
+    "vues": "36 272 vues"
+   }
+  ]
+ },
+ "MATH-PROBA-L14": {
+  "titre": "Calculer « au moins » et « au plus »",
+  "candidats": [
+   {
+    "id": "g2b9xlnCSWU",
+    "titre": "Cours- CM2- Mathématiques: Activités de mesure/ Le partage inégal: Tant de plus -Tant de moins/Suite",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "11:45",
+    "sec": 705,
+    "vues": "77 730 vues"
+   },
+   {
+    "id": "3rXse_lbAKk",
+    "titre": "Revoir les calculs sur les nombres relatifs - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "226 585 vues"
+   },
+   {
+    "id": "TrHxDAN9UmA",
+    "titre": "CALCULER avec des puissances | Mathématiques",
+    "chaine": "Paul Olivier",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "180 095 vues"
+   },
+   {
+    "id": "c-akR4NJhh0",
+    "titre": "COMPRENDRE les intervalles",
+    "chaine": "Hedacademy",
+    "duree": "7:42",
+    "sec": 462,
+    "vues": "279 132 vues"
+   },
+   {
+    "id": "ivedi7n0hMI",
+    "titre": "FRACTIONS - Calculs complets",
+    "chaine": "Hedacademy",
+    "duree": "8:42",
+    "sec": 522,
+    "vues": "536 987 vues"
+   },
+   {
+    "id": "JDF2BVeFoZ8",
+    "titre": "Démontrons que 1+1=3",
+    "chaine": "Éducation Plus",
+    "duree": "5:27",
+    "sec": 327,
+    "vues": "1 744 941 vues"
+   },
+   {
+    "id": "ovIRv587bq4",
+    "titre": "Calcul de limite d'une fonction rationnelle",
+    "chaine": "Éducation Plus",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "344 530 vues"
+   },
+   {
+    "id": "BUR4E3mOwww",
+    "titre": "5 MÉTHODES POUR CALCULER TOUS TYPES DE LIMITE SANS ÊTRE BLOQUÉ. PARTIE 1 {EXPLICAT+EXEMP} -TERMINALE",
+    "chaine": "David Patience { MATHS }",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "130 341 vues"
+   },
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "133 349 vues"
+   },
+   {
+    "id": "GPMmGxKMIAE",
+    "titre": "♦️♦️DÉNOMBREMENT.Tirage simultané boule d'une urne même couleur couleur différente au moins au plus",
+    "chaine": "Professeur Raoul",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "10 533 vues"
+   }
+  ]
+ }
+}

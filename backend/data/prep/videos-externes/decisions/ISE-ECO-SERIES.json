@@ -1,0 +1,137 @@
+[
+  {
+    "code": "ISE-ECO-SERIES-L1",
+    "youtubeId": "tk4XtFEuU4o",
+    "couverture": "exacte",
+    "justification": "Suite convergente, suite divergente : comprendre la limite d’une suite.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L2",
+    "youtubeId": "H2jbT1nxzjg",
+    "couverture": "exacte",
+    "justification": "Convergence et limite d’une suite récurrente uₙ₊₁ = f(uₙ).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L3",
+    "youtubeId": "WLju0n2lmUU",
+    "couverture": "exacte",
+    "justification": "Série numérique : sommes partielles, convergence, somme et nature.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L4",
+    "youtubeId": "GEfnvaIF6_0",
+    "couverture": "exacte",
+    "justification": "Séries géométriques : formule de la somme et exemples.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L5",
+    "youtubeId": "Y_xJuN7BRWg",
+    "couverture": "exacte",
+    "justification": "Séries à termes positifs : comparaison, domination, équivalents.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L6",
+    "youtubeId": "z0bKrg3E_GI",
+    "couverture": "partielle",
+    "justification": "Fiche méthode sur la convergence d’une série, dont la recherche d’un équivalent positif.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L7",
+    "youtubeId": "uYygr1yi6w8",
+    "couverture": "exacte",
+    "justification": "Bibmath : le critère des séries alternées.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L8",
+    "youtubeId": "fOU9tL5Rjkc",
+    "couverture": "partielle",
+    "justification": "Séries semi-convergentes : décomposer un terme signé et étudier chaque morceau.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L9",
+    "youtubeId": "qa47AopbGto",
+    "couverture": "exacte",
+    "justification": "Tableau des primitives usuelles retrouvé à partir des dérivées.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L10",
+    "youtubeId": "Z3vKJJE57Uw",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : calculer une intégrale sur un segment avec une primitive.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L11",
+    "youtubeId": "YmJj9uIkC78",
+    "couverture": "exacte",
+    "justification": "Introduction aux intégrales impropres : remplacer la borne par une limite.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L12",
+    "youtubeId": "D48UAUrhosY",
+    "couverture": "partielle",
+    "justification": "Intégrale impropre convergente ou divergente, y compris en une borne où la fonction n’est pas définie.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L13",
+    "youtubeId": "FdweGGz1g4Y",
+    "couverture": "exacte",
+    "justification": "Règle de comparaison des intégrales impropres.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L14",
+    "youtubeId": "IPUHy99VJGM",
+    "couverture": "exacte",
+    "justification": "Intégration par parties pour une intégrale impropre, sur un segment puis passage à la limite.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-SERIES-L15",
+    "youtubeId": "fj_1DFEmbiE",
+    "couverture": "exacte",
+    "justification": "Le changement de variable dans une intégrale : nouvelle variable et nouvelles bornes.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

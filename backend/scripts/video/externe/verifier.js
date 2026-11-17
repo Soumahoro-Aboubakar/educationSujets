@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Vérifie des vidéos YouTube (existence, intégration autorisée, durée ≤ 10 min, chaîne, langue)
+ * Vérifie des vidéos YouTube (existence, intégration autorisée, durée ≤ 15 min, chaîne, langue)
  * et met en cache le résultat : data/prep/videos-externes/verifications.json (une entrée par id).
  *
  *   node scripts/video/externe/verifier.js <id|url> [...]          vérifie (cache 7 jours)

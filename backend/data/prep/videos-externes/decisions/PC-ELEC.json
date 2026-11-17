@@ -1,0 +1,92 @@
+[
+  {
+    "code": "PC-ELEC-L1",
+    "youtubeId": "hzYWwg2tovk",
+    "couverture": "exacte",
+    "justification": "Ampèremètre ou voltmètre : mesurer une intensité et une tension, branchement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L2",
+    "youtubeId": "Q9RFhmS5we8",
+    "couverture": "exacte",
+    "justification": "Loi des nœuds et loi des mailles pour suivre le courant dans un circuit.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L3",
+    "youtubeId": "R6WpdF0BO60",
+    "couverture": "exacte",
+    "justification": "La loi d’Ohm : U = R × I.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L4",
+    "youtubeId": "1dPPuiWaeXA",
+    "couverture": "partielle",
+    "justification": "Résistance équivalente d’associations de résistances (série : R₁ + R₂).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L5",
+    "youtubeId": "M94AGQ5r4Vg",
+    "couverture": "partielle",
+    "justification": "Calcul de résistance dans un circuit, dont les associations en parallèle (1/R = 1/R₁ + 1/R₂).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L6",
+    "youtubeId": "lno2ZKq40Q8",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : énergie et puissance électrique (P = UI, E = Pt).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L7",
+    "youtubeId": "J-ww9ysjHLw",
+    "couverture": "exacte",
+    "justification": "Qu’est-ce que la capacité d’un condensateur : q = C × u.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L8",
+    "youtubeId": "2XDsGz3GEhA",
+    "couverture": "exacte",
+    "justification": "Condensateurs associés en série ou en parallèle.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L9",
+    "youtubeId": "fu9p6Zzu7to",
+    "couverture": "exacte",
+    "justification": "Circuit RC : temps caractéristique τ = RC et charge du condensateur.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "PC-ELEC-L10",
+    "youtubeId": "-d_8C0SsYpI",
+    "couverture": "partielle",
+    "justification": "Énergie stockée dans un condensateur ½Cu² ; la décharge est peu développée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

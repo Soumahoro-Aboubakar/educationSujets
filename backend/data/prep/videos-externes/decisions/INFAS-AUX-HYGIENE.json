@@ -1,0 +1,74 @@
+[
+  {
+    "code": "INFAS-AUX-HYGIENE-L1",
+    "youtubeId": "dGekAdVGWck",
+    "couverture": "exacte",
+    "justification": "Agents pathogènes et maladies infectieuses : présence d’un microbe, infection, maladie.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-HYGIENE-L2",
+    "youtubeId": "TGQigFZed78",
+    "couverture": "partielle",
+    "justification": "Modes de transmission des microbes (contact, air, eau, aliments) : maillons de la chaîne.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-HYGIENE-L3",
+    "youtubeId": "IXiGWkMu27E",
+    "couverture": "partielle",
+    "justification": "Hôpitaux universitaires de Genève : technique de friction hydro-alcoolique des mains.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-HYGIENE-L4",
+    "youtubeId": "XXDX-byb36M",
+    "couverture": "exacte",
+    "justification": "Un médecin explique les maladies hydriques, leurs causes et leur prévention par l’hygiène de l’eau et des aliments.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-HYGIENE-L5",
+    "youtubeId": "GbTxWXlTzbo",
+    "couverture": "exacte",
+    "justification": "MSF : le paludisme, son parasite (Plasmodium) transmis par le moustique, et ce qu’il fait au corps.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-HYGIENE-L6",
+    "youtubeId": "xhE4U0KANg8",
+    "couverture": "exacte",
+    "justification": "Comprendre le VIH : destruction des lymphocytes CD4 et affaiblissement des défenses, rôle du traitement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-HYGIENE-L7",
+    "youtubeId": "9JFhrYsIpeU",
+    "couverture": "exacte",
+    "justification": "AFP : la vaccination prépare la mémoire du système immunitaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-HYGIENE-L8",
+    "youtubeId": "aRKDYgL-q5I",
+    "couverture": "partielle",
+    "justification": "Prévention primaire, secondaire et tertiaire : du geste individuel à l’action de santé publique.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

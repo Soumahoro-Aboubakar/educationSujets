@@ -1,0 +1,751 @@
+{
+ "ENSEA-AS-GEOM-L1": {
+  "titre": "Repérer un déplacement dans l’espace",
+  "candidats": [
+   {
+    "id": "Il7LZL-jynY",
+    "titre": "[RévisionsBac.com] - Repère d'espace & repère de temps",
+    "chaine": "Revisions Bac",
+    "duree": "2:32",
+    "sec": 152,
+    "vues": "63 894 vues"
+   },
+   {
+    "id": "EyBUZt9Q0s0",
+    "titre": "♦️♦️ PLACER DANS L'ESPACE LES POINTS A(1;1;0) B(2;0;2) C(0;2;1) G(1;1;1) repère de l'espace de R^3",
+    "chaine": "Professeur Raoul",
+    "duree": "7:03",
+    "sec": 423,
+    "vues": "28 356 vues"
+   },
+   {
+    "id": "ogKYhQq-4Zc",
+    "titre": "géométrie dans l'espace • déplacement d'un sous-marin • Bac S 2018 Liban",
+    "chaine": "jaicompris Maths",
+    "duree": "13:36",
+    "sec": 816,
+    "vues": "8 716 vues"
+   },
+   {
+    "id": "PdHewbO2bH0",
+    "titre": "Se déplacer sur un quadrillage CP - CE1 - Cycle 2 - Maths - Se repérer dans l'espace",
+    "chaine": "Maître Lucas",
+    "duree": "4:45",
+    "sec": 285,
+    "vues": "64 248 vues"
+   },
+   {
+    "id": "ThTYsi3fgTA",
+    "titre": "Se déplacer sur un plan ou une carte CE2 - CM1 - CM2 - Cycle 3 - Se repérer dans l'espace - Maths",
+    "chaine": "Maître Lucas",
+    "duree": "7:40",
+    "sec": 460,
+    "vues": "77 260 vues"
+   },
+   {
+    "id": "PvCndyPcEng",
+    "titre": "Se repérer dans l'espace - Quatrième",
+    "chaine": "Yvan Monka",
+    "duree": "12:02",
+    "sec": 722,
+    "vues": "182 076 vues"
+   },
+   {
+    "id": "5a9pE6XQna4",
+    "titre": "Reconnaître une base de l'espace - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "10:37",
+    "sec": 637,
+    "vues": "169 200 vues"
+   },
+   {
+    "id": "zP4885ihBBU",
+    "titre": "Géométrie : Bases et repères dans l'espace - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "5:01",
+    "sec": 301,
+    "vues": "10 375 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L2": {
+  "titre": "Combiner des vecteurs et reconnaître une direction",
+  "candidats": [
+   {
+    "id": "nFHuglLbClc",
+    "titre": "COMPRENDRE LES VECTEURS",
+    "chaine": "Hedacademy",
+    "duree": "14:01",
+    "sec": 841,
+    "vues": "436 963 vues"
+   },
+   {
+    "id": "FjUbd9Pbhmg",
+    "titre": "Démontrer que deux vecteurs sont colinéaires - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "3:30",
+    "sec": 210,
+    "vues": "1 180 862 vues"
+   },
+   {
+    "id": "HOZ26Px-3eY",
+    "titre": "Savoir si 2 VECTEURS sont COLINÉAIRES dans l'Espace - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "3:14",
+    "sec": 194,
+    "vues": "65 711 vues"
+   },
+   {
+    "id": "DhKhPbJGzcg",
+    "titre": "Calcul de coordonnées de vecteur",
+    "chaine": "Éducation Plus",
+    "duree": "9:46",
+    "sec": 586,
+    "vues": "21 612 vues"
+   },
+   {
+    "id": "CJihlGG8ykw",
+    "titre": "Produit vectoriel",
+    "chaine": "Enseignement Supérieur et Lycée",
+    "duree": "6:15",
+    "sec": 375,
+    "vues": "231 344 vues"
+   },
+   {
+    "id": "Rj8M6s_dRwc",
+    "titre": "Additionner des vecteurs (ayant même direction) I Rappels mathématiques pour la physique",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "2:08",
+    "sec": 128,
+    "vues": "26 280 vues"
+   },
+   {
+    "id": "saskXQJjDgQ",
+    "titre": "Démontrer que deux vecteurs sont colinéaires #maths",
+    "chaine": "coach tera",
+    "duree": "5:06",
+    "sec": 306,
+    "vues": "5 101 vues"
+   },
+   {
+    "id": "QMduZYVxn2Y",
+    "titre": "produit vectoriel : règle de la main droite",
+    "chaine": "PV Math",
+    "duree": "1:44",
+    "sec": 104,
+    "vues": "91 978 vues"
+   },
+   {
+    "id": "mquMEvOs2XM",
+    "titre": "LE SECRET des VECTEURS DIRECTEURS enfin DÉVOILÉ !*",
+    "chaine": "SOUMAHORO ACADEMY",
+    "duree": "4:33",
+    "sec": 273,
+    "vues": "272 vues"
+   },
+   {
+    "id": "Nha9zJUbfOA",
+    "titre": "Cours: vecteurs coplanaires - géométrie dans l'espace - très important",
+    "chaine": "jaicompris Maths",
+    "duree": "13:22",
+    "sec": 802,
+    "vues": "179 104 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L3": {
+  "titre": "Le produit scalaire détecte un angle droit",
+  "candidats": [
+   {
+    "id": "VXAa-F659tQ",
+    "titre": "Term - Produit scalaire et angle",
+    "chaine": "Maths en tête - Alexandre Morgan",
+    "duree": "6:31",
+    "sec": 391,
+    "vues": "362 vues"
+   },
+   {
+    "id": "T6fuh2tbrwA",
+    "titre": "Cours articulé de mathématiques — Méthode 1 : produit scalaire et angle (chapitre 10)",
+    "chaine": "Éditions Clementinium",
+    "duree": "4:50",
+    "sec": 290,
+    "vues": "7 vues"
+   },
+   {
+    "id": "NCA5arKBgpc",
+    "titre": "Calculer un angle à l'aide d'un produit scalaire • Un classique! • première spécialité mathématiques",
+    "chaine": "jaicompris Maths",
+    "duree": "10:03",
+    "sec": 603,
+    "vues": "14 433 vues"
+   },
+   {
+    "id": "kByHp72kq4M",
+    "titre": "Calculer un angle dans l'espace 🚀 Produit scalaire | Bac 2025 Spécialité Maths - Amérique du nord ♕",
+    "chaine": "jaicompris Maths",
+    "duree": "9:59",
+    "sec": 599,
+    "vues": "1 107 vues"
+   },
+   {
+    "id": "T89-pqIuUvc",
+    "titre": "Le produit scalaire en 5 minutes - Spé maths - Première",
+    "chaine": "NOVELCLASS",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "327 366 vues"
+   },
+   {
+    "id": "MoV5S2NsxK4",
+    "titre": "Produit scalaire: angle dans un carré",
+    "chaine": "MATH & ÇA !",
+    "duree": "7:03",
+    "sec": 423,
+    "vues": "324 vues"
+   },
+   {
+    "id": "BGEeZiwFxB0",
+    "titre": "Produit scalaire. Calculer la mesure d'un angle.",
+    "chaine": "KIFFELESMATHS : L'école de maths en ligne",
+    "duree": "13:29",
+    "sec": 809,
+    "vues": "26 855 vues"
+   },
+   {
+    "id": "01bgoRBWKSE",
+    "titre": "Vecteurs et produit scalaire — Maths 1re",
+    "chaine": "Maï Lan Study",
+    "duree": "7:00",
+    "sec": 420,
+    "vues": "6 vues"
+   },
+   {
+    "id": "MnRvKAlm_b4",
+    "titre": "03 Calculer un angle dans l’espace avec le produit scalaire",
+    "chaine": "Sébastien Vendeuil",
+    "duree": "4:09",
+    "sec": 249,
+    "vues": "148 vues"
+   },
+   {
+    "id": "IVlVK9PtRl0",
+    "titre": "Comment calculer un angle dans l'espace grâce au produit scalaire ?",
+    "chaine": "Mathemax",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "9 369 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L4": {
+  "titre": "Décrire une droite avec un paramètre",
+  "candidats": [
+   {
+    "id": "smCUbzJs9xo",
+    "titre": "Utiliser la représentation paramétrique d'une droite - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "9:22",
+    "sec": 562,
+    "vues": "610 154 vues"
+   },
+   {
+    "id": "0l0mWwEXEa0",
+    "titre": "FC Term - Représentation paramétrique de droite",
+    "chaine": "Maths en tête - Alexandre Morgan",
+    "duree": "4:40",
+    "sec": 280,
+    "vues": "310 vues"
+   },
+   {
+    "id": "Tv_nPRiNWoI",
+    "titre": "Le passage d'une représentation paramétrique à une équation cartésienne",
+    "chaine": "u math",
+    "duree": "6:28",
+    "sec": 388,
+    "vues": "118 600 vues"
+   },
+   {
+    "id": "cK5L-P6WqkY",
+    "titre": "Comment reconnaître une droite donnée par une représentation paramétrique ?",
+    "chaine": "Mathemax",
+    "duree": "4:23",
+    "sec": 263,
+    "vues": "6 799 vues"
+   },
+   {
+    "id": "PhC38FhT5zc",
+    "titre": "Représentation Paramétrique",
+    "chaine": "u math",
+    "duree": "11:20",
+    "sec": 680,
+    "vues": "77 680 vues"
+   },
+   {
+    "id": "4NMxBUN2ucw",
+    "titre": "Représentation paramétrique d'une droite",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "1:27",
+    "sec": 87,
+    "vues": "376 vues"
+   },
+   {
+    "id": "7sNFBIPnyug",
+    "titre": "Représentation paramétrique d’une droite de l’espace - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "4:08",
+    "sec": 248,
+    "vues": "1 913 vues"
+   },
+   {
+    "id": "3Am3_EBGd_w",
+    "titre": "Représentation paramétrique d'une droite - Maths Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "3:44",
+    "sec": 224,
+    "vues": "14 330 vues"
+   },
+   {
+    "id": "3lZR1gsJYKc",
+    "titre": "DROITES DE L'ESPACE : Position relative - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "9:26",
+    "sec": 566,
+    "vues": "110 255 vues"
+   },
+   {
+    "id": "g43VovmfJqU",
+    "titre": "POINT appartenant à DROITE avec SYST. d'ÉQ. PARAMÉTRIQUES - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "3:25",
+    "sec": 205,
+    "vues": "24 850 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L5": {
+  "titre": "Décrire un plan avec deux directions",
+  "candidats": [
+   {
+    "id": "ThTYsi3fgTA",
+    "titre": "Se déplacer sur un plan ou une carte CE2 - CM1 - CM2 - Cycle 3 - Se repérer dans l'espace - Maths",
+    "chaine": "Maître Lucas",
+    "duree": "7:40",
+    "sec": 460,
+    "vues": "77 273 vues"
+   },
+   {
+    "id": "QrJ6LkVyM9Y",
+    "titre": "DÉTERMINER L'ÉQUATION D'UN PLAN - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:01",
+    "sec": 421,
+    "vues": "67 246 vues"
+   },
+   {
+    "id": "_WFgaar1eDI",
+    "titre": "Tracer une SECTION PLANE dans l'Espace - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "3:44",
+    "sec": 224,
+    "vues": "53 662 vues"
+   },
+   {
+    "id": "6SvDRet5QN0",
+    "titre": "Repérage dans le Plan - Seconde - Mathrix",
+    "chaine": "Mathrix",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "120 467 vues"
+   },
+   {
+    "id": "MYA3IDXiO0k",
+    "titre": "Géométrie dans l'espace : Position relative de plans et droites - Cours - IMPORTANT",
+    "chaine": "jaicompris Maths",
+    "duree": "4:00",
+    "sec": 240,
+    "vues": "105 951 vues"
+   },
+   {
+    "id": "bX7Bt3Cm3xc",
+    "titre": "Vocabulaire géométrique CE1 - CE2 - Cycle 2 - Géométrie - Mathématiques - Maths",
+    "chaine": "Maître Lucas",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "158 603 vues"
+   },
+   {
+    "id": "lrkNdeE71Ns",
+    "titre": "COMMENT construire l'intersection de 2 plans - Mon secret 🤫",
+    "chaine": "Hedacademy",
+    "duree": "7:00",
+    "sec": 420,
+    "vues": "23 382 vues"
+   },
+   {
+    "id": "lPjwG4NPHOY",
+    "titre": "Droites perpendiculaires et parallèles CE2 - CM1 - Cycle 2 et 3 - Maths - Mathématiques - Géométrie",
+    "chaine": "Maître Lucas",
+    "duree": "5:08",
+    "sec": 308,
+    "vues": "100 954 vues"
+   },
+   {
+    "id": "qAp1emDJKXA",
+    "titre": "GÉOMÉTRIE DE L'ESPACE 2nd C SÉANCE 3 ET FIN",
+    "chaine": "ACADÉMIE DES MATHS OLYMPIQUES ( A.M.O )",
+    "duree": "8:23",
+    "sec": 503,
+    "vues": "2 315 vues"
+   },
+   {
+    "id": "rBMKwCThsaA",
+    "titre": "Leçon 223 Géométrie de l'espace Orientation d'un plan",
+    "chaine": "EDUNOTE",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "680 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L6": {
+  "titre": "Une équation cartésienne pour un plan",
+  "candidats": [
+   {
+    "id": "uXPKHa7To1I",
+    "titre": "Cours : Équation cartésienne d'un plan - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "3:38",
+    "sec": 218,
+    "vues": "5 499 vues"
+   },
+   {
+    "id": "s4xqI6IPQBY",
+    "titre": "Déterminer une équation cartésienne d'un plan - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "377 748 vues"
+   },
+   {
+    "id": "QrJ6LkVyM9Y",
+    "titre": "DÉTERMINER L'ÉQUATION D'UN PLAN - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:01",
+    "sec": 421,
+    "vues": "67 246 vues"
+   },
+   {
+    "id": "G_EsiRcNJg8",
+    "titre": "Équation cartésienne d’un plan de l’espace - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "3:05",
+    "sec": 185,
+    "vues": "1 277 vues"
+   },
+   {
+    "id": "31FKk5CBnDc",
+    "titre": "Equation cartésienne d'un plan : le rappel de cours - MATHS - TS - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "2:37",
+    "sec": 157,
+    "vues": "104 844 vues"
+   },
+   {
+    "id": "3WchEQDJSro",
+    "titre": "Cours : Équation de droite Maths-3ème",
+    "chaine": "coach tera",
+    "duree": "3:37",
+    "sec": 217,
+    "vues": "11 432 vues"
+   },
+   {
+    "id": "NosYmlLLFB4",
+    "titre": "Déterminer une équation cartésienne d'une droite (1) - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "3:19",
+    "sec": 199,
+    "vues": "1 195 084 vues"
+   },
+   {
+    "id": "c44w_2Kbxqc",
+    "titre": "Comment déterminer une équation cartésienne d'un plan ?",
+    "chaine": "Mathemax",
+    "duree": "2:07",
+    "sec": 127,
+    "vues": "20 100 vues"
+   },
+   {
+    "id": "c7Vti0blkXQ",
+    "titre": "Équation cartésienne d'un plan de l'espace",
+    "chaine": "MATH & ÇA !",
+    "duree": "6:19",
+    "sec": 379,
+    "vues": "940 vues"
+   },
+   {
+    "id": "BU75IJx-e6A",
+    "titre": "Géométrie dans l’espace, équation cartésienne d’un plan",
+    "chaine": "Raja Siva",
+    "duree": "7:46",
+    "sec": 466,
+    "vues": "410 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L7": {
+  "titre": "Trouver une intersection",
+  "candidats": [
+   {
+    "id": "9XSRzUGu-7k",
+    "titre": "MAÎTRISER UNION ET INTERSECTION",
+    "chaine": "Hedacademy",
+    "duree": "8:57",
+    "sec": 537,
+    "vues": "245 033 vues"
+   },
+   {
+    "id": "la98eQ3IRcs",
+    "titre": "Déterminer l'intersection de deux intervalles",
+    "chaine": "Campus XYZ",
+    "duree": "2:45",
+    "sec": 165,
+    "vues": "5 828 vues"
+   },
+   {
+    "id": "8WJG_QHQs1Y",
+    "titre": "Déterminer l'intersection d'intervalles - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "4:59",
+    "sec": 299,
+    "vues": "397 134 vues"
+   },
+   {
+    "id": "zCHhmXDc9ps",
+    "titre": "Déterminer la réunion et l'intersection des intervalles Maths-3ème",
+    "chaine": "coach tera",
+    "duree": "6:37",
+    "sec": 397,
+    "vues": "10 645 vues"
+   },
+   {
+    "id": "VprpP3e_R-4",
+    "titre": "Calculer la probabilité d'une intersection - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "4:59",
+    "sec": 299,
+    "vues": "175 243 vues"
+   },
+   {
+    "id": "BIpxhPEZ4mE",
+    "titre": "Savoir déterminer l'intersection et la réunion d'intervalles • Cours mathématiques Seconde • I∩J I∪J",
+    "chaine": "jaicompris Maths",
+    "duree": "7:48",
+    "sec": 468,
+    "vues": "88 413 vues"
+   },
+   {
+    "id": "DT0qoEIxKrQ",
+    "titre": "Points d'intersection Avec Les Axes Du Repère",
+    "chaine": "Tchitcha",
+    "duree": "4:39",
+    "sec": 279,
+    "vues": "7 751 vues"
+   },
+   {
+    "id": "xqEhKpgLflg",
+    "titre": "Comment trouver les points d'intersection de deux fonctions ?",
+    "chaine": "Romain - L'élégance des maths",
+    "duree": "14:48",
+    "sec": 888,
+    "vues": "570 vues"
+   },
+   {
+    "id": "xPHBMBOTyHQ",
+    "titre": "Comment Trouver le Point d'INTERSECTION de deux Droites dans l'Espace ? Géométrie dans l'espace.",
+    "chaine": "Simon Semaan",
+    "duree": "7:35",
+    "sec": 455,
+    "vues": "3 208 vues"
+   },
+   {
+    "id": "lrkNdeE71Ns",
+    "titre": "COMMENT construire l'intersection de 2 plans - Mon secret 🤫",
+    "chaine": "Hedacademy",
+    "duree": "7:00",
+    "sec": 420,
+    "vues": "23 382 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L8": {
+  "titre": "Projeter un point sur une droite",
+  "candidats": [
+   {
+    "id": "-HNUbyU72Pc",
+    "titre": "Déterminer les coordonnées d'un projeté orthogonal - Première",
+    "chaine": "Yvan Monka",
+    "duree": "9:36",
+    "sec": 576,
+    "vues": "215 322 vues"
+   },
+   {
+    "id": "aSFmOvJ3_L0",
+    "titre": "Projeté orthogonal d'un point sur une droite - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "1:17",
+    "sec": 77,
+    "vues": "2 832 vues"
+   },
+   {
+    "id": "l5GozY845-k",
+    "titre": "L102 PROJETE D'UN SEGMENT",
+    "chaine": "EDUNOTE",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "548 vues"
+   },
+   {
+    "id": "RoacrySlUAU",
+    "titre": "Déterminer les coordonnées du projeté orthogonal d'un point sur une droite - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "9:18",
+    "sec": 558,
+    "vues": "173 325 vues"
+   },
+   {
+    "id": "LL5qftVMWFo",
+    "titre": "6e Appartenance et non appartenance d'un point à une droite",
+    "chaine": "Cours de Maths Saber",
+    "duree": "1:29",
+    "sec": 89,
+    "vues": "37 059 vues"
+   },
+   {
+    "id": "MiJHpVzyQPc",
+    "titre": "Reconnaître et construire un PROJETÉ ORTHOGONAL - Première",
+    "chaine": "Yvan Monka",
+    "duree": "5:26",
+    "sec": 326,
+    "vues": "217 071 vues"
+   },
+   {
+    "id": "FXo1q8GlWuc",
+    "titre": "Projeté orthogonal d’un point sur un plan de l’espace - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "1:59",
+    "sec": 119,
+    "vues": "1 587 vues"
+   },
+   {
+    "id": "zA9i8vDnZBs",
+    "titre": "L101 PROJECTION ET PROJETE ORTHOGONAL D'UN POINT",
+    "chaine": "EDUNOTE",
+    "duree": "5:53",
+    "sec": 353,
+    "vues": "5 110 vues"
+   },
+   {
+    "id": "5lORp_3r0ZY",
+    "titre": "Exo : Savoir projeter orthogonalement un pt de l'espace sur une droite",
+    "chaine": "Géométrie dans l'espace",
+    "duree": "1:43",
+    "sec": 103,
+    "vues": "56 vues"
+   },
+   {
+    "id": "xQtC5BOjWqs",
+    "titre": "PROJETÉ ORTHOGONALE d'un POINT sur une DROITE et sur un PLAN - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "6:35",
+    "sec": 395,
+    "vues": "25 246 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-GEOM-L9": {
+  "titre": "Projeter sur un plan et mesurer une distance",
+  "candidats": [
+   {
+    "id": "1b9FtX4sCmQ",
+    "titre": "Déterminer la distance d'un point à un plan (projection orthogonale) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "13:33",
+    "sec": 813,
+    "vues": "126 803 vues"
+   },
+   {
+    "id": "7c6y8ibnA5w",
+    "titre": "Calculer la distance entre deux points dans un repère orthonormé du plan - 2nde",
+    "chaine": "L.P.B. Maths vidéo",
+    "duree": "2:55",
+    "sec": 175,
+    "vues": "242 968 vues"
+   },
+   {
+    "id": "Ja4vmn_H8Go",
+    "titre": "Calculer la dimension sur le plan ou la carte. #primaire #modeleola #maths #education #echelle",
+    "chaine": "MODÈLE OLA",
+    "duree": "5:09",
+    "sec": 309,
+    "vues": "17 395 vues"
+   },
+   {
+    "id": "nJLzQO7-x1Q",
+    "titre": "Distance d'un point à un plan 🚀 (Bac 2025 Amérique du nord - Terminale Spécialité Maths)",
+    "chaine": "jaicompris Maths",
+    "duree": "8:58",
+    "sec": 538,
+    "vues": "1 414 vues"
+   },
+   {
+    "id": "tUzoATZrAmc",
+    "titre": "Mesurer la distance d'un point à une droite",
+    "chaine": "Yvan Monka",
+    "duree": "5:21",
+    "sec": 321,
+    "vues": "106 052 vues"
+   },
+   {
+    "id": "zoCDB6LRmUc",
+    "titre": "Calculer une dimension réelle avec une échelle",
+    "chaine": "mathasius",
+    "duree": "0:51",
+    "sec": 51,
+    "vues": "103 285 vues"
+   },
+   {
+    "id": "RkAIjfC-PHY",
+    "titre": "Distance d'un point à un plan",
+    "chaine": "mathsetmethodes",
+    "duree": "2:56",
+    "sec": 176,
+    "vues": "703 vues"
+   },
+   {
+    "id": "WqMIMGTZKmo",
+    "titre": "Comment calculer l'échelle d'un plan ?",
+    "chaine": "Papotechno",
+    "duree": "3:21",
+    "sec": 201,
+    "vues": "156 475 vues"
+   },
+   {
+    "id": "Tr8Kdhmxtdk",
+    "titre": "DISTANCE MINIMALE À UN PLAN - Term Spé Maths",
+    "chaine": "Hedacademy",
+    "duree": "8:55",
+    "sec": 535,
+    "vues": "14 491 vues"
+   },
+   {
+    "id": "q0Jor4I4iZ0",
+    "titre": "Géométrie dans l'espace s09e01 - Calcul de distances",
+    "chaine": "Voilà les maths! by Marc Decoux",
+    "duree": "10:14",
+    "sec": 614,
+    "vues": "2 427 vues"
+   }
+  ]
+ }
+}

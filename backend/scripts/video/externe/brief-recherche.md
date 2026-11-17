@@ -14,7 +14,7 @@ For EACH lesson, find on YouTube the best SHORT video that explains THAT lesson 
 2. NEVER invent or guess a URL or video ID. Only report URLs that appeared verbatim in your search
    results. Use the canonical form `https://www.youtube.com/watch?v=<11-char id>` (no playlists,
    no Shorts, no channels, no timestamps).
-3. Duration: max 10 minutes. Prefer 1–3 min, then 4–5, then 6–8, then 9–10. Pedagogical fit beats
+3. Duration: max 15 minutes (never more). Prefer 2–3 min, then 4–6, then 7–10, then 11–15 only as a last resort. Pedagogical fit beats
    brevity (a clear 6-minute video beats a confusing 2-minute one). Report the duration you saw in
    `dureeVue` ("4:32"), or "inconnue".
 4. Language: French first. English only if no acceptable French video exists (say so).

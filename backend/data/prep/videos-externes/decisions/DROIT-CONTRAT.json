@@ -1,0 +1,83 @@
+[
+  {
+    "code": "DROIT-CONTRAT-L1",
+    "youtubeId": "iqTLhBtgRr8",
+    "couverture": "partielle",
+    "justification": "Définit l’obligation (lien de droit entre créancier et débiteur) avec des exemples.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L2",
+    "youtubeId": "zGRVRmuBZGc",
+    "couverture": "exacte",
+    "justification": "Acte juridique (volonté de produire des effets de droit) opposé au fait juridique.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L3",
+    "youtubeId": "3pTyD1wRD2M",
+    "couverture": "exacte",
+    "justification": "Formation du contrat par la rencontre d’une offre et d’une acceptation ; principe identique en droit ivoirien.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L4",
+    "youtubeId": "lqp6tibmLnc",
+    "couverture": "partielle",
+    "justification": "Conditions de validité du contrat : consentement, capacité, contenu licite et certain.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L5",
+    "youtubeId": "j2H0YYo6n0A",
+    "couverture": "partielle",
+    "justification": "Les vices du consentement (erreur, dol, violence). Présentation française, notions identiques dans le Code civil ivoirien.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L6",
+    "youtubeId": "AJlq-WbR6BA",
+    "couverture": "partielle",
+    "justification": "Nullité du contrat : sanction d’une condition de validité manquante, effet rétroactif.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L7",
+    "youtubeId": "GHnPdAq_jZ8",
+    "couverture": "partielle",
+    "justification": "Effets du contrat : force obligatoire et effet relatif.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L8",
+    "youtubeId": "UWfAmX_YZJs",
+    "couverture": "partielle",
+    "justification": "Inexécution du contrat et ses sanctions (exécution forcée, exception d’inexécution, résolution, dommages-intérêts).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-CONTRAT-L9",
+    "youtubeId": "8CXFY6hRPQ4",
+    "couverture": "exacte",
+    "justification": "Le paiement de l’indu : qui paie ce qu’il ne doit pas peut en obtenir la restitution.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

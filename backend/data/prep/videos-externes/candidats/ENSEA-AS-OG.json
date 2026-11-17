@@ -1,0 +1,589 @@
+{
+ "ENSEA-AS-OG-L1": {
+  "titre": "Reconnaître la tâche et choisir un sujet",
+  "candidats": []
+ },
+ "ENSEA-AS-OG-L2": {
+  "titre": "Définir les mots et délimiter la question",
+  "candidats": []
+ },
+ "ENSEA-AS-OG-L3": {
+  "titre": "Construire une problématique",
+  "candidats": [
+   {
+    "id": "j72RmLQZ0Wc",
+    "titre": "Comment formuler une problématique ? (dissertation, travail de fin d'études, mémoire, thèse)",
+    "chaine": "Juristudes",
+    "duree": "4:05",
+    "sec": 245,
+    "vues": "123 745 vues"
+   },
+   {
+    "id": "rTMs8G8MYwc",
+    "titre": "Déterminer le thème la problématique la thèse les arguments et les concepts d'un texte philosophique",
+    "chaine": "Dawitzchon PIERRE",
+    "duree": "7:21",
+    "sec": 441,
+    "vues": "14 109 vues"
+   },
+   {
+    "id": "6QBKrWISFCU",
+    "titre": "4. Problématiser un sujet de dissertation de français",
+    "chaine": "Mme T.",
+    "duree": "2:01",
+    "sec": 121,
+    "vues": "32 185 vues"
+   },
+   {
+    "id": "q9DMl7du1rE",
+    "titre": "Trouver une problématique en commentaire l Mon guide flash ! ⚡️⚡️",
+    "chaine": "Ta coach de français",
+    "duree": "9:31",
+    "sec": 571,
+    "vues": "47 263 vues"
+   },
+   {
+    "id": "oIgav-UoZJQ",
+    "titre": "Comment dégager le problème en dissertation philosophique ?",
+    "chaine": "La Formation en continue TV",
+    "duree": "9:50",
+    "sec": 590,
+    "vues": "35 081 vues"
+   },
+   {
+    "id": "bv5hGA2NXVI",
+    "titre": "C'est quoi une problématique ? Comment la trouver ? (Dissertation, Bac, Méthode claire)",
+    "chaine": "Parle Moi de Philo",
+    "duree": "5:37",
+    "sec": 337,
+    "vues": "15 134 vues"
+   },
+   {
+    "id": "L87HeuqvzT8",
+    "titre": "20/20 à la dissertation de français : GUIDE ULTIME 2026",
+    "chaine": "Maxime Lim",
+    "duree": "11:50",
+    "sec": 710,
+    "vues": "559 612 vues"
+   },
+   {
+    "id": "-G5dUATyGFA",
+    "titre": "Comment faire une Dissertation et passer de 4,5 à 20/20 📈",
+    "chaine": "Les Sherpas - Étudiants",
+    "duree": "10:39",
+    "sec": 639,
+    "vues": "1 505 285 vues"
+   },
+   {
+    "id": "Jq8ssjroA28",
+    "titre": "La dissertation - La problématique (4)",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "70 563 vues"
+   },
+   {
+    "id": "MHobE5N7kxQ",
+    "titre": "DISSERTATION : bien s'organiser pour une copie réussie !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "246 878 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-OG-L4": {
+  "titre": "Construire un argument avec un exemple",
+  "candidats": [
+   {
+    "id": "LHTfFSUVviE",
+    "titre": "Méthodologie du sujet d'argumentation - Français - 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:44",
+    "sec": 404,
+    "vues": "22 231 vues"
+   },
+   {
+    "id": "zsLnoxl3kL0",
+    "titre": "Argumenter son discours | Développer son éloquence, avec Bertrand Périer : Leçon 9",
+    "chaine": "Welcome to the Jungle Media",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "79 447 vues"
+   },
+   {
+    "id": "PdfGBtUp_4U",
+    "titre": "Thèse, argument, exemple - DISSERTATION #3 - Leçon de français (C1/C2) - Cours de méthode",
+    "chaine": "L'atelier du français | Paris",
+    "duree": "3:24",
+    "sec": 204,
+    "vues": "67 485 vues"
+   },
+   {
+    "id": "qwt4FtgkCg0",
+    "titre": "Méthodologie - Paragraphe argumenté",
+    "chaine": "Jannot P.",
+    "duree": "2:02",
+    "sec": 122,
+    "vues": "53 908 vues"
+   },
+   {
+    "id": "-3Qj3i9ZE1Y",
+    "titre": "10 Connecteurs Logiques INDISPENSABLES pour mieux parler français !",
+    "chaine": "Parlez-vous FRENCH : Cours de français",
+    "duree": "14:20",
+    "sec": 860,
+    "vues": "498 970 vues"
+   },
+   {
+    "id": "mPvcBSHIo04",
+    "titre": "Structurer son discours | Développer son éloquence, avec Bertrand Périer : Leçon 5",
+    "chaine": "Welcome to the Jungle Media",
+    "duree": "4:43",
+    "sec": 283,
+    "vues": "116 181 vues"
+   },
+   {
+    "id": "vCeWcHVcL4s",
+    "titre": "Expression écrite : l'argumentation - Français 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "429 113 vues"
+   },
+   {
+    "id": "AoUIdRLlqmY",
+    "titre": "Le texte argumentatif: une explication claire et facile de A à Z",
+    "chaine": "Minutes de Savoir",
+    "duree": "9:16",
+    "sec": 556,
+    "vues": "373 886 vues"
+   },
+   {
+    "id": "MHobE5N7kxQ",
+    "titre": "DISSERTATION : bien s'organiser pour une copie réussie !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "246 878 vues"
+   },
+   {
+    "id": "GoTWmEFdqdU",
+    "titre": "Comment trouver des idées en dissertation : les 3 solutions",
+    "chaine": "1000 idées de culture générale",
+    "duree": "9:42",
+    "sec": 582,
+    "vues": "323 343 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-OG-L5": {
+  "titre": "Organiser un plan qui répond au sujet",
+  "candidats": [
+   {
+    "id": "ylKFaqQ4OVs",
+    "titre": "Dissertation : comment faire un bon plan détaillé (2 clés)",
+    "chaine": "1000 idées de culture générale",
+    "duree": "7:51",
+    "sec": 471,
+    "vues": "113 633 vues"
+   },
+   {
+    "id": "D0kN5pN0pu4",
+    "titre": "2. Les types de plans en dissertation",
+    "chaine": "Mme T.",
+    "duree": "2:02",
+    "sec": 122,
+    "vues": "103 515 vues"
+   },
+   {
+    "id": "O5XJKUjHOL0",
+    "titre": "Leçon 25 Méthodologie de la dissertation Différents types de plans 1",
+    "chaine": "EDUNOTE",
+    "duree": "7:26",
+    "sec": 446,
+    "vues": "70 519 vues"
+   },
+   {
+    "id": "L87HeuqvzT8",
+    "titre": "20/20 à la dissertation de français : GUIDE ULTIME 2026",
+    "chaine": "Maxime Lim",
+    "duree": "11:50",
+    "sec": 710,
+    "vues": "559 612 vues"
+   },
+   {
+    "id": "8BB-nVQ6sbg",
+    "titre": "Bac français 2027 : 20/20 à la dissertation avec ma méthode complète (brouillon + rédaction)",
+    "chaine": "Selene sauve ton bac 🫡",
+    "duree": "12:44",
+    "sec": 764,
+    "vues": "313 974 vues"
+   },
+   {
+    "id": "GoTWmEFdqdU",
+    "titre": "Comment trouver des idées en dissertation : les 3 solutions",
+    "chaine": "1000 idées de culture générale",
+    "duree": "9:42",
+    "sec": 582,
+    "vues": "323 343 vues"
+   },
+   {
+    "id": "MHobE5N7kxQ",
+    "titre": "DISSERTATION : bien s'organiser pour une copie réussie !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "246 878 vues"
+   },
+   {
+    "id": "-G5dUATyGFA",
+    "titre": "Comment faire une Dissertation et passer de 4,5 à 20/20 📈",
+    "chaine": "Les Sherpas - Étudiants",
+    "duree": "10:39",
+    "sec": 639,
+    "vues": "1 505 285 vues"
+   },
+   {
+    "id": "t4RNp3_T_oM",
+    "titre": "Concours SOG - Méthode de la dissertation",
+    "chaine": "Gendarme Mathéo",
+    "duree": "5:24",
+    "sec": 324,
+    "vues": "18 181 vues"
+   },
+   {
+    "id": "sIEIkMwHJk0",
+    "titre": "DIFFÉRENTS TYPES DE PLANS DANS LA RÉDACTION D'UN SUJET D'ORDRE GÉNÉRAL AU CONCOURS DE L'ENA EN CI",
+    "chaine": "Mister Bamba",
+    "duree": "3:19",
+    "sec": 199,
+    "vues": "3 524 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-OG-L6": {
+  "titre": "Rédiger une introduction utile",
+  "candidats": [
+   {
+    "id": "Iiu8VM6D6Es",
+    "titre": "Composition : rédaction de l'introduction - Histoire-Géographie - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:06",
+    "sec": 246,
+    "vues": "464 005 vues"
+   },
+   {
+    "id": "X4SGJp737Lw",
+    "titre": "Dissertation - Rédiger l'introduction - Français 1ère - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "5:56",
+    "sec": 356,
+    "vues": "1 364 163 vues"
+   },
+   {
+    "id": "Ux0GcSg1SdI",
+    "titre": "Méthodologie Dissertation Littéraire : L'INTRODUCTION qui passe partout en Français",
+    "chaine": "Monsieur Jeff MINTSA",
+    "duree": "10:55",
+    "sec": 655,
+    "vues": "137 475 vues"
+   },
+   {
+    "id": "ufd9F2dlVGU",
+    "titre": "Exemple d'introduction en dissertation | Spécial bac français 🚀",
+    "chaine": "Ta coach de français",
+    "duree": "6:03",
+    "sec": 363,
+    "vues": "40 250 vues"
+   },
+   {
+    "id": "c_NnRtx7xIE",
+    "titre": "[BAC] Commentaire de Texte (1/3) : l'INTRODUCTION",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:07",
+    "sec": 367,
+    "vues": "552 429 vues"
+   },
+   {
+    "id": "zDqff45DMTs",
+    "titre": "Comment réussir l'introduction de son commentaire composé en 3 étapes",
+    "chaine": "Amélie Vioux - Bac de français",
+    "duree": "4:22",
+    "sec": 262,
+    "vues": "584 824 vues"
+   },
+   {
+    "id": "Jvum3dtPNCs",
+    "titre": "Comment Rédiger l'Introduction Parfaite pour votre Mémoire?",
+    "chaine": "Expertmemoire - Aide à la rédaction de mémoire",
+    "duree": "3:11",
+    "sec": 191,
+    "vues": "228 926 vues"
+   },
+   {
+    "id": "wzEfVx_6avU",
+    "titre": "Méthode de PHILOSOPHIE - l'introduction de dissertation (la BASE)",
+    "chaine": "Mr B",
+    "duree": "4:10",
+    "sec": 250,
+    "vues": "1 368 597 vues"
+   },
+   {
+    "id": "GoTWmEFdqdU",
+    "titre": "Comment trouver des idées en dissertation : les 3 solutions",
+    "chaine": "1000 idées de culture générale",
+    "duree": "9:42",
+    "sec": 582,
+    "vues": "323 343 vues"
+   },
+   {
+    "id": "8S2WIvGcJ9I",
+    "titre": "Introduction de dissertation : les 3 secrets pour la réussir",
+    "chaine": "1000 idées de culture générale",
+    "duree": "14:30",
+    "sec": 870,
+    "vues": "282 581 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-OG-L7": {
+  "titre": "Rédiger un paragraphe et une transition",
+  "candidats": [
+   {
+    "id": "GoTWmEFdqdU",
+    "titre": "Comment trouver des idées en dissertation : les 3 solutions",
+    "chaine": "1000 idées de culture générale",
+    "duree": "9:42",
+    "sec": 582,
+    "vues": "323 343 vues"
+   },
+   {
+    "id": "PZhytgPM3V8",
+    "titre": "Comment faire une transition en français?",
+    "chaine": "Commentaire et dissertation",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "36 541 vues"
+   },
+   {
+    "id": "-G5dUATyGFA",
+    "titre": "Comment faire une Dissertation et passer de 4,5 à 20/20 📈",
+    "chaine": "Les Sherpas - Étudiants",
+    "duree": "10:39",
+    "sec": 639,
+    "vues": "1 505 285 vues"
+   },
+   {
+    "id": "X4SGJp737Lw",
+    "titre": "Dissertation - Rédiger l'introduction - Français 1ère - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "5:56",
+    "sec": 356,
+    "vues": "1 364 163 vues"
+   },
+   {
+    "id": "wecSMaCDtQE",
+    "titre": "Les 5 étapes pour rédiger un paragraphe de dissertation",
+    "chaine": "1000 idées de culture générale",
+    "duree": "11:08",
+    "sec": 668,
+    "vues": "52 503 vues"
+   },
+   {
+    "id": "Ra23sMlBV5g",
+    "titre": "La minute du coach – EP 20 : Soignez vos transitions",
+    "chaine": "Baraka Gate",
+    "duree": "1:16",
+    "sec": 76,
+    "vues": "9 054 vues"
+   },
+   {
+    "id": "MHobE5N7kxQ",
+    "titre": "DISSERTATION : bien s'organiser pour une copie réussie !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "246 878 vues"
+   },
+   {
+    "id": "L87HeuqvzT8",
+    "titre": "20/20 à la dissertation de français : GUIDE ULTIME 2026",
+    "chaine": "Maxime Lim",
+    "duree": "11:50",
+    "sec": 710,
+    "vues": "559 612 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-OG-L8": {
+  "titre": "Conclure en répondant vraiment",
+  "candidats": [
+   {
+    "id": "rDPjOVImGcg",
+    "titre": "Rédiger la conclusion - DISSERTATION #5 - Leçon de français (C1/C2) - Cours de méthode",
+    "chaine": "L'atelier du français | Paris",
+    "duree": "2:00",
+    "sec": 120,
+    "vues": "14 338 vues"
+   },
+   {
+    "id": "1t_Y8R3aOws",
+    "titre": "Comment faire la conclusion d'une Dissertation en français",
+    "chaine": "Hugo Ndiaye",
+    "duree": "10:19",
+    "sec": 619,
+    "vues": "117 798 vues"
+   },
+   {
+    "id": "0XAtYArnVIg",
+    "titre": "Structurer une rédaction : introduction, développement, conclusion (rédaction 4/7)",
+    "chaine": "Bien écrire - Katia Nugnes",
+    "duree": "6:11",
+    "sec": 371,
+    "vues": "232 151 vues"
+   },
+   {
+    "id": "OD8AemCki3I",
+    "titre": "L'ouverture d'une conclusion | Français | Alloprof",
+    "chaine": "Alloprof",
+    "duree": "3:22",
+    "sec": 202,
+    "vues": "66 900 vues"
+   },
+   {
+    "id": "E7Nk9Zf3xrI",
+    "titre": "[BAC] Commentaire de Texte (3/3) : la CONCLUSION",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "169 509 vues"
+   },
+   {
+    "id": "5hCohseOyPo",
+    "titre": "BAC français : Réussir la CONCLUSION du COMMENTAIRE (4/4)",
+    "chaine": "Les rouages du français",
+    "duree": "8:58",
+    "sec": 538,
+    "vues": "338 vues"
+   },
+   {
+    "id": "AdD2VsYOO4A",
+    "titre": "Introduction, développement et conclusion dans une rédaction",
+    "chaine": "Bien écrire - Katia Nugnes",
+    "duree": "0:46",
+    "sec": 46,
+    "vues": "18 415 vues"
+   },
+   {
+    "id": "Upq2WhombLs",
+    "titre": "Dissertation - Rédiger la conclusion - Français 1ère - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "1:36",
+    "sec": 96,
+    "vues": "249 053 vues"
+   },
+   {
+    "id": "GoTWmEFdqdU",
+    "titre": "Comment trouver des idées en dissertation : les 3 solutions",
+    "chaine": "1000 idées de culture générale",
+    "duree": "9:42",
+    "sec": 582,
+    "vues": "323 343 vues"
+   },
+   {
+    "id": "MxPsTS4FnWU",
+    "titre": "Conclusion de dissertation : 2 formules pour la rédiger facilement",
+    "chaine": "1000 idées de culture générale",
+    "duree": "13:19",
+    "sec": 799,
+    "vues": "33 250 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-OG-L9": {
+  "titre": "Organiser son temps et relire sa copie",
+  "candidats": [
+   {
+    "id": "MHobE5N7kxQ",
+    "titre": "DISSERTATION : bien s'organiser pour une copie réussie !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "246 878 vues"
+   },
+   {
+    "id": "GohdaDrJZHM",
+    "titre": "Comment présenter sa copie pour une évaluation?",
+    "chaine": "Sylvie Baudonnel",
+    "duree": "1:00",
+    "sec": 60,
+    "vues": "14 207 vues"
+   },
+   {
+    "id": "L87HeuqvzT8",
+    "titre": "20/20 à la dissertation de français : GUIDE ULTIME 2026",
+    "chaine": "Maxime Lim",
+    "duree": "11:50",
+    "sec": 710,
+    "vues": "559 612 vues"
+   },
+   {
+    "id": "H_h_wHQsP-8",
+    "titre": "[DALF C1🧑🏻‍🎓] BIEN GÉRER SON TEMPS ⌚ SYNTHÈSE DE DOCUMENTS",
+    "chaine": "Le French Club",
+    "duree": "1:55",
+    "sec": 115,
+    "vues": "1 853 vues"
+   },
+   {
+    "id": "8BB-nVQ6sbg",
+    "titre": "Bac français 2027 : 20/20 à la dissertation avec ma méthode complète (brouillon + rédaction)",
+    "chaine": "Selene sauve ton bac 🫡",
+    "duree": "12:44",
+    "sec": 764,
+    "vues": "313 974 vues"
+   },
+   {
+    "id": "rU7893vyCew",
+    "titre": "Comment étudier EFFICACEMENT la veille d'un contrôle (et avoir 20)",
+    "chaine": "Maxime Lim",
+    "duree": "7:11",
+    "sec": 431,
+    "vues": "247 553 vues"
+   },
+   {
+    "id": "ck-cAQRqp1E",
+    "titre": "Comment Apprendre 10x Plus Vite que 90% des Étudiants.(7 MÉTHODES scientifique)",
+    "chaine": "Un-Pas-De-Plus",
+    "duree": "4:16",
+    "sec": 256,
+    "vues": "494 039 vues"
+   },
+   {
+    "id": "nnZPBxEeYX0",
+    "titre": "BAC FRANÇAIS - Comment retenir facilement jusqu'à l'examen ?",
+    "chaine": "French Help by Carine Cros",
+    "duree": "3:22",
+    "sec": 202,
+    "vues": "688 vues"
+   },
+   {
+    "id": "GoTWmEFdqdU",
+    "titre": "Comment trouver des idées en dissertation : les 3 solutions",
+    "chaine": "1000 idées de culture générale",
+    "duree": "9:42",
+    "sec": 582,
+    "vues": "323 343 vues"
+   },
+   {
+    "id": "-G5dUATyGFA",
+    "titre": "Comment faire une Dissertation et passer de 4,5 à 20/20 📈",
+    "chaine": "Les Sherpas - Étudiants",
+    "duree": "10:39",
+    "sec": 639,
+    "vues": "1 505 285 vues"
+   }
+  ]
+ }
+}

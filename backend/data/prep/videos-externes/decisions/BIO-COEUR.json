@@ -1,0 +1,83 @@
+[
+  {
+    "code": "BIO-COEUR-L1",
+    "youtubeId": "mS2F8QuI2k8",
+    "couverture": "partielle",
+    "justification": "Animation Inserm : les cellules ont besoin de nutriments et de dioxygène, apportés par le sang depuis l’intestin et les poumons.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L2",
+    "youtubeId": "KE7OL2wfNdU",
+    "couverture": "exacte",
+    "justification": "Jamy montre les quatre cavités et le trajet oreillettes → ventricules → éjection, comme la leçon.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L3",
+    "youtubeId": "rBZyKYoh2BU",
+    "couverture": "exacte",
+    "justification": "Animation Inserm : artères et veines définies par le sens du trajet par rapport au cœur, échanges dans les capillaires.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L4",
+    "youtubeId": "9WeVFn25pOY",
+    "couverture": "partielle",
+    "justification": "Présente la petite circulation (cœur droit → poumons → oreillette gauche) puis la grande, en moins de 3 minutes.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L5",
+    "youtubeId": "sdwXQVqWuR8",
+    "couverture": "exacte",
+    "justification": "Khan Academy suit la circulation systémique depuis le ventricule gauche et la raccorde à la circulation pulmonaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L6",
+    "youtubeId": "CK0y0v6d-oY",
+    "couverture": "partielle",
+    "justification": "Un médecin présente plasma, globules rouges, globules blancs et plaquettes avec leurs rôles.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L7",
+    "youtubeId": "hQVeJa04PSY",
+    "couverture": "exacte",
+    "justification": "Khan Academy distingue antigènes A/B des hématies et anticorps du plasma : les quatre groupes ABO.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L8",
+    "youtubeId": "_P8LU_TCKoQ",
+    "couverture": "exacte",
+    "justification": "Établissement français du sang : compatibilité des globules rouges entre donneur et receveur.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "BIO-COEUR-L9",
+    "youtubeId": "cOChEoC6nVw",
+    "couverture": "partielle",
+    "justification": "Explique l’antigène D (Rh+/Rh−), l’immunisation et les règles transfusionnelles.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

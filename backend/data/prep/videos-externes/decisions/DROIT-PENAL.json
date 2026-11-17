@@ -1,0 +1,92 @@
+[
+  {
+    "code": "DROIT-PENAL-L1",
+    "youtubeId": "2Jcwnw1Bw40",
+    "couverture": "exacte",
+    "justification": "Principe de légalité des délits et des peines : pas d’infraction ni de peine sans texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L2",
+    "youtubeId": "jEvWzggucO4",
+    "couverture": "exacte",
+    "justification": "Application de la loi pénale dans le temps : non-rétroactivité de la loi plus sévère, rétroactivité de la loi plus douce.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L3",
+    "youtubeId": "_n3mYpIaAL4",
+    "couverture": "partielle",
+    "justification": "Différence entre contravention, délit et crime ; seuils de peine français, classification tripartite identique en Côte d’Ivoire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L4",
+    "youtubeId": "SCuds5j2m8M",
+    "couverture": "exacte",
+    "justification": "L’élément matériel de l’infraction : l’acte ou l’omission réalisé.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L5",
+    "youtubeId": "vyJFsOBt_o4",
+    "couverture": "exacte",
+    "justification": "L’élément moral : intention (infraction intentionnelle) ou faute (imprudence, négligence).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L6",
+    "youtubeId": "K_rcRR7_yYo",
+    "couverture": "exacte",
+    "justification": "La tentative punissable : commencement d’exécution et absence de désistement volontaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L7",
+    "youtubeId": "LUJhSJKV1I8",
+    "couverture": "partielle",
+    "justification": "La complicité (aide, assistance, provocation, instructions) ; exemples français, notions proches des articles ivoiriens.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L8",
+    "youtubeId": "fP8pTZnXMEc",
+    "couverture": "partielle",
+    "justification": "Conditions de la légitime défense (attaque actuelle et injuste, défense nécessaire et proportionnée).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L9",
+    "youtubeId": "UE-YUwIJ9rY",
+    "couverture": "partielle",
+    "justification": "Causes d’irresponsabilité pénale (trouble mental, contrainte, minorité…) : la responsabilité s’examine pour chacun.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-PENAL-L10",
+    "youtubeId": "hzPX78UvJlg",
+    "couverture": "exacte",
+    "justification": "Grâce et amnistie : la grâce dispense de la peine, l’amnistie efface l’infraction.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

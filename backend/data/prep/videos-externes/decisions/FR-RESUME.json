@@ -1,0 +1,74 @@
+[
+  {
+    "code": "FR-RESUME-L1",
+    "youtubeId": "aVGgNOCQImM",
+    "couverture": "partielle",
+    "justification": "Méthode du résumé de texte en 4 minutes : ce que l’épreuve demande et ce qu’il faut éviter.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "FR-RESUME-L2",
+    "youtubeId": "rTMs8G8MYwc",
+    "couverture": "exacte",
+    "justification": "Déterminer le thème, la thèse, les arguments et les exemples d’un texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "FR-RESUME-L3",
+    "youtubeId": "ERO6AOUcK_U",
+    "couverture": "partielle",
+    "justification": "Les connecteurs logiques et les relations qu’ils expriment (cause, conséquence, opposition…).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "FR-RESUME-L4",
+    "youtubeId": "hJ33Nrm_fl8",
+    "couverture": "partielle",
+    "justification": "Analyser un texte argumentatif : repérer son organisation et sa progression.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "FR-RESUME-L5",
+    "youtubeId": "OEDmYdAo1pU",
+    "couverture": "partielle",
+    "justification": "Reformuler une idée avec ses propres mots pour résumer sans trahir le sens.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "FR-RESUME-L6",
+    "youtubeId": "yh_-mTjQQ08",
+    "couverture": "partielle",
+    "justification": "Réussir la contraction de texte : respecter le point de vue et l’énonciation de l’auteur.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "FR-RESUME-L7",
+    "youtubeId": "AuC2x_Fd_CA",
+    "couverture": "exacte",
+    "justification": "Compter le nombre de mots d’un texte selon les règles d’examen.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "FR-RESUME-L8",
+    "youtubeId": "kglANS4flVk",
+    "couverture": "partielle",
+    "justification": "Réussir un résumé / une contraction de texte de bout en bout, avec la relecture finale.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

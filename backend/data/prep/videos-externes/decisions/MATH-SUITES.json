@@ -1,0 +1,101 @@
+[
+  {
+    "code": "MATH-SUITES-L1",
+    "youtubeId": "53BGC9Ccm-M",
+    "couverture": "exacte",
+    "justification": "C’est quoi une suite numérique : un nombre associé à chaque rang.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L2",
+    "youtubeId": "TZ8Na2Nk08Q",
+    "couverture": "exacte",
+    "justification": "Différencier une suite explicite d’une suite définie par récurrence.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L3",
+    "youtubeId": "6O0KhPMHvBA",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : expression générale d’une suite arithmétique uₙ = u₀ + nr.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L4",
+    "youtubeId": "WeDtB9ZUTHs",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : somme des termes d’une suite arithmétique.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L5",
+    "youtubeId": "Gbvu9BLmn88",
+    "couverture": "exacte",
+    "justification": "Comprendre les suites géométriques : vₙ = v₀qⁿ.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L6",
+    "youtubeId": "gUkOjvAiZGA",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : somme des termes d’une suite géométrique.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L7",
+    "youtubeId": "DFz8LDKCw9Y",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : sens de variation d’une suite par le signe de uₙ₊₁ − uₙ.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L8",
+    "youtubeId": "Eo6cc3344PQ",
+    "couverture": "exacte",
+    "justification": "Comprendre et calculer la limite d’une suite.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L9",
+    "youtubeId": "i3z1lg40JOo",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : raisonnement par récurrence (initialisation, hérédité).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L10",
+    "youtubeId": "4kmyUiY7CZ0",
+    "couverture": "exacte",
+    "justification": "Suite convergente : une suite croissante et majorée converge.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-SUITES-L11",
+    "youtubeId": "6-vFnQ6TghM",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : suite arithmético-géométrique exprimée en fonction de n par une suite auxiliaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

@@ -1,0 +1,205 @@
+{
+  "module": "BIO-COEUR",
+  "lecons": [
+    {
+      "code": "BIO-COEUR-L1",
+      "requetes": [
+        "\"Pourquoi le corps a besoin de transports\" biologie vidéo",
+        "site:youtube.com cellules organes besoins nutriments dioxygène circulation explication simple",
+        "cellules tissus organes organisme besoins cours explication simple youtube",
+        "Alimentation cellules Corpus Canopé 5 min 30"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=mS2F8QuI2k8",
+          "titre": "Corpus : au cœur des organes. Alimentation des cellules",
+          "chaine": "Inserm",
+          "dureeVue": "5:30",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’animation relie les besoins cellulaires en nutriments et dioxygène aux fonctions de l’intestin, des poumons et du sang, sans développer toute la hiérarchie cellules–tissus–organes."
+        }
+      ],
+      "justification": "Cette animation pédagogique explique directement pourquoi les cellules ont besoin de transports. Les définitions de tissu, d’anatomie et de physiologie restent à compléter."
+    },
+    {
+      "code": "BIO-COEUR-L2",
+      "requetes": [
+        "\"Le cœur : recevoir puis éjecter\"",
+        "site:youtube.com cœur quatre cavités oreillettes ventricules valves cours 5 minutes",
+        "cœur oreillettes ventricules valves explication simple vidéo youtube",
+        "\"Le fonctionnement du cœur\" \"Jamy\" youtube",
+        "Le fonctionnement du cœur expliqué par Jamy Initiatives cœur"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=KE7OL2wfNdU",
+          "titre": "Le fonctionnement du cœur expliqué par Jamy",
+          "chaine": "Initiatives-Cœur",
+          "dureeVue": "2:29",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Jamy explique les cavités cardiaques et le passage du sang des oreillettes aux ventricules, puis son éjection par les contractions du cœur."
+        }
+      ],
+      "justification": "Une explication très courte et accessible du cœur comme pompe, adaptée aux débutants et au repérage du trajet intracardiaque."
+    },
+    {
+      "code": "BIO-COEUR-L3",
+      "requetes": [
+        "\"Distinguer artères, veines et capillaires\"",
+        "site:youtube.com artères veines capillaires différences explication simple",
+        "artères veines capillaires cours vidéo youtube",
+        "artères veines capillaires explication simple en 5 minutes youtube",
+        "Au coeur des organes Coeur et vaisseaux Inserm"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=rBZyKYoh2BU",
+          "titre": "Au coeur des organes : Coeur et vaisseaux",
+          "chaine": "Inserm",
+          "dureeVue": "3:54",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "L’animation définit artères et veines par le sens du trajet par rapport au cœur et situe les échanges dans les capillaires."
+        }
+      ],
+      "justification": "Les trois catégories de vaisseaux et leurs fonctions sont expliquées visuellement en moins de quatre minutes. La vidéo apporte aussi un aperçu utile de la circulation."
+    },
+    {
+      "code": "BIO-COEUR-L4",
+      "requetes": [
+        "\"La circulation entre cœur et poumons\"",
+        "site:youtube.com/watch \"petite circulation\" \"pulmonaire\"",
+        "site:youtube.com \"circulation pulmonaire\" \"cours\"",
+        "circulation pulmonaire explication simple en 5 minutes youtube",
+        "petite grande circulation sanguine cours youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=rBZyKYoh2BU",
+          "titre": "Au coeur des organes : Coeur et vaisseaux",
+          "chaine": "Inserm",
+          "dureeVue": "3:54",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’animation suit le sang du cœur droit aux poumons puis à l’oreillette gauche et explique son enrichissement en dioxygène et sa perte de dioxyde de carbone."
+        }
+      ],
+      "justification": "Le trajet pulmonaire est présenté clairement dans une animation institutionnelle courte. La couverture est partielle car la vidéo traite également les vaisseaux et l’ensemble de la circulation."
+    },
+    {
+      "code": "BIO-COEUR-L5",
+      "requetes": [
+        "\"La circulation entre cœur et organes\"",
+        "site:youtube.com/watch \"grande circulation\" \"systémique\"",
+        "petite grande circulation sanguine cours youtube",
+        "circulation systémique aorte veines caves exemple cours youtube",
+        "Au coeur des organes Coeur et vaisseaux Inserm"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=rBZyKYoh2BU",
+          "titre": "Au coeur des organes : Coeur et vaisseaux",
+          "chaine": "Inserm",
+          "dureeVue": "3:54",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo montre la distribution du sang aux organes et son retour au cœur en raccordant ce trajet au circuit pulmonaire."
+        }
+      ],
+      "justification": "L’animation aide à comprendre la boucle complète et l’enchaînement des deux circulations. Elle reste plus générale que l’apprentissage détaillé du trajet ventricule gauche–aorte–veines caves–oreillette droite."
+    },
+    {
+      "code": "BIO-COEUR-L6",
+      "requetes": [
+        "\"Les composants du sang et leurs rôles\"",
+        "site:youtube.com/watch \"composants du sang\"",
+        "composition du sang globules plasma plaquettes vidéo youtube",
+        "composition sang plasma hémoglobine plaquettes cours 5 minutes youtube",
+        "composition du sang explication simple youtube EFS",
+        "Les différents composants du sang 2 minutes pour comprendre Médecine TV"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=CK0y0v6d-oY",
+          "titre": "Les différents composants du sang - 2 minutes pour comprendre",
+          "chaine": "Médecine TV",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Un médecin présente plasma, globules rouges, globules blancs et plaquettes en reliant les composants aux fonctions de transport, de défense et de coagulation."
+        }
+      ],
+      "justification": "Ce format annoncé de deux minutes convient à une première identification des composants sanguins, mais la durée exacte n’était pas affichée. Le rôle précis de l’hémoglobine et les étapes de l’hémostase restent à compléter."
+    },
+    {
+      "code": "BIO-COEUR-L7",
+      "requetes": [
+        "\"Comprendre les groupes ABO\"",
+        "site:youtube.com/watch \"groupes ABO\" explication",
+        "groupes sanguins ABO antigènes anticorps vidéo youtube",
+        "groupes sanguins ABO Khan Academy français youtube",
+        "\"Groupes sanguins ABO\" \"KhanAcademyFrancophone\" durée vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=hQVeJa04PSY",
+          "titre": "Groupes sanguins ABO",
+          "chaine": "KhanAcademyFrancophone",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Les dessins distinguent les antigènes A et B à la surface des hématies des anticorps du plasma pour expliquer les quatre groupes ABO."
+        }
+      ],
+      "justification": "L’explication correspond précisément aux notions de la leçon et précise que les hématies O portent d’autres structures que les antigènes A et B. Elle prolonge le raisonnement vers les transfusions ; la durée exacte n’a pas été retrouvée."
+    },
+    {
+      "code": "BIO-COEUR-L8",
+      "requetes": [
+        "\"Raisonner sur une transfusion de globules rouges\"",
+        "site:youtube.com/watch transfusion globules rouges compatibilité explication simple",
+        "compatibilité transfusion globules rouges vidéo youtube",
+        "site:youtube.com \"transfusion\" \"compatibilité\" \"globules rouges\"",
+        "transfusion globules rouges compatibilité ABO exemple cours youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=hQVeJa04PSY",
+          "titre": "Groupes sanguins ABO",
+          "chaine": "KhanAcademyFrancophone",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo construit un tableau donneur–receveur en comparant les antigènes des globules rouges transfusés aux anticorps du receveur."
+        }
+      ],
+      "justification": "Le raisonnement demandé est expliqué avec un exemple d’incompatibilité puis un tableau à compléter, en distinguant explicitement la transfusion de globules rouges. La durée exacte n’a pas été retrouvée."
+    },
+    {
+      "code": "BIO-COEUR-L9",
+      "requetes": [
+        "\"Ajouter le Rhésus D au raisonnement\"",
+        "site:youtube.com/watch rhésus antigène D anti D cours",
+        "rhésus D immunisation anti D explication vidéo youtube",
+        "rhésus groupe sanguin explication simple youtube",
+        "rhésus D anticorps après transfusion cours youtube",
+        "système rhésus explication youtube cours",
+        "\"Comprendre le système Rhésus\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=cOChEoC6nVw",
+          "titre": "Comprendre le système Rhésus (antigènes, RAI, transfusion)",
+          "chaine": "IFPS Lorient",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le cours explique l’antigène D, l’immunisation et les anticorps irréguliers puis les règles transfusionnelles, avec des compléments sur les autres antigènes Rh et le plasma."
+        }
+      ],
+      "justification": "Cette ressource de formation infirmière aborde les points essentiels, notamment l’apparition des anticorps après immunisation. Le chapitrage situe la conclusion à 4:51 sans donner la durée totale exacte ; la nomenclature Rh et le plasma dépassent la leçon."
+    }
+  ]
+}

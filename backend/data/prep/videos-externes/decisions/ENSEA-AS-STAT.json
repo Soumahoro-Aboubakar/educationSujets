@@ -1,0 +1,83 @@
+[
+  {
+    "code": "ENSEA-AS-STAT-L1",
+    "youtubeId": "L7Uy-CQ0eh4",
+    "couverture": "partielle",
+    "justification": "Effectifs et fréquences d’une série (fréquence = effectif / effectif total).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L2",
+    "youtubeId": "U1NamiLxBaI",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : moyenne pondérée par les effectifs.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L3",
+    "youtubeId": "kr90dXv0NFY",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : déterminer la médiane d’une série ordonnée.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L4",
+    "youtubeId": "Yjh-9nMVmEw",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : calculer les quartiles Q1 et Q3.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L5",
+    "youtubeId": "CiFoBkipJQk",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : variance et écart-type d’une série.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L6",
+    "youtubeId": "k-EyLPh6ip0",
+    "couverture": "exacte",
+    "justification": "Série à deux variables : nuage de points et point moyen.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L7",
+    "youtubeId": "BOs77oOKbDw",
+    "couverture": "exacte",
+    "justification": "Calcul de la covariance d’une série à deux variables, cours et exemple.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L8",
+    "youtubeId": "34pLkrfq1qc",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : droite d’ajustement par la méthode des moindres carrés (a = Cov/V(x), b = ȳ − ax̄).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-STAT-L9",
+    "youtubeId": "FxREenh3fgE",
+    "couverture": "partielle",
+    "justification": "Yvan Monka : calculer et interpréter le coefficient de corrélation r ; la différence corrélation/causalité est peu traitée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

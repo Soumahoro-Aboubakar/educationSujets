@@ -1,0 +1,173 @@
+{
+  "module": "ANG-QCM",
+  "lecons": [
+    {
+      "code": "ANG-QCM-L1",
+      "requetes": [
+        "Exprimer une condition réelle anglais YouTube",
+        "site:youtube.com conditionnel anglais type 0 type 1 unless explication simple",
+        "conditionnel anglais type 1 cours youtube",
+        "anglais conditionnel forte probabilité digischool youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=YrJRNEqBJlA",
+          "titre": "Le conditionnel, forte probabilité - Anglais - Collège",
+          "chaine": "digiSchool Orientation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la condition réalisable et sa conséquence future, mais sa description ne confirme pas le traitement du type 0 et de unless."
+        }
+      ],
+      "justification": "Capsule destinée aux débutants, référencée autour de trois minutes par Cursa, adaptée au type 1 ; la durée exacte n’est pas affichée dans les résultats."
+    },
+    {
+      "code": "ANG-QCM-L2",
+      "requetes": [
+        "Imaginer une autre situation présente anglais YouTube",
+        "site:youtube.com conditionnel anglais type 2 cours if I were you",
+        "\"conditionnel\" \"type 2\" anglais youtube",
+        "conditionnel anglais type 2 cours 3 minutes youtube",
+        "If-Clause de type 2 SVP Anglais durée"
+      ],
+      "candidats": [],
+      "justification": "La vidéo « If-Clause de type 2 » de SVP Anglais correspond aux hypothèses présentes et à if + prétérit / would + base. Sa durée n’a toutefois pas pu être vérifiée pour garantir le plafond de quinze minutes."
+    },
+    {
+      "code": "ANG-QCM-L3",
+      "requetes": [
+        "Imaginer un passé différent anglais YouTube",
+        "site:youtube.com conditionnel anglais type 3 past perfect exemple",
+        "conditionnel anglais type 3 cours youtube",
+        "conditionnel type 3 anglais explication simple",
+        "conditionnel anglais type 3 cours 3 minutes youtube"
+      ],
+      "candidats": [],
+      "justification": "« If-Clause de type 3 en anglais » de SVP Anglais présente exactement had + participe et would have + participe, avec des exemples et un exercice. Aucun candidat n’a pu être validé avec une durée garantie inférieure ou égale à quinze minutes."
+    },
+    {
+      "code": "ANG-QCM-L4",
+      "requetes": [
+        "Faire du destinataire de l’action le sujet anglais YouTube",
+        "site:youtube.com voix passive anglais cours en 5 minutes",
+        "voix passive anglais youtube cours court",
+        "anglais voix passive construction digischool youtube",
+        "Je vous dévoile tout sur la voix passive en anglais durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=950DSaZKebc",
+          "titre": "Anglais Collège [4ème] - La voix passive : Construction.",
+          "chaine": "digiSchool Orientation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo détaille sujet + be + participe passé et le complément d’agent avec by, sans couvrir à elle seule tous les temps passifs de la leçon."
+        }
+      ],
+      "justification": "Explication directement centrée sur la construction passive et accessible aux débutants, référencée autour de trois minutes par Cursa. La durée exacte n’est pas affichée dans les résultats."
+    },
+    {
+      "code": "ANG-QCM-L5",
+      "requetes": [
+        "Rapporter les paroles de quelqu’un anglais YouTube",
+        "site:youtube.com discours indirect anglais explication simple",
+        "discours indirect anglais Les Bons Profs youtube",
+        "\"discours indirect\" anglais vidéo cours 5 minutes",
+        "discours indirect anglais",
+        "Le discours indirect anglais cours 5 minutes youtube"
+      ],
+      "candidats": [],
+      "justification": "Les descriptions repérées expliquent le discours indirect, notamment said/told et certains changements de temps. Les durées et la couverture des changements de repères n’ont pas pu être suffisamment vérifiées pour retenir un candidat."
+    },
+    {
+      "code": "ANG-QCM-L6",
+      "requetes": [
+        "Relier correctement deux informations anglais YouTube",
+        "site:youtube.com pronoms relatifs connecteurs anglais cours",
+        "pronoms relatifs anglais who which whose where vidéo youtube",
+        "pronoms relatifs anglais explication simple vidéo",
+        "anglais mots liaison because although whereas cours youtube",
+        "TOUT SAVOIR SUR LES PRONOMS RELATIFS EN ANGLAIS Huito durée"
+      ],
+      "candidats": [],
+      "justification": "Les résultats séparent généralement les relatifs des connecteurs, et le cours détaillé de MrC dépasse quinze minutes. Aucun autre candidat suffisamment vérifié ne couvre les distinctions demandées dans le format autorisé."
+    },
+    {
+      "code": "ANG-QCM-L7",
+      "requetes": [
+        "Choisir un mot de quantité anglais YouTube",
+        "quantifieurs anglais much many few little some any youtube",
+        "Les quantifieurs anglais cours vidéo",
+        "anglais quantifieurs cours some any much many vidéo",
+        "anglais much many few little cours français youtube",
+        "SOME/ANY/NO Les quantifieurs Partie 1",
+        "Utiliser MUCH et MANY en anglais le guide complet"
+      ],
+      "candidats": [],
+      "justification": "Le guide de ISpeakSpokeSpoken sur much/many dépasse quinze minutes ; les autres résultats présentent une couverture ou une durée insuffisamment vérifiée. Aucun candidat n’a donc été validé pour cette leçon."
+    },
+    {
+      "code": "ANG-QCM-L8",
+      "requetes": [
+        "Trouver le mot qui convient au contexte anglais YouTube",
+        "anglais QCM word formation adjectif adverbe faux amis youtube",
+        "TOEIC word formation nom adjectif adverbe français cours vidéo",
+        "anglais faux amis adjectifs adverbes texte à trous vidéo",
+        "anglais adverbes formation position digischool youtube",
+        "Cours sur les catégories grammaticales au TOEIC durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=bQNd5JNcv4A",
+          "titre": "Les adverbes, formation et position - Anglais",
+          "chaine": "digiSchool Orientation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la formation des adverbes à partir des adjectifs et leur position, utiles pour identifier la forme attendue dans un blanc, mais ne traite pas les faux amis."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=HNmrfgWg7s4",
+          "titre": "Les adjectifs, formation - Anglais - Collège",
+          "chaine": "digiSchool Orientation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule travaille la formation des adjectifs et complète la partie consacrée aux familles de mots, sans couvrir toute la démarche de choix lexical en contexte."
+        }
+      ],
+      "justification": "La première capsule travaille une distinction grammaticale directement utile aux phrases à trous ; Cursa référence ces deux vidéos autour de six et quatre minutes respectivement. Leurs durées exactes ne sont pas affichées dans les résultats."
+    },
+    {
+      "code": "ANG-QCM-L9",
+      "requetes": [
+        "Lire pour trouver une preuve anglais YouTube",
+        "compréhension écrite anglais méthode QCM preuve texte youtube",
+        "compréhension écrite anglais méthode vidéo youtube",
+        "compréhension écrite anglais inférence QCM méthode vidéo",
+        "compréhension écrite anglais méthode Les Bons Profs youtube",
+        "TOEIC part 7 méthode français youtube",
+        "REUSSIR PARTIE 7 TOEIC 2 TECHNIQUES DE LECTURE"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos repérées portent surtout sur la méthode générale du bac ou sur skimming/scanning au TOEIC. Leur durée et le traitement précis des preuves, références pronominales, inférences et paraphrases n’ont pas pu être suffisamment établis."
+    },
+    {
+      "code": "ANG-QCM-L10",
+      "requetes": [
+        "Éliminer les distracteurs et gérer le QCM anglais YouTube",
+        "réussir QCM anglais éliminer distracteurs gestion temps youtube",
+        "QCM anglais stratégie élimination vidéo youtube",
+        "Comment réussir un QCM anglais concours",
+        "réussir un QCM conseils méthodologie vidéo YouTube",
+        "TOEIC part 5 méthode élimination français vidéo",
+        "La méthode de réponse aux QCM Najib durée",
+        "7 Tips and Strategies for Answering Multiple Choice Questions Test Taking Strategies"
+      ],
+      "candidats": [],
+      "justification": "« La méthode de réponse aux QCM » de Najib Svt rejoint la lecture des consignes et le travail en plusieurs passages, mais sa durée reste non vérifiée et sa couverture est partielle. Aucun candidat français ou anglais suffisamment vérifié n’a été retenu."
+    }
+  ]
+}

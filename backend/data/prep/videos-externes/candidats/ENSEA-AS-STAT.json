@@ -1,0 +1,751 @@
+{
+ "ENSEA-AS-STAT-L1": {
+  "titre": "Compter des observations",
+  "candidats": [
+   {
+    "id": "kVxVES1wM4M",
+    "titre": "Les unités et les dizaines CP - CE1 - Cycle 2 - Maths - Numération",
+    "chaine": "Maître Lucas",
+    "duree": "7:29",
+    "sec": 449,
+    "vues": "78 189 vues"
+   },
+   {
+    "id": "72MNee-t5O4",
+    "titre": "Compte 2 par 2 en français 🇨🇵 #apprendre #enfants #débutant #chiffres #maths",
+    "chaine": "Kidi Fun",
+    "duree": "0:23",
+    "sec": 23,
+    "vues": "8 979 606 vues"
+   },
+   {
+    "id": "fjgPWoTQ0uM",
+    "titre": "CP - Appendre à compter - Compter des oiseux et taper leur nombre",
+    "chaine": "Primval",
+    "duree": "0:31",
+    "sec": 31,
+    "vues": "11 vues"
+   },
+   {
+    "id": "vbxspCeBSLs",
+    "titre": "Les additions jusqu'à 10 CP - Cycle 2 - Mathématiques - Maths - Calculs",
+    "chaine": "Maître Lucas",
+    "duree": "8:21",
+    "sec": 501,
+    "vues": "82 065 vues"
+   },
+   {
+    "id": "WG1r8lebeLo",
+    "titre": "Compte jusqu’à 1000 en français #apprendre #enfants #débutant #chiffres #math #maternelle",
+    "chaine": "Kidi Fun",
+    "duree": "0:41",
+    "sec": 41,
+    "vues": "27 660 428 vues"
+   },
+   {
+    "id": "cr2thPwOu5Q",
+    "titre": "Cours - CE2: Activités Numériques / Les nombres de 0 à 10000 /Mme Sarr",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "10:11",
+    "sec": 611,
+    "vues": "71 640 vues"
+   },
+   {
+    "id": "1GTFsdBvnRE",
+    "titre": "⭐️ Astuce pour additionner deux fractions ayant 1 au numérateur #maths #fraction",
+    "chaine": "Campus XYZ",
+    "duree": "0:25",
+    "sec": 25,
+    "vues": "1 174 190 vues"
+   },
+   {
+    "id": "RGDLgit_96Q",
+    "titre": "Comment devenir EXCELLENT en MATHS sans travailler dur ?",
+    "chaine": "Zebilatruite",
+    "duree": "7:02",
+    "sec": 422,
+    "vues": "332 782 vues"
+   },
+   {
+    "id": "EpEZbbHeR7I",
+    "titre": "Comment résumer 1000 données en un seul chiffre ? Statistique descriptive",
+    "chaine": "El khader",
+    "duree": "5:52",
+    "sec": 352,
+    "vues": "456 929 vues"
+   },
+   {
+    "id": "9fd8fwo0vWs",
+    "titre": "Statistiques Descriptives dans R (3 Packages qui Sauvent) | Comment dans R?| caps 53",
+    "chaine": "Lulus CommentdansR",
+    "duree": "14:12",
+    "sec": 852,
+    "vues": "647 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L2": {
+  "titre": "La moyenne partage un total",
+  "candidats": [
+   {
+    "id": "g2b9xlnCSWU",
+    "titre": "Cours- CM2- Mathématiques: Activités de mesure/ Le partage inégal: Tant de plus -Tant de moins/Suite",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "11:45",
+    "sec": 705,
+    "vues": "77 730 vues"
+   },
+   {
+    "id": "j2FODdEbB64",
+    "titre": "Cours-CM2-Mathématiques: Activités de mesure/Le partage inégal: Tant de plus -Tant de moins/M.Guissé",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "13:00",
+    "sec": 780,
+    "vues": "24 775 vues"
+   },
+   {
+    "id": "Mf5aN_CR5sc",
+    "titre": "Cours - CM2 - Mathématiques : Activités de mesure/ Le partage inégal: Les multiples / M.Guissé",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "11:36",
+    "sec": 696,
+    "vues": "32 706 vues"
+   },
+   {
+    "id": "j2wPKJAantc",
+    "titre": "Exercice -Tseco Maths:Rapports et propositions: Partages proportionnels/Fin/M.KONE",
+    "chaine": "Ecoles Au Mali",
+    "duree": "9:21",
+    "sec": 561,
+    "vues": "11 594 vues"
+   },
+   {
+    "id": "LrPHXuXC4Sw",
+    "titre": "♦️♦️ CALCULER LA MOYENNE D'UN ÉLÈVE des notes Calcul de la moyenne. statistique moyenne arithmétique",
+    "chaine": "Professeur Raoul",
+    "duree": "1:58",
+    "sec": 118,
+    "vues": "24 978 vues"
+   },
+   {
+    "id": "TuLYVAujXns",
+    "titre": "Cours-CM2-Mathématiques: Activités de mesure/Le partage inégal: Une part est une fraction de l'autre",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:50",
+    "sec": 770,
+    "vues": "38 953 vues"
+   },
+   {
+    "id": "YNkLdMwPHfs",
+    "titre": "MATH / PROBLEMES PARTAGES PROPORTIONNELS",
+    "chaine": "LES ECOLES CHRÉTIENNES LA SOURCE DE VIE",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "19 332 vues"
+   },
+   {
+    "id": "pAMDvaoR2Ec",
+    "titre": "4e Trouver la moyenne d'une série à partir d'un tableau",
+    "chaine": "Cours de Maths Saber",
+    "duree": "2:40",
+    "sec": 160,
+    "vues": "20 285 vues"
+   },
+   {
+    "id": "eJwg-ivMWkc",
+    "titre": "Comment calculer la moyenne arithmétique - statistiques S1",
+    "chaine": "Les Bons Étudiants",
+    "duree": "8:08",
+    "sec": 488,
+    "vues": "48 473 vues"
+   },
+   {
+    "id": "6iSUn53LI0M",
+    "titre": "Moyenne d'une série statistique",
+    "chaine": "20/20",
+    "duree": "5:45",
+    "sec": 345,
+    "vues": "85 525 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L3": {
+  "titre": "La médiane repère le milieu",
+  "candidats": [
+   {
+    "id": "WC6XnJ9ErMs",
+    "titre": "Tracer les médianes d'un triangle - Collège - Petits Savants",
+    "chaine": "Petits Savants",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "44 641 vues"
+   },
+   {
+    "id": "yvKXU0TFvZQ",
+    "titre": "Cours : Le théorème de la médiane",
+    "chaine": "Mathemax",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "5 630 vues"
+   },
+   {
+    "id": "NATX4evtOiQ",
+    "titre": "Appliquer le théorème de la médiane - Première S",
+    "chaine": "Yvan Monka",
+    "duree": "2:51",
+    "sec": 171,
+    "vues": "127 328 vues"
+   },
+   {
+    "id": "jwmH01K3V1c",
+    "titre": "construction de médiane",
+    "chaine": "Prof Math",
+    "duree": "0:54",
+    "sec": 54,
+    "vues": "117 945 vues"
+   },
+   {
+    "id": "WhSSDAuclJM",
+    "titre": "Médianes d’un triangle 📐 Définition + Tracer + Concourantes au centre de gravité 🚀 ♕",
+    "chaine": "jaicompris Maths",
+    "duree": "8:16",
+    "sec": 496,
+    "vues": "1 254 vues"
+   },
+   {
+    "id": "DtQppvuYOu4",
+    "titre": "Comment calculer LA MÉDIANE ? ✅ Facile ! 💪 Exercice corrigé 🎯 3e | Math | Automatisme",
+    "chaine": "Paul Olivier",
+    "duree": "3:40",
+    "sec": 220,
+    "vues": "150 237 vues"
+   },
+   {
+    "id": "RqUWTwK5knw",
+    "titre": "La médiane - Le rappel de cours - Maths première - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:05",
+    "sec": 365,
+    "vues": "115 885 vues"
+   },
+   {
+    "id": "0bEH4MzGV1U",
+    "titre": "Repérage dans le plan: Équations cartésiennes de la hauteur et de la médiane. Seconde S - Troisième",
+    "chaine": "MathsClaires",
+    "duree": "3:55",
+    "sec": 235,
+    "vues": "1 230 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L4": {
+  "titre": "Les quartiles délimitent la moitié centrale",
+  "candidats": [
+   {
+    "id": "Yjh-9nMVmEw",
+    "titre": "Calculer les quartiles (1) - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "8:39",
+    "sec": 519,
+    "vues": "524 942 vues"
+   },
+   {
+    "id": "bWTx1p5Uj-Y",
+    "titre": "Les quartiles - Le rappel de cours - Maths première - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "5:42",
+    "sec": 342,
+    "vues": "104 180 vues"
+   },
+   {
+    "id": "dxiywB1lPyQ",
+    "titre": "1er QUARTILE, 3ème QUARTILE et Écart INTERQUARTILE - Exercice Corrigé - Seconde",
+    "chaine": "Galilee ac",
+    "duree": "5:10",
+    "sec": 310,
+    "vues": "71 601 vues"
+   },
+   {
+    "id": "YiVWqTIx530",
+    "titre": "Les quartiles",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "1 087 vues"
+   },
+   {
+    "id": "HN69Oy6m0vg",
+    "titre": "✅ Les quartiles en statistique - notions et calcul",
+    "chaine": "El khader",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "158 788 vues"
+   },
+   {
+    "id": "VsqfuT6uERE",
+    "titre": "A quoi sert les quartiles, déciles, centiles",
+    "chaine": "El khader",
+    "duree": "6:47",
+    "sec": 407,
+    "vues": "8 549 vues"
+   },
+   {
+    "id": "leS4aN-z44o",
+    "titre": "2de - Calculer les quartiles d'une série statistique",
+    "chaine": "Laplanche Maths",
+    "duree": "9:52",
+    "sec": 592,
+    "vues": "162 567 vues"
+   },
+   {
+    "id": "drEcpmHiaNo",
+    "titre": "Analyse des données - Moyenne, médiane, quintiles et quartiles",
+    "chaine": "Stat Math R",
+    "duree": "7:15",
+    "sec": 435,
+    "vues": "133 vues"
+   },
+   {
+    "id": "bFuDkaM-9Os",
+    "titre": "✅ Boîte à moustache ou diagramme de quartiles - Statistique descriptive",
+    "chaine": "El khader",
+    "duree": "4:53",
+    "sec": 293,
+    "vues": "85 737 vues"
+   },
+   {
+    "id": "gYUyiG7u91U",
+    "titre": "Moyenne, médiane et quartiles (cours complet)| Maths 2de",
+    "chaine": "QUIL 1000N",
+    "duree": "10:38",
+    "sec": 638,
+    "vues": "100 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L5": {
+  "titre": "Mesurer la dispersion autour de la moyenne",
+  "candidats": [
+   {
+    "id": "mHC0fd9GbDI",
+    "titre": "Leçon 91 Exemple de calcul de Caractéristiques de dispersion",
+    "chaine": "EDUNOTE",
+    "duree": "5:48",
+    "sec": 348,
+    "vues": "471 vues"
+   },
+   {
+    "id": "MaT_IJM1IVY",
+    "titre": "Statistiques : paramètres de dispersion - Maths Seconde - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "5:28",
+    "sec": 328,
+    "vues": "7 630 vues"
+   },
+   {
+    "id": "DS90gOupOok",
+    "titre": "Les mesures de dispersion",
+    "chaine": "Promath",
+    "duree": "8:28",
+    "sec": 508,
+    "vues": "3 286 vues"
+   },
+   {
+    "id": "6bQleBlagaY",
+    "titre": "Ecart-type, variance, quartiles : mesurer la dispersion",
+    "chaine": "Jean Paul Maalouf",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "52 vues"
+   },
+   {
+    "id": "83rl10w66IY",
+    "titre": "Statistiques descriptives : indicateurs de dispersion",
+    "chaine": "Cédric Mathsciences35",
+    "duree": "6:56",
+    "sec": 416,
+    "vues": "24 366 vues"
+   },
+   {
+    "id": "C6secD2ncS8",
+    "titre": "#34 - Interpréter l'écart-type pour la dispersion des données | Formation Data & Machine Learning",
+    "chaine": "IA Futura",
+    "duree": "6:39",
+    "sec": 399,
+    "vues": "40 vues"
+   },
+   {
+    "id": "fW2osCHy154",
+    "titre": "introduction à la Statistique partie3_3 | mesures de dispersion : application calcul écart-type",
+    "chaine": "Anais",
+    "duree": "5:52",
+    "sec": 352,
+    "vues": "695 vues"
+   },
+   {
+    "id": "q-O9ETTk-y8",
+    "titre": "MÉDIANE, MODE, ÉTENDUE... Tu les connais tous ?",
+    "chaine": "Hedacademy",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "245 855 vues"
+   },
+   {
+    "id": "scdOmBbbTA8",
+    "titre": "✅ Caractéristiques de position et caractéristiques de dispersion - Statistique",
+    "chaine": "El khader",
+    "duree": "5:56",
+    "sec": 356,
+    "vues": "133 146 vues"
+   },
+   {
+    "id": "qklR6s7-si0",
+    "titre": "✅ Exercice en statistique : moyenne, médiane, étendue, les quartiles, variance, écart type",
+    "chaine": "El khader",
+    "duree": "11:08",
+    "sec": 668,
+    "vues": "138 716 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L6": {
+  "titre": "Observer deux caractères ensemble",
+  "candidats": [
+   {
+    "id": "nZJS8YGV28w",
+    "titre": "Nombres de parties d'un ensemble fini • Comprendre d'où vient la formule Card(P(E))=2^n • Terminale",
+    "chaine": "jaicompris Maths",
+    "duree": "7:26",
+    "sec": 446,
+    "vues": "61 129 vues"
+   },
+   {
+    "id": "kL-eMNZiARM",
+    "titre": "LE COURS - Les ensembles de nombres",
+    "chaine": "Yvan Monka",
+    "duree": "8:02",
+    "sec": 482,
+    "vues": "1 796 241 vues"
+   },
+   {
+    "id": "PObQttkQFOk",
+    "titre": "MAJORANTS, MINORANTS, MAXIMUM, MINIMUM D'UN ENSEMBLE : 2nd C et 1ère Année Maths-info.",
+    "chaine": "ACADÉMIE DES MATHS OLYMPIQUES ( A.M.O )",
+    "duree": "14:56",
+    "sec": 896,
+    "vues": "6 535 vues"
+   },
+   {
+    "id": "Y8cV0zcFijs",
+    "titre": "Ensembles et applications - partie 2 : applications",
+    "chaine": "Exo7Math",
+    "duree": "7:47",
+    "sec": 467,
+    "vues": "393 453 vues"
+   },
+   {
+    "id": "w92-onm8k3s",
+    "titre": "COMPRENDRE les ensembles de nombres",
+    "chaine": "Hedacademy",
+    "duree": "12:19",
+    "sec": 739,
+    "vues": "366 397 vues"
+   },
+   {
+    "id": "S5TZbPD8_HU",
+    "titre": "Les Ensembles; Démonstration 1 : Inclusion et égalité, loi de double inclusion",
+    "chaine": "Maths 2SPI ( M2SPI)",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "3 604 vues"
+   },
+   {
+    "id": "W1PMIvmzNl4",
+    "titre": "Cardinal d'un ensemble - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "7 729 vues"
+   },
+   {
+    "id": "bPT6-g3B5wQ",
+    "titre": "Ensembles et applications - partie 1 : ensembles",
+    "chaine": "Exo7Math",
+    "duree": "11:58",
+    "sec": 718,
+    "vues": "881 290 vues"
+   },
+   {
+    "id": "QOfRNGn-Ego",
+    "titre": "Leçon 178 Séries statistiques à deux caractères",
+    "chaine": "EDUNOTE",
+    "duree": "10:06",
+    "sec": 606,
+    "vues": "484 vues"
+   },
+   {
+    "id": "kA0xxKlhLtY",
+    "titre": "Leçon 92 Organisation des données d'une serie statistique à deux caractères",
+    "chaine": "EDUNOTE",
+    "duree": "7:15",
+    "sec": 435,
+    "vues": "1 603 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L7": {
+  "titre": "La covariance décrit le sens d’une liaison",
+  "candidats": [
+   {
+    "id": "Fm9pbSBVuWc",
+    "titre": "Covariance et corrélations (Cours)",
+    "chaine": "Gilles Maurin",
+    "duree": "10:11",
+    "sec": 611,
+    "vues": "1 678 vues"
+   },
+   {
+    "id": "BOs77oOKbDw",
+    "titre": "Stats à 2 variables-Calculer une Covariance-COURS et exemple-maths complémentaires et autres",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "7:18",
+    "sec": 438,
+    "vues": "152 660 vues"
+   },
+   {
+    "id": "UM-AOmT2RWk",
+    "titre": "Covariance et corrélation",
+    "chaine": "Mathéma-TIC",
+    "duree": "7:13",
+    "sec": 433,
+    "vues": "82 590 vues"
+   },
+   {
+    "id": "uW0TapQ6UQU",
+    "titre": "Covariance et corrélation expliquées",
+    "chaine": "DataMListic",
+    "duree": "4:36",
+    "sec": 276,
+    "vues": "62 863 vues"
+   },
+   {
+    "id": "9_509zdEUVk",
+    "titre": "14. La covariance",
+    "chaine": "Eric Lombardot",
+    "duree": "6:17",
+    "sec": 377,
+    "vues": "38 552 vues"
+   },
+   {
+    "id": "kqLI__jAZkk",
+    "titre": "Le sens très peu connu de la COVARIANCE",
+    "chaine": "El khader",
+    "duree": "9:44",
+    "sec": 584,
+    "vues": "7 367 vues"
+   },
+   {
+    "id": "lN1vSpCB8wY",
+    "titre": "📍CALCUL DE LA COVARIANCE - Comment calculer la covariance. Formule de la covariance. Cov(X; X)=",
+    "chaine": "Professeur Raoul",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "7 812 vues"
+   },
+   {
+    "id": "N67vo2hPM8M",
+    "titre": "C3- La covariance : un détecteur de relations invisibles des données",
+    "chaine": "El khader",
+    "duree": "10:13",
+    "sec": 613,
+    "vues": "1 832 vues"
+   },
+   {
+    "id": "lC8fTImh1Jw",
+    "titre": "Comment calculer la covariance ? Statistiques à deux dimensions S1",
+    "chaine": "Les Bons Étudiants",
+    "duree": "8:13",
+    "sec": 493,
+    "vues": "60 864 vues"
+   },
+   {
+    "id": "WY6DzFapt_0",
+    "titre": "Statistique descriptive (partie 2 : statistique bivariée)",
+    "chaine": "Abdelmounaim Kerkri",
+    "duree": "9:31",
+    "sec": 571,
+    "vues": "7 194 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L8": {
+  "titre": "Ajuster une droite par les moindres carrés",
+  "candidats": [
+   {
+    "id": "vdEL0MOKAIg",
+    "titre": "Déterminer et tracer la droite d'ajustement (moindres carrés) - Première - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "10:11",
+    "sec": 611,
+    "vues": "375 424 vues"
+   },
+   {
+    "id": "HaDrhuQPOQ4",
+    "titre": "Méthode des moindres carrés",
+    "chaine": "Promath",
+    "duree": "8:32",
+    "sec": 512,
+    "vues": "303 098 vues"
+   },
+   {
+    "id": "34pLkrfq1qc",
+    "titre": "Méthode des moindres carrés - Maths - Terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "5:52",
+    "sec": 352,
+    "vues": "10 410 vues"
+   },
+   {
+    "id": "Uk8cuDw4eJA",
+    "titre": "C9- Méthode des Moindres Carrés : MAÎTRISER la Régression Linéaire en 5 min",
+    "chaine": "El khader",
+    "duree": "5:58",
+    "sec": 358,
+    "vues": "6 885 vues"
+   },
+   {
+    "id": "LH_eOaEOYtc",
+    "titre": "Leçon 184 Statistiques Ajustement linéaire par la méthode des moindres carrés 2",
+    "chaine": "EDUNOTE",
+    "duree": "6:04",
+    "sec": 364,
+    "vues": "53 vues"
+   },
+   {
+    "id": "vyfcQYHlN4Y",
+    "titre": "Leçon 97 Exemple d'Ajustement linéaire par la méthode de Mayer",
+    "chaine": "EDUNOTE",
+    "duree": "6:34",
+    "sec": 394,
+    "vues": "16 217 vues"
+   },
+   {
+    "id": "HgPfWrraSSo",
+    "titre": "DROITE DES MOINDRES CARRÉS OU DROITE DE RÉGRESSION AFFINE",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "7:10",
+    "sec": 430,
+    "vues": "184 vues"
+   },
+   {
+    "id": "ESHY4QPgriw",
+    "titre": "Déterminer la droite d'ajustement par la méthode des 2 points moyens - Première - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:03",
+    "sec": 423,
+    "vues": "196 537 vues"
+   },
+   {
+    "id": "uR710pAS5ms",
+    "titre": "COMMENT déterminer la droite de tendance par La méthode des moindres carrés",
+    "chaine": "JoelPro Education",
+    "duree": "6:20",
+    "sec": 380,
+    "vues": "1 252 vues"
+   },
+   {
+    "id": "yDiFOBHwFLE",
+    "titre": "V26 - Ajustement par les moindres carrés : droite de régression linéaire | Statistiques",
+    "chaine": "BarBar Lab",
+    "duree": "6:21",
+    "sec": 381,
+    "vues": "343 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-STAT-L9": {
+  "titre": "Interpréter la corrélation sans surinterpréter",
+  "candidats": [
+   {
+    "id": "nLxvm5P0UQY",
+    "titre": "Leçon 189 Détermination du coefficient de correlation linéaire",
+    "chaine": "EDUNOTE",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "361 vues"
+   },
+   {
+    "id": "SCWk-_wh-VY",
+    "titre": "Tout comprendre aux corrélations et à la causalité",
+    "chaine": "Monsieur SES",
+    "duree": "12:06",
+    "sec": 726,
+    "vues": "57 064 vues"
+   },
+   {
+    "id": "FxREenh3fgE",
+    "titre": "Calculer un coefficient de corrélation - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:34",
+    "sec": 454,
+    "vues": "292 551 vues"
+   },
+   {
+    "id": "I9q4DEppGbo",
+    "titre": "Corrélation n'est pas causalité - L'instant maths",
+    "chaine": "La finance pour tous",
+    "duree": "1:14",
+    "sec": 74,
+    "vues": "51 157 vues"
+   },
+   {
+    "id": "SxaanR_dRmo",
+    "titre": "La différence entre corrélation et causalité — Attention aux erreurs d'interprétation !",
+    "chaine": "H2ES INSTITUTE",
+    "duree": "2:48",
+    "sec": 168,
+    "vues": "981 vues"
+   },
+   {
+    "id": "hDIOrST730U",
+    "titre": "Coefficient de corrélation de Spearman",
+    "chaine": "Thierry Ancelle",
+    "duree": "13:53",
+    "sec": 833,
+    "vues": "42 321 vues"
+   },
+   {
+    "id": "S-o9DX3K0Z0",
+    "titre": "Leçon 100 Exemple de calcul de Coefficient de correlation linéaire",
+    "chaine": "EDUNOTE",
+    "duree": "6:34",
+    "sec": 394,
+    "vues": "3 810 vues"
+   },
+   {
+    "id": "xGU5u2ixxP8",
+    "titre": "Leçon 99 Coefficient de correlation linéaire",
+    "chaine": "EDUNOTE",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "465 vues"
+   },
+   {
+    "id": "BauymbxsmZA",
+    "titre": "V27 - Corrélation : calcul et interprétation du coefficient r | Statistiques",
+    "chaine": "BarBar Lab",
+    "duree": "3:54",
+    "sec": 234,
+    "vues": "638 vues"
+   },
+   {
+    "id": "lBM49XbvKsU",
+    "titre": "V17 - Paramètres de dissymétrie : Sk et Yk | Variables continues - Statistiques",
+    "chaine": "BarBar Lab",
+    "duree": "2:07",
+    "sec": 127,
+    "vues": "243 vues"
+   }
+  ]
+ }
+}

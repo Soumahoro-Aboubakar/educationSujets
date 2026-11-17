@@ -1,0 +1,65 @@
+[
+  {
+    "code": "EDU-SEI-L1",
+    "youtubeId": null,
+    "couverture": null,
+    "justification": "Aucune vidéo courte ne présente les cycles ivoiriens (primaire, collège, lycée) et les diplômes CEPE, BEPC, bac ; les résultats sont des débats d’opinion.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "EDU-SEI-L2",
+    "youtubeId": "N4RmH95OpVo",
+    "couverture": "partielle",
+    "justification": "Définit le décrochage scolaire : l’inscription ne suffit pas, il faut une scolarité suivie.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "EDU-SEI-L3",
+    "youtubeId": "3ncQcT_8EaY",
+    "couverture": "partielle",
+    "justification": "Fonctionnement et acteurs d’un établissement scolaire (chef d’établissement, enseignants, vie scolaire) ; cadre français.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "EDU-SEI-L4",
+    "youtubeId": null,
+    "couverture": null,
+    "justification": "Aucune vidéo trouvée sur le suivi d’un élève à partir de faits observés ; résultats hors sujet (logiciels, parents).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "EDU-SEI-L5",
+    "youtubeId": "Yh3bsvcsALU",
+    "couverture": "partielle",
+    "justification": "Eirick Prairat : finalités éducatives de la règle et de la sanction.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "EDU-SEI-L6",
+    "youtubeId": "LLtqvf40s90",
+    "couverture": "partielle",
+    "justification": "Orientation scolaire après le BEPC : choisir une voie selon ses intérêts et ses résultats.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "EDU-SEI-L7",
+    "youtubeId": "XdfHmHMNRQI",
+    "couverture": "partielle",
+    "justification": "Méthode AEI (affirmer, expliquer, illustrer) pour construire une argumentation.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

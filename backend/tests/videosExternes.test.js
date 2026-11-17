@@ -28,8 +28,10 @@ test('verifierVideo accepte une vidéo courte, intégrable, et préfère la pist
   assert.equal(v.chaine, 'Chaîne Maths');
 });
 
-test('verifierVideo refuse : > 10 min, intégration interdite, introuvable, identifiant invalide', async () => {
-  const longue = await verifierVideo(ID, { fetchImpl: fakeFetch({ html: page(player({ details: { lengthSeconds: '601' } })) }) });
+test('verifierVideo refuse : > 15 min, intégration interdite, introuvable, identifiant invalide', async () => {
+  const longue = await verifierVideo(ID, { fetchImpl: fakeFetch({ html: page(player({ details: { lengthSeconds: '901' } })) }) });
+  const quatorze = await verifierVideo(ID, { fetchImpl: fakeFetch({ html: page(player({ details: { lengthSeconds: '840' } })) }) });
+  assert.equal(quatorze.ok, true);
   assert.equal(longue.ok, false); assert.match(longue.motifs.join(), /trop longue/);
   const interdite = await verifierVideo(ID, { fetchImpl: fakeFetch({ oembed: 401, html: page(player({ statut: { playableInEmbed: false } })) }) });
   assert.equal(interdite.ok, false); assert.match(interdite.motifs.join(), /intégration/);

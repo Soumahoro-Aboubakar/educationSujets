@@ -1,0 +1,219 @@
+{
+  "module": "ENSEA-AS-INTEGR",
+  "lecons": [
+    {
+      "code": "ENSEA-AS-INTEGR-L1",
+      "requetes": [
+        "site:youtube.com primitive définition constante condition initiale Yvan Monka",
+        "déterminer primitive vérifiant condition Monka youtube",
+        "primitive condition initiale vidéo maths terminale"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=vnW9UeIN0ng",
+          "titre": "Trouver une primitive vérifiant une condition initiale donnée. Terminale spécialité maths.",
+          "chaine": "JEAN MARC LEFRANC",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La capsule explique comment déterminer une primitive particulière à partir d’une valeur imposée, ce qui correspond au rôle de la constante dans la leçon."
+        }
+      ],
+      "justification": "Cette capsule cible directement la recherche d’une primitive avec condition initiale et annonce un format inférieur à cinq minutes ; la durée exacte n’est pas affichée dans les résultats accessibles."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L2",
+      "requetes": [
+        "site:youtube.com primitives usuelles composées u prime cours",
+        "primitives composées vidéo cours maths terminale u prime",
+        "primitives usuelles épisode 1 J ai 20 en maths youtube",
+        "Comment calculer une primitive u exponentielle J ai 20 en maths youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=fa1dSOkv2GU",
+          "titre": "Terminale - Les Primitives usuelles - Partie 1 | J'ai 20 en maths",
+          "chaine": "J'ai 20 en maths",
+          "dureeVue": "5:53",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente les primitives usuelles nécessaires pour lire les règles de dérivation à l’envers, sans couvrir à elle seule toutes les formes composées de la leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=7_ufyNb_U4M",
+          "titre": "Calculer une primitive de la forme u'e^u - Primitives - Terminale",
+          "chaine": "J'ai 20 en maths",
+          "dureeVue": "3:34",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Deux exemples montrent comment reconnaître u′eᵘ et ajuster un facteur constant pour obtenir une primitive."
+        }
+      ],
+      "justification": "Le premier candidat constitue une introduction courte aux primitives usuelles ; le second travaille précisément la reconnaissance de la dérivée intérieure. Aucun des deux ne couvre seul l’ensemble des formes demandées."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L3",
+      "requetes": [
+        "site:youtube.com intégrale accumulation aire signée calcul explication simple",
+        "intégrale aire signée calcul explication simple youtube",
+        "calculer intégrale primitive explication simple youtube 5 minutes",
+        "Comment calculer une intégrale Mathemax youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=n4dzOans08k",
+          "titre": "Comment calculer une intégrale ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique explicitement le calcul d’une intégrale par F(b) − F(a), mais sa description ne confirme pas le traitement de l’accumulation et des aires signées."
+        }
+      ],
+      "justification": "Le candidat cible exactement la formule de calcul de la leçon, avec une présentation de niveau terminale. L’interprétation comme accumulation signée reste à compléter et la durée n’a pas pu être relevée."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L4",
+      "requetes": [
+        "site:youtube.com intégrales linéarité Chasles encadrement cours",
+        "propriétés intégrale Chasles linéarité vidéo cours",
+        "Cours Propriétés intégrale relation Chasles linéarité positivité Mathemax youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ZaAMZVkN1TI",
+          "titre": "Cours : Propriétés de l'intégrale (relation de Chasles, linéarité et positivité)",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le cours présente Chasles, la linéarité et la positivité avec des exemples, mais le traitement explicite d’un encadrement n’est pas confirmé."
+        }
+      ],
+      "justification": "C’est le résultat le plus directement aligné sur les propriétés demandées. Le chapitrage atteint 10:37, mais la durée totale n’est pas disponible ; la couverture de l’encadrement reste partielle."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L5",
+      "requetes": [
+        "\"valeur moyenne\" \"intégrale\" youtube Monka",
+        "\"intégrale\" \"borne variable\" youtube cours",
+        "valeur moyenne intégrale cours youtube",
+        "intégrale borne variable théorème fondamental analyse youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Gii87ttiNGA",
+          "titre": "Cours : Valeur moyenne d'une fonction",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo donne la définition de la moyenne intégrale, un exemple de calcul et une estimation graphique, correspondant à la première partie de la leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=QPllqTbbqA4",
+          "titre": "Le théorème fondamental de l'analyse (dérivée et intégrale) | Lê Nguyên Hoang",
+          "chaine": "Wandida, EPFL",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique que l’intégrale à borne variable d’une fonction continue est une primitive, ce qui correspond à A′(x) = f(x)."
+        }
+      ],
+      "justification": "Le premier candidat privilégie la formule de moyenne et ses applications élémentaires ; le second complète le lien entre intégrale et primitive. Aucun résultat retenu ne réunit les deux objectifs, et leurs durées exactes restent inconnues."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L6",
+      "requetes": [
+        "intégration par parties explication simple youtube Monka",
+        "intégration par parties cours en 5 minutes",
+        "\"Effectuer une intégration par parties (1)\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=uNIpYeaNfsg",
+          "titre": "Effectuer une intégration par parties (1) - Terminale",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "L’exemple d’intégration de x sin(x) montre le choix des facteurs et l’application de la formule avec le terme aux bornes et la soustraction."
+        }
+      ],
+      "justification": "L’exemple correspond directement au produit avec x étudié dans la leçon. Une page pédagogique indique environ six minutes pour cette vidéo, sans préciser les secondes."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L7",
+      "requetes": [
+        "changement de variable affine intégrale exemple youtube",
+        "changement de variable affine intégrale cours vidéo débutant",
+        "changement de variable affine intégrale exemple en 5 minutes",
+        "Calcul intégrale changement variable affine Sissa maths youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=AEilqmFMOME",
+          "titre": "CALCUL D'UNE INTEGRALE PAR CHANGEMENT DE VARIABLE AFFINE",
+          "chaine": "Sissa-maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo annonce une explication pas à pas du changement de variable affine dans une intégrale, sans confirmer le cas d’un coefficient négatif."
+        }
+      ],
+      "justification": "Le sujet correspond précisément à la technique demandée, contrairement aux résultats consacrés aux substitutions logarithmiques ou trigonométriques. La durée totale et le traitement du coefficient négatif n’ont pas pu être vérifiés."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L8",
+      "requetes": [
+        "résoudre y prime ay équation différentielle youtube",
+        "\"Résoudre une équation différentielle du type y'=ay\" \"min\"",
+        "\"YJNHTq85tJA\" durée",
+        "équation différentielle y ay cours en 5 minutes youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=YJNHTq85tJA",
+          "titre": "Résoudre une équation différentielle du type y'=ay - Terminale",
+          "chaine": "Yvan Monka",
+          "dureeVue": "7:12",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "L’exercice détermine les solutions exponentielles puis fixe la constante avec f(1) = 2, illustrant une condition initiale donnée ailleurs qu’en zéro."
+        }
+      ],
+      "justification": "La vidéo couvre la résolution et la détermination de la constante avec un exemple particulièrement bien adapté aux points clés de la leçon. Sa durée de 7:12 est indiquée dans une fiche pédagogique."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L9",
+      "requetes": [
+        "résoudre y prime ay b équation différentielle youtube",
+        "\"Comment résoudre une équation différentielle du type y'=ay+b\" durée",
+        "équation différentielle y ay b exemple Monka youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ZSjzg-bnfOg",
+          "titre": "Comment résoudre une équation différentielle du type y'=ay+b ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la résolution de y′ = ay + b et la forme Ce^(ax) − b/a, mais sa description ne confirme pas le cas a = 0 ni l’étude de l’équilibre."
+        }
+      ],
+      "justification": "Le candidat vise exactement l’équation et la formule principales, sans ajouter un second membre variable. La durée reste inconnue et les cas particuliers de la leçon ne sont pas confirmés."
+    },
+    {
+      "code": "ENSEA-AS-INTEGR-L10",
+      "requetes": [
+        "vérifier solution équation différentielle second ordre youtube",
+        "\"vérifier\" \"solution\" \"second ordre\" \"YouTube\"",
+        "vérifier fonction solution équation différentielle dérivée seconde vidéo",
+        "vérifier solution équation différentielle second ordre substitution exemple vidéo courte"
+      ],
+      "candidats": [],
+      "justification": "Les résultats trouvés portent surtout sur la résolution générale des équations du second ordre ou sur une vérification au premier ordre. Aucun candidat suffisamment ciblé sur le calcul de y′, puis y″ et leur substitution n’a été identifié."
+    }
+  ]
+}

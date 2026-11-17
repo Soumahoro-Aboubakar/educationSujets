@@ -1,0 +1,683 @@
+{
+ "ENSEA-AS-INTEGR-L1": {
+  "titre": "Remonter d’une dérivée à une primitive",
+  "candidats": [
+   {
+    "id": "GA6jMgLd_Cw",
+    "titre": "Calculer une primitive (1) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "9:45",
+    "sec": 585,
+    "vues": "1 250 581 vues"
+   },
+   {
+    "id": "FYkm98R6tnI",
+    "titre": "QU'EST-CE QU'UNE PRIMITIVE ?",
+    "chaine": "Hedacademy",
+    "duree": "9:53",
+    "sec": 593,
+    "vues": "33 767 vues"
+   },
+   {
+    "id": "sVFI5LqrGIc",
+    "titre": "Cours - Terminale - Mathématiques : Les Primitives d'une fonction / Suite 1 / M.Diop",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "9:59",
+    "sec": 599,
+    "vues": "88 250 vues"
+   },
+   {
+    "id": "RLEE-iSBimc",
+    "titre": "Comment comprendre FACILEMENT les dérivées",
+    "chaine": "ParaMaths",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "1 100 356 vues"
+   },
+   {
+    "id": "sgskaZeUcck",
+    "titre": "Primitives : l'opération inverse de la dérivation | Cours Terminale Mathématiques (spécialité)",
+    "chaine": "Lycée & Bac",
+    "duree": "10:22",
+    "sec": 622,
+    "vues": "13 vues"
+   },
+   {
+    "id": "07f-Mm8iJkU",
+    "titre": "Qu'est-ce qu'une dérivée?",
+    "chaine": "Entraînement mathématique",
+    "duree": "8:02",
+    "sec": 482,
+    "vues": "59 394 vues"
+   },
+   {
+    "id": "-q9M7oJ9gkI",
+    "titre": "Calculer LA primitive d'une fonction - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "239 978 vues"
+   },
+   {
+    "id": "7tQqY9Vkmss",
+    "titre": "Vérifier si une fonction est une PRIMITIVE d'une autre - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "5:11",
+    "sec": 311,
+    "vues": "81 326 vues"
+   },
+   {
+    "id": "EWbhCdhU2ak",
+    "titre": "[Term G - Cours] Primitive d'une fonction continue - Primitives et équations différentielles #03",
+    "chaine": "Mathoutils",
+    "duree": "8:27",
+    "sec": 507,
+    "vues": "307 vues"
+   },
+   {
+    "id": "m_-N8FAyfag",
+    "titre": "Montre qu'une Fonction est une PRIMITIVE d'une autre ? - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "4:01",
+    "sec": 241,
+    "vues": "7 080 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L2": {
+  "titre": "Reconnaître les primitives usuelles",
+  "candidats": [
+   {
+    "id": "sVFI5LqrGIc",
+    "titre": "Cours - Terminale - Mathématiques : Les Primitives d'une fonction / Suite 1 / M.Diop",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "9:59",
+    "sec": 599,
+    "vues": "88 250 vues"
+   },
+   {
+    "id": "T94pehjN7LE",
+    "titre": "Fiche : TOUTES les PRIMITIVES & DERIVEES à SAVOIR pour résoudre des INTEGRALES - maths Bac+1",
+    "chaine": "Fabinou",
+    "duree": "8:38",
+    "sec": 518,
+    "vues": "112 377 vues"
+   },
+   {
+    "id": "MLJz__CsEaY",
+    "titre": "Les primitives usuelles - Le rappel de cours - Maths Terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "274 853 vues"
+   },
+   {
+    "id": "E8k0xH1XQH4",
+    "titre": "Primitive d'une fonction : Comprendre le cours et les propriétés - Terminale maths",
+    "chaine": "jaicompris Maths",
+    "duree": "9:04",
+    "sec": 544,
+    "vues": "78 911 vues"
+   },
+   {
+    "id": "ygSOVCKZ540",
+    "titre": "[Term G - Cours] Primitives usuelles - Primitives et équations différentielles #05",
+    "chaine": "Mathoutils",
+    "duree": "8:09",
+    "sec": 489,
+    "vues": "167 vues"
+   },
+   {
+    "id": "MznzF-xSTuk",
+    "titre": "Résumé de cours: primitives et équations différentielles",
+    "chaine": "MATH & ÇA !",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "804 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L3": {
+  "titre": "L’intégrale mesure une accumulation",
+  "candidats": [
+   {
+    "id": "i2qELFK6zS0",
+    "titre": "[L3] Théorie de la mesure: Fonctions étagées et intégrale de Lebesgue.",
+    "chaine": "Nayel Prepa",
+    "duree": "9:50",
+    "sec": 590,
+    "vues": "14 644 vues"
+   },
+   {
+    "id": "E0Ryo199-Gs",
+    "titre": "Qu'est-ce qu'une Aire Sous La Courbe ? | E01 - Introduction aux Intégrales de RIEMANN et de LEBESGUE",
+    "chaine": "KobiPy",
+    "duree": "6:29",
+    "sec": 389,
+    "vues": "41 666 vues"
+   },
+   {
+    "id": "utM8TKG90r8",
+    "titre": "Les intégrales",
+    "chaine": "Hedacademy",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "940 319 vues"
+   },
+   {
+    "id": "Z3vKJJE57Uw",
+    "titre": "Calculer une intégrale (1) -Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:46",
+    "sec": 226,
+    "vues": "1 299 260 vues"
+   },
+   {
+    "id": "d9oXGuF1KVM",
+    "titre": "Définition géométrique de l'intégrale - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "2:14",
+    "sec": 134,
+    "vues": "375 vues"
+   },
+   {
+    "id": "U6pWueUwQbs",
+    "titre": "[UT#1] Introduction à l'intégrale de Riemann",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "6:18",
+    "sec": 378,
+    "vues": "161 793 vues"
+   },
+   {
+    "id": "-8AAm4I6110",
+    "titre": "Calculer une AIRE à l'aide d'une INTÉGRALE - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "3:47",
+    "sec": 227,
+    "vues": "25 634 vues"
+   },
+   {
+    "id": "6YuNgrZWtHY",
+    "titre": "Montrer qu'une forme différentielle est exacte et l'intégrer - partie 1",
+    "chaine": "Méthode Maths",
+    "duree": "12:59",
+    "sec": 779,
+    "vues": "41 729 vues"
+   },
+   {
+    "id": "VOSd9q40QDk",
+    "titre": "Théorie de la Mesure et de l'Intégration vidéo 10",
+    "chaine": "ANAS EL BAZ",
+    "duree": "8:54",
+    "sec": 534,
+    "vues": "106 vues"
+   },
+   {
+    "id": "oZbeO_Sd2kg",
+    "titre": "Théorie de la Mesure et de l'Intégration vidéo 6",
+    "chaine": "ANAS EL BAZ",
+    "duree": "7:02",
+    "sec": 422,
+    "vues": "180 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L4": {
+  "titre": "Découper, combiner et encadrer",
+  "candidats": [
+   {
+    "id": "zV95w708gRs",
+    "titre": "Encadrement",
+    "chaine": "Éducation Plus",
+    "duree": "14:51",
+    "sec": 891,
+    "vues": "65 964 vues"
+   },
+   {
+    "id": "s26CK2wO9x8",
+    "titre": "Donner un encadrement d'un nombre - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "5:05",
+    "sec": 305,
+    "vues": "238 654 vues"
+   },
+   {
+    "id": "b6MiD9GVK6M",
+    "titre": "Comment encadrer des nombres entiers ? CM2",
+    "chaine": "Hedacademy",
+    "duree": "5:04",
+    "sec": 304,
+    "vues": "6 420 vues"
+   },
+   {
+    "id": "liAJCypnmwM",
+    "titre": "Encadrer une fraction",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "1:23",
+    "sec": 83,
+    "vues": "4 925 vues"
+   },
+   {
+    "id": "KKHIYdQ919g",
+    "titre": "𝐄𝐧𝐜𝐚𝐝𝐫𝐞𝐦𝐞𝐧𝐭 : Maîtrise Toutes les Opérations en 13 min ❗",
+    "chaine": "TON MAX",
+    "duree": "13:50",
+    "sec": 830,
+    "vues": "819 vues"
+   },
+   {
+    "id": "YaLkcA4cIp4",
+    "titre": "Encadrer une fraction entre deux entiers consécutifs CM1 - CM2 - 6ème Cycle 3 - Mathématiques Maths",
+    "chaine": "Maître Lucas",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "124 004 vues"
+   },
+   {
+    "id": "dgjorBYbock",
+    "titre": "Intervalle et calcul approché: Comment encadrer X+Y, X-Y, XxY, 1/Y, X/Y. Classes: 3e - 2ndeS",
+    "chaine": "MathsClaires",
+    "duree": "12:49",
+    "sec": 769,
+    "vues": "28 511 vues"
+   },
+   {
+    "id": "llaKD6pLzO0",
+    "titre": "Encadrer x - 2nde",
+    "chaine": "L.P.B. Maths vidéo",
+    "duree": "3:21",
+    "sec": 201,
+    "vues": "18 936 vues"
+   },
+   {
+    "id": "2ZFUmfLH3Sw",
+    "titre": "Cours - Terminales S1 & S3 - Mathématiques: Equations différentielles / M. Boye",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "13:10",
+    "sec": 790,
+    "vues": "18 079 vues"
+   },
+   {
+    "id": "MznzF-xSTuk",
+    "titre": "Résumé de cours: primitives et équations différentielles",
+    "chaine": "MATH & ÇA !",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "804 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L5": {
+  "titre": "Moyenne et borne qui varie",
+  "candidats": [
+   {
+    "id": "1GTFsdBvnRE",
+    "titre": "⭐️ Astuce pour additionner deux fractions ayant 1 au numérateur #maths #fraction",
+    "chaine": "Campus XYZ",
+    "duree": "0:25",
+    "sec": 25,
+    "vues": "1 174 190 vues"
+   },
+   {
+    "id": "B9qOOvZpwSk",
+    "titre": "V24 : Mathématiques de l'ingénieur : Équations différentielles non linéaires",
+    "chaine": "Alexandre mizrahi",
+    "duree": "6:09",
+    "sec": 369,
+    "vues": "6 102 vues"
+   },
+   {
+    "id": "2ZFUmfLH3Sw",
+    "titre": "Cours - Terminales S1 & S3 - Mathématiques: Equations différentielles / M. Boye",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "13:10",
+    "sec": 790,
+    "vues": "18 079 vues"
+   },
+   {
+    "id": "uAPGqMvlhjo",
+    "titre": "Cours Équations différentielles (partie 2)",
+    "chaine": "Thibaut Lust",
+    "duree": "15:00",
+    "sec": 900,
+    "vues": "73 vues"
+   },
+   {
+    "id": "v3BwORhXMjA",
+    "titre": "Équations différentielles exactes 2",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "9:26",
+    "sec": 566,
+    "vues": "6 616 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L6": {
+  "titre": "Intégrer par parties",
+  "candidats": [
+   {
+    "id": "uNIpYeaNfsg",
+    "titre": "Effectuer une intégration par parties (1) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:06",
+    "sec": 366,
+    "vues": "986 674 vues"
+   },
+   {
+    "id": "waddmGDS6Ts",
+    "titre": "Comprendre l'intégration par parties - Méthode + Exercices",
+    "chaine": "Le Raton",
+    "duree": "11:31",
+    "sec": 691,
+    "vues": "49 244 vues"
+   },
+   {
+    "id": "CrjfuFGqvTU",
+    "titre": "COMPRENDRE L'INTÉGRATION PAR PARTIES (IPP)",
+    "chaine": "Hedacademy",
+    "duree": "13:31",
+    "sec": 811,
+    "vues": "78 502 vues"
+   },
+   {
+    "id": "g5XyiVlN0fg",
+    "titre": "L’INTÉGRATION PAR PARTIES : Formule + Exemple - Maths Prépa Licence",
+    "chaine": "Fabinou",
+    "duree": "6:01",
+    "sec": 361,
+    "vues": "191 625 vues"
+   },
+   {
+    "id": "O-rZe-9ZrPk",
+    "titre": "intégration par parties • comprendre la formule et savoir l'utiliser ∫u'v=[uv]-∫uv' • Cours",
+    "chaine": "jaicompris Maths",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "50 930 vues"
+   },
+   {
+    "id": "Q1O5kLGVCA4",
+    "titre": "Integrale par partie",
+    "chaine": "Éducation Plus",
+    "duree": "9:34",
+    "sec": 574,
+    "vues": "38 141 vues"
+   },
+   {
+    "id": "-kqVYkdy4Dc",
+    "titre": "2 minutes pour (enfin) comprendre l'integration par changement de variable.",
+    "chaine": "Le Raton",
+    "duree": "3:54",
+    "sec": 234,
+    "vues": "131 694 vues"
+   },
+   {
+    "id": "PuZIENynmNQ",
+    "titre": "Intégration par parties – Faire le bon choix",
+    "chaine": "Mathéma-TIC",
+    "duree": "6:07",
+    "sec": 367,
+    "vues": "109 245 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L7": {
+  "titre": "Changer une variable affine",
+  "candidats": [
+   {
+    "id": "ypLPZ5h5XMc",
+    "titre": "Exercice sur le changement de variable affine",
+    "chaine": "Savoirplus",
+    "duree": "10:31",
+    "sec": 631,
+    "vues": "187 vues"
+   },
+   {
+    "id": "nVDL0razClY",
+    "titre": "Effectuer un ajustement à l'aide d'un changement de variable - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "13:36",
+    "sec": 816,
+    "vues": "58 677 vues"
+   },
+   {
+    "id": "fj_1DFEmbiE",
+    "titre": "Le CHANGEMENT DE VARIABLE pour RÉSOUDRE des INTÉGRALES : Méthode + Exemple - Maths Prépa Licence",
+    "chaine": "Fabinou",
+    "duree": "5:12",
+    "sec": 312,
+    "vues": "275 275 vues"
+   },
+   {
+    "id": "0Hj7XbNhNI4",
+    "titre": "Les Fonctions AFFINES - Définition + Exercice",
+    "chaine": "Hedacademy",
+    "duree": "10:29",
+    "sec": 629,
+    "vues": "360 105 vues"
+   },
+   {
+    "id": "dPJV4vhSZHs",
+    "titre": "Comment trouver l’approximation affine d’une fonction ? mathématiques 1",
+    "chaine": "Les Bons Étudiants",
+    "duree": "12:01",
+    "sec": 721,
+    "vues": "20 081 vues"
+   },
+   {
+    "id": "-kqVYkdy4Dc",
+    "titre": "2 minutes pour (enfin) comprendre l'integration par changement de variable.",
+    "chaine": "Le Raton",
+    "duree": "3:54",
+    "sec": 234,
+    "vues": "131 694 vues"
+   },
+   {
+    "id": "PWVouOTtPEg",
+    "titre": "MATHS 3e : CAS ET VARIATION D'APPLICATION AFFINE",
+    "chaine": "ADMINA TV",
+    "duree": "10:25",
+    "sec": 625,
+    "vues": "11 020 vues"
+   },
+   {
+    "id": "WfP1jZW4Dmw",
+    "titre": "Comment utiliser un ajustement affine",
+    "chaine": "Mathemax",
+    "duree": "3:53",
+    "sec": 233,
+    "vues": "12 446 vues"
+   },
+   {
+    "id": "AEilqmFMOME",
+    "titre": "CALCUL D'UNE INTEGRALE PAR CHANGEMENT DE VARIABLE AFFINE",
+    "chaine": "Sissa-maths",
+    "duree": "8:29",
+    "sec": 509,
+    "vues": "2 052 vues"
+   },
+   {
+    "id": "o1lR0R0I_OU",
+    "titre": "Équations différentielles de premier ordre homogènes",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "117 279 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L8": {
+  "titre": "Résoudre y′ = ay",
+  "candidats": [
+   {
+    "id": "UQjt0O_-M_g",
+    "titre": "ÉQUATIONS DIFFÉRENTIELLES y' = ay - Term Spé Maths",
+    "chaine": "Hedacademy",
+    "duree": "6:08",
+    "sec": 368,
+    "vues": "64 928 vues"
+   },
+   {
+    "id": "WeCFnwKHIr4",
+    "titre": "C'EST QUOI UNE ÉQUATION DIFFÉRENTIELLE ?",
+    "chaine": "Hedacademy",
+    "duree": "7:25",
+    "sec": 445,
+    "vues": "239 860 vues"
+   },
+   {
+    "id": "QeGvVncvyLc",
+    "titre": "Résoudre une équation différentielle du type y'=ay+f - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "282 987 vues"
+   },
+   {
+    "id": "OxoZAOgoqXA",
+    "titre": "ÉQUATIONS DIFFÉRENTIELLES y' = ay + b - Term Spé Maths",
+    "chaine": "Hedacademy",
+    "duree": "6:29",
+    "sec": 389,
+    "vues": "54 106 vues"
+   },
+   {
+    "id": "Xd9bKiQgzp8",
+    "titre": "Résoudre une équation différentielle du 1er ordre avec 2nd membre - PostBac",
+    "chaine": "Yvan Monka",
+    "duree": "11:19",
+    "sec": 679,
+    "vues": "1 002 856 vues"
+   },
+   {
+    "id": "YJNHTq85tJA",
+    "titre": "Résoudre une équation différentielle du type y'=ay - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:13",
+    "sec": 433,
+    "vues": "1 081 123 vues"
+   },
+   {
+    "id": "F_LQLZ8rUhg",
+    "titre": "Résoudre une équation différentielle du type y'=ay+b (1) - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:27",
+    "sec": 387,
+    "vues": "347 678 vues"
+   },
+   {
+    "id": "ezGlju-nR6s",
+    "titre": "Résoudre une équation ✅ Méthode simple | Maths | 3e | Brevet",
+    "chaine": "Paul Olivier",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "429 188 vues"
+   },
+   {
+    "id": "q-g-R6gnNoM",
+    "titre": "Résoudre l'équation différentielle -5y'+3y=4exp(2x) (recherche d'une solution particulière)",
+    "chaine": "mathsetmethodes",
+    "duree": "5:05",
+    "sec": 305,
+    "vues": "92 463 vues"
+   },
+   {
+    "id": "1OrLNUY5C3A",
+    "titre": "Toutes les SOLUTIONS de (E) : y'=ay+f - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "6:52",
+    "sec": 412,
+    "vues": "20 009 vues"
+   }
+  ]
+ },
+ "ENSEA-AS-INTEGR-L9": {
+  "titre": "Résoudre y′ = ay + b",
+  "candidats": []
+ },
+ "ENSEA-AS-INTEGR-L10": {
+  "titre": "Vérifier une solution avec une dérivée seconde",
+  "candidats": [
+   {
+    "id": "W6rypabq8uA",
+    "titre": "Déterminer la DÉRIVÉE SECONDE d'une fonction - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:36",
+    "sec": 216,
+    "vues": "84 014 vues"
+   },
+   {
+    "id": "J11iF15GRHA",
+    "titre": "Convexité et dérivée seconde - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "3:26",
+    "sec": 206,
+    "vues": "2 172 vues"
+   },
+   {
+    "id": "g9qrLqih9TY",
+    "titre": "Équation de Seconde : tu as le niveau ? 🫵",
+    "chaine": "Hedacademy",
+    "duree": "4:18",
+    "sec": 258,
+    "vues": "151 719 vues"
+   },
+   {
+    "id": "c-akR4NJhh0",
+    "titre": "COMPRENDRE les intervalles",
+    "chaine": "Hedacademy",
+    "duree": "7:42",
+    "sec": 462,
+    "vues": "279 132 vues"
+   },
+   {
+    "id": "LX8PxR-ScfM",
+    "titre": "Vérifier si une fonction est solution d'une équation différentielle - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "301 331 vues"
+   },
+   {
+    "id": "fTrSJXkNw2U",
+    "titre": "Solution d'un exercice intéressant sur les fonctions réciproques | 2 Bac",
+    "chaine": "LowDiscovery",
+    "duree": "10:36",
+    "sec": 636,
+    "vues": "224 013 vues"
+   },
+   {
+    "id": "ASmN4FtfXf4",
+    "titre": "Term - Maths - M.3.2 - Vérifier qu'une fonction est solution d'une équation différentielle",
+    "chaine": "Cyrille et Méthode",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "286 vues"
+   },
+   {
+    "id": "SbFTrxEhqTM",
+    "titre": "Solution particulière : c) dérivée seconde de h",
+    "chaine": "SophieGuichard",
+    "duree": "1:56",
+    "sec": 116,
+    "vues": "2 735 vues"
+   },
+   {
+    "id": "q-g-R6gnNoM",
+    "titre": "Résoudre l'équation différentielle -5y'+3y=4exp(2x) (recherche d'une solution particulière)",
+    "chaine": "mathsetmethodes",
+    "duree": "5:05",
+    "sec": 305,
+    "vues": "92 463 vues"
+   },
+   {
+    "id": "YUSz5YBLgmE",
+    "titre": "Exercices - Terminale S2 - Mathématiques : Équations Différentielles / M. Boye",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:59",
+    "sec": 779,
+    "vues": "69 893 vues"
+   }
+  ]
+ }
+}

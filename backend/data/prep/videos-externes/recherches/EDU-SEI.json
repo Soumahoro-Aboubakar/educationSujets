@@ -1,0 +1,125 @@
+{
+  "module": "EDU-SEI",
+  "lecons": [
+    {
+      "code": "EDU-SEI-L1",
+      "requetes": [
+        "site:youtube.com \"Lire le parcours de l’enseignement général\"",
+        "site:youtube.com/watch \"système éducatif ivoirien\" primaire secondaire",
+        "site:youtube.com/watch Côte Ivoire parcours scolaire CEPE BEPC baccalauréat",
+        "Côte Ivoire système éducatif cycles cours en 5 minutes youtube",
+        "\"système éducatif ivoirien\" \"structure\" vidéo"
+      ],
+      "candidats": [],
+      "justification": "Aucune capsule trouvée ne présente précisément les cycles ivoiriens de 6, 4 et 3 ans et les diplômes CEPE, BEPC et baccalauréat. Les résultats vidéo portent surtout sur l’actualité scolaire ou les réformes."
+    },
+    {
+      "code": "EDU-SEI-L2",
+      "requetes": [
+        "site:youtube.com \"Rendre la scolarisation effective\"",
+        "site:youtube.com scolarisation obligatoire Côte Ivoire 6 16 ans",
+        "école obligatoire 6 16 ans Côte Ivoire YouTube loi 2015",
+        "décrochage scolaire explication simple vidéo youtube",
+        "\"Définition du décrochage scolaire\" vidéo PERSCOL",
+        "\"Définition du décrochage scolaire\" \"durée\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=N4RmH95OpVo",
+          "titre": "Définition du décrochage scolaire",
+          "chaine": "GIP-FTLV Bourgogne",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce clip pédagogique définit le décrochage scolaire, notion de la leçon transposable au contexte ivoirien, mais ne présente pas l’obligation ivoirienne de scolarisation de 6 à 16 ans."
+        }
+      ],
+      "justification": "Le clip institutionnel constitue un complément ciblé sur le décrochage, sans couvrir l’ensemble accès–assiduité–maintien ni la loi ivoirienne de 2015. Sa durée n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "EDU-SEI-L3",
+      "requetes": [
+        "site:youtube.com \"Identifier les acteurs de l’école\"",
+        "site:youtube.com/watch \"COGES\" rôle missions Côte Ivoire",
+        "site:youtube.com COGES Côte Ivoire missions fonctionnement",
+        "COGES explication simple vidéo youtube école Côte Ivoire",
+        "\"COGES\" \"CLEF\" vidéo entretien",
+        "\"COGES\" \"missions\" vidéo youtube Côte"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo YouTube suffisamment vérifiable ne présente les responsabilités complémentaires du ministère, des services territoriaux, du chef d’établissement et du COGES ivoirien. Un entretien pertinent de CLEF a été repéré, mais aucune URL YouTube canonique n’a pu être établie à partir des résultats."
+    },
+    {
+      "code": "EDU-SEI-L4",
+      "requetes": [
+        "\"Suivre un élève à partir de faits\"",
+        "site:youtube.com/watch suivi élève observation faits interprétation vie scolaire",
+        "\"suivi\" \"élève\" \"faits\" \"interprétation\" vidéo",
+        "\"observation\" \"interprétation\" \"éducateur\" youtube",
+        "observer sans juger élève vidéo Canopé",
+        "observation faits interprétation youtube"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos repérées expliquent surtout la communication non violente ou la différence entre faits et opinions. Elles ne montrent pas suffisamment la démarche de suivi d’un élève : observation, écoute, coordination, action puis évaluation de l’aide."
+    },
+    {
+      "code": "EDU-SEI-L5",
+      "requetes": [
+        "\"Poser un cadre qui protège\"",
+        "site:youtube.com/watch sanction éducative règlement intérieur explication",
+        "\"sanction éducative\" youtube",
+        "sanction éducative Eirick Prairat courte vidéo YouTube",
+        "Eirick Prairat sanction éducation France Éducation international vidéo",
+        "\"La sanction en éducation\" \"France Éducation\" vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Yh3bsvcsALU",
+          "titre": "Eirick Prairat - La sanction en éducation",
+          "chaine": "France Éducation international",
+          "dureeVue": "4:04",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Eirick Prairat explique les finalités éducatives de la sanction et la réparation, principes utiles en Côte d’Ivoire, sans exposer les procédures disciplinaires ivoiriennes ni la protection en urgence."
+        }
+      ],
+      "justification": "Cette courte intervention d’un spécialiste éclaire la fonction de la règle et la responsabilisation de l’élève. Son approche internationale constitue un complément pédagogique, à distinguer du cadre réglementaire ivoirien."
+    },
+    {
+      "code": "EDU-SEI-L6",
+      "requetes": [
+        "\"Orienter vers des parcours de formation\"",
+        "site:youtube.com/watch orientation enseignement technique formation professionnelle Côte Ivoire",
+        "enseignement technique formation professionnelle orientation Côte Ivoire YouTube",
+        "enseignement technique professionnel Côte Ivoire orientation exemple vidéo youtube",
+        "\"orientation\" \"METFPA\" youtube formation",
+        "\"enseignement technique\" \"formation professionnelle\" différence youtube Côte"
+      ],
+      "candidats": [],
+      "justification": "Les résultats concernent surtout des présentations institutionnelles, des procédures d’affectation ou des établissements particuliers. Aucun contenu suffisamment documenté ne permet de retenir une courte vidéo distinguant les voies ivoiriennes tout en expliquant l’accompagnement du projet et l’insertion."
+    },
+    {
+      "code": "EDU-SEI-L7",
+      "requetes": [
+        "\"Construire une réponse sur un enjeu éducatif\"",
+        "site:youtube.com/watch construire argumentation idée explication exemple concours éducateur",
+        "paragraphe argumenté idée argument exemple méthode YouTube",
+        "\"paragraphe argumenté\" \"5 minutes\" vidéo",
+        "argumentation méthode AEI vidéo",
+        "\"La méthode AEI en SES pour construire une argumentation\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=XdfHmHMNRQI",
+          "titre": "La méthode AEI en SES pour construire une argumentation",
+          "chaine": "Le Prof de SES",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo enseigne à affirmer une idée, l’expliquer et l’illustrer, structure directement transférable à une réponse sur un enjeu éducatif, sans traiter spécifiquement le concours ENS ivoirien."
+        }
+      ],
+      "justification": "La méthode AEI correspond au cœur de la leçon : relier idée, mécanisme et exemple. La vidéo ne couvre pas explicitement l’attribution des chiffres ni l’analyse des acteurs éducatifs, et sa durée n’est pas affichée dans les résultats consultés."
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "code": "INFAS-AUX-DIGESTION-L1",
+    "youtubeId": "4WcbSlr5N88",
+    "couverture": "exacte",
+    "justification": "Hôpitaux universitaires de Genève : transformation des aliments en nutriments utilisables par le corps.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-DIGESTION-L2",
+    "youtubeId": "AnmHhWsGQdA",
+    "couverture": "exacte",
+    "justification": "Animation Inserm : trajet des aliments dans le tube digestif, organe par organe.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-DIGESTION-L3",
+    "youtubeId": "sRsrZDKl2Bg",
+    "couverture": "exacte",
+    "justification": "Action mécanique et action chimique de la digestion.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-DIGESTION-L4",
+    "youtubeId": "DnhJLeLt1Q0",
+    "couverture": "exacte",
+    "justification": "Enzymes et sucs digestifs : quel organe sécrète quoi et ce que fait l’enzyme.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-DIGESTION-L5",
+    "youtubeId": "ItdxzdhvtkE",
+    "couverture": "exacte",
+    "justification": "Absorption intestinale : passage des nutriments dans le sang à travers les villosités.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-DIGESTION-L6",
+    "youtubeId": "kf8gr8HwsGE",
+    "couverture": "exacte",
+    "justification": "Le gros intestin : réabsorption de l’eau et formation des selles.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-DIGESTION-L7",
+    "youtubeId": "H32XHs54SdE",
+    "couverture": "exacte",
+    "justification": "Hôpitaux universitaires de Genève : groupes d’aliments et équilibre alimentaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFAS-AUX-DIGESTION-L8",
+    "youtubeId": "wX5ULoINDwg",
+    "couverture": "partielle",
+    "justification": "Les carences alimentaires et leurs conséquences sur la santé.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

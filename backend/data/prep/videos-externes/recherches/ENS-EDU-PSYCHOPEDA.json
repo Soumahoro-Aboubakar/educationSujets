@@ -1,0 +1,200 @@
+{
+  "module": "ENS-EDU-PSYCHOPEDA",
+  "lecons": [
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L1",
+      "requetes": [
+        "\"Comprendre l’adolescence sans étiqueter\" vidéo",
+        "site:youtube.com adolescence puberté identité explication simple",
+        "adolescence développement psychologique explication simple youtube",
+        "adolescence psychologie vidéo courte youtube identité Erikson",
+        "\"La Puberté\" \"8dFPmhSJEWE\" youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=8dFPmhSJEWE",
+          "titre": "La puberté",
+          "chaine": "Agence sanitaire et sociale de la Nouvelle-Calédonie (production ; chaîne non vérifiée)",
+          "dureeVue": "3:10",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule présente les transformations physiques et psychologiques de la puberté, mais ne développe pas la recherche identitaire selon Erikson."
+        }
+      ],
+      "justification": "Complément introductif court, produit par un organisme sanitaire et recommandé dans des ressources scolaires. Il couvre surtout la puberté et doit être accompagné du texte sur la diversité des adolescences et l’absence de diagnostic automatique."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L2",
+      "requetes": [
+        "\"Passer du concret au raisonnement sur des hypothèses\" vidéo",
+        "site:youtube.com Piaget stades assimilation accommodation cours",
+        "Piaget assimilation accommodation vidéo français youtube",
+        "Piaget stades développement Sprouts français youtube",
+        "\"Psychologie - Les stades du développement de Piaget\" \"Coursitout\" YouTube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=_2p1Pd_QDXg",
+          "titre": "Psychologie - Les stades du développement de Piaget",
+          "chaine": "Coursitout",
+          "dureeVue": "9:58",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique les opérations concrètes et le stade formel puis présente les critiques de Piaget, mais développe aussi les premiers stades de l’enfance."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=8PdEslYSW4A",
+          "titre": "L'assimilation et l'accommodation",
+          "chaine": "Jawaz TICE",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette présentation de formation pédagogique cible la construction des schèmes, l’assimilation et l’accommodation, sans couvrir tout le passage au raisonnement hypothétique."
+        }
+      ],
+      "justification": "Le premier candidat couvre le passage du concret au formel et apporte les réserves nécessaires sur la théorie des stades. Le second constitue un complément ciblé sur les mécanismes explicitement définis dans la leçon ; sa durée n’était pas affichée."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L3",
+      "requetes": [
+        "\"Faire apprendre au-delà de la répétition immédiate\" vidéo",
+        "site:youtube.com mémoire travail apprentissage durable renforcement Skinner explication",
+        "mémoire de travail apprentissage vidéo Canopé youtube",
+        "Skinner renforcement positif négatif exemple youtube",
+        "\"Le conditionnement opérant de Skinner : Récompenses et punitions\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=giLUUjTopA4",
+          "titre": "Le conditionnement opérant de Skinner : Récompenses et punitions",
+          "chaine": "Sprouts en Français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente le conditionnement opérant et les conséquences qui modifient les comportements, mais ne traite pas l’ensemble attention, mémoire de travail et apprentissage durable."
+        }
+      ],
+      "justification": "Candidat retenu uniquement pour la partie consacrée à Skinner et au renforcement. Les recherches n’ont pas permis d’identifier une capsule YouTube suffisamment ciblée réunissant aussi les différentes mémoires et la vérification différée des apprentissages ; la durée du candidat reste inconnue."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L4",
+      "requetes": [
+        "\"Aider juste assez, puis retirer l’aide\" vidéo",
+        "site:youtube.com/watch Vygotski zone proximale développement étayage",
+        "Vygotski étayage explication simple vidéo 5 minutes",
+        "site:youtube.com/watch \"zone proximale de développement\"",
+        "site:youtube.com/watch \"étayage\" Bruner"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=YNQSVgDbaco",
+          "titre": "Apprendre mieux : Zone proximale de développement (apprendre sans être en échec)",
+          "chaine": "Objectif Educateur",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la zone proximale de développement et l’apprentissage avec une aide appropriée, sans documenter dans sa présentation tout le retrait progressif de l’étayage."
+        }
+      ],
+      "justification": "Le sujet et le public éducateur correspondent directement au noyau de la leçon. La couverture reste partielle pour l’étayage de Wood, Bruner et Ross, et la durée n’a pas pu être relevée."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L5",
+      "requetes": [
+        "\"Soutenir une motivation qui dure\" vidéo",
+        "site:youtube.com/watch motivation intrinsèque extrinsèque Deci Ryan",
+        "motivation autodétermination compétence autonomie appartenance vidéo français",
+        "\"Motivation extrinsèque et intrinsèque\" Sprouts",
+        "\"Motivation extrinsèque et intrinsèque\" \"Sprouts en Français\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=PoLlQ_tzbkU",
+          "titre": "Motivation extrinsèque et intrinsèque",
+          "chaine": "Sprouts en Français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette animation distingue motivation intrinsèque et extrinsèque et leurs effets, mais ne couvre pas à elle seule les trois besoins de l’autodétermination et les limites du modèle de Maslow."
+        }
+      ],
+      "justification": "Introduction accessible à la distinction centrale entre les raisons de s’engager dans une activité. Elle nécessite un complément sur compétence, autonomie, lien social et Maslow ; sa durée n’était pas visible."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L6",
+      "requetes": [
+        "\"Utiliser l’erreur pour ajuster l’aide\" vidéo",
+        "site:youtube.com/watch évaluation formative erreur remédiation",
+        "\"évaluation formative\" \"YouTube\"",
+        "\"évaluation\" \"remédiation\" \"explication simple\" youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=5KSZtzU1pi8",
+          "titre": "Évaluation formative : définition, exemples... (expliquée en 3 minutes)",
+          "chaine": "le Savoir Partagé",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo définit l’évaluation formative, la distingue de l’évaluation sommative et propose des exemples, sans annoncer un traitement complet des critères, indicateurs et remédiations."
+        }
+      ],
+      "justification": "Le format annoncé de trois minutes et les exemples conviennent à une première découverte de l’évaluation au service des apprentissages. La durée exacte n’est pas affichée et la distinction critère-indicateur reste à compléter."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L7",
+      "requetes": [
+        "\"Adapter les moyens sans enfermer les élèves\" vidéo",
+        "différenciation pédagogique explication simple youtube",
+        "différenciation pédagogique cours exemple en 5 minutes youtube",
+        "\"Différencier (simplement)\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=soLtgmIfPII",
+          "titre": "Différencier (simplement)",
+          "chaine": "M-CO",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique comment adapter les activités et le fonctionnement de la classe aux besoins des élèves, sans couvrir explicitement les effets des attentes et les étiquettes de styles d’apprentissage."
+        }
+      ],
+      "justification": "La présentation cible une mise en pratique accessible de la différenciation pédagogique. Elle complète la partie sur les moyens ajustés, mais sa durée n’a pas pu être vérifiée et elle ne remplace pas les précautions de la leçon sur les étiquettes."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L8",
+      "requetes": [
+        "\"Conduire un groupe avec un cadre partagé\" vidéo",
+        "Lewin leadership autocratique démocratique laisser faire youtube français",
+        "\"Lewin\" \"styles\" \"YouTube\"",
+        "\"Les styles de leadership\" \"Lewin\" vidéo",
+        "\"Lewin\" \"cours\" \"en 5 minutes\" youtube"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos trouvées portent principalement sur le management d’entreprise, avec une durée ou une qualité pédagogique insuffisamment vérifiables. Aucun candidat n’a été retenu pour expliquer de façon fiable le cadre éducatif, la participation et les trois conduites du groupe."
+    },
+    {
+      "code": "ENS-EDU-PSYCHOPEDA-L9",
+      "requetes": [
+        "\"Traiter un conflit et repérer la violence\" vidéo",
+        "conflit harcèlement différence médiation youtube",
+        "\"harcèlement\" \"conflit\" \"YouTube\" différence",
+        "conflit intimidation différence vidéo youtube",
+        "\"harcèlement scolaire\" \"1 jour, 1 question\" youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=zeAjp6B_DNs",
+          "titre": "C'est quoi le harcèlement à l'école ? - 1 jour, 1 question",
+          "chaine": "1 jour, 1 question",
+          "dureeVue": "1:45",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette animation explique les violences répétées et les rôles de victime, auteur et témoins, avec des données françaises à contextualiser pour la Côte d’Ivoire."
+        }
+      ],
+      "justification": "Capsule très courte et accessible pour repérer le harcèlement, avec une durée indiquée par la ressource du CVM. Elle ne couvre pas les conditions de la médiation ni toute la distinction entre conflit et violence ; les statistiques françaises ne doivent pas être transposées à la Côte d’Ivoire."
+    }
+  ]
+}

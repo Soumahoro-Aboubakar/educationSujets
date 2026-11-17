@@ -1,0 +1,83 @@
+[
+  {
+    "code": "ESATIC-BAC-ARITH-L1",
+    "youtubeId": "VDbIz8Iw0uc",
+    "couverture": "exacte",
+    "justification": "Divisibilité et division euclidienne a = bq + r avec 0 ≤ r < b, rappel de cours.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L2",
+    "youtubeId": "RBE2wPIKagI",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : décomposer un nombre en produit de facteurs premiers.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L3",
+    "youtubeId": "npG_apkI18o",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : PGCD de deux nombres par l’algorithme d’Euclide.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L4",
+    "youtubeId": "2bIK1KkQ1k0",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : PGCD et PPCM par décomposition en facteurs premiers.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L5",
+    "youtubeId": "oJuQv8guLJk",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : utiliser le théorème de Bézout (au + bv = PGCD).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L6",
+    "youtubeId": "wr-g6I67DOA",
+    "couverture": "exacte",
+    "justification": "Résoudre une équation diophantienne ax + by = c : solution particulière puis solutions générales.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L7",
+    "youtubeId": "4RRjMC8_Dio",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : propriétés des congruences (somme, produit, puissance).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L8",
+    "youtubeId": "uVS-oeibDJ4",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : calculer un reste à l’aide d’une congruence en repérant le cycle des puissances.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ARITH-L9",
+    "youtubeId": "Hb39SqG6nbg",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : résoudre une équation avec des congruences.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

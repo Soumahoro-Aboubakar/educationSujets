@@ -1,0 +1,101 @@
+[
+  {
+    "code": "ESATIC-BAC-ONDES-L1",
+    "youtubeId": "o_yyndStwBQ",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : onde mécanique progressive, perturbation qui se propage sans transport de matière.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L2",
+    "youtubeId": "CFfODZUUqJ4",
+    "couverture": "exacte",
+    "justification": "Célérité d’une onde et retard : c = d/Δt.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L3",
+    "youtubeId": "rFQLIaz-RGA",
+    "couverture": "exacte",
+    "justification": "Période et fréquence d’un signal périodique : f = 1/T, méthode de lecture.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L4",
+    "youtubeId": "kK4wkk6lT9U",
+    "couverture": "exacte",
+    "justification": "Ondes périodiques : longueur d’onde, célérité et période (λ = cT).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L5",
+    "youtubeId": "yXGwA-H34J8",
+    "couverture": "partielle",
+    "justification": "Présentation du phénomène de diffraction avec exemples ; la formule θ ≈ λ/a est peu détaillée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L6",
+    "youtubeId": "fOt3JZO6b8o",
+    "couverture": "exacte",
+    "justification": "Éléments caractéristiques d’une fonction sinusoïdale : amplitude, période, pulsation, phase.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L7",
+    "youtubeId": "c9HZ-s2oK4M",
+    "couverture": "partielle",
+    "justification": "Oscillations LC : l’énergie passe du condensateur à la bobine et inversement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L8",
+    "youtubeId": "cKKjTsZipfg",
+    "couverture": "exacte",
+    "justification": "Oscillateur LC : équation et période propre T₀ = 2π√(LC).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L9",
+    "youtubeId": "0jnVvOz9YJA",
+    "couverture": "partielle",
+    "justification": "Oscillations RLC amorties observées à l’oscilloscope : la résistance dissipe l’énergie.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L10",
+    "youtubeId": "TCV2MNipz2s",
+    "couverture": "exacte",
+    "justification": "Circuit RLC en régime sinusoïdal forcé : phénomène de résonance.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ESATIC-BAC-ONDES-L11",
+    "youtubeId": "bDuhXVtvbuM",
+    "couverture": "exacte",
+    "justification": "Physique Tle C-D : calcul de l’impédance d’un dipôle RLC et de l’intensité efficace.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

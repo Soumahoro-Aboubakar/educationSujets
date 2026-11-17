@@ -1,0 +1,92 @@
+[
+  {
+    "code": "INFJ-MAG-ADMIN-L1",
+    "youtubeId": "BOBG5TkPImE",
+    "couverture": "exacte",
+    "justification": "Le principe de légalité : l’administration doit respecter le droit (principe identique en Côte d’Ivoire).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L2",
+    "youtubeId": "Ke-I3lb6_7s",
+    "couverture": "partielle",
+    "justification": "Centralisation, déconcentration et décentralisation : différence en 3 minutes (exemples français).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L3",
+    "youtubeId": "SVW_bYjTz7M",
+    "couverture": "partielle",
+    "justification": "Les collectivités territoriales : autonomie encadrée par l’État (exemples français, principe identique).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L4",
+    "youtubeId": "C5sNduTjTaI",
+    "couverture": "exacte",
+    "justification": "Les lois de Rolland : continuité, égalité et mutabilité du service public.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L5",
+    "youtubeId": "lEDrS8IRipY",
+    "couverture": "exacte",
+    "justification": "Police administrative (prévenir un trouble) et police judiciaire (rechercher les auteurs).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L6",
+    "youtubeId": "P_Glfhq9Kfo",
+    "couverture": "exacte",
+    "justification": "La notion d’acte administratif unilatéral : décision imposée sans le consentement de son destinataire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L7",
+    "youtubeId": "aQmb4rqbPJM",
+    "couverture": "exacte",
+    "justification": "Identifier un contrat administratif : critères organique et matériel.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L8",
+    "youtubeId": "eQYADqqcZd8",
+    "couverture": "partielle",
+    "justification": "Responsabilité administrative : faute de service et faute personnelle.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L9",
+    "youtubeId": "auHpNoMTzps",
+    "couverture": "partielle",
+    "justification": "Le recours pour excès de pouvoir (annulation d’un acte illégal) ; le recours préalable ivoirien de la loi de 2020 n’est pas traité.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-ADMIN-L10",
+    "youtubeId": null,
+    "couverture": null,
+    "justification": "Les vidéos trouvées portent sur le référé-suspension français ou le sursis en droit congolais ; aucune n’explique le sursis à exécution et le référé de la loi organique ivoirienne sans induire en erreur.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

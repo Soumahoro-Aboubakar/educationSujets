@@ -1,7 +1,7 @@
 # Vidéos YouTube externes rattachées aux leçons
 
 En attendant les vidéos Fatafalta, chaque leçon peut recevoir **une vidéo courte publiée par une
-autre chaîne** (≤ 10 min, en français, intégrable). Elle complète le cours écrit sans le remplacer.
+autre chaîne** (≤ 15 min, en français, intégrable). Elle complète le cours écrit sans le remplacer.
 
 On réutilise le mécanisme existant : collection `prepvideos` (clé `{ cible: 'lecon', code, langue }`),
 `GET /api/prep/videos`, et le lecteur intégré `fatafalta/src/prep/video/`. Une vidéo écrite en base
@@ -20,6 +20,7 @@ apparaît dans l'application **en 5 minutes au plus**, sans nouvelle version sur
   - `decisions/<MODULE>.json` : décisions relues, avec justification et source.
   - `selections.json` : état par leçon, `validee` ou `a_rechercher` (trace des recherches infructueuses).
   - `verifications.json` : cache des vérifications YouTube.
+  - `candidats/<MODULE>.json` : candidats bruts de la recherche directe YouTube (secours).
 
 ## Procédure (depuis `backend/`)
 
@@ -27,7 +28,11 @@ apparaît dans l'application **en 5 minutes au plus**, sans nouvelle version sur
 node scripts/video/externe/inventaire.js                 # 1. lots de recherche (lecture seule)
 node scripts/video/externe/rechercher.js MATH-PROBA ...  # 2. recherche déléguée à ChatGPT (Codex --search)
 #                                                           code 5 = quota ChatGPT atteint : rien n'est perdu
-# 3. relire recherches/<M>.json, écrire decisions/<M>.json (une vidéo par leçon, ou null)
+#   Sans ChatGPT (quota épuisé) : recherche directe sur la page publique de résultats YouTube
+node scripts/video/externe/chercher-youtube.js "requête 1" "requête 2"      # vrais candidats (id, durée, chaîne)
+node scripts/video/externe/chercher-youtube.js --lot MATH-PROBA             # candidats/<M>.json, requêtes tirées du lot
+node scripts/video/externe/revue.js MATH-PROBA                              # fiche de relecture (ChatGPT + secours, vérifiés)
+# 3. relire, écrire decisions/<M>.json (une vidéo par leçon, ou null)
 node scripts/video/externe/decider.js MATH-PROBA         # 4. vérification YouTube + selections.json
 node scripts/video/externe/attacher.js                   # 5. essai à blanc contre la base
 node scripts/video/externe/attacher.js --ecrire          # 6. écriture (relançable sans doublon)
@@ -41,7 +46,8 @@ vidéos). Le `.env` du backend n'est jamais lu.
 ## Règles de sélection (appliquées par `decider.js` et à la relecture)
 
 - La vidéo explique **cette leçon** (ses formules, ses notions, son niveau), pas seulement le domaine.
-- Durée de 10 min au plus (refus automatique au-delà). On préfère 1 à 3 min, puis 4 à 5, puis 6 à 8.
+- Durée de 15 min au plus (refus automatique au-delà ; décision du 2026-11-17). Ordre de préférence : 2 à 3 min,
+  puis 4 à 6, puis 7 à 10 ; 11 à 15 min seulement en dernier recours.
 - Audio en français. L'anglais n'est accepté que par exception explicite (`"anglaisAccepte": true`).
 - La vidéo doit être publique et intégrable (oEmbed + `playableInEmbed`). Les directs sont refusés,
   ainsi que les vidéos bloquées en Côte d'Ivoire.
@@ -67,3 +73,12 @@ Lecture par le lecteur IFrame officiel uniquement (`react-native-youtube-iframe`
 téléchargement, pas de réhébergement, pas de lecture automatique. Les commandes du lecteur ne sont
 jamais recouvertes. Si la vidéo est indisponible, l'app affiche un état « Réessayer » et le cours écrit
 reste accessible. Seules les vidéos dont le créateur autorise l'intégration sont retenues.
+
+## État au 2026-11-17
+
+Les 39 modules (392 leçons) ont été traités : **387 leçons ont une vidéo validée et vérifiée**, 5 restent
+`a_rechercher`. Rien n'est encore écrit en production (accès à la base de prod non configuré). Rapport
+détaillé : [rapport-2026-11-17.md](rapport-2026-11-17.md).
+
+Les titres YouTube sont nettoyés de leurs emojis à l'écriture (`attacher.js`), sinon ils s'affichent en carrés
+dans l'app. Quand la lecture intégrée est refusée, l'app propose « Ouvrir sur YouTube ».

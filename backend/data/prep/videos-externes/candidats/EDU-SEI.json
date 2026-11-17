@@ -1,0 +1,581 @@
+{
+ "EDU-SEI-L1": {
+  "titre": "Lire le parcours de l’enseignement général",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 067 vues"
+   },
+   {
+    "id": "_r8-CDVyzzI",
+    "titre": "Le behaviorisme dans l'éducation (expliqué en 3 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "3 911 vues"
+   },
+   {
+    "id": "65Cl6Xvhpug",
+    "titre": "Les courants pédagogiques",
+    "chaine": "devenir formateur - coach",
+    "duree": "8:39",
+    "sec": 519,
+    "vues": "47 697 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "38 203 vues"
+   },
+   {
+    "id": "TjDaAe-BnaU",
+    "titre": "Les théories d'apprentissage",
+    "chaine": "تربية مبسطة Education simplifiée",
+    "duree": "10:20",
+    "sec": 620,
+    "vues": "54 882 vues"
+   },
+   {
+    "id": "QlthTzF0UF4",
+    "titre": "Comprendre la différence entre les concepts :Education, Enseignement, Pédagogie et Didactique",
+    "chaine": "تربية مبسطة Education simplifiée",
+    "duree": "14:36",
+    "sec": 876,
+    "vues": "21 222 vues"
+   },
+   {
+    "id": "zjii9D0z2dw",
+    "titre": "Les méthodes pédagogiques pour diversifier sa façon d'enseigner",
+    "chaine": "Education Voyageuse",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "157 702 vues"
+   },
+   {
+    "id": "op0acrPPkWc",
+    "titre": "Cours de #pedagogie #générale - partie 01 : #elucidation #conceptuelle",
+    "chaine": "Le Coach Akylotan",
+    "duree": "6:56",
+    "sec": 416,
+    "vues": "1 122 vues"
+   },
+   {
+    "id": "kXwhpgmHCjo",
+    "titre": "DE QUOI SOUFFRE LE SYSTÈME ÉDUCATIF IVOIRIEN ?",
+    "chaine": "TNN 24",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "1 276 vues"
+   },
+   {
+    "id": "nFSB0IttC0k",
+    "titre": "Les acteurs du secteur éducation-formation évaluent le système ivoirien",
+    "chaine": "RTI",
+    "duree": "2:19",
+    "sec": 139,
+    "vues": "466 vues"
+   }
+  ]
+ },
+ "EDU-SEI-L2": {
+  "titre": "Rendre la scolarisation effective",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 067 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "38 203 vues"
+   },
+   {
+    "id": "_r8-CDVyzzI",
+    "titre": "Le behaviorisme dans l'éducation (expliqué en 3 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "3 911 vues"
+   },
+   {
+    "id": "s2Q_ONDgHkg",
+    "titre": "Cours de Psychopedagogie Presentation // Universite Espoir",
+    "chaine": "D ConstantTV",
+    "duree": "9:29",
+    "sec": 569,
+    "vues": "1 041 vues"
+   },
+   {
+    "id": "zjii9D0z2dw",
+    "titre": "Les méthodes pédagogiques pour diversifier sa façon d'enseigner",
+    "chaine": "Education Voyageuse",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "157 702 vues"
+   },
+   {
+    "id": "_UdXsHV0nfA",
+    "titre": "Introduction à La Psychologie de l' éducation",
+    "chaine": "Kamal BOUKHATEM",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "2 777 vues"
+   },
+   {
+    "id": "GM5Lgh3UY-A",
+    "titre": "L'épreuve de psychopédagogie et de français aux concours professionnels",
+    "chaine": "Abou Fofana",
+    "duree": "14:21",
+    "sec": 861,
+    "vues": "857 vues"
+   },
+   {
+    "id": "TjDaAe-BnaU",
+    "titre": "Les théories d'apprentissage",
+    "chaine": "تربية مبسطة Education simplifiée",
+    "duree": "10:20",
+    "sec": 620,
+    "vues": "54 882 vues"
+   },
+   {
+    "id": "BkuywRe6aNk",
+    "titre": "Système éducatif ivoirien : que révèle l’exclusion de 1 300 élèves à Adzopé ?",
+    "chaine": "Info news 225",
+    "duree": "9:55",
+    "sec": 595,
+    "vues": "7 669 vues"
+   },
+   {
+    "id": "kXwhpgmHCjo",
+    "titre": "DE QUOI SOUFFRE LE SYSTÈME ÉDUCATIF IVOIRIEN ?",
+    "chaine": "TNN 24",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "1 276 vues"
+   }
+  ]
+ },
+ "EDU-SEI-L3": {
+  "titre": "Identifier les acteurs de l’école",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 067 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "38 203 vues"
+   },
+   {
+    "id": "3ncQcT_8EaY",
+    "titre": "Le fonctionnement et les acteurs d'un établissement scolaire",
+    "chaine": "Le Choix de l'école",
+    "duree": "3:17",
+    "sec": 197,
+    "vues": "2 320 vues"
+   },
+   {
+    "id": "_r8-CDVyzzI",
+    "titre": "Le behaviorisme dans l'éducation (expliqué en 3 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "3 911 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 353 vues"
+   },
+   {
+    "id": "opHllZFRUX8",
+    "titre": "Au cœur de l'Ecole. L'établissement scolaire et ses acteurs.",
+    "chaine": "Concours-TV-Personnel-Direction",
+    "duree": "5:01",
+    "sec": 301,
+    "vues": "799 vues"
+   },
+   {
+    "id": "nFSB0IttC0k",
+    "titre": "Les acteurs du secteur éducation-formation évaluent le système ivoirien",
+    "chaine": "RTI",
+    "duree": "2:19",
+    "sec": 139,
+    "vues": "466 vues"
+   },
+   {
+    "id": "TjDaAe-BnaU",
+    "titre": "Les théories d'apprentissage",
+    "chaine": "تربية مبسطة Education simplifiée",
+    "duree": "10:20",
+    "sec": 620,
+    "vues": "54 882 vues"
+   },
+   {
+    "id": "kXwhpgmHCjo",
+    "titre": "DE QUOI SOUFFRE LE SYSTÈME ÉDUCATIF IVOIRIEN ?",
+    "chaine": "TNN 24",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "1 276 vues"
+   },
+   {
+    "id": "33GJVQmglio",
+    "titre": "Les acteurs du système educatif national échangent sur les nouvelles reformes",
+    "chaine": "Abidjan.netTV",
+    "duree": "1:41",
+    "sec": 101,
+    "vues": "1 754 vues"
+   }
+  ]
+ },
+ "EDU-SEI-L4": {
+  "titre": "Suivre un élève à partir de faits",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 067 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 353 vues"
+   },
+   {
+    "id": "_r8-CDVyzzI",
+    "titre": "Le behaviorisme dans l'éducation (expliqué en 3 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "3 911 vues"
+   },
+   {
+    "id": "xG7AStCAdfA",
+    "titre": "👩🏻‍🏫 Le modèle transmissif 🧠- Psychologie de l'éducation - Cours - CNED",
+    "chaine": "La fille du Midi",
+    "duree": "6:38",
+    "sec": 398,
+    "vues": "1 187 vues"
+   },
+   {
+    "id": "_UdXsHV0nfA",
+    "titre": "Introduction à La Psychologie de l' éducation",
+    "chaine": "Kamal BOUKHATEM",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "2 777 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "38 203 vues"
+   },
+   {
+    "id": "SwVzwaFkqnE",
+    "titre": "Enseignement apprentissage de la dissertation 1. Analyse du sujet par le Professeur Maugust MULOMBA",
+    "chaine": "ADEF RDCONGO",
+    "duree": "14:54",
+    "sec": 894,
+    "vues": "19 706 vues"
+   },
+   {
+    "id": "kWXgnFRDIpM",
+    "titre": "Exemple de Dissertation psychopédagogique",
+    "chaine": "All Possibilities Official",
+    "duree": "10:01",
+    "sec": 601,
+    "vues": "1 791 vues"
+   }
+  ]
+ },
+ "EDU-SEI-L5": {
+  "titre": "Poser un cadre qui protège",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 067 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "38 203 vues"
+   },
+   {
+    "id": "kWXgnFRDIpM",
+    "titre": "Exemple de Dissertation psychopédagogique",
+    "chaine": "All Possibilities Official",
+    "duree": "10:01",
+    "sec": 601,
+    "vues": "1 791 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 353 vues"
+   },
+   {
+    "id": "72m5cWg_XyY",
+    "titre": "La psychopédagogie vue par Psychopedia Formations",
+    "chaine": "PsychoPedia Formations",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "47 412 vues"
+   },
+   {
+    "id": "tgMKyNX__a8",
+    "titre": "1ère Partie Réussir la Dissertation Psychopédagogique : Libérez Votre Potentiel d'Écriture",
+    "chaine": "All Possibilities Official",
+    "duree": "6:58",
+    "sec": 418,
+    "vues": "3 378 vues"
+   },
+   {
+    "id": "ImUJnB_zEpk",
+    "titre": "Cycle complet psychopédagogie Psychopedia",
+    "chaine": "PsychoPedia Formations",
+    "duree": "5:53",
+    "sec": 353,
+    "vues": "618 vues"
+   },
+   {
+    "id": "GM5Lgh3UY-A",
+    "titre": "L'épreuve de psychopédagogie et de français aux concours professionnels",
+    "chaine": "Abou Fofana",
+    "duree": "14:21",
+    "sec": 861,
+    "vues": "857 vues"
+   },
+   {
+    "id": "2vvo8O4gqDs",
+    "titre": "🔴MENAET / Côte d’Ivoire Terminal : Un accord-cadre stratégique pour moderniser l’école ivoirienne",
+    "chaine": "JD MAGAZINE + TÉLÉVISION",
+    "duree": "2:42",
+    "sec": 162,
+    "vues": "98 vues"
+   },
+   {
+    "id": "UY4KptzTPx4",
+    "titre": "Atelier de validation du cadre de référence national en évaluation des apprentissages",
+    "chaine": "MCA-Côte d'Ivoire",
+    "duree": "7:59",
+    "sec": 479,
+    "vues": "51 vues"
+   }
+  ]
+ },
+ "EDU-SEI-L6": {
+  "titre": "Orienter vers des parcours de formation",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 067 vues"
+   },
+   {
+    "id": "_tRD2bVGoIY",
+    "titre": "Présentation des axes et parcours",
+    "chaine": "SKILL4PROF",
+    "duree": "5:22",
+    "sec": 322,
+    "vues": "134 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "38 203 vues"
+   },
+   {
+    "id": "kmppLGL4efA",
+    "titre": "Les parcours éducatifs - PEP",
+    "chaine": "SKILL4PROF",
+    "duree": "3:16",
+    "sec": 196,
+    "vues": "385 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 353 vues"
+   },
+   {
+    "id": "s2Q_ONDgHkg",
+    "titre": "Cours de Psychopedagogie Presentation // Universite Espoir",
+    "chaine": "D ConstantTV",
+    "duree": "9:29",
+    "sec": 569,
+    "vues": "1 041 vues"
+   },
+   {
+    "id": "GM5Lgh3UY-A",
+    "titre": "L'épreuve de psychopédagogie et de français aux concours professionnels",
+    "chaine": "Abou Fofana",
+    "duree": "14:21",
+    "sec": 861,
+    "vues": "857 vues"
+   },
+   {
+    "id": "72m5cWg_XyY",
+    "titre": "La psychopédagogie vue par Psychopedia Formations",
+    "chaine": "PsychoPedia Formations",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "47 412 vues"
+   },
+   {
+    "id": "kXwhpgmHCjo",
+    "titre": "DE QUOI SOUFFRE LE SYSTÈME ÉDUCATIF IVOIRIEN ?",
+    "chaine": "TNN 24",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "1 276 vues"
+   },
+   {
+    "id": "HR90f_cwIJ8",
+    "titre": "L'INTEGRATION DES JEUNES ENSEIGNANTS DANS LE SYSTEME EDUCATIF IVOIRIEN",
+    "chaine": "Emission télé Ma Nouvelle Ecole",
+    "duree": "10:59",
+    "sec": 659,
+    "vues": "1 570 vues"
+   }
+  ]
+ },
+ "EDU-SEI-L7": {
+  "titre": "Construire une réponse sur un enjeu éducatif",
+  "candidats": [
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "38 203 vues"
+   },
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 067 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 353 vues"
+   },
+   {
+    "id": "_r8-CDVyzzI",
+    "titre": "Le behaviorisme dans l'éducation (expliqué en 3 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "3 911 vues"
+   },
+   {
+    "id": "xG7AStCAdfA",
+    "titre": "👩🏻‍🏫 Le modèle transmissif 🧠- Psychologie de l'éducation - Cours - CNED",
+    "chaine": "La fille du Midi",
+    "duree": "6:38",
+    "sec": 398,
+    "vues": "1 187 vues"
+   },
+   {
+    "id": "kWXgnFRDIpM",
+    "titre": "Exemple de Dissertation psychopédagogique",
+    "chaine": "All Possibilities Official",
+    "duree": "10:01",
+    "sec": 601,
+    "vues": "1 791 vues"
+   },
+   {
+    "id": "tgMKyNX__a8",
+    "titre": "1ère Partie Réussir la Dissertation Psychopédagogique : Libérez Votre Potentiel d'Écriture",
+    "chaine": "All Possibilities Official",
+    "duree": "6:58",
+    "sec": 418,
+    "vues": "3 378 vues"
+   },
+   {
+    "id": "_UdXsHV0nfA",
+    "titre": "Introduction à La Psychologie de l' éducation",
+    "chaine": "Kamal BOUKHATEM",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "2 777 vues"
+   },
+   {
+    "id": "kXwhpgmHCjo",
+    "titre": "DE QUOI SOUFFRE LE SYSTÈME ÉDUCATIF IVOIRIEN ?",
+    "chaine": "TNN 24",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "1 276 vues"
+   },
+   {
+    "id": "nFSB0IttC0k",
+    "titre": "Les acteurs du secteur éducation-formation évaluent le système ivoirien",
+    "chaine": "RTI",
+    "duree": "2:19",
+    "sec": 139,
+    "vues": "466 vues"
+   }
+  ]
+ }
+}

@@ -1,0 +1,209 @@
+{
+  "module": "ENSEA-AS-GEOM",
+  "lecons": [
+    {
+      "code": "ENSEA-AS-GEOM-L1",
+      "requetes": [
+        "site:youtube.com/watch \"Repérer un déplacement dans l’espace\"",
+        "site:youtube.com coordonnées vecteur espace norme explication simple",
+        "site:youtube.com/watch repérage espace coordonnées vecteur cours",
+        "site:youtube.com/watch coordonnées vecteur espace norme explication simple"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=oLNxa7RTrQo",
+          "titre": "Cours : Bases, repères et coordonnées dans l'espace",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le cours présente les repères, les coordonnées des points et le calcul des coordonnées d’un vecteur à partir de deux points, mais ne signale pas le calcul de norme."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=rRmS4mJXx3s",
+          "titre": "Comment calculer la norme d'un vecteur de l'espace ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le calcul de la norme à partir des trois coordonnées dans un repère orthonormé, en complément du repérage."
+        }
+      ],
+      "justification": "Le premier candidat correspond au passage des points aux déplacements ; le second complète précisément la formule de norme. Les durées totales ne sont pas affichées dans les résultats consultés."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L2",
+      "requetes": [
+        "site:youtube.com/watch \"Combiner des vecteurs et reconnaître une direction\"",
+        "site:youtube.com combinaison linéaire vecteurs espace colinéarité cours",
+        "combinaison linéaire vecteurs espace colinéarité vidéo cours",
+        "site:youtube.com/watch combinaison linéaire vecteurs espace exemple",
+        "site:youtube.com/watch vecteurs colinéaires espace coordonnées cours"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=nfddVNIuj3E",
+          "titre": "Comment exprimer un vecteur comme une combinaison linéaire d'autres vecteurs ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo construit des combinaisons linéaires de vecteurs de l’espace avec la relation de Chasles, sans couvrir à elle seule les bases et tous les tests de colinéarité."
+        }
+      ],
+      "justification": "Cet exercice cible directement la combinaison de déplacements, avec une démarche adaptée au lycée. La couverture est partielle et la durée totale n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L3",
+      "requetes": [
+        "site:youtube.com/watch \"Le produit scalaire détecte un angle droit\"",
+        "site:youtube.com produit scalaire espace orthogonalité cours",
+        "site:youtube.com/watch produit scalaire espace orthogonalité exemple en 5 minutes",
+        "site:youtube.com/watch calculer produit scalaire espace orthogonaux",
+        "\"Format Cours - Produit scalaire dans\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=hajIe1hRJaQ",
+          "titre": "Format Cours - Produit scalaire dans l'espace (orthogonalité)",
+          "chaine": "Maths en tête - Alexandre Morgan",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule résume le produit scalaire et l’orthogonalité dans l’espace, mais les résultats disponibles ne confirment pas le traitement des deux identités sur les normes."
+        }
+      ],
+      "justification": "Le format annoncé comme condensé et le thème précis conviennent au cœur de la leçon. La durée totale et la présence de l’identité de polarisation restent non vérifiées."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L4",
+      "requetes": [
+        "site:youtube.com/watch \"Décrire une droite avec un paramètre\"",
+        "site:youtube.com représentation paramétrique droite espace exemple",
+        "\"représentation paramétrique\" \"droite\" \"Yvan Monka\" youtube",
+        "site:youtube.com/watch représentation paramétrique droite explication simple"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=3Am3_EBGd_w",
+          "titre": "Représentation paramétrique d'une droite - Maths Terminale",
+          "chaine": "NOVELCLASS",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique la représentation paramétrique d’une droite au niveau terminale, correspondant à la description par un point, une direction et un paramètre."
+        }
+      ],
+      "justification": "Le sujet est directement ciblé et la description annonce une explication en moins de quatre minutes. Le minutage exact n’est pas affiché dans les résultats consultés."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L5",
+      "requetes": [
+        "site:youtube.com/watch \"Décrire un plan avec deux directions\"",
+        "représentation paramétrique plan deux vecteurs vidéo",
+        "site:youtube.com/watch représentation paramétrique plan deux vecteurs cours",
+        "site:youtube.com/watch paramétrisation plan point deux vecteurs",
+        "\"Géométrie dans l'espace : Représentation Paramétrique de Plan\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=yLyPoQk6cE0",
+          "titre": "Géométrie dans l'espace : Représentation Paramétrique de Plan - Cours",
+          "chaine": "coursmaths_ac",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Le cours présente explicitement un plan de l’espace défini par un point et deux vecteurs directeurs, ce qui correspond à sa représentation avec deux paramètres."
+        }
+      ],
+      "justification": "La description correspond précisément à la construction enseignée, au niveau terminale spécialité. La durée totale n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L6",
+      "requetes": [
+        "site:youtube.com/watch \"Une équation cartésienne pour un plan\"",
+        "site:youtube.com/watch \"équation cartésienne\" \"plan\" \"normal\" Monka",
+        "site:youtube.com/watch déterminer équation cartésienne plan Yvan Monka",
+        "site:youtube.com/watch équation cartésienne plan NOVELCLASS"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=s6ot30BgI2E",
+          "titre": "EQ. CARTÉSIENNE d'un PLAN avec VECTEUR NORMAL et un POINT - Exercice Corrigé - Terminale",
+          "chaine": "Galilee ac",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’exercice explique comment utiliser les coordonnées du normal comme coefficients et calculer d avec un point du plan, sans annoncer la recherche du normal à partir de deux directions."
+        }
+      ],
+      "justification": "La description explicite exactement les formules ax + by + cz + d = 0 et d = −axₐ − byₐ − czₐ. La recherche du normal n’est pas couverte et la durée totale n’est pas affichée."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L7",
+      "requetes": [
+        "site:youtube.com/watch \"Trouver une intersection\" espace",
+        "intersection droite plan deux droites espace Yvan Monka vidéo",
+        "site:youtube.com/watch intersection droite plan deux droites espace exemple",
+        "site:youtube.com/watch intersection droite plan substitution",
+        "site:youtube.com/watch intersection droite plan NOVELCLASS"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=xPHBMBOTyHQ",
+          "titre": "Comment Trouver le Point d'INTERSECTION de deux Droites dans l'Espace ? Géométrie dans l'espace.",
+          "chaine": "Simon Semaan",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la détermination du point d’intersection de deux droites dans l’espace, mais ne couvre pas l’ensemble des cas droite-plan et des droites gauches."
+        }
+      ],
+      "justification": "Le candidat traite un calcul d’intersection explicitement prévu dans la leçon. Il constitue un complément partiel ; sa durée totale n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L8",
+      "requetes": [
+        "site:youtube.com/watch \"Projeter un point sur une droite\"",
+        "projeté orthogonal point droite espace Yvan Monka vidéo",
+        "site:youtube.com/watch projeté orthogonal point droite espace cours",
+        "site:youtube.com/watch déterminer projeté orthogonal droite Terminale Monka",
+        "\"Déterminer les coordonnées du projeté orthogonal\" \"RoacrySlUAU\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=RoacrySlUAU",
+          "titre": "Déterminer les coordonnées du projeté orthogonal d'un point sur une droite - Terminale",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "L’exemple associé sur le site de l’auteur utilise une représentation paramétrique de la droite puis l’orthogonalité au vecteur directeur pour déterminer le projeté."
+        }
+      ],
+      "justification": "La méthode documentée par l’auteur correspond directement aux deux conditions de la leçon : appartenance à la droite et produit scalaire nul. La durée totale n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "ENSEA-AS-GEOM-L9",
+      "requetes": [
+        "site:youtube.com/watch \"Projeter sur un plan et mesurer une distance\"",
+        "projeté orthogonal plan distance point plan Yvan Monka vidéo",
+        "site:youtube.com/watch projeté orthogonal plan distance point plan cours",
+        "site:youtube.com/watch projeté orthogonal plan distance exemple Monka",
+        "\"distance\" \"point\" \"plan\" \"Monka\" \"durée\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=115By_2Sr38",
+          "titre": "Comment calculer la distance d'un point à un plan ?",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo détermine d’abord le projeté orthogonal sur le plan puis calcule la distance, mais sa description ne confirme pas l’explicitation des formules générales de λ et de distance."
+        }
+      ],
+      "justification": "Le candidat relie précisément projection et distance, conformément à l’objectif de la leçon. Les formules générales et la durée totale ne sont pas vérifiables dans les résultats consultés."
+    }
+  ]
+}

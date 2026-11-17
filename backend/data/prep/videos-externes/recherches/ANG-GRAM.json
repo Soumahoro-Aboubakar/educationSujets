@@ -1,0 +1,228 @@
+{
+  "module": "ANG-GRAM",
+  "lecons": [
+    {
+      "code": "ANG-GRAM-L1",
+      "requetes": [
+        "site:youtube.com/watch construire phrase anglais sujet verbe complément explication simple",
+        "\"phrase\" \"anglais\" \"sujet verbe\" youtube",
+        "site:youtube.com/watch \"Construire une phrase\" anglais",
+        "Cours d'anglais débutant faire phrases simples AnglaisCours Club"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=XmAM-i7mPoA",
+          "titre": "Cours d'anglais débutant : faire des phrases simples en anglais",
+          "chaine": "AnglaisCours Club",
+          "dureeVue": "8:23",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce cours pour débutants travaille la construction de phrases simples, mais la présentation complète des pronoms sujets de la leçon reste à compléter."
+        }
+      ],
+      "justification": "Une introduction accessible à la construction des premières phrases ; la durée de 8:23 est indiquée dans l’index vidéo consulté."
+    },
+    {
+      "code": "ANG-GRAM-L2",
+      "requetes": [
+        "site:youtube.com/watch to be présent affirmatif négatif interrogatif cours français",
+        "to be présent anglais cours youtube",
+        "site:youtube.com/watch \"to be\" \"Cours d'anglais 5\"",
+        "Cours anglais 5 TO BE ABCanglais durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=qH5fa3sTwLI",
+          "titre": "Cours d'anglais 5 - TO BE Conjugaison Présent Affirmatif Négatif Interrogatif Forme contractée",
+          "chaine": "ABCanglais Blogspot",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo cible précisément les formes affirmatives, négatives, interrogatives et contractées de be au présent."
+        }
+      ],
+      "justification": "Le programme annoncé correspond directement aux transformations enseignées dans la leçon. La durée exacte n’était pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "ANG-GRAM-L3",
+      "requetes": [
+        "site:youtube.com/watch have has a an the pluriel anglais cours",
+        "have has avoir anglais cours youtube",
+        "Cours anglais HAVE conjugaison présent affirmatif négatif interrogatif",
+        "Cours anglais 14 articles définis indéfinis ABCanglais Blogspot youtube",
+        "ABCanglais articles définis indéfinis A AN THE vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=zV5Z6l3xaUQ",
+          "titre": "Cours d'anglais 14 - Articles définis et indéfinis en anglais A AN THE singulier pluriel Débutants",
+          "chaine": "ABCanglais Blogspot",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique les articles a, an et the au singulier et au pluriel, mais ne constitue pas un cours sur la possession avec have et has."
+        }
+      ],
+      "justification": "C’est une piste ciblée pour la partie consacrée aux articles et aux noms. Aucun résultat vérifié ne réunissait convenablement have/has, les articles et les règles du pluriel dans une seule capsule."
+    },
+    {
+      "code": "ANG-GRAM-L4",
+      "requetes": [
+        "site:youtube.com présent simple anglais habitudes cours",
+        "présent simple anglais habitudes cours youtube",
+        "site:youtube.com/watch \"présent simple\" \"Les Bons Profs\"",
+        "Le présent simple Les Bons Profs 2022 vidéo minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=DAq1alCVN9U",
+          "titre": "Le présent simple - Anglais - Sixième - Les Bons Profs",
+          "chaine": "Les Bons Profs",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule présente les habitudes, les généralités et la terminaison -s à la troisième personne, sans détail confirmé sur toutes les variantes -es et -ies."
+        }
+      ],
+      "justification": "Le niveau débutant et les emplois présentés correspondent au cœur de la leçon. La capsule homonyme publiée sur Lumni dure 2:05, mais l’identité exacte du montage YouTube n’a pas pu être confirmée."
+    },
+    {
+      "code": "ANG-GRAM-L5",
+      "requetes": [
+        "site:youtube.com do does négation question anglais explication simple",
+        "do does négation question anglais cours youtube",
+        "auxiliaire do does anglais vidéo français",
+        "\"Do - Does - Doesn't - Did - Didn't - en Anglais\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=DAq1alCVN9U",
+          "titre": "Le présent simple - Anglais - Sixième - Les Bons Profs",
+          "chaine": "Les Bons Profs",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule introduit do et does pour les questions et les négations, mais reprend aussi l’affirmation et ne développe pas tous les pièges de la leçon."
+        }
+      ],
+      "justification": "Cette courte introduction convient pour découvrir le rôle de do au présent simple. Elle nécessite un complément sur does/doesn’t suivi de la base verbale et sur l’exception de be."
+    },
+    {
+      "code": "ANG-GRAM-L6",
+      "requetes": [
+        "site:youtube.com/watch présent continu anglais explication simple",
+        "\"présent continu\" anglais cours youtube",
+        "Présent simple présent BE ing formation Les Bons Profs youtube",
+        "Présent simple présent BE ing utilisation Les Bons Profs youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=nbFnVm2TniU",
+          "titre": "Présent simple VS présent be+ing : la formation - Anglais - 3e - Les Bons Profs",
+          "chaine": "Les Bons Profs",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le cours explique be au présent suivi de -ing et les modifications orthographiques comme writing et le doublement de consonne, en comparant les deux présents."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=cjH9mZp7Ij4",
+          "titre": "Présent simple VS présent be+ing : l’utilisation - Anglais - 3e - Les Bons Profs",
+          "chaine": "Les Bons Profs",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo distingue l’habitude de l’action en cours, ce qui correspond au choix entre présent simple et présent continu enseigné ici."
+        }
+      ],
+      "justification": "La première piste privilégie la construction grammaticale ; la seconde complète le choix du temps. Les capsules correspondantes sur Lumni affichent 5:07 et 3:33, sans confirmation de l’identité exacte des montages YouTube."
+    },
+    {
+      "code": "ANG-GRAM-L7",
+      "requetes": [
+        "site:youtube.com/watch prétérit anglais cours débutant",
+        "\"prétérit\" \"cours\" \"5 minutes\" youtube",
+        "\"Le PRETERIT simple en ANGLAIS en 5 minutes\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ZNRNm-9FBAE",
+          "titre": "Le PRETERIT simple en ANGLAIS en 5 minutes",
+          "chaine": "Apprendre l'anglais avec les Tutos de Huito",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce tutoriel présente rapidement l’utilisation du prétérit simple, mais la couverture détaillée de was/were et de toutes les transformations n’est pas confirmée."
+        }
+      ],
+      "justification": "Le format annoncé de cinq minutes et le sujet précis conviennent à une première explication du passé terminé. Le minutage exact n’était pas visible."
+    },
+    {
+      "code": "ANG-GRAM-L8",
+      "requetes": [
+        "site:youtube.com/watch present perfect français since for cours",
+        "site:youtube.com/watch \"present perfect\" \"Les Bons Profs\"",
+        "\"present perfect\" \"en 5 minutes\"",
+        "Le present perfect Les Bons Profs lien passé présent for since"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ThZuIIxk3vE",
+          "titre": "Le present perfect - Anglais - Lycée - Les Bons Profs",
+          "chaine": "Les Bons Profs",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule cible le present perfect et sa construction, mais le traitement de since, for et ago n’est pas confirmé pour cette version."
+        }
+      ],
+      "justification": "Une piste scolaire ciblée pour comprendre have/has suivi du participe passé et le lien passé-présent. La capsule correspondante sur Lumni affiche 4:31 ; la durée propre au montage YouTube reste inconnue."
+    },
+    {
+      "code": "ANG-GRAM-L9",
+      "requetes": [
+        "site:youtube.com/watch futur will going to français cours",
+        "\"will going to\" explication simple youtube",
+        "futur will going to anglais vidéo courte",
+        "futur anglais will going to explication français 5 minutes",
+        "\"Différence Entre: Will et Going To\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=K8VP-wuB_E4",
+          "titre": "ANGLAIS - Le FUTUR avec BE GOING TO + Exercice",
+          "chaine": "Teacher Chaba Florence Ayivigan",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la construction et l’utilisation de be going to avec un exercice, mais ne couvre qu’une des deux formes principales de la leçon."
+        }
+      ],
+      "justification": "La description annonce une explication en moins de dix minutes, adaptée à la partie sur les intentions et projets. Les résultats plus généraux sur le futur étaient trop longs ou insuffisamment vérifiables."
+    },
+    {
+      "code": "ANG-GRAM-L10",
+      "requetes": [
+        "site:youtube.com/watch \"modaux\" \"can\" \"should\" \"must\" français",
+        "\"can must should\" cours anglais youtube français",
+        "modaux anglais can should must vidéo courte",
+        "site:youtube.com/watch \"must\" \"have to\" \"français\"",
+        "les auxiliaires modaux anglais Les Bons Profs can must should",
+        "Les modaux Les Bons Profs 2024 vidéo durée"
+      ],
+      "candidats": [],
+      "justification": "Les cours détaillés repérés dépassaient souvent quinze minutes ; les capsules plus ciblées ne permettaient pas de vérifier simultanément leur durée et le traitement de mustn’t face à don’t have to. Aucune recommandation suffisamment étayée n’est retenue."
+    },
+    {
+      "code": "ANG-GRAM-L11",
+      "requetes": [
+        "site:youtube.com/watch \"comparatif\" \"superlatif\" anglais cours",
+        "\"comparatif superlatif\" anglais exemple youtube",
+        "Anglais lycée savoir utiliser comparatif superlatif Hatier vidéo",
+        "\"Anglais lycée : savoir utiliser le comparatif et le superlatif\" durée vidéo"
+      ],
+      "candidats": [],
+      "justification": "Une vidéo Hatier correspond précisément au thème, mais sa durée et son traitement de l’égalité ainsi que des irréguliers n’ont pas pu être vérifiés. Elle n’est donc pas retenue comme recommandation validée."
+    }
+  ]
+}

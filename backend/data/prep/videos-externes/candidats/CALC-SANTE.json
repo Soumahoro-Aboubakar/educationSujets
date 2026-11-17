@@ -1,0 +1,751 @@
+{
+ "CALC-SANTE-L1": {
+  "titre": "Lire et organiser un calcul",
+  "candidats": [
+   {
+    "id": "HjfQwzco2pA",
+    "titre": "Lire un tableau - leçon 1",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "2:39",
+    "sec": 159,
+    "vues": "9 518 vues"
+   },
+   {
+    "id": "s8HRE-YRjmQ",
+    "titre": "Lire un graphique et un tableau CE1 - CE2 - Cycle 2 - Maths - Mathématiques - Grandeurs et mesure",
+    "chaine": "Maître Lucas",
+    "duree": "8:15",
+    "sec": 495,
+    "vues": "57 345 vues"
+   },
+   {
+    "id": "JdCejOxgK1A",
+    "titre": "Développement, Calcul littéral",
+    "chaine": "Éducation Plus",
+    "duree": "13:46",
+    "sec": 826,
+    "vues": "181 319 vues"
+   },
+   {
+    "id": "0R1L_BXdgMc",
+    "titre": "Organiser un calcul avec des nombres relatifs",
+    "chaine": "matheasy",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "216 vues"
+   },
+   {
+    "id": "dZKCREESqOw",
+    "titre": "Lire, construire et compléter un tableau de données - Cm1 Cm2 6ème Fée des Maths Leçon, Exercices",
+    "chaine": "Pass Education FR",
+    "duree": "7:53",
+    "sec": 473,
+    "vues": "3 271 vues"
+   },
+   {
+    "id": "kVxVES1wM4M",
+    "titre": "Les unités et les dizaines CP - CE1 - Cycle 2 - Maths - Numération",
+    "chaine": "Maître Lucas",
+    "duree": "7:29",
+    "sec": 449,
+    "vues": "78 189 vues"
+   },
+   {
+    "id": "gezWeHs2d4U",
+    "titre": "Lire les grands nombres - la classe des millions CM1-CM2-Cycle 3 Maths - Mathématiques - Numération",
+    "chaine": "Maître Lucas",
+    "duree": "5:48",
+    "sec": 348,
+    "vues": "27 070 vues"
+   },
+   {
+    "id": "1GTFsdBvnRE",
+    "titre": "⭐️ Astuce pour additionner deux fractions ayant 1 au numérateur #maths #fraction",
+    "chaine": "Campus XYZ",
+    "duree": "0:25",
+    "sec": 25,
+    "vues": "1 174 190 vues"
+   },
+   {
+    "id": "YkPHUSAV9Fo",
+    "titre": "Calculs de doses IFSI : cours complet et exercices",
+    "chaine": "Réussis ton IFSI",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "131 878 vues"
+   },
+   {
+    "id": "k6wjDbYFGCQ",
+    "titre": "Calcul PM Medicament dosé à 10%",
+    "chaine": "e-FSI Sarreguemines",
+    "duree": "2:32",
+    "sec": 152,
+    "vues": "219 534 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L2": {
+  "titre": "Convertir masses et volumes",
+  "candidats": [
+   {
+    "id": "fDo__Czsngs",
+    "titre": "MASSE VOLUMIQUE : formules, unités et calculs ✅ Méthode facile",
+    "chaine": "Paul Olivier",
+    "duree": "4:49",
+    "sec": 289,
+    "vues": "918 143 vues"
+   },
+   {
+    "id": "-tazxGgkIP0",
+    "titre": "Comment CONVERTIR des VOLUMES ? 💡 Méthode | Physique-Chimie (collège, lycée)",
+    "chaine": "Paul Olivier",
+    "duree": "6:00",
+    "sec": 360,
+    "vues": "344 521 vues"
+   },
+   {
+    "id": "ksm5c5FeQ-M",
+    "titre": "CONVERTIR unités MASSE VOLUMIQUE ? 💡 Méthode | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:23",
+    "sec": 323,
+    "vues": "314 722 vues"
+   },
+   {
+    "id": "nnXfRWe4WDE",
+    "titre": "Convertir les unités de volume - Sixième - Cinquième",
+    "chaine": "Yvan Monka",
+    "duree": "9:12",
+    "sec": 552,
+    "vues": "393 892 vues"
+   },
+   {
+    "id": "orSQpy5J0_4",
+    "titre": "Les correspondances: volume, capacité, masse",
+    "chaine": "Réussir le CREM",
+    "duree": "3:08",
+    "sec": 188,
+    "vues": "3 052 vues"
+   },
+   {
+    "id": "KsAN6QfNxbA",
+    "titre": "Masse volumique: convertir des g/cm³ en kg/m³",
+    "chaine": "sciencesnad",
+    "duree": "6:58",
+    "sec": 418,
+    "vues": "87 959 vues"
+   },
+   {
+    "id": "Ye2BEqHYCx0",
+    "titre": "Le secret de conversion de volume enfin revelé !",
+    "chaine": "Éducation Plus et Académie de Sciences",
+    "duree": "10:55",
+    "sec": 655,
+    "vues": "40 259 vues"
+   },
+   {
+    "id": "RGMWL2otDhs",
+    "titre": "CONVERTIR une MASSE VOLUMIQUE (unités) ✅ Méthode facile ! 🎯 Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "7:40",
+    "sec": 460,
+    "vues": "3 103 vues"
+   },
+   {
+    "id": "FtrD-8fvk1o",
+    "titre": "Volume, capacité et masse",
+    "chaine": "Julie Tremblay",
+    "duree": "1:27",
+    "sec": 87,
+    "vues": "10 909 vues"
+   },
+   {
+    "id": "4zWvh2QTN-U",
+    "titre": "MATH/GRANDEURS RELATION ENTRE LES UNITES DE MASSES ET DE CAPACITES",
+    "chaine": "LES ECOLES CHRÉTIENNES LA SOURCE DE VIE",
+    "duree": "5:21",
+    "sec": 321,
+    "vues": "11 471 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L3": {
+  "titre": "Convertir une durée",
+  "candidats": [
+   {
+    "id": "tVtsBfbthQg",
+    "titre": "Convertir des mesures de durée CM1 - CM2 - Cycle 3 - Maths - Mathématiques - Mesures",
+    "chaine": "Maître Lucas",
+    "duree": "6:42",
+    "sec": 402,
+    "vues": "163 115 vues"
+   },
+   {
+    "id": "8c2QbSHG2so",
+    "titre": "Comment convertir ✅ heure, minute, seconde ? 💪 Facile !",
+    "chaine": "Paul Olivier",
+    "duree": "6:17",
+    "sec": 377,
+    "vues": "157 593 vues"
+   },
+   {
+    "id": "m7sMMY43Mik",
+    "titre": "CONVERTIR des unités de TEMPS (secondes, minutes, heures, jours, années) | Outils MATHÉMATIQUES",
+    "chaine": "Paul Olivier",
+    "duree": "4:35",
+    "sec": 275,
+    "vues": "200 013 vues"
+   },
+   {
+    "id": "WnkDzVLr68Q",
+    "titre": "Convertir des unités de temps (secondes, minutes, heures, jours, années)",
+    "chaine": "Maths2Primaire",
+    "duree": "10:14",
+    "sec": 614,
+    "vues": "13 905 vues"
+   },
+   {
+    "id": "tFJK6s92sNM",
+    "titre": "Convertir les durées (heure, minute, seconde)",
+    "chaine": "Au bureau du maître",
+    "duree": "9:21",
+    "sec": 561,
+    "vues": "621 559 vues"
+   },
+   {
+    "id": "oRxu7M1g4qM",
+    "titre": "Calcul de durée entre deux instants - Maths CM1 - CM2 - 6ème - Cycle 3 - Grandeurs et mesures",
+    "chaine": "Maître Lucas",
+    "duree": "7:29",
+    "sec": 449,
+    "vues": "233 459 vues"
+   },
+   {
+    "id": "9IIcLRhI-Qs",
+    "titre": "Cours ♦ Convertir des durées • Heure minute seconde • Heure décimale ♦ Sixième",
+    "chaine": "jaicompris Maths",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "39 731 vues"
+   },
+   {
+    "id": "ZV7VG7NzDwE",
+    "titre": "Convertir les unités de temps - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "6:09",
+    "sec": 369,
+    "vues": "217 965 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L4": {
+  "titre": "La proportionnalité : passer par un",
+  "candidats": [
+   {
+    "id": "qSbYsztzMpU",
+    "titre": "LE COURS : Proportionnalité - Quatrième",
+    "chaine": "Yvan Monka",
+    "duree": "11:56",
+    "sec": 716,
+    "vues": "633 311 vues"
+   },
+   {
+    "id": "w9TwOuxqlHo",
+    "titre": "La proportionnalité : passage à l'unité et tableaux CM1 - CM2 - 6e - Maths - Cycle 3",
+    "chaine": "Maître Lucas",
+    "duree": "7:06",
+    "sec": 426,
+    "vues": "123 901 vues"
+   },
+   {
+    "id": "YQx6EFCRnqI",
+    "titre": "Qu'est-ce que la proportionnalité ?",
+    "chaine": "Hedacademy",
+    "duree": "3:30",
+    "sec": 210,
+    "vues": "251 450 vues"
+   },
+   {
+    "id": "PDpsbdbmn_Q",
+    "titre": "La proportionnalité CM2 - CM1 - 6e - Maths - Cycle 3 - Découvrir la proportionnalité",
+    "chaine": "Maître Lucas",
+    "duree": "9:16",
+    "sec": 556,
+    "vues": "461 939 vues"
+   },
+   {
+    "id": "tH0M_CwCq4g",
+    "titre": "Cours - Seconde L - Mathématiques : C 7 La proportionnalité / Définition / Pourcentage / M. Ka",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:59",
+    "sec": 779,
+    "vues": "17 139 vues"
+   },
+   {
+    "id": "g6O2B_5TuCc",
+    "titre": "Compléter un tableau de proportionnalité - Cinquième",
+    "chaine": "Yvan Monka",
+    "duree": "7:44",
+    "sec": 464,
+    "vues": "864 437 vues"
+   },
+   {
+    "id": "UH7yqLgUJh0",
+    "titre": "Replay Cours CRPE - Proportionnalité, échelles & vitesses",
+    "chaine": "Droles2Maths",
+    "duree": "13:28",
+    "sec": 808,
+    "vues": "33 023 vues"
+   },
+   {
+    "id": "mGDjvAcvigc",
+    "titre": "proportionnalité : la règle de 3",
+    "chaine": "Jerome BREHERET",
+    "duree": "2:28",
+    "sec": 148,
+    "vues": "255 938 vues"
+   },
+   {
+    "id": "YkPHUSAV9Fo",
+    "titre": "Calculs de doses IFSI : cours complet et exercices",
+    "chaine": "Réussis ton IFSI",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "131 878 vues"
+   },
+   {
+    "id": "XHwVLOnnmlk",
+    "titre": "Qu'est-ce que la règle de trois ?",
+    "chaine": "Hedacademy",
+    "duree": "11:42",
+    "sec": 702,
+    "vues": "1 143 501 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L5": {
+  "titre": "Calculer un pourcentage et une évolution",
+  "candidats": [
+   {
+    "id": "Y48-iK7Cp20",
+    "titre": "Déterminer un taux d'évolution - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "5:30",
+    "sec": 330,
+    "vues": "644 914 vues"
+   },
+   {
+    "id": "UnPcLQIHO0c",
+    "titre": "pourcentage • Exercice complet pour maîtriser taux d'évolution & coefficient multiplicateur",
+    "chaine": "jaicompris Maths",
+    "duree": "12:52",
+    "sec": 772,
+    "vues": "88 915 vues"
+   },
+   {
+    "id": "PwFcy0Pjwck",
+    "titre": "+30% puis +20 % - Évolutions successives de pourcentages",
+    "chaine": "Hedacademy",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "14 797 vues"
+   },
+   {
+    "id": "ezY-VntwbwU",
+    "titre": "Pourcentages & taux d'évolution - Maths 1ère - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "3:21",
+    "sec": 201,
+    "vues": "228 192 vues"
+   },
+   {
+    "id": "EOLkTQCVThk",
+    "titre": "Pourcentage : Augmentation/diminution",
+    "chaine": "Hedacademy",
+    "duree": "12:25",
+    "sec": 745,
+    "vues": "237 247 vues"
+   },
+   {
+    "id": "wD2SbmIPGeQ",
+    "titre": "Calculer une augmentation / Réduction ✅ (Pourcentages 📈 +10% 📉 -30%) 🎯 Méthode SIMPLE !",
+    "chaine": "Paul Olivier",
+    "duree": "6:50",
+    "sec": 410,
+    "vues": "2 112 vues"
+   },
+   {
+    "id": "8ocIhl-SFuQ",
+    "titre": "Calculer un taux moyen - Première ESM - Terminale Techno",
+    "chaine": "Yvan Monka",
+    "duree": "6:30",
+    "sec": 390,
+    "vues": "198 518 vues"
+   },
+   {
+    "id": "1UV378tA_Hg",
+    "titre": "LE COURS : Pourcentages - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "8:06",
+    "sec": 486,
+    "vues": "401 960 vues"
+   },
+   {
+    "id": "4UcPdLFfxjM",
+    "titre": "Excel : \" Calculer un pourcentage \"",
+    "chaine": "Apprentissage ExpresS Gratuit",
+    "duree": "0:26",
+    "sec": 26,
+    "vues": "313 177 vues"
+   },
+   {
+    "id": "uCdxTYmNxeQ",
+    "titre": "1 minute pour calculer un pourcentage",
+    "chaine": "Hedacademy",
+    "duree": "0:58",
+    "sec": 58,
+    "vues": "435 095 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L6": {
+  "titre": "Comprendre une concentration",
+  "candidats": [
+   {
+    "id": "kMAqyCxxazI",
+    "titre": "7 techniques pour une CONCENTRATION maximale ! ⚡️",
+    "chaine": "Les Sherpas - Étudiants",
+    "duree": "11:33",
+    "sec": 693,
+    "vues": "115 276 vues"
+   },
+   {
+    "id": "aL047nuwlFA",
+    "titre": "Comment améliorer votre concentration et libérer votre intelligence",
+    "chaine": "Sadhguru Français",
+    "duree": "8:53",
+    "sec": 533,
+    "vues": "82 694 vues"
+   },
+   {
+    "id": "9lWc6XV4Fw4",
+    "titre": "Cette technique va te rendre accro aux études",
+    "chaine": "Lorenz",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "582 218 vues"
+   },
+   {
+    "id": "dVwFq7lhsCc",
+    "titre": "Comment mieux se CONCENTRER : Mes 4 Astuces secrètes",
+    "chaine": "Grey Zone",
+    "duree": "6:51",
+    "sec": 411,
+    "vues": "11 124 vues"
+   },
+   {
+    "id": "13GjBFN79z0",
+    "titre": "CONCENTRATION MASSIQUE : formules, calculs et unités | Physique-Chimie (lycée)",
+    "chaine": "Paul Olivier",
+    "duree": "4:29",
+    "sec": 269,
+    "vues": "350 369 vues"
+   },
+   {
+    "id": "92irDttunrE",
+    "titre": "COMMENT AMÉLIORER TA CONCENTRATION | La Technique la plus efficace qui existe 👌",
+    "chaine": "Renforcer son Âme",
+    "duree": "10:44",
+    "sec": 644,
+    "vues": "108 288 vues"
+   },
+   {
+    "id": "ck-cAQRqp1E",
+    "titre": "Comment Apprendre 10x Plus Vite que 90% des Étudiants.(7 MÉTHODES scientifique)",
+    "chaine": "Un-Pas-De-Plus",
+    "duree": "4:16",
+    "sec": 256,
+    "vues": "494 039 vues"
+   },
+   {
+    "id": "jMfQq-DAZ-c",
+    "titre": "🧠 Comment préserver sa mémoire ?",
+    "chaine": "Le Monde De Jamy - France Télévisions",
+    "duree": "2:54",
+    "sec": 174,
+    "vues": "98 737 vues"
+   },
+   {
+    "id": "YkPHUSAV9Fo",
+    "titre": "Calculs de doses IFSI : cours complet et exercices",
+    "chaine": "Réussis ton IFSI",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "131 878 vues"
+   },
+   {
+    "id": "piDMW4e5VIM",
+    "titre": "UE 4.4 - Les prérequis aux calculs de doses",
+    "chaine": "Tutorat IFSI CHU Nantes",
+    "duree": "6:27",
+    "sec": 387,
+    "vues": "34 717 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L7": {
+  "titre": "Calculer une quantité par kilogramme",
+  "candidats": [
+   {
+    "id": "731NIh-d3h4",
+    "titre": "Connaître et utiliser les unités de mesure de masses CE2 - Cycle 2 - Maths - Mathématiques - Mesures",
+    "chaine": "Maître Lucas",
+    "duree": "7:50",
+    "sec": 470,
+    "vues": "71 175 vues"
+   },
+   {
+    "id": "KsAN6QfNxbA",
+    "titre": "Masse volumique: convertir des g/cm³ en kg/m³",
+    "chaine": "sciencesnad",
+    "duree": "6:58",
+    "sec": 418,
+    "vues": "87 959 vues"
+   },
+   {
+    "id": "PxJCvPrmric",
+    "titre": "CONVERTIR AVEC UN TABLEAU ? ✅ Conversion facile ! 💪 Unités de masse (kg, g, cg, hg, ...)",
+    "chaine": "Paul Olivier",
+    "duree": "5:24",
+    "sec": 324,
+    "vues": "46 114 vues"
+   },
+   {
+    "id": "3wuTyJuJhak",
+    "titre": "Calcul de poids",
+    "chaine": "Académie de Sciences",
+    "duree": "6:16",
+    "sec": 376,
+    "vues": "1 632 vues"
+   },
+   {
+    "id": "9fHdrWjE9j0",
+    "titre": "Cours ♦ Convertir des unités de masse • Tableau de conversion • kg hg dag g dg cg mg ♦ Sixième",
+    "chaine": "jaicompris Maths",
+    "duree": "3:47",
+    "sec": 227,
+    "vues": "69 318 vues"
+   },
+   {
+    "id": "W9mo-MeRMy0",
+    "titre": "Mesurer des masses CP - CE1- CE2 - Cycle 2 - Grandeurs et mesures - Maths",
+    "chaine": "Maître Lucas",
+    "duree": "8:17",
+    "sec": 497,
+    "vues": "180 123 vues"
+   },
+   {
+    "id": "N763BlCHS3M",
+    "titre": "Cours - CE1 - Mathématiques: Activités de mesures / le Kilogramme et ses sous multiples / M. Guèye",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "9:18",
+    "sec": 558,
+    "vues": "6 663 vues"
+   },
+   {
+    "id": "s2Nl1p1OcK4",
+    "titre": "Calculer : POIDS et MASSE - Formules et unités | Physique-Chimie (collège, lycée)",
+    "chaine": "Paul Olivier",
+    "duree": "4:49",
+    "sec": 289,
+    "vues": "459 753 vues"
+   },
+   {
+    "id": "YkPHUSAV9Fo",
+    "titre": "Calculs de doses IFSI : cours complet et exercices",
+    "chaine": "Réussis ton IFSI",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "131 878 vues"
+   },
+   {
+    "id": "k6wjDbYFGCQ",
+    "titre": "Calcul PM Medicament dosé à 10%",
+    "chaine": "e-FSI Sarreguemines",
+    "duree": "2:32",
+    "sec": 152,
+    "vues": "219 534 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L8": {
+  "titre": "Calculer un débit en volume",
+  "candidats": [
+   {
+    "id": "YkPHUSAV9Fo",
+    "titre": "Calculs de doses IFSI : cours complet et exercices",
+    "chaine": "Réussis ton IFSI",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "131 878 vues"
+   },
+   {
+    "id": "Y0ZXbSmlTEA",
+    "titre": "DÉBIT VOLUMIQUE ✅ Écoulement d'un fluide | Cours + Exercice | Terminale spécialité",
+    "chaine": "Paul Olivier",
+    "duree": "6:02",
+    "sec": 362,
+    "vues": "95 890 vues"
+   },
+   {
+    "id": "8YGa1I9OJX0",
+    "titre": "Calcul du débit d'une perfusion",
+    "chaine": "sylvain vetois",
+    "duree": "4:22",
+    "sec": 262,
+    "vues": "79 624 vues"
+   },
+   {
+    "id": "J0W12zGlh6U",
+    "titre": "Leçon 71 Débit moyen",
+    "chaine": "EDUNOTE",
+    "duree": "6:47",
+    "sec": 407,
+    "vues": "1 079 vues"
+   },
+   {
+    "id": "ULibkH_laUQ",
+    "titre": "Calculer un débit de robinet • conversion Litre cm^3 • grandeur quotient • Quatrième Troisième",
+    "chaine": "jaicompris Maths",
+    "duree": "6:51",
+    "sec": 411,
+    "vues": "19 062 vues"
+   },
+   {
+    "id": "dUE8QVBe9aI",
+    "titre": "Débit massique et débit volumique.",
+    "chaine": "Doms ToolBox",
+    "duree": "4:37",
+    "sec": 277,
+    "vues": "27 289 vues"
+   },
+   {
+    "id": "9iNMRUFHGQQ",
+    "titre": "Video N191 DIFFERENCE ENTRE DEBIT MASSIQUE ET DEBIT VOLUMIQUE",
+    "chaine": "FmecaT",
+    "duree": "14:11",
+    "sec": 851,
+    "vues": "13 177 vues"
+   },
+   {
+    "id": "TqbHR12ScaI",
+    "titre": "💦 Débit VOLUMIQUE - Formules à connaitre ❤️ -Terminale spécialité Physique chimie | Lycée",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "3:22",
+    "sec": 202,
+    "vues": "6 542 vues"
+   },
+   {
+    "id": "k6wjDbYFGCQ",
+    "titre": "Calcul PM Medicament dosé à 10%",
+    "chaine": "e-FSI Sarreguemines",
+    "duree": "2:32",
+    "sec": 152,
+    "vues": "219 534 vues"
+   },
+   {
+    "id": "piDMW4e5VIM",
+    "titre": "UE 4.4 - Les prérequis aux calculs de doses",
+    "chaine": "Tutorat IFSI CHU Nantes",
+    "duree": "6:27",
+    "sec": 387,
+    "vues": "34 717 vues"
+   }
+  ]
+ },
+ "CALC-SANTE-L9": {
+  "titre": "Passer aux gouttes par minute",
+  "candidats": [
+   {
+    "id": "YkPHUSAV9Fo",
+    "titre": "Calculs de doses IFSI : cours complet et exercices",
+    "chaine": "Réussis ton IFSI",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "131 878 vues"
+   },
+   {
+    "id": "l8EVctDzkkg",
+    "titre": "CALCUL DE DOSE : le débit gouttes / mins",
+    "chaine": "Clarong1",
+    "duree": "2:28",
+    "sec": 148,
+    "vues": "5 254 vues"
+   },
+   {
+    "id": "8YGa1I9OJX0",
+    "titre": "Calcul du débit d'une perfusion",
+    "chaine": "sylvain vetois",
+    "duree": "4:22",
+    "sec": 262,
+    "vues": "79 624 vues"
+   },
+   {
+    "id": "k6wjDbYFGCQ",
+    "titre": "Calcul PM Medicament dosé à 10%",
+    "chaine": "e-FSI Sarreguemines",
+    "duree": "2:32",
+    "sec": 152,
+    "vues": "219 534 vues"
+   },
+   {
+    "id": "IzuUXsTPXPw",
+    "titre": "UE 4.4 - Quelle vitesse / [Calculs de débit]",
+    "chaine": "Tutorat IFSI CHU Nantes",
+    "duree": "9:16",
+    "sec": 556,
+    "vues": "14 972 vues"
+   },
+   {
+    "id": "Lo9qLKIGHvA",
+    "titre": "Comment calculer le débit de perfusion",
+    "chaine": "Be infirmier",
+    "duree": "1:01",
+    "sec": 61,
+    "vues": "3 321 vues"
+   },
+   {
+    "id": "_fBJA-q9GCg",
+    "titre": "Solutés de perfusion en soins infirmiers : indications, administration et erreurs à éviter",
+    "chaine": "Réussis ton IFSI",
+    "duree": "14:16",
+    "sec": 856,
+    "vues": "110 440 vues"
+   },
+   {
+    "id": "cqFbbdf-FuY",
+    "titre": "Calcul de dose n°1 : la préparation de perfusion",
+    "chaine": "Les tutos infirmiers",
+    "duree": "4:09",
+    "sec": 249,
+    "vues": "181 421 vues"
+   },
+   {
+    "id": "nQepCtQ2Zjs",
+    "titre": "Calculs de doses PSE et transfusion",
+    "chaine": "IDE Pocket",
+    "duree": "2:12",
+    "sec": 132,
+    "vues": "629 vues"
+   },
+   {
+    "id": "BBj5HpC1iGs",
+    "titre": "Calcul du débit d'une perfusion intraveineuse",
+    "chaine": "المؤسسة الخاصة للتكوين شبه الطبي الزيتونة",
+    "duree": "1:17",
+    "sec": 77,
+    "vues": "47 607 vues"
+   }
+  ]
+ }
+}

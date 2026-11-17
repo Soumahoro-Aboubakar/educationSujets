@@ -1,0 +1,171 @@
+{
+  "module": "DROIT-CONTRAT",
+  "lecons": [
+    {
+      "code": "DROIT-CONTRAT-L1",
+      "requetes": [
+        "\"Comprendre une obligation\" youtube",
+        "site:youtube.com obligation créancier débiteur explication simple",
+        "\"obligation\" \"créancier\" \"débiteur\" vidéo",
+        "obligation droit définition YouTube cours",
+        "La notion d'obligation définition exemples Jurixio"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=iqTLhBtgRr8",
+          "titre": "La notion d’obligation (définition et exemples)",
+          "chaine": "Jurixio - Les vidéos de droit",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette introduction définit l’obligation avec des exemples, selon une notion commune aux droits français et ivoirien, mais les sources non contractuelles ne sont pas confirmées dans la description indexée."
+        }
+      ],
+      "justification": "Le sujet est directement adapté à une première découverte de l’obligation juridique. La durée et la couverture des obligations sans contrat n’ont pas pu être vérifiées."
+    },
+    {
+      "code": "DROIT-CONTRAT-L2",
+      "requetes": [
+        "\"Acte juridique ou fait juridique\" youtube",
+        "site:youtube.com acte juridique fait juridique explication exemple",
+        "\"acte juridique\" \"fait juridique\" youtube",
+        "acte juridique fait juridique explication simple vidéo",
+        "\"L'acte juridique : définition et distinction avec le fait juridique\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=zGRVRmuBZGc",
+          "titre": "L'acte juridique : définition et distinction avec le fait juridique",
+          "chaine": "Maxime Bizeau - Fiches-droit.com",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo traite précisément de la définition de l’acte juridique et de sa distinction avec le fait juridique, principe commun aux droits français et ivoirien malgré des références législatives différentes."
+        }
+      ],
+      "justification": "Le thème annoncé correspond directement à la distinction centrale de la leçon, avec un enseignant en droit identifié. La durée n’était pas accessible."
+    },
+    {
+      "code": "DROIT-CONTRAT-L3",
+      "requetes": [
+        "\"Quand les volontés se rencontrent-elles\" youtube",
+        "site:youtube.com offre acceptation contrat cours simple",
+        "offre acceptation contrat explication simple vidéo",
+        "\"offre acceptation\" youtube cours droit",
+        "ACCEPTATION en droit des contrats ABCJuris",
+        "La formation du contrat offre acceptation Droit digiSchool YouTube"
+      ],
+      "candidats": [],
+      "justification": "Les résultats repérés ne permettent pas de vérifier une vidéo suffisamment ciblée sur l’accord, la contre-offre et la distinction entre contrats unilatéral et synallagmatique. La capsule sur l’acceptation seule reste insuffisamment documentée."
+    },
+    {
+      "code": "DROIT-CONTRAT-L4",
+      "requetes": [
+        "\"Vérifier la validité du contrat\" youtube",
+        "site:youtube.com validité contrat consentement capacité objet cause Côte Ivoire",
+        "conditions validité contrat consentement capacité objet cause vidéo",
+        "\"conditions de validité\" \"objet\" \"cause\" \"YouTube\"",
+        "\"Les conditions de validité du contrat\" \"digiSchool\"",
+        "Les conditions de validité du contrat Droit digiSchool minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=lqp6tibmLnc",
+          "titre": "Les conditions de validité du contrat - Droit - digiSchool",
+          "chaine": "digiSchool Orientation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La description reprend consentement, capacité, objet et cause selon l’ancien article 1108 français, formulation correspondant à la leçon ivoirienne, mais sans couverture confirmée des formes particulières."
+        }
+      ],
+      "justification": "Ce cours conserve explicitement l’objet et la cause, contrairement aux présentations françaises fondées sur la réforme de 2016. La durée n’a pas pu être vérifiée."
+    },
+    {
+      "code": "DROIT-CONTRAT-L5",
+      "requetes": [
+        "\"Un consentement libre et éclairé\" youtube",
+        "site:youtube.com vices consentement erreur dol violence explication simple",
+        "vices consentement erreur dol violence explication simple vidéo",
+        "\"vices du consentement\" youtube",
+        "Les vices du consentement erreur dol violence Droit digiSchool YouTube",
+        "Les vices du consentement erreur dol violence explication cours Afrique vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos ciblées trouvées mêlent les trois notions à des règles françaises contemporaines de prescription ou de violence par dépendance. Leur adéquation au droit ivoirien n’étant pas suffisamment vérifiable, aucune n’est retenue."
+    },
+    {
+      "code": "DROIT-CONTRAT-L6",
+      "requetes": [
+        "\"Que sanctionne la nullité\" youtube",
+        "site:youtube.com nullité relative absolue contrat explication",
+        "nullité relative absolue explication simple vidéo",
+        "site:youtube.com \"nullité\" contrat Côte Ivoire",
+        "\"nullité\" \"Côte d'Ivoire\" vidéo cours",
+        "La nullité des contrats Droit digiSchool YouTube cours"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=AJlq-WbR6BA",
+          "titre": "La nullité des contrats - Droit - digiSchool",
+          "chaine": "digiSchool Orientation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente le défaut de validité, la rétroactivité et la distinction selon l’intérêt général ou privé, principes communs aux droits français et ivoirien, sans traitement confirmé de la confirmation et des exceptions aux restitutions."
+        }
+      ],
+      "justification": "La description correspond aux notions fondamentales de la leçon et évite le développement sur la prescription française présent dans un autre résultat. La durée n’était pas accessible."
+    },
+    {
+      "code": "DROIT-CONTRAT-L7",
+      "requetes": [
+        "\"Ce que le contrat oblige à faire\" youtube",
+        "site:youtube.com force obligatoire bonne foi effet relatif contrat cours",
+        "force obligatoire effet relatif contrat explication simple vidéo",
+        "site:youtube.com \"effets du contrat\" bonne foi",
+        "\"Les effets du contrat\" \"YouTube\"",
+        "\"Les effets du contrat\" \"digiSchool\" vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=GHnPdAq_jZ8",
+          "titre": "Les effets du contrat - Droit - digiSchool",
+          "chaine": "digiSchool Orientation",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette vidéo explique la force obligatoire, l’effet relatif et une exception, selon des principes communs aux droits français et ivoirien, mais ses références françaises doivent être contextualisées et la bonne foi n’est pas confirmée dans la description."
+        }
+      ],
+      "justification": "Le contenu annoncé vise précisément les effets entre parties et à l’égard des tiers, avec un niveau accessible. La durée et le traitement de l’exécution loyale restent non vérifiés."
+    },
+    {
+      "code": "DROIT-CONTRAT-L8",
+      "requetes": [
+        "\"Que faire face à une obligation inexécutée\" youtube",
+        "site:youtube.com inexécution contrat résolution mise en demeure Côte Ivoire",
+        "inexécution contrat résolution dommages intérêts explication simple vidéo",
+        "\"inexécution du contrat\" \"YouTube\"",
+        "Les sanctions de l’inexécution du contrat Côte d’Ivoire vidéo",
+        "Les sanctions de l inexécution du contrat explication vidéo Côte Ivoire"
+      ],
+      "candidats": [],
+      "justification": "La capsule de Compta Online repérée présente notamment la résolution par notification selon le droit français, sans vérification de sa transposition au cadre ivoirien. Aucun autre résultat suffisamment documenté ne couvre les recours et leurs conditions sans risque de confusion."
+    },
+    {
+      "code": "DROIT-CONTRAT-L9",
+      "requetes": [
+        "\"Un paiement sans dette doit-il être rendu\" youtube",
+        "site:youtube.com paiement répétition indu article 1376 explication",
+        "\"répétition de l’indu\" youtube",
+        "paiement indu répétition explication simple vidéo",
+        "\"paiement de l'indu\" youtube",
+        "La répétition de l’indu droit cours YouTube INFJ",
+        "Le paiement de l indu article 1376 YouTube explication simple"
+      ],
+      "candidats": [],
+      "justification": "Aucune URL YouTube de vidéo explicative suffisamment pertinente n’a été obtenue pour le paiement de l’indu dans le cadre de l’article 1376 étudié. Les résultats textuels ne permettent pas de proposer un candidat vidéo vérifiable."
+    }
+  ]
+}

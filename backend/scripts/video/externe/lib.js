@@ -15,7 +15,7 @@ const path = require('path');
 
 const DIR = path.resolve(__dirname, '../../../data/prep/videos-externes');
 const SELECTIONS = path.join(DIR, 'selections.json');
-const DUREE_MAX = 600; // 10 minutes : plafond de la mission
+const DUREE_MAX = 900; // 15 minutes : plafond de la mission (décision du 2026-11-17)
 const ID = /^[A-Za-z0-9_-]{11}$/;
 
 const propre = (s) => String(s || '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
@@ -72,7 +72,7 @@ const HEADERS = {
 /**
  * Vérification d'une vidéo par ses pages publiques. Renvoie { ok, motifs[], ...métadonnées }.
  * ok = true seulement si : la vidéo existe, est publique et lisible, l'intégration est autorisée
- * (oEmbed + playableInEmbed), ce n'est pas un direct, et elle dure au plus 10 minutes.
+ * (oEmbed + playableInEmbed), ce n'est pas un direct, et elle dure au plus 15 minutes.
  */
 const verifierVideo = async (youtubeId, { fetchImpl = fetch } = {}) => {
   if (!ID.test(String(youtubeId))) return { youtubeId, ok: false, motifs: ['identifiant YouTube invalide'] };
@@ -98,7 +98,7 @@ const verifierVideo = async (youtubeId, { fetchImpl = fetch } = {}) => {
   if (statut.playableInEmbed === false) motifs.push('lecture intégrée interdite');
   if (details.isLiveContent) motifs.push('direct ou rediffusion de direct');
   if (!durationSec) motifs.push('durée inconnue');
-  else if (durationSec > DUREE_MAX) motifs.push(`trop longue : ${Math.round(durationSec / 60)} min (> 10 min)`);
+  else if (durationSec > DUREE_MAX) motifs.push(`trop longue : ${Math.round(durationSec / 60)} min (> 15 min)`);
   if (Array.isArray(micro.availableCountries) && micro.availableCountries.length && !micro.availableCountries.includes('CI')) {
     motifs.push('non disponible en Côte d’Ivoire');
   }

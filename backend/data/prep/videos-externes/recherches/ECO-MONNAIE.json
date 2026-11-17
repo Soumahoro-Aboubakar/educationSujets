@@ -1,0 +1,226 @@
+{
+  "module": "ECO-MONNAIE",
+  "lecons": [
+    {
+      "code": "ECO-MONNAIE-L1",
+      "requetes": [
+        "site:youtube.com/watch \"Pourquoi l’économie étudie-t-elle des choix\"",
+        "site:youtube.com/watch \"économie\" \"rareté\" \"choix\"",
+        "rareté choix économie cours vidéo youtube",
+        "rareté choix économie explication simple en 5 minutes vidéo",
+        "\"Les ressources économiques et la notion de rareté\" \"YouTube\" -site:fr.khanacademy.org"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=m_zvi-2PbZs",
+          "titre": "Les ressources économiques",
+          "chaine": "KhanAcademyFrancophone",
+          "dureeVue": "7:27",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique la rareté des ressources avec des exemples de travail, de logement et de biens, selon des principes applicables en Côte d’Ivoire, mais ne développe pas la distinction entre description et recommandation."
+        }
+      ],
+      "justification": "Une introduction progressive et concrète à la rareté, adaptée aux débutants. La distinction entre affirmations positives et normatives reste à compléter."
+    },
+    {
+      "code": "ECO-MONNAIE-L2",
+      "requetes": [
+        "site:youtube.com/watch \"Qui produit et qui consomme\"",
+        "site:youtube.com/watch agents économiques circuit économique explication simple",
+        "agents économiques circuit économique vidéo cours youtube",
+        "circuit économique Citéco youtube",
+        "\"Le circuit économique\" \"06DnEsZJt9M\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=06DnEsZJt9M",
+          "titre": "Le circuit économique",
+          "chaine": "Cité de l'Économie (Citéco)",
+          "dureeVue": "4:50",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "L’animation suit un achat pour relier consommation, production et répartition des revenus entre ménages, entreprises, banques et État, avec des exemples français dont les mécanismes sont transposables en Côte d’Ivoire."
+        }
+      ],
+      "justification": "Le circuit est présenté à partir d’une situation quotidienne facile à suivre. Le format court permet de comprendre les acteurs et leurs échanges sans prérequis."
+    },
+    {
+      "code": "ECO-MONNAIE-L3",
+      "requetes": [
+        "site:youtube.com \"Lire l’offre et la demande sur un marché\"",
+        "offre demande équilibre marché explication simple youtube",
+        "site:youtube.com offre demande cours en 5 minutes",
+        "Loi de l’offre et de la demande cours rapide illustré",
+        "L équilibre de marché Khan Academy français youtube",
+        "L équilibre de marché KhanAcademyFrancophone vidéo minutes durée français"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Z895aSaMev4",
+          "titre": "L'équilibre de marché",
+          "chaine": "KhanAcademyFrancophone",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo construit les courbes d’offre et de demande sur le marché des pommes puis compare pénurie, surplus et équilibre, avec des prix en euros dont le raisonnement reste identique en FCFA."
+        }
+      ],
+      "justification": "L’exemple chiffré correspond directement à la comparaison des quantités offertes et demandées au même prix. La durée exacte n’était pas affichée dans les résultats consultables."
+    },
+    {
+      "code": "ECO-MONNAIE-L4",
+      "requetes": [
+        "site:youtube.com \"Mesurer une quantité, une valeur et une variation\"",
+        "stock flux valeur volume taux variation cours youtube",
+        "site:youtube.com stock flux taux variation explication simple",
+        "taux variation calcul exemple SES youtube",
+        "Mesurer une évolution Les formules Les Bons Profs youtube",
+        "Mesurer une quantité une valeur variation stock flux cours vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=R7szOtN1RD8",
+          "titre": "Mesurer une évolution : les formules - SES - Terminale - Les Bons Profs",
+          "chaine": "Les Bons Profs",
+          "dureeVue": "5:14",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique notamment le taux de variation et sa base de calcul, selon une méthode universelle, mais ne couvre pas la distinction stock-flux ni la formule valeur = prix × quantité."
+        }
+      ],
+      "justification": "Ce complément court et structuré convient pour la formule de variation en pourcentage. Aucun résultat suffisamment ciblé ne réunissait les trois dimensions de la leçon."
+    },
+    {
+      "code": "ECO-MONNAIE-L5",
+      "requetes": [
+        "\"Pourquoi utilise-t-on de la monnaie\" youtube",
+        "fonctions formes monnaie explication simple youtube",
+        "Les fonctions de la monnaie Dessine moi éco",
+        "Les fonctions et les formes de la monnaie Campus pour les Lycées vidéo minutes",
+        "\"Monnaie : de quoi parle-t-on\" youtube Banque de France"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=zIIyCHw04ew",
+          "titre": "Les fonctions et les formes de la monnaie",
+          "chaine": "Campus pour les Lycées",
+          "dureeVue": "9:21",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo présente les fonctions et les formes de la monnaie au niveau lycée, avec un cadre français dont les notions générales sont applicables à la monnaie utilisée dans l’UEMOA."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=6bDQG9LWwk4",
+          "titre": "Quelles sont les différentes formes de monnaie ? | Banque de France",
+          "chaine": "Banque de France",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule distingue monnaie fiduciaire, scripturale, commerciale et centrale, mais ses références institutionnelles concernent l’Eurosystème et doivent être distinguées de la BCEAO."
+        }
+      ],
+      "justification": "Le premier candidat couvre explicitement les deux objectifs centraux : fonctions et formes de la monnaie. Le second est annoncé autour de trois minutes par l’éditeur, mais sa durée exacte n’était pas visible."
+    },
+    {
+      "code": "ECO-MONNAIE-L6",
+      "requetes": [
+        "\"Comment un crédit crée-t-il un dépôt\" youtube",
+        "création monétaire crédit remboursement cours youtube",
+        "\"création monétaire\" \"youtube\" Citéco",
+        "\"La création monétaire\" \"9cSujzEo4A8\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=9cSujzEo4A8",
+          "titre": "La création monétaire",
+          "chaine": "Cité de l'Économie (Citéco)",
+          "dureeVue": "4:54",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "L’animation explique comment les crédits font les dépôts, les règlements entre banques et les limites de la création monétaire, selon des mécanismes également pertinents dans l’UEMOA."
+        }
+      ],
+      "justification": "Une animation institutionnelle courte, centrée sur le mécanisme bancaire enseigné. Elle relie clairement création monétaire, crédit et besoin de monnaie centrale."
+    },
+    {
+      "code": "ECO-MONNAIE-L7",
+      "requetes": [
+        "\"Mesurer la masse monétaire sans double compte\" youtube",
+        "agrégats monétaires M1 M2 BCEAO cours vidéo youtube",
+        "\"Masse monétaire, agrégats monétaires et base monétaire\" \"3:\"",
+        "Mesurer la masse monétaire M1 M2 UEMOA BCEAO vidéo cours exemple"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Om9ko4VXImQ",
+          "titre": "Masse monétaire, agrégats monétaires et base monétaire | Banque de France",
+          "chaine": "Banque de France",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo distingue agrégats emboîtés et monnaie centrale, mais présente M1, M2 et M3 dans la zone euro, dont les périmètres statistiques ne doivent pas être repris tels quels pour l’UEMOA."
+        }
+      ],
+      "justification": "La distinction entre masse monétaire et base monétaire répond au risque de double compte ; l’éditeur annonce une vidéo d’un peu plus de trois minutes. Elle constitue seulement un complément conceptuel, les définitions UEMOA du cours restant la référence."
+    },
+    {
+      "code": "ECO-MONNAIE-L8",
+      "requetes": [
+        "\"Financer un projet par banque ou par titres\" youtube",
+        "financement direct indirect actions obligations explication simple youtube",
+        "financement direct indirect cours vidéo youtube",
+        "Comment les entreprises financent elles leurs projets vidéo",
+        "\"Comment les entreprises se financent-elles\" \"minutes\" Banque"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=vl02qjffotg",
+          "titre": "Comment les entreprises se financent-elles ? | Banque de France",
+          "chaine": "Banque de France",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo compare notamment crédit bancaire et émission d’actions ou d’obligations, selon des principes transposables en Côte d’Ivoire, mais ne traite pas complètement les marchés primaire et secondaire."
+        }
+      ],
+      "justification": "Cette capsule institutionnelle, annoncée autour de trois minutes, introduit clairement les principaux modes de financement. Les références aux dispositifs français et la distinction émission-revente nécessitent un complément."
+    },
+    {
+      "code": "ECO-MONNAIE-L9",
+      "requetes": [
+        "\"Suivre une décision de politique monétaire\" youtube",
+        "BCEAO politique monétaire taux directeurs explication simple youtube",
+        "BCEAO politique monétaire expliquée vidéo cours",
+        "politique monétaire conventionnelle Citéco vidéo",
+        "Politique monétaire conventionnelle Cité de l Économie youtube cTN6MDn1aVg",
+        "La politique monétaire conventionnelle Citéco durée 2016"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=cTN6MDn1aVg",
+          "titre": "Politique monétaire conventionnelle",
+          "chaine": "Cité de l'Économie (Citéco)",
+          "dureeVue": "5:56",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique les taux directeurs et leur transmission au crédit, à l’activité et aux prix, mais son cadre est celui de la BCE et de la zone euro, à distinguer des instruments et décisions de la BCEAO."
+        }
+      ],
+      "justification": "L’animation correspond au mécanisme de transmission central de la leçon. Les résultats africains trouvés portaient surtout sur des annonces conjoncturelles ou des émissions longues, moins adaptées à une première explication."
+    },
+    {
+      "code": "ECO-MONNAIE-L10",
+      "requetes": [
+        "\"Partager une monnaie : avantages et contraintes\" youtube",
+        "union monétaire UEMOA avantages contraintes choc asymétrique cours youtube",
+        "union monétaire avantages inconvénients chocs asymétriques vidéo youtube",
+        "\"union monétaire\" \"choc\" youtube vidéo cours",
+        "monnaie unique avantages inconvénients vidéo dessine moi eco",
+        "UEMOA monnaie commune avantages contraintes vidéo courte"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte suffisamment ciblée et vérifiable n’a été trouvée sur les avantages de l’union monétaire UEMOA et les contraintes face aux chocs asymétriques. Les résultats concernaient surtout le projet d’ECO dans la CEDEAO ou les modèles européens, avec un décalage trop important."
+    }
+  ]
+}

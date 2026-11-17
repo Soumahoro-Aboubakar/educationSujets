@@ -1,0 +1,92 @@
+[
+  {
+    "code": "ENSEA-AS-INTEGR-L1",
+    "youtubeId": "vnW9UeIN0ng",
+    "couverture": "exacte",
+    "justification": "Remonter de f à une primitive F et fixer la constante avec une condition initiale.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L2",
+    "youtubeId": "fa1dSOkv2GU",
+    "couverture": "exacte",
+    "justification": "Tableau des primitives usuelles (xⁿ, 1/x, eˣ, u′eᵘ…), niveau terminale.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L3",
+    "youtubeId": "n4dzOans08k",
+    "couverture": "partielle",
+    "justification": "Calcul d’une intégrale avec une primitive : ∫ f = F(b) − F(a).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L4",
+    "youtubeId": "2y-Pkv-uCEQ",
+    "couverture": "partielle",
+    "justification": "Linéarité des intégrales et relation de Chasles ; l’encadrement (positivité) est peu développé.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L5",
+    "youtubeId": "Gii87ttiNGA",
+    "couverture": "partielle",
+    "justification": "Valeur moyenne d’une fonction sur un intervalle ; la fonction intégrale à borne variable n’est pas traitée.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L6",
+    "youtubeId": "uNIpYeaNfsg",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : effectuer une intégration par parties.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L7",
+    "youtubeId": "AEilqmFMOME",
+    "couverture": "exacte",
+    "justification": "Calcul d’une intégrale par changement de variable affine.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L8",
+    "youtubeId": "YJNHTq85tJA",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : résoudre y′ = ay (solutions x ↦ Ce^(ax)).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L9",
+    "youtubeId": "ZSjzg-bnfOg",
+    "couverture": "exacte",
+    "justification": "Résoudre y′ = ay + b : solution constante plus solutions de l’équation homogène.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-INTEGR-L10",
+    "youtubeId": "klU6n691j7I",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : équation du 2e ordre y″ + ω²y = 0, vérifiée par dérivée seconde.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

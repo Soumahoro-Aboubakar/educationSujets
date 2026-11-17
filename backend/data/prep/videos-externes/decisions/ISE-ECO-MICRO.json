@@ -1,0 +1,101 @@
+[
+  {
+    "code": "ISE-ECO-MICRO-L1",
+    "youtubeId": "bAeItbL8x_I",
+    "couverture": "exacte",
+    "justification": "La contrainte budgétaire expliquée simplement : les paniers accessibles avec un revenu donné.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L2",
+    "youtubeId": "_QwHDRM8Htk",
+    "couverture": "exacte",
+    "justification": "Le raisonnement à la marge en microéconomie.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L3",
+    "youtubeId": "Pfr1jpKZJrI",
+    "couverture": "exacte",
+    "justification": "L’élasticité-prix de la demande : mesurer la réaction de la demande à un prix.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L4",
+    "youtubeId": "RqDV0UXD6iU",
+    "couverture": "exacte",
+    "justification": "Isoquantes de production : combiner travail et capital.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L5",
+    "youtubeId": "WxijVV9s4rM",
+    "couverture": "partielle",
+    "justification": "Rendements d’échelle (croissants, constants, décroissants) ; le rendement marginal est peu développé.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L6",
+    "youtubeId": "3n9LSWopx9M",
+    "couverture": "partielle",
+    "justification": "Coût marginal et coût moyen et leur relation ; recette et profit moins détaillés.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L7",
+    "youtubeId": "i59HNkFQ4us",
+    "couverture": "exacte",
+    "justification": "Maximisation du profit en concurrence pure et parfaite : prix = coût marginal.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L8",
+    "youtubeId": "6GAxMJT7MEc",
+    "couverture": "exacte",
+    "justification": "Équilibre du monopole : quantité, prix et profit (recette marginale = coût marginal).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L9",
+    "youtubeId": "2omj_D76oSQ",
+    "couverture": "partielle",
+    "justification": "Les structures de marché (concurrence, oligopole, monopole…) ; le long terme est peu traité.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L10",
+    "youtubeId": "nRg8ZJZUZwM",
+    "couverture": "exacte",
+    "justification": "La théorie de l’équilibre général (Walras) : interdépendance des marchés.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-MICRO-L11",
+    "youtubeId": "KtJZ1Wy1mts",
+    "couverture": "exacte",
+    "justification": "Dilemme du prisonnier et équilibre de Nash expliqués simplement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

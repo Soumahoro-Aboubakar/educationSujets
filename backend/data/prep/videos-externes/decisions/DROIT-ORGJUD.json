@@ -1,0 +1,74 @@
+[
+  {
+    "code": "DROIT-ORGJUD-L1",
+    "youtubeId": "4FZ36A8rcjk",
+    "couverture": "partielle",
+    "justification": "Le litige : du désaccord à la saisine du juge, vocabulaire de base (cadre français, notions identiques).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-ORGJUD-L2",
+    "youtubeId": "38lG-GNsiQk",
+    "couverture": "partielle",
+    "justification": "Le droit à un procès équitable expliqué en 2 minutes : juge impartial, droits de la défense, délai raisonnable.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-ORGJUD-L3",
+    "youtubeId": "Cf4_5udypOQ",
+    "couverture": "partielle",
+    "justification": "Règles de compétence matérielle et territoriale pour trouver le bon tribunal (exemples français).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-ORGJUD-L4",
+    "youtubeId": "l9l7PFe-FZc",
+    "couverture": "partielle",
+    "justification": "Le double degré de juridiction (appel) expliqué par une chaîne de droit sénégalais, système proche du système ivoirien.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-ORGJUD-L5",
+    "youtubeId": "FZt89_7166Y",
+    "couverture": "exacte",
+    "justification": "Magistrats du siège (qui jugent) et magistrats du parquet (qui requièrent au nom de la société).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-ORGJUD-L6",
+    "youtubeId": "JJHD0bdVo8E",
+    "couverture": "exacte",
+    "justification": "Rôle du greffier dans le système judiciaire de Côte d’Ivoire : authentifier et conserver les actes du procès.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-ORGJUD-L7",
+    "youtubeId": "2I_zFJ79c_k",
+    "couverture": "partielle",
+    "justification": "Les ordres de juridiction : chaque type de contentieux a ses juges.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "DROIT-ORGJUD-L8",
+    "youtubeId": "cvDCkWHyrNo",
+    "couverture": "exacte",
+    "justification": "La Cour commune de justice et d’arbitrage de l’OHADA : rôle de cassation et d’arbitrage.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

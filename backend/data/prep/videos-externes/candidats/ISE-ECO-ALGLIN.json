@@ -1,0 +1,1197 @@
+{
+ "ISE-ECO-ALGLIN-L1": {
+  "titre": "Lire un tableau de nombres : la matrice",
+  "candidats": [
+   {
+    "id": "AQDyvMW3dSo",
+    "titre": "Matrice : introduction - définition - spé maths - Terminale S et ES",
+    "chaine": "jaicompris Maths",
+    "duree": "6:34",
+    "sec": 394,
+    "vues": "380 052 vues"
+   },
+   {
+    "id": "6s-xmyjLpIM",
+    "titre": "Cours: savoir calculer le produit de 2 matrices et connaitre les propriétés - Spé maths - IMPORTANT",
+    "chaine": "jaicompris Maths",
+    "duree": "14:07",
+    "sec": 847,
+    "vues": "338 738 vues"
+   },
+   {
+    "id": "lG4PFDy_V78",
+    "titre": "MATHS : SYSTÈME LINÉAIRE ET MATRICES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "139 307 vues"
+   },
+   {
+    "id": "gezWeHs2d4U",
+    "titre": "Lire les grands nombres - la classe des millions CM1-CM2-Cycle 3 Maths - Mathématiques - Numération",
+    "chaine": "Maître Lucas",
+    "duree": "5:48",
+    "sec": 348,
+    "vues": "27 070 vues"
+   },
+   {
+    "id": "hQbIg6bmPhU",
+    "titre": "Produit de deux matrices exemple de calcul [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "744 538 vues"
+   },
+   {
+    "id": "IeW2YTOtwys",
+    "titre": "additionner, soustraire 2 matrices ou multiplier par un réel - Spé maths - Cours",
+    "chaine": "jaicompris Maths",
+    "duree": "8:03",
+    "sec": 483,
+    "vues": "136 721 vues"
+   },
+   {
+    "id": "Sdg9O-HqSN0",
+    "titre": "Matrices - partie 1 : définition",
+    "chaine": "Exo7Math",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "662 647 vues"
+   },
+   {
+    "id": "Dr9J1BIcVBw",
+    "titre": "Une matrice, c'est une transformation du plan",
+    "chaine": "ParaMaths",
+    "duree": "8:51",
+    "sec": 531,
+    "vues": "611 600 vues"
+   },
+   {
+    "id": "jXby-9CJiw8",
+    "titre": "Calcul du rang d'une matrice",
+    "chaine": "Algèbre Prépa (Omar Jedidi)",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "299 787 vues"
+   },
+   {
+    "id": "MMBfOom_mac",
+    "titre": "Calculer la somme de deux matrices - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "2:15",
+    "sec": 135,
+    "vues": "379 671 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L2": {
+  "titre": "Calculer coefficient par coefficient",
+  "candidats": [
+   {
+    "id": "yFBk4ISmYYQ",
+    "titre": "Comprendre le coefficient binomial : quand l'ordre ne compte plus",
+    "chaine": "Maths moi ça !",
+    "duree": "10:08",
+    "sec": 608,
+    "vues": "782 vues"
+   },
+   {
+    "id": "a6mj7ALL_lI",
+    "titre": "Comment calculer le COEFFICIENT DIRECTEUR d'une droite ? | Outils mathématiques",
+    "chaine": "Paul Olivier",
+    "duree": "4:47",
+    "sec": 287,
+    "vues": "424 007 vues"
+   },
+   {
+    "id": "-gvlrfFdaS8",
+    "titre": "Calculer un coefficient binomial - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:12",
+    "sec": 432,
+    "vues": "252 085 vues"
+   },
+   {
+    "id": "mfcBNlUuGaw",
+    "titre": "Calculer un coefficient binomial : Formules - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "229 906 vues"
+   },
+   {
+    "id": "8THf2llYhog",
+    "titre": "Calculer les Coefficients binomiaux sans calculatrice • Avec les formules du cours • première S",
+    "chaine": "jaicompris Maths",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "12 010 vues"
+   },
+   {
+    "id": "FxREenh3fgE",
+    "titre": "Calculer un coefficient de corrélation - Terminale",
+    "chaine": "Yvan Monka",
+    "duree": "7:34",
+    "sec": 454,
+    "vues": "292 551 vues"
+   },
+   {
+    "id": "5T9921d2sWk",
+    "titre": "Nombre de combinaisons - coefficient binomial | cours et exemple",
+    "chaine": "soMaths",
+    "duree": "14:27",
+    "sec": 867,
+    "vues": "4 211 vues"
+   },
+   {
+    "id": "NnGaw3rUQIA",
+    "titre": "Première - Factorisation de polynomes - identification - IMPORTANT",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "3:59",
+    "sec": 239,
+    "vues": "261 665 vues"
+   },
+   {
+    "id": "hQbIg6bmPhU",
+    "titre": "Produit de deux matrices exemple de calcul [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "744 538 vues"
+   },
+   {
+    "id": "QJevGF1XLhY",
+    "titre": "Comment calculer l'inverse d'une matrice 3x3",
+    "chaine": "ENNACHID_Academy",
+    "duree": "8:48",
+    "sec": 528,
+    "vues": "816 124 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L3": {
+  "titre": "Multiplier une ligne par une colonne",
+  "candidats": [
+   {
+    "id": "BnA1EcqvmrM",
+    "titre": "Maths CE2 : La multiplication en colonnes séq 109",
+    "chaine": "Naoual Bakkar",
+    "duree": "10:35",
+    "sec": 635,
+    "vues": "677 vues"
+   },
+   {
+    "id": "4pc5dTStm18",
+    "titre": "Multiplication Excel - multiplier des nombres ou colonnes sur Excel",
+    "chaine": "informatique-tuto",
+    "duree": "3:15",
+    "sec": 195,
+    "vues": "65 572 vues"
+   },
+   {
+    "id": "tBAkYnlZbU0",
+    "titre": "Excel Multiplier une colonne par un même nombre par Sitadi",
+    "chaine": "Sitadi - Ida Bonnin",
+    "duree": "1:16",
+    "sec": 76,
+    "vues": "70 513 vues"
+   },
+   {
+    "id": "1dKa6Qn57LY",
+    "titre": "Multiplication en colonnes à partir de zéro",
+    "chaine": "I CAN Mathématiques",
+    "duree": "2:44",
+    "sec": 164,
+    "vues": "15 vues"
+   },
+   {
+    "id": "hQbIg6bmPhU",
+    "titre": "Produit de deux matrices exemple de calcul [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "744 538 vues"
+   },
+   {
+    "id": "CDrrh8iSoZ4",
+    "titre": "Terminale Spécialité S et ES - Les matrices - Cours 4a : produit ligne colonne",
+    "chaine": "Hans Amble - Maths au Lycée",
+    "duree": "9:37",
+    "sec": 577,
+    "vues": "21 491 vues"
+   },
+   {
+    "id": "gCtGuG0Qko0",
+    "titre": "Poser une multiplication à 2 chiffres ✅ Facile ! 💪 Math - Sixième",
+    "chaine": "Paul Olivier",
+    "duree": "5:26",
+    "sec": 326,
+    "vues": "242 576 vues"
+   },
+   {
+    "id": "aSE0-DNuoAg",
+    "titre": "13 Regle de calcul des determinants multiplication d'une colonne par un nombre",
+    "chaine": "henseignant",
+    "duree": "2:37",
+    "sec": 157,
+    "vues": "97 vues"
+   },
+   {
+    "id": "nW8XRIhlq0Q",
+    "titre": "Calculer le produit d'une matrice carrée par une matrice colonne - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "3:40",
+    "sec": 220,
+    "vues": "250 402 vues"
+   },
+   {
+    "id": "kTe1-fjRiVU",
+    "titre": "2022 -Licence - produit de 2 matrices 3x3-(2)",
+    "chaine": "abdelkader LAGGOUNE",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "47 544 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L4": {
+  "titre": "Traduire plusieurs équations en AX = B",
+  "candidats": [
+   {
+    "id": "O9YraTJS5eI",
+    "titre": "Équations : a+x=b et ax=b - Maths - 5e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "5:48",
+    "sec": 348,
+    "vues": "6 704 vues"
+   },
+   {
+    "id": "P3MzmMfpSws",
+    "titre": "Cours Equations du type ax+b=c",
+    "chaine": "MathÔBatB",
+    "duree": "4:30",
+    "sec": 270,
+    "vues": "4 909 vues"
+   },
+   {
+    "id": "a28Oj86-sBM",
+    "titre": "Résoudre une équation du type ax = b",
+    "chaine": "Académie des maths",
+    "duree": "1:59",
+    "sec": 119,
+    "vues": "361 vues"
+   },
+   {
+    "id": "axG_YXiHVKs",
+    "titre": "Comment déterminer l'équation d'une droite ? y = ax + b",
+    "chaine": "Hedacademy",
+    "duree": "7:05",
+    "sec": 425,
+    "vues": "14 105 vues"
+   },
+   {
+    "id": "-TMNDQZoaEk",
+    "titre": "4ème - Comment résoudre une équation du type ax=b ?",
+    "chaine": "Coup de pouce mathématique",
+    "duree": "4:05",
+    "sec": 245,
+    "vues": "246 vues"
+   },
+   {
+    "id": "eR2R6mC9Gno",
+    "titre": "Résoudre une équation du type ax = b",
+    "chaine": "Cours Ouverts en Ligne",
+    "duree": "5:42",
+    "sec": 342,
+    "vues": "4 477 vues"
+   },
+   {
+    "id": "ALTji9BNAss",
+    "titre": "Résoudre une équation de la forme ax + b = c [Collège]",
+    "chaine": "Petits Savants",
+    "duree": "9:06",
+    "sec": 546,
+    "vues": "586 vues"
+   },
+   {
+    "id": "dXCeAkCr89c",
+    "titre": "Résoudre une équation du type ax=b",
+    "chaine": "Jean-Yves Labouche",
+    "duree": "5:45",
+    "sec": 345,
+    "vues": "34 838 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L5": {
+  "titre": "Éliminer avec le pivot de Gauss",
+  "candidats": [
+   {
+    "id": "q924ey023rk",
+    "titre": "Inversion d'une matrice 3x3 par la méthode du pivot de Gauss",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "10:00",
+    "sec": 600,
+    "vues": "321 725 vues"
+   },
+   {
+    "id": "PjUY128E5zY",
+    "titre": "Comment calculer l'inverse d'une matrice 3x3 : Méthode de Gauss Jordan",
+    "chaine": "ENNACHID_Academy",
+    "duree": "9:15",
+    "sec": 555,
+    "vues": "129 610 vues"
+   },
+   {
+    "id": "ENbu8VKSyxc",
+    "titre": "La Méthode du pivot de Gauss - Système linéaire - L1, Maths Sup, IUT",
+    "chaine": "J'ai 20 en maths",
+    "duree": "8:36",
+    "sec": 516,
+    "vues": "56 903 vues"
+   },
+   {
+    "id": "DFLQM_GiUGU",
+    "titre": "Matrices : exercice classique de système (méthode du pivot de Gauss)",
+    "chaine": "Cogitamus",
+    "duree": "9:36",
+    "sec": 576,
+    "vues": "126 389 vues"
+   },
+   {
+    "id": "lG4PFDy_V78",
+    "titre": "MATHS : SYSTÈME LINÉAIRE ET MATRICES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "139 307 vues"
+   },
+   {
+    "id": "6_UaRWAuFHo",
+    "titre": "Pivot de Gauss forme échelonnée, exemple 3. Résolution de système linéaire",
+    "chaine": "Les maths par l'exemple",
+    "duree": "4:47",
+    "sec": 287,
+    "vues": "54 773 vues"
+   },
+   {
+    "id": "PC5ZRNaT_d8",
+    "titre": "Calcul d'un déterminant par la méthode du pivot de Gauss",
+    "chaine": "VMathsPhy Tech",
+    "duree": "4:33",
+    "sec": 273,
+    "vues": "282 vues"
+   },
+   {
+    "id": "qHnBNNY1qnI",
+    "titre": "Inverse d’une matrice via pivot de gauss",
+    "chaine": "Hyper Maths",
+    "duree": "3:42",
+    "sec": 222,
+    "vues": "2 384 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L6": {
+  "titre": "Lire le rang et les solutions après Gauss",
+  "candidats": [
+   {
+    "id": "jXby-9CJiw8",
+    "titre": "Calcul du rang d'une matrice",
+    "chaine": "Algèbre Prépa (Omar Jedidi)",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "299 787 vues"
+   },
+   {
+    "id": "Age0r13YnvI",
+    "titre": "Calcul de rang de matrices et la résolution des systèmes linéaires à l'aide des matrices",
+    "chaine": "Algèbre Prépa (Omar Jedidi)",
+    "duree": "13:39",
+    "sec": 819,
+    "vues": "13 999 vues"
+   },
+   {
+    "id": "3POZ1KFpn3g",
+    "titre": "Exemples de calcul de rang de petites matrices [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "9:00",
+    "sec": 540,
+    "vues": "288 229 vues"
+   },
+   {
+    "id": "lG4PFDy_V78",
+    "titre": "MATHS : SYSTÈME LINÉAIRE ET MATRICES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "139 307 vues"
+   },
+   {
+    "id": "c1FcL5eTWaM",
+    "titre": "Comment calculer le rang d'une matrice",
+    "chaine": "Prof de maths : Classes préparatoires et licences.",
+    "duree": "4:20",
+    "sec": 260,
+    "vues": "492 vues"
+   },
+   {
+    "id": "fe0czF-lGk8",
+    "titre": "♦️♦️Échelonner une Matrice. Comment échelonner une matrice. Échelonnement matrice Rang d'une matrice",
+    "chaine": "Professeur Raoul",
+    "duree": "8:48",
+    "sec": 528,
+    "vues": "10 856 vues"
+   },
+   {
+    "id": "PjUY128E5zY",
+    "titre": "Comment calculer l'inverse d'une matrice 3x3 : Méthode de Gauss Jordan",
+    "chaine": "ENNACHID_Academy",
+    "duree": "9:15",
+    "sec": 555,
+    "vues": "129 610 vues"
+   },
+   {
+    "id": "ilKsCrgPAw0",
+    "titre": "PIVOT DE GAUSS : DÉTERMINER LE RANG D'UNE MATRICE",
+    "chaine": "Mathemat'Exos",
+    "duree": "6:54",
+    "sec": 414,
+    "vues": "23 117 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L7": {
+  "titre": "Construire l’inverse par Gauss",
+  "candidats": [
+   {
+    "id": "PjUY128E5zY",
+    "titre": "Comment calculer l'inverse d'une matrice 3x3 : Méthode de Gauss Jordan",
+    "chaine": "ENNACHID_Academy",
+    "duree": "9:15",
+    "sec": 555,
+    "vues": "129 610 vues"
+   },
+   {
+    "id": "DalK5o-DHB4",
+    "titre": "Matrices - partie 4 : inverse d'une matrice : calcul",
+    "chaine": "Exo7Math",
+    "duree": "9:02",
+    "sec": 542,
+    "vues": "1 133 096 vues"
+   },
+   {
+    "id": "SV3fufnstnY",
+    "titre": "Inverse d'une matrice avec Gauss-Jordan. Exemple résolu [Calcul matriciel]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:00",
+    "sec": 360,
+    "vues": "277 334 vues"
+   },
+   {
+    "id": "q924ey023rk",
+    "titre": "Inversion d'une matrice 3x3 par la méthode du pivot de Gauss",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "10:00",
+    "sec": 600,
+    "vues": "321 725 vues"
+   },
+   {
+    "id": "QJevGF1XLhY",
+    "titre": "Comment calculer l'inverse d'une matrice 3x3",
+    "chaine": "ENNACHID_Academy",
+    "duree": "8:48",
+    "sec": 528,
+    "vues": "816 124 vues"
+   },
+   {
+    "id": "AHQkDzGc_ds",
+    "titre": "Prépa MPSI PCSI BCPST - Matrice- Inversion avec Gauss Jordan",
+    "chaine": "Maths en licence et prépa avec Hans Amble",
+    "duree": "5:56",
+    "sec": 356,
+    "vues": "13 991 vues"
+   },
+   {
+    "id": "IjRpMbge76I",
+    "titre": "🔴MATHSCLIC EXERCICE | CALCUL DE L'INVERSE D'UNE MATRICE EN UTILISANT LA MÉTHODE DE GAUSS",
+    "chaine": "MathsClic",
+    "duree": "10:12",
+    "sec": 612,
+    "vues": "609 vues"
+   },
+   {
+    "id": "aoDWJM2oxVk",
+    "titre": "Matrices : cours 17 ECE/ECS ; méthode de Gauss-Jordan",
+    "chaine": "Cogitamus",
+    "duree": "8:29",
+    "sec": 509,
+    "vues": "14 269 vues"
+   },
+   {
+    "id": "4QMzwWY6T7g",
+    "titre": "Calculer l'inverse d'une matrice - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "6:45",
+    "sec": 405,
+    "vues": "637 880 vues"
+   },
+   {
+    "id": "c7Jgab5DSys",
+    "titre": "Calculer l’inverse d’une matrice 3x3 | Algèbre linéaire",
+    "chaine": "Taylon",
+    "duree": "4:07",
+    "sec": 247,
+    "vues": "79 849 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L8": {
+  "titre": "Tester l’inversibilité par un déterminant",
+  "candidats": [
+   {
+    "id": "nBrPqOmp9nQ",
+    "titre": "Comment calculer le déterminant d'une matrice. Comment pour identifier une matrice inversible",
+    "chaine": "Économathématique",
+    "duree": "1:01",
+    "sec": 61,
+    "vues": "316 vues"
+   },
+   {
+    "id": "4QMzwWY6T7g",
+    "titre": "Calculer l'inverse d'une matrice - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "6:45",
+    "sec": 405,
+    "vues": "637 880 vues"
+   },
+   {
+    "id": "HcarwMa8qsY",
+    "titre": "Montrer qu'une matrice n'est pas inversible (sans déterminant) • Terminale option maths expertes",
+    "chaine": "jaicompris Maths",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "19 732 vues"
+   },
+   {
+    "id": "9Fk3rWP6NsU",
+    "titre": "Montrer qu'une matrice est inversible en utilisant une relation du type A²-3A+2I=0 • spé maths",
+    "chaine": "jaicompris Maths",
+    "duree": "10:51",
+    "sec": 651,
+    "vues": "267 693 vues"
+   },
+   {
+    "id": "HNlgwyBHy0U",
+    "titre": "Déterminant d'une matrice carrée d'ordre 4",
+    "chaine": "u math",
+    "duree": "11:06",
+    "sec": 666,
+    "vues": "134 345 vues"
+   },
+   {
+    "id": "XuZs-EzAbng",
+    "titre": "Déterminant de Vandermonde - Exercice corrigé Maths Sup",
+    "chaine": "Optimal Sup-Spé - Groupe Ipesup",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "10 657 vues"
+   },
+   {
+    "id": "sjEiYGHnQ4M",
+    "titre": "3 PROPRIÉTÉS pour calculer un DÉTERMINANT RAPIDEMENT - Méthode & Exemples - Algèbre maths Licence",
+    "chaine": "Fabinou",
+    "duree": "5:55",
+    "sec": 355,
+    "vues": "14 807 vues"
+   },
+   {
+    "id": "QJevGF1XLhY",
+    "titre": "Comment calculer l'inverse d'une matrice 3x3",
+    "chaine": "ENNACHID_Academy",
+    "duree": "8:48",
+    "sec": 528,
+    "vues": "816 124 vues"
+   },
+   {
+    "id": "c7Jgab5DSys",
+    "titre": "Calculer l’inverse d’une matrice 3x3 | Algèbre linéaire",
+    "chaine": "Taylon",
+    "duree": "4:07",
+    "sec": 247,
+    "vues": "79 849 vues"
+   },
+   {
+    "id": "jXby-9CJiw8",
+    "titre": "Calcul du rang d'une matrice",
+    "chaine": "Algèbre Prépa (Omar Jedidi)",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "299 787 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L9": {
+  "titre": "Reconnaître un espace vectoriel et un sous-espace",
+  "candidats": [
+   {
+    "id": "NtVu2HHj7_U",
+    "titre": "espace vectoriel • cours et exemples de référence • algèbre linéaire • maths sup spé - prépa MPSI",
+    "chaine": "jaicompris Maths",
+    "duree": "12:38",
+    "sec": 758,
+    "vues": "572 844 vues"
+   },
+   {
+    "id": "nO9UlkHPlLI",
+    "titre": "Comment Montrer Qu'un Ensemble Est Un Sous Espace Vectoriel",
+    "chaine": "Tchitcha",
+    "duree": "8:48",
+    "sec": 528,
+    "vues": "19 676 vues"
+   },
+   {
+    "id": "Lb5dOxKwruk",
+    "titre": "Sous-Espace Vectoriel : Tout Comprendre Facilement !",
+    "chaine": "Phassyl - Maths & Physique à l'université",
+    "duree": "6:39",
+    "sec": 399,
+    "vues": "2 634 vues"
+   },
+   {
+    "id": "VrvQrxHlrXU",
+    "titre": "sous-espace vectoriel • c'est quoi? A quoi ça sert? Cours algèbre linéaire • prépa MPSI PCSI ECS",
+    "chaine": "jaicompris Maths",
+    "duree": "8:26",
+    "sec": 506,
+    "vues": "259 277 vues"
+   },
+   {
+    "id": "LCLTsMrq7QI",
+    "titre": "Comment Déterminer Une Base Et La Dimension D'un Sous Espace Vectoriel",
+    "chaine": "Tchitcha",
+    "duree": "8:56",
+    "sec": 536,
+    "vues": "27 566 vues"
+   },
+   {
+    "id": "aVTn7X7RgEo",
+    "titre": "Algèbre Linéaire #3 Espace et Sous Espace vectoriel - application 2",
+    "chaine": "EcoleTresFacile",
+    "duree": "9:47",
+    "sec": 587,
+    "vues": "7 826 vues"
+   },
+   {
+    "id": "CDSkWs4iukM",
+    "titre": "Exercice sous espace vectoriel de R^3 • Les parties suivantes sont-elles des sev de R^3? sup prépa",
+    "chaine": "jaicompris Maths",
+    "duree": "11:19",
+    "sec": 679,
+    "vues": "266 938 vues"
+   },
+   {
+    "id": "ADJOBNf15J4",
+    "titre": "Algèbre Linéaire #4 Espace et Sous Espace vectoriel - Bases et Dimensions",
+    "chaine": "EcoleTresFacile",
+    "duree": "12:49",
+    "sec": 769,
+    "vues": "9 514 vues"
+   },
+   {
+    "id": "PgI1SFvg_AE",
+    "titre": "Savoir si une famille est LIBRE, GÉNÉRATRICE, BASE - Méthode & Exemples -Algèbre maths Prépa Licence",
+    "chaine": "Fabinou",
+    "duree": "4:16",
+    "sec": 256,
+    "vues": "185 113 vues"
+   },
+   {
+    "id": "YFlS5ZVQG4c",
+    "titre": "Base d'un espace vectoriel",
+    "chaine": "Mathéma-TIC",
+    "duree": "5:19",
+    "sec": 319,
+    "vues": "127 974 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L10": {
+  "titre": "Choisir une base pour donner des coordonnées",
+  "candidats": [
+   {
+    "id": "DhKhPbJGzcg",
+    "titre": "Calcul de coordonnées de vecteur",
+    "chaine": "Éducation Plus",
+    "duree": "9:46",
+    "sec": 586,
+    "vues": "21 612 vues"
+   },
+   {
+    "id": "1-q7mGXrZQ4",
+    "titre": "Coordonnées cartésiennes",
+    "chaine": "Enseignement Supérieur et Lycée",
+    "duree": "4:35",
+    "sec": 275,
+    "vues": "96 498 vues"
+   },
+   {
+    "id": "ObZtM-wFOn4",
+    "titre": "✅ montrer qu'une système est une base. base orthonormé. coordonnées de I et j dans une base.",
+    "chaine": "Professeur Raoul",
+    "duree": "4:55",
+    "sec": 295,
+    "vues": "2 167 vues"
+   },
+   {
+    "id": "CrLPPFGFKQs",
+    "titre": "Comment déterminer les coordonnées d'un point de l'espace dans un repère ?",
+    "chaine": "Mathemax",
+    "duree": "4:56",
+    "sec": 296,
+    "vues": "59 504 vues"
+   },
+   {
+    "id": "-7zf4dF-M9c",
+    "titre": "Se repérer dans le plan 📐 Coordonnées d’un point 🚀 abscisse & ordonnée | Cours + Exemple 💪",
+    "chaine": "jaicompris Maths",
+    "duree": "4:18",
+    "sec": 258,
+    "vues": "4 549 vues"
+   },
+   {
+    "id": "4cRSsCO0KNA",
+    "titre": "COORDONNÉES d'un POINT dans un REPÈRE de l'ESPACE - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "3:32",
+    "sec": 212,
+    "vues": "21 367 vues"
+   },
+   {
+    "id": "P-OLZ4oPUaw",
+    "titre": "Repérage dans le plan : lire et placer des coordonnées facilement",
+    "chaine": "Jean-Yves Labouche",
+    "duree": "7:50",
+    "sec": 470,
+    "vues": "446 vues"
+   },
+   {
+    "id": "mYDaRE51M-4",
+    "titre": "COORDONNEES CARTESIENNES EN COORDONNEES CYLINDRIQUES ET VICE VERSA",
+    "chaine": "The Professor Math Academy",
+    "duree": "9:12",
+    "sec": 552,
+    "vues": "100 415 vues"
+   },
+   {
+    "id": "lG4PFDy_V78",
+    "titre": "MATHS : SYSTÈME LINÉAIRE ET MATRICES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "139 307 vues"
+   },
+   {
+    "id": "yrHyEnNdmu0",
+    "titre": "Exemple de changement de base pour les coordonnées d'un vecteur [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "7:27",
+    "sec": 447,
+    "vues": "47 358 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L11": {
+  "titre": "Relier noyau, image et rang",
+  "candidats": [
+   {
+    "id": "D3sb178BSqw",
+    "titre": "application linéaire • déterminer Ker(f) noyau et Im(f) l'image • injective surjective théorème rang",
+    "chaine": "jaicompris Maths",
+    "duree": "9:42",
+    "sec": 582,
+    "vues": "390 092 vues"
+   },
+   {
+    "id": "VIEn2cseYSs",
+    "titre": "Calcul de noyau image et rang d'une matrice [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:40",
+    "sec": 400,
+    "vues": "240 121 vues"
+   },
+   {
+    "id": "XmQQ3Nj_Ylc",
+    "titre": "Exercice d’algèbre linéaire : noyau et image d’une application linéaire à partir de la matrice",
+    "chaine": "Pink Maths",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "164 061 vues"
+   },
+   {
+    "id": "G52yok6RxGE",
+    "titre": "Exercice sur le noyau et l'image d'une application linéaire",
+    "chaine": "Algèbre Prépa (Omar Jedidi)",
+    "duree": "10:34",
+    "sec": 634,
+    "vues": "350 696 vues"
+   },
+   {
+    "id": "4kKOa7k5GSg",
+    "titre": "Noyau APPLICATIONS LINÉAIRES//Ker(f) - Cours ECG Maths APPRO/Maths APPLI",
+    "chaine": "Cogitamus",
+    "duree": "11:27",
+    "sec": 687,
+    "vues": "22 502 vues"
+   },
+   {
+    "id": "CjYlqfrS7Jw",
+    "titre": "Comprendre l’image et le noyau d’une matrice | Algèbre linéaire",
+    "chaine": "Taylon",
+    "duree": "9:16",
+    "sec": 556,
+    "vues": "1 329 vues"
+   },
+   {
+    "id": "ETWkXWUQtuk",
+    "titre": "✅ Noyau et image d'une application linéaire ou d'une matrice. ker(f) et Im(f). ker(A)et im(A).",
+    "chaine": "Professeur Raoul",
+    "duree": "5:59",
+    "sec": 359,
+    "vues": "13 868 vues"
+   },
+   {
+    "id": "1_F2XhDU7f4",
+    "titre": "♦️♦️DÉTERMINER KER f ET IM f. déterminer le noyau et l'image kerf et IMf ker(f) et Im(f) noyau imagr",
+    "chaine": "Professeur Raoul",
+    "duree": "4:20",
+    "sec": 260,
+    "vues": "18 690 vues"
+   },
+   {
+    "id": "jXby-9CJiw8",
+    "titre": "Calcul du rang d'une matrice",
+    "chaine": "Algèbre Prépa (Omar Jedidi)",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "299 787 vues"
+   },
+   {
+    "id": "SWs7IlMbDSI",
+    "titre": "CALCUL MATRICIEL NOYAU IMAGE D'UNE APPLICATION LINÉAIRE",
+    "chaine": "Algèbre Linéaire",
+    "duree": "8:45",
+    "sec": 525,
+    "vues": "806 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L12": {
+  "titre": "Décomposer un vecteur et le projeter",
+  "candidats": [
+   {
+    "id": "lG4PFDy_V78",
+    "titre": "MATHS : SYSTÈME LINÉAIRE ET MATRICES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "139 307 vues"
+   },
+   {
+    "id": "G7cYfmNibcQ",
+    "titre": "Trouver les vecteurs et valeurs propres d’une matrice | Algèbre linéaire",
+    "chaine": "Taylon",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "41 225 vues"
+   },
+   {
+    "id": "_169kFvTOSk",
+    "titre": "Calcul de la matrice d'une application linéaire dans les bases canoniques [Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "3:40",
+    "sec": 220,
+    "vues": "228 829 vues"
+   },
+   {
+    "id": "QokAqFazmFs",
+    "titre": "Coordonnées d'un vecteur dans une base matrice d'un vecteur",
+    "chaine": "Ennajisciences",
+    "duree": "10:46",
+    "sec": 646,
+    "vues": "5 827 vues"
+   },
+   {
+    "id": "QFnVNLT0D2M",
+    "titre": "DIAGONALISATION DES MATRICES PARTIE 1",
+    "chaine": "Mathématiques faciles Secondaires & Universitaires",
+    "duree": "6:41",
+    "sec": 401,
+    "vues": "76 509 vues"
+   },
+   {
+    "id": "yrHyEnNdmu0",
+    "titre": "Exemple de changement de base pour les coordonnées d'un vecteur [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "7:27",
+    "sec": 447,
+    "vues": "47 358 vues"
+   },
+   {
+    "id": "hQbIg6bmPhU",
+    "titre": "Produit de deux matrices exemple de calcul [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "744 538 vues"
+   },
+   {
+    "id": "Dr9J1BIcVBw",
+    "titre": "Algèbre linéaire : ce qu'est vraiment une matrice",
+    "chaine": "ParaMaths",
+    "duree": "8:51",
+    "sec": 531,
+    "vues": "611 600 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L13": {
+  "titre": "Chercher les directions propres",
+  "candidats": [
+   {
+    "id": "F6Y7AMU2Bqs",
+    "titre": "Les valeurs propres : les directions que la matrice respecte · Algèbre linéaire (Ép. 1, partie 3)",
+    "chaine": "Le Tisserand de l'Infini",
+    "duree": "2:25",
+    "sec": 145,
+    "vues": "58 vues"
+   },
+   {
+    "id": "G7cYfmNibcQ",
+    "titre": "Trouver les vecteurs et valeurs propres d’une matrice | Algèbre linéaire",
+    "chaine": "Taylon",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "41 225 vues"
+   },
+   {
+    "id": "7sbe4ERHOMU",
+    "titre": "À quoi servent les vecteurs et valeurs propres ? Lê Nguyên Hoang",
+    "chaine": "Wandida, EPFL",
+    "duree": "5:28",
+    "sec": 328,
+    "vues": "51 256 vues"
+   },
+   {
+    "id": "V3tzRjfC9EI",
+    "titre": "#maths valeurs propres et sous espace propre 🔥🔥",
+    "chaine": "Maths pour tous",
+    "duree": "9:55",
+    "sec": 595,
+    "vues": "56 vues"
+   },
+   {
+    "id": "yGKcOiJkFhw",
+    "titre": "Trouver les valeurs propres et les vecteurs propres de cette matrice",
+    "chaine": "Pays des maths",
+    "duree": "6:12",
+    "sec": 372,
+    "vues": "5 254 vues"
+   },
+   {
+    "id": "hQbIg6bmPhU",
+    "titre": "Produit de deux matrices exemple de calcul [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "744 538 vues"
+   },
+   {
+    "id": "jXby-9CJiw8",
+    "titre": "Calcul du rang d'une matrice",
+    "chaine": "Algèbre Prépa (Omar Jedidi)",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "299 787 vues"
+   },
+   {
+    "id": "lG4PFDy_V78",
+    "titre": "MATHS : SYSTÈME LINÉAIRE ET MATRICES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "139 307 vues"
+   },
+   {
+    "id": "XmQQ3Nj_Ylc",
+    "titre": "Exercice d’algèbre linéaire : noyau et image d’une application linéaire à partir de la matrice",
+    "chaine": "Pink Maths",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "164 061 vues"
+   },
+   {
+    "id": "QFnVNLT0D2M",
+    "titre": "DIAGONALISATION DES MATRICES PARTIE 1",
+    "chaine": "Mathématiques faciles Secondaires & Universitaires",
+    "duree": "6:41",
+    "sec": 401,
+    "vues": "76 509 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L14": {
+  "titre": "Construire une base de vecteurs propres",
+  "candidats": [
+   {
+    "id": "jUq6rUCVkBo",
+    "titre": "[RévisionsBac.com] - Matrices 3x3 : vecteurs propres",
+    "chaine": "Revisions Bac",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "97 801 vues"
+   },
+   {
+    "id": "G7cYfmNibcQ",
+    "titre": "Trouver les vecteurs et valeurs propres d’une matrice | Algèbre linéaire",
+    "chaine": "Taylon",
+    "duree": "9:23",
+    "sec": 563,
+    "vues": "41 225 vues"
+   },
+   {
+    "id": "MU11v25gnnM",
+    "titre": "Vecteurs propres",
+    "chaine": "Mathéma-TIC",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "149 420 vues"
+   },
+   {
+    "id": "CJihlGG8ykw",
+    "titre": "Produit vectoriel",
+    "chaine": "Enseignement Supérieur et Lycée",
+    "duree": "6:15",
+    "sec": 375,
+    "vues": "231 344 vues"
+   },
+   {
+    "id": "POgWEP5CKws",
+    "titre": "Qu'est-ce qu'un vecteur propre ?",
+    "chaine": "Les Maths avec Jean",
+    "duree": "1:50",
+    "sec": 110,
+    "vues": "6 456 vues"
+   },
+   {
+    "id": "7sbe4ERHOMU",
+    "titre": "À quoi servent les vecteurs et valeurs propres ? Lê Nguyên Hoang",
+    "chaine": "Wandida, EPFL",
+    "duree": "5:28",
+    "sec": 328,
+    "vues": "51 256 vues"
+   },
+   {
+    "id": "nFHuglLbClc",
+    "titre": "COMPRENDRE LES VECTEURS",
+    "chaine": "Hedacademy",
+    "duree": "14:01",
+    "sec": 841,
+    "vues": "436 963 vues"
+   },
+   {
+    "id": "NtVu2HHj7_U",
+    "titre": "espace vectoriel • cours et exemples de référence • algèbre linéaire • maths sup spé - prépa MPSI",
+    "chaine": "jaicompris Maths",
+    "duree": "12:38",
+    "sec": 758,
+    "vues": "572 844 vues"
+   },
+   {
+    "id": "lG4PFDy_V78",
+    "titre": "MATHS : SYSTÈME LINÉAIRE ET MATRICES",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "8:47",
+    "sec": 527,
+    "vues": "139 307 vues"
+   },
+   {
+    "id": "hQbIg6bmPhU",
+    "titre": "Produit de deux matrices exemple de calcul [Calcul matriciel, Algèbre linéaire]",
+    "chaine": "Les maths par l'exemple",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "744 538 vues"
+   }
+  ]
+ },
+ "ISE-ECO-ALGLIN-L15": {
+  "titre": "Changer de coordonnées pour calculer Aⁿ",
+  "candidats": [
+   {
+    "id": "DhKhPbJGzcg",
+    "titre": "Calcul de coordonnées de vecteur",
+    "chaine": "Éducation Plus",
+    "duree": "9:46",
+    "sec": 586,
+    "vues": "21 612 vues"
+   },
+   {
+    "id": "mYDaRE51M-4",
+    "titre": "COORDONNEES CARTESIENNES EN COORDONNEES CYLINDRIQUES ET VICE VERSA",
+    "chaine": "The Professor Math Academy",
+    "duree": "9:12",
+    "sec": 552,
+    "vues": "100 415 vues"
+   },
+   {
+    "id": "1-q7mGXrZQ4",
+    "titre": "Coordonnées cartésiennes",
+    "chaine": "Enseignement Supérieur et Lycée",
+    "duree": "4:35",
+    "sec": 275,
+    "vues": "96 498 vues"
+   },
+   {
+    "id": "uJ9d4PP-BAU",
+    "titre": "COMMENT PASSER DES COORDONNEES CARTESIENNES AUX COORDONNEES POLAIRES ET RECIPROQUEMENT",
+    "chaine": "The Professor Math Academy",
+    "duree": "7:03",
+    "sec": 423,
+    "vues": "99 219 vues"
+   },
+   {
+    "id": "GwsVblLgLQo",
+    "titre": "3ème-Mathématique | LEÇON 01 : Coordonnées d'un vecteur",
+    "chaine": "RTI Officiel",
+    "duree": "7:32",
+    "sec": 452,
+    "vues": "82 617 vues"
+   },
+   {
+    "id": "vWX3cIFZOyg",
+    "titre": "Coordonnées de barycentre",
+    "chaine": "Éducation Plus",
+    "duree": "4:23",
+    "sec": 263,
+    "vues": "20 381 vues"
+   },
+   {
+    "id": "vwnOCGrCE9E",
+    "titre": "Coordonnées d’un vecteur 🚀 AB (xB − xA ; yB − yA) 💪 Formule + exemples 💥 Cours Maths Seconde",
+    "chaine": "jaicompris Maths",
+    "duree": "9:03",
+    "sec": 543,
+    "vues": "7 026 vues"
+   },
+   {
+    "id": "FHR3WWfgOvE",
+    "titre": "Calcul de coordonnées de vecteurs Maths-3ème",
+    "chaine": "coach tera",
+    "duree": "6:27",
+    "sec": 387,
+    "vues": "4 221 vues"
+   }
+  ]
+ }
+}

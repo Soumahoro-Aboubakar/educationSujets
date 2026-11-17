@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CG-INSTIT-L1",
+    "youtubeId": "e2hB3XpxUVo",
+    "couverture": "partielle",
+    "justification": "Définit la règle de droit et ses caractères (générale, obligatoire, sanctionnée par l’État), principe identique en Côte d’Ivoire.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CG-INSTIT-L2",
+    "youtubeId": "lsB76EmPZT0",
+    "couverture": "partielle",
+    "justification": "Hiérarchie des normes (Constitution, loi, règlement/décret) : l’auteur fixe la place de la règle. Exemples français, principe identique.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CG-INSTIT-L3",
+    "youtubeId": "1JXktjYCOhY",
+    "couverture": "partielle",
+    "justification": "Rôle d’une Constitution : organiser les pouvoirs et protéger les droits. Présentation générale, sans le texte ivoirien de 2016.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CG-INSTIT-L4",
+    "youtubeId": "FX73Qu3FkAI",
+    "couverture": "partielle",
+    "justification": "RFI explique la place du vice-président dans l’exécutif ivoirien, aux côtés du Président et du Premier ministre.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CG-INSTIT-L5",
+    "youtubeId": "_iMdSuC28hE",
+    "couverture": "partielle",
+    "justification": "RTI : création et rôle du Sénat ivoirien, seconde chambre du Parlement depuis la Constitution de 2016.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CG-INSTIT-L6",
+    "youtubeId": "tg-91DintRg",
+    "couverture": "partielle",
+    "justification": "Le Conseil constitutionnel ivoirien expliqué simplement ; les autres juridictions ne sont pas traitées.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CG-INSTIT-L7",
+    "youtubeId": "lbvXP3ch7sA",
+    "couverture": "partielle",
+    "justification": "Chaîne ivoirienne : rôle et missions du Médiateur de la République (médiation, pas jugement).",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CG-INSTIT-L8",
+    "youtubeId": "7doV-qP36ao",
+    "couverture": "exacte",
+    "justification": "Sens des cinq symboles de la République de Côte d’Ivoire : drapeau, armoiries, hymne, devise, langue.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

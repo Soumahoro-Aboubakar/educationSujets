@@ -1,10 +1,10 @@
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { getErrorMessage } from '../../utils/userMessages';
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Image, Linking, StyleSheet, View } from 'react-native';
 import Animated, { FadeOut } from 'react-native-reanimated';
 import { useFocusEffect } from '@react-navigation/native';
-import { ArrowDown, CloudOff, PlayCircle, RotateCcw } from 'lucide-react-native';
+import { ArrowDown, CloudOff, ExternalLink, PlayCircle, RotateCcw } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import usePrep from '../store';
 
@@ -112,7 +112,13 @@ const VideoPanel = forwardRef(({ video, kind = 'lecon', language = 'fr', readLab
               <View style={styles.blocked} accessibilityLiveRegion="polite">
                 <CloudOff size={22} color={brand.goldLight} strokeWidth={1.9} />
                 <Text variant="caption" style={styles.blockedText}>{MESSAGES[failure || 'horsLigne']}</Text>
-                <InlineAction title="Réessayer" icon={RotateCcw} onPress={retry} accessibilityLabel="Réessayer de charger la vidéo" style={styles.retry} />
+                <View style={styles.row}>
+                  <InlineAction title="Réessayer" icon={RotateCcw} onPress={retry} accessibilityLabel="Réessayer de charger la vidéo" style={styles.retry} />
+                  {/* Lecture intégrée refusée (vidéo d'une autre chaîne) : on peut toujours la voir sur YouTube. */}
+                  {failure === 'indisponible' ? (
+                    <InlineAction title="Ouvrir sur YouTube" icon={ExternalLink} onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${video.youtubeId}`).catch(() => {})} accessibilityLabel="Ouvrir la vidéo dans YouTube" style={styles.retry} />
+                  ) : null}
+                </View>
               </View>
             ) : (
               <View style={styles.loading}><ActivityIndicator color={brand.goldLight} accessibilityLabel="Chargement de la vidéo" /></View>

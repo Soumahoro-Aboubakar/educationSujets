@@ -1,35 +1,132 @@
 [
-  { "code": "MATH-LNEXP-L1", "youtubeId": "FBmVDGvUtJ4", "couverture": "exacte", "source": "maths-et-tiques.fr 19RacPuissM — Méthode : Effectuer des calculs sur les puissances",
-    "justification": "Applique pas à pas les règles aᵐ×aⁿ, (aᵐ)ⁿ, exposant nul et négatif : exactement les calculs de la leçon, niveau seconde accessible aux débutants." },
-  { "code": "MATH-LNEXP-L2", "youtubeId": null, "source": "maths-et-tiques.fr 20LogT1 / 20LogTC",
-    "justification": "L'introduction du logarithme (motivation, ln 1 = 0, ln e = 1) n'existe que dans le cours complet de 18 min ; aucune vidéo courte dédiée trouvée.",
-    "ecartes": [{ "youtubeId": "VJns0RfVWGg", "motif": "cours complet, 18 min" }] },
-  { "code": "MATH-LNEXP-L3", "youtubeId": "HGrK77-SCl4", "couverture": "partielle", "source": "maths-et-tiques.fr 20LogT1 — Méthode : Simplifier une expression contenant des logarithmes",
-    "justification": "Exercices de simplification fondés d'abord sur ln(ab) = ln a + ln b (relation fonctionnelle) ; aborde aussi quotient et puissance, vus dans les deux leçons suivantes." },
-  { "code": "MATH-LNEXP-L4", "youtubeId": null, "source": "maths-et-tiques.fr 20LogT1",
-    "justification": "La seule vidéo courte sur les formules (HGrK77-SCl4) est déjà associée à la leçon 3 ; pas de vidéo dédiée au quotient et à l'inverse." },
-  { "code": "MATH-LNEXP-L5", "youtubeId": null, "source": "maths-et-tiques.fr 20LogT1",
-    "justification": "Pas de vidéo courte dédiée à ln(aⁿ) et ln √a distincte de celle de la leçon 3." },
-  { "code": "MATH-LNEXP-L6", "youtubeId": null, "source": "maths-et-tiques.fr 20LogT2",
-    "justification": "Candidat « Étudier la fonction logarithme népérien » (9 min) centré sur variations et convexité, pas sur domaine et signe : écarté.",
-    "ecartes": [{ "youtubeId": "3KLX-ScJmcI", "motif": "traite variations et convexité, pas domaine et signe" }] },
-  { "code": "MATH-LNEXP-L7", "youtubeId": "f7AuwNAagAQ", "couverture": "partielle", "source": "maths-et-tiques.fr 19DeriP1M — Méthode : Déterminer graphiquement le nombre dérivé",
-    "justification": "Montre le nombre dérivé comme pente de la tangente lue sur un graphique : l'idée centrale de « la dérivée mesure une pente locale » (le lien signe/variations n'y est pas)." },
-  { "code": "MATH-LNEXP-L8", "youtubeId": "iT9C0BiOK4Y", "couverture": "exacte", "source": "maths-et-tiques.fr 20LogT2 — Méthode : Étudier les variations d'une fonction contenant des logarithmes",
-    "justification": "Dérive une fonction contenant ln, étudie le signe de la dérivée et dresse les variations : la démarche exacte de la leçon." },
-  { "code": "MATH-LNEXP-L9", "youtubeId": "lA3W_j4p-c8", "couverture": "partielle", "source": "maths-et-tiques.fr 20LogT2 — Méthode : Déterminer une limite par croissance comparée",
-    "justification": "Calcule des limites avec (ln x)/x → 0 et x ln x → 0, la partie la plus délicate de la leçon ; les limites de base de ln sont rappelées." },
-  { "code": "MATH-LNEXP-L10", "youtubeId": null, "source": "maths-et-tiques.fr 19ExpoPM / 20LogTC",
-    "justification": "« Déterminer la fonction réciproque » est générique (pas exp/ln) ; pas de vidéo courte sur ln(eʸ) = y et e^(ln x) = x.",
-    "ecartes": [{ "youtubeId": "bgINubYekqo", "motif": "réciproque d'une fonction quelconque, pas exp/ln" }] },
-  { "code": "MATH-LNEXP-L11", "youtubeId": "qDFjeFyA_OY", "couverture": "exacte", "source": "maths-et-tiques.fr 19ExpoPM — Méthode : Simplifier les écritures",
-    "justification": "Simplifie des expressions avec e^(a+b) = eᵃeᵇ, e^(a−b), e⁻ᵃ et (eᵃ)ⁿ : exactement les règles de calcul de la leçon, en 3 min 30." },
-  { "code": "MATH-LNEXP-L12", "youtubeId": "XcMePHk6Ilk", "couverture": "exacte", "source": "maths-et-tiques.fr 19ExpoPM — Méthode : Dériver une fonction exponentielle",
-    "justification": "Dérive eˣ et des composées e^(u) en multipliant par u′, la règle centrale de la leçon." },
-  { "code": "MATH-LNEXP-L13", "youtubeId": "GoLYLTZFaz0", "couverture": "partielle", "source": "maths-et-tiques.fr 20LimitesFct2 — Méthode : Calculer une limite par croissance comparée",
-    "justification": "Traite xᵐ/eˣ → 0 et la transformation des produits, cœur de la leçon ; les limites simples de eˣ sont supposées connues." },
-  { "code": "MATH-LNEXP-L14", "youtubeId": "lCT-8ijhZiE", "couverture": "exacte", "source": "maths-et-tiques.fr 20LogT1 — Méthode : Résoudre une équation avec des logarithmes",
-    "justification": "Détermine l'ensemble de définition, résout avec ln/exp comme réciproques puis vérifie les solutions : la méthode en trois temps de la leçon." },
-  { "code": "MATH-LNEXP-L15", "youtubeId": "_fpPphstjYw", "couverture": "exacte", "source": "maths-et-tiques.fr 20LogT1 — Méthode : Résoudre une inéquation avec des logarithmes",
-    "justification": "Résout une inéquation en conservant le sens par ln puis croise avec le domaine, comme dans la leçon." }
+  {
+    "code": "MATH-LNEXP-L1",
+    "youtubeId": "FBmVDGvUtJ4",
+    "couverture": "exacte",
+    "source": "maths-et-tiques.fr 19RacPuissM — Méthode : Effectuer des calculs sur les puissances",
+    "justification": "Applique pas à pas les règles aᵐ×aⁿ, (aᵐ)ⁿ, exposant nul et négatif : exactement les calculs de la leçon, niveau seconde accessible aux débutants."
+  },
+  {
+    "code": "MATH-LNEXP-L2",
+    "youtubeId": "58bIfIthvMs",
+    "couverture": "exacte",
+    "justification": "Introduction courte du logarithme népérien : pourquoi on l’introduit et ses premières valeurs, comme la leçon.",
+    "source": "recherche YouTube « introduction logarithme népérien »",
+    "recherchePar": "claude",
+    "ecartes": [
+      {
+        "youtubeId": "VJns0RfVWGg",
+        "motif": "cours complet, 18 min"
+      }
+    ]
+  },
+  {
+    "code": "MATH-LNEXP-L3",
+    "youtubeId": "HGrK77-SCl4",
+    "couverture": "partielle",
+    "source": "maths-et-tiques.fr 20LogT1 — Méthode : Simplifier une expression contenant des logarithmes",
+    "justification": "Exercices de simplification fondés d'abord sur ln(ab) = ln a + ln b (relation fonctionnelle) ; aborde aussi quotient et puissance, vus dans les deux leçons suivantes."
+  },
+  {
+    "code": "MATH-LNEXP-L4",
+    "youtubeId": "7-p2bAJ_Ft0",
+    "couverture": "exacte",
+    "justification": "Démontre ln(a/b) = ln a − ln b à partir de la règle du produit, exactement la démarche de la leçon.",
+    "source": "recherche YouTube « ln(a/b) = ln a − ln b »",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-LNEXP-L5",
+    "youtubeId": "Pj_6mBG7w9c",
+    "couverture": "partielle",
+    "justification": "Retrouve ln(aⁿ) = n ln a par comptage ; la racine (ln √a) n’est pas traitée.",
+    "source": "recherche YouTube « ln(a^n) = n ln a »",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "MATH-LNEXP-L6",
+    "youtubeId": "-j-tZYFnQZk",
+    "couverture": "partielle",
+    "justification": "Méthode pour l’ensemble de définition d’une expression avec ln ; le signe de ln est moins développé.",
+    "source": "recherche YouTube « domaine de définition ln »",
+    "recherchePar": "claude",
+    "ecartes": [
+      {
+        "youtubeId": "3KLX-ScJmcI",
+        "motif": "traite variations et convexité, pas domaine et signe"
+      }
+    ]
+  },
+  {
+    "code": "MATH-LNEXP-L7",
+    "youtubeId": "f7AuwNAagAQ",
+    "couverture": "partielle",
+    "source": "maths-et-tiques.fr 19DeriP1M — Méthode : Déterminer graphiquement le nombre dérivé",
+    "justification": "Montre le nombre dérivé comme pente de la tangente lue sur un graphique : l'idée centrale de « la dérivée mesure une pente locale » (le lien signe/variations n'y est pas)."
+  },
+  {
+    "code": "MATH-LNEXP-L8",
+    "youtubeId": "iT9C0BiOK4Y",
+    "couverture": "exacte",
+    "source": "maths-et-tiques.fr 20LogT2 — Méthode : Étudier les variations d'une fonction contenant des logarithmes",
+    "justification": "Dérive une fonction contenant ln, étudie le signe de la dérivée et dresse les variations : la démarche exacte de la leçon."
+  },
+  {
+    "code": "MATH-LNEXP-L9",
+    "youtubeId": "lA3W_j4p-c8",
+    "couverture": "partielle",
+    "source": "maths-et-tiques.fr 20LogT2 — Méthode : Déterminer une limite par croissance comparée",
+    "justification": "Calcule des limites avec (ln x)/x → 0 et x ln x → 0, la partie la plus délicate de la leçon ; les limites de base de ln sont rappelées."
+  },
+  {
+    "code": "MATH-LNEXP-L10",
+    "youtubeId": "HuUqg9W7sPQ",
+    "couverture": "exacte",
+    "justification": "Présente ln et exp comme fonctions réciproques : ln(eʸ) = y et e^(ln x) = x.",
+    "source": "recherche YouTube « exponentielle réciproque du logarithme »",
+    "recherchePar": "claude",
+    "ecartes": [
+      {
+        "youtubeId": "bgINubYekqo",
+        "motif": "réciproque d'une fonction quelconque, pas exp/ln"
+      }
+    ]
+  },
+  {
+    "code": "MATH-LNEXP-L11",
+    "youtubeId": "qDFjeFyA_OY",
+    "couverture": "exacte",
+    "source": "maths-et-tiques.fr 19ExpoPM — Méthode : Simplifier les écritures",
+    "justification": "Simplifie des expressions avec e^(a+b) = eᵃeᵇ, e^(a−b), e⁻ᵃ et (eᵃ)ⁿ : exactement les règles de calcul de la leçon, en 3 min 30."
+  },
+  {
+    "code": "MATH-LNEXP-L12",
+    "youtubeId": "XcMePHk6Ilk",
+    "couverture": "exacte",
+    "source": "maths-et-tiques.fr 19ExpoPM — Méthode : Dériver une fonction exponentielle",
+    "justification": "Dérive eˣ et des composées e^(u) en multipliant par u′, la règle centrale de la leçon."
+  },
+  {
+    "code": "MATH-LNEXP-L13",
+    "youtubeId": "GoLYLTZFaz0",
+    "couverture": "partielle",
+    "source": "maths-et-tiques.fr 20LimitesFct2 — Méthode : Calculer une limite par croissance comparée",
+    "justification": "Traite xᵐ/eˣ → 0 et la transformation des produits, cœur de la leçon ; les limites simples de eˣ sont supposées connues."
+  },
+  {
+    "code": "MATH-LNEXP-L14",
+    "youtubeId": "lCT-8ijhZiE",
+    "couverture": "exacte",
+    "source": "maths-et-tiques.fr 20LogT1 — Méthode : Résoudre une équation avec des logarithmes",
+    "justification": "Détermine l'ensemble de définition, résout avec ln/exp comme réciproques puis vérifie les solutions : la méthode en trois temps de la leçon."
+  },
+  {
+    "code": "MATH-LNEXP-L15",
+    "youtubeId": "_fpPphstjYw",
+    "couverture": "exacte",
+    "source": "maths-et-tiques.fr 20LogT1 — Méthode : Résoudre une inéquation avec des logarithmes",
+    "justification": "Résout une inéquation en conservant le sens par ln puis croise avec le domaine, comme dans la leçon."
+  }
 ]

@@ -1,0 +1,836 @@
+{
+ "PC-ELEC-L1": {
+  "titre": "Mesurer une grandeur électrique",
+  "candidats": [
+   {
+    "id": "2nyb9AQ5MiY",
+    "titre": "Les grandeurs électriques",
+    "chaine": "Deux gouttes de culture",
+    "duree": "8:19",
+    "sec": 499,
+    "vues": "196 538 vues"
+   },
+   {
+    "id": "ME6Sw9bhvqQ",
+    "titre": "LA TENSION ÉLECTRIQUE (4eme)",
+    "chaine": "Roncherolles 76 PHY-CHI",
+    "duree": "6:33",
+    "sec": 393,
+    "vues": "212 081 vues"
+   },
+   {
+    "id": "XZ55qeeU5ls",
+    "titre": "COMMENT MESURER l'intensité ? ✅ La tension électrique ? 💪 Exercice | 4e, 3e | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "4:06",
+    "sec": 246,
+    "vues": "169 232 vues"
+   },
+   {
+    "id": "1Z0ffvKHdMo",
+    "titre": "L'INTENSITÉ DU COURANT ✅ Unité, mesure 💪 Cours | 4e, 3e | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "5:18",
+    "sec": 318,
+    "vues": "308 338 vues"
+   },
+   {
+    "id": "pESxGOzrd_M",
+    "titre": "INTENSITÉ et TENSION électrique 🔟/🔟 Quiz pour réviser | Collège | Physique Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "4:10",
+    "sec": 250,
+    "vues": "125 448 vues"
+   },
+   {
+    "id": "dCdU2uuuVfU",
+    "titre": "L'électricité - cours 06 - Mesures d'intensité et tension",
+    "chaine": "Le Catalyseur - Physique-Chimie",
+    "duree": "15:00",
+    "sec": 900,
+    "vues": "1 995 vues"
+   },
+   {
+    "id": "MMbmfNxF_WI",
+    "titre": "INTENSITÉ & TENSION ✅ Comment mesurer ? 💪 4e | 3e 🎯 Exercice BREVET",
+    "chaine": "Paul Olivier",
+    "duree": "2:58",
+    "sec": 178,
+    "vues": "43 015 vues"
+   },
+   {
+    "id": "iXHSz5ktHPE",
+    "titre": "Puissance, intensité et tension - Physique-Chimie - 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "3:51",
+    "sec": 231,
+    "vues": "301 684 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "tWyKUOjgO10",
+    "titre": "ÉLECTRICITÉ ✅ Circuit électrique simple + Schéma | Physique - Chimie | 6e | Sciences",
+    "chaine": "Paul Olivier",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "140 122 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L2": {
+  "titre": "Suivre le courant dans un circuit",
+  "candidats": [
+   {
+    "id": "tWyKUOjgO10",
+    "titre": "ÉLECTRICITÉ ✅ Circuit électrique simple + Schéma | Physique - Chimie | 6e | Sciences",
+    "chaine": "Paul Olivier",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "140 122 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "lAaqbOinnkY",
+    "titre": "Qu'est-ce qu'un COURT-CIRCUIT ? | Physique-Chimie (collège, lycée)",
+    "chaine": "Paul Olivier",
+    "duree": "4:29",
+    "sec": 269,
+    "vues": "167 110 vues"
+   },
+   {
+    "id": "GaNCghnuS0U",
+    "titre": "5e - COURS n° 15 - COURT-CIRCUIT - Physique-Chimie - Collège",
+    "chaine": "PCCL Physique Chimie Collège Lycée",
+    "duree": "4:18",
+    "sec": 258,
+    "vues": "5 880 vues"
+   },
+   {
+    "id": "ddSpAP_YOKI",
+    "titre": "Les circuits électriques - Physique-Chimie - Collège - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:27",
+    "sec": 267,
+    "vues": "7 921 vues"
+   },
+   {
+    "id": "_XfH6JgTWRE",
+    "titre": "Circuit électrique - Boucle de courant, noeud et branche (Physique-Chimie)",
+    "chaine": "Paul Olivier",
+    "duree": "3:03",
+    "sec": 183,
+    "vues": "57 019 vues"
+   },
+   {
+    "id": "k1-wjQAiStU",
+    "titre": "5e - COURS n° 12 - SENS DU COURANT - DIODE - Physique-Chimie - Collège",
+    "chaine": "PCCL Physique Chimie Collège Lycée",
+    "duree": "3:56",
+    "sec": 236,
+    "vues": "4 801 vues"
+   },
+   {
+    "id": "9hVgA4dBKBg",
+    "titre": "035 cinquième électricité - Le court circuit",
+    "chaine": "Cours de physique-chimie",
+    "duree": "1:13",
+    "sec": 73,
+    "vues": "50 951 vues"
+   },
+   {
+    "id": "8v45PFoXnng",
+    "titre": "Circuit électrique : dipôles en SÉRIE et en DÉRIVATION",
+    "chaine": "Paul Olivier",
+    "duree": "3:32",
+    "sec": 212,
+    "vues": "147 234 vues"
+   },
+   {
+    "id": "WKlCFshjQxo",
+    "titre": "CIRCUIT ÉLECTRIQUE ⚡ Série ou Dérivation ? 💡 ✅ La différence EXPLIQUÉE avec EXPÉRIENCES !",
+    "chaine": "Paul Olivier",
+    "duree": "8:02",
+    "sec": 482,
+    "vues": "19 037 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L3": {
+  "titre": "Utiliser la loi d’Ohm",
+  "candidats": [
+   {
+    "id": "R6WpdF0BO60",
+    "titre": "La loi d'Ohm : résistance, tension, intensité | Collège | Lycée | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "3:57",
+    "sec": 237,
+    "vues": "461 944 vues"
+   },
+   {
+    "id": "J2pUG_775kQ",
+    "titre": "cours 1S physique ch 8: loi d'ohm",
+    "chaine": "Thierry Collet",
+    "duree": "1:29",
+    "sec": 89,
+    "vues": "39 796 vues"
+   },
+   {
+    "id": "LIY45FZozlk",
+    "titre": "La LOI D'OHM ✅ Comment calculer facilement ? 💪 4e | 3e 🎯 Exercice BREVET Physique",
+    "chaine": "Paul Olivier",
+    "duree": "2:47",
+    "sec": 167,
+    "vues": "37 079 vues"
+   },
+   {
+    "id": "EFmRp07u680",
+    "titre": "La LOI D'OHM : formule & unités | Manipuler une formule",
+    "chaine": "Paul Olivier",
+    "duree": "3:21",
+    "sec": 201,
+    "vues": "66 667 vues"
+   },
+   {
+    "id": "9DLmLVP9D3s",
+    "titre": "Loi d’Ohm - Physique-Chimie - Seconde - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:39",
+    "sec": 279,
+    "vues": "10 107 vues"
+   },
+   {
+    "id": "cxQVkFKJwyk",
+    "titre": "Loi d'Ohm, loi des mailles, loi des nœuds ✏️ Exercice | Seconde | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "5:28",
+    "sec": 328,
+    "vues": "249 152 vues"
+   },
+   {
+    "id": "AEl17E4Xptk",
+    "titre": "Tension, Courant, Résistance : Quel est le Rapport ? La Loi d'Ohm - niveau collège brevet et lycée",
+    "chaine": "Physico Chimico Méthodo !",
+    "duree": "6:36",
+    "sec": 396,
+    "vues": "4 793 vues"
+   },
+   {
+    "id": "KsqCpdgLjO8",
+    "titre": "Résistance - LOI d'OHM - U=RI - Conducteur ohmique Courbe caractéristique Physique-Chimie 4e et 2e",
+    "chaine": "PCCL Physique Chimie Collège Lycée",
+    "duree": "6:55",
+    "sec": 415,
+    "vues": "90 624 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "EC6ifQ3zgzw",
+    "titre": "Caractéristiques d’un résistor, loi d’ohm.",
+    "chaine": "CMA Auvergne-Rhône-Alpes",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "14 176 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L4": {
+  "titre": "Additionner des résistances en série",
+  "candidats": [
+   {
+    "id": "M94AGQ5r4Vg",
+    "titre": "Calcul de résistance dans un circuit",
+    "chaine": "Académie de Sciences",
+    "duree": "13:09",
+    "sec": 789,
+    "vues": "173 933 vues"
+   },
+   {
+    "id": "faf3fWQgrBw",
+    "titre": "Comment trouver une résistance équivalente ?",
+    "chaine": "Mathuvu",
+    "duree": "14:46",
+    "sec": 886,
+    "vues": "125 430 vues"
+   },
+   {
+    "id": "q1oM1HVqqdE",
+    "titre": "ASSOCIATION de RESISTANCES - calculer une résistance équivalente",
+    "chaine": "Maths Physique EASY",
+    "duree": "3:41",
+    "sec": 221,
+    "vues": "8 511 vues"
+   },
+   {
+    "id": "-CNgAi0kAkk",
+    "titre": "Exercice sur les résistances équivalentes (résistances en série et en parallèle) - partie 1/2",
+    "chaine": "Méthode Maths",
+    "duree": "10:29",
+    "sec": 629,
+    "vues": "424 042 vues"
+   },
+   {
+    "id": "Fm7WX4mTRhU",
+    "titre": "2 Résistances en série et parallèle",
+    "chaine": "manuechenoz",
+    "duree": "5:00",
+    "sec": 300,
+    "vues": "788 vues"
+   },
+   {
+    "id": "R6WpdF0BO60",
+    "titre": "La loi d'Ohm : résistance, tension, intensité | Collège | Lycée | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "3:57",
+    "sec": 237,
+    "vues": "461 944 vues"
+   },
+   {
+    "id": "v_MSZKXpGWk",
+    "titre": "Déterminer une résistance équivalente en utilisant des associations en série ou en parallèle",
+    "chaine": "Electrocinétique",
+    "duree": "0:39",
+    "sec": 39,
+    "vues": "22 335 vues"
+   },
+   {
+    "id": "Bs__miK5b_I",
+    "titre": "Exercice : calcul de résistance équivalente n°2",
+    "chaine": "Emmanuel Boutin",
+    "duree": "3:41",
+    "sec": 221,
+    "vues": "60 962 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "8v45PFoXnng",
+    "titre": "Circuit électrique : dipôles en SÉRIE et en DÉRIVATION",
+    "chaine": "Paul Olivier",
+    "duree": "3:32",
+    "sec": 212,
+    "vues": "147 234 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L5": {
+  "titre": "Répartir le courant en parallèle",
+  "candidats": [
+   {
+    "id": "03MSbmVgt6c",
+    "titre": "Les circuits en série et en parallèle | Sciences | Alloprof",
+    "chaine": "Alloprof",
+    "duree": "4:09",
+    "sec": 249,
+    "vues": "306 682 vues"
+   },
+   {
+    "id": "WKlCFshjQxo",
+    "titre": "CIRCUIT ÉLECTRIQUE ⚡ Série ou Dérivation ? 💡 ✅ La différence EXPLIQUÉE avec EXPÉRIENCES !",
+    "chaine": "Paul Olivier",
+    "duree": "8:02",
+    "sec": 482,
+    "vues": "19 037 vues"
+   },
+   {
+    "id": "tWyKUOjgO10",
+    "titre": "ÉLECTRICITÉ ✅ Circuit électrique simple + Schéma | Physique - Chimie | 6e | Sciences",
+    "chaine": "Paul Olivier",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "140 122 vues"
+   },
+   {
+    "id": "DOsHBDztjto",
+    "titre": "⚡️LES CIRCUITS EN PARALLELE, EN SERIE, MIXTES ⚡️ ELECTRICITE (PHYSIQUE) 🔌",
+    "chaine": "SCIENCES POUR TOI",
+    "duree": "1:35",
+    "sec": 95,
+    "vues": "1 542 vues"
+   },
+   {
+    "id": "zoMkj8l4woY",
+    "titre": "Circuit en DÉRIVATION 💡 Définition, schéma et vocabulaire | Physique | Collège",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "2:28",
+    "sec": 148,
+    "vues": "9 229 vues"
+   },
+   {
+    "id": "8v45PFoXnng",
+    "titre": "Circuit électrique : dipôles en SÉRIE et en DÉRIVATION",
+    "chaine": "Paul Olivier",
+    "duree": "3:32",
+    "sec": 212,
+    "vues": "147 234 vues"
+   },
+   {
+    "id": "BEPH7KwveJg",
+    "titre": "Circuit en série ou en parallèle ? La différence en 4 minutes !",
+    "chaine": "Technologie en poche",
+    "duree": "4:27",
+    "sec": 267,
+    "vues": "82 018 vues"
+   },
+   {
+    "id": "4rrvqokL6bA",
+    "titre": "Circuits en parallèle et résolution de problèmes",
+    "chaine": "PatProf",
+    "duree": "9:52",
+    "sec": 592,
+    "vues": "622 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "M94AGQ5r4Vg",
+    "titre": "Calcul de résistance dans un circuit",
+    "chaine": "Académie de Sciences",
+    "duree": "13:09",
+    "sec": 789,
+    "vues": "173 933 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L6": {
+  "titre": "Distinguer puissance et énergie",
+  "candidats": [
+   {
+    "id": "xb8_58ZJBrA",
+    "titre": "Puissance et énergie - Physique-Chimie - 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "315 569 vues"
+   },
+   {
+    "id": "lno2ZKq40Q8",
+    "titre": "Energie et puissance électrique - Physique-Chimie - 1ère - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:53",
+    "sec": 293,
+    "vues": "242 067 vues"
+   },
+   {
+    "id": "8l60kVNdJVE",
+    "titre": "PUISSANCE et ÉNERGIE ÉLECTRIQUE ✅ Quiz de révision 🎯 4e | 3e | Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "21 307 vues"
+   },
+   {
+    "id": "a_7tFXn2A2U",
+    "titre": "Puissance et énergie électrique - Sciences 1ère ES/L - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:00",
+    "sec": 360,
+    "vues": "304 297 vues"
+   },
+   {
+    "id": "a2qlnKy3ytk",
+    "titre": "Electricité - Puissance et énergie - Première STI2D - Physique-Chimie - Chap 4 - Cours 1/2",
+    "chaine": "Monsieur Schmitt",
+    "duree": "5:01",
+    "sec": 301,
+    "vues": "16 880 vues"
+   },
+   {
+    "id": "tqzH6tfhmHs",
+    "titre": "Comment calculer l'ÉNERGIE ÉLECTRIQUE ? ✏️ Exercice | 3e | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "3:45",
+    "sec": 225,
+    "vues": "264 129 vues"
+   },
+   {
+    "id": "whcfTtK7SWM",
+    "titre": "L'ÉNERGIE électrique : calculs et unités | Physique-Chimie (collège, lycée)",
+    "chaine": "Paul Olivier",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "110 304 vues"
+   },
+   {
+    "id": "cnFC41q-XXk",
+    "titre": "Puissance et énergie en électricité | Physique-chimie au collège",
+    "chaine": "Monsieur Grégré",
+    "duree": "5:18",
+    "sec": 318,
+    "vues": "22 415 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L7": {
+  "titre": "Comprendre la capacité d’un condensateur",
+  "candidats": [
+   {
+    "id": "J-ww9ysjHLw",
+    "titre": "Qu'est ce que la Capacité d'un CONDENSATEUR ? | terminale spécialité physique chimie",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "3:13",
+    "sec": 193,
+    "vues": "26 671 vues"
+   },
+   {
+    "id": "UaS66RBS2oY",
+    "titre": "Cours 6 - Les condensateurs",
+    "chaine": "Sciences physiques à Stella",
+    "duree": "9:50",
+    "sec": 590,
+    "vues": "204 740 vues"
+   },
+   {
+    "id": "MUrG2sFIjYo",
+    "titre": "C'est Quoi Un Condensateur? - condensateurs",
+    "chaine": "Mentalité Ingénieur",
+    "duree": "8:42",
+    "sec": 522,
+    "vues": "1 435 484 vues"
+   },
+   {
+    "id": "Oc4mCOHoHmY",
+    "titre": "🔥 Cours Circuit RC Terminale ⚡ spécialité physique chimie - Charge & décharge du condensateur.",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "17 852 vues"
+   },
+   {
+    "id": "Eo-rJEtCKEc",
+    "titre": "Condensateur et capacité",
+    "chaine": "KhanAcademyFrancophone",
+    "duree": "5:41",
+    "sec": 341,
+    "vues": "29 642 vues"
+   },
+   {
+    "id": "nx2Xy1AEEzY",
+    "titre": "Le condensateur : principe de fonctionnement expliqué simplement ?",
+    "chaine": "Technologie en poche",
+    "duree": "4:03",
+    "sec": 243,
+    "vues": "204 957 vues"
+   },
+   {
+    "id": "4jqu5cT4d5A",
+    "titre": "Physique-Chimie Terminale - Comment mesurer la capacité d’un condensateur électrique ?",
+    "chaine": "Annabac",
+    "duree": "3:12",
+    "sec": 192,
+    "vues": "3 640 vues"
+   },
+   {
+    "id": "YfDMvq4BsWc",
+    "titre": "4 Capacité d'un condensateur",
+    "chaine": "TakiAcademy Pack Silver",
+    "duree": "8:23",
+    "sec": 503,
+    "vues": "7 231 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "kHUk3P36TgY",
+    "titre": "Le CONDENSATEUR - INTENSITE - TENSION - CHARGE - Physique",
+    "chaine": "Maths Physique EASY",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "10 544 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L8": {
+  "titre": "Associer des condensateurs",
+  "candidats": [
+   {
+    "id": "UaS66RBS2oY",
+    "titre": "Cours 6 - Les condensateurs",
+    "chaine": "Sciences physiques à Stella",
+    "duree": "9:50",
+    "sec": 590,
+    "vues": "204 740 vues"
+   },
+   {
+    "id": "J-ww9ysjHLw",
+    "titre": "Qu'est ce que la Capacité d'un CONDENSATEUR ? | terminale spécialité physique chimie",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "3:13",
+    "sec": 193,
+    "vues": "26 671 vues"
+   },
+   {
+    "id": "fWaar2iYtk8",
+    "titre": "Terminale physique chimie Vers le supérieur: Association de condensateurs",
+    "chaine": "PROPANONE",
+    "duree": "7:20",
+    "sec": 440,
+    "vues": "119 vues"
+   },
+   {
+    "id": "M4TVygMu9Gw",
+    "titre": "ASSOCIATION DE CONDENSATEURS",
+    "chaine": "SIMON PAUL BANGBO NDOBO : MINISTRE GUERRE AFRIQUE",
+    "duree": "4:46",
+    "sec": 286,
+    "vues": "1 316 vues"
+   },
+   {
+    "id": "bAM0QVpcBuc",
+    "titre": "Association de CONDENSATEURS (série & parallèle) | Exercice corrigé | Eléctricté",
+    "chaine": "Maths Physique EASY",
+    "duree": "3:27",
+    "sec": 207,
+    "vues": "275 vues"
+   },
+   {
+    "id": "9cx2B573Exo",
+    "titre": "Association de CONDENSATEURS : capacité équivalente série parallèle | science et technologie",
+    "chaine": "Maths Physique EASY",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "260 vues"
+   },
+   {
+    "id": "vAWiOkcXT1I",
+    "titre": "Cours - Première S - Physique / Chimie : P8 Le condensateur / Association de condensateurs",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "11:17",
+    "sec": 677,
+    "vues": "8 689 vues"
+   },
+   {
+    "id": "MUrG2sFIjYo",
+    "titre": "C'est Quoi Un Condensateur? - condensateurs",
+    "chaine": "Mentalité Ingénieur",
+    "duree": "8:42",
+    "sec": 522,
+    "vues": "1 435 484 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "nx2Xy1AEEzY",
+    "titre": "Le condensateur : principe de fonctionnement expliqué simplement ?",
+    "chaine": "Technologie en poche",
+    "duree": "4:03",
+    "sec": 243,
+    "vues": "204 957 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L9": {
+  "titre": "Lire la charge d’un circuit RC",
+  "candidats": [
+   {
+    "id": "Oc4mCOHoHmY",
+    "titre": "🔥 Cours Circuit RC Terminale ⚡ spécialité physique chimie - Charge & décharge du condensateur.",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "17 852 vues"
+   },
+   {
+    "id": "zIILy18FCvg",
+    "titre": "Circuit RC - TLE - Spé PHYSIQUE",
+    "chaine": "David Latouche",
+    "duree": "11:20",
+    "sec": 680,
+    "vues": "15 157 vues"
+   },
+   {
+    "id": "G-o2TC-YbkM",
+    "titre": "Etude d'un circuit RC",
+    "chaine": "Profcoudert",
+    "duree": "12:50",
+    "sec": 770,
+    "vues": "164 149 vues"
+   },
+   {
+    "id": "fu9p6Zzu7to",
+    "titre": "Circuit RC ✅ Temps caractéristique condensateur 🎯 BAC Polynésie 2023 | Terminale spé",
+    "chaine": "Paul Olivier",
+    "duree": "2:59",
+    "sec": 179,
+    "vues": "76 474 vues"
+   },
+   {
+    "id": "GUfV8CUTwwA",
+    "titre": "Méthode : Déterminer tau (temps caractéristique) circuit RC condensateur",
+    "chaine": "e-profs - Physique Chimie",
+    "duree": "2:23",
+    "sec": 143,
+    "vues": "64 492 vues"
+   },
+   {
+    "id": "42YHb7T8yek",
+    "titre": "Ton cours complet sur la dynamique des circuits électriques (RC) pour la terminale spé physique",
+    "chaine": "Les génies des sciences",
+    "duree": "10:28",
+    "sec": 628,
+    "vues": "124 679 vues"
+   },
+   {
+    "id": "q1dIq3T4jZA",
+    "titre": "Circuit RC ✅ Solution équation différentielle 🎯 BAC Physique - Chimie | Terminale spé",
+    "chaine": "Paul Olivier",
+    "duree": "3:07",
+    "sec": 187,
+    "vues": "166 038 vues"
+   },
+   {
+    "id": "HCYp_cL5wjE",
+    "titre": "Temps caractéristique circuit RC SP#64",
+    "chaine": "Laissemoitaider Vite Fait !",
+    "duree": "3:47",
+    "sec": 227,
+    "vues": "4 061 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "_I3WkrjCO6Q",
+    "titre": "Circuit RC - Charge d'un condensateur - Equation différentielle de la charge du condensateur.",
+    "chaine": "Maths&Sciences - AB",
+    "duree": "5:55",
+    "sec": 355,
+    "vues": "1 859 vues"
+   }
+  ]
+ },
+ "PC-ELEC-L10": {
+  "titre": "Énergie stockée et décharge",
+  "candidats": [
+   {
+    "id": "xb8_58ZJBrA",
+    "titre": "Puissance et énergie - Physique-Chimie - 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "315 569 vues"
+   },
+   {
+    "id": "ph7oolw5ySQ",
+    "titre": "Stocker l'énergie électrique - Sciences - Terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "9:06",
+    "sec": 546,
+    "vues": "17 453 vues"
+   },
+   {
+    "id": "zlyIYtWWCkg",
+    "titre": "Énergie cinétique et vitesse | Collège | Lycée | Physique",
+    "chaine": "Paul Olivier",
+    "duree": "5:35",
+    "sec": 335,
+    "vues": "397 774 vues"
+   },
+   {
+    "id": "iz3qmgfCr8Q",
+    "titre": "Cours - Première S - Physique / Chimie : Energie Cinétique / Notion d'énergie cinétique / M.Diop",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "13:23",
+    "sec": 803,
+    "vues": "85 290 vues"
+   },
+   {
+    "id": "IqXAeWoCv5A",
+    "titre": "7 FORMES D'ÉNERGIE ✅ à connaitre | Physique Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "2:34",
+    "sec": 154,
+    "vues": "204 594 vues"
+   },
+   {
+    "id": "whcfTtK7SWM",
+    "titre": "L'ÉNERGIE électrique : calculs et unités | Physique-Chimie (collège, lycée)",
+    "chaine": "Paul Olivier",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "110 304 vues"
+   },
+   {
+    "id": "QNvdGzKgq0I",
+    "titre": "L'énergie (physique-chimie - 4ème)",
+    "chaine": "Romain Bourdel-Chapuzot",
+    "duree": "7:29",
+    "sec": 449,
+    "vues": "35 196 vues"
+   },
+   {
+    "id": "VXihCw_Ryxk",
+    "titre": "Conversion de l'énergie stockée dans la matière organique - les réactions de combustion - première",
+    "chaine": "Les génies des sciences",
+    "duree": "10:15",
+    "sec": 615,
+    "vues": "25 010 vues"
+   },
+   {
+    "id": "Ud2HUCxYya8",
+    "titre": "Dipôles et circuits électriques 💡 | Collège | Physique-Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "5:44",
+    "sec": 344,
+    "vues": "357 692 vues"
+   },
+   {
+    "id": "tWyKUOjgO10",
+    "titre": "ÉLECTRICITÉ ✅ Circuit électrique simple + Schéma | Physique - Chimie | 6e | Sciences",
+    "chaine": "Paul Olivier",
+    "duree": "4:11",
+    "sec": 251,
+    "vues": "140 122 vues"
+   }
+  ]
+ }
+}

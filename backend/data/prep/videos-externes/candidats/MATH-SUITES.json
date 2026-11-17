@@ -1,0 +1,889 @@
+{
+ "MATH-SUITES-L1": {
+  "titre": "Une suite : un nombre à chaque rang",
+  "candidats": [
+   {
+    "id": "Vks5eX8QMD8",
+    "titre": "Les suites : TOUT LE PROGRAMME EN 5 MINUTES - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "356 692 vues"
+   },
+   {
+    "id": "dpHd-kc5xGw",
+    "titre": "RANG DES CHIFFRES D'UN NOMBRE ENTIER NATUREL",
+    "chaine": "Matπs_α",
+    "duree": "8:00",
+    "sec": 480,
+    "vues": "127 vues"
+   },
+   {
+    "id": "rdSxmqatY1g",
+    "titre": "5 minutes avant ton contrôle - Fiche sur les suites",
+    "chaine": "Hedacademy",
+    "duree": "5:51",
+    "sec": 351,
+    "vues": "513 262 vues"
+   },
+   {
+    "id": "7kdCpfjRfPM",
+    "titre": "Les suites de nombres CP CE1 - Itérer une suite - Cycle 2 - Maths - Mathématiques - Numération",
+    "chaine": "Maître Lucas",
+    "duree": "7:18",
+    "sec": 438,
+    "vues": "46 284 vues"
+   },
+   {
+    "id": "icGHAYyXaE4",
+    "titre": "Reconnaître le rang des chiffres - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "5:39",
+    "sec": 339,
+    "vues": "201 405 vues"
+   },
+   {
+    "id": "NYD4iynRWMA",
+    "titre": "Reconnaitre le rang des chiffres dans un entier - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "9:10",
+    "sec": 550,
+    "vues": "93 474 vues"
+   },
+   {
+    "id": "cr8EwYSOALo",
+    "titre": "Déterminer le rang des chiffres d'un nombre (Tableau de numération)",
+    "chaine": "Académie des maths",
+    "duree": "3:33",
+    "sec": 213,
+    "vues": "1 885 vues"
+   },
+   {
+    "id": "Rr-mVRnG1yg",
+    "titre": "RÉSUMÉ DE COURS SUR SUITES ET NOMBRES RÉEL NIVEAU LICENCE",
+    "chaine": "L'ESPRIT CURIEUX",
+    "duree": "4:46",
+    "sec": 286,
+    "vues": "199 vues"
+   },
+   {
+    "id": "vG8p8oRqHMw",
+    "titre": "Analyse 1 : Suites numériques. Suites extraites ou sous suites. Cours",
+    "chaine": "Maths avec Ammar",
+    "duree": "8:53",
+    "sec": 533,
+    "vues": "65 476 vues"
+   },
+   {
+    "id": "YfWlpTLo9UQ",
+    "titre": "CalculatriceNumWorks-Obtenir le terme de rang n d'une suite numérique",
+    "chaine": "Maths chez vous",
+    "duree": "1:57",
+    "sec": 117,
+    "vues": "661 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L2": {
+  "titre": "Formule directe ou calcul de proche en proche",
+  "candidats": [
+   {
+    "id": "OrdcdWpFKbs",
+    "titre": "Les Suites - Calculer les premiers termes",
+    "chaine": "Hedacademy",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "127 374 vues"
+   },
+   {
+    "id": "GzbwS6Imay0",
+    "titre": "Cours: les suites numériques (arithmétiques et géométriques)",
+    "chaine": "Le prof de maths sciences",
+    "duree": "10:28",
+    "sec": 628,
+    "vues": "2 383 vues"
+   },
+   {
+    "id": "zH_ddQFLPTM",
+    "titre": "💥 Tle S2 | MATHS : SUITES NUMERIQUES (Ex. 1 Epreuve Marathon)",
+    "chaine": "Elite Science",
+    "duree": "12:09",
+    "sec": 729,
+    "vues": "44 134 vues"
+   },
+   {
+    "id": "Vks5eX8QMD8",
+    "titre": "Les suites : TOUT LE PROGRAMME EN 5 MINUTES - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "356 692 vues"
+   },
+   {
+    "id": "9xdPLv2PYkU",
+    "titre": "✅ Suites numériques. calculer termes d'une suite numérique. u0=3 u1=6.calculer U2 Un+2=1/(Un+1-Un)",
+    "chaine": "Professeur Raoul",
+    "duree": "1:56",
+    "sec": 116,
+    "vues": "173 vues"
+   },
+   {
+    "id": "UmAcKtaAu0A",
+    "titre": "Les suites numériques",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "6 862 vues"
+   },
+   {
+    "id": "7VLQqqMTlgw",
+    "titre": "Suite numerique en mathématiques",
+    "chaine": "EXERCICES MATHS",
+    "duree": "1:51",
+    "sec": 111,
+    "vues": "544 vues"
+   },
+   {
+    "id": "JDEy6QxV3BM",
+    "titre": "Suites numériques: Convergence des suites arithmétiques et géométriques et de la somme",
+    "chaine": "Mr 2X",
+    "duree": "6:18",
+    "sec": 378,
+    "vues": "77 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L3": {
+  "titre": "Suite arithmétique : ajouter toujours le même nombre",
+  "candidats": [
+   {
+    "id": "4696gJoJaAk",
+    "titre": "TOUT sur les Suites Arithmétiques en 2 minutes ! - Maths",
+    "chaine": "NOVELCLASS",
+    "duree": "2:14",
+    "sec": 134,
+    "vues": "172 467 vues"
+   },
+   {
+    "id": "9092FIghP6o",
+    "titre": "Suite arithmétique, Determiner le nombre de termes",
+    "chaine": "Éducation Plus",
+    "duree": "8:03",
+    "sec": 483,
+    "vues": "11 228 vues"
+   },
+   {
+    "id": "UYZXFf6HYAM",
+    "titre": "Suite arithmétique",
+    "chaine": "Éducation Plus",
+    "duree": "9:34",
+    "sec": 574,
+    "vues": "35 544 vues"
+   },
+   {
+    "id": "8lgWHAwawNg",
+    "titre": "Les suites arithmétiques",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "2:50",
+    "sec": 170,
+    "vues": "9 548 vues"
+   },
+   {
+    "id": "GBLhm8Hg290",
+    "titre": "Mémo - Les suites arithmétiques",
+    "chaine": "Droles2Maths",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "17 135 vues"
+   },
+   {
+    "id": "R0VFkG7IBHg",
+    "titre": "C'est quoi une suite arithmétique? Définition.",
+    "chaine": "KIFFELESMATHS : L'école de maths en ligne",
+    "duree": "2:26",
+    "sec": 146,
+    "vues": "9 552 vues"
+   },
+   {
+    "id": "vonDsJeec0Q",
+    "titre": "🔴 Suites arithmétiques : Formule de calcul du n-ième terme Un",
+    "chaine": "Maths la simplicité",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "1 841 vues"
+   },
+   {
+    "id": "WeDtB9ZUTHs",
+    "titre": "Calculer la somme des termes d'une suite arithmétique (1) - Première",
+    "chaine": "Yvan Monka",
+    "duree": "3:10",
+    "sec": 190,
+    "vues": "729 701 vues"
+   },
+   {
+    "id": "rdSxmqatY1g",
+    "titre": "5 minutes avant ton contrôle - Fiche sur les suites",
+    "chaine": "Hedacademy",
+    "duree": "5:51",
+    "sec": 351,
+    "vues": "513 262 vues"
+   },
+   {
+    "id": "OrdcdWpFKbs",
+    "titre": "Les Suites - Calculer les premiers termes",
+    "chaine": "Hedacademy",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "127 374 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L4": {
+  "titre": "Additionner des termes arithmétiques",
+  "candidats": [
+   {
+    "id": "HJJUq4XpWH0",
+    "titre": "Calculer une SOMME de terme de suites ARITHMÉTIQUES - Première",
+    "chaine": "Galilee ac",
+    "duree": "4:28",
+    "sec": 268,
+    "vues": "58 410 vues"
+   },
+   {
+    "id": "OrdcdWpFKbs",
+    "titre": "Les Suites - Calculer les premiers termes",
+    "chaine": "Hedacademy",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "127 374 vues"
+   },
+   {
+    "id": "WeDtB9ZUTHs",
+    "titre": "Calculer la somme des termes d'une suite arithmétique (1) - Première",
+    "chaine": "Yvan Monka",
+    "duree": "3:10",
+    "sec": 190,
+    "vues": "729 701 vues"
+   },
+   {
+    "id": "-xfTMAVLtXI",
+    "titre": "Calculer une SOMME de terme de suites ARITHMÉTIQUES - Première",
+    "chaine": "Galilee ac",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "17 032 vues"
+   },
+   {
+    "id": "9092FIghP6o",
+    "titre": "Suite arithmétique, Determiner le nombre de termes",
+    "chaine": "Éducation Plus",
+    "duree": "8:03",
+    "sec": 483,
+    "vues": "11 228 vues"
+   },
+   {
+    "id": "AmDjdNfRRyU",
+    "titre": "Suite numérique, Formule explicite",
+    "chaine": "Éducation Plus",
+    "duree": "8:32",
+    "sec": 512,
+    "vues": "25 859 vues"
+   },
+   {
+    "id": "jloh6PZDMJs",
+    "titre": "Suite arithmétique : Somme des termes et nombre de termes",
+    "chaine": "Pikomath",
+    "duree": "5:41",
+    "sec": 341,
+    "vues": "35 064 vues"
+   },
+   {
+    "id": "q9kcwb6f4Bw",
+    "titre": "Calculer la somme des termes d'une suite arithmétique - Terminale Techno",
+    "chaine": "Yvan Monka",
+    "duree": "4:20",
+    "sec": 260,
+    "vues": "189 940 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L5": {
+  "titre": "Suite géométrique : multiplier toujours par le même nombre",
+  "candidats": [
+   {
+    "id": "Gbvu9BLmn88",
+    "titre": "Comprendre les suites géométriques",
+    "chaine": "Hedacademy",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "313 385 vues"
+   },
+   {
+    "id": "qRM4p0OSE2E",
+    "titre": "Suites géométriques : multiplier à chaque fois",
+    "chaine": "CommeUnJeu",
+    "duree": "3:29",
+    "sec": 209,
+    "vues": "24 vues"
+   },
+   {
+    "id": "XzB31w9LGHk",
+    "titre": "Multiplication géométrique avec Lucie",
+    "chaine": "association Cité des Géométries",
+    "duree": "3:00",
+    "sec": 180,
+    "vues": "657 vues"
+   },
+   {
+    "id": "yw3alr00vjk",
+    "titre": "multiplier les nombres relatifs. Mathématiques collège. niveau 4ème",
+    "chaine": "Bonnes Notes en Maths",
+    "duree": "6:11",
+    "sec": 371,
+    "vues": "685 vues"
+   },
+   {
+    "id": "D8EHAuSblvM",
+    "titre": "Suites : multiplier ou diviser par le même nombre",
+    "chaine": "CommeUnJeu",
+    "duree": "2:12",
+    "sec": 132,
+    "vues": "18 vues"
+   },
+   {
+    "id": "nUvqb525-00",
+    "titre": "Suites géométriques - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "4:14",
+    "sec": 254,
+    "vues": "1 535 vues"
+   },
+   {
+    "id": "n8hkCjFgQ7I",
+    "titre": "Les suites géométriques | Spé maths 1re",
+    "chaine": "Kompri · cours de lycée",
+    "duree": "2:55",
+    "sec": 175,
+    "vues": "5 vues"
+   },
+   {
+    "id": "0KhXZ-fnPzU",
+    "titre": "Les suites géométriques",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "2:44",
+    "sec": 164,
+    "vues": "1 540 vues"
+   },
+   {
+    "id": "ZOATSNCxPZY",
+    "titre": "Suite Géométrique",
+    "chaine": "Éducation Plus",
+    "duree": "5:50",
+    "sec": 350,
+    "vues": "13 416 vues"
+   },
+   {
+    "id": "0LC-dfM-vs8",
+    "titre": "Mémo - Les suites géométriques",
+    "chaine": "Droles2Maths",
+    "duree": "4:33",
+    "sec": 273,
+    "vues": "17 981 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L6": {
+  "titre": "Additionner des termes géométriques",
+  "candidats": [
+   {
+    "id": "mAsU47aPDXk",
+    "titre": "Additionner des fractions ✅ exemples faciles | Maths",
+    "chaine": "Paul Olivier",
+    "duree": "3:54",
+    "sec": 234,
+    "vues": "829 719 vues"
+   },
+   {
+    "id": "_BjEOTi-2z8",
+    "titre": "Calculer la somme des termes d'une suite géométrique (1) - Terminale Techno",
+    "chaine": "Yvan Monka",
+    "duree": "4:25",
+    "sec": 265,
+    "vues": "193 841 vues"
+   },
+   {
+    "id": "VlUbPCuRAoY",
+    "titre": "Comprendre les Sommes",
+    "chaine": "Le Raton",
+    "duree": "9:12",
+    "sec": 552,
+    "vues": "68 628 vues"
+   },
+   {
+    "id": "gUkOjvAiZGA",
+    "titre": "Calculer la somme des termes d'une suite géométrique (3) - Première",
+    "chaine": "Yvan Monka",
+    "duree": "3:13",
+    "sec": 193,
+    "vues": "429 548 vues"
+   },
+   {
+    "id": "WeDtB9ZUTHs",
+    "titre": "Calculer la somme des termes d'une suite arithmétique (1) - Première",
+    "chaine": "Yvan Monka",
+    "duree": "3:10",
+    "sec": 190,
+    "vues": "729 701 vues"
+   },
+   {
+    "id": "Jzwz_b-d6z8",
+    "titre": "Calculer une SOMME de terme de suites GÉOMÉTRIQUES - Première",
+    "chaine": "Galilee ac",
+    "duree": "2:25",
+    "sec": 145,
+    "vues": "27 367 vues"
+   },
+   {
+    "id": "pBAOi2-dJ30",
+    "titre": "Comment utiliser la notation Σ (sigma) pour les sommes ?",
+    "chaine": "Mathemax",
+    "duree": "3:28",
+    "sec": 208,
+    "vues": "13 513 vues"
+   },
+   {
+    "id": "-l08ecn53GQ",
+    "titre": "🔴 Suites géométriques : Formule du calcul du n-ième terme Un",
+    "chaine": "Maths la simplicité",
+    "duree": "3:58",
+    "sec": 238,
+    "vues": "362 vues"
+   },
+   {
+    "id": "OrdcdWpFKbs",
+    "titre": "Les Suites - Calculer les premiers termes",
+    "chaine": "Hedacademy",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "127 374 vues"
+   },
+   {
+    "id": "azM5OY32128",
+    "titre": "Suite numérique: determiner la raison et le premier terme de la suite géométrique",
+    "chaine": "Éducation Plus",
+    "duree": "7:27",
+    "sec": 447,
+    "vues": "13 119 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L7": {
+  "titre": "Savoir si une suite monte ou descend",
+  "candidats": [
+   {
+    "id": "pHq6oClOylU",
+    "titre": "Reconnaitre une suite arithmétique et une suite géométrique - Première",
+    "chaine": "Yvan Monka",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "876 439 vues"
+   },
+   {
+    "id": "Gbvu9BLmn88",
+    "titre": "Comprendre les suites géométriques",
+    "chaine": "Hedacademy",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "313 385 vues"
+   },
+   {
+    "id": "UYZXFf6HYAM",
+    "titre": "Suite arithmétique",
+    "chaine": "Éducation Plus",
+    "duree": "9:34",
+    "sec": 574,
+    "vues": "35 557 vues"
+   },
+   {
+    "id": "lGvPVOm3eGk",
+    "titre": "Suites arithmétiques et géométriques : reconnaître le modèle | Cours Première Maths spécialité",
+    "chaine": "Lycée & Bac",
+    "duree": "10:46",
+    "sec": 646,
+    "vues": "5 vues"
+   },
+   {
+    "id": "Vks5eX8QMD8",
+    "titre": "Les suites : TOUT LE PROGRAMME EN 5 MINUTES - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "356 692 vues"
+   },
+   {
+    "id": "7OkCnme--VY",
+    "titre": "Démontrer qu'une suite est arithmétique",
+    "chaine": "Hedacademy",
+    "duree": "8:48",
+    "sec": 528,
+    "vues": "184 443 vues"
+   },
+   {
+    "id": "QNyxESToCP8",
+    "titre": "Les suites - L'essentiel du cours complet - 1ère et Terminal - Spé maths",
+    "chaine": "Le génie des maths",
+    "duree": "12:10",
+    "sec": 730,
+    "vues": "73 362 vues"
+   },
+   {
+    "id": "L4UFMgpiRHk",
+    "titre": "Montrer qu'une suite est géométrique - TYPE BAC",
+    "chaine": "Hedacademy",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "119 844 vues"
+   },
+   {
+    "id": "lThMuQMFZXE",
+    "titre": "Suites EXPLICITES ou RÉCURRENTES ? - Première",
+    "chaine": "Galilee ac",
+    "duree": "8:16",
+    "sec": 496,
+    "vues": "36 420 vues"
+   },
+   {
+    "id": "O55KKyj9tuA",
+    "titre": "Les suites numériques. Introduction.",
+    "chaine": "KIFFELESMATHS : L'école de maths en ligne",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "66 687 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L8": {
+  "titre": "Comprendre une limite de suite",
+  "candidats": [
+   {
+    "id": "Eo6cc3344PQ",
+    "titre": "Calculer la LIMITE d'une suite - COMPRENDRE",
+    "chaine": "Hedacademy",
+    "duree": "10:35",
+    "sec": 635,
+    "vues": "44 337 vues"
+   },
+   {
+    "id": "wV_V1EiI3eI",
+    "titre": "COMPRENDRE LES LIMITES DE FONCTIONS - Term Spé",
+    "chaine": "Hedacademy",
+    "duree": "7:28",
+    "sec": 448,
+    "vues": "248 463 vues"
+   },
+   {
+    "id": "jmGDbo6u-VY",
+    "titre": "Limite d'une suite • Comprendre la définition avec epsilon et les quantificateurs • ∀ ∃ prépa MPSI",
+    "chaine": "jaicompris Maths",
+    "duree": "7:26",
+    "sec": 446,
+    "vues": "56 552 vues"
+   },
+   {
+    "id": "GZnXze0Uh9Q",
+    "titre": "limite d'une suite • comprendre la définition cours • Terminale S",
+    "chaine": "jaicompris Maths",
+    "duree": "8:21",
+    "sec": 501,
+    "vues": "46 093 vues"
+   },
+   {
+    "id": "jAbYd8cP-Q0",
+    "titre": "Généralités sur les limites de suite - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "3:29",
+    "sec": 209,
+    "vues": "576 vues"
+   },
+   {
+    "id": "0CC-EqOH92c",
+    "titre": "Comprendre la notion de LIMITE d'une SUITE - Première",
+    "chaine": "Yvan Monka",
+    "duree": "12:29",
+    "sec": 749,
+    "vues": "105 403 vues"
+   },
+   {
+    "id": "Vks5eX8QMD8",
+    "titre": "Les suites : TOUT LE PROGRAMME EN 5 MINUTES - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "356 692 vues"
+   },
+   {
+    "id": "6zZikMXi1xg",
+    "titre": "limite de suite géométrique - comprendre le cours et exemple - terminale S Maths",
+    "chaine": "jaicompris Maths",
+    "duree": "8:22",
+    "sec": 502,
+    "vues": "47 408 vues"
+   },
+   {
+    "id": "8SaU79Zl3r4",
+    "titre": "Suites numériques : tout comprendre sur les limites, variations et convergence (Analyse L1)",
+    "chaine": "Phassyl - Maths & Physique à l'université",
+    "duree": "11:28",
+    "sec": 688,
+    "vues": "2 833 vues"
+   },
+   {
+    "id": "YMxHmXdknWQ",
+    "titre": "SUITES NUMÉRIQUES : Calcul de limite des suites #Ep_6",
+    "chaine": "Tioh Academy",
+    "duree": "5:54",
+    "sec": 354,
+    "vues": "1 759 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L9": {
+  "titre": "Prouver une propriété par récurrence",
+  "candidats": [
+   {
+    "id": "P3vwDSTqsXQ",
+    "titre": "Démonstration par recurrence",
+    "chaine": "Éducation Plus",
+    "duree": "14:12",
+    "sec": 852,
+    "vues": "93 151 vues"
+   },
+   {
+    "id": "3eq423TrOoM",
+    "titre": "Démonstration par récurrence - Term. Spé",
+    "chaine": "Hedacademy",
+    "duree": "6:39",
+    "sec": 399,
+    "vues": "170 695 vues"
+   },
+   {
+    "id": "i3z1lg40JOo",
+    "titre": "Raisonnement par récurrence - Exercice 1 - Maths terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:37",
+    "sec": 277,
+    "vues": "323 367 vues"
+   },
+   {
+    "id": "mVzUVUTycBM",
+    "titre": "Cours articulé de mathématiques — Méthode 2 : prouver une propriété par récurrence (chapitre 15)",
+    "chaine": "Éditions Clementinium",
+    "duree": "4:36",
+    "sec": 276,
+    "vues": "5 vues"
+   },
+   {
+    "id": "3rNNyqJTf24",
+    "titre": "Démontrer une ÉGALITÉ complexe par Récurrence - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "10:18",
+    "sec": 618,
+    "vues": "59 862 vues"
+   },
+   {
+    "id": "NXHqtN59wSk",
+    "titre": "Raisonnement par récurrence 🚀 Comprendre la méthode 💪 Cours + Exemple détaillé 💥 Terminale spé maths",
+    "chaine": "jaicompris Maths",
+    "duree": "12:30",
+    "sec": 750,
+    "vues": "43 162 vues"
+   },
+   {
+    "id": "QiqtCOH7Ur4",
+    "titre": "Démonstration par récurrence - Spé Maths",
+    "chaine": "digiSchool Lycée",
+    "duree": "9:18",
+    "sec": 558,
+    "vues": "13 269 vues"
+   },
+   {
+    "id": "G3nX7LwQSNQ",
+    "titre": "Raisonnement par récurrence : cet exercice est incontournable (somme des entiers)",
+    "chaine": "Maths moi ça !",
+    "duree": "8:15",
+    "sec": 495,
+    "vues": "10 143 vues"
+   },
+   {
+    "id": "QXE_WJUa688",
+    "titre": "SUITE NUMÉRIQUE_*Démonstration par récurrence*_Comment faire ?_Demo par le Savant ACHI.",
+    "chaine": "Le savant ACHI",
+    "duree": "11:31",
+    "sec": 691,
+    "vues": "78 410 vues"
+   },
+   {
+    "id": "TeRTbJxu25A",
+    "titre": "Démontrer par Récurrence qu'une suite est POSITIVE ou NÉGATIVE - Exercice Corrigé - Terminale",
+    "chaine": "Galilee ac",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "15 655 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L10": {
+  "titre": "Prouver la convergence avant de chercher la limite",
+  "candidats": [
+   {
+    "id": "33CreRZlkkQ",
+    "titre": "[EM#5] Unicité de la limite & Caractère borné des suites convergentes (Démonstration)",
+    "chaine": "Øljen – Les maths en finesse",
+    "duree": "7:49",
+    "sec": 469,
+    "vues": "36 355 vues"
+   },
+   {
+    "id": "Eo6cc3344PQ",
+    "titre": "Calculer la LIMITE d'une suite - COMPRENDRE",
+    "chaine": "Hedacademy",
+    "duree": "10:35",
+    "sec": 635,
+    "vues": "44 337 vues"
+   },
+   {
+    "id": "0FOFjHu1d4c",
+    "titre": "Comment calculer la limite d'une suite qui converge grâce à la formule de récurrence ?",
+    "chaine": "les Maths en Tongs",
+    "duree": "4:23",
+    "sec": 263,
+    "vues": "7 379 vues"
+   },
+   {
+    "id": "7ATDHczA_5A",
+    "titre": "SUITES : Limite d'une suite, convergence, divergence",
+    "chaine": "Campus XYZ",
+    "duree": "5:15",
+    "sec": 315,
+    "vues": "3 403 vues"
+   },
+   {
+    "id": "00WMMoTUQAs",
+    "titre": "Comment montrer qu'une suite est convergente avec le théorème de convergence monotone ?",
+    "chaine": "Mathemax",
+    "duree": "5:26",
+    "sec": 326,
+    "vues": "74 789 vues"
+   },
+   {
+    "id": "mo5Ay_ZxM20",
+    "titre": "SUITES - CONVERGENCE - Définition",
+    "chaine": "AM Maths (FaisonsDesMaths)",
+    "duree": "6:31",
+    "sec": 391,
+    "vues": "17 694 vues"
+   },
+   {
+    "id": "475F61FM_2Q",
+    "titre": "BAC 2026 Les suites numériques — Terminale spécialité (récurrence, limites, convergence monotone)",
+    "chaine": "MathsProfessor",
+    "duree": "8:43",
+    "sec": 523,
+    "vues": "65 vues"
+   },
+   {
+    "id": "OP0iX9TAH5k",
+    "titre": "Limite d’une suite par définition : comprendre la convergence et la méthode (Analyse 1)",
+    "chaine": "AM Maths Academy",
+    "duree": "4:42",
+    "sec": 282,
+    "vues": "216 vues"
+   }
+  ]
+ },
+ "MATH-SUITES-L11": {
+  "titre": "Transformer une récurrence affine en suite géométrique",
+  "candidats": [
+   {
+    "id": "Gbvu9BLmn88",
+    "titre": "Comprendre les suites géométriques",
+    "chaine": "Hedacademy",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "313 385 vues"
+   },
+   {
+    "id": "7wVG6b1llUQ",
+    "titre": "Forme EXPLICITE d'une suite arithmético-géométrique",
+    "chaine": "Galilee ac",
+    "duree": "7:26",
+    "sec": 446,
+    "vues": "29 035 vues"
+   },
+   {
+    "id": "6M81jigXkGo",
+    "titre": "BAC PRO suite géométrique - Formule de récurrence",
+    "chaine": "Moa",
+    "duree": "2:21",
+    "sec": 141,
+    "vues": "45 vues"
+   },
+   {
+    "id": "vFRjPYSPksw",
+    "titre": "Déterminer une relation de récurrence pour une suite définie par un motif géométrique (bis)",
+    "chaine": "Maths pell zo",
+    "duree": "5:19",
+    "sec": 319,
+    "vues": "405 vues"
+   },
+   {
+    "id": "DBWOmpfh3Sg",
+    "titre": "Etude d’une suite récurrente grâce à une suite auxiliaire géométrique - L1 Suites et récurrence",
+    "chaine": "Les maths par l'exemple",
+    "duree": "11:30",
+    "sec": 690,
+    "vues": "3 735 vues"
+   },
+   {
+    "id": "lThMuQMFZXE",
+    "titre": "Suites EXPLICITES ou RÉCURRENTES ? - Première",
+    "chaine": "Galilee ac",
+    "duree": "8:16",
+    "sec": 496,
+    "vues": "36 420 vues"
+   },
+   {
+    "id": "7LAQXpR1CDw",
+    "titre": "Suite arithmético-géométrique - Les suites - Terminale",
+    "chaine": "J'ai 20 en maths",
+    "duree": "5:37",
+    "sec": 337,
+    "vues": "32 291 vues"
+   },
+   {
+    "id": "P4WHuDHp9yk",
+    "titre": "Les suites arithmético-géométriques - cas général",
+    "chaine": "Méthode Maths",
+    "duree": "14:00",
+    "sec": 840,
+    "vues": "74 005 vues"
+   },
+   {
+    "id": "mpuwP-4apR4",
+    "titre": "Suite particulière définie par récurrence : Représentation graphique",
+    "chaine": "Pikomath",
+    "duree": "10:57",
+    "sec": 657,
+    "vues": "46 834 vues"
+   },
+   {
+    "id": "xdYW1ZQjs4o",
+    "titre": "Représentation graphique d'une suite - MATHS - TS TES spé Maths - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "6:17",
+    "sec": 377,
+    "vues": "294 283 vues"
+   }
+  ]
+ }
+}

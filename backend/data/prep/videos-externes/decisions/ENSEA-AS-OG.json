@@ -1,0 +1,83 @@
+[
+  {
+    "code": "ENSEA-AS-OG-L1",
+    "youtubeId": "DQzyDJxYrZw",
+    "couverture": "partielle",
+    "justification": "Analyse du sujet de dissertation : comprendre la tâche avant de se lancer.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L2",
+    "youtubeId": "uHXsTLlhLx0",
+    "couverture": "exacte",
+    "justification": "Analyse du sujet : définir les mots-clés et délimiter la question posée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L3",
+    "youtubeId": "hNOlcgI0ioM",
+    "couverture": "exacte",
+    "justification": "Construire une problématique de dissertation à partir du sujet.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L4",
+    "youtubeId": "OWxSU2mvjfw",
+    "couverture": "exacte",
+    "justification": "Thèse, argument, exemple : construire un argument illustré.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L5",
+    "youtubeId": "D0kN5pN0pu4",
+    "couverture": "exacte",
+    "justification": "Les types de plans en dissertation (dialectique, thématique, analytique).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L6",
+    "youtubeId": "X4SGJp737Lw",
+    "couverture": "exacte",
+    "justification": "Rédiger l’introduction : accroche, sujet, problématique, annonce du plan.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L7",
+    "youtubeId": "PZhytgPM3V8",
+    "couverture": "partielle",
+    "justification": "Rédiger une transition entre deux parties ; le paragraphe argumenté est traité en L4.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L8",
+    "youtubeId": "Upq2WhombLs",
+    "couverture": "exacte",
+    "justification": "Rédiger la conclusion : répondre à la problématique et ouvrir.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ENSEA-AS-OG-L9",
+    "youtubeId": "pEfqtXzCorA",
+    "couverture": "partielle",
+    "justification": "Gérer son temps pendant une épreuve écrite ; la relecture est peu détaillée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

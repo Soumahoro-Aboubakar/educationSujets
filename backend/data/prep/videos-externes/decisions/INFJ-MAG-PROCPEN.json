@@ -1,0 +1,83 @@
+[
+  {
+    "code": "INFJ-MAG-PROCPEN-L1",
+    "youtubeId": "q1xdlLAl1lM",
+    "couverture": "exacte",
+    "justification": "La présomption d’innocence : poursuivre sans présumer la culpabilité.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L2",
+    "youtubeId": "903FzXvOKYk",
+    "couverture": "exacte",
+    "justification": "Action publique (punir) et action civile (réparer) : quelle différence.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L3",
+    "youtubeId": "6ypoo4QuH6E",
+    "couverture": "partielle",
+    "justification": "Opportunité des poursuites : le procureur décide des suites d’une plainte (poursuite ou classement).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L4",
+    "youtubeId": "eyYzWbqYEEA",
+    "couverture": "partielle",
+    "justification": "La garde à vue en une minute ; durées et formalités françaises, à vérifier dans le Code ivoirien.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L5",
+    "youtubeId": "4fQEMcbEo2Q",
+    "couverture": "exacte",
+    "justification": "Le juge d’instruction : il instruit à charge et à décharge.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L6",
+    "youtubeId": "KKtTfPiuX5M",
+    "couverture": "partielle",
+    "justification": "Garde à vue et détention provisoire : la liberté reste le principe, la détention l’exception.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L7",
+    "youtubeId": "JhCVqzda_Q4",
+    "couverture": "partielle",
+    "justification": "Les acteurs de la procédure pénale et les juridictions selon la gravité de l’infraction.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L8",
+    "youtubeId": "8Yt69YJqHo0",
+    "couverture": "partielle",
+    "justification": "Les voies de recours (appel, opposition, pourvoi) pour contester une décision.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "INFJ-MAG-PROCPEN-L9",
+    "youtubeId": "eJ-yaeEQVrc",
+    "couverture": "exacte",
+    "justification": "Les causes d’extinction de l’action publique : décès, prescription, amnistie, chose jugée…",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

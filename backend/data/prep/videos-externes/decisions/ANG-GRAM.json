@@ -1,0 +1,101 @@
+[
+  {
+    "code": "ANG-GRAM-L1",
+    "youtubeId": "FRS85m0UbPM",
+    "couverture": "exacte",
+    "justification": "Explique l’ordre des mots de la phrase anglaise (sujet, verbe, complément), objet de la leçon.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L2",
+    "youtubeId": "IoMOxJNf_bU",
+    "couverture": "exacte",
+    "justification": "Conjugaison de to be au présent (I am, you are, he is) expliquée en français, niveau débutant.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L3",
+    "youtubeId": "50j98eCkNHA",
+    "couverture": "partielle",
+    "justification": "Conjugaison de to have au présent (have/has) ; les articles a/an/the ne sont pas traités.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L4",
+    "youtubeId": "LTDjVjNSHZQ",
+    "couverture": "exacte",
+    "justification": "Le présent simple en 3 minutes : habitudes, base verbale et -s à la 3e personne.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L5",
+    "youtubeId": "0lP1HgfxJ64",
+    "couverture": "exacte",
+    "justification": "Do ou does au présent simple pour les questions et négations, en 2 minutes.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L6",
+    "youtubeId": "Siv8HOWvfTI",
+    "couverture": "exacte",
+    "justification": "Présent continu (be + -ing) expliqué simplement pour débutants, opposé à l’habitude.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L7",
+    "youtubeId": "ZNRNm-9FBAE",
+    "couverture": "exacte",
+    "justification": "Prétérit simple : emploi pour un fait terminé, verbes réguliers en -ed et irréguliers.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L8",
+    "youtubeId": "4jTZuqbg-js",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : formation have/has + participe passé et emploi du present perfect.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L9",
+    "youtubeId": "Tv7oMUij8DM",
+    "couverture": "exacte",
+    "justification": "Will et be going to expliqués en français : prévision, décision immédiate et intention déjà prise.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L10",
+    "youtubeId": "lySinfUUmo4",
+    "couverture": "exacte",
+    "justification": "Can, must, should : capacité, obligation et conseil, avec la base verbale sans to.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-GRAM-L11",
+    "youtubeId": "skgkkjYtfyY",
+    "couverture": "exacte",
+    "justification": "Hatier : formation du comparatif et du superlatif (adjectifs courts et longs, irréguliers).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

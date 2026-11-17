@@ -1,0 +1,137 @@
+[
+  {
+    "code": "ISE-ECO-ALGLIN-L1",
+    "youtubeId": "AQDyvMW3dSo",
+    "couverture": "exacte",
+    "justification": "Introduction aux matrices : définition, dimension, coefficients.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L2",
+    "youtubeId": "IeW2YTOtwys",
+    "couverture": "exacte",
+    "justification": "Additionner, soustraire deux matrices et multiplier par un réel, coefficient par coefficient.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L3",
+    "youtubeId": "ZOtgQxB5NXI",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : produit de deux matrices (ligne × colonne).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L4",
+    "youtubeId": "_68bATcvozg",
+    "couverture": "exacte",
+    "justification": "Écriture matricielle AX = B d’un système linéaire, deux exemples.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L5",
+    "youtubeId": "ENbu8VKSyxc",
+    "couverture": "exacte",
+    "justification": "Méthode du pivot de Gauss pour résoudre un système linéaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L6",
+    "youtubeId": "ilKsCrgPAw0",
+    "couverture": "exacte",
+    "justification": "Déterminer le rang d’une matrice par le pivot de Gauss.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L7",
+    "youtubeId": "SV3fufnstnY",
+    "couverture": "exacte",
+    "justification": "Inverse d’une matrice par Gauss-Jordan, exemple résolu.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L8",
+    "youtubeId": "4QMzwWY6T7g",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : inverse d’une matrice 2×2 et condition d’inversibilité (ad − bc ≠ 0).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L9",
+    "youtubeId": "VrvQrxHlrXU",
+    "couverture": "exacte",
+    "justification": "Sous-espace vectoriel : définition, à quoi ça sert, comment le reconnaître.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L10",
+    "youtubeId": "LCLTsMrq7QI",
+    "couverture": "exacte",
+    "justification": "Déterminer une base et la dimension d’un sous-espace vectoriel.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L11",
+    "youtubeId": "D3sb178BSqw",
+    "couverture": "exacte",
+    "justification": "Noyau et image d’une application linéaire, lien avec le rang.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L12",
+    "youtubeId": "MkmniyHJRhE",
+    "couverture": "partielle",
+    "justification": "Projecteurs et somme directe : décomposer un vecteur puis le projeter (exercice classique).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L13",
+    "youtubeId": "G7cYfmNibcQ",
+    "couverture": "exacte",
+    "justification": "Trouver les valeurs propres et les vecteurs propres d’une matrice.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L14",
+    "youtubeId": "QFnVNLT0D2M",
+    "couverture": "exacte",
+    "justification": "Diagonalisation : construire une base de vecteurs propres, P⁻¹AP = D.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ISE-ECO-ALGLIN-L15",
+    "youtubeId": "0ReYxOIP_7E",
+    "couverture": "exacte",
+    "justification": "Calcul de Aⁿ avec une matrice diagonalisable (A = PDP⁻¹).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

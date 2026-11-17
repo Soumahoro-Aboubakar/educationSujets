@@ -1,0 +1,92 @@
+[
+  {
+    "code": "ANG-QCM-L1",
+    "youtubeId": "YrJRNEqBJlA",
+    "couverture": "partielle",
+    "justification": "Condition réalisable : if + présent, conséquence au futur (will), niveau collège.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L2",
+    "youtubeId": "nYX29IAsXF8",
+    "couverture": "partielle",
+    "justification": "Les trois conditionnels en 3 minutes, dont if + prétérit / would + base pour une situation imaginaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L3",
+    "youtubeId": "joTDoEofORE",
+    "couverture": "partielle",
+    "justification": "Les conditionnels en anglais, dont le troisième (if + had + participe, would have + participe), expliqués en français.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L4",
+    "youtubeId": "950DSaZKebc",
+    "couverture": "exacte",
+    "justification": "Construction de la voix passive : sujet + be + participe passé, complément d’agent by.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L5",
+    "youtubeId": "c5NwXylDanI",
+    "couverture": "exacte",
+    "justification": "Discours indirect : say/tell, changement de temps et de pronoms.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L6",
+    "youtubeId": "Qx6CUexZdxQ",
+    "couverture": "partielle",
+    "justification": "Pronoms relatifs who, which, that, whose ; les connecteurs logiques ne sont pas traités.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L7",
+    "youtubeId": "8zaNNivHibk",
+    "couverture": "exacte",
+    "justification": "Hatier : many, much, a lot of, few, little selon dénombrable ou indénombrable.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L8",
+    "youtubeId": "bQNd5JNcv4A",
+    "couverture": "partielle",
+    "justification": "Formation des adverbes à partir des adjectifs et leur position : choisir la bonne nature de mot.",
+    "source": "proposition ChatGPT (recherche web) relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L9",
+    "youtubeId": "tS4L-1vvDvg",
+    "couverture": "partielle",
+    "justification": "Méthode de compréhension écrite : repérer le thème, chercher l’élément du texte qui justifie la réponse.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "ANG-QCM-L10",
+    "youtubeId": "susAhQ-AMDU",
+    "couverture": "partielle",
+    "justification": "Méthode générale pour les QCM : lire la consigne, éliminer les propositions fausses, gérer son temps.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]
