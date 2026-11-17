@@ -1,7 +1,10 @@
+import { useServerQuery } from '../hooks/useServerQuery';
+import { queryKeys, freshness } from '../services/queryKeys';
+import { keepPreviousData } from '@tanstack/react-query';
 import Pressable from '../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, FlatList, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
@@ -83,33 +86,20 @@ const BulkDownloadScreen = ({ navigation, route }) => {
   const [year, setYear] = useState(route.params?.annee ? String(route.params.annee) : '');
   const [matieres, setMatieres] = useState(route.params?.matiereId ? [route.params.matiereId] : []);
 
-  const [scope, setScope] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(false);
+  const scopeParams = { organisme: organisme?._id, parcoursTypeId: cycleId || undefined };
+  const scopeQuery = useServerQuery({ queryKey: queryKeys.downloadScope(scopeParams), queryFn: () => fetchDownloadScope(scopeParams), ...freshness.documents, enabled: Boolean(organisme?._id), placeholderData: keepPreviousData });
+  const scope = scopeQuery.data;
+  const loading = scopeQuery.isLoading;
+  const loadError = !scope ? scopeQuery.error : null;
+  const load = scopeQuery.refetch;
   const [selected, setSelected] = useState(() => new Set());
-  const [summary, setSummary] = useState(null);
-  const [checking, setChecking] = useState(false);
+  const [debouncedSelection, setDebouncedSelection] = useState('');
   const [message, setMessage] = useState(null);
   const [progress, setProgress] = useState(null);
 
   const access = useDocumentAccess(navigation);
-  const refreshAccount = useRefreshAccount();
+  const refreshAccount = useRefreshAccount(['entitlements', 'download-quota']);
   const startDownload = useDownloadStore((state) => state.startDownload);
-
-  const load = useCallback(async () => {
-    if (!organisme?._id) return;
-    setLoading(true);
-    setLoadError(false);
-    try {
-      setScope(await fetchDownloadScope({ organisme: organisme._id, parcoursTypeId: cycleId || undefined }));
-    } catch (error) {
-      setLoadError(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [organisme?._id, cycleId]);
-
-  useEffect(() => { load(); }, [load]);
 
   // Une opération ne mélange jamais deux cycles : changer de cycle vide la sélection.
   const scopeKey = scope?.cycle?._id || '';
@@ -131,23 +121,21 @@ const BulkDownloadScreen = ({ navigation, route }) => {
   const selectedItems = useMemo(() => [...selected].map((id) => byId.get(id)).filter(Boolean), [selected, byId]);
   const selectionKey = selectedItems.map((item) => item._id).sort().join(',');
 
-  // Récapitulatif serveur, après chaque changement de sélection.
+  // Récapitulatif sans consommation de quota ; le téléchargement revérifie les droits.
   useEffect(() => {
-    if (!selectionKey) { setSummary(null); setChecking(false); return undefined; }
-    let cancelled = false;
-    setChecking(true);
-    const timer = setTimeout(async () => {
-      try {
-        const result = await previewDownloadSelection(selectionKey.split(','));
-        if (!cancelled) setSummary(result);
-      } catch (error) {
-        if (!cancelled) setMessage({ error: true, text: getErrorMessage(error, 'telechargement') });
-      } finally {
-        if (!cancelled) setChecking(false);
-      }
-    }, 300);
-    return () => { cancelled = true; clearTimeout(timer); };
+    const timer = setTimeout(() => setDebouncedSelection(selectionKey), 300);
+    return () => clearTimeout(timer);
   }, [selectionKey]);
+  const previewQuery = useServerQuery({
+    queryKey: queryKeys.downloadPreview(debouncedSelection ? debouncedSelection.split(',') : []),
+    queryFn: () => previewDownloadSelection(debouncedSelection.split(',')),
+    ...freshness.quota, enabled: Boolean(debouncedSelection && selectionKey === debouncedSelection),
+  });
+  const summary = selectionKey === debouncedSelection ? previewQuery.data : null;
+  const checking = Boolean(selectionKey) && (selectionKey !== debouncedSelection || previewQuery.isLoading);
+  useEffect(() => {
+    if (previewQuery.error) setMessage({ error: true, text: getErrorMessage(previewQuery.error, 'telechargement') });
+  }, [previewQuery.error]);
 
   const toggle = (id) => {
     Haptics.selectionAsync().catch(() => {});
@@ -227,7 +215,7 @@ const BulkDownloadScreen = ({ navigation, route }) => {
   const quota = summary?.quota || scope?.quota;
   const counts = summary?.counts;
   const overflow = summary?.overflow || 0;
-  const canStart = selectedItems.length > 0 && summary?.canProceed && !checking && !progress;
+  const canStart = selectedItems.length > 0 && summary?.canProceed && !checking && !scopeQuery.isPlaceholderData && !progress;
   const renewal = formatRenewal(quota?.nextRenewalAt);
 
   const header = (

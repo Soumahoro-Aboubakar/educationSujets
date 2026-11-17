@@ -5,20 +5,12 @@ import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 
 import { getErrorAlert } from '../utils/userMessages';
 import React, { useState, useContext, useCallback } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  RefreshControl,
-  Alert,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import { View, StyleSheet, RefreshControl, Alert, FlatList, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { Trash2, Edit, Send, Plus, Clock, FileText, Link2 } from 'lucide-react-native';
 import Text from '../components/ui/Text';
-import Button from '../components/ui/Button';
+
 import Card from '../components/ui/Card';
 import EmptyState from '../components/ui/EmptyState';
 import AuthContext from '../context/AuthContext';
@@ -43,8 +35,7 @@ const AdminDraftsScreen = ({ navigation }) => {
         );
         return;
       }
-      loadDrafts();
-    }, [user, loadDrafts])
+    }, [user, logout])
   );
 
   const handleRefresh = async () => {
@@ -103,7 +94,7 @@ const AdminDraftsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
-        <View>
+        <View style={styles.headerText}>
           <Text variant="h2" style={styles.title}>Brouillons</Text>
           <Text
             variant="body"
@@ -120,6 +111,8 @@ const AdminDraftsScreen = ({ navigation }) => {
                 style={styles.iconAction}
                 onPress={() => navigation.navigate('CorrectionUpload')}
                 activeOpacity={0.7}
+                accessibilityRole="button"
+                accessibilityLabel="Associer un corrigé à un sujet"
               >
                 <Link2 size={20} color={theme.colors.primary} />
               </TouchableOpacity>
@@ -127,6 +120,8 @@ const AdminDraftsScreen = ({ navigation }) => {
                 style={styles.iconActionError}
                 onPress={() => navigation.navigate('AdminTrash')}
                 activeOpacity={0.7}
+                accessibilityRole="button"
+                accessibilityLabel="Ouvrir la corbeille"
               >
                 <Trash2 size={20} color={theme.colors.error} />
               </TouchableOpacity>
@@ -136,6 +131,8 @@ const AdminDraftsScreen = ({ navigation }) => {
             style={styles.primaryAction}
             onPress={() => navigation.navigate('Upload')}
             activeOpacity={0.8}
+            accessibilityRole="button"
+            accessibilityLabel="Nouveau document"
           >
             <Plus size={18} color={theme.colors.textInverse} strokeWidth={2.2} />
             <Text variant="caption" style={styles.primaryActionText}>Nouveau</Text>
@@ -181,6 +178,12 @@ const AdminDraftsScreen = ({ navigation }) => {
           )}
           renderItem={({ item: draft }) => {
             const isComplete = draft.status !== 'draft';
+            const draftId = draft._id || draft.id;
+            const title = draft.title?.trim()
+              // Nom de fichier brut (« ANNEE_INCONNUE_Tous_cycles_Droit_… ») rendu lisible.
+              || String(draft.originalFileName || '').replace(/\.[a-z0-9]+$/i, '')
+                .replace(/ANNEE_INCONNUE_?/gi, '').replace(/[_]+/g, ' ').replace(/\s+/g, ' ').trim()
+              || 'Document sans titre';
             return (
               <Card style={styles.draftCard}>
                 <View style={styles.draftHeader}>
@@ -190,7 +193,7 @@ const AdminDraftsScreen = ({ navigation }) => {
                       style={styles.draftTitle}
                       numberOfLines={2}
                     >
-                      {draft.title || 'Sans titre'}
+                      {title}
                     </Text>
                     <View style={styles.draftMeta}>
                       <Clock size={12} color={theme.colors.textMuted} strokeWidth={2.2} />
@@ -214,7 +217,7 @@ const AdminDraftsScreen = ({ navigation }) => {
                       color={isComplete ? theme.colors.success : theme.colors.primary}
                       style={styles.completionText}
                     >
-                      {isComplete ? '100%' : '~30%'}
+                      {isComplete ? 'Prêt' : 'À compléter'}
                     </Text>
                   </View>
                 </View>
@@ -252,8 +255,10 @@ const AdminDraftsScreen = ({ navigation }) => {
                 <View style={styles.draftActions}>
                   <TouchableOpacity
                     style={[styles.actionButton, styles.editButton]}
-                    onPress={() => handleEditDraft(draft._id || draft.id)}
+                    onPress={() => handleEditDraft(draftId)}
                     activeOpacity={0.75}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Modifier ${title}`}
                   >
                     <Edit size={16} color={theme.colors.primary} strokeWidth={2.2} />
                     <Text
@@ -267,8 +272,10 @@ const AdminDraftsScreen = ({ navigation }) => {
 
                   <TouchableOpacity
                     style={[styles.actionButton, styles.publishButton]}
-                    onPress={() => handleEditDraft(draft._id || draft.id)}
+                    onPress={() => handleEditDraft(draftId)}
                     activeOpacity={0.85}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Publier ${title}`}
                   >
                     <Send size={16} color={theme.colors.textInverse} strokeWidth={2.2} />
                     <Text
@@ -281,13 +288,16 @@ const AdminDraftsScreen = ({ navigation }) => {
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={[styles.actionButton, styles.deleteButton]}
-                    loading={mutating && mutationId === (draft._id || draft.id)}
+                    style={styles.deleteButton}
                     disabled={mutating}
-                    onPress={() => handleDeleteDraft(draft._id || draft.id)}
+                    onPress={() => handleDeleteDraft(draftId)}
                     activeOpacity={0.75}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Supprimer ${title}`}
                   >
-                    <Trash2 size={16} color={theme.colors.error} strokeWidth={2.2} />
+                    {mutating && mutationId === draftId
+                      ? <ActivityIndicator size="small" color={theme.colors.error} />
+                      : <Trash2 size={18} color={theme.colors.error} strokeWidth={2.2} />}
                   </TouchableOpacity>
                 </View>
               </Card>
@@ -313,9 +323,14 @@ const useStyles = createThemedStyles(({ theme, studySurface }) => {
       alignItems: 'center',
       paddingHorizontal: 16,
       paddingVertical: 16,
+      gap: 12,
       backgroundColor: theme.colors.surface,
       borderBottomWidth: 1,
       borderBottomColor: theme.colors.borderLight,
+    },
+    headerText: {
+      flex: 1,
+      minWidth: 0,
     },
     title: {
       fontSize: 26,
@@ -327,24 +342,23 @@ const useStyles = createThemedStyles(({ theme, studySurface }) => {
       fontSize: 14,
     },
     headerActions: {
-      flexDirection: 'row', flexWrap: 'wrap',
+      flexDirection: 'row',
+      flexShrink: 0,
       alignItems: 'center',
       gap: 8,
     },
     iconAction: {
-      minWidth: 44,
-      minHeight: 44,
-      paddingVertical: 8,
-      borderRadius: 19,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       backgroundColor: theme.colors.primaryWash,
       alignItems: 'center',
       justifyContent: 'center',
     },
     iconActionError: {
-      minWidth: 44,
-      minHeight: 44,
-      paddingVertical: 8,
-      borderRadius: 19,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       backgroundColor: theme.colors.errorWash,
       alignItems: 'center',
       justifyContent: 'center',
@@ -353,7 +367,7 @@ const useStyles = createThemedStyles(({ theme, studySurface }) => {
       minHeight: 44,
       paddingVertical: 8,
       paddingHorizontal: 14,
-      borderRadius: 19,
+      borderRadius: 22,
       backgroundColor: theme.brand.night,
       flexDirection: 'row',
       alignItems: 'center',
@@ -448,7 +462,8 @@ const useStyles = createThemedStyles(({ theme, studySurface }) => {
       marginTop: 4,
     },
     actionButton: {
-      flexGrow: 1, flexBasis: 140,
+      flex: 1,
+      minWidth: 0,
       minHeight: 44,
       paddingVertical: 8,
       borderRadius: theme.radius.md,
@@ -463,10 +478,13 @@ const useStyles = createThemedStyles(({ theme, studySurface }) => {
     },
     publishButton: {
       backgroundColor: theme.brand.night,
-      flex: 1.2,
     },
     deleteButton: {
-      flex: 0.5,
+      width: 44,
+      height: 44,
+      borderRadius: theme.radius.md,
+      alignItems: 'center',
+      justifyContent: 'center',
       backgroundColor: theme.colors.errorWash,
       borderWidth: 1,
       borderColor: theme.colors.error,

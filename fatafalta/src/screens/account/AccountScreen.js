@@ -1,3 +1,4 @@
+import { usePullRefresh } from '../../hooks/usePullRefresh';
 import useAsyncAction from '../../hooks/useAsyncAction';
 import { createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useContext } from 'react';
@@ -58,6 +59,7 @@ const AccountScreen = ({ navigation }) => {
   const { user, isAuthenticated, logout, isAdmin, loading: authLoading } = useContext(AuthContext);
   const entitlements = useEntitlements();
   const wallet = useWallet();
+  const pull = usePullRefresh(() => Promise.all([entitlements.refetch(), wallet.refetch()]));
 
   if (authLoading) return <View style={styles.container}><ScreenHeader title="Mon compte" /><SkeletonRows count={4} /></View>;
   if (!isAuthenticated) return <GuestAccount navigation={navigation} />;
@@ -65,7 +67,7 @@ const AccountScreen = ({ navigation }) => {
   const data = entitlements.data;
   const subscription = data?.subscription;
   const downloads = data?.downloads;
-  const refreshing = entitlements.isRefetching || wallet.isRefetching;
+  const refreshing = pull.refreshing;
 
   const subscriptionHint = subscription?.status === 'ACTIVE'
     ? `Expire le ${formatDate(subscription.currentPeriodEnd)}`
@@ -86,10 +88,7 @@ const AccountScreen = ({ navigation }) => {
       <AccountScroll
         tabbed
         refreshing={refreshing}
-        onRefresh={() => {
-          entitlements.refetch();
-          wallet.refetch();
-        }}
+        onRefresh={pull.refresh}
       >
         <MeCard navigation={navigation} email={user?.email} />
         {!data && entitlements.isLoading ? <SkeletonRows count={4} /> : (

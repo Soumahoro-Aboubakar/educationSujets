@@ -1,3 +1,6 @@
+import { queryClient } from './queryClient';
+import { invalidateKeys } from './queryCache';
+import { queryKeys } from './queryKeys';
 import api from './api';
 
 export const fetchInstitutions = async () => {
@@ -23,15 +26,18 @@ export const fetchNodes = async (params = {}) => {
 
 export const createInstitution = async (payload) => {
   const response = await api.post('/api/institutions', payload);
+  invalidateKeys(queryClient, [queryKeys.options('/api/institutions'), ['metadata', 'institution-nodes']]);
   return response.data.data;
 };
 
 export const updateInstitution = async (institutionId, payload) => {
   const response = await api.put(`/api/institutions/${institutionId}`, payload);
+  invalidateKeys(queryClient, [queryKeys.options('/api/institutions'), ['metadata', 'institution-nodes']]);
   return response.data.data;
 };
 
 export const createCatalogNode = async (payload) => {
   const response = await api.post('/api/nodes', payload);
+  invalidateKeys(queryClient, [['metadata', 'institution-nodes']]);
   return response.data.data;
 };

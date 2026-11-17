@@ -1,3 +1,4 @@
+import { useRankingResource, useCandidateSearchResource } from '../usePrepQueries';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import prepApi, { isServiceMissing } from '../api';
 
@@ -25,37 +26,40 @@ export const rankingError = (error) => isServiceMissing(error) ? 'missing' : err
 
 /** Une instance par programme/période. Les remplacements invalident aussi les pages en vol. */
 export const useRanking = (programme, periode) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { data, save: setData, fetch: fetchRanking, cancel } = useRankingResource(programme, periode);
+  const [loading, setLoading] = useState(!data);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(null);
   const [paging, setPaging] = useState(null);
   const [pageError, setPageError] = useState(null);
   const [located, setLocated] = useState(0);
   const [revision, setRevision] = useState(0);
-  const current = useRef(null);
+  const current = useRef(data);
+  current.current = data;
   const request = useRef(null);
   const epoch = useRef(0);
   const around = useRef(false);
 
-  const load = useCallback(async ({ locate = false, refresh = false } = {}) => {
+  const load = useCallback(async ({ locate = false, refresh = false, automatic = false } = {}) => {
+    if (automatic && request.current) return;
     const version = ++epoch.current;
     request.current?.abort();
+    if (!automatic) cancel();
     const controller = new AbortController();
     request.current = controller;
     around.current = locate;
-    setLoading(true);
+    setLoading(!current.current);
     setRefreshing(refresh);
     setPaging(null);
     setPageError(null);
     setError(null);
     try {
-      const result = await prepApi.ranking(programme, periode, { ...(locate ? { autour: 'moi' } : {}), signal: controller.signal });
+      const result = await fetchRanking({ locate, automatic, controller });
       if (controller.signal.aborted || version !== epoch.current) return;
       if (!result) throw new Error('Classement vide');
       const next = { ...result, candidats: uniqueCandidates(result.candidats) };
       current.current = next;
-      setData(next);
+      setData(next, automatic);
       setRevision((r) => r + 1);
       if (locate) setLocated((n) => n + 1);
     } catch (err) {
@@ -67,7 +71,7 @@ export const useRanking = (programme, periode) => {
         setRefreshing(false);
       }
     }
-  }, [programme, periode]);
+  }, [programme, periode, fetchRanking, setData, cancel]);
 
   const loadPage = useCallback(async (direction) => {
     const previous = current.current;
@@ -96,12 +100,12 @@ export const useRanking = (programme, periode) => {
     } finally {
       if (version === epoch.current) { request.current = null; setPaging(null); }
     }
-  }, [programme, periode]);
+  }, [programme, periode, setData]);
 
   // Chargement à l'ouverture et au changement de période seulement : revenir d'un profil conserve
   // les pages déjà chargées et la position de défilement (le pull-to-refresh recharge à la demande).
   useEffect(() => {
-    load({ locate: around.current });
+    load({ locate: around.current, automatic: true });
     return () => { epoch.current += 1; request.current?.abort(); request.current = null; };
   }, [load]);
 
@@ -113,6 +117,8 @@ export const useCandidateSearch = (programme, periode, query) => {
   const [result, setResult] = useState(null);
   const [revision, setRevision] = useState(0);
   const q = query.trim();
+  const resource = useCandidateSearchResource(programme, periode, q);
+  const fetchSearch = resource.fetch;
   const valid = [...q].length >= 2;
   useEffect(() => {
     const controller = new AbortController();
@@ -120,15 +126,15 @@ export const useCandidateSearch = (programme, periode, query) => {
     if (!valid) return () => controller.abort();
     const timer = setTimeout(async () => {
       try {
-        const out = await prepApi.searchCandidates(programme, q, periode, controller.signal);
+        const out = await fetchSearch(q, controller.signal, revision > 0);
         if (!out) throw new Error('Recherche vide');
-        if (!controller.signal.aborted) setResult({ q, candidates: uniqueCandidates(out.candidats) });
+        if (!controller.signal.aborted) setResult({ q, scope: resource.scope, candidates: uniqueCandidates(out.candidats) });
       } catch (error) {
-        if (!controller.signal.aborted) setResult({ q, error: rankingError(error) });
+        if (!controller.signal.aborted) setResult({ q, scope: resource.scope, error: rankingError(error) });
       }
     }, 300);
     return () => { clearTimeout(timer); controller.abort(); };
-  }, [q, valid, programme, periode, revision]);
+  }, [q, valid, programme, periode, revision, fetchSearch, resource.scope]);
   // Même avant l'effet, aucune ancienne réponse sous une nouvelle saisie.
-  return { valid, current: result?.q === q ? result : null, retry: () => setRevision((n) => n + 1) };
+  return { valid, current: valid && resource.data ? { q, candidates: uniqueCandidates(resource.data.candidats) } : result?.q === q && result.scope === resource.scope ? result : null, retry: () => setRevision((n) => n + 1) };
 };

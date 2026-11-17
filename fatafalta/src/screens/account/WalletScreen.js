@@ -1,3 +1,4 @@
+import { usePullRefresh } from '../../hooks/usePullRefresh';
 import useAsyncAction from '../../hooks/useAsyncAction';
 import { createThemedStyles } from '../../theme/ThemeProvider';
 import { getUserMessage } from '../../utils/userMessages';
@@ -19,7 +20,8 @@ import { formatAmount, formatDate } from '../../utils/format';
 const WalletScreen = ({ navigation }) => {
   const { styles } = useStyles();
   const { data, isLoading, isError, refetch, isRefetching, error: loadError } = useWallet();
-  const refreshAccount = useRefreshAccount();
+  const pull = usePullRefresh(refetch);
+  const refreshAccount = useRefreshAccount(['wallet']);
   const [runCancel, cancelling] = useAsyncAction();
   const [cancellingId, setCancellingId] = React.useState(null);
 
@@ -112,7 +114,7 @@ const WalletScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScreenHeader onBack={() => navigation.goBack()} title="Mes gains" />
-      <AccountScroll refreshing={isRefetching} onRefresh={refetch}>
+      <AccountScroll refreshing={pull.refreshing} onRefresh={pull.refresh}>
         {renderBody()}
       </AccountScroll>
     </View>

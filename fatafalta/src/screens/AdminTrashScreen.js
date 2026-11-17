@@ -1,10 +1,13 @@
+import { useServerQuery } from '../hooks/useServerQuery';
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys, freshness } from '../services/queryKeys';
 import useAsyncAction from '../hooks/useAsyncAction';
 import { SkeletonRows } from '../components/ui/Skeleton';
 import { TouchableOpacity } from '../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 
 import { getErrorAlert } from '../utils/userMessages';
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -13,7 +16,7 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useFocusEffect } from '@react-navigation/native';
+
 import { Trash2, RotateCcw, ArrowLeft, Eye } from 'lucide-react-native';
 import * as WebBrowser from 'expo-web-browser';
 import Text from '../components/ui/Text';
@@ -31,29 +34,22 @@ import {
 const AdminTrashScreen = ({ navigation }) => {
   const { theme } = useTheme();
   const { styles } = useStyles();
-  const [trashedDocs, setTrashedDocs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const client = useQueryClient();
+  const trashQuery = useServerQuery({ queryKey: queryKeys.trash(), queryFn: getTrashedDocuments, ...freshness.documents });
+  const trashedDocs = trashQuery.data?.data || [];
+  const loading = trashQuery.isLoading;
+  const setTrashedDocs = (update) => client.setQueryData(trashQuery.queryKey, (data) => data ? { ...data, data: update(data.data || []) } : data);
   const [refreshing, setRefreshing] = useState(false);
   const [runMutation, mutating] = useAsyncAction();
   const [mutationId, setMutationId] = useState(null);
 
   const loadTrash = async () => {
-    try {
-      const response = await getTrashedDocuments();
-      setTrashedDocs(response.data || []);
-    } catch (err) {
-      console.error('Erreur lors du chargement de la corbeille', err);
-      Alert.alert(...getErrorAlert(err, 'corbeille', 'vous'));
-    } finally {
-      setLoading(false);
-    }
+    const result = await trashQuery.refetch();
+    if (result.error) Alert.alert(...getErrorAlert(result.error, 'corbeille', 'vous'));
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      loadTrash();
-    }, [])
-  );
+  React.useEffect(() => {
+    if (trashQuery.error && !trashQuery.data) Alert.alert(...getErrorAlert(trashQuery.error, 'corbeille', 'vous'));
+  }, [trashQuery.error, trashQuery.data]);
 
   const handleRefresh = async () => {
     setRefreshing(true);

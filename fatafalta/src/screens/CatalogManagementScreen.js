@@ -1,3 +1,4 @@
+import { useOption } from '../hooks/useOptions';
 import { SkeletonRows } from '../components/ui/Skeleton';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorAlert } from '../utils/userMessages';
@@ -14,7 +15,7 @@ import TaxonomyPathFields from '../components/catalog/TaxonomyPathFields';
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
 
-import { createInstitution, fetchInstitutions, updateInstitution } from '../services/institutions';
+import { createInstitution, updateInstitution } from '../services/institutions';
 
 const parseStructure = (value) => value
   .split(',')
@@ -25,13 +26,14 @@ const CatalogManagementScreen = () => {
   const { theme } = useTheme();
   const { styles } = useStyles();
   const { isAdmin } = useContext(AuthContext);
-  const [institutions, setInstitutions] = useState([]);
+  const institutionsQuery = useOption('/api/institutions');
+  const institutions = institutionsQuery.data || [];
   const [institutionId, setInstitutionId] = useState(null);
   const [name, setName] = useState('');
   const [abbreviation, setAbbreviation] = useState('');
   const [structureText, setStructureText] = useState('year, subject');
   const [taxonomyPath, setTaxonomyPath] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const loading = institutionsQuery.isLoading;
   const [saving, setSaving] = useState(false);
 
   const selectedInstitution = useMemo(
@@ -47,21 +49,15 @@ const CatalogManagementScreen = () => {
     setTaxonomyPath([]);
   }, []);
 
-  const refreshInstitutions = useCallback(async (preferredId) => {
-    setLoading(true);
-    try {
-      const items = await fetchInstitutions();
-      setInstitutions(items);
-      const next = items.find((item) => item._id === (preferredId || institutionId));
-      if (next) hydrateForm(next);
-    } catch (error) {
-      Alert.alert(...getErrorAlert(error, 'catalogue', 'vous'));
-    } finally {
-      setLoading(false);
-    }
-  }, [hydrateForm, institutionId]);
-
-  useEffect(() => { refreshInstitutions(); }, [refreshInstitutions]);
+  const refreshInstitutions = async (preferredId) => {
+    const { data: items, error } = await institutionsQuery.refetch();
+    if (error) { Alert.alert(...getErrorAlert(error, 'catalogue', 'vous')); return; }
+    const next = items.find((item) => item._id === (preferredId || institutionId));
+    if (next) hydrateForm(next);
+  };
+  useEffect(() => {
+    if (institutionsQuery.error && !institutionsQuery.data) Alert.alert(...getErrorAlert(institutionsQuery.error, 'catalogue', 'vous'));
+  }, [institutionsQuery.error, institutionsQuery.data]);
 
   const validateStructure = () => {
     const navigationStructure = parseStructure(structureText);

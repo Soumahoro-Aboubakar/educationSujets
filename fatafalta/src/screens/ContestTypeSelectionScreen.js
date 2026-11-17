@@ -1,13 +1,13 @@
+import { useOption } from '../hooks/useOptions';
 import { SkeletonRows } from '../components/ui/Skeleton';
 import Pressable from '../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorMessage } from '../utils/userMessages';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Text from '../components/ui/Text';
-import api from '../services/api';
 
 import ScreenHeader from '../components/ui/ScreenHeader';
 import SearchField from '../components/ui/SearchField';
@@ -20,28 +20,8 @@ const ContestTypeSelectionScreen = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
   const { contest } = route.params || {};
   const [query, setQuery] = useState('');
-  const [types, setTypes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(null);
-
-  useEffect(() => {
-    let mounted = true;
-    const load = async () => {
-      try {
-        const res = await api.get('/api/contest-types');
-        if (!mounted) return;
-        setTypes(res.data.data || []);
-      } catch (e) {
-        console.warn(e);
-        if (mounted) setLoadError(getErrorMessage(e, 'catalogue'));
-      } finally {
-        if (mounted) setLoading(false);
-      }
-    };
-
-    load();
-    return () => { mounted = false; };
-  }, []);
+  const { data: types = [], isLoading: loading, error } = useOption('/api/contest-types');
+  const loadError = error ? getErrorMessage(error, 'catalogue') : null;
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();

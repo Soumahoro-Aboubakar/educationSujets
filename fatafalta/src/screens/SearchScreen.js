@@ -1,3 +1,4 @@
+import { usePullRefresh } from '../hooks/usePullRefresh';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
 import React, { useState, useEffect, useRef } from 'react';
@@ -41,11 +42,13 @@ const SearchScreen = () => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-    isRefetching,
+    isFetching,
+    isPlaceholderData,
     refetch,
     isError,
     error: searchError,
   } = useInfiniteDocuments(filters, hasActiveQuery);
+  const pull = usePullRefresh(refetch);
   const documents = documentsPages?.pages.flatMap((page) => page.data || []) || [];
   const pagination = documentsPages?.pages[0]?.pagination || null;
 
@@ -125,9 +128,9 @@ const SearchScreen = () => {
             isLoading={isLoading && hasActiveQuery}
             isFetchingNextPage={isFetchingNextPage}
             hasNextPage={hasNextPage}
-            onLoadMore={fetchNextPage}
-            isRefreshing={isRefetching}
-            onRefresh={refetch}
+            onLoadMore={() => { if (hasNextPage && !isFetching && !isPlaceholderData) fetchNextPage(); }}
+            isRefreshing={pull.refreshing}
+            onRefresh={pull.refresh}
             onDocumentPress={handleDocumentPress}
             ListHeaderComponent={ListHeader}
             emptyStateTitle={isError ? getUserMessage(searchError, 'documents', 'vous').title : 'Aucun résultat'}

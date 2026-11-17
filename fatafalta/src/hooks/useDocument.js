@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryKeys, freshness } from '../services/queryKeys';
+import { useServerQuery as useQuery } from './useServerQuery';
 import { fetchDocument } from '../services/documents';
 
 /**
@@ -8,9 +9,9 @@ import { fetchDocument } from '../services/documents';
  */
 export const useDocument = (id) => {
   return useQuery({
-    queryKey: ['document', id],
+    queryKey: queryKeys.document(id),
     queryFn: () => fetchDocument(id),
     enabled: !!id,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    ...freshness.documents,
   });
 };

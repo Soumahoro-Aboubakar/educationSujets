@@ -1,3 +1,4 @@
+import { usePrepRanking } from '../usePrepQueries';
 import Pressable from '../../components/ui/FeedbackPressable';
 import { useOpenSubscription } from '../../hooks/useAccountLink';
 import StatusBar from '../../theme/ThemeStatusBar';
@@ -156,8 +157,7 @@ const SessionReview = ({ session, navigation, onRestart, celebrations }) => {
   const rattrapees = items.filter((it) => it.result?.correct && it.essai === 2).length;
   const auCahier = items.filter((it) => it.final && !it.result?.correct && !it.result?.pending).length;
   const enAttente = items.filter((it) => it.result?.pending).length;
-  const [rank, setRank] = useState(null);
-  useEffect(() => { prepApi.ranking(session.programme, 'tout').then(setRank).catch(() => {}); }, [session.programme]);
+  const { data: rank } = usePrepRanking(session.programme);
   const versions = usePrep((s) => s.prefs.versions);
   const mod = session.module ? getModule(session.module, versions) : null;
   const title = session.mode === 'blanc' ? 'Copie remise' : ratio >= 0.8 ? 'Excellente session' : ratio >= 0.5 ? 'Bonne progression' : 'Chaque erreur te fait avancer';

@@ -1,3 +1,6 @@
+import { useServerQuery } from '../../hooks/useServerQuery';
+import { usePublishedOrganismes } from '../../hooks/useCatalog';
+import { queryKeys, freshness } from '../../services/queryKeys';
 import Pressable from '../../components/ui/FeedbackPressable';
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
@@ -13,7 +16,7 @@ import { usePreferences } from '../../context/PreferencesContext';
 import { localCatalogue, useContentGeneration } from '../content';
 import { mergeCatalogue } from '../contentRepo';
 import prepApi from '../api';
-import { fetchPublishedOrganismes } from '../../services/catalog';
+
 import cache from '../../services/cache';
 import usePrep from '../store';
 import { type } from '../theme';
@@ -35,8 +38,6 @@ import { HomeChevron } from '../components/HomePresentation';
  */
 const LOGO_CACHE_KEY = 'prep-organisme-logos';
 const keyOf = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-let logoIndex = null;
-let logoRequest = null;
 const indexLogos = (organismes) => {
   const index = {};
   (organismes || []).forEach((o) => {
@@ -45,25 +46,6 @@ const indexLogos = (organismes) => {
     [o.abbreviation, o.name, o.nom].forEach((label) => { const k = keyOf(label); if (k && !index[k]) index[k] = entry; });
   });
   return index;
-};
-const loadLogoIndex = () => {
-  if (logoIndex) return Promise.resolve(logoIndex);
-  if (!logoRequest) {
-    logoRequest = (async () => {
-      const cached = await cache.load(LOGO_CACHE_KEY);
-      if (cached && typeof cached === 'object') logoIndex = cached;
-      try {
-        const result = await fetchPublishedOrganismes({ limit: 100 });
-        logoIndex = indexLogos(result.data);
-        cache.save(LOGO_CACHE_KEY, logoIndex);
-      } catch (error) {
-        // Hors ligne : la copie locale (ou les monogrammes) prend le relais.
-      }
-      logoRequest = null;
-      return logoIndex || {};
-    })();
-  }
-  return logoRequest;
 };
 const withLogos = (catalogue, index) => catalogue.map((o) => {
   const found = index?.[keyOf(o.sigle)];
@@ -86,14 +68,16 @@ const fetchRemoteCatalogue = async () => {
 /** Catalogue « organismes → cycles » : embarqué tout de suite, complété par l'API (nouveaux cycles, logos). */
 export const useCatalogue = () => {
   const generation = useContentGeneration();
-  const [remote, setRemote] = useState(null);
-  const [logos, setLogos] = useState(logoIndex);
+  const { data: remote } = useServerQuery({ queryKey: queryKeys.prepCatalogue(), queryFn: fetchRemoteCatalogue, ...freshness.catalog });
+  const published = usePublishedOrganismes();
+  const [savedLogos, setSavedLogos] = useState(null);
   useEffect(() => {
-    let alive = true;
-    loadLogoIndex().then((index) => { if (alive) setLogos(index); });
-    fetchRemoteCatalogue().then((list) => { if (alive) setRemote(list); }).catch(() => {});
-    return () => { alive = false; };
+    let active = true;
+    cache.load(LOGO_CACHE_KEY).then((index) => { if (active) setSavedLogos(index); });
+    return () => { active = false; };
   }, []);
+  const logos = useMemo(() => published.data ? indexLogos(published.data.data) : savedLogos, [published.data, savedLogos]);
+  useEffect(() => { if (published.data) cache.save(LOGO_CACHE_KEY, logos); }, [published.data, logos]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useMemo(() => withLogos(mergeCatalogue(localCatalogue(), remote), logos), [remote, logos, generation]);
 };

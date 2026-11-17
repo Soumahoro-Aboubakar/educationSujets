@@ -1,9 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryKeys, freshness } from '../services/queryKeys';
+import { useServerQuery as useQuery } from './useServerQuery';
 import { fetchTrainingQuestions } from '../services/orientation';
 
 export const useTrainingQuestions = (contestId) => useQuery({
-  queryKey: ['training-questions', contestId],
+  queryKey: queryKeys.training(contestId),
   queryFn: () => fetchTrainingQuestions(contestId),
   enabled: Boolean(contestId),
-  staleTime: 1000 * 60 * 5,
+  ...freshness.documents,
 });

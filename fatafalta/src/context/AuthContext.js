@@ -1,3 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
+import { queryClient, clearSessionCache } from '../services/queryClient';
+import { queryKeys, freshness } from '../services/queryKeys';
 import { getErrorMessage } from '../utils/userMessages';
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import * as SecureStore from 'expo-secure-store';
@@ -10,6 +13,17 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const profile = useQuery({
+    queryKey: queryKeys.account('profile', token),
+    queryFn: async () => (await api.get('/api/auth/me')).data.data,
+    ...freshness.account, enabled: Boolean(token),
+  });
+  useEffect(() => {
+    if (profile.data) {
+      setUser(profile.data);
+      SecureStore.setItemAsync('authUser', JSON.stringify(profile.data)).catch(() => {});
+    }
+  }, [profile.data]);
 
   // Initialize auth state from storage
   useEffect(() => {
@@ -25,7 +39,9 @@ export const AuthProvider = ({ children }) => {
               headers: { Authorization: `Bearer ${storedToken}` }
             });
             setToken(storedToken);
-            setUser(JSON.parse(storedUser));
+            const currentUser = response.data.data || response.data.user || JSON.parse(storedUser);
+            queryClient.setQueryData(queryKeys.account('profile', storedToken), currentUser);
+            setUser(currentUser);
             // Update API default header
             api.defaults.headers.common.Authorization = `Bearer ${storedToken}`;
           } catch (err) {
@@ -67,6 +83,8 @@ export const AuthProvider = ({ children }) => {
       
       await persistAuthData(newToken, newUser);
       
+      await clearSessionCache();
+      queryClient.setQueryData(queryKeys.account('profile', newToken), newUser);
       setToken(newToken);
       setUser(newUser);
       api.defaults.headers.common.Authorization = `Bearer ${newToken}`;
@@ -91,6 +109,8 @@ export const AuthProvider = ({ children }) => {
       
       await persistAuthData(newToken, newUser);
       
+      await clearSessionCache();
+      queryClient.setQueryData(queryKeys.account('profile', newToken), newUser);
       setToken(newToken);
       setUser(newUser);
       api.defaults.headers.common.Authorization = `Bearer ${newToken}`;
@@ -110,6 +130,7 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error('Logout error:', err);
     } finally {
+      await clearSessionCache();
       await SecureStore.deleteItemAsync('authToken');
       await SecureStore.deleteItemAsync('authUser');
       setToken(null);

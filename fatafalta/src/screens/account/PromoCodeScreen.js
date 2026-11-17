@@ -1,3 +1,4 @@
+import { usePullRefresh } from '../../hooks/usePullRefresh';
 import Pressable from '../../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { getUserMessage } from '../../utils/userMessages';
@@ -24,6 +25,7 @@ const PromoCodeScreen = ({ navigation }) => {
   const { brand } = useTheme();
   const { styles } = useStyles();
   const { data, isLoading, isError, refetch, isRefetching, error: loadError } = usePromoCode();
+  const pull = usePullRefresh(refetch);
   const [copied, setCopied] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
@@ -131,7 +133,7 @@ const PromoCodeScreen = ({ navigation }) => {
           </View>
         ) : null}
       </ScreenHeader>
-      <AccountScroll refreshing={isRefetching} onRefresh={refetch}>
+      <AccountScroll refreshing={pull.refreshing} onRefresh={pull.refresh}>
         {renderBody()}
       </AccountScroll>
     </View>

@@ -1,3 +1,4 @@
+import { usePrepRanking } from '../usePrepQueries';
 import StudyLamp from '../../theme/StudyLamp';
 import { SUBSCRIPTION_BUTTON_LABEL, useOpenSubscription } from '../../hooks/useAccountLink';
 import StatusBar from '../../theme/ThemeStatusBar';
@@ -7,16 +8,14 @@ import { Image, RefreshControl, ScrollView, StyleSheet, View } from 'react-nativ
 import Animated, { FadeIn, LinearTransition, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
-import {
-  BookOpen, Check, CheckCircle2, ChevronRight, ChevronsUpDown, CloudOff, GraduationCap, Lock, Sparkles, Target, Timer,
-} from 'lucide-react-native';
+import { BookOpen, CheckCircle2, ChevronRight, ChevronsUpDown, CloudOff, GraduationCap, Lock, Sparkles, Target, Timer } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import core from '../shared/prepCore';
 import { getLesson, getModule, getProgramme, programmeModules, useContentGeneration } from '../content';
 import usePrep, { useRights, useSummary, currentDevice } from '../store';
 import { lastStorageError } from '../storage';
-import prepApi from '../api';
+
 import { motion, type } from '../theme';
 import { haptic, useReduceMotion } from '../feedback';
 import { DailyCopy, HomeChevron, HomeScoreboard, HomeVideoBadge } from '../components/HomePresentation';
@@ -205,7 +204,7 @@ const PrepHomeScreen = ({ navigation, route }) => {
   const rights = useRights();
   const summary = useSummary(programmeCode);
   const catalogue = useCatalogue();
-  const [rank, setRank] = useState(null);
+  const { data: rank, refetch: loadRank } = usePrepRanking(programmeCode);
   const [sheet, setSheet] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -215,11 +214,7 @@ const PrepHomeScreen = ({ navigation, route }) => {
   const chip = prefs.puce?.[programmeCode] || 'Toutes';
   const org = catalogue.find((o) => o.sigle === programme?.organisme.sigle);
 
-  const loadRank = useCallback(() => {
-    if (!programmeCode) return Promise.resolve();
-    return prepApi.ranking(programmeCode, 'tout').then(setRank).catch(() => {});
-  }, [programmeCode]);
-  useFocusEffect(useCallback(() => { flush(); loadRank(); }, [flush, loadRank]));
+  useFocusEffect(useCallback(() => { flush(); }, [flush]));
 
   useEffect(() => {
     if (route.params?.accueil && !prefs.rythmeFait) setTimeout(() => setSheet('rythme'), 500);

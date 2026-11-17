@@ -254,7 +254,8 @@ const usePrep = create((set, get) => ({
       get().persist();
       get().flush();
     } catch (error) {
-      set({ online: false });
+      // Une réponse du serveur (même un refus) prouve que l'appareil est en ligne.
+      if (!error?.response) set({ online: false });
     }
   },
 
@@ -361,7 +362,8 @@ const usePrep = create((set, get) => ({
         if (restant.length) setTimeout(() => get().flush(), 300);
       }
     } catch (error) {
-      set({ online: false });
+      // Une réponse du serveur (même un refus) prouve que l'appareil est en ligne.
+      if (!error?.response) set({ online: false });
     } finally {
       inFlight = new Set();
       flushing = false;

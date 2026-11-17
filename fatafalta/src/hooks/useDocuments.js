@@ -1,4 +1,6 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { queryKeys, freshness } from '../services/queryKeys';
+import { keepPreviousData } from '@tanstack/react-query';
+import { useServerQuery as useQuery, useServerInfiniteQuery as useInfiniteQuery } from './useServerQuery';
 import { fetchDocuments } from '../services/documents';
 import { DOCUMENTS_PER_PAGE } from '../types/constants';
 
@@ -7,28 +9,31 @@ import { DOCUMENTS_PER_PAGE } from '../types/constants';
  * @param {Object} filters
  * @returns
  */
-export const useDocuments = (filters = {}) => {
+export const useDocuments = (filters = {}, enabled = true) => {
   return useQuery({
-    queryKey: ['documents', filters],
+    queryKey: queryKeys.documents(filters),
     queryFn: () => fetchDocuments(filters),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    keepPreviousData: true,
+    enabled,
+    ...freshness.documents,
+    placeholderData: keepPreviousData,
   });
 };
 
 export const useInfiniteDocuments = (filters = {}, enabled = true) => useInfiniteQuery({
-  queryKey: ['documents-infinite', filters || {}],
+  queryKey: queryKeys.infiniteDocuments(filters || {}),
   queryFn: ({ pageParam }) => fetchDocuments({
     ...(filters || {}),
     page: pageParam,
     limit: DOCUMENTS_PER_PAGE,
   }),
+  placeholderData: keepPreviousData,
   initialPageParam: 1,
-  getNextPageParam: (lastPage) => {
+  getNextPageParam: (lastPage, pages) => {
     const pagination = lastPage.pagination;
-    if (!pagination || pagination.page >= pagination.pages) return undefined;
-    return pagination.page + 1;
+    if (!pagination) return lastPage.data.length === DOCUMENTS_PER_PAGE ? pages.length + 1 : undefined;
+    const page = Number(pagination.page) || pages.length;
+    return page < Number(pagination.pages) ? page + 1 : undefined;
   },
   enabled,
-  staleTime: 1000 * 60 * 5,
+  ...freshness.documents,
 });

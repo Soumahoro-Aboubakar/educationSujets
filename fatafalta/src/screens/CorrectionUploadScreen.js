@@ -1,10 +1,11 @@
+import { useDocuments } from '../hooks/useDocuments';
 import useAsyncAction from '../hooks/useAsyncAction';
 import ProgressBar from '../components/ui/ProgressBar';
 import { DocumentSkeleton } from '../components/documents/DocumentList';
 import { TouchableOpacity } from '../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { createUserError, getErrorAlert } from '../utils/userMessages';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -42,7 +43,7 @@ import EmptyState from '../components/ui/EmptyState';
 import ImageEditorModal from '../components/documents/ImageEditorModal';
 import AuthContext from '../context/AuthContext';
 import LockedFeatureScreen from './LockedFeatureScreen';
-import { fetchDocuments, uploadCorrectionDocument, getDownloadUrl } from '../services/documents';
+import { uploadCorrectionDocument, getDownloadUrl } from '../services/documents';
 import {
   applyWatermarkToExistingPdf,
   cleanTempDirectory,
@@ -64,11 +65,10 @@ const CorrectionUploadScreen = ({ navigation }) => {
   const isAndroid = Platform.OS === 'android';
   const canManageCorrections = user?.role === 'admin';
 
-  const [subjects, setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [loadingSubjects, setLoadingSubjects] = useState(false);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const [inputMode, setInputMode] = useState(null);
@@ -139,23 +139,13 @@ const CorrectionUploadScreen = ({ navigation }) => {
     resetCorrectionFile();
   };
 
-  const loadSubjects = useCallback(async () => {
-    if (!canManageCorrections) return;
-
-    try {
-      setLoadingSubjects(true);
-      const result = await fetchDocuments({ search: debouncedSearch, limit: 100 });
-      const pdfSubjects = (result.data || []).filter((document) => {
-        return isPdfDocument(document) && document.documentType !== 'corrige';
-      });
-      setSubjects(pdfSubjects);
-    } catch (error) {
-      console.warn('Unable to load documents for correction:', error);
-      Alert.alert(...getErrorAlert(error, 'documents', 'vous'));
-    } finally {
-      setLoadingSubjects(false);
-    }
-  }, [canManageCorrections, debouncedSearch]);
+  const subjectsQuery = useDocuments({ search: debouncedSearch, limit: 100 }, canManageCorrections);
+  const subjects = (subjectsQuery.data?.data || []).filter((document) => isPdfDocument(document) && document.documentType !== 'corrige');
+  const loadingSubjects = subjectsQuery.isLoading;
+  const loadSubjects = subjectsQuery.refetch;
+  useEffect(() => {
+    if (subjectsQuery.error && !subjectsQuery.data) Alert.alert(...getErrorAlert(subjectsQuery.error, 'documents', 'vous'));
+  }, [subjectsQuery.error, subjectsQuery.data]);
 
   useEffect(() => {
     try {
@@ -171,10 +161,6 @@ const CorrectionUploadScreen = ({ navigation }) => {
     const timeoutId = setTimeout(() => setDebouncedSearch(search.trim()), 350);
     return () => clearTimeout(timeoutId);
   }, [search]);
-
-  useEffect(() => {
-    loadSubjects();
-  }, [loadSubjects]);
 
   const handleRefresh = async () => {
     setRefreshing(true);

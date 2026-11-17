@@ -38,7 +38,7 @@ const WithdrawScreen = ({ navigation }) => {
   const { styles } = useStyles();
   const { user } = useContext(AuthContext);
   const { data, isLoading, isError, error: loadError, refetch } = useWallet();
-  const refreshAccount = useRefreshAccount();
+  const refreshAccount = useRefreshAccount(['wallet']);
   const [form, setForm] = useState(() => ({ operator: null, phone: user?.phone || '', amount: '', ...splitName(user?.name) }));
   const [errors, setErrors] = useState({});
   const [confirming, setConfirming] = useState(false);

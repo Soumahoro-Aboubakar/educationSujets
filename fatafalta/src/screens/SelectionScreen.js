@@ -1,12 +1,13 @@
+import { usePublishedOrganismes } from '../hooks/useCatalog';
 import Pressable from '../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FlatList, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { Building2, ClipboardList, FileText, SearchX } from 'lucide-react-native';
-import { useFocusEffect } from '@react-navigation/native';
+
 import Text from '../components/ui/Text';
 import ScreenHeader from '../components/ui/ScreenHeader';
 
@@ -15,9 +16,8 @@ import SearchField from '../components/ui/SearchField';
 import StateView from '../components/ui/StateView';
 import { SkeletonGrid, SkeletonRows } from '../components/ui/Skeleton';
 import { useOrientationOptions } from '../hooks/useOrientationOptions';
-import { fetchPublishedOrganismes } from '../services/catalog';
+
 import { usePreferences } from '../context/PreferencesContext';
-import cache from '../services/cache';
 
 import { PrepButton } from '../prep/ui/primitives';
 import { HomeChevron } from '../prep/components/HomePresentation';
@@ -75,31 +75,17 @@ const SelectionScreen = ({ navigation, route }) => {
   const { width, fontScale } = useWindowDimensions();
   // Une copie garde sa mesure ; grand texte : moins de colonnes, jamais de texte réduit.
   const columns = Math.max(1, Math.min(3, Math.floor((Math.min(width, 1040) - 28) / (160 * fontScale))));
-  const { data, isLoading, isError, refetch, error: optionsError } = useOrientationOptions();
+  const catalogMode = mode === 'contest' || mode === 'establishment';
+  const { data, isLoading, isError, refetch, error: optionsError } = useOrientationOptions(!catalogMode);
   const { updatePreferences } = usePreferences();
   const [query, setQuery] = useState('');
   const [saving, setSaving] = useState(false);
-  const [local, setLocal] = useState(null);
-  const [catalog, setCatalog] = useState(null);
-  const [catalogLoading, setCatalogLoading] = useState(true);
-  const [catalogError, setCatalogError] = useState(false);
-  const mounted = useRef(true);
-  const catalogMode = mode === 'contest' || mode === 'establishment';
-
-  const loadCatalog = useCallback(async () => {
-    setCatalogLoading(true);
-    setCatalogError(false);
-    try {
-      const result = await fetchPublishedOrganismes({ limit: 100 });
-      if (mounted.current) setCatalog(result.data);
-    } catch (error) {
-      if (mounted.current) setCatalogError(error);
-    } finally {
-      if (mounted.current) setCatalogLoading(false);
-    }
-  }, []);
-
-  const options = catalogMode ? (catalog ?? []) : (local ?? (data?.[config.key] ?? []));
+  const catalogQuery = usePublishedOrganismes(catalogMode);
+  const catalog = catalogQuery.data?.data ?? null;
+  const catalogLoading = catalogQuery.isLoading;
+  const catalogError = catalogQuery.error;
+  const loadCatalog = catalogQuery.refetch;
+  const options = catalogMode ? (catalog ?? []) : (data?.[config.key] ?? []);
 
   const visible = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase();
@@ -108,29 +94,6 @@ const SelectionScreen = ({ navigation, route }) => {
       .filter(Boolean)
       .some((value) => value.toLocaleLowerCase().includes(normalized)));
   }, [options, query]);
-
-  useEffect(() => {
-    mounted.current = true;
-    if (catalogMode) return () => { mounted.current = false; };
-
-    (async () => {
-      try {
-        const raw = await cache.load('orientation-options');
-        if (mounted.current && raw?.payload?.[config.key]) setLocal(raw.payload[config.key]);
-      } catch (error) {
-        // Le cache est facultatif : la requête réseau prend le relais.
-      }
-      refetch().catch(() => {});
-    })();
-
-    return () => { mounted.current = false; };
-  }, [catalogMode, config.key, refetch]);
-
-  // Rafraîchit au retour sur l'écran ; la liste déjà affichée reste visible.
-  useFocusEffect(useCallback(() => {
-    if (catalogMode) loadCatalog();
-    return undefined;
-  }, [catalogMode, loadCatalog]));
 
   const select = async (item) => {
     if (saving) return;

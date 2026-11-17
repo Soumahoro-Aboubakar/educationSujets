@@ -1,62 +1,34 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { fetchAllFilterOptions } from '../services/filters';
+import { hydrateCachedQuery } from '../services/queryCache';
+import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import cache from '../services/cache';
+import { queryKeys } from '../services/queryKeys';
+import { useOptions } from './useOptions';
+import { FILTER_DEFINITIONS } from '../types/constants';
 
-/**
- * Hook to fetch all taxonomy filter options (universities, departments, etc.)
- * Uses a local cache to provide instant data + background sync.
- */
+// The raw endpoint cache is also shared with upload/edit metadata forms.
 export const useFilterOptions = () => {
-  const qc = useQueryClient();
-  const [initial, setInitial] = useState(() => {
-    try {
-      if (typeof window !== 'undefined' && window.localStorage) {
-        const raw = window.localStorage.getItem('filterOptions');
-        return raw ? JSON.parse(raw) : undefined;
-      }
-    } catch (e) {
-      // ignore
-    }
-    return undefined;
-  });
-
-  const query = useQuery({
-    queryKey: ['filterOptions'],
-    queryFn: fetchAllFilterOptions,
-    initialData: initial,
-    staleTime: 1000 * 60 * 60, // 1 hour
-    refetchOnMount: true,
-    refetchOnReconnect: true,
-    onSuccess: (data) => {
-      // persist fetched data
-      cache.save('filterOptions', data);
-      try {
-        if (typeof window !== 'undefined' && window.localStorage) {
-          window.localStorage.setItem('filterOptions', JSON.stringify(data));
-        }
-      } catch (e) {
-        // ignore
-      }
-    },
-  });
-
-  // For native (expo) platforms, attempt to load cache asynchronously and prime react-query
+  const client = useQueryClient();
+  const queries = useOptions(FILTER_DEFINITIONS.map((def) => def.endpoint));
+  const data = Object.fromEntries(FILTER_DEFINITIONS.map((def, i) => [def.key,
+    def.key === 'semester' ? (queries[i].data || []).map((item) => ({ ...item, displayName: (item.name || '').replace(/Semestre/gi, 'Session') })) : queries[i].data || [],
+  ]));
+  const stamp = queries.map((query) => query.dataUpdatedAt).join(':');
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const mobileCached = await cache.load('filterOptions');
-        if (mounted && mobileCached) {
-          qc.setQueryData(['filterOptions'], mobileCached);
-          setInitial(mobileCached);
-        }
-      } catch (e) {
-        // ignore
-      }
-    })();
-    return () => { mounted = false; };
-  }, [qc]);
-
-  return query;
+    let active = true;
+    cache.load('filterOptions').then((raw) => {
+      if (!active || !raw) return;
+      const payload = raw.payload || raw;
+      FILTER_DEFINITIONS.forEach((def) => {
+        const key = queryKeys.options(def.endpoint);
+        if (payload[def.key]) hydrateCachedQuery(client, key, payload[def.key], raw.cachedAt || 0);
+      });
+    });
+    return () => { active = false; };
+  }, [client]);
+  useEffect(() => {
+    if (queries.every((query) => query.data)) cache.save('filterOptions', { payload: data, cachedAt: Math.min(...queries.map((query) => query.dataUpdatedAt)) });
+  }, [stamp]);
+  return { data, isLoading: queries.some((query) => query.isLoading), isError: queries.some((query) => query.isError && !query.data),
+    error: queries.find((query) => query.error)?.error, refetch: () => Promise.all(queries.map((query) => query.refetch())) };
 };

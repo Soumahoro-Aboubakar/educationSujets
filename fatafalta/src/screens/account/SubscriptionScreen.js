@@ -1,3 +1,4 @@
+import { usePullRefresh } from '../../hooks/usePullRefresh';
 import { createThemedStyles } from '../../theme/ThemeProvider';
 import { getUserMessage } from '../../utils/userMessages';
 import React from 'react';
@@ -29,6 +30,7 @@ const KIND_LABELS = { initial: 'Abonnement', monthly: 'Mensualité' };
 const SubscriptionScreen = ({ navigation }) => {
   const { styles } = useStyles();
   const { data, isLoading, isError, refetch, isRefetching, error: loadError } = useSubscription();
+  const pull = usePullRefresh(refetch);
   const { data: entitlements } = useEntitlements();
   const canCheckout = canOfferPurchase(entitlements?.checkout?.mobileWebCheckout);
   const checkout = useWebCheckout();
@@ -153,7 +155,7 @@ const SubscriptionScreen = ({ navigation }) => {
         onBack={() => navigation.goBack()}
         title={data?.accessState && data.accessState !== 'enabled' ? (data.accessState === 'revoked' ? 'Accès retiré' : 'Accès suspendu') : TITLES[status] || 'Abonnement à vérifier'}
       />
-      <AccountScroll refreshing={isRefetching} onRefresh={refetch}>
+      <AccountScroll refreshing={pull.refreshing} onRefresh={pull.refresh}>
         {renderBody()}
       </AccountScroll>
     </View>

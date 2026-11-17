@@ -1,20 +1,21 @@
+import { usePrepRanking } from '../usePrepQueries';
 import StudyLamp from '../../theme/StudyLamp';
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 
 import { ordinal } from '../../utils/ordinal';
 import { getErrorMessage } from '../../utils/userMessages';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useFocusEffect } from '@react-navigation/native';
+
 import Svg, { Circle, Line, Path, Rect } from 'react-native-svg';
 import { ChevronRight, NotebookPen, Target, Timer, Trophy } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
 import { programmeModules, useContentGeneration } from '../content';
 import usePrep, { todayKey, useSummary } from '../store';
-import prepApi from '../api';
+
 import { type } from '../theme';
 import { haptic } from '../feedback';
 import { AnimatedNumber, NightBackground, PrepButton, PressScale, ProgressBar, SectionTitle, SubjectIcon } from '../ui/primitives';
@@ -105,13 +106,9 @@ export const ProgressScreen = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const programmeCode = usePrep((s) => s.programme);
   const summary = useSummary(programmeCode);
-  const [rank, setRank] = useState(null);
-  const [offline, setOffline] = useState(false);
+  const { data: rank, error: rankError } = usePrepRanking(programmeCode);
+  const offline = rankError ? getErrorMessage(rankError, 'classement') : false;
   const [tab, setTab] = useState('progression');
-  useFocusEffect(useCallback(() => {
-    if (!programmeCode) return;
-    prepApi.ranking(programmeCode, 'tout').then((r) => { setRank(r); setOffline(false); }).catch((err) => setOffline(getErrorMessage(err, 'classement')));
-  }, [programmeCode]));
 
   if (!summary) {
     return (

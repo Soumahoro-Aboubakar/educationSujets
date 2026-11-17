@@ -52,7 +52,7 @@ const TrainingSessionScreen = ({ navigation, route }) => {
     setIsChecking(true);
 
     try {
-      const answer = await answerTrainingQuestion(question._id, selectedIndex);
+      const answer = await answerTrainingQuestion(question._id, selectedIndex, contestId);
       setFeedback(answer);
       if (answer.isCorrect) {
         setCorrectCount((count) => count + 1);

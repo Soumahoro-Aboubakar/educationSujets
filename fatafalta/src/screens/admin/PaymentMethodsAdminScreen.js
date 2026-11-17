@@ -1,9 +1,12 @@
+import { useServerQuery } from '../../hooks/useServerQuery';
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys, freshness } from '../../services/queryKeys';
 import useAsyncAction from '../../hooks/useAsyncAction';
 import { SkeletonRows } from '../../components/ui/Skeleton';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Switch, View } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+
 import { CreditCard } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import PaymentMethodLogo from '../../components/payments/PaymentMethodLogo';
@@ -21,26 +24,18 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
   const { brand, theme } = useTheme();
   const { styles } = useStyles();
   const { user } = useContext(AuthContext);
-  const [methods, setMethods] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const client = useQueryClient();
+  const methodsQuery = useServerQuery({ queryKey: queryKeys.paymentMethods(), queryFn: fetchAdminPaymentMethods, ...freshness.account, enabled: user?.role === 'admin' });
+  const methods = methodsQuery.data || [];
+  const loading = methodsQuery.isLoading;
+  const setMethods = (update) => client.setQueryData(methodsQuery.queryKey, (current) => current ? update(current) : undefined);
   const [refreshing, setRefreshing] = useState(false);
-  const [loadError, setLoadError] = useState(null);
+  const loadError = methodsQuery.error && !methodsQuery.data ? getErrorMessage(methodsQuery.error, 'moyensPaiement', 'vous') : null;
   const [actionError, setActionError] = useState(null);
   const [busy, setBusy] = useState(null);
   const [runToggle, toggling] = useAsyncAction();
 
-  const load = useCallback(async () => {
-    try {
-      setMethods(await fetchAdminPaymentMethods());
-      setLoadError(null);
-    } catch (error) {
-      setLoadError(getErrorMessage(error, 'moyensPaiement', 'vous'));
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useFocusEffect(useCallback(() => { load(); }, [load]));
+  const load = methodsQuery.refetch;
 
   const refresh = async () => {
     setRefreshing(true);
@@ -51,6 +46,7 @@ const PaymentMethodsAdminScreen = ({ navigation }) => {
   const toggle = (method, enabled) => runToggle(async () => {
     setBusy(method.code);
     setActionError(null);
+    await client.cancelQueries({ queryKey: queryKeys.paymentMethods() });
     // Affichage immédiat, annulé si le serveur refuse.
     setMethods((current) => current.map((item) => (item.code === method.code ? { ...item, enabled } : item)));
     try {

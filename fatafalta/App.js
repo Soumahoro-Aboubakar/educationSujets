@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import { prepQueueChanged } from './src/services/queryCache';
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { AppState, Platform, StyleSheet } from 'react-native';
 import { isRunningInExpoGo } from 'expo';
@@ -6,7 +7,7 @@ import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/
 import { ThemeProvider, useTheme, useThemePreference } from './src/theme/ThemeProvider';
 import ThemeStatusBar from './src/theme/ThemeStatusBar';
 import * as Linking from 'expo-linking';
-import { QueryClient, QueryClientProvider, focusManager } from '@tanstack/react-query';
+import { QueryClientProvider, focusManager } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from '@expo-google-fonts/inter/useFonts';
 // Import par graisse : seules les 5 graisses utilisées sont embarquées (et non les 18 du paquet).
@@ -30,6 +31,7 @@ import { PreferencesProvider } from './src/context/PreferencesContext';
 import usePrep from './src/prep/store';
 import { flushState } from './src/prep/storage';
 import prepApi, { setPrepToken } from './src/prep/api';
+import { queryClient } from './src/services/queryClient';
 import { useEntitlements } from './src/hooks/useAccount';
 
 /**
@@ -37,26 +39,33 @@ import { useEntitlements } from './src/hooks/useAccount';
  * rattachement de l'identité appareil au compte à la connexion (§ 25.5).
  */
 const PrepBridge = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, token: accountToken } = useContext(AuthContext);
   const entitlements = useEntitlements();
   const setAbonneLocal = usePrep((s) => s.setAbonneLocal);
   const token = usePrep((s) => s.token);
-  const attached = useRef(false);
+  const attached = useRef(null);
+  useEffect(() => usePrep.subscribe((state, previous) => {
+    if (state.queue === previous.queue) return;
+    prepQueueChanged(queryClient, previous.queue, state.queue, state.rejets);
+  }), []);
   useEffect(() => {
     setAbonneLocal(isAuthenticated && entitlements.data?.subscription?.status === 'ACTIVE');
   }, [isAuthenticated, entitlements.data?.subscription?.status, setAbonneLocal]);
   useEffect(() => {
-    if (!isAuthenticated) { attached.current = false; return; }
-    if (!token || attached.current) return;
-    attached.current = true;
+    if (!isAuthenticated) { attached.current = null; return; }
+    if (!token || attached.current === accountToken) return;
+    attached.current = accountToken;
+    let active = true;
     prepApi.attach().then((out) => {
-      if (!out?.token) return;
+      if (!active || !out?.token) return;
+      queryClient.removeQueries({ queryKey: ['prep'] });
       setPrepToken(out.token);
       usePrep.setState({ token: out.token, identite: out.identite });
       usePrep.getState().persist();
       usePrep.getState().flush();
-    }).catch(() => { attached.current = false; });
-  }, [isAuthenticated, token]);
+    }).catch(() => { if (active) attached.current = null; });
+    return () => { active = false; };
+  }, [isAuthenticated, token, accountToken]);
   // Retour au premier plan : envoi des réponses faites hors ligne (§ 22).
   useEffect(() => {
     // Retour au premier plan : envoi des réponses en file, puis contenus publiés depuis la dernière ouverture.
@@ -109,7 +118,8 @@ if (!isRunningInExpoGo()) SplashScreen.setOptions({ duration: 180, fade: true })
 
 // Retour de l'app au premier plan (ex. après un paiement sur le site) = « focus » pour React
 // Query : les requêtes qui l'acceptent (état du compte) sont relues auprès du serveur.
-focusManager.setEventListener((handleFocus) => {
+if (Platform.OS !== 'web') focusManager.setEventListener((handleFocus) => {
+  handleFocus(AppState.currentState === 'active');
   const subscription = AppState.addEventListener('change', (state) => handleFocus(state === 'active'));
   return () => subscription.remove();
 });
@@ -128,14 +138,6 @@ const linking = {
   },
 };
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 2,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
 
 function ThemedNavigation({ children, onReady }) {
   const { isDark, brand } = useTheme();

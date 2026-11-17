@@ -1,3 +1,5 @@
+import { queryClient } from './queryClient';
+import { documentChanged, invalidateKeys } from './queryCache';
 /**
  * Document API service
  */
@@ -42,6 +44,7 @@ export const fetchDocument = async (id) => {
  */
 export const getDownloadUrl = async (id) => {
   const response = await api.get(`/api/documents/${id}/download`);
+  invalidateKeys(queryClient, [['account', 'download-quota'], ['download-preview'], ['download-scope']]);
   return response.data.data;
 };
 
@@ -57,6 +60,7 @@ export const uploadDocument = async (formData, onProgress) => {
       'Content-Type': 'multipart/form-data',
     },
   });
+  documentChanged(queryClient, undefined);
   return response.data;
 };
 
@@ -73,6 +77,7 @@ export const uploadCorrectionDocument = async (documentId, formData, onProgress)
       'Content-Type': 'multipart/form-data',
     },
   });
+  documentChanged(queryClient, documentId);
   return response.data;
 };
 
@@ -83,6 +88,7 @@ export const uploadCorrectionDocument = async (documentId, formData, onProgress)
  */
 export const updateDocumentMetadata = async (id, payload) => {
   const response = await api.put(`/api/documents/${id}`, payload);
+  documentChanged(queryClient, id);
   return response.data;
 };
 
@@ -93,6 +99,7 @@ export const updateDocumentMetadata = async (id, payload) => {
  */
 export const validateDocumentStatus = async (id, status) => {
   const response = await api.put(`/api/documents/${id}/validate`, { status });
+  documentChanged(queryClient, id);
   return response.data;
 };
 
@@ -102,6 +109,7 @@ export const validateDocumentStatus = async (id, status) => {
  */
 export const deleteDocument = async (id) => {
   const response = await api.delete(`/api/documents/${id}`);
+  documentChanged(queryClient, id, { removed: true });
   return response.data;
 };
 
@@ -138,6 +146,7 @@ export const getTrashedDocumentPreview = async (id) => {
  */
 export const restoreDocument = async (id) => {
   const response = await api.put(`/api/documents/trash/${id}/restore`);
+  documentChanged(queryClient, id);
   return response.data;
 };
 
@@ -147,6 +156,7 @@ export const restoreDocument = async (id) => {
  */
 export const permanentlyDeleteDocument = async (id) => {
   const response = await api.delete(`/api/documents/trash/${id}`);
+  documentChanged(queryClient, id, { removed: true });
   return response.data;
 };
 
@@ -166,6 +176,7 @@ export const previewDownloadSelection = (documentIds) => api.post('/api/download
 /** Réserve le quota puis remet un lien signé par document (enregistrés dans l'application). */
 export const fetchBundleFiles = async (documentIds) => {
   const bundle = await api.post('/api/downloads/bundles', { documentIds, delivery: 'files' }).then(unwrapData);
+  invalidateKeys(queryClient, [['account', 'download-quota'], ['download-preview'], ['download-scope']]);
   const delivery = await api.get(bundle.filesUrl).then(unwrapData);
   return { ...delivery, count: bundle.count };
 };

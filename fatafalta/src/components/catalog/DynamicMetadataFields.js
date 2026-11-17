@@ -1,3 +1,8 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { useServerQuery, useServerQueries } from '../../hooks/useServerQuery';
+import { catalogQueries, useParcours } from '../../hooks/useCatalog';
+import { queryKeys } from '../../services/queryKeys';
+import { upsertEntity } from '../../services/queryCache';
 import { useTheme } from '../../theme/ThemeProvider';
 import { getErrorMessage } from '../../utils/userMessages';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -5,17 +10,7 @@ import { ActivityIndicator, View } from 'react-native';
 import MetadataSelect from '../ui/MetadataSelect';
 import Text from '../ui/Text';
 
-import {
-  createCatalogNode,
-  createMatiere,
-  createOrganisme,
-  createParcoursType,
-  fetchCatalogNodes,
-  fetchMatieres,
-  fetchOrganismeStructure,
-  fetchOrganismes,
-  fetchParcoursTypes,
-} from '../../services/dynamicCatalog';
+import { createCatalogNode, createMatiere, createOrganisme, createParcoursType } from '../../services/dynamicCatalog';
 
 const labelFor = (level) => level?.libelleSingulier || level?.type || 'Niveau';
 const normalize = (item) => (item ? { ...item, name: item.name || item.nom } : item);
@@ -32,15 +27,6 @@ const getPathFromLeaf = (leaf) => {
 
 const DynamicMetadataFields = ({ value, onChange, error }) => {
   const { theme } = useTheme();
-  const [organismes, setOrganismes] = useState([]);
-  const [structure, setStructure] = useState(null);
-  const [parcoursTypes, setParcoursTypes] = useState([]);
-  const [matieres, setMatieres] = useState([]);
-  const [nodesByLevel, setNodesByLevel] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [organismesLoading, setOrganismesLoading] = useState(true);
-  const [nodesLoading, setNodesLoading] = useState(false);
-  const [catalogError, setCatalogError] = useState(null);
   const [createdOrganisme, setCreatedOrganisme] = useState(null);
   const [createdParcoursType, setCreatedParcoursType] = useState(null);
   const [createdMatiere, setCreatedMatiere] = useState(null);
@@ -48,83 +34,33 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
 
   const organisme = value?.organisme || null;
   const path = value?.path || [];
+  const client = useQueryClient();
+  const organismsQuery = useServerQuery(catalogQueries.organismes());
+  const structureQuery = useServerQuery(catalogQueries.structure(organisme?._id));
+  const parcoursQuery = useParcours(organisme?._id);
+  const mattersQuery = useServerQuery(catalogQueries.matieres(organisme?._id));
+  const organismes = organismsQuery.data || [];
+  const structure = structureQuery.data;
+  const parcoursTypes = (parcoursQuery.data?.data || []).map(normalize);
+  const matieres = mattersQuery.data || [];
   const levels = useMemo(() => structure?.niveaux || [], [structure]);
-
+  const nodeParams = levels.slice(0, Math.min(levels.length, path.length + 1)).map((level, index) => ({
+    organismeId: organisme?._id, parentId: index ? path[index - 1]?._id : null, type: level.type,
+  }));
+  const nodeQueries = useServerQueries(nodeParams.map(catalogQueries.nodes));
+  const nodesByLevel = nodeQueries.map((query) => query.data || []);
+  const organismesLoading = organismsQuery.isLoading;
+  const loading = structureQuery.isLoading || parcoursQuery.isLoading || mattersQuery.isLoading;
+  const nodesLoading = nodeQueries.some((query) => query.isLoading);
+  const failure = [organismsQuery, structureQuery, parcoursQuery, mattersQuery, ...nodeQueries].find((query) => query.error && !query.data)?.error;
+  const catalogError = failure ? getErrorMessage(failure, 'catalogue', 'vous') : null;
   useEffect(() => {
-    let active = true;
-    fetchOrganismes()
-      .then((items) => {
-        if (!active) return;
-        setOrganismes(items);
-        if (organisme?._id) {
-          const current = items.find((item) => item._id === organisme._id);
-          if (current && current.name !== organisme.name) onChange({ ...value, organisme: current });
-        }
-      })
-      .catch((error) => active && setCatalogError(getErrorMessage(error, 'catalogue', 'vous')))
-      .finally(() => active && setOrganismesLoading(false));
-    return () => { active = false; };
-  }, []);
-
+    if (structure && value.structureLength !== levels.length) onChange({ ...value, structureLength: levels.length });
+  }, [structure, levels.length, value, onChange]);
   useEffect(() => {
-    let active = true;
-    if (!organisme?._id) {
-      setLoading(false);
-      setStructure(null);
-      setParcoursTypes([]);
-      setMatieres([]);
-      setNodesByLevel([]);
-      return undefined;
-    }
-
-    setLoading(true);
-    setCatalogError(null);
-    Promise.all([
-      fetchOrganismeStructure(organisme._id),
-      fetchParcoursTypes(organisme._id),
-      fetchMatieres(organisme._id),
-    ])
-      .then(([nextStructure, nextParcoursTypes, nextMatieres]) => {
-        if (!active) return;
-        setStructure(nextStructure);
-        setParcoursTypes(nextParcoursTypes);
-        setMatieres(nextMatieres);
-        if (value.structureLength !== (nextStructure?.niveaux || []).length) {
-          onChange({ ...value, structureLength: (nextStructure?.niveaux || []).length });
-        }
-      })
-      .catch((error) => active && setCatalogError(getErrorMessage(error, 'catalogue', 'vous')))
-      .finally(() => active && setLoading(false));
-
-    return () => { active = false; };
-  }, [organisme?._id]);
-
-  useEffect(() => {
-    let active = true;
-    const loadNodes = async () => {
-      if (!organisme?._id || !levels.length) { setNodesLoading(false); return; }
-      const nextOptions = [];
-      setNodesLoading(true);
-      try {
-        for (let index = 0; index < levels.length; index += 1) {
-          const parentId = index ? path[index - 1]?._id : null;
-          if (index && !parentId) break;
-          nextOptions[index] = await fetchCatalogNodes({
-            organismeId: organisme._id,
-            parentId,
-            type: levels[index].type,
-          });
-        }
-        if (active) setNodesByLevel(nextOptions);
-      } catch (requestError) {
-        if (active) setCatalogError(getErrorMessage(requestError, 'catalogue', 'vous'));
-      } finally {
-        if (active) setNodesLoading(false);
-      }
-    };
-    loadNodes();
-    return () => { active = false; };
-  }, [organisme?._id, levels, path]);
+    const current = organismes.find((item) => item._id === organisme?._id);
+    if (current && current.name !== organisme.name) onChange({ ...value, organisme: current });
+  }, [organismsQuery.data, organisme?._id, organisme?.name]);
 
   const selectOrganisme = (organismeId, created) => {
     const selected = organismes.find((item) => item._id === organismeId)
@@ -146,11 +82,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
       parentId: index ? path[index - 1]?._id : null,
       nom,
     });
-    setNodesByLevel((current) => {
-      const next = [...current];
-      next[index] = [...(next[index] || []), created];
-      return next;
-    });
+    client.setQueryData(queryKeys.nodes(nodeParams[index]), (items) => upsertEntity(items, created));
     setCreatedNodes((current) => ({ ...current, [index]: created }));
     return created;
   };
@@ -172,7 +104,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
         onChange={selectOrganisme}
         onCreate={async (name) => {
           const created = await createOrganisme(name);
-          setOrganismes((current) => [...current, created]);
+          client.setQueryData(queryKeys.organismes(), (items) => upsertEntity(items, created));
           setCreatedOrganisme(created);
           return created;
         }}
@@ -210,7 +142,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
                   })}
                   onCreate={async (name) => {
                     const created = await createParcoursType(organisme._id, name);
-                    setParcoursTypes((current) => [...current, created]);
+                    client.setQueryData(queryKeys.parcours(organisme._id), (data) => ({ ...data, data: upsertEntity(data?.data, created) }));
                     setCreatedParcoursType(created);
                     return created;
                   }}
@@ -248,7 +180,7 @@ const DynamicMetadataFields = ({ value, onChange, error }) => {
               })}
               onCreate={async (name) => {
                 const created = await createMatiere(organisme._id, name);
-                setMatieres((current) => [...current, created]);
+                client.setQueryData(queryKeys.matieres(organisme._id), (items) => upsertEntity(items, created));
                 setCreatedMatiere(created);
                 return created;
               }}

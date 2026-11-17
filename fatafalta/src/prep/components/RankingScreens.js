@@ -1,3 +1,6 @@
+import { useQueries, useQueryClient } from '@tanstack/react-query';
+import { useCandidate, usePrepRanking, usePrepQueryScope, candidateQuery } from '../usePrepQueries';
+import { queryKeys } from '../../services/queryKeys';
 import { SkeletonRows } from '../../components/ui/Skeleton';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { ordinal } from '../../utils/ordinal';
@@ -138,29 +141,17 @@ const FollowedCandidates = memo(({ programme, periode, revision, open }) => {
   const { s } = useStyles();
   const followed = usePrep((state) => state.candidatsSuivis?.[programme] || EMPTY_CANDIDATES);
   const remove = usePrep((state) => state.unfollowCandidate);
-  const [profiles, setProfiles] = useState({});
-  const [retry, setRetry] = useState(0);
+  const token = usePrepQueryScope();
+  const client = useQueryClient();
+  const profileQueries = useQueries({ queries: followed.map((candidate) => candidateQuery(programme, candidate.identite, periode, token)) });
+  const profiles = Object.fromEntries(followed.map((candidate, index) => [candidate.identite, {
+    profile: profileQueries[index].data, error: profileQueries[index].error ? rankingError(profileQueries[index].error) : null,
+  }]));
+  const setRetry = () => profileQueries.forEach((query) => query.refetch());
   const reduced = useReduceMotion();
   useEffect(() => {
-    const controller = new AbortController();
-    setProfiles({});
-    // Concurrence bornée, même si un parent suit beaucoup de candidats.
-    let next = 0;
-    const worker = async () => {
-      while (next < followed.length && !controller.signal.aborted) {
-        const c = followed[next++];
-        try {
-          const profile = await prepApi.candidate(programme, c.identite, periode, controller.signal);
-          if (!profile) throw new Error('Profil vide');
-          if (!controller.signal.aborted) setProfiles((prev) => ({ ...prev, [c.identite]: { profile } }));
-        } catch (error) {
-          if (!controller.signal.aborted) setProfiles((prev) => ({ ...prev, [c.identite]: { error: rankingError(error) } }));
-        }
-      }
-    };
-    Array.from({ length: Math.min(4, followed.length) }, () => worker());
-    return () => controller.abort();
-  }, [followed, programme, periode, revision, retry]);
+    followed.forEach((candidate) => client.refetchQueries({ queryKey: queryKeys.candidate(programme, candidate.identite, periode, token), exact: true, stale: true }, { cancelRefetch: false }));
+  }, [client, followed, programme, periode, token, revision]);
   if (!followed.length) return null;
   return (
     <View style={s.followed}>
@@ -245,6 +236,13 @@ const RankingContent = ({ navigation, programmeCode, periode, setPeriode }) => {
   const identity = usePrep((state) => state.identite);
   const ranking = useRanking(programmeCode, periode);
   const { data, loading, refreshing, error, paging, pageError, located, revision, load, loadPage } = ranking;
+  const visited = useRef(false);
+  const focusLoad = useRef(load);
+  focusLoad.current = load;
+  useFocusEffect(useCallback(() => {
+    if (visited.current) focusLoad.current({ automatic: true });
+    visited.current = true;
+  }, []));
   const [query, setQuery] = useState('');
   const [locationNote, setLocationNote] = useState(null);
   const list = useRef(null);
@@ -353,7 +351,7 @@ const RankingContent = ({ navigation, programmeCode, periode, setPeriode }) => {
 export const RankingScreen = ({ navigation, route }) => {
   const [periode, setPeriode] = useState('tout');
   const programmeCode = route.params?.programme;
-  return <RankingContent key={`${programmeCode}:${periode}`} navigation={navigation} programmeCode={programmeCode} periode={periode} setPeriode={setPeriode} />;
+  return <RankingContent key={programmeCode} navigation={navigation} programmeCode={programmeCode} periode={periode} setPeriode={setPeriode} />;
 };
 
 export const CandidateScreen = ({ navigation, route }) => {
@@ -368,30 +366,16 @@ export const CandidateScreen = ({ navigation, route }) => {
   const followed = usePrep((state) => Boolean(state.candidatsSuivis?.[programmeCode]?.some((c) => c.identite === identite)));
   const follow = usePrep((state) => state.followCandidate);
   const unfollow = usePrep((state) => state.unfollowCandidate);
-  const [profile, setProfile] = useState(null);
-  const [total, setTotal] = useState(route.params.total ?? null);
-  const [totalError, setTotalError] = useState(false);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [revision, setRevision] = useState(0);
+  const profileQuery = useCandidate(programmeCode, identite, periode);
+  const rankQuery = usePrepRanking(programmeCode, periode);
+  const profile = profileQuery.data;
+  const total = rankQuery.data?.total ?? route.params.total ?? null;
+  const totalError = Boolean(rankQuery.error && total == null);
+  const error = profileQuery.error && !profile ? rankingError(profileQuery.error) : null;
+  const loading = profileQuery.isLoading;
   const [comparing, setComparing] = useState(false);
   const own = route.params.moi || identite === (identity?.id || identity?._id);
-  useFocusEffect(useCallback(() => {
-    const controller = new AbortController();
-    setProfile(null); setTotal(route.params.total ?? null); setError(null); setLoading(true); setComparing(false); setTotalError(false);
-    prepApi.candidate(programmeCode, identite, periode, controller.signal).then((p) => {
-      if (!p) throw new Error('Profil vide');
-      if (!controller.signal.aborted) setProfile(p);
-    }).catch((err) => { if (!controller.signal.aborted) setError(rankingError(err)); })
-      .finally(() => { if (!controller.signal.aborted) setLoading(false); });
-    // Le contrat du profil ne contient pas de total. Celui-ci est lu pour la même période.
-    prepApi.ranking(programmeCode, periode, { limite: 1, signal: controller.signal }).then((r) => {
-      if (r?.total == null) throw new Error('Total absent');
-      if (!controller.signal.aborted) setTotal(r.total);
-    }).catch(() => { if (!controller.signal.aborted) setTotalError(true); });
-    return () => controller.abort();
-  }, [programmeCode, identite, periode, revision, route.params.total]));
-  const retry = () => setRevision((r) => r + 1);
+  const retry = () => { profileQuery.refetch(); rankQuery.refetch(); };
   const stats = profile?.stats || {};
   const canCompare = !own && Boolean(mine && (mine.stats.questions > 0 || mine.modulesValides > 0 || mine.stats.meilleurBlanc != null));
   const compare = profile && mine ? [

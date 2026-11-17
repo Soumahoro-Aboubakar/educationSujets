@@ -1,6 +1,9 @@
 // Sans nouvelle dépendance : Babel est déjà fourni par Expo. Aucun fichier d'environnement lu.
 // Exécution : node tests/prepRanking.test.cjs
-const { test } = require('node:test');
+const { test, after } = require('node:test');
+const { QueryClient } = require('@tanstack/react-query');
+const clients = [];
+after(() => clients.forEach((client) => client.clear()));
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -22,7 +25,7 @@ function load(relative, mocks, globals = {}) {
   return exports;
 }
 const row = (id, rang) => ({ identite: id, rang, score: 100 - rang });
-const tick = async () => { await Promise.resolve(); await Promise.resolve(); };
+const tick = () => new Promise((resolve) => setImmediate(resolve));
 function pendingApi() {
   const calls = [];
   return {
@@ -30,12 +33,18 @@ function pendingApi() {
     ranking: (...args) => new Promise((resolve, reject) => { calls.push({ args, resolve, reject }); }),
   };
 }
-function hookHarness(api, mode = 'ranking', globals = {}) {
+function hookHarness(api, mode = 'ranking', globals = {}, sharedClient) {
   let index = 0;
   const cells = [];
   let focus;
   let effects = [];
   const react = {
+    useContext: () => ({ token: null }),
+    useMemo: (factory, deps) => {
+      const i = index++;
+      if (!cells[i] || deps.some((dep, k) => dep !== cells[i].deps[k])) cells[i] = { deps, value: factory() };
+      return cells[i].value;
+    },
     useState: (initial) => {
       const i = index++;
       if (!(i in cells)) cells[i] = initial;
@@ -55,8 +64,23 @@ function hookHarness(api, mode = 'ranking', globals = {}) {
       }
     },
   };
+  const client = sharedClient || new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  clients.push(client);
+  const keys = load('src/services/queryKeys.js', {});
+  keys.freshness = { ...keys.freshness, ranking: { ...keys.freshness.ranking, gcTime: Infinity } };
+  const resources = load('src/prep/usePrepQueries.js', {
+    react,
+    '@tanstack/react-query': { useQueryClient: () => client, useQuery: (options) => ({ data: client.getQueryData(options.queryKey) }), keepPreviousData: (value) => value },
+    '../context/AuthContext': {},
+    '../hooks/useServerQuery': {},
+    '../services/queryKeys': keys,
+    '../services/queryCache': load('src/services/queryCache.js', { './queryKeys': keys }),
+    './store': { __esModule: true, default: (selector) => selector({ token: null }) },
+    './api': { __esModule: true, default: api },
+  });
   const module = load('src/prep/components/useRanking.js', {
     react,
+    '../usePrepQueries': resources,
     '../api': { __esModule: true, default: api, isServiceMissing: (e) => e?.response?.status === 404 },
   }, globals);
   const render = (query = '') => {
@@ -68,7 +92,7 @@ function hookHarness(api, mode = 'ranking', globals = {}) {
   render();
   // Le chargement part au montage (useEffect) ; focus() renvoie le nettoyage de cet effet (sortie d'écran).
   focus = () => () => cells.find((cell) => cell && typeof cell.cleanup === 'function')?.cleanup();
-  return { ...module, render, focus: () => focus() };
+  return { ...module, client, render, focus: () => focus() };
 }
 
 test('rangs réels, ex æquo, doublons et conservation des deux frontières', () => {
@@ -222,4 +246,18 @@ test('syntaxe JSX des fichiers modifiés et composants référencés définis', 
       if (/^[A-Z]/.test(p.node.name)) assert.ok(p.scope.hasBinding(p.node.name), `${file}: composant non défini ${p.node.name}`);
     } });
   }
+});
+
+
+test('classement partagé au remontage : lignes immédiates, aucun appel supplémentaire, date inchangée', async () => {
+  const api = pendingApi();
+  const first = hookHarness(api);
+  api.calls[0].resolve({ candidats: [row('one', 1)], total: 1 }); await tick();
+  const before = first.client.getQueryCache().getAll()[0].state.dataUpdatedAt;
+  const second = hookHarness(api, 'ranking', {}, first.client);
+  assert.equal(second.render().data.candidats[0].identite, 'one');
+  assert.equal(second.render().loading, false);
+  await tick();
+  assert.equal(api.calls.length, 1);
+  assert.equal(first.client.getQueryCache().getAll()[0].state.dataUpdatedAt, before);
 });

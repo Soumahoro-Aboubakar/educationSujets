@@ -1,10 +1,15 @@
+import { useServerQueries } from '../../hooks/useServerQuery';
+import { useQueryClient } from '@tanstack/react-query';
+import { catalogQueries } from '../../hooks/useCatalog';
+import { queryKeys } from '../../services/queryKeys';
+import { upsertEntity } from '../../services/queryCache';
 import { useTheme } from '../../theme/ThemeProvider';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import MetadataSelect from '../ui/MetadataSelect';
 import Text from '../ui/Text';
 
-import { createCatalogNode, fetchNodes } from '../../services/institutions';
+import { createCatalogNode } from '../../services/institutions';
 
 const labelFor = (type) => String(type || '')
   .replace(/[-_]/g, ' ')
@@ -17,55 +22,22 @@ const labelFor = (type) => String(type || '')
 const TaxonomyPathFields = ({ institution, value = [], onChange, error, disabled = false }) => {
   const { theme } = useTheme();
   const structure = useMemo(() => institution?.navigationStructure || [], [institution]);
-  const [optionsByLevel, setOptionsByLevel] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
+  const client = useQueryClient();
+  const params = institution?._id ? structure.slice(0, Math.min(structure.length, value.length + 1)).map((type, index) => ({
+    institution: institution._id, parent: index ? value[index - 1] : 'root', type, limit: 100,
+  })) : [];
+  const queries = useServerQueries(params.map(catalogQueries.institutionNodes));
+  const optionsByLevel = queries.map((query) => query.data?.data || []);
+  const isLoading = queries.some((query) => query.isLoading);
   useEffect(() => {
-    let active = true;
-
-    const loadPathOptions = async () => {
-      if (!institution?._id || !structure.length) {
-        if (active) setOptionsByLevel([]);
-        return;
+    for (let index = 0; index < queries.length; index += 1) {
+      if (!queries[index].data) break;
+      if (value[index] && !queries[index].data.data.some((option) => option._id === value[index])) {
+        onChange(value.slice(0, index));
+        break;
       }
-
-      setIsLoading(true);
-      const nextOptions = [];
-      let nextPath = Array.isArray(value) ? value.filter(Boolean) : [];
-
-      try {
-        for (let index = 0; index < structure.length; index += 1) {
-          const parent = index === 0 ? 'root' : nextPath[index - 1];
-          if (index > 0 && !parent) break;
-
-          const result = await fetchNodes({
-            institution: institution._id,
-            parent,
-            type: structure[index],
-            limit: 100,
-          });
-          const options = result.data || [];
-          nextOptions[index] = options;
-
-          if (!nextPath[index] || !options.some((option) => option._id === nextPath[index])) {
-            nextPath = nextPath.slice(0, index);
-            break;
-          }
-        }
-
-        if (!active) return;
-        setOptionsByLevel(nextOptions);
-        if (nextPath.join('|') !== value.join('|')) onChange(nextPath);
-      } catch (requestError) {
-        if (active) setOptionsByLevel([]);
-      } finally {
-        if (active) setIsLoading(false);
-      }
-    };
-
-    loadPathOptions();
-    return () => { active = false; };
-  }, [institution?._id, onChange, structure, value]);
+    }
+  }, [queries, value, onChange]);
 
   if (!institution?._id) return null;
 
@@ -81,13 +53,9 @@ const TaxonomyPathFields = ({ institution, value = [], onChange, error, disabled
       type: structure[index],
       name,
     });
-    setOptionsByLevel((current) => {
-      const next = [...current];
-      const options = next[index] || [];
-      next[index] = [...options.filter((option) => option._id !== node._id), node]
-        .sort((a, b) => a.name.localeCompare(b.name));
-      return next;
-    });
+    client.setQueryData(queryKeys.institutionNodes(params[index]), (data) => ({
+      ...data, data: upsertEntity(data?.data, node).sort((a, b) => a.name.localeCompare(b.name)),
+    }));
     return node;
   };
 

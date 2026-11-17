@@ -1,86 +1,31 @@
-import { getUserMessage, getErrorMessage } from '../utils/userMessages';
-/**
- * Hook for managing document drafts from the server
- */
-
-import { useState, useEffect, useCallback } from 'react';
+import { useContext } from 'react';
+import { useServerInfiniteQuery } from './useServerQuery';
+import AuthContext from '../context/AuthContext';
+import { queryKeys, freshness } from '../services/queryKeys';
+import { deleteDocument } from '../services/documents';
 import api from '../services/api';
+import { getUserMessage, getErrorMessage } from '../utils/userMessages';
 
 export const useDrafts = () => {
-  const [drafts, setDrafts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(false);
-  const [error, setError] = useState(null);
-
-  // Load drafts on mount
-  useEffect(() => {
-    loadDrafts(1, false);
-  }, []);
-
-  const loadDrafts = useCallback(async (requestedPage = 1, append = false) => {
-    setError(null);
-    try {
-      if (append) setLoadingMore(true);
-      else setLoading(true);
-      
-      const res = await api.get('/api/documents/drafts', { params: { page: requestedPage, limit: 12 } });
-      const newData = res.data?.data || [];
-      const pagination = res.data?.meta?.pagination;
-      
-      setDrafts(prev => {
-        if (!append) return newData;
-        const existingIds = new Set(prev.map(d => d._id || d.id));
-        const newItems = newData.filter(d => !existingIds.has(d._id || d.id));
-        return [...prev, ...newItems];
-      });
-      setPage(requestedPage);
-      setHasMore(pagination ? pagination.pages > requestedPage : false);
-    } catch (err) {
-      console.error('Error loading drafts:', err);
-      setError(getUserMessage(err, 'documents', 'vous'));
-    } finally {
-      if (append) setLoadingMore(false);
-      else setLoading(false);
-    }
-  }, []);
-
-  const saveDraft = useCallback(async (draft) => {
-    throw new Error(getErrorMessage(null, 'envoi', 'vous'));
-  }, []);
-
-  const deleteDraft = useCallback(async (draftId) => {
-    try {
-      await api.delete('/api/documents/' + draftId);
-      setDrafts(prev => prev.filter(d => d._id !== draftId && d.id !== draftId));
-    } catch (err) {
-      console.error('Error deleting draft:', err);
-      throw err;
-    }
-  }, []);
-
-  const getDraftById = useCallback((draftId) => {
-    return drafts.find(d => d._id === draftId || d.id === draftId);
-  }, [drafts]);
-
-  const clearAllDrafts = useCallback(async () => {
-    // No-op for server drafts
-  }, []);
-
+  const { token } = useContext(AuthContext);
+  const query = useServerInfiniteQuery({
+    queryKey: queryKeys.drafts(), ...freshness.documents, enabled: Boolean(token), initialPageParam: 1,
+    queryFn: async ({ pageParam }) => {
+      const res = await api.get('/api/documents/drafts', { params: { page: pageParam, limit: 12 } });
+      return { data: res.data?.data || [], pagination: res.data?.meta?.pagination };
+    },
+    getNextPageParam: (last, pages) => last.pagination?.pages > pages.length ? pages.length + 1 : undefined,
+  });
+  const drafts = [...new Map((query.data?.pages || []).flatMap((page) => page.data).map((item) => [item._id || item.id, item])).values()];
   return {
-    drafts,
-    error,
-    loading,
-    saveDraft,
-    deleteDraft,
-    getDraftById,
-    clearAllDrafts,
-    loadDrafts,
-    page,
-    hasMore,
-    loadingMore,
+    drafts, loading: query.isLoading, loadingMore: query.isFetchingNextPage,
+    error: query.error ? getUserMessage(query.error, 'documents', 'vous') : null,
+    page: query.data?.pages.length || 1, hasMore: Boolean(query.hasNextPage),
+    loadDrafts: (page = 1, append = false) => append ? (query.hasNextPage && !query.isFetching ? query.fetchNextPage() : Promise.resolve()) : query.refetch(),
+    deleteDraft: deleteDocument,
+    saveDraft: async () => { throw new Error(getErrorMessage(null, 'envoi', 'vous')); },
+    getDraftById: (id) => drafts.find((item) => (item._id || item.id) === id),
+    clearAllDrafts: async () => {},
   };
 };
-
 export default useDrafts;

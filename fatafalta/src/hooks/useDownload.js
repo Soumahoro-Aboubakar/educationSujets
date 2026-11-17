@@ -89,7 +89,7 @@ const ACCESS_CODES = ['AUTH_REQUIRED', 'SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REA
 export const useDownload = (document, { onAccessDenied } = {}) => {
   const [runDownload, isInitializing] = useAsyncAction();
   const [runFile, isFilePending] = useAsyncAction();
-  const refreshAccount = useRefreshAccount();
+  const refreshAccount = useRefreshAccount(['entitlements', 'download-quota']);
   const { startDownload, isDownloaded, getLocalUri, activeDownloads, removeDownload } =
     useDownloadStore();
 

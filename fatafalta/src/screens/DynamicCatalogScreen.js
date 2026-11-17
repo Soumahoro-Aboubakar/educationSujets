@@ -1,3 +1,4 @@
+import { usePublishedBranches } from '../hooks/useCatalog';
 import Pressable from '../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorMessage } from '../utils/userMessages';
@@ -15,8 +16,6 @@ import ListRow from '../components/ui/ListRow';
 import StateView from '../components/ui/StateView';
 import { SkeletonRows } from '../components/ui/Skeleton';
 
-import { fetchPublishedMatieres, fetchPublishedNoeuds } from '../services/catalog';
-
 const labelOf = (item) => item?.nom || item?.name || '';
 const MATTER_LEVEL = { libelleSingulier: 'Matière', libellePluriel: 'Matières' };
 
@@ -27,18 +26,6 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
   const parcoursType = route.params?.parcoursType || null;
   const levels = organisme?.structure?.niveaux || [];
   const [path, setPath] = useState([]);
-  const [items, setItems] = useState([]);
-  // Niveau auquel appartiennent `items` : évite d'afficher, pendant une image,
-  // le contenu du niveau précédent lors d'un changement de niveau.
-  const [itemsKey, setItemsKey] = useState(null);
-  const [page, setPage] = useState(1);
-  const [hasNextPage, setHasNextPage] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [error, setError] = useState('');
-  const requestId = useRef(0);
-  // Chaque niveau déjà visité est conservé : remonter d'un cran est instantané.
-  const levelCache = useRef(new Map());
   const direction = useRef('forward');
   const insets = useSafeAreaInsets();
 
@@ -47,82 +34,23 @@ const DynamicCatalogScreen = ({ navigation, route }) => {
   const currentLevel = isMatterStep ? MATTER_LEVEL : levels[path.length];
   const levelKey = `${parcoursType?._id || 'all'}:${leaf?._id || 'root'}:${isMatterStep ? 'm' : 'n'}`;
 
-  const loadItems = useCallback(async (requestedPage = 1, append = false) => {
-    if (!organisme?._id || !levels.length) {
-      setItems([]);
-      setItemsKey(levelKey);
-      setLoading(false);
-      setError('Ce catalogue est momentanément indisponible. Consulte un autre organisme ou réessaie un peu plus tard.');
-      return;
-    }
-
-    const currentRequest = ++requestId.current;
-    const cached = !append && levelCache.current.get(levelKey);
-    if (append) setLoadingMore(true);
-    else if (cached) {
-      // Affichage immédiat du niveau connu, rafraîchi silencieusement.
-      setItems(cached.items);
-      setItemsKey(levelKey);
-      setPage(cached.page);
-      setHasNextPage(cached.hasNextPage);
-      setLoading(false);
-    } else setLoading(true);
-    setError('');
-
-    try {
-      const result = isMatterStep
-        ? await fetchPublishedMatieres({
-          organismeId: organisme._id,
-          parcoursTypeId: parcoursType?._id,
-          noeudId: leaf?._id,
-          page: requestedPage,
-          limit: 50,
-        })
-        : await fetchPublishedNoeuds({
-          organismeId: organisme._id,
-          parcoursTypeId: parcoursType?._id,
-          parentId: leaf?._id || 'root',
-          page: requestedPage,
-          limit: 50,
-        });
-
-      if (currentRequest !== requestId.current) return;
-      const nextHasPage = Boolean(result.pagination?.pages > requestedPage);
-      setItems((current) => {
-        const nextItems = append ? [...current, ...result.data] : result.data;
-        levelCache.current.set(levelKey, { items: nextItems, page: requestedPage, hasNextPage: nextHasPage });
-        return nextItems;
-      });
-      setItemsKey(levelKey);
-      setPage(requestedPage);
-      setHasNextPage(nextHasPage);
-    } catch (requestError) {
-      if (currentRequest !== requestId.current) return;
-      // Une erreur de rafraîchissement ne masque pas un niveau déjà affiché.
-      if (!cached || append) setError(getErrorMessage(requestError, 'catalogue'));
-      if (!append && !cached) {
-        setItems([]);
-        setItemsKey(levelKey);
-      }
-    } finally {
-      if (currentRequest === requestId.current) {
-        setLoading(false);
-        setLoadingMore(false);
-      }
-    }
-  }, [isMatterStep, leaf?._id, levelKey, levels.length, organisme?._id, parcoursType?._id]);
-
-  useEffect(() => {
-    levelCache.current.clear();
-    setPath([]);
-  }, [organisme?._id, parcoursType?._id]);
-
-  useFocusEffect(
-    useCallback(() => {
-      loadItems(1, false);
-      return undefined;
-    }, [loadItems])
-  );
+  const result = usePublishedBranches({
+    organismeId: organisme?._id, parcoursTypeId: parcoursType?._id,
+    ...(isMatterStep ? { noeudId: leaf?._id } : { parentId: leaf?._id || 'root' }),
+  }, isMatterStep, Boolean(organisme?._id && levels.length));
+  const items = result.data?.pages.flatMap((page) => page.data) || [];
+  const itemsKey = levelKey;
+  const page = result.data?.pages.length || 1;
+  const loading = result.isLoading;
+  const loadingMore = result.isFetchingNextPage;
+  const hasNextPage = result.hasNextPage;
+  const error = !organisme?._id || !levels.length
+    ? 'Ce catalogue est momentanément indisponible. Consulte un autre organisme ou réessaie un peu plus tard.'
+    : result.error ? getErrorMessage(result.error, 'catalogue') : '';
+  const loadItems = (requestedPage = 1, append = false) => append
+    ? (result.hasNextPage && !result.isFetching && !result.isPlaceholderData ? result.fetchNextPage() : undefined)
+    : result.refetch();
+  useEffect(() => { setPath([]); }, [organisme?._id, parcoursType?._id]);
 
   const goToDepth = useCallback((depth) => {
     direction.current = 'back';

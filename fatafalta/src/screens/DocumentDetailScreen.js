@@ -2,7 +2,7 @@ import useAsyncAction from '../hooks/useAsyncAction';
 import Pressable from '../components/ui/FeedbackPressable';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorAlert, getUserMessage } from '../utils/userMessages';
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import {
   Check,
   CheckCircle2,
@@ -127,13 +127,6 @@ const DocumentDetailScreen = () => {
 
   const isOwner = user && document?.uploadedBy && (user._id === (document.uploadedBy._id || document.uploadedBy));
   const canDelete = user && (user.role === 'admin' || isOwner);
-
-  useFocusEffect(
-    useCallback(() => {
-      if (!documentId) return;
-      refetch();
-    }, [documentId, refetch])
-  );
 
   useEffect(() => {
     if (!promptLoaded) return;

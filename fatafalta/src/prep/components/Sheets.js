@@ -1,3 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '../../services/queryKeys';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import { SUBSCRIPTION_BUTTON_LABEL } from '../../hooks/useAccountLink';
 import { getErrorMessage } from '../../utils/userMessages';
@@ -85,6 +87,7 @@ const Thinking = () => {
 };
 
 export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscribe, onDone }) => {
+  const client = useQueryClient();
   const reduce = useReduceMotion();
   const { brand } = useTheme();
   const { VERDICTS, styles } = useStyles();
@@ -107,6 +110,7 @@ export const ReasoningSheet = ({ visible, exercice, programme, onClose, onSubscr
       const version = versions?.[getExercise(exercice.code)?.module.code] || 'fr';
       const out = await prepApi.reasoning(exercice.code, { texte, programme, version });
       if (out.disponible) {
+        client.invalidateQueries({ queryKey: queryKeys.prepProgramme(programme) });
         useIA();
         if (out.verdict === 'exact') haptic.success(); else haptic.warning();
         if (out.verdict !== 'exact') markFragile(programme, exercice.code, (exercice.notions || [])[0]);

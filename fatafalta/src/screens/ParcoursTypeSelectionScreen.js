@@ -1,6 +1,7 @@
+import { useParcours } from '../hooks/useCatalog';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getUserMessage } from '../utils/userMessages';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
@@ -11,7 +12,6 @@ import ScreenHeader from '../components/ui/ScreenHeader';
 import ListRow from '../components/ui/ListRow';
 import StateView from '../components/ui/StateView';
 import { SkeletonRows } from '../components/ui/Skeleton';
-import { fetchParcoursTypes } from '../services/catalog';
 
 const labelOf = (item) => item?.nom || item?.name || '';
 
@@ -19,34 +19,15 @@ const ParcoursTypeSelectionScreen = ({ navigation, route }) => {
   const { theme } = useTheme();
   const { styles } = useStyles();
   const organisme = route.params?.organisme || null;
-  const [types, setTypes] = useState(route.params?.parcoursTypes || []);
-  const [loading, setLoading] = useState(!route.params?.parcoursTypes);
-  const [error, setError] = useState(false);
+  const result = useParcours(organisme?._id, route.params?.parcoursTypes);
+  const types = result.data?.data || [];
+  const loading = result.isLoading;
+  const error = !organisme?._id || (!result.data && result.error);
+  const load = result.refetch;
   const insets = useSafeAreaInsets();
-
-  const load = async () => {
-    if (!organisme?._id) {
-      setError(true);
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
-    setError(false);
-    try {
-      const result = await fetchParcoursTypes(organisme._id);
-      setTypes(result.data);
-      // Organisme sans parcours : cette étape n'a pas de sens, on la retire de l'historique.
-      if (!result.data.length) navigation.replace('DynamicCatalog', { organisme });
-    } catch (requestError) {
-      setError(requestError);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (!route.params?.parcoursTypes) load();
-  }, [organisme?._id]);
+    if (result.data && !result.data.data.length) navigation.replace('DynamicCatalog', { organisme });
+  }, [result.data, navigation, organisme]);
 
   // `navigate` (et non `replace`) : le retour depuis le catalogue ramène ici.
   const select = (item) => {

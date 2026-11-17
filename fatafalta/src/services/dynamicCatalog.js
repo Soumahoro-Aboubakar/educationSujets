@@ -1,3 +1,6 @@
+import { queryClient } from './queryClient';
+import { invalidateKeys } from './queryCache';
+import { queryKeys } from './queryKeys';
 import api from './api';
 
 const withName = (item) => (item ? { ...item, name: item.name || item.nom } : item);
@@ -11,6 +14,7 @@ export const fetchOrganismes = async (search = '') => {
 
 export const createOrganisme = async (nom) => {
   const response = await api.post('/api/organismes', { nom });
+  invalidateKeys(queryClient, [['metadata', 'organismes'], ['catalog', 'organismes']]);
   return withName(response.data.data);
 };
 
@@ -26,6 +30,7 @@ export const fetchParcoursTypes = async (organismeId) => {
 
 export const createParcoursType = async (organismeId, nom) => {
   const response = await api.post(`/api/organismes/${organismeId}/parcours-types`, { nom });
+  invalidateKeys(queryClient, [queryKeys.parcours(organismeId)]);
   return withName(response.data.data);
 };
 
@@ -49,6 +54,7 @@ export const createCatalogNode = async ({ organismeId, parentId, nom }) => {
     parentId: parentId || null,
     nom,
   });
+  invalidateKeys(queryClient, [['metadata', 'nodes'], ['catalog', 'nodes']]);
   return withName(response.data.data);
 };
 
@@ -61,5 +67,6 @@ export const fetchMatieres = async (organismeId, search = '') => {
 
 export const createMatiere = async (organismeId, nom) => {
   const response = await api.post('/api/matieres/trouver-ou-creer', { organismeId, nom });
+  invalidateKeys(queryClient, [queryKeys.matieres(organismeId), ['catalog', 'matieres']]);
   return withName(response.data.data);
 };
