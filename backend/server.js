@@ -83,6 +83,8 @@ app.use('/api/contest-types', require('./routes/contestTypes'));
 app.use('/api/orientation', require('./routes/orientation'));
 app.use('/api/training', require('./routes/training'));
 app.use('/api/prep', require('./routes/prep'));
+app.use('/api/push', require('./routes/push'));
+app.use('/api/app', require('./routes/app'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/me', require('./routes/me'));
 app.use('/api/downloads', require('./routes/downloads'));
@@ -129,6 +131,8 @@ const startServer = async () => {
 
   // Confirme les paiements ouverts auprès du fournisseur, même sans webhook.
   require('./services/payments/reconciler').startPaymentReconciler();
+  // Rappels quotidiens (notifications web) : inactifs sans clés VAPID.
+  require('./services/pushService').startReminderScheduler();
 
   try {
     const startTrashPurgeCron = require('./scripts/trashCron');

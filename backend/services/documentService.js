@@ -49,18 +49,60 @@ const POPULATE_FIELDS = [
   { path: 'parcoursTypeId', select: 'nom organismeId isDefault' },
   { path: 'sujetParentId', select: '_id title titre status type documentType isDeleted' },
   { path: 'dynamicCorrection', select: '_id title titre status originalFileName fileType extension mimeType fileSize type isDeleted' },
-  // Pas d'email : ces champs sont servis sur des routes publiques.
+  // Attribution affichée dans les écrans de gestion.
   { path: 'uploadedBy', select: 'name role' },
   { path: 'validatedBy', select: 'name role' },
   { path: 'correction', select: '_id status originalFileName fileType extension mimeType fileSize documentType' },
 ];
 
-const applyPopulate = (query) => {
-  POPULATE_FIELDS.forEach((field) => {
+const publishedDocument = { status: 'approved', isDeleted: { $ne: true } };
+const publicRelations = {
+  correction: { ...publishedDocument, documentType: 'corrige' },
+  dynamicCorrection: { ...publishedDocument, type: 'correction' },
+  sujetParentId: publishedDocument,
+};
+const PUBLIC_POPULATE_FIELDS = POPULATE_FIELDS
+  .filter(({ path }) => path !== 'uploadedBy' && path !== 'validatedBy')
+  .map((field) => publicRelations[field.path] ? { ...field, match: publicRelations[field.path] } : field);
+
+const applyPopulate = (query, fields = POPULATE_FIELDS) => {
+  fields.forEach((field) => {
     query.populate(field);
   });
 
   return query;
+};
+
+// Contrat des listes, de la fiche et des deux représentations de corrigé.
+const PUBLIC_FIELDS = [
+  '_id', 'id', 'title', 'titre', 'description', 'type', 'documentType', 'status',
+  'fileType', 'extension', 'mimeType', 'fileSize', 'isPremmuim', 'correctionIncludedInPdf',
+  'university', 'department', 'level', 'semester', 'category', 'contestType', 'institution',
+  'taxonomyNodes', 'noeudId', 'matiereId', 'parcoursTypeId', 'sujetParentId', 'correctionFor',
+  'views', 'downloads', 'createdAt', 'updatedAt', 'dateAjout', 'validatedAt', 'access',
+];
+
+const publicDocument = (document, user = null) => {
+  const result = Object.fromEntries(PUBLIC_FIELDS.filter((key) => document[key] !== undefined)
+    .map((key) => [key, document[key]]));
+  // Expo compose un chemin local avec originalFileName || file.
+  const isCorrection = document.documentType === 'corrige' || document.type === 'correction';
+  const label = document.title || document.titre || (isCorrection ? 'Corrigé' : 'Sujet');
+  const base = label.normalize('NFC').replace(/[^\p{L}\p{N} _-]+/gu, ' ').trim().slice(0, 60) || 'Document';
+  const extension = /^\.?([a-z0-9]{1,8})$/i.exec(document.extension || document.fileType)?.[1];
+  result.originalFileName = extension ? `${base}.${extension.toLowerCase()}` : base;
+  result.file = result.originalFileName;
+
+  // Le propriétaire voit son propre identifiant pour les commandes de sa fiche mobile.
+  const ownerId = document.uploadedBy?._id || document.uploadedBy;
+  if (user && ownerId && String(ownerId) === String(user._id)) result.uploadedBy = user._id;
+
+  for (const key of ['correction', 'dynamicCorrection']) {
+    if (document[key] === undefined) continue;
+    const correction = document[key];
+    result[key] = correction?.status === 'approved' && !correction.isDeleted ? publicDocument(correction) : null;
+  }
+  return result;
 };
 
 const normalizeTitle = (value = '') =>
@@ -127,6 +169,7 @@ const getTitleSimilarity = (sourceTitle, candidateTitle) => {
 };
 
 const canAccessDocument = (document, user) => {
+  if (document.isDeleted) return false;
   if (document.status === 'approved') {
     return true;
   }
@@ -145,7 +188,7 @@ const canAccessDocument = (document, user) => {
 };
 
 const assertDocumentAccess = (document, user) => {
-  if (!document) {
+  if (!document || document.isDeleted) {
     throw new AppError('Document non trouve', 404);
   }
 
@@ -192,9 +235,12 @@ const assertDeleteAccess = (document, user) => {
   throw new AppError('Vous n\'etes pas autorise a supprimer ce document', 403);
 };
 
-const getDocumentById = async (id) => applyPopulate(Document.findById(id));
+const getDocumentById = async (id, { publicView = false } = {}) => applyPopulate(
+  Document.findOne({ _id: id, isDeleted: { $ne: true } }),
+  publicView ? PUBLIC_POPULATE_FIELDS : POPULATE_FIELDS
+);
 
-const getDocumentByStoredFileName = async (fileName) => applyPopulate(Document.findOne({ file: fileName }));
+const getDocumentByStoredFileName = async (fileName) => applyPopulate(Document.findOne({ file: fileName, isDeleted: { $ne: true } }));
 
 const findDuplicateTitleCandidates = async (title, user) => {
   const normalized = normalizeTitle(title);
@@ -203,7 +249,10 @@ const findDuplicateTitleCandidates = async (title, user) => {
     return [];
   }
 
-  const documents = await Document.find({ isDeleted: { $ne: true } })
+  const staff = ['admin', 'sub-admin'].includes(user?.role);
+  const filter = { isDeleted: { $ne: true } };
+  if (!staff) filter.$or = [{ status: 'approved' }, ...(user ? [{ uploadedBy: user._id }] : [])];
+  const documents = await Document.find(filter)
     .select('title originalFileName status uploadedBy createdAt')
     .sort('-createdAt')
     .lean();
@@ -225,21 +274,19 @@ const findDuplicateTitleCandidates = async (title, user) => {
     .slice(0, 5);
 
   const documentsById = new Map(
-    (await applyPopulate(Document.find({ _id: { $in: rankedMatches.map((match) => match.document._id) } })))
+    (await applyPopulate(Document.find({ ...filter, _id: { $in: rankedMatches.map((match) => match.document._id) } }),
+      staff ? POPULATE_FIELDS : PUBLIC_POPULATE_FIELDS))
       .map((document) => [document._id.toString(), document])
   );
 
-  return rankedMatches.map((match) => {
-    const populatedDocument = documentsById.get(match.document._id.toString());
-    const plainDocument = populatedDocument?.toObject
-      ? populatedDocument.toObject()
-      : match.document;
-
+  return rankedMatches.filter((match) => documentsById.has(String(match.document._id))).map((match) => {
+    const populatedDocument = documentsById.get(String(match.document._id));
+    const plainDocument = populatedDocument.toObject();
     return {
-      ...plainDocument,
+      ...(staff ? plainDocument : publicDocument(plainDocument, user)),
       duplicateScore: match.duplicateScore,
       matchPercent: match.matchPercent,
-      canView: canAccessDocument(populatedDocument || match.document, user),
+      canView: canAccessDocument(populatedDocument, user),
     };
   });
 };
@@ -380,7 +427,7 @@ const listPublicDocuments = async (params = {}) => {
     ];
   }
 
-  let query = applyPopulate(Document.find(filters)).sort('-createdAt');
+  let query = applyPopulate(Document.find(filters), PUBLIC_POPULATE_FIELDS).sort('-createdAt');
 
   const limit = Math.min(Math.max(Number.parseInt(params.limit, 10) || 12, 1), 100);
   const page = Math.min(Math.max(Number.parseInt(params.page, 10) || 1, 1), 500);
@@ -465,11 +512,19 @@ const listDynamicDocuments = async (params = {}, user = null) => {
       .lean(),
     Document.countDocuments(filter),
   ]);
-  const data = await Promise.all(pageItems.map(async (subject) => {
-    const correction = await Document.findOne(activeCorrectionFilter(subject._id))
-      .sort('-dateAjout -createdAt')
-      .lean();
-    return { ...subject, correction: correction || null };
+  const subjectIds = pageItems.map((subject) => subject._id);
+  const corrections = subjectIds.length ? await Document.find({
+    ...activeCorrectionFilter({ $in: subjectIds }),
+    status: 'approved',
+  }).sort('-dateAjout -createdAt -_id').lean() : [];
+  const bySubject = new Map();
+  for (const correction of corrections) {
+    const parent = String(correction.sujetParentId || correction.correctionFor);
+    if (!bySubject.has(parent)) bySubject.set(parent, correction);
+  }
+  const data = pageItems.map((subject) => ({
+    ...subject,
+    correction: bySubject.get(String(subject._id)) || null,
   }));
 
   return {
@@ -1179,9 +1234,7 @@ const purgeExpiredTrash = async () => {
   return { purged, total: expiredDocuments.length };
 };
 
-const buildDownloadPayload = async (document, user) => {
-  assertDocumentAccess(document, user);
-
+const signDocumentDownload = async (document, user) => {
   if (!document.storageKey || document.storageProvider === 'legacy-local') {
     return null;
   }
@@ -1191,7 +1244,7 @@ const buildDownloadPayload = async (document, user) => {
     contentType: document.mimeType,
   });
 
-  await Document.updateOne({ _id: document._id }, { $inc: { downloads: 1 } }, { timestamps: false });
+  await incrementDocumentDownloads(document._id);
 
   console.info(`[DOWNLOAD_URL] user=${user?._id || 'guest'} document=${document._id} expiresIn=${storageConfig.downloadUrlExpiration}`);
 
@@ -1199,6 +1252,19 @@ const buildDownloadPayload = async (document, user) => {
     url,
     expiresIn: storageConfig.downloadUrlExpiration,
   };
+};
+
+const buildDownloadPayload = async (document, user) => {
+  assertDocumentAccess(document, user);
+  return signDocumentDownload(document, user);
+};
+
+// Seule la route de prévisualisation réservée au super administrateur lit la corbeille.
+const previewTrashedDocument = async (id, user) => {
+  if (user?.role !== 'admin') throw new AppError('Accès réservé au super administrateur', 403);
+  const document = await Document.findOne({ _id: id, isDeleted: true });
+  if (!document) throw new AppError('Document non trouve', 404);
+  return signDocumentDownload(document, user);
 };
 
 const resolveLegacyLocalPath = async (document) => {
@@ -1225,6 +1291,7 @@ module.exports = {
   getDocumentById,
   getDocumentByStoredFileName,
   findDuplicateTitleCandidates,
+  publicDocument,
   listPublicDocuments,
   listDynamicDocuments,
   listUserDocuments,
@@ -1244,6 +1311,7 @@ module.exports = {
   listTrashedDocuments,
   purgeExpiredTrash,
   buildDownloadPayload,
+  previewTrashedDocument,
   resolveLegacyLocalPath,
   incrementDocumentViews,
   incrementDocumentDownloads,

@@ -33,11 +33,6 @@
               "scheme": "https",
               "host": "www.fatafalta.com",
               "pathPrefix": "/sujets/document/"
-            },
-            {
-              "scheme": "https",
-              "host": "fatafalta.onrender.com",
-              "pathPrefix": "/sujets/document/"
             }
           ],
           "category": [

@@ -63,6 +63,7 @@ export const prepApi = {
   programme: (code) => axios.get(`/api/prep/programmes/${encodeURIComponent(code)}`).then(data),
   module: (code, version) => axios.get(`/api/prep/modules/${encodeURIComponent(code)}`, { params: version ? { version } : {}, headers: headers() }).then(data),
   progressions: () => axios.get('/api/prep/progressions', { headers: headers() }).then(data),
+  ranking: (code, periode = 'semaine') => axios.get(`/api/prep/programmes/${encodeURIComponent(code)}/classement`, { params: { periode }, headers: headers() }).then(data),
   sync: (actions) => axios.post('/api/prep/sync', { actions }, { headers: headers(), timeout: 20000 }).then(data),
 };
 

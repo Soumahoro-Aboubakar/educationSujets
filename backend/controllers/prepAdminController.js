@@ -2,6 +2,7 @@ const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const Content = require('../models/PrepContent');
 const service = require('../services/prep/publicationService');
+const seo = require('../services/seoNotifier');
 const actor = req => req.user._id;
 exports.list = asyncHandler(async (req, res) => {
   const page = Math.max(1, parseInt(req.query.page, 10) || 1);
@@ -37,10 +38,13 @@ exports.validate = asyncHandler(async (req, res) => {
   res.json({ success: true, data: await service.validateDraft(req.params.kind, req.params.code, req.body?.revision) });
 });
 exports.publish = asyncHandler(async (req, res) => {
-  res.json({ success: true, data: await service.publish(req.body || {}, actor(req)) });
+  const data = await service.publish(req.body || {}, actor(req));
+  seo.notifyCatalogChange();
+  res.json({ success: true, data });
 });
 exports.archive = asyncHandler(async (req, res) => {
   const data = await service.publish({ expectedGeneration: req.body?.expectedGeneration, removals: [req.params] }, actor(req));
+  seo.notifyCatalogChange();
   res.json({ success: true, data });
 });
 exports.remove = asyncHandler(async (req, res) => {

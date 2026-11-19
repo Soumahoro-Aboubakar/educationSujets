@@ -3,11 +3,13 @@ const { sendSuccess } = require('../utils/api');
 const service = require('../services/dynamicCatalogService');
 const Noeud = require('../models/Noeud');
 const logos = require('../services/organismeLogoService');
+const seo = require('../services/seoNotifier');
 const Revision = require('../models/CatalogRevision');
 const scope = req => ({ ...req.query, includeUnpublished: req.query.scope === 'admin' && req.user?.role === 'admin' });
 const catalogRevision = async () => (await Revision.findById('catalog').lean())?.revision || 0;
 exports.patchCatalog = kind => asyncHandler(async (req, res) => {
   const data = await require('../services/catalogLifecycleService').patch(kind, req.params.id, req.body, req.user._id);
+  if (req.body.status || data.status === 'published') seo.notifyCatalogChange();
   sendSuccess(res, { data, meta: { revision: await catalogRevision() } });
 });
 
@@ -100,7 +102,10 @@ exports.removeOrganismeLogo = asyncHandler(async (req, res) => {
   sendSuccess(res, { data, message: 'Logo supprime' });
 });
 
-/** Logo stocké : redirection vers une URL signée, mise en cache par le navigateur. */
+/**
+ * Logo stocké : redirection vers une URL signée, mise en cache par le navigateur pendant la moitié
+ * de sa validité. Image publique : la mettre en cache n'expose rien et évite une requête par affichage.
+ */
 exports.getOrganismeLogo = asyncHandler(async (req, res) => {
   const url = await logos.resolveStoredLogoUrl(req.params.organismeId);
   if (!url) throw new AppError('Logo introuvable', 404);

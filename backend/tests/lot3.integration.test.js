@@ -72,8 +72,11 @@ test('publication atomique sans redémarrage, ETag, droits avant 304 et ancienne
   const mod = await call('GET', '/prep/modules/MATH-LNEXP', undefined, guest); assert.equal(mod.status, 200);
   for (const ex of mod.body.data.exercices) { assert.equal(ex.cle, undefined); assert.equal(ex.explication, undefined); assert.equal(ex.raisonnement?.reference, undefined); }
   assert.equal(mod.body.data.versionCible, undefined);
+  assert.equal(mod.headers.get('cache-control'), 'private, no-store');
   const cached = { ...guest, 'If-None-Match': mod.headers.get('etag') };
-  assert.equal((await call('GET', '/prep/modules/MATH-LNEXP', undefined, cached)).status, 304);
+  const revalidated = await call('GET', '/prep/modules/MATH-LNEXP', undefined, cached);
+  assert.equal(revalidated.status, 304);
+  assert.equal(revalidated.headers.get('cache-control'), 'private, no-store');
   assert.equal((await call('GET', '/prep/modules/MATH-LNEXP', undefined, { 'If-None-Match': mod.headers.get('etag') })).status, 401);
   const changed = modFixture(); changed.lecons[0].titre = 'Leçon publiée en direct'; changed.exercices[0].consigne = 'Énoncé modifié en direct';
   const next = await edit(rows[0], changed); assert.equal(next.status, 200);
@@ -92,17 +95,20 @@ test('concurrence : un gagnant ; interruption avant CAS sans activation', { skip
   assert.equal((await service.current()).generation, before.generation); t.mock.restoreAll();
   const both = await Promise.all([1, 2].map(() => call('POST', '/admin/prep/publications', { expectedGeneration: before.generation, revisions: [next] }, admin))); assert.deepEqual(both.map(r => r.status).sort(), [200, 409]);
 });
-test('module partagé, retrait et dépendances, rollback, progression conservée', { skip }, async () => {
+test('module partagé, retrait et dépendances, rollback, progression conservée', { skip }, async (t) => {
+  const notify = t.mock.method(require('../services/seoNotifier'), 'notifyCatalogChange', () => {});
   const p = await draft('programme', progFixture('LOT3-SHARED')); await publish([p.body.data]);
   assert.deepEqual((await call('GET', '/admin/prep/contenus/module/MATH-LNEXP', undefined, admin)).body.data.dependencies.sort(), ['LOT3-PROG', 'LOT3-SHARED']);
   const before = await service.current();
   assert.equal((await call('POST', '/admin/prep/contenus/module/MATH-LNEXP/archiver', { expectedGeneration: before.generation }, admin)).status, 422);
+  assert.equal(notify.mock.callCount(), 1, 'publication réussie puis archivage refusé');
   const progress = await PrepProgression.create({ identite: new mongoose.Types.ObjectId(), programme: 'LOT3-PROG', etat: { lecons: { L: { terminee: true } } } });
   const removed = await publish([], { removals: before.entries.map(({ kind, code }) => ({ kind, code })) }); assert.equal(removed.status, 200); assert.ok(removed.body.data.tombstones.some(r => r.code === 'MATH-LNEXP'));
   assert.equal((await call('GET', '/prep/modules/MATH-LNEXP', undefined, guest)).status, 404);
   assert.equal((await call('GET', '/prep/modules/MATH-LNEXP?revision=1', undefined, guest)).status, 200);
   assert.equal((await PrepProgression.findById(progress._id)).etat.lecons.L.terminee, true);
   assert.equal((await publish([], { rollbackGeneration: before.generation })).status, 200);
+  assert.equal(notify.mock.callCount(), 3, 'publication, retrait puis restauration');
   assert.equal((await call('GET', '/prep/modules/MATH-LNEXP', undefined, guest)).status, 200);
 });
 test('pagination admin au-delà de 100, suppression sans réutilisation de révision', { skip }, async () => {
@@ -177,4 +183,55 @@ test('matière et parcours : modification, archivage, découverte filtrée et co
   assert.equal((await call('GET', `/organismes/${org._id}/parcours-types`)).body.data.length, 0);
   assert.ok((await call('GET', '/organismes')).body.meta.revision > before);
   assert.equal((await call('PATCH', `/organismes/${org._id}`, { status: 'invalide' }, admin)).status, 400);
+});
+
+test('le module protégé conserve no-store dans la réponse Express finale, y compris en 304', async (t) => {
+  const express = require('express');
+  const http = require('node:http');
+  const { Socket } = require('node:net');
+  const app = express();
+  const prep = require('../controllers/prepController');
+  const identite = require('../services/prep/identityService');
+  const progress = require('../services/prep/progressService');
+  const videos = require('../services/prep/videoService');
+  t.mock.method(identite, 'fromRequest', async () => ({}));
+  t.mock.method(progress, 'rights', async () => ({ accesPreparation: true }));
+  t.mock.method(content, 'historical', async () => modFixture());
+  t.mock.method(videos, 'index', async () => []);
+  app.get('/modules/:code', require('../middleware/privateNoStore'), prep.getModule);
+
+  // Exécute Express avec ses vraies méthodes json/end sans ouvrir de port réseau.
+  const read = (headers) => new Promise((resolve, reject) => {
+    const req = new http.IncomingMessage(new Socket());
+    Object.assign(req, { method: 'GET', url: '/modules/MATH-LNEXP', headers });
+    const res = new http.ServerResponse(req);
+    const end = res.end;
+    res.end = function (...args) {
+      const result = end.apply(this, args);
+      resolve(this);
+      return result;
+    };
+    app.handle(req, res, reject);
+  });
+  const first = await read({});
+  assert.equal(first.statusCode, 200);
+  assert.equal(first.getHeader('cache-control'), 'private, no-store');
+  const cached = await read({ 'if-none-match': first.getHeader('etag') });
+  assert.equal(cached.statusCode, 304);
+  assert.equal(cached.getHeader('cache-control'), 'private, no-store');
+});
+
+test('la préparation déclenche la reconstruction après publication ou archivage réussi', async (t) => {
+  const admin = require('../controllers/prepAdminController');
+  const notify = t.mock.method(require('../services/seoNotifier'), 'notifyCatalogChange', () => {});
+  const publish = t.mock.method(service, 'publish', async () => ({ generation: 2 }));
+  const req = { user: { _id: 'admin' }, params: { kind: 'module', code: 'MODULE' }, body: { expectedGeneration: 1 } };
+  const run = (handler) => new Promise((resolve, reject) => handler(req, { json: resolve }, reject));
+  await run(admin.publish);
+  await run(admin.archive);
+  assert.deepEqual(publish.mock.calls[1].arguments[0].removals, [req.params]);
+  assert.equal(notify.mock.callCount(), 2);
+  publish.mock.mockImplementation(async () => { throw new Error('Publication refusée'); });
+  await assert.rejects(run(admin.publish), /Publication refusée/);
+  assert.equal(notify.mock.callCount(), 2);
 });

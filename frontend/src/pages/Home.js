@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, BookOpenCheck, Check, Compass, Download, Search } from 'lucide-react';
+import { ArrowRight, BookOpenCheck, Check, Compass, Download, GraduationCap, Search } from 'lucide-react';
 import { Button, Container, Eyebrow, Skeleton } from '../components/ui';
 import HeroVisual from '../components/illustrations/HeroVisual';
+import HomePreparation from '../components/site/HomePreparation';
 import useAsync from '../hooks/useAsync';
 import useReveal from '../hooks/useReveal';
 import { catalog, payments } from '../lib/api';
@@ -87,14 +88,14 @@ const Home = () => {
             <div className="animate-rise-in">
               <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold-wash/70 py-1 pl-1.5 pr-3 text-xs font-semibold text-gold-ink">
                 <span className="rounded-full bg-white px-2 py-0.5 text-[11px] text-ink">Côte d’Ivoire</span>
-                Concours · Examens · Tests
+                Sujets corrigés · Préparation
               </span>
             </div>
             <h1 className="mt-5 animate-rise-in text-display font-extrabold text-ink [animation-delay:60ms]">
-              Les anciens sujets de concours, avec leurs <Underline>corrigés.</Underline>
+              Préparez vos concours, des anciens sujets au <Underline>jour J.</Underline>
             </h1>
             <p className="mt-5 max-w-lg animate-rise-in text-[17px] leading-relaxed text-ink-soft [animation-delay:120ms] sm:text-lg">
-              Fatafalta réunit les sujets, tests et corrigés des concours passés pour vous aider à vous préparer sérieusement.
+              Les sujets et corrigés des concours passés, et une préparation guidée : cours en vidéo, exercices corrigés et concours blancs.
             </p>
 
             <form
@@ -137,7 +138,7 @@ const Home = () => {
 
             <div className="mt-7 grid animate-rise-in gap-3 [animation-delay:260ms] sm:flex sm:flex-wrap">
               <Button to="/sujets" size="lg" icon={ArrowRight} iconPosition="end">Explorer les sujets</Button>
-              <Button as="a" href="#concours" variant="secondary" size="lg">Découvrir les concours</Button>
+              <Button as="a" href="#preparation" variant="secondary" size="lg" icon={GraduationCap}>Découvrir la préparation</Button>
             </div>
 
             <p className="mt-6 flex min-h-[20px] flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-soft" aria-live="polite">
@@ -156,6 +157,8 @@ const Home = () => {
           </div>
         </Container>
       </section>
+
+      <HomePreparation />
 
       {/* Organismes */}
       <section id="concours" className="scroll-mt-20 border-y border-line bg-white py-16 md:py-24">
@@ -200,7 +203,7 @@ const Home = () => {
       <section className="py-16 md:py-24">
         <Container>
           <Eyebrow>Comment ça marche</Eyebrow>
-          <h2 className="mt-2 max-w-md text-title font-bold text-ink">Trois étapes, pas plus.</h2>
+          <h2 className="mt-2 max-w-md text-title font-bold text-ink">Les sujets, en trois étapes.</h2>
           <ol {...stepsReveal} className="relative mt-10 grid gap-4 md:mt-12 md:grid-cols-3 md:gap-6">
             {/* Fil qui relie les étapes (ordinateur). */}
             <span className="absolute left-[12%] right-[12%] top-[46px] hidden border-t border-dashed border-line-strong md:block" aria-hidden />
@@ -231,6 +234,7 @@ const Home = () => {
               <ul className="mt-6 space-y-3.5 text-white/80">
                 {[
                   'Tous les sujets et leurs corrigés',
+                  'La préparation complète : leçons, vidéos, exercices et concours blancs',
                   `Jusqu’à ${plans.data?.downloadsPerDay || 20} sujets récents par 24 h, anciens sujets illimités`,
                   methodLabels.length ? `Paiement par ${methodLabels.join(', ').replace(/, ([^,]*)$/, ' ou $1')}` : 'Paiement par Orange Money, MTN, Moov ou Wave',
                 ].map((item) => (

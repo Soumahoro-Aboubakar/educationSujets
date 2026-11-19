@@ -1,4 +1,5 @@
 const express = require('express');
+const privateNoStore = require('../middleware/privateNoStore');
 const { body, param } = require('express-validator');
 const controller = require('../controllers/downloadController');
 const { optionalAuth, protect, authorize } = require('../middleware/auth');
@@ -12,6 +13,8 @@ const validate = require('../middleware/validate');
  * sont appliquées par services/downloads/bundleService.js et services/billing/downloadGuard.js.
  */
 const router = express.Router();
+
+router.use(privateNoStore);
 
 const selection = [
   body('documentIds').isArray({ min: 1, max: 200 }).withMessage('Sélectionnez au moins un document.'),

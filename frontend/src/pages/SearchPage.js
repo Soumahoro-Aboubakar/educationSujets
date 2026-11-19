@@ -8,7 +8,7 @@ import { catalog, documents } from '../lib/api';
 import { documentTitle, formatDate, hasCorrection, labelOf, nodeChain, organismeLabel } from '../lib/format';
 import { segmentFor } from '../lib/slug';
 import { catalogPath } from '../lib/catalogSeo';
-import { trackEvent } from '../lib/analytics';
+import { safeText, trackEvent } from '../lib/analytics';
 import OrganismeLogo, { distinctPalette } from '../components/catalog/OrganismeLogo';
 
 const PAGE_SIZE = 20;
@@ -45,7 +45,7 @@ const SearchPage = () => {
     const next = new URLSearchParams(params);
     if (debounced) next.set('q', debounced);
     else next.delete('q');
-    if (debounced.length >= 2) trackEvent('search', { search_term: debounced.slice(0, 100) });
+    if (debounced.length >= 2 && safeText(debounced)) trackEvent('search', { search_term: safeText(debounced) });
     setParams(next, { replace: true });
     setPage(1);
   }, [debounced]); // eslint-disable-line react-hooks/exhaustive-deps

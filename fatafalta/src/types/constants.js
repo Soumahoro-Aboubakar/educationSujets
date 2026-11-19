@@ -47,11 +47,11 @@ export const FILTER_DEFINITIONS = [
     endpoint: '/api/categories',
   },
 ];
-//http://10.31.127.234:5000 https://educationsujets.onrender.com
 export const DOCUMENTS_PER_PAGE = 12;
-//'https://educationsujets-xaaz.onrender.com';
 
-// Production par défaut ; en local : EXPO_PUBLIC_API_URL=http://<IP du Mac>:5000 npx expo start
-export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://educationsujets.onrender.com';
+// Adresse stable de l'API, sur le domaine de Fatafalta (Cloudflare → hébergeur) : changer d'hébergeur ne
+// demande qu'une modification DNS, jamais une mise à jour de l'application.
+// En local : EXPO_PUBLIC_API_URL=http://<IP du Mac>:5000 npx expo start
+export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://api.fatafalta.com';
 
 export const DOWNLOAD_DIR = 'fatafalta_downloads';

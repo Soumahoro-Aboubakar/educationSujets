@@ -248,9 +248,52 @@ DocumentSchema.index({ noeudId: 1, matiereId: 1, type: 1, status: 1, isDeleted: 
 DocumentSchema.index({ sujetParentId: 1, type: 1 });
 DocumentSchema.index({ storageKey: 1 }, { unique: true, sparse: true });
 
-// La publication d’un sujet et les libellés de structure modifient les listes publiques.
-for (const event of ['save', 'findOneAndUpdate', 'updateOne', 'updateMany', 'deleteOne', 'deleteMany', 'insertMany']) {
-  DocumentSchema.post(event, require('./catalogLifecycle').bump);
-}
+const { bump } = require('./catalogLifecycle');
+const isPublished = (doc) => doc.status === 'approved' && !doc.isDeleted;
+const internalFields = new Set([
+  'views', 'downloads', 'updatedAt', '__v', 'validatedBy', 'deletedBy', 'deletedAt',
+  'deletionReason', 'previousStatus', 'fichierUrl',
+]);
+const rememberVisibility = (doc) => { doc.$locals.wasPublished = isPublished(doc); };
+DocumentSchema.post('init', rememberVisibility);
+DocumentSchema.pre('save', function () {
+  this.$locals.catalogChanged = (this.$locals.wasPublished || isPublished(this))
+    && (this.isNew || this.modifiedPaths().some((field) => !internalFields.has(field)));
+});
+DocumentSchema.post('save', async function (doc) {
+  rememberVisibility(doc);
+  if (doc.$locals.catalogChanged) await bump();
+});
+DocumentSchema.post('insertMany', async function (docs) {
+  if (docs.some(isPublished)) await bump();
+});
+
+// Les compteurs de consultation ne changent ni le catalogue ni sa date de modification.
+// Pour une écriture de contenu, vérifier si un document est visible avant ou après la mutation.
+const mutations = ['findOneAndUpdate', 'updateOne', 'updateMany', 'deleteOne', 'deleteMany'];
+DocumentSchema.pre(mutations, async function () {
+  const update = this.getUpdate();
+  if (update && !this.getOptions().upsert && Object.keys(update).every((operator) =>
+    ['$inc', '$set', '$setOnInsert'].includes(operator)
+      && Object.keys(update[operator]).every((field) => internalFields.has(field) || (operator === '$setOnInsert' && field === 'createdAt'))
+  )) return;
+
+  const visibleBeforeOrAfter = { status: 'approved', isDeleted: { $ne: true } };
+  const changes = { ...update, ...update?.$set };
+  if ((!changes.status || changes.status === 'approved') && changes.isDeleted !== true) {
+    if (changes.status === 'approved') delete visibleBeforeOrAfter.status;
+    if (changes.isDeleted === false || update?.$unset?.isDeleted !== undefined) delete visibleBeforeOrAfter.isDeleted;
+  }
+  this.catalogChanged = await this.model.exists({
+    $and: [this.getFilter(), visibleBeforeOrAfter],
+  }).session(this.getOptions().session || null);
+  if (!this.catalogChanged && this.getOptions().upsert) {
+    const inserted = { ...this.getFilter(), ...update?.$setOnInsert, ...changes };
+    this.catalogChanged = isPublished(inserted);
+  }
+});
+DocumentSchema.post(mutations, async function (result) {
+  if (this.catalogChanged && (result || this.getOptions().upsert)) await bump(result);
+});
 
 module.exports = mongoose.model('Document', DocumentSchema);

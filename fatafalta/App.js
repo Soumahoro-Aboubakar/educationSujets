@@ -23,6 +23,7 @@ import { PlayfairDisplay_700Bold_Italic } from '@expo-google-fonts/playfair-disp
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationBar } from 'expo-navigation-bar';
 import RootNavigator from './src/navigation/RootNavigator';
+import AppUpdateGate from './src/components/AppUpdateGate';
 import LaunchExperience from './src/launch/LaunchExperience';
 import useLaunchReadiness from './src/launch/useLaunchReadiness';
 import { launch as launchColors } from './src/theme/brand';
@@ -129,7 +130,7 @@ if (Platform.OS !== 'web') focusManager.setEventListener((handleFocus) => {
  * l'accueil est placé dessous pour que « Retour » y mène. Même adresse que le site web.
  */
 const linking = {
-  prefixes: [Linking.createURL('/'), 'https://fatafalta.com', 'https://www.fatafalta.com', 'https://fatafalta.onrender.com'],
+  prefixes: [Linking.createURL('/'), 'https://fatafalta.com', 'https://www.fatafalta.com'],
   config: {
     initialRouteName: 'MainTabs',
     screens: {
@@ -194,6 +195,8 @@ function AppContent() {
                 <ThemedNavigation onReady={launch.onNavigationReady}>
                   <RootNavigator />
                 </ThemedNavigation>
+                {/* Mise à jour forcée ou conseillée, réglée dans l'administration. */}
+                <AppUpdateGate />
             </AuthProvider>
           </QueryClientProvider>
         </>

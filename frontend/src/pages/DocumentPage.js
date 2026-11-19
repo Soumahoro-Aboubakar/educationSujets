@@ -129,9 +129,12 @@ const DocumentPage = () => {
     if (documentId && organismeName) trackEvent('view_item', { document_id: documentId, organisme: organismeName });
   }, [documentId, organismeName]);
 
+  // Absence confirmée par le serveur (404/410) : noindex. Panne réseau ou serveur : on ne touche pas aux
+  // métadonnées (celles du pré-rendu restent), pour ne jamais désindexer une fiche publiée par erreur.
+  const missing = [404, 410].includes(error?.response?.status);
   useSeo(document && !organismes.loading
     ? documentSeo({ ...document, hasCorrection: hasCorrection(document) }, context)
-    : error ? { title: 'Sujet introuvable', description: 'Ce document n’existe pas ou n’est plus disponible.', robots: NOINDEX } : null);
+    : missing ? { title: 'Sujet introuvable', description: 'Ce document n’existe pas ou n’est plus disponible.', robots: NOINDEX } : null);
 
   if (loading && !document) {
     return (
@@ -155,9 +158,11 @@ const DocumentPage = () => {
       <Container className="max-w-3xl py-12">
         <EmptyState
           icon={FileText}
-          title="Sujet introuvable"
-          description="Ce document n’existe pas ou n’est plus disponible. Il a peut-être été déplacé : retrouvez-le par organisme, année ou matière."
-          onRetry={error?.response ? undefined : reload}
+          title={missing ? 'Sujet introuvable' : 'Connexion impossible'}
+          description={missing
+            ? 'Ce document n’existe pas ou n’est plus disponible. Il a peut-être été déplacé : retrouvez-le par organisme, année ou matière.'
+            : 'Le sujet n’a pas pu être chargé. Vérifiez votre connexion, puis réessayez.'}
+          onRetry={missing ? undefined : reload}
           action={(
             <div className="flex flex-wrap justify-center gap-2">
               <Button to="/recherche" variant="secondary" size="sm" icon={Search}>Rechercher un sujet</Button>

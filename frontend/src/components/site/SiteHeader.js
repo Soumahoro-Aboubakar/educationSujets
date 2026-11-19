@@ -4,6 +4,7 @@ import { BookOpen, ChevronDown, ChevronRight, CreditCard, Download, Gift, Layout
 import AuthContext, { isStaff } from '../../context/AuthContext';
 import { Button, Container, cx } from '../ui';
 import Logo from './Logo';
+import { openContextSearch, useActiveSearch } from '../../lib/contextSearch';
 
 const PRIMARY_LINKS = [
   { to: '/sujets', label: 'Sujets', icon: BookOpen },
@@ -212,6 +213,25 @@ const SiteHeader = () => {
     };
   }, [mobileOpen]);
 
+  // Recherche contextuelle : la page déclare ce qu'on cherche chez elle ; sinon, les sujets.
+  const activeSearch = useActiveSearch();
+  const searchLabel = activeSearch?.label || 'Rechercher des sujets';
+  const runSearch = () => {
+    setMobileOpen(false);
+    if (!openContextSearch()) navigate('/recherche');
+  };
+  useEffect(() => {
+    const onKey = (event) => {
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName) || event.target.isContentEditable;
+      if ((event.key === 'k' && (event.metaKey || event.ctrlKey)) || (event.key === '/' && !typing)) {
+        event.preventDefault();
+        runSearch();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+
   const handleLogout = () => {
     setMobileOpen(false);
     logout();
@@ -223,7 +243,8 @@ const SiteHeader = () => {
       <a href="#contenu" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-[60] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
         Aller au contenu
       </a>
-      <Container className="flex h-16 items-center justify-between gap-4">
+      {/* Espace d'étude : en-tête aligné sur sa largeur (rail + contenu + contexte). */}
+      <Container className={cx('flex h-16 items-center justify-between gap-4', /^\/preparation\/[^/]+/.test(location.pathname) && '!max-w-[1400px]')}>
         <div className="flex items-center gap-8">
           <Logo />
           <nav className="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
@@ -232,6 +253,16 @@ const SiteHeader = () => {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
+          <button
+            type="button"
+            onClick={runSearch}
+            aria-label={searchLabel}
+            className="group hidden h-10 w-[230px] items-center xl:w-[300px] gap-2.5 rounded-xl border border-line bg-white px-3 text-left text-[14px] text-ink-muted transition-colors hover:border-line-strong hover:text-ink lg:flex"
+          >
+            <Search size={16} className="shrink-0" />
+            <span className="min-w-0 flex-1 truncate">{`${searchLabel}…`}</span>
+            <kbd className="rounded-md border border-line bg-paper px-1.5 py-0.5 font-sans text-[11px] font-semibold text-ink-soft">⌘K</kbd>
+          </button>
           {user ? <AccountMenu user={user} onLogout={handleLogout} /> : (
             <>
               <Button to={`/login${authSuffix}`} variant="ghost" size="sm">Se connecter</Button>
@@ -241,9 +272,9 @@ const SiteHeader = () => {
         </div>
 
         <div className="-mr-2 flex items-center gap-0.5 md:hidden">
-          <Link to="/recherche" aria-label="Rechercher" className="flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors active:bg-ink/5">
+          <button type="button" onClick={runSearch} aria-label={searchLabel} className="flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors active:bg-ink/5">
             <Search size={20} />
-          </Link>
+          </button>
           <button
             type="button"
             aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}

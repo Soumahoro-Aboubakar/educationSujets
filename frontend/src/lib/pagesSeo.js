@@ -1,4 +1,4 @@
-import { NOINDEX, SITE_NAME, absoluteUrl } from './seo.js';
+import { NOINDEX, organizationJsonLd, websiteJsonLd } from './seo.js';
 
 /*
  * Métadonnées des pages fixes du site, partagées avec le pré-rendu (scripts/prerender.mjs).
@@ -11,21 +11,7 @@ export const PAGES_SEO = {
     title: 'Fatafalta — Anciens sujets de concours et corrigés en Côte d’Ivoire',
     description: 'Anciens sujets de concours et d’examens en Côte d’Ivoire (ENSEA, EAMAC, INP-HB, ENA, ESATIC…), classés par organisme, année et matière, avec leurs corrigés quand ils sont publiés.',
     path: '/',
-    jsonLd: [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: SITE_NAME,
-        url: absoluteUrl('/'),
-        inLanguage: 'fr',
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: SITE_NAME,
-        url: absoluteUrl('/'),
-      },
-    ],
+    jsonLd: [organizationJsonLd(), websiteJsonLd()],
   },
   subscribe: {
     title: 'Abonnement Fatafalta : téléchargez sujets et corrigés',

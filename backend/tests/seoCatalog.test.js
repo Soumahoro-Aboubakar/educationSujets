@@ -85,8 +85,27 @@ test('a catalogue change invalidates the cached feed', { skip }, async () => {
 
 test('IndexNow stays silent without a key and never submits foreign hosts', async () => {
   delete process.env.INDEXNOW_KEY;
-  assert.equal(await submitIndexNow(['https://fatafalta.onrender.com/sujets']), null);
+  assert.equal(await submitIndexNow(['https://fatafalta.com/sujets']), null);
   process.env.INDEXNOW_KEY = 'a1b2c3d4e5f6a7b8';
   assert.equal(await submitIndexNow(['https://example.com/page']), null);
   delete process.env.INDEXNOW_KEY;
+});
+
+test('the SEO feed states the public download rule computed by the server', { skip }, async () => {
+  const organisme = await catalog.createOrganisme({ nom: 'Accès test' });
+  await Structure.create({ organismeId: organisme._id, niveaux: [{ ordre: 1, type: 'annee', libelleSingulier: 'Année', libellePluriel: 'Années' }] });
+  const maths = await catalog.upsertMatiere({ organismeId: organisme._id, nom: 'Mathématiques' });
+  const docs = [];
+  for (const [nom, title] of [['2008', 'Ancien'], ['2015', 'Intermédiaire'], ['2024', 'Récent']]) {
+    const node = await catalog.upsertNoeud({ organismeId: organisme._id, nom });
+    docs.push(subject({ title, noeudId: node._id, matiereId: maths._id }));
+  }
+  await Document.collection.insertMany(docs);
+  const feed = await buildSeoCatalog();
+  assert.deepEqual(feed.accessPolicy, { freeUntilYear: 2009, freeQuotaUntilYear: 2020, freeQuota: 3 });
+  const own = feed.organismes.find((item) => item.nom === 'Accès test');
+  const accesOf = (title) => own.documents.find((document) => document.title === title).acces;
+  assert.equal(accesOf('Ancien'), 'gratuit');
+  assert.equal(accesOf('Intermédiaire'), 'quota');
+  assert.equal(accesOf('Récent'), 'abonnement');
 });

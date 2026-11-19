@@ -1,4 +1,5 @@
 const express = require('express');
+const privateNoStore = require('../middleware/privateNoStore');
 const {
   getDocuments,
   checkDuplicateTitle,
@@ -65,11 +66,11 @@ router.get('/duplicates/title', protect, duplicateTitleValidator, validate, chec
 
 // ── Trash routes (Super Admin only) ─────────────
 router.get('/trash', protect, authorizeSuperAdmin, getTrashedDocuments);
-router.get('/trash/:id/preview', protect, authorizeSuperAdmin, documentIdParamValidator, validate, getTrashedDocumentPreview);
+router.get('/trash/:id/preview', privateNoStore, protect, authorizeSuperAdmin, documentIdParamValidator, validate, getTrashedDocumentPreview);
 router.put('/trash/:id/restore', protect, authorizeSuperAdmin, documentIdParamValidator, validate, restoreDocument);
 router.delete('/trash/:id', protect, authorizeSuperAdmin, documentIdParamValidator, validate, permanentlyDeleteDocument);
 
-router.get('/:id/download', limits.download, optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
+router.get('/:id/download', privateNoStore, limits.download, optionalAuth, documentIdParamValidator, validate, getDocumentDownloadUrl);
 router.post(
   '/:id/correction',
   protect,

@@ -2,6 +2,7 @@ const {
   getDocumentById,
   getDocumentByStoredFileName,
   findDuplicateTitleCandidates,
+  publicDocument,
   listPublicDocuments,
   listDynamicDocuments,
   listUserDocuments,
@@ -19,6 +20,7 @@ const {
   permanentlyDeleteDocument: permanentlyDeleteDocumentService,
   listTrashedDocuments,
   buildDownloadPayload,
+  previewTrashedDocument,
   resolveLegacyLocalPath,
   incrementDocumentViews,
   incrementDocumentDownloads,
@@ -29,14 +31,14 @@ const { resolveAccessForDocument, withAccess } = require('../services/access/doc
 const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
-const { notifyCatalogChange } = require('../services/seoNotifier');
+const seo = require('../services/seoNotifier');
 
 exports.getDocuments = asyncHandler(async (req, res) => {
   const result = req.query.noeudId && req.query.matiereId
     ? await listDynamicDocuments(req.query, req.user)
     : await listPublicDocuments(req.query);
   // `access` : année et gratuité de chaque document (badges « Gratuit » des interfaces).
-  const data = await withAccess(result.data);
+  const data = (await withAccess(result.data)).map((document) => publicDocument(document));
   sendSuccess(res, { data, meta: { count: data.length, pagination: result.pagination } });
 });
 
@@ -46,31 +48,37 @@ exports.checkDuplicateTitle = asyncHandler(async (req, res) => {
 });
 
 exports.getDocument = asyncHandler(async (req, res) => {
-  const document = await getDocumentById(req.params.id);
+  const document = await getDocumentById(req.params.id, { publicView: true });
   assertDocumentAccess(document, req.user || null);
   await incrementDocumentViews(document._id);
   const [withYear] = await withAccess([document]);
-  sendSuccess(res, { data: withYear });
+  res.vary('Authorization');
+  if (req.user) res.set('Cache-Control', 'private, no-store');
+  sendSuccess(res, { data: publicDocument(withYear, req.user) });
 });
 
 exports.createDocument = asyncHandler(async (req, res) => {
   const document = await createDocument(req.body, req.file, req.user);
-  const isCorrection = req.body.documentType === 'corrige';
-  // Un corrigé publié enrichit la fiche de son sujet ; un nouveau sujet attend sa validation.
-  if (isCorrection) notifyCatalogChange([req.body.correctionFor]);
+  const isCorrection = document.documentType === 'corrige';
+  if (document.status === 'approved') {
+    const subjectId = isCorrection ? document.correctionFor || document.sujetParentId?._id : document._id;
+    seo.notifyCatalogChange([String(subjectId)]);
+  }
+
+  let message = 'Document uploade avec succes et en attente de validation';
+  if (isCorrection) message = 'Corrige associe au document';
+  else if (document.status === 'approved') message = 'Sujet publié avec succès';
 
   sendSuccess(res, {
     statusCode: 201,
-    message: isCorrection
-      ? 'Corrige associe au document'
-      : 'Document uploade avec succes et en attente de validation',
+    message,
     data: document,
   });
 });
 
 exports.createCorrectionDocument = asyncHandler(async (req, res) => {
   const correction = await createCorrectionDocumentService(req.params.id, req.file, req.user);
-  notifyCatalogChange([req.params.id]);
+  seo.notifyCatalogChange([req.params.id]);
   sendSuccess(res, {
     statusCode: 201,
     message: 'Corrige associe au document',
@@ -80,19 +88,19 @@ exports.createCorrectionDocument = asyncHandler(async (req, res) => {
 
 exports.replaceDocumentFile = asyncHandler(async (req, res) => {
   const document = await replaceDocumentFile(req.params.id, req.file, req.user);
-  notifyCatalogChange([req.params.id]);
+  seo.notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Fichier remplace', data: document });
 });
 
 exports.updateDocument = asyncHandler(async (req, res) => {
   const document = await updateDocument(req.params.id, req.body, req.user);
-  notifyCatalogChange([req.params.id]);
+  seo.notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document mis a jour', data: document });
 });
 
 exports.deleteDocument = asyncHandler(async (req, res) => {
   await deleteDocument(req.params.id, req.user);
-  notifyCatalogChange([req.params.id]);
+  seo.notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document supprime', data: {} });
 });
 
@@ -103,7 +111,7 @@ exports.getMyDocuments = asyncHandler(async (req, res) => {
 
 exports.validateDocument = asyncHandler(async (req, res) => {
   const document = await validateDocument(req.params.id, req.body.status, req.user);
-  notifyCatalogChange([req.params.id]);
+  seo.notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Statut du document mis a jour', data: document });
 });
 
@@ -197,25 +205,18 @@ exports.getTrashedDocuments = asyncHandler(async (req, res) => {
 
 exports.restoreDocument = asyncHandler(async (req, res) => {
   const document = await restoreDocumentService(req.params.id);
-  notifyCatalogChange([req.params.id]);
+  seo.notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document restaure avec succes', data: document });
 });
 
 exports.permanentlyDeleteDocument = asyncHandler(async (req, res) => {
   await permanentlyDeleteDocumentService(req.params.id);
-  notifyCatalogChange([req.params.id]);
+  seo.notifyCatalogChange([req.params.id]);
   sendSuccess(res, { message: 'Document supprime definitivement', data: {} });
 });
 
 exports.getTrashedDocumentPreview = asyncHandler(async (req, res) => {
-  const document = await getDocumentById(req.params.id);
-
-  if (!document) {
-    throw new AppError('Document non trouve', 404);
-  }
-
-  const download = await buildDownloadPayload(document, req.user);
-
+  const download = await previewTrashedDocument(req.params.id, req.user);
   if (!download) {
     throw new AppError('Ce document ne dispose pas de lien de previsualisation', 400);
   }

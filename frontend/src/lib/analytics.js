@@ -28,6 +28,16 @@ const start = () => {
   });
 };
 
+/**
+ * Texte libre (recherche, paramètres de campagne) : jamais envoyé s'il ressemble à une donnée
+ * personnelle saisie par erreur (adresse e-mail, numéro de téléphone ou d'identité).
+ */
+export const safeText = (value, max = 100) => {
+  const text = String(value || '').trim().slice(0, max);
+  if (!text || /@|\d[\d\s.-]{5,}\d/.test(text)) return null;
+  return text;
+};
+
 /** Page vue : chemin seul (sans paramètres d'un lien de connexion, de paiement…), sauf UTM. */
 export const trackPageView = (location) => {
   if (!enabled) return;
@@ -35,7 +45,8 @@ export const trackPageView = (location) => {
   const params = new URLSearchParams(location.search);
   const kept = new URLSearchParams();
   ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach((key) => {
-    if (params.get(key)) kept.set(key, params.get(key));
+    const value = safeText(params.get(key));
+    if (value) kept.set(key, value);
   });
   const page = `${location.pathname}${kept.toString() ? `?${kept}` : ''}`;
   if (page === lastPage) return;

@@ -8,7 +8,8 @@
  * React remplace ce contenu au chargement, avec les mêmes textes (lib/catalogSeo.js, lib/seo.js).
  *
  * Produit aussi sitemap.xml, robots.txt, 404.html, app.html (coquille de l'application pour les
- * adresses non pré-rendues) et, si INDEXNOW_KEY est défini, le fichier de clé IndexNow.
+ * adresses non pré-rendues), _redirects et _headers (Cloudflare Pages) et, si INDEXNOW_KEY est défini,
+ * le fichier de clé IndexNow. Pages écrites en `chemin.html` : Cloudflare Pages les sert sans redirection.
  *
  * Données : un seul appel à GET /api/seo/catalog (sujets publiés uniquement, sans fichier ni lien).
  * API injoignable : la construction échoue et Render garde la version en ligne, sauf si
@@ -17,20 +18,22 @@
  * Variables : REACT_APP_SITE_URL, REACT_APP_API_URL (ou PRERENDER_API_URL), PRERENDER_FEED_FILE
  * (flux JSON local, pour les tests), INDEXNOW_KEY, GOOGLE_SITE_VERIFICATION, BING_SITE_VERIFICATION.
  */
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { SITE_URL, absoluteUrl, renderHead } from '../src/lib/seo.js';
+import { SITE_DESCRIPTION, SITE_URL, absoluteUrl, renderHead } from '../src/lib/seo.js';
 import { PAGES_SEO } from '../src/lib/pagesSeo.js';
 import {
   CATALOG_ROOT, catalogCrumbs, catalogPath, catalogSeo, catalogText, documentPath, documentSeo,
 } from '../src/lib/catalogSeo.js';
 import { formatDate, formatFileSize, labelOf, organismeLabel } from '../src/lib/format.js';
 import { segmentFor } from '../src/lib/slug.js';
+import { PREP_ROOT, prepHomeSeo, programmeModules, programmePath, programmeSeo } from '../src/lib/prepSeo.js';
 
 const BUILD_DIR = path.resolve(process.env.PRERENDER_BUILD_DIR || path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'build'));
-const API_URL = (process.env.PRERENDER_API_URL || process.env.REACT_APP_API_URL || 'https://educationsujets.onrender.com').replace(/\/+$/, '');
+const API_URL = (process.env.PRERENDER_API_URL || process.env.REACT_APP_API_URL || 'https://api.fatafalta.com').replace(/\/+$/, '');
 const ATTEMPTS = 6;
 const RETRY_DELAY_MS = 20 * 1000;
 const REQUEST_TIMEOUT_MS = 60 * 1000;
@@ -49,25 +52,53 @@ const plural = (count, word) => `${count} ${word}${count > 1 ? 's' : ''}`;
 
 const sleep = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
 
-const loadFeed = async () => {
-  if (process.env.PRERENDER_FEED_FILE) {
-    return JSON.parse(await readFile(process.env.PRERENDER_FEED_FILE, 'utf8')).data;
-  }
+const fetchJson = async (pathname, attempts = ATTEMPTS) => {
   // Le serveur gratuit de Render peut être en veille : plusieurs tentatives espacées.
-  for (let attempt = 1; attempt <= ATTEMPTS; attempt += 1) {
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
-      const res = await fetch(`${API_URL}/api/seo/catalog`, {
+      const res = await fetch(`${API_URL}${pathname}`, {
         headers: { Accept: 'application/json', 'User-Agent': 'fatafalta-prerender' },
         signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return (await res.json()).data;
     } catch (error) {
-      console.warn(`[prerender] Catalogue indisponible (essai ${attempt}/${ATTEMPTS}) : ${error.message}`);
-      if (attempt < ATTEMPTS) await sleep(RETRY_DELAY_MS);
+      console.warn(`[prerender] ${pathname} indisponible (essai ${attempt}/${attempts}) : ${error.message}`);
+      if (attempt < attempts) await sleep(RETRY_DELAY_MS);
     }
   }
   return null;
+};
+
+const loadFeed = async () => {
+  if (process.env.PRERENDER_FEED_FILE) {
+    return JSON.parse(await readFile(process.env.PRERENDER_FEED_FILE, 'utf8')).data;
+  }
+  return fetchJson('/api/seo/catalog');
+};
+
+/**
+ * Préparation publique : catalogue des programmes, puis chaque programme publié (programme officiel,
+ * épreuves, matières, modules et titres des leçons ; jamais le contenu des leçons ni les corrigés).
+ * Facultatif : en cas d'échec, ces adresses sont servies par la coquille de l'application.
+ */
+const loadPrep = async () => {
+  if (process.env.PRERENDER_PREP_FILE) {
+    return JSON.parse(await readFile(process.env.PRERENDER_PREP_FILE, 'utf8'));
+  }
+  if (process.env.PRERENDER_FEED_FILE) return null;
+  const catalogue = await fetchJson('/api/prep/catalogue', 2);
+  if (!Array.isArray(catalogue)) return null;
+  const codes = catalogue.flatMap((organisme) => (organisme.cycles || []).filter((cycle) => cycle.publie !== false).map((cycle) => cycle.programme));
+  const programmes = [];
+  for (const code of codes) {
+    const data = await fetchJson(`/api/prep/programmes/${encodeURIComponent(code)}`, 2);
+    // Programme annoncé mais illisible : la construction échoue et la version en ligne reste servie
+    // (sinon l'accueil de la préparation publierait un lien vers une page absente).
+    if (!data?.programme) throw new Error(`Programme ${code} annoncé par le catalogue mais injoignable.`);
+    programmes.push(data);
+  }
+  return { catalogue, programmes };
 };
 
 /**
@@ -210,6 +241,26 @@ const organismePages = (organisme, organismes) => {
   return { pages, documentContexts, levels };
 };
 
+/*
+ * Droit de téléchargement d'une fiche, calculé par le serveur (flux SEO : `acces` du document,
+ * `accessPolicy` du catalogue). Sans ces champs, une phrase générale exacte, jamais une promesse.
+ */
+const accessText = (document, policy) => {
+  if (document.acces === 'gratuit') return 'Téléchargement gratuit, sans compte.';
+  if (document.acces === 'quota') {
+    return policy?.freeQuota
+      ? `Téléchargeable avec le quota gratuit (${policy.freeQuota} sujets de cette période, sans abonnement) ou avec un abonnement.`
+      : 'Téléchargeable avec le quota gratuit ou avec un abonnement.';
+  }
+  if (document.acces === 'abonnement') return 'Téléchargement réservé aux abonnés.';
+  return 'Les sujets anciens sont gratuits ; les plus récents demandent le quota gratuit ou un abonnement, selon leur année.';
+};
+
+/** Règle d'accès en une phrase (llms.txt, abonnement), à partir des seuils publiés par le serveur. */
+const accessPolicyText = (policy) => (policy?.freeUntilYear
+  ? `Les fiches des sujets sont publiques. Téléchargement des PDF : gratuit et sans compte pour les sujets de ${policy.freeUntilYear} et avant ; de ${policy.freeUntilYear + 1} à ${policy.freeQuotaUntilYear}, ${policy.freeQuota} téléchargements gratuits au total, puis abonnement ; à partir de ${policy.freeQuotaUntilYear + 1}, abonnement.`
+  : 'Les fiches des sujets sont publiques ; le téléchargement des PDF est gratuit pour les sujets anciens et demande, pour les plus récents, le quota gratuit ou un abonnement.');
+
 // ── Rendu ──────────────────────────────────────────────────────────────────────────────────
 
 const header = () => `
@@ -245,7 +296,7 @@ const catalogPageHtml = ({ text, crumbs, items }) => layout(`
   <h2 class="mt-8 text-sm font-semibold uppercase tracking-[0.12em] text-ink-muted">${escapeHtml(text.listHeading)}</h2>
   ${listHtml(items)}`);
 
-const documentPageHtml = (document, context, levels) => {
+const documentPageHtml = (document, context, levels, accessPolicy) => {
   const details = [
     ['Parcours', labelOf(context.parcoursType)],
     ...context.nodes.map((node, index) => [levels[index]?.libelleSingulier || 'Niveau', labelOf(node)]),
@@ -262,7 +313,7 @@ const documentPageHtml = (document, context, levels) => {
   <article class="max-w-3xl">
     <h1 class="mt-6 text-3xl font-bold leading-tight tracking-[-0.03em] text-ink md:text-[40px]">${escapeHtml(document.title)}</h1>
     ${document.description ? `<p class="mt-3 text-lg leading-relaxed text-ink-soft">${escapeHtml(document.description)}</p>` : ''}
-    <p class="mt-6 text-ink-soft">Document réservé aux membres : connectez-vous pour vérifier votre accès au téléchargement.</p>
+    <p class="mt-6 text-ink-soft">${escapeHtml(accessText(document, accessPolicy))}</p>
     <p class="mt-4 text-sm text-ink-soft">${escapeHtml(correction)}</p>
     <dl class="mt-10 rounded-2xl border border-line bg-white px-5">${details
     .map(([label, value]) => `<div class="flex justify-between gap-4 border-b border-line py-3 last:border-0"><dt class="text-sm text-ink-soft">${escapeHtml(label)}</dt><dd class="text-sm font-medium text-ink">${escapeHtml(value)}</dd></div>`)
@@ -271,28 +322,66 @@ const documentPageHtml = (document, context, levels) => {
   </article>`);
 };
 
-const homeHtml = (organismes) => layout(`
-  <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gold-ink">Concours · Examens · Tests</p>
-  <h1 class="mt-4 text-[40px] font-extrabold leading-[1.05] tracking-[-0.035em] text-ink sm:text-5xl">Les anciens sujets de concours, avec leurs corrigés.</h1>
-  <p class="mt-5 max-w-lg text-lg leading-relaxed text-ink-soft">Fatafalta réunit les sujets, tests et corrigés des concours passés pour vous aider à vous préparer sérieusement.</p>
-  <p class="mt-6"><a href="/sujets" class="font-semibold text-burgundy">Explorer les sujets</a></p>
+// Mêmes H1, introduction et accès que l'accueil React (pages/Home.js) : les deux offres sont visibles sans JavaScript.
+const homeHtml = (organismes, prep) => layout(`
+  <h1 class="mt-4 text-[40px] font-extrabold leading-[1.05] tracking-[-0.035em] text-ink sm:text-5xl">Préparez vos concours, des anciens sujets au jour J.</h1>
+  <p class="mt-5 max-w-lg text-lg leading-relaxed text-ink-soft">Les sujets et corrigés des concours passés, et une préparation guidée : cours en vidéo, exercices corrigés et concours blancs.</p>
+  <p class="mt-6 flex flex-wrap gap-6"><a href="/sujets" class="font-semibold text-burgundy">Explorer les sujets</a><a href="${PREP_ROOT}" class="font-semibold text-burgundy">Découvrir la préparation</a></p>
   <h2 class="mt-16 text-3xl font-bold tracking-[-0.03em] text-ink">Parcourez par organisme</h2>
   <p class="mt-2 text-ink-soft">Les organismes dont les sujets sont déjà disponibles.</p>
   ${listHtml(organismes.slice(0, 8).map((organisme) => ({
     label: organismeLabel(organisme), path: catalogPath([segmentFor(organisme, organismes)]), meta: plural(organisme.documents.length, 'sujet'),
   })))}
-  <h2 class="mt-16 text-3xl font-bold tracking-[-0.03em] text-ink">Trois étapes, pas plus.</h2>
-  <ol class="mt-6 grid gap-6 md:grid-cols-3">
-    <li><h3 class="text-lg font-semibold text-ink">Choisissez votre concours</h3><p class="text-ink-soft">Organisme, concours, année, matière : chaque sujet est rangé à sa place.</p></li>
-    <li><h3 class="text-lg font-semibold text-ink">Consultez le sujet</h3><p class="text-ink-soft">Voyez ce qui est disponible, avec ou sans corrigé, avant de vous engager.</p></li>
-    <li><h3 class="text-lg font-semibold text-ink">Téléchargez et révisez</h3><p class="text-ink-soft">Avec votre abonnement, gardez sujets et corrigés pour travailler hors ligne.</p></li>
-  </ol>
+  ${prep?.programmes?.length ? `
+  <h2 class="mt-16 text-3xl font-bold tracking-[-0.03em] text-ink">Préparez un concours pas à pas</h2>
+  <p class="mt-2 text-ink-soft">Programme officiel, leçons courtes avec vidéo, exercices corrigés par niveau et concours blancs chronométrés.</p>
+  ${listHtml(prep.programmes.map(({ programme }) => ({ label: `${programme.organisme?.sigle || ''} · ${programme.titre}`, path: programmePath(programme.code) })))}` : ''}
   <p class="mt-10"><a href="/abonnement" class="font-semibold text-burgundy">Voir l’abonnement</a></p>`);
 
 const simplePageHtml = (h1, text, link) => layout(`
   <h1 class="text-3xl font-bold tracking-[-0.03em] text-ink">${escapeHtml(h1)}</h1>
   <p class="mt-2 text-ink-soft">${escapeHtml(text)}</p>
   ${link ? `<p class="mt-6"><a href="${link.path}" class="font-semibold text-burgundy">${escapeHtml(link.label)}</a></p>` : ''}`);
+
+const prepHomeHtml = (catalogue) => layout(`
+  ${breadcrumbHtml([{ label: 'Accueil', path: '/' }, { label: 'Préparation', path: PREP_ROOT }])}
+  <h1 class="mt-6 text-3xl font-bold tracking-[-0.03em] text-ink md:text-4xl">Préparation aux concours</h1>
+  <p class="mt-2 max-w-2xl text-ink-soft">Pour chaque concours : le programme officiel, des leçons courtes avec une vidéo, des exercices corrigés par niveau, des concours blancs chronométrés et un suivi de progression, sur le site et sur l’application Android.</p>
+  ${catalogue.map((organisme) => `
+  <h2 class="mt-10 text-xl font-bold text-ink">${escapeHtml(organisme.sigle || organisme.nom)}</h2>
+  ${listHtml((organisme.cycles || []).filter((cycle) => cycle.publie !== false).map((cycle) => ({
+    label: cycle.nom, path: programmePath(cycle.programme), meta: [cycle.parcoursType, cycle.matieres ? plural(cycle.matieres, 'matière') : null].filter(Boolean).join(' · '),
+  })))}`).join('')}
+  <p class="mt-10 text-ink-soft">Les anciens sujets et leurs corrigés restent consultables dans le <a href="/sujets" class="font-semibold text-burgundy">catalogue des sujets</a>.</p>`);
+
+const programmeHtml = (data) => {
+  const { programme } = data;
+  const sigle = programme.organisme?.sigle || '';
+  const epreuves = programme.epreuves || [];
+  const matieres = programmeModules(data);
+  const sources = (programme.sources || []).filter((source) => source.titre && source.url);
+  return layout(`
+  ${breadcrumbHtml([{ label: 'Accueil', path: '/' }, { label: 'Préparation', path: PREP_ROOT }, { label: `${sigle} · ${programme.titre}`, path: programmePath(programme.code) }])}
+  <article class="max-w-3xl">
+    <h1 class="mt-6 text-3xl font-bold leading-tight tracking-[-0.03em] text-ink md:text-4xl">${escapeHtml(`Préparer le concours ${sigle} · ${programme.titre}`)}</h1>
+    ${programme.description ? `<p class="mt-3 text-lg leading-relaxed text-ink-soft">${escapeHtml(programme.description)}</p>` : ''}
+    ${epreuves.length ? `
+    <h2 class="mt-10 text-xl font-bold text-ink">Les épreuves du concours</h2>
+    <table class="mt-3 w-full text-left text-sm"><thead><tr><th scope="col" class="py-2">Épreuve</th><th scope="col" class="py-2">Durée</th><th scope="col" class="py-2">Coefficient</th></tr></thead><tbody>${epreuves
+    .map((epreuve) => `<tr class="border-t border-line"><td class="py-2 font-medium text-ink">${escapeHtml(epreuve.nom)}${epreuve.note ? `<br><span class="text-ink-soft">${escapeHtml(epreuve.note)}</span>` : ''}</td><td class="py-2">${escapeHtml(epreuve.duree || '—')}</td><td class="py-2 tabular-nums">${escapeHtml(epreuve.coefficient ?? '—')}</td></tr>`)
+    .join('')}</tbody></table>` : ''}
+    ${matieres.length ? `
+    <h2 class="mt-10 text-xl font-bold text-ink">Le programme de préparation</h2>
+    ${matieres.map((matiere) => `
+    <h3 class="mt-6 text-lg font-semibold text-ink">${escapeHtml(matiere.nom)}</h3>
+    <ul class="mt-2 grid gap-3">${matiere.modules.map((module) => `<li><p class="font-medium text-ink">${escapeHtml(module.titre)}</p>${module.resume ? `<p class="text-sm text-ink-soft">${escapeHtml(module.resume)}</p>` : ''}${(module.lecons || []).length ? `<p class="text-sm text-ink-soft">Leçons : ${escapeHtml(module.lecons.map((lecon) => lecon.titre).join(' · '))}</p>` : ''}</li>`).join('')}</ul>`).join('')}` : ''}
+    ${programme.concoursBlanc?.nbQuestions ? `<p class="mt-8 text-ink-soft">${escapeHtml(`Concours blanc : ${programme.concoursBlanc.nbQuestions} questions en ${programme.concoursBlanc.dureeMinutes} minutes, noté automatiquement.`)}</p>` : ''}
+    ${sources.length ? `
+    <h2 class="mt-10 text-xl font-bold text-ink">Sources</h2>
+    <ul class="mt-2 grid gap-1 text-sm text-ink-soft">${sources.map((source) => `<li><a href="${escapeHtml(source.url)}" rel="noopener" class="underline">${escapeHtml(source.titre)}</a></li>`).join('')}</ul>` : ''}
+    <p class="mt-10"><a href="/register?next=${encodeURIComponent(programmePath(programme.code))}" class="font-semibold text-burgundy">Créer un compte et commencer la préparation</a></p>
+  </article>`);
+};
 
 // ── Écriture ───────────────────────────────────────────────────────────────────────────────
 
@@ -310,7 +399,9 @@ const writePage = async (pagePath, html) => {
     ? path.join(BUILD_DIR, 'index.html')
     : pagePath.endsWith('.html')
       ? path.join(BUILD_DIR, pagePath)
-      : path.join(BUILD_DIR, ...pagePath.split('/').filter(Boolean).map((segment) => decodeURIComponent(segment)), 'index.html');
+      // Cloudflare Pages sert /a/b depuis a/b.html sans redirection ; a/b/index.html imposerait une
+      // redirection 308 vers /a/b/ et une canonique qui ne correspond plus à l'adresse servie.
+      : `${path.join(BUILD_DIR, ...pagePath.split('/').filter(Boolean).map((segment) => decodeURIComponent(segment)))}.html`;
   if (!target.startsWith(BUILD_DIR)) throw new Error(`Chemin hors du dossier de build : ${pagePath}`);
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, html);
@@ -323,17 +414,101 @@ ${entries.map(({ path: entryPath, lastmod }) => `  <url><loc>${escapeHtml(absolu
 `;
 
 const robotsTxt = () => `# Fatafalta — règles d'exploration.
-# Les pages publiques (accueil, catalogue des sujets, fiches, abonnement) sont ouvertes à tous les robots,
-# y compris Googlebot, Bingbot et OAI-SearchBot (ChatGPT Search).
-# Espace personnel et administration : rien à explorer (ces pages exigent une connexion).
-# robots.txt ne protège rien : l'accès aux données et aux fichiers reste contrôlé par l'API.
+# Pages publiques (accueil, catalogue des sujets, fiches, préparation, abonnement) : ouvertes à tous les
+# robots, moteurs de recherche et moteurs de réponse (Googlebot, Bingbot, OAI-SearchBot, PerplexityBot,
+# ClaudeBot…). Espace personnel, administration et coquille de l'application : rien à explorer.
+# robots.txt ne protège rien : l'accès aux fichiers PDF et aux données reste contrôlé par l'API.
 User-agent: *
 Allow: /
 Disallow: /compte
 Disallow: /dashboard
+Disallow: /app
 
 Sitemap: ${absoluteUrl('/sitemap.xml')}
 `;
+
+/*
+ * Cloudflare Pages : routes de l'application sans page pré-rendue, servies par la coquille (/app)
+ * avec un statut 200 (sans cette règle, elles recevraient 404.html et un statut 404).
+ * Les règles de _redirects passent avant les fichiers : aucune ne doit couvrir une page pré-rendue.
+ */
+const APP_ROUTES = [
+  '/login', '/register', '/recherche', '/telecharger', '/compte', '/compte/*', '/dashboard', '/dashboard/*',
+  `${PREP_ROOT}/:programme/revisions`, `${PREP_ROOT}/:programme/classement`, `${PREP_ROOT}/:programme/concours-blanc`,
+  `${PREP_ROOT}/:programme/test-de-niveau`, `${PREP_ROOT}/:programme/:module/lecon/:lecon`, `${PREP_ROOT}/:programme/:module/niveau/:niveau`,
+];
+const redirectsFile = ({ prepRendered }) => `# Généré par scripts/prerender.mjs — ne pas modifier à la main.
+${[...APP_ROUTES, ...(prepRendered ? [] : [PREP_ROOT, `${PREP_ROOT}/:programme`])].map((route) => `${route} /app 200`).join('\n')}
+`;
+
+/*
+ * En-têtes Cloudflare Pages. Fichiers versionnés (empreinte dans le nom) : cache d'un an. Pages HTML et
+ * service worker : toujours revalidés, pour qu'une publication soit visible aussitôt.
+ */
+const headersFile = () => `# Généré par scripts/prerender.mjs — ne pas modifier à la main.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/sw.js
+  Cache-Control: no-cache
+
+/app
+  X-Robots-Tag: noindex
+
+/404
+  X-Robots-Tag: noindex
+`;
+
+/*
+ * llms.txt (proposition llmstxt.org) : résumé factuel du site et liens vers ses pages de référence, en
+ * Markdown, pour les assistants qui le consultent. Aucun moteur ne garantit de l'utiliser ; il est
+ * généré depuis les mêmes données que le sitemap, donc jamais en retard sur le catalogue.
+ */
+const llmsTxt = ({ organismes, prep, accessPolicy }) => `# Fatafalta
+
+> ${SITE_DESCRIPTION}
+
+Site en français, pour les candidats de Côte d’Ivoire. ${accessPolicyText(accessPolicy)} Les programmes de préparation citent leurs sources officielles (brochures, arrêtés).
+
+## Catalogue des anciens sujets
+
+- [Tous les organismes](${absoluteUrl(CATALOG_ROOT)}): organismes, concours et examens couverts
+${organismes.map((organisme) => `- [${organismeLabel(organisme)}](${absoluteUrl(catalogPath([segmentFor(organisme, organismes)]))}): ${plural(organisme.documents.length, 'sujet')} publié${organisme.documents.length > 1 ? 's' : ''}`).join('\n')}
+${prep?.programmes?.length ? `
+## Préparation aux concours
+
+- [Tous les programmes](${absoluteUrl(PREP_ROOT)}): cours, exercices corrigés, concours blancs
+${prep.programmes.map(({ programme }) => `- [${programme.organisme?.sigle || ''} · ${programme.titre}](${absoluteUrl(programmePath(programme.code))}): épreuves, coefficients, programme et sources`).join('\n')}
+` : ''}
+## Optional
+
+- [Abonnement](${absoluteUrl('/abonnement')}): accès au téléchargement des sujets et corrigés
+- [Plan du site](${absoluteUrl('/sitemap.xml')})
+`;
+
+/*
+ * Service worker : sa version reprend l'empreinte du build. Chaque déploiement change donc sw.js, ce
+ * qui suffit au navigateur pour proposer (ou imposer) la nouvelle version, même dans la PWA ouverte.
+ */
+const stampServiceWorker = async () => {
+  const swPath = path.join(BUILD_DIR, 'sw.js');
+  let sw;
+  try { sw = await readFile(swPath, 'utf8'); } catch (error) { return; }
+  const manifest = await readFile(path.join(BUILD_DIR, 'asset-manifest.json'), 'utf8').catch(() => String(Date.now()));
+  const build = createHash('sha256').update(manifest).digest('hex').slice(0, 12);
+  const stamped = sw.replace(/const VERSION = '[^']*';/, `const VERSION = 'fatafalta-${build}';`);
+  if (stamped === sw && !sw.includes(`fatafalta-${build}`)) throw new Error('sw.js : constante VERSION introuvable.');
+  await writeFile(swPath, stamped);
+};
 
 const verificationTags = () => [
   process.env.GOOGLE_SITE_VERIFICATION && `<meta name="google-site-verification" content="${escapeHtml(process.env.GOOGLE_SITE_VERIFICATION)}">`,
@@ -355,8 +530,22 @@ const main = async () => {
   // la dernière construction…) : aucune canonique ni consigne d'indexation, React les fixe.
   await writePage('/app.html', template);
 
+  // Préparation chargée d'abord : l'accueil la présente aussi.
+  const prep = await loadPrep();
+  if (!prep && feed && process.env.PRERENDER_ALLOW_OFFLINE !== 'true' && !process.env.PRERENDER_FEED_FILE) {
+    throw new Error('Préparation injoignable (/api/prep/catalogue). PRERENDER_ALLOW_OFFLINE=true pour publier sans ses pages.');
+  }
+
+  // Exhaustivité : chaque programme publié annoncé par le catalogue a sa page, sinon aucun déploiement.
+  if (prep) {
+    const announced = prep.catalogue.flatMap((organisme) => (organisme.cycles || []).filter((cycle) => cycle.publie !== false).map((cycle) => cycle.programme));
+    const rendered = new Set(prep.programmes.map((data) => data.programme?.code));
+    const missing = announced.filter((code) => !rendered.has(code));
+    if (missing.length) throw new Error(`Préparation incomplète : ${missing.join(', ')} sans données. Aucune page publiée.`);
+  }
+
   const home = { ...PAGES_SEO.home };
-  await writePage('/', pageFromTemplate(template, { seo: home, body: homeHtml(organismes), extraHead: verificationTags() }));
+  await writePage('/', pageFromTemplate(template, { seo: home, body: homeHtml(organismes, prep), extraHead: verificationTags() }));
   sitemap.push({ path: '/', lastmod: feed?.updatedAt });
 
   await writePage('/abonnement', pageFromTemplate(template, {
@@ -402,17 +591,33 @@ const main = async () => {
       const context = documentContexts.get(document._id);
       await writePage(documentPath(document._id), pageFromTemplate(template, {
         seo: documentSeo(document, context),
-        body: documentPageHtml(document, context, levels),
+        body: documentPageHtml(document, context, levels, feed?.accessPolicy),
       }));
       sitemap.push({ path: documentPath(document._id), lastmod: document.updatedAt || document.dateAjout });
       documentPages += 1;
     }
   }
 
+  // Préparation : accueil et page publique de chaque programme.
+  if (prep?.catalogue?.length) {
+    await writePage(PREP_ROOT, pageFromTemplate(template, { seo: prepHomeSeo(prep.catalogue), body: prepHomeHtml(prep.catalogue) }));
+    sitemap.push({ path: PREP_ROOT });
+    for (const data of prep.programmes) {
+      await writePage(programmePath(data.programme.code), pageFromTemplate(template, { seo: programmeSeo(data), body: programmeHtml(data) }));
+      sitemap.push({ path: programmePath(data.programme.code) });
+    }
+  }
+  const prepRendered = Boolean(prep?.catalogue?.length);
+  await writeFile(path.join(BUILD_DIR, '_redirects'), redirectsFile({ prepRendered }));
+  await writeFile(path.join(BUILD_DIR, '_headers'), headersFile());
+
   const unique = [...new Map(sitemap.map((entry) => [entry.path, entry])).values()];
   if (unique.length > 50000) throw new Error('Plus de 50 000 adresses : découper le sitemap (index de sitemaps).');
   await writeFile(path.join(BUILD_DIR, 'sitemap.xml'), sitemapXml(unique));
   await writeFile(path.join(BUILD_DIR, 'robots.txt'), robotsTxt());
+  await writeFile(path.join(BUILD_DIR, 'llms.txt'), llmsTxt({ organismes, prep, accessPolicy: feed?.accessPolicy }));
+
+  await stampServiceWorker();
 
   const indexNowKey = process.env.INDEXNOW_KEY;
   if (indexNowKey) {
@@ -420,7 +625,7 @@ const main = async () => {
     await writeFile(path.join(BUILD_DIR, `${indexNowKey}.txt`), indexNowKey);
   }
 
-  console.log(`[prerender] ${SITE_URL} : ${organismes.length} organisme(s), ${catalogPages} page(s) de catalogue, ${documentPages} fiche(s), ${unique.length} adresse(s) dans le sitemap.${feed ? '' : ' (hors ligne : pages fixes uniquement)'}`);
+  console.log(`[prerender] ${SITE_URL} : ${organismes.length} organisme(s), ${catalogPages} page(s) de catalogue, ${documentPages} fiche(s), ${prepRendered ? `${prep.programmes.length} programme(s) de préparation` : 'préparation non pré-rendue'}, ${unique.length} adresse(s) dans le sitemap.${feed ? '' : ' (hors ligne : pages fixes uniquement)'}`);
 };
 
 main().catch((error) => {

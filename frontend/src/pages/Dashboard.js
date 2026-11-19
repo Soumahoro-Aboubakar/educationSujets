@@ -5,11 +5,12 @@ import {
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
   MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User, Building2,
   AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon,
-  Users, CreditCard, Gift, Activity, FolderCog, Wallet, Download
+  Users, CreditCard, Gift, Activity, FolderCog, Wallet, Download, RefreshCw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import AuthContext from '../context/AuthContext';
+import { SIDEBAR_SHORTCUT, SidebarTip, SidebarToggleIcon, sidebarToggleLabel, useSidebar } from '../components/site/Sidebar';
 import { Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS, ArcElement, Tooltip, Legend,
@@ -20,6 +21,7 @@ import ReferentialAdminPanel from '../components/ReferentialAdminPanel';
 import AdminCatalogPanel from '../components/AdminCatalogPanel';
 import AdminPrepContent from '../components/admin/AdminPrepContent';
 import AdminOrganismeLogos from '../components/admin/AdminOrganismeLogos';
+import AdminAppReleases from '../components/admin/AdminAppReleases';
 import YearIssuesPanel from '../components/admin/YearIssuesPanel';
 import AdminFreeDownloads from '../components/admin/AdminFreeDownloads';
 import DynamicStructureSelector from '../components/DynamicStructureSelector';
@@ -263,6 +265,7 @@ const Dashboard = () => {
     ...(user?.isSuperAdmin ? [{ id: 'referentials', label: 'Gestion des référentiels', icon: Layers }] : []),
     ...(user?.role === 'admin' ? [{ id: 'catalog', label: 'Institutions et structures', icon: Building2 }, { id: 'prep', label: 'Préparation', icon: BookOpen }] : []),
     ...(user?.role === 'admin' ? [{ id: 'organisme-logos', label: 'Logos des organismes', icon: Building2 }] : []),
+    ...(user?.role === 'admin' ? [{ id: 'app-releases', label: 'Mises à jour', icon: RefreshCw }] : []),
     ...(user?.role === 'admin' || user?.role === 'sub-admin' ? [{ id: 'year-issues', label: 'Années à vérifier', icon: Calendar }] : []),
     // Gestion commerciale (utilisateurs, abonnements, paiements, parrainage) : super admin uniquement.
     ...(user?.role === 'admin' ? [
@@ -449,6 +452,9 @@ const Dashboard = () => {
     }
   };
 
+  const { collapsed: navCollapsed, toggle: toggleNav } = useSidebar();
+  const hide = navCollapsed ? 'opacity-0' : 'opacity-100';
+
   const hasBlockingDuplicate = duplicateCheck.matches.length > 0 && !duplicateAcknowledged;
   const uploadButtonDisabled =
     uploading || duplicateCheck.status === 'checking' || hasBlockingDuplicate || watermarking
@@ -464,17 +470,32 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans flex text-slate-900">
-      {/* Sidebar Desktop */}
-      <aside className="hidden lg:flex flex-col w-72 bg-white/70 backdrop-blur-xl border-r border-slate-200/60 sticky top-0 h-screen transition-all">
-        <div className="p-6 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+      {/* Sidebar Desktop (repliable : bouton du bas ou ⌘B / Ctrl+B) */}
+      <aside id="menu-staff" className={`hidden lg:flex flex-col shrink-0 bg-white/70 backdrop-blur-xl border-r border-slate-200/60 sticky top-0 h-screen z-30 transition-[width] duration-300 ease-emphasized motion-reduce:transition-none ${navCollapsed ? 'w-20' : 'w-72'}`}>
+        <div className="p-5 flex items-center gap-3 min-w-0">
+          <div className="w-10 h-10 shrink-0 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
             <BookOpen className="text-white" size={20} />
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-800">Fatafalta</span>
+          <span className={`font-bold text-xl tracking-tight text-slate-800 whitespace-nowrap transition-opacity duration-200 ${hide}`}>Fatafalta</span>
         </div>
-        
-        <div className="px-6 py-4">
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Menu Principal</div>
+
+        {/* Réduire / ouvrir : en haut, sous le logo */}
+        <button
+          type="button"
+          onClick={toggleNav}
+          aria-expanded={!navCollapsed}
+          aria-controls="menu-staff"
+          aria-label={sidebarToggleLabel(navCollapsed)}
+          title={navCollapsed ? undefined : `${sidebarToggleLabel(navCollapsed)} (${SIDEBAR_SHORTCUT})`}
+          className={`group relative mx-4 flex h-11 items-center px-[15px] rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-100 hover:text-slate-900 transition-colors ${navCollapsed ? 'gap-0' : 'gap-3'}`}
+        >
+          <SidebarToggleIcon collapsed={navCollapsed} size={18} className="shrink-0" />
+          <span className={`whitespace-nowrap overflow-hidden transition-opacity duration-200 ${hide}`}>Réduire le menu</span>
+          <SidebarTip show={navCollapsed}>{`Ouvrir le menu · ${SIDEBAR_SHORTCUT}`}</SidebarTip>
+        </button>
+
+        <div className="px-4 py-4">
+          <div className={`h-4 px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 whitespace-nowrap overflow-hidden transition-opacity duration-200 ${hide}`} aria-hidden={navCollapsed || undefined}>Menu Principal</div>
           <nav className="flex flex-col gap-2">
             {navItems.map(item => {
               const Icon = item.icon;
@@ -483,38 +504,55 @@ const Dashboard = () => {
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-2xl transition-all duration-300 ${isActive ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'}`}
+                  aria-label={navCollapsed ? item.label : undefined}
+                  className={`group relative flex items-center justify-between h-12 px-[15px] rounded-2xl transition-colors duration-300 ${isActive ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'}`}
                 >
-                  <div className="flex items-center gap-3 font-medium">
-                    <Icon size={18} className={isActive ? 'text-indigo-100' : 'text-slate-400'} />
-                    {item.label}
+                  <div className={`flex items-center min-w-0 font-medium ${navCollapsed ? 'gap-0' : 'gap-3'}`}>
+                    <Icon size={18} className={`shrink-0 ${isActive ? 'text-indigo-100' : 'text-slate-400'}`} />
+                    <span className={`whitespace-nowrap overflow-hidden transition-opacity duration-200 ${hide}`}>{item.label}</span>
                   </div>
-                  {item.badge > 0 && (
+                  {item.badge > 0 && (navCollapsed ? (
+                    <span className="absolute left-8 top-2.5 h-2 w-2 rounded-full bg-rose-500 ring-2 ring-white" />
+                  ) : (
                     <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-rose-100 text-rose-600'}`}>
                       {item.badge}
                     </span>
-                  )}
+                  ))}
+                  <SidebarTip show={navCollapsed}>{item.badge > 0 ? `${item.label} · ${item.badge}` : item.label}</SidebarTip>
                 </button>
               );
             })}
           </nav>
         </div>
 
-        <div className="mt-auto p-6">
-          <div className="bg-slate-50 border border-slate-100 rounded-3xl p-4 flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">
+        <div className="mt-auto p-4 flex flex-col gap-3">
+          {navCollapsed ? (
+            <>
+              <div className="group relative mx-auto w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold" aria-label={user?.name}>
                 {user?.name?.charAt(0).toUpperCase()}
+                <SidebarTip show>{user?.name}</SidebarTip>
               </div>
-              <div>
-                <p className="text-sm font-bold text-slate-800">{user?.name}</p>
-                <p className="text-xs font-medium text-slate-500 capitalize">{user?.role}</p>
+              <button onClick={handleLogout} aria-label="Déconnexion" className="group relative mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 transition-colors">
+                <LogOut size={16} />
+                <SidebarTip show>Déconnexion</SidebarTip>
+              </button>
+            </>
+          ) : (
+            <div className="bg-slate-50 border border-slate-100 rounded-3xl p-4 flex flex-col gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-10 h-10 shrink-0 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">
+                  {user?.name?.charAt(0).toUpperCase()}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-slate-800 truncate">{user?.name}</p>
+                  <p className="text-xs font-medium text-slate-500 capitalize">{user?.role}</p>
+                </div>
               </div>
+              <button onClick={handleLogout} className="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 transition-colors">
+                <LogOut size={16} /> Déconnexion
+              </button>
             </div>
-            <button onClick={handleLogout} className="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 transition-colors">
-              <LogOut size={16} /> Déconnexion
-            </button>
-          </div>
+          )}
         </div>
       </aside>
 
@@ -1245,6 +1283,7 @@ const Dashboard = () => {
           )}
 
           {user?.role === 'admin' && activeTab === 'organisme-logos' && <AdminOrganismeLogos />}
+          {user?.role === 'admin' && activeTab === 'app-releases' && <AdminAppReleases />}
           {(user?.role === 'admin' || user?.role === 'sub-admin') && activeTab === 'year-issues' && <YearIssuesPanel />}
           {user?.role === 'admin' && activeTab === 'platform' && <AdminOverview />}
           {user?.role === 'admin' && activeTab === 'users' && <AdminUsers />}

@@ -25,6 +25,10 @@ const publishedSubjectFilter = {
   isDeleted: { $ne: true },
 };
 
+const billingConfig = require('../config/billing');
+const { resolveAccessForDocuments } = require('./access/documentYear');
+const { requiresSubscription } = require('./billing/downloadGuard');
+
 const CACHE_TTL_MS = 5 * 60 * 1000;
 let cache = null;
 
@@ -33,11 +37,19 @@ const latest = (...dates) => dates.filter(Boolean).map((date) => new Date(date))
 
 const buildSeoCatalog = async () => {
   const documents = await Document.find(publishedSubjectFilter)
-    .select('title description noeudId matiereId parcoursTypeId correctionIncludedInPdf extension fileSize dateAjout createdAt updatedAt')
+    .select('title description noeudId matiereId parcoursTypeId correctionIncludedInPdf extension fileSize isPremmuim dateAjout createdAt updatedAt')
     .sort('-dateAjout')
     .lean();
 
   const subjectIds = documents.map((document) => document._id);
+  // Droit de téléchargement public (sans profil) : même calcul que downloadGuard.authorizeDownload.
+  const accessById = await resolveAccessForDocuments(documents);
+  const accesOf = (document) => {
+    const access = accessById.get(id(document._id));
+    if (access?.tier === 'free') return 'gratuit';
+    if (access?.freeQuotaEligible && !requiresSubscription(document)) return 'quota';
+    return 'abonnement';
+  };
   const leafIds = [...new Set(documents.map((document) => id(document.noeudId)))];
   const matiereIds = [...new Set(documents.map((document) => id(document.matiereId)))];
 
@@ -109,6 +121,7 @@ const buildSeoCatalog = async () => {
           parcoursTypeId: id(document.parcoursTypeId),
           hasCorrection: corrected.has(id(document._id)) || Boolean(document.correctionIncludedInPdf),
           correctionIncludedInPdf: Boolean(document.correctionIncludedInPdf),
+          acces: accesOf(document),
           extension: document.extension || '.pdf',
           fileSize: document.fileSize || 0,
           dateAjout: document.dateAjout || document.createdAt,
@@ -119,8 +132,15 @@ const buildSeoCatalog = async () => {
     })
     .filter((organisme) => organisme.documents.length);
 
+  const { downloads } = billingConfig;
   return {
     generatedAt: new Date(),
+    // Règle publique de téléchargement (seuils réglables par variables d'environnement).
+    accessPolicy: {
+      freeUntilYear: downloads.freeUntilYear,
+      freeQuotaUntilYear: downloads.freeQuotaUntilYear,
+      freeQuota: downloads.recentLimits.free,
+    },
     updatedAt: latest(...items.map((organisme) => organisme.updatedAt)),
     organismes: items,
   };

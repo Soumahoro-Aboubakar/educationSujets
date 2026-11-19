@@ -6,9 +6,9 @@ import axios from 'axios';
 import './index.css';
 import App from './App';
 import { installVisitorToken } from './lib/visitor';
-//https://educationsujets.onrender.com
-// REACT_APP_API_URL permet de viser un backend local (ex. http://localhost:5000) ; production par défaut.//https://educationsujets.onrender.com
-axios.defaults.baseURL = (process.env.REACT_APP_API_URL || 'https://educationsujets.onrender.com').replace(/\/$/, '');
+// API sur le domaine de Fatafalta (adresse stable, indépendante de l'hébergeur).
+// REACT_APP_API_URL permet de viser un backend local (ex. http://localhost:5000).
+axios.defaults.baseURL = (process.env.REACT_APP_API_URL || 'https://api.fatafalta.com').replace(/\/$/, '');
 axios.defaults.headers.common.Accept = 'application/json';
 installVisitorToken();
 
@@ -19,6 +19,9 @@ installVisitorToken();
  * ou 6 secondes au plus.
  */
 const container = document.getElementById('root');
+// Application installée (PWA) : pas de référencement à servir, l'interface vivante s'affiche tout de suite.
+const standalone = window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
+if (standalone && container.firstElementChild) container.replaceChildren();
 if (container.firstElementChild) {
   const snapshot = document.createElement('div');
   snapshot.id = 'prerendered';
@@ -33,6 +36,8 @@ if (container.firstElementChild) {
     container.hidden = false;
   };
   window.addEventListener('fatafalta:page-ready', reveal);
+  // Un toucher sur la copie statique ne doit jamais être perdu : l'interface vivante prend la main.
+  snapshot.addEventListener('pointerdown', reveal, { once: true });
   setTimeout(reveal, 6000);
 }
 

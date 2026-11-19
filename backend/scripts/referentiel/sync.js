@@ -10,7 +10,7 @@
  *   npm run referentiel:sync -- --brut <dossier> # conserve aussi les réponses brutes de l'API
  *   npm run referentiel:sync -- --depuis-brut <dossier>  # reconstruit hors ligne depuis ces réponses
  *
- * Options : --api <url> (défaut https://educationsujets.onrender.com), --dir <dossier du référentiel>.
+ * Options : --api <url> (défaut https://api.fatafalta.com), --dir <dossier du référentiel>.
  * L'inventaire précédent n'est jamais écrasé silencieusement : les ressources disparues du serveur
  * restent listées (presentSurServeur: false) et chaque changement est journalisé.
  */
@@ -25,7 +25,7 @@ const option = (name, fallback = null) => {
 };
 const flag = (name) => args.includes(name);
 
-const API = (option('--api', process.env.FATAFALTA_API_URL || 'https://educationsujets.onrender.com')).replace(/\/+$/, '');
+const API = (option('--api', process.env.FATAFALTA_API_URL || 'https://api.fatafalta.com')).replace(/\/+$/, '');
 const DIR = path.resolve(option('--dir', lib.DEFAULT_DIR));
 const RAW_OUT = option('--brut');
 const RAW_IN = option('--depuis-brut');

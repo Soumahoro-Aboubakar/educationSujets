@@ -14,12 +14,27 @@ export const errorCode = (error) => error?.response?.data?.code || null;
 export const errorMessage = (error, fallback = 'Une erreur est survenue. Réessayez dans un instant.') =>
   error?.response?.data?.error || fallback;
 
+/**
+ * Cache mémoire des lectures publiques du catalogue (10 min) : revenir sur une page déjà vue
+ * (onglet « Sujets », retour arrière) ne refait pas l'appel réseau. Une erreur n'est pas gardée.
+ */
+const CATALOG_TTL = 10 * 60 * 1000;
+const catalogCache = new Map();
+const cached = (key, load) => {
+  const hit = catalogCache.get(key);
+  if (hit && Date.now() - hit.at < CATALOG_TTL) return hit.promise;
+  const promise = load().catch((error) => { catalogCache.delete(key); throw error; });
+  catalogCache.set(key, { at: Date.now(), promise });
+  return promise;
+};
+const keyOf = (name, params) => `${name}:${JSON.stringify(params || {})}`;
+
 // Catalogue public (seules les branches menant à un sujet publié).
 export const catalog = {
-  organismes: (params) => axios.get('/api/catalog/organismes', { params }).then(unwrapList),
-  parcoursTypes: (organismeId) => axios.get(`/api/organismes/${organismeId}/parcours-types`).then(unwrapList),
-  noeuds: (params) => axios.get('/api/catalog/noeuds', { params }).then(unwrapList),
-  matieres: (params) => axios.get('/api/catalog/matieres', { params }).then(unwrapList),
+  organismes: (params) => cached(keyOf('organismes', params), () => axios.get('/api/catalog/organismes', { params }).then(unwrapList)),
+  parcoursTypes: (organismeId) => cached(keyOf('parcours', organismeId), () => axios.get(`/api/organismes/${organismeId}/parcours-types`).then(unwrapList)),
+  noeuds: (params) => cached(keyOf('noeuds', params), () => axios.get('/api/catalog/noeuds', { params }).then(unwrapList)),
+  matieres: (params) => cached(keyOf('matieres', params), () => axios.get('/api/catalog/matieres', { params }).then(unwrapList)),
 };
 
 export const documents = {

@@ -67,12 +67,12 @@ const tokens = {};
 const docs = {};
 const ids = {};
 
-const call = async (path, { method = 'GET', token, visitor, ip = '10.9.9.9', body, raw = false, signal } = {}) => {
+const call = async (path, { method = 'GET', token, visitor, ip = '10.9.9.9', body, raw = false, signal, redirect } = {}) => {
   const headers = { 'X-Forwarded-For': ip, Accept: 'application/json' };
   if (token) headers.Authorization = `Bearer ${token}`;
   if (visitor) headers['X-Visitor-Token'] = visitor;
   if (body) headers['Content-Type'] = 'application/json';
-  const response = await fetch(`${base}${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined, signal });
+  const response = await fetch(`${base}${path}`, { method, headers, redirect, body: body ? JSON.stringify(body) : undefined, signal });
   if (raw) return response;
   const json = await response.json().catch(() => null);
   return { status: response.status, json, headers: response.headers };
@@ -81,6 +81,7 @@ const call = async (path, { method = 'GET', token, visitor, ip = '10.9.9.9', bod
 /** Nouveau visiteur : son jeton est obtenu à la première requête (sans jeton). */
 const newVisitor = async (ip = freshIp()) => {
   const { json, headers } = await call('/api/downloads/quota', { ip });
+  assert.equal(headers.get('cache-control'), 'private, no-store');
   const visitor = headers.get('x-visitor-token') || json.data.visitorToken;
   assert.ok(verifyVisitorToken(visitor), 'jeton visiteur signé');
   return { visitor, ip };
@@ -642,7 +643,9 @@ test('24 (mobile). livraison en liens individuels, confirmée à la remise', { s
   const visitor = await newVisitor();
   const created = await call('/api/downloads/bundles', { ...visitor, method: 'POST', body: { documentIds: [docs.m2009._id, docs.m2011._id, docs.i2011._id], delivery: 'files' } });
   assert.equal(created.status, 201);
+  assert.equal(created.headers.get('cache-control'), 'private, no-store');
   const files = await call(created.json.data.filesUrl, { ip: visitor.ip });
+  assert.equal(files.headers.get('cache-control'), 'private, no-store');
   assert.equal(files.status, 200);
   assert.equal(files.json.data.files.length, 3);
   assert.ok(files.json.data.files.every((file) => file.url && file.fileName.endsWith('.pdf')));
@@ -695,6 +698,7 @@ test('27-29. logo : ajout par adresse ou image, remplacement, suppression ; admi
   assert.match(uploadJson.data.logo, new RegExp(`^/api/organismes/${ids.ena._id}/logo\\?v=\\d+$`));
   const redirect = await fetch(`${base}${path}`, { redirect: 'manual' });
   assert.equal(redirect.status, 302);
+  assert.match(redirect.headers.get('cache-control'), /^public, max-age=\d+$/, 'logo public : redirection mise en cache');
 
   const removed = await call(path, { method: 'DELETE', token: tokens.admin });
   assert.equal(removed.status, 200);
@@ -702,4 +706,212 @@ test('27-29. logo : ajout par adresse ou image, remplacement, suppression ; admi
   assert.ok(deleted.some((key) => key.includes(`organismes/${ids.ena._id}/logo-`)), 'ancien fichier supprimé du stockage');
   const police = (await call('/api/catalog/organismes')).json.data.find((item) => item.slug === 'concours-police');
   assert.equal(police.logo, null, 'organisme sans logo : le client affiche le monogramme');
+});
+
+const documentService = require('../services/documentService');
+const Revision = require('../models/CatalogRevision');
+const privateKeys = ['uploadedBy', 'validatedBy', 'storageKey', 'fichierUrl', 'storageProvider', 'deletedBy'];
+const assertPublicFile = (item) => {
+  for (const key of privateKeys) assert.ok(!(key in item), key);
+  assert.equal(item.file, item.originalFileName);
+  assert.match(item.originalFileName, /^[\p{L}\p{N} _-]+\.pdf$/u);
+};
+
+test('projection publique : noms de téléchargement, auteur et corrigés', () => {
+  const original = {
+    _id: 'sujet', title: 'Maths / Session', extension: '.pdf', status: 'approved',
+    file: 'stockage.pdf', originalFileName: 'interne.pdf', fichierUrl: 'prive/stockage.pdf',
+    uploadedBy: { _id: 'auteur', name: 'Privé', role: 'admin' }, validatedBy: 'autre',
+  };
+  const result = documentService.publicDocument({ ...original, correction: original });
+  for (const item of [result, result.correction]) {
+    assertPublicFile(item);
+    assert.notEqual(item.file, original.file);
+    assert.notEqual(item.originalFileName, original.originalFileName);
+  }
+  assert.equal(documentService.publicDocument(original, { _id: 'auteur' }).uploadedBy, 'auteur');
+  for (const fields of [{ status: 'pending' }, { status: 'rejected' }, { isDeleted: true }]) {
+    const item = documentService.publicDocument({ ...original, dynamicCorrection: { ...original, ...fields } });
+    assert.equal(item.dynamicCorrection, null);
+  }
+});
+
+test('les incréments Mongoose ne lisent ni ne modifient la révision du catalogue', async (t) => {
+  const write = t.mock.method(Document.collection, 'updateOne', async () => ({ modifiedCount: 1 }));
+  const lookup = t.mock.method(Document, 'exists', () => assert.fail('lecture lors d’un incrément'));
+  const bump = t.mock.method(Revision, 'updateOne', () => assert.fail('révision lors d’un incrément'));
+  const id = new mongoose.Types.ObjectId();
+  await documentService.incrementDocumentViews(id);
+  await documentService.incrementDocumentDownloads(id);
+  assert.deepEqual(write.mock.calls.map(({ arguments: args }) => args[1]), [{ $inc: { views: 1 } }, { $inc: { downloads: 1 } }]);
+  assert.equal(lookup.mock.callCount(), 0);
+  assert.equal(bump.mock.callCount(), 0);
+});
+
+test('corbeille : lecture et téléchargement refusés, prévisualisation admin et restauration en cascade', { skip }, async () => {
+  const subject = docs.m2009;
+  const correction = await Document.create({
+    type: 'correction', documentType: 'corrige', sujetParentId: subject._id, correctionFor: subject._id,
+    file: 'corbeille.pdf', originalFileName: 'interne-corbeille.pdf', extension: '.pdf', fileType: 'PDF',
+    mimeType: 'application/pdf', fileSize: 40, storageKey: 'corbeille.pdf', storageProvider: 'r2',
+    status: 'approved', uploadedBy: users.admin._id,
+  });
+  const admin = { token: tokens.admin };
+  const actors = [await newVisitor(), { token: tokens.subscriber }];
+  const revision = async () => (await Revision.findById('catalog')).revision;
+  const before = await revision();
+  const checkAccess = async (visible) => {
+    for (const who of actors) {
+      for (const doc of [subject, correction]) {
+        const detail = await call(`/api/documents/${doc._id}`, who);
+        assert.equal(detail.status, visible ? 200 : 404);
+        const single = await download(doc._id, who);
+        assert.equal(single.status, visible ? 200 : 404);
+        assert.equal(single.headers.get('cache-control'), 'private, no-store');
+        const legacy = await call(`/uploads/${doc.file}`, { ...who, redirect: 'manual', raw: true });
+        assert.equal(legacy.status, visible ? 302 : 404);
+        assert.equal(legacy.headers.get('cache-control'), 'private, no-store');
+        if (visible && doc === subject) assert.equal(detail.json.data.correction._id, String(correction._id));
+      }
+    }
+  };
+  await checkAccess(true);
+  assert.equal(await revision(), before);
+  assert.equal((await call(`/api/documents/${subject._id}`, { ...admin, method: 'DELETE' })).status, 200);
+  await checkAccess(false);
+  assert.ok(await revision() > before);
+  const previewUrl = `/api/documents/trash/${subject._id}/preview`;
+  assert.equal((await call(previewUrl, actors[1])).status, 403);
+  const preview = await call(previewUrl, admin);
+  assert.equal(preview.status, 200);
+  assert.equal(preview.headers.get('cache-control'), 'private, no-store');
+  const trashedRevision = await revision();
+  assert.equal((await call(`/api/documents/trash/${subject._id}/restore`, { ...admin, method: 'PUT' })).status, 200);
+  await checkAccess(true);
+  assert.ok(await revision() > trashedRevision);
+});
+
+test('liste, recherche, matière et fiche filtrent aussi les corrigés imbriqués', { skip }, async () => {
+  const subject = docs.m2021;
+  const corr = docs.c2021;
+  const paths = [
+    '/api/documents?limit=100', '/api/search?search=Maths&limit=100',
+    `/api/documents?noeudId=${subject.noeudId}&matiereId=${subject.matiereId}`, `/api/documents/${subject._id}`,
+  ];
+  for (const state of [{ status: 'pending' }, { status: 'approved', isDeleted: true }, { isDeleted: false }]) {
+    await Document.updateOne({ _id: corr._id }, { $set: state });
+    for (const path of paths) {
+      const response = await call(path);
+      assert.equal(response.status, 200, path);
+      const data = response.json.data;
+      const item = Array.isArray(data) ? data.find((row) => row._id === String(subject._id)) : data;
+      assertPublicFile(item);
+      assert.notEqual(item.file, subject.file);
+      if (state.isDeleted === false) {
+        assert.equal(item.correction._id, String(corr._id));
+        assertPublicFile(item.correction);
+        assert.notEqual(item.correction.originalFileName, corr.originalFileName);
+        if (item.dynamicCorrection) assertPublicFile(item.dynamicCorrection);
+      } else {
+        assert.equal(item.correction, null);
+        assert.ok(!item.dynamicCorrection);
+      }
+    }
+  }
+  const managed = await call('/api/documents/manage?limit=100', { token: tokens.admin });
+  const item = managed.json.data.find((row) => row._id === String(subject._id));
+  assert.equal(item.file, subject.file);
+  assert.equal(item.storageKey, subject.storageKey);
+  assert.equal(item.uploadedBy.name, users.admin.name);
+});
+
+test('une seule recherche des corrigés pour tous les sujets de la page matière', { skip }, async (t) => {
+  const grouped = t.mock.method(Document.collection, 'find');
+  const singles = t.mock.method(Document.collection, 'findOne');
+  const { data } = await documentService.listDynamicDocuments({ noeudId: ids.node['2021']._id, matiereId: ids.maths._id });
+  assert.ok(data.length >= 2);
+  const queries = grouped.mock.calls.map(({ arguments: args }) => args[0]);
+  const corrections = queries.filter((q) => q.$or?.some((branch) => branch.correctionFor?.$in));
+  assert.equal(corrections.length, 1);
+  assert.equal(corrections[0].$or[0].sujetParentId.$in.length, data.length);
+  assert.equal(singles.mock.callCount(), 0);
+});
+
+test('livraison des lots réservés avant un retrait : liens, archive et restitution du quota', { skip }, async () => {
+  const subject = docs.m2010;
+  const admin = { token: tokens.admin };
+  const lots = [];
+  for (const delivery of ['files', 'zip']) {
+    const who = await newAccount();
+    const created = await call('/api/downloads/bundles', {
+      ...who, method: 'POST', body: { documentIds: [subject._id, docs.m2009._id], delivery },
+    });
+    assert.equal(created.status, 201);
+    lots.push({ who, ...created.json.data });
+  }
+  assert.equal((await call(`/api/documents/${subject._id}`, { ...admin, method: 'DELETE' })).status, 200);
+  const files = await call(lots[0].filesUrl, lots[0].who);
+  assert.deepEqual(files.json.data.files.map((row) => row._id), [String(docs.m2009._id)]);
+  assert.deepEqual(files.json.data.missing.map((row) => row._id), [String(subject._id)]);
+  const zip = await call(lots[1].archiveUrl, { ...lots[1].who, raw: true });
+  assert.equal(zip.headers.get('cache-control'), 'private, no-store');
+  const names = zipEntryNames(Buffer.from(await zip.arrayBuffer()));
+  assert.equal(names.filter((name) => name.endsWith('.pdf')).length, 1);
+  assert.ok(names.some((name) => name.includes('2009')));
+  for (const lot of lots) {
+    for (let i = 0; i < 30 && (await call('/api/downloads/quota', lot.who)).json.data.used; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 25));
+    }
+    assert.equal((await call('/api/downloads/quota', lot.who)).json.data.used, 0);
+  }
+  assert.equal((await call(`/api/documents/trash/${subject._id}/restore`, { ...admin, method: 'PUT' })).status, 200);
+});
+
+test('création directement approuvée : notification du sujet, du corrigé et silence du brouillon', { skip }, async (t) => {
+  const notify = t.mock.method(require('../services/seoNotifier'), 'notifyCatalogChange', () => {});
+  const upload = async (fields) => {
+    const body = new FormData();
+    for (const [key, value] of Object.entries(fields)) body.append(key, String(value));
+    body.append('file', new Blob([pdf('publication')], { type: 'application/pdf' }), 'interne-publication.pdf');
+    const response = await fetch(base + '/api/documents', { method: 'POST', headers: { Authorization: `Bearer ${tokens.admin}` }, body });
+    assert.equal(response.status, 201);
+    return (await response.json()).data;
+  };
+  const fields = { type: 'sujet', titre: 'Publication directe', noeudId: ids.node['2009']._id, matiereId: ids.maths._id, hasParcoursType: false };
+  await upload({ ...fields, publicationStatus: 'draft' });
+  assert.equal(notify.mock.callCount(), 0);
+  const subject = await upload({ ...fields, publicationStatus: 'approved' });
+  await upload({ type: 'correction', sujetParentId: subject._id });
+  assert.deepEqual(notify.mock.calls.map((entry) => entry.arguments), [[[subject._id]], [[subject._id]]]);
+});
+
+test('les lectures par identifiant et ancien nom excluent la corbeille avant toute signature', async (t) => {
+  const id = new mongoose.Types.ObjectId();
+  const lookup = t.mock.method(Document.collection, 'findOne', async () => null);
+  assert.equal(await documentService.getDocumentById(id), null);
+  assert.equal(await documentService.getDocumentByStoredFileName('ancien.pdf'), null);
+  assert.deepEqual(lookup.mock.calls.map((entry) => entry.arguments[0]), [
+    { _id: id, isDeleted: { $ne: true } }, { file: 'ancien.pdf', isDeleted: { $ne: true } },
+  ]);
+  const deleted = { _id: id, status: 'approved', isDeleted: true };
+  for (const actor of [null, { _id: id, role: 'user' }, { _id: id, role: 'admin' }]) {
+    await assert.rejects(documentService.buildDownloadPayload(deleted, actor), { statusCode: 404 });
+  }
+});
+
+test('la révision suit publication, édition, retrait et restauration du sujet', async (t) => {
+  t.mock.method(Document.collection, 'updateOne', async () => ({ matchedCount: 1, modifiedCount: 1 }));
+  const bump = t.mock.method(Revision, 'updateOne', async () => ({}));
+  const subject = Document.hydrate({ _id: new mongoose.Types.ObjectId(), status: 'draft', title: 'Initial' });
+  const edit = async (fields, count) => {
+    subject.set(fields);
+    await subject.save({ validateBeforeSave: false });
+    assert.equal(bump.mock.callCount(), count);
+  };
+  await edit({ title: 'Brouillon' }, 0);
+  await edit({ status: 'approved' }, 1);
+  await edit({ title: 'Titre publié' }, 2);
+  await edit({ isDeleted: true }, 3);
+  await edit({ title: 'En corbeille' }, 3);
+  await edit({ isDeleted: false }, 4);
 });

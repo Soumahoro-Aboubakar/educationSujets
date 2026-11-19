@@ -1,6 +1,5 @@
 import React from 'react';
 import { BookOpenCheck, FileCheck, Smartphone } from 'lucide-react';
-import { LogoMark } from './Logo';
 
 const POINTS = [
   { icon: BookOpenCheck, text: 'Les anciens sujets classés par organisme, année et matière' },
@@ -16,8 +15,8 @@ const AuthShell = ({ title, subtitle, children, footer }) => (
   <div className="mx-auto grid min-h-[calc(100dvh-4rem)] w-full max-w-site lg:grid-cols-[1fr_minmax(0,460px)] lg:gap-10 lg:px-8 lg:py-10">
     <div className="flex items-start justify-center px-4 pb-14 pt-8 sm:items-center sm:py-12">
       <div className="w-full max-w-[420px] animate-rise-in sm:rounded-3xl sm:border sm:border-line sm:bg-white sm:p-10 sm:shadow-soft">
-        <LogoMark className="h-11 w-11" />
-        <h1 className="mt-6 text-title font-bold text-ink">{title}</h1>
+        {/* Le logo est déjà dans l'en-tête du site : un seul logo à l'écran. */}
+        <h1 className="text-title font-bold text-ink">{title}</h1>
         {subtitle ? <p className="mt-2 text-ink-soft">{subtitle}</p> : null}
         <div className="mt-8">{children}</div>
         {footer ? <p className="mt-8 border-t border-line pt-6 text-center text-sm text-ink-soft">{footer}</p> : null}

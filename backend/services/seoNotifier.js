@@ -14,7 +14,7 @@ const { invalidateSeoCatalog } = require('./seoCatalogService');
  * Variables : SITE_URL, FRONTEND_DEPLOY_HOOK_URL (secret), INDEXNOW_KEY,
  * SEO_REBUILD_DELAY_MS (10 min par défaut), INDEXNOW_DELAY_MS (10 min après la reconstruction).
  */
-const SITE_URL = () => (process.env.SITE_URL || 'https://fatafalta.onrender.com').replace(/\/+$/, '');
+const SITE_URL = () => (process.env.SITE_URL || 'https://fatafalta.com').replace(/\/+$/, '');
 const REQUEST_TIMEOUT_MS = 30 * 1000;
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
 const INDEXNOW_KEY_PATTERN = /^[a-zA-Z0-9-]{8,128}$/;

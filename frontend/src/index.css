@@ -37,6 +37,12 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* iOS (app installée) : un toucher = une action, sans attente du double-tap de zoom ; le
+     pincement pour zoomer reste possible. */
+  html {
+    touch-action: manipulation;
+  }
+
   body {
     margin: 0;
     background-color: var(--paper);
@@ -225,4 +231,10 @@ html[data-hydrating] [data-reveal='pending']:not([data-reveal-group]) {
   .hero-underline { stroke-dashoffset: 0 !important; }
 
   .skeleton { animation: none; }
+}
+
+/* Démo animée de la préparation (PlatformDemo) : la barre de l'onglet actif sert d'horloge. */
+@keyframes demo-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }

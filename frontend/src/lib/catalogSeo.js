@@ -1,5 +1,5 @@
 import { formatDate, labelOf, organismeLabel } from './format.js';
-import { SITE_NAME, absoluteUrl, breadcrumbJsonLd } from './seo.js';
+import { SITE_NAME, WEBSITE_ID, absoluteUrl, breadcrumbJsonLd, publisherRef } from './seo.js';
 
 /*
  * Adresses et textes des pages du catalogue, partagés par le site (ExplorePage, DocumentPage)
@@ -37,13 +37,18 @@ export const scopeLabel = ({ organisme, parcoursType, nodes = [] }) => [
  */
 export const catalogText = ({ organismes = [], organisme, parcoursType, nodes = [], matiere, levels = [], step, count }) => {
   if (step === 'organisme' || !organisme) {
-    const names = organismes.map(organismeLabel);
+    // On cite les organismes les plus fournis, pas la liste entière : la liste complète est juste en dessous.
+    const names = [...organismes]
+      .sort((x, y) => (y.subjectCount || 0) - (x.subjectCount || 0))
+      .slice(0, 4)
+      .map(organismeLabel);
+    const others = organismes.length - names.length;
     return {
       title: 'Anciens sujets de concours en Côte d’Ivoire par organisme',
       h1: 'Anciens sujets de concours par organisme',
       listHeading: 'Organismes',
       description: names.length
-        ? `Anciens sujets de concours et d’examens classés par organisme : ${joinList(names)}. Choisissez un organisme, puis l’année et la matière.`
+        ? `Anciens sujets de concours et d’examens classés par organisme : ${others > 0 ? `${names.join(', ')} et ${plural(others, 'autre')}` : joinList(names)}. Choisissez un organisme, puis l’année et la matière.`
         : 'Anciens sujets de concours et d’examens classés par organisme, année et matière.',
     };
   }
@@ -128,7 +133,11 @@ export const documentSeo = (document, { organisme, parcoursType, nodes = [], mat
         about: subject ? { '@type': 'Thing', name: subject } : undefined,
         encodingFormat: /pdf$/i.test(document.extension || '.pdf') ? 'application/pdf' : undefined,
         dateCreated: document.dateAjout || document.createdAt || undefined,
-        provider: { '@type': 'Organization', name: SITE_NAME, url: absoluteUrl('/') },
+        dateModified: document.updatedAt || undefined,
+        keywords: [organismeLabel(organisme), labelOf(parcoursType), ...nodes.map(labelOf), subject, 'ancien sujet', 'concours', 'Côte d’Ivoire'].filter(Boolean).join(', '),
+        educationalUse: 'Préparation aux concours',
+        provider: { ...publisherRef(), '@type': 'EducationalOrganization', name: SITE_NAME, url: absoluteUrl('/') },
+        isPartOf: { '@id': WEBSITE_ID },
       },
     ],
   };

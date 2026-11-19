@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useContextSearch } from '../lib/contextSearch';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { ChevronRight, FileCheck, FileText, Files, Layers3, Search, SearchX, X } from 'lucide-react';
+import { ChevronDown, ChevronRight, FileCheck, FileText, Files, Layers3, Search, SearchX, X } from 'lucide-react';
 import { Breadcrumbs, Button, Container, EmptyState, SkeletonRows, cx } from '../components/ui';
 import useAsync from '../hooks/useAsync';
 import useDebounce from '../hooks/useDebounce';
@@ -32,21 +33,22 @@ const Row = ({ to, onClick, title, meta, icon: Icon = ChevronRight, leading, tra
         {meta ? <p className="mt-0.5 truncate text-sm text-ink-soft">{meta}</p> : null}
       </div>
       {trailing}
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink-muted transition-[background-color,color,transform] duration-200 group-hover:translate-x-0.5 group-hover:bg-paper-dim group-hover:text-ink">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink-muted transition-[background-color,color,transform] duration-200 [@media(hover:hover)]:group-hover:translate-x-0.5 [@media(hover:hover)]:group-hover:bg-paper-dim [@media(hover:hover)]:group-hover:text-ink">
         <Icon size={18} aria-hidden />
       </span>
     </>
   );
-  const className = 'group flex min-h-[64px] w-full items-center gap-4 border-b border-line px-4 py-3.5 text-left transition-colors last:border-0 hover:bg-paper active:bg-paper-dim/60 sm:px-5';
+  const className = 'group flex min-h-[64px] w-full items-center gap-4 border-b border-line px-4 py-3.5 text-left transition-colors last:border-0 [@media(hover:hover)]:hover:bg-paper active:bg-paper-dim/60 sm:px-5';
   return to
     ? <Link to={to} className={className}>{content}</Link>
     : <button type="button" onClick={onClick} className={className}>{content}</button>;
 };
 
-const Filter = ({ value, onChange, placeholder }) => (
+const Filter = React.forwardRef(({ value, onChange, placeholder }, ref) => (
   <div className="relative w-full sm:max-w-xs">
     <Search size={17} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-muted" aria-hidden />
     <input
+      ref={ref}
       type="search"
       value={value}
       onChange={(event) => onChange(event.target.value)}
@@ -61,7 +63,19 @@ const Filter = ({ value, onChange, placeholder }) => (
       </button>
     ) : null}
   </div>
-);
+));
+
+// Libellé de la recherche selon l'étape affichée (loupe de l'en-tête et champ de la page).
+/** Organismes visibles d'emblée à l'accueil du catalogue (les plus fournis), avant « Voir les N organismes ». */
+const ORGANISMES_SHOWN = 8;
+
+const SEARCH_LABELS = {
+  organisme: 'Rechercher un organisme',
+  parcours: 'Rechercher un parcours',
+  noeud: 'Rechercher dans la liste',
+  matiere: 'Rechercher une matière',
+  documents: 'Rechercher un sujet',
+};
 
 const countLabel = (count) => (count ? `${count} sujet${count > 1 ? 's' : ''}` : undefined);
 
@@ -87,6 +101,7 @@ const ExplorePage = () => {
   } : null;
   const organismeSegment = legacy ? params.get('o') : pathSegments[0] || null;
   const [filter, setFilter] = useState('');
+  const [allOrganismes, setAllOrganismes] = useState(false);
 
   // Listes déjà chargées, par niveau : un clic ne relance aucune requête pour résoudre le chemin.
   const lists = useRef(new Map());
@@ -105,6 +120,11 @@ const ExplorePage = () => {
   const organisme = findBySegment(organismeList, organismeSegment);
   // Couleurs des monogrammes réparties sur la liste complète : identiques sur toutes les pages.
   const colors = useMemo(() => distinctPalette(organismeList), [organismeList]);
+  // Accueil du catalogue : les organismes les plus fournis d'abord, le reste sur demande.
+  const organismesByCount = useMemo(
+    () => [...organismeList].sort((a, b) => (b.subjectCount || 0) - (a.subjectCount || 0)),
+    [organismeList],
+  );
   const organismeId = organisme?._id;
   const levels = organisme?.structure?.niveaux || [];
 
@@ -159,6 +179,7 @@ const ExplorePage = () => {
   const matiere = (trailFresh && trail.data.matiere?.item) || null;
   const leaf = nodes[nodes.length - 1]?.item || null;
 
+  const filterRef = useRef(null);
   const step = !organismeSegment ? 'organisme'
     : organismes.error ? 'error'
       : !organismes.data ? 'loading'
@@ -210,6 +231,13 @@ const ExplorePage = () => {
 
   const [page, setPage] = useState(1);
   const [docs, setDocs] = useState([]);
+  useContextSearch(SEARCH_LABELS[step] ? {
+    label: SEARCH_LABELS[step],
+    open: () => {
+      filterRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      filterRef.current?.focus({ preventScroll: true });
+    },
+  } : null);
   const docsQuery = useDebounce(step === 'documents' ? filter : '', 300);
   const documentsState = useAsync(async () => {
     const result = await documentsApi.list({
@@ -314,8 +342,9 @@ const ExplorePage = () => {
 
     if (step === 'organisme') {
       if (organismes.error) return errorState(organismes.error, 'Le catalogue', organismes.reload);
-      const items = filterItems(organismeList, organismeLabel);
-      if (!items.length) return <EmptyState icon={SearchX} title="Aucun résultat" description="Aucun organisme ne correspond à votre recherche." />;
+      const matches = filterItems(organismesByCount, organismeLabel);
+      if (!matches.length) return <EmptyState icon={SearchX} title="Aucun résultat" description="Aucun organisme ne correspond à votre recherche." />;
+      const items = filter.trim() || allOrganismes ? matches : matches.slice(0, ORGANISMES_SHOWN);
       return items.map((item) => (
         <Row
           key={item._id}
@@ -422,7 +451,8 @@ const ExplorePage = () => {
               setFilter(value);
               if (step === 'documents') setPage(1);
             }}
-            placeholder={step === 'documents' ? 'Filtrer les sujets…' : 'Filtrer la liste…'}
+            ref={filterRef}
+            placeholder={`${SEARCH_LABELS[step] || 'Rechercher dans la liste'}…`}
           />
         ) : null}
       </div>
@@ -434,6 +464,19 @@ const ExplorePage = () => {
       >
         {renderList()}
       </div>
+
+      {step === 'organisme' && !filter.trim() && organismesByCount.length > ORGANISMES_SHOWN ? (
+        <div className="mt-6 flex justify-center">
+          <Button
+            variant="secondary"
+            aria-expanded={allOrganismes}
+            onClick={() => setAllOrganismes((value) => !value)}
+          >
+            {allOrganismes ? 'Afficher moins' : `Voir les ${organismesByCount.length} organismes`}
+            <ChevronDown size={17} aria-hidden className={cx('transition-transform duration-200', allOrganismes && 'rotate-180')} />
+          </Button>
+        </div>
+      ) : null}
 
       {hasMoreDocs ? (
         <div className="mt-6 flex justify-center">

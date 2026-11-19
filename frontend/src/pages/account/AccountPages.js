@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { Suspense, lazy, useContext, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ArrowDownLeft, ArrowUpRight, Check, ChevronDown, Copy, CreditCard, Download, FileText, Gift, Wallet } from 'lucide-react';
 import { Button, Card, EmptyState, Field, InfoRow, Modal, PasswordField, SkeletonRows, StatusPill } from '../../components/ui';
@@ -8,8 +8,10 @@ import useEntitlements from '../../hooks/useEntitlements';
 import { account, errorMessage, payments } from '../../lib/api';
 import { documentTitle, formatAmount, formatDate, formatLongDate } from '../../lib/format';
 import { PageTitle } from './AccountLayout';
-import { AccountPrepResume } from '../prep/PrepPages';
 import AppAccountCheck from '../../components/account/AppAccountCheck';
+
+// Reprise de la préparation : chargée à part, pour ne pas embarquer tout l'espace d'étude dans le site.
+const AccountPrepResume = lazy(() => import('../prep/PrepPages').then((m) => ({ default: m.AccountPrepResume })));
 
 const SUBSCRIPTION_TITLES = {
   ACTIVE: 'Abonnement actif',
@@ -75,7 +77,7 @@ export const AccountOverview = () => {
         <SummaryCard to="/compte/portefeuille" icon={Wallet} label="Solde disponible" value={wallet.data ? formatAmount(wallet.data.balances.available) : '—'} />
       </div>
 
-      <AccountPrepResume />
+      <Suspense fallback={null}><AccountPrepResume /></Suspense>
 
       {!downloads.unlimited ? (
         <Card className="mt-4 flex items-center justify-between gap-4 p-5">

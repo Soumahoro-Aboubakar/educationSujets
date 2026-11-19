@@ -1,4 +1,5 @@
 const express = require('express');
+const privateNoStore = require('../middleware/privateNoStore');
 const { body, param } = require('express-validator');
 const controller = require('../controllers/adminController');
 const { protect, authorize } = require('../middleware/auth');
@@ -9,7 +10,7 @@ const router = express.Router();
 
 // Données personnelles et financières : super administrateur uniquement.
 // Limites propres : un jeton administrateur volé ne doit pas permettre d'aspirer la base.
-router.use(protect, authorize('admin'), limits.admin, limits.adminWrite);
+router.use(privateNoStore, protect, authorize('admin'), limits.admin, limits.adminWrite);
 
 const prep = require('../controllers/prepAdminController');
 router.get('/prep/contenus', prep.list);
@@ -20,6 +21,11 @@ router.post('/prep/contenus/:kind/:code/valider', prep.validate);
 router.post('/prep/publications', prep.publish);
 router.post('/prep/contenus/:kind/:code/archiver', prep.archive);
 router.delete('/prep/contenus/:kind/:code/brouillon', prep.remove);
+
+// Mises à jour des applications (forcée ou conseillée).
+const appReleases = require('../controllers/appReleaseController');
+router.get('/app-releases', appReleases.listPolicies);
+router.put('/app-releases/:platform', [param('platform').isIn(['android', 'ios']), validate], appReleases.updatePolicy);
 
 const idParam = [param('id').isMongoId(), validate];
 

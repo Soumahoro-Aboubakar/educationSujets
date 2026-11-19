@@ -1,0 +1,24 @@
+{
+  "id": "/",
+  "name": "Fatafalta — Sujets de concours et préparation",
+  "short_name": "Fatafalta",
+  "description": "Anciens sujets de concours avec leurs corrigés, et préparation guidée : leçons, vidéos, exercices et progression.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "/preparation?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FCFAF5",
+  "theme_color": "#FCFAF5",
+  "categories": ["education"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Ma préparation", "short_name": "Préparation", "url": "/preparation?source=pwa", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Sujets et corrigés", "short_name": "Sujets", "url": "/sujets?source=pwa", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

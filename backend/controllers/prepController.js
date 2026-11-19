@@ -18,7 +18,7 @@ const versionOf = (value) => (typeof value === 'string' && /^[a-z]{2}$/.test(val
 const sendVersioned = (req, res, data, meta = {}, privateContent = false) => {
   const body = { success: true, data, meta: { generation: content.load().manifest.generation, schemaVersion: 1, ...meta } };
   const etag = `"${require('../services/prep/publicationService').hash(body)}"`;
-  res.set('Cache-Control', privateContent ? 'private, no-cache' : 'public, max-age=0, must-revalidate');
+  res.set('Cache-Control', privateContent ? 'private, no-store' : 'public, max-age=0, must-revalidate');
   res.set('ETag', etag);
   if (privateContent) res.vary('Authorization').vary('X-Prep-Token');
   if (req.headers['if-none-match']?.split(',').map(v => v.trim()).includes(etag)) return res.status(304).end();
@@ -63,7 +63,6 @@ exports.declareDevice = asyncHandler(async (req, res) => {
 // GET /api/prep/droits
 exports.getRights = asyncHandler(async (req, res) => {
   const identite = await requireIdentity(req);
-  res.set('Cache-Control', 'private, no-store');
   res.json({ success: true, data: { droits: await progress.rights(identite, req.user), serveurJour: progress.today() } });
 });
 
@@ -112,7 +111,6 @@ exports.getModule = asyncHandler(async (req, res) => {
   const identite = await requireIdentity(req);
   const droits = await progress.rights(identite, req.user);
   if (!droits.accesPreparation) throw new AppError('Accès à la préparation indisponible', 403);
-  res.set('Cache-Control', 'private, no-store');
   const data = content.publicModule(mod, versionOf(req.query.version));
   const index = await videos.index();
   sendVersioned(req, res, { ...data, lecons: data.lecons.map((l) => ({ ...l, video: videos.find(index, 'lecon', l.code, data.version, mod.revision) })) }, {}, true);
@@ -140,7 +138,6 @@ exports.sync = asyncHandler(async (req, res) => {
 exports.getProgressions = asyncHandler(async (req, res) => {
   const identite = await requireIdentity(req);
   const out = await progress.listProgress(identite, { since: typeof req.query.depuis === 'string' && !Number.isNaN(Date.parse(req.query.depuis)) ? req.query.depuis : null, limit: parseInt(req.query.limit, 10) || 50 });
-  res.set('Cache-Control', 'private, no-store');
   res.json({ success: true, data: { ...out, serveurJour: progress.today() } });
 });
 
@@ -189,13 +186,11 @@ exports.reasoning = asyncHandler(async (req, res) => {
 exports.ranking = asyncHandler(async (req, res) => {
   const identite = await identity.fromRequest(req);
   const { periode, limite, apres, avant, autour } = req.query;
-  res.set('Cache-Control', 'private, no-store');
   res.json({ success: true, data: await progress.ranking(identite, req.params.code, { periode, limite, apres, avant, autour }) });
 });
 
 // GET /api/prep/programmes/:code/candidats?q=préfixe
 exports.searchCandidates = asyncHandler(async (req, res) => {
-  res.set('Cache-Control', 'private, no-store');
   res.json({ success: true, data: await progress.searchCandidates(req.params.code, req.query.q, { periode: req.query.periode }) });
 });
 
@@ -204,7 +199,6 @@ exports.candidate = asyncHandler(async (req, res) => {
   if (!/^[a-f0-9]{24}$/.test(req.params.identite)) throw new AppError('Candidat introuvable', 404);
   const viewer = await identity.fromRequest(req);
   const profil = await progress.candidateProfile(req.params.code, req.params.identite, { periode: req.query.periode, viewer });
-  res.set('Cache-Control', 'private, no-store');
   if (!profil) throw new AppError('Candidat introuvable', 404);
   res.json({ success: true, data: profil });
 });

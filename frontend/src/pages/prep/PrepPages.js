@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, BookOpen, Check, CircleCheck, CloudOff, GraduationCap, Lock, RotateCcw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Check, CircleCheck, CloudOff, GraduationCap, RotateCcw, Search } from 'lucide-react';
 import { Breadcrumbs, Button, Card, Container, EmptyState, SkeletonRows } from '../../components/ui';
 import core from '../../prep/shared/prepCore';
 import { ExerciseInput } from '../../prep/Exercises';
@@ -8,31 +8,22 @@ import { LessonBlock, RichText } from '../../prep/LessonBlocks';
 import { awaitResult, enqueue, flush, newKey, prepApi, shareResume } from '../../prep/client';
 import usePrepAccount, { useQueueState } from '../../prep/usePrepAccount';
 import useSeo from '../../hooks/useSeo';
+import { prepHomeSeo, prepPrivateSeo, programmeSeo } from '../../lib/prepSeo';
+import PrepWorkspace, { StudyGate } from './PrepWorkspace';
+import { Feedback, SessionFrame } from './sessionKit';
+import useStudyTime from '../../prep/useStudyTime';
+import PrepSearch, { catalogueEntries, programmeEntries } from './PrepSearch';
+import { useContextSearch } from '../../lib/contextSearch';
+import { LessonMark, LessonVideo, MasteryBar, OrgMark } from '../../prep/ui';
+import PlatformDemo from '../../components/site/PlatformDemo';
 
 /*
  * Préparation sur le site (lot 6) : même compte, mêmes contenus publiés, même progression que
  * l'application. Le serveur corrige ; le navigateur n'a jamais les clés des exercices notés.
  */
 
-const SEO = { title: 'Préparation aux concours', description: 'Cours, exercices corrigés et suivi de progression pour préparer les concours, sur le site et sur l’application.', noindex: true };
+const SEO = prepPrivateSeo('Préparation aux concours');
 const pct = (x) => `${Math.round((x || 0) * 100)} %`;
-
-/**
- * Pastille d'état (même code que l'application) : terminé = disque vert + coche ;
- * commencé = anneau bordeaux proportionnel ; pas encore ouvert = cercle neutre.
- */
-const StatusMark = ({ state, label, value = 0 }) => {
-  if (state === 'done') return <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-700 text-white" aria-hidden><Check size={15} strokeWidth={2.8} /></span>;
-  if (state === 'progress') {
-    const deg = Math.round(Math.max(0.08, value) * 360);
-    return (
-      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full" style={{ background: `conic-gradient(#6C2838 ${deg}deg, #E4DED2 0deg)` }} aria-hidden>
-        <span className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-white text-xs font-semibold tabular-nums text-burgundy">{label}</span>
-      </span>
-    );
-  }
-  return <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line-strong bg-white text-xs font-semibold tabular-nums text-ink-soft" aria-hidden>{label}</span>;
-};
 
 const Shell = ({ children, crumbs }) => (
   <Container className="py-8 sm:py-12">
@@ -50,16 +41,8 @@ const QueueNote = () => {
   return <p className="mt-4 flex items-center gap-2 text-sm text-ink-soft"><CloudOff size={15} />{`Hors connexion · ${pending} enregistrement${pending > 1 ? 's' : ''} envoyé${pending > 1 ? 's' : ''} au retour du réseau`}</p>;
 };
 
-/** Accès refusé par le serveur : connexion, ou accès Premium. */
-const AccessNote = ({ user }) => (
-  <div className="flex flex-col items-start gap-4 rounded-2xl bg-ink p-6 text-white sm:flex-row sm:items-center sm:justify-between">
-    <div>
-      <p className="font-semibold">{user ? 'Accès Premium requis' : 'Connecte-toi pour étudier'}</p>
-      <p className="mt-1 text-sm text-white/70">{user ? 'Ton essai est terminé. L’accès Premium débloque les cours et les exercices sur le site et l’application.' : 'Ta progression est enregistrée sur ton compte et te suit sur l’application.'}</p>
-    </div>
-    {user ? <Button to="/abonnement" variant="gold">Voir l’accès Premium</Button> : <Button to="/login?next=%2Fpreparation" variant="gold">Se connecter</Button>}
-  </div>
-);
+/** Accès refusé par le serveur : membres (connexion, 7 jours gratuits), ou fin de l'essai. */
+const AccessNote = ({ user }) => <StudyGate user={user} next={window.location.pathname} />;
 
 /** Dernière reprise, tous programmes confondus (la plus récente, d'après le serveur). */
 const latestResume = (progressions) => Object.entries(progressions || {})
@@ -92,77 +75,174 @@ export const resumeLink = ({ programme, reprise }) => (reprise.type === 'lecon' 
   ? `/preparation/${programme}/${reprise.module}/lecon/${reprise.lecon}`
   : `/preparation/${programme}#module-${reprise.module}`);
 
-/** Logo de l'organisme, ou son sigle si l'image manque ou ne se charge pas. */
-const OrgMark = ({ logo, sigle }) => {
-  const [failed, setFailed] = useState(false);
-  if (logo && !failed) return <img src={logo} alt="" className="h-9 w-9 shrink-0 rounded-lg object-contain" loading="lazy" onError={() => setFailed(true)} />;
-  return <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-paper-dim text-[11px] font-bold uppercase text-ink">{sigle.slice(0, 3)}</span>;
-};
-
 // ── /preparation ───────────────────────────────────────────────────────────
 export const PrepHomePage = () => {
-  useSeo(SEO);
   const prep = usePrepAccount();
   const [catalogue, setCatalogue] = useState(null);
   const [error, setError] = useState(null);
-  useEffect(() => { prepApi.catalogue().then(setCatalogue).catch(setError); }, []);
+  // Métadonnées indexables dès que le catalogue est là (identiques au pré-rendu) ; en erreur, titre seul.
+  // Erreur réseau : métadonnées du pré-rendu conservées (jamais de noindex sur une panne passagère).
+  useSeo(catalogue ? prepHomeSeo(catalogue) : null);
+  const [searching, setSearching] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const load = () => { setError(null); prepApi.catalogue().then(setCatalogue).catch(setError); };
+  useEffect(load, []);
   const resume = latestResume(prep.progressions);
   const resumeInfo = useProgrammeInfo(resume?.programme);
+  const entries = useMemo(() => catalogueEntries(catalogue), [catalogue]);
+  useContextSearch({ label: 'Rechercher un concours', open: () => setSearching(true) });
+
+  const orgs = catalogue || [];
+  const started = (code) => Object.keys(prep.progressions[code]?.lecons || {}).length;
+  const startedCycles = orgs.flatMap((o) => o.cycles.map((c) => ({ ...c, org: o }))).filter((c) => started(c.programme));
+  const current = orgs.find((o) => o.sigle === selected) || orgs.find((o) => o.cycles.some((c) => started(c.programme))) || orgs[0];
+  const totals = { concours: orgs.reduce((a, o) => a + o.cycles.length, 0), modules: orgs.reduce((a, o) => a + o.cycles.reduce((b, c) => b + (c.modulesPublies || 0), 0), 0) };
 
   return (
-    <Shell>
-      <header className="max-w-2xl">
-        <h1 className="text-title-lg font-bold text-ink">Préparation aux concours</h1>
-        <p className="mt-3 text-[17px] leading-relaxed text-ink-soft">Des cours courts, des exercices corrigés et ta progression, la même sur le site et sur l’application.</p>
-      </header>
-
-      {!prep.loading && !prep.user ? <div className="mt-8"><AccessNote user={null} /></div> : null}
-
-      {resume ? (
-        <Link to={resumeLink(resume)} className="group mt-8 flex items-center justify-between gap-4 rounded-2xl bg-ink p-6 text-white shadow-soft transition-transform [@media(hover:hover)]:hover:-translate-y-0.5">
-          <div className="min-w-0">
-            <p className="text-sm text-white/70">Reprendre où tu t’es arrêté</p>
-            <p className="mt-1 truncate text-lg font-semibold">{resumeLabel(resume, resumeInfo)}</p>
-            <p className="mt-0.5 truncate text-sm text-white/70">{`${resumeInfo?.programme?.titre || resume.programme}${resume.reprise.position != null ? ` · lu à ${pct(resume.reprise.position)}` : ''}`}</p>
+    <div className="mx-auto w-full max-w-site px-4 pb-20 pt-8 sm:px-6 sm:pt-12 lg:px-8">
+      {/* En-tête : promesse, recherche, reprise ou accès */}
+      <section className="grid grid-cols-[minmax(0,1fr)] items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10">
+        <div className="flex flex-col justify-center">
+          <h1 className="text-display font-bold text-ink">Prépare ton concours, une leçon à la fois.</h1>
+          <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-ink-soft">Des cours courts avec leur vidéo, des exercices corrigés, des concours blancs et ta progression, la même sur le site et sur l’application Android.</p>
+          <button
+            type="button"
+            onClick={() => setSearching(true)}
+            className="group mt-8 flex h-14 w-full max-w-xl items-center gap-3 rounded-2xl border border-line bg-white px-5 text-left text-[16px] text-ink-muted shadow-soft transition-[border-color,box-shadow] hover:border-line-strong hover:shadow-lift"
+          >
+            <Search size={19} className="shrink-0 text-ink" />
+            <span className="flex-1">Rechercher un concours, un organisme…</span>
+            <kbd className="hidden rounded-md border border-line bg-paper px-1.5 py-0.5 text-[12px] font-semibold text-ink-soft sm:block">⌘K</kbd>
+          </button>
+          {catalogue ? (
+            <p className="mt-5 text-[14px] text-ink-soft">
+              <span className="font-semibold tabular-nums text-ink">{totals.concours}</span>{' concours · '}
+              <span className="font-semibold tabular-nums text-ink">{orgs.length}</span>{' organismes · '}
+              <span className="font-semibold tabular-nums text-ink">{totals.modules}</span>{' modules publiés'}
+            </p>
+          ) : null}
+        </div>
+        {resume ? (
+          <Link to={resumeLink(resume)} className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-ink p-7 text-white shadow-lift">
+            <span aria-hidden className="absolute -right-12 -top-12 h-48 w-48 rounded-full border border-white/10" />
+            <span aria-hidden className="absolute -right-4 -top-4 h-32 w-32 rounded-full border border-white/10" />
+            <div className="relative">
+              <p className="text-[14px] text-white/65">Reprendre où tu t’es arrêté</p>
+              <p className="mt-3 text-[24px] font-bold leading-tight tracking-[-0.02em]">{resumeLabel(resume, resumeInfo).replace(/^Leçon · /, '').replace(/^Exercices · /, 'Exercices · ')}</p>
+              <p className="mt-2 text-[14px] text-white/65">{resumeInfo?.programme?.titre || resume.programme}</p>
+            </div>
+            <div className="relative mt-8 flex items-center justify-between">
+              {resume.reprise.position > 0.02 ? <span className="text-[14px] tabular-nums text-white/70">{`Lue à ${pct(resume.reprise.position)}`}</span> : <span className="text-[14px] text-white/70">Ton plan du jour t’attend</span>}
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gold-light text-ink transition-transform duration-300 ease-emphasized group-hover:translate-x-1"><ArrowRight size={19} /></span>
+            </div>
+          </Link>
+        ) : !prep.loading && !prep.user ? (
+          <div className="relative overflow-hidden rounded-3xl bg-ink bg-[radial-gradient(ellipse_80%_60%_at_100%_0%,rgba(58,90,148,0.55),transparent_70%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(180,138,72,0.14),transparent_70%)] p-5 text-white shadow-lift sm:p-6">
+            <PlatformDemo className="relative" />
+            <div className="relative mt-5 flex flex-wrap items-center gap-3">
+              <Button to={`/register?next=${encodeURIComponent('/preparation')}`} variant="gold">Créer un compte</Button>
+              <Button to={`/login?next=${encodeURIComponent('/preparation')}`} variant="ghost" className="text-white hover:bg-white/10">Se connecter</Button>
+            </div>
+            <p className="relative mt-3 text-[13px] text-white/60">7 jours gratuits, sans abonnement.</p>
           </div>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold-light text-ink transition-transform group-hover:translate-x-0.5"><ArrowRight size={18} /></span>
-        </Link>
+        ) : (
+          <div className="flex flex-col justify-center rounded-3xl border border-line bg-white p-7">
+            <GraduationCap size={26} className="text-gold" />
+            <p className="mt-4 text-[20px] font-bold tracking-[-0.02em] text-ink">Choisis ton concours</p>
+            <p className="mt-2 text-[15px] text-ink-soft">Ton plan du jour se construit dès ta première leçon. Pas sûr de ton niveau ? Le test de niveau saute ce que tu maîtrises déjà.</p>
+          </div>
+        )}
+      </section>
+
+      {/* Concours en cours */}
+      {startedCycles.length ? (
+        <section className="mt-14" aria-labelledby="prep-encours">
+          <h2 id="prep-encours" className="text-[20px] font-bold tracking-[-0.02em] text-ink">Tes préparations</h2>
+          <ul className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {startedCycles.map((c) => (
+              <li key={c.programme}>
+                <Link to={`/preparation/${c.programme}`} className="group flex items-center gap-4 rounded-2xl border border-line bg-white p-4 transition-colors hover:border-ink">
+                  <OrgMark logo={c.org.logo} organismeId={c.org.organismeId} sigle={c.org.sigle} size={44} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[15px] font-semibold text-ink">{c.nom}</span>
+                    <span className="block text-[13px] text-ink-soft">{`${c.org.sigle} · ${started(c.programme)} leçon${started(c.programme) > 1 ? 's' : ''} ouverte${started(c.programme) > 1 ? 's' : ''}`}</span>
+                  </span>
+                  <ArrowRight size={17} className="shrink-0 text-ink-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       ) : null}
 
-      <section className="mt-10" aria-labelledby="prep-programmes">
-        <h2 id="prep-programmes" className="text-xl font-bold tracking-[-0.02em] text-ink">Choisis ton concours</h2>
-        {error ? <Card className="mt-4"><EmptyState title="Connexion impossible" description="La liste des concours n’a pas pu être chargée." onRetry={() => { setError(null); prepApi.catalogue().then(setCatalogue).catch(setError); }} /></Card> : null}
-        {!catalogue && !error ? <Card className="mt-4 p-6"><SkeletonRows count={4} /></Card> : null}
-        <div className="mt-4 divide-y divide-line overflow-hidden rounded-2xl border border-line bg-white">
-          {(catalogue || []).map((org) => (
-            <div key={org.sigle} className="grid gap-3 p-5 sm:grid-cols-[200px_1fr]">
-              <div className="flex items-center gap-3">
-                <OrgMark logo={org.logo} sigle={org.sigle} />
-                <p className="font-semibold text-ink">{org.nom || org.sigle}</p>
+      {/* Répertoire : organismes à gauche, leurs préparations à droite */}
+      <section className="mt-14" aria-labelledby="prep-catalogue">
+        <div className="flex items-end justify-between gap-4">
+          <h2 id="prep-catalogue" className="text-[20px] font-bold tracking-[-0.02em] text-ink">Tous les concours</h2>
+          {catalogue ? <p className="text-[14px] text-ink-soft">{`${orgs.length} organismes`}</p> : null}
+        </div>
+        {error ? <Card className="mt-4"><EmptyState title="Connexion impossible" description="La liste des concours n’a pas pu être chargée." onRetry={load} /></Card> : null}
+        {!catalogue && !error ? <Card className="mt-4 p-6"><SkeletonRows count={5} /></Card> : null}
+        {catalogue && current ? (
+          <div className="mt-5 grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-3xl border border-line bg-white lg:grid-cols-[300px_minmax(0,1fr)]">
+            <nav className="min-w-0 border-b border-line p-2 lg:border-b-0 lg:border-r" aria-label="Organismes">
+              <ul className="flex gap-1 overflow-x-auto lg:block lg:space-y-0.5">
+                {orgs.map((o) => {
+                  const on = o.sigle === current.sigle;
+                  return (
+                    <li key={o.sigle} className="shrink-0">
+                      <button type="button" onClick={() => setSelected(o.sigle)} aria-current={on ? 'true' : undefined} className={`flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors ${on ? 'bg-paper' : 'hover:bg-paper/70'}`}>
+                        <OrgMark logo={o.logo} organismeId={o.organismeId} sigle={o.sigle} size={36} />
+                        <span className="min-w-0 flex-1">
+                          <span className={`block truncate text-[15px] ${on ? 'font-bold text-ink' : 'font-semibold text-ink'}`}>{o.sigle}</span>
+                          <span className="hidden truncate text-[13px] text-ink-soft lg:block">{`${o.cycles.length} préparation${o.cycles.length > 1 ? 's' : ''}`}</span>
+                        </span>
+                        {on ? <span className="hidden h-1.5 w-1.5 shrink-0 rounded-full bg-gold lg:block" aria-hidden /> : null}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+            <div className="p-5 sm:p-8">
+              <div className="flex items-center gap-4">
+                <OrgMark logo={current.logo} organismeId={current.organismeId} sigle={current.sigle} size={48} />
+                <div className="min-w-0">
+                  <p className="text-[22px] font-bold tracking-[-0.02em] text-ink">{current.sigle}</p>
+                  <p className="truncate text-[14px] text-ink-soft">{current.nom && current.nom !== current.sigle ? current.nom : `${current.cycles.length} préparation${current.cycles.length > 1 ? 's' : ''}`}</p>
+                </div>
               </div>
-              <ul className="grid gap-1.5">
-                {org.cycles.map((c) => {
-                  const etat = prep.progressions[c.programme];
-                  const started = etat && Object.keys(etat.lecons || {}).length;
+              <ul className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-3">
+                {current.cycles.map((c) => {
+                  const n = started(c.programme);
+                  const ratio = c.modulesTotal ? c.modulesPublies / c.modulesTotal : 1;
                   return (
                     <li key={c.programme}>
-                      <Link to={`/preparation/${c.programme}`} className="group flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-paper">
+                      <Link to={`/preparation/${c.programme}`} className="group grid grid-cols-[minmax(0,1fr)] gap-4 rounded-2xl border border-line p-5 transition-[border-color,box-shadow] hover:border-ink hover:shadow-soft sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
                         <span className="min-w-0">
-                          <span className="block truncate font-medium text-ink">{c.nom}</span>
-                          <span className="text-sm text-ink-muted">{`${c.modulesPublies} module${c.modulesPublies > 1 ? 's' : ''}${started ? ' · commencé' : ''}`}</span>
+                          <span className="block text-[17px] font-semibold text-ink">{c.nom}</span>
+                          <span className="mt-1 block text-[14px] text-ink-soft">{[c.parcoursType, `${c.matieres} matière${c.matieres > 1 ? 's' : ''}`, `${c.modulesPublies} module${c.modulesPublies > 1 ? 's' : ''} publié${c.modulesPublies > 1 ? 's' : ''}`].filter(Boolean).join(' · ')}</span>
+                          <span className="mt-3 flex max-w-sm items-center gap-3">
+                            <MasteryBar className="flex-1" value={ratio} done={ratio >= 1} label={`Programme publié à ${pct(ratio)}`} />
+                            <span className="shrink-0 text-[12px] tabular-nums text-ink-muted">{ratio >= 1 ? 'Programme complet' : `${c.modulesPublies}/${c.modulesTotal} modules`}</span>
+                          </span>
                         </span>
-                        <ArrowRight size={16} className="shrink-0 text-burgundy transition-transform group-hover:translate-x-0.5" />
+                        <span className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-ink px-5 text-[15px] font-semibold text-white transition-transform group-hover:-translate-y-px">
+                          {n ? 'Continuer' : 'Commencer'}
+                          <ArrowRight size={16} />
+                        </span>
                       </Link>
                     </li>
                   );
                 })}
               </ul>
             </div>
-          ))}
-        </div>
+          </div>
+        ) : null}
       </section>
       <QueueNote />
-    </Shell>
+      <PrepSearch open={searching} onClose={() => setSearching(false)} entries={entries} placeholder="Rechercher un concours" />
+    </div>
   );
 };
 
@@ -170,85 +250,35 @@ export const PrepHomePage = () => {
 export const PrepProgrammePage = () => {
   const { programme: code } = useParams();
   const prep = usePrepAccount();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(() => programmeCache.get(code) || null);
   const [error, setError] = useState(null);
-  useEffect(() => { setData(null); prepApi.programme(code).then(setData).catch(setError); }, [code]);
-  useSeo({ ...SEO, title: data?.programme?.titre ? `Préparation · ${data.programme.titre}` : SEO.title });
+  useEffect(() => {
+    let alive = true;
+    setError(null);
+    if (!programmeCache.has(code)) setData(null);
+    prepApi.programme(code).then((d) => { programmeCache.set(code, d); if (alive) setData(d); }).catch((e) => { if (alive) setError(e); });
+    return () => { alive = false; };
+  }, [code]);
+  // Programme inconnu (404) : noindex ; panne passagère : métadonnées du pré-rendu conservées.
+  useSeo(data ? programmeSeo(data) : error?.response?.status === 404 ? SEO : null);
 
   if (error) return <Shell><Card><EmptyState title={error?.response?.status === 404 ? 'Programme introuvable' : 'Connexion impossible'} description="Ce programme n’est pas disponible pour le moment." action={<Button to="/preparation" variant="secondary">Tous les concours</Button>} /></Card></Shell>;
-  if (!data) return <Loading />;
-  const { programme, modules } = data;
-  const etat = prep.progressions[code] || core.emptyProgress();
-  const canStudy = prep.droits?.accesPreparation;
-  const seen = new Set();
-
-  return (
-    <Shell crumbs={[{ label: 'Préparation', to: '/preparation' }, { label: programme.titre, to: `/preparation/${code}` }]}>
-      <header className="max-w-3xl">
-        <h1 className="text-title-lg font-bold text-ink">{programme.titre}</h1>
-        <p className="mt-2 text-ink-soft">{`${programme.organisme?.sigle || ''} · ${programme.parcoursType || ''}`}</p>
-      </header>
-      {!prep.loading && !canStudy ? <div className="mt-8"><AccessNote user={prep.user} /></div> : null}
-
-      <div className="mt-10 grid gap-10">
-        {programme.matieres.map((matiere) => (
-          <section key={matiere.nom} aria-labelledby={`m-${matiere.nom}`}>
-            <h2 id={`m-${matiere.nom}`} className="text-xl font-bold tracking-[-0.02em] text-ink">{matiere.nom}</h2>
-            <div className="mt-4 grid gap-4">
-              {matiere.modules.filter((ref) => modules[ref.code] && !seen.has(ref.code) && seen.add(ref.code)).map((ref) => {
-                const mod = modules[ref.code];
-                const done = mod.lecons.filter((l) => etat.lecons?.[l.code]?.terminee).length;
-                const valide = (etat.modulesValides || []).includes(ref.code);
-                return (
-                  <article key={ref.code} id={`module-${ref.code}`} className="scroll-mt-24 rounded-2xl border border-line bg-white p-5 sm:p-6">
-                    <div className="flex flex-wrap items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <h3 className="text-lg font-semibold text-ink">{mod.titre}</h3>
-                        <p className="mt-1 text-sm text-ink-muted">{`${done} / ${mod.lecons.length} leçons terminées${valide ? ' · module validé' : ''}`}</p>
-                      </div>
-                      {valide ? <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-800"><CircleCheck size={15} />Module validé</span>
-                        : done || mod.lecons.some((l) => etat.lecons?.[l.code]) ? <span className="inline-flex items-center gap-1.5 rounded-full bg-burgundy-wash px-3 py-1 text-sm font-semibold text-burgundy">En cours</span> : null}
-                    </div>
-                    <ol className="mt-4 grid gap-1 sm:grid-cols-2">
-                      {mod.lecons.map((l, i) => {
-                        const p = etat.lecons?.[l.code];
-                        const lu = p ? Math.max(p.derniere ?? 0, p.position ?? 0) : 0;
-                        const state = p?.terminee ? 'done' : p ? 'progress' : 'todo';
-                        const content = (
-                          <>
-                            <StatusMark state={state} label={i + 1} value={lu} />
-                            <span className="min-w-0 flex-1 truncate">{l.titre}</span>
-                            <span className="sr-only">{state === 'done' ? 'terminée' : state === 'progress' ? `commencée, ${pct(lu)}` : 'pas encore ouverte'}</span>
-                            <span className={`shrink-0 text-xs ${state === 'done' ? 'font-semibold text-emerald-800' : state === 'progress' ? 'font-semibold text-burgundy' : 'text-ink-muted'}`}>{state === 'done' ? 'Terminée' : state === 'progress' ? pct(lu) : `${l.duree} min`}</span>
-                          </>
-                        );
-                        return (
-                          <li key={l.code}>
-                            {canStudy
-                              ? <Link to={`/preparation/${code}/${ref.code}/lecon/${l.code}`} className="flex items-center gap-3 rounded-xl px-2 py-2 text-[15px] text-ink transition-colors hover:bg-paper">{content}</Link>
-                              : <span className="flex items-center gap-3 px-2 py-2 text-[15px] text-ink-soft">{content}</span>}
-                          </li>
-                        );
-                      })}
-                    </ol>
-                    <div className="mt-4 flex flex-wrap gap-2 border-t border-line pt-4">
-                      {[1, 2, 3].map((n) => (
-                        <Button key={n} size="sm" variant={n === 1 ? 'primary' : 'secondary'} to={canStudy ? `/preparation/${code}/${ref.code}/niveau/${n}` : undefined} disabled={!canStudy} icon={canStudy ? undefined : Lock}>
-                          {`Exercices · niveau ${n}`}
-                        </Button>
-                      ))}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
-        ))}
-      </div>
-      <QueueNote />
-    </Shell>
-  );
+  if (!data) return <WorkspaceSkeleton />;
+  return <PrepWorkspace data={data} prep={prep} logo={data.programme.organismeLogo || null} />;
 };
+
+/** Squelette de l'espace de travail : même géométrie que la page chargée, sans saut. */
+const WorkspaceSkeleton = () => (
+  <div className="mx-auto flex w-full max-w-[1400px] gap-10 px-4 sm:px-6 lg:px-8" aria-busy="true" aria-label="Chargement du programme">
+    <div className="hidden w-[248px] shrink-0 border-r border-line py-8 pr-6 lg:block"><SkeletonRows count={5} /></div>
+    <div className="min-w-0 flex-1 py-10">
+      <div className="skeleton h-10 w-2/3 rounded-xl" />
+      <div className="skeleton mt-4 h-5 w-1/2 rounded-lg" />
+      <div className="skeleton mt-8 h-56 w-full rounded-3xl" />
+      <div className="mt-8"><SkeletonRows count={3} /></div>
+    </div>
+  </div>
+);
 
 /**
  * Module servi par l'API (droits vérifiés par le serveur). Sans compte connecté, aucun appel :
@@ -284,11 +314,15 @@ export const PrepLessonPage = () => {
   const prep = usePrepAccount();
   const { mod, error } = useModule(moduleCode, prep.user, prep.authLoading);
   const programmeInfo = useProgrammeInfo(programme);
+  const [searching, setSearching] = useState(false);
+  const searchEntries = useMemo(() => programmeEntries(programmeInfo), [programmeInfo]);
+  useContextSearch({ label: 'Rechercher une leçon ou un module', open: () => setSearching(true) });
   const index = mod ? mod.lecons.findIndex((l) => l.code === leconCode) : -1;
   const lecon = index >= 0 ? mod.lecons[index] : null;
-  useSeo({ ...SEO, title: lecon ? `${lecon.titre} · Préparation` : SEO.title });
+  useSeo(prepPrivateSeo(lecon ? `${lecon.titre} · Préparation` : SEO.title));
 
   const etat = prep.progressions[programme];
+  useStudyTime(programme, Boolean(lecon));
   const position = useRef(0);
   const saved = useRef(0);
   const restored = useRef(false);
@@ -340,6 +374,10 @@ export const PrepLessonPage = () => {
   if (!mod) return <Loading />;
   if (!lecon) return <Shell><Card><EmptyState title="Leçon introuvable" description="Cette leçon a peut-être été déplacée." action={<Button to={`/preparation/${programme}`} variant="secondary">Retour au programme</Button>} /></Card></Shell>;
   const next = mod.lecons[index + 1];
+  const done = finished || etat?.lecons?.[leconCode]?.terminee;
+  const outline = programmeInfo?.modules?.[moduleCode]?.lecons || mod.lecons;
+  const video = outline.find((l) => l.code === leconCode)?.video || null;
+  const back = `/preparation/${programme}?vue=programme#module-${moduleCode}`;
 
   const finish = () => {
     position.current = 1;
@@ -347,30 +385,96 @@ export const PrepLessonPage = () => {
     setFinished(true);
   };
 
+  const nextAction = done ? (
+    next
+      ? <Button className="w-full" onClick={() => navigate(`/preparation/${programme}/${moduleCode}/lecon/${next.code}`)} icon={ArrowRight} iconPosition="end">Leçon suivante</Button>
+      : <Button className="w-full" to={`/preparation/${programme}/${moduleCode}/niveau/1`} icon={ArrowRight} iconPosition="end">S’entraîner sur le module</Button>
+  ) : <Button className="w-full" onClick={finish} icon={Check}>J’ai terminé cette leçon</Button>;
+
   return (
-    <Shell crumbs={[{ label: 'Préparation', to: '/preparation' }, { label: programmeInfo?.programme?.titre || programme, to: `/preparation/${programme}` }, { label: mod.titre, to: `/preparation/${programme}#module-${moduleCode}` }]}>
-      <article className="mx-auto max-w-[68ch]">
-        <header>
-          <p className="text-sm text-ink-muted">{`Leçon ${index + 1} sur ${mod.lecons.length} · ${lecon.duree} min`}</p>
-          <h1 className="mt-2 text-title font-bold text-ink">{lecon.titre}</h1>
-        </header>
-        <div className="mt-8 grid gap-6">
-          {lecon.blocs.map((bloc, i) => <LessonBlock key={`${bloc.type}-${i}`} bloc={bloc} index={i} />)} {/* eslint-disable-line react/no-array-index-key */}
+    <div className="mx-auto flex w-full max-w-[1400px] gap-10 px-4 sm:px-6 lg:px-8">
+      {/* Sommaire du module : se situer, sauter à une autre leçon. */}
+      <nav className="sticky top-16 hidden h-[calc(100vh-4rem)] w-[248px] shrink-0 overflow-y-auto border-r border-line py-8 pr-4 lg:block" aria-label="Leçons du module">
+        <Link to={back} className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink-soft transition-colors hover:text-ink"><ArrowLeft size={14} />{programmeInfo?.programme?.titre || 'Programme'}</Link>
+        <p className="mt-4 text-[15px] font-bold leading-snug tracking-[-0.01em] text-ink">{mod.titre}</p>
+        <ol className="mt-4 grid gap-0.5">
+          {outline.map((l, i) => {
+            const p = etat?.lecons?.[l.code];
+            const current = l.code === leconCode;
+            const state = (current && done) || p?.terminee ? 'done' : p ? 'progress' : 'todo';
+            return (
+              <li key={l.code}>
+                <Link
+                  to={`/preparation/${programme}/${moduleCode}/lecon/${l.code}`}
+                  aria-current={current ? 'page' : undefined}
+                  className={`flex items-center gap-2.5 rounded-xl px-2 py-2 text-[14px] leading-snug transition-colors ${current ? 'bg-white font-semibold text-ink shadow-soft ring-1 ring-line' : 'text-ink-soft hover:bg-ink/[0.04] hover:text-ink'}`}
+                >
+                  <LessonMark state={state} number={i + 1} value={p ? Math.max(p.derniere ?? 0, p.position ?? 0) : 0} size={24} />
+                  <span className="min-w-0 flex-1">{l.titre}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      </nav>
+
+      <article className="min-w-0 flex-1 pb-32 pt-8 lg:pb-20 lg:pt-12">
+        <div className="mx-auto max-w-[68ch]">
+          <Link to={back} className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink-soft lg:hidden"><ArrowLeft size={14} />{mod.titre}</Link>
+          <header className="mt-3 lg:mt-0">
+            <p className="text-[14px] tabular-nums text-ink-soft">{`Leçon ${index + 1} sur ${mod.lecons.length} · ${lecon.duree} min de lecture`}</p>
+            <h1 className="mt-2 text-title-lg font-bold text-ink">{lecon.titre}</h1>
+          </header>
+          {video ? <div className="mt-8 xl:hidden"><LessonVideo video={video} /></div> : null}
+          <div className="mt-10 grid gap-7 text-[17px] leading-[1.7]">
+            {lecon.blocs.map((bloc, i) => <LessonBlock key={`${bloc.type}-${i}`} bloc={bloc} index={i} />)} {/* eslint-disable-line react/no-array-index-key */}
+          </div>
+          <footer className="mt-14 border-t border-line pt-8">
+            {done ? <p className="mb-4 flex items-center gap-2 font-semibold text-ink"><CircleCheck size={18} className="text-gold" />Leçon terminée</p> : null}
+            <div className="max-w-sm">{nextAction}</div>
+            <QueueNote />
+          </footer>
         </div>
-        <footer className="mt-12 border-t border-line pt-6">
-          {finished || etat?.lecons?.[leconCode]?.terminee ? (
-            <div className="flex flex-wrap items-center gap-3">
-              <p className="mr-auto flex items-center gap-2 font-semibold text-ink"><CircleCheck size={18} className="text-gold-ink" />Leçon terminée</p>
-              {next ? <Button onClick={() => navigate(`/preparation/${programme}/${moduleCode}/lecon/${next.code}`)} icon={ArrowRight} iconPosition="end">Leçon suivante</Button>
-                : <Button to={`/preparation/${programme}/${moduleCode}/niveau/1`} icon={ArrowRight} iconPosition="end">S’entraîner</Button>}
-            </div>
-          ) : (
-            <Button onClick={finish} icon={Check}>J’ai terminé cette leçon</Button>
-          )}
-          <QueueNote />
-        </footer>
       </article>
-    </Shell>
+
+      {/* Compagnon : vidéo, avancement, action suivante (grands écrans). */}
+      <aside className="hidden w-[340px] shrink-0 xl:block" aria-label="Vidéo et suite">
+        <div className="sticky top-24 grid gap-5 pt-12">
+          {video ? <LessonVideo video={video} compact /> : null}
+          <div className="rounded-3xl border border-line bg-white p-5">
+            <ReadingMeter position={position} done={done} />
+            <div className="mt-5">{nextAction}</div>
+            {next && !done ? <p className="mt-3 text-[13px] leading-snug text-ink-soft">{`Ensuite : ${next.titre}`}</p> : null}
+          </div>
+        </div>
+      </aside>
+
+      <PrepSearch open={searching} onClose={() => setSearching(false)} entries={searchEntries} placeholder="Rechercher une leçon ou un module" />
+      {/* Mobile : l'action reste à portée de pouce. */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl xl:hidden">
+        <div className="mx-auto max-w-[68ch]">{nextAction}</div>
+      </div>
+    </div>
+  );
+};
+
+/** Avancement de lecture, suivi au défilement (même mesure que la reprise). */
+const ReadingMeter = ({ position, done }) => {
+  const [value, setValue] = useState(position.current);
+  useEffect(() => {
+    const tick = () => setValue(position.current);
+    window.addEventListener('scroll', tick, { passive: true });
+    return () => window.removeEventListener('scroll', tick);
+  }, [position]);
+  const v = done ? 1 : value;
+  return (
+    <div>
+      <div className="flex items-baseline justify-between text-[14px]">
+        <span className="font-semibold text-ink">{done ? 'Leçon terminée' : 'Ta lecture'}</span>
+        <span className="tabular-nums text-ink-soft">{`${Math.round(v * 100)} %`}</span>
+      </div>
+      <MasteryBar className="mt-2" value={v} done={done} label="Avancement de la lecture" />
+    </div>
   );
 };
 
@@ -382,9 +486,9 @@ export const PrepSessionPage = () => {
   const niveau = Number(niveauParam) || 1;
   const prep = usePrepAccount();
   const { mod, error } = useModule(moduleCode, prep.user, prep.authLoading);
-  const programmeInfo = useProgrammeInfo(programme);
-  useSeo({ ...SEO, title: mod ? `${mod.titre} · Exercices` : SEO.title });
+  useSeo(prepPrivateSeo(mod ? `${mod.titre} · Exercices` : SEO.title));
   const [sessionId] = useState(() => `web-${programme}-${moduleCode}-${niveau}-${Date.now().toString(36)}`);
+  useStudyTime(programme, Boolean(mod));
   const codes = useMemo(() => (mod ? core.seededShuffle(mod.exercices.filter((ex) => ex.niveau === niveau).map((ex) => ex.code), sessionId).slice(0, SESSION_SIZE) : []), [mod, niveau, sessionId]);
   const [i, setI] = useState(0);
   const [items, setItems] = useState({});
@@ -429,18 +533,18 @@ export const PrepSessionPage = () => {
     const pending = list.filter((it) => it.result?.pending).length;
     const pts = list.reduce((a, it) => a + (it.points || 0), 0);
     return (
-      <Shell crumbs={[{ label: 'Préparation', to: '/preparation' }, { label: programmeInfo?.programme?.titre || programme, to: `/preparation/${programme}` }, { label: mod.titre, to: `/preparation/${programme}#module-${moduleCode}` }]}>
-        <div className="mx-auto max-w-xl text-center">
+      <SessionFrame back={`/preparation/${programme}?vue=programme#module-${moduleCode}`} title={mod.titre} done={codes.length} total={codes.length}>
+        <div className="mx-auto max-w-xl pt-6 text-center">
           <GraduationCap size={36} className="mx-auto text-gold-ink" />
           <h1 className="mt-4 text-title font-bold text-ink">Session terminée</h1>
           <p className="mt-3 text-5xl font-bold tabular-nums tracking-[-0.03em] text-ink">{`${Math.round(pts * 10) / 10} / ${codes.length}`}</p>
           <p className="mt-2 text-ink-soft">{pending ? `Score provisoire · ${pending} réponse${pending > 1 ? 's' : ''} corrigée${pending > 1 ? 's' : ''} au retour de la connexion` : 'Ta progression est enregistrée sur ton compte.'}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button to={`/preparation/${programme}#module-${moduleCode}`} variant="secondary" icon={ArrowLeft}>Retour au module</Button>
+            <Button to={`/preparation/${programme}?vue=programme#module-${moduleCode}`} variant="secondary" icon={ArrowLeft}>Retour au module</Button>
             <Button onClick={() => window.location.reload()} icon={RotateCcw}>Nouvelle session</Button>
           </div>
         </div>
-      </Shell>
+      </SessionFrame>
     );
   }
 
@@ -448,13 +552,12 @@ export const PrepSessionPage = () => {
   const corrected = Boolean(r);
   const complete = core.isComplete(exercice, item.value);
   return (
-    <Shell crumbs={[{ label: 'Préparation', to: '/preparation' }, { label: programmeInfo?.programme?.titre || programme, to: `/preparation/${programme}` }, { label: mod.titre, to: `/preparation/${programme}#module-${moduleCode}` }]}>
-      <div className="mx-auto max-w-2xl">
-        <div className="flex items-center justify-between text-sm text-ink-muted">
-          <span>{`Niveau ${niveau} · question ${i + 1} sur ${codes.length}`}</span>
-          {item.essai === 2 && !item.final ? <span className="rounded-full bg-gold-wash px-3 py-1 font-medium text-gold-ink">Seconde chance</span> : null}
+    <SessionFrame back={`/preparation/${programme}?vue=programme#module-${moduleCode}`} title={`${mod.titre} · niveau ${niveau}`} done={i + (item.final ? 1 : 0)} total={codes.length} items={codes.map((c) => items[c])}>
+      <div className="rounded-3xl border border-line bg-white p-6 sm:p-10">
+        <div className="flex items-center justify-between gap-3 text-[14px] text-ink-soft">
+          <span className="tabular-nums">{`Question ${i + 1} sur ${codes.length}`}</span>
+          {item.essai === 2 && !item.final ? <span className="rounded-full bg-gold-wash px-3 py-1 text-[13px] font-semibold text-gold-ink">Seconde chance</span> : null}
         </div>
-        <div className="mt-2 h-1 overflow-hidden rounded-full bg-line" aria-hidden><div className="h-full origin-left bg-ink transition-transform duration-300 ease-out" style={{ transform: `scaleX(${(i + (item.final ? 1 : 0)) / codes.length})` }} /></div>
         <h1 ref={heading} tabIndex={-1} className="mt-6 text-[22px] font-semibold leading-snug text-ink focus:outline-none">{exercice.consigne}</h1>
         <div className="mt-6">
           <ExerciseInput
@@ -489,18 +592,7 @@ export const PrepSessionPage = () => {
         </div>
         <QueueNote />
       </div>
-    </Shell>
-  );
-};
-
-const Feedback = ({ tone, title, body, children }) => {
-  const tones = { good: 'bg-emerald-50 text-emerald-950', bad: 'bg-burgundy-wash text-burgundy', wait: 'bg-gold-wash text-gold-ink' };
-  return (
-    <div className={`rounded-2xl p-5 ${tones[tone]}`} role="status">
-      <p className="font-semibold">{title}</p>
-      {body ? <div className="mt-1.5 text-[15px] leading-relaxed text-ink-soft">{typeof body === 'string' ? <RichText md={body} /> : body}</div> : null}
-      {children}
-    </div>
+    </SessionFrame>
   );
 };
 

@@ -216,6 +216,21 @@ const listScope = async ({ organisme: organismeRef, parcoursTypeId, annee, matie
 
 const publicQuota = ({ documentIds, ...status }) => status;
 
+// La sélection est relue à la livraison : un retrait peut suivre la réservation du lot.
+const loadPublishedSelection = async (documentIds) => {
+  const found = await Document.find({ _id: { $in: documentIds }, status: 'approved', isDeleted: { $ne: true } }).lean();
+  const parentIds = found.filter(isCorrection).map(parentIdOf).filter(Boolean);
+  const parents = parentIds.length
+    ? await Document.find({ _id: { $in: parentIds }, status: 'approved', isDeleted: { $ne: true } }).lean()
+    : [];
+  const subjectsById = new Map([...found.filter((item) => !isCorrection(item)), ...parents].map((item) => [id(item._id), item]));
+  // Un corrigé dont le sujet n'est plus publié n'est pas livrable.
+  const deliverable = found.filter((item) => !isCorrection(item) || subjectsById.has(parentIdOf(item)));
+  const byId = new Map(deliverable.map((item) => [id(item._id), item]));
+  const ordered = documentIds.map((documentId) => byId.get(id(documentId))).filter(Boolean);
+  return { byId, described: await describeDocuments(ordered, { subjectsById }) };
+};
+
 /**
  * Contrôle d'une sélection, sans rien consommer. Erreurs : sélection vide ou trop grande,
  * documents de plusieurs organismes ou de plusieurs cycles.
@@ -227,15 +242,7 @@ const analyzeSelection = async (documentIds, actor) => {
     throw new AppError(`Une opération est limitée à ${downloads.bundleMaxDocuments} documents. Réduisez votre sélection.`, 400, { max: downloads.bundleMaxDocuments }, 'BUNDLE_TOO_LARGE');
   }
   const validIds = ids.filter(isObjectId);
-  const found = await Document.find({ _id: { $in: validIds }, status: 'approved', isDeleted: { $ne: true } }).lean();
-  const parentIds = found.filter(isCorrection).map(parentIdOf).filter(Boolean);
-  const parents = parentIds.length
-    ? await Document.find({ _id: { $in: parentIds }, status: 'approved', isDeleted: { $ne: true } }).lean()
-    : [];
-  const subjectsById = new Map([...found.filter((item) => !isCorrection(item)), ...parents].map((item) => [id(item._id), item]));
-  // Un corrigé dont le sujet n'est plus publié n'est pas livrable.
-  const deliverable = found.filter((item) => !isCorrection(item) || subjectsById.has(parentIdOf(item)));
-  const described = await describeDocuments(deliverable, { subjectsById });
+  const { described } = await loadPublishedSelection(validIds);
   const items = described.filter((item) => item.organismeId);
   const unavailable = ids.filter((documentId) => !items.some((item) => item._id === documentId));
 
@@ -448,6 +455,11 @@ const openDocumentStream = async (document) => {
   return fs.createReadStream(localPath);
 };
 
+const withdrawnItems = (bundle, byId) => bundle.documents
+  .map(id)
+  .filter((documentId) => !byId.has(documentId))
+  .map((documentId) => ({ _id: documentId, title: 'Document indisponible' }));
+
 /**
  * Archive ZIP servie en flux : un fichier à la fois, sans compression (PDF déjà compressés),
  * jamais l'archive entière en mémoire. Fichier indisponible : ignoré, listé dans LISEZ-MOI.txt
@@ -455,19 +467,13 @@ const openDocumentStream = async (document) => {
  */
 const streamArchive = async (token, req, res) => {
   const bundle = await claimBundle(token);
-  const documents = await Document.find({ _id: { $in: bundle.documents } }).lean();
-  const byId = new Map(documents.map((document) => [id(document._id), document]));
-  const parents = await Document.find({ _id: { $in: documents.filter(isCorrection).map(parentIdOf).filter(Boolean) } }).lean();
-  const described = await describeDocuments(bundle.documents.map((documentId) => byId.get(id(documentId))).filter(Boolean), {
-    subjectsById: new Map(parents.map((parent) => [id(parent._id), parent])),
-  });
+  const { byId, described } = await loadPublishedSelection(bundle.documents);
 
   const date = new Date().toISOString().slice(0, 10);
   const archiveName = `fatafalta-${safeFileName(bundle.label, 'sujets').toLowerCase().replace(/\s+/g, '-')}-${date}.zip`;
   res.status(200);
   res.setHeader('Content-Type', 'application/zip');
   res.setHeader('Content-Disposition', `attachment; filename="${archiveName}"`);
-  res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Bundle-Files', String(described.length));
   // En-têtes envoyés tout de suite : le navigateur affiche le téléchargement dès le début.
   res.flushHeaders();
@@ -491,7 +497,7 @@ const streamArchive = async (token, req, res) => {
 
   const usedNames = new Set();
   const delivered = [];
-  const missing = [];
+  const missing = withdrawnItems(bundle, byId);
   for (const item of described) {
     if (aborted) return;
     const document = byId.get(item._id);
@@ -540,16 +546,11 @@ const streamArchive = async (token, req, res) => {
  */
 const deliverFiles = async (token, req) => {
   const bundle = await claimBundle(token);
-  const documents = await Document.find({ _id: { $in: bundle.documents } }).lean();
-  const byId = new Map(documents.map((document) => [id(document._id), document]));
-  const parents = await Document.find({ _id: { $in: documents.filter(isCorrection).map(parentIdOf).filter(Boolean) } }).lean();
-  const described = await describeDocuments(bundle.documents.map((documentId) => byId.get(id(documentId))).filter(Boolean), {
-    subjectsById: new Map(parents.map((parent) => [id(parent._id), parent])),
-  });
+  const { byId, described } = await loadPublishedSelection(bundle.documents);
 
   const usedNames = new Set();
   const files = [];
-  const missing = [];
+  const missing = withdrawnItems(bundle, byId);
   for (const item of described) {
     const document = byId.get(item._id);
     if (!document.storageKey || document.storageProvider === 'legacy-local') {
