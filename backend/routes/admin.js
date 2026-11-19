@@ -27,6 +27,9 @@ const appReleases = require('../controllers/appReleaseController');
 router.get('/app-releases', appReleases.listPolicies);
 router.put('/app-releases/:platform', [param('platform').isIn(['android', 'ios']), validate], appReleases.updatePolicy);
 
+// Provenance des visiteurs (ChatGPT, Google, Facebook, WhatsApp…).
+router.get('/traffic', require('../controllers/trafficController').report);
+
 const idParam = [param('id').isMongoId(), validate];
 
 router.get('/stats', controller.getStats);

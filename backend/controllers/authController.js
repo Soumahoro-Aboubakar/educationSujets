@@ -13,8 +13,15 @@ const asyncHandler = require('../utils/asyncHandler');
 const AppError = require('../utils/errors');
 const { sendSuccess } = require('../utils/api');
 const { ensurePromoCode } = require('../services/billing/promoCodeService');
+const { blockedHere, isReservedEmail } = require('../utils/testAccounts');
+const { isProduction } = require('../config/environment');
 
 const sendTokenResponse = async (user, statusCode, res, req, rotated) => {
+  // Compte de test en production : refusé, avec la réponse d'un mauvais mot de passe (rien n'est révélé).
+  if (blockedHere(user)) {
+    securityLog.warn('auth.test_account_blocked', { requestId: req.id, ip: clientIp(req), userId: user._id });
+    throw new AppError('Identifiants invalides', 401);
+  }
   await require('../services/prep/identityService').canonicalFor(user);
   const { token, refreshToken, session } = rotated || await sessions.create(user, req.body?.platform);
   res.set('Cache-Control', 'private, no-store');
@@ -55,6 +62,11 @@ const DUMMY_PASSWORD_HASH = bcrypt.hashSync('fatafalta-timing-guard', 10);
 exports.register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   const normalizedEmail = email.trim().toLowerCase();
+
+  // Domaines réservés aux tests (example.com, .test…) : aucune vraie boîte, refusés en production.
+  if (isProduction() && isReservedEmail(normalizedEmail)) {
+    throw new AppError('Adresse e-mail invalide', 400, undefined, 'EMAIL_INVALID');
+  }
 
   const existingUser = await User.findOne({ email: normalizedEmail }).select('_id').lean();
 

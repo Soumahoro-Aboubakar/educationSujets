@@ -270,6 +270,9 @@ const createUser = async ({ name, phone, email }, admin) => {
   const tempPassword = generateTempPassword();
   const finalEmail = String(email || '').trim().toLowerCase()
     || `membre-${crypto.randomBytes(4).toString('hex')}@${TEMP_EMAIL_DOMAIN}`;
+  if (require('../../config/environment').isProduction() && require('../../utils/testAccounts').isReservedEmail(finalEmail)) {
+    throw new AppError('Adresse e-mail réservée aux tests : impossible en production', 400);
+  }
 
   const user = await User.create({
     name: name.trim(),

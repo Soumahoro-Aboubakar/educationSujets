@@ -59,6 +59,8 @@ const resolveAccess = async (raw) => {
   if (decoded.typ === 'refresh') return null;
   const user = await User.findById(decoded.id);
   if (!user || (decoded.ver || 0) !== (user.tokenVersion || 0)) return null;
+  // Compte de test : aucune session valable en production, même ouverte auparavant.
+  if (require('../../utils/testAccounts').blockedHere(user)) return null;
   if (!decoded.sid) return legacyAllowed(decoded, user) ? user : null;
   const valid = await AuthSession.exists({ sid: decoded.sid, user: user._id, revokedAt: null, expiresAt: { $gt: new Date() }, tokenVersion: user.tokenVersion || 0 });
   return valid ? user : null;

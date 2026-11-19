@@ -5,6 +5,7 @@ import AuthShell from '../components/site/AuthShell';
 import { Button, ErrorNote, Field, PasswordField } from '../components/ui';
 import { afterAuthPath } from '../lib/redirect';
 import { trackEvent } from '../lib/analytics';
+import { trackSignupSource } from '../lib/visitSource';
 
 /** Inscription courte : trois champs. Le reste se complète plus tard dans le profil. */
 const Register = () => {
@@ -32,6 +33,7 @@ const Register = () => {
     setLoading(false);
     if (result.success) {
       trackEvent('sign_up', { method: 'email' });
+      trackSignupSource();
       navigate(afterAuthPath(result.user, next), { replace: true });
     }
     else setError(result.error);

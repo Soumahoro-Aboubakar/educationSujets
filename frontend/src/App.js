@@ -9,6 +9,7 @@ import { Button, Container, EmptyState, Spinner } from './components/ui';
 import useSeo from './hooks/useSeo';
 import { PAGES_SEO } from './lib/pagesSeo';
 import { trackPageView } from './lib/analytics';
+import { trackArrival } from './lib/visitSource';
 import Home from './pages/Home';
 import ExplorePage from './pages/ExplorePage';
 import DocumentPage from './pages/DocumentPage';
@@ -114,6 +115,8 @@ const StaffOnly = ({ children }) => {
 };
 
 function App() {
+  // Provenance de la visite (une fois par session) : tableau de bord « Provenance ».
+  useEffect(() => { trackArrival(); }, []);
   return (
     <AuthProvider>
       <Router>

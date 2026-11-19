@@ -45,6 +45,11 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  // Compte de démonstration ou de test : refusé en production (utils/testAccounts.js).
+  isTestAccount: {
+    type: Boolean,
+    default: false,
+  },
   isVerified: {
     type: Boolean,
     default: false,

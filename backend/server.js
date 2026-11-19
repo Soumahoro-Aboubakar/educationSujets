@@ -85,6 +85,7 @@ app.use('/api/training', require('./routes/training'));
 app.use('/api/prep', require('./routes/prep'));
 app.use('/api/push', require('./routes/push'));
 app.use('/api/app', require('./routes/app'));
+app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/me', require('./routes/me'));
 app.use('/api/downloads', require('./routes/downloads'));
@@ -102,7 +103,7 @@ const startServer = async () => {
 
   const PORT = process.env.PORT || 5000;
   const server = app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode (APP_ENV=${require('./config/environment').appEnv()}) on port ${PORT}`);
   });
   // Connexions lentes (slowloris) : en-têtes et requête complète reçus dans un délai borné.
   server.headersTimeout = securityConfig.timeouts.headersMs;
