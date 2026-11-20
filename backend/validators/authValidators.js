@@ -31,7 +31,22 @@ const handoffExchangeValidator = [
   body('code').isString().isLength({ min: 16, max: 128 }).withMessage('Lien invalide'),
 ];
 
+const codeRule = body('code').isString().trim().matches(/^\d{6}$/).withMessage('Le code contient 6 chiffres');
+const verifyEmailValidator = [codeRule];
+const forgotPasswordValidator = [
+  body('email').isString().trim().isLength({ max: EMAIL_MAX }).isEmail().withMessage('Un email valide est obligatoire'),
+];
+const resetPasswordValidator = [
+  body('email').isString().trim().isLength({ max: EMAIL_MAX }).isEmail().withMessage('Un email valide est obligatoire'),
+  codeRule,
+  body('password').isString().isLength({ min: 6 }).withMessage('Le mot de passe doit contenir au moins 6 caracteres')
+    .isLength({ max: PASSWORD_MAX }).withMessage(`Le mot de passe ne doit pas depasser ${PASSWORD_MAX} caracteres`),
+];
+
 module.exports = {
+  verifyEmailValidator,
+  forgotPasswordValidator,
+  resetPasswordValidator,
   registerValidator,
   loginValidator,
   refreshTokenValidator,

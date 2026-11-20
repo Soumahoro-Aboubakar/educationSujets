@@ -17,9 +17,20 @@ const tokens = (user, session) => ({
   refreshToken: jwt.sign({ id: user._id, typ: 'refresh', sid: session.sid, ver: user.tokenVersion || 0 }, refreshSecret(),
     { algorithm: 'HS256', expiresIn: Math.max(1, Math.floor((session.expiresAt.getTime() - Date.now()) / 1000)), jwtid: crypto.randomUUID() }),
 });
+/*
+ * Durée de session : 30 jours sans visite (prolongée à chaque renouvellement), et au plus 180 jours
+ * depuis la connexion, après quoi le mot de passe est redemandé.
+ */
+const DAY_MS = 86400000;
+const IDLE_MS = 30 * DAY_MS;
+const MAX_MS = 180 * DAY_MS;
+const nextExpiry = (session) => {
+  const started = session.createdAt ? session.createdAt.getTime() : Date.now();
+  return new Date(Math.min(Date.now() + IDLE_MS, started + MAX_MS));
+};
 const create = async (user, platform = 'unknown', sid = crypto.randomUUID()) => {
   const session = new AuthSession({ sid, user: user._id, platform: ['web', 'mobile'].includes(platform) ? platform : 'unknown',
-    tokenVersion: user.tokenVersion || 0, expiresAt: new Date(Date.now() + 30 * 86400000) });
+    tokenVersion: user.tokenVersion || 0, expiresAt: new Date(Date.now() + IDLE_MS) });
   const pair = tokens(user, session);
   session.refreshHash = hash(pair.refreshToken);
   await session.save();
@@ -44,9 +55,11 @@ const rotate = async (raw) => {
   }
   const session = await AuthSession.findOne({ sid: decoded.sid, user: user._id, revokedAt: null, expiresAt: { $gt: new Date() } });
   if (!session) throw invalid();
+  // Session prolongée tant que l'utilisateur revient (plafond : 180 jours après la connexion).
+  session.expiresAt = nextExpiry(session);
   const pair = tokens(user, session);
   const changed = await AuthSession.updateOne({ _id: session._id, revokedAt: null, refreshHash: hash(raw) },
-    { $set: { refreshHash: hash(pair.refreshToken) } });
+    { $set: { refreshHash: hash(pair.refreshToken), expiresAt: session.expiresAt } });
   if (!changed.modifiedCount) {
     await AuthSession.updateOne({ _id: session._id }, { $set: { revokedAt: new Date() } });
     log.warn('auth.refresh_replay', { userId: user._id });

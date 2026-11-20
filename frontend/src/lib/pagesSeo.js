@@ -25,6 +25,8 @@ export const PAGES_SEO = {
   },
   login: { title: 'Connexion', robots: NOINDEX },
   register: { title: 'Créer un compte', robots: NOINDEX },
+  verifyEmail: { title: 'Vérifier mon adresse e-mail', robots: NOINDEX },
+  forgotPassword: { title: 'Mot de passe oublié', robots: NOINDEX },
   account: { title: 'Mon compte', robots: NOINDEX },
   dashboard: { title: 'Administration', robots: 'noindex, nofollow' },
   notFound: {

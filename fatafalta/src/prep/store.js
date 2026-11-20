@@ -5,7 +5,7 @@ import core from './shared/prepCore';
 import { loadState, loadToken, saveState, saveToken } from './storage';
 import { deviceIdentifiers } from './device';
 import prepApi, { setPrepToken } from './api';
-import { getExercise, getLesson, getModule, getProgramme, moduleVersions, publishedModuleDefs } from './content';
+import { getExercise, getLesson, getModule, getProgramme, moduleVersions, publishedModuleDefs, useContentGeneration } from './content';
 import { needsServerGrading } from './contentRepo';
 import { hydrateContent, releaseContent, syncContent } from './contentSync';
 
@@ -29,6 +29,7 @@ const MAX_REJETS = 20;
 let counter = 0;
 const newKey = () => `${Date.now().toString(36)}-${(counter += 1).toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 
+let refreshingIdentity = false;
 const PERSISTED = ['identite', 'sequence', 'rejets', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'candidatsSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding', 'videos'];
 
 // versions : version choisie par cours de langue { [codeModule]: 'en' } ; « fr » par défaut.
@@ -211,10 +212,31 @@ const usePrep = create((set, get) => ({
    * Met à jour les contenus publiés (nouveaux programmes, modules, leçons, exercices) sans
    * nouvelle version de l'app. Hors connexion, le cache précédent reste utilisé.
    */
-  refreshContent: (force = false) => {
+  refreshContent: async (force = false) => {
     const s = get();
     const programmes = [...new Set([...(s.programmesSuivis || []), s.programme].filter(Boolean))];
-    return syncContent({ programmes, busy: busyModules(s.sessions), force });
+    const out = await syncContent({ programmes, busy: busyModules(s.sessions), force });
+    // Jeton refusé par le serveur (périmé, autre serveur) : sans identité valide, aucun module ne
+    // peut être téléchargé. On redéclare l'appareil (le serveur retrouve son identité) puis on
+    // relance une seule fois.
+    if (out?.identityRejected && !refreshingIdentity) {
+      refreshingIdentity = true;
+      try {
+        await get().resetIdentity();
+        return await syncContent({ programmes, busy: busyModules(get().sessions), force: true });
+      } finally {
+        refreshingIdentity = false;
+      }
+    }
+    return out;
+  },
+
+  /** Oublie un jeton refusé et redéclare l'appareil (identité retrouvée côté serveur, § 25.4). */
+  resetIdentity: async () => {
+    setPrepToken(null);
+    await saveToken(null);
+    set({ token: null });
+    await get().ensureIdentity();
   },
 
   /** Identité automatique, sans saisie (§ 25.1) ; restaurée après réinstallation (§ 25.4). */
@@ -530,7 +552,10 @@ export const useRights = () => {
 export const useSummary = (code) => {
   const [programme, progressions, objectif] = usePrep(useShallow((s) => [code || s.programme, s.progressions, s.prefs.objectif]));
   const etat = progressions[programme];
-  return useMemo(() => (programme ? computeSummary(programme, etat, objectif) : null), [programme, etat, objectif]);
+  // Contenu téléchargé à la demande : le résumé se recalcule quand le programme ou ses modules arrivent.
+  const generation = useContentGeneration();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useMemo(() => (programme ? computeSummary(programme, etat, objectif) : null), [programme, etat, objectif, generation]);
 };
 
 export const useProgress = (code) => {

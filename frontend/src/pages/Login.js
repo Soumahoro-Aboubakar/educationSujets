@@ -45,6 +45,9 @@ const Login = () => {
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <Field label="Email" type="email" autoComplete="email" required value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
         <PasswordField label="Mot de passe" autoComplete="current-password" required value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} />
+        <div className="-mt-1 flex justify-end">
+          <Link to={`/mot-de-passe-oublie${next ? `?next=${encodeURIComponent(next)}` : ''}`} state={{ email: form.email.trim() }} className="inline-block py-1.5 text-sm font-semibold text-ink-soft underline decoration-line-strong underline-offset-4 hover:text-ink hover:decoration-ink">Mot de passe oublié ?</Link>
+        </div>
         <ErrorNote>{error}</ErrorNote>
         <Button type="submit" size="lg" className="!mt-6 w-full" loading={loading} disabled={!form.email || !form.password}>Se connecter</Button>
       </form>

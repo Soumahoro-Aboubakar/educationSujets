@@ -147,6 +147,8 @@ const limiters = {
     code: 'REGISTER_RATE_LIMITED',
   }),
   refreshToken: createLimiter({ name: 'refresh', rule: L.refreshToken, key: 'ip' }),
+  emailSend: createLimiter({ name: 'email-send', rule: L.emailSend, key: 'ip', message: 'Trop de demandes d’e-mail depuis cette connexion. Réessayez plus tard.', code: 'EMAIL_RATE_LIMITED' }),
+  emailCode: createLimiter({ name: 'email-code', rule: L.emailCode, key: 'ip', message: 'Trop d’essais de code depuis cette connexion. Patientez quelques minutes.', code: 'EMAIL_CODE_RATE_LIMITED' }),
   handoffCreate: createLimiter({ name: 'handoff-create', rule: L.handoffCreate }),
   handoffExchange: createLimiter({ name: 'handoff-exchange', rule: L.handoffExchange, key: 'ip' }),
   passwordChange: createLimiter({

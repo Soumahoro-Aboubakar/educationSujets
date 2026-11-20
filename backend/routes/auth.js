@@ -13,7 +13,11 @@ const { protect } = require('../middleware/auth');
 const validate = require('../middleware/validate');
 const limits = require('../middleware/rateLimit');
 const { restrictSensitive } = require('../middleware/security');
+const emailAuth = require('../controllers/emailAuthController');
 const {
+  verifyEmailValidator,
+  forgotPasswordValidator,
+  resetPasswordValidator,
   registerValidator,
   loginValidator,
   refreshTokenValidator,
@@ -31,6 +35,12 @@ router.post('/sessions/revoke', protect, revokeSessions);
 router.get('/me', protect, getMe);
 router.post('/handoff', protect, restrictSensitive, limits.handoffCreate, createHandoff);
 router.post('/handoff/exchange', limits.handoffExchange, handoffExchangeValidator, validate, exchangeHandoff);
+// Vérification d'adresse et mot de passe oublié (codes par e-mail, 3 par adresse et par jour).
+router.post('/email/send-verification', protect, limits.emailSend, emailAuth.sendVerification);
+router.post('/email/verify', protect, limits.emailCode, verifyEmailValidator, validate, emailAuth.verifyEmail);
+router.get('/email/quota', protect, emailAuth.quota);
+router.post('/password/forgot', limits.emailSend, forgotPasswordValidator, validate, emailAuth.forgotPassword);
+router.post('/password/reset', limits.emailCode, resetPasswordValidator, validate, emailAuth.resetPassword);
 router.post('/refresh-token', limits.refreshToken, refreshTokenValidator, validate, refreshToken);
 
 module.exports = router;

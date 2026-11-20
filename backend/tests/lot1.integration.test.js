@@ -80,6 +80,25 @@ test('sessions : rotation concurrente ne délivre qu’un seul renouvellement', 
   assert.equal((await call('GET', '/auth/me', undefined, auth(accepted.body.token))).status, 401);
 });
 
+test('sessions : prolongée à chaque renouvellement, plafonnée à 180 jours après la connexion', { skip }, async () => {
+  const DAY = 86400000;
+  const user = await newUser(); const { body } = await login(user, 'web');
+  const { sid } = jwt.decode(body.token);
+  // Session qui expirerait dans 2 jours : un renouvellement la reporte à 30 jours.
+  await AuthSession.updateOne({ sid }, { $set: { expiresAt: new Date(Date.now() + 2 * DAY) } });
+  const first = await call('POST', '/auth/refresh-token', { refreshToken: body.refreshToken });
+  assert.equal(first.status, 200);
+  const extended = await AuthSession.findOne({ sid });
+  assert.ok(extended.expiresAt.getTime() > Date.now() + 29 * DAY);
+  // Connexion vieille de 179 jours : la prolongation s'arrête au plafond (dans 1 jour).
+  await AuthSession.collection.updateOne({ sid }, { $set: { createdAt: new Date(Date.now() - 179 * DAY) } });
+  const second = await call('POST', '/auth/refresh-token', { refreshToken: first.body.refreshToken });
+  assert.equal(second.status, 200);
+  const capped = await AuthSession.findOne({ sid });
+  assert.ok(capped.expiresAt.getTime() <= Date.now() + DAY + 60000);
+  assert.ok(capped.expiresAt.getTime() > Date.now() + DAY - 60000);
+});
+
 test('sessions : cookies HttpOnly, contrôle d’origine, logout et révocation globale', { skip }, async () => {
   const user = await newUser(); const first = await login(user, 'web'); const second = await login(user);
   assert.match(first.headers.get('set-cookie'), /HttpOnly/);

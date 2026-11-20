@@ -17,8 +17,9 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [justRegistered, setJustRegistered] = useState(false);
 
-  if (user) return <Navigate to={afterAuthPath(user, next)} replace />;
+  if (user && !justRegistered) return <Navigate to={afterAuthPath(user, next)} replace />;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,14 +30,18 @@ const Register = () => {
       return;
     }
     setLoading(true);
+    setJustRegistered(true);
     const result = await register(form.name.trim(), form.email.trim(), form.password);
     setLoading(false);
     if (result.success) {
       trackEvent('sign_up', { method: 'email' });
       trackSignupSource();
-      navigate(afterAuthPath(result.user, next), { replace: true });
+      // Vérification de l'adresse : le premier code part tout seul ; « Plus tard » reste possible.
+      navigate(`/verifier-email?envoi=auto${next ? `&next=${encodeURIComponent(next)}` : ''}`, { replace: true });
+    } else {
+      setJustRegistered(false);
+      setError(result.error);
     }
-    else setError(result.error);
   };
 
   const suffix = next ? `?next=${encodeURIComponent(next)}` : '';

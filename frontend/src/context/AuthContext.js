@@ -1,17 +1,8 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
+import { applyToken, endSession, onSessionEnded } from '../lib/session';
 
 const AuthContext = createContext();
-
-const applyToken = (token) => {
-  if (token) {
-    localStorage.setItem('token', token);
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  } else {
-    localStorage.removeItem('token');
-    delete axios.defaults.headers.common.Authorization;
-  }
-};
 
 export const isStaff = (user) => user?.role === 'admin' || user?.role === 'sub-admin';
 
@@ -24,15 +15,21 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get('/api/auth/me');
       setUser(res.data.data);
     } catch (error) {
-      applyToken(null);
+      // 401 : le jeton a déjà été renouvelé si possible (lib/session) ; sinon, session terminée.
+      // Coupure réseau : on garde la session pour le prochain essai.
+      if (error.response?.status === 401) applyToken(null);
       setUser(null);
     } finally {
       setLoading(false);
     }
   }, []);
 
+  // Session fermée côté serveur ou dans un autre onglet.
+  useEffect(() => { onSessionEnded(() => setUser(null)); }, []);
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    let token = null;
+    try { token = localStorage.getItem('token'); } catch (error) { token = null; }
     if (token) {
       applyToken(token);
       checkAuth();
@@ -76,13 +73,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  /** Mise à jour locale du profil (ex. adresse vérifiée), sans nouvel appel. */
+  const updateUser = useCallback((patch) => setUser((current) => (current ? { ...current, ...patch } : current)), []);
+
   const logout = () => {
-    applyToken(null);
+    endSession();
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, exchangeHandoff }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, exchangeHandoff, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

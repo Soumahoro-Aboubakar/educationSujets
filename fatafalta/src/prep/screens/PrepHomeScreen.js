@@ -4,7 +4,7 @@ import { SUBSCRIPTION_BUTTON_LABEL, useOpenSubscription } from '../../hooks/useA
 import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Image, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Image, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
@@ -13,6 +13,7 @@ import Text from '../../components/ui/Text';
 import OrganismeLogo from '../../components/catalog/OrganismeLogo';
 import core from '../shared/prepCore';
 import { getLesson, getModule, getProgramme, programmeModules, useContentGeneration } from '../content';
+import { useContentStatus } from '../contentSync';
 import usePrep, { useRights, useSummary, currentDevice } from '../store';
 import { lastStorageError } from '../storage';
 
@@ -183,9 +184,38 @@ const TrialSheet = ({ visible, onClose, rights, onSubscribe, subscribing }) => {
   );
 };
 
+/**
+ * Contenu du concours pas encore sur l'appareil (rien n'est livré avec l'application) :
+ * téléchargement en cours, hors ligne, serveur indisponible ou accès requis (essai terminé).
+ */
+const ContentPending = ({ phase, onRetry, onUnlock, compact = false }) => {
+  const { brand } = useTheme();
+  const { styles } = useStyles();
+  const offline = phase === 'offline';
+  const locked = phase === 'locked';
+  const failed = phase === 'error';
+  const title = locked ? 'Leçons réservées' : offline ? 'Pas de connexion' : failed ? 'Téléchargement interrompu' : 'Téléchargement de ton concours';
+  const body = locked
+    ? 'Ton essai est terminé : les leçons et exercices de ce concours ne peuvent pas être téléchargés sans abonnement.'
+    : offline ? 'Les leçons de ce concours se téléchargent une seule fois, puis restent disponibles sans connexion. Reconnecte-toi pour continuer.'
+      : failed ? 'Le serveur ne répond pas pour le moment. Réessaie dans un instant.'
+        : 'Leçons et exercices arrivent sur ton téléphone. Ils resteront disponibles hors connexion.';
+  return (
+    <View style={[styles.pending, compact && styles.pendingCompact]} accessibilityLiveRegion="polite">
+      {phase === 'loading' || phase === 'idle' ? <ActivityIndicator color={brand.burgundy} /> : (locked ? <Lock size={22} color={brand.inkSoft} /> : <CloudOff size={22} color={brand.inkSoft} />)}
+      <Text variant="h3" style={[styles.ink, styles.center]}>{title}</Text>
+      <Text variant="body" style={[styles.muted, styles.center]}>{body}</Text>
+      {locked ? <PrepButton title={SUBSCRIPTION_BUTTON_LABEL} variant="gold" onPress={onUnlock} style={{ alignSelf: 'stretch' }} /> : null}
+      {offline || failed ? <PrepButton title="Réessayer" variant="secondary" onPress={onRetry} style={{ alignSelf: 'stretch' }} /> : null}
+    </View>
+  );
+};
+
 // ═════════════════════════════════════════════════════════════════════════
 const PrepHomeScreen = ({ navigation, route }) => {
   useContentGeneration(); // redessine à l'arrivée d'une nouvelle publication
+  const contentStatus = useContentStatus();
+  const refreshContent = usePrep((s) => s.refreshContent);
   const subscription = useOpenSubscription(navigation);
   const { brand, colors } = useTheme();
   const { styles } = useStyles();
@@ -217,9 +247,22 @@ const PrepHomeScreen = ({ navigation, route }) => {
   useFocusEffect(useCallback(() => { flush(); }, [flush]));
 
   useEffect(() => {
-    if (route.params?.accueil && !prefs.rythmeFait) setTimeout(() => setSheet('rythme'), 500);
+    // Une seule feuille à la fois : iOS ne présente pas une fenêtre modale pendant qu'une autre
+    // se ferme. « Ton rythme » n'apparaît que si aucune autre feuille n'est ouverte.
+    if (route.params?.accueil && !prefs.rythmeFait) setTimeout(() => setSheet((current) => current || 'rythme'), 500);
   }, [route.params?.accueil]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => { if (retour) setSheet('retour'); }, [retour]);
+  // Retour d'un élève connu du serveur : affiché dès que l'écran est libre (après « Ton rythme », au besoin).
+  useEffect(() => { if (retour && !sheet) setTimeout(() => setSheet((current) => current || 'retour'), 320); }, [retour, sheet]);
+
+  // Concours choisi mais pas encore téléchargé (première ouverture) : état de téléchargement.
+  if (programmeCode && (!programme || !summary)) {
+    return (
+      <View style={[styles.flex, styles.empty, { paddingTop: insets.top + 40 }]}>
+        <ContentPending phase={contentStatus.phase === 'done' ? 'error' : contentStatus.phase} onRetry={() => refreshContent(true)} onUnlock={subscription.go} />
+        <PrepButton title="Changer de concours" variant="link" onPress={() => navigation.navigate('PrepContestPicker')} style={{ alignSelf: 'stretch' }} />
+      </View>
+    );
+  }
 
   if (!programme) {
     return (
@@ -275,12 +318,16 @@ const PrepHomeScreen = ({ navigation, route }) => {
   const currentLesson = enCours?.type === 'lecon' ? getLesson(enCours.lecon) : null;
   const currentModuleCode = currentLesson?.module.code
     || (enCours?.type === 'session' && getModule(enCours.module) ? enCours.module : modules[recommendedIndex]?.code);
+  // Modules publiés mais pas encore sur l'appareil : on dit qu'ils arrivent, pas qu'ils « se préparent ».
+  const downloading = !firstPublished && modules.some((m) => m.aTelecharger);
   const copyTitle = locked ? 'Ton essai est terminé'
-    : currentLesson ? currentLesson.lecon.titre : continueTarget?.label || firstPublished?.module.lecons[0]?.titre || 'Les cours arrivent bientôt';
+    : currentLesson ? currentLesson.lecon.titre : continueTarget?.label || firstPublished?.module.lecons[0]?.titre
+      || (downloading ? 'Tes leçons arrivent' : 'Les cours arrivent bientôt');
   const copyAnnotation = locked ? 'Ta copie est conservée'
     : currentLesson ? `Leçon ${currentLesson.index + 1}/${currentLesson.module.lecons.length} · ${Math.round(continueTarget.progress * 100)} %`
       : continueTarget ? `${continueTarget.sub} · ${Math.round(continueTarget.progress * 100)} %`
-        : firstPublished ? `Leçon 1/${firstPublished.module.lecons.length} · Ton point de départ` : 'Un nouveau parcours se prépare';
+        : firstPublished ? `Leçon 1/${firstPublished.module.lecons.length} · Ton point de départ`
+          : downloading ? (contentStatus.phase === 'offline' ? 'Connexion nécessaire' : 'Téléchargement en cours') : 'Un nouveau parcours se prépare';
 
   const onRefresh = async () => { if (refreshing) return; setRefreshing(true); try { await Promise.all([flush(), loadRank()]); } finally { setRefreshing(false); } };
 
@@ -338,7 +385,8 @@ const PrepHomeScreen = ({ navigation, route }) => {
               context={locked ? 'Ta progression, ton cahier d’erreurs et ton rang sont conservés.'
                 : continueTarget ? (currentLesson ? continueTarget.sub : 'Reprends là où tu t’es arrêté.')
                   : firstPublished ? `${firstPublished.matiere} · ${firstPublished.titre} · ${firstPublished.module.duree} min`
-                    : 'Tu peux déjà découvrir les épreuves officielles de ton concours.'}
+                    : downloading ? 'Elles se téléchargent une seule fois, puis restent disponibles sans connexion.'
+                      : 'Tu peux déjà découvrir les épreuves officielles de ton concours.'}
               action={locked ? SUBSCRIPTION_BUTTON_LABEL : continueTarget ? 'Continuer' : 'Commencer la leçon 1'}
               actionLabel={locked ? `Essai terminé : ${SUBSCRIPTION_BUTTON_LABEL.toLowerCase()}` : continueTarget ? `Continuer : ${continueTarget.label}, ${Math.round(continueTarget.progress * 100)} %` : `Commencer : leçon 1, ${copyTitle}`}
               onPress={locked ? subscription.go : continueTarget ? continueTarget.go
@@ -370,7 +418,10 @@ const PrepHomeScreen = ({ navigation, route }) => {
                   ? modules[recommendedIndex].numero : null;
                 return <ModuleRow key={m.code} item={m} etat={etat} index={i} first={i === 0} last={i === published.length - 1} current={m.code === currentModuleCode} locked={locked && m.publie} conseilleApres={ahead && ahead !== m.numero && idx === recommendedIndex + 1 ? ahead : null} video={Boolean(m.module?.lecons.some((l) => findVideo(videos, 'lecon', l.code, prefs.versions?.[m.code] || 'fr')))} onPress={() => openModule(m)} />;
               })}
-              <UpcomingModules key={`${programmeCode}-${chip}`} modules={visible.filter((m) => !m.publie)} />
+              {visible.some((m) => m.aTelecharger) ? (
+                <ContentPending compact phase={contentStatus.phase === 'done' ? 'error' : contentStatus.phase} onRetry={() => refreshContent(true)} onUnlock={() => setSheet('locked')} />
+              ) : null}
+              <UpcomingModules key={`${programmeCode}-${chip}`} modules={visible.filter((m) => !m.publie && !m.aTelecharger)} />
             </Animated.View>
 
             {/* Le bloc suit le dépliage du parcours sans saut de position. */}
@@ -439,6 +490,9 @@ const useStyles = createThemedStyles(({ brand, theme, colors }) => {
     flex: { flex: 1, backgroundColor: brand.paper },
     scroll: { flexGrow: 1 },
     empty: { alignItems: 'center', paddingHorizontal: 28, gap: 14 },
+    // Contenu en cours de téléchargement / hors ligne / accès requis.
+    pending: { alignItems: 'center', gap: 12, paddingVertical: 8, alignSelf: 'stretch' },
+    pendingCompact: { paddingVertical: 24, paddingHorizontal: 20, borderRadius: 18, borderWidth: StyleSheet.hairlineWidth, borderColor: brand.line, backgroundColor: brand.sheet },
     center: { textAlign: 'center' },
     ink: { color: brand.ink },
     muted: { color: brand.inkSoft },

@@ -11,7 +11,7 @@ import {
 import Text from '../../components/ui/Text';
 import AuthContext from '../../context/AuthContext';
 import { THEN_SUBSCRIPTION, useAccountLink } from '../../hooks/useAccountLink';
-import { getProgramme, packInfo, useContentGeneration } from '../content';
+import { getProgramme, useContentGeneration } from '../content';
 import usePrep, { useSummary } from '../store';
 import { type } from '../theme';
 import { Badge, NightBackground, PaperStack, PrepButton } from '../ui/primitives';
@@ -137,7 +137,7 @@ export const ProgramInfoScreen = ({ navigation, route }) => {
             {s.url ? <ExternalLink size={16} color={brand.burgundy} /> : null}
           </Pressable>
         ))}
-        <Text variant="caption" style={styles.muted}>{`Contenu pilote — ${packInfo.provenance.statut}. Rédaction : ${packInfo.provenance.redaction}. ${packInfo.provenance.relecture}. Signale toute erreur depuis un exercice (drapeau).`}</Text>
+        <Text variant="caption" style={styles.muted}>{'Contenu rédigé par l’équipe Fatafalta à partir des programmes officiels. Signale toute erreur depuis un exercice (drapeau).'}</Text>
       </Animated.ScrollView>
       {video ? (
         <VideoDock

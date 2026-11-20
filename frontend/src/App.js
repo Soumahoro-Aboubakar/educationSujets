@@ -21,6 +21,8 @@ const BulkDownloadPage = lazy(() => import('./pages/BulkDownloadPage'));
 const SubscribePage = lazy(() => import('./pages/SubscribePage'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
+const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const AccountLayout = lazy(() => import('./pages/account/AccountLayout'));
 const accountPages = () => import('./pages/account/AccountPages');
 const AccountDownloads = lazy(() => accountPages().then((m) => ({ default: m.AccountDownloads })));
@@ -140,6 +142,8 @@ function App() {
             <Route path="/preparation/:programme/:module/niveau/:niveau" element={<Lazy><PrepSessionPage /></Lazy>} />
             <Route path="/login" element={<Page seo="login"><Lazy><Login /></Lazy></Page>} />
             <Route path="/register" element={<Page seo="register"><Lazy><Register /></Lazy></Page>} />
+            <Route path="/verifier-email" element={<Page seo="verifyEmail"><Lazy><VerifyEmail /></Lazy></Page>} />
+            <Route path="/mot-de-passe-oublie" element={<Page seo="forgotPassword"><Lazy><ForgotPassword /></Lazy></Page>} />
             <Route path="/compte" element={<Page seo="account"><Lazy><AccountLayout /></Lazy></Page>}>
               <Route index element={<Lazy><AccountOverview /></Lazy>} />
               <Route path="abonnement" element={<Lazy><AccountSubscription /></Lazy>} />

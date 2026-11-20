@@ -6,10 +6,10 @@ import StatusBar from '../../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../../theme/ThemeProvider';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ArrowLeft, ArrowRight, FileText, GraduationCap, Target } from 'lucide-react-native';
+import { ArrowLeft, ArrowRight, CloudOff, FileText, GraduationCap, Target } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import BrandMark from '../../components/brand/BrandMark';
 import { usePreferences } from '../../context/PreferencesContext';
@@ -65,7 +65,13 @@ const fetchRemoteCatalogue = async () => {
   return all;
 };
 
-/** Catalogue « organismes → cycles » : embarqué tout de suite, complété par l'API (nouveaux cycles, logos). */
+/** État du chargement du catalogue (liste vide au tout premier lancement, hors ligne…). */
+export const useCatalogueStatus = () => {
+  const { isLoading, isError, isFetching, refetch } = useServerQuery({ queryKey: queryKeys.prepCatalogue(), queryFn: fetchRemoteCatalogue, ...freshness.catalog });
+  return { loading: isLoading || isFetching, failed: isError, retry: refetch };
+};
+
+/** Catalogue « organismes → cycles » : concours déjà connus de l'appareil, complétés par l'API (nouveaux cycles, logos). */
 export const useCatalogue = () => {
   const generation = useContentGeneration();
   const { data: remote } = useServerQuery({ queryKey: queryKeys.prepCatalogue(), queryFn: fetchRemoteCatalogue, ...freshness.catalog });
@@ -169,6 +175,7 @@ export const ContestPickerScreen = ({ navigation, route }) => {
   const reduce = useReduceMotion();
   const onboarding = route.params?.onboarding;
   const catalogue = useCatalogue();
+  const catalogueStatus = useCatalogueStatus();
   const current = usePrep((s) => s.programme);
   const suivis = usePrep((s) => s.programmesSuivis);
   const chooseProgramme = usePrep((s) => s.chooseProgramme);
@@ -221,6 +228,15 @@ export const ContestPickerScreen = ({ navigation, route }) => {
               );
             })}
             <Text variant="h3" style={[styles.ink, { marginTop: 14 }]}>Tous les concours</Text>
+          </View>
+        ) : null}
+        {!catalogue.length ? (
+          <View style={styles.catalogueEmpty} accessibilityLiveRegion="polite">
+            {catalogueStatus.loading ? <ActivityIndicator color={brand.burgundy} /> : <CloudOff size={22} color={brand.inkSoft} />}
+            <Text variant="body" style={[styles.muted, { textAlign: 'center' }]}>
+              {catalogueStatus.loading ? 'Chargement des concours…' : 'Pas de connexion : la liste des concours s’affichera dès que tu seras en ligne.'}
+            </Text>
+            {!catalogueStatus.loading ? <PrepButton title="Réessayer" variant="secondary" onPress={() => catalogueStatus.retry()} style={{ alignSelf: 'stretch' }} /> : null}
           </View>
         ) : null}
         <ContestAccordion catalogue={catalogue} selected={selected} onSelect={(c) => setSelected(c.programme)} scrollTo={(y) => scroll.current?.scrollTo({ y: Math.max(0, y + 120), animated: !reduce })} />
@@ -299,6 +315,7 @@ const useStyles = createThemedStyles(({ countryFlag, brand, theme }) => {
     ink: { color: brand.ink },
 
     muted: { color: brand.inkSoft },
+    catalogueEmpty: { alignItems: 'center', gap: 12, paddingVertical: 28 },
     mutedLight: { color: brand.inkSoft },
     row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
     center: { textAlign: 'center' },

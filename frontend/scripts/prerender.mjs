@@ -433,7 +433,7 @@ Sitemap: ${absoluteUrl('/sitemap.xml')}
  * Les règles de _redirects passent avant les fichiers : aucune ne doit couvrir une page pré-rendue.
  */
 const APP_ROUTES = [
-  '/login', '/register', '/recherche', '/telecharger', '/compte', '/compte/*', '/dashboard', '/dashboard/*',
+  '/login', '/register', '/verifier-email', '/mot-de-passe-oublie', '/recherche', '/telecharger', '/compte', '/compte/*', '/dashboard', '/dashboard/*',
   `${PREP_ROOT}/:programme/revisions`, `${PREP_ROOT}/:programme/classement`, `${PREP_ROOT}/:programme/concours-blanc`,
   `${PREP_ROOT}/:programme/test-de-niveau`, `${PREP_ROOT}/:programme/:module/lecon/:lecon`, `${PREP_ROOT}/:programme/:module/niveau/:niveau`,
 ];

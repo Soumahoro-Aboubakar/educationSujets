@@ -84,6 +84,10 @@ const security = {
     handoffCreate: rule('HANDOFF_CREATE_MAX', 10 * MINUTE, 10),
     handoffExchange: rule('HANDOFF_EXCHANGE_MAX', 15 * MINUTE, 30),
     passwordChange: rule('PASSWORD_CHANGE_MAX', 15 * MINUTE, 5),
+    // E-mails à code (vérification, mot de passe oublié) : par IP, en plus du quota de 3 par adresse et par jour.
+    emailSend: rule('EMAIL_SEND_IP_MAX', HOUR, 15),
+    // Saisie de codes : par IP (5 essais par code côté serveur).
+    emailCode: rule('EMAIL_CODE_IP_MAX', 15 * MINUTE, 30),
     profileUpdate: rule('PROFILE_UPDATE_MAX', 15 * MINUTE, 20),
 
     // ── Paiements ──

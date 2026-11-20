@@ -6,11 +6,13 @@ import axios from 'axios';
 import './index.css';
 import App from './App';
 import { installVisitorToken } from './lib/visitor';
+import { installSession } from './lib/session';
 // API sur le domaine de Fatafalta (adresse stable, indépendante de l'hébergeur).
 // REACT_APP_API_URL permet de viser un backend local (ex. http://localhost:5000).
 axios.defaults.baseURL = (process.env.REACT_APP_API_URL || 'https://api.fatafalta.com').replace(/\/$/, '');
 axios.defaults.headers.common.Accept = 'application/json';
 installVisitorToken();
+installSession();
 
 /*
  * Page pré-rendue (scripts/prerender.mjs) : son contenu reste affiché pendant que l'application

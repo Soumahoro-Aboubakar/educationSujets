@@ -1,7 +1,7 @@
 import Pressable from '../../components/ui/FeedbackPressable';
 import StudyLamp from '../../theme/StudyLamp';
 import { createThemedStyles } from '../../theme/ThemeProvider';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -28,16 +28,24 @@ const BottomSheet = ({ visible, onClose, onDismissRequest, children, maxHeight =
   const y = useSharedValue(height);
   const fade = useSharedValue(0);
 
+  // La fenêtre modale doit TOUJOURS disparaître à la fermeture : restée montée (animation
+  // interrompue, feuilles enchaînées), elle serait invisible mais capterait tous les touchers.
+  const visibleRef = useRef(visible);
   useEffect(() => {
+    visibleRef.current = visible;
     if (visible) {
       setMounted(true);
       y.value = height;
       fade.value = withTiming(1, { duration: 220 });
       y.value = reduce ? withTiming(0, { duration: 150 }) : withSpring(0, motion.sheet);
-    } else if (mounted) {
-      fade.value = withTiming(0, { duration: 180 });
-      y.value = withTiming(height, { duration: 220, easing: Easing.in(Easing.quad) }, (done) => { if (done) scheduleOnRN(setMounted, false); });
+      return undefined;
     }
+    if (!mounted) return undefined;
+    fade.value = withTiming(0, { duration: 180 });
+    y.value = withTiming(height, { duration: 220, easing: Easing.in(Easing.quad) });
+    // Démontage garanti par une minuterie JS, que l'animation aille au bout ou non.
+    const timer = setTimeout(() => { if (!visibleRef.current) setMounted(false); }, 260);
+    return () => clearTimeout(timer);
   }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const requestClose = () => {

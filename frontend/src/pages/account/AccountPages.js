@@ -54,6 +54,15 @@ export const AccountOverview = () => {
     <>
       <PageTitle title={`Bonjour ${firstName || ''}`.trim()} description="L’essentiel de votre compte en un coup d’œil." />
 
+      {user && !user.isVerified ? (
+        <div className="mb-6 flex flex-col items-start justify-between gap-3 rounded-2xl border border-gold/30 bg-gold-wash px-5 py-4 sm:flex-row sm:items-center">
+          <p className="text-sm leading-relaxed text-ink">
+            <strong className="font-semibold">Vérifiez votre adresse e-mail</strong> : elle vous permettra de récupérer votre compte si vous oubliez votre mot de passe.
+          </p>
+          <Button to="/verifier-email?next=%2Fcompte" size="sm" variant="secondary" className="shrink-0">Vérifier</Button>
+        </div>
+      ) : null}
+
       {subscription.status !== 'ACTIVE' ? (
         <div className="mb-6 flex flex-col items-start justify-between gap-4 rounded-2xl bg-ink p-6 text-white sm:flex-row sm:items-center">
           <div>

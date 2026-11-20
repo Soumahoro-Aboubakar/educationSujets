@@ -1,17 +1,19 @@
 import { useSyncExternalStore } from 'react';
-import pack from './content/pack.json';
 import core from './shared/prepCore';
 import {
   emptyCache, listProgrammes, resolveModule, resolveProgramme,
 } from './contentRepo';
 
 /**
- * Accès au contenu de préparation. Source : le cache des contenus publiés (téléchargé d'après
- * le manifeste, voir contentSync.js), puis le pack embarqué produit par « npm run prep:pack ».
+ * Accès au contenu de préparation. Rien n'est livré avec l'application : les programmes (plans des
+ * concours, légers) puis les modules (leçons, exercices) du seul concours choisi sont téléchargés
+ * à la demande et gardés sur l'appareil (contentSync.js), donc consultables ensuite hors ligne.
  * Les accesseurs restent synchrones : les écrans s'abonnent aux changements avec
- * useContentGeneration() et se redessinent quand une nouvelle publication arrive.
+ * useContentGeneration() et se redessinent quand un téléchargement arrive.
  */
-const bundle = { modules: pack.modules, programmes: pack.programmes.map((p) => p.code), empreintes: pack.empreintes?.modules || {} };
+// Plus de pack embarqué : le dépôt (contentRepo.js) garde sa couche « pack », ici vide.
+const bundle = { modules: {}, programmes: [], empreintes: {} };
+const bundledProgrammes = [];
 let cache = emptyCache();
 let tick = 0;
 const listeners = new Set();
@@ -20,7 +22,7 @@ let lessons = new Map();
 const versioned = new Map();
 
 const effectiveModules = () => {
-  const codes = new Set([...Object.keys(pack.modules), ...Object.keys(cache.modules)]);
+  const codes = new Set(Object.keys(cache.modules));
   return [...codes].map((code) => resolveModule(cache, bundle, code)?.module).filter(Boolean);
 };
 const reindex = () => {
@@ -49,8 +51,8 @@ const snapshot = () => tick;
 /** Hook : redessine l'écran à chaque changement de contenu publié. */
 export const useContentGeneration = () => useSyncExternalStore(subscribe, snapshot, snapshot);
 
-export const getProgrammes = () => listProgrammes(cache, pack.programmes);
-export const getProgramme = (code) => (code ? resolveProgramme(cache, pack.programmes, code) : null);
+export const getProgrammes = () => listProgrammes(cache, bundledProgrammes);
+export const getProgramme = (code) => (code ? resolveProgramme(cache, bundledProgrammes, code) : null);
 
 /**
  * Cours de langue étrangère : deux versions (« fr » par défaut, explications en français ;
@@ -110,8 +112,10 @@ export const programmeModules = (programme) => {
       const mod = ref.publie ? getModule(ref.code) : null;
       list.push({
         code: ref.code,
+        // Publié mais pas encore sur l'appareil (téléchargement en cours, hors ligne ou accès requis).
+        aTelecharger: Boolean(ref.publie && !mod),
         titre: mod ? mod.titre : ref.titre,
-        resume: mod ? mod.resume : ref.notions.map((n) => n.libelle).join(' · '),
+        resume: mod ? mod.resume : (ref.notions || []).map((n) => n.libelle).join(' · '),
         matiere: matiere.nom,
         teinte: matiere.teinte,
         publie: Boolean(ref.publie && mod),
@@ -146,6 +150,7 @@ export const pickAcrossProgramme = (programme, { nombre, mode, graine }) => {
   return core.seededShuffle(picked, `${graine}:ordre`);
 };
 
-export const packInfo = { version: pack.version, genereLe: pack.genereLe, provenance: pack.provenance };
 export const contentInfo = () => ({ generation: cache.generation, majLe: cache.majLe });
-export default pack;
+
+/** Modules publiés d'un programme qui ne sont pas encore sur l'appareil. */
+export const missingModules = (programme) => programmeModules(programme).filter((m) => m.aTelecharger).map((m) => m.code);

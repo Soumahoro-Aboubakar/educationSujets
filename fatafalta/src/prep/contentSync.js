@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from 'react';
 import { Platform } from 'react-native';
 import * as FileSystem from 'expo-file-system/legacy';
 import prepApi from './api';
@@ -5,10 +6,22 @@ import { applyPlan, planUpdate, releaseDeferred, sanitizeCache } from './content
 import { bundleInfo, getContentCache, getProgramme, setContentCache } from './content';
 
 /**
- * Mise à jour des contenus publiés (lot 4) : manifeste → programmes → modules utiles.
+ * Contenus de préparation à la demande : manifeste → programmes (plans des concours, légers) →
+ * modules (leçons, exercices) des seuls concours suivis. Rien n'est livré avec l'application ;
+ * ce qui a été téléchargé est gardé sur l'appareil et reste consultable hors ligne.
  * Le cache est un fichier à part de l'état de progression : s'il est perdu ou tronqué, l'app
- * repart du pack embarqué et retélécharge ; la progression n'est jamais touchée.
+ * retélécharge ; la progression n'est jamais touchée.
  */
+
+// État du dernier téléchargement, pour les écrans (chargement, hors ligne, accès requis).
+// phase : 'idle' | 'loading' | 'done' | 'offline' | 'locked' | 'error'
+let status = { phase: 'idle', at: 0 };
+const statusListeners = new Set();
+const setStatus = (next) => { status = { ...next, at: Date.now() }; statusListeners.forEach((listener) => listener()); };
+const subscribeStatus = (listener) => { statusListeners.add(listener); return () => statusListeners.delete(listener); };
+export const getContentStatus = () => status;
+/** Hook : état du téléchargement des contenus. */
+export const useContentStatus = () => useSyncExternalStore(subscribeStatus, getContentStatus, getContentStatus);
 const FILE = `${FileSystem.documentDirectory || ''}fatafalta-prepa-contenus.v1.json`;
 const KEY = 'fatafalta-prepa-contenus.v1';
 const isWeb = Platform.OS === 'web';
@@ -71,14 +84,29 @@ const fetchModule = async (entry) => {
  *   busy : modules utilisés par une session en cours (leur mise à jour attend la fin de la session).
  * @returns {Promise<{ changed: boolean, raison?: string }>}
  */
+let queued = null;
 export const syncContent = ({ programmes = [], busy = [], force = false } = {}) => {
-  if (running) return running;
+  // Un téléchargement est en cours (démarrage…) : une demande forcée (nouveau concours choisi)
+  // est rejouée juste après, pour que ses modules ne soient pas oubliés.
+  if (running) {
+    if (force) queued = { programmes, busy };
+    return running.then(() => {
+      if (!queued) return { changed: false, raison: 'en cours' };
+      const next = queued;
+      queued = null;
+      return syncContent({ ...next, force: true });
+    });
+  }
   if (!force && Date.now() - lastRun < MIN_INTERVAL) return Promise.resolve({ changed: false, raison: 'récent' });
   running = (async () => {
+    setStatus({ phase: 'loading' });
+    let locked = false;
+    let offline = false;
+    let identityRejected = false;
     try {
       const before = getContentCache();
       const plan = planUpdate(before, await prepApi.manifest(), bundleInfo);
-      if (plan.action !== 'appliquer') return { changed: false, raison: plan.raison };
+      if (plan.action !== 'appliquer') { setStatus({ phase: 'done', raison: plan.raison }); return { changed: false, raison: plan.raison }; }
 
       const fetched = { programmes: {}, modules: {} };
       await Promise.all(plan.fetchProgrammes.map(async (e) => {
@@ -97,20 +125,27 @@ export const syncContent = ({ programmes = [], busy = [], force = false } = {}) 
           if (versions) fetched.modules[e.code] = versions;
         } catch (error) {
           // 401/403 (pas de droits) ou réseau : le module reste à sa révision précédente ou indisponible.
-          if (!error?.response) break;
+          // 401 : identité de préparation refusée (jeton périmé) ; 403 : pas de droit d'étude.
+          if (error?.response?.status === 401) { identityRejected = true; break; }
+          if (error?.response?.status === 403) { locked = true; break; }
+          // Coupure réseau : on garde ce qui est déjà arrivé, la suite viendra au prochain passage.
+          if (!error?.response) { offline = true; break; }
         }
       }
 
       // Une autre synchronisation a pu appliquer une génération plus récente entre-temps.
       const current = getContentCache();
-      if (current.generation > plan.generation) return { changed: false, raison: 'génération plus récente déjà appliquée' };
+      if (current.generation > plan.generation) { setStatus({ phase: 'done' }); return { changed: false, raison: 'génération plus récente déjà appliquée' }; }
       const next = applyPlan(current, plan, fetched, busy);
       setContentCache(next);
       await persist(next);
       lastRun = Date.now();
-      return { changed: true };
+      setStatus({ phase: locked ? 'locked' : offline ? 'offline' : identityRejected ? 'error' : 'done' });
+      return { changed: true, locked, offline, identityRejected };
     } catch (error) {
-      return { changed: false, raison: error?.response ? 'erreur serveur' : 'hors ligne' };
+      const raison = error?.response ? 'erreur serveur' : 'hors ligne';
+      setStatus({ phase: error?.response ? 'error' : 'offline', raison });
+      return { changed: false, raison };
     } finally {
       running = null;
     }
