@@ -2,7 +2,7 @@
   "expo": {
     "name": "Fatafalta",
     "slug": "fatafalta",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -18,7 +18,7 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "package": "com.fatafalta.mobile",
-      "versionCode": 11,
+      "versionCode": 12,
       "intentFilters": [
         {
           "action": "VIEW",
@@ -75,7 +75,21 @@
           "style": "dark"
         }
       ],
-      "expo-image"
+      "expo-image",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableMinifyInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true,
+            "buildArchs": [
+              "armeabi-v7a",
+              "arm64-v8a"
+            ]
+          }
+        }
+      ],
+      "expo-web-browser"
     ],
     "scheme": "fatafalta",
     "extra": {

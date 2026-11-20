@@ -11,6 +11,7 @@ import { formatAmount, organismeLabel } from '../lib/format';
 import { segmentFor } from '../lib/slug';
 import { catalogPath } from '../lib/catalogSeo';
 import OrganismeLogo, { distinctPalette } from '../components/catalog/OrganismeLogo';
+import { IosInstallSection } from '../components/site/IosInstall';
 
 const STEPS = [
   { icon: Compass, title: 'Choisissez votre concours', text: 'Organisme, concours, année, matière : chaque sujet est rangé à sa place.' },
@@ -159,6 +160,9 @@ const Home = () => {
       </section>
 
       <HomePreparation />
+
+      {/* Installer l'application sur iPhone (PWA) : guide, lien à ouvrir dans Safari ou QR code. */}
+      <IosInstallSection />
 
       {/* Organismes */}
       <section id="concours" className="scroll-mt-20 border-y border-line bg-white py-16 md:py-24">

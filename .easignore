@@ -30,3 +30,19 @@ Thumbs.db
 **/.env.*
 keys.text
 **/keys.text
+
+# Dossiers natifs générés localement (EAS les regénère à partir de app.json)
+/fatafalta/ios/
+/fatafalta/android/
+
+# Sources des images générées (l'application n'utilise que leurs déclinaisons)
+/fatafalta/assets/_generated/
+
+# Documentation, notes personnelles et carnets : jamais envoyés à Expo
+/docs/
+/test.txt
+/prompt_sujets.txt
+/.impeccable/
+**/*.ipynb
+.ipynb_checkpoints/
+.virtual_documents/

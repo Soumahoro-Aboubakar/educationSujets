@@ -429,9 +429,10 @@ export const PrepLessonPage = () => {
           <div className="mt-10 grid gap-7 text-[17px] leading-[1.7]">
             {lecon.blocs.map((bloc, i) => <LessonBlock key={`${bloc.type}-${i}`} bloc={bloc} index={i} />)} {/* eslint-disable-line react/no-array-index-key */}
           </div>
-          <footer className="mt-14 border-t border-line pt-8">
-            {done ? <p className="mb-4 flex items-center gap-2 font-semibold text-ink"><CircleCheck size={18} className="text-gold" />Leçon terminée</p> : null}
-            <div className="max-w-sm">{nextAction}</div>
+          {/* L'action suivante vit dans la barre fixe (mobile, tablette) ou la colonne de droite (grand
+              écran) : jamais une seconde fois ici, sinon deux boutons identiques se suivent. */}
+          <footer className="mt-14">
+            {done ? <p className="flex items-center gap-2 border-t border-line pt-8 font-semibold text-ink"><CircleCheck size={18} className="text-gold" />Leçon terminée</p> : null}
             <QueueNote />
           </footer>
         </div>

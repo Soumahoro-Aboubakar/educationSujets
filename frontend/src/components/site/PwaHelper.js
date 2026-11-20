@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { PlusSquare, Share, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { cx } from '../ui';
+import { IosInstallSteps, isIosSafari, isStandalone } from './IosInstall';
 
 /*
  * Application installable (PWA).
@@ -15,13 +16,7 @@ import { cx } from '../ui';
 const DISMISS_KEY = 'fatafalta.pwa.ios-guide';
 const DAYS = 30;
 
-const isIos = () => {
-  const ua = window.navigator.userAgent || '';
-  const iPadOs = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
-  return /iPhone|iPad|iPod/.test(ua) || iPadOs;
-};
-const isSafari = () => /Safari/.test(navigator.userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent);
-export const isStandalone = () => window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
+export { isStandalone };
 
 const dismissedRecently = () => {
   try {
@@ -126,7 +121,7 @@ const PwaHelper = () => {
   const studying = /^\/preparation(\/|$)/.test(pathname);
 
   useEffect(() => {
-    if (!studying || isStandalone() || !isIos() || !isSafari() || dismissedRecently()) { setGuide(false); return undefined; }
+    if (!studying || isStandalone() || !isIosSafari() || dismissedRecently()) { setGuide(false); return undefined; }
     const timer = setTimeout(() => setGuide(true), 2500);
     return () => clearTimeout(timer);
   }, [studying]);
@@ -154,11 +149,7 @@ const PwaHelper = () => {
             </div>
             <button type="button" onClick={closeGuide} className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-soft hover:bg-paper" aria-label="Fermer le guide d’installation"><X size={18} /></button>
           </div>
-          <ol className="mt-4 grid gap-3 text-[14px] text-ink">
-            <li className="flex items-center gap-3"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper"><Share size={16} /></span><span>Touche <strong className="font-semibold">Partager</strong> (sur iOS 26 : <strong className="font-semibold">⋯</strong> puis <strong className="font-semibold">Partager</strong>)</span></li>
-            <li className="flex items-center gap-3"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper"><PlusSquare size={16} /></span><span>Choisis <strong className="font-semibold">Sur l’écran d’accueil</strong> (au besoin, touche <strong className="font-semibold">En voir plus</strong>)</span></li>
-            <li className="flex items-center gap-3"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper text-[13px] font-bold">3</span><span>Touche <strong className="font-semibold">Ajouter</strong>, en haut à droite</span></li>
-          </ol>
+          <IosInstallSteps tu className="mt-4 !text-[14px]" />
         </Sheet>
       ) : null}
     </>
