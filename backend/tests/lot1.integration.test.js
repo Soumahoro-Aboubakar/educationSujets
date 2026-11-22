@@ -99,6 +99,14 @@ test('sessions : prolongée à chaque renouvellement, plafonnée à 180 jours ap
   assert.ok(capped.expiresAt.getTime() > Date.now() + DAY - 60000);
 });
 
+test('sessions : le site officiel renouvelle par cookie même si FRONTEND_URL / CORS_ORIGINS l’omettent', { skip }, async () => {
+  const user = await newUser(); const first = await login(user, 'web');
+  const ok = await call('POST', '/auth/refresh-token', {}, { Cookie: `refreshToken=${first.body.refreshToken}`, Origin: 'https://fatafalta.com' });
+  assert.equal(ok.status, 200);
+  const evil = await call('POST', '/auth/refresh-token', {}, { Cookie: `refreshToken=${ok.body.refreshToken}`, Origin: 'https://fatafalta.com.evil.invalid' });
+  assert.equal(evil.status, 403);
+});
+
 test('sessions : cookies HttpOnly, contrôle d’origine, logout et révocation globale', { skip }, async () => {
   const user = await newUser(); const first = await login(user, 'web'); const second = await login(user);
   assert.match(first.headers.get('set-cookie'), /HttpOnly/);

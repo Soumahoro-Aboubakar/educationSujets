@@ -5,6 +5,7 @@ import { getErrorMessage } from '../utils/userMessages';
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import api from '../services/api';
+import { clearSession, onSessionEnded, readRefreshToken, saveSession, setAccessHeader } from '../services/session';
 
 export const AuthContext = createContext();
 
@@ -33,23 +34,25 @@ export const AuthProvider = ({ children }) => {
         const storedUser = await SecureStore.getItemAsync('authUser');
         
         if (storedToken && storedUser) {
-          // Validate token with backend
+          // Jeton expiré : renouvelé automatiquement (services/session) avant de relire le profil.
+          setAccessHeader(storedToken);
           try {
-            const response = await api.get('/api/auth/me', {
-              headers: { Authorization: `Bearer ${storedToken}` }
-            });
+            const response = await api.get('/api/auth/me');
             setToken(storedToken);
             const currentUser = response.data.data || response.data.user || JSON.parse(storedUser);
             queryClient.setQueryData(queryKeys.account('profile', storedToken), currentUser);
             setUser(currentUser);
-            // Update API default header
-            api.defaults.headers.common.Authorization = `Bearer ${storedToken}`;
           } catch (err) {
-            // Token expired or invalid, clear it
-            await SecureStore.deleteItemAsync('authToken');
-            await SecureStore.deleteItemAsync('authUser');
-            setToken(null);
-            setUser(null);
+            if (err.response?.status === 401) {
+              // Session réellement terminée (déconnexion, mot de passe changé…).
+              await clearSession();
+              setToken(null);
+              setUser(null);
+            } else {
+              // Hors ligne ou serveur indisponible : la session enregistrée reste ouverte.
+              setToken(storedToken);
+              setUser(JSON.parse(storedUser));
+            }
           }
         }
       } catch (err) {
@@ -62,12 +65,18 @@ export const AuthProvider = ({ children }) => {
     bootstrapAsync();
   }, []);
 
-  const persistAuthData = async (tokenValue, userValue) => {
-    const authToken = typeof tokenValue === 'string' ? tokenValue : JSON.stringify(tokenValue);
-    const authUser = JSON.stringify(userValue);
+  // Session fermée par le serveur pendant l'utilisation : retour à l'état « invité ».
+  useEffect(() => {
+    onSessionEnded(() => {
+      clearSessionCache().catch(() => {});
+      setToken(null);
+      setUser(null);
+    });
+  }, []);
 
-    await SecureStore.setItemAsync('authToken', authToken);
-    await SecureStore.setItemAsync('authUser', authUser);
+  const persistAuthData = async (data, userValue) => {
+    await saveSession(data);
+    await SecureStore.setItemAsync('authUser', JSON.stringify(userValue));
   };
 
   const register = useCallback(async (name, email, password) => {
@@ -77,17 +86,17 @@ export const AuthProvider = ({ children }) => {
         name,
         email,
         password,
+        platform: 'mobile',
       });
       
       const { token: newToken, user: newUser } = response.data;
       
-      await persistAuthData(newToken, newUser);
+      await persistAuthData(response.data, newUser);
       
       await clearSessionCache();
       queryClient.setQueryData(queryKeys.account('profile', newToken), newUser);
       setToken(newToken);
       setUser(newUser);
-      api.defaults.headers.common.Authorization = `Bearer ${newToken}`;
       
       return { success: true, user: newUser };
     } catch (err) {
@@ -103,21 +112,20 @@ export const AuthProvider = ({ children }) => {
       const response = await api.post('/api/auth/login', {
         email,
         password,
+        platform: 'mobile',
       });
       
       const { token: newToken, user: newUser } = response.data;
       
-      await persistAuthData(newToken, newUser);
+      await persistAuthData(response.data, newUser);
       
       await clearSessionCache();
       queryClient.setQueryData(queryKeys.account('profile', newToken), newUser);
       setToken(newToken);
       setUser(newUser);
-      api.defaults.headers.common.Authorization = `Bearer ${newToken}`;
       
       return { success: true, user: newUser };
     } catch (err) {
-      console.error('Login error00:', err);
       const message = getErrorMessage(err, 'connexion', 'tu');
       setError(message);
       return { success: false, error: message };
@@ -126,19 +134,27 @@ export const AuthProvider = ({ children }) => {
 
   const logout = useCallback(async () => {
     try {
-      await api.post('/api/auth/logout');
+      // Ferme cette session côté serveur (jeton de renouvellement compris).
+      await api.post('/api/auth/logout', { refreshToken: await readRefreshToken() });
     } catch (err) {
-      console.error('Logout error:', err);
+      // Hors ligne : la session expirera d'elle-même ; l'appareil est nettoyé quand même.
     } finally {
       await clearSessionCache();
-      await SecureStore.deleteItemAsync('authToken');
-      await SecureStore.deleteItemAsync('authUser');
+      await clearSession();
       setToken(null);
       setUser(null);
-      delete api.defaults.headers.common.Authorization;
       setError(null);
     }
   }, []);
+
+  /** Mise à jour locale du profil (ex. adresse vérifiée), sans nouvel appel. */
+  const updateUser = useCallback((patch) => {
+    if (!user) return;
+    const next = { ...user, ...patch };
+    setUser(next);
+    queryClient.setQueryData(queryKeys.account('profile', token), next);
+    SecureStore.setItemAsync('authUser', JSON.stringify(next)).catch(() => {});
+  }, [token, user]);
 
   const isAdmin = useCallback(() => {
     return user?.role === 'admin' || user?.role === 'sub-admin';
@@ -152,6 +168,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    updateUser,
     isAdmin,
     isAuthenticated: !!token,
   };

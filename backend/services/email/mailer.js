@@ -10,6 +10,8 @@ const securityLog = require('../security/securityLogger');
  */
 const emailHash = (email) => securityLog.hashEmail(String(email).toLowerCase());
 
+const RETRY_DELAY_MS = 1500;
+
 // Remplaçable dans les tests (fournisseurs simulés).
 let overrideProviders = null;
 const setProvidersForTests = (providers) => { overrideProviders = providers; };
@@ -34,15 +36,25 @@ const sendEmail = async (message) => {
   if (!providers.length) {
     throw new AppError('Envoi d’e-mails indisponible pour le moment. Réessayez plus tard.', 503, undefined, 'EMAIL_UNAVAILABLE');
   }
-  for (const provider of providers) {
-    try {
-      // eslint-disable-next-line no-await-in-loop
-      await provider.send(message);
-      securityLog.info('email.sent', { provider: provider.name, emailHash: emailHash(message.to.email) });
-      return { provider: provider.name };
-    } catch (error) {
-      securityLog.warn('email.provider_failed', { provider: provider.name, status: error.status || null, reason: error.name === 'TimeoutError' ? 'timeout' : error.message });
+  // Coupure réseau brève (Wi-Fi, DNS) : tous échouent sans réponse. Une seconde tournée, 1,5 s plus
+  // tard, rattrape ce cas ; un refus du fournisseur (statut HTTP) ou un délai dépassé n'est pas rejoué.
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    let networkOnly = true;
+    for (const provider of providers) {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        await provider.send(message);
+        securityLog.info('email.sent', { provider: provider.name, attempt, emailHash: emailHash(message.to.email) });
+        return { provider: provider.name };
+      } catch (error) {
+        const timeout = error.name === 'TimeoutError';
+        if (error.status || timeout) networkOnly = false;
+        securityLog.warn('email.provider_failed', { provider: provider.name, attempt, status: error.status || null, reason: timeout ? 'timeout' : (error.cause?.code || error.message) });
+      }
     }
+    if (!networkOnly || attempt === 2) break;
+    // eslint-disable-next-line no-await-in-loop
+    await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
   }
   throw new AppError('Envoi d’e-mails indisponible pour le moment. Réessayez dans quelques minutes.', 503, undefined, 'EMAIL_UNAVAILABLE');
 };

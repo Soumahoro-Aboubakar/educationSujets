@@ -12,13 +12,15 @@ import ScreenHeader from '../components/ui/ScreenHeader';
 import { PrepButton } from '../prep/ui/primitives';
 import AuthContext from '../context/AuthContext';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
+import { useIsFocused } from '@react-navigation/native';
+import { InlineAction } from '../prep/ui/primitives';
 
 const LoginScreen = ({ navigation, route }) => {
   const { NAVY_SOFT } = useStyles();
   const styles = useAuthStyles();
   const insets = useSafeAreaInsets();
   const { login, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(route?.params?.email || '');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,11 +28,13 @@ const LoginScreen = ({ navigation, route }) => {
   const [errors, setErrors] = useState({});
 
   const redirectAfterAuth = useAuthRedirect(navigation, route);
+  // Seulement si cet écran est affiché : « Mot de passe oublié », empilé au-dessus, gère sa propre suite.
+  const focused = useIsFocused();
 
   useEffect(() => {
-    if (authLoading || !isAuthenticated) return;
+    if (authLoading || !isAuthenticated || !focused) return;
     redirectAfterAuth(user);
-  }, [authLoading, isAuthenticated, redirectAfterAuth, user]);
+  }, [authLoading, isAuthenticated, focused, redirectAfterAuth, user]);
 
   const validateForm = () => {
     const nextErrors = {};
@@ -75,6 +79,7 @@ const LoginScreen = ({ navigation, route }) => {
               <FormInput label="Mot de passe" placeholder="••••••••" value={password} onChangeText={(text) => { setPassword(text); if (errors.password) setErrors({ ...errors, password: null }); }} secureTextEntry={!showPassword} autoCapitalize="none" icon={Lock} error={errors.password} editable={!loading} trailing={<Pressable accessibilityRole="button" accessibilityLabel={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'} onPress={() => setShowPassword((value) => !value)} style={styles.showPasswordButton}>
                 {showPassword ? <EyeOff size={18} color={NAVY_SOFT} strokeWidth={2} /> : <Eye size={18} color={NAVY_SOFT} strokeWidth={2} />}
               </Pressable>} />
+              <InlineAction title="Mot de passe oublié ?" onPress={() => navigation.navigate('ForgotPassword', { ...route?.params, email: email.trim() })} style={localStyles.forgot} />
             </View>
           </View>
           <View style={styles.submit}>
@@ -88,6 +93,8 @@ const LoginScreen = ({ navigation, route }) => {
 };
 
 export default LoginScreen;
+
+const localStyles = { forgot: { alignSelf: 'flex-end', marginTop: 12 } };
 
 const useStyles = createThemedStyles(({ brand }) => {
   const NAVY_SOFT = brand.inkSoft;

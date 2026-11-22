@@ -8,6 +8,7 @@ import {
   Download,
   Gift,
   LogOut,
+  MailWarning,
   Settings,
   ShieldCheck,
   Wallet,
@@ -93,6 +94,17 @@ const AccountScreen = ({ navigation }) => {
         <MeCard navigation={navigation} email={user?.email} />
         {!data && entitlements.isLoading ? <SkeletonRows count={4} /> : (
           <>
+            {user && user.isVerified === false ? (
+              <Section>
+                <Row
+                  icon={MailWarning}
+                  label="Vérifie ton adresse e-mail"
+                  hint="Un code à 6 chiffres pour sécuriser ton compte"
+                  onPress={() => navigation.navigate('VerifyEmail')}
+                  isLast
+                />
+              </Section>
+            ) : null}
             <Section>
               <Row
                 icon={CreditCard}

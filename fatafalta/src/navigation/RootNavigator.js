@@ -8,6 +8,8 @@ import DownloadsScreen from '../screens/DownloadsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
+import VerifyEmailScreen from '../screens/VerifyEmailScreen';
+import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import UploadScreen from '../screens/UploadScreen';
 import EditDraftScreen from '../screens/EditDraftScreen';
 import CorrectionUploadScreen from '../screens/CorrectionUploadScreen';
@@ -88,6 +90,8 @@ const RootNavigator = () => {
       <Stack.Screen name="Downloads" component={DownloadsScreen} options={push} />
       <Stack.Screen name="Register" component={RegisterScreen} options={push} />
       <Stack.Screen name="Login" component={LoginScreen} options={push} />
+      <Stack.Screen name="VerifyEmail" component={VerifyEmailScreen} options={push} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={push} />
       <Stack.Screen name="Subscription" component={SubscriptionScreen} options={push} />
       <Stack.Screen name="PromoCode" component={PromoCodeScreen} options={push} />
       <Stack.Screen name="Wallet" component={WalletScreen} options={push} />

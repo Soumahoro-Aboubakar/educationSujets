@@ -73,3 +73,16 @@ graphify-out/
 backend/.video-state/
 *.mp4
 *.mov
+
+# Jupyter (carnets de brouillon à la racine et fichiers générés)
+.ipynb_checkpoints/
+.virtual_documents/
+/Untitled*.ipynb
+
+# Vidéo promo (Remotion) : rendus, images fixes et fichiers générés
+fatafalta-promo/out/
+fatafalta-promo/*.mp4
+fatafalta-promo/*.mov
+fatafalta-promo/*.webm
+fatafalta-promo/assets/_generated/
+*.wav

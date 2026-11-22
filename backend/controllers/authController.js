@@ -131,9 +131,13 @@ exports.login = asyncHandler(async (req, res) => {
 });
 
 // Les appels cookie sensibles exigent une origine connue ; les clients natifs utilisent le corps/header.
+// Le site officiel est toujours accepté : un FRONTEND_URL / CORS_ORIGINS incomplet ne doit pas
+// déconnecter les utilisateurs à chaque renouvellement de session.
+const OFFICIAL_ORIGINS = ['https://fatafalta.com', 'https://www.fatafalta.com'];
 const checkCookieOrigin = (req) => {
   const origin = req.get('origin');
-  const allowed = [process.env.FRONTEND_URL, ...(process.env.CORS_ORIGINS || '').split(',')].filter(Boolean);
+  const allowed = [...OFFICIAL_ORIGINS, process.env.FRONTEND_URL, ...(process.env.CORS_ORIGINS || '').split(',')]
+    .map((value) => (value || '').trim().replace(/\/$/, '')).filter(Boolean);
   if (!origin || !allowed.includes(origin)) throw new AppError('Origine non autorisée', 403);
 };
 exports.logout = asyncHandler(async (req, res) => {

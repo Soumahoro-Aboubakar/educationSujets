@@ -9,7 +9,7 @@ const crypto = require('crypto');
 const ALLOWED_FIELDS = [
   'actorId', 'sessionId', 'requestId', 'ip', 'userId', 'emailHash', 'method', 'path', 'status', 'limiter', 'key', 'hits', 'limit',
   'retryAfter', 'reason', 'blockMs', 'strikes', 'count', 'userAgent', 'durationMs', 'requests', 'errors5xx',
-  'rateLimited', 'authFailures', 'errorCode', 'paymentId',
+  'rateLimited', 'authFailures', 'errorCode', 'paymentId', 'provider', 'attempt',
 ];
 
 const hashEmail = (email) => (email

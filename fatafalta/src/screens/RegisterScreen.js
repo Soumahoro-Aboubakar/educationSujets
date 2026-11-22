@@ -3,7 +3,7 @@ import StatusBar from '../theme/ThemeStatusBar';
 import { useTheme, createThemedStyles } from '../theme/ThemeProvider';
 import { getErrorMessage } from '../utils/userMessages';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Check, Eye, EyeOff, Lock, Mail, User } from 'lucide-react-native';
 import Text from '../components/ui/Text';
@@ -30,9 +30,11 @@ const RegisterScreen = ({ navigation, route }) => {
   const [errors, setErrors] = useState({});
 
   const redirectAfterAuth = useAuthRedirect(navigation, route);
+  // Inscription en cours : la suite est la vérification de l'adresse, pas la redirection habituelle.
+  const justRegistered = useRef(false);
 
   useEffect(() => {
-    if (authLoading || !isAuthenticated) return;
+    if (authLoading || !isAuthenticated || justRegistered.current) return;
     redirectAfterAuth(user);
   }, [authLoading, isAuthenticated, redirectAfterAuth, user]);
 
@@ -57,18 +59,18 @@ const RegisterScreen = ({ navigation, route }) => {
     if (!validateForm()) return;
     setLoading(true);
     setError(null);
+    justRegistered.current = true;
     try {
       const result = await register(name.trim(), email.trim(), password);
       if (result.success) {
-        setName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        redirectAfterAuth(result.user);
+        // Premier code envoyé tout seul ; « Plus tard » reprend la redirection habituelle.
+        navigation.replace('VerifyEmail', { ...route?.params, autoSend: true, afterAuth: true });
       } else {
+        justRegistered.current = false;
         setError(result.error || getErrorMessage(null, 'inscription', 'tu'));
       }
     } catch (requestError) {
+      justRegistered.current = false;
       setError(getErrorMessage(requestError, 'inscription', 'tu'));
     } finally {
       setLoading(false);

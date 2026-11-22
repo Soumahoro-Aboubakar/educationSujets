@@ -14,7 +14,13 @@ const skip = !uri && 'TEST_MONGODB_URI non defini';
 // Fournisseurs simulés : chacun note ce qu'il reçoit ; `down` les met en panne.
 const outbox = [];
 const down = new Set();
-const fake = (name) => ({ name, send: async (message) => { if (down.has(name)) { const e = new Error('HTTP 503'); e.status = 503; throw e; } outbox.push({ provider: name, message }); } });
+// `network.cuts` : nombre d'appels qui échouent sans réponse (coupure réseau brève).
+const network = { cuts: 0 };
+const fake = (name) => ({ name, send: async (message) => {
+  if (network.cuts > 0) { network.cuts -= 1; throw new TypeError('fetch failed'); }
+  if (down.has(name)) { const e = new Error('HTTP 503'); e.status = 503; throw e; }
+  outbox.push({ provider: name, message });
+} });
 mailer.setProvidersForTests([fake('brevo'), fake('mailjet'), fake('resend')]);
 const lastCode = () => /\b(\d{6})\b/.exec(outbox.at(-1).message.text)[1];
 
@@ -81,6 +87,17 @@ test('verification code: sent by the first provider, then fallback when it is do
   assert.equal(res.status, 200);
   const me = await call('GET', '/api/auth/me', { token });
   assert.equal(me.body.data.isVerified, true);
+});
+
+test('brief network cut: every provider unreachable, a second round 1.5 s later sends the code', { skip }, async () => {
+  const token = await register('coupure@test.ci');
+  outbox.length = 0;
+  network.cuts = 3;
+  const res = await call('POST', '/api/auth/email/send-verification', { token });
+  assert.equal(res.status, 200);
+  assert.equal(outbox.length, 1);
+  assert.equal(outbox[0].provider, 'brevo');
+  assert.equal(network.cuts, 0);
 });
 
 test('all providers down: 503 and the daily quota is given back', { skip }, async () => {
