@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import AuthContext from '../context/AuthContext';
 import { useDownloadQuota, useEntitlements } from './useAccount';
 import { useWebCheckout } from './useWebCheckout';
+import { useOpenSubscription } from './useAccountLink';
 
 /**
  * Orchestration de l'accès à un document protégé :
@@ -15,6 +16,8 @@ export const useDocumentAccess = (navigation) => {
   const quota = useDownloadQuota();
   const { data: entitlements, isFetching } = useEntitlements();
   const checkout = useWebCheckout();
+  // Même action que tous les boutons « Voir mon abonnement » de l'application.
+  const subscription = useOpenSubscription(navigation);
   const [reason, setReason] = useState(null);
   const [limitInfo, setLimitInfo] = useState(null);
   const awaitingAuth = useRef(false);
@@ -66,6 +69,7 @@ export const useDocumentAccess = (navigation) => {
       reason,
       limitInfo,
       entitlements,
+      isAuthenticated,
       quota: quota.data,
       onClose: close,
       onLogin: () => goToAuth('Login'),
@@ -73,6 +77,13 @@ export const useDocumentAccess = (navigation) => {
       // Le paiement se fait sur le site ; au retour, les droits sont relus et la feuille se ferme seule.
       onSubscribe: () => checkout.open(entitlements?.checkout?.webCheckoutUrl),
       subscribing: checkout.opening,
+      onOpenSubscription: () => {
+        // Ouverture du site : la feuille reste et se ferme seule au retour si l'accès est ouvert.
+        // Écran interne : la feuille (modale) se ferme d'abord, sinon elle le masquerait.
+        if (subscription.leavesScreen) setReason(null);
+        subscription.go();
+      },
+      openingSubscription: subscription.opening,
       onOpenDownloads: () => {
         setReason(null);
         navigation.navigate('Downloads');

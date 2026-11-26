@@ -40,7 +40,12 @@ app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 // Avant tout travail : IP bloquée, puis limites globales (flood par IP, plafond général, rafales).
 app.use('/api', security.blockGuard, security.identify, limits.ipFlood);
 app.use('/api', (req, res, next) => (req.path.startsWith('/payments/webhooks/') ? next() : limits.general(req, res, next)));
-app.use('/api', (req, res, next) => (req.path.startsWith('/payments/webhooks/') ? next() : limits.burst(req, res, next)));
+// Rafale : la préparation télécharge d'un coup tout le contenu d'un concours (jusqu'à ~50 modules
+// et leurs versions, en lecture seule) ; ces lectures ne comptent pas dans la limite des 10 s, mais
+// restent soumises à la limite générale (5 min) et à la protection anti-inondation par IP.
+const PREP_CONTENT_READ = /^\/prep\/(?:manifest|catalogue|videos|programmes\/[^/]+|modules\/[^/]+)$/;
+const skipsBurst = (req) => req.path.startsWith('/payments/webhooks/') || (req.method === 'GET' && PREP_CONTENT_READ.test(req.path));
+app.use('/api', (req, res, next) => (skipsBurst(req) ? next() : limits.burst(req, res, next)));
 
 // Corps brut conservé pour vérifier la signature HMAC des webhooks de paiement.
 app.use('/api/payments/webhooks', express.json({

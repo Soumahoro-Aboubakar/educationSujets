@@ -118,3 +118,13 @@ test('« Voir mon abonnement » sans compte : création de compte puis ouverture
     assert.match(read(file), /navigation\.replace\('(Register|Login)', route\.params\)/, file);
   }
 });
+
+test('feuille d’accès d’un sujet : « Voir mon abonnement » seulement si le serveur fournit l’adresse, « Se connecter » sans compte', () => {
+  const sheet = read('src/components/access/AccessSheet.js');
+  // Connecté : bouton conditionné à l'adresse fournie par le serveur (aucun écran de repli).
+  assert.match(sheet, /signedIn\s*\?\s*\(accountLink\.available\s*\?\s*<ActionButton title=\{SUBSCRIPTION_BUTTON_LABEL\}/);
+  assert.match(sheet, /:\s*null\)\s*:\s*onLogin \? <ActionButton title="Se connecter" onPress=\{onLogin\} \/>/);
+  assert.match(sheet, /<ActionButton title="J’ai compris" variant="secondary" onPress=\{onClose\} \/>/);
+  // L'action est celle de tous les autres boutons « Voir mon abonnement ».
+  assert.match(read('src/hooks/useDocumentAccess.js'), /useOpenSubscription\(navigation\)/);
+});

@@ -7,7 +7,7 @@ import Sheet from '../ui/Sheet';
 import ActionButton from '../ui/ActionButton';
 import { usePlans } from '../../hooks/useAccount';
 import { formatAmount, formatRenewal } from '../../utils/format';
-import { useAccountLink } from '../../hooks/useAccountLink';
+import { useAccountLink, SUBSCRIPTION_BUTTON_LABEL } from '../../hooks/useAccountLink';
 import { canOfferPurchase } from '../../utils/storePolicy';
 
 const Benefit = ({ children }) => {
@@ -35,13 +35,22 @@ const Header = ({ icon: Icon, title, description }) => {
  * Explique pourquoi un document n'est pas téléchargeable et propose l'étape suivante.
  * `reason` est le code renvoyé par le serveur : l'interface ne décide jamais seule des droits.
  */
-const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscribe, subscribing, entitlements, limitInfo, onOpenDownloads }) => {
+const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscribe, subscribing, entitlements, isAuthenticated, onOpenSubscription, openingSubscription, limitInfo, onOpenDownloads }) => {
   const { styles } = useStyles();
   const { data: plans } = usePlans();
   const canCheckout = canOfferPurchase(entitlements?.checkout?.mobileWebCheckout);
   // Build store : pas d'achat dans l'app, mais accès à la page « Mon abonnement » du compte.
   const accountLink = useAccountLink();
-  const showAccount = !canCheckout && Boolean(entitlements) && accountLink.available;
+  // Connecté : bouton d'abonnement (même action que partout dans l'app), affiché seulement si le
+  // serveur fournit l'adresse de la page du compte (canOpenAccount) ; sans elle, aucun bouton.
+  // Non connecté : « Se connecter » (l'écran de connexion propose aussi de créer un compte) ; on revient
+  // ensuite ici et l'accès est vérifié automatiquement.
+  const signedIn = isAuthenticated ?? Boolean(entitlements);
+  const nextStep = signedIn
+    ? (accountLink.available
+      ? <ActionButton title={SUBSCRIPTION_BUTTON_LABEL} onPress={onOpenSubscription || accountLink.open} loading={onOpenSubscription ? openingSubscription : accountLink.opening} />
+      : null)
+    : onLogin ? <ActionButton title="Se connecter" onPress={onLogin} /> : null;
   const amount = entitlements?.nextPayment?.amount ?? plans?.initial?.amount;
   const isRenewal = entitlements?.subscription?.status === 'EXPIRED';
   const freeUntilYear = limitInfo?.freeUntilYear || plans?.downloadPolicy?.freeUntilYear || 2009;
@@ -105,11 +114,15 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
               </>
             ) : (
               <>
-                <Text variant="body" align="center" style={styles.footnote}>
-                  Ce sujet se débloque automatiquement dès que ton compte dispose d’un accès Premium actif.
+                <Text variant="body" align="center" style={[styles.footnote, styles.footnoteSpaced]}>
+                  {signedIn
+                    ? 'Ce sujet se débloque automatiquement dès que ton compte dispose d’un accès Premium actif.'
+                    : 'Tu as déjà un abonnement ? Connecte-toi : ton accès sera vérifié automatiquement. Pas encore de compte ? Tu pourras en créer un.'}
                 </Text>
-                {showAccount ? <ActionButton title="Voir mon abonnement" onPress={accountLink.open} loading={accountLink.opening} /> : null}
-                <ActionButton title="Compris" variant="secondary" onPress={onClose} />
+                <View style={styles.actions}>
+                  {nextStep}
+                  <ActionButton title="J’ai compris" variant="secondary" onPress={onClose} />
+                </View>
               </>
             )}
           </>
@@ -137,9 +150,7 @@ const AccessSheet = ({ reason, visible, onClose, onLogin, onRegister, onSubscrib
               {limitInfo?.canSubscribe && canCheckout ? (
                 <ActionButton title="Prendre mon abonnement" onPress={onSubscribe} loading={subscribing} />
               ) : null}
-              {limitInfo?.canSubscribe && showAccount ? (
-                <ActionButton title="Voir mon abonnement" onPress={accountLink.open} loading={accountLink.opening} />
-              ) : null}
+              {limitInfo?.canSubscribe && !canCheckout && signedIn ? nextStep : null}
               {limitInfo?.sharedConnection && !entitlements ? (
                 <ActionButton title="Créer un compte gratuit" variant="secondary" onPress={onRegister} />
               ) : null}
@@ -237,6 +248,10 @@ const useStyles = createThemedStyles(({ theme, brand }) => {
       flex: 1,
       color: brand.ink,
       fontSize: 14,
+    },
+    footnoteSpaced: {
+      marginTop: 0,
+      marginBottom: theme.spacing.lg,
     },
     footnote: {
       marginTop: theme.spacing.md,

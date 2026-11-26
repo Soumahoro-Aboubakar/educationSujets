@@ -84,7 +84,9 @@ export const useOpenSubscription = (navigation, fallback = 'PrepSubscription') =
     else if (!PURCHASE_FLOW_AVAILABLE && link.available) link.open();
     else navigation.navigate(fallback);
   }, [link, navigation, fallback, isAuthenticated]);
-  return { go, opening: link.opening };
+  // `leavesScreen` : le bouton navigue vers un autre écran (une feuille ouverte doit se fermer avant).
+  const leavesScreen = PURCHASE_FLOW_AVAILABLE || !isAuthenticated || !link.available;
+  return { go, opening: link.opening, leavesScreen };
 };
 
 /** Libellé unique du bouton (build store : jamais de mot d'achat). */

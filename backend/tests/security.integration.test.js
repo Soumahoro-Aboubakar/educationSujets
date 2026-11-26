@@ -296,6 +296,18 @@ test('api: a burst of requests from one user is cut with 429 and the user can re
   assert.equal((await call('GET', '/api/health', { token: tokenOf(neighbour), ip })).status, 200);
 });
 
+test('api: downloading a whole prep concours (read-only content) is not cut by the 10 s burst limit', { skip }, async () => {
+  // L'application télécharge d'un coup tous les modules d'un concours (CAFOP : ~50 requêtes avec les versions).
+  const user = await newUser();
+  const ip = freshIp();
+  const count = securityConfig.limits.burstUser.max + 20;
+  const reads = await Promise.all(Array.from({ length: count }, (_, i) => call('GET', i % 2 ? '/api/prep/manifest' : '/api/prep/programmes/INCONNU', { token: tokenOf(user), ip })));
+  assert.ok(reads.every((r) => r.status !== 429), 'aucune lecture de contenu coupée');
+  // Le reste de l'API garde sa limite de rafale.
+  const other = await Promise.all(Array.from({ length: securityConfig.limits.burstUser.max + 10 }, () => call('GET', '/api/health', { token: tokenOf(user), ip })));
+  assert.ok(other.some((r) => r.status === 429), 'les autres routes restent limitées');
+});
+
 test('api: anonymous visitors sharing one IP get a larger allowance than a single account', { skip }, async () => {
   const ip = freshIp();
   const results = await Promise.all(Array.from({ length: securityConfig.limits.burstUser.max + 20 }, () => call('GET', '/api/health', { ip })));

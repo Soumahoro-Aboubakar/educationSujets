@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react';
+import { withRateLimitRetry } from './rateLimitRetry';
 import { Platform } from 'react-native';
 import * as FileSystem from 'expo-file-system/legacy';
 import prepApi from './api';
@@ -66,12 +67,12 @@ const modulesOf = (codes, fetchedProgrammes) => {
 };
 
 const fetchModule = async (entry) => {
-  const first = await prepApi.module(entry.code, entry.revision);
+  const first = await withRateLimitRetry(() => prepApi.module(entry.code, entry.revision));
   if (!first || first.code !== entry.code || (first.revision && first.revision !== entry.revision)) return null;
   const versions = { [first.version || 'fr']: { ...first, distant: true } };
   for (const v of (first.versions || []).filter((x) => !versions[x])) {
     // eslint-disable-next-line no-await-in-loop
-    const mod = await prepApi.module(entry.code, entry.revision, v);
+    const mod = await withRateLimitRetry(() => prepApi.module(entry.code, entry.revision, v));
     if (mod?.code === entry.code) versions[v] = { ...mod, distant: true };
   }
   return versions;
@@ -105,13 +106,13 @@ export const syncContent = ({ programmes = [], busy = [], force = false } = {}) 
     let identityRejected = false;
     try {
       const before = getContentCache();
-      const plan = planUpdate(before, await prepApi.manifest(), bundleInfo);
+      const plan = planUpdate(before, await withRateLimitRetry(() => prepApi.manifest()), bundleInfo);
       if (plan.action !== 'appliquer') { setStatus({ phase: 'done', raison: plan.raison }); return { changed: false, raison: plan.raison }; }
 
       const fetched = { programmes: {}, modules: {} };
       await Promise.all(plan.fetchProgrammes.map(async (e) => {
         try {
-          const out = await prepApi.programme(e.code, e.revision);
+          const out = await withRateLimitRetry(() => prepApi.programme(e.code, e.revision));
           if (out?.programme?.code === e.code) fetched.programmes[e.code] = out.programme;
         } catch (error) { /* gardé à l'ancienne révision ; nouvel essai à la prochaine synchronisation */ }
       }));
