@@ -28,13 +28,52 @@ const nextExpiry = (session) => {
   const started = session.createdAt ? session.createdAt.getTime() : Date.now();
   return new Date(Math.min(Date.now() + IDLE_MS, started + MAX_MS));
 };
-const create = async (user, platform = 'unknown', sid = crypto.randomUUID()) => {
+/*
+ * Abonnement personnel (CGV) : un même titulaire peut utiliser plusieurs appareils, mais au-delà de
+ * MAX_ACTIVE sessions actives la plus anciennement utilisée est fermée (limite douce, jamais de
+ * blocage du compte). Chaque dépassement est journalisé pour repérer un éventuel partage.
+ */
+const MAX_ACTIVE = Math.max(1, Number.parseInt(process.env.AUTH_MAX_ACTIVE_SESSIONS, 10) || 5);
+const active = (userId) => ({ user: userId, revokedAt: null, expiresAt: { $gt: new Date() } });
+/** Libellé lisible et minimal (« Android · Chrome ») ; l’agent utilisateur complet n’est pas conservé. */
+const deviceLabel = (userAgent = '', platform = 'unknown') => {
+  const ua = String(userAgent);
+  const os = /Android/i.test(ua) ? 'Android' : /iPhone|iPad|iPod/i.test(ua) ? 'iPhone ou iPad' : /Windows/i.test(ua) ? 'Windows'
+    : /Mac OS X|Macintosh/i.test(ua) ? 'Mac' : /Linux/i.test(ua) ? 'Linux' : '';
+  const app = /okhttp|Expo|ReactNative|Dalvik/i.test(ua) || platform === 'mobile' ? 'Application Fatafalta'
+    : /Edg\//.test(ua) ? 'Edge' : /OPR\/|Opera/.test(ua) ? 'Opera' : /Firefox\//.test(ua) ? 'Firefox'
+      : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : '';
+  return [os, app].filter(Boolean).join(' · ').slice(0, 80) || 'Appareil inconnu';
+};
+const enforceLimit = async (userId, keepSid) => {
+  const sessionsActives = await AuthSession.find(active(userId)).sort({ dernierUsageAt: -1, createdAt: -1 }).select('sid').lean();
+  const surplus = sessionsActives.filter((s) => s.sid !== keepSid).slice(MAX_ACTIVE - 1);
+  if (!surplus.length) return 0;
+  await AuthSession.updateMany({ sid: { $in: surplus.map((s) => s.sid) }, revokedAt: null },
+    { $set: { revokedAt: new Date(), revokedReason: 'limite' } });
+  log.warn('auth.session_limit', { userId, count: sessionsActives.length });
+  return surplus.length;
+};
+const create = async (user, platform = 'unknown', sid = crypto.randomUUID(), userAgent = '') => {
   const session = new AuthSession({ sid, user: user._id, platform: ['web', 'mobile'].includes(platform) ? platform : 'unknown',
-    tokenVersion: user.tokenVersion || 0, expiresAt: new Date(Date.now() + IDLE_MS) });
+    tokenVersion: user.tokenVersion || 0, expiresAt: new Date(Date.now() + IDLE_MS),
+    appareil: deviceLabel(userAgent, platform), dernierUsageAt: new Date() });
   const pair = tokens(user, session);
   session.refreshHash = hash(pair.refreshToken);
   await session.save();
+  await enforceLimit(user._id, session.sid);
   return { ...pair, session };
+};
+/** Sessions actives du titulaire, pour la page « Mes appareils » (aucune donnée sensible). */
+const list = async (userId, currentSid) => (await AuthSession.find(active(userId))
+  .sort({ dernierUsageAt: -1, createdAt: -1 }).select('sid platform appareil createdAt dernierUsageAt').lean())
+  .map((s) => ({ id: s.sid, plateforme: s.platform, appareil: s.appareil || 'Appareil inconnu', connecteLe: s.createdAt,
+    dernierUsage: s.dernierUsageAt || s.createdAt, actuelle: s.sid === currentSid }));
+/** Déconnexion à distance d’un seul appareil (uniquement parmi les sessions du titulaire). */
+const revokeOne = async (userId, sid) => {
+  const r = await AuthSession.updateOne({ sid, user: userId, revokedAt: null }, { $set: { revokedAt: new Date(), revokedReason: 'utilisateur' } });
+  if (r.modifiedCount) log.info('auth.session_revoked', { userId });
+  return r.modifiedCount > 0;
 };
 const rotate = async (raw) => {
   let decoded;
@@ -59,7 +98,7 @@ const rotate = async (raw) => {
   session.expiresAt = nextExpiry(session);
   const pair = tokens(user, session);
   const changed = await AuthSession.updateOne({ _id: session._id, revokedAt: null, refreshHash: hash(raw) },
-    { $set: { refreshHash: hash(pair.refreshToken), expiresAt: session.expiresAt } });
+    { $set: { refreshHash: hash(pair.refreshToken), expiresAt: session.expiresAt, dernierUsageAt: new Date() } });
   if (!changed.modifiedCount) {
     await AuthSession.updateOne({ _id: session._id }, { $set: { revokedAt: new Date() } });
     log.warn('auth.refresh_replay', { userId: user._id });
@@ -91,4 +130,4 @@ const revokeToken = async (raw, refresh = false) => {
   else await revokeAll(decoded.id);
   log.info('auth.logout', { userId: decoded.id });
 };
-module.exports = { create, rotate, resolveAccess, revokeAll, revokeToken };
+module.exports = { create, rotate, resolveAccess, revokeAll, revokeToken, list, revokeOne, deviceLabel, MAX_ACTIVE };

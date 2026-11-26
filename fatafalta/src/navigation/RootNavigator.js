@@ -6,6 +6,8 @@ import TabNavigator from './TabNavigator';
 import DocumentDetailScreen from '../screens/DocumentDetailScreen';
 import DownloadsScreen from '../screens/DownloadsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LegalScreen from '../screens/legal/LegalScreen';
+import DeleteAccountScreen from '../screens/legal/DeleteAccountScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
 import VerifyEmailScreen from '../screens/VerifyEmailScreen';
@@ -97,6 +99,8 @@ const RootNavigator = () => {
       <Stack.Screen name="Wallet" component={WalletScreen} options={push} />
       <Stack.Screen name="Withdraw" component={WithdrawScreen} options={push} />
       <Stack.Screen name="Settings" component={SettingsScreen} options={push} />
+      <Stack.Screen name="Legal" component={LegalScreen} options={push} />
+      <Stack.Screen name="DeleteAccount" component={DeleteAccountScreen} options={push} />
       <Stack.Screen name="AdminTab" component={AdminDraftsScreen} options={push} />
       <Stack.Screen name="CatalogManagement" component={CatalogManagementScreen} options={push} />
       <Stack.Screen name="AdminPaymentMethods" component={PaymentMethodsAdminScreen} options={push} />

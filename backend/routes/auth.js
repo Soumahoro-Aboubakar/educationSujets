@@ -1,9 +1,12 @@
 const express = require('express');
+const { param } = require('express-validator');
 const {
   register,
   login,
   logout,
   revokeSessions,
+  listSessions,
+  revokeOneSession,
   getMe,
   refreshToken,
   createHandoff,
@@ -32,6 +35,9 @@ router.post('/register', limits.register, registerValidator, validate, register)
 router.post('/login', limits.loginIp, limits.loginEmail, limits.loginIpEmail, loginValidator, validate, login);
 router.post('/logout', logout);
 router.post('/sessions/revoke', protect, revokeSessions);
+// « Mes appareils » : sessions actives du titulaire et déconnexion à distance d’un seul appareil.
+router.get('/sessions', protect, listSessions);
+router.delete('/sessions/:sid', protect, limits.publicWrite, param('sid').isString().isLength({ min: 8, max: 120 }), validate, revokeOneSession);
 router.get('/me', protect, getMe);
 router.post('/handoff', protect, restrictSensitive, limits.handoffCreate, createHandoff);
 router.post('/handoff/exchange', limits.handoffExchange, handoffExchangeValidator, validate, exchangeHandoff);

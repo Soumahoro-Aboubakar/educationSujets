@@ -19,6 +19,9 @@ import DocumentPage from './pages/DocumentPage';
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const BulkDownloadPage = lazy(() => import('./pages/BulkDownloadPage'));
 const SubscribePage = lazy(() => import('./pages/SubscribePage'));
+const legalPages = () => import('./pages/LegalPage');
+const LegalDocumentPage = lazy(() => legalPages().then((m) => ({ default: m.LegalDocumentPage })));
+const LegalHubPage = lazy(() => legalPages().then((m) => ({ default: m.LegalHubPage })));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
@@ -140,6 +143,16 @@ function App() {
             <Route path="/preparation/:programme/classement" element={<Lazy><PrepRankingPage /></Lazy>} />
             <Route path="/preparation/:programme/:module/lecon/:lecon" element={<Lazy><PrepLessonPage /></Lazy>} />
             <Route path="/preparation/:programme/:module/niveau/:niveau" element={<Lazy><PrepSessionPage /></Lazy>} />
+            {/* Documents juridiques publics (source de référence, ouverts aussi par l’application Android). */}
+            <Route path="/informations-legales" element={<Lazy><LegalHubPage /></Lazy>} />
+            <Route path="/conditions-utilisation" element={<Lazy><LegalDocumentPage slug="conditions-utilisation" /></Lazy>} />
+            <Route path="/conditions-vente" element={<Lazy><LegalDocumentPage slug="conditions-vente" /></Lazy>} />
+            <Route path="/politique-confidentialite" element={<Lazy><LegalDocumentPage slug="politique-confidentialite" /></Lazy>} />
+            <Route path="/politique-cookies" element={<Lazy><LegalDocumentPage slug="politique-cookies" /></Lazy>} />
+            <Route path="/politique-securite" element={<Lazy><LegalDocumentPage slug="politique-securite" /></Lazy>} />
+            <Route path="/propriete-intellectuelle" element={<Lazy><LegalDocumentPage slug="propriete-intellectuelle" /></Lazy>} />
+            <Route path="/mentions-legales" element={<Lazy><LegalDocumentPage slug="mentions-legales" /></Lazy>} />
+            <Route path="/suppression-compte" element={<Lazy><LegalDocumentPage slug="suppression-compte" /></Lazy>} />
             <Route path="/login" element={<Page seo="login"><Lazy><Login /></Lazy></Page>} />
             <Route path="/register" element={<Page seo="register"><Lazy><Register /></Lazy></Page>} />
             <Route path="/verifier-email" element={<Page seo="verifyEmail"><Lazy><VerifyEmail /></Lazy></Page>} />

@@ -535,6 +535,7 @@ const SubscribePage = () => {
                   <div className="animate-fade-in">
                     <InfoRow label={quote.data.kind === 'initial' ? `Abonnement · ${plan?.initial.months || 4} mois` : 'Mensualité · 1 mois'} value={formatAmount(quote.data.baseAmount)} />
                     {quote.data.discount ? <InfoRow label={`Code ${quote.data.promoCode}`} value={`− ${formatAmount(quote.data.discount)}`} /> : null}
+                    {quote.data.periodStart && quote.data.periodEnd ? <InfoRow label="Accès" value={`du ${formatLongDate(quote.data.periodStart)} au ${formatLongDate(quote.data.periodEnd)}`} /> : null}
                     <div className="flex items-baseline justify-between pt-4">
                       <span className="font-semibold text-ink">Total</span>
                       <span key={quote.data.amount} className="tabular animate-pop-in text-2xl font-extrabold tracking-[-0.03em] text-ink">{formatAmount(quote.data.amount)}</span>

@@ -240,7 +240,7 @@ const Home = () => {
                   'Tous les sujets et leurs corrigés',
                   'La préparation complète : leçons, vidéos, exercices et concours blancs',
                   `Jusqu’à ${plans.data?.downloadsPerDay || 20} sujets récents par 24 h, anciens sujets illimités`,
-                  methodLabels.length ? `Paiement par ${methodLabels.join(', ').replace(/, ([^,]*)$/, ' ou $1')}` : 'Paiement par Orange Money, MTN, Moov ou Wave',
+                  methodLabels.length ? `Paiement par ${methodLabels.join(', ').replace(/, ([^,]*)$/, ' ou $1')}` : 'Paiement par mobile money',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-light/15"><Check size={13} className="text-gold-light" strokeWidth={3} /></span>

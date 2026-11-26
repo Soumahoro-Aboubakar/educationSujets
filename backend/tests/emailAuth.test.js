@@ -128,6 +128,24 @@ test('forgot password: code by email, new password works, old sessions closed', 
   assert.equal((await call('GET', '/api/auth/me', { token: oldToken })).status, 401, 'anciennes sessions fermées');
 });
 
+test('forgot password lifts an account lock (the owner always has a way back in)', { skip }, async () => {
+  await register('verrou@test.ci');
+  const { accountLock } = require('../config/security');
+  let res;
+  for (let i = 0; i < accountLock.failuresBeforeLock; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    res = await call('POST', '/api/auth/login', { body: { email: 'verrou@test.ci', password: `faux-${i}` } });
+  }
+  assert.equal(res.status, 429);
+  assert.equal(res.body.code, 'ACCOUNT_LOCKED');
+  assert.equal((await call('POST', '/api/auth/login', { body: { email: 'verrou@test.ci', password: 'secret123' } })).status, 429);
+  outbox.length = 0;
+  assert.equal((await call('POST', '/api/auth/password/forgot', { body: { email: 'verrou@test.ci' } })).status, 200, 'mot de passe oublié possible pendant le verrouillage');
+  res = await call('POST', '/api/auth/password/reset', { body: { email: 'verrou@test.ci', code: lastCode(), password: 'nouveau123' } });
+  assert.equal(res.status, 200, JSON.stringify(res.body));
+  assert.equal((await call('POST', '/api/auth/login', { body: { email: 'verrou@test.ci', password: 'nouveau123' } })).status, 200, 'verrouillage levé');
+});
+
 test('forgot password for an unknown address: same answer, nothing sent, quota consumed', { skip }, async () => {
   outbox.length = 0;
   for (let i = 0; i < 3; i += 1) {

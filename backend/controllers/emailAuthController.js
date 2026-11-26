@@ -4,6 +4,7 @@ const { sendSuccess } = require('../utils/api');
 const sessions = require('../services/auth/sessionService');
 const codes = require('../services/auth/emailCodeService');
 const securityLog = require('../services/security/securityLogger');
+const loginGuard = require('../services/security/loginGuard');
 const { clientIp } = require('../utils/request');
 
 /*
@@ -63,6 +64,8 @@ exports.resetPassword = asyncHandler(async (req, res) => {
   await user.save();
   // Toutes les sessions ouvertes (autres appareils, éventuel intrus) sont fermées.
   await sessions.revokeAll(user._id);
+  // Le titulaire a prouvé la possession de l'adresse : le verrouillage éventuel est levé.
+  await loginGuard.clear(email);
   securityLog.info('auth.password_reset', { requestId: req.id, ip: clientIp(req), userId: user._id });
   sendSuccess(res, { message: 'Mot de passe modifié. Connectez-vous avec le nouveau.', data: { reset: true } });
 });

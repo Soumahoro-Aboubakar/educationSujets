@@ -73,6 +73,10 @@ export const account = {
   cancelWithdrawal: (id) => axios.post(`/api/me/withdrawals/${id}/cancel`).then(unwrap),
   updateProfile: (payload) => axios.put('/api/me/profile', payload).then(unwrap),
   changePassword: (payload) => axios.put('/api/me/password', payload),
+  // « Mes appareils » (abonnement personnel) et suppression du compte par son titulaire.
+  sessions: () => axios.get('/api/auth/sessions').then((res) => ({ list: res.data?.data || [], limite: res.data?.meta?.limite })),
+  revokeSession: (id) => axios.delete(`/api/auth/sessions/${encodeURIComponent(id)}`).then(unwrap),
+  deleteAccount: (motDePasse) => axios.post('/api/me/suppression-compte', { motDePasse }).then(unwrap),
 };
 
 export const payments = {

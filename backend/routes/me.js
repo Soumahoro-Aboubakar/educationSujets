@@ -18,6 +18,8 @@ router.get('/downloads', controller.getMyDownloads);
 router.put('/profile', limits.profileUpdate, controller.updateProfile);
 router.put('/password', limits.passwordChange, controller.changePassword);
 router.post('/withdrawals', restrictSensitive, limits.withdrawalCreate, controller.createWithdrawal);
+// Suppression du compte par son titulaire (mot de passe exigé). Voir services/account/deletionService.js.
+router.post('/suppression-compte', limits.passwordChange, controller.deleteMyAccount);
 router.post('/withdrawals/:id/cancel', limits.withdrawalCancel, param('id').isMongoId(), validate, controller.cancelWithdrawal);
 
 module.exports = router;

@@ -6,11 +6,12 @@ import Logo from './Logo';
 const GROUPS = [
   { title: 'Explorer', links: [['/sujets', 'Sujets'], ['/recherche', 'Recherche'], ['/abonnement', 'Abonnement']] },
   { title: 'Mon compte', links: [['/compte', 'Tableau de bord'], ['/compte/telechargements', 'Téléchargements'], ['/compte/code-promo', 'Parrainage']] },
+  { title: 'Informations légales', links: [['/conditions-utilisation', 'Conditions d’utilisation'], ['/conditions-vente', 'Conditions d’abonnement'], ['/politique-confidentialite', 'Confidentialité'], ['/politique-cookies', 'Cookies'], ['/mentions-legales', 'Mentions légales']] },
 ];
 
 const SiteFooter = () => (
   <footer className="mt-auto border-t border-line bg-paper-dim/50">
-    <Container className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-[1.4fr_1fr_1fr] md:py-14">
+    <Container className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-[1.3fr_1fr_1fr_1.2fr] md:py-14">
       <div className="col-span-2 max-w-xs md:col-span-1">
         <Logo />
         <p className="mt-4 text-sm leading-relaxed text-ink-soft">
@@ -32,7 +33,12 @@ const SiteFooter = () => (
     </Container>
     <Container className="flex flex-wrap items-center justify-between gap-2 border-t border-line py-5 pb-safe text-xs text-ink-muted">
       <span>© {new Date().getFullYear()} Fatafalta</span>
-      <span>Côte d’Ivoire</span>
+      <span className="flex flex-wrap gap-x-4 gap-y-1">
+        <Link to="/informations-legales" className="hover:text-ink">Tous les documents</Link>
+        <Link to="/politique-securite" className="hover:text-ink">Sécurité</Link>
+        <Link to="/propriete-intellectuelle" className="hover:text-ink">Propriété intellectuelle</Link>
+        <span>Côte d’Ivoire</span>
+      </span>
     </Container>
   </footer>
 );

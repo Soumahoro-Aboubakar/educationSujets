@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const sessions = require('../services/auth/sessionService');
 const { extractToken, parseCookies } = require('../utils/request');
 const User = require('../models/User');
@@ -15,6 +16,8 @@ const { sendSuccess } = require('../utils/api');
 const { ensurePromoCode } = require('../services/billing/promoCodeService');
 const { blockedHere, isReservedEmail } = require('../utils/testAccounts');
 const { isProduction } = require('../config/environment');
+const loginGuard = require('../services/security/loginGuard');
+const { sendTooMany } = require('../middleware/rateLimit');
 
 const sendTokenResponse = async (user, statusCode, res, req, rotated) => {
   // Compte de test en production : refusé, avec la réponse d'un mauvais mot de passe (rien n'est révélé).
@@ -23,7 +26,7 @@ const sendTokenResponse = async (user, statusCode, res, req, rotated) => {
     throw new AppError('Identifiants invalides', 401);
   }
   await require('../services/prep/identityService').canonicalFor(user);
-  const { token, refreshToken, session } = rotated || await sessions.create(user, req.body?.platform);
+  const { token, refreshToken, session } = rotated || await sessions.create(user, req.body?.platform, undefined, req.headers['user-agent']);
   res.set('Cache-Control', 'private, no-store');
   res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', path: '/api/auth', expires: session.expiresAt });
   const cookieExpireDays = Number.parseInt(process.env.JWT_COOKIE_EXPIRE, 10) || 30;
@@ -55,6 +58,17 @@ const sendTokenResponse = async (user, statusCode, res, req, rotated) => {
     });
 };
 
+/** Réponse 429 d'un compte verrouillé, identique que l'adresse existe ou non. */
+const accountLocked = (req, res, lockMs) => {
+  const minutes = Math.max(1, Math.ceil(lockMs / 60000));
+  const wait = minutes < 60 ? `${minutes} min` : `${Math.ceil(minutes / 60)} h`;
+  return sendTooMany(req, res, {
+    message: `Trop de tentatives sur ce compte. Réessayez dans ${wait}, ou réinitialisez votre mot de passe avec « Mot de passe oublié ».`,
+    code: 'ACCOUNT_LOCKED',
+    retryAfter: Math.ceil(lockMs / 1000),
+  });
+};
+
 // Haché factice : un email inconnu coûte le même temps qu'un mot de passe faux, la durée de
 // réponse ne révèle donc pas si un compte existe.
 const DUMMY_PASSWORD_HASH = bcrypt.hashSync('fatafalta-timing-guard', 10);
@@ -77,11 +91,15 @@ exports.register = asyncHandler(async (req, res) => {
     throw new AppError('Impossible de créer un compte avec cet email. Si vous avez déjà un compte, connectez-vous.', 409, undefined, 'EMAIL_UNAVAILABLE');
   }
 
+  // Acceptation explicite (case non précochée) : envoyée par le site et les nouvelles versions de
+  // l’application ; les anciennes versions de l’application ne l’envoient pas encore.
+  const legal = require('../config/legal'); // eslint-disable-line global-require
   const user = await User.create({
     name: name.trim(),
     email: normalizedEmail,
     password,
     role: 'user',
+    ...(req.body?.accepteConditions === true ? { conditions: { version: legal.version, accepteesLe: new Date() } } : {}),
   });
 
   // Code de parrainage créé dès l'inscription (inactif tant que l'abonnement ne l'est pas).
@@ -98,6 +116,10 @@ exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const normalizedEmail = email.trim().toLowerCase();
   const ip = clientIp(req);
+
+  // Compte verrouillé (trop d'échecs, toutes IP confondues) : refus sans même vérifier le mot de passe.
+  const lockedMs = await loginGuard.lockedFor(normalizedEmail);
+  if (lockedMs) return accountLocked(req, res, lockedMs);
 
   // Vérification humaine uniquement après plusieurs échecs sur ce couple IP + email.
   const failures = abuse.loginFailureCount(ip, normalizedEmail);
@@ -116,11 +138,14 @@ exports.login = asyncHandler(async (req, res) => {
   if (!passwordOk) {
     const count = abuse.recordLoginFailure({ ip, email: normalizedEmail, requestId: req.id });
     securityLog.warn('auth.login_failed', { requestId: req.id, ip, emailHash: securityLog.hashEmail(normalizedEmail), count, userAgent: req.get('user-agent') });
+    const lockMs = await loginGuard.recordFailure(normalizedEmail, { requestId: req.id, ip });
+    if (lockMs) return accountLocked(req, res, lockMs);
     // Même message que le compte existe ou non.
     throw new AppError('Identifiants invalides', 401);
   }
 
   abuse.clearLoginFailures(ip, normalizedEmail);
+  await loginGuard.clear(normalizedEmail);
 
   if (user.accountStatus && user.accountStatus !== 'ACTIVE') {
     throw new AppError('Ce compte est desactive. Contactez le support.', 403, undefined, 'ACCOUNT_DISABLED');
@@ -147,6 +172,18 @@ exports.logout = asyncHandler(async (req, res) => {
   res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
   res.clearCookie('refreshToken', { path: '/api/auth', httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict' });
   sendSuccess(res, { message: 'Déconnecté' });
+});
+const currentSid = (req) => {
+  try { return jwt.decode(extractToken(req))?.sid || null; } catch { return null; }
+};
+exports.listSessions = asyncHandler(async (req, res) => {
+  res.set('Cache-Control', 'private, no-store');
+  sendSuccess(res, { data: await sessions.list(req.user._id, currentSid(req)), meta: { limite: sessions.MAX_ACTIVE } });
+});
+exports.revokeOneSession = asyncHandler(async (req, res) => {
+  if (!req.headers.authorization) checkCookieOrigin(req);
+  if (!(await sessions.revokeOne(req.user._id, req.params.sid))) throw new AppError('Session introuvable', 404);
+  sendSuccess(res, { message: 'Appareil déconnecté' });
 });
 exports.revokeSessions = asyncHandler(async (req, res) => {
   if (!req.headers.authorization) checkCookieOrigin(req);

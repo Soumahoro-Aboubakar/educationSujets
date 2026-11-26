@@ -50,6 +50,12 @@ const Login = () => {
         </div>
         <ErrorNote>{error}</ErrorNote>
         <Button type="submit" size="lg" className="!mt-6 w-full" loading={loading} disabled={!form.email || !form.password}>Se connecter</Button>
+        <p className="!mt-4 text-center text-[13px] leading-relaxed text-ink-muted">
+          En vous connectant, vous acceptez les{' '}
+          <Link to="/conditions-utilisation" className="font-medium text-ink-soft underline decoration-line-strong underline-offset-2 hover:text-ink hover:decoration-ink">conditions d’utilisation</Link>
+          {' '}de Fatafalta et reconnaissez avoir lu la{' '}
+          <Link to="/politique-confidentialite" className="font-medium text-ink-soft underline decoration-line-strong underline-offset-2 hover:text-ink hover:decoration-ink">politique de confidentialité</Link>.
+        </p>
       </form>
     </AuthShell>
   );

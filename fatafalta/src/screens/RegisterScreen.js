@@ -5,6 +5,7 @@ import { getErrorMessage } from '../utils/userMessages';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { openLegal } from '../utils/legalLinks';
 import { Check, Eye, EyeOff, Lock, Mail, User } from 'lucide-react-native';
 import Text from '../components/ui/Text';
 import { AccountField as FormInput, AccountPaper, useAuthStyles } from '../components/account/AccountPresentation';
@@ -15,7 +16,7 @@ import { useAuthRedirect } from '../hooks/useAuthRedirect';
 
 const RegisterScreen = ({ navigation, route }) => {
   const { brand } = useTheme();
-  const { NAVY_SOFT } = useStyles();
+  const { NAVY_SOFT, legal } = useStyles();
   const styles = useAuthStyles();
   const insets = useSafeAreaInsets();
   const { register, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
@@ -28,6 +29,8 @@ const RegisterScreen = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
+  // Case jamais cochée par défaut : l'acceptation des conditions est un geste explicite.
+  const [accepte, setAccepte] = useState(false);
 
   const redirectAfterAuth = useAuthRedirect(navigation, route);
   // Inscription en cours : la suite est la vérification de l'adresse, pas la redirection habituelle.
@@ -61,7 +64,7 @@ const RegisterScreen = ({ navigation, route }) => {
     setError(null);
     justRegistered.current = true;
     try {
-      const result = await register(name.trim(), email.trim(), password);
+      const result = await register(name.trim(), email.trim(), password, accepte);
       if (result.success) {
         // Premier code envoyé tout seul ; « Plus tard » reprend la redirection habituelle.
         navigation.replace('VerifyEmail', { ...route?.params, autoSend: true, afterAuth: true });
@@ -77,7 +80,7 @@ const RegisterScreen = ({ navigation, route }) => {
     }
   };
 
-  const isFormValid = name.trim() && email.trim() && password.length >= 6 && password === confirmPassword;
+  const isFormValid = name.trim() && email.trim() && password.length >= 6 && password === confirmPassword && accepte;
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
@@ -105,6 +108,27 @@ const RegisterScreen = ({ navigation, route }) => {
               </View>
             ))}
           </View>
+          <View style={legal.row}>
+            <Pressable
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: accepte }}
+              accessibilityLabel="J’accepte les conditions d’utilisation et les conditions d’abonnement, et j’ai lu la politique de confidentialité"
+              onPress={() => setAccepte((value) => !value)}
+              hitSlop={8}
+              style={[legal.box, accepte && legal.boxOn]}
+            >
+              {accepte ? <Check size={14} color={brand.onInk} strokeWidth={2.6} /> : null}
+            </Pressable>
+            <Text variant="caption" style={legal.text}>
+              J’accepte les{' '}
+              <Text variant="caption" style={legal.link} onPress={() => openLegal('conditions-utilisation')} accessibilityRole="link">conditions d’utilisation</Text>
+              {' '}et les{' '}
+              <Text variant="caption" style={legal.link} onPress={() => openLegal('conditions-vente')} accessibilityRole="link">conditions d’abonnement</Text>
+              . J’ai lu la{' '}
+              <Text variant="caption" style={legal.link} onPress={() => openLegal('politique-confidentialite')} accessibilityRole="link">politique de confidentialité</Text>
+              .
+            </Text>
+          </View>
           <View style={styles.submit}>
             <PrepButton title="Créer mon compte" loading={loading} disabled={loading || !isFormValid} onPress={handleRegister} />
           </View>
@@ -119,5 +143,12 @@ export default RegisterScreen;
 
 const useStyles = createThemedStyles(({ brand }) => {
   const NAVY_SOFT = brand.inkSoft;
-  return { NAVY_SOFT };
+  const legal = {
+    row: { flexDirection: 'row', alignItems: 'flex-start', gap: 12, marginTop: 20 },
+    box: { width: 24, height: 24, borderRadius: 7, borderWidth: 1.5, borderColor: brand.lineStrong, backgroundColor: brand.sheet, alignItems: 'center', justifyContent: 'center', marginTop: 1 },
+    boxOn: { backgroundColor: brand.burgundy, borderColor: brand.burgundy },
+    text: { flex: 1, color: brand.inkSoft, lineHeight: 20 },
+    link: { color: brand.burgundy, fontWeight: '600', textDecorationLine: 'underline' },
+  };
+  return { NAVY_SOFT, legal };
 });

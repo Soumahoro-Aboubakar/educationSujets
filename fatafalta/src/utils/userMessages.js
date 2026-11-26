@@ -79,6 +79,13 @@ export function getUserMessage(error, context = 'general', register = 'tu') {
     const approved = candidates.find((text) => typeof text === 'string' && Object.prototype.hasOwnProperty.call(VALIDATION_MESSAGES, text));
     return result('Informations à vérifier', approved ? VALIDATION_MESSAGES[approved][vous ? 1 : 0] : vous ? 'Vérifiez les informations saisies, puis réessayez.' : 'Vérifie les informations saisies, puis réessaie.');
   }
+  if (status === 429 && code === 'ACCOUNT_LOCKED') {
+    const minutes = Math.ceil(Number(error?.response?.data?.retryAfter || 0) / 60);
+    const wait = minutes >= 60 ? `${Math.ceil(minutes / 60)} h` : `${Math.max(1, minutes)} min`;
+    return result('Compte verrouillé temporairement', vous
+      ? `Trop d’essais de mot de passe. Réessayez dans ${wait}, ou utilisez « Mot de passe oublié ».`
+      : `Trop d’essais de mot de passe. Réessaie dans ${wait}, ou utilise « Mot de passe oublié ».`);
+  }
   if (status === 429) return result('Trop de tentatives rapprochées', retry);
   if (status === 409) return result('Action à vérifier', vous ? 'Actualisez les informations avant de réessayer.' : 'Actualise les informations avant de réessayer.');
   const guidance = {

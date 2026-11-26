@@ -32,6 +32,7 @@ const PaymentMethod = require('../models/PaymentMethod');
 const abuse = require('../services/security/abuseTracker');
 const breaker = require('../services/payments/circuitBreaker');
 const securityConfig = require('../config/security');
+const LoginGuard = require('../models/LoginGuard');
 
 let app;
 let httpServer;
@@ -78,7 +79,7 @@ test.before(async () => {
   if (skip) return;
   await mongoose.connect(uri);
   await mongoose.connection.dropDatabase();
-  await Promise.all([Payment.syncIndexes(), User.syncIndexes()]);
+  await Promise.all([Payment.syncIndexes(), User.syncIndexes(), LoginGuard.syncIndexes()]);
   app = require('../server');
   httpServer = app.listen(0);
   apiUrl = `http://127.0.0.1:${httpServer.address().port}`;
@@ -411,6 +412,64 @@ test('auth: credential stuffing (many accounts from one IP) blocks the IP', { sk
   const next = await call('GET', '/api/health', { ip });
   assert.equal(next.status, 429);
   assert.equal(next.body.code, 'IP_TEMPORARILY_BLOCKED');
+});
+
+// Attaque distribuée : chaque essai vient d'une IP différente, aucune limite par IP ne se déclenche.
+const failFromManyIps = async (email, count) => {
+  let last;
+  for (let i = 0; i < count; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    last = await call('POST', '/api/auth/login', { ip: freshIp(), body: { email, password: `guess-${i}` } });
+  }
+  return last;
+};
+const LOCK_AT = () => securityConfig.accountLock.failuresBeforeLock;
+
+test('auth: distributed brute force (one IP per try) locks the account, even for the right password', { skip }, async () => {
+  const user = await newUser();
+  const before = await failFromManyIps(user.email, LOCK_AT() - 1);
+  assert.equal(before.status, 401, 'pas de verrouillage avant le seuil');
+  const locking = await failFromManyIps(user.email, 1);
+  assert.equal(locking.status, 429);
+  assert.equal(locking.body.code, 'ACCOUNT_LOCKED');
+  assert.match(locking.body.error, /Mot de passe oublié/);
+  assert.equal(Number(locking.headers.get('retry-after')), securityConfig.accountLock.baseLockMs / 1000);
+  // Pendant le verrouillage, même le bon mot de passe (depuis une autre IP) ne passe pas.
+  const right = await call('POST', '/api/auth/login', { ip: freshIp(), body: { email: user.email, password: 'secret123' } });
+  assert.equal(right.status, 429);
+  assert.equal(right.body.code, 'ACCOUNT_LOCKED');
+  // Le verrouillage est en base : il survit à la remise à zéro des compteurs en mémoire (redémarrage).
+  abuse.reset();
+  assert.equal((await call('POST', '/api/auth/login', { ip: freshIp(), body: { email: user.email, password: 'secret123' } })).status, 429);
+});
+
+test('auth: an unknown address is locked exactly like a real account (no enumeration)', { skip }, async () => {
+  const user = await newUser();
+  const real = await failFromManyIps(user.email, LOCK_AT());
+  const ghost = await failFromManyIps(`ghost-${Date.now()}@test.ci`, LOCK_AT());
+  assert.equal(ghost.status, real.status);
+  assert.equal(ghost.body.code, real.body.code);
+  assert.equal(ghost.body.error, real.body.error);
+  assert.equal(ghost.headers.get('retry-after'), real.headers.get('retry-after'));
+});
+
+test('auth: a successful login clears the failure count (typos are forgiven)', { skip }, async () => {
+  const user = await newUser();
+  await failFromManyIps(user.email, LOCK_AT() - 1);
+  assert.equal((await call('POST', '/api/auth/login', { ip: freshIp(), body: { email: user.email, password: 'secret123' } })).status, 200);
+  const after = await failFromManyIps(user.email, LOCK_AT() - 1);
+  assert.equal(after.status, 401, 'le compteur est reparti de zéro');
+});
+
+test('auth: lock expires, then a repeat offence locks twice as long', { skip }, async () => {
+  const user = await newUser();
+  await failFromManyIps(user.email, LOCK_AT());
+  // Fin du premier verrouillage (simulée) : le compte s'ouvre de nouveau.
+  await LoginGuard.updateMany({}, { $set: { lockedUntil: new Date(Date.now() - 1000) } });
+  assert.equal((await call('POST', '/api/auth/login', { ip: freshIp(), body: { email: user.email, password: 'wrong-again' } })).status, 401);
+  const second = await failFromManyIps(user.email, LOCK_AT() - 1);
+  assert.equal(second.status, 429);
+  assert.equal(Number(second.headers.get('retry-after')), (2 * securityConfig.accountLock.baseLockMs) / 1000);
 });
 
 test('auth: unknown email and wrong password are indistinguishable (message and timing)', { skip }, async () => {

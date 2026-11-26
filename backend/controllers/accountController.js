@@ -147,3 +147,10 @@ exports.changePassword = asyncHandler(async (req, res) => {
   await require('../services/auth/sessionService').revokeAll(user._id);
   sendSuccess(res, { message: 'Mot de passe modifié' });
 });
+
+exports.deleteMyAccount = asyncHandler(async (req, res) => {
+  const result = await require('../services/account/deletionService').deleteAccount(req.user._id, req.body?.motDePasse); // eslint-disable-line global-require
+  res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
+  res.clearCookie('refreshToken', { path: '/api/auth', httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict' });
+  sendSuccess(res, { data: result, message: 'Ton compte a été supprimé.' });
+});

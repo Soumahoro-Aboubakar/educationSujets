@@ -14,6 +14,8 @@ const Register = () => {
   const navigate = useNavigate();
   const next = params.get('next');
   const [form, setForm] = useState({ name: '', email: '', password: '' });
+  // Acceptation des conditions : case jamais précochée, obligatoire pour créer le compte.
+  const [accepte, setAccepte] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -31,7 +33,7 @@ const Register = () => {
     }
     setLoading(true);
     setJustRegistered(true);
-    const result = await register(form.name.trim(), form.email.trim(), form.password);
+    const result = await register(form.name.trim(), form.email.trim(), form.password, accepte);
     setLoading(false);
     if (result.success) {
       trackEvent('sign_up', { method: 'email' });
@@ -56,8 +58,14 @@ const Register = () => {
         <Field label="Nom complet" autoComplete="name" required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
         <Field label="Email" type="email" autoComplete="email" required value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
         <PasswordField label="Mot de passe" hint="6 caractères minimum." error={passwordError} autoComplete="new-password" required value={form.password} onChange={(event) => { setForm({ ...form, password: event.target.value }); setPasswordError(''); }} />
+        <label className="flex cursor-pointer items-start gap-3 pt-1 text-[14px] leading-relaxed text-ink-soft">
+          <input type="checkbox" required checked={accepte} onChange={(event) => setAccepte(event.target.checked)} className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-line-strong accent-ink" />
+          <span>
+            J’accepte les <Link to="/conditions-utilisation" target="_blank" className="font-medium text-ink underline decoration-gold underline-offset-4">conditions d’utilisation</Link> et les <Link to="/conditions-vente" target="_blank" className="font-medium text-ink underline decoration-gold underline-offset-4">conditions d’abonnement</Link>. J’ai lu la <Link to="/politique-confidentialite" target="_blank" className="font-medium text-ink underline decoration-gold underline-offset-4">politique de confidentialité</Link>.
+          </span>
+        </label>
         <ErrorNote>{error}</ErrorNote>
-        <Button type="submit" size="lg" className="!mt-6 w-full" loading={loading} disabled={!form.name || !form.email || !form.password}>Créer mon compte</Button>
+        <Button type="submit" size="lg" className="!mt-6 w-full" loading={loading} disabled={!form.name || !form.email || !form.password || !accepte}>Créer mon compte</Button>
       </form>
     </AuthShell>
   );

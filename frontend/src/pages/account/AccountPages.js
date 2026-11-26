@@ -1,6 +1,6 @@
 import React, { Suspense, lazy, useContext, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ArrowDownLeft, ArrowUpRight, Check, ChevronDown, Copy, CreditCard, Download, FileText, Gift, Wallet } from 'lucide-react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, ArrowDownLeft, ArrowUpRight, Check, ChevronDown, Copy, CreditCard, Download, FileText, Gift, Laptop, Smartphone, Wallet } from 'lucide-react';
 import { Button, Card, EmptyState, Field, InfoRow, Modal, PasswordField, SkeletonRows, StatusPill } from '../../components/ui';
 import AuthContext from '../../context/AuthContext';
 import useAsync from '../../hooks/useAsync';
@@ -532,6 +532,90 @@ export const AccountProfile = () => {
           </div>
         </form>
       </Card>
+
+      <MesAppareils />
+      <SupprimerCompte />
     </>
+  );
+};
+
+/*
+ * « Mes appareils » : l’abonnement est personnel, mais utilisable sur les appareils de son titulaire.
+ * Au-delà de la limite, la session la plus ancienne se ferme seule (jamais de blocage du compte).
+ */
+const MesAppareils = () => {
+  const { data, loading, error, reload } = useAsync(() => account.sessions(), []);
+  const [busy, setBusy] = useState(null);
+  const [message, setMessage] = useState(null);
+  const revoke = async (id) => {
+    setBusy(id); setMessage(null);
+    try { await account.revokeSession(id); setMessage('Appareil déconnecté.'); reload(); } catch (e) { setMessage(errorMessage(e)); } finally { setBusy(null); }
+  };
+  const list = data?.list || [];
+  return (
+    <section aria-labelledby="mes-appareils" className="mt-10">
+      <h2 id="mes-appareils" className="text-lg font-bold text-ink">Mes appareils</h2>
+      <p className="mt-1 max-w-[62ch] text-sm leading-relaxed text-ink-soft">
+        Ton compte et ton abonnement sont personnels. Tu peux les utiliser sur tes propres appareils{data?.limite ? ` (${data.limite} connexions actives au plus : au-delà, la plus ancienne se ferme)` : ''}, mais pas les partager. <Link to="/conditions-vente#abonnement-personnel" className="font-medium text-ink underline decoration-gold underline-offset-4">En savoir plus</Link>
+      </p>
+      <div className="mt-4 border-t border-line">
+        {loading ? <SkeletonRows count={2} className="py-4" /> : null}
+        {error ? <p className="py-4 text-sm text-burgundy">{errorMessage(error)} <button type="button" onClick={reload} className="font-semibold underline">Réessayer</button></p> : null}
+        {list.map((s) => {
+          const Icone = s.plateforme === 'mobile' || /Android|iPhone|Application/.test(s.appareil) ? Smartphone : Laptop;
+          return (
+            <div key={s.id} className="flex items-center gap-4 border-b border-line py-4">
+              <Icone aria-hidden className="h-5 w-5 shrink-0 text-ink-muted" />
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[15px] font-semibold text-ink">{s.appareil}{s.actuelle ? <span className="ml-2 text-[13px] font-medium text-gold-ink">Cet appareil</span> : null}</p>
+                <p className="text-[13px] tabular-nums text-ink-muted">Dernière utilisation : {formatDate(s.dernierUsage)} · connecté le {formatDate(s.connecteLe)}</p>
+              </div>
+              {s.actuelle ? null : <Button size="sm" variant="secondary" loading={busy === s.id} onClick={() => revoke(s.id)}>Déconnecter</Button>}
+            </div>
+          );
+        })}
+      </div>
+      {message ? <p role="status" className="mt-3 text-sm text-ink-soft">{message}</p> : null}
+    </section>
+  );
+};
+
+// Suppression du compte par son titulaire (exigée par Google Play ; politique de confidentialité).
+const SupprimerCompte = () => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [ouvert, setOuvert] = useState(false);
+  const [motDePasse, setMotDePasse] = useState('');
+  const [state, setState] = useState(null);
+  const supprimer = async (event) => {
+    event.preventDefault();
+    setState({ loading: true });
+    try {
+      await account.deleteAccount(motDePasse);
+      logout();
+      navigate('/suppression-compte?fait=1', { replace: true });
+    } catch (e) {
+      setState({ error: errorMessage(e) });
+    }
+  };
+  return (
+    <section aria-labelledby="supprimer-compte" className="mt-12 border-t border-line pt-8">
+      <h2 id="supprimer-compte" className="text-lg font-bold text-ink">Supprimer mon compte</h2>
+      <p className="mt-1 max-w-[62ch] text-sm leading-relaxed text-ink-soft">
+        Ton compte, ta progression et tes données personnelles sont supprimés ou rendus anonymes. Les traces de paiement sont conservées le temps exigé par la loi. Un abonnement en cours prend fin, même s’il te restait du temps payé ; tes droits légaux restent applicables. <Link to="/suppression-compte" className="font-medium text-ink underline decoration-gold underline-offset-4">Ce qui est supprimé</Link>
+      </p>
+      <Button variant="secondary" className="mt-4" onClick={() => setOuvert(true)}>Supprimer mon compte…</Button>
+      <Modal open={ouvert} onClose={() => { setOuvert(false); setState(null); setMotDePasse(''); }} title="Supprimer définitivement ton compte ?">
+        <form onSubmit={supprimer} className="space-y-4">
+          <p className="text-sm leading-relaxed text-ink-soft">Cette action est définitive. Confirme avec ton mot de passe.</p>
+          <PasswordField label="Mot de passe" autoComplete="current-password" value={motDePasse} onChange={(event) => setMotDePasse(event.target.value)} />
+          {state?.error ? <p className="text-sm text-burgundy">{state.error}</p> : null}
+          <div className="flex flex-wrap justify-end gap-3">
+            <Button type="button" variant="ghost" onClick={() => setOuvert(false)}>Annuler</Button>
+            <Button type="submit" loading={state?.loading} disabled={!motDePasse} className="!bg-burgundy hover:!bg-burgundy/90">Supprimer définitivement</Button>
+          </div>
+        </form>
+      </Modal>
+    </section>
   );
 };

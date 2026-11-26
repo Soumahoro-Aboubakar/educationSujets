@@ -25,6 +25,7 @@ import { fileURLToPath } from 'node:url';
 
 import { SITE_DESCRIPTION, SITE_URL, absoluteUrl, renderHead } from '../src/lib/seo.js';
 import { PAGES_SEO } from '../src/lib/pagesSeo.js';
+import { DOCUMENTS as LEGAL_DOCUMENTS, LEGAL_DATE_TEXTE, LEGAL_VERSION, legalSeo } from '../src/legal/documents.js';
 import {
   CATALOG_ROOT, catalogCrumbs, catalogPath, catalogSeo, catalogText, documentPath, documentSeo,
 } from '../src/lib/catalogSeo.js';
@@ -274,7 +275,7 @@ const header = () => `
 const footer = () => `
 <footer class="mt-auto border-t border-line bg-paper"><div class="mx-auto w-full max-w-site px-4 py-10 text-sm text-ink-soft sm:px-6 lg:px-8">
   <p>Les anciens sujets de concours, tests et corrigés, réunis au même endroit.</p>
-  <nav aria-label="Pied de page" class="mt-3 flex gap-4"><a href="/sujets">Sujets</a><a href="/abonnement">Abonnement</a></nav>
+  <nav aria-label="Pied de page" class="mt-3 flex flex-wrap gap-4"><a href="/sujets">Sujets</a><a href="/abonnement">Abonnement</a><a href="/conditions-utilisation">Conditions d’utilisation</a><a href="/politique-confidentialite">Confidentialité</a><a href="/mentions-legales">Mentions légales</a><a href="/informations-legales">Informations légales</a></nav>
 </div></footer>`;
 
 const layout = (main) => `<div class="flex min-h-screen flex-col bg-paper font-sans text-ink antialiased">${header()}<main class="flex-1"><div class="mx-auto w-full max-w-site px-4 py-8 sm:px-6 md:py-12 lg:px-8">${main}</div></main>${footer()}</div>`;
@@ -342,6 +343,37 @@ const simplePageHtml = (h1, text, link) => layout(`
   <h1 class="text-3xl font-bold tracking-[-0.03em] text-ink">${escapeHtml(h1)}</h1>
   <p class="mt-2 text-ink-soft">${escapeHtml(text)}</p>
   ${link ? `<p class="mt-6"><a href="${link.path}" class="font-semibold text-burgundy">${escapeHtml(link.label)}</a></p>` : ''}`);
+
+// Documents juridiques : texte intégral dans le HTML (lisible sans JavaScript, indexable).
+const legalInline = (text) => escapeHtml(text)
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => `<a href="${href}" class="font-medium text-ink underline">${label}</a>`)
+  .replace(/\[(À COMPLÉTER[^\]]*)\]/g, '<mark>$1</mark>');
+const legalBlocHtml = (bloc) => {
+  if (bloc.liste) return `<ul class="my-4 list-disc space-y-2 pl-5">${bloc.liste.map((item) => `<li>${legalInline(item)}</li>`).join('')}</ul>`;
+  if (bloc.tableau) return `<table class="my-5 w-full text-left"><thead><tr>${bloc.tableau.entetes.map((h) => `<th>${escapeHtml(h)}</th>`).join('')}</tr></thead><tbody>${bloc.tableau.lignes.map((ligne) => `<tr>${ligne.map((cell) => `<td>${legalInline(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  if (bloc.note) return `<p class="my-5 rounded-xl bg-paper-dim px-5 py-4">${legalInline(bloc.note)}</p>`;
+  return `<p class="my-4">${legalInline(bloc.p)}</p>`;
+};
+const legalPageHtml = (doc) => layout(`
+  <article class="max-w-[68ch] text-[17px] leading-[1.7] text-ink-soft">
+  <a href="/informations-legales" class="text-[14px] text-ink-muted">Informations légales</a>
+  <h1 class="mt-3 text-3xl font-bold tracking-[-0.03em] text-ink md:text-4xl">${escapeHtml(doc.titre)}</h1>
+  <p class="mt-4 text-[14px] text-ink-muted">Version ${escapeHtml(LEGAL_VERSION)} · En vigueur le ${escapeHtml(LEGAL_DATE_TEXTE)}</p>
+  ${doc.essentiel?.length ? `<h2 class="mt-8 text-[15px] font-bold text-ink">L’essentiel</h2><ul class="mt-3 list-disc pl-5">${doc.essentiel.map((item) => `<li>${legalInline(item)}</li>`).join('')}</ul>` : ''}
+  ${doc.sections.map((section) => `<section id="${escapeHtml(section.id)}"><h2 class="mt-12 text-[22px] font-bold text-ink">${escapeHtml(section.titre)}</h2>${section.blocs.map(legalBlocHtml).join('')}</section>`).join('')}
+  <p class="mt-12">Une question sur ce document ? <a href="mailto:contact@fatafalta.com">contact@fatafalta.com</a></p>
+  </article>
+  <h2 class="mt-16 text-xl font-bold text-ink">Les autres documents</h2>
+  ${listHtml(LEGAL_DOCUMENTS.filter((d) => d.slug !== doc.slug).map((d) => ({ label: d.titre, path: `/${d.slug}` })))}`);
+const LEGAL_HUB_SEO = {
+  title: 'Informations légales — Fatafalta',
+  description: 'Conditions d’utilisation, conditions d’abonnement, politique de confidentialité, cookies, sécurité, propriété intellectuelle et mentions légales de Fatafalta.',
+  path: '/informations-legales',
+};
+const legalHubHtml = () => layout(`
+  <h1 class="text-3xl font-bold tracking-[-0.03em] text-ink md:text-4xl">Informations légales</h1>
+  <p class="mt-2 max-w-2xl text-ink-soft">Les règles qui encadrent l’utilisation de Fatafalta, l’abonnement et la protection de tes données. Version ${escapeHtml(LEGAL_VERSION)}, en vigueur le ${escapeHtml(LEGAL_DATE_TEXTE)}.</p>
+  ${listHtml(LEGAL_DOCUMENTS.map((d) => ({ label: d.titre, path: `/${d.slug}`, meta: d.resume })))}`);
 
 const prepHomeHtml = (catalogue) => layout(`
   ${breadcrumbHtml([{ label: 'Accueil', path: '/' }, { label: 'Préparation', path: PREP_ROOT }])}
@@ -553,6 +585,13 @@ const main = async () => {
     body: simplePageHtml('Préparez vos concours avec tous les sujets.', PAGES_SEO.subscribe.description, { path: '/sujets', label: 'Parcourir les sujets' }),
   }));
   sitemap.push({ path: '/abonnement' });
+
+  await writePage('/informations-legales', pageFromTemplate(template, { seo: LEGAL_HUB_SEO, body: legalHubHtml() }));
+  sitemap.push({ path: '/informations-legales' });
+  for (const doc of LEGAL_DOCUMENTS) {
+    await writePage(`/${doc.slug}`, pageFromTemplate(template, { seo: legalSeo(doc), body: legalPageHtml(doc) }));
+    sitemap.push({ path: `/${doc.slug}` });
+  }
 
   await writeFile(path.join(BUILD_DIR, '404.html'), pageFromTemplate(template, {
     seo: PAGES_SEO.notFound,

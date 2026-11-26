@@ -142,6 +142,14 @@ const security = {
     maxTrackedKeys: 50000,
   },
 
+  // Verrouillage progressif d'un compte (échecs comptés en base, toutes IP confondues) :
+  // 10 échecs consécutifs → 15 min, puis 30 min, 1 h… 24 h au plus. Recours : « Mot de passe oublié ».
+  accountLock: {
+    failuresBeforeLock: num('ACCOUNT_LOCK_FAILURES', 10),
+    baseLockMs: num('ACCOUNT_LOCK_MS', 15 * MINUTE),
+    maxLockMs: num('ACCOUNT_LOCK_MAX_MS', 24 * HOUR),
+  },
+
   // Vérification humaine (Cloudflare Turnstile), demandée seulement en cas de comportement suspect.
   captcha: {
     secret: process.env.TURNSTILE_SECRET_KEY || '',

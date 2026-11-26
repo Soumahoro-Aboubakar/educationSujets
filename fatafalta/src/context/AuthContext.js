@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }) => {
     await SecureStore.setItemAsync('authUser', JSON.stringify(userValue));
   };
 
-  const register = useCallback(async (name, email, password) => {
+  const register = useCallback(async (name, email, password, accepteConditions = false) => {
     try {
       setError(null);
       const response = await api.post('/api/auth/register', {
@@ -87,6 +87,7 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
         platform: 'mobile',
+        accepteConditions: accepteConditions === true,
       });
       
       const { token: newToken, user: newUser } = response.data;

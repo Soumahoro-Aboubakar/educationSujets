@@ -10,7 +10,9 @@ import {
   LogOut,
   MailWarning,
   Settings,
+  Scale,
   ShieldCheck,
+  UserX,
   Wallet,
 } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
@@ -34,7 +36,8 @@ const GuestAccount = ({ navigation }) => {
     <View style={styles.guestRows}>
       <Section>
         <Row icon={Download} label="Téléchargements" hint="Sujets PDF enregistrés sur cet appareil" onPress={() => navigation.navigate('Downloads')} />
-        <Row icon={Settings} label="Paramètres" hint="Objectif quotidien, texte, documents PDF" onPress={() => navigation.navigate('Settings')} isLast />
+        <Row icon={Settings} label="Paramètres" hint="Objectif quotidien, texte, documents PDF" onPress={() => navigation.navigate('Settings')} />
+        <Row icon={Scale} label="Informations légales" hint="Conditions, confidentialité, mentions légales" onPress={() => navigation.navigate('Legal')} isLast />
       </Section>
     </View>
     <View style={styles.guest}>
@@ -145,8 +148,15 @@ const AccountScreen = ({ navigation }) => {
               ) : null}
               <Row icon={Download} label="Téléchargements" onPress={() => navigation.navigate('Downloads')} />
               <Row icon={Settings} label="Paramètres" onPress={() => navigation.navigate('Settings')} />
+              <Row icon={Scale} label="Informations légales" onPress={() => navigation.navigate('Legal')} />
               <Row icon={LogOut} label="Se déconnecter" loading={loggingOut} disabled={loggingOut} onPress={confirmLogout} danger isLast />
             </Section>
+
+            {!isAdmin() ? (
+              <Section>
+                <Row icon={UserX} label="Supprimer mon compte" hint="Efface tes données personnelles" onPress={() => navigation.navigate('DeleteAccount')} danger isLast />
+              </Section>
+            ) : null}
           </>
         )}
       </AccountScroll>

@@ -14,9 +14,10 @@ import AuthContext from '../context/AuthContext';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
 import { useIsFocused } from '@react-navigation/native';
 import { InlineAction } from '../prep/ui/primitives';
+import { openLegal } from '../utils/legalLinks';
 
 const LoginScreen = ({ navigation, route }) => {
-  const { NAVY_SOFT } = useStyles();
+  const { NAVY_SOFT, legal } = useStyles();
   const styles = useAuthStyles();
   const insets = useSafeAreaInsets();
   const { login, user, isAuthenticated, loading: authLoading } = useContext(AuthContext);
@@ -85,6 +86,12 @@ const LoginScreen = ({ navigation, route }) => {
           <View style={styles.submit}>
             <PrepButton title="Accéder à mon espace" loading={loading} disabled={loading || !isFormValid} onPress={handleLogin} />
           </View>
+          <Text variant="caption" style={legal.text}>
+            En te connectant, tu acceptes les{' '}
+            <Text variant="caption" style={legal.link} accessibilityRole="link" onPress={() => openLegal('conditions-utilisation')}>conditions d’utilisation</Text>
+            {' '}de Fatafalta et reconnais avoir lu la{' '}
+            <Text variant="caption" style={legal.link} accessibilityRole="link" onPress={() => openLegal('politique-confidentialite')}>politique de confidentialité</Text>.
+          </Text>
           <View style={styles.registerLink}><Text variant="body" style={styles.linkPrefix}>Pas encore de compte ?</Text><Pressable onPress={() => (route?.params?.returnTo ? navigation.replace('Register', route.params) : navigation.navigate('Register'))} accessibilityRole="button" hitSlop={6} style={({ pressed }) => [styles.linkButton, pressed && { opacity: 0.8 }]}><Text variant="bodyMedium" style={styles.linkLabel}>S’inscrire</Text></Pressable></View>
         </AccountPaper>
       </ScrollView>
@@ -98,5 +105,9 @@ const localStyles = { forgot: { alignSelf: 'flex-end', marginTop: 12 } };
 
 const useStyles = createThemedStyles(({ brand }) => {
   const NAVY_SOFT = brand.inkSoft;
-  return { NAVY_SOFT };
+  const legal = {
+    text: { color: brand.inkSoft, textAlign: 'center', lineHeight: 19, marginTop: 14, paddingHorizontal: 8 },
+    link: { color: brand.ink, fontWeight: '600', textDecorationLine: 'underline' },
+  };
+  return { NAVY_SOFT, legal };
 });

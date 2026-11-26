@@ -52,6 +52,7 @@ Clé « sujet » : l'utilisateur connecté, sinon l'IP. Les IPv6 sont regroupée
 | `POST /api/auth/login` | IP + email | 8 **échecs** / 15 min | Brute force ciblé. Les connexions réussies ne comptent pas. |
 | `POST /api/auth/login` | IP | 60 échecs / 15 min | IP partagée : quelques erreurs de saisie tolérées. |
 | `POST /api/auth/login` | email | 25 échecs / h | Attaque distribuée sur un compte (sans pénaliser l'IP). |
+| `POST /api/auth/login` | compte (en base) | 10 échecs consécutifs → verrouillage 15 min, doublé à chaque récidive (24 h max) | Force brute distribuée lente. Persistant (survit aux redémarrages), identique pour une adresse inconnue (pas d'énumération), effacé par une connexion réussie ou « Mot de passe oublié ». Réponse 429 `ACCOUNT_LOCKED`. Réglages : `SEC_ACCOUNT_LOCK_FAILURES`, `SEC_ACCOUNT_LOCK_MS`, `SEC_ACCOUNT_LOCK_MAX_MS`. |
 | `POST /api/auth/register` | IP | 20 / h (3 / h pour curl, python…) | Création massive de comptes. |
 | `POST /api/auth/refresh-token` | IP | 120 / 15 min | Renouvellements mobiles ; bloque le rejeu en boucle. |
 | `POST /api/auth/handoff` | utilisateur | 10 / 10 min | Génération de codes de connexion. |

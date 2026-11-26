@@ -39,6 +39,11 @@ const UserSchema = new mongoose.Schema({
   },
   statusReason: { type: String, trim: true },
   mustChangePassword: { type: Boolean, default: false },
+  // Preuve d’acceptation des conditions d’utilisation et de vente (version et date), cochée à l’inscription.
+  conditions: {
+    version: { type: String, default: null },
+    accepteesLe: { type: Date, default: null },
+  },
   // Code promotionnel utilisé lors du premier paiement (fixé une seule fois, côté serveur).
   referredBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
   isSuperAdmin: {

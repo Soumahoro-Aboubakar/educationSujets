@@ -15,7 +15,7 @@ export const PAGES_SEO = {
   },
   subscribe: {
     title: 'Abonnement Fatafalta : téléchargez sujets et corrigés',
-    description: 'L’abonnement Fatafalta donne accès au téléchargement des anciens sujets de concours et de leurs corrigés. Paiement par Orange Money, MTN, Moov ou Wave.',
+    description: 'L’abonnement Fatafalta donne accès au téléchargement des anciens sujets de concours et de leurs corrigés. Paiement par Wave.',
     path: '/abonnement',
   },
   search: {

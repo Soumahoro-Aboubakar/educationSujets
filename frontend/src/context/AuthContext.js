@@ -53,9 +53,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (name, email, password) => {
+  const register = async (name, email, password, accepteConditions = false) => {
     try {
-      const res = await axios.post('/api/auth/register', { name, email, password });
+      const res = await axios.post('/api/auth/register', { name, email, password, platform: 'web', accepteConditions: accepteConditions === true });
       return startSession(res.data);
     } catch (error) {
       const details = error.response?.data?.details;
