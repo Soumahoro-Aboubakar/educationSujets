@@ -26,7 +26,7 @@ const verifierListe = async (ids, { force = false, log = console.log } = {}) => 
   const res = {};
   for (const id of [...new Set(ids)]) {
     const connu = cache[id];
-    if (connu && !force && Date.now() - Date.parse(connu.verifieeLe) < SEMAINE && !/illisible/.test(connu.motifs.join())) { res[id] = connu; continue; }
+    if (connu && !force && Date.now() - Date.parse(connu.verifieeLe) < SEMAINE && !/illisible|erreur réseau/.test(connu.motifs.join())) { res[id] = connu; continue; }
     try { res[id] = await verifierVideo(id); } catch (error) { res[id] = { youtubeId: id, ok: false, motifs: [`erreur réseau : ${error.message}`], verifieeLe: new Date().toISOString() }; }
     cache[id] = res[id];
     ecrireCache(cache);

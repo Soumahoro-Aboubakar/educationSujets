@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L1",
+    "youtubeId": "fzpaNa8w5as",
+    "couverture": "exacte",
+    "justification": "Hedacademy : vecteurs et relation de Chasles.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L2",
+    "youtubeId": "7c6y8ibnA5w",
+    "couverture": "partielle",
+    "justification": "Distance entre deux points dans un repère orthonormé ; coordonnées du vecteur et du milieu restent dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L3",
+    "youtubeId": "elZ5bR9_aJk",
+    "couverture": "exacte",
+    "justification": "Khan Academy : parallélisme et perpendicularité de droites dans un repère par leurs coefficients.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L4",
+    "youtubeId": "VLa5ApIKZY0",
+    "couverture": "exacte",
+    "justification": "Trigonométrie dans le triangle rectangle en 3 minutes : cosinus, sinus, tangente.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L5",
+    "youtubeId": "XZQo3muJ-mU",
+    "couverture": "exacte",
+    "justification": "Thalès au brevet : calculer une longueur et prouver que des droites sont parallèles (réciproque).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L6",
+    "youtubeId": "2x-Xf2jJVnA",
+    "couverture": "exacte",
+    "justification": "myMaxicours : angles inscrits et angle au centre interceptant le même arc.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L7",
+    "youtubeId": "y0__u49nzjY",
+    "couverture": "partielle",
+    "justification": "Formulaire des volumes des solides élémentaires (pavé, cube, pyramide, cône, boule).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-GEOMETRIE-L8",
+    "youtubeId": "nZGW4q4zeKw",
+    "couverture": "partielle",
+    "justification": "Méthodes pour réussir un QCM de mathématiques : lire les propositions, tester, éliminer.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

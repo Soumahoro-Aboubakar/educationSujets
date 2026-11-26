@@ -136,15 +136,15 @@ test('catalogue : découverte vide publiée, archives privées, descendants et p
 });
 test('import : à blanc, liens explicites, répétition sans écrasement des éditions', { skip }, async () => {
   await Content.deleteMany({}); await Publication.deleteMany({}); content.resetCache();
-  const before = await migration.migrate(); assert.equal(before.modules, 39); assert.equal(before.programmes, 8); assert.equal(await Content.countDocuments(), 0);
+  const before = await migration.migrate(); const nbModules = Object.keys(pack.modules).length; const nbProgrammes = pack.programmes.length; assert.equal(before.modules, nbModules); assert.equal(before.programmes, nbProgrammes); assert.equal(await Content.countDocuments(), 0);
   await assert.rejects(migration.migrate({ apply: true }), /Rapprochement/); assert.throws(() => migration.assertLocalUri('mongodb://production.invalid/fatafalta'));
   const links = {};
   for (const p of pack.programmes) { const org = await Organisme.create({ nom: `Import ${p.code}` }); const parcours = await ParcoursType.create({ organismeId: org._id, nom: p.parcoursType }); links[p.code] = { organismeId: String(org._id), parcoursTypeId: String(parcours._id) }; }
-  const first = await migration.migrate({ apply: true, links }); assert.equal(first.generation, 1); assert.equal(await Content.countDocuments(), 47);
+  const first = await migration.migrate({ apply: true, links }); assert.equal(first.generation, 1); assert.equal(await Content.countDocuments(), nbModules + nbProgrammes);
   const row = await service.latest('module', 'MATH-LNEXP'); const modified = await service.saveDraft({ ...row, expectedRevision: row.revision, payload: { ...row.payload, titre: 'Édition conservée' } });
   const revisionBeforeRetry = (await require('../models/CatalogRevision').findById('catalog').lean()).revision;
   assert.equal((await migration.migrate({ apply: true, links })).alreadyImported, true);
-  assert.equal((await require('../models/CatalogRevision').findById('catalog').lean()).revision, revisionBeforeRetry); assert.equal(await Content.countDocuments(), 48); assert.equal((await service.latest('module', 'MATH-LNEXP')).revision, modified.revision);
+  assert.equal((await require('../models/CatalogRevision').findById('catalog').lean()).revision, revisionBeforeRetry); assert.equal(await Content.countDocuments(), nbModules + nbProgrammes + 1); assert.equal((await service.latest('module', 'MATH-LNEXP')).revision, modified.revision);
 });
 test('vidéo liée à une révision et snapshot stable pendant une requête', { skip }, async () => {
   const initial = await content.snapshot(); const cible = require('../scripts/video/lib/cible').resolveCible({ type: 'lecon', id: 'MATH-LNEXP-L1' }, initial.pack); assert.equal(cible.contentRevision, 1); assert.equal(cible.contentGeneration, 1);

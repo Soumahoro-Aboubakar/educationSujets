@@ -30,7 +30,7 @@
         "Le budget limite les choix.",
         "L’utilité représente un ordre de préférence."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L2",
@@ -53,7 +53,7 @@
         "Rapporter le gain marginal au prix.",
         "Vérifier les hypothèses et les choix de bord."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L3",
@@ -78,7 +78,7 @@
         "Revenu ou préférences : déplacement de la courbe.",
         "Élasticité : rapport de variations relatives."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L4",
@@ -101,7 +101,7 @@
         "Moyenne et marge répondent à deux questions.",
         "Comparer les techniques à production identique."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L5",
@@ -124,7 +124,7 @@
         "Marge : un facteur change.",
         "Échelle : tous les facteurs changent proportionnellement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L6",
@@ -149,7 +149,7 @@
         "Fixe, variable, moyen et marginal sont distincts.",
         "Préciser les coûts inclus."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L7",
@@ -172,7 +172,7 @@
         "Vérifier le profit et la fermeture.",
         "Marché : égaliser demande et offre."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L8",
@@ -195,7 +195,7 @@
         "Recette marginale ≠ prix en général.",
         "Comparer les profits et vérifier les limites."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L9",
@@ -218,7 +218,7 @@
         "Distinguer court et long terme.",
         "Libre entrée et concurrence modifient les profits."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L10",
@@ -241,7 +241,7 @@
         "Efficacité et équité sont distinctes.",
         "Examiner externalités et conditions d’intervention."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MICRO-L11",
@@ -264,7 +264,7 @@
         "Chercher les meilleures réponses.",
         "Tester les changements unilatéraux, pas seulement le gain total."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

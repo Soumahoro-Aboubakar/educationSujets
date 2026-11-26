@@ -1,0 +1,203 @@
+{
+  "module": "CAFOP-CG-SCIENCES",
+  "titre": "Sciences, santé et environnement",
+  "matiere": "Culture générale",
+  "resume": "Les questions de sciences de la culture générale du CAFOP : classer les animaux, la reproduction des plantes, la photosynthèse, le sang et la santé, l’électricité.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-CG-SCIENCES-L1",
+      "titre": "Classer les vertébrés",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "La fleur et la pollinisation",
+      "explication": "À la fin de cette leçon, tu sauras ranger un vertébré dans sa classe à partir de deux caractères observables. Aucun prérequis. Les sujets de culture générale du CAFOP demandent souvent de classer une liste d’animaux (1993, 1998, 1999). On ne classe pas un animal d’après son milieu de vie ni d’après sa taille, mais d’après des caractères : ce qu’il possède.",
+      "formules": [],
+      "exemples": [
+        "Le dauphin",
+        "Comme au concours (1999)"
+      ],
+      "pieges": [
+        "Le requin vit dans l’eau comme le dauphin, mais il respire par des branchies : c’est un poisson. Le caïman a des écailles : c’est un reptil…"
+      ],
+      "aRetenir": [
+        "On classe par les caractères, pas par le milieu.",
+        "Mammifère : poils et mamelles.",
+        "Amphibiens = batraciens : peau nue et humide."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L2",
+      "titre": "La fleur et la pollinisation",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "2/8",
+      "precedente": "Classer les vertébrés",
+      "suivante": "Du fruit à la germination",
+      "explication": "À la fin de cette leçon, tu sauras nommer les organes de la fleur et définir les types de pollinisation. Aucun prérequis. La fleur est l’organe de la reproduction sexuée des plantes à fleurs. Ses organes mâles sont les étamines, qui produisent le pollen. Son organe femelle est le pistil, formé du stigmate, du style et de l’ovaire, qui contient les ovules. La pollinisation est le transport du pollen des étamines jusqu’au stigmate du pistil. Elle est directe (autopollinisation) quand le pollen reste sur la même fleur, croisée quand il passe d’une fleur à une autre.",
+      "formules": [],
+      "exemples": [
+        "Une abeille sur un manguier",
+        "Comme au concours (1998)"
+      ],
+      "pieges": [
+        "Ne pas confondre le pollen, produit par les étamines, et les ovules, contenus dans l’ovaire du pistil."
+      ],
+      "aRetenir": [
+        "Étamines : pollen ; pistil : ovaire et ovules.",
+        "Pollinisation directe ou croisée.",
+        "Agents : vent, insectes, eau."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L3",
+      "titre": "Du fruit à la germination",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "3/8",
+      "precedente": "La fleur et la pollinisation",
+      "suivante": "La photosynthèse",
+      "explication": "À la fin de cette leçon, tu sauras expliquer d’où viennent le fruit et la graine et distinguer germination épigée et hypogée. Prérequis : la leçon sur la fleur. Après la pollinisation, la fécondation unit une cellule du pollen et un ovule. Ensuite, l’ovaire se transforme en fruit et l’ovule en graine. La graine contient une plantule et des réserves, souvent dans les cotylédons. La germination est le développement de la plantule quand la graine reçoit de l’eau, de l’air et une température favorable. Elle est épigée quand les cotylédons sortent du sol (haricot), hypogée quand ils restent dans le sol (maïs, petit pois).",
+      "formules": [],
+      "exemples": [
+        "L’avocat",
+        "Comme au concours (1997)"
+      ],
+      "pieges": [
+        "« Épi- » signifie « sur » et « hypo- » « sous » : épigée, au-dessus du sol ; hypogée, sous le sol. Ne pas inverser."
+      ],
+      "aRetenir": [
+        "Ovaire → fruit ; ovule → graine.",
+        "Germination : eau, air, chaleur.",
+        "Épigée : cotylédons hors du sol ; hypogée : dans le sol."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L4",
+      "titre": "La photosynthèse",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "4/8",
+      "precedente": "Du fruit à la germination",
+      "suivante": "Écosystème et chaîne alimentaire",
+      "explication": "À la fin de cette leçon, tu sauras citer les éléments indispensables à la photosynthèse et expliquer pourquoi une plante verte est autotrophe. Aucun prérequis. La photosynthèse est la fabrication de matière organique par les plantes vertes, à partir de matières minérales, grâce à l’énergie de la lumière. Elle a lieu surtout dans les feuilles, dans les cellules qui contiennent de la chlorophylle, le pigment vert. Une plante verte est donc autotrophe : elle produit elle-même sa matière organique. Les animaux sont hétérotrophes : ils doivent consommer de la matière organique déjà fabriquée.",
+      "formules": [
+        "Eau + sels minéraux + dioxyde de carbone —(lumière, chlorophylle)→ matière organique + dioxygène"
+      ],
+      "exemples": [
+        "L’image de l’usine (sujet de 1993)",
+        "Comme au concours (1995)"
+      ],
+      "pieges": [
+        "La plante ne « mange » pas le sol : le sol lui fournit l’eau et les sels minéraux, mais la matière organique est fabriquée dans les feuille…"
+      ],
+      "aRetenir": [
+        "Matières premières : eau, sels minéraux, CO₂.",
+        "Énergie : lumière ; pigment : chlorophylle.",
+        "Plante verte autotrophe, animal hétérotrophe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L5",
+      "titre": "Écosystème et chaîne alimentaire",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "5/8",
+      "precedente": "La photosynthèse",
+      "suivante": "Le sang et ses cellules",
+      "explication": "À la fin de cette leçon, tu sauras définir biotope, biocénose et écosystème et lire une chaîne alimentaire. Prérequis : la photosynthèse. Le biotope est le milieu physique : sol, eau, climat, lumière. La biocénose est l’ensemble des êtres vivants qui l’habitent. Le biotope et la biocénose forment ensemble un écosystème : une forêt, une lagune, une mare. Dans une chaîne alimentaire, chaque être vivant est mangé par le suivant. Elle commence par un producteur (plante verte), puis des consommateurs ; les décomposeurs (champignons, bactéries) transforment les restes en matières minérales.",
+      "formules": [
+        "Herbe → criquet → poule → épervier"
+      ],
+      "exemples": [
+        "La lagune Ébrié",
+        "Comme au concours (1998)"
+      ],
+      "pieges": [
+        "Dans une chaîne alimentaire, la flèche part de l’être mangé vers celui qui le mange, et non l’inverse."
+      ],
+      "aRetenir": [
+        "Biotope : le milieu ; biocénose : les vivants.",
+        "Biotope + biocénose = écosystème.",
+        "Chaîne : producteur → consommateurs."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L6",
+      "titre": "Le sang et ses cellules",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "6/8",
+      "precedente": "Écosystème et chaîne alimentaire",
+      "suivante": "VIH, paludisme et vaccination",
+      "explication": "À la fin de cette leçon, tu sauras donner le rôle des trois types de cellules du sang. Aucun prérequis. Le sang est formé d’un liquide, le plasma, et de cellules. Il transporte le dioxygène, les nutriments et les déchets dans tout le corps.",
+      "formules": [],
+      "exemples": [
+        "Une petite coupure",
+        "Comme au concours (1997)"
+      ],
+      "pieges": [
+        "C’est le cœur qui fait circuler le sang. Les hématies sont transportées par le sang ; elles ne le font pas circuler."
+      ],
+      "aRetenir": [
+        "Hématies : dioxygène.",
+        "Leucocytes : défense.",
+        "Plaquettes : coagulation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L7",
+      "titre": "VIH, paludisme et vaccination",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "7/8",
+      "precedente": "Le sang et ses cellules",
+      "suivante": "Électricité : circuit, tension et puissance",
+      "explication": "À la fin de cette leçon, tu sauras expliquer comment se transmettent le VIH et le paludisme et ce que fait un vaccin. Prérequis : le rôle des leucocytes. Le VIH est le virus responsable du sida. Il détruit surtout les lymphocytes T4 (ou CD4), des globules blancs qui organisent la défense. Il se transmet par les rapports sexuels non protégés, par le sang (seringue, objet tranchant partagé) et de la mère à l’enfant. Il ne se transmet ni par une poignée de main, ni par un repas partagé, ni par une piqûre de moustique. Le paludisme est dû à un parasite, le *Plasmodium*, transmis par la piqûre d’un moustique anophèle femelle. On s’en protège en dormant sous moustiquaire imprégnée et en supprimant les eaux stagnantes.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2003)",
+        "Le vaccin"
+      ],
+      "pieges": [
+        "Le moustique transmet le paludisme, pas le VIH. Le paludisme est dû à un parasite, pas à un virus."
+      ],
+      "aRetenir": [
+        "VIH : lymphocytes T4 ; voies sexuelle, sanguine, mère-enfant.",
+        "Paludisme : Plasmodium, anophèle femelle.",
+        "Vaccin : prévention et mémoire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L8",
+      "titre": "Électricité : circuit, tension et puissance",
+      "module": "Sciences, santé et environnement (Culture générale)",
+      "position": "8/8",
+      "precedente": "VIH, paludisme et vaccination",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras reconnaître les dipôles d’un circuit et utiliser P = U × I pour répondre à une question du concours. Prérequis : multiplier et additionner des nombres décimaux. Un circuit électrique fermé relie un générateur (pile, batterie, prise) à des récepteurs (lampe, moteur) par des fils. Un interrupteur ouvert coupe le courant. Chaque appareil porte des valeurs nominales : la tension U en volts (V) et la puissance P en watts (W).",
+      "formules": [
+        "P = U × I"
+      ],
+      "exemples": [
+        "Une lampe 4,5 V – 1 W (sujet de 1993)",
+        "Comme au concours (1999)"
+      ],
+      "pieges": [
+        "Ne pas additionner des volts et des watts : on convertit d’abord le compteur en puissance maximale, puis on compare des watts à des watts."
+      ],
+      "aRetenir": [
+        "Circuit : générateur, fils, récepteurs, interrupteur.",
+        "P = U × I.",
+        "Additionner les puissances et comparer au maximum."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-MATH-GEOMETRIE",
+  "titre": "Géométrie du BEPC",
+  "matiere": "Mathématiques",
+  "resume": "Vecteurs, repère, droites, trigonométrie, angles inscrits, Thalès et solides : la géométrie de 3ᵉ des sujets CAFOP-IA récents, avec la méthode du QCM.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L1",
+      "titre": "Vecteurs et relation de Chasles",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Calculer dans un repère",
+      "explication": "À la fin de cette leçon, tu sauras utiliser l’égalité de vecteurs, le parallélogramme et la relation de Chasles. Aucun prérequis. Un vecteur est défini par une direction, un sens et une longueur. ABCD est un parallélogramme si et seulement si les vecteurs AB et DC sont égaux. La relation de Chasles permet d’enchaîner les vecteurs : AB + BC = AC.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2023)",
+        "Comme au concours (2024)"
+      ],
+      "pieges": [
+        "AB + AD = BD est faux : la somme de deux vecteurs de même origine donne la diagonale issue de cette origine, AC."
+      ],
+      "aRetenir": [
+        "Direction, sens, longueur.",
+        "Parallélogramme ABCD : AB = DC.",
+        "Chasles : AB + BC = AC."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L2",
+      "titre": "Calculer dans un repère",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "2/8",
+      "precedente": "Vecteurs et relation de Chasles",
+      "suivante": "Droites parallèles et perpendiculaires",
+      "explication": "À la fin de cette leçon, tu sauras calculer les coordonnées d’un vecteur, d’un milieu et une distance. Prérequis : les vecteurs.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2025)",
+        "Une distance"
+      ],
+      "pieges": [
+        "Calculer xA − xB au lieu de xB − xA : on obtient le vecteur BA, opposé de AB."
+      ],
+      "aRetenir": [
+        "Vecteur : arrivée − départ.",
+        "Milieu : demi-sommes.",
+        "Distance : racine de la somme des carrés."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L3",
+      "titre": "Droites parallèles et perpendiculaires",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "3/8",
+      "precedente": "Calculer dans un repère",
+      "suivante": "Trigonométrie dans le triangle rectangle",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître à leurs équations deux droites parallèles ou perpendiculaires. Prérequis : les fonctions affines. Pour des droites d’équations y = ax + b et y = a′x + b′ : elles sont parallèles si a = a′ ; dans un repère orthonormé, elles sont perpendiculaires si a × a′ = −1.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Perpendiculaires"
+      ],
+      "pieges": [
+        "Croire que deux droites de coefficients opposés (2 et −2) sont perpendiculaires : le produit vaut −4, pas −1."
+      ],
+      "aRetenir": [
+        "Parallèles : a = a′.",
+        "Perpendiculaires : a × a′ = −1.",
+        "b ne compte pas pour la direction."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L4",
+      "titre": "Trigonométrie dans le triangle rectangle",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "4/8",
+      "precedente": "Droites parallèles et perpendiculaires",
+      "suivante": "Thalès dans les sujets du concours",
+      "explication": "À la fin de cette leçon, tu sauras calculer le cosinus, le sinus ou la tangente d’un angle aigu et t’en servir pour trouver une longueur. Prérequis : Pythagore.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2026)",
+        "Réutiliser une tangente"
+      ],
+      "pieges": [
+        "Le côté « adjacent » dépend de l’angle choisi : c’est le côté de l’angle droit qui touche cet angle."
+      ],
+      "aRetenir": [
+        "cos, sin, tan.",
+        "Identifier l’hypoténuse et le côté adjacent.",
+        "SOH-CAH-TOA."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L5",
+      "titre": "Thalès dans les sujets du concours",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "5/8",
+      "precedente": "Trigonométrie dans le triangle rectangle",
+      "suivante": "Angles inscrits et angle au centre",
+      "explication": "À la fin de cette leçon, tu sauras appliquer la propriété de Thalès et sa réciproque pour calculer une longueur ou démontrer un parallélisme. Prérequis : la proportionnalité. Si les points O, A, E sont alignés, ainsi que O, B, F, et si (AB) est parallèle à (EF), alors OA/OE = OB/OF = AB/EF. Réciproquement, si OA/OE = OB/OF et si les points sont dans le même ordre, alors (AB) est parallèle à (EF).",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2025)",
+        "Démontrer un parallélisme"
+      ],
+      "pieges": [
+        "Utiliser la réciproque sans vérifier l’ordre des points : l’égalité des rapports ne suffit pas."
+      ],
+      "aRetenir": [
+        "OA/OE = OB/OF = AB/EF.",
+        "Même ordre dans les rapports.",
+        "Réciproque : rapports égaux + ordre."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L6",
+      "titre": "Angles inscrits et angle au centre",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "6/8",
+      "precedente": "Thalès dans les sujets du concours",
+      "suivante": "Solides : cube, pyramide, cône, boule",
+      "explication": "À la fin de cette leçon, tu sauras comparer des angles inscrits et un angle au centre. Prérequis : le vocabulaire du cercle. Un angle inscrit a son sommet sur le cercle et ses côtés coupent le cercle. Un angle au centre a son sommet au centre O. Deux propriétés : deux angles inscrits qui interceptent le même arc ont la même mesure ; un angle inscrit mesure la moitié de l’angle au centre qui intercepte le même arc.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Angle au centre"
+      ],
+      "pieges": [
+        "Doubler au lieu de diviser : l’angle inscrit est la moitié de l’angle au centre, pas le double."
+      ],
+      "aRetenir": [
+        "Même arc : même mesure.",
+        "Inscrit = moitié du centre.",
+        "Demi-cercle : angle droit."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L7",
+      "titre": "Solides : cube, pyramide, cône, boule",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "7/8",
+      "precedente": "Angles inscrits et angle au centre",
+      "suivante": "Bilan : réussir le QCM de l’exercice 1",
+      "explication": "À la fin de cette leçon, tu sauras calculer le volume d’un solide usuel et des longueurs dans un cube. Prérequis : aires et Pythagore.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Comme au concours (2021)"
+      ],
+      "pieges": [
+        "Oublier de diviser par 3 pour une pyramide ou un cône."
+      ],
+      "aRetenir": [
+        "Pyramide et cône : ÷ 3.",
+        "Cube : a√2, a√3.",
+        "Triangle équilatéral : c²√3 ÷ 4."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L8",
+      "titre": "Bilan : réussir le QCM de l’exercice 1",
+      "module": "Géométrie du BEPC (Mathématiques)",
+      "position": "8/8",
+      "precedente": "Solides : cube, pyramide, cône, boule",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras traiter efficacement le QCM qui ouvre l’épreuve de mathématiques. Prérequis : les leçons d’algèbre et de géométrie. Depuis plusieurs sessions, l’exercice 1 est un QCM d’environ 9 questions (4 points en 2023 et 2024). Pour chaque ligne, une seule proposition est vraie ; on écrit sur la copie le numéro suivi de la lettre, par exemple « 1-A ». Les calculs se font au brouillon.",
+      "formules": [],
+      "exemples": [
+        "Tester plutôt que résoudre (2024)",
+        "Éliminer par le signe (2023)"
+      ],
+      "pieges": [
+        "Écrire seulement la lettre sans le numéro de la question : la réponse ne peut pas être corrigée."
+      ],
+      "aRetenir": [
+        "Une seule bonne réponse par ligne.",
+        "Tester, éliminer.",
+        "Noter « numéro-lettre »."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-PROF-FONCPUB-L1",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Candidats sur le statut français, différent de la loi ivoirienne n° 2023-892.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-FONCPUB-L2",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Candidats sur le recrutement en France.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-FONCPUB-L3",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Candidats sur les droits des fonctionnaires français.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-FONCPUB-L4",
+    "youtubeId": "pLlUjN2SBDU",
+    "couverture": "partielle",
+    "justification": "Obligations communes du fonctionnaire (neutralité, discrétion, obéissance) ; texte français, principes identiques à la loi ivoirienne.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-FONCPUB-L5",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Positions du droit français différentes de l’article 53 de la loi ivoirienne.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-FONCPUB-L6",
+    "youtubeId": "xA_O95Mc4Lo",
+    "couverture": "partielle",
+    "justification": "Fonction Publique Côte d’Ivoire : le Conseil de discipline.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-FONCPUB-L7",
+    "youtubeId": "9_5OahEQRLY",
+    "couverture": "partielle",
+    "justification": "Fonction Publique Côte d’Ivoire : la politique d’éthique et de déontologie.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-FONCPUB-L8",
+    "youtubeId": "hPomh2LLENs",
+    "couverture": "partielle",
+    "justification": "Méthode générale du cas pratique : faits, règle, application, conclusion.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

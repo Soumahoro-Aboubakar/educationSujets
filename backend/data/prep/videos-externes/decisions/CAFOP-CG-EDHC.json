@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-CG-EDHC-L1",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo de présentation de l’EDHC parmi les candidats.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-EDHC-L2",
+    "youtubeId": "7LWPkn1kQs4",
+    "couverture": "partielle",
+    "justification": "Les droits humains en deux minutes : universalité et grands textes.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-EDHC-L3",
+    "youtubeId": "tAz_u94okHE",
+    "couverture": "exacte",
+    "justification": "Les droits de l’enfant (Convention de 1989), expliqués simplement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-EDHC-L4",
+    "youtubeId": "oC_q5-y_jgk",
+    "couverture": "exacte",
+    "justification": "Droits et devoirs du citoyen.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-EDHC-L5",
+    "youtubeId": "rZBeTkUbHCk",
+    "couverture": "exacte",
+    "justification": "Démocratie et séparation des pouvoirs exécutif, législatif, judiciaire.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-EDHC-L6",
+    "youtubeId": "6ScMuQykXzI",
+    "couverture": "partielle",
+    "justification": "RTI, éducation civique et morale : protéger l’environnement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-EDHC-L7",
+    "youtubeId": "HJfHK2F5KI0",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : agir pour l’égalité et refuser les discriminations.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-EDHC-L8",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz sans lien avec l’EDHC.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

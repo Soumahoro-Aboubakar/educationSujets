@@ -1,0 +1,92 @@
+[
+  {
+    "code": "CAFOP-MATH-PROP-L1",
+    "youtubeId": "B3JVZdGMZqk",
+    "couverture": "exacte",
+    "justification": "Comprendre la proportionnalité et compléter un tableau (coefficient, passage par l’unité).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L2",
+    "youtubeId": "vAK1NWWINi8",
+    "couverture": "partielle",
+    "justification": "Yvan Monka : calculer un pourcentage d’une quantité et un taux.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L3",
+    "youtubeId": "T3UV3sHq5lY",
+    "couverture": "exacte",
+    "justification": "Retrouver le prix initial à partir d’un prix après évolution.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L4",
+    "youtubeId": "3GtUzTBMaEs",
+    "couverture": "exacte",
+    "justification": "Évolutions successives : multiplier les coefficients, éviter d’additionner les pourcentages.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L5",
+    "youtubeId": "pXtFxwy0xDc",
+    "couverture": "exacte",
+    "justification": "Calcul d’échelle : échelle numérique, distance sur le plan et distance réelle.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L6",
+    "youtubeId": "1t6fCpwVT6o",
+    "couverture": "partielle",
+    "justification": "Yvan Monka : calculs de vitesse moyenne, distance et durée ; la conversion km/h-m/s est dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L7",
+    "youtubeId": "T-eGR8Ke6l8",
+    "couverture": "exacte",
+    "justification": "Deux robinets pour remplir un bassin : débits additionnés, comme l’exercice des pompes.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L8",
+    "youtubeId": "dyICc644aug",
+    "couverture": "exacte",
+    "justification": "Problème de partage proportionnel d’une somme.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L9",
+    "youtubeId": "A9jYPhyKmvw",
+    "couverture": "exacte",
+    "justification": "Intérêts simples : capital × taux × durée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROP-L10",
+    "youtubeId": "_JkHvWlP-T4",
+    "couverture": "partielle",
+    "justification": "Méthode pour résoudre un problème de mathématiques étape par étape.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

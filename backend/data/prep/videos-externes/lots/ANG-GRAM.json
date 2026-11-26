@@ -30,7 +30,7 @@
         "Verbe : action ou état.",
         "Affirmation simple : sujet avant le verbe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L2",
@@ -53,7 +53,7 @@
         "Négation : be + not.",
         "Question : be + sujet."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L3",
@@ -76,7 +76,7 @@
         "a/an : un élément ; the : un élément identifié.",
         "Un pluriel prend souvent -s."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L4",
@@ -99,7 +99,7 @@
         "He/she/it : -s, parfois -es ou -ies.",
         "I/you/we/they : base verbale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L5",
@@ -122,7 +122,7 @@
         "Négation : don’t/doesn’t + base.",
         "Avec be : pas de do."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L6",
@@ -145,7 +145,7 @@
         "Habitude : présent simple.",
         "Be porte not et passe devant le sujet."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L7",
@@ -168,7 +168,7 @@
         "Régulier : -ed ; irrégulier : forme à apprendre.",
         "Après did/didn’t : base verbale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L8",
@@ -191,7 +191,7 @@
         "Since : départ ; for : durée.",
         "Ago et moment terminé : prétérit."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L9",
@@ -214,7 +214,7 @@
         "Be going to + base : intention ou indice visible.",
         "Will not = won’t."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L10",
@@ -237,7 +237,7 @@
         "Modal + base, sans to.",
         "Mustn’t : interdit ; don’t have to : facultatif."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-GRAM-L11",
@@ -260,7 +260,7 @@
         "Tout le groupe : the + superlatif.",
         "Égalité : as…as ; good → better → best."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

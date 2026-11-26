@@ -29,7 +29,7 @@
         "uₙ est un nombre ; (uₙ) est la liste.",
         "Toujours repérer le premier indice."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L2",
@@ -52,7 +52,7 @@
         "Par récurrence : terme initial puis règle de passage.",
         "Ne pas confondre n et uₙ."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L3",
@@ -77,7 +77,7 @@
         "Compter les étapes depuis le rang connu.",
         "Formule au rang 0 : u₀ + nr."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L4",
@@ -102,7 +102,7 @@
         "Repérer le premier et le dernier.",
         "Multiplier leur moyenne par le nombre de termes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L5",
@@ -127,7 +127,7 @@
         "Compter les multiplications depuis le rang connu.",
         "Éviter les quotients si un terme est nul."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L6",
@@ -152,7 +152,7 @@
         "Utiliser le premier terme inclus dans la somme.",
         "Traiter q = 1 séparément."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L7",
@@ -177,7 +177,7 @@
         "Tenir compte du signe des termes pour une suite géométrique.",
         "Quelques termes ne prouvent pas les variations générales."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L8",
@@ -200,7 +200,7 @@
         "qⁿ → 0 si −1 < q < 1.",
         "Vérifier les signes et le facteur devant la puissance."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L9",
@@ -223,7 +223,7 @@
         "Supposer au rang n et démontrer au rang n + 1.",
         "Conclure pour tous les rangs annoncés."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L10",
@@ -246,7 +246,7 @@
         "Croissante et majorée, ou décroissante et minorée : convergence.",
         "Passer ensuite à ℓ = f(ℓ), si f est continue en ℓ."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-SUITES-L11",
@@ -271,7 +271,7 @@
         "Poser vₙ = uₙ − L pour obtenir une suite géométrique.",
         "Revenir à uₙ et utiliser la limite de la puissance."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

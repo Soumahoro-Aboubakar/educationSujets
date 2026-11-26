@@ -1,0 +1,92 @@
+[
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L1",
+    "youtubeId": "sidJeUquyRY",
+    "couverture": "exacte",
+    "justification": "Résoudre une équation du premier degré en isolant l’inconnue.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L2",
+    "youtubeId": "MxHNokhrJIQ",
+    "couverture": "exacte",
+    "justification": "Résoudre une inéquation du premier degré et écrire l’intervalle solution.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L3",
+    "youtubeId": "rDa1z3oUYjo",
+    "couverture": "partielle",
+    "justification": "Mettre en équation un problème d’âges, comme le sujet de 1994.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L4",
+    "youtubeId": "x_AJ6vtBXms",
+    "couverture": "exacte",
+    "justification": "Hedacademy : résoudre un système par substitution.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L5",
+    "youtubeId": "xlcJc2gOg9U",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs, niveau 3ᵉ : système par combinaison.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L6",
+    "youtubeId": "PmpmDk9wmmY",
+    "couverture": "partielle",
+    "justification": "Trouver les dimensions d’un rectangle à partir de son périmètre et de son aire (mise en équation).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L7",
+    "youtubeId": "pHq6oClOylU",
+    "couverture": "exacte",
+    "justification": "Reconnaître une suite arithmétique ou géométrique (raison).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L8",
+    "youtubeId": "aO3pb-FEsbk",
+    "couverture": "exacte",
+    "justification": "Yvan Monka, niveau 3ᵉ : moyenne, médiane et étendue.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L9",
+    "youtubeId": "xo7x9WXPPeM",
+    "couverture": "partielle",
+    "justification": "Probabilités de tirages sans remise, comme le tirage des volailles.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-PROBLEMES-L10",
+    "youtubeId": "A-6YlNoqHRU",
+    "couverture": "partielle",
+    "justification": "Comment rédiger une solution en mathématiques.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

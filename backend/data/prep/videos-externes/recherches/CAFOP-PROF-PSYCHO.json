@@ -1,0 +1,134 @@
+{
+  "module": "CAFOP-PROF-PSYCHO",
+  "lecons": [
+    {
+      "code": "CAFOP-PROF-PSYCHO-L1",
+      "requetes": [
+        "\"Les stades du développement selon Piaget\" site:youtube.com/watch",
+        "site:youtube.com/watch \"Piaget\" \"stades\" développement enfant",
+        "site:youtube.com Piaget stades développement explication simple en 5 minutes",
+        "site:youtube.com/watch \"Piaget\" \"Sprouts\" français",
+        "\"TxARXAGn-_k\" durée",
+        "\"La théorie du développement cognitif de Piaget\" \"minutes\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=TxARXAGn-_k",
+          "titre": "La théorie du développement cognitif de Piaget",
+          "chaine": "Sprouts en Français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Cette animation présente les quatre stades de Piaget, la variabilité des âges et des pistes d’activités adaptées au développement cognitif."
+        }
+      ],
+      "justification": "La présentation visuelle et progressive correspond aux notions attendues pour un débutant. La durée exacte n’a pas pu être confirmée sur une source fiable."
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L2",
+      "requetes": [
+        "\"Vygotski, Bruner et le rôle des autres\" YouTube",
+        "site:youtube.com/watch \"Vygotski\" \"Bruner\" étayage",
+        "Vygotski Bruner zone proximale développement étayage vidéo youtube",
+        "site:youtube.com Vygotski Bruner étayage cours exemple",
+        "site:youtube.com/watch \"Vygotsky\" \"Sprouts en Français\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=jLOIohWDMAE",
+          "titre": "Vygotsky: The theory of cognitive development through social interactions",
+          "chaine": "Sprouts en Français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’animation explique la ZPD et l’effet de l’accompagnement à travers deux enfants, mais ne développe pas les fonctions de l’étayage selon Bruner."
+        }
+      ],
+      "justification": "Les chapitres consacrés à la ZPD et au mentor correspondent directement à la première partie de la leçon ; le dernier chapitre annoncé commence à 3:55, sans durée totale visible. Un complément reste nécessaire pour Bruner et le retrait progressif des aides."
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L3",
+      "requetes": [
+        "site:youtube.com/watch \"Trois théories de l’apprentissage\"",
+        "béhaviorisme constructivisme socioconstructivisme vidéo youtube",
+        "site:youtube.com \"béhaviorisme\" \"constructivisme\" \"socioconstructivisme\"",
+        "site:youtube.com/watch \"théories de l’apprentissage\" \"5\"",
+        "site:youtube.com/watch \"béhaviorisme\" \"constructivisme\" cours explication simple",
+        "\"TjDaAe-BnaU\""
+      ],
+      "candidats": [],
+      "justification": "Une synthèse réunissant les trois courants a été repérée, mais sa langue effective et sa durée n’ont pas pu être vérifiées. Les autres résultats ne permettent pas une comparaison suffisamment ciblée des trois pratiques de classe."
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L4",
+      "requetes": [
+        "\"Une tête bien faite : former au transfert\" YouTube",
+        "site:youtube.com/watch transfert apprentissages explication simple",
+        "transfert des apprentissages pédagogie vidéo youtube",
+        "site:youtube.com \"transfert\" \"apprentissages\" \"Masson\"",
+        "\"Pourquoi le transfert est-il si difficile\"",
+        "\"transfert\" \"Steve Masson\" youtube",
+        "\"Y8JI6b0DMyM\"",
+        "site:youtube.com/watch \"Comprendre le transfert\"",
+        "\"transfert\" \"apprentissages\" \"RÉCIT\" vidéo"
+      ],
+      "candidats": [],
+      "justification": "Une capsule attribuée au RÉCIT semble pertinente, mais son titre YouTube, sa chaîne et sa durée n’ont pas pu être confirmés directement. L’entretien de Steve Masson retrouvé dépasse quinze minutes."
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L5",
+      "requetes": [
+        "\"Évaluer pour faire apprendre\" site:youtube.com/watch",
+        "évaluation diagnostique formative sommative vidéo youtube",
+        "site:youtube.com \"évaluation\" \"diagnostique\" \"formative\" \"sommative\"",
+        "site:youtube.com/watch \"erreur\" \"remédiation\" évaluation formative"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=SZloaxCWErU",
+          "titre": "#01 Évaluation diagnostique, formative et sommative ! (LA MINUTE DU PÉDAGOGUE ! - 28.11.23)",
+          "chaine": "Axélérance",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule présente les trois fonctions de l’évaluation, mais sa description ne documente pas l’analyse des erreurs ni la remédiation ciblée."
+        }
+      ],
+      "justification": "Le format annoncé d’une minute convient à une première distinction des trois évaluations, sans durée exacte affichée. La pédagogie de l’erreur doit être travaillée séparément."
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L6",
+      "requetes": [
+        "\"L’école face aux médias et à l’éducation permanente\" YouTube",
+        "site:youtube.com \"école\" \"médias\" \"éducation permanente\"",
+        "\"école parallèle\" \"youtube\"",
+        "site:youtube.com/watch \"éducation permanente\""
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte suffisamment ciblée n’a été identifiée sur les médias comme école parallèle et leurs conséquences pour l’apprentissage autonome. Les entretiens retrouvés sur l’éducation permanente portent surtout sur la démocratie culturelle belge."
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L7",
+      "requetes": [
+        "\"Observer et conseiller un élève-maître\" YouTube",
+        "site:youtube.com observer conseiller élève maître CAFOP",
+        "\"entretien\" \"enseignant stagiaire\" site:youtube.com/watch",
+        "site:youtube.com/watch \"entretien de conseil\"",
+        "site:youtube.com/watch \"conseiller\" \"stagiaire\" pédagogie"
+      ],
+      "candidats": [],
+      "justification": "Les recherches n’ont pas fait ressortir de vidéo courte expliquant concrètement comment décrire une prestation, l’interpréter et formuler un conseil réalisable. Aucun résultat ne permet de valider cette démarche de formation des élèves-maîtres."
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L8",
+      "requetes": [
+        "\"Méthode de l’épreuve : un texte, trois questions\" psychopédagogie YouTube",
+        "site:youtube.com professeur CAFOP psychopédagogie méthodologie texte trois questions",
+        "\"psychopédagogie\" \"méthodologie\" \"CAFOP\"",
+        "\"CAFOP\" \"psychopédagogie\" \"youtube\""
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo vérifiable ne traite précisément de l’épreuve de psychopédagogie pour l’accès à la formation de professeur de CAFOP, avec un texte et trois questions en trois heures. Les méthodes générales de dissertation ou de commentaire ne correspondent pas assez à cet exercice."
+    }
+  ]
+}

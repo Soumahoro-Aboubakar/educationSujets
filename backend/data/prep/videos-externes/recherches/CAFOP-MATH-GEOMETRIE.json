@@ -1,0 +1,209 @@
+{
+  "module": "CAFOP-MATH-GEOMETRIE",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L1",
+      "requetes": [
+        "site:youtube.com \"Vecteurs et relation de Chasles\"",
+        "site:youtube.com/watch vecteurs relation Chasles explication simple",
+        "site:youtube.com/watch vecteurs parallélogramme Chasles cours 5 minutes",
+        "site:youtube.com vecteurs Chasles cours en 5 minutes",
+        "\"vecteurs\" \"Chasles\" \"cours\" youtube 6 minutes",
+        "\"La relation de Chasles (pour calculer avec des vecteurs)\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=cqQBOxMgfUk",
+          "titre": "La relation de Chasles (pour calculer avec des vecteurs)",
+          "chaine": "charmuzelle",
+          "dureeVue": "5:45",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique Chasles avec des exemples de simplification et de démonstration, mais ne reprend pas toute l’introduction aux vecteurs et au parallélogramme."
+        }
+      ],
+      "justification": "Une explication ciblée avec des applications concrètes ; la durée est indiquée sur le site pédagogique de l’enseignante. Elle convient surtout à la partie Chasles de la leçon."
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L2",
+      "requetes": [
+        "site:youtube.com/watch Calculer dans un repère vecteur milieu distance",
+        "site:youtube.com/watch coordonnées vecteur milieu distance explication simple",
+        "site:youtube.com/watch coordonnées vecteur milieu distance cours exemple",
+        "site:youtube.com \"Calculer dans un repère\"",
+        "site:youtube.com coordonnées vecteur milieu distance 5 minutes",
+        "Coordonnées vecteur milieu distance résumé français youtube",
+        "site:youtube.com \"Norme d'un vecteur\" \"charmuzelle\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=YjEOS-IUC5I",
+          "titre": "REPERE DANS LE PLAN : Coordonnées, Milieu et Distance (Cours complet + Exemples)",
+          "chaine": "Math Genius - D-MA",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Le programme annoncé réunit les coordonnées d’un vecteur, les demi-sommes pour le milieu et la distance dans un repère orthonormé, avec des exemples."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=EbC9JxM_r5E",
+          "titre": "Calculer la norme d'un vecteur dans un repère orthonormé du plan ou de l'espace.",
+          "chaine": "charmuzelle",
+          "dureeVue": "3:21",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule explique le calcul d’une longueur à partir de coordonnées avec un exemple, mais ne traite pas le milieu et ajoute le cas de l’espace."
+        }
+      ],
+      "justification": "Le premier résultat correspond aux trois calculs attendus, mais sa durée n’est pas accessible dans les sources consultées. Le second constitue un complément court sur la distance."
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L3",
+      "requetes": [
+        "site:youtube.com \"Droites parallèles et perpendiculaires\" coefficients",
+        "site:youtube.com droites parallèles perpendiculaires coefficient directeur explication simple",
+        "site:youtube.com droites parallèles perpendiculaires produit -1 cours",
+        "site:youtube.com \"coefficients directeurs\" \"parallèles\" \"perpendiculaires\" Khan",
+        "\"Parallèles et perpendiculaires dans le plan repéré\" Khan Academy",
+        "\"Parallèles et perpendiculaires dans le plan repéré\" \"minutes\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=elZ5bR9_aJk",
+          "titre": "Parallèles et perpendiculaires dans le plan repéré",
+          "chaine": "KhanAcademyFrancophone",
+          "dureeVue": "7:26",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique les critères de coefficients directeurs égaux ou de produit égal à −1, puis les applique à plusieurs exemples."
+        }
+      ],
+      "justification": "Les deux critères de la leçon sont expliqués explicitement et illustrés par des exercices progressifs. La durée est confirmée sur Khan Academy."
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L4",
+      "requetes": [
+        "site:youtube.com \"Trigonométrie dans le triangle rectangle\"",
+        "site:youtube.com trigonométrie explication simple cos sinus tangente 5 minutes",
+        "site:youtube.com trigonométrie calculer longueur exemple cours",
+        "site:youtube.com trigonométrie triangle rectangle cours 5 minutes",
+        "\"Trigonométrie dans le triangle rectangle\" \"EN 3 MIN\"",
+        "trigonométrie triangle rectangle Hedacademy 3 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=VLa5ApIKZY0",
+          "titre": "[EN 3 MIN] Trigonométrie dans le triangle rectangle",
+          "chaine": "Vis tes maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Cette synthèse porte sur les relations trigonométriques permettant de déterminer les côtés et les angles d’un triangle rectangle."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=DEk3TqhuPhM",
+          "titre": "Trigonométrie - Calculer une longueur, calculer un angle",
+          "chaine": "Hedacademy",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo annonce l’identification des côtés, le choix entre sinus, cosinus et tangente et leur utilisation pour calculer une longueur."
+        }
+      ],
+      "justification": "Le premier candidat annonce une synthèse en trois minutes, adaptée à une révision ciblée ; sa durée exacte n’est pas affichée. Le second propose davantage d’explications sur le choix du rapport trigonométrique."
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L5",
+      "requetes": [
+        "site:youtube.com \"Thalès dans les sujets du concours\"",
+        "site:youtube.com Thalès réciproque explication simple 5 minutes",
+        "site:youtube.com théorème Thalès réciproque cours exemple",
+        "site:youtube.com \"Thalès\" \"réciproque\" \"5 min\"",
+        "site:youtube.com \"Thalès\" \"réciproque\" \"résumé\"",
+        "Yvan Monka Thalès réciproque troisième youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=XFnFX6FsKtY",
+          "titre": "THALÈS & RÉCIPROQUE : Tout comprendre en 5 min ! (Maths 3e Brevet)",
+          "chaine": "MathiLou Education",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Le sommaire réunit les conditions de Thalès, les trois rapports, le calcul d’une longueur et la réciproque pour établir un parallélisme."
+        }
+      ],
+      "justification": "Le format annoncé en cinq minutes couvre les deux usages demandés, avec une conclusion qui commence à 4:55. La durée totale exacte et le traitement explicite de l’ordre des points restent à confirmer."
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L6",
+      "requetes": [
+        "Angles inscrits et angle au centre youtube",
+        "angles inscrits angle au centre explication simple youtube",
+        "angles inscrits cours exemple en 5 minutes youtube",
+        "angles inscrits angle au centre cours 5 minutes",
+        "\"angles inscrits\" \"KhanAcademyFrancophone\" youtube",
+        "\"Les angles inscrits\" site:fr.khanacademy.org",
+        "\"Angles inscrits\" \"1:18\" youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=XFHorOScd7c",
+          "titre": "Angles au Centre Et Angles Inscrits,Résumé de cours,3APIC",
+          "chaine": "MPCS(@CH-011)",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Le résumé présente les deux définitions, l’égalité des angles inscrits interceptant le même arc et le rapport de deux avec l’angle au centre."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=tu6yfiN9JM0",
+          "titre": "Les angles inscrits",
+          "chaine": "KhanAcademyFrancophone",
+          "dureeVue": "1:18",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Un exemple numérique montre qu’un angle inscrit mesure la moitié de l’angle au centre interceptant le même arc."
+        }
+      ],
+      "justification": "Le premier candidat reprend précisément les définitions et les deux propriétés centrales, mais sa durée n’est pas accessible. Le second offre une application très courte dont la durée est confirmée sur Khan Academy."
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L7",
+      "requetes": [
+        "Solides cube pyramide cône boule youtube",
+        "volumes solides cube pyramide cône boule cours 5 minutes youtube",
+        "diagonale cube a racine 3 explication exemple youtube",
+        "volumes solides brevet rappel formules youtube",
+        "\"Calcul des volumes des solides élémentaires\" durée",
+        "Yvan Monka diagonale cube calculer longueur youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=y0__u49nzjY",
+          "titre": "Calcul des volumes des solides élémentaires (formulaire)",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce formulaire rappelle notamment les volumes du cube, de la pyramide et de la boule, mais ne couvre pas les diagonales du cube."
+        }
+      ],
+      "justification": "Ce rappel de formules est pertinent pour la partie volumes ; aucune capsule suffisamment documentée ne réunit aussi les longueurs du cube et l’aire du triangle équilatéral. La durée du candidat reste inconnue."
+    },
+    {
+      "code": "CAFOP-MATH-GEOMETRIE-L8",
+      "requetes": [
+        "Bilan réussir le QCM de l’exercice 1 CAFOP mathématiques youtube",
+        "CAFOP mathématiques exercice 1 QCM correction 2024 youtube",
+        "CAFOP QCM mathématiques méthode éliminer réponses youtube",
+        "site:youtube.com \"CAFOP\" \"QCM\" \"mathématiques\"",
+        "CAFOP mathématique QCM corrigé 2023",
+        "\"CAFOP\" \"QCM\" maths conseils YouTube",
+        "\"CAFOP\" \"exercice 1\" \"QCM\" site:youtube.com/watch"
+      ],
+      "candidats": [],
+      "justification": "Les recherches ont trouvé des entraînements BEPC/CAFOP, mais aucune vidéo courte suffisamment vérifiable sur la méthode précise de l’exercice 1. Le traitement conjoint des stratégies de test, d’élimination et de la notation « numéro-lettre » n’a pas pu être établi."
+    }
+  ]
+}

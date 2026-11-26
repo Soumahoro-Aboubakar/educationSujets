@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-CG-EDHC",
+  "titre": "EDHC : droits de l’homme et citoyenneté",
+  "matiere": "Culture générale",
+  "resume": "Les grands textes des droits humains, les droits de l’enfant, les droits et devoirs du citoyen, la démocratie et le vivre-ensemble, pour la rubrique EDHC du concours.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-CG-EDHC-L1",
+      "titre": "Qu’est-ce que l’EDHC ?",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Les grands textes des droits humains",
+      "explication": "À la fin de cette leçon, tu sauras ce que recouvre la rubrique EDHC et pourquoi elle concerne le futur instituteur. Prérequis : le module Les institutions de la Côte d’Ivoire. L’EDHC (éducation aux droits de l’homme et à la citoyenneté) est une discipline de l’école ivoirienne. Elle apprend aux élèves leurs droits, leurs devoirs et les règles de la vie en société. Depuis 2025, la culture générale du CAFOP-IA comporte une rubrique EDHC.",
+      "formules": [],
+      "exemples": [
+        "Questions de 2025",
+        "Pourquoi pour l’instituteur ?"
+      ],
+      "pieges": [
+        "Confondre EDHC et histoire : l’EDHC porte sur les droits, les devoirs et la vie citoyenne d’aujourd’hui."
+      ],
+      "aRetenir": [
+        "EDHC : droits, devoirs, citoyenneté.",
+        "Rubrique du concours depuis 2025.",
+        "Discipline enseignée au primaire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-EDHC-L2",
+      "titre": "Les grands textes des droits humains",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "2/8",
+      "precedente": "Qu’est-ce que l’EDHC ?",
+      "suivante": "Les droits de l’enfant",
+      "explication": "À la fin de cette leçon, tu sauras dater et situer les principaux textes de protection des droits. Prérequis : l’ONU et l’OUA (module CAFOP-CG-MONDE).",
+      "formules": [],
+      "exemples": [
+        "Une journée symbolique",
+        "Un article célèbre"
+      ],
+      "pieges": [
+        "Confondre la Déclaration universelle (1948) et la Déclaration des droits de l’homme et du citoyen, texte français de 1789."
+      ],
+      "aRetenir": [
+        "DUDH : 10 décembre 1948.",
+        "Charte africaine : 1981.",
+        "Droits de l’enfant : 20 novembre 1989."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-EDHC-L3",
+      "titre": "Les droits de l’enfant",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "3/8",
+      "precedente": "Les grands textes des droits humains",
+      "suivante": "Droits et devoirs du citoyen",
+      "explication": "À la fin de cette leçon, tu sauras citer les droits de l’enfant et les situations où il faut le protéger. Prérequis : les grands textes. Selon la Convention de 1989, un enfant est toute personne de moins de 18 ans. Ses droits se regroupent en quatre familles : survie (vie, santé, nourriture), développement (éducation, loisirs, culture), protection (contre la violence, l’exploitation, la discrimination), participation (donner son avis sur ce qui le concerne).",
+      "formules": [],
+      "exemples": [
+        "L’école obligatoire",
+        "Une situation à signaler"
+      ],
+      "pieges": [
+        "Croire que le travail domestique lourd qui empêche d’aller à l’école est un simple service familial : il prive l’enfant de son droit à l’éd…"
+      ],
+      "aRetenir": [
+        "Enfant : moins de 18 ans.",
+        "Survie, développement, protection, participation.",
+        "École obligatoire de 6 à 16 ans."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-EDHC-L4",
+      "titre": "Droits et devoirs du citoyen",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "4/8",
+      "precedente": "Les droits de l’enfant",
+      "suivante": "Démocratie et séparation des pouvoirs",
+      "explication": "À la fin de cette leçon, tu sauras distinguer les droits et les devoirs du citoyen. Prérequis : les grands textes.",
+      "formules": [],
+      "exemples": [
+        "Le vote",
+        "Un droit limité par celui des autres"
+      ],
+      "pieges": [
+        "Penser que voter est seulement un devoir : c’est d’abord un droit, que chacun exerce librement."
+      ],
+      "aRetenir": [
+        "Droits : voter, s’exprimer, s’associer.",
+        "Devoirs : lois, impôt, biens publics.",
+        "Le droit de chacun s’arrête à celui des autres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-EDHC-L5",
+      "titre": "Démocratie et séparation des pouvoirs",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "5/8",
+      "precedente": "Droits et devoirs du citoyen",
+      "suivante": "Civisme et environnement",
+      "explication": "À la fin de cette leçon, tu sauras définir la démocratie et associer chaque pouvoir à son rôle. Prérequis : les institutions ivoiriennes (CG-INSTIT). La démocratie est souvent définie comme « le gouvernement du peuple, par le peuple et pour le peuple ». Elle repose sur des élections libres, le pluralisme (plusieurs partis) et la séparation des pouvoirs, qui évite qu’une seule autorité concentre tout.",
+      "formules": [],
+      "exemples": [
+        "Élus au suffrage direct ou indirect",
+        "Comme au concours (2021 et 2025)"
+      ],
+      "pieges": [
+        "Confondre nommé et élu : un ministre est nommé par le président de la République, il n’est pas élu à ce poste."
+      ],
+      "aRetenir": [
+        "Élections libres et pluralisme.",
+        "Trois pouvoirs séparés.",
+        "Élu ou nommé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-EDHC-L6",
+      "titre": "Civisme et environnement",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "6/8",
+      "precedente": "Démocratie et séparation des pouvoirs",
+      "suivante": "Tolérance, égalité et lutte contre les discriminations",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître des comportements civiques et expliquer leur importance. Aucun prérequis. Le civisme est le respect des règles et du bien commun. Il se voit dans les gestes quotidiens : jeter ses déchets dans une poubelle, respecter le code de la route, préserver les équipements publics, économiser l’eau et l’électricité.",
+      "formules": [],
+      "exemples": [
+        "À l’école",
+        "Sur la route"
+      ],
+      "pieges": [
+        "Penser que les règles ne s’appliquent que lorsqu’un agent surveille : le civisme est un comportement volontaire."
+      ],
+      "aRetenir": [
+        "Civisme : respect du bien commun.",
+        "Salubrité, environnement, route.",
+        "Biens publics : à préserver."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-EDHC-L7",
+      "titre": "Tolérance, égalité et lutte contre les discriminations",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "7/8",
+      "precedente": "Civisme et environnement",
+      "suivante": "Bilan : répondre aux questions d’EDHC",
+      "explication": "À la fin de cette leçon, tu sauras définir tolérance et discrimination et reconnaître une situation injuste. Prérequis : les droits de l’homme. La tolérance est l’acceptation des différences d’origine, de religion ou d’opinion. Une discrimination est un traitement inégal et injuste d’une personne à cause de son sexe, de son origine, de sa religion ou de son handicap. L’égalité entre les filles et les garçons, à l’école comme dans la société, est un principe garanti.",
+      "formules": [],
+      "exemples": [
+        "Une discrimination à l’école",
+        "Une pratique égalitaire"
+      ],
+      "pieges": [
+        "Confondre tolérance et indifférence : être tolérant, c’est respecter l’autre, pas l’ignorer."
+      ],
+      "aRetenir": [
+        "Tolérance : accepter les différences.",
+        "Discrimination : traitement injuste.",
+        "Égalité filles-garçons."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-EDHC-L8",
+      "titre": "Bilan : répondre aux questions d’EDHC",
+      "module": "EDHC : droits de l’homme et citoyenneté (Culture générale)",
+      "position": "8/8",
+      "precedente": "Tolérance, égalité et lutte contre les discriminations",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras traiter rapidement les formats de questions d’EDHC. Prérequis : les leçons du module.",
+      "formules": [],
+      "exemples": [
+        "Définir en une phrase",
+        "Réagir à une situation"
+      ],
+      "pieges": [
+        "Donner une opinion personnelle au lieu d’appliquer une règle ou un principe."
+      ],
+      "aRetenir": [
+        "Classer, citer, définir, dater.",
+        "Situation : protéger et respecter.",
+        "Appliquer un principe, pas une opinion."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

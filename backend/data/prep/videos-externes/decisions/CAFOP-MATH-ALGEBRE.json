@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L1",
+    "youtubeId": "c-akR4NJhh0",
+    "couverture": "partielle",
+    "justification": "Hedacademy : intervalles ouverts, fermés, notation ; l’encadrement d’une différence reste dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L2",
+    "youtubeId": "ycYfb8aHssY",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : isoler x, diviser par un négatif en inversant le sens, solutions en intervalle.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L3",
+    "youtubeId": "WTcFs5oyG3M",
+    "couverture": "partielle",
+    "justification": "Résoudre un système d’inéquations et prendre l’intersection ; la résolution graphique est traitée dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L4",
+    "youtubeId": "vXSDO4HNn2c",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs, niveau 3ᵉ : système de deux équations par substitution, comme l’exemple du sujet 2024.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L5",
+    "youtubeId": "0Ck3ciLjJQg",
+    "couverture": "exacte",
+    "justification": "Hedacademy : déterminer l’expression d’une fonction affine à partir de deux valeurs.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L6",
+    "youtubeId": "Jyfbgi0QZRc",
+    "couverture": "exacte",
+    "justification": "Écrire une fraction sans radical au dénominateur grâce à la quantité conjuguée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L7",
+    "youtubeId": "pmyQtkYSFrw",
+    "couverture": "partielle",
+    "justification": "Factorisation par facteur commun puis par identité remarquable (différence de deux carrés).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ALGEBRE-L8",
+    "youtubeId": "weZUwJrQ6IA",
+    "couverture": "exacte",
+    "justification": "Tableau d’effectifs cumulés, moyenne pondérée, médiane et fréquences, comme l’exercice 3 du sujet 2026.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

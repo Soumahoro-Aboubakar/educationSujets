@@ -1,0 +1,155 @@
+const { mc, qcm, vf, glisser, ordre, relier, classer, entourer, numerique, b, lecon } = require('../dsl');
+
+// Mathématiques du CAFOP-IA récent : programme de 3ᵉ (BEPC). Sujets officiels DECO lus le 22/11/2026 :
+// 2021 (6adf4d1e…), 2023 (6adf4d46…), 2024 (6adf4d76…), 2025 (6adf4d8e…), 2026 (6adf4da5…).
+// Épreuve : 2 h, coefficient 1 ; exercice 1 = QCM d'environ 9 questions, puis exercices rédigés.
+
+const DOC = { 2021: '6adf4d1eecb585bf0e4f4258', 2023: '6adf4d46ecb585bf0e4f42ab', 2024: '6adf4d76ecb585bf0e4f42e9', 2025: '6adf4d8eecb585bf0e4f4333', 2026: '6adf4da5ecb585bf0e4f4367' };
+const annale = (annee, epreuve) => ({ type: 'annale', organisme: 'CAFOP', annee, epreuve: `IA, Mathématiques, ${epreuve}`, documentId: DOC[annee] });
+const original = { type: 'original', inspireDe: 'Mathématiques CAFOP-IA 2021-2026 (programme de 3ᵉ)' };
+
+const rappels = {
+  'ALG-INTER': mc('Intervalles et encadrements', 'L’intervalle [a ; b] contient les réels x tels que a ≤ x ≤ b ; ]a ; b[ exclut les bornes. Un crochet tourné vers l’extérieur signifie que la borne est exclue ; ∞ est toujours exclu. L’amplitude d’un intervalle borné vaut b − a. Pour encadrer x − y, on ajoute un encadrement de x et un encadrement de −y, obtenu en multipliant celui de y par −1, ce qui inverse les inégalités.', 'Amplitude = b − a ; multiplier par un négatif inverse le sens.'),
+  'ALG-INEQ': mc('Inéquations du premier degré', 'On résout une inéquation comme une équation : on regroupe les x d’un côté, les nombres de l’autre. On peut ajouter ou soustraire un même nombre sans changer le sens. Multiplier ou diviser par un nombre positif garde le sens ; par un nombre négatif, on inverse le sens. Les solutions s’écrivent sous forme d’intervalle. Pour un système d’inéquations, on prend l’intersection des solutions.', 'Diviser par un négatif : on retourne l’inégalité.'),
+  'ALG-SYS': mc('Systèmes et fonctions affines', 'Un système de deux équations à deux inconnues se résout par substitution (exprimer une inconnue puis remplacer) ou par combinaison (additionner des multiples des équations). Une fonction affine s’écrit f(x) = ax + b. Avec deux valeurs, a = (f(x₂) − f(x₁)) ÷ (x₂ − x₁), puis on trouve b. Deux droites de même coefficient directeur a sont parallèles.', 'Toujours vérifier la solution dans les deux équations.'),
+  'ALG-CALC': mc('Radicaux et identités', 'Les identités remarquables : (a + b)² = a² + 2ab + b² ; (a − b)² = a² − 2ab + b² ; (a + b)(a − b) = a² − b². Pour factoriser, on cherche un facteur commun ou une différence de deux carrés. Pour rendre rationnel le dénominateur de c ÷ (a + √b), on multiplie le numérateur et le dénominateur par la quantité conjuguée a − √b, car (a + √b)(a − √b) = a² − b.', 'Différence de deux carrés et quantité conjuguée.'),
+  'ALG-STAT': mc('Statistiques', 'L’effectif cumulé croissant d’une valeur est le nombre d’observations inférieures ou égales à cette valeur. La moyenne pondérée est la somme des produits valeur × effectif divisée par l’effectif total. La médiane partage la série ordonnée en deux groupes de même effectif : pour un effectif pair, c’est la demi-somme des deux valeurs centrales. Pour un pourcentage, on divise l’effectif concerné par l’effectif total et on multiplie par 100.', 'Ordonner avant de chercher la médiane.'),
+};
+const spec = (notion, extra = {}) => ({ notions: [notion], miniCours: rappels[notion], source: original, ...extra });
+const question = (i, notion, consigne, options, explication) => b.question(qcm({ ...spec(notion), code: `CAFOP-MATH-ALGEBRE-L${i}-Q1`, niveau: 1, consigne, options, bonne: 0, explication }));
+
+const algebre = {
+  code: 'CAFOP-MATH-ALGEBRE',
+  matiere: 'Mathématiques',
+  titre: 'Algèbre et statistiques du BEPC',
+  resume: 'Les notions de 3ᵉ des sujets CAFOP-IA récents : intervalles, inéquations et systèmes, fonctions affines, radicaux, identités remarquables et statistiques.',
+  notions: [
+    { code: 'ALG-INTER', libelle: 'Intervalles et encadrements' },
+    { code: 'ALG-INEQ', libelle: 'Inéquations et systèmes d’inéquations' },
+    { code: 'ALG-SYS', libelle: 'Systèmes d’équations et fonctions affines' },
+    { code: 'ALG-CALC', libelle: 'Radicaux et identités remarquables' },
+    { code: 'ALG-STAT', libelle: 'Statistiques' },
+  ],
+  lecons: [
+    lecon('CAFOP-MATH-ALGEBRE-L1', 'Intervalles et encadrements', 5, [
+      b.texte('À la fin de cette leçon, tu sauras écrire un ensemble de réels sous forme d’intervalle, calculer son amplitude et encadrer une différence. Prérequis : comparer des nombres relatifs.'),
+      b.tableau(['Condition sur x', 'Intervalle'], [['−3 < x < 7', ']−3 ; 7['], ['2 ≤ x ≤ 5', '[2 ; 5]'], ['x ≥ 4', '[4 ; +∞['], ['x < 1', ']−∞ ; 1[']]),
+      b.texte('L’**amplitude** d’un intervalle borné est sa longueur : b − a. Pour **encadrer x − y**, on encadre −y en multipliant l’encadrement de y par −1, ce qui **inverse les inégalités**, puis on additionne membre à membre.'),
+      b.exemple('Amplitude (CAFOP 2025)', 'L’amplitude de ]−3 ; 7[ vaut 7 − (−3) = 10.'),
+      b.exemple('Encadrer x − y (CAFOP 2024)', 'Si −2 < x < −1 et 2 < y < 4, alors −4 < −y < −2. En additionnant : −2 + (−4) < x − y < −1 + (−2), soit −6 < x − y < −3.'),
+      b.retenir('Un crochet tourné vers l’extérieur exclut la borne ; l’infini est toujours exclu.'),
+      b.piege('Soustraire les encadrements membre à membre (−2 − 2 < x − y < −1 − 4) donne un résultat faux. On passe toujours par −y.'),
+      question(1, 'ALG-INTER', 'Quelle est l’amplitude de l’intervalle [−2 ; 5] ?', ['7', '3', '−7'], 'L’amplitude vaut 5 − (−2) = 5 + 2 = 7.'),
+      b.recap(['Intervalle ouvert ou fermé selon les bornes.', 'Amplitude = b − a.', 'Encadrer −y avant d’additionner.']),
+    ]),
+    lecon('CAFOP-MATH-ALGEBRE-L2', 'Résoudre une inéquation', 5, [
+      b.texte('À la fin de cette leçon, tu sauras résoudre une inéquation du premier degré et écrire ses solutions en intervalle. Prérequis : les intervalles.'),
+      b.texte('On isole x comme dans une équation. Une seule règle change : **quand on multiplie ou divise les deux membres par un nombre négatif, on inverse le sens de l’inégalité**.'),
+      b.exemple('Comme au concours (2025)', '3x − 4 < 5(x − 1). On développe : 3x − 4 < 5x − 5. Donc 3x − 5x < −5 + 4, soit −2x < −1. On divise par −2 et on inverse : x > 1/2. Solutions : ]1/2 ; +∞[.'),
+      b.exemple('Comme au concours (2026)', '3x ≥ 2x + 2/3 donne x ≥ 2/3. Solutions : [2/3 ; +∞[.'),
+      b.retenir('Une inégalité large (≤, ≥) donne une borne incluse ; une inégalité stricte (<, >) une borne exclue.'),
+      b.piege('Oublier d’inverser le sens en divisant par −2 : on écrirait x < 1/2, ce qui est faux.'),
+      question(2, 'ALG-INEQ', 'Quelles sont les solutions de −3x > 6 ?', [']−∞ ; −2[', ']−2 ; +∞[', ']−∞ ; 2['], 'On divise par −3 et on inverse le sens : x < −2. Les solutions forment ]−∞ ; −2[.'),
+      b.recap(['Isoler x.', 'Diviser par un négatif : inverser.', 'Écrire l’intervalle.']),
+    ]),
+    lecon('CAFOP-MATH-ALGEBRE-L3', 'Systèmes d’inéquations', 5, [
+      b.texte('À la fin de cette leçon, tu sauras résoudre un système d’inéquations à une inconnue et comprendre la résolution graphique à deux inconnues. Prérequis : résoudre une inéquation.'),
+      b.texte('Pour un **système d’inéquations à une inconnue**, on résout chaque inéquation, puis on prend l’**intersection** des deux ensembles : les x qui vérifient les deux à la fois.'),
+      b.exemple('Comme au concours (2026)', 'Première inéquation : x ≥ 2/3. Seconde : −3x + 1 > x − 3 donne −4x > −4, donc x < 1. Intersection : [2/3 ; 1[.'),
+      b.texte('Pour un **système à deux inconnues** (x et y), on trace chaque droite frontière, puis on hachure le demi-plan qui **ne convient pas**. On teste un point simple, souvent O(0 ; 0) : s’il vérifie l’inéquation, son demi-plan convient. La solution est la partie non hachurée.'),
+      b.exemple('Tester l’origine (CAFOP 2021)', 'Pour 3x + 7y > −7, avec x = 0 et y = 0 : 0 > −7 est vrai. Le demi-plan qui contient O fait partie des solutions.'),
+      b.retenir('Système : on garde ce qui est commun. Graphique : on hachure ce qui ne convient pas.'),
+      b.piege('Prendre la réunion au lieu de l’intersection : un x qui ne vérifie qu’une inéquation n’est pas solution du système.'),
+      question(3, 'ALG-INEQ', 'x ≥ 1 et x < 4. Quel est l’ensemble des solutions ?', ['[1 ; 4[', ']1 ; 4]', ']−∞ ; 4['], 'On garde les x qui vérifient les deux conditions : 1 inclus, 4 exclu. D’où [1 ; 4[.'),
+      b.recap(['Résoudre chaque inéquation.', 'Prendre l’intersection.', 'Graphique : tester O(0 ; 0).']),
+    ]),
+    lecon('CAFOP-MATH-ALGEBRE-L4', 'Systèmes de deux équations', 5, [
+      b.texte('À la fin de cette leçon, tu sauras résoudre un système de deux équations à deux inconnues et vérifier ta solution. Prérequis : résoudre une équation du premier degré.'),
+      b.texte('**Substitution** : on exprime une inconnue en fonction de l’autre dans une équation, puis on remplace dans l’autre. **Combinaison** : on multiplie les équations pour que l’addition fasse disparaître une inconnue.'),
+      b.exemple('Comme au concours (2024)', 'x − 2y − 3 = 0 et 2x + y + 4 = 0. De la première : x = 2y + 3. On remplace : 2(2y + 3) + y + 4 = 0, soit 5y + 10 = 0, donc y = −2, puis x = 2 × (−2) + 3 = −1. Solution : (−1 ; −2).'),
+      b.exemple('Vérifier', 'Avec x = −1 et y = −2 : −1 + 4 − 3 = 0 et −2 − 2 + 4 = 0. Les deux équations sont vérifiées.'),
+      b.retenir('Dans un QCM, il suffit souvent de tester chaque couple proposé dans les deux équations.'),
+      b.piege('Vérifier une seule équation : un couple peut convenir à l’une et pas à l’autre.'),
+      question(4, 'ALG-SYS', 'Quel couple est solution de x + y = 5 et x − y = 1 ?', ['(3 ; 2)', '(2 ; 3)', '(4 ; 1)'], 'En additionnant : 2x = 6, donc x = 3, puis y = 2. Vérification : 3 + 2 = 5 et 3 − 2 = 1.'),
+      b.recap(['Substitution ou combinaison.', 'Trouver x et y.', 'Vérifier dans les deux équations.']),
+    ]),
+    lecon('CAFOP-MATH-ALGEBRE-L5', 'Fonctions affines et droites', 6, [
+      b.texte('À la fin de cette leçon, tu sauras déterminer une fonction affine à partir de deux valeurs et reconnaître des droites parallèles. Prérequis : les systèmes d’équations.'),
+      b.formule('f(x) = ax + b avec a = [f(x₂) − f(x₁)] ÷ (x₂ − x₁)', 'a est le coefficient directeur, b l’ordonnée à l’origine.'),
+      b.exemple('Comme au concours (2024)', 'f(2) = 5 et f(−1) = 2. a = (5 − 2) ÷ (2 − (−1)) = 3 ÷ 3 = 1. Puis f(2) = 2 + b = 5, donc b = 3 : f(x) = x + 3.'),
+      b.exemple('Comme au concours (2023)', 'g(−1/2) = −1/2 et g(2) = −3. a = (−3 + 1/2) ÷ (2 + 1/2) = (−5/2) ÷ (5/2) = −1. Puis −2 + b = −3, donc b = −1 : g(x) = −x − 1. La droite a pour équation y = −x − 1, soit x + y + 1 = 0.'),
+      b.texte('Les droites d’équations y = ax + b et y = ax + c ont le **même coefficient directeur a** : elles sont **parallèles** (confondues si b = c).'),
+      b.retenir('Pour vérifier une fonction trouvée, recalcule les deux valeurs données.'),
+      b.piege('Inverser l’ordre dans le calcul de a : le numérateur et le dénominateur doivent être pris dans le même ordre.'),
+      question(5, 'ALG-SYS', 'Les droites d’équations y = 2x + 1 et y = 2x − 5 sont…', ['parallèles', 'perpendiculaires', 'sécantes en un seul point'], 'Elles ont le même coefficient directeur 2 et des ordonnées à l’origine différentes : elles sont parallèles.'),
+      b.recap(['f(x) = ax + b.', 'a = variation de f ÷ variation de x.', 'Même a : droites parallèles.']),
+    ]),
+    lecon('CAFOP-MATH-ALGEBRE-L6', 'Radicaux et dénominateur rationnel', 5, [
+      b.texte('À la fin de cette leçon, tu sauras simplifier une racine carrée et rendre rationnel le dénominateur d’une fraction. Prérequis : les identités remarquables.'),
+      b.texte('Pour simplifier √n, on fait apparaître un carré : √45 = √(9 × 5) = 3√5. Pour comparer 3√5 et 7, on compare leurs carrés : 45 < 49, donc 3√5 < 7.'),
+      b.texte('Pour rendre **rationnel le dénominateur** de c ÷ (a − √b), on multiplie en haut et en bas par la **quantité conjuguée** a + √b : (a − √b)(a + √b) = a² − b.'),
+      b.exemple('Comme au concours (2023)', '3 ÷ (1 − √3) = 3(1 + √3) ÷ [(1 − √3)(1 + √3)] = (3 + 3√3) ÷ (1 − 3) = (3 + 3√3) ÷ (−2) = (−3 − 3√3) ÷ 2.'),
+      b.exemple('Comme au concours (2021)', 'B = 3√5 − 7 est négatif, car (3√5)² = 45 < 49 = 7², donc 3√5 < 7.'),
+      b.retenir('(√a)² = a pour a ≥ 0 ; (a − √b)(a + √b) = a² − b.'),
+      b.piege('√(a + b) n’est pas égal à √a + √b : √(9 + 16) = 5, alors que √9 + √16 = 7.'),
+      question(6, 'ALG-CALC', 'Comment s’écrit √50 sous forme simplifiée ?', ['5√2', '25√2', '2√5'], '50 = 25 × 2, donc √50 = √25 × √2 = 5√2.'),
+      b.recap(['Faire apparaître un carré.', 'Comparer des radicaux par leurs carrés.', 'Quantité conjuguée au dénominateur.']),
+    ]),
+    lecon('CAFOP-MATH-ALGEBRE-L7', 'Développer et factoriser', 5, [
+      b.texte('À la fin de cette leçon, tu sauras développer, factoriser et calculer une expression pour une valeur donnée. Prérequis : les identités remarquables.'),
+      b.exemple('Comme au concours (2026)', 'A = (x + 3)² − 2x(x + 3). Développé : x² + 6x + 9 − 2x² − 6x = 9 − x². Factorisé avec le facteur commun (x + 3) : A = (x + 3)[(x + 3) − 2x] = (x + 3)(3 − x). Pour x = √3 : A = 9 − 3 = 6.'),
+      b.exemple('Comme au concours (2025)', '(2x − 1)² − 9 = (2x − 1)² − 3² = (2x − 1 − 3)(2x − 1 + 3) = (2x − 4)(2x + 2) = 4(x − 2)(x + 1).'),
+      b.texte('Pour calculer une expression pour une valeur donnée, choisis la forme la plus simple : la forme développée 9 − x² se calcule plus vite que la forme factorisée.'),
+      b.retenir('Différence de deux carrés : a² − b² = (a − b)(a + b).'),
+      b.piege('Oublier les parenthèses en distribuant le signe moins : −2x(x + 3) = −2x² − 6x, et non −2x² + 6x.'),
+      question(7, 'ALG-CALC', 'Quelle est la forme factorisée de x² − 16 ?', ['(x − 4)(x + 4)', '(x − 4)²', '(x − 8)(x + 8)'], 'x² − 16 = x² − 4², différence de deux carrés : (x − 4)(x + 4).'),
+      b.recap(['Facteur commun.', 'Différence de deux carrés.', 'Choisir la forme la plus pratique.']),
+    ]),
+    lecon('CAFOP-MATH-ALGEBRE-L8', 'Statistiques : effectifs cumulés, moyenne, médiane', 6, [
+      b.texte('À la fin de cette leçon, tu sauras compléter un tableau d’effectifs cumulés et calculer moyenne, médiane et pourcentage. Prérequis : multiplier et additionner.'),
+      b.tableau(['Note', '5', '7', '8', '9', '10', '11', '12', '13', '14', '15'], [['Effectif', '3', '1', '3', '2', '1', '1', '2', '3', '1', '3'], ['Effectif cumulé croissant', '3', '4', '7', '9', '10', '11', '13', '16', '17', '20']], 'Série du sujet CAFOP-IA 2026, exercice 3.'),
+      b.exemple('Moyenne pondérée', '5×3 + 7×1 + 8×3 + 9×2 + 10×1 + 11×1 + 12×2 + 13×3 + 14×1 + 15×3 = 207. Moyenne = 207 ÷ 20 = 10,35.'),
+      b.exemple('Médiane', 'L’effectif est 20, pair : la médiane est la demi-somme des 10ᵉ et 11ᵉ valeurs. D’après les effectifs cumulés, la 10ᵉ note vaut 10 et la 11ᵉ vaut 11 : médiane = (10 + 11) ÷ 2 = 10,5.'),
+      b.texte('**Pourcentage** : les notes de l’intervalle ]11 ; 15] concernent 2 + 3 + 1 + 3 = 9 élèves sur 20, soit 9 ÷ 20 × 100 = 45 %.'),
+      b.retenir('Interpréter la médiane : autant de valeurs en dessous qu’au-dessus.'),
+      b.piege('Calculer la moyenne en additionnant seulement les notes différentes (5 + 7 + … + 15) et en divisant par 20 : il faut pondérer par les effectifs.'),
+      question(8, 'ALG-STAT', 'Quelle est la médiane de la série 2 ; 13 ; 3 ; 11 ; 5 ; 19 ?', ['8', '5', '11'], 'Série ordonnée : 2 ; 3 ; 5 ; 11 ; 13 ; 19. Six valeurs : médiane = (5 + 11) ÷ 2 = 8 (CAFOP 2025).'),
+      b.recap(['Effectifs cumulés.', 'Moyenne pondérée.', 'Médiane : ordonner, puis prendre le centre.']),
+    ]),
+  ],
+  exercices: [
+    numerique({ ...spec('ALG-INTER', { source: annale(2025, 'exercice 1 (QCM, amplitude)') }), code: 'CAFOP-MATH-ALGEBRE-E01', niveau: 1, consigne: 'Quelle est l’amplitude de l’intervalle ]−3 ; 7[ ?', valeur: 10, tolerance: { type: 'abs', valeur: 0 }, calcul: ['Amplitude = 7 − (−3)', '= 7 + 3 = 10'],
+      explication: '(CAFOP IA 2025, mathématiques, exercice 1) L’amplitude est la longueur de l’intervalle : borne supérieure moins borne inférieure, soit 7 − (−3) = 10.' }),
+    relier({ ...spec('ALG-INTER'), code: 'CAFOP-MATH-ALGEBRE-E02', niveau: 1, consigne: 'Relie chaque condition à son intervalle.', paires: [['−1 < x ≤ 4', ']−1 ; 4]'], ['x ≥ 2', '[2 ; +∞['], ['x < 0', ']−∞ ; 0['], ['3 ≤ x ≤ 6', '[3 ; 6]']],
+      explication: 'Une inégalité stricte exclut la borne (crochet tourné vers l’extérieur), une inégalité large l’inclut. L’infini est toujours exclu.' }),
+    qcm({ ...spec('ALG-INEQ', { source: annale(2025, 'exercice 1 (QCM, inéquation)') }), code: 'CAFOP-MATH-ALGEBRE-E03', niveau: 1, consigne: 'Quel est l’ensemble des solutions de 3x − 4 < 5(x − 1) ?', options: [']1/2 ; +∞[', ']−∞ ; 1/2[', ']−1/2 ; +∞[', '[1/2 ; +∞['], bonne: 0,
+      explication: '(CAFOP IA 2025, mathématiques, exercice 1) 3x − 4 < 5x − 5 donne −2x < −1. En divisant par −2, on inverse le sens : x > 1/2. La borne est exclue car l’inégalité est stricte.' }),
+    qcm({ ...spec('ALG-SYS', { source: annale(2024, 'exercice 1, question 7 (QCM)') }), code: 'CAFOP-MATH-ALGEBRE-E04', niveau: 1, consigne: 'Quel couple est solution du système x − 2y − 3 = 0 et 2x + y + 4 = 0 ?', options: ['(−1 ; −2)', '(−1 ; 2)', '(−2 ; −1)'], bonne: 0,
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 7) x = 2y + 3 ; en remplaçant : 5y + 10 = 0, donc y = −2 et x = −1. Vérification : −1 + 4 − 3 = 0 et −2 − 2 + 4 = 0.' }),
+    qcm({ ...spec('ALG-CALC'), code: 'CAFOP-MATH-ALGEBRE-E05', niveau: 1, consigne: 'Quelle est la forme développée de (x + 5)² ?', options: ['x² + 10x + 25', 'x² + 25', 'x² + 5x + 25', 'x² + 10x + 10'], bonne: 0,
+      explication: '(a + b)² = a² + 2ab + b² : x² + 2 × x × 5 + 25 = x² + 10x + 25. Oublier le double produit est l’erreur la plus fréquente.' }),
+    numerique({ ...spec('ALG-STAT', { source: annale(2025, 'exercice 1 (QCM, médiane)') }), code: 'CAFOP-MATH-ALGEBRE-E06', niveau: 1, consigne: 'Calcule la médiane de la série 2 ; 13 ; 3 ; 11 ; 5 ; 19.', valeur: 8, tolerance: { type: 'abs', valeur: 0 }, calcul: ['Série ordonnée : 2 ; 3 ; 5 ; 11 ; 13 ; 19', 'Effectif pair : demi-somme des 3ᵉ et 4ᵉ valeurs', '(5 + 11) ÷ 2 = 8'],
+      explication: '(CAFOP IA 2025, mathématiques, exercice 1) On ordonne la série, puis, comme l’effectif 6 est pair, on prend la demi-somme des deux valeurs centrales 5 et 11 : 8.' }),
+    qcm({ ...spec('ALG-INTER', { source: annale(2024, 'exercice 1, question 3 (QCM)') }), code: 'CAFOP-MATH-ALGEBRE-E07', niveau: 2, consigne: 'Si −2 < x < −1 et 2 < y < 4, quel est l’encadrement de x − y ?', options: ['−6 < x − y < −3', '−5 < x − y < −3', '−5 < x − y < −4', '−4 < x − y < −5'], bonne: 0,
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 3) De 2 < y < 4, on tire −4 < −y < −2. On additionne avec −2 < x < −1 : −6 < x − y < −3.' }),
+    qcm({ ...spec('ALG-INEQ', { source: annale(2026, 'exercice 2, question 3') }), code: 'CAFOP-MATH-ALGEBRE-E08', niveau: 2, consigne: 'Quel est l’ensemble des solutions du système formé par 3x ≥ 2x + 2/3 et −3x + 1 > x − 3 ?', options: ['[2/3 ; 1[', ']2/3 ; 1]', '[2/3 ; +∞[', ']−∞ ; 1['], bonne: 0,
+      explication: '(CAFOP IA 2026, mathématiques, exercice 2) La première inéquation donne x ≥ 2/3, la seconde −4x > −4, soit x < 1. L’intersection est [2/3 ; 1[ : 2/3 inclus, 1 exclu.' }),
+    qcm({ ...spec('ALG-SYS', { source: annale(2024, 'exercice 1, question 8 (QCM)') }), code: 'CAFOP-MATH-ALGEBRE-E09', niveau: 2, consigne: 'L’application affine f vérifie f(2) = 5 et f(−1) = 2. Quelle est son expression ?', options: ['f(x) = x + 3', 'f(x) = 2x + 5', 'f(x) = 5x − 3', 'f(x) = 3x − 1'], bonne: 0,
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 8) a = (5 − 2) ÷ (2 + 1) = 1, puis 2 + b = 5, donc b = 3. Vérification : f(−1) = −1 + 3 = 2.' }),
+    qcm({ ...spec('ALG-CALC', { source: annale(2023, 'exercice 1, ligne 5 (QCM)') }), code: 'CAFOP-MATH-ALGEBRE-E10', niveau: 2, consigne: 'À quoi est égal 3 ÷ (1 − √3) ?', options: ['(−3 − 3√3) ÷ 2', '(3 − √3) ÷ (−2)', '(3√3 − 3) ÷ 2', '3 + 3√3'], bonne: 0,
+      explication: '(CAFOP IA 2023, mathématiques, exercice 1) On multiplie par la quantité conjuguée 1 + √3 : 3(1 + √3) ÷ (1 − 3) = (3 + 3√3) ÷ (−2) = (−3 − 3√3) ÷ 2.' }),
+    numerique({ ...spec('ALG-STAT', { source: annale(2026, 'exercice 3') }), code: 'CAFOP-MATH-ALGEBRE-E11', niveau: 2, consigne: 'Notes : 5, 7, 8, 9, 10, 11, 12, 13, 14, 15 ; effectifs : 3, 1, 3, 2, 1, 1, 2, 3, 1, 3. Calcule la moyenne de la série.', valeur: 10.35, decimales: 2, tolerance: { type: 'abs', valeur: 0.005 },
+      calcul: ['Somme des produits : 15 + 7 + 24 + 18 + 10 + 11 + 24 + 39 + 14 + 45 = 207', 'Effectif total : 20', '207 ÷ 20 = 10,35'],
+      explication: '(CAFOP IA 2026, mathématiques, exercice 3) On multiplie chaque note par son effectif, on additionne (207) et on divise par l’effectif total 20 : 10,35.' }),
+    numerique({ ...spec('ALG-CALC', { source: annale(2026, 'exercice 2, question 1') }), code: 'CAFOP-MATH-ALGEBRE-E12', niveau: 3, consigne: 'A = (x + 3)² − 2x(x + 3). Calcule A pour x = √3.', valeur: 6, tolerance: { type: 'abs', valeur: 0 },
+      calcul: ['Forme développée : A = x² + 6x + 9 − 2x² − 6x = 9 − x²', 'Pour x = √3 : A = 9 − (√3)² = 9 − 3 = 6'],
+      explication: '(CAFOP IA 2026, mathématiques, exercice 2) Développer simplifie le calcul : A = 9 − x². Comme (√3)² = 3, A = 6. La forme factorisée (x + 3)(3 − x) donne le même résultat, avec plus de calculs.' }),
+    qcm({ ...spec('ALG-SYS', { source: annale(2023, 'exercice 2') }), code: 'CAFOP-MATH-ALGEBRE-E13', niveau: 3, consigne: 'La fonction affine g vérifie g(−1/2) = −1/2 et g(2) = −3. Quelle est l’équation de sa droite représentative ?', options: ['x + y + 1 = 0', 'x − y + 1 = 0', 'x + y − 1 = 0', '2x + y + 3 = 0'], bonne: 0,
+      explication: '(CAFOP IA 2023, mathématiques, exercice 2) a = (−3 + 1/2) ÷ (2 + 1/2) = −1 ; puis −2 + b = −3 donne b = −1. Donc y = −x − 1, soit x + y + 1 = 0.' }),
+    numerique({ ...spec('ALG-STAT', { source: annale(2026, 'exercice 3, question 2') }), code: 'CAFOP-MATH-ALGEBRE-E14', niveau: 3, consigne: 'Dans la série de l’exercice précédent (effectif total 20), quel pourcentage des élèves a une note dans l’intervalle ]11 ; 15] ?', valeur: 45, unite: '%', tolerance: { type: 'abs', valeur: 0 },
+      calcul: ['Notes de ]11 ; 15] : 12, 13, 14, 15 (11 exclu)', 'Effectif : 2 + 3 + 1 + 3 = 9', '9 ÷ 20 × 100 = 45 %'],
+      explication: '(CAFOP IA 2026, mathématiques, exercice 3) La borne 11 est exclue et 15 incluse : on garde les notes 12, 13, 14 et 15, soit 9 élèves sur 20, c’est-à-dire 45 %.' }),
+  ],
+};
+
+module.exports = [algebre];

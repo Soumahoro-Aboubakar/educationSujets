@@ -1,0 +1,195 @@
+{
+  "module": "CAFOP-PROF-DIDACTIQUE",
+  "titre": "Didactique et préparation de la classe",
+  "matiere": "Psychopédagogie",
+  "resume": "De la psychopédagogie à la didactique : objectifs, fiche de préparation, didactique de la lecture, des mathématiques et de l’éveil, gestion des classes nombreuses et formation des élèves-maîtres.",
+  "concours": [
+    "CAFOP — Accès à la formation de professeur de CAFOP"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L1",
+      "titre": "De la pédagogie à la didactique",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Formuler des objectifs et viser des compétences",
+      "explication": "À la fin de cette leçon, tu sauras distinguer pédagogie et didactique et utiliser le triangle pédagogique. Prérequis : le module Psychopédagogie de l’enfant et didactique. La pédagogie concerne la conduite de la classe et la relation éducative. La didactique étudie l’enseignement d’une discipline : ses notions, leurs difficultés, l’ordre dans lequel les enseigner. Le professeur de CAFOP forme les élèves-maîtres aux deux.",
+      "formules": [],
+      "exemples": [
+        "Une même séance vue deux fois",
+        "Lien avec la psychopédagogie"
+      ],
+      "pieges": [
+        "Réduire la didactique à la discipline elle-même : connaître les fractions ne suffit pas pour savoir les enseigner."
+      ],
+      "aRetenir": [
+        "Pédagogie : conduite de classe.",
+        "Didactique : une discipline.",
+        "Triangle : savoir, enseignant, élève."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L2",
+      "titre": "Formuler des objectifs et viser des compétences",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "2/8",
+      "precedente": "De la pédagogie à la didactique",
+      "suivante": "Construire une fiche de préparation",
+      "explication": "À la fin de cette leçon, tu sauras écrire un objectif opérationnel et le distinguer d’une compétence. Prérequis : la taxonomie de Bloom (module de psychopédagogie). Un objectif opérationnel dit ce que l’élève saura faire à la fin de la séance. Il comporte un verbe d’action observable, des conditions et un critère de réussite. Une compétence est plus large : la capacité à mobiliser plusieurs ressources pour résoudre une situation de la vie. Compétence : « Résoudre une situation de la vie courante faisant intervenir l’addition », par exemple calculer la dépense de deux achats au marché.",
+      "formules": [],
+      "exemples": [
+        "Objectif mal formulé",
+        "Objectif opérationnel"
+      ],
+      "pieges": [
+        "Écrire un objectif centré sur le maître (« expliquer l’addition ») au lieu de l’élève."
+      ],
+      "aRetenir": [
+        "Verbe observable.",
+        "Conditions et critère.",
+        "Compétence : mobiliser en situation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L3",
+      "titre": "Construire une fiche de préparation",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "3/8",
+      "precedente": "Formuler des objectifs et viser des compétences",
+      "suivante": "Didactique de la lecture",
+      "explication": "À la fin de cette leçon, tu sauras organiser le déroulement d’une séance et en évaluer la cohérence. Prérequis : formuler des objectifs.",
+      "formules": [],
+      "exemples": [
+        "En-tête de fiche",
+        "Cohérence"
+      ],
+      "pieges": [
+        "Donner la règle dès le début puis faire seulement répéter : la recherche des élèves disparaît."
+      ],
+      "aRetenir": [
+        "En-tête : discipline, niveau, durée, objectif, matériel.",
+        "Rappel, recherche, synthèse, application, évaluation.",
+        "Objectif et évaluation cohérents."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L4",
+      "titre": "Didactique de la lecture",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "4/8",
+      "precedente": "Construire une fiche de préparation",
+      "suivante": "Didactique des mathématiques",
+      "explication": "À la fin de cette leçon, tu sauras décrire les grandes méthodes d’apprentissage de la lecture et les compétences en jeu. Prérequis : le développement de l’enfant. Apprendre à lire, c’est maîtriser deux compétences : identifier les mots (déchiffrer, grâce à la conscience des sons) et comprendre le texte. Les deux se travaillent ensemble.",
+      "formules": [],
+      "exemples": [
+        "Conscience phonologique",
+        "Compréhension"
+      ],
+      "pieges": [
+        "Faire réciter un texte appris par cœur et croire que l’élève sait lire."
+      ],
+      "aRetenir": [
+        "Syllabique, globale, mixte.",
+        "Identifier les mots et comprendre.",
+        "Conscience des sons."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L5",
+      "titre": "Didactique des mathématiques",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "5/8",
+      "precedente": "Didactique de la lecture",
+      "suivante": "Activités d’éveil et démarche d’investigation",
+      "explication": "À la fin de cette leçon, tu sauras organiser l’apprentissage d’une notion mathématique du concret à l’abstrait. Prérequis : les stades de Piaget. À l’école primaire, une notion mathématique se construit en trois temps : manipuler des objets, représenter la situation (dessin, schéma), puis écrire le calcul ou la règle. La situation-problème met l’élève face à une question qu’il ne sait pas encore résoudre directement, ce qui donne du sens à la notion.",
+      "formules": [],
+      "exemples": [
+        "La division au CE2",
+        "Une erreur à exploiter"
+      ],
+      "pieges": [
+        "Rester trop longtemps dans le concret : la manipulation est une étape, l’objectif reste l’abstraction."
+      ],
+      "aRetenir": [
+        "Concret, représentation, abstraction.",
+        "Situation-problème.",
+        "Erreur = point de départ de la remédiation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L6",
+      "titre": "Activités d’éveil et démarche d’investigation",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "6/8",
+      "precedente": "Didactique des mathématiques",
+      "suivante": "Classes nombreuses et classes à plusieurs niveaux",
+      "explication": "À la fin de cette leçon, tu sauras conduire une activité d’éveil selon une démarche d’investigation. Prérequis : l’école face aux médias (module de psychopédagogie).",
+      "formules": [],
+      "exemples": [
+        "Pourquoi la flaque disparaît-elle ?",
+        "Le sujet de 2005"
+      ],
+      "pieges": [
+        "Dicter un résumé d’éveil sans observation ni expérience : les élèves récitent sans comprendre."
+      ],
+      "aRetenir": [
+        "Observer, questionner, supposer.",
+        "Vérifier, conclure.",
+        "L’élève cherche."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L7",
+      "titre": "Classes nombreuses et classes à plusieurs niveaux",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "7/8",
+      "precedente": "Activités d’éveil et démarche d’investigation",
+      "suivante": "Former les élèves-maîtres",
+      "explication": "À la fin de cette leçon, tu sauras proposer des organisations efficaces pour une classe nombreuse ou à plusieurs niveaux. Prérequis : la différenciation (module de psychopédagogie). Beaucoup d’instituteurs exercent dans des classes à effectif élevé ou à plusieurs niveaux (classes multigrades). Le maître doit alors faire travailler tous les élèves en même temps, sans pouvoir suivre chacun en permanence.",
+      "formules": [],
+      "exemples": [
+        "Une classe CE1-CE2",
+        "Évaluer vite 70 élèves"
+      ],
+      "pieges": [
+        "Laisser un groupe sans tâche précise pendant que le maître s’occupe de l’autre : le temps d’apprentissage est perdu."
+      ],
+      "aRetenir": [
+        "Groupes et tutorat.",
+        "Consignes écrites, routines.",
+        "Ardoise pour évaluer vite."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L8",
+      "titre": "Former les élèves-maîtres",
+      "module": "Didactique et préparation de la classe (Psychopédagogie)",
+      "position": "8/8",
+      "precedente": "Classes nombreuses et classes à plusieurs niveaux",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras organiser l’accompagnement d’un élève-maître en stage. Prérequis : observer et conseiller un élève-maître (module de psychopédagogie).",
+      "formules": [],
+      "exemples": [
+        "Un entretien de conseil",
+        "Le sujet de 2004"
+      ],
+      "pieges": [
+        "Accumuler dix critiques à la fois : le stagiaire ne sait plus par où commencer."
+      ],
+      "aRetenir": [
+        "Leçon modèle, leçon d’essai.",
+        "Entretien fondé sur les faits.",
+        "Une priorité à la fois."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

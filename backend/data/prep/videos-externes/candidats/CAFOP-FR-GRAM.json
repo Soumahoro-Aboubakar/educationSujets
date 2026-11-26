@@ -1,0 +1,767 @@
+{
+ "CAFOP-FR-GRAM-L1": {
+  "titre": "Reconnaître la nature d’un mot",
+  "candidats": [
+   {
+    "id": "yl8ROX7Ltzg",
+    "titre": "CLASSES GRAMMATICALES : ASTUCES pour identifier la nature des mots",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "664 272 vues"
+   },
+   {
+    "id": "28GbAcHjrrw",
+    "titre": "Les natures et les fonctions des mots CM1 - CM2 - 6ème - Cycle 3 - Français, Grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "299 181 vues"
+   },
+   {
+    "id": "OdzdTyEPh20",
+    "titre": "Comment distinguer la nature d'un mot de sa fonction ? + exemples d'analyse grammaticale",
+    "chaine": "Français universel",
+    "duree": "3:11",
+    "sec": 191,
+    "vues": "1 802 vues"
+   },
+   {
+    "id": "plK3w243yZY",
+    "titre": "TOUTES LES CLASSES GRAMMATICALES : Comment les identifier ?",
+    "chaine": "L'ardoise",
+    "duree": "7:51",
+    "sec": 471,
+    "vues": "305 894 vues"
+   },
+   {
+    "id": "9NdLW52UX2k",
+    "titre": "La nature des mots - CM1, CM2 et 6ème - Leçon, Exercices, Evaluations",
+    "chaine": "Pass Education FR",
+    "duree": "5:39",
+    "sec": 339,
+    "vues": "42 010 vues"
+   },
+   {
+    "id": "knGUSKNbt4s",
+    "titre": "La classe grammaticale CE2 - CM1 - Cycle 2 et 3 - Français - Grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "4:28",
+    "sec": 268,
+    "vues": "64 233 vues"
+   },
+   {
+    "id": "dZEw41vC7bo",
+    "titre": "La nature des mots en français : Tout savoir sur les mots variables (Leçon 1)",
+    "chaine": "lamachineaecrire",
+    "duree": "6:40",
+    "sec": 400,
+    "vues": "1 734 517 vues"
+   },
+   {
+    "id": "_MFy4M4YU5M",
+    "titre": "Les secrets de l'analyse grammaticale",
+    "chaine": "French Help by Carine Cros",
+    "duree": "6:25",
+    "sec": 385,
+    "vues": "72 587 vues"
+   },
+   {
+    "id": "IP98v7BcZGQ",
+    "titre": "Les Fonctions : comment les identifier ?",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "566 130 vues"
+   },
+   {
+    "id": "uLu7RfKQUnw",
+    "titre": "Les FONCTIONS grammaticales : les apprendre facilement et rapidement !",
+    "chaine": "L'ardoise",
+    "duree": "7:59",
+    "sec": 479,
+    "vues": "323 862 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L2": {
+  "titre": "Trouver le sujet, le COD, le COI et le COS",
+  "candidats": [
+   {
+    "id": "lJSkCPwHAFw",
+    "titre": "Compléments d'objet - COD - COI CM1 - CM2 - 6ème - Cycle 3 - Français - Grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "7:25",
+    "sec": 445,
+    "vues": "507 818 vues"
+   },
+   {
+    "id": "VN3vdNWdJzM",
+    "titre": "COD / COI - Un complément d'objet, c'est quoi?",
+    "chaine": "Parlez-vous FRENCH : Cours de français",
+    "duree": "6:43",
+    "sec": 403,
+    "vues": "1 529 021 vues"
+   },
+   {
+    "id": "VUaW4pJGIeA",
+    "titre": "COD, COI, COS, attribut du sujet : mes astuces pour les repérer",
+    "chaine": "Bien écrire - Katia Nugnes",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "91 526 vues"
+   },
+   {
+    "id": "0jNim1POQSs",
+    "titre": "COD, COI, COS, attribut du sujet",
+    "chaine": "Bien écrire - Katia Nugnes",
+    "duree": "3:27",
+    "sec": 207,
+    "vues": "24 830 vues"
+   },
+   {
+    "id": "JcBvS6a9o0Y",
+    "titre": "COD COI - 3 Astuces pour ne plus se tromper",
+    "chaine": "Parlez-vous FRENCH : Cours de français",
+    "duree": "5:51",
+    "sec": 351,
+    "vues": "525 633 vues"
+   },
+   {
+    "id": "FgGlq0tbgnM",
+    "titre": "Comment trouver un COD ou un COI dans une phrase ?",
+    "chaine": "Prof de français",
+    "duree": "3:11",
+    "sec": 191,
+    "vues": "33 352 vues"
+   },
+   {
+    "id": "0tWw9HYgayE",
+    "titre": "Les Bases : Tout savoir du C.O.D (Complément d'Objet Direct)",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "4:59",
+    "sec": 299,
+    "vues": "20 125 vues"
+   },
+   {
+    "id": "l5JzF1wqLLU",
+    "titre": "Terminologie officielle des Compléments de verbe : COD et COI",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:04",
+    "sec": 304,
+    "vues": "41 463 vues"
+   },
+   {
+    "id": "wwJjFsbCcd4",
+    "titre": "Attribut du sujet, COD, COI - 5ème, 4ème, 3ème - Cours, Exercices, Evaluations",
+    "chaine": "Pass Education FR",
+    "duree": "6:43",
+    "sec": 403,
+    "vues": "17 215 vues"
+   },
+   {
+    "id": "IP98v7BcZGQ",
+    "titre": "Les Fonctions : comment les identifier ?",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "566 130 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L3": {
+  "titre": "Distinguer attributs et circonstances",
+  "candidats": [
+   {
+    "id": "rPU_ehACEM8",
+    "titre": "Les bases : Trouver l'ATTRIBUT DU SUJET à tous les coups !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:59",
+    "sec": 359,
+    "vues": "54 641 vues"
+   },
+   {
+    "id": "vJ2cz8gpmu4",
+    "titre": "Les FONCTIONS de l'ADJECTIF : épithète, attribut du sujet & du C.O.D",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:00",
+    "sec": 360,
+    "vues": "97 586 vues"
+   },
+   {
+    "id": "G5rMwKbEPIU",
+    "titre": "Sujet et attribut du sujet - Français - Collège - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "3:58",
+    "sec": 238,
+    "vues": "4 360 vues"
+   },
+   {
+    "id": "poUFOukNeCY",
+    "titre": "L'Attribut du sujet",
+    "chaine": "Maitre Jack",
+    "duree": "3:24",
+    "sec": 204,
+    "vues": "400 652 vues"
+   },
+   {
+    "id": "03D7ZKjpFvg",
+    "titre": "Épithète ou Attribut ? Le Grand Défi de la Grammaire Expliqué",
+    "chaine": "Français facile et clair",
+    "duree": "5:41",
+    "sec": 341,
+    "vues": "20 855 vues"
+   },
+   {
+    "id": "Nen-CpdvieU",
+    "titre": "Complément Circonstanciel : La meilleure manière de l’identifier.",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:22",
+    "sec": 322,
+    "vues": "89 288 vues"
+   },
+   {
+    "id": "jJ0ZsRqluCU",
+    "titre": "Adjectif qualificatif - épithète - attribut du sujet CM1-CM2-Cycle 3 - Français - Étude de la langue",
+    "chaine": "Maître Lucas",
+    "duree": "6:11",
+    "sec": 371,
+    "vues": "49 057 vues"
+   },
+   {
+    "id": "wwJjFsbCcd4",
+    "titre": "Attribut du sujet, COD, COI - 5ème, 4ème, 3ème - Cours, Exercices, Evaluations",
+    "chaine": "Pass Education FR",
+    "duree": "6:43",
+    "sec": 403,
+    "vues": "17 215 vues"
+   },
+   {
+    "id": "IP98v7BcZGQ",
+    "titre": "Les Fonctions : comment les identifier ?",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "566 130 vues"
+   },
+   {
+    "id": "yl8ROX7Ltzg",
+    "titre": "CLASSES GRAMMATICALES : ASTUCES pour identifier la nature des mots",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "664 272 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L4": {
+  "titre": "Analyser les expansions du nom",
+  "candidats": [
+   {
+    "id": "Wt676-VZfBU",
+    "titre": "Les EXPANSIONS du NOM en 5 Minutes !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "4:51",
+    "sec": 291,
+    "vues": "484 282 vues"
+   },
+   {
+    "id": "-gSwyk4iVWA",
+    "titre": "Les expansions du nom",
+    "chaine": "Monsieur Tsim",
+    "duree": "5:00",
+    "sec": 300,
+    "vues": "187 487 vues"
+   },
+   {
+    "id": "aauHuFSUXZM",
+    "titre": "Les Expansions du Nom : Tout Comprendre pour le Brevet ! (3e)",
+    "chaine": "Cours Clairs",
+    "duree": "3:10",
+    "sec": 190,
+    "vues": "684 vues"
+   },
+   {
+    "id": "PAFCAmORXC8",
+    "titre": "Les expansions du nom",
+    "chaine": "Prof Youssef",
+    "duree": "11:23",
+    "sec": 683,
+    "vues": "4 692 vues"
+   },
+   {
+    "id": "e_2Q53AjDoE",
+    "titre": "Le groupe nominal et ses expansions - Français - Collège - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "5:43",
+    "sec": 343,
+    "vues": "19 080 vues"
+   },
+   {
+    "id": "ymRTdQgNqig",
+    "titre": "🎯 Tout savoir sur les expansions du nom : Adjectif qualificatif VS Complément de nom !",
+    "chaine": "Madrasatona",
+    "duree": "5:54",
+    "sec": 354,
+    "vues": "5 834 vues"
+   },
+   {
+    "id": "YOihJEzxV9Q",
+    "titre": "Le nom et ses expansions",
+    "chaine": "Le français avec Nouma",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "93 430 vues"
+   },
+   {
+    "id": "MTNvMlOZLtk",
+    "titre": "EXPANSIONS DU NOM : tout comprendre en 6 minutes !",
+    "chaine": "Le français c'est clair",
+    "duree": "6:47",
+    "sec": 407,
+    "vues": "106 348 vues"
+   },
+   {
+    "id": "uLu7RfKQUnw",
+    "titre": "Les FONCTIONS grammaticales : les apprendre facilement et rapidement !",
+    "chaine": "L'ardoise",
+    "duree": "7:59",
+    "sec": 479,
+    "vues": "323 862 vues"
+   },
+   {
+    "id": "L4311yWD7r4",
+    "titre": "Les expansions du nom",
+    "chaine": "francophonie-news",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "4 426 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L5": {
+  "titre": "Choisir le pronom relatif",
+  "candidats": [
+   {
+    "id": "ZV8U856rM30",
+    "titre": "LES PRONOMS RELATIFS EN FRANÇAIS : pronoms relatifs simples et pronoms relatifs composés",
+    "chaine": "Français avec Pierre",
+    "duree": "7:41",
+    "sec": 461,
+    "vues": "444 180 vues"
+   },
+   {
+    "id": "gAztaclwNa4",
+    "titre": "Les pronoms relatifs en français : QUE - QUI - DONT",
+    "chaine": "Français avec Nelly",
+    "duree": "5:14",
+    "sec": 314,
+    "vues": "563 074 vues"
+   },
+   {
+    "id": "xzsnlcgGzlg",
+    "titre": "Les PRONOMS RELATIFS COMPOSÉS | LEQUEL, DUQUEL, AUQUEL, AUXQUELLES, etc.",
+    "chaine": "Le French Club",
+    "duree": "12:35",
+    "sec": 755,
+    "vues": "130 690 vues"
+   },
+   {
+    "id": "If2K5Z-zJhA",
+    "titre": "Analyser un Pronom Relatif : 2 fonctions en 1 mot !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:21",
+    "sec": 321,
+    "vues": "24 923 vues"
+   },
+   {
+    "id": "7fA8Sm3m2ho",
+    "titre": "QUI - QUE - OÙ - DONT : Tout savoir sur les pronoms relatifs en français ! 📚",
+    "chaine": "Le French Club",
+    "duree": "14:46",
+    "sec": 886,
+    "vues": "271 717 vues"
+   },
+   {
+    "id": "9O1DniJg4OA",
+    "titre": "Pronoms relatifs en français : lequel, duquel, auquel - Explication facile !",
+    "chaine": "French mornings with Elisa",
+    "duree": "3:24",
+    "sec": 204,
+    "vues": "75 620 vues"
+   },
+   {
+    "id": "uyVEi_d9SuE",
+    "titre": "Les pronoms relatifs en français : QUI, QUE, Où, DONT",
+    "chaine": "Classe de français",
+    "duree": "14:43",
+    "sec": 883,
+    "vues": "76 858 vues"
+   },
+   {
+    "id": "dlPeWTel_Vk",
+    "titre": "Lequel, Auquel, Duquel : Les PRONOMS RELATIFS COMPOSÉS | Grammaire B2 - C1",
+    "chaine": "Français avec Nelly",
+    "duree": "7:03",
+    "sec": 423,
+    "vues": "192 336 vues"
+   },
+   {
+    "id": "AZae85Hu4Ck",
+    "titre": "Tuto fonction pronom relatif",
+    "chaine": "madame jouanne",
+    "duree": "3:57",
+    "sec": 237,
+    "vues": "5 963 vues"
+   },
+   {
+    "id": "r4z29wWdwlY",
+    "titre": "😨Le pronom relatif DONT ! (explication + beaucoup d'exemples)",
+    "chaine": "Guillaume Posé - Professeur de français",
+    "duree": "10:37",
+    "sec": 637,
+    "vues": "179 691 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L6": {
+  "titre": "De la phrase simple à la phrase complexe",
+  "candidats": [
+   {
+    "id": "zq4C4ocGqH0",
+    "titre": "La phrase complexe... c'est SIMPLE ! (juxtaposition, coordination & subordination)",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:50",
+    "sec": 350,
+    "vues": "250 629 vues"
+   },
+   {
+    "id": "IVa5P-NDpyQ",
+    "titre": "Les phrases simples et complexes CM1 - CM2 - 6e - Cycle 3 - Français : grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "6:22",
+    "sec": 382,
+    "vues": "178 406 vues"
+   },
+   {
+    "id": "YMYACKmUgwU",
+    "titre": "La phrase simple et la phrase complexe (juxtaposée, coordonnée subordonnée/ relative/complétive...)",
+    "chaine": "J'aimerais savoir !",
+    "duree": "7:25",
+    "sec": 445,
+    "vues": "1 106 520 vues"
+   },
+   {
+    "id": "LV3OkpaVtuM",
+    "titre": "Cours - 4e - Français - Grammaire : La phrase simple et la phrase complexe 1/2",
+    "chaine": "Ecoles au Burkina",
+    "duree": "14:48",
+    "sec": 888,
+    "vues": "1 336 vues"
+   },
+   {
+    "id": "p9o5VyaoMNA",
+    "titre": "LES PROPOSITIONS : Juxtaposées, coordonnées et subordonnées",
+    "chaine": "L'ardoise",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "405 289 vues"
+   },
+   {
+    "id": "9pcZ7kXoRM4",
+    "titre": "Phrases simples et phrases complexes - 5ème, 4ème, 3ème - Cours, Exercices, Evaluations",
+    "chaine": "Pass Education FR",
+    "duree": "4:48",
+    "sec": 288,
+    "vues": "21 377 vues"
+   },
+   {
+    "id": "ow3RG-OrTF0",
+    "titre": "Cours - 3e - Français - Grammaire : Les phrases simples et les phrases complexes 1/4",
+    "chaine": "Ecoles au Burkina",
+    "duree": "10:53",
+    "sec": 653,
+    "vues": "1 367 vues"
+   },
+   {
+    "id": "-JhnIKyIEQU",
+    "titre": "La phrase simple et la phrase complexe",
+    "chaine": "jerevise",
+    "duree": "3:18",
+    "sec": 198,
+    "vues": "222 307 vues"
+   },
+   {
+    "id": "yl8ROX7Ltzg",
+    "titre": "CLASSES GRAMMATICALES : ASTUCES pour identifier la nature des mots",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "664 272 vues"
+   },
+   {
+    "id": "IP98v7BcZGQ",
+    "titre": "Les Fonctions : comment les identifier ?",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "566 130 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L7": {
+  "titre": "Analyser les propositions subordonnées",
+  "candidats": [
+   {
+    "id": "pGQ1nFbzfmY",
+    "titre": "Identifier les SUBORDONNÉES : les différentes subordinations",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:54",
+    "sec": 354,
+    "vues": "1 194 773 vues"
+   },
+   {
+    "id": "p9o5VyaoMNA",
+    "titre": "LES PROPOSITIONS : Juxtaposées, coordonnées et subordonnées",
+    "chaine": "L'ardoise",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "405 289 vues"
+   },
+   {
+    "id": "gJ3oOGH87gs",
+    "titre": "Les propositions subordonnées relatives, complétives, interrogatives indirectes et circonstancielles",
+    "chaine": "Le français avec Profélie",
+    "duree": "6:31",
+    "sec": 391,
+    "vues": "195 436 vues"
+   },
+   {
+    "id": "LK8e1Sr05yA",
+    "titre": "Propositions subordonnées circonstancielles | Réussir la question de grammaire au bac ! 🤩 🤩",
+    "chaine": "Ta coach de français",
+    "duree": "6:41",
+    "sec": 401,
+    "vues": "146 765 vues"
+   },
+   {
+    "id": "YMYACKmUgwU",
+    "titre": "La phrase simple et la phrase complexe (juxtaposée, coordonnée subordonnée/ relative/complétive...)",
+    "chaine": "J'aimerais savoir !",
+    "duree": "7:25",
+    "sec": 445,
+    "vues": "1 106 520 vues"
+   },
+   {
+    "id": "kYPd_NEjxpo",
+    "titre": "ANALYSE : La Subordonnée Conjonctive en fonction de Complément Circonstanciel",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:14",
+    "sec": 314,
+    "vues": "238 398 vues"
+   },
+   {
+    "id": "gAeOisZHBOw",
+    "titre": "Propositions Subordonnées : une astuce très simple pour les identifier !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:25",
+    "sec": 325,
+    "vues": "93 659 vues"
+   },
+   {
+    "id": "vKseubdJ1OA",
+    "titre": "Morphosyntaxe : comment analyser les propositions subordonnées ?",
+    "chaine": "On parle français",
+    "duree": "11:10",
+    "sec": 670,
+    "vues": "89 780 vues"
+   },
+   {
+    "id": "Czpz4MIBwjQ",
+    "titre": "Trouver la fonction des subordonnées : Explications et TEST !",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "9:06",
+    "sec": 546,
+    "vues": "37 631 vues"
+   },
+   {
+    "id": "TdsNs6re308",
+    "titre": "Les propositions dans la phrase CM1 - CM2 - 6ème - Cycle 3 - Français : grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "7:40",
+    "sec": 460,
+    "vues": "161 400 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L8": {
+  "titre": "Ponctuer la phrase et lire ses limites",
+  "candidats": [
+   {
+    "id": "HthdHu_5lO8",
+    "titre": "La phrase et la ponctuation",
+    "chaine": "Eveiller mon enfant",
+    "duree": "5:35",
+    "sec": 335,
+    "vues": "119 263 vues"
+   },
+   {
+    "id": "rrV0rI50ja4",
+    "titre": "La phrase et la ponctuation",
+    "chaine": "3M2S Education سرّ التّفوّق و النّجاح",
+    "duree": "9:24",
+    "sec": 564,
+    "vues": "9 777 vues"
+   },
+   {
+    "id": "dKop3sgk5Tw",
+    "titre": "Cours - Sixième - Français : La ponctuation / M. Ngom",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "10:08",
+    "sec": 608,
+    "vues": "4 426 vues"
+   },
+   {
+    "id": "j-ML4Su3iEo",
+    "titre": "Cours de français sur la ponctuation : la virgule et le point virgule",
+    "chaine": "digiSchool Orientation",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "138 447 vues"
+   },
+   {
+    "id": "MSgryF7n7Qk",
+    "titre": "Les signes de ponctuation forte (point, point d'exclamation, d'interrogation, points de suspension)",
+    "chaine": "Bien écrire - Katia Nugnes",
+    "duree": "0:28",
+    "sec": 28,
+    "vues": "8 928 vues"
+   },
+   {
+    "id": "gDzx3Cb4rGM",
+    "titre": "La phrase et la ponctuation",
+    "chaine": "mverbois kingsworth",
+    "duree": "6:13",
+    "sec": 373,
+    "vues": "713 vues"
+   },
+   {
+    "id": "vSer8zuFjZs",
+    "titre": "La ponctuation en français : les 8 signes de ponctuation expliqués simplement avec des exemples",
+    "chaine": "L’Art de S’exprimer",
+    "duree": "3:33",
+    "sec": 213,
+    "vues": "504 vues"
+   },
+   {
+    "id": "kvUX0ZVgLMc",
+    "titre": "LA PONCTUATION : ce qu’il faut savoir pour mieux écrire !",
+    "chaine": "Le français c'est clair",
+    "duree": "12:53",
+    "sec": 773,
+    "vues": "56 728 vues"
+   },
+   {
+    "id": "28GbAcHjrrw",
+    "titre": "Les natures et les fonctions des mots CM1 - CM2 - 6ème - Cycle 3 - Français, Grammaire",
+    "chaine": "Maître Lucas",
+    "duree": "4:44",
+    "sec": 284,
+    "vues": "299 181 vues"
+   },
+   {
+    "id": "yl8ROX7Ltzg",
+    "titre": "CLASSES GRAMMATICALES : ASTUCES pour identifier la nature des mots",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "664 272 vues"
+   }
+  ]
+ },
+ "CAFOP-FR-GRAM-L9": {
+  "titre": "Analyser une phrase comme au concours",
+  "candidats": [
+   {
+    "id": "lH59b0i93LY",
+    "titre": "Comment analyser une PHRASE ?",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "6:18",
+    "sec": 378,
+    "vues": "28 225 vues"
+   },
+   {
+    "id": "MQQj7dEMeQ4",
+    "titre": "Analyser une phrase comme un pro ! 🤩",
+    "chaine": "Ta coach de français",
+    "duree": "11:38",
+    "sec": 698,
+    "vues": "15 945 vues"
+   },
+   {
+    "id": "fkrl4KKlvJU",
+    "titre": "Comment effectuer une analyse logique",
+    "chaine": "Hattemer Bilingue",
+    "duree": "3:29",
+    "sec": 209,
+    "vues": "167 779 vues"
+   },
+   {
+    "id": "m_TRv6DQsTo",
+    "titre": "Grammaire - Analyse de la phrase - Montaigne (2/3) - bac de français",
+    "chaine": "J'peux pas j'ai français",
+    "duree": "2:52",
+    "sec": 172,
+    "vues": "524 vues"
+   },
+   {
+    "id": "_MFy4M4YU5M",
+    "titre": "Les secrets de l'analyse grammaticale",
+    "chaine": "French Help by Carine Cros",
+    "duree": "6:25",
+    "sec": 385,
+    "vues": "72 587 vues"
+   },
+   {
+    "id": "LGocUIzvv4A",
+    "titre": "L'analyse grammaticale : analyse d'une phrase complexe | Français | Alloprof",
+    "chaine": "Alloprof",
+    "duree": "5:47",
+    "sec": 347,
+    "vues": "140 602 vues"
+   },
+   {
+    "id": "oY8PxyidP_U",
+    "titre": "Comment analyser une phrase complexe ? (en 5 minutes)",
+    "chaine": "On parle français",
+    "duree": "5:09",
+    "sec": 309,
+    "vues": "18 985 vues"
+   },
+   {
+    "id": "4w6u-PlwMr0",
+    "titre": "Les FONCTIONS : Mener une analyse de Grammaire efficace",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "4:55",
+    "sec": 295,
+    "vues": "82 878 vues"
+   },
+   {
+    "id": "yl8ROX7Ltzg",
+    "titre": "CLASSES GRAMMATICALES : ASTUCES pour identifier la nature des mots",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "664 272 vues"
+   },
+   {
+    "id": "IP98v7BcZGQ",
+    "titre": "Les Fonctions : comment les identifier ?",
+    "chaine": "Un Cours de 5 Minutes",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "566 130 vues"
+   }
+  ]
+ }
+}

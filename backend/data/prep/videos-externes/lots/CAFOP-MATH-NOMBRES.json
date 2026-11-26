@@ -1,0 +1,247 @@
+{
+  "module": "CAFOP-MATH-NOMBRES",
+  "titre": "Nombres et opérations",
+  "matiere": "Mathématiques",
+  "resume": "Lire les nombres, calculer avec des fractions et des relatifs, puis simplifier des puissances, des racines carrées et des expressions littérales.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-NOMBRES-L1",
+      "titre": "Lire et comparer les entiers et les décimaux",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Appliquer les priorités opératoires",
+      "explication": "À la fin de cette leçon, tu sauras donner la valeur d’un chiffre et comparer deux nombres décimaux positifs. Aucun prérequis. Un chiffre est l’un des dix signes de 0 à 9. Un nombre peut s’écrire avec plusieurs chiffres. La position d’un chiffre indique le nombre d’unités, de dizaines ou d’autres groupes qu’il représente. Dans un décimal, la virgule sépare la partie entière de la partie décimale. Tout entier est aussi un décimal, puisqu’on peut lui ajouter une virgule suivie de zéros. Pour comparer deux nombres positifs, compare d’abord leurs parties entières. Si elles sont égales, lis les chiffres après la virgule de gauche à droite. Le premier rang qui diffère décide de l’ordre. Tu peux compléter une écriture par des zéros à droite de la partie décimale pour mieux aligner les rangs.",
+      "formules": [],
+      "exemples": [
+        "Lire 4 052,37",
+        "Classer trois mesures"
+      ],
+      "pieges": [
+        "Dans 8,07, le zéro des dixièmes maintient le 7 au rang des centièmes. Si tu l’effaces, tu obtiens 8,7 et tu changes la valeur du nombre."
+      ],
+      "aRetenir": [
+        "Repérer le rang du chiffre.",
+        "Comparer d’abord les parties entières.",
+        "Aligner les rangs décimaux pour comparer."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L2",
+      "titre": "Appliquer les priorités opératoires",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "2/10",
+      "precedente": "Lire et comparer les entiers et les décimaux",
+      "suivante": "Comparer et calculer avec les nombres relatifs",
+      "explication": "À la fin de cette leçon, tu sauras calculer une expression qui combine parenthèses, carré et opérations. Prérequis : savoir effectuer les quatre opérations. Dans les parenthèses, les mêmes priorités s’appliquent. À chaque ligne, recopie les termes et les signes que tu n’as pas encore traités. Une barre de fraction regroupe tout le numérateur et tout le dénominateur. Sur une seule ligne, utilise des parenthèses si l’un de ces deux termes est un calcul.",
+      "formules": [],
+      "exemples": [
+        "Ajouter ou multiplier d’abord",
+        "Un calcul en plusieurs étapes"
+      ],
+      "pieges": [
+        "Dans 48 ÷ 4 × 2, multiplier 4 par 2 en premier revient à traiter le calcul comme 48 ÷ (4 × 2). Ces parenthèses changent l’expression."
+      ],
+      "aRetenir": [
+        "Traiter les parenthèses et les puissances.",
+        "Avancer de gauche à droite à priorité égale.",
+        "Recopier les termes encore à calculer."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L3",
+      "titre": "Comparer et calculer avec les nombres relatifs",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "3/10",
+      "precedente": "Appliquer les priorités opératoires",
+      "suivante": "Simplifier et comparer des fractions",
+      "explication": "À la fin de cette leçon, tu sauras ordonner des nombres relatifs et déterminer le signe d’un résultat. Prérequis : savoir comparer des décimaux positifs et appliquer les priorités opératoires. Sur une droite graduée, les nombres négatifs sont à gauche de zéro et les positifs à droite. Deux nombres opposés sont à la même distance de zéro et de part et d’autre de zéro s’ils sont non nuls. Parmi deux négatifs, le plus éloigné de zéro est le plus petit. Un produit vaut zéro dès qu’un facteur vaut zéro. Si le diviseur est non nul, diviser zéro donne zéro. La division par zéro est impossible.",
+      "formules": [],
+      "exemples": [
+        "Un déplacement sur la droite",
+        "Deux signes moins dans un calcul"
+      ],
+      "pieges": [
+        "La règle des signes du produit ne s’applique pas à une somme. Additionner deux nombres négatifs donne un nombre négatif."
+      ],
+      "aRetenir": [
+        "Les nombres augmentent de gauche à droite.",
+        "Soustraire revient à ajouter l’opposé.",
+        "Pour multiplier ou diviser, comparer les signes des deux nombres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L4",
+      "titre": "Simplifier et comparer des fractions",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "4/10",
+      "precedente": "Comparer et calculer avec les nombres relatifs",
+      "suivante": "Effectuer les quatre opérations sur les fractions",
+      "explication": "À la fin de cette leçon, tu sauras rendre une fraction irréductible et comparer deux fractions. Prérequis : savoir multiplier et diviser des entiers. Dans a/b, a est le numérateur et b le dénominateur, qui doit être non nul. Multiplier ou diviser les deux termes par un même nombre non nul conserve la valeur de la fraction. Une fraction à termes entiers est irréductible lorsqu’on ne peut plus diviser ces deux termes par un entier supérieur à 1. Pour comparer deux fractions, rends les dénominateurs positifs en changeant les deux signes si nécessaire. Choisis ensuite un dénominateur commun, par exemple un multiple commun des deux dénominateurs. Avec des dénominateurs égaux et positifs, compare les numérateurs.",
+      "formules": [],
+      "exemples": [
+        "Réduire 18/24",
+        "Comparer 7/12 et 5/8"
+      ],
+      "pieges": [
+        "Un numérateur plus grand ne suffit pas pour conclure que la fraction est plus grande. Dans l’exemple, 7 > 5, mais les fractions représenten…"
+      ],
+      "aRetenir": [
+        "Le dénominateur est non nul.",
+        "Simplifier en divisant les deux termes.",
+        "Comparer sur un dénominateur commun positif."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L5",
+      "titre": "Effectuer les quatre opérations sur les fractions",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "5/10",
+      "precedente": "Simplifier et comparer des fractions",
+      "suivante": "Retrouver des chiffres inconnus",
+      "explication": "À la fin de cette leçon, tu sauras calculer avec des fractions et prendre une fraction d’une quantité. Prérequis : savoir simplifier et mettre au même dénominateur. Pour prendre la fraction d’une quantité, multiplie la quantité par cette fraction. Tu peux diviser par le dénominateur puis multiplier par le numérateur. Si la division ne tombe pas juste, garde une fraction exacte jusqu’au dernier calcul. Dans une expression qui combine plusieurs opérations, applique les priorités à chaque étape et simplifie dès que possible.",
+      "formules": [],
+      "exemples": [
+        "Une part de la réserve",
+        "Une expression avec trois opérations"
+      ],
+      "pieges": [
+        "Additionner aussi les dénominateurs change la taille des parts. Une somme de huitièmes compte toujours des huitièmes."
+      ],
+      "aRetenir": [
+        "Addition et soustraction sur un dénominateur commun.",
+        "Division par une fraction non nulle en multipliant par son inverse.",
+        "Une fraction d’une quantité se calcule par un produit."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L6",
+      "titre": "Retrouver des chiffres inconnus",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "6/10",
+      "precedente": "Effectuer les quatre opérations sur les fractions",
+      "suivante": "Calculer des puissances et écrire en notation scientifique",
+      "explication": "À la fin de cette leçon, tu sauras déterminer tous les chiffres qui rendent un nombre divisible par 9 ou par 36. Prérequis : savoir lire les rangs et repérer des multiples. Dans un nombre à chiffres manquants, chaque lettre désigne un chiffre compris entre 0 et 9. Le chiffre de gauche est non nul si l’énoncé impose une longueur. Par exemple, « le nombre formé par 5, 2 et x » signifie que x occupe le rang des unités. Avec deux chiffres inconnus, commence par le critère qui laisse le moins de possibilités. Pour une divisibilité par 36, liste les terminaisons possibles, puis cherche les sommes de chiffres compatibles avec chacune. Termine en vérifiant les nombres obtenus.",
+      "formules": [],
+      "exemples": [
+        "Compléter un seul chiffre",
+        "Deux chiffres à déterminer"
+      ],
+      "pieges": [
+        "Un chiffre final pair assure la divisibilité par 2. Pour le test par 4, il faut examiner les deux derniers chiffres ensemble."
+      ],
+      "aRetenir": [
+        "Respecter les valeurs possibles d’un chiffre.",
+        "Tester la terminaison pour 4 et la somme pour 9.",
+        "Chercher toutes les possibilités avant de conclure."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L7",
+      "titre": "Calculer des puissances et écrire en notation scientifique",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "7/10",
+      "precedente": "Retrouver des chiffres inconnus",
+      "suivante": "Simplifier et calculer des racines carrées",
+      "explication": "À la fin de cette leçon, tu sauras combiner des puissances de même base et écrire un décimal positif en notation scientifique. Prérequis : savoir calculer avec les relatifs et les décimaux. Dans aⁿ, a est la base et n l’exposant. Quand n est un entier positif, aⁿ est le produit de n facteurs a. Si a est non nul, a⁰ = 1 et a⁻ⁿ = 1/(aⁿ). L’écriture scientifique d’un nombre positif prend la forme a × 10ⁿ, où 1 ≤ a < 10 et n est entier. Place la virgule après le premier chiffre non nul pour trouver a. Choisis ensuite la puissance de 10 qui ramène a au nombre de départ. Déplacer la virgule vers la droite pour revenir au nombre de départ correspond à un exposant positif. La déplacer vers la gauche correspond à un exposant négatif. Pour un nombre négatif, écris la notation scientifique de son opposé et place le signe moins devant.",
+      "formules": [],
+      "exemples": [
+        "Multiplier deux puissances de 2",
+        "Mettre un produit sous forme scientifique"
+      ],
+      "pieges": [
+        "Dans (−2)², la base est −2. Dans −2², le signe moins est devant la puissance et le résultat est l’opposé de 2²."
+      ],
+      "aRetenir": [
+        "Distinguer la base et l’exposant.",
+        "Repérer l’opération avant de combiner des exposants.",
+        "Choisir un coefficient entre 1 inclus et 10 exclu."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L8",
+      "titre": "Simplifier et calculer des racines carrées",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "8/10",
+      "precedente": "Calculer des puissances et écrire en notation scientifique",
+      "suivante": "Développer et factoriser avec les identités remarquables",
+      "explication": "À la fin de cette leçon, tu sauras extraire un carré parfait et réduire une somme de radicaux semblables. Prérequis : connaître les carrés des petits entiers et la distributivité simple. Pour un nombre a positif ou nul, √a désigne le nombre positif ou nul dont le carré vaut a. Un carré parfait est le carré d’un entier. Pour simplifier une racine, cherche un carré parfait qui divise le nombre placé sous le radical. Une fois les racines simplifiées, tu peux additionner ou soustraire les coefficients des termes qui ont le même radical. Si les radicaux restent différents après simplification, conserve les termes séparés.",
+      "formules": [
+        "√(a × b) = √a × √b pour a et b positifs ou nuls."
+      ],
+      "exemples": [
+        "Reconnaître un carré parfait",
+        "Réduire une somme de radicaux"
+      ],
+      "pieges": [
+        "La règle du produit ne s’étend pas à l’addition. Dans √(a + b), la somme se calcule sous le radical."
+      ],
+      "aRetenir": [
+        "Une racine carrée est positive ou nulle.",
+        "Extraire un carré parfait du radical.",
+        "Réunir les termes qui ont le même radical."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L9",
+      "titre": "Développer et factoriser avec les identités remarquables",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "9/10",
+      "precedente": "Simplifier et calculer des racines carrées",
+      "suivante": "Bilan méthode — Comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras développer une expression, la réduire et reconnaître un produit à factoriser. Prérequis : savoir appliquer les règles de signes et calculer un carré. Une lettre représente un nombre. Développer, c’est passer d’un produit à une somme ou une différence à l’aide de la distributivité. Pour développer deux parenthèses, multiplie chaque terme de la première par chaque terme de la seconde. Réduire, c’est ensuite réunir les termes de même degré. Factoriser consiste à transformer une somme ou une différence en produit, par exemple en sortant un facteur commun.",
+      "formules": [
+        "k(a + b) = ka + kb et k(a − b) = ka − kb."
+      ],
+      "exemples": [
+        "Développer puis réduire",
+        "Factoriser une différence de carrés"
+      ],
+      "pieges": [
+        "Le carré d’une somme contient un double produit. Pour le retrouver, écris le carré comme un produit de deux parenthèses identiques et repèr…"
+      ],
+      "aRetenir": [
+        "Distribuer chaque terme avant de réduire.",
+        "Reconnaître le double produit dans un carré.",
+        "Vérifier une factorisation en redéveloppant."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L10",
+      "titre": "Bilan méthode — Comme au concours",
+      "module": "Nombres et opérations (Mathématiques)",
+      "position": "10/10",
+      "precedente": "Développer et factoriser avec les identités remarquables",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras rédiger les étapes d’un calcul et contrôler ta réponse avant de conclure. Prérequis : savoir appliquer les priorités et calculer avec les fractions et les décimaux. Tu peux vérifier un résultat par une opération inverse ou en remplaçant une valeur trouvée dans l’énoncé. Pour un calcul littéral, redéveloppe l’expression si la consigne demande de factoriser. Dans un problème à plusieurs étapes, termine par une phrase qui nomme la quantité cherchée.",
+      "formules": [],
+      "exemples": [
+        "Vérifier un résultat par l’opération inverse",
+        "Un problème à rédiger comme au concours"
+      ],
+      "pieges": [
+        "Dans un problème de partage, « la moitié du reste » s’applique à la quantité qui reste au moment du partage. Repère cette quantité avant de…"
+      ],
+      "aRetenir": [
+        "Repérer la demande et les données utiles.",
+        "Écrire des étapes justes et lisibles.",
+        "Contrôler le résultat, sa forme et son unité."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

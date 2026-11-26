@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-PROF-PSYCHO-L1",
+    "youtubeId": "uP5Kp6J06Gg",
+    "couverture": "exacte",
+    "justification": "La théorie de Piaget et les stades du développement cognitif.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-PSYCHO-L2",
+    "youtubeId": "jLOIohWDMAE",
+    "couverture": "partielle",
+    "justification": "Vygotski : développement par les interactions et zone proximale ; Bruner et l’étayage sont dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-PSYCHO-L3",
+    "youtubeId": "8uC3AQAIOyo",
+    "couverture": "partielle",
+    "justification": "Cours universitaire sur les théories de l’apprentissage (béhaviorisme, constructivisme, socioconstructivisme).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-PSYCHO-L4",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur le transfert des apprentissages.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-PSYCHO-L5",
+    "youtubeId": "SZloaxCWErU",
+    "couverture": "exacte",
+    "justification": "Évaluation diagnostique, formative et sommative.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-PSYCHO-L6",
+    "youtubeId": "p_CUN4MwxVM",
+    "couverture": "partielle",
+    "justification": "L’école face aux défis médiatiques.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-PSYCHO-L7",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur l’analyse de prestation d’un stagiaire.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-PSYCHO-L8",
+    "youtubeId": "kWXgnFRDIpM",
+    "couverture": "partielle",
+    "justification": "Exemple de dissertation psychopédagogique : structure de la réponse.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

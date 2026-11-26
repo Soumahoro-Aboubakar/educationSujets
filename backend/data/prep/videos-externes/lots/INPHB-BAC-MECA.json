@@ -28,7 +28,7 @@
         "Fixer origine, axes et horloge.",
         "Convertir en m, s et kg."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L2",
@@ -51,7 +51,7 @@
         "Composantes signées.",
         "Addition axe par axe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L3",
@@ -76,7 +76,7 @@
         "Une vitesse algébrique peut être négative.",
         "m/s → km/h : × 3,6."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L4",
@@ -101,7 +101,7 @@
         "Si a constante : v = v₀ + at.",
         "Position : ajouter v₀t et ½at² à x₀."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L5",
@@ -123,7 +123,7 @@
         "Lister ce qu’il reçoit.",
         "Action-réaction : objets différents."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L6",
@@ -146,7 +146,7 @@
         "Repos et mouvement rectiligne uniforme sont possibles.",
         "Préciser le référentiel."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L7",
@@ -171,7 +171,7 @@
         "a = résultante/masse.",
         "Puis utiliser les lois du mouvement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L8",
@@ -196,7 +196,7 @@
         "Axe vers le haut : a_z = −g.",
         "Une durée physique est positive."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L9",
@@ -221,7 +221,7 @@
         "Horizontal : vitesse constante.",
         "Vertical : accélération −g ; portée au retour au sol."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INPHB-BAC-MECA-L10",
@@ -246,7 +246,7 @@
         "F⃗ = qE⃗ puis a⃗ = qE⃗/m.",
         "Même méthode cinématique, attention au signe de q."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

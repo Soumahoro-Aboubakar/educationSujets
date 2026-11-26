@@ -28,7 +28,7 @@
         "Converger : approcher une limite finie unique.",
         "Une puissance de raison de valeur absolue <1 tend vers zéro."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L2",
@@ -51,7 +51,7 @@
         "Comparer deux termes successifs.",
         "Prouver la convergence, puis chercher la limite."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L3",
@@ -74,7 +74,7 @@
         "Convergence : limite finie de Sₙ.",
         "uₙ→0 est nécessaire, pas suffisant."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L4",
@@ -99,7 +99,7 @@
         "Somme infinie : |q|<1.",
         "Somme = premier terme / (1−q)."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L5",
@@ -124,7 +124,7 @@
         "Convergence : majorer ; divergence : minorer.",
         "Riemann : p>1 pour les séries."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L6",
@@ -147,7 +147,7 @@
         "Pour les séries, contrôler le signe des termes.",
         "Factoriser les puissances dominantes de n."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L7",
@@ -170,7 +170,7 @@
         "Alternée : amplitude positive, décroissante, de limite 0.",
         "Erreur ≤ première amplitude omise."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L8",
@@ -195,7 +195,7 @@
         "Étudier la série de chaque contribution.",
         "Un reste plus petit terme à terme peut encore accumuler une divergence."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L9",
@@ -218,7 +218,7 @@
         "Puissance : ajouter 1 à l’exposant puis diviser par ce nouvel exposant.",
         "Cas 1/x : ln x sur x>0."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L10",
@@ -243,7 +243,7 @@
         "Sur un segment régulier : F(b)−F(a).",
         "On peut découper l’intervalle et additionner les résultats."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L11",
@@ -268,7 +268,7 @@
         "Passer à la limite après le calcul.",
         "Riemann à l’infini : p>1."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L12",
@@ -291,7 +291,7 @@
         "Calculer puis faire tendre ε vers la borne.",
         "Riemann près de zéro : p<1."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L13",
@@ -314,7 +314,7 @@
         "Comparer à un modèle de Riemann ou exponentiel.",
         "Une majoration de |f| peut prouver la convergence absolue."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L14",
@@ -337,7 +337,7 @@
         "Écrire le terme de bord et l’intégrale restante.",
         "Pour une borne impropre, contrôler toutes les limites."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-SERIES-L15",
@@ -362,7 +362,7 @@
         "Transformer les deux bornes.",
         "Passer ensuite aux limites impropres."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

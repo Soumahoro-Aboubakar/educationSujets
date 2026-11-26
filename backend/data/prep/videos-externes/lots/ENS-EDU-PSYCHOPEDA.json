@@ -4,7 +4,8 @@
   "matiere": "Psychopédagogie et système éducatif",
   "resume": "Comprendre le développement et l’apprentissage, soutenir la motivation et accompagner les relations sans réduire un élève à une étiquette.",
   "concours": [
-    "ENS — Éducateurs"
+    "ENS — Éducateurs",
+    "CAFOP — Accès à la formation de professeur de CAFOP"
   ],
   "lecons": [
     {
@@ -28,7 +29,7 @@
         "Respecter la diversité des rythmes.",
         "Comprendre sans diagnostiquer à partir d’un signe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L2",
@@ -51,7 +52,7 @@
         "Concret et hypothèses sont des repères utiles.",
         "Adapter l’aide à la tâche, pas seulement à l’âge."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L3",
@@ -74,7 +75,7 @@
         "Rappeler, vérifier et réutiliser dans le temps.",
         "Renforcement : effet sur la fréquence du comportement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L4",
@@ -97,7 +98,7 @@
         "Ajuster des aides temporaires.",
         "Vérifier la réussite autonome."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L5",
@@ -120,7 +121,7 @@
         "Soutenir compétence, autonomie et lien.",
         "Les besoins ne forment pas un escalier rigide universel."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L6",
@@ -143,7 +144,7 @@
         "Chercher l’obstacle précis.",
         "Cibler l’aide puis vérifier son effet."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L7",
@@ -166,7 +167,7 @@
         "Adapter les moyens avec un objectif clair.",
         "Éviter les étiquettes définitives."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L8",
@@ -189,7 +190,7 @@
         "Distinguer trois conduites du groupe.",
         "Adapter la fermeté aux situations sans humilier."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENS-EDU-PSYCHOPEDA-L9",
@@ -212,7 +213,7 @@
         "Médiation si sécurité et dialogue libre.",
         "Violences répétées : protéger et relayer."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

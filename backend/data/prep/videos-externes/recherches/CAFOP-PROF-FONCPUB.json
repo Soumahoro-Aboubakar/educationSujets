@@ -1,0 +1,112 @@
+{
+  "module": "CAFOP-PROF-FONCPUB",
+  "lecons": [
+    {
+      "code": "CAFOP-PROF-FONCPUB-L1",
+      "requetes": [
+        "site:youtube.com/watch \"statut général\" \"2023\" \"Côte d’Ivoire\"",
+        "site:youtube.com statut fonction publique Côte Ivoire 2023 892",
+        "site:youtube.com \"statut\" \"fonction publique\" \"2023-892\"",
+        "nouveau statut général fonction publique Côte Ivoire 2023 explication vidéo youtube"
+      ],
+      "candidats": [],
+      "justification": "Les résultats ivoiriens repérés sont des reportages sur la présentation du nouveau statut, sans explication pédagogique suffisamment vérifiable du champ d’application et des notions de la leçon. Aucune vidéo répondant à l’ensemble des critères n’a été validée."
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L2",
+      "requetes": [
+        "site:youtube.com/watch \"devenir fonctionnaire\" \"Côte d'Ivoire\" stage",
+        "site:youtube.com fonctionnaire ivoirien recrutement stage titularisation cours",
+        "\"devenir fonctionnaire\" youtube explication simple",
+        "site:youtube.com \"fonction publique\" \"stage probatoire\"",
+        "site:youtube.com fonctionnaire ivoire recrutement titularisation stage un an"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos identifiées sur les conditions de recrutement concernent principalement la France. Aucun résultat suffisamment documenté ne permet de retenir une explication des conditions ivoiriennes et du stage probatoire prévu par le statut de 2023."
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L3",
+      "requetes": [
+        "site:youtube.com/watch \"droits du fonctionnaire\" \"Côte d'Ivoire\"",
+        "site:youtube.com droits fonctionnaire ivoirien cours",
+        "\"droits du fonctionnaire\" youtube cours",
+        "site:youtube.com \"droits\" \"fonctionnaire ivoirien\"",
+        "\"Les droits du fonctionnaire\" \"explication simple\" youtube"
+      ],
+      "candidats": [],
+      "justification": "Les résultats portent sur le droit français ou sur les droits des travailleurs en général. Aucun ne permet de vérifier une présentation courte et adaptée des droits et congés du fonctionnaire ivoirien selon le statut de 2023."
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L4",
+      "requetes": [
+        "site:youtube.com/watch \"obligations du fonctionnaire\" \"Côte d'Ivoire\"",
+        "site:youtube.com obligations fonctionnaire ivoirien explication simple",
+        "\"obligations du fonctionnaire\" youtube cours",
+        "site:youtube.com \"obligations\" \"fonctionnaire ivoirien\"",
+        "\"Les obligations du fonctionnaire\" explication simple vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les synthèses trouvées s’appuient sur les textes français, notamment pour le cumul d’activités. Faute de pouvoir vérifier leur compatibilité avec les règles ivoiriennes enseignées et leur durée, aucun candidat n’est retenu."
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L5",
+      "requetes": [
+        "site:youtube.com \"positions du fonctionnaire\"",
+        "youtube positions fonctionnaire détachement disponibilité Côte Ivoire cours",
+        "site:youtube.com \"positions\" \"fonctionnaire\" cours",
+        "\"positions du fonctionnaire\" \"explication simple\"",
+        "\"Les positions du fonctionnaire\" youtube cours Côte Ivoire"
+      ],
+      "candidats": [],
+      "justification": "La vidéo française identifiée présente notamment le congé parental comme une position, ce qui ne correspond pas aux quatre positions de cette leçon ivoirienne. Aucun résultat validé ne traite les dispositions ivoiriennes de 2023 sur la disponibilité."
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L6",
+      "requetes": [
+        "site:youtube.com \"discipline\" \"sanctions\" \"fonctionnaire\" \"ivoire\"",
+        "youtube discipline sanctions fonction publique Côte Ivoire cours",
+        "site:youtube.com \"sanctions\" \"fonctionnaire\" \"premier degré\"",
+        "\"discipline\" \"sanctions\" \"fonction publique\" \"Côte d'Ivoire\" youtube",
+        "\"La discipline et les sanctions\" fonctionnaire youtube cours"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte suffisamment documentée n’a été trouvée sur les deux degrés de sanctions, les autorités compétentes et le délai de suspension du statut ivoirien de 2023. Les ressources textuelles apparues dans les recherches ne constituent pas des candidats YouTube."
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L7",
+      "requetes": [
+        "site:youtube.com \"Déontologie de l’enseignant\"",
+        "youtube déontologie enseignant Côte Ivoire cours",
+        "site:youtube.com \"déontologie\" \"enseignant\" \"ivoire\"",
+        "site:youtube.com déontologie enseignant cours exemple neutralité intégrité",
+        "site:youtube.com déontologie enseignant CAFOP",
+        "\"déontologie\" \"enseignant\" \"5 minutes\" youtube"
+      ],
+      "candidats": [],
+      "justification": "Les ressources identifiées sont principalement des conférences longues ou des présentations générales de l’éthique enseignante. Aucune vidéo courte vérifiée n’explique suffisamment les obligations concrètes de la leçon dans le contexte ivoirien."
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L8",
+      "requetes": [
+        "site:youtube.com \"Méthode du cas pratique\"",
+        "youtube cas pratique méthodologie explication simple 5 minutes",
+        "\"dnFXNbm31kg\" durée",
+        "\"hPomh2LLENs\" durée vidéo",
+        "\"cas pratique\" \"Dalloz\" site:youtube.com/watch",
+        "\"La méthodologie du Cas pratique en droit\" vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=hPomh2LLENs",
+          "titre": "La Méthode du Cas Pratique (pour sauver tes partiels)",
+          "chaine": "Aide aux TD - Vidéos de droit",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette synthèse présente les étapes du cas pratique juridique, dont le raisonnement est transférable en Côte d’Ivoire, mais ne traite pas les articles du statut ivoirien de 2023."
+        }
+      ],
+      "justification": "Le sommaire annonce une présentation concise des étapes méthodologiques, avec les derniers conseils à 2:50 ; la durée totale n’était toutefois pas affichée dans les résultats accessibles. Cette ressource apporte un complément de méthode à appliquer aux règles ivoiriennes du module."
+    }
+  ]
+}

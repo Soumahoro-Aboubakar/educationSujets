@@ -30,7 +30,7 @@
         "VA = production − CI.",
         "Ne pas compter deux fois les produits intermédiaires."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L2",
@@ -55,7 +55,7 @@
         "Ajouter les impôts nets pertinents.",
         "Retirer les importations dans les dépenses."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L3",
@@ -78,7 +78,7 @@
         "Résidence économique ≠ nationalité.",
         "Secteur institutionnel et branche sont distincts."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L4",
@@ -103,7 +103,7 @@
         "Ajouter et retrancher les transferts courants.",
         "Revenu disponible : consommation et épargne."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L5",
@@ -126,7 +126,7 @@
         "Repérer ressources et emplois.",
         "Contrôler les contreparties entre secteurs."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L6",
@@ -151,7 +151,7 @@
         "Un solde positif est une capacité.",
         "Un solde négatif est un besoin."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L7",
@@ -176,7 +176,7 @@
         "Relier le solde au compte de capital.",
         "Transactions et gains de valeur ne se confondent pas."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L8",
@@ -201,7 +201,7 @@
         "Garder les valorisations cohérentes.",
         "La variation de stocks peut être négative."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L9",
@@ -227,7 +227,7 @@
         "RNB : ajouter le solde primaire extérieur.",
         "Net : retrancher la consommation de capital fixe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-CN-L10",
@@ -252,7 +252,7 @@
         "La croissance se mesure en volume.",
         "Une moyenne de production ne résume pas le développement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

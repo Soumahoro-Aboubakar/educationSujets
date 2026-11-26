@@ -1,0 +1,92 @@
+[
+  {
+    "code": "CAFOP-FR-ORTHO-L1",
+    "youtubeId": "rTXQA4PXMZs",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : trouver le sujet et accorder le verbe.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L2",
+    "youtubeId": "9Usan-qwuL4",
+    "couverture": "exacte",
+    "justification": "Accords complexes sujet-verbe : sujet inversé, éloigné, collectif, coordonné.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L3",
+    "youtubeId": "5F-oqTRKT_0",
+    "couverture": "partielle",
+    "justification": "Le pluriel des noms (-s, -x, -aux) ; les noms composés sont dans le texte.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L4",
+    "youtubeId": "eK-Z3qFnBOI",
+    "couverture": "partielle",
+    "justification": "Accord des adjectifs de couleur (simples, composés, noms employés comme couleur).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L5",
+    "youtubeId": "BRVEDZJOugc",
+    "couverture": "exacte",
+    "justification": "Accord du participe passé avec être et avec avoir (COD placé avant).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L6",
+    "youtubeId": "asBNQRXtNXQ",
+    "couverture": "exacte",
+    "justification": "Alloprof : le participe passé des verbes pronominaux.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L7",
+    "youtubeId": "7IliF_cJTYQ",
+    "couverture": "exacte",
+    "justification": "Projet Voltaire : participe passé suivi d’un infinitif.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L8",
+    "youtubeId": "iq_NpmADtr4",
+    "couverture": "exacte",
+    "justification": "Les homophones grammaticaux (a/à, et/est, son/sont, on/ont…).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L9",
+    "youtubeId": "O76gEYB-dSY",
+    "couverture": "partielle",
+    "justification": "Distinguer ses, ces, c’est, s’est par leur nature et leur fonction.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ORTHO-L10",
+    "youtubeId": "1XSPucTRR84",
+    "couverture": "partielle",
+    "justification": "Alloprof : méthode pour corriger un texte (relire par type d’erreur).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

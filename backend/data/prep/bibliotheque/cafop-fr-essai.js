@@ -1,0 +1,150 @@
+const { mc, qcm, vf, glisser, ordre, relier, classer, entourer, surligner, b, lecon } = require('../dsl');
+
+// Suite de CAFOP-FR-TEXTE : la 4ᵉ partie de l'épreuve de français du CAFOP-IA, l'essai (6 points sur 20).
+// Sujets d'essai officiels lus le 22/11/2026 : IA 2021 (« mesures du maître contre la Covid-19 »,
+// 8 à 12 lignes, document 6adf40d0…) ; IA 2025 (« étaye cette assertion… », une dizaine de lignes,
+// document 6adf4d85…) ; IO 2005 (essai court, document 6adf4066…).
+
+const DOC = { 2021: '6adf40d0ecb585bf0e4f3378', 2025: '6adf4d85ecb585bf0e4f431c' };
+const annale = (annee, epreuve) => ({ type: 'annale', organisme: 'CAFOP', annee, epreuve: `IA, Français, ${epreuve}`, documentId: DOC[annee] });
+const original = { type: 'original', inspireDe: 'Essais du CAFOP-IA 2021 et 2025, essais courts des sujets IO' };
+
+const rappels = {
+  'ESS-CONSIGNE': mc('Lire la consigne de l’essai', 'Souligne le verbe de consigne : « dis », « montre », « étaye », « explique », « discute ». Il fixe la tâche. Repère ensuite le thème, la limite de longueur (8 à 12 lignes, une dizaine de lignes) et ce qui est imposé : exemples, point de vue du maître, contexte ivoirien. Étayer une assertion, c’est la soutenir par des arguments et des exemples, pas la contester.', 'Verbe de consigne, thème, longueur, contraintes.'),
+  'ESS-ARG': mc('Argument et exemple', 'Une thèse est l’idée que l’on défend. Un argument est une raison qui la soutient ; un exemple est un fait précis qui illustre l’argument. Un bon paragraphe enchaîne : idée (argument), explication, exemple, puis courte conclusion. Un exemple sans argument ne prouve rien ; un argument sans exemple reste abstrait.', 'Argument = pourquoi ; exemple = la preuve concrète.'),
+  'ESS-PLAN': mc('Organiser un essai court', 'En une dizaine de lignes : une phrase d’introduction qui reprend le sujet, deux arguments développés avec chacun un exemple, une phrase de conclusion qui répond clairement. On évite une longue introduction : la place doit aller aux arguments. Chaque argument commence une nouvelle phrase introduite par un connecteur.', 'Introduction brève, deux arguments, conclusion.'),
+  'ESS-LIENS': mc('Connecteurs logiques', 'Pour ajouter : d’abord, ensuite, de plus, enfin. Pour la cause : car, parce que, en effet. Pour la conséquence : donc, ainsi, c’est pourquoi. Pour l’opposition : mais, cependant, pourtant. Pour illustrer : par exemple, ainsi. Pour conclure : en somme, en définitive. Un connecteur doit correspondre au vrai lien entre les idées.', 'Un connecteur = un lien logique précis.'),
+  'ESS-RELIRE': mc('Rédiger et relire', 'On rédige au brouillon les idées, pas tout le texte. On recopie en phrases complètes, au présent de préférence, avec une écriture lisible. On compte les lignes. On relit trois fois : une pour le sens, une pour les accords (sujet-verbe, participes passés), une pour la ponctuation et les majuscules.', 'Compter les lignes ; relire les accords.'),
+};
+const spec = (notion, extra = {}) => ({ notions: [notion], miniCours: rappels[notion], source: original, ...extra });
+const question = (i, notion, consigne, options, explication) => b.question(qcm({ ...spec(notion), code: `CAFOP-FR-ESSAI-L${i}-Q1`, niveau: 1, consigne, options, bonne: 0, explication }));
+
+const essai = {
+  code: 'CAFOP-FR-ESSAI',
+  matiere: 'Français',
+  titre: 'Rédiger l’essai',
+  resume: 'La dernière partie de l’épreuve de français : comprendre la consigne, trouver des arguments et des exemples, organiser une dizaine de lignes et relire.',
+  notions: [
+    { code: 'ESS-CONSIGNE', libelle: 'Comprendre la consigne' },
+    { code: 'ESS-ARG', libelle: 'Arguments et exemples' },
+    { code: 'ESS-PLAN', libelle: 'Organiser l’essai' },
+    { code: 'ESS-LIENS', libelle: 'Connecteurs logiques' },
+    { code: 'ESS-RELIRE', libelle: 'Rédiger et relire' },
+  ],
+  lecons: [
+    lecon('CAFOP-FR-ESSAI-L1', 'Ce que demande l’essai du CAFOP', 4, [
+      b.texte('À la fin de cette leçon, tu sauras situer l’essai dans l’épreuve et ce qu’il rapporte. Prérequis : le module Étude de texte, dont l’essai est la suite.'),
+      b.texte('L’épreuve de français du CAFOP-IA (2 h, coefficient 3) se termine par un **essai** noté **6 points sur 20** en 2025. Le sujet prolonge le thème du texte : l’école face à la Covid-19 en 2021, l’éducation des filles en 2025.'),
+      b.tableau(['Session', 'Consigne', 'Longueur'], [['IA 2021', 'Dis les mesures que doit prendre le maître dans sa classe pour lutter contre la Covid-19.', '8 à 12 lignes'], ['IA 2025', '« L’éducation donne aux filles et aux femmes une confiance dans leurs aptitudes et droits. » Étaye cette assertion.', 'Une dizaine de lignes']]),
+      b.exemple('Lien avec le texte', 'En 2025, le texte parle de la scolarisation des filles. L’essai demande de soutenir une phrase du texte : on peut réutiliser les idées comprises, mais avec ses propres exemples.'),
+      b.exemple('Ce que vérifie le correcteur', 'Une réponse au sujet, des arguments justifiés, des exemples précis, une organisation claire et une langue correcte dans la longueur demandée.'),
+      b.retenir('L’essai vaut presque autant que la structure et la syntaxe : il ne faut jamais le sacrifier faute de temps.'),
+      b.piege('Recopier des phrases du texte : l’essai attend ta propre réflexion.'),
+      question(1, 'ESS-CONSIGNE', 'Combien de points l’essai rapportait-il dans le sujet de français IA 2025 ?', ['6 points sur 20', '2 points sur 20', '10 points sur 20'], 'Le barème 2025 donne 5 points à la compréhension, 3 au vocabulaire, 6 à la structure et syntaxe et 6 à l’essai.'),
+      b.recap(['Essai : dernière partie de l’épreuve.', '6 points sur 20 en 2025.', 'Thème lié au texte.']),
+    ]),
+    lecon('CAFOP-FR-ESSAI-L2', 'Analyser la consigne', 5, [
+      b.texte('À la fin de cette leçon, tu sauras décomposer une consigne d’essai en tâche, thème et contraintes. Prérequis : la leçon précédente.'),
+      b.tableau(['Verbe de consigne', 'Ce qu’il faut faire'], [['Dis, énumère', 'Présenter plusieurs éléments en les expliquant'], ['Montre, étaye', 'Soutenir une idée avec des arguments et des exemples'], ['Explique', 'Faire comprendre le sens et les raisons'], ['Discute', 'Examiner le pour et le contre, puis conclure']]),
+      b.exemple('Décomposer la consigne 2021', 'Verbe : « dis ». Thème : les mesures contre la Covid-19. Point de vue imposé : celui du maître, dans sa classe. Longueur : 8 à 12 lignes. Il faut donc présenter des mesures concrètes de classe, pas des décisions du ministère.'),
+      b.exemple('Décomposer la consigne 2025', 'Verbe : « étaye ». Thème : l’éducation donne confiance aux filles et aux femmes. Il faut défendre cette idée, pas la critiquer.'),
+      b.retenir('Une copie qui ne respecte pas le point de vue imposé est hors sujet, même si elle est bien écrite.'),
+      b.piege('« Étayer » ne veut pas dire « discuter » : on ne présente pas d’arguments contraires à l’assertion.'),
+      question(2, 'ESS-CONSIGNE', 'Que signifie « étayer une assertion » ?', ['La soutenir par des arguments et des exemples', 'La contester', 'La recopier'], 'Étayer, c’est appuyer, consolider : on apporte des arguments et des exemples qui soutiennent l’idée.'),
+      b.recap(['Verbe, thème, contraintes.', 'Respecter le point de vue imposé.', 'Étayer = soutenir.']),
+    ]),
+    lecon('CAFOP-FR-ESSAI-L3', 'Trouver des arguments', 5, [
+      b.texte('À la fin de cette leçon, tu sauras trouver rapidement des arguments variés au brouillon. Prérequis : analyser la consigne.'),
+      b.texte('Pour trouver des idées, pose-toi des questions simples sur le thème : **pour qui ?** (l’élève, la famille, la société), **dans quels domaines ?** (santé, travail, droits, vie quotidienne), **pourquoi ?** et **comment ?**.'),
+      b.exemple('Sujet 2025 au brouillon', 'Pour la fille : elle sait lire ses droits et prendre des décisions. Dans le travail : elle obtient un emploi qualifié. Dans la famille : elle soigne mieux ses enfants. Dans la société : elle participe aux décisions de sa communauté.'),
+      b.exemple('Sujet 2021 au brouillon', 'Hygiène : lavage des mains à l’entrée et après la récréation. Distanciation : espacer les tables-bancs. Information : expliquer les gestes barrières avec des images. Surveillance : signaler un élève malade.'),
+      b.retenir('Garde les deux ou trois arguments les plus solides et les plus différents.'),
+      b.piege('Donner trois fois le même argument avec des mots différents : « elle est instruite », « elle a appris », « elle sait des choses ».'),
+      question(3, 'ESS-ARG', 'Quelle question aide à trouver des arguments variés ?', ['Dans quels domaines de la vie ce thème a-t-il des effets ?', 'Combien de mots compte le texte ?', 'Qui est l’auteur du texte ?'], 'Explorer les domaines (santé, travail, famille, société) donne des arguments différents et complémentaires.'),
+      b.recap(['Pour qui, dans quels domaines, pourquoi, comment.', 'Deux ou trois arguments distincts.', 'Brouillon en mots-clés.']),
+    ]),
+    lecon('CAFOP-FR-ESSAI-L4', 'Illustrer par des exemples', 5, [
+      b.texte('À la fin de cette leçon, tu sauras choisir un exemple précis et le relier à ton argument. Prérequis : trouver des arguments.'),
+      b.texte('Un bon exemple est **précis** (un lieu, une personne, une situation), **vraisemblable** et **expliqué** : on dit en une phrase ce qu’il prouve. Les exemples tirés de la vie ivoirienne et de l’école sont bienvenus.'),
+      b.exemple('Exemple faible', '« Par exemple, il y a des femmes instruites. » Trop vague : il ne prouve rien.'),
+      b.exemple('Exemple fort', '« Par exemple, une jeune femme de Daloa qui a obtenu son BEPC peut lire seule un contrat de location avant de le signer : elle défend ainsi ses droits. »'),
+      b.retenir('Après l’exemple, une courte phrase de lien : « Ainsi… », « Cela montre que… ».'),
+      b.piege('Inventer des chiffres « officiels » : un exemple n’a pas besoin de statistique, et un faux chiffre décrédibilise la copie.'),
+      question(4, 'ESS-ARG', 'Quelle phrase est le meilleur exemple ?', ['Dans mon village, l’école a organisé un point d’eau pour le lavage des mains avant la classe.', 'Il y a beaucoup de choses à faire.', 'C’est important pour tout le monde.'], 'La première phrase est précise et concrète : elle illustre une mesure réelle. Les deux autres restent générales.'),
+      b.recap(['Précis, vraisemblable, expliqué.', 'Contexte ivoirien bienvenu.', 'Phrase de lien après l’exemple.']),
+    ]),
+    lecon('CAFOP-FR-ESSAI-L5', 'Construire le plan d’une dizaine de lignes', 5, [
+      b.texte('À la fin de cette leçon, tu sauras répartir tes lignes entre introduction, arguments et conclusion. Prérequis : arguments et exemples.'),
+      b.tableau(['Partie', 'Contenu', 'Longueur indicative'], [['Introduction', 'Reprendre le sujet en une phrase', '1 ligne'], ['Argument 1', 'Idée, explication, exemple', '3 à 4 lignes'], ['Argument 2', 'Idée, explication, exemple', '3 à 4 lignes'], ['Conclusion', 'Répondre clairement, éventuellement ouvrir', '1 à 2 lignes']]),
+      b.exemple('Plan du sujet 2025', 'Introduction : l’éducation transforme la vie des filles. Argument 1 : elle leur donne confiance dans leurs capacités (réussite scolaire, emploi). Argument 2 : elle leur fait connaître et défendre leurs droits (lire un contrat, voter de façon éclairée). Conclusion : instruire les filles, c’est renforcer toute la société.'),
+      b.exemple('Plan du sujet 2021', 'Introduction : le maître est en première ligne. Mesure 1 : l’hygiène dans la classe. Mesure 2 : l’organisation de l’espace et des déplacements. Conclusion : ces gestes protègent les élèves et leurs familles.'),
+      b.retenir('Un retour à la ligne pour chaque partie rend l’organisation visible.'),
+      b.piege('Une introduction de quatre lignes qui ne laisse que deux lignes pour les arguments.'),
+      question(5, 'ESS-PLAN', 'Dans un essai d’une dizaine de lignes, combien d’arguments développer ?', ['Deux, chacun avec un exemple', 'Six, sans exemple', 'Un seul, sur toute la longueur'], 'Deux arguments développés et illustrés tiennent dans une dizaine de lignes et montrent une réflexion organisée.'),
+      b.recap(['Introduction d’une ligne.', 'Deux arguments illustrés.', 'Conclusion qui répond.']),
+    ]),
+    lecon('CAFOP-FR-ESSAI-L6', 'Relier les idées', 4, [
+      b.texte('À la fin de cette leçon, tu sauras choisir le connecteur qui exprime le bon lien logique. Prérequis : le plan.'),
+      b.tableau(['Lien', 'Connecteurs'], [['Addition', 'D’abord, ensuite, de plus, enfin'], ['Cause', 'Car, parce que, en effet'], ['Conséquence', 'Donc, ainsi, c’est pourquoi'], ['Opposition', 'Mais, cependant, pourtant'], ['Illustration', 'Par exemple, notamment'], ['Conclusion', 'En somme, en définitive']]),
+      b.exemple('Un enchaînement réussi', '« D’abord, l’école donne aux filles confiance en leurs capacités. En effet, réussir un examen prouve qu’elles peuvent apprendre comme les garçons. De plus… »'),
+      b.exemple('Un connecteur mal choisi', '« Le maître fait laver les mains, donc les élèves aiment l’école. » La conséquence n’est pas logique.'),
+      b.retenir('Avant d’écrire un connecteur, demande-toi quel est le lien réel entre les deux idées.'),
+      b.piege('Enchaîner « et » à chaque phrase : le texte devient une liste sans logique.'),
+      question(6, 'ESS-LIENS', 'Quel connecteur exprime la cause ?', ['Car', 'Pourtant', 'Ensuite'], '« Car » introduit une cause. « Pourtant » marque une opposition et « ensuite » une addition.'),
+      b.recap(['Addition, cause, conséquence, opposition.', 'Illustration, conclusion.', 'Le connecteur suit le lien réel.']),
+    ]),
+    lecon('CAFOP-FR-ESSAI-L7', 'Rédiger proprement', 4, [
+      b.texte('À la fin de cette leçon, tu sauras rédiger des phrases claires et éviter les fautes qui coûtent des points. Prérequis : les modules d’orthographe et de conjugaison.'),
+      b.liste(['Des phrases courtes : un sujet, un verbe, un complément', 'Le présent de l’indicatif pour les idées générales', 'Le « je » est possible pour donner son avis, sans excès', 'Pas d’abréviations (« pb », « ds ») ni de langage familier', 'Une écriture lisible et des paragraphes séparés'], false),
+      b.exemple('Phrase trop longue', '« L’éducation des filles qui est importante parce que quand une fille va à l’école et qu’elle réussit elle peut travailler et aider sa famille et le pays. » Elle n’a pas de verbe principal.'),
+      b.exemple('Version corrigée', '« L’éducation des filles est importante. Une fille qui réussit à l’école peut travailler et aider sa famille. »'),
+      b.retenir('Deux phrases claires valent mieux qu’une phrase longue et confuse.'),
+      b.piege('Le registre familier (« les filles elles sont fortes ») : supprime le pronom de reprise.'),
+      question(7, 'ESS-RELIRE', 'Quel temps convient le mieux pour exprimer des idées générales dans l’essai ?', ['Le présent de l’indicatif', 'Le passé simple', 'Le futur antérieur'], 'Le présent exprime des vérités générales et rend l’argumentation claire.'),
+      b.recap(['Phrases courtes et complètes.', 'Présent de l’indicatif.', 'Ni abréviations ni familiarités.']),
+    ]),
+    lecon('CAFOP-FR-ESSAI-L8', 'Bilan : un essai complet en 25 minutes', 6, [
+      b.texte('À la fin de cette leçon, tu sauras organiser ton temps et vérifier ton essai avant de rendre la copie. Prérequis : toutes les leçons du module.'),
+      b.liste(['3 min : analyser la consigne (verbe, thème, contraintes)', '7 min : brouillon des arguments et exemples en mots-clés', '12 min : rédaction au propre', '3 min : relecture (sens, accords, ponctuation) et comptage des lignes'], true),
+      b.exemple('Un essai modèle pour le sujet 2025 (10 lignes)', 'L’instruction change profondément la vie des filles et des femmes. D’abord, elle leur donne confiance en leurs capacités. En réussissant leurs examens, elles constatent qu’elles peuvent apprendre et réussir comme les garçons ; une bachelière de Korhogo peut ainsi viser un métier qualifié. Ensuite, l’école leur fait connaître leurs droits. Une femme qui sait lire peut comprendre un contrat ou un acte de naissance avant de le signer, et refuser une décision injuste. En somme, instruire les filles, c’est leur permettre de décider de leur vie et de contribuer au développement du pays.'),
+      b.retenir('Compte toujours tes lignes : 8 à 12 lignes, c’est ni 5 ni 20.'),
+      b.piege('Commencer l’essai dans les dix dernières minutes : garde au moins 25 minutes pour cette partie.'),
+      question(8, 'ESS-RELIRE', 'Combien de temps garder pour l’essai dans l’épreuve de 2 heures ?', ['Au moins 25 minutes', '5 minutes', '1 heure 30'], 'L’essai rapporte 6 points : 25 minutes permettent d’analyser, de préparer, de rédiger et de relire.'),
+      b.recap(['Consigne, brouillon, rédaction, relecture.', 'Environ 25 minutes.', 'Compter les lignes.']),
+    ]),
+  ],
+  exercices: [
+    relier({ ...spec('ESS-CONSIGNE'), code: 'CAFOP-FR-ESSAI-E01', niveau: 1, consigne: 'Relie chaque verbe de consigne à la tâche attendue.', paires: [['Étaye', 'Soutenir une idée avec des arguments et des exemples'], ['Discute', 'Examiner le pour et le contre, puis conclure'], ['Énumère', 'Présenter plusieurs éléments'], ['Explique', 'Faire comprendre le sens et les raisons']],
+      explication: 'Étayer, c’est soutenir ; discuter, c’est peser le pour et le contre ; énumérer, c’est présenter plusieurs éléments ; expliquer, c’est faire comprendre.' }),
+    classer({ ...spec('ESS-ARG'), code: 'CAFOP-FR-ESSAI-E02', niveau: 1, consigne: 'Classe chaque phrase : argument ou exemple.', categories: ['Argument', 'Exemple'],
+      cartes: [['L’école donne aux filles confiance en leurs capacités.', 0], ['L’instruction permet de connaître ses droits.', 0], ['Aminata, première de sa classe à Bouaké, a obtenu une bourse.', 1], ['Ma tante, qui sait lire, vérifie seule les factures de son commerce.', 1]],
+      explication: 'Les deux premières phrases énoncent des raisons générales : ce sont des arguments. Les deux autres donnent des faits précis qui illustrent ces raisons : ce sont des exemples.' }),
+    qcm({ ...spec('ESS-CONSIGNE', { source: annale(2021, 'essai (adaptation)') }), code: 'CAFOP-FR-ESSAI-E03', niveau: 1, consigne: 'Sujet 2021 : « Dis les mesures que doit prendre le maître dans sa classe pour lutter efficacement contre la Covid-19. » Quelle idée est hors sujet ?', options: ['Le gouvernement doit fermer les frontières.', 'Faire laver les mains des élèves à l’entrée.', 'Espacer les tables-bancs.', 'Expliquer les gestes barrières avec des affiches.'], bonne: 0,
+      explication: '(CAFOP IA 2021, français, essai) La consigne impose le point de vue du maître, dans sa classe. Fermer les frontières est une décision de l’État, pas une mesure de classe.' }),
+    glisser({ ...spec('ESS-LIENS'), code: 'CAFOP-FR-ESSAI-E04', niveau: 1, consigne: 'Complète avec le connecteur qui convient.', texte: '{{D’abord}}, le maître fait laver les mains à l’entrée. {{Ensuite}}, il espace les tables-bancs. Les élèves sont {{ainsi}} mieux protégés.', distracteurs: ['Pourtant', 'Car'],
+      explication: '« D’abord » et « Ensuite » ordonnent les mesures ; « ainsi » introduit la conséquence. « Pourtant » marquerait une opposition et « car » une cause.' }),
+    vf({ ...spec('ESS-PLAN'), code: 'CAFOP-FR-ESSAI-E05', niveau: 1, consigne: 'Indique si chaque conseil est vrai ou faux pour un essai d’une dizaine de lignes.', affirmations: [['L’introduction doit être brève.', true], ['Il faut développer au moins six arguments.', false], ['Chaque argument doit être illustré par un exemple.', true]],
+      explication: 'En une dizaine de lignes, une introduction d’une ligne et deux arguments illustrés suffisent. Six arguments ne pourraient pas être développés.' }),
+    ordre({ ...spec('ESS-PLAN'), code: 'CAFOP-FR-ESSAI-E06', niveau: 1, consigne: 'Remets les parties de l’essai dans l’ordre.', elements: ['Une phrase qui reprend le sujet', 'Premier argument et son exemple', 'Second argument et son exemple', 'Conclusion qui répond clairement'],
+      explication: 'L’essai court suit l’ordre introduction, deux arguments illustrés, conclusion.' }),
+    entourer({ ...spec('ESS-ARG', { source: annale(2025, 'essai (adaptation)') }), code: 'CAFOP-FR-ESSAI-E07', niveau: 2, consigne: 'Sujet 2025 : étaye l’assertion « L’éducation donne aux filles et aux femmes une confiance dans leurs aptitudes et droits. » Sélectionne les arguments qui conviennent.', elements: [['Réussir à l’école prouve aux filles qu’elles peuvent apprendre comme les garçons.', true], ['Savoir lire permet de connaître et défendre ses droits.', true], ['Un diplôme ouvre l’accès à un emploi et à l’autonomie financière.', true], ['Les filles devraient quitter l’école tôt pour aider à la maison.', false], ['L’école coûte cher aux familles.', false]],
+      explication: '(CAFOP IA 2025, français, essai) Étayer, c’est soutenir l’assertion : les trois premiers arguments montrent comment l’éducation renforce la confiance et les droits. Les deux derniers vont contre l’assertion ou sont hors sujet.' }),
+    surligner({ ...spec('ESS-ARG'), code: 'CAFOP-FR-ESSAI-E08', niveau: 2, consigne: 'Surligne la phrase qui est l’exemple dans ce paragraphe.', segments: [['L’école apprend aux élèves à protéger leur santé. ', false], ['À Man, les élèves d’un CM2 ont appris à fabriquer un lave-mains avec un bidon et un robinet. ', true], ['Ils l’utilisent désormais à chaque récréation.', false]],
+      explication: 'La phrase sur les élèves de Man est un fait précis, situé dans un lieu : c’est l’exemple. La première phrase est l’argument, la dernière en tire la conséquence.' }),
+    qcm({ ...spec('ESS-LIENS'), code: 'CAFOP-FR-ESSAI-E09', niveau: 2, consigne: 'Quel connecteur convient ? « Le maître organise des sorties en rangs espacés, … il limite les contacts entre élèves. »', options: ['ainsi', 'pourtant', 'mais', 'cependant'], bonne: 0,
+      explication: 'La seconde partie est la conséquence de la première : « ainsi » convient. « Pourtant », « mais » et « cependant » exprimeraient une opposition.' }),
+    classer({ ...spec('ESS-RELIRE'), code: 'CAFOP-FR-ESSAI-E10', niveau: 2, consigne: 'Classe chaque phrase : correcte pour un essai ou à corriger.', categories: ['Correcte', 'À corriger'],
+      cartes: [['L’éducation des filles renforce leur autonomie.', 0], ['Une femme instruite défend mieux ses droits.', 0], ['Les filles elles sont fortes à l’école.', 1], ['Ya bcp de pbs pour les filles.', 1]],
+      explication: 'Les deux premières phrases sont correctes et soutenues. « Les filles elles sont » répète le sujet (registre familier) ; « Ya bcp de pbs » utilise des abréviations et un langage oral à proscrire.' }),
+    qcm({ ...spec('ESS-PLAN'), code: 'CAFOP-FR-ESSAI-E11', niveau: 2, consigne: 'Quelle conclusion répond le mieux au sujet 2021 sur les mesures du maître contre la Covid-19 ?', options: ['En somme, par ces gestes simples d’hygiène et d’organisation, le maître protège ses élèves et leurs familles.', 'La Covid-19 est une maladie.', 'Je ne sais pas ce qu’il faut faire.', 'Enfin, la récréation est un moment de jeu.'], bonne: 0,
+      explication: 'Une conclusion reprend la réponse au sujet (les mesures du maître) et en montre la portée. Les autres phrases sont trop vagues, négatives ou hors sujet.' }),
+    ordre({ ...spec('ESS-RELIRE'), code: 'CAFOP-FR-ESSAI-E12', niveau: 3, consigne: 'Remets dans l’ordre les étapes de travail de l’essai.', elements: ['Souligner le verbe de consigne et les contraintes', 'Noter au brouillon arguments et exemples en mots-clés', 'Choisir deux arguments et construire le plan', 'Rédiger au propre en paragraphes', 'Compter les lignes et relire les accords'],
+      explication: 'On analyse d’abord la consigne, on cherche les idées, on organise, on rédige, puis on vérifie la longueur et l’orthographe.' }),
+    qcm({ ...spec('ESS-ARG', { source: annale(2025, 'essai (adaptation)') }), code: 'CAFOP-FR-ESSAI-E13', niveau: 3, consigne: 'Quel paragraphe étaye le mieux l’assertion du sujet 2025 ?', options: ['D’abord, l’école donne confiance aux filles. En réussissant leurs examens, elles constatent qu’elles peuvent apprendre comme les garçons. Ainsi, une bachelière de Korhogo peut viser un métier qualifié.', 'Les filles vont à l’école. Les garçons aussi. Tout le monde va à l’école.', 'L’éducation des filles pose problème car les familles préfèrent les garder à la maison.', 'Par exemple, une fille. Par exemple, une femme. Par exemple, l’école.'], bonne: 0,
+      explication: '(CAFOP IA 2025, français, essai) Le premier paragraphe énonce un argument, l’explique et l’illustre par un exemple précis, avec des connecteurs. Les autres sont vides, contraires à l’assertion ou sans argument.' }),
+    vf({ ...spec('ESS-CONSIGNE', { source: annale(2021, 'essai (adaptation)') }), code: 'CAFOP-FR-ESSAI-E14', niveau: 3, consigne: 'Le sujet 2021 demande 8 lignes au minimum et 12 au maximum. Juge chaque situation.', affirmations: [['Un essai de 10 lignes respecte la consigne.', true], ['Un essai de 5 lignes très bien écrit respecte la consigne.', false], ['Un essai de 18 lignes montre plus de travail et respecte la consigne.', false]],
+      explication: '(CAFOP IA 2021, français, essai) La longueur fait partie de la consigne : entre 8 et 12 lignes. Un essai trop court ou trop long ne la respecte pas, quelle que soit sa qualité.' }),
+  ],
+};
+
+module.exports = [essai];

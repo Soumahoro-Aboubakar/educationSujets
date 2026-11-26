@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-CG-CI-L1",
+    "youtubeId": "MYeh2LeNBj0",
+    "couverture": "partielle",
+    "justification": "RTI : éphéméride du 10 mars 1893, la Côte d’Ivoire devient colonie française.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-CI-L2",
+    "youtubeId": "-YiyNMuCEuc",
+    "couverture": "exacte",
+    "justification": "L’accession de la Côte d’Ivoire à l’indépendance (étapes et acteurs).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-CI-L3",
+    "youtubeId": "qBRv7jx9udI",
+    "couverture": "partielle",
+    "justification": "Toute l’histoire de la Côte d’Ivoire en 8 minutes, dont la succession des présidents.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-CI-L4",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Candidats sur le relief de la France ; recherche ciblée à refaire.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-CI-L5",
+    "youtubeId": "ex1tjtMjEw0",
+    "couverture": "exacte",
+    "justification": "Les secteurs d’activités économiques de la Côte d’Ivoire (primaire, secondaire, tertiaire).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-CI-L6",
+    "youtubeId": "pJgKo2yEjec",
+    "couverture": "exacte",
+    "justification": "Les mouvements de la Terre (rotation, révolution) et leurs conséquences.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-CI-L7",
+    "youtubeId": "2-3Fhv4aQxE",
+    "couverture": "exacte",
+    "justification": "Se repérer sur Terre : méridien, parallèle, latitude et longitude.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-CI-L8",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur golfe, isthme, oued, reg et erg parmi les candidats.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

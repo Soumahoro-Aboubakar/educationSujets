@@ -1,0 +1,174 @@
+{
+  "module": "CAFOP-CG-SCIENCES",
+  "lecons": [
+    {
+      "code": "CAFOP-CG-SCIENCES-L1",
+      "requetes": [
+        "site:youtube.com/watch classer les vertébrés mammifères oiseaux reptiles amphibiens poissons",
+        "site:youtube.com/watch vertébrés classification explication simple",
+        "\"Classer les vertébrés\" youtube",
+        "les cinq classes de vertébrés cours youtube",
+        "\"FtXBvEIKZVk\" \"minutes\""
+      ],
+      "candidats": [],
+      "justification": "Les résultats les plus proches comprennent une compilation et une vidéo d’Émilie Biologie dont la durée et le contenu détaillé n’ont pas pu être suffisamment vérifiés. Les capsules sur la classification générale ne présentent pas assez précisément les caractères des cinq classes demandées."
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L2",
+      "requetes": [
+        "site:youtube.com/watch fleur pollinisation étamines pistil cours",
+        "site:youtube.com/watch pollinisation directe croisée explication simple",
+        "\"La fleur et la pollinisation\" youtube",
+        "pollinisation étamines pistil site:youtube.com/watch",
+        "La pollinisation explication youtube",
+        "\"La pollinisation\" \"illustrascience\" minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=XflRKpNysB4",
+          "titre": "La pollinisation: explication 1/2",
+          "chaine": "illustrascience",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’animation présente le pollen, les étamines, le pistil et le transport par les abeilles, mais ne couvre pas toute la distinction entre pollinisation directe et croisée ni tous les agents."
+        }
+      ],
+      "justification": "Cette animation accessible est également utilisée dans des ressources pédagogiques de l’Université de Namur ; son insertion dans une compilation situe cette séquence autour de trois minutes, sans donner sa durée individuelle exacte. La fécondation y est simplifiée, comme le précise l’auteur dans la description."
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L3",
+      "requetes": [
+        "\"Du fruit à la germination\" youtube",
+        "germination épigée hypogée explication simple youtube",
+        "germination épigée hypogée vidéo français",
+        "de la fleur au fruit germination cours sixième youtube",
+        "germination cours explication simple youtube",
+        "\"La germination et la vie des plantes\" Maître Lucas"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=MO-T-XOWci8",
+          "titre": "La germination et la vie des plantes CP - CE1 - CE2 - Cycle 2 - Cycle 3 - Questionner le monde",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule explique les besoins de la graine et les étapes de développement de la plante, mais ne suffit pas pour apprendre la distinction entre germination épigée et hypogée."
+        }
+      ],
+      "justification": "Le langage et les expériences conviennent aux débutants ; une fiche pédagogique de la Francophonie repère les passages essentiels entre 1:38 et 4:04, sans préciser la durée totale. Il faut compléter la transformation ovaire-fruit et ovule-graine ainsi que les deux types de germination."
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L4",
+      "requetes": [
+        "site:youtube.com \"La photosynthèse\" explication simple",
+        "site:youtube.com photosynthèse cours en 5 minutes",
+        "photosynthèse explication 3 minutes youtube",
+        "\"Qu’est-ce que la photosynthèse\" Curionautes",
+        "\"9n6FEHfuXjg\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=9n6FEHfuXjg",
+          "titre": "Qu’est-ce que la photosynthèse ?",
+          "chaine": "Curionautes des sciences",
+          "dureeVue": "2:32",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La capsule explique comment l’eau, les sels minéraux, le CO₂, la lumière et la chlorophylle permettent à la plante de fabriquer sa matière."
+        }
+      ],
+      "justification": "C’est le meilleur accord entre brièveté et contenu pour une première compréhension de la photosynthèse. Le texte pédagogique de l’éditeur confirme les notions centrales, et la notice de Bibliothèques Sans Frontières indique 2:32."
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L5",
+      "requetes": [
+        "écosystème chaîne alimentaire biotope biocénose explication simple youtube",
+        "site:youtube.com \"Écosystème et chaîne alimentaire\"",
+        "site:youtube.com écosystème biotope biocénose cours",
+        "chaîne alimentaire explication simple youtube",
+        "écosystème biotope biocénose 3 minutes youtube",
+        "\"ÉCOSYSTÈMES & IMPACT HUMAIN\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=TBhZN9E7GB8",
+          "titre": "ÉCOSYSTÈMES & IMPACT HUMAIN : Tout comprendre (Révisions SVT / CRPE)",
+          "chaine": "La Fée Bulleuse - Révisions CRPE",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo traite du biotope, de la biocénose et des relations entre producteurs, consommateurs et décomposeurs, puis élargit aux adaptations et aux impacts humains."
+        }
+      ],
+      "justification": "Le plan annoncé couvre les deux composantes de la leçon dès 0:45 et 2:30, dans une révision destinée notamment aux futurs enseignants. La conclusion commence à 8:00, mais la durée finale exacte n’est pas affichée ; une partie importante dépasse le programme de cette leçon."
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L6",
+      "requetes": [
+        "le sang et ses cellules plasma plaquettes globules cours youtube",
+        "site:youtube.com \"Le sang et ses cellules\"",
+        "composition du sang explication simple youtube",
+        "\"Les différents composants du sang\" \"2\"",
+        "\"CK0y0v6d-oY\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=CK0y0v6d-oY",
+          "titre": "Les différents composants du sang - 2 minutes pour comprendre",
+          "chaine": "Médecine TV",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Le médecin présente le plasma, les globules rouges, les globules blancs et les plaquettes en reliant les composants du sang au transport, à la défense et à la coagulation."
+        }
+      ],
+      "justification": "Cette explication médicale vise directement les composants et fonctions attendus, dans un format annoncé de deux minutes. Le minutage exact n’étant pas visible, il reste indiqué comme inconnu."
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L7",
+      "requetes": [
+        "\"VIH, paludisme et vaccination\" youtube",
+        "VIH paludisme vaccination cours youtube",
+        "VIH transmission explication simple vidéo Inserm",
+        "paludisme explication simple vidéo français",
+        "vaccin mémoire immunitaire explication simple youtube",
+        "\"A quoi ça sert un vaccin\" 1 jour 1 question vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=IL3Uo-FSKxg",
+          "titre": "A quoi ça sert, un vaccin ? - 1Jour1Question - Info ou Mytho",
+          "chaine": "Info ou Mytho ?",
+          "dureeVue": "1:42",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette animation explique le principe préventif de la vaccination et l’apprentissage des défenses immunitaires, mais ne traite pas la transmission du VIH et du paludisme."
+        }
+      ],
+      "justification": "Cette capsule courte et accessible convient au volet vaccination ; sa durée est également indiquée par Promotion Santé Occitanie. Aucun résultat suffisamment vérifié ne réunit les trois thèmes dans une seule vidéo courte."
+    },
+    {
+      "code": "CAFOP-CG-SCIENCES-L8",
+      "requetes": [
+        "\"Électricité : circuit, tension et puissance\" youtube",
+        "Électricité circuit tension puissance P U I cours youtube",
+        "\"puissance électrique\" \"P = U\" youtube cours 3ème",
+        "\"TMNjEHojg-Q\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=TMNjEHojg-Q",
+          "titre": "Cours d'électricité : Tension, courant, puissance, énergie",
+          "chaine": "Afpa",
+          "dureeVue": "4:56",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le cours introduit les grandeurs électriques tension, courant et puissance, mais ne constitue pas une vérification complète des dipôles et des exercices d’addition des puissances du CAFOP."
+        }
+      ],
+      "justification": "Cette ressource de formation professionnelle est recommandée pour acquérir les bases et sa durée de 4:56 figure dans un mémoire pédagogique de l’ENS d’Antananarivo. Elle fournit une introduction pertinente, à compléter par les applications numériques précises de la leçon."
+    }
+  ]
+}

@@ -30,7 +30,7 @@
         "Préciser le côté si nécessaire.",
         "Opérer sur les limites sous leurs conditions."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L2",
@@ -53,7 +53,7 @@
         "Factoriser près d’un point.",
         "Diviser par la plus grande puissance à l’infini."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L3",
@@ -76,7 +76,7 @@
         "Une borne divergente peut imposer une limite infinie.",
         "Réutiliser les croissances de ln et exp."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L4",
@@ -99,7 +99,7 @@
         "Étudier les deux côtés d’un raccord.",
         "Continuité et dérivabilité sont différentes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L5",
@@ -122,7 +122,7 @@
         "Unicité : stricte monotonie.",
         "Dichotomie : resserrer l’intervalle."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L6",
@@ -147,7 +147,7 @@
         "Choisir produit ou quotient.",
         "Simplifier et rappeler le domaine."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L7",
@@ -172,7 +172,7 @@
         "Multiplier par la dérivée intérieure.",
         "Avec sin et cos, utiliser les radians."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L8",
@@ -197,7 +197,7 @@
         "Retrouver l’entrée associée à y.",
         "Inverser une dérivée non nulle au bon point."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L9",
@@ -220,7 +220,7 @@
         "Signe de f″ : variation des pentes.",
         "Un changement de signe peut marquer une inflexion."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L10",
@@ -245,7 +245,7 @@
         "Borner |f′| sur tout le segment.",
         "Multiplier cette borne par la longueur du segment."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L11",
@@ -270,7 +270,7 @@
         "Limite finie à l’infini : horizontale.",
         "Différence avec une droite → 0 : oblique."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-ANALYSE-L12",
@@ -293,7 +293,7 @@
         "Calculer les valeurs utiles.",
         "Justifier asymptotes et position de la courbe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

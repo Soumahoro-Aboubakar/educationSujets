@@ -29,7 +29,7 @@
         "Effectif : compter.",
         "Fréquence : diviser par le total."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L2",
@@ -54,7 +54,7 @@
         "Avec des effectifs, pondérer chaque valeur.",
         "Une valeur extrême influence la moyenne."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L3",
@@ -77,7 +77,7 @@
         "Effectif impair : rang central.",
         "Effectif pair : moyenne des deux valeurs centrales ici."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L4",
@@ -100,7 +100,7 @@
         "Lire les valeurs à ces rangs.",
         "Soustraire Q₁ à Q₃ pour mesurer l’étalement central."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L5",
@@ -125,7 +125,7 @@
         "Écart-type : racine de la variance.",
         "Même moyenne ne signifie pas même dispersion."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L6",
@@ -148,7 +148,7 @@
         "Les marges décrivent un caractère à la fois.",
         "Un nuage place une paire numérique par point."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L7",
@@ -173,7 +173,7 @@
         "Multiplier les écarts puis moyenner.",
         "Le signe décrit le sens de la tendance linéaire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L8",
@@ -198,7 +198,7 @@
         "a = covariance / variance de x.",
         "b se déduit du passage par le point moyen."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-STAT-L9",
@@ -223,7 +223,7 @@
         "Le nuage reste indispensable.",
         "Prédiction et causalité demandent plus qu’une corrélation."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

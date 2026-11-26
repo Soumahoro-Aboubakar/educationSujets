@@ -30,7 +30,7 @@
         "Type 1 : if + présent / will + base.",
         "Unless : sauf si, souvent if…not."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L2",
@@ -53,7 +53,7 @@
         "If + prétérit ; would + base.",
         "If I were you sert à donner un conseil."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L3",
@@ -76,7 +76,7 @@
         "Type 3 : if + past perfect / would have + participe.",
         "Choisir selon le moment imaginé."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L4",
@@ -99,7 +99,7 @@
         "Be au bon temps + participe passé.",
         "By indique l’auteur si nécessaire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L5",
@@ -122,7 +122,7 @@
         "Au passé, les temps reculent souvent selon le contexte.",
         "Said that… ; told someone that…"
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L6",
@@ -145,7 +145,7 @@
         "Connecteur : cause, résultat, contraste ou temps.",
         "During + nom ; while + proposition."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L7",
@@ -168,7 +168,7 @@
         "Much/little : indénombrable.",
         "Some/any : lire le type de message."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L8",
@@ -191,7 +191,7 @@
         "Vérifier le sens en contexte et les faux amis.",
         "Apprendre des groupes de mots usuels."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L9",
@@ -214,7 +214,7 @@
         "Chercher une preuve, y compris pour les paraphrases.",
         "NOT inverse la recherche ; surveiller les absolus."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ANG-QCM-L10",
@@ -237,7 +237,7 @@
         "Éliminer par une règle ou une preuve.",
         "Avancer, revenir, puis vérifier la grille."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

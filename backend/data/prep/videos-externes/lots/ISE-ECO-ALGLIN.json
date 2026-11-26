@@ -28,7 +28,7 @@
         "Taille : lignes × colonnes.",
         "aᵢⱼ : ligne i, colonne j."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L2",
@@ -51,7 +51,7 @@
         "Scalaire : multiplier toutes les cases.",
         "Transposée : échanger lignes et colonnes ; trace : additionner la diagonale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L3",
@@ -74,7 +74,7 @@
         "Chaque case : ligne × colonne.",
         "L’identité conserve la matrice."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L4",
@@ -99,7 +99,7 @@
         "AX regroupe les membres avec inconnues.",
         "B regroupe les seconds membres."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L5",
@@ -122,7 +122,7 @@
         "Annuler sous le pivot avec des opérations de lignes.",
         "Remonter pour trouver les inconnues."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L6",
@@ -145,7 +145,7 @@
         "0 = nombre non nul : aucune solution.",
         "Sans contradiction : n−r paramètres libres."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L7",
@@ -168,7 +168,7 @@
         "Réduire A en I ; lire A⁻¹ à droite.",
         "Contrôler par multiplication."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L8",
@@ -193,7 +193,7 @@
         "Ordre 3 : développer avec +,−,+.",
         "Déterminant non nul : inverse possible."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L9",
@@ -216,7 +216,7 @@
         "Un sous-espace contient zéro.",
         "Il est stable par somme et par multiplication par tout réel."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L10",
@@ -239,7 +239,7 @@
         "Libre : aucune combinaison nulle non triviale.",
         "Base : coordonnées uniques ; dimension : taille d’une base."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L11",
@@ -264,7 +264,7 @@
         "Image : espace engendré par les colonnes.",
         "Dimension du départ = dimension du noyau + rang."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L12",
@@ -287,7 +287,7 @@
         "Supplémentaires : décomposition unique de tout E.",
         "Projection p²=p ; symétrie s²=I."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L13",
@@ -310,7 +310,7 @@
         "Chercher det(A−λI)=0 puis les noyaux.",
         "Une valeur propre nulle signifie que A n’est pas inversible."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L14",
@@ -335,7 +335,7 @@
         "P : vecteurs en colonnes ; D : valeurs dans le même ordre.",
         "Valeurs répétées : vérifier les dimensions des espaces propres."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-ALGLIN-L15",
@@ -358,7 +358,7 @@
         "Nouvelle matrice : P⁻¹AP.",
         "Puissances : calculer Dⁿ puis revenir par P et P⁻¹."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

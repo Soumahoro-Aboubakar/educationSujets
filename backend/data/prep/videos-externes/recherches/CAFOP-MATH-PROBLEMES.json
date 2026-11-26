@@ -1,0 +1,211 @@
+{
+  "module": "CAFOP-MATH-PROBLEMES",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L1",
+      "requetes": [
+        "site:youtube.com Isoler l’inconnue dans une équation",
+        "site:youtube.com équation premier degré explication simple exemple",
+        "équation premier degré explication simple exemple youtube",
+        "\"sidJeUquyRY\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=sidJeUquyRY",
+          "titre": "Résoudre une équation du premier degré | Méthode simple et efficace",
+          "chaine": "Les Maths avec Nicolas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique les opérations pour isoler l’inconnue, la vérification et les erreurs classiques, avec deux exemples corrigés."
+        }
+      ],
+      "justification": "Le programme annoncé correspond directement à la méthode de la leçon et convient aux débutants. La durée totale n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L2",
+      "requetes": [
+        "site:youtube.com Résoudre une inéquation et lire sa borne",
+        "site:youtube.com inéquation premier degré cours exemple budget",
+        "inéquation premier degré cours exemple budget youtube",
+        "\"MxHNokhrJIQ\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=MxHNokhrJIQ",
+          "titre": "Savoir résoudre une inéquation du premier degré ♦ Cours + Exemple détaillé ♦ Seconde",
+          "chaine": "jaicompris Maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce cours accompagné d’un exemple explique la résolution d’une inéquation du premier degré, mais le contrôle d’un maximum entier dans un budget n’est pas attesté."
+        }
+      ],
+      "justification": "La vidéo cible précisément la technique algébrique nécessaire. Son application aux bornes entières reste à compléter et sa durée totale n’a pas été trouvée."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L3",
+      "requetes": [
+        "site:youtube.com Mettre en équation des âges et des partages",
+        "site:youtube.com problème âges mise en équation Yvan Monka",
+        "problème âges mise en équation Yvan Monka youtube",
+        "youtube problème âges équation père fils",
+        "\"rDa1z3oUYjo\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=rDa1z3oUYjo",
+          "titre": "🎯 Problème d’âge : Un classique des équations.",
+          "chaine": "NumeriMaths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’exemple père-fils traduit une relation d’âges à une date future, puis détaille la résolution et la vérification, sans traiter les partages."
+        }
+      ],
+      "justification": "L’énoncé annoncé correspond précisément à la difficulté des âges à deux dates. Les partages ne sont pas couverts et la durée totale reste inconnue."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L4",
+      "requetes": [
+        "site:youtube.com Résoudre un système par substitution",
+        "site:youtube.com système substitution explication simple exemple",
+        "système substitution explication simple exemple youtube",
+        "Yvan Monka système substitution youtube",
+        "\"24VsDZK6bN0\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=24VsDZK6bN0",
+          "titre": "Résoudre un système par substitution (1) - Seconde",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "L’exercice montre comment isoler une inconnue, substituer une expression avec parenthèses et retrouver le couple solution."
+        }
+      ],
+      "justification": "Cette démonstration cible exclusivement la méthode demandée, également documentée dans le cours écrit de l’enseignant. La durée totale n’a pas été retrouvée."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L5",
+      "requetes": [
+        "site:youtube.com Résoudre un système par combinaison",
+        "site:youtube.com système combinaison cours exemple",
+        "système combinaison cours exemple youtube",
+        "Yvan Monka système combinaison youtube",
+        "\"UPIz65G4f48\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=UPIz65G4f48",
+          "titre": "Résoudre un système par combinaisons linéaires (2) - Seconde",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La résolution utilise des multiplicateurs pour éliminer une inconnue par combinaison avant de déterminer la seconde."
+        }
+      ],
+      "justification": "L’exercice correspond à la technique centrale de la leçon, sans détour par d’autres chapitres. La durée totale reste inconnue."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L6",
+      "requetes": [
+        "site:youtube.com Retrouver les dimensions d’un rectangle",
+        "site:youtube.com rectangle périmètre variation aire système équations",
+        "rectangle périmètre variation aire système équations youtube",
+        "youtube rectangle périmètre aire augmente diminue système"
+      ],
+      "candidats": [],
+      "justification": "Les résultats trouvés portent sur une variation de périmètre, des pourcentages d’aire ou une équation du second degré. Aucun ne traite suffisamment précisément le périmètre associé à une variation d’aire avec annulation du produit L × l."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L7",
+      "requetes": [
+        "site:youtube.com Reconnaître et prolonger une suite",
+        "site:youtube.com suites arithmétiques géométriques cours 5 minutes",
+        "suites arithmétiques géométriques cours 5 minutes youtube",
+        "youtube suites arithmétiques géométriques 5 minutes",
+        "\"rdSxmqatY1g\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=rdSxmqatY1g",
+          "titre": "5 minutes avant ton contrôle - Fiche sur les suites",
+          "chaine": "Hedacademy",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La fiche animée présente les suites arithmétiques et géométriques, le calcul de termes et la modélisation par pourcentages, avec des compléments sur les variations et les sommes."
+        }
+      ],
+      "justification": "Le format de révision annoncé est court et couvre les deux types de suites demandés. Il contient toutefois des notions supplémentaires et sa durée exacte n’a pas été affichée."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L8",
+      "requetes": [
+        "site:youtube.com Calculer moyenne médiane fréquence",
+        "site:youtube.com statistiques moyenne médiane fréquence cours 5 minutes",
+        "statistiques moyenne médiane fréquence cours 5 minutes youtube",
+        "youtube statistiques moyenne médiane fréquence troisième cours",
+        "\"5857Zxpwsjg\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=5857Zxpwsjg",
+          "titre": "STATS | Moyenne et médiane: tout comprendre en 5 Min",
+          "chaine": "Simon Porcher",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette explication courte porte directement sur la moyenne et la médiane, mais la fréquence et le traitement des tableaux d’effectifs ne sont pas attestés."
+        }
+      ],
+      "justification": "Le sujet et le format annoncé conviennent à une première explication de deux notions centrales. La couverture est partielle et la durée exacte reste inconnue."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L9",
+      "requetes": [
+        "site:youtube.com Calculer une probabilité de tirage",
+        "site:youtube.com probabilité sans remise au moins une exemple",
+        "probabilité sans remise au moins une exemple youtube",
+        "youtube probabilité au moins une boule contraire sans remise",
+        "\"xo7x9WXPPeM\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=xo7x9WXPPeM",
+          "titre": "Probabilité des tirages sans remise",
+          "chaine": "Fabien Macformath",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’exercice calcule plusieurs probabilités de couleurs lors de trois tirages sans remise, mais l’utilisation de l’événement contraire pour « au moins un » n’est pas annoncée."
+        }
+      ],
+      "justification": "L’exercice correspond aux tirages successifs sans remise et aux calculs de probabilités de couleurs. Il ne couvre pas explicitement toute la leçon et sa durée totale n’a pas été trouvée."
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L10",
+      "requetes": [
+        "site:youtube.com Bilan méthode rédiger comme au concours équation",
+        "site:youtube.com résoudre problème équation étapes rédaction vérification",
+        "résoudre problème équation étapes rédaction vérification youtube",
+        "\"N1MYS76Xaxo\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=N1MYS76Xaxo",
+          "titre": "Mettre un problème en équation",
+          "chaine": "Les Math Experts (Par Nicole Nasrallah)",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo détaille le choix de l’inconnue, la traduction, la résolution, la conclusion et la vérification de l’énoncé, sans traiter les seuils stricts."
+        }
+      ],
+      "justification": "Le déroulé annoncé correspond à la rédaction structurée attendue au concours. Le contrôle d’une borne entière reste à compléter et la durée totale n’est pas affichée."
+    }
+  ]
+}

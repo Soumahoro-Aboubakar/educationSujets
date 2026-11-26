@@ -1,0 +1,83 @@
+[
+  {
+    "code": "CAFOP-FR-VOCAB-L1",
+    "youtubeId": "om2DmpdQ9V8",
+    "couverture": "exacte",
+    "justification": "Synonyme, antonyme, paronyme et homonyme : définitions et exemples.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L2",
+    "youtubeId": "hNRMPE9a8ig",
+    "couverture": "exacte",
+    "justification": "Comprendre un mot grâce au contexte de la phrase.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L3",
+    "youtubeId": "VnkAZUSlUx4",
+    "couverture": "exacte",
+    "justification": "Les homonymes et les paronymes : les distinguer.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L4",
+    "youtubeId": "DAgHdN3c-rA",
+    "couverture": "exacte",
+    "justification": "Radical, préfixe et suffixe : la formation des mots et les familles.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L5",
+    "youtubeId": "OJirdct3Vz8",
+    "couverture": "exacte",
+    "justification": "Nominalisation : former un nom à partir d’un verbe.",
+    "source": "recherche YouTube ciblée (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L6",
+    "youtubeId": "BLfHV8rspyg",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : sens propre et sens figuré.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L7",
+    "youtubeId": "5QAZ_DJrx1o",
+    "couverture": "exacte",
+    "justification": "Les registres de langue : familier, courant, soutenu.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L8",
+    "youtubeId": "2Kkc4VlV1sc",
+    "couverture": "exacte",
+    "justification": "Les principales figures de style : comparaison, métaphore, personnification, hyperbole, antithèse.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-VOCAB-L9",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo de méthode pour les questions de vocabulaire du concours.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

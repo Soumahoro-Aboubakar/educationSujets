@@ -1,0 +1,686 @@
+{
+ "CAFOP-MATH-ARITH-L1": {
+  "titre": "Énumérer les diviseurs d’un nombre",
+  "candidats": [
+   {
+    "id": "jteZZBzyai8",
+    "titre": "Déterminer tous les diviseurs d'un nombre - Cinquième",
+    "chaine": "Yvan Monka",
+    "duree": "4:33",
+    "sec": 273,
+    "vues": "110 053 vues"
+   },
+   {
+    "id": "k0rhj8fwdjs",
+    "titre": "Déterminer tous les diviseurs d'un nombre par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "6:25",
+    "sec": 385,
+    "vues": "158 046 vues"
+   },
+   {
+    "id": "Qj2G6BTk3yo",
+    "titre": "Comment déterminer tous les diviseurs d'un nombre ?",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "7:01",
+    "sec": 421,
+    "vues": "2 367 vues"
+   },
+   {
+    "id": "sSgsrHMyFrI",
+    "titre": "Déterminer les diviseurs d'un nombre - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "8:46",
+    "sec": 526,
+    "vues": "569 064 vues"
+   },
+   {
+    "id": "SiieXLVf-gI",
+    "titre": "Comment trouver l'ensemble des DIVISEURS D'UN NOMBRE grâce aux NOMBRES PREMIERS ?",
+    "chaine": "CQFE maths",
+    "duree": "5:08",
+    "sec": 308,
+    "vues": "4 792 vues"
+   },
+   {
+    "id": "AyMNWDvUahs",
+    "titre": "MÉTHODE : Comment connaître le nombre de diviseurs d'un nombre ? - 2nd",
+    "chaine": "Archimaide",
+    "duree": "5:21",
+    "sec": 321,
+    "vues": "348 vues"
+   },
+   {
+    "id": "3_IDtiXlrdM",
+    "titre": "EXERCICE : Déterminer tous les diviseurs d'un nombre - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "4:43",
+    "sec": 283,
+    "vues": "37 747 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   },
+   {
+    "id": "VUEyQoCeB0Q",
+    "titre": "PPCM et PGCD des nombres entiers",
+    "chaine": "Éducation Plus",
+    "duree": "12:33",
+    "sec": 753,
+    "vues": "51 222 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-ARITH-L2": {
+  "titre": "Appliquer les critères de divisibilité",
+  "candidats": [
+   {
+    "id": "BJDE6uOrmYQ",
+    "titre": "EXERCICE : Appliquer les critères de divisibilité - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "10:57",
+    "sec": 657,
+    "vues": "251 804 vues"
+   },
+   {
+    "id": "n0aXMGLusXQ",
+    "titre": "Maîtriser les critères de divisibilité !",
+    "chaine": "Hedacademy",
+    "duree": "5:29",
+    "sec": 329,
+    "vues": "83 364 vues"
+   },
+   {
+    "id": "3pH0qkA4vps",
+    "titre": "ON DÉMONTRE LES CRITÈRES DE DIVISIBILITÉ 😎",
+    "chaine": "Hedacademy",
+    "duree": "12:51",
+    "sec": 771,
+    "vues": "52 201 vues"
+   },
+   {
+    "id": "16BKqk_1zJA",
+    "titre": "Comment appliquer les critères de divisibilité par 2, 3, 5, 9 et 10 ?",
+    "chaine": "Mathemax",
+    "duree": "6:11",
+    "sec": 371,
+    "vues": "2 149 vues"
+   },
+   {
+    "id": "XMyZs8j2hVw",
+    "titre": "C'est quoi les critères de divisibilité ?",
+    "chaine": "Sultan's Academy",
+    "duree": "2:43",
+    "sec": 163,
+    "vues": "4 681 vues"
+   },
+   {
+    "id": "e-noKy-HD0Y",
+    "titre": "A'Rieka - Critères de divisibilité - ( Prod : Cogway )",
+    "chaine": "Rapémathiques",
+    "duree": "3:45",
+    "sec": 225,
+    "vues": "29 043 vues"
+   },
+   {
+    "id": "qhGvM4BWllM",
+    "titre": "Caractériser la divisibilité: Utiliser une combinaison linéaire-Divisibilité dans Z - Maths Expertes",
+    "chaine": "J'ai 20 en maths",
+    "duree": "4:35",
+    "sec": 275,
+    "vues": "43 602 vues"
+   },
+   {
+    "id": "_tE4SYW6HPE",
+    "titre": "Critères de divisibilité",
+    "chaine": "Les Maths de Jean-Kevin",
+    "duree": "3:12",
+    "sec": 192,
+    "vues": "676 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-ARITH-L3": {
+  "titre": "Combiner les critères sans opérer",
+  "candidats": [
+   {
+    "id": "1GTFsdBvnRE",
+    "titre": "⭐️ Astuce pour additionner deux fractions ayant 1 au numérateur #maths #fraction",
+    "chaine": "Campus XYZ",
+    "duree": "0:25",
+    "sec": 25,
+    "vues": "1 176 412 vues"
+   },
+   {
+    "id": "JDF2BVeFoZ8",
+    "titre": "Démontrons que 1+1=3",
+    "chaine": "Éducation Plus",
+    "duree": "5:27",
+    "sec": 327,
+    "vues": "1 782 207 vues"
+   },
+   {
+    "id": "TrHxDAN9UmA",
+    "titre": "CALCULER avec des puissances | Mathématiques",
+    "chaine": "Paul Olivier",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "183 718 vues"
+   },
+   {
+    "id": "al9oHwrlTNo",
+    "titre": "LE COURS : Arithmétique - Quatrième/Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "14:41",
+    "sec": 881,
+    "vues": "779 827 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   },
+   {
+    "id": "Axmr-mg3UII",
+    "titre": "CRPE Maths – PGCD et PPCM avec la décomposition en facteurs premiers",
+    "chaine": "MATHS-CRPE",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "1 211 vues"
+   },
+   {
+    "id": "H4flM-HqsPQ",
+    "titre": "TCS : Arithmétique dans N : séance 3 : le PGCD et PPCM",
+    "chaine": "karim math",
+    "duree": "6:02",
+    "sec": 362,
+    "vues": "585 vues"
+   },
+   {
+    "id": "rB5NYjCuFgo",
+    "titre": "PGCD et PPCM de trois nombres",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "10:38",
+    "sec": 638,
+    "vues": "8 325 vues"
+   },
+   {
+    "id": "mjFXPPXX7_c",
+    "titre": "PPCM & PGCD:'' Les Méthodes Des Multiples & Des Diviseurs.''",
+    "chaine": "MATHS et logique",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "361 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-ARITH-L4": {
+  "titre": "Contrôler une division euclidienne",
+  "candidats": [
+   {
+    "id": "2Ocfhucc58g",
+    "titre": "Poser une division euclidienne (avec reste) - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "11:11",
+    "sec": 671,
+    "vues": "1 750 133 vues"
+   },
+   {
+    "id": "bwS45UeOZrg",
+    "titre": "Déterminer le quotient et le reste d'une division euclidienne - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "263 392 vues"
+   },
+   {
+    "id": "3Fr_1_8aTmw",
+    "titre": "Cinquième - Nombres entiers naturels - Division euclidienne",
+    "chaine": "Prodesmaths",
+    "duree": "5:21",
+    "sec": 321,
+    "vues": "2 490 vues"
+   },
+   {
+    "id": "EzhZb0IOtL8",
+    "titre": "Division euclidienne - cours + méthodes pour les exercices - IMPORTANT Terminale Option Maths Expert",
+    "chaine": "jaicompris Maths",
+    "duree": "12:19",
+    "sec": 739,
+    "vues": "86 786 vues"
+   },
+   {
+    "id": "wW3uw2hyQso",
+    "titre": "La division Euclidienne",
+    "chaine": "Éducation Plus",
+    "duree": "5:17",
+    "sec": 317,
+    "vues": "18 180 vues"
+   },
+   {
+    "id": "fv5uhr8JP3U",
+    "titre": "Déterminer quotient et reste d'une division euclidienne (fct de n) - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "7:16",
+    "sec": 436,
+    "vues": "83 961 vues"
+   },
+   {
+    "id": "Y8ODy-1nzKY",
+    "titre": "LA DIVISION EUCLIDIENNE - avec reste",
+    "chaine": "Hedacademy",
+    "duree": "3:31",
+    "sec": 211,
+    "vues": "41 335 vues"
+   },
+   {
+    "id": "NS_FCLoHfz8",
+    "titre": "La division Euclidienne.",
+    "chaine": "KIFFELESMATHS : L'école de maths en ligne",
+    "duree": "10:08",
+    "sec": 608,
+    "vues": "89 146 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-ARITH-L5": {
+  "titre": "Décomposer en facteurs premiers",
+  "candidats": [
+   {
+    "id": "BlGaIqNz_pk",
+    "titre": "Décomposer un nombre en produits de facteurs premiers - Quatrième",
+    "chaine": "Yvan Monka",
+    "duree": "6:10",
+    "sec": 370,
+    "vues": "335 230 vues"
+   },
+   {
+    "id": "NGrAFTa1TFA",
+    "titre": "Comment DÉCOMPOSER UN NOMBRE en FACTEURS PREMIERS ? ✅ Troisième",
+    "chaine": "Paul Olivier",
+    "duree": "3:39",
+    "sec": 219,
+    "vues": "72 142 vues"
+   },
+   {
+    "id": "zGj-Dzwyk-U",
+    "titre": "Décomposer en facteurs premiers.",
+    "chaine": "Hedacademy",
+    "duree": "7:44",
+    "sec": 464,
+    "vues": "85 415 vues"
+   },
+   {
+    "id": "RBE2wPIKagI",
+    "titre": "Décomposer un nombre en un produit de facteurs premiers",
+    "chaine": "Yvan Monka",
+    "duree": "9:01",
+    "sec": 541,
+    "vues": "1 143 213 vues"
+   },
+   {
+    "id": "pSDme0OLyuU",
+    "titre": "La décomposition en facteurs premiers - Maths",
+    "chaine": "digiSchool Collège",
+    "duree": "1:36",
+    "sec": 96,
+    "vues": "281 vues"
+   },
+   {
+    "id": "JuJhKx_BTCA",
+    "titre": "DÉCOMPOSER EN PRODUITS DE FACTEURS PREMIERS !",
+    "chaine": "Maths Faciles",
+    "duree": "5:51",
+    "sec": 351,
+    "vues": "1 963 vues"
+   },
+   {
+    "id": "1WMQ-iH7-7c",
+    "titre": "Décomposer un nombre en produit de facteurs premiers - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "4:08",
+    "sec": 248,
+    "vues": "154 292 vues"
+   },
+   {
+    "id": "J9emHRU66Tg",
+    "titre": "L’arbre des facteurs premiers | Mathématiques | Primaire",
+    "chaine": "Alloprof",
+    "duree": "2:12",
+    "sec": 132,
+    "vues": "72 231 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-ARITH-L6": {
+  "titre": "Calculer le PGCD avec Euclide",
+  "candidats": [
+   {
+    "id": "ZICUfgw5vik",
+    "titre": "Calcul Du Pgcd À L'aide De L'algorithme D'Euclide",
+    "chaine": "Tchitcha",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "601 vues"
+   },
+   {
+    "id": "npG_apkI18o",
+    "titre": "Déterminer le PGCD de deux nombres (Algorithme d'Euclide) - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "5:59",
+    "sec": 359,
+    "vues": "176 951 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   },
+   {
+    "id": "EVQY8DG5_es",
+    "titre": "algorithme d'Euclide • comprendre et savoir l'appliquer pour calculer un PGCD • arithmétique",
+    "chaine": "jaicompris Maths",
+    "duree": "7:09",
+    "sec": 429,
+    "vues": "131 730 vues"
+   },
+   {
+    "id": "Z2AY4axxJUY",
+    "titre": "Algorithme d'Euclide (PGCD) & programme Python - Exercice d'algorithmique",
+    "chaine": "Mohamed Chiny",
+    "duree": "8:59",
+    "sec": 539,
+    "vues": "42 515 vues"
+   },
+   {
+    "id": "GRspofhTrfQ",
+    "titre": "Appliquer l'algorithme d'Euclide (Version collège) - Tale Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "6:56",
+    "sec": 416,
+    "vues": "286 832 vues"
+   },
+   {
+    "id": "uoigpLGek4Y",
+    "titre": "Calculer le PGCD à l'aide de l'algorithme d'Euclide",
+    "chaine": "mathsollivier",
+    "duree": "2:17",
+    "sec": 137,
+    "vues": "653 vues"
+   },
+   {
+    "id": "0NNoL32cilY",
+    "titre": "PGCD de 5n+1 et 2n-1 • Une méthode très efficace à connaitre • Terminale maths expertes",
+    "chaine": "jaicompris Maths",
+    "duree": "5:47",
+    "sec": 347,
+    "vues": "31 208 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   },
+   {
+    "id": "cuzaa5sbYzQ",
+    "titre": "PGCD : Comprendre & calculer",
+    "chaine": "Hedacademy",
+    "duree": "7:09",
+    "sec": 429,
+    "vues": "21 746 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-ARITH-L7": {
+  "titre": "Trouver le premier multiple commun",
+  "candidats": [
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   },
+   {
+    "id": "Axmr-mg3UII",
+    "titre": "CRPE Maths – PGCD et PPCM avec la décomposition en facteurs premiers",
+    "chaine": "MATHS-CRPE",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "1 211 vues"
+   },
+   {
+    "id": "HXrm8tosnk4",
+    "titre": "Cours - Cinquième - Maths : Multiples et diviseurs / Suite 4 / Mr Gueye",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "10:17",
+    "sec": 617,
+    "vues": "35 069 vues"
+   },
+   {
+    "id": "v6n1Fq99goo",
+    "titre": "Multiples Communs & Diviseurs Communs │Mathématiques Faciles │Classes Primaires",
+    "chaine": "Académie SBAI",
+    "duree": "7:14",
+    "sec": 434,
+    "vues": "4 472 vues"
+   },
+   {
+    "id": "1q1o5BJDZDU",
+    "titre": "PPCM de trois nombres entiers naturels",
+    "chaine": "Éducation Plus",
+    "duree": "5:53",
+    "sec": 353,
+    "vues": "9 207 vues"
+   },
+   {
+    "id": "30vF8qPsGiw",
+    "titre": "J'explique comment calculer rapidement le PPCM - Les leçons de Monsieur Sébastien",
+    "chaine": "Les leçons de Monsieur Sébastien",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "187 566 vues"
+   },
+   {
+    "id": "2NSX4KfPJME",
+    "titre": "C'est quoi le PPMC ? Le plus petit multiple commun",
+    "chaine": "Sultan's Academy",
+    "duree": "5:15",
+    "sec": 315,
+    "vues": "27 836 vues"
+   },
+   {
+    "id": "H4flM-HqsPQ",
+    "titre": "TCS : Arithmétique dans N : séance 3 : le PGCD et PPCM",
+    "chaine": "karim math",
+    "duree": "6:02",
+    "sec": 362,
+    "vues": "587 vues"
+   },
+   {
+    "id": "aHU00y8LONw",
+    "titre": "PGCD - PPCM - Décomposition en produit de facteurs premiers",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "8:10",
+    "sec": 490,
+    "vues": "7 320 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-ARITH-L8": {
+  "titre": "Partager et carreler sans reste",
+  "candidats": []
+ },
+ "CAFOP-MATH-ARITH-L9": {
+  "titre": "Bilan méthode — raisonner comme au concours",
+  "candidats": [
+   {
+    "id": "RGDLgit_96Q",
+    "titre": "Comment devenir EXCELLENT en MATHS sans travailler dur ?",
+    "chaine": "Zebilatruite",
+    "duree": "7:02",
+    "sec": 422,
+    "vues": "336 141 vues"
+   },
+   {
+    "id": "JDF2BVeFoZ8",
+    "titre": "Démontrons que 1+1=3",
+    "chaine": "Éducation Plus",
+    "duree": "5:27",
+    "sec": 327,
+    "vues": "1 782 305 vues"
+   },
+   {
+    "id": "eFbXQXWurZk",
+    "titre": "Le SECRET chinois pour être fort en maths en 2026",
+    "chaine": "Maxime Lim",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "274 629 vues"
+   },
+   {
+    "id": "Gv7MQEtusJY",
+    "titre": "Concours Accès - les conseils pour l'épreuve de raisonnement logique et mathématiques",
+    "chaine": "Esdes Business School",
+    "duree": "3:14",
+    "sec": 194,
+    "vues": "3 496 vues"
+   },
+   {
+    "id": "j8YZCxYTtUU",
+    "titre": "PPCM et PGCD",
+    "chaine": "Éducation Plus",
+    "duree": "12:18",
+    "sec": 738,
+    "vues": "117 706 vues"
+   },
+   {
+    "id": "2bIK1KkQ1k0",
+    "titre": "Déterminer le PGCD et le PPCM par décomposition - Terminale - Maths expertes",
+    "chaine": "Yvan Monka",
+    "duree": "11:04",
+    "sec": 664,
+    "vues": "1 101 776 vues"
+   },
+   {
+    "id": "Axmr-mg3UII",
+    "titre": "CRPE Maths – PGCD et PPCM avec la décomposition en facteurs premiers",
+    "chaine": "MATHS-CRPE",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "1 212 vues"
+   },
+   {
+    "id": "0Gyp-Rdku-w",
+    "titre": "PGCD et PPCM - Décomposition en produit de facteurs premiers",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "8:51",
+    "sec": 531,
+    "vues": "34 075 vues"
+   },
+   {
+    "id": "cwZjHYfg-cE",
+    "titre": "Calculer le PGCD et le PPCM facilement (Méthode du tableau)",
+    "chaine": "Ludek-Academy",
+    "duree": "8:33",
+    "sec": 513,
+    "vues": "74 vues"
+   },
+   {
+    "id": "0NNoL32cilY",
+    "titre": "PGCD de 5n+1 et 2n-1 • Une méthode très efficace à connaitre • Terminale maths expertes",
+    "chaine": "jaicompris Maths",
+    "duree": "5:47",
+    "sec": 347,
+    "vues": "31 208 vues"
+   }
+  ]
+ }
+}

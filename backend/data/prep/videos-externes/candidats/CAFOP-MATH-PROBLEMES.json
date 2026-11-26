@@ -1,0 +1,828 @@
+{
+ "CAFOP-MATH-PROBLEMES-L1": {
+  "titre": "Isoler l’inconnue dans une équation",
+  "candidats": [
+   {
+    "id": "hphg26yfjQA",
+    "titre": "1. Isoler un terme d'une formule / Manipulation de formule (physique-chimie)",
+    "chaine": "Tuto Sciences",
+    "duree": "4:00",
+    "sec": 240,
+    "vues": "10 594 vues"
+   },
+   {
+    "id": "Xn8rUSZPO34",
+    "titre": "Mettre un problème en équation (1) - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "8:00",
+    "sec": 480,
+    "vues": "563 784 vues"
+   },
+   {
+    "id": "vXSDO4HNn2c",
+    "titre": "Système de 2 équations à 2 inconnues - Méthode par substitution - Maths 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:40",
+    "sec": 280,
+    "vues": "989 969 vues"
+   },
+   {
+    "id": "ezGlju-nR6s",
+    "titre": "Résoudre une équation ✅ Méthode simple | Maths | 3e | Brevet",
+    "chaine": "Paul Olivier",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "431 147 vues"
+   },
+   {
+    "id": "yQ1auuMtMvw",
+    "titre": "Résoudre une équation en 1 minute",
+    "chaine": "Hedacademy",
+    "duree": "2:58",
+    "sec": 178,
+    "vues": "387 390 vues"
+   },
+   {
+    "id": "PkdiA2WDq04",
+    "titre": "Cours ♦ Méthodes pour résoudre une équation ♦ Isoler l'inconnue & Produit nul ♦ Seconde",
+    "chaine": "jaicompris Maths",
+    "duree": "7:31",
+    "sec": 451,
+    "vues": "6 979 vues"
+   },
+   {
+    "id": "TXRkdmRrm1Y",
+    "titre": "Résoudre un SYSTÈME D'ÉQUATIONS ✅ Méthode facile (substitution) ! 💪 Seconde",
+    "chaine": "Paul Olivier",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "40 982 vues"
+   },
+   {
+    "id": "xDP0Il3CFa4",
+    "titre": "NE FAIS PLUS CES ERREURS - Isoler une inconnue🏋️‍♀️- Résous tes équations facilement",
+    "chaine": "Yohan eZsciences",
+    "duree": "10:31",
+    "sec": 631,
+    "vues": "3 627 vues"
+   },
+   {
+    "id": "KxrU8fO2sP8",
+    "titre": "Mettre un problème en équation",
+    "chaine": "Éditions Lelivrescolaire.fr",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "24 450 vues"
+   },
+   {
+    "id": "_OdK4_ahU_E",
+    "titre": "Mise en équation et résolution de problème",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "3:45",
+    "sec": 225,
+    "vues": "14 224 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L2": {
+  "titre": "Résoudre une inéquation et lire sa borne",
+  "candidats": [
+   {
+    "id": "POjZ14LyJ-I",
+    "titre": "Résoudre une INÉQUATION ✅ Méthode facile ! 💪 3e | Seconde",
+    "chaine": "Paul Olivier",
+    "duree": "7:17",
+    "sec": 437,
+    "vues": "48 342 vues"
+   },
+   {
+    "id": "qoNLr9NkvUE",
+    "titre": "Résoudre une inéquation-produit - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "4:31",
+    "sec": 271,
+    "vues": "522 436 vues"
+   },
+   {
+    "id": "ycYfb8aHssY",
+    "titre": "Résoudre une inéquation (1) - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "7:45",
+    "sec": 465,
+    "vues": "2 140 268 vues"
+   },
+   {
+    "id": "c-akR4NJhh0",
+    "titre": "COMPRENDRE les intervalles",
+    "chaine": "Hedacademy",
+    "duree": "7:42",
+    "sec": 462,
+    "vues": "281 407 vues"
+   },
+   {
+    "id": "Vitm29q8AEs",
+    "titre": "Résoudre une inéquation-quotient - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "5:34",
+    "sec": 334,
+    "vues": "765 909 vues"
+   },
+   {
+    "id": "nq_96pyNqQU",
+    "titre": "Inéquation irrationnelle, explication simple : techniques et astuces",
+    "chaine": "Éducation Plus",
+    "duree": "12:59",
+    "sec": 779,
+    "vues": "104 752 vues"
+   },
+   {
+    "id": "Tdp7mH6VXKY",
+    "titre": "Résoudre une INÉQUATION avec COSINUS ou SINUS dans R - Première",
+    "chaine": "Galilee ac",
+    "duree": "8:21",
+    "sec": 501,
+    "vues": "46 560 vues"
+   },
+   {
+    "id": "TeNKWSgJGTk",
+    "titre": "Cours - Première - Mathématiques : Inéquations irrationnelles / Rappel",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "8:41",
+    "sec": 521,
+    "vues": "150 190 vues"
+   },
+   {
+    "id": "UVuBIhV7m0Y",
+    "titre": "Résoudre un problème à l'aide d'une inéquation - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "8:59",
+    "sec": 539,
+    "vues": "184 420 vues"
+   },
+   {
+    "id": "TM4HFRh0OWA",
+    "titre": "Résoudre un PROBLÈME avec une INÉQUATION - Exercice Corrigé - Seconde",
+    "chaine": "Galilee ac",
+    "duree": "5:16",
+    "sec": 316,
+    "vues": "6 742 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L3": {
+  "titre": "Mettre en équation des âges et des partages",
+  "candidats": [
+   {
+    "id": "Xn8rUSZPO34",
+    "titre": "Mettre un problème en équation (1) - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "8:00",
+    "sec": 480,
+    "vues": "563 805 vues"
+   },
+   {
+    "id": "KxrU8fO2sP8",
+    "titre": "Mettre un problème en équation",
+    "chaine": "Éditions Lelivrescolaire.fr",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "24 450 vues"
+   },
+   {
+    "id": "1QxOAffFXrM",
+    "titre": "Exercice : Partage À Parts Égales",
+    "chaine": "SCIENCES AU RENDEZ-VOUS",
+    "duree": "2:10",
+    "sec": 130,
+    "vues": "310 vues"
+   },
+   {
+    "id": "7bc_W1LaIZI",
+    "titre": "98.6e-Trouver l'âge de chacun !",
+    "chaine": "Mihaï Stoenescu",
+    "duree": "2:38",
+    "sec": 158,
+    "vues": "24 577 vues"
+   },
+   {
+    "id": "_OdK4_ahU_E",
+    "titre": "Mise en équation et résolution de problème",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "3:45",
+    "sec": 225,
+    "vues": "14 224 vues"
+   },
+   {
+    "id": "U6AzwNeCau4",
+    "titre": "👉 CRPE Maths : problèmes de mise en équation sur les âges et les écarts d’âge",
+    "chaine": "MATHS-CRPE",
+    "duree": "4:24",
+    "sec": 264,
+    "vues": "23 vues"
+   },
+   {
+    "id": "TEgtkSS2Bzg",
+    "titre": "✅ PROBLÈME CLASSIQUE SUR LES AGES. ali a 27 ans de plus que son fils. dans 6 ans il sera le double",
+    "chaine": "Professeur Raoul",
+    "duree": "3:20",
+    "sec": 200,
+    "vues": "7 784 vues"
+   },
+   {
+    "id": "Yv-jVnGfm1w",
+    "titre": "LES PROBLÈMES DU COLLÈGE #3 : encore des âges",
+    "chaine": "Hedacademy",
+    "duree": "5:01",
+    "sec": 301,
+    "vues": "171 394 vues"
+   },
+   {
+    "id": "_Z4S8fbxfSM",
+    "titre": "Mise en équation et résolution de problème",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "3:51",
+    "sec": 231,
+    "vues": "2 712 vues"
+   },
+   {
+    "id": "0V8IyREsxNc",
+    "titre": "Maths 3ème - Comprendre la mise en équation en 3 minutes - Cours et Exercices",
+    "chaine": "Le Bon Calcul",
+    "duree": "4:56",
+    "sec": 296,
+    "vues": "15 909 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L4": {
+  "titre": "Résoudre un système par substitution",
+  "candidats": [
+   {
+    "id": "vXSDO4HNn2c",
+    "titre": "Système de 2 équations à 2 inconnues - Méthode par substitution - Maths 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:40",
+    "sec": 280,
+    "vues": "989 969 vues"
+   },
+   {
+    "id": "x_AJ6vtBXms",
+    "titre": "Résoudre un système par substitution.",
+    "chaine": "Hedacademy",
+    "duree": "5:19",
+    "sec": 319,
+    "vues": "799 284 vues"
+   },
+   {
+    "id": "f7izgX5LTNU",
+    "titre": "Méthode de Substitution",
+    "chaine": "Éducation Plus",
+    "duree": "9:34",
+    "sec": 574,
+    "vues": "92 310 vues"
+   },
+   {
+    "id": "24VsDZK6bN0",
+    "titre": "Résoudre un système par substitution (1) - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "8:43",
+    "sec": 523,
+    "vues": "946 151 vues"
+   },
+   {
+    "id": "TXRkdmRrm1Y",
+    "titre": "Résoudre un SYSTÈME D'ÉQUATIONS ✅ Méthode facile (substitution) ! 💪 Seconde",
+    "chaine": "Paul Olivier",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "40 982 vues"
+   },
+   {
+    "id": "iPeYX1O9UVY",
+    "titre": "Système d équation méthode par substitution",
+    "chaine": "LA Didactika",
+    "duree": "4:23",
+    "sec": 263,
+    "vues": "41 851 vues"
+   },
+   {
+    "id": "pB4uGSBHACo",
+    "titre": "Résoudre un système d'équation par substitution Maths-3ème",
+    "chaine": "coach tera",
+    "duree": "13:05",
+    "sec": 785,
+    "vues": "9 175 vues"
+   },
+   {
+    "id": "jxFt6khKZHc",
+    "titre": "Résoudre un SYSTEME par SUBSTITUTION | Mathématiques 3ème - Préparer le BREVET",
+    "chaine": "Maths Physique EASY",
+    "duree": "4:49",
+    "sec": 289,
+    "vues": "16 699 vues"
+   },
+   {
+    "id": "t1G9yZ-W5Ms",
+    "titre": "Résoudre un problème avec un système d'équations",
+    "chaine": "Cours Ouverts en Ligne",
+    "duree": "8:12",
+    "sec": 492,
+    "vues": "21 483 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L5": {
+  "titre": "Résoudre un système par combinaison",
+  "candidats": [
+   {
+    "id": "Zw-qI9DFv54",
+    "titre": "Résoudre un système par combinaisons linéaires (1) - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "186 874 vues"
+   },
+   {
+    "id": "brwKbKccjQQ",
+    "titre": "Résoudre un système par combinaison.",
+    "chaine": "Hedacademy",
+    "duree": "6:53",
+    "sec": 413,
+    "vues": "830 203 vues"
+   },
+   {
+    "id": "xlcJc2gOg9U",
+    "titre": "Système de 2 équations à 2 inconnues - Méthode par combinaison - Maths 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:37",
+    "sec": 277,
+    "vues": "608 145 vues"
+   },
+   {
+    "id": "R73n2Acjx4w",
+    "titre": "Résoudre un SYSTEME par COMBINAISON ou ADDITION | Préparer le BREVET - Mathématiques 3ème",
+    "chaine": "Maths Physique EASY",
+    "duree": "3:55",
+    "sec": 235,
+    "vues": "21 999 vues"
+   },
+   {
+    "id": "_MnIPPHWpCM",
+    "titre": "Résoudre un système d'équation par combinaison Maths-3ème",
+    "chaine": "coach tera",
+    "duree": "11:13",
+    "sec": 673,
+    "vues": "3 680 vues"
+   },
+   {
+    "id": "TXRkdmRrm1Y",
+    "titre": "Résoudre un SYSTÈME D'ÉQUATIONS ✅ Méthode facile (substitution) ! 💪 Seconde",
+    "chaine": "Paul Olivier",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "40 986 vues"
+   },
+   {
+    "id": "rlLlzYMaN-E",
+    "titre": "Résoudre un système d'équation par COMBINAISON 📚 Cours ➕ Exemple expliqué pas à pas 👣 (Seconde)",
+    "chaine": "jaicompris Maths",
+    "duree": "8:52",
+    "sec": 532,
+    "vues": "14 991 vues"
+   },
+   {
+    "id": "vXSDO4HNn2c",
+    "titre": "Système de 2 équations à 2 inconnues - Méthode par substitution - Maths 3e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "4:40",
+    "sec": 280,
+    "vues": "989 969 vues"
+   },
+   {
+    "id": "t1G9yZ-W5Ms",
+    "titre": "Résoudre un problème avec un système d'équations",
+    "chaine": "Cours Ouverts en Ligne",
+    "duree": "8:12",
+    "sec": 492,
+    "vues": "21 481 vues"
+   },
+   {
+    "id": "YUi9VrDFPZg",
+    "titre": "Méthode d’élimination | Systèmes d’équations à deux inconnues",
+    "chaine": "20/20",
+    "duree": "9:18",
+    "sec": 558,
+    "vues": "30 640 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L6": {
+  "titre": "Retrouver les dimensions d’un rectangle",
+  "candidats": [
+   {
+    "id": "PmpmDk9wmmY",
+    "titre": "TROUVE LES DIMENSIONS DE CE RECTANGLE : P = 12 et A = 6",
+    "chaine": "Hedacademy",
+    "duree": "11:27",
+    "sec": 687,
+    "vues": "92 502 vues"
+   },
+   {
+    "id": "7Rj26t7lbec",
+    "titre": "Comment calculer les dimensions d'un rectangle",
+    "chaine": "Le papillon matheux",
+    "duree": "1:28",
+    "sec": 88,
+    "vues": "25 470 vues"
+   },
+   {
+    "id": "wR5rZCgirgg",
+    "titre": "Calcul des dimensions d'un rectangle",
+    "chaine": "Éducation Plus",
+    "duree": "10:11",
+    "sec": 611,
+    "vues": "10 130 vues"
+   },
+   {
+    "id": "pcsEoZ5xzFw",
+    "titre": "Mesure d'aires CM1-CM2- Cycle 3 - Aires d'un rectangle et d'un carré - Grandeurs et mesures - Maths",
+    "chaine": "Maître Lucas",
+    "duree": "6:14",
+    "sec": 374,
+    "vues": "337 569 vues"
+   },
+   {
+    "id": "tWr4aDCbk18",
+    "titre": "Comment trouver la longueur et la largeur d'un rectangle avec périmètre et aire",
+    "chaine": "Le papillon matheux",
+    "duree": "2:13",
+    "sec": 133,
+    "vues": "1 671 vues"
+   },
+   {
+    "id": "P5oiXs6p3Eg",
+    "titre": "Leçon 27 Géométrie Le calcule d'une dimension d'un rectangle 2",
+    "chaine": "EDUNOTE",
+    "duree": "5:11",
+    "sec": 311,
+    "vues": "466 vues"
+   },
+   {
+    "id": "Mw4_378ZWAc",
+    "titre": "Calculer la longueur et la largeur d'un rectangle",
+    "chaine": "Faire aimer les mathématiques",
+    "duree": "4:55",
+    "sec": 295,
+    "vues": "54 809 vues"
+   },
+   {
+    "id": "iKHQhdVBYSc",
+    "titre": "Cours - CM2 - Mathématiques: Le rectangle : calcul du périmètre et d'une dimension / M. Gassama",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "13:51",
+    "sec": 831,
+    "vues": "23 416 vues"
+   },
+   {
+    "id": "xaPM7dI-hPg",
+    "titre": "🤯 Ce rectangle te piègera si tu ne poses pas les bonnes équations !",
+    "chaine": "NumeriMaths",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "8 295 vues"
+   },
+   {
+    "id": "5MU4PvrBoK0",
+    "titre": "Problème sur les dimensions d'un rectangle - Les systèmes de deux équations à deux inconnues",
+    "chaine": "Roland Vanderstraeten",
+    "duree": "6:31",
+    "sec": 391,
+    "vues": "6 856 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L7": {
+  "titre": "Reconnaître et prolonger une suite",
+  "candidats": [
+   {
+    "id": "pHq6oClOylU",
+    "titre": "Reconnaitre une suite arithmétique et une suite géométrique - Première",
+    "chaine": "Yvan Monka",
+    "duree": "6:46",
+    "sec": 406,
+    "vues": "877 340 vues"
+   },
+   {
+    "id": "rWRgkcR_xK0",
+    "titre": "Suite arithmétique 🚀 représentation graphique, lire u₀ et la raison r 💪 Première Spé Maths",
+    "chaine": "jaicompris Maths",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "6 911 vues"
+   },
+   {
+    "id": "Vks5eX8QMD8",
+    "titre": "Les suites : TOUT LE PROGRAMME EN 5 MINUTES - Spé maths - Terminale",
+    "chaine": "NOVELCLASS",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "357 767 vues"
+   },
+   {
+    "id": "Jmt_XKZMdfQ",
+    "titre": "Exercices - Première S2 - Mathématiques : Synthèse / Suites numériques / M. Boye",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "10:17",
+    "sec": 617,
+    "vues": "14 193 vues"
+   },
+   {
+    "id": "Gbvu9BLmn88",
+    "titre": "Comprendre les suites géométriques",
+    "chaine": "Hedacademy",
+    "duree": "6:49",
+    "sec": 409,
+    "vues": "314 554 vues"
+   },
+   {
+    "id": "4696gJoJaAk",
+    "titre": "TOUT sur les Suites Arithmétiques en 2 minutes ! - Maths",
+    "chaine": "NOVELCLASS",
+    "duree": "2:14",
+    "sec": 134,
+    "vues": "173 552 vues"
+   },
+   {
+    "id": "nz3k4_wsXYM",
+    "titre": "Cours - Première S - Mathématiques : Suites numériques / Généralités / M. Boye",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:29",
+    "sec": 749,
+    "vues": "56 821 vues"
+   },
+   {
+    "id": "O55KKyj9tuA",
+    "titre": "Les suites numériques. Introduction.",
+    "chaine": "KIFFELESMATHS : L'école de maths en ligne",
+    "duree": "4:26",
+    "sec": 266,
+    "vues": "66 919 vues"
+   },
+   {
+    "id": "Xn8rUSZPO34",
+    "titre": "Mettre un problème en équation (1) - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "8:00",
+    "sec": 480,
+    "vues": "563 791 vues"
+   },
+   {
+    "id": "9Kox2DDd1wI",
+    "titre": "EXERCICE : Résoudre un problème (avec %) à l'aide d'une suite - Première",
+    "chaine": "Yvan Monka",
+    "duree": "9:27",
+    "sec": 567,
+    "vues": "131 934 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L8": {
+  "titre": "Calculer moyenne, médiane et fréquence",
+  "candidats": [
+   {
+    "id": "aO3pb-FEsbk",
+    "titre": "Calculer une moyenne, une médiane, une étendue (1) - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "7:23",
+    "sec": 443,
+    "vues": "952 401 vues"
+   },
+   {
+    "id": "qklR6s7-si0",
+    "titre": "✅ Exercice en statistique : moyenne, médiane, étendue, les quartiles, variance, écart type",
+    "chaine": "El khader",
+    "duree": "11:08",
+    "sec": 668,
+    "vues": "139 131 vues"
+   },
+   {
+    "id": "RGXWth3Ia4c",
+    "titre": "Statistiques Vidéo 1 Effectifs, fréquences",
+    "chaine": "Michel Chasles",
+    "duree": "4:55",
+    "sec": 295,
+    "vues": "500 241 vues"
+   },
+   {
+    "id": "DtQppvuYOu4",
+    "titre": "Comment calculer LA MÉDIANE ? ✅ Facile ! 💪 Exercice corrigé 🎯 3e | Math | Automatisme",
+    "chaine": "Paul Olivier",
+    "duree": "3:40",
+    "sec": 220,
+    "vues": "150 893 vues"
+   },
+   {
+    "id": "EJemilr-FTs",
+    "titre": "La moyenne, la médiane et le mode | Mathématiques | Alloprof",
+    "chaine": "Alloprof",
+    "duree": "3:51",
+    "sec": 231,
+    "vues": "63 735 vues"
+   },
+   {
+    "id": "q-O9ETTk-y8",
+    "titre": "MÉDIANE, MODE, ÉTENDUE... Tu les connais tous ?",
+    "chaine": "Hedacademy",
+    "duree": "8:04",
+    "sec": 484,
+    "vues": "246 449 vues"
+   },
+   {
+    "id": "pAMDvaoR2Ec",
+    "titre": "4e Trouver la moyenne d'une série à partir d'un tableau",
+    "chaine": "Cours de Maths Saber",
+    "duree": "2:40",
+    "sec": 160,
+    "vues": "20 318 vues"
+   },
+   {
+    "id": "yvN0gFlc2kE",
+    "titre": "Astuce : Comment calculer la moyenne d'une série statistiques avec des classes ? - Seconde",
+    "chaine": "EXERCICES MATHS",
+    "duree": "4:08",
+    "sec": 248,
+    "vues": "80 004 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L9": {
+  "titre": "Calculer une probabilité de tirage",
+  "candidats": [
+   {
+    "id": "K-jBhe7K5ko",
+    "titre": "Probabilité , Tirage",
+    "chaine": "Éducation Plus",
+    "duree": "5:40",
+    "sec": 340,
+    "vues": "134 059 vues"
+   },
+   {
+    "id": "CBtj0nLx-N4",
+    "titre": "LE COURS : Probabilités - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "12:03",
+    "sec": 723,
+    "vues": "977 121 vues"
+   },
+   {
+    "id": "f0t_yWsiGgQ",
+    "titre": "Calcul Des Probabilités: Tirage Simultané",
+    "chaine": "Tchitcha",
+    "duree": "6:32",
+    "sec": 392,
+    "vues": "4 160 vues"
+   },
+   {
+    "id": "UcAwwWLyjvQ",
+    "titre": "Comment calculer la probabilité de gagner au loto?",
+    "chaine": "Les génies des sciences",
+    "duree": "4:05",
+    "sec": 245,
+    "vues": "50 533 vues"
+   },
+   {
+    "id": "TqaAxnld66M",
+    "titre": "PROBABILITÉS - Evénements indépendants",
+    "chaine": "Hedacademy",
+    "duree": "5:06",
+    "sec": 306,
+    "vues": "210 996 vues"
+   },
+   {
+    "id": "Qp_N7M5rzQ0",
+    "titre": "3e Tirage de boules dans une urne sans remise",
+    "chaine": "Cours de Maths Saber",
+    "duree": "3:08",
+    "sec": 188,
+    "vues": "68 769 vues"
+   },
+   {
+    "id": "R8bjZpJFeHg",
+    "titre": "PROBABILITÉS - Maîtriser les arbres !",
+    "chaine": "Hedacademy",
+    "duree": "11:50",
+    "sec": 710,
+    "vues": "389 739 vues"
+   },
+   {
+    "id": "y-uoqcBSAf8",
+    "titre": "Probabilité",
+    "chaine": "Éducation Plus",
+    "duree": "3:12",
+    "sec": 192,
+    "vues": "39 084 vues"
+   },
+   {
+    "id": "OPJ1iUM3nJs",
+    "titre": "Probabilités et tirage dans deux urnes . Mise en équation et résolution au CRPE.",
+    "chaine": "MATHS-CRPE",
+    "duree": "5:41",
+    "sec": 341,
+    "vues": "230 vues"
+   },
+   {
+    "id": "zAWePLV9JOw",
+    "titre": "♦️♦️Tirage simultané de 3 boules parmi 9. Combinaisons. Tirage simultané. dénombrement probabilité",
+    "chaine": "Professeur Raoul",
+    "duree": "12:22",
+    "sec": 742,
+    "vues": "67 351 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-PROBLEMES-L10": {
+  "titre": "Bilan méthode – rédiger comme au concours",
+  "candidats": [
+   {
+    "id": "A-6YlNoqHRU",
+    "titre": "Instant Méthodo : Comment rédiger en maths ?",
+    "chaine": "Génération Prépa",
+    "duree": "2:42",
+    "sec": 162,
+    "vues": "22 309 vues"
+   },
+   {
+    "id": "RGDLgit_96Q",
+    "titre": "Comment devenir EXCELLENT en MATHS sans travailler dur ?",
+    "chaine": "Zebilatruite",
+    "duree": "7:02",
+    "sec": 422,
+    "vues": "336 168 vues"
+   },
+   {
+    "id": "eFbXQXWurZk",
+    "titre": "Le SECRET chinois pour être fort en maths en 2026",
+    "chaine": "Maxime Lim",
+    "duree": "8:07",
+    "sec": 487,
+    "vues": "274 629 vues"
+   },
+   {
+    "id": "j_Ilg2BmC0s",
+    "titre": "Comment j’apprends 10 pages de cours en 30 minutes ?",
+    "chaine": "Fafaa en Droit",
+    "duree": "7:00",
+    "sec": 420,
+    "vues": "591 133 vues"
+   },
+   {
+    "id": "JDF2BVeFoZ8",
+    "titre": "Démontrons que 1+1=3",
+    "chaine": "Éducation Plus",
+    "duree": "5:27",
+    "sec": 327,
+    "vues": "1 782 383 vues"
+   },
+   {
+    "id": "Xn8rUSZPO34",
+    "titre": "Mettre un problème en équation (1) - Troisième",
+    "chaine": "Yvan Monka",
+    "duree": "8:00",
+    "sec": 480,
+    "vues": "563 791 vues"
+   },
+   {
+    "id": "ezGlju-nR6s",
+    "titre": "Résoudre une équation ✅ Méthode simple | Maths | 3e | Brevet",
+    "chaine": "Paul Olivier",
+    "duree": "4:15",
+    "sec": 255,
+    "vues": "431 309 vues"
+   },
+   {
+    "id": "KxrU8fO2sP8",
+    "titre": "Mettre un problème en équation",
+    "chaine": "Éditions Lelivrescolaire.fr",
+    "duree": "3:02",
+    "sec": 182,
+    "vues": "24 456 vues"
+   },
+   {
+    "id": "HxI8g6fsdfA",
+    "titre": "Équilibrer une équation chimique ? ✅ Exercice facile | Collège | Physique Chimie",
+    "chaine": "Paul Olivier",
+    "duree": "4:49",
+    "sec": 289,
+    "vues": "584 305 vues"
+   },
+   {
+    "id": "vtO0Ipj-G24",
+    "titre": "MISE EN ÉQUATION D'UN PROBLÈME : 4 ÉTAPES",
+    "chaine": "BosseTesMaths",
+    "duree": "6:44",
+    "sec": 404,
+    "vues": "343 vues"
+   }
+  ]
+ }
+}

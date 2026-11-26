@@ -1,0 +1,92 @@
+[
+  {
+    "code": "CAFOP-MATH-MESURES-L1",
+    "youtubeId": "dqGlfSi57F8",
+    "couverture": "exacte",
+    "justification": "Convertir des longueurs, des masses et des capacités avec le tableau de conversion.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L2",
+    "youtubeId": "-ULlseGWcwc",
+    "couverture": "partielle",
+    "justification": "Correspondance litre, dm³ et m³ ; les conversions d’aires restent dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L3",
+    "youtubeId": "frnQXnbL6yo",
+    "couverture": "exacte",
+    "justification": "Calculs avec des heures et des durées (retenues de 60 minutes).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L4",
+    "youtubeId": "UXtlMZUUa7c",
+    "couverture": "partielle",
+    "justification": "Reconnaître carré, rectangle et losange par leurs propriétés ; triangles et cercle dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L5",
+    "youtubeId": "KOtxjoxPbA0",
+    "couverture": "exacte",
+    "justification": "Périmètre et aire des figures usuelles avec des calculs simples.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L6",
+    "youtubeId": "r28ifgVQip4",
+    "couverture": "partielle",
+    "justification": "Aire d’un trapèze ; losange et disque sont traités dans le texte.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L7",
+    "youtubeId": "YBQmqXh0Dbs",
+    "couverture": "partielle",
+    "justification": "Volume d’un cylindre et conversion en litres, comme pour la capacité d’une cuve.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L8",
+    "youtubeId": "7IU9lZgRUns",
+    "couverture": "exacte",
+    "justification": "Théorème de Pythagore et sa réciproque, cours et exemples.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L9",
+    "youtubeId": "4jYzkihBG_c",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : appliquer Thalès pour calculer une longueur et sa réciproque pour prouver un parallélisme.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-MESURES-L10",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo de méthode adaptée.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

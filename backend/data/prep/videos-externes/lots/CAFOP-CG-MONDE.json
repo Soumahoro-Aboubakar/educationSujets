@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-CG-MONDE",
+  "titre": "Afrique et organisations internationales",
+  "matiere": "Culture générale",
+  "resume": "Les empires africains, la traite et la colonisation, les organisations africaines, l’ONU et ses institutions, et les grands repères d’histoire mondiale du concours.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-CG-MONDE-L1",
+      "titre": "Les grands empires de l’Afrique de l’Ouest",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Grandes découvertes et commerce triangulaire",
+      "explication": "À la fin de cette leçon, tu sauras ranger dans l’ordre les empires du Ghana, du Mali et songhaï et citer un souverain de chacun. Aucun prérequis.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2002)",
+        "Comme au concours (1998)"
+      ],
+      "pieges": [
+        "L’ancien empire du Ghana se trouvait entre les actuels Mali et Mauritanie, et non sur le territoire de l’actuel Ghana."
+      ],
+      "aRetenir": [
+        "Ordre : Ghana, Sosso, Mali, Songhaï.",
+        "Kaya Maghan : « roi de l’or ».",
+        "Songhaï : chute en 1591."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L2",
+      "titre": "Grandes découvertes et commerce triangulaire",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "2/8",
+      "precedente": "Les grands empires de l’Afrique de l’Ouest",
+      "suivante": "Colonisation et indépendances africaines",
+      "explication": "À la fin de cette leçon, tu sauras citer les inventions des voyages du XVᵉ siècle et expliquer le commerce triangulaire. Aucun prérequis. Au XVᵉ siècle, les navigateurs européens explorent les côtes africaines puis atteignent l’Amérique (Christophe Colomb, 1492). Ces voyages sont possibles grâce à des inventions : la boussole pour l’orientation, l’astrolabe pour mesurer la latitude, le gouvernail d’étambot pour diriger le navire et la caravelle, navire léger capable de remonter le vent. Le commerce triangulaire (XVIᵉ – XIXᵉ siècle) se fait en trois étapes : des navires partent d’Europe avec des marchandises (tissus, armes, alcool) ; en Afrique, ces marchandises sont échangées contre des captifs ; les captifs sont déportés et réduits en esclavage en Amérique ; les navires rentrent en Europe chargés de sucre, de coton ou de café.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1999)",
+        "Comme au concours (1997)"
+      ],
+      "pieges": [
+        "Le triangle commence en Europe, et non en Afrique."
+      ],
+      "aRetenir": [
+        "Boussole, astrolabe, gouvernail d’étambot, caravelle.",
+        "Europe → Afrique → Amérique → Europe.",
+        "Traite : déportation de millions d’Africains."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L3",
+      "titre": "Colonisation et indépendances africaines",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "3/8",
+      "precedente": "Grandes découvertes et commerce triangulaire",
+      "suivante": "De l’OUA à l’Union africaine",
+      "explication": "À la fin de cette leçon, tu sauras dater le partage de l’Afrique et quelques grandes étapes des indépendances. Prérequis : le commerce triangulaire. À la conférence de Berlin (1884-1885), les puissances européennes fixent les règles du partage de l’Afrique. La France et le Royaume-Uni constituent les plus grands empires coloniaux. Après la Seconde Guerre mondiale, les mouvements d’indépendance se renforcent : le Ghana devient indépendant en 1957, la Guinée en 1958, et de nombreux pays d’Afrique francophone en 1960.",
+      "formules": [],
+      "exemples": [
+        "L’année 1960",
+        "Premiers présidents (sujet de 1997)"
+      ],
+      "pieges": [
+        "La conférence de Berlin n’a pas eu lieu en Afrique et aucun Africain n’y participait."
+      ],
+      "aRetenir": [
+        "Berlin 1884-1885 : partage de l’Afrique.",
+        "1957 Ghana, 1958 Guinée.",
+        "1960 : année de l’Afrique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L4",
+      "titre": "De l’OUA à l’Union africaine",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "4/8",
+      "precedente": "Colonisation et indépendances africaines",
+      "suivante": "CEDEAO, UEMOA et institutions financières",
+      "explication": "À la fin de cette leçon, tu sauras dater et situer l’OUA et l’Union africaine. Prérequis : les indépendances africaines. L’Organisation de l’unité africaine (OUA) est créée le 25 mai 1963 à Addis-Abeba (Éthiopie) par 32 États indépendants. Elle soutient la décolonisation et la lutte contre l’apartheid. Le 25 mai est célébré comme la Journée de l’Afrique. L’OUA est remplacée par l’Union africaine (UA), lancée en 2002 à Durban. Le siège de l’UA est toujours à Addis-Abeba.",
+      "formules": [],
+      "exemples": [
+        "Type concours",
+        "Félix Houphouët-Boigny"
+      ],
+      "pieges": [
+        "Le siège de l’UA n’est ni à Abidjan ni à Dakar, mais à Addis-Abeba, en Éthiopie."
+      ],
+      "aRetenir": [
+        "OUA : 25 mai 1963, Addis-Abeba.",
+        "UA : 2002.",
+        "Siège : Addis-Abeba."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L5",
+      "titre": "CEDEAO, UEMOA et institutions financières",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "5/8",
+      "precedente": "De l’OUA à l’Union africaine",
+      "suivante": "L’ONU et ses institutions spécialisées",
+      "explication": "À la fin de cette leçon, tu sauras développer les sigles des organisations ouest-africaines et donner leur siège. Prérequis : de l’OUA à l’UA. La CEDEAO regroupe des pays francophones, anglophones et lusophones. Les pays lusophones (de langue portugaise) membres sont le Cap-Vert (capitale Praia) et la Guinée-Bissau (capitale Bissau).",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1993)",
+        "Le franc CFA"
+      ],
+      "pieges": [
+        "La CEDEAO compte plus de membres que l’UEMOA : tous les pays de l’UEMOA sont dans la CEDEAO, mais l’inverse est faux (le Nigeria et le Ghan…"
+      ],
+      "aRetenir": [
+        "CEDEAO : 1975, Abuja.",
+        "UEMOA : 1994, Ouagadougou.",
+        "BCEAO : Dakar ; BAD : Abidjan."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L6",
+      "titre": "L’ONU et ses institutions spécialisées",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "6/8",
+      "precedente": "CEDEAO, UEMOA et institutions financières",
+      "suivante": "L’Afrique dans l’histoire du monde",
+      "explication": "À la fin de cette leçon, tu sauras présenter l’ONU et associer ses institutions à leur domaine. Aucun prérequis. Après la Première Guerre mondiale, la Société des Nations (SDN) est créée en 1919 pour préserver la paix. Elle échoue à empêcher la Seconde Guerre mondiale. L’Organisation des Nations unies (ONU) la remplace en 1945 ; son siège est à New York.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1999)",
+        "Deux Africains à la tête de l’ONU"
+      ],
+      "pieges": [
+        "L’OMS s’occupe de la santé et l’UNESCO de l’éducation et de la culture : ne les inverse pas."
+      ],
+      "aRetenir": [
+        "SDN 1919 → ONU 1945, New York.",
+        "OMS : santé ; UNESCO : éducation et culture ; FAO : alimentation.",
+        "Secrétaires généraux africains : Boutros-Ghali, Annan."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L7",
+      "titre": "L’Afrique dans l’histoire du monde",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "7/8",
+      "precedente": "L’ONU et ses institutions spécialisées",
+      "suivante": "Bilan : répondre vite aux questions de culture générale",
+      "explication": "À la fin de cette leçon, tu sauras expliquer pourquoi l’Afrique est le berceau de l’humanité et situer quelques événements du XXᵉ siècle. Aucun prérequis. L’Afrique est appelée le berceau de l’humanité : on y a découvert les plus anciens fossiles d’hominidés, comme Lucy, retrouvée en Éthiopie en 1974. Elle est reliée à l’Asie par l’isthme de Suez, traversé depuis 1869 par le canal de Suez.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1993)",
+        "Comme au concours (1996)"
+      ],
+      "pieges": [
+        "La guerre froide (1947-1991) oppose les États-Unis et l’URSS sans guerre directe entre eux ; ne la confonds pas avec la Seconde Guerre mond…"
+      ],
+      "aRetenir": [
+        "Afrique : berceau de l’humanité (Lucy).",
+        "Suez : isthme et canal.",
+        "Mandela, ANC, président en 1994."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L8",
+      "titre": "Bilan : répondre vite aux questions de culture générale",
+      "module": "Afrique et organisations internationales (Culture générale)",
+      "position": "8/8",
+      "precedente": "L’Afrique dans l’histoire du monde",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras organiser tes révisions et tes réponses pour la culture générale du CAFOP. Prérequis : les leçons précédentes. Dans les anciens sujets, l’épreuve comporte souvent cinq rubriques : arts-culture-sports, littérature, sciences, histoire et géographie. Les questions sont courtes : développer un sigle, donner une date, associer un nom à une œuvre ou à un pays, définir un mot.",
+      "formules": [],
+      "exemples": [
+        "Un sigle bien développé",
+        "Une date complète"
+      ],
+      "pieges": [
+        "Ne recopie pas une réponse d’un ancien corrigé sur un fait d’actualité : le secrétaire général de l’ONU de 1993 n’est plus le même aujourd’…"
+      ],
+      "aRetenir": [
+        "Cinq rubriques.",
+        "Sigles développés mot par mot.",
+        "Méfiance sur l’actualité."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "module": "CAFOP-CG-MONDE",
+  "lecons": [
+    {
+      "code": "CAFOP-CG-MONDE-L1",
+      "requetes": [
+        "site:youtube.com \"Les grands empires de l’Afrique de l’Ouest\"",
+        "site:youtube.com \"Ghana Mali Songhaï\" empires",
+        "site:youtube.com empires Afrique Ouest Ghana Mali Songhai cours explication simple",
+        "site:youtube.com \"empires\" \"Ghana\" \"5 minutes\"",
+        "site:youtube.com/watch empires africains cours Ghana Mali Songhai résumé",
+        "site:youtube.com/watch empire Ghana cours 5 minutes"
+      ],
+      "candidats": [],
+      "justification": "La synthèse d’Épisodes d’Histoire correspond aux trois empires, mais sa durée totale et sa langue audio n’ont pas pu être confirmées ; l’autre synthèse repérée dure 1 h 29. Les cours francophones sur le Ghana seul ne permettent pas de travailler la succession complète demandée."
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L2",
+      "requetes": [
+        "site:youtube.com \"Grandes découvertes\" \"commerce triangulaire\"",
+        "site:youtube.com grandes découvertes explication simple 5 minutes",
+        "\"grandes découvertes\" cours youtube",
+        "site:youtube.com commerce triangulaire explication simple",
+        "\"commerce triangulaire\" explication simple youtube",
+        "\"Le Commerce triangulaire expliqué en 1 minute\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=XGTZaqZ8b4o",
+          "titre": "Le Commerce triangulaire expliqué en 1 minute",
+          "chaine": "Karl Derisson",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule attribuée à Francetv Éducation explique le commerce triangulaire, mais ne traite pas les instruments de navigation des grandes découvertes."
+        }
+      ],
+      "justification": "La capsule annonce un format d’une minute et cible directement le circuit du commerce triangulaire ; sa durée exacte n’était pas affichée. Elle constitue un complément ciblé, à accompagner d’une explication sur la boussole, l’astrolabe, le gouvernail et la caravelle."
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L3",
+      "requetes": [
+        "site:youtube.com \"Colonisation et indépendances africaines\"",
+        "site:youtube.com colonisation décolonisation Afrique cours 5 minutes",
+        "site:youtube.com \"décolonisation\" \"Afrique\" \"Lumni\"",
+        "site:youtube.com décolonisation Afrique 1960 cours",
+        "\"Cinq choses à savoir sur les indépendances en Afrique\" durée",
+        "site:youtube.com \"qui a tracé les frontières de l’Afrique\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ZDq7uT7EXcA",
+          "titre": "Cinq choses à savoir sur les indépendances en Afrique",
+          "chaine": "Le Monde Afrique",
+          "dureeVue": "12:08",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique les résistances à la colonisation, le tournant de la Seconde Guerre mondiale et les indépendances de 1960, sans couvrir entièrement le repère de Berlin."
+        }
+      ],
+      "justification": "Cette présentation documentée correspond au volet des indépendances africaines et situe clairement l’importance de 1960. Son format de 12:08 est retenu faute de synthèse plus courte suffisamment adaptée ; Berlin et les dates nationales restent à compléter."
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L4",
+      "requetes": [
+        "site:youtube.com \"De l’OUA à l’Union africaine\"",
+        "site:youtube.com Union africaine OUA explication simple 1963 2002",
+        "site:youtube.com/watch \"Union africaine\" \"comprendre\"",
+        "site:youtube.com \"OUA\" \"UA\" \"3 minutes\"",
+        "Union africaine OUA histoire vidéo RFI 2002",
+        "site:youtube.com/watch OUA Union africaine histoire en minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=pzcIfLkXYcQ",
+          "titre": "9 juillet 2002 : de l’OUA à l’Union africaine",
+          "chaine": "RFI",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "RFI retrace la création de l’OUA en 1963 à Addis-Abeba par 32 États et son remplacement par l’Union africaine en 2002."
+        }
+      ],
+      "justification": "Le sujet correspond directement à la transition institutionnelle enseignée, avec une source journalistique reconnue. La durée n’était pas accessible et la description ne confirme pas tous les détails attendus sur le 25 mai et le siège actuel."
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L5",
+      "requetes": [
+        "site:youtube.com \"CEDEAO, UEMOA et institutions financières\"",
+        "site:youtube.com \"CEDEAO\" \"UEMOA\" institutions cours",
+        "CEDEAO UEMOA explication simple youtube",
+        "UEMOA BCEAO BAD sièges vidéo cours",
+        "site:youtube.com UEMOA explication simple cours",
+        "site:youtube.com CEDEAO 2025 comprendre 12 membres"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte repérée ne présente convenablement l’ensemble des sigles et sièges demandés. Le passage du fichier affirmant que tous les pays de l’UEMOA appartiennent à la CEDEAO doit être actualisé depuis le retrait du Burkina Faso, du Mali et du Niger en janvier 2025."
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L6",
+      "requetes": [
+        "site:youtube.com \"L’ONU et ses institutions spécialisées\"",
+        "site:youtube.com \"ONU\" \"institutions spécialisées\"",
+        "ONU institutions spécialisées cours youtube",
+        "site:youtube.com \"ONU\" \"UNESCO\" \"FAO\" cours",
+        "ONU institutions spécialisées vidéo français 5 minutes",
+        "site:youtube.com \"Qu'est-ce que l'Organisation des Nations Unies\"",
+        "site:youtube.com/watch ONU institutions spécialisées explication cours exemple"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=zlYitlIuEtQ",
+          "titre": "Qu'est-ce que l'Organisation des Nations Unies ? On vous explique",
+          "chaine": "United Nations (French)",
+          "dureeVue": "2:04",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette présentation officielle explique les origines et les missions de l’ONU, mais ne développe pas les associations OMS-santé, UNESCO-éducation et FAO-alimentation."
+        }
+      ],
+      "justification": "La capsule officielle offre une introduction courte et accessible ; la version correspondante publiée sur UN Web TV indique 2:04. Les institutions spécialisées, la SDN et les secrétaires généraux africains nécessitent un complément."
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L7",
+      "requetes": [
+        "site:youtube.com \"L’Afrique dans l’histoire du monde\"",
+        "site:youtube.com \"Afrique\" \"berceau de l’humanité\" Lucy",
+        "site:youtube.com Afrique berceau humanité Lucy cours",
+        "\"Lucy\" \"Lumni\" youtube",
+        "\"C’est qui Lucy\" site:youtube.com/watch",
+        "site:youtube.com \"Lucy\" \"1jour1question\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=WXXbNo-dV7M",
+          "titre": "C'est qui Lucy ? / 1jour1question feat. Info ou Mytho",
+          "chaine": "1 jour, 1 question",
+          "dureeVue": "1:42",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule présente Lucy, sa découverte en Éthiopie en 1974 et sa place dans l’évolution humaine, ce qui éclaire le repère de l’Afrique comme berceau de l’humanité."
+        }
+      ],
+      "justification": "Cette animation pédagogique convient aux débutants ; la fiche Lumni du même épisode affiche 1:42. Elle couvre uniquement le volet Lucy et origines humaines, sans Suez, Mandela ni la guerre froide."
+    },
+    {
+      "code": "CAFOP-CG-MONDE-L8",
+      "requetes": [
+        "site:youtube.com \"Bilan : répondre vite aux questions de culture générale\"",
+        "site:youtube.com CAFOP culture générale méthodologie révision",
+        "CAFOP culture générale méthodologie youtube",
+        "site:youtube.com \"CAFOP\" \"culture générale\" conseils",
+        "CAFOP répondre questions culture générale méthode vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les résultats proposent surtout des corrections de sujets et des quiz, sans enseigner la méthode précise de cette leçon. Aucun candidat suffisamment ciblé n’a été identifié sur l’organisation des cinq rubriques, la rédaction des sigles et la vérification des faits d’actualité."
+    }
+  ]
+}

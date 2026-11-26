@@ -1,0 +1,217 @@
+{
+  "module": "CAFOP-FR-GRAM",
+  "lecons": [
+    {
+      "code": "CAFOP-FR-GRAM-L1",
+      "requetes": [
+        "site:youtube.com \"Reconnaître la nature d’un mot\"",
+        "site:youtube.com nature mots classes grammaticales explication simple",
+        "classes grammaticales nature des mots youtube cours 5 minutes",
+        "\"classes grammaticales\" \"youtube\" \"5 minutes\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=yl8ROX7Ltzg",
+          "titre": "CLASSES GRAMMATICALES : ASTUCES pour identifier la nature des mots",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La capsule présente les classes variables et invariables et donne des indices pour reconnaître noms, déterminants, adjectifs, pronoms et autres classes dans une phrase."
+        }
+      ],
+      "justification": "Cette présentation annoncée autour de cinq minutes correspond directement à l’identification des classes grammaticales et convient à une reprise des bases ; la durée exacte reste indisponible."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L2",
+      "requetes": [
+        "site:youtube.com \"Trouver le sujet, le COD, le COI et le COS\"",
+        "site:youtube.com sujet COD COI COS cours exemple",
+        "COD COI COS explication simple cours youtube 5 minutes",
+        "site:youtube.com/watch \"Les Fonctions : comment les identifier\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=IP98v7BcZGQ",
+          "titre": "Les Fonctions : comment les identifier ?",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "5:34",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le sujet, le COD, le COI et le COS avec des exemples, mais aborde aussi d’autres fonctions et développe peu les vérifications par pronominalisation."
+        }
+      ],
+      "justification": "Cette synthèse courte réunit les quatre fonctions demandées dans une même démarche ; les sujets inversés et les manipulations pronominales nécessitent toutefois un complément."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L3",
+      "requetes": [
+        "site:youtube.com/watch \"Distinguer attributs et circonstances\"",
+        "site:youtube.com/watch attribut sujet COD complément circonstanciel cours",
+        "attribut sujet attribut COD différence cours youtube 5 minutes",
+        "site:youtube.com \"CAPSULE\" \"Attributs du sujet\" \"COD\"",
+        "\"CAPSULE 3e- Attributs du sujet du COD\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=GSJIQ6p64dI",
+          "titre": "CAPSULE 3e- Attributs du sujet du COD",
+          "chaine": "Chemin de traverse- M.Chemin",
+          "dureeVue": "3:32",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule cible la distinction entre attribut du sujet et attribut du COD, mais ne constitue pas un cours sur les compléments circonstanciels."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=IP98v7BcZGQ",
+          "titre": "Les Fonctions : comment les identifier ?",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "5:34",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La synthèse situe les attributs et les compléments circonstanciels parmi les fonctions grammaticales, avec plusieurs notions supplémentaires."
+        }
+      ],
+      "justification": "La première capsule est particulièrement ciblée et brève pour comprendre les deux attributs ; la seconde élargit aux circonstances, sans reprendre tous les pièges de la leçon."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L4",
+      "requetes": [
+        "site:youtube.com \"Analyser les expansions du nom\"",
+        "site:youtube.com expansions nom épithète apposition complément cours",
+        "expansions nom apposition cours youtube 5 minutes",
+        "\"Les expansions du nom en 5 minutes\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Wt676-VZfBU",
+          "titre": "Les EXPANSIONS du NOM en 5 Minutes !",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "4:51",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique comment reconnaître l’épithète, le complément du nom et l’apposition en les reliant au nom qu’ils précisent."
+        }
+      ],
+      "justification": "Le déroulé couvre explicitement les trois fonctions demandées dans un format court, avec un récapitulatif ; la relative est également présentée."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L5",
+      "requetes": [
+        "site:youtube.com \"Choisir le pronom relatif\"",
+        "site:youtube.com pronoms relatifs simples composés cours exemples",
+        "\"pronoms relatifs\" \"en 5 minutes\" youtube",
+        "\"LES PRONOMS RELATIFS EN FRANÇAIS\" \"Français avec Pierre\"",
+        "https://www.youtube.com/watch?v=ZV8U856rM30"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ZV8U856rM30",
+          "titre": "LES PRONOMS RELATIFS EN FRANÇAIS : pronoms relatifs simples et pronoms relatifs composés",
+          "chaine": "Français avec Pierre",
+          "dureeVue": "7:41",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La leçon explique le choix de qui, que, dont, où et des relatifs composés à partir de l’antécédent, de la fonction et de la construction prépositionnelle."
+        }
+      ],
+      "justification": "Ce format un peu plus long couvre aussi les points précis du module : dont complément du nom, contractions avec à et de, et accord des formes composées."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L6",
+      "requetes": [
+        "site:youtube.com \"De la phrase simple à la phrase complexe\"",
+        "site:youtube.com \"phrase simple\" \"phrase complexe\" \"cours\"",
+        "phrase simple phrase complexe coordination juxtaposition Un cours cinq minutes youtube",
+        "Phrase SIMPLE Phrase COMPLEXE Coordination Subordination cours cinq minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=vKHinbuTLd0",
+          "titre": "Phrase SIMPLE ou Phrase COMPLEXE ? (Coordination & Subordination)",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule explique le repérage des phrases simples et complexes et les liens entre propositions, sans développer séparément les types et formes de phrase."
+        }
+      ],
+      "justification": "La capsule correspond à l’objectif central et propose une méthode accessible ; les types et formes de phrase restent à compléter, et la durée exacte n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L7",
+      "requetes": [
+        "site:youtube.com \"Analyser les propositions subordonnées\"",
+        "site:youtube.com subordonnées relatives complétives circonstancielles explication simple",
+        "Identifier subordonnées différents types cours cinq minutes relative complétive",
+        "\"Identifier les SUBORDONNÉES\" \"5:54\"",
+        "site:youtube.com/watch \"Identifier les SUBORDONNÉES\" \"types\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=pGQ1nFbzfmY",
+          "titre": "Identifier les SUBORDONNÉES : les différentes subordinations",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "5:54",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo distingue relatives, complétives et circonstancielles et leurs mots introducteurs, mais approfondit peu les propositions enchâssées."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=Czpz4MIBwjQ",
+          "titre": "Trouver la fonction des subordonnées : Explications et TEST !",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "9:06",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Les explications et le test entraînent à déterminer la fonction des subordonnées, en complément du repérage de leur nature."
+        }
+      ],
+      "justification": "La première capsule offre l’introduction la plus courte et structurée aux trois catégories ; la seconde consolide l’analyse fonctionnelle, sans couvrir à elle seule tous les cas d’enchâssement."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L8",
+      "requetes": [
+        "site:youtube.com \"Ponctuer la phrase et lire ses limites\"",
+        "site:youtube.com ponctuation virgule point-virgule discours direct cours",
+        "ponctuation cours explication simple youtube virgule point virgule",
+        "ponctuation français cours capsule 3 minutes",
+        "site:youtube.com \"La ponctuation : le point, la virgule\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Q2mm033jcNg",
+          "titre": "Les signes de ponctuation : Le point, la virgule, l'interrogation... (Cours de français CP/CE1/CE2)",
+          "chaine": "Capsule Révision",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule présente les limites de phrase, la virgule, les deux-points et les signes du dialogue avec un exercice corrigé, mais ne traite pas le point-virgule."
+        }
+      ],
+      "justification": "Le niveau très accessible convient aux débutants et le chapitrage annonce la fin vers neuf minutes ; le point-virgule et l’interrogation indirecte restent à compléter."
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L9",
+      "requetes": [
+        "site:youtube.com \"Analyser une phrase comme au concours\"",
+        "site:youtube.com analyse grammaticale logique phrase exercice corrigé CAFOP",
+        "analyse grammaticale analyse logique méthode phrase concours youtube 5 minutes",
+        "analyse grammaticale nature fonction exercices corrigés youtube français",
+        "site:youtube.com \"BREVET des COLLEGES : On traite ensemble\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=PvQucmsq7Bg",
+          "titre": "BREVET des COLLEGES : On traite ensemble un sujet de grammaire et la réécriture !",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le corrigé applique les notions de classe, fonction, pronom COD, expansion du nom et subordonnée à des questions d’examen, avec une partie supplémentaire de réécriture."
+        }
+      ],
+      "justification": "Ce corrigé court est le plus proche de la démarche attendue pour répondre précisément à une consigne ; il porte sur le brevet français et ne propose pas une analyse complète de phrase au format CAFOP."
+    }
+  ]
+}

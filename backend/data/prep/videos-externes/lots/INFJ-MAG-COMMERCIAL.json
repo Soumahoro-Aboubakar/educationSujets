@@ -28,7 +28,7 @@
         "Actes uniformes : application directe dans leur domaine.",
         "AUDCG, AUSCGIE et recouvrement sont distincts."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L2",
@@ -51,7 +51,7 @@
         "Revente : intention présente lors de l’achat.",
         "Acte commercial et statut de commerçant sont distincts."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L3",
@@ -74,7 +74,7 @@
         "Vérifier capacité et incompatibilités.",
         "Distinguer activité personnelle et activité pour l’employeur."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L4",
@@ -97,7 +97,7 @@
         "Immatriculation et déclaration se distinguent.",
         "Vérifier les conditions du statut d’entreprenant."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L5",
@@ -120,7 +120,7 @@
         "Clientèle et identification commerciale sont centrales.",
         "Fonds et murs ne se confondent pas."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L6",
@@ -143,7 +143,7 @@
         "Usage du local distinct de sa propriété.",
         "Renouvellement et éviction : conditions à vérifier."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L7",
@@ -166,7 +166,7 @@
         "Acheteur : paiement et prise de livraison.",
         "Champ du régime et sanctions à vérifier."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L8",
@@ -189,7 +189,7 @@
         "La forme sociale détermine une partie du risque.",
         "Patrimoine social et patrimoine personnel se distinguent."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-COMMERCIAL-L9",
@@ -212,7 +212,7 @@
         "Commissionnaire : son nom, compte du commettant.",
         "Agent commercial : mandat indépendant et durable."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

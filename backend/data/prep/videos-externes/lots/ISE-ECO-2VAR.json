@@ -28,7 +28,7 @@
         "Le domaine précise les entrées.",
         "La continuité relie la limite à la valeur au point."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L2",
@@ -51,7 +51,7 @@
         "Dérivée seconde : dériver une deuxième fois.",
         "Une dérivée nulle seule ne prouve pas un extremum."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L3",
@@ -74,7 +74,7 @@
         "Domaine : toutes les conditions simultanées.",
         "Niveau c : f(x,y)=c dans le plan."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L4",
@@ -97,7 +97,7 @@
         "Deux chemins incompatibles prouvent l’absence de limite.",
         "Un encadrement uniforme peut prouver une limite."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L5",
@@ -120,7 +120,7 @@
         "Appliquer les règles usuelles de dérivation.",
         "Dériver d’abord, puis remplacer les coordonnées."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L6",
@@ -143,7 +143,7 @@
         "Calculer les dérivées secondes.",
         "Schwarz : continuité des dérivées secondes dans un voisinage."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L7",
@@ -166,7 +166,7 @@
         "Vérifier le domaine et les équations.",
         "Un point critique est encore seulement un candidat."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L8",
@@ -189,7 +189,7 @@
         "D=rt−s² ; si D>0, regarder r.",
         "D<0 : selle ; D=0 : changer de méthode."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L9",
@@ -212,7 +212,7 @@
         "Chercher une inégalité valable dans un voisinage.",
         "Deux directions de signes opposés excluent un extremum."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L10",
@@ -235,7 +235,7 @@
         "Une somme de carrés fournit une borne.",
         "Vérifier que la borne peut être atteinte, et où."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-2VAR-L11",
@@ -258,7 +258,7 @@
         "Un côté se traite en une variable.",
         "Inclure les coins puis comparer les valeurs."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

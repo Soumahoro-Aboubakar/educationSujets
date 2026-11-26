@@ -1,0 +1,138 @@
+{
+  "module": "CAFOP-CG-PAYS",
+  "lecons": [
+    {
+      "code": "CAFOP-CG-PAYS-L1",
+      "requetes": [
+        "site:youtube.com/watch \"Côte d’Ivoire et ses voisins\"",
+        "site:youtube.com/watch Côte Ivoire pays limitrophes explication simple",
+        "Côte d'Ivoire situation géographique pays voisins youtube cours",
+        "\"Géographie de la Côte d'Ivoire\" TéléCrayon youtube",
+        "Côte Ivoire pays voisins leçon vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos trouvées présentent surtout l’ensemble de la géographie ou de l’économie ivoirienne. Aucune ne traite suffisamment précisément les cinq voisins et les langues de la région dans un format court et fiable."
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L2",
+      "requetes": [
+        "site:youtube.com/watch \"Capitales d’Afrique de l’Ouest\"",
+        "site:youtube.com/watch capitales Afrique ouest cours 5 minutes",
+        "capitales Afrique de l'Ouest apprendre youtube",
+        "site:youtube.com \"capitales\" \"Afrique de l'Ouest\"",
+        "\"capitales Afrique de l'Ouest\" vidéo",
+        "capitales Afrique de l Ouest apprendre vidéo YouTube Dakar Abuja Porto Novo",
+        "\"capitales\" \"Afrique de l’Ouest\" youtube cours",
+        "pays capitales Afrique ouest vidéo français cours",
+        "\"RETENIR les pays d'Afrique : 2eme partie\"",
+        "\"esGRi9OjgBc\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=esGRi9OjgBc",
+          "titre": "RETENIR les pays d'Afrique : 2eme partie",
+          "chaine": "Meme Horizon",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo associe pays, capitales et positions sur la carte de l’Afrique occidentale à des histoires mnémotechniques, avec une extension à l’Afrique du Nord-Ouest."
+        }
+      ],
+      "justification": "La description annonce un apprentissage cartographique et mnémotechnique en moins de quinze minutes, pertinent pour mémoriser les associations pays-capitales. La durée exacte et le traitement explicite des pièges Abuja/Lagos et Porto-Novo/Cotonou ne sont pas confirmés."
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L3",
+      "requetes": [
+        "site:youtube.com capitales Afrique centrale Nord Est australe cours",
+        "site:youtube.com capitales africaines explication simple",
+        "site:youtube.com \"capitales\" \"Afrique centrale\"",
+        "\"capitales\" \"Afrique centrale\" youtube apprendre",
+        "capitales Afrique apprendre français vidéo 54 pays",
+        "\"Capitales d’Afrique centrale, du Nord, de l’Est et australe\"",
+        "\"capitales\" \"Meme Horizon\" \"1ere\""
+      ],
+      "candidats": [],
+      "justification": "Les résultats exploitables sont principalement des listes, des quiz ou des présentations promotionnelles. Aucun candidat court suffisamment vérifié ne couvre les capitales demandées et leurs confusions classiques."
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L4",
+      "requetes": [
+        "site:youtube.com \"Les grands fleuves africains\"",
+        "site:youtube.com fleuves Afrique Nil Niger Congo cours explication simple",
+        "\"fleuves africains\" cours vidéo",
+        "fleuves Afrique cours YouTube Nil Niger embouchure",
+        "\"fleuves\" \"Afrique\" \"TéléCrayon\"",
+        "\"fleuve Niger\" géographie explication youtube",
+        "\"Les grands fleuves africains\" youtube cours exemple",
+        "géographie Afrique relief hydrographie vidéo français",
+        "site:youtube.com/watch Niger fleuve dessous cartes essentiel",
+        "site:youtube.com/watch Afrique hydrographie cours français",
+        "\"pmPDNcoxeWY\""
+      ],
+      "candidats": [],
+      "justification": "Une leçon francophone sur l’hydrographie africaine a été repérée, mais sa durée et son traitement des sources et embouchures ne sont pas vérifiables avec les éléments accessibles. Les autres vidéos portent surtout sur l’histoire ou la géopolitique et répondent insuffisamment à cette leçon."
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L5",
+      "requetes": [
+        "\"Déserts, montagnes et lacs\" Afrique youtube",
+        "Afrique relief déserts montagnes lacs cours youtube 5 minutes",
+        "\"relief Afrique\" youtube cours français",
+        "\"Déserts\" \"Afrique\" \"explication simple\" youtube",
+        "géographie Afrique relief hydrographie vidéo français",
+        "\"Déserts, montagnes et lacs\" explication simple",
+        "site:youtube.com/watch Sahara Kalahari Namib Kilimandjaro Victoria"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte vérifiée ne rassemble les déserts africains, le Kilimandjaro et le lac Victoria au niveau attendu. Les résultats sont trop généraux, touristiques ou dans d’autres langues que le français et l’anglais."
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L6",
+      "requetes": [
+        "site:youtube.com \"Continents et océans\"",
+        "site:youtube.com continents océans explication simple taille",
+        "\"Les continents et les océans\" cours youtube",
+        "Maître Lucas pays continents océans durée vidéo",
+        "\"h_YkcmbRR4Q\" durée",
+        "\"h_YkcmbRR4Q\" \"minutes\"",
+        "\"Pays, continents, océans\" \"06\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=h_YkcmbRR4Q",
+          "titre": "Pays, continents, océans CP - CE1- CE2 - Cycle 2 - Questionner le monde Situer un lieu sur une carte",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo distingue pays, continents, mers et océans puis propose de les identifier sur un planisphère, avec les six continents correspondant au découpage de la leçon."
+        }
+      ],
+      "justification": "L’explication illustrée et les exercices conviennent à des débutants ; le dernier chapitre annoncé commence à 6:04, mais la durée totale exacte n’est pas affichée. Le classement des continents par superficie reste à compléter."
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L7",
+      "requetes": [
+        "site:youtube.com \"Capitales du monde\" apprendre cours",
+        "site:youtube.com capitales monde Canberra Brasilia Ottawa explication",
+        "\"capitales du monde\" apprendre en 5 minutes youtube",
+        "capitales monde pièges Canberra Ottawa Brasilia vidéo",
+        "site:youtube.com/watch capitales monde cours français Canberra"
+      ],
+      "candidats": [],
+      "justification": "Les résultats proposent surtout des quiz, des Shorts ou des analyses urbaines éloignées de l’objectif. Aucune courte explication vérifiée ne couvre suffisamment les grandes capitales et les pièges Canberra, Ottawa et Brasília."
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L8",
+      "requetes": [
+        "CAFOP géographie questions corrigées youtube",
+        "\"Bilan : questions de géographie au concours\"",
+        "site:youtube.com CAFOP géographie correction capitales",
+        "site:youtube.com/watch CAFOP géographie quiz corrigé",
+        "\"JSytfJ1L-ns\" durée"
+      ],
+      "candidats": [],
+      "justification": "Une correction générale du CAFOP 2020 a été repérée, mais son ciblage sur la géographie de ce module et sa durée maximale de quinze minutes ne sont pas établis. Aucun bilan court vérifié n’enseigne la méthode de réponse précise et les confusions pays-capitale demandées."
+    }
+  ]
+}

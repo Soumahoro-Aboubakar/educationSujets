@@ -28,7 +28,7 @@
         "Personne physique : être humain.",
         "Personne morale : organisation reconnue par le droit."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PERSONNES-L2",
@@ -51,7 +51,7 @@
         "Minorité civile : moins de dix-huit ans accomplis.",
         "Représentation et autorisations à vérifier pour l’acte."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PERSONNES-L3",
@@ -74,7 +74,7 @@
         "Domicile et résidence ne sont pas synonymes.",
         "Une erreur appelle une procédure de rectification."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PERSONNES-L4",
@@ -97,7 +97,7 @@
         "Dix-huit ans pour les deux époux.",
         "Consentement personnel et absence d’empêchement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PERSONNES-L5",
@@ -120,7 +120,7 @@
         "Respect, fidélité, secours et assistance mutuels.",
         "Le mariage ne supprime pas les droits de la personne."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PERSONNES-L6",
@@ -143,7 +143,7 @@
         "Distinguer bien propre et masse commune.",
         "Vérifier régime, date et origine du bien."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PERSONNES-L7",
@@ -166,7 +166,7 @@
         "Séparation de corps : mariage maintenu.",
         "Divorce : dissolution et conséquences à régler."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PERSONNES-L8",
@@ -189,7 +189,7 @@
         "Vérifier le mode légal d’établissement.",
         "Distinguer filiation et modalités d’autorité parentale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

@@ -11,7 +11,7 @@ import Animated, { FadeIn, FadeInRight, FadeOutLeft } from 'react-native-reanima
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import {
-  ArrowRight, Check, ChevronLeft, ChevronRight, Flag, LayoutGrid, Lightbulb, MoreHorizontal, NotebookPen, RotateCcw, Sparkles, Trophy, X,
+  ArrowRight, Check, ChevronLeft, ChevronRight, Flag, LayoutGrid, Lightbulb, MoreHorizontal, NotebookPen, RotateCcw, Sparkles, Trophy, WifiOff, X,
 } from 'lucide-react-native';
 import Text from '../../components/ui/Text';
 import core from '../shared/prepCore';
@@ -61,7 +61,7 @@ const Segments = ({ session }) => {
       const it = session.items[code];
       let bg = brand.line;
       if (i === session.index && !it?.final) bg = brand.ink;
-      if (it?.final && session.mode !== 'blanc' && session.mode !== 'test') bg = it.result?.correct ? (it.essai === 2 ? colors.warning : colors.success) : colors.error;
+      if (it?.final && session.mode !== 'blanc' && session.mode !== 'test') bg = it.result?.pending ? colors.warning : it.result?.correct ? (it.essai === 2 ? colors.warning : colors.success) : colors.error;
       if (session.mode === 'blanc' && it?.value) bg = brand.ink;
       if (session.mode === 'test' && it?.final) bg = brand.ink;
       return <View key={code} style={[styles.segment, { backgroundColor: bg }, it?.essai === 2 && !it.final && styles.segmentSecond]} />;
@@ -92,19 +92,28 @@ const Timer = ({ finA, onEnd }) => {
 };
 
 // ── Bandeau de correction (E23) ───────────────────────────────────────────
-const CorrectionBanner = ({ item, exercice, mode, onShowRecall, onReason, onNext, iaLabel }) => {
+const CorrectionBanner = ({ item, exercice, mode, onShowRecall, onReason, onNext, iaLabel, onRetry, retrying }) => {
   const { colors, brand } = useTheme();
   const { styles } = useStyles();
   const r = item.result;
   const { height, fontScale } = useWindowDimensions();
-  useResultAnnouncement(r ? (r.pending ? 'Réponse enregistrée. Elle sera corrigée dès le retour de la connexion.' : `${r.correct ? (item.essai === 1 ? 'Bien joué' : 'Bien rattrapé') : item.final ? 'La bonne réponse' : 'Pas tout à fait'}. ${item.final ? r.explication || exercice.explication || '' : 'Petit rappel avant de réessayer.'}`) : null);
+  useResultAnnouncement(r ? (r.pending ? 'Connexion internet requise pour corriger cette réponse. Ta réponse est gardée.' : `${r.correct ? (item.essai === 1 ? 'Bien joué' : 'Bien rattrapé') : item.final ? 'La bonne réponse' : 'Pas tout à fait'}. ${item.final ? r.explication || exercice.explication || '' : 'Petit rappel avant de réessayer.'}`) : null);
   if (!r) return null;
   const canReason = exercice.raisonnement?.actif && r.correct;
   const explication = r.explication || exercice.explication;
   let tone; let title; let body; let actions;
   if (r.pending) {
-    tone = { bg: colors.warningWash, fg: colors.warning }; title = 'Réponse enregistrée';
-    body = 'Pas de connexion pour la corriger maintenant. Elle sera corrigée dès que tu seras de nouveau en ligne, et comptera dans ta progression.';
+    // Exercice corrigé sur le serveur : sans internet, pas de correction possible sur l'appareil.
+    tone = { bg: colors.warningWash, fg: colors.warning }; title = 'Connexion internet requise';
+    body = r.toujoursHorsLigne
+      ? 'Toujours pas de connexion. Active les données mobiles ou le Wi-Fi, puis réessaie.'
+      : 'La correction de cet exercice se fait en ligne. Ta réponse est gardée : connecte-toi à internet pour la faire corriger. Les leçons déjà enregistrées sur ton téléphone restent lisibles sans connexion.';
+    actions = (
+      <View style={styles.bannerActions}>
+        <PrepButton title="Corriger plus tard" variant="secondary" onPress={onNext} disabled={retrying} style={styles.half} accessibilityLabel="Corriger plus tard et passer à la suite" />
+        <PrepButton title="Réessayer" iconLeft={RotateCcw} onPress={onRetry} loading={retrying} style={styles.half} accessibilityLabel="Réessayer la correction" />
+      </View>
+    );
   } else if (r.correct && item.essai === 1) {
     tone = { bg: colors.successWash, fg: colors.success }; title = 'Bien joué'; body = explication;
   } else if (r.correct) {
@@ -127,9 +136,9 @@ const CorrectionBanner = ({ item, exercice, mode, onShowRecall, onReason, onNext
     <View style={styles.banner}>
       <ScrollView style={{ maxHeight: height * 0.32 }} contentContainerStyle={{ paddingBottom: 12 }} nestedScrollEnabled>
         <View accessibilityLiveRegion="polite">
-          <CorrectorNote title={title} correct={r.correct} color={tone.fg}>
+          <CorrectorNote title={title} correct={r.correct} color={tone.fg} icon={r.pending ? WifiOff : undefined}>
             {body ? <Text variant="body" style={styles.bannerBody}>{body}</Text> : null}
-            {item.final && !r.correct && mode !== 'test' ? (
+            {item.final && !r.correct && !r.pending && mode !== 'test' ? (
               <View style={styles.notebook}>
                 <NotebookPen size={16} color={brand.inkSoft} />
                 <Text variant="caption" style={styles.muted}>Ajoutée à ton cahier d’erreurs</Text>
@@ -194,7 +203,7 @@ const SessionReview = ({ session, navigation, onRestart, celebrations }) => {
               <Text style={[type.numeral, styles.reviewScoreSur]}>{`/ ${total}`}</Text>
             </View>
           )}
-          <Text variant="bodyMedium" style={styles.reviewPct}>{enAttente ? `${session.mode === 'blanc' ? 'Note provisoire' : 'Score provisoire'} · ${enAttente} réponse${enAttente > 1 ? 's' : ''} en attente de correction` : `${pct} % de réussite`}</Text>
+          <Text variant="bodyMedium" style={styles.reviewPct}>{enAttente ? `${session.mode === 'blanc' ? 'Note provisoire' : 'Score provisoire'} · ${enAttente} réponse${enAttente > 1 ? 's' : ''} à corriger dès ta prochaine connexion` : `${pct} % de réussite`}</Text>
         </View>
         {rows.length || rank?.rang ? (
           <View style={styles.reviewCard}>
@@ -304,6 +313,10 @@ const SessionScreen = ({ navigation, route }) => {
   });
   const [sheet, setSheet] = useState(null); // 'mini' | 'reason' | 'quit' | 'grid' | 'locked' | 'report' | 'submit'
   const [hint, setHint] = useState(false);
+  const [checking, setChecking] = useState(false);
+  const [retrying, setRetrying] = useState(false);
+  const [reportError, setReportError] = useState(null);
+  const online = usePrep((st) => st.online);
   const [celebrations, setCelebrations] = useState([]);
   const [placement, setPlacement] = useState(null);
   const lastCheckpoint = useRef(Date.now());
@@ -396,16 +409,52 @@ const SessionScreen = ({ navigation, route }) => {
   const resolveAttempt = async (r) => {
     if (!r?.pending) return r;
     const server = await store.awaitResult(r.cle);
-    if (!server) return { pending: true, correct: false, score: 0, points: 0 };
-    if (server.ok === false) return server.erreur === 'ESSAI_EPUISE' ? { locked: true } : { pending: true, correct: false, score: 0, points: 0 };
+    if (!server) return { pending: true, cle: r.cle, correct: false, score: 0, points: 0 };
+    if (server.ok === false) return server.erreur === 'ESSAI_EPUISE' ? { locked: true } : { pending: true, cle: r.cle, correct: false, score: 0, points: 0 };
     return { ...server, cle: server.correction?.cle, explication: server.correction?.explication };
   };
 
   const verify = async () => {
+    if (checking) return;
     countMinutes();
+    setChecking(true);
+    try { await verifyNow(); } finally { setChecking(false); }
+  };
+
+  // « Réessayer » : la réponse est déjà en file ; on relance l'envoi et on attend sa correction.
+  const retryCorrection = async () => {
+    const cle = item.result?.cle;
+    if (!cle || retrying) return;
+    setRetrying(true);
+    try {
+      const server = await store.awaitResult(cle, 8000);
+      if (!server || server.ok === false) {
+        if (server?.erreur === 'ESSAI_EPUISE') { setSheet('locked'); return; }
+        haptic.error();
+        update({ result: { ...item.result, toujoursHorsLigne: true } });
+        return;
+      }
+      const r = { ...server, cle: server.correction?.cle, explication: server.correction?.explication };
+      if (mode === 'test') {
+        const nextItems = { ...session.items, [code]: { ...item, result: r, final: true, phase: 'corrected', points: r.points } };
+        haptic.select();
+        if (session.index + 1 >= session.codes.length) finish({ ...session, items: nextItems });
+        else setSession({ ...session, items: nextItems, index: session.index + 1 });
+        return;
+      }
+      const final = r.correct || item.essai === 2;
+      if (r.correct) haptic.success(); else haptic.error();
+      update({ result: { ...r, cle: r.cle ?? exercice.cle }, phase: 'corrected', final, points: final ? r.points : 0, premierCoup: item.essai === 1 ? r.correct : item.premierCoup });
+    } finally {
+      setRetrying(false);
+    }
+  };
+
+  const verifyNow = async () => {
     if (mode === 'test') {
       const r = await resolveAttempt(store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value, essai: 1, indices: 0, contexte: 'test', session: session.id }));
       if (r?.locked) { setSheet('locked'); return; }
+      if (r?.pending) { haptic.warning(); update({ result: r, phase: 'corrected', final: true, points: 0 }); return; }
       const nextItems = { ...session.items, [code]: { ...item, result: r, final: true, phase: 'corrected', points: r.points } };
       haptic.select();
       if (session.index + 1 >= session.codes.length) finish({ ...session, items: nextItems });
@@ -415,7 +464,7 @@ const SessionScreen = ({ navigation, route }) => {
     const r = await resolveAttempt(store.attempt({ programme: session.programme, exercice: code, module: found.module.code, reponse: item.value, essai: item.essai, indices: item.indices, contexte: mode, session: session.id, duree: Math.round((Date.now() - item.debut) / 1000) }));
     if (r?.locked) { setSheet('locked'); return; }
     if (r.pending) {
-      haptic.select();
+      haptic.warning();
       update({ result: r, phase: 'corrected', final: true, points: 0 });
       setHint(false);
       return;
@@ -522,7 +571,7 @@ const SessionScreen = ({ navigation, route }) => {
       {/* ── Zone d'action ── */}
       <ScrollView style={{ flexGrow: 0, maxHeight: fontScale >= 1.3 ? '42%' : '55%' }} keyboardShouldPersistTaps="handled" contentContainerStyle={[styles.actions, { paddingBottom: Math.max(insets.bottom, 12) + 6 }]}>
         <LinearGradient colors={[theme.brand.paperTransparent, brand.paper]} style={StyleSheet.absoluteFill} pointerEvents="none" />
-        {corrected && mode !== 'test' && mode !== 'blanc' ? (
+        {corrected && mode !== 'blanc' && (mode !== 'test' || item.result?.pending) ? (
           <CorrectionBanner
             item={item}
             exercice={exercice}
@@ -531,6 +580,8 @@ const SessionScreen = ({ navigation, route }) => {
             onShowRecall={() => setSheet('mini')}
             onReason={() => setSheet('reason')}
             onNext={next}
+            onRetry={retryCorrection}
+            retrying={retrying}
           />
         ) : mode === 'blanc' ? (
           <View style={[styles.blancNav, fontScale >= 1.3 && { flexDirection: 'column', alignItems: 'stretch' }] }>
@@ -541,7 +592,7 @@ const SessionScreen = ({ navigation, route }) => {
               : <PrepButton title="Remettre" onPress={() => setSheet('submit')} style={styles.half} compact />}
           </View>
         ) : (
-          <PrepButton title={!complete ? answerPrompt(exercice.type) : mode === 'test' ? 'Valider' : 'Vérifier'} disabled={!complete} onPress={verify} />
+          <PrepButton title={!complete ? answerPrompt(exercice.type) : mode === 'test' ? 'Valider' : 'Vérifier'} disabled={!complete || checking} loading={checking} onPress={verify} />
         )}
       </ScrollView>
 
@@ -574,7 +625,7 @@ const SessionScreen = ({ navigation, route }) => {
       <Dialog
         visible={sheet === 'submit'}
         title="Remettre ta copie ?"
-        message={`${answeredCount} question${answeredCount > 1 ? 's' : ''} répondue${answeredCount > 1 ? 's' : ''} sur ${session.codes.length}. Aucune modification ne sera possible ensuite.`}
+        message={`${answeredCount} question${answeredCount > 1 ? 's' : ''} répondue${answeredCount > 1 ? 's' : ''} sur ${session.codes.length}. Aucune modification ne sera possible ensuite.${online === false ? ' Tu n’es pas connecté à internet : certaines réponses ne pourront être corrigées qu’à ta prochaine connexion, ta note sera donc provisoire.' : ''}`}
         cancelLabel="Relire ma copie"
         confirmLabel="Remettre ma copie"
         onCancel={() => setSheet(null)}
@@ -595,10 +646,11 @@ const SessionScreen = ({ navigation, route }) => {
           })}
         </View>
       </BottomSheet>
-      <BottomSheet visible={sheet === 'report'} onClose={() => setSheet(null)} maxHeight={0.5}>
+      <BottomSheet visible={sheet === 'report'} onClose={() => { setSheet(null); setReportError(null); }} maxHeight={0.5}>
         <Text variant="h3" style={{ color: brand.ink, marginBottom: 12 }}>Signaler un problème</Text>
+        {reportError ? <Text variant="caption" accessibilityLiveRegion="polite" style={{ color: colors.warning, marginBottom: 10 }}>{reportError}</Text> : null}
         {[['enonce', 'Erreur dans l’énoncé'], ['reponse', 'Réponse contestable'], ['autre', 'Autre']].map(([motif, label]) => (
-          <PrepButton key={motif} title={label} variant="secondary" style={{ marginBottom: 8 }} onPress={async () => { await prepApi.report({ element: code, motif }); haptic.success(); setSheet(null); }} />
+          <PrepButton key={motif} title={label} variant="secondary" style={{ marginBottom: 8 }} onPress={async () => { try { await prepApi.report({ element: code, motif }); haptic.success(); setSheet(null); } catch { haptic.error(); setReportError('Connexion internet requise pour envoyer ton signalement. Réessaie une fois connecté.'); } }} />
         ))}
       </BottomSheet>
     </PaperStack>

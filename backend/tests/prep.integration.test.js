@@ -67,10 +67,12 @@ test('identité automatique, puis restauration après réinstallation via ANDROI
   assert.equal(again.identite.id, first.identite.id);
 });
 
-test('catalogue : les 6 organismes pilotes', { skip }, async () => {
+test('catalogue : les 7 organismes (6 pilotes + CAFOP)', { skip }, async () => {
   const r = await call('GET', '/catalogue');
   const sigles = r.body.data.map((o) => o.sigle).sort();
-  assert.deepEqual(sigles, ['ENS', 'ENSEA', 'ESATIC', 'INFAS', 'INFJ', 'INPHB']);
+  assert.deepEqual(sigles, ['CAFOP', 'ENS', 'ENSEA', 'ESATIC', 'INFAS', 'INFJ', 'INPHB']);
+  const cafop = r.body.data.find((o) => o.sigle === 'CAFOP');
+  assert.deepEqual(cafop.cycles.map((c) => c.programme).sort(), ['CAFOP-IA', 'CAFOP-IO', 'CAFOP-PROF', 'CAFOP-RECRUT']);
 });
 
 test('module public : aucune clé de correction exposée', { skip }, async () => {

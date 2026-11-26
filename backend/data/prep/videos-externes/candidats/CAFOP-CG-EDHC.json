@@ -1,0 +1,666 @@
+{
+ "CAFOP-CG-EDHC-L1": {
+  "titre": "Qu’est-ce que l’EDHC ?",
+  "candidats": [
+   {
+    "id": "NFVbwLYdgLg",
+    "titre": "50 Questions de culture générale pour tous les niveaux ! | La culture générale",
+    "chaine": "Culture Générale",
+    "duree": "5:09",
+    "sec": 309,
+    "vues": "462 908 vues"
+   },
+   {
+    "id": "TT0-fP09-so",
+    "titre": "quizz sur la cote d'ivoire (15 questions)",
+    "chaine": "BabiCulture",
+    "duree": "4:42",
+    "sec": 282,
+    "vues": "30 568 vues"
+   },
+   {
+    "id": "pCycfWCb3Ts",
+    "titre": "50 QUESTIONS pour TESTER TON SAVOIR 🧠🤯 | Quiz Culture Générale",
+    "chaine": "Hero Quiz",
+    "duree": "14:22",
+    "sec": 862,
+    "vues": "2 736 079 vues"
+   },
+   {
+    "id": "BV9_lC_NoyY",
+    "titre": "📚 As Tu Le Niveau 6e ?📚 - Quiz Culture Générale 50 Questions - Teste tes connaissances - Défi",
+    "chaine": "123Quizzone",
+    "duree": "11:22",
+    "sec": 682,
+    "vues": "59 659 vues"
+   },
+   {
+    "id": "Nq1ssj3vgMM",
+    "titre": "🧠 Es-tu un EXPERT en GÉOGRAPHIE...? 50 Questions de Culture Générale 🌍✅",
+    "chaine": "Hero Quiz",
+    "duree": "13:26",
+    "sec": 806,
+    "vues": "565 084 vues"
+   },
+   {
+    "id": "75tnBFgebog",
+    "titre": "Quiz Culture Générale : Connais-tu le Corps Humain ? 🧍🧠✅ 40 Questions",
+    "chaine": "Hero Quiz",
+    "duree": "12:25",
+    "sec": 745,
+    "vues": "732 884 vues"
+   },
+   {
+    "id": "kv2RXA8bubY",
+    "titre": "Culture générale avec L'institut Voltaire VS Essect Poincare",
+    "chaine": "La Nouvelle Chaîne Ivoirienne",
+    "duree": "3:18",
+    "sec": 198,
+    "vues": "2 627 vues"
+   },
+   {
+    "id": "Rr5RH8Adbok",
+    "titre": "Comment AMÉLIORER sa CULTURE G ? (concours, test, culture générale) 🎓🔥",
+    "chaine": "Les Sherpas - Étudiants",
+    "duree": "8:40",
+    "sec": 520,
+    "vues": "56 056 vues"
+   }
+  ]
+ },
+ "CAFOP-CG-EDHC-L2": {
+  "titre": "Les grands textes des droits humains",
+  "candidats": [
+   {
+    "id": "7LWPkn1kQs4",
+    "titre": "Les droits humains en deux minutes",
+    "chaine": "Amnesty Switzerland",
+    "duree": "2:34",
+    "sec": 154,
+    "vues": "136 629 vues"
+   },
+   {
+    "id": "sRaqzdVkpDM",
+    "titre": "Déclaration Universelle des Droits de l'Homme - Texte intégral lu (1948) | Le Conteur",
+    "chaine": "le conteur",
+    "duree": "13:50",
+    "sec": 830,
+    "vues": "4 059 vues"
+   },
+   {
+    "id": "GwMiPuA_Oas",
+    "titre": "C'est quoi les droits de l'homme ? - Capsule #18",
+    "chaine": "Politikon",
+    "duree": "9:19",
+    "sec": 559,
+    "vues": "25 111 vues"
+   },
+   {
+    "id": "eNotd5Q6yxM",
+    "titre": "Comprendre la Déclaration universelle des droits de l'homme avec Guillaume Meurice",
+    "chaine": "AmnestyFrance",
+    "duree": "10:05",
+    "sec": 605,
+    "vues": "671 597 vues"
+   },
+   {
+    "id": "OnjQPSqVZfU",
+    "titre": "Les droits de l'HOMME, c'est quoi ?",
+    "chaine": "Guacalor - Fraîcheur juridique",
+    "duree": "6:42",
+    "sec": 402,
+    "vues": "1 168 vues"
+   },
+   {
+    "id": "WzKFXqTjqbc",
+    "titre": "La déclaration Universelle des Droits de l'Homme (1948)",
+    "chaine": "RTS Archives",
+    "duree": "4:52",
+    "sec": 292,
+    "vues": "65 208 vues"
+   },
+   {
+    "id": "51vKRh7595Q",
+    "titre": "Mooc Introduction aux droits de l'homme",
+    "chaine": "Université de Genève (UNIGE)",
+    "duree": "3:29",
+    "sec": 209,
+    "vues": "1 500 vues"
+   },
+   {
+    "id": "FziniVWsjgA",
+    "titre": "Le droit international des droits de l'homme et le droit international humanitaire",
+    "chaine": "Dire le Droit",
+    "duree": "4:22",
+    "sec": 262,
+    "vues": "4 084 vues"
+   },
+   {
+    "id": "as-u1cZVPR4",
+    "titre": "Quiz: LES DROITS DE L'HOMME - Education à la Citoyenneté et à la Morale - niveau CM1/CM2",
+    "chaine": "APLUS QUIZ",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "475 vues"
+   },
+   {
+    "id": "iSo6UgPD4vc",
+    "titre": "Au coeur de \"La Déclaration des DROITS de l'HOMME et du citoyen\"",
+    "chaine": "Europe 1",
+    "duree": "9:48",
+    "sec": 588,
+    "vues": "19 286 vues"
+   }
+  ]
+ },
+ "CAFOP-CG-EDHC-L3": {
+  "titre": "Les droits de l’enfant",
+  "candidats": [
+   {
+    "id": "Gb_2JOdiuZs",
+    "titre": "Comprendre les droits de l'enfant avec Benjamin Brillaud (Nota Bene)",
+    "chaine": "AmnestyFrance",
+    "duree": "7:22",
+    "sec": 442,
+    "vues": "399 893 vues"
+   },
+   {
+    "id": "tAz_u94okHE",
+    "titre": "Droits de l'enfant CE2 - CM1 - CM2 - 6e - Cycle 2/3 - Enseignement moral et civique - EMC",
+    "chaine": "Maître Lucas",
+    "duree": "4:31",
+    "sec": 271,
+    "vues": "162 501 vues"
+   },
+   {
+    "id": "capnec1DlSI",
+    "titre": "Les droits de l'enfant (1) - 8 QCM - Difficulté : ★",
+    "chaine": "bac2philo",
+    "duree": "3:41",
+    "sec": 221,
+    "vues": "205 vues"
+   },
+   {
+    "id": "etSsWE_R7gI",
+    "titre": "C'est quoi les droits de l'enfant ? - 1 jour, 1 question",
+    "chaine": "1 jour, 1 question",
+    "duree": "1:42",
+    "sec": 102,
+    "vues": "507 169 vues"
+   },
+   {
+    "id": "d0_HZQ9DZoA",
+    "titre": "Quels sont les droits de l'enfant ? - L'actu en classe",
+    "chaine": "C'était l'Actu en Classe",
+    "duree": "3:28",
+    "sec": 208,
+    "vues": "49 633 vues"
+   },
+   {
+    "id": "z-OvtEraojY",
+    "titre": "Janusz Korczak : précurseur du droit de l'enfant",
+    "chaine": "France Culture",
+    "duree": "3:53",
+    "sec": 233,
+    "vues": "11 424 vues"
+   },
+   {
+    "id": "WGzELUImHWw",
+    "titre": "Découvre les droits de l'enfant avec Sacha ! | UNICEF Belgium",
+    "chaine": "UNICEF Belgium",
+    "duree": "3:13",
+    "sec": 193,
+    "vues": "34 684 vues"
+   },
+   {
+    "id": "aTN4MJCPh8A",
+    "titre": "EP1 CAP AEPE 10 Questions sur Les droits de l'enfant",
+    "chaine": "CAP Petite Enfance avec QuizzyLearning",
+    "duree": "4:18",
+    "sec": 258,
+    "vues": "558 vues"
+   },
+   {
+    "id": "as-u1cZVPR4",
+    "titre": "Quiz: LES DROITS DE L'HOMME - Education à la Citoyenneté et à la Morale - niveau CM1/CM2",
+    "chaine": "APLUS QUIZ",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "475 vues"
+   },
+   {
+    "id": "mzky0ylhgCo",
+    "titre": "C'est quoi la Déclaration universelle des droits de l'homme ? - 1 jour, 1 question",
+    "chaine": "1 jour, 1 question",
+    "duree": "1:42",
+    "sec": 102,
+    "vues": "231 763 vues"
+   }
+  ]
+ },
+ "CAFOP-CG-EDHC-L4": {
+  "titre": "Droits et devoirs du citoyen",
+  "candidats": [
+   {
+    "id": "oC_q5-y_jgk",
+    "titre": "DROITS ET DEVOIRS DU CITOYEN",
+    "chaine": "Civisme Développement Paix",
+    "duree": "5:48",
+    "sec": 348,
+    "vues": "7 565 vues"
+   },
+   {
+    "id": "Ybvl_PJK-o4",
+    "titre": "Charte des droits et devoirs du citoyen français",
+    "chaine": "Naturalisation française",
+    "duree": "7:51",
+    "sec": 471,
+    "vues": "473 vues"
+   },
+   {
+    "id": "ENlQNbImxD0",
+    "titre": "Naturalisation 4 : La charte des droits et devoirs du citoyen français (lecture illustrée)",
+    "chaine": "Enseignement du FLE",
+    "duree": "6:21",
+    "sec": 381,
+    "vues": "257 863 vues"
+   },
+   {
+    "id": "XTk1Nxvqyw4",
+    "titre": "Charte des droits et devoirs du citoyen français 2026 | Naturalisation française",
+    "chaine": "APPRENDRE LES TECHNIQUES",
+    "duree": "6:25",
+    "sec": 385,
+    "vues": "980 vues"
+   },
+   {
+    "id": "8816rGB59rU",
+    "titre": "LES DROITS ET DEVOIRS DU CITOYEN (BREVET - BAC)",
+    "chaine": "CULTURE HG",
+    "duree": "1:29",
+    "sec": 89,
+    "vues": "6 052 vues"
+   },
+   {
+    "id": "6-AMjcT4YKQ",
+    "titre": "Les devoirs du citoyen",
+    "chaine": "Succes Assure",
+    "duree": "3:06",
+    "sec": 186,
+    "vues": "1 512 vues"
+   },
+   {
+    "id": "gTEJi019jbs",
+    "titre": "La citoyenneté française : droits, devoirs et symboles",
+    "chaine": "UFR Histoire, histoire de l'art et archéologie",
+    "duree": "5:20",
+    "sec": 320,
+    "vues": "36 511 vues"
+   },
+   {
+    "id": "uElARo5uD3c",
+    "titre": "Charte du citoyen français 🇫🇷 | Droits, devoirs et valeurs de la République",
+    "chaine": "Fouta Média",
+    "duree": "9:11",
+    "sec": 551,
+    "vues": "320 vues"
+   },
+   {
+    "id": "_iTEWSXprlI",
+    "titre": "Droits et devoirs des citoyens dans une démocratie : Éducation civique",
+    "chaine": "229TV+",
+    "duree": "4:24",
+    "sec": 264,
+    "vues": "169 vues"
+   },
+   {
+    "id": "as-u1cZVPR4",
+    "titre": "Quiz: LES DROITS DE L'HOMME - Education à la Citoyenneté et à la Morale - niveau CM1/CM2",
+    "chaine": "APLUS QUIZ",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "475 vues"
+   }
+  ]
+ },
+ "CAFOP-CG-EDHC-L5": {
+  "titre": "Démocratie et séparation des pouvoirs",
+  "candidats": [
+   {
+    "id": "e7UGEG0xaxA",
+    "titre": "La théorie de la séparation des pouvoirs",
+    "chaine": "Jurixio - Les vidéos de droit",
+    "duree": "6:36",
+    "sec": 396,
+    "vues": "276 351 vues"
+   },
+   {
+    "id": "rZBeTkUbHCk",
+    "titre": "Démocratie et séparation des pouvoirs",
+    "chaine": "Frederic Lafon",
+    "duree": "5:07",
+    "sec": 307,
+    "vues": "2 157 vues"
+   },
+   {
+    "id": "RLXA0iV9dlg",
+    "titre": "La séparation des pouvoirs en France - vidéo animée",
+    "chaine": "Fonctionnaire territorial",
+    "duree": "3:35",
+    "sec": 215,
+    "vues": "128 300 vues"
+   },
+   {
+    "id": "juhh4vHXfBc",
+    "titre": "La séparation des pouvoirs (Droit constitutionnel)",
+    "chaine": "Aide aux TD - Vidéos de droit",
+    "duree": "11:28",
+    "sec": 688,
+    "vues": "80 880 vues"
+   },
+   {
+    "id": "awwO3mYeyL8",
+    "titre": "La séparation des pouvoirs en droit constitutionnel : le cours complet (L1)",
+    "chaine": "Droit au Tableau",
+    "duree": "9:06",
+    "sec": 546,
+    "vues": "2 514 vues"
+   },
+   {
+    "id": "hs_xtO4vrP8",
+    "titre": "Les formes de la démocratie - Droit constitutionnel",
+    "chaine": "Maxime Bizeau - Fiches-droit․com",
+    "duree": "7:37",
+    "sec": 457,
+    "vues": "16 510 vues"
+   },
+   {
+    "id": "6HM1L-zDTlM",
+    "titre": "La séparation des pouvoirs - EMC - Terminale - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "3:52",
+    "sec": 232,
+    "vues": "7 081 vues"
+   },
+   {
+    "id": "kD85KOsLaLg",
+    "titre": "Rôle des élus en Côte d'Ivoire: vidéo 1: séparation des pouvoirs, rôle du président de la République",
+    "chaine": "KAS Dialogue Politique en Afrique de l'Ouest",
+    "duree": "5:03",
+    "sec": 303,
+    "vues": "1 973 vues"
+   },
+   {
+    "id": "_iTEWSXprlI",
+    "titre": "Droits et devoirs des citoyens dans une démocratie : Éducation civique",
+    "chaine": "229TV+",
+    "duree": "4:24",
+    "sec": 264,
+    "vues": "169 vues"
+   },
+   {
+    "id": "wcEITW2Vm8k",
+    "titre": "EDHC 6ème",
+    "chaine": "NG+ Consulte",
+    "duree": "0:31",
+    "sec": 31,
+    "vues": "1 261 vues"
+   }
+  ]
+ },
+ "CAFOP-CG-EDHC-L6": {
+  "titre": "Civisme et environnement",
+  "candidats": [
+   {
+    "id": "Nq1ssj3vgMM",
+    "titre": "🧠 Es-tu un EXPERT en GÉOGRAPHIE...? 50 Questions de Culture Générale 🌍✅",
+    "chaine": "Hero Quiz",
+    "duree": "13:26",
+    "sec": 806,
+    "vues": "565 084 vues"
+   },
+   {
+    "id": "kv2RXA8bubY",
+    "titre": "Culture générale avec L'institut Voltaire VS Essect Poincare",
+    "chaine": "La Nouvelle Chaîne Ivoirienne",
+    "duree": "3:18",
+    "sec": 198,
+    "vues": "2 627 vues"
+   },
+   {
+    "id": "6ScMuQykXzI",
+    "titre": "La cour éducative | Education civique et morale : L'environnement",
+    "chaine": "RTI Officiel",
+    "duree": "1:40",
+    "sec": 100,
+    "vues": "691 vues"
+   },
+   {
+    "id": "pCycfWCb3Ts",
+    "titre": "50 QUESTIONS pour TESTER TON SAVOIR 🧠🤯 | Quiz Culture Générale",
+    "chaine": "Hero Quiz",
+    "duree": "14:22",
+    "sec": 862,
+    "vues": "2 736 079 vues"
+   },
+   {
+    "id": "NFVbwLYdgLg",
+    "titre": "50 Questions de culture générale pour tous les niveaux ! | La culture générale",
+    "chaine": "Culture Générale",
+    "duree": "5:09",
+    "sec": 309,
+    "vues": "462 908 vues"
+   },
+   {
+    "id": "zYxA-7ecr7I",
+    "titre": "Le civisme, la protection de notre environnement - La cour éducative - Episode 08, saison 05",
+    "chaine": "RTI Officiel",
+    "duree": "14:07",
+    "sec": 847,
+    "vues": "332 vues"
+   },
+   {
+    "id": "cnrvFwKrgKo",
+    "titre": "📚 As-tu le niveau d'un CM2 ? 50 Questions de CULTURE GÉNÉRALE 🧠✅",
+    "chaine": "Hero Quiz",
+    "duree": "13:48",
+    "sec": 828,
+    "vues": "271 468 vues"
+   },
+   {
+    "id": "TT0-fP09-so",
+    "titre": "quizz sur la cote d'ivoire (15 questions)",
+    "chaine": "BabiCulture",
+    "duree": "4:42",
+    "sec": 282,
+    "vues": "30 581 vues"
+   },
+   {
+    "id": "_iTEWSXprlI",
+    "titre": "Droits et devoirs des citoyens dans une démocratie : Éducation civique",
+    "chaine": "229TV+",
+    "duree": "4:24",
+    "sec": 264,
+    "vues": "169 vues"
+   },
+   {
+    "id": "as-u1cZVPR4",
+    "titre": "Quiz: LES DROITS DE L'HOMME - Education à la Citoyenneté et à la Morale - niveau CM1/CM2",
+    "chaine": "APLUS QUIZ",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "475 vues"
+   }
+  ]
+ },
+ "CAFOP-CG-EDHC-L7": {
+  "titre": "Tolérance, égalité et lutte contre les discriminations",
+  "candidats": [
+   {
+    "id": "aj0knIvJnRk",
+    "titre": "Brevet d'EMC – Égalité et lutte contre les discriminations (E4)",
+    "chaine": "Paul Rousselin",
+    "duree": "7:12",
+    "sec": 432,
+    "vues": "4 vues"
+   },
+   {
+    "id": "HJfHK2F5KI0",
+    "titre": "Agir pour l'égalité et refuser les discriminations - EMC - collège - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "7:20",
+    "sec": 440,
+    "vues": "3 957 vues"
+   },
+   {
+    "id": "SZXnyu2_dSw",
+    "titre": "Éducation civique : lutte contre le racisme et la discrimination",
+    "chaine": "229TV+",
+    "duree": "3:44",
+    "sec": 224,
+    "vues": "76 vues"
+   },
+   {
+    "id": "1T8GXJCEr2Y",
+    "titre": "C'est quoi la discrimination ? (EP. 593) - 1 jour, 1 question",
+    "chaine": "1 jour, 1 question",
+    "duree": "1:42",
+    "sec": 102,
+    "vues": "308 616 vues"
+   },
+   {
+    "id": "7K0m3umGDHM",
+    "titre": "Respecter autrui - Tolérance et égalité CE2 - CM1 - CM2 - 6e - Enseignement moral et civique - EMC",
+    "chaine": "Maître Lucas",
+    "duree": "5:11",
+    "sec": 311,
+    "vues": "88 397 vues"
+   },
+   {
+    "id": "eFMgROVqa1U",
+    "titre": "Qu’est-ce qu’une discrimination ? (EMC 5e)",
+    "chaine": "Éditions Lelivrescolaire.fr",
+    "duree": "1:16",
+    "sec": 76,
+    "vues": "6 156 vues"
+   },
+   {
+    "id": "NY0PKR4GGrg",
+    "titre": "EMC - Les discriminations à travers l'analyse d'Harry Potter (5ème)",
+    "chaine": "Histoire d’une prof 🌍",
+    "duree": "12:22",
+    "sec": 742,
+    "vues": "3 678 vues"
+   },
+   {
+    "id": "tWVYZnOIn4E",
+    "titre": "mission égalité lutte contre les discriminations",
+    "chaine": "Faculté des Lettres de Sorbonne Université",
+    "duree": "2:03",
+    "sec": 123,
+    "vues": "199 vues"
+   },
+   {
+    "id": "wcEITW2Vm8k",
+    "titre": "EDHC 6ème",
+    "chaine": "NG+ Consulte",
+    "duree": "0:31",
+    "sec": 31,
+    "vues": "1 261 vues"
+   },
+   {
+    "id": "y55m4of6HJ0",
+    "titre": "ÉDUCATION AUX DROITS DE L'HOMME ET À LA CITOYENNETÉ EDHC. LLLYCÉE MODERNE DJEDJI AMONDDJI PIERRE",
+    "chaine": "LMDAPTV",
+    "duree": "0:57",
+    "sec": 57,
+    "vues": "110 vues"
+   }
+  ]
+ },
+ "CAFOP-CG-EDHC-L8": {
+  "titre": "Bilan : répondre aux questions d’EDHC",
+  "candidats": [
+   {
+    "id": "bYidVOJb3aw",
+    "titre": "QUIZ Culture Générale Difficile #5 : 30 Questions",
+    "chaine": "Culture Quizz",
+    "duree": "11:44",
+    "sec": 704,
+    "vues": "517 063 vues"
+   },
+   {
+    "id": "pCycfWCb3Ts",
+    "titre": "50 QUESTIONS pour TESTER TON SAVOIR 🧠🤯 | Quiz Culture Générale",
+    "chaine": "Hero Quiz",
+    "duree": "14:22",
+    "sec": 862,
+    "vues": "2 736 079 vues"
+   },
+   {
+    "id": "NFVbwLYdgLg",
+    "titre": "50 Questions de culture générale pour tous les niveaux ! | La culture générale",
+    "chaine": "Culture Générale",
+    "duree": "5:09",
+    "sec": 309,
+    "vues": "462 908 vues"
+   },
+   {
+    "id": "BV9_lC_NoyY",
+    "titre": "📚 As Tu Le Niveau 6e ?📚 - Quiz Culture Générale 50 Questions - Teste tes connaissances - Défi",
+    "chaine": "123Quizzone",
+    "duree": "11:22",
+    "sec": 682,
+    "vues": "59 659 vues"
+   },
+   {
+    "id": "75tnBFgebog",
+    "titre": "Quiz Culture Générale : Connais-tu le Corps Humain ? 🧍🧠✅ 40 Questions",
+    "chaine": "Hero Quiz",
+    "duree": "12:25",
+    "sec": 745,
+    "vues": "732 884 vues"
+   },
+   {
+    "id": "Nq1ssj3vgMM",
+    "titre": "🧠 Es-tu un EXPERT en GÉOGRAPHIE...? 50 Questions de Culture Générale 🌍✅",
+    "chaine": "Hero Quiz",
+    "duree": "13:26",
+    "sec": 806,
+    "vues": "565 084 vues"
+   },
+   {
+    "id": "LZkoW1e_UaM",
+    "titre": "QUIZZ culture générale , niveau difficile Afrique",
+    "chaine": "QUIZ DE CHAMPION",
+    "duree": "10:22",
+    "sec": 622,
+    "vues": "92 908 vues"
+   },
+   {
+    "id": "TT0-fP09-so",
+    "titre": "quizz sur la cote d'ivoire (15 questions)",
+    "chaine": "BabiCulture",
+    "duree": "4:42",
+    "sec": 282,
+    "vues": "30 581 vues"
+   },
+   {
+    "id": "as-u1cZVPR4",
+    "titre": "Quiz: LES DROITS DE L'HOMME - Education à la Citoyenneté et à la Morale - niveau CM1/CM2",
+    "chaine": "APLUS QUIZ",
+    "duree": "2:49",
+    "sec": 169,
+    "vues": "475 vues"
+   },
+   {
+    "id": "wcEITW2Vm8k",
+    "titre": "EDHC 6ème",
+    "chaine": "NG+ Consulte",
+    "duree": "0:31",
+    "sec": 31,
+    "vues": "1 261 vues"
+   }
+  ]
+ }
+}

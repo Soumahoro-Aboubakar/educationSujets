@@ -1,0 +1,192 @@
+{
+  "module": "CAFOP-MATH-PROP",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-PROP-L1",
+      "requetes": [
+        "site:youtube.com/watch \"tableau de proportionnalité\" \"coefficient\" compléter",
+        "Lire et compléter un tableau de proportionnalité explication simple youtube",
+        "tableau proportionnalité cours exemple en 5 minutes youtube Monka"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=B3JVZdGMZqk",
+          "titre": "Comprendre la proportionnalité et les Tableaux de proportionnalité 🚀 Cours + Exemples 💪 en 5 min !",
+          "chaine": "jaicompris Maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique les tableaux de proportionnalité et leur complétion par coefficient, multiplication ou division et passage par l’unité."
+        }
+      ],
+      "justification": "Le contenu annoncé correspond directement aux méthodes de la leçon et convient aux débutants. Le titre annonce cinq minutes, mais la durée exacte n’est pas accessible."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L2",
+      "requetes": [
+        "site:youtube.com/watch \"Calculer une part ou un taux\" pourcentage",
+        "calculer une proportion pourcentage effectif total Yvan Monka vidéo",
+        "site:youtube.com/watch pourcentage calculer part taux total explication simple",
+        "\"Calculer un pourcentage\" \"vAK1NWWINi8\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=vAK1NWWINi8",
+          "titre": "Calculer un POURCENTAGE (2) - Cinquième",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo travaille le calcul d’un taux à partir d’une part et d’un total, sans couvrir les trois calculs demandés dans la leçon."
+        }
+      ],
+      "justification": "Cette capsule cible le rapport part sur total avec un exemple scolaire accessible. Elle constitue un complément sur le taux ; la durée totale n’a pas pu être relevée."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L3",
+      "requetes": [
+        "Appliquer une variation et retrouver le prix initial youtube",
+        "coefficient multiplicateur prix initial cours exemple youtube",
+        "retrouver prix initial coefficient multiplicateur youtube cours exemple",
+        "\"Évolutions réciproques\" \"youtube\" \"Cours\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=kbGDTI7F5KA",
+          "titre": "Cours : Évolutions réciproques",
+          "chaine": "Mathemax",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le coefficient réciproque et la recherche d’une valeur initiale, mais développe moins l’application directe d’une hausse ou d’une remise."
+        }
+      ],
+      "justification": "Le retour à la valeur initiale correspond précisément à la difficulté centrale de la leçon. Les chapitres comprennent aussi un exemple de TVA, à considérer comme exercice mathématique ; la durée totale reste inconnue."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L4",
+      "requetes": [
+        "site:youtube.com/watch calculer évolutions successives taux global",
+        "évolutions successives taux global Yvan Monka vidéo",
+        "évolutions successives taux global cours vidéo 4 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=3GtUzTBMaEs",
+          "titre": "Evolutions successives : comment éviter l'erreur classique",
+          "chaine": "Captain Carré",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique le produit des coefficients multiplicateurs, le taux global et le piège d’une hausse suivie d’une baisse du même taux."
+        }
+      ],
+      "justification": "Les exemples et la méthode annoncés correspondent aux objectifs et au piège de la leçon. Le dernier chapitre commence à 5:15, mais la durée totale n’est pas indiquée."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L5",
+      "requetes": [
+        "site:youtube.com/watch échelle plan carte calculer distance réelle",
+        "échelle plan carte explication simple youtube cours",
+        "site:youtube.com/watch échelle distance réelle cours exemple",
+        "Papotechno Comment calculer échelle plan durée vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=WqMIMGTZKmo",
+          "titre": "Comment calculer l'échelle d'un plan ?",
+          "chaine": "Papotechno",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo montre la conversion des unités, le calcul d’une échelle et d’une dimension sur le plan, sans annoncer explicitement le calcul inverse vers la longueur réelle."
+        }
+      ],
+      "justification": "La progression concrète par tableau convient aux débutants et couvre deux objectifs importants. Le dernier chapitre commence à 2:40 ; la durée totale exacte reste inaccessible."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L6",
+      "requetes": [
+        "calculer convertir vitesse moyenne km/h m/s youtube",
+        "site:youtube.com/watch vitesse moyenne plusieurs étapes arrêt exercice",
+        "\"Calculer une vitesse en m/s ou en km/h\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=2FXNFQ5Frmo",
+          "titre": "[6è] Calculer une vitesse en m/s ou en km/h",
+          "chaine": "Les cours de physique de Jean Zay",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente vitesse égale distance divisée par durée et les conversions par 3,6, sans expliciter les trajets à plusieurs étapes avec arrêt."
+        }
+      ],
+      "justification": "Le niveau introductif et les conversions correspondent aux bases de la leçon. La gestion des étapes et des arrêts nécessite un complément, et la durée totale n’a pas pu être relevée."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L7",
+      "requetes": [
+        "débit rendement travail ouvriers robinets cours youtube",
+        "site:youtube.com/watch problème ouvriers travail ensemble robinets",
+        "problème robinets ensemble maths vidéo corrigé",
+        "\"Deux Robinets pour Remplir un Bassin\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=T-eGR8Ke6l8",
+          "titre": "💧 Deux Robinets pour Remplir un Bassin | Exercice CRPE Maths Corrigé (Débit & Proportion) ⏱️",
+          "chaine": "Maths CRPE avec Théo",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’exercice explique le calcul et l’addition de deux débits simultanés, sans traiter la productivité par personne ni un changement d’équipe en cours de travail."
+        }
+      ],
+      "justification": "L’exemple de bassin cible directement l’addition des rythmes, difficulté essentielle de la leçon. La durée totale n’est pas disponible dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L8",
+      "requetes": [
+        "partager une somme proportionnellement youtube",
+        "site:youtube.com/watch partage proportionnel somme cours exemple",
+        "\"Ratio : partager une quantité\" Nicolas durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=b4Yltq_Dj4I",
+          "titre": "Ratio : partager une quantité",
+          "chaine": "Les Maths avec Nicolas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique la valeur d’une part puis la répartition de 255 euros selon les poids 3, 5 et 7, conformément au partage proportionnel."
+        }
+      ],
+      "justification": "L’exemple monétaire et le calcul des parts correspondent directement à la leçon. La conclusion est annoncée à 3:55, sans indication de la durée totale exacte."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L9",
+      "requetes": [
+        "calculer intérêts simples mois cours youtube",
+        "site:youtube.com/watch intérêts simples capital durée mois exemple",
+        "intérêts simples cours 5 minutes youtube capital mois",
+        "intérêts simples vidéo 2min41 cours",
+        "\"intérêts simples\" \"hNWzxwp47y4\" cours"
+      ],
+      "candidats": [],
+      "justification": "Les résultats ciblés portent surtout sur la recherche d’un taux ou d’un capital, avec une durée non vérifiée. Deux capsules courtes sont référencées dans un document pédagogique, mais leurs métadonnées et leur traitement des mois n’ont pas pu être confirmés."
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L10",
+      "requetes": [
+        "CAFOP problème échelle vitesse correction youtube",
+        "site:youtube.com/watch résoudre problème proportionnalité méthode concours CAFOP",
+        "site:youtube.com/watch \"échelle\" \"vitesse\" \"problème\" corrigé",
+        "CAFOP mathématiques problème pourcentages méthode résolution vidéo courte"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte suffisamment ciblée sur le choix de méthode, la justification et le contrôle d’un problème combinant les notions du module n’a été identifiée. Le cours méthodologique le plus proche dépasse quinze minutes."
+    }
+  ]
+}

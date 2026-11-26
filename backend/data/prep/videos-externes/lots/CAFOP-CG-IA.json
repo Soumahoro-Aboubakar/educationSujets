@@ -1,0 +1,196 @@
+{
+  "module": "CAFOP-CG-IA",
+  "titre": "Culture générale des sujets récents",
+  "matiere": "Culture générale",
+  "resume": "Les notions des sujets CAFOP-IA de 2021 à 2025 : arts et sport, EDHC, histoire, géographie ivoirienne, sciences du quotidien et méthode de l’épreuve d’une heure.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-CG-IA-L1",
+      "titre": "L’épreuve de culture générale du CAFOP-IA",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Arts, culture et sport",
+      "explication": "À la fin de cette leçon, tu sauras comment est construite l’épreuve et comment répartir ton heure. Aucun prérequis. Dans les sujets officiels de 2021 à 2025, l’épreuve dure 1 heure et porte le coefficient 2. Elle comporte cinq ou six rubriques : arts-culture-sport, littérature, histoire, géographie, sciences et, depuis 2025, EDHC (éducation aux droits de l’homme et à la citoyenneté).",
+      "formules": [],
+      "exemples": [
+        "Répartir l’heure",
+        "Une consigne à respecter"
+      ],
+      "pieges": [
+        "Écrire des noms propres mal orthographiés : « Christophe Colombe » ou « Chinua Achébé » peuvent être pénalisés."
+      ],
+      "aRetenir": [
+        "1 heure, coefficient 2.",
+        "Cinq ou six rubriques.",
+        "Réponses courtes et précises."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-IA-L2",
+      "titre": "Arts, culture et sport",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "2/8",
+      "precedente": "L’épreuve de culture générale du CAFOP-IA",
+      "suivante": "EDHC : élus, nommés et symboles",
+      "explication": "À la fin de cette leçon, tu sauras répondre aux questions de culture et de sport les plus fréquentes. Aucun prérequis.",
+      "formules": [],
+      "exemples": [
+        "La CAN (sujets 2021 et 2025)",
+        "Personnalités et activités (sujet 2024)"
+      ],
+      "pieges": [
+        "Confondre le MASA, marché des arts du spectacle d’Abidjan, et le FESPACO, festival du cinéma de Ouagadougou."
+      ],
+      "aRetenir": [
+        "Rythmes et pays.",
+        "Joueurs par sport.",
+        "CAN : 1992, 2015, 2023."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-IA-L3",
+      "titre": "EDHC : élus, nommés et symboles",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "3/8",
+      "precedente": "Arts, culture et sport",
+      "suivante": "Repères d’histoire",
+      "explication": "À la fin de cette leçon, tu sauras classer les responsables publics selon leur mode de désignation et citer les symboles de l’État. Prérequis : les institutions ivoiriennes (module CG-INSTIT). Les symboles de l’État : le drapeau orange, blanc et vert ; l’hymne national, L’Abidjanaise ; la devise Union – Discipline – Travail ; les armoiries.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2025)",
+        "Développer des sigles (2024, 2025)"
+      ],
+      "pieges": [
+        "Classer le préfet parmi les élus : il est nommé par le gouvernement."
+      ],
+      "aRetenir": [
+        "Élus directs, indirects, nommés.",
+        "Symboles : drapeau, hymne, devise, armoiries.",
+        "Sigles développés mot par mot."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-IA-L4",
+      "titre": "Repères d’histoire",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "4/8",
+      "precedente": "EDHC : élus, nommés et symboles",
+      "suivante": "Géographie de la Côte d’Ivoire au concours",
+      "explication": "À la fin de cette leçon, tu sauras trouver le siècle d’une année et citer des repères d’histoire africaine et ivoirienne. Aucun prérequis.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Comme au concours (2025)"
+      ],
+      "pieges": [
+        "Dire que l’an 1400 appartient au XVᵉ siècle : un siècle va de l’année 01 à l’année 00 ; le XVᵉ siècle commence en 1401."
+      ],
+      "aRetenir": [
+        "Siècle = centaines + 1.",
+        "Années en 00 : fin du siècle.",
+        "Éthiopie et Liberia ; Gold Coast = Ghana."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-IA-L5",
+      "titre": "Géographie de la Côte d’Ivoire au concours",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "5/8",
+      "precedente": "Repères d’histoire",
+      "suivante": "Sang, maladies et santé",
+      "explication": "À la fin de cette leçon, tu sauras localiser les climats, les barrages et quelques chefs-lieux de région. Prérequis : les fleuves ivoiriens (module CAFOP-CG-CI).",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Le chemin de fer (sujet 2024)"
+      ],
+      "pieges": [
+        "Placer le climat soudanien au sud : il correspond au nord, avec deux saisons."
+      ],
+      "aRetenir": [
+        "Climats : sud attiéen, centre baouléen, nord soudanien, ouest montagne.",
+        "Barrages et fleuves.",
+        "Chefs-lieux de région."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-IA-L6",
+      "titre": "Sang, maladies et santé",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "6/8",
+      "precedente": "Géographie de la Côte d’Ivoire au concours",
+      "suivante": "Matière, électricité et plantes",
+      "explication": "À la fin de cette leçon, tu sauras expliquer la compatibilité des groupes sanguins et classer des maladies selon leur agent. Prérequis : les cellules du sang (module CAFOP-CG-SCIENCES). Il existe quatre groupes sanguins : A, B, AB et O. Le groupe O peut donner à tous les groupes : c’est le donneur universel. Le groupe AB peut recevoir de tous : c’est le receveur universel. A donne à A et AB ; B donne à B et AB.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2021)",
+        "Maladies du sang (sujet 2025)"
+      ],
+      "pieges": [
+        "Croire que le groupe AB peut donner à tous : il ne donne qu’au groupe AB."
+      ],
+      "aRetenir": [
+        "O : donneur universel ; AB : receveur universel.",
+        "Virus, bactérie, parasite.",
+        "Antibiotique : contre les bactéries."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-IA-L7",
+      "titre": "Matière, électricité et plantes",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "7/8",
+      "precedente": "Sang, maladies et santé",
+      "suivante": "Langue dans l’épreuve de culture générale",
+      "explication": "À la fin de cette leçon, tu sauras nommer les changements d’état de l’eau, les unités électriques et les modes de reproduction asexuée. Aucun prérequis. Le générateur d’un circuit produit une force électromotrice, mesurée en volts ; l’intensité du courant se mesure en ampères.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Changements d’état (2024)"
+      ],
+      "pieges": [
+        "Confondre fusion et vaporisation : la fusion transforme un solide en liquide."
+      ],
+      "aRetenir": [
+        "Fusion, solidification, vaporisation, liquéfaction.",
+        "Volts et ampères.",
+        "Bouture, rejet, tubercule."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-IA-L8",
+      "titre": "Langue dans l’épreuve de culture générale",
+      "module": "Culture générale des sujets récents (Culture générale)",
+      "position": "8/8",
+      "precedente": "Matière, électricité et plantes",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras répondre aux questions de langue glissées dans la rubrique littérature. Prérequis : les modules d’orthographe et de grammaire.",
+      "formules": [],
+      "exemples": [
+        "Participes passés (sujet 2024)",
+        "COD et COI (sujet 2021)"
+      ],
+      "pieges": [
+        "Écrire « des festivaux » ou « des pneux » : ce sont des exceptions."
+      ],
+      "aRetenir": [
+        "Exceptions en -al, -ail, -eu, -ou.",
+        "Participe passé avec avoir : COD placé avant.",
+        "Coûter, valoir, peser : souvent invariables."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

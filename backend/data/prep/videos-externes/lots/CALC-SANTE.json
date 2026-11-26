@@ -26,7 +26,7 @@
         "Une fraction est une division.",
         "Parenthèses avant multiplication, puis addition."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L2",
@@ -49,7 +49,7 @@
         "g → mg et L → mL : × 1 000.",
         "Ne pas convertir une masse en volume sans donnée supplémentaire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L3",
@@ -74,7 +74,7 @@
         "Séparer heures entières et minutes restantes.",
         "Une écriture décimale n’est pas un horaire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L4",
@@ -99,7 +99,7 @@
         "Diviser pour une unité.",
         "Multiplier pour le nombre demandé."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L5",
@@ -124,7 +124,7 @@
         "Part = total × proportion.",
         "Évolution : variation divisée par le départ."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L6",
@@ -147,7 +147,7 @@
         "% m/V = grammes pour 100 mL.",
         "Accorder les unités avant de diviser."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L7",
@@ -172,7 +172,7 @@
         "Multiplier la quantité par kg par la masse en kg.",
         "Pour un volume, diviser ensuite par la concentration."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L8",
@@ -197,7 +197,7 @@
         "Vérifier l’unité de temps.",
         "Inverser la relation pour trouver volume ou durée."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CALC-SANTE-L9",
@@ -222,7 +222,7 @@
         "Convertir la durée en minutes.",
         "Arrondir le résultat final selon la consigne."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

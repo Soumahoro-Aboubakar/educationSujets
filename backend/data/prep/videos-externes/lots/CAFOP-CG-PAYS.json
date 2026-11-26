@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-CG-PAYS",
+  "titre": "Pays, capitales et géographie du monde",
+  "matiere": "Culture générale",
+  "resume": "Les pays et capitales d’Afrique et du monde, les voisins de la Côte d’Ivoire, les langues officielles et les grands repères physiques, avec leurs pièges classiques.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-CG-PAYS-L1",
+      "titre": "La Côte d’Ivoire et ses voisins",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Capitales d’Afrique de l’Ouest",
+      "explication": "À la fin de cette leçon, tu sauras situer la Côte d’Ivoire parmi ses voisins et les langues officielles de la région. Prérequis : le module Histoire et géographie de la Côte d’Ivoire. Au sud, la Côte d’Ivoire est bordée par l’océan Atlantique, dans le golfe de Guinée. Ses deux capitales sont Yamoussoukro (politique) et Abidjan (économique).",
+      "formules": [],
+      "exemples": [
+        "Langues officielles des voisins",
+        "Comme au concours (1993)"
+      ],
+      "pieges": [
+        "Citer le Togo ou le Sénégal comme voisins : ils n’ont pas de frontière avec la Côte d’Ivoire."
+      ],
+      "aRetenir": [
+        "Liberia, Guinée, Mali, Burkina Faso, Ghana.",
+        "Golfe de Guinée au sud.",
+        "Lusophones : Cap-Vert, Guinée-Bissau."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L2",
+      "titre": "Capitales d’Afrique de l’Ouest",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "2/8",
+      "precedente": "La Côte d’Ivoire et ses voisins",
+      "suivante": "Capitales d’Afrique centrale, du Nord, de l’Est et australe",
+      "explication": "À la fin de cette leçon, tu sauras associer chaque pays d’Afrique de l’Ouest à sa capitale. Prérequis : la leçon précédente.",
+      "formules": [],
+      "exemples": [
+        "Le piège du Nigeria",
+        "Le piège du Bénin"
+      ],
+      "pieges": [
+        "Confondre Niamey (Niger) et Abuja (Nigeria) à cause de la ressemblance des noms de pays."
+      ],
+      "aRetenir": [
+        "Abuja, pas Lagos.",
+        "Porto-Novo, pas Cotonou.",
+        "Niamey : Niger."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L3",
+      "titre": "Capitales d’Afrique centrale, du Nord, de l’Est et australe",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "3/8",
+      "precedente": "Capitales d’Afrique de l’Ouest",
+      "suivante": "Les grands fleuves africains",
+      "explication": "À la fin de cette leçon, tu sauras citer les capitales des principaux pays africains. Prérequis : les capitales d’Afrique de l’Ouest.",
+      "formules": [],
+      "exemples": [
+        "Deux Congo",
+        "Grande ville ou capitale ?"
+      ],
+      "pieges": [
+        "Répondre Douala pour le Cameroun : la capitale est Yaoundé."
+      ],
+      "aRetenir": [
+        "Yaoundé, Kinshasa, Brazzaville, Libreville.",
+        "Le Caire, Rabat, Alger, Tunis.",
+        "Addis-Abeba, Nairobi, Pretoria."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L4",
+      "titre": "Les grands fleuves africains",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "4/8",
+      "precedente": "Capitales d’Afrique centrale, du Nord, de l’Est et australe",
+      "suivante": "Déserts, montagnes et lacs",
+      "explication": "À la fin de cette leçon, tu sauras situer les grands fleuves d’Afrique et leur embouchure. Prérequis : les fleuves ivoiriens (module CAFOP-CG-CI).",
+      "formules": [],
+      "exemples": [
+        "Le Niger, un fleuve en arc",
+        "Le château d’eau de l’Afrique de l’Ouest"
+      ],
+      "pieges": [
+        "Croire que le Niger se jette dans la Méditerranée : il rejoint le golfe de Guinée."
+      ],
+      "aRetenir": [
+        "Nil : Méditerranée.",
+        "Niger : source en Guinée, golfe de Guinée.",
+        "Fouta-Djalon : château d’eau."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L5",
+      "titre": "Déserts, montagnes et lacs",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "5/8",
+      "precedente": "Les grands fleuves africains",
+      "suivante": "Continents et océans",
+      "explication": "À la fin de cette leçon, tu sauras citer les principaux déserts, sommets et lacs d’Afrique. Prérequis : le vocabulaire de géographie (reg, erg, oued).",
+      "formules": [],
+      "exemples": [
+        "Le Sahel",
+        "Montagnes d’Afrique du Nord"
+      ],
+      "pieges": [
+        "Placer le Kilimandjaro au Kenya : il se trouve en Tanzanie, près de la frontière kényane."
+      ],
+      "aRetenir": [
+        "Sahara, Kalahari, Namib.",
+        "Kilimandjaro en Tanzanie.",
+        "Lac Victoria."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L6",
+      "titre": "Continents et océans",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "6/8",
+      "precedente": "Déserts, montagnes et lacs",
+      "suivante": "Capitales du monde",
+      "explication": "À la fin de cette leçon, tu sauras nommer les continents et les océans et les classer par taille. Aucun prérequis. On distingue en général cinq continents habités : l’Afrique, l’Amérique, l’Asie, l’Europe et l’Océanie, auxquels s’ajoute l’Antarctique. L’Asie est le plus grand et le plus peuplé ; l’Afrique est le deuxième par la superficie.",
+      "formules": [],
+      "exemples": [
+        "L’Afrique entre deux océans",
+        "Le détroit de Gibraltar"
+      ],
+      "pieges": [
+        "Confondre la mer Méditerranée et un océan : c’est une mer presque fermée."
+      ],
+      "aRetenir": [
+        "Cinq continents habités + Antarctique.",
+        "Asie la plus grande, Afrique deuxième.",
+        "Pacifique, Atlantique, Indien."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L7",
+      "titre": "Capitales du monde",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "7/8",
+      "precedente": "Continents et océans",
+      "suivante": "Bilan : questions de géographie au concours",
+      "explication": "À la fin de cette leçon, tu sauras citer les capitales des grands pays du monde, notamment celles qui piègent. Prérequis : les continents.",
+      "formules": [],
+      "exemples": [
+        "Capitales européennes",
+        "Une méthode"
+      ],
+      "pieges": [
+        "Répondre Sydney pour l’Australie : la capitale est Canberra."
+      ],
+      "aRetenir": [
+        "Washington, Brasília, Ottawa.",
+        "Canberra, New Delhi, Pékin.",
+        "Grande ville ≠ capitale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-PAYS-L8",
+      "titre": "Bilan : questions de géographie au concours",
+      "module": "Pays, capitales et géographie du monde (Culture générale)",
+      "position": "8/8",
+      "precedente": "Capitales du monde",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras répondre aux formats de questions de géographie du concours. Prérequis : les leçons du module.",
+      "formules": [],
+      "exemples": [
+        "Méthode pour réviser",
+        "Répondre précisément"
+      ],
+      "pieges": [
+        "Confondre un pays et sa capitale du même nom : Guinée-Bissau et Bissau, Djibouti et Djibouti."
+      ],
+      "aRetenir": [
+        "Carte muette chaque jour.",
+        "Réponses précises.",
+        "Orthographe des noms propres."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

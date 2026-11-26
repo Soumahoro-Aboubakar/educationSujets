@@ -30,7 +30,7 @@
         "AB se calcule par arrivée moins départ.",
         "La norme mesure la longueur du déplacement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L2",
@@ -53,7 +53,7 @@
         "Colinéaires : même direction.",
         "Une base donne une décomposition unique."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L3",
@@ -79,7 +79,7 @@
         "Orthogonalité : produit nul.",
         "Les identités sur les normes viennent du développement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L4",
@@ -104,7 +104,7 @@
         "Un paramètre réel parcourt tous ses points.",
         "Un candidat doit satisfaire les trois équations ensemble."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L5",
@@ -127,7 +127,7 @@
         "Deux paramètres parcourent ses points.",
         "Trois points non alignés déterminent un plan."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L6",
@@ -152,7 +152,7 @@
         "Équation : n · AM = 0.",
         "Les trois coefficients variables donnent le normal."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L7",
@@ -176,7 +176,7 @@
         "Un point, aucun point ou inclusion.",
         "Deux droites gauches existent dans l’espace."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L8",
@@ -201,7 +201,7 @@
         "MH est orthogonal au directeur.",
         "La longueur MH est la distance à D."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-GEOM-L9",
@@ -227,7 +227,7 @@
         "Le déplacement suit le normal.",
         "Distance = valeur absolue de l’équation / norme du normal."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

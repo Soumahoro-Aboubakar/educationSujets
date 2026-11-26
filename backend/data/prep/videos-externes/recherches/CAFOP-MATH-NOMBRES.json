@@ -1,0 +1,109 @@
+{
+  "module": "CAFOP-MATH-NOMBRES",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-NOMBRES-L1",
+      "requetes": [
+        "site:youtube.com lire comparer entiers décimaux cours",
+        "site:youtube.com comparer nombres décimaux explication simple",
+        "comparer nombres décimaux Yvan Monka youtube"
+      ],
+      "candidats": [],
+      "justification": "Une vidéo ciblée sur la comparaison des décimaux a été trouvée, mais sa durée et son traitement de la valeur positionnelle des chiffres n'ont pas pu être vérifiés."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L2",
+      "requetes": [
+        "site:youtube.com priorités opératoires puissances cours",
+        "site:youtube.com priorités opératoires exemple en 5 minutes",
+        "priorités opératoires Yvan Monka youtube",
+        "site:youtube.com/watch \"priorités opératoires\" \"puissances\""
+      ],
+      "candidats": [],
+      "justification": "Les résultats proposent des explications pertinentes, mais aucune vidéo n'a pu être validée simultanément pour les parenthèses, les puissances et la limite de 15 minutes."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L3",
+      "requetes": [
+        "site:youtube.com/watch nombres relatifs comparer calculer cours 5 minutes",
+        "site:youtube.com/watch nombres relatifs explication simple addition multiplication",
+        "\"CALCULER AVEC DES NOMBRES RELATIFS\" BosseTesMaths",
+        "\"7AVyM2pOn6U\""
+      ],
+      "candidats": [],
+      "justification": "Des vidéos expliquent la comparaison ou les opérations sur les relatifs, mais leur durée totale n'a pas pu être contrôlée ; aucun candidat n'est retenu sans assurance du respect des 15 minutes."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L4",
+      "requetes": [
+        "site:youtube.com/watch simplifier comparer fractions cours",
+        "site:youtube.com/watch simplifier comparer fractions exemple en 5 minutes",
+        "fractions simplifier comparer cours youtube",
+        "\"Simplification et comparaison de fractions\" durée",
+        "\"ynDtyilbCf0\""
+      ],
+      "candidats": [],
+      "justification": "La vidéo « SIMPLIFY AND COMPARE FRACTIONS » de BosseTesMaths présente une couverture prometteuse, avec une conclusion annoncée à 10:12, mais sa durée totale et sa langue audio n'ont pas pu être confirmées."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L5",
+      "requetes": [
+        "fractions quatre opérations cours youtube",
+        "fractions quatre opérations explication simple youtube"
+      ],
+      "candidats": [],
+      "justification": "Alloprof propose une explication des quatre opérations avec simplification des résultats, mais la durée totale n'est pas disponible dans les éléments consultés et la limite de 15 minutes reste invérifiable."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L6",
+      "requetes": [
+        "chiffres inconnus divisible par 36 youtube",
+        "chiffres manquants divisibilité 9 exemple youtube",
+        "site:youtube.com/watch \"chiffres\" \"manquants\" \"divisibilité\"",
+        "site:youtube.com/watch \"36\" \"CAFOP\""
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo française suffisamment ciblée sur la recherche exhaustive de chiffres manquants par les critères de divisibilité par 4 et 9 n'a été trouvée. Une piste anglophone traite la divisibilité par 36, mais sa durée et sa qualité pédagogique n'ont pas pu être vérifiées."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L7",
+      "requetes": [
+        "puissances notation scientifique cours youtube",
+        "puissances notation scientifique explication simple youtube",
+        "\"Tsxvnnpgi3w\""
+      ],
+      "candidats": [],
+      "justification": "La piste courte de Catherine Absil porte sur les puissances de 10 et la notation scientifique, sans couverture établie des règles générales sur les exposants ; sa durée totale reste également inconnue."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L8",
+      "requetes": [
+        "simplifier calculer racines carrées cours youtube",
+        "racines carrées somme radicaux exemple youtube",
+        "\"6TXDLazaqko\""
+      ],
+      "candidats": [],
+      "justification": "Des vidéos ciblent l'extraction de carrés parfaits et la réduction de sommes de radicaux, mais aucune durée totale vérifiable n'a été obtenue pour une vidéo YouTube française adaptée."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L9",
+      "requetes": [
+        "développer factoriser identités remarquables cours youtube",
+        "développer factoriser identités remarquables explication simple youtube",
+        "\"dD1qC_phrcU\" durée"
+      ],
+      "candidats": [],
+      "justification": "Le cours de Mathemax explique les trois identités remarquables en développement et en factorisation, mais sa durée totale n'a pas pu être vérifiée. La vidéo d'exercices associée dépasse explicitement 15 minutes et a été écartée."
+    },
+    {
+      "code": "CAFOP-MATH-NOMBRES-L10",
+      "requetes": [
+        "CAFOP mathématiques problème fractions méthode corrigé youtube",
+        "résoudre problème étapes vérifier résultat opération inverse youtube",
+        "\"p39NsvRlHEU\""
+      ],
+      "candidats": [],
+      "justification": "Les résultats concernent surtout des méthodes élémentaires ou un problème de fractions isolé, sans couverture établie du contrôle par opération inverse et de la rédaction attendue au concours. Aucune vidéo suffisamment étayée n'est retenue."
+    }
+  ]
+}

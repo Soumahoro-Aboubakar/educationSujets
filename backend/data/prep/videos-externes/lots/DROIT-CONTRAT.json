@@ -28,7 +28,7 @@
         "Débiteur : doit la prestation.",
         "Une obligation peut naître avec ou sans contrat."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L2",
@@ -51,7 +51,7 @@
         "Fait : effets attachés par la règle.",
         "Ne pas confondre acte et preuve écrite."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L3",
@@ -74,7 +74,7 @@
         "Une modification essentielle appelle un nouvel accord.",
         "Contrat unilatéral ne signifie pas volonté unique."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L4",
@@ -97,7 +97,7 @@
         "Vérifier les formes exigées pour l’opération.",
         "Utiliser les textes applicables en Côte d’Ivoire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L5",
@@ -120,7 +120,7 @@
         "Dol : tromperie intentionnelle déterminante.",
         "Violence : contrainte affectant l’accord."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L6",
@@ -143,7 +143,7 @@
         "Relative ou absolue selon l’intérêt protégé.",
         "Examiner les restitutions et les exceptions."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L7",
@@ -166,7 +166,7 @@
         "Exécution loyale : bonne foi.",
         "Un tiers n’est pas automatiquement débiteur."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L8",
@@ -189,7 +189,7 @@
         "Vérifier démarches et sanction adaptée.",
         "Réparation : préjudice et lien causal à établir."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-CONTRAT-L9",
@@ -212,7 +212,7 @@
         "Répétition : demande de restitution.",
         "L’indu peut créer une obligation sans contrat."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

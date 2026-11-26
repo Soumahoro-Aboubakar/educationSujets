@@ -1,0 +1,196 @@
+{
+  "module": "CAFOP-FR-ESSAI",
+  "titre": "Rédiger l’essai",
+  "matiere": "Français",
+  "resume": "La dernière partie de l’épreuve de français : comprendre la consigne, trouver des arguments et des exemples, organiser une dizaine de lignes et relire.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-FR-ESSAI-L1",
+      "titre": "Ce que demande l’essai du CAFOP",
+      "module": "Rédiger l’essai (Français)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Analyser la consigne",
+      "explication": "À la fin de cette leçon, tu sauras situer l’essai dans l’épreuve et ce qu’il rapporte. Prérequis : le module Étude de texte, dont l’essai est la suite. L’épreuve de français du CAFOP-IA (2 h, coefficient 3) se termine par un essai noté 6 points sur 20 en 2025. Le sujet prolonge le thème du texte : l’école face à la Covid-19 en 2021, l’éducation des filles en 2025.",
+      "formules": [],
+      "exemples": [
+        "Lien avec le texte",
+        "Ce que vérifie le correcteur"
+      ],
+      "pieges": [
+        "Recopier des phrases du texte : l’essai attend ta propre réflexion."
+      ],
+      "aRetenir": [
+        "Essai : dernière partie de l’épreuve.",
+        "6 points sur 20 en 2025.",
+        "Thème lié au texte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L2",
+      "titre": "Analyser la consigne",
+      "module": "Rédiger l’essai (Français)",
+      "position": "2/8",
+      "precedente": "Ce que demande l’essai du CAFOP",
+      "suivante": "Trouver des arguments",
+      "explication": "À la fin de cette leçon, tu sauras décomposer une consigne d’essai en tâche, thème et contraintes. Prérequis : la leçon précédente.",
+      "formules": [],
+      "exemples": [
+        "Décomposer la consigne 2021",
+        "Décomposer la consigne 2025"
+      ],
+      "pieges": [
+        "« Étayer » ne veut pas dire « discuter » : on ne présente pas d’arguments contraires à l’assertion."
+      ],
+      "aRetenir": [
+        "Verbe, thème, contraintes.",
+        "Respecter le point de vue imposé.",
+        "Étayer = soutenir."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L3",
+      "titre": "Trouver des arguments",
+      "module": "Rédiger l’essai (Français)",
+      "position": "3/8",
+      "precedente": "Analyser la consigne",
+      "suivante": "Illustrer par des exemples",
+      "explication": "À la fin de cette leçon, tu sauras trouver rapidement des arguments variés au brouillon. Prérequis : analyser la consigne. Pour trouver des idées, pose-toi des questions simples sur le thème : pour qui ? (l’élève, la famille, la société), dans quels domaines ? (santé, travail, droits, vie quotidienne), pourquoi ? et comment ?.",
+      "formules": [],
+      "exemples": [
+        "Sujet 2025 au brouillon",
+        "Sujet 2021 au brouillon"
+      ],
+      "pieges": [
+        "Donner trois fois le même argument avec des mots différents : « elle est instruite », « elle a appris », « elle sait des choses »."
+      ],
+      "aRetenir": [
+        "Pour qui, dans quels domaines, pourquoi, comment.",
+        "Deux ou trois arguments distincts.",
+        "Brouillon en mots-clés."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L4",
+      "titre": "Illustrer par des exemples",
+      "module": "Rédiger l’essai (Français)",
+      "position": "4/8",
+      "precedente": "Trouver des arguments",
+      "suivante": "Construire le plan d’une dizaine de lignes",
+      "explication": "À la fin de cette leçon, tu sauras choisir un exemple précis et le relier à ton argument. Prérequis : trouver des arguments. Un bon exemple est précis (un lieu, une personne, une situation), vraisemblable et expliqué : on dit en une phrase ce qu’il prouve. Les exemples tirés de la vie ivoirienne et de l’école sont bienvenus.",
+      "formules": [],
+      "exemples": [
+        "Exemple faible",
+        "Exemple fort"
+      ],
+      "pieges": [
+        "Inventer des chiffres « officiels » : un exemple n’a pas besoin de statistique, et un faux chiffre décrédibilise la copie."
+      ],
+      "aRetenir": [
+        "Précis, vraisemblable, expliqué.",
+        "Contexte ivoirien bienvenu.",
+        "Phrase de lien après l’exemple."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L5",
+      "titre": "Construire le plan d’une dizaine de lignes",
+      "module": "Rédiger l’essai (Français)",
+      "position": "5/8",
+      "precedente": "Illustrer par des exemples",
+      "suivante": "Relier les idées",
+      "explication": "À la fin de cette leçon, tu sauras répartir tes lignes entre introduction, arguments et conclusion. Prérequis : arguments et exemples.",
+      "formules": [],
+      "exemples": [
+        "Plan du sujet 2025",
+        "Plan du sujet 2021"
+      ],
+      "pieges": [
+        "Une introduction de quatre lignes qui ne laisse que deux lignes pour les arguments."
+      ],
+      "aRetenir": [
+        "Introduction d’une ligne.",
+        "Deux arguments illustrés.",
+        "Conclusion qui répond."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L6",
+      "titre": "Relier les idées",
+      "module": "Rédiger l’essai (Français)",
+      "position": "6/8",
+      "precedente": "Construire le plan d’une dizaine de lignes",
+      "suivante": "Rédiger proprement",
+      "explication": "À la fin de cette leçon, tu sauras choisir le connecteur qui exprime le bon lien logique. Prérequis : le plan.",
+      "formules": [],
+      "exemples": [
+        "Un enchaînement réussi",
+        "Un connecteur mal choisi"
+      ],
+      "pieges": [
+        "Enchaîner « et » à chaque phrase : le texte devient une liste sans logique."
+      ],
+      "aRetenir": [
+        "Addition, cause, conséquence, opposition.",
+        "Illustration, conclusion.",
+        "Le connecteur suit le lien réel."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L7",
+      "titre": "Rédiger proprement",
+      "module": "Rédiger l’essai (Français)",
+      "position": "7/8",
+      "precedente": "Relier les idées",
+      "suivante": "Bilan : un essai complet en 25 minutes",
+      "explication": "À la fin de cette leçon, tu sauras rédiger des phrases claires et éviter les fautes qui coûtent des points. Prérequis : les modules d’orthographe et de conjugaison.",
+      "formules": [],
+      "exemples": [
+        "Phrase trop longue",
+        "Version corrigée"
+      ],
+      "pieges": [
+        "Le registre familier (« les filles elles sont fortes ») : supprime le pronom de reprise."
+      ],
+      "aRetenir": [
+        "Phrases courtes et complètes.",
+        "Présent de l’indicatif.",
+        "Ni abréviations ni familiarités."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L8",
+      "titre": "Bilan : un essai complet en 25 minutes",
+      "module": "Rédiger l’essai (Français)",
+      "position": "8/8",
+      "precedente": "Rédiger proprement",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras organiser ton temps et vérifier ton essai avant de rendre la copie. Prérequis : toutes les leçons du module.",
+      "formules": [],
+      "exemples": [
+        "Un essai modèle pour le sujet 2025 (10 lignes)"
+      ],
+      "pieges": [
+        "Commencer l’essai dans les dix dernières minutes : garde au moins 25 minutes pour cette partie."
+      ],
+      "aRetenir": [
+        "Consigne, brouillon, rédaction, relecture.",
+        "Environ 25 minutes.",
+        "Compter les lignes."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

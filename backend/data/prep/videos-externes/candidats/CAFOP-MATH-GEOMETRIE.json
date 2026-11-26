@@ -1,0 +1,618 @@
+{
+ "CAFOP-MATH-GEOMETRIE-L1": {
+  "titre": "Vecteurs et relation de Chasles",
+  "candidats": [
+   {
+    "id": "fzpaNa8w5as",
+    "titre": "Vecteurs - Relation de Chasles",
+    "chaine": "Hedacademy",
+    "duree": "6:55",
+    "sec": 415,
+    "vues": "186 373 vues"
+   },
+   {
+    "id": "fbVrdYiY0qc",
+    "titre": "Appliquer la relation de Chasles - Seconde",
+    "chaine": "Yvan Monka",
+    "duree": "6:11",
+    "sec": 371,
+    "vues": "1 054 500 vues"
+   },
+   {
+    "id": "jSJSBUQcOxU",
+    "titre": "COMMENT COMPRENDRE LA RELATION DE CHASLES. {EXPLICATION+ EXO}. - 3eme",
+    "chaine": "David Patience { MATHS }",
+    "duree": "10:10",
+    "sec": 610,
+    "vues": "1 435 vues"
+   },
+   {
+    "id": "kNbt-2EBjM8",
+    "titre": "Démontrer un PARALLÉLOGRAMME à partir de propriétés et Chasles - Exercice Corrigé - Seconde",
+    "chaine": "Galilee ac",
+    "duree": "6:27",
+    "sec": 387,
+    "vues": "76 173 vues"
+   },
+   {
+    "id": "l0SWq-o1eiw",
+    "titre": "Démontrer une égalité de Vecteurs avec CHASLES - Exercice Corrigé - Seconde",
+    "chaine": "Galilee ac",
+    "duree": "2:46",
+    "sec": 166,
+    "vues": "29 638 vues"
+   },
+   {
+    "id": "JxGQ_ocpntg",
+    "titre": "Décomposer un Vecteur avec CHASLES - Exercice Corrigé - Seconde",
+    "chaine": "Galilee ac",
+    "duree": "3:48",
+    "sec": 228,
+    "vues": "21 353 vues"
+   },
+   {
+    "id": "nFHuglLbClc",
+    "titre": "COMPRENDRE LES VECTEURS",
+    "chaine": "Hedacademy",
+    "duree": "14:01",
+    "sec": 841,
+    "vues": "439 368 vues"
+   },
+   {
+    "id": "PK1eRGHS7WI",
+    "titre": "Vecteur • Relation de Chasles • Savoir l'appliquer et connaitre les erreurs à éviter • Cours Seconde",
+    "chaine": "jaicompris Maths",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "28 223 vues"
+   },
+   {
+    "id": "csDvZomJUyo",
+    "titre": "ÉGALITÉ DE CHASLES 😱 | L’ASTUCE QUE TOUS LES ÉLÈVES RATENT EN 2ndeC !",
+    "chaine": "SOUMAHORO ACADEMY",
+    "duree": "5:31",
+    "sec": 331,
+    "vues": "220 vues"
+   },
+   {
+    "id": "TAGMuP934N8",
+    "titre": "3ème : [S.15][E.2] BEPC, CAFOP : Vecteur , construction et egalité de Chasles",
+    "chaine": "SOUMAHORO ACADEMY",
+    "duree": "13:39",
+    "sec": 819,
+    "vues": "86 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-GEOMETRIE-L2": {
+  "titre": "Calculer dans un repère",
+  "candidats": [
+   {
+    "id": "ZEzkr6EI-yE",
+    "titre": "Repère orthogonal, orthonormal, orthonormé : quelle est la différence ?",
+    "chaine": "charmuzelle",
+    "duree": "1:03",
+    "sec": 63,
+    "vues": "40 452 vues"
+   },
+   {
+    "id": "7c6y8ibnA5w",
+    "titre": "Calculer la distance entre deux points dans un repère orthonormé du plan - 2nde",
+    "chaine": "L.P.B. Maths vidéo",
+    "duree": "2:55",
+    "sec": 175,
+    "vues": "243 062 vues"
+   },
+   {
+    "id": "AHNYuKCoCvU",
+    "titre": "Placer des points dans un repère - Cinquième",
+    "chaine": "Yvan Monka",
+    "duree": "9:46",
+    "sec": 586,
+    "vues": "451 734 vues"
+   },
+   {
+    "id": "6SvDRet5QN0",
+    "titre": "Repérage dans le Plan - Seconde - Mathrix",
+    "chaine": "Mathrix",
+    "duree": "5:49",
+    "sec": 349,
+    "vues": "120 581 vues"
+   },
+   {
+    "id": "EehP4SFpo5c",
+    "titre": "LE COURS : Géométrie repérée - Première",
+    "chaine": "Yvan Monka",
+    "duree": "10:15",
+    "sec": 615,
+    "vues": "172 159 vues"
+   },
+   {
+    "id": "DhKhPbJGzcg",
+    "titre": "Calcul de coordonnées de vecteur",
+    "chaine": "Éducation Plus",
+    "duree": "9:46",
+    "sec": 586,
+    "vues": "21 995 vues"
+   },
+   {
+    "id": "R60lTKc0G98",
+    "titre": "MAÎTRISER LES REPÈRES - 5ᵉ / 4ᵉ",
+    "chaine": "Hedacademy",
+    "duree": "9:13",
+    "sec": 553,
+    "vues": "10 541 vues"
+   },
+   {
+    "id": "dK786qIAEFY",
+    "titre": "Mathématiques – Cours – Coordonnées dans un repère",
+    "chaine": "Optimaths",
+    "duree": "4:58",
+    "sec": 298,
+    "vues": "155 vues"
+   },
+   {
+    "id": "DGSSguRZxXo",
+    "titre": "Calcul de coordonnées, de distance et de milieu d'un segment",
+    "chaine": "Éducation Plus",
+    "duree": "10:15",
+    "sec": 615,
+    "vues": "43 393 vues"
+   },
+   {
+    "id": "r122CVJ48v0",
+    "titre": "Cours - 3e - Maths - Géométrie : Répère Orthonormé et Distance 1/3",
+    "chaine": "Ecoles au Burkina",
+    "duree": "13:08",
+    "sec": 788,
+    "vues": "2 147 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-GEOMETRIE-L3": {
+  "titre": "Droites parallèles et perpendiculaires",
+  "candidats": [
+   {
+    "id": "lPjwG4NPHOY",
+    "titre": "Droites perpendiculaires et parallèles CE2 - CM1 - Cycle 2 et 3 - Maths - Mathématiques - Géométrie",
+    "chaine": "Maître Lucas",
+    "duree": "5:08",
+    "sec": 308,
+    "vues": "103 512 vues"
+   },
+   {
+    "id": "ohtIhC_dwo4",
+    "titre": "Reconnaître des droites parallèles, des droites perpendiculaires - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "9:25",
+    "sec": 565,
+    "vues": "140 794 vues"
+   },
+   {
+    "id": "kyhY5bCdngc",
+    "titre": "DROITES SÉCANTES - PARALLÈLES - PERPENDICULAIRES - CM2 / 6ᵉ",
+    "chaine": "Hedacademy",
+    "duree": "3:43",
+    "sec": 223,
+    "vues": "22 421 vues"
+   },
+   {
+    "id": "GK-dsVJH90s",
+    "titre": "6e Construire des droites perpendiculaires",
+    "chaine": "Cours de Maths Saber",
+    "duree": "1:45",
+    "sec": 105,
+    "vues": "22 544 vues"
+   },
+   {
+    "id": "5OYptO_cawg",
+    "titre": "Droites parallèles et perpendiculaires - Géométrie plane - Maths 6e - Les Bons Profs",
+    "chaine": "Les Bons Profs",
+    "duree": "1:58",
+    "sec": 118,
+    "vues": "179 698 vues"
+   },
+   {
+    "id": "thr5WEN4biU",
+    "titre": "EXERCICE : Construire des droites parallèles et des droites perpendiculaires - Sixième",
+    "chaine": "Yvan Monka",
+    "duree": "7:15",
+    "sec": 435,
+    "vues": "52 574 vues"
+   },
+   {
+    "id": "MZoAAkyZMQI",
+    "titre": "6-Droites parallèles et perpendiculaires",
+    "chaine": "Karine Hoarau",
+    "duree": "1:26",
+    "sec": 86,
+    "vues": "57 838 vues"
+   },
+   {
+    "id": "KItFk_vmgO0",
+    "titre": "Cours -CE2- Mathématiques: Géométrie /Les droites sécantes et les droites perpendiculaires/Mme SARR",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "11:40",
+    "sec": 700,
+    "vues": "6 066 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-GEOMETRIE-L4": {
+  "titre": "Trigonométrie dans le triangle rectangle",
+  "candidats": [
+   {
+    "id": "EvTw4124Quo",
+    "titre": "Calculer une longueur ? 💪 SINUS, COSINUS, TANGENTE ✅ Troisième",
+    "chaine": "Paul Olivier",
+    "duree": "4:50",
+    "sec": 290,
+    "vues": "242 068 vues"
+   },
+   {
+    "id": "e9NVoVkONvU",
+    "titre": "Trigonométrie Dans Le Triangle Rectangle",
+    "chaine": "all for math",
+    "duree": "1:17",
+    "sec": 77,
+    "vues": "17 vues"
+   },
+   {
+    "id": "HOL3YkVxIzc",
+    "titre": "Le triangle rectangle : Pythagore, sinus, cosinus, tangente | Maths 3e BEPC",
+    "chaine": "FONDATION FOSOPIQ",
+    "duree": "10:23",
+    "sec": 623,
+    "vues": "126 vues"
+   },
+   {
+    "id": "Fjwla-R02EY",
+    "titre": "GÉOMÉTRIE AU BEPC : Pythagore, Hauteur et Sinus (L’exercice incontournable)",
+    "chaine": "École en ligne C.I",
+    "duree": "7:29",
+    "sec": 449,
+    "vues": "100 vues"
+   },
+   {
+    "id": "OS3yEkR9F8E",
+    "titre": "LA TRIGONOMÉTRIE AU BREVET",
+    "chaine": "Hedacademy",
+    "duree": "10:56",
+    "sec": 656,
+    "vues": "209 753 vues"
+   },
+   {
+    "id": "XqkEQ_jmiDU",
+    "titre": "Cours - Troisième - Mathématiques : Relation trigonométrique dans un triangle rectangle / M. Diop",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "12:59",
+    "sec": 779,
+    "vues": "77 795 vues"
+   },
+   {
+    "id": "K890zWAq2EU",
+    "titre": "045 | [3ème Brevet • Mathématiques] Ch.3 — Trigonométrie dans le triangle rectangle | LaboBac",
+    "chaine": "LaboBac — Cours Collège & Lycée",
+    "duree": "10:50",
+    "sec": 650,
+    "vues": "10 vues"
+   },
+   {
+    "id": "RFlTEfF0EoA",
+    "titre": "Trigonométrie dans le triangle quelconque",
+    "chaine": "Promath",
+    "duree": "7:55",
+    "sec": 475,
+    "vues": "15 688 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-GEOMETRIE-L5": {
+  "titre": "Thalès dans les sujets du concours",
+  "candidats": [
+   {
+    "id": "BGaPOB02ty0",
+    "titre": "5 minutes avant ton contrôle - Fiche sur Thalès",
+    "chaine": "Hedacademy",
+    "duree": "4:14",
+    "sec": 254,
+    "vues": "188 222 vues"
+   },
+   {
+    "id": "SDc5hp7VQSQ",
+    "titre": "Le théorème de Thalès - Réviser et comprendre les maths, avec Mathema",
+    "chaine": "Science & Vie TV",
+    "duree": "5:01",
+    "sec": 301,
+    "vues": "26 714 vues"
+   },
+   {
+    "id": "preGhwQs7eY",
+    "titre": "Théorème de Thalès",
+    "chaine": "Éducation Plus",
+    "duree": "14:54",
+    "sec": 894,
+    "vues": "207 464 vues"
+   },
+   {
+    "id": "o67pXZL3qbQ",
+    "titre": "THALÈS : Ne faites plus JAMAIS l'erreur ! (Propriété, Conséquence, Réciproque) 📐\"",
+    "chaine": "SOUMAHORO ACADEMY",
+    "duree": "4:22",
+    "sec": 262,
+    "vues": "194 vues"
+   },
+   {
+    "id": "7xiVqX4N-6I",
+    "titre": "Théoreme de Thales",
+    "chaine": "Éducation Plus",
+    "duree": "9:39",
+    "sec": 579,
+    "vues": "10 010 vues"
+   },
+   {
+    "id": "YHA81vyt05Y",
+    "titre": "Cours ♦ Théorème de Thalès • Calcul de longueur dans une configuration papillon ♦ Troisième",
+    "chaine": "jaicompris Maths",
+    "duree": "8:55",
+    "sec": 535,
+    "vues": "7 111 vues"
+   },
+   {
+    "id": "w-ZtRqYd80I",
+    "titre": "Théorème de THALÈS 🎯 Calculer la longueur d'un TRIANGLE ? 💪 BREVET MATHS ✌️ 4e | 3e",
+    "chaine": "Paul Olivier",
+    "duree": "6:01",
+    "sec": 361,
+    "vues": "14 131 vues"
+   },
+   {
+    "id": "zC9xdWJI1LI",
+    "titre": "[Maths] 1ère année (lycée) maths: Théorème de Thalès et sa réciproque (cours)",
+    "chaine": "Réussir mon bac",
+    "duree": "7:29",
+    "sec": 449,
+    "vues": "67 019 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-GEOMETRIE-L6": {
+  "titre": "Angles inscrits et angle au centre",
+  "candidats": [
+   {
+    "id": "2x-Xf2jJVnA",
+    "titre": "Mathématiques : Angles inscrits et angles au centre",
+    "chaine": "myMaxicours",
+    "duree": "6:51",
+    "sec": 411,
+    "vues": "203 306 vues"
+   },
+   {
+    "id": "_ECyBuYlB0M",
+    "titre": "Appliquer le théorème de l'angle inscrit",
+    "chaine": "Yvan Monka",
+    "duree": "3:50",
+    "sec": 230,
+    "vues": "183 482 vues"
+   },
+   {
+    "id": "CuXY9PsqnvU",
+    "titre": "Appliquer le théorème de l'angle au centre",
+    "chaine": "Yvan Monka",
+    "duree": "5:03",
+    "sec": 303,
+    "vues": "116 356 vues"
+   },
+   {
+    "id": "bSxBqZHDviU",
+    "titre": "Cours - Troisième - Mathématiques : Angle au centre / Angle inscrit",
+    "chaine": "Ecoles Au Senegal",
+    "duree": "14:41",
+    "sec": 881,
+    "vues": "63 131 vues"
+   },
+   {
+    "id": "ZV0_8VAVIWc",
+    "titre": "Cours : Angles inscrits 3ème #maths #fonction #éducation",
+    "chaine": "coach tera",
+    "duree": "12:47",
+    "sec": 767,
+    "vues": "2 823 vues"
+   },
+   {
+    "id": "7wx9sicZdyY",
+    "titre": "Arc de cercle et angle au centre (Niveau 4ème)",
+    "chaine": "Ludek-Academy",
+    "duree": "9:28",
+    "sec": 568,
+    "vues": "457 vues"
+   },
+   {
+    "id": "QnuOMp3L01I",
+    "titre": "Leçon 46 Angles inscrits interceptant le même arc",
+    "chaine": "EDUNOTE",
+    "duree": "5:38",
+    "sec": 338,
+    "vues": "1 575 vues"
+   },
+   {
+    "id": "Ltc41X6-tb8",
+    "titre": "Arcs et angles : Angles au centre, angles inscrits et angles tangentiels",
+    "chaine": "Máthēma",
+    "duree": "7:54",
+    "sec": 474,
+    "vues": "17 695 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-GEOMETRIE-L7": {
+  "titre": "Solides : cube, pyramide, cône, boule",
+  "candidats": [
+   {
+    "id": "JgWofXmJpMI",
+    "titre": "Reconnaître les solides usuels 💥 Pavé Cube Prisme Pyramide Cylindre Cône Boule 🚀 Cours géométrie 6e♕",
+    "chaine": "jaicompris Maths",
+    "duree": "5:45",
+    "sec": 345,
+    "vues": "1 202 vues"
+   },
+   {
+    "id": "br0fdTKg1_w",
+    "titre": "Les 6 solides : cube, pavé, boule, pyramide, cylindre, cône",
+    "chaine": "CommeUnJeu",
+    "duree": "2:37",
+    "sec": 157,
+    "vues": "46 vues"
+   },
+   {
+    "id": "KpldM-7CUhU",
+    "titre": "Découvrir les solides CP - Cycle 2 - Maths - Mathématiques - Géométrie",
+    "chaine": "Maître Lucas",
+    "duree": "7:11",
+    "sec": 431,
+    "vues": "62 231 vues"
+   },
+   {
+    "id": "QxkAPpOCZ1w",
+    "titre": "Les solides CE1 - CE2 - Cycle 2 - Maths - Mathématiques - Géométrie",
+    "chaine": "Maître Lucas",
+    "duree": "7:19",
+    "sec": 439,
+    "vues": "75 981 vues"
+   },
+   {
+    "id": "2NgIhsxlvMU",
+    "titre": "Vidéo 03 | Reconnaître les Solides | Pavé | Cône | Sphère | Cylindre | Cube | Pyramide",
+    "chaine": "J'aime les Maths !",
+    "duree": "0:56",
+    "sec": 56,
+    "vues": "1 632 vues"
+   },
+   {
+    "id": "uJdCXfhVSkE",
+    "titre": "cours G5 : Les solides : pyramides, cônes, sphères et boules 3ème",
+    "chaine": "Ludovic Megret",
+    "duree": "13:18",
+    "sec": 798,
+    "vues": "70 vues"
+   },
+   {
+    "id": "K-W7vzynnvo",
+    "titre": "Volume : pyramides, cônes et boule (avec mesure manquante)",
+    "chaine": "Les cours de Madame Domingue",
+    "duree": "10:15",
+    "sec": 615,
+    "vues": "11 vues"
+   },
+   {
+    "id": "1d32xW-h7Cg",
+    "titre": "Solides - Distinguer prisme et pyramide (ép. 7/7)",
+    "chaine": "Réseau Canopé",
+    "duree": "2:11",
+    "sec": 131,
+    "vues": "188 385 vues"
+   },
+   {
+    "id": "eJ9_2ijYPME",
+    "titre": "TOUS LES SOLIDES en 2 formules ! 🤩",
+    "chaine": "Hedacademy",
+    "duree": "10:26",
+    "sec": 626,
+    "vues": "391 043 vues"
+   },
+   {
+    "id": "LwcvLSBMqLM",
+    "titre": "Comment calculer le volume d'un solide ? (cube, pavé droit, prisme droit, cylindre, pyramide, boule)",
+    "chaine": "Mathemax",
+    "duree": "12:22",
+    "sec": 742,
+    "vues": "1 780 vues"
+   }
+  ]
+ },
+ "CAFOP-MATH-GEOMETRIE-L8": {
+  "titre": "Bilan : réussir le QCM de l’exercice 1",
+  "candidats": [
+   {
+    "id": "rx30cpSBL3s",
+    "titre": "QCM 1 – Concours Médecine 2026-2027 | Limite et taux d'accroissement – Correction détaillée",
+    "chaine": "Maths Animées",
+    "duree": "13:49",
+    "sec": 829,
+    "vues": "131 vues"
+   },
+   {
+    "id": "tN_-_VV6M5A",
+    "titre": "AUTOMATISMES - QCM n°1 | Entraînement à l'épreuve anticipée de bac de maths de première",
+    "chaine": "DiaporaMaths",
+    "duree": "13:23",
+    "sec": 803,
+    "vues": "5 632 vues"
+   },
+   {
+    "id": "nZGW4q4zeKw",
+    "titre": "QCM de mathématiques. Comment réussir un QCM de Maths ? 5 astuces très pratiques.",
+    "chaine": "Make maths easier",
+    "duree": "6:55",
+    "sec": 415,
+    "vues": "9 287 vues"
+   },
+   {
+    "id": "zR5P8I-cViM",
+    "titre": "QCM ANALYSE & ALGÈBRE | Concours Enseignement Mathématiques 2026 | Testez votre niveau 🎯",
+    "chaine": "Youness essamti",
+    "duree": "13:58",
+    "sec": 838,
+    "vues": "1 877 vues"
+   },
+   {
+    "id": "h-VsQZDzx3Y",
+    "titre": "QCM 6 – Concours Médecine 2026-2027 | Équation avec une puissance cubique – Correction détaillée",
+    "chaine": "Maths Animées",
+    "duree": "14:48",
+    "sec": 888,
+    "vues": "45 vues"
+   },
+   {
+    "id": "5Yvu2htHKL4",
+    "titre": "COMMENT REUSSIR LES QCM",
+    "chaine": "Potion de vie",
+    "duree": "8:26",
+    "sec": 506,
+    "vues": "196 119 vues"
+   },
+   {
+    "id": "ibtnt9Y6b5w",
+    "titre": "BEPC 2026 Zone1 - MATHS - Exercice 1 Corrigé",
+    "chaine": "DEDI Vincent",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "455 vues"
+   },
+   {
+    "id": "m2dXW79f2_4",
+    "titre": "BEPC 2023 en Maths",
+    "chaine": "ndolomath_officiel",
+    "duree": "2:07",
+    "sec": 127,
+    "vues": "809 vues"
+   },
+   {
+    "id": "OWvcJBkVjHE",
+    "titre": "PREPA BEPC EN MATHEMATIQUES",
+    "chaine": "BACADEMY",
+    "duree": "5:26",
+    "sec": 326,
+    "vues": "540 vues"
+   },
+   {
+    "id": "zEGdIxNnZQM",
+    "titre": "Quiz : Histoire Géo niveau Brevet des collèges - 10 questions",
+    "chaine": "TopQuizz",
+    "duree": "3:23",
+    "sec": 203,
+    "vues": "380 430 vues"
+   }
+  ]
+ }
+}

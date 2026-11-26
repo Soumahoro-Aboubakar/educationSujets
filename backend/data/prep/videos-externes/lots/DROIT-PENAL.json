@@ -29,7 +29,7 @@
         "Pas de peine inventée par le juge.",
         "Code de 2019 à lire avec ses modifications."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L2",
@@ -52,7 +52,7 @@
         "Loi de fond plus sévère : pas de rétroactivité.",
         "Loi plus douce : bénéfice avant condamnation définitive."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L3",
@@ -75,7 +75,7 @@
         "Encourue : prévue ; prononcée : retenue.",
         "Éviter les seuils étrangers non vérifiés."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L4",
@@ -98,7 +98,7 @@
         "Vérifier le résultat si le texte l’exige.",
         "Établir le lien causal nécessaire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L5",
@@ -121,7 +121,7 @@
         "Imprudence : seulement si elle est pénalement prévue.",
         "Mobile et intention sont distincts."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L6",
@@ -144,7 +144,7 @@
         "Vérifier acte non équivoque et cause extérieure.",
         "Délit : texte spécial ; contravention : pas de tentative punissable."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L7",
@@ -167,7 +167,7 @@
         "Certaines instigations relèvent de l’auteur : article 29.",
         "Complicité : aide consciente dans les conditions de l’article 30."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L8",
@@ -190,7 +190,7 @@
         "Défense concomitante et proportionnée.",
         "Relier chaque condition aux faits."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L9",
@@ -213,7 +213,7 @@
         "Minorité et antécédents sont distincts.",
         "Vérifier les conditions particulières du Code."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-PENAL-L10",
@@ -236,7 +236,7 @@
         "Amnistie : effet pénal défini par la loi.",
         "Ne pas confondre avec une décision d’innocence."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

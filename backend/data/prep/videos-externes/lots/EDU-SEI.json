@@ -4,7 +4,11 @@
   "matiere": "Psychopédagogie et système éducatif",
   "resume": "Comprendre les parcours scolaires, l’obligation de scolarité, les acteurs, la vie scolaire et les enjeux d’orientation.",
   "concours": [
-    "ENS — Éducateurs"
+    "ENS — Éducateurs",
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires",
+    "CAFOP — Accès à la formation de professeur de CAFOP"
   ],
   "lecons": [
     {
@@ -27,7 +31,7 @@
         "Primaire : 6 ans ; secondaire : 4 puis 3 ans.",
         "CEPE, BEPC et baccalauréat jalonnent le parcours."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "EDU-SEI-L2",
@@ -50,7 +54,7 @@
         "Accès, présence et maintien se complètent.",
         "Rechercher les obstacles et coordonner la réponse."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "EDU-SEI-L3",
@@ -72,7 +76,7 @@
         "Le COGES soutient la participation communautaire.",
         "Coopérer en respectant les missions."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "EDU-SEI-L4",
@@ -95,7 +99,7 @@
         "Écouter et coordonner.",
         "Agir puis vérifier l’effet de l’aide."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "EDU-SEI-L5",
@@ -118,7 +122,7 @@
         "La réponse vise un acte, dans le respect de la dignité.",
         "Protéger avant d’analyser une urgence."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "EDU-SEI-L6",
@@ -141,7 +145,7 @@
         "Distinguer les voies de formation.",
         "Relier compétences et insertion sans garantie automatique."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "EDU-SEI-L7",
@@ -164,7 +168,7 @@
         "Relier problème, acteurs et actions.",
         "Attribuer les chiffres et reconnaître les limites."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

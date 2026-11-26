@@ -28,7 +28,7 @@
         "U en V, I en A, R en Ω.",
         "Écrire la conversion avant la formule."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L2",
@@ -50,7 +50,7 @@
         "Série : même branche ; parallèle : mêmes nœuds.",
         "Ampèremètre en série ; voltmètre en dérivation."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L3",
@@ -75,7 +75,7 @@
         "Convertir en V, A, Ω.",
         "Isoler cette grandeur puis remplacer les lettres."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L4",
@@ -100,7 +100,7 @@
         "Addition des tensions.",
         "R équivalente = somme des résistances."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L5",
@@ -124,7 +124,7 @@
         "Au nœud : addition des courants.",
         "R équivalente plus petite que chaque R."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L6",
@@ -149,7 +149,7 @@
         "E = Pt si P constante.",
         "J avec des secondes ; Wh avec des heures."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L7",
@@ -173,7 +173,7 @@
         "q = Cu.",
         "Capacité en F, charge en C."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L8",
@@ -198,7 +198,7 @@
         "Série : inverses qui s’ajoutent.",
         "Simplifier un groupe à la fois."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L9",
@@ -223,7 +223,7 @@
         "À τ : 63,2 % de la tension finale.",
         "Vers 5τ : charge presque achevée."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "PC-ELEC-L10",
@@ -248,7 +248,7 @@
         "Décharge RC : tension décroissante.",
         "L’énergie est dissipée dans la résistance."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-CG-IA-L1",
+    "youtubeId": "JSytfJ1L-ns",
+    "couverture": "exacte",
+    "justification": "Correction d’un sujet de culture générale du concours direct d’entrée au CAFOP : format et types de questions.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-IA-L2",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz sans explication ; recherche ciblée à refaire.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-IA-L3",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo ivoirienne sur élus, nommés et symboles parmi les candidats.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-IA-L4",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz sans explication.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-IA-L5",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz sur la Côte d’Ivoire, sans cours sur climats et barrages.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-IA-L6",
+    "youtubeId": "alsyze81898",
+    "couverture": "exacte",
+    "justification": "Cours de 3ᵉ : groupes sanguins, donneur et receveur universels, transfusion.",
+    "source": "recherche YouTube ciblée (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-IA-L7",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz ; recherche ciblée sur les changements d’état à refaire.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-IA-L8",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur les pluriels et accords demandés en culture générale.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

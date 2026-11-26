@@ -1,0 +1,108 @@
+{
+  "module": "CAFOP-CG-IA",
+  "lecons": [
+    {
+      "code": "CAFOP-CG-IA-L1",
+      "requetes": [
+        "site:youtube.com CAFOP culture générale épreuve méthodologie durée",
+        "site:youtube.com CAFOP culture générale conseils gestion temps",
+        "CAFOP culture générale méthodologie épreuve youtube",
+        "site:youtube.com/watch \"CAFOP\" \"culture\" \"méthodologie\"",
+        "\"CAFOP\" \"culture générale\" \"conseils\" vidéo"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo trouvée ne présente suffisamment précisément la structure de l’épreuve CAFOP-IA et la répartition de son heure ; la méthodologie générale repérée concerne d’autres concours."
+    },
+    {
+      "code": "CAFOP-CG-IA-L2",
+      "requetes": [
+        "site:youtube.com CAFOP arts culture sport cours",
+        "site:youtube.com MASA FESPACO CAN culture générale explication",
+        "CAFOP arts culture sport cours youtube",
+        "site:youtube.com/watch \"CAFOP\" \"sport\" \"culture\"",
+        "\"CAFOP\" \"arts\" \"sport\" vidéo cours"
+      ],
+      "candidats": [],
+      "justification": "Les résultats ne proposent pas d’explication pédagogique ciblée réunissant les repères culturels et sportifs attendus ; les commentaires de compétition et les corrections généralistes ne conviennent pas."
+    },
+    {
+      "code": "CAFOP-CG-IA-L3",
+      "requetes": [
+        "site:youtube.com Côte Ivoire EDHC élus nommés symboles Etat",
+        "site:youtube.com symboles république Côte Ivoire cours",
+        "Côte Ivoire symboles Etat EDHC cours youtube",
+        "\"CODE CITOYEN\" \"symboles\" durée",
+        "\"CODE CITOYEN\" \"Les symboles de la République\" vidéo durée",
+        "kFfsQKdssy8 durée"
+      ],
+      "candidats": [],
+      "justification": "Une capsule de RTI Officiel sur les symboles de la République ivoirienne est pertinente pour une partie de la leçon, mais sa durée n’a pas pu être vérifiée pour garantir le plafond de 15 minutes."
+    },
+    {
+      "code": "CAFOP-CG-IA-L4",
+      "requetes": [
+        "site:youtube.com trouver siècle année explication simple",
+        "site:youtube.com histoire Afrique Ethiopie Liberia Gold Coast cours",
+        "trouver siècle année cours youtube",
+        "site:youtube.com/watch \"siècle\" \"année\" \"5\"",
+        "\"trouver le siècle\" vidéo",
+        "\"Les siècles\" \"xysGKyo7Hh4\"",
+        "SzOElnsNq9I durée"
+      ],
+      "candidats": [],
+      "justification": "Des vidéos expliquent le calcul des siècles, mais leur durée totale n’a pas pu être établie ; aucune ressource courte vérifiée ne couvre également les repères africains demandés."
+    },
+    {
+      "code": "CAFOP-CG-IA-L5",
+      "requetes": [
+        "géographie Côte Ivoire climats barrages cours youtube",
+        "climats Côte Ivoire explication simple youtube",
+        "site:youtube.com/watch \"climats\" \"Côte d'Ivoire\"",
+        "\"climats de la Côte d'Ivoire\" youtube",
+        "\"Géographie de la Côte d'Ivoire\" TéléCrayon youtube"
+      ],
+      "candidats": [],
+      "justification": "Les résultats portent sur l’harmattan ou sur une présentation générale du pays, sans couverture établie des quatre climats, des barrages et des chefs-lieux enseignés."
+    },
+    {
+      "code": "CAFOP-CG-IA-L6",
+      "requetes": [
+        "groupes sanguins compatibilité explication simple youtube",
+        "virus bactéries parasites différences cours youtube",
+        "site:youtube.com/watch \"pqi0qtilu3s\"",
+        "site:youtube.com/watch \"virus\" \"bactéries\" \"parasites\"",
+        "\"groupes sanguins et la compatibilité sanguine\" Alloprof durée",
+        "\"Les groupes sanguins et la compatibilité sanguine\" \"7\"",
+        "pqi0qtilu3s durée"
+      ],
+      "candidats": [],
+      "justification": "La vidéo Alloprof explique précisément les compatibilités sanguines, avec prise en compte du rhésus, mais sa durée totale n’a pas pu être vérifiée ; les autres résultats ne permettent pas davantage de garantir la limite imposée."
+    },
+    {
+      "code": "CAFOP-CG-IA-L7",
+      "requetes": [
+        "changements état eau explication simple youtube",
+        "intensité tension volts ampères cours youtube",
+        "site:youtube.com/watch \"changements d'état\" \"3 minutes\"",
+        "\"changements d'état\" vidéo 4 minutes youtube",
+        "\"changements d'état\" \"Paul Olivier\" youtube",
+        "fW8bwgRDxSY durée"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos repérées expliquent surtout les changements d’état, sans couvrir les unités électriques et la reproduction végétative ; aucune candidate suffisamment vérifiée ne satisfait les critères de sélection."
+    },
+    {
+      "code": "CAFOP-CG-IA-L8",
+      "requetes": [
+        "accord participe passé avoir COD avant cours youtube",
+        "pluriel noms al ail eu ou exceptions cours youtube",
+        "site:youtube.com/watch \"UcCefkw1jeI\"",
+        "\"Accord du participe passé\" \"UcCefkw1jeI\"",
+        "\"Accord du participe passé avec l'auxiliaire\" \"avoir\" youtube Le français",
+        "UcCefkw1jeI durée"
+      ],
+      "candidats": [],
+      "justification": "Une explication ciblée de Skolab Fr traite l’accord avec avoir et le COD, mais sa durée reste invérifiable ; les résultats sur les pluriels ne permettent pas non plus de garantir le plafond de 15 minutes."
+    }
+  ]
+}

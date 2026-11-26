@@ -1,0 +1,237 @@
+{
+  "module": "CAFOP-FR-ORTHO",
+  "lecons": [
+    {
+      "code": "CAFOP-FR-ORTHO-L1",
+      "requetes": [
+        "site:youtube.com/watch trouver le sujet accorder le verbe explication simple",
+        "site:youtube.com/watch accord sujet verbe cours exemples",
+        "site:youtube.com \"Trouver le sujet\" \"accorder\"",
+        "\"Le sujet et l'accord du verbe\" \"Clément\" minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=S_ut1e0HVtk",
+          "titre": "Le sujet et l'accord du verbe",
+          "chaine": "Clément Lemaitre-Provost",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Cette capsule explique comment identifier le sujet d’une phrase puis l’utiliser pour accorder le verbe conjugué."
+        }
+      ],
+      "justification": "La présentation annoncée correspond directement aux deux objectifs de la leçon et convient à une reprise des bases. La durée n’a pas pu être vérifiée."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L2",
+      "requetes": [
+        "site:youtube.com/watch accord verbe sujet inversé éloigné collectif coordonnés",
+        "site:youtube.com/watch accord sujet difficile la plupart cours",
+        "site:youtube.com \"accord sujet verbe\" \"collectif\"",
+        "site:youtube.com \"accord sujet\" \"inversé\" cours",
+        "\"Accords complexes sujet\" \"Pass Education\" vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=9Usan-qwuL4",
+          "titre": "Accords complexes sujet / verbe (2) - 5ème, 4ème, 3ème - Cours, Exercices, Evaluations",
+          "chaine": "Pass Education FR",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo annonce des exemples de sujets éloignés, multiples et inversés, mais le traitement des collectifs et de « la plupart de » n’est pas confirmé."
+        }
+      ],
+      "justification": "C’est la correspondance la plus directe trouvée pour les difficultés de repérage du sujet, avec une couverture des collectifs à compléter. La durée n’a pas pu être vérifiée."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L3",
+      "requetes": [
+        "site:youtube.com/watch pluriel noms simples composés cours",
+        "site:youtube.com/watch pluriel des noms explication simple",
+        "site:youtube.com \"pluriel des noms\" cours",
+        "site:youtube.com \"pluriel des noms\" \"composés\" \"minutes\"",
+        "\"pluriel des noms\" vidéo \"03\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=5F-oqTRKT_0",
+          "titre": "Le pluriel des noms CE2 - CM1 - Cycle 2 et 3 - Français - Orthographe",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo reprend progressivement la formation du pluriel des noms simples, mais ne couvre pas les noms composés de la leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=wmaWTzDLaxY",
+          "titre": "Le pluriel des noms composés : la méthode simple pour ne plus faire d’erreurs",
+          "chaine": "Classe de français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La leçon analyse les différentes constructions des noms composés et annonce les rectifications de 1990, en complément des pluriels simples."
+        }
+      ],
+      "justification": "Le premier candidat facilite la reprise des bases ; le second correspond au volet des noms composés et aux variantes orthographiques. Leurs durées n’ont pas pu être vérifiées."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L4",
+      "requetes": [
+        "site:youtube.com/watch accord adjectif composé couleur cours",
+        "site:youtube.com/watch accord adjectifs couleur explication simple",
+        "site:youtube.com \"accord\" \"adjectifs de couleur\"",
+        "site:youtube.com \"accord adjectifs\" \"couleur\" \"cours\"",
+        "\"accord des adjectifs de couleur\" vidéo \"02\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=eK-Z3qFnBOI",
+          "titre": "Accord des adjectifs de couleurs - Cours de français animé...",
+          "chaine": "Foad Spirit",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette courte leçon animée annoncée présente les règles et exceptions des couleurs, sans couvrir tout l’accord des adjectifs simples et composés."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=pEDU4xXt4Cs",
+          "titre": "L’accord de l’adjectif (cours 26) SANS CONFUSION ✔️ exercices et évaluations | Marie de Charlevoix🌷",
+          "chaine": "Marie de Charlevoix",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Le cours explique le lien entre nom et adjectif ainsi que l’accord en genre et en nombre, les couleurs faisant l’objet d’un cours distinct."
+        }
+      ],
+      "justification": "Le premier candidat cible les pièges des couleurs ; le second apporte les règles générales nécessaires aux débutants. Leurs durées n’ont pas pu être vérifiées."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L5",
+      "requetes": [
+        "site:youtube.com \"accord du participe passé\" \"être et avoir\"",
+        "accord participe passé être avoir cours explication simple YouTube",
+        "\"BRVEDZJOugc\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=BRVEDZJOugc",
+          "titre": "L'accord du participe passé avec les auxiliaires être et avoir",
+          "chaine": "français pratique",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo annonce une explication progressive des accords avec être et avoir, mais le détail du COD antéposé et de ses reprises pronominales reste à confirmer."
+        }
+      ],
+      "justification": "Le sujet annoncé correspond au cœur de la leçon, avec des exemples et une progression accessibles. L’accès direct ayant échoué, la durée et les sous-cas précis n’ont pas pu être vérifiés."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L6",
+      "requetes": [
+        "accord participe passé verbes pronominaux cours YouTube",
+        "site:youtube.com \"participe\" \"pronominaux\" \"5\"",
+        "\"asBNQRXtNXQ\" durée",
+        "\"Le participe passé d’un verbe pronominal\" Alloprof durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=asBNQRXtNXQ",
+          "titre": "Le participe passé d’un verbe pronominal| Français | Alloprof",
+          "chaine": "Alloprof",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule distingue les verbes essentiellement et occasionnellement pronominaux et leurs règles d’accord, sans traitement confirmé des emplois de sens passif."
+        }
+      ],
+      "justification": "La description et le chapitrage confirment une progression adaptée à l’analyse des verbes pronominaux ; la terminologie québécoise CD/CI correspond à COD/COI. La durée totale n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L7",
+      "requetes": [
+        "site:youtube.com \"participe passé suivi d’un infinitif\"",
+        "site:youtube.com \"participe passé suivi d'un infinitif\" cours",
+        "\"7IliF_cJTYQ\" durée",
+        "\"Participe passé suivi d'un infinitif\" \"Voltaire\" vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=7IliF_cJTYQ",
+          "titre": "Participe passé suivi d'un infinitif",
+          "chaine": "Projet Voltaire",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule cible précisément l’accord devant un infinitif, mais les cas de « fait » et de « laissé » selon les rectifications de 1990 ne sont pas confirmés."
+        }
+      ],
+      "justification": "La ressource est directement consacrée à la difficulté grammaticale étudiée et provient d’un spécialiste de l’orthographe. Sa durée et la couverture des exceptions n’ont pas pu être vérifiées."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L8",
+      "requetes": [
+        "site:youtube.com homophones a à et est son sont ce se ces ses on ont",
+        "homophones grammaticaux cours 5 minutes YouTube",
+        "\"Homophones grammaticaux\" \"Maître Lucas\" vidéo",
+        "\"iq_NpmADtr4\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=iq_NpmADtr4",
+          "titre": "Homophones grammaticaux CM1 - CM2 - 6ème - Cycle 3 - Français - Grammaire",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo associe les homophones courants à leur classe grammaticale, à un remplacement et à un exemple, sans confirmation de toutes les paires demandées."
+        }
+      ],
+      "justification": "La démarche par fonction et remplacement correspond à celle de la leçon et convient aux débutants. Le chapitrage atteint 9:10, mais la durée totale n’a pas pu être vérifiée."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L9",
+      "requetes": [
+        "site:youtube.com homophones leur leurs ou où quel qu'elle la peu peut",
+        "site:youtube.com \"homophones\" \"leur\" \"quel\" cours",
+        "\"Homophones grammaticaux\" \"Maître Lucas\" vidéo",
+        "\"iq_NpmADtr4\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=iq_NpmADtr4",
+          "titre": "Homophones grammaticaux CM1 - CM2 - 6ème - Cycle 3 - Français - Grammaire",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La ressource explique notamment ou/où et leur/leur(s) à partir des catégories grammaticales, mais la couverture des autres groupes de la leçon n’est pas confirmée."
+        }
+      ],
+      "justification": "Ce candidat fournit une méthode pertinente pour une partie des homophones étudiés ; aucune vidéo unique suffisamment documentée ne couvre tout le programme recherché. La durée totale reste inconnue."
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L10",
+      "requetes": [
+        "site:youtube.com corriger paragraphe fautes CAFOP",
+        "site:youtube.com méthode relecture orthographe corriger texte",
+        "site:youtube.com \"CAFOP\" \"texte fautif\"",
+        "site:youtube.com \"corriger un texte\" \"méthode\"",
+        "\"Trucs pour la correction\" Alloprof vidéo",
+        "\"1XSPucTRR84\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=1XSPucTRR84",
+          "titre": "Trucs pour la correction d’un texte | Français | Alloprof",
+          "chaine": "Alloprof",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule organise la correction autour des homophones, des accords, des participes et de la ponctuation, sans application spécifique à un paragraphe du concours CAFOP."
+        }
+      ],
+      "justification": "Le chapitrage confirme une méthode de relecture directement transférable à l’exercice, présentée en dix étapes plutôt qu’en trois passages. Il atteint 5:00, mais la durée totale n’a pas pu être vérifiée."
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "module": "CAFOP-CG-CI",
+  "lecons": [
+    {
+      "code": "CAFOP-CG-CI-L1",
+      "requetes": [
+        "site:youtube.com/watch \"colonisation de la Côte d’Ivoire\" cours",
+        "Côte Ivoire colonisation Binger Angoulvant cours vidéo youtube",
+        "site:youtube.com/watch colonisation Côte Ivoire cours 1893 Binger",
+        "colonisation Côte Ivoire Binger Angoulvant explication simple youtube",
+        "Côte Ivoire colonisation 1893 vidéo 5 minutes",
+        "Côte Ivoire colonisation cours vidéo Binger 1893 10 mars",
+        "\"MYeh2LeNBj0\"",
+        "\"Ephéméride/10 mars1893\" durée"
+      ],
+      "candidats": [],
+      "justification": "Une éphéméride de RTI Officiel porte précisément sur la création de la colonie, mais sa durée et sa couverture de Binger, Angoulvant et des capitales n’ont pas pu être vérifiées. Les autres résultats sont trop généraux ou insuffisamment documentés."
+    },
+    {
+      "code": "CAFOP-CG-CI-L2",
+      "requetes": [
+        "site:youtube.com/watch Côte Ivoire indépendance 1944 1946 cours",
+        "Côte Ivoire accession indépendance cours en 5 minutes youtube",
+        "site:youtube.com/watch \"indépendance\" \"Côte\" \"1944\"",
+        "L'accession de la Côte d'Ivoire à l'indépendance club cedeao durée",
+        "\"po0RAVThV64\" durée",
+        "\"L’accession de la Côte d’Ivoire à l’indépendance\" youtube minutes",
+        "\"Côte d'Ivoire\" \"indépendance\" \"club cedeao\" vidéo"
+      ],
+      "candidats": [],
+      "justification": "Des cours ivoiriens consacrés à l’accession à l’indépendance ont été trouvés, notamment chez club cedeao et Mon école à la maison. Leur durée maximale de quinze minutes n’a pas pu être confirmée ; aucun n’est retenu sans cette vérification."
+    },
+    {
+      "code": "CAFOP-CG-CI-L3",
+      "requetes": [
+        "site:youtube.com/watch présidents Côte Ivoire histoire succession",
+        "site:youtube.com \"présidents\" \"ivoire\" \"1960\" \"1999\"",
+        "site:youtube.com/watch les présidents de la Côte d'Ivoire de 1960 à nos jours",
+        "présidents Côte Ivoire 1960 nos jours cours youtube",
+        "site:youtube.com/watch \"présidents ivoiriens\"",
+        "site:youtube.com/watch \"Houphouët\" \"Bédié\" \"Guéï\" \"présidents\""
+      ],
+      "candidats": [],
+      "justification": "Les résultats portent surtout sur les crises politiques, des biographies ou des récits historiques généraux. Aucun ne présente suffisamment clairement la succession complète et les débuts de mandat, avec une durée compatible vérifiable."
+    },
+    {
+      "code": "CAFOP-CG-CI-L4",
+      "requetes": [
+        "site:youtube.com/watch Côte Ivoire relief fleuves climat cours",
+        "Côte Ivoire relief fleuves climats cours vidéo youtube",
+        "Géographie de la Côte d'Ivoire TéléCrayon youtube",
+        "Géographie de la Côte d'Ivoire TéléCrayon durée minutes",
+        "site:youtube.com/watch \"Côte d'Ivoire\" \"relief\"",
+        "site:youtube.com/watch \"climat\" \"Côte d'Ivoire\" cours",
+        "site:youtube.com/watch \"fleuves\" \"ivoire\""
+      ],
+      "candidats": [],
+      "justification": "La vidéo de TéléCrayon aborde le relief, les fleuves et les climats, mais sa transcription omet le Cavally et ajoute beaucoup de contenu extérieur à la leçon. Aucune capsule plus ciblée, suffisamment vérifiable et compatible avec la limite de durée n’a été identifiée."
+    },
+    {
+      "code": "CAFOP-CG-CI-L5",
+      "requetes": [
+        "site:youtube.com \"économie\" \"organisation\" \"Côte\" districts",
+        "site:youtube.com Côte Ivoire économie districts cours explication simple",
+        "site:youtube.com/watch économie Côte Ivoire cours cacao secteurs",
+        "économie Côte Ivoire cacao secteurs cours youtube",
+        "\"Côte d'Ivoire\" \"districts\" \"cours\" \"youtube\"",
+        "site:youtube.com/watch Côte Ivoire économie primaire secondaire tertiaire cours",
+        "site:youtube.com/watch \"districts\" \"régions\" \"ivoire\""
+      ],
+      "candidats": [],
+      "justification": "Les résultats concernent principalement l’actualité du cacao ou des présentations générales du pays, sans explication pédagogique suffisante des trois secteurs et de l’organisation territoriale. Les informations administratives anciennes demandent également une vérification avant utilisation."
+    },
+    {
+      "code": "CAFOP-CG-CI-L6",
+      "requetes": [
+        "site:youtube.com \"Les mouvements de la Terre\" rotation révolution",
+        "\"Les mouvements de la Terre\" \"Maître Lucas\"",
+        "mouvements Terre rotation révolution 365 6 heures vidéo",
+        "Les mouvements de la Terre Maître Lucas vidéo durée minutes",
+        "\"mouvements de la Terre\" \"Lucas\" \"04\"",
+        "\"Les mouvements de la Terre\" \"Lucas\" \"5 min\"",
+        "\"mouvements de la Terre\" \"Lucas\" \"Idéllo\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=f_aEjBo6ndA",
+          "titre": "Les mouvements de la Terre sur elle-même et autour du Soleil CM1 -CM2 - Science Questionner le monde",
+          "chaine": "Maître Lucas",
+          "dureeVue": "5:14",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule illustre la rotation, la révolution, l’alternance jour-nuit et le rôle de l’inclinaison terrestre dans les saisons, mais ne développe pas les années bissextiles."
+        }
+      ],
+      "justification": "L’explication illustrée convient aux débutants et traite directement des deux mouvements et de leurs conséquences ; la durée est indiquée dans le catalogue Idéllo. Il faut compléter les valeurs de 24 heures et 365 jours ¼ ainsi que la règle des années bissextiles."
+    },
+    {
+      "code": "CAFOP-CG-CI-L7",
+      "requetes": [
+        "site:youtube.com latitude longitude explication simple cours",
+        "site:youtube.com/watch latitude longitude cours explication simple",
+        "latitude longitude cours vidéo Lumni",
+        "latitude longitude Yvan Monka youtube cours",
+        "\"Se repérer sur la sphère\" \"vidéo\" \"minutes\"",
+        "\"GNbVEivQpVQ\"",
+        "\"Comment se repérer sur une sphère\" youtube"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=GNbVEivQpVQ",
+          "titre": "Comment se repérer sur une sphère",
+          "chaine": "inconnue",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette animation explique latitude, longitude, équateur et méridien de Greenwich, mais ne traite pas l’amplitude thermique ni les instruments météorologiques."
+        }
+      ],
+      "justification": "Le document pédagogique de l’AIPBIA décrit explicitement cette vidéo comme une explication animée de cinq minutes, également référencée dans des supports scolaires. La durée exacte et la chaîne n’ont pas été vérifiées ; la couverture reste limitée aux coordonnées géographiques."
+    },
+    {
+      "code": "CAFOP-CG-CI-L8",
+      "requetes": [
+        "site:youtube.com vocabulaire géographie golfe isthme reg erg",
+        "site:youtube.com/watch golfe baie péninsule isthme géographie",
+        "golfe baie péninsule isthme géographie cours youtube",
+        "\"reg\" \"erg\" \"explication\" youtube",
+        "Vocabulaire de géographie golfe isthme vidéo cours",
+        "site:youtube.com/watch \"reg\" \"erg\"",
+        "site:youtube.com/watch \"isthme\" \"golfe\" français"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos francophones repérées expliquent surtout golfe, baie et détroit, sans couverture vérifiable de l’isthme et de la distinction reg-erg. Leur durée et leur qualité pédagogique sont insuffisamment documentées pour retenir un candidat."
+    }
+  ]
+}

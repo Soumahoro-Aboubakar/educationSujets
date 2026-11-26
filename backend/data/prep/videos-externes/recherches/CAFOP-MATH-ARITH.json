@@ -1,0 +1,190 @@
+{
+  "module": "CAFOP-MATH-ARITH",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-ARITH-L1",
+      "requetes": [
+        "site:youtube.com/watch \"diviseurs\" \"Yvan Monka\"",
+        "site:youtube.com \"Énumérer les diviseurs d’un nombre\" explication simple",
+        "site:youtube.com diviseurs nombre exemple en 5 minutes",
+        "\"Déterminer les diviseurs d'un nombre\" \"Monka\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=sSgsrHMyFrI",
+          "titre": "Déterminer les diviseurs d'un nombre - Troisième",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo enseigne la recherche des diviseurs par couples de facteurs, directement adaptée à la construction d’une liste complète."
+        }
+      ],
+      "justification": "La méthode correspond précisément à l’objectif de la leçon et convient aux débutants. La durée n’était pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L2",
+      "requetes": [
+        "site:youtube.com/watch \"critères de divisibilité\" \"25\"",
+        "site:youtube.com critères divisibilité 2 3 4 5 9 10 25 cours",
+        "site:youtube.com/watch \"critères de divisibilité\" cours",
+        "\"critères de divisibilité\" \"25\" youtube explication simple",
+        "site:youtube.com \"divisibilité par 25\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=E0VQh2cKeJ8",
+          "titre": "Les critères de divisibilité.",
+          "chaine": "KIFFELESMATHS : L'école de maths en ligne",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique les tests par 2, 3, 4, 5, 9 et 10, mais sa présentation ne comprend pas le critère de divisibilité par 25."
+        }
+      ],
+      "justification": "Cette source francophone marocaine présente les six critères usuels au niveau attendu ; le critère de 25 reste à compléter. La durée n’était pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L3",
+      "requetes": [
+        "site:youtube.com/watch \"divisibilité\" \"premiers entre eux\" 15 45",
+        "site:youtube.com divisibilité par 15 36 45 critères cours",
+        "Combiner les critères sans opérer divisibilité youtube",
+        "divisibilité par 15 36 45 explication simple youtube",
+        "site:youtube.com/watch \"critère de divisibilité par 15\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=q4_NtLC-iTM",
+          "titre": "Critère de divisibilité par 15",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette vidéo flash explique la divisibilité par 15 avec des exemples, mais ne couvre pas les cas de 36 et 45 ni explicitement toute la règle des facteurs premiers entre eux."
+        }
+      ],
+      "justification": "Le format flash et le cas de 15 constituent une introduction ciblée à la combinaison de critères. La généralisation demandée reste à compléter et la durée exacte n’était pas affichée."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L4",
+      "requetes": [
+        "site:youtube.com \"Contrôler une division euclidienne\"",
+        "site:youtube.com division euclidienne explication simple quotient reste",
+        "site:youtube.com division euclidienne exemple Yvan Monka",
+        "\"Poser une division euclidienne\" \"Monka\" minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=2Ocfhucc58g",
+          "titre": "Poser une division euclidienne (avec reste) - Sixième",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo présente le calcul du quotient et du reste, avec l’égalité de division euclidienne et le contrôle du reste inférieur au diviseur."
+        }
+      ],
+      "justification": "La procédure élémentaire correspond aux prérequis et aux vérifications enseignées dans la leçon. La durée n’était pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L5",
+      "requetes": [
+        "site:youtube.com/watch décomposer facteurs premiers explication simple",
+        "site:youtube.com/watch décomposition facteurs premiers cours exemple Monka",
+        "\"Décomposer en facteurs premiers\" explication simple cours youtube",
+        "site:youtube.com/watch \"Décomposer un nombre en un produit de facteurs premiers\"",
+        "\"Décomposer un nombre en un produit de facteurs premiers\" \"Labouche\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ywnMmF4CYR8",
+          "titre": "Décomposer un nombre en un produit de facteurs premiers",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo rappelle les nombres premiers et explique les divisions successives sur 280 et 495, sans couverture attestée du test de primalité jusqu’à la racine carrée."
+        }
+      ],
+      "justification": "La présentation pas à pas correspond au cœur pratique de la leçon ; la justification du test de primalité reste à compléter. La durée n’était pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L6",
+      "requetes": [
+        "site:youtube.com/watch \"Calculer le PGCD avec Euclide\"",
+        "site:youtube.com/watch PGCD algorithme Euclide explication simple exemple",
+        "\"Calculer le PGCD\" \"Euclide\" exemple en 5 minutes youtube",
+        "\"COMPRENDRE le PGCD et l'algorithme d'Euclide\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=uoypxf6Hopo",
+          "titre": "COMPRENDRE le PGCD et l'algorithme d'Euclide",
+          "chaine": "Captain Carré",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo introduit le PGCD, traite les cas simples puis les divisions successives et explique pourquoi l’algorithme d’Euclide fonctionne."
+        }
+      ],
+      "justification": "Le déroulé annoncé correspond particulièrement bien à la progression de la leçon, y compris sa justification mathématique. Le chapitrage situe la conclusion à 10:27, mais la durée totale exacte n’était pas affichée."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L7",
+      "requetes": [
+        "\"Trouver le premier multiple commun\" youtube",
+        "PPCM explication simple youtube multiples facteurs premiers",
+        "PPCM premier multiple commun cours en 5 minutes youtube",
+        "site:youtube.com/watch \"PPCM\" \"bus\"",
+        "site:youtube.com \"Le PPCM : les méthodes des multiples et de l'arbre des facteurs\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=jcSCkD1-oaw",
+          "titre": "Le PPCM : les méthodes des multiples et de l'arbre des facteurs | Mathématiques | Alloprof",
+          "chaine": "Alloprof",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente le calcul du PPCM par les listes de multiples et les facteurs premiers, sans application annoncée aux rendez-vous périodiques ni à la formule utilisant le PGCD."
+        }
+      ],
+      "justification": "Alloprof annonce une courte vidéo couvrant les deux méthodes de calcul centrales, adaptées aux débutants. L’application aux horaires reste à compléter et la durée exacte n’était pas affichée."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L8",
+      "requetes": [
+        "site:youtube.com/watch PGCD carrelage bouquets problème",
+        "PGCD carrelage bouquets problème youtube",
+        "Partager et carreler sans reste PGCD youtube",
+        "PGCD carrelage exercice corrigé youtube",
+        "\"Déterminer le Plus Grand Commun Diviseur\" \"les fleurs\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Y8qDg6USP8E",
+          "titre": "Déterminer le Plus Grand Commun Diviseur (PGCD) pour résoudre un problème : les fleurs.",
+          "chaine": "Yannick Bauer",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo applique le PGCD à un problème de fleurs, correspondant au volet de partage en bouquets, mais ne traite pas le carrelage ni les contraintes d’intervalle."
+        }
+      ],
+      "justification": "L’exercice correspond directement au contexte des bouquets de la leçon et évite un cours général sur le PGCD. La couverture reste partielle et la durée n’était pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L9",
+      "requetes": [
+        "Bilan méthode raisonner comme au concours arithmétique youtube",
+        "\"Bilan méthode — raisonner comme au concours\"",
+        "site:youtube.com/watch arithmétique deux restes imposés PGCD exercice",
+        "division euclidienne restes imposés PGCD exercice youtube",
+        "site:youtube.com PGCD problème diviseur restes imposés exemple"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte suffisamment ciblée n’a été identifiée pour articuler choix de méthode, première coïncidence et recherche d’un diviseur avec deux restes imposés. Les résultats trouvés portent surtout sur des calculs isolés ou des problèmes de congruences différents."
+    }
+  ]
+}

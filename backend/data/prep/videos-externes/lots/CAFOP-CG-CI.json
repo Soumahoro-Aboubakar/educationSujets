@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-CG-CI",
+  "titre": "Histoire et géographie de la Côte d’Ivoire",
+  "matiere": "Culture générale",
+  "resume": "Les repères d’histoire et de géographie ivoiriennes les plus demandés au CAFOP, avec les notions de géographie générale des anciens sujets.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-CG-CI-L1",
+      "titre": "La colonisation de la Côte d’Ivoire",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Vers l’indépendance",
+      "explication": "À la fin de cette leçon, tu sauras dater la naissance de la colonie et nommer ses premiers acteurs. Aucun prérequis. À la fin du XIXᵉ siècle, la France s’installe sur la côte puis vers l’intérieur. Le 10 mars 1893, la Côte d’Ivoire devient une colonie française. Louis-Gustave Binger, explorateur qui a parcouru la région, en devient le premier gouverneur ; la ville de Bingerville porte son nom. La colonie fait ensuite partie de l’Afrique-Occidentale française (AOF), créée en 1895. Entre 1908 et 1916, le gouverneur Gabriel Angoulvant impose la domination coloniale par la force : c’est la politique dite de « pacification », marquée par des expéditions militaires contre les peuples qui résistent.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1997)",
+        "Des capitales successives"
+      ],
+      "pieges": [
+        "Ne confonds pas Binger, premier gouverneur en 1893, et Angoulvant, qui gouverne la colonie à partir de 1908."
+      ],
+      "aRetenir": [
+        "10 mars 1893 : colonie française.",
+        "Binger, premier gouverneur.",
+        "Capitales : Grand-Bassam, Bingerville, Abidjan."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-CI-L2",
+      "titre": "Vers l’indépendance",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "2/8",
+      "precedente": "La colonisation de la Côte d’Ivoire",
+      "suivante": "Les présidents de la République",
+      "explication": "À la fin de cette leçon, tu sauras présenter les étapes qui mènent à l’indépendance du 7 août 1960. Prérequis : la leçon sur la colonisation. En 1944, des planteurs africains fondent le Syndicat agricole africain (SAA), dirigé par Félix Houphouët-Boigny, pour défendre leurs intérêts face aux colons. En 1946, le Rassemblement démocratique africain (RDA) naît à Bamako et le PDCI (Parti démocratique de Côte d’Ivoire) en devient la section ivoirienne : le PDCI-RDA. Député à Paris, Houphouët-Boigny obtient en 1946 la loi qui abolit le travail forcé dans les colonies, appelée loi Houphouët-Boigny. Après la loi-cadre de 1956 et la Communauté française de 1958, la Côte d’Ivoire proclame son indépendance le 7 août 1960.",
+      "formules": [],
+      "exemples": [
+        "Une date et une fête",
+        "Comme au concours (1995)"
+      ],
+      "pieges": [
+        "Le RDA est fondé à Bamako, pas à Abidjan ; le PDCI en est la section ivoirienne."
+      ],
+      "aRetenir": [
+        "1944 : SAA.",
+        "1946 : PDCI-RDA, fin du travail forcé.",
+        "7 août 1960 : indépendance."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-CI-L3",
+      "titre": "Les présidents de la République",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "3/8",
+      "precedente": "Vers l’indépendance",
+      "suivante": "Relief, fleuves et climats",
+      "explication": "À la fin de cette leçon, tu sauras citer dans l’ordre les présidents ivoiriens et leurs débuts de mandat. Prérequis : la date de l’indépendance.",
+      "formules": [],
+      "exemples": [
+        "Une succession constitutionnelle",
+        "Type concours"
+      ],
+      "pieges": [
+        "Robert Guéï n’a pas été élu : il a dirigé la transition après le coup d’État de décembre 1999."
+      ],
+      "aRetenir": [
+        "Houphouët-Boigny : 1960-1993.",
+        "Bédié : 1993-1999.",
+        "Guéï, Gbagbo, puis Ouattara."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-CI-L4",
+      "titre": "Relief, fleuves et climats",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "4/8",
+      "precedente": "Les présidents de la République",
+      "suivante": "Économie et organisation du territoire",
+      "explication": "À la fin de cette leçon, tu sauras situer les grands fleuves et distinguer les milieux du sud et du nord. Aucun prérequis. La Côte d’Ivoire couvre environ 322 000 km². Le relief est surtout fait de plaines et de plateaux ; l’ouest est montagneux, avec le mont Nimba, point culminant. Le littoral est fait de lagunes à l’est et de côtes rocheuses à falaises à l’ouest, vers Sassandra et San-Pédro. Le sud a un climat équatorial à quatre saisons (deux sèches, deux pluvieuses) et une forêt dense. Le nord a un climat tropical à deux saisons et une végétation de savane.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1997)",
+        "Un lac artificiel"
+      ],
+      "pieges": [
+        "Kossou est un lac de barrage, pas un fleuve."
+      ],
+      "aRetenir": [
+        "Environ 322 000 km².",
+        "Quatre fleuves orientés nord-sud.",
+        "Sud : 4 saisons, forêt ; nord : 2 saisons, savane."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-CI-L5",
+      "titre": "Économie et organisation du territoire",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "5/8",
+      "precedente": "Relief, fleuves et climats",
+      "suivante": "Les mouvements de la Terre",
+      "explication": "À la fin de cette leçon, tu sauras présenter les secteurs de l’économie ivoirienne et l’organisation en districts et régions. Aucun prérequis. La Côte d’Ivoire est le premier producteur mondial de cacao. Le port autonome d’Abidjan et celui de San-Pédro assurent l’essentiel des exportations. L’agriculture d’exportation repose aussi sur le café, l’hévéa, l’anacarde (noix de cajou) et le coton. Depuis 2011, le territoire est organisé en 12 districts et 2 districts autonomes (Abidjan et Yamoussoukro), eux-mêmes découpés en régions puis en départements.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1998)",
+        "Comme au concours (2002)"
+      ],
+      "pieges": [
+        "Transformer les fèves de cacao en beurre ou en chocolat relève du secteur secondaire, pas du primaire."
+      ],
+      "aRetenir": [
+        "Trois secteurs : primaire, secondaire, tertiaire.",
+        "Premier producteur mondial de cacao.",
+        "12 districts + 2 districts autonomes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-CI-L6",
+      "titre": "Les mouvements de la Terre",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "6/8",
+      "precedente": "Économie et organisation du territoire",
+      "suivante": "Se repérer : latitude, longitude, climat",
+      "explication": "À la fin de cette leçon, tu sauras nommer les deux mouvements de la Terre, leur durée et leurs conséquences. Aucun prérequis.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1995)",
+        "Le quart de jour"
+      ],
+      "pieges": [
+        "Les saisons ne viennent pas de la distance entre la Terre et le Soleil, mais de l’inclinaison de l’axe terrestre pendant la révolution."
+      ],
+      "aRetenir": [
+        "Rotation : 24 h, jour et nuit.",
+        "Révolution : 365 jours ¼, saisons.",
+        "Année bissextile tous les 4 ans."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-CI-L7",
+      "titre": "Se repérer : latitude, longitude, climat",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "7/8",
+      "precedente": "Les mouvements de la Terre",
+      "suivante": "Vocabulaire de géographie",
+      "explication": "À la fin de cette leçon, tu sauras définir latitude, longitude et amplitude thermique, et nommer quelques instruments de météorologie. Prérequis : les mouvements de la Terre. La latitude d’un lieu est sa distance angulaire à l’équateur, de 0° à 90° nord ou sud. La longitude est sa distance angulaire au méridien de Greenwich, de 0° à 180° est ou ouest. Ensemble, elles donnent les coordonnées géographiques d’un lieu.",
+      "formules": [],
+      "exemples": [
+        "L’amplitude thermique (sujet de 1993)",
+        "Comme au concours (1999)"
+      ],
+      "pieges": [
+        "La girouette indique d’où vient le vent ; c’est l’anémomètre qui mesure sa vitesse."
+      ],
+      "aRetenir": [
+        "Latitude : par rapport à l’équateur.",
+        "Longitude : par rapport à Greenwich.",
+        "Amplitude = max − min."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-CI-L8",
+      "titre": "Vocabulaire de géographie",
+      "module": "Histoire et géographie de la Côte d’Ivoire (Culture générale)",
+      "position": "8/8",
+      "precedente": "Se repérer : latitude, longitude, climat",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras définir les mots de géographie qui reviennent au concours. Aucun prérequis.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1997)",
+        "Comme au concours (1998)"
+      ],
+      "pieges": [
+        "Ne confonds pas reg (pierres) et erg (sable) : pense « e comme ensablé »."
+      ],
+      "aRetenir": [
+        "Golfe : la mer dans la terre.",
+        "Isthme : terre étroite entre deux mers.",
+        "Reg : pierres ; erg : sable."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

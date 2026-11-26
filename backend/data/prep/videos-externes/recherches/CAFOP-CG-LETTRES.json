@@ -1,0 +1,180 @@
+{
+  "module": "CAFOP-CG-LETTRES",
+  "lecons": [
+    {
+      "code": "CAFOP-CG-LETTRES-L1",
+      "requetes": [
+        "site:youtube.com \"Réussir les questions auteur œuvre\"",
+        "site:youtube.com auteurs œuvres personnages littérature africaine CAFOP",
+        "auteurs œuvres personnages CAFOP mémoriser littérature vidéo",
+        "site:youtube.com \"auteurs\" \"œuvres\" \"CAFOP\"",
+        "site:youtube.com/watch \"auteurs et œuvres\" littérature",
+        "CAFOP culture générale auteurs œuvres littérature youtube"
+      ],
+      "candidats": [],
+      "justification": "Les résultats proposent surtout des listes d’œuvres et des quiz, sans expliquer la mémorisation par triplets auteur–œuvre–personnage. Aucun candidat suffisamment ciblé n’a été retenu."
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L2",
+      "requetes": [
+        "site:youtube.com \"La littérature ivoirienne\" cours",
+        "site:youtube.com écrivains ivoiriens œuvres Dadié Kourouma Adiaffi",
+        "littérature ivoirienne Dadié Kourouma Adiaffi vidéo cours",
+        "site:youtube.com \"littérature ivoirienne\" \"écrivains\"",
+        "\"littérature ivoirienne\" \"cours\" youtube Dadié",
+        "site:youtube.com/watch \"Climbié\" \"résumé\"",
+        "littérature ivoirienne auteurs oeuvres en 5 minutes youtube"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos repérées sont des portraits, des entretiens ou des présentations d’un seul livre. Aucune synthèse courte suffisamment documentée ne permet d’apprendre les associations entre les principaux écrivains ivoiriens et leurs œuvres."
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L3",
+      "requetes": [
+        "site:youtube.com \"La littérature africaine\" auteurs œuvres",
+        "site:youtube.com littérature africaine auteurs pays œuvres explication simple",
+        "site:youtube.com \"littérature africaine\" \"cours\"",
+        "site:youtube.com \"auteurs africains\" \"œuvres\" \"culture\"",
+        "\"littérature africaine\" \"auteurs\" \"quiz\" youtube",
+        "site:youtube.com/watch \"L’Aventure ambiguë\" résumé 5 minutes",
+        "la littérature africaine écrivains célèbres oeuvres cours court youtube",
+        "\"5 romans africains de moins de 200 pages\" durée",
+        "\"La littérature africaine\" \"en 5 minutes\" youtube"
+      ],
+      "candidats": [],
+      "justification": "Les recommandations de lecture trouvées ne correspondent pas suffisamment aux repères Kane–Samba Diallo, Oyono–Meka et Soyinka–Nobel 1986. Les cours généraux repérés ne permettent pas de confirmer une synthèse adaptée de moins de quinze minutes."
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L4",
+      "requetes": [
+        "site:youtube.com versification alexandrin quatrain tercet sonnet cours",
+        "site:youtube.com versification explication simple 5 minutes",
+        "\"La Versification expliquée simplement\" durée",
+        "site:youtube.com \"versification\" \"5 minutes\"",
+        "\"versification\" \"DhmyqNTj4nM\" durée",
+        "site:youtube.com/watch \"versification\" \"sonnet\" \"quatrain\"",
+        "versification cours court 3 minutes youtube alexandrin sonnet",
+        "les règles de versification Les Bons Profs youtube",
+        "\"Versification\" \"Les Bons Profs\" durée",
+        "\"DhmyqNTj4nM\" minutes",
+        "\"sJ-kHUGiHSk\"",
+        "\"La Versification expliquée simplement\" \"min\"",
+        "site:listubes.com/user/lesbonsprofs/ \"versification\"",
+        "\"Versification\" \"Les Bons Profs\" \"sonnet\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=R7IbyAflLds",
+          "titre": "La versification - Français - 3e - les Bons Profs",
+          "chaine": "Les Bons Profs",
+          "dureeVue": "8:36",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Ce cours présenté par Élodie Pinel reprend les bases de la versification utiles à la leçon, mais le traitement précis du sonnet n’a pas pu être confirmé."
+        }
+      ],
+      "justification": "Cours scolaire accessible aux débutants, avec une durée de 8:36 relevée dans l’index Listubes et un lien confirmé par le site de l’éditeur. La couverture reste partielle faute de confirmation de toutes les notions demandées."
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L5",
+      "requetes": [
+        "site:youtube.com \"La négritude\" explication simple",
+        "site:youtube.com négritude Césaire Senghor Damas 5 minutes",
+        "site:youtube.com \"négritude\" \"cours\" \"Damas\"",
+        "négritude 3 minutes Lumni youtube",
+        "négritude explication simple cours vidéo youtube Césaire Senghor Damas",
+        "\"négritude\" \"Lumni\" \"youtube.com/watch\"",
+        "\"Aimé Césaire, un poète contre le colonialisme\" youtube",
+        "site:youtube.com/watch \"négritude\" \"5\"",
+        "Aimé Césaire un poète contre le colonialisme Lumni durée",
+        "\"La négritude\" \"explication\" youtube cours"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=NuUR2jFbm9k",
+          "titre": "Aimé Césaire, un poète contre le colonialisme, avec \"La Grande Explication\" | Lumni",
+          "chaine": "Lumni",
+          "dureeVue": "4:53",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule présente Césaire, sa rencontre avec Senghor et Damas à Paris et son engagement anticolonial, tout en développant aussi son parcours politique."
+        }
+      ],
+      "justification": "Capsule pédagogique institutionnelle dont la durée de 4:53 est affichée sur Lumni. Elle donne les principaux repères humains et historiques, mais dépasse la seule définition du mouvement."
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L6",
+      "requetes": [
+        "site:youtube.com \"Instruments de musique et drummologie\"",
+        "site:youtube.com drummologie Niangoran Bouah explication",
+        "site:youtube.com familles instruments cordes vents percussions cours",
+        "site:youtube.com \"familles d'instruments\" \"leçon\" -Stéphane -chanson",
+        "\"Introduction à la drummologie\" \"durée\"",
+        "familles instruments musique cordes vents percussions vidéo cours youtube",
+        "\"Niangoran-Bouah\" \"drummologie\" vidéo minutes",
+        "\"familles instrumentales\" \"capsule pédagogique\" youtube",
+        "\"ecX3ejG1eP0\"",
+        "\"Introduction à la drummologie\" \"minutes\"",
+        "\"familles\" \"instruments\" \"3 minutes\" cours youtube",
+        "\"drummologie\" \"RTI\" youtube",
+        "\"familles instrumentales\" \"capsule\" \"durée\"",
+        "\"drummologie\" \"explication simple\" youtube"
+      ],
+      "candidats": [],
+      "justification": "Des capsules sur les familles instrumentales et des cours ivoiriens sur la drummologie ont été repérés, mais leurs durées n’ont pas pu être vérifiées. Aucun candidat réunissant une explication suffisamment documentée et le respect du plafond de quinze minutes n’a été retenu."
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L7",
+      "requetes": [
+        "site:youtube.com \"Couleurs et arts plastiques\"",
+        "site:youtube.com couleurs primaires secondaires peinture explication simple",
+        "site:youtube.com \"couleurs primaires\" \"secondaires\" \"3 minutes\"",
+        "\"6sPU4Kk1Jx4\"",
+        "couleurs primaires secondaires rouge jaune bleu cours vidéo youtube",
+        "\"COULEURS PRIMAIRES, SECONDAIRES et TERTIAIRES\" durée",
+        "site:youtube.com/watch \"couleurs primaires\" \"rouge\" \"mélanges\" -English",
+        "couleurs primaires secondaires tertiaires Madame Ré durée vidéo",
+        "\"6sPU4Kk1Jx4\" -site:youtube.com",
+        "couleurs primaires secondaires peinture cours 5 minutes youtube",
+        "\"5 minutes pour comprendre le mélange des couleurs\" rouge bleu",
+        "\"IlL0bH1YfnY\" \"couleurs\"",
+        "\"5 minutes pour comprendre le mélange des couleurs\" \"bleu\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=IlL0bH1YfnY",
+          "titre": "5 minutes pour comprendre le mélange des couleurs 🖐",
+          "chaine": "SunnyMunneko",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le cercle chromatique, les couleurs primaires et secondaires et leurs mélanges, sans traiter la distinction entre artiste et artisan."
+        }
+      ],
+      "justification": "Le format annoncé de cinq minutes et le chapitrage, avec une conclusion à 4:30, correspondent à une courte initiation aux mélanges. La durée totale exacte n’est pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L8",
+      "requetes": [
+        "site:youtube.com \"Cinéma africain et ivoirien\"",
+        "site:youtube.com FESPACO histoire Djéli Au nom du Christ",
+        "site:youtube.com \"FESPACO\" \"histoire\" \"minutes\"",
+        "site:youtube.com \"Fespaco\" \"c'est quoi\"",
+        "FESPACO histoire expliquée vidéo youtube",
+        "FESPACO expliqué histoire festival youtube France 24",
+        "site:youtube.com/watch \"FESPACO\" \"histoire du\"",
+        "Fespaco histoire 2 minutes TV5MONDE youtube",
+        "FESPACO c’est quoi Brut youtube",
+        "FESPACO histoire festival en bref youtube",
+        "\"Retour sur l’histoire\" \"FESPACO\" RTB durée",
+        "\"RTB\" \"FESPACO\" \"Retour sur\" \"2023\" vidéo",
+        "\"c7QaXN2npZQ\"",
+        "\"Ce jour-là\" \"première édition du Fespaco\" durée",
+        "\"Retour sur l'histoire du Festival panafricain\" durée",
+        "\"Ce jour-là\" \"Fespaco\" TV5MONDE 1969 vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les recherches ont trouvé des historiques du FESPACO et une bande-annonce de Djéli, mais aucune capsule vérifiée couvrant suffisamment les repères du festival et les films ivoiriens primés. La durée des historiques les plus pertinents n’a pas pu être confirmée."
+    }
+  ]
+}

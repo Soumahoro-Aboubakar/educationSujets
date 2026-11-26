@@ -1,0 +1,83 @@
+[
+  {
+    "code": "CAFOP-FR-TEXTE-L1",
+    "youtubeId": "Thn8YqBmVJ4",
+    "couverture": "exacte",
+    "justification": "Formuler l’idée générale d’un texte, par un enseignant ivoirien.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L2",
+    "youtubeId": "GiYVNsw0ZCQ",
+    "couverture": "partielle",
+    "justification": "Relever les idées principales et secondaires pour suivre la progression du texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L3",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "La recherche « donner un titre à un texte » ne renvoie que des tutoriels de traitement de texte.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L4",
+    "youtubeId": "h4EoadUZUnU",
+    "couverture": "exacte",
+    "justification": "Comment répondre aux questions d’un texte en s’appuyant sur des passages précis.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L5",
+    "youtubeId": "DglMYpVymgM",
+    "couverture": "exacte",
+    "justification": "La reformulation : redire une idée avec ses mots sans en changer le sens.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L6",
+    "youtubeId": "OeYP102gyGY",
+    "couverture": "partielle",
+    "justification": "Les connecteurs logiques et le lien qu’ils expriment.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L7",
+    "youtubeId": "J8Oiq2Ncc0Q",
+    "couverture": "exacte",
+    "justification": "Les types de texte : narratif, descriptif, explicatif, argumentatif.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L8",
+    "youtubeId": "sFhmJyZQwIU",
+    "couverture": "partielle",
+    "justification": "Réussir un essai court : thèse, arguments, exemples.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-TEXTE-L9",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo de méthode d’ensemble adaptée.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

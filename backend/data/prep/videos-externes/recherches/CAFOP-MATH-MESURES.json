@@ -1,0 +1,319 @@
+{
+  "module": "CAFOP-MATH-MESURES",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-MESURES-L1",
+      "requetes": [
+        "site:youtube.com \"Convertir des longueurs, des masses et des capacités\"",
+        "site:youtube.com/watch convertir longueurs masses capacités explication simple cours",
+        "site:youtube.com conversion longueurs masses capacités \"5 minutes\"",
+        "\"Comment Utiliser un Tableau de Conversion\" \"minutes\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=drCAik_P1fE",
+          "titre": "Comment Utiliser un Tableau de Conversion FACILEMENT ? 📏⚖️💧",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le tableau de conversion des longueurs, masses et capacités, mais sa description ne confirme pas le traitement des tonnes et des additions après conversion."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=GyF0rjBB258",
+          "titre": "Convertir sans tableau de conversion (longueur, masse et contenance)",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle explique les préfixes métriques et propose des conversions par le calcul dans les trois familles, avec une méthode différente du tableau utilisé dans la leçon."
+        }
+      ],
+      "justification": "Le premier candidat correspond directement à la méthode du module et aux trois familles de mesures. La durée exacte n’était pas affichée dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L2",
+      "requetes": [
+        "site:youtube.com \"Convertir des aires et passer des mètres cubes aux litres\"",
+        "site:youtube.com/watch convertir aires mètres cubes litres cours",
+        "site:youtube.com \"Convertir des aires\"",
+        "site:youtube.com \"mètres cubes\" \"litres\" conversion",
+        "site:youtube.com/watch \"aires\" \"hectares\" conversion",
+        "site:youtube.com/watch \"Convertir des aires\" \"tableau\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=lHbS8oclxE4",
+          "titre": "Conversion d'unités d'aire CM2 - CM1 - Cycle 3 - Grandeurs et mesures - Maths",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le facteur 100 entre unités d’aire, les deux colonnes par unité et des exercices de conversion, sans traiter le passage des mètres cubes aux litres."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=XMP4SbPpXOM",
+          "titre": "Comment convertir des mètres cubes en litres (Conversion m3 en l)",
+          "chaine": "Le papillon matheux",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle présente l’équivalence entre mètres cubes et litres, la multiplication ou division par 1 000 et des exemples, sans aborder les conversions d’aires."
+        }
+      ],
+      "justification": "Le premier candidat expose progressivement les conversions d’aires avec des exercices ; son dernier chapitre pédagogique annoncé commence à 5:43. Le second complète précisément la partie m³–L, mais aucune ressource repérée ne réunit clairement les deux volets et les unités agraires."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L3",
+      "requetes": [
+        "site:youtube.com \"Calculer et comparer des durées\"",
+        "site:youtube.com/watch calculer comparer durées explication simple",
+        "site:youtube.com \"Calculer une durée\" Yvan Monka",
+        "site:youtube.com \"durées\" \"explication simple\"",
+        "calcul durée heures minutes cours vidéo youtube 5 minutes",
+        "\"Calculs avec des heures et des durées\" vidéo durée Labouche"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=frnQXnbL6yo",
+          "titre": "Calculs avec des heures et des durées",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle distingue heure et durée et explique additions, soustractions et conversions avec des exemples, sans confirmation du traitement des pauses et du passage par minuit."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=chOpd5B8tsQ",
+          "titre": "Calculer une durée",
+          "chaine": "Arnaud Escamocher",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle explique le calcul d’une durée en heures et minutes à partir d’un problème concret, ce qui correspond à l’objectif principal de la leçon."
+        }
+      ],
+      "justification": "Le premier candidat fournit les bases nécessaires pour calculer une durée puis retrancher une pause. Les descriptions disponibles ne permettent pas de confirmer tous les cas particuliers ni les durées exactes."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L4",
+      "requetes": [
+        "site:youtube.com \"Reconnaître les figures et justifier leurs propriétés\"",
+        "site:youtube.com reconnaître figures propriétés triangles quadrilatères cercle cours",
+        "site:youtube.com \"quadrilatères\" \"propriétés\" \"Monka\"",
+        "quadrilatères propriétés cours vidéo youtube",
+        "site:youtube.com/watch \"triangles particuliers\" cours",
+        "site:youtube.com/watch \"cercle\" \"rayon\" \"diamètre\" cours"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=x_p75G_LeiU",
+          "titre": "Le quadrilatère CM2 CM1 - cycle 3 - Maths - Géométrie - Figures géométriques",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle apprend à reconnaître les quadrilatères à partir de leurs propriétés et du codage des figures, mais ne couvre pas les triangles et le cercle."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=wHmGxm3G5ag",
+          "titre": "Les triangles CM1 - CM2 - 6ème - Cycle 3 - Mathématiques - Géométrie",
+          "chaine": "Maître Lucas",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle présente les triangles particuliers et leurs caractéristiques avec des exercices d’identification, sans traiter les quadrilatères, le cercle ou la somme des angles."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=PhAagsGhnRs",
+          "titre": "19. Le cercle (CE2, CM1 et CM2) - Maths - Géométrie",
+          "chaine": "Maître Corentin",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle définit le cercle, distingue rayon et diamètre et propose un exercice, en ajoutant des constructions au compas."
+        }
+      ],
+      "justification": "Le premier candidat convient à l’identification justifiée des quadrilatères ; les deux autres complètent les familles restantes. Aucune vidéo courte repérée ne rassemble toutes les propriétés enseignées dans cette leçon."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L5",
+      "requetes": [
+        "site:youtube.com \"Calculer le tour et la surface d’une figure\"",
+        "site:youtube.com périmètre aire carré rectangle triangle cours",
+        "périmètres aires rectangle carré triangle vidéo cours",
+        "site:youtube.com \"périmètre\" \"aire\" \"triangle\" \"rectangle\" \"6ème\"",
+        "site:youtube.com/watch aire triangle cours",
+        "site:youtube.com/watch \"périmètre\" \"aire\" \"carré\" \"rectangle\" cours simple"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=_vKA85F0Plc",
+          "titre": "Périmètre et aire (carré et rectangle) - à quoi ça sert ?",
+          "chaine": "Les maths à quoi ça sert ?",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle introduit périmètre et aire par un problème puis récapitule les formules du carré et du rectangle, sans traiter le triangle."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=5H5ANHVXAuk",
+          "titre": "Aire d’un triangle 🚀 Comprendre d’où vient la formule ? (base × hauteur) ÷ 2 💪 Cours 6e 5e",
+          "chaine": "jaicompris Maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle explique l’origine de la formule base × hauteur ÷ 2, correspondant à la partie de la leçon consacrée à l’aire du triangle."
+        }
+      ],
+      "justification": "Le premier candidat relie les formules à une situation concrète, avec un dernier résumé annoncé à 2:35. Le second apporte l’explication de la division par deux pour le triangle."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L6",
+      "requetes": [
+        "site:youtube.com \"Mesurer un trapèze, un losange et un disque\"",
+        "site:youtube.com aire trapèze losange disque cours",
+        "aire trapèze losange disque vidéo cours",
+        "site:youtube.com \"aire\" \"trapèze\" \"losange\" \"disque\"",
+        "site:youtube.com/watch aire trapèze cours",
+        "site:youtube.com/watch aire losange cours",
+        "site:youtube.com/watch \"aire d'un disque\" \"Cours de maths\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=r28ifgVQip4",
+          "titre": "Aire d'un trapèze - Cours de maths",
+          "chaine": "Mathsbook",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle présente les deux bases et la hauteur nécessaires au calcul de l’aire d’un trapèze, puis applique la formule dans un exemple."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=EWkTEPUO0zw",
+          "titre": "Aire d'un losange - Cours de maths",
+          "chaine": "Mathsbook",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle enseigne la formule de l’aire du losange et son application dans un exemple, sans couvrir les autres figures de la leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=hgarE3udC2k",
+          "titre": "Aire d'un disque - Cours de maths",
+          "chaine": "Mathsbook",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle présente la formule de l’aire du disque et un exemple simple, mais ne traite pas la circonférence ni les autres figures."
+        }
+      ],
+      "justification": "Ces trois capsules sont annoncées comme des vidéos de deux minutes, sans durée exacte affichée. Elles couvrent séparément les trois calculs d’aire, mais ne constituent pas une explication complète des périmètres et des démonstrations du module."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L7",
+      "requetes": [
+        "site:youtube.com \"Calculer le volume d’un solide et la capacité d’une cuve\"",
+        "site:youtube.com volume cube pavé prisme cylindre cours",
+        "volumes solides prisme cylindre cube pavé vidéo cours",
+        "site:youtube.com \"cylindre\" \"volume\" \"litres\" exercice",
+        "\"Comment calculer le volume d'un solide\" \"Mathemax\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=YBQmqXh0Dbs",
+          "titre": "Volume d'un cylindre et conversion",
+          "chaine": "monProfDeMaths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle calcule le volume d’un cylindre en insistant sur le rayon puis convertit le résultat en litres, ce qui correspond à l’exemple de citerne du module."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=prRcmfUK3NI",
+          "titre": "comment calculer un volume en litre",
+          "chaine": "Le papillon matheux",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle calcule le volume d’un récipient rectangulaire par longueur × largeur × hauteur puis le convertit en litres, sans traiter les prismes triangulaires."
+        }
+      ],
+      "justification": "Le premier candidat relie directement volume géométrique et capacité en litres. Les ressources retenues restent partielles : elles ne réunissent pas les quatre solides et les précautions sur les dimensions intérieures."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L8",
+      "requetes": [
+        "site:youtube.com \"Utiliser Pythagore dans les deux sens\"",
+        "site:youtube.com \"Pythagore\" \"réciproque\" \"cours\"",
+        "site:youtube.com/watch Pythagore théorème réciproque cours 10 minutes",
+        "\"7IU9lZgRUns\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=7IU9lZgRUns",
+          "titre": "📚 Théorème de Pythagore et sa réciproque en 10 minutes : cours + exercices",
+          "chaine": "MathXpress",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Elle présente le théorème, son interprétation géométrique, des calculs de longueurs et la réciproque à travers plusieurs exercices."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=NA2a0P4o6Ik",
+          "titre": "Réciproque vs contraposée de Pythagore 🚀 Ne plus les confondre | Cours 4e 3e",
+          "chaine": "jaicompris Maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle explique comment comparer les carrés des côtés pour démontrer qu’un triangle est rectangle ou ne l’est pas, sans développer le calcul d’un côté."
+        }
+      ],
+      "justification": "Le premier candidat réunit les deux usages demandés et annonce un format de dix minutes, avec des exercices contextualisés. La durée exacte à la seconde n’était pas visible."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L9",
+      "requetes": [
+        "site:youtube.com \"Calculer une longueur et prouver un parallélisme avec Thalès\"",
+        "site:youtube.com \"Thalès\" \"réciproque\" \"cours\"",
+        "Thalès théorème réciproque en 5 minutes youtube",
+        "site:youtube.com/watch appliquer théorème Thalès Monka",
+        "site:youtube.com/watch \"EXERCICE : Appliquer le théorème de Thalès et sa réciproque\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=4jYzkihBG_c",
+          "titre": "EXERCICE : Appliquer le théorème de Thalès et sa réciproque - Troisième",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Cet exercice expliqué applique le théorème de Thalès et sa réciproque, correspondant aux deux objectifs de calcul de longueur et de justification du parallélisme."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=o51vU-S7H8s",
+          "titre": "Cours ♦ Thalès • Réciproque • Contraposée • Démontrer que 2 droites sont parallèles ♦ Troisième",
+          "chaine": "jaicompris Maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Elle explique la réciproque dans des triangles emboîtés pour décider du parallélisme, en ajoutant la contraposée sans couvrir le calcul d’une longueur."
+        }
+      ],
+      "justification": "Le premier candidat correspond aux deux compétences de la leçon et propose une application guidée. Sa durée exacte n’a pas pu être confirmée ; le replay d’une heure trouvé lors des recherches a été écarté."
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L10",
+      "requetes": [
+        "site:youtube.com \"Bilan méthode comme au concours\"",
+        "site:youtube.com problème carrelage citerne volume aire exercice corrigé",
+        "problème carrelage aire arrondi exercice corrigé youtube",
+        "problème citerne remplissage litres exercice corrigé youtube",
+        "problème carrelage maths exercice corrigé vidéo youtube aire paquets",
+        "site:youtube.com/watch \"carrelage\" \"paquets\""
+      ],
+      "candidats": [],
+      "justification": "Les résultats trouvés portent sur des calculs isolés d’aire ou sur des débits, sans couvrir suffisamment la méthode en plusieurs étapes, les conversions et le choix de l’arrondi adapté au besoin. Aucun candidat assez fidèle à ce bilan n’a été retenu."
+    }
+  ]
+}

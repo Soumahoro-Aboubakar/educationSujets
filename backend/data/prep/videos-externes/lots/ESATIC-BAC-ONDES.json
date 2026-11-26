@@ -28,7 +28,7 @@
         "Pas de transport global de matière.",
         "Mécanique : milieu nécessaire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L2",
@@ -53,7 +53,7 @@
         "Retard = distance/célérité.",
         "Écho : tenir compte des deux trajets."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L3",
@@ -78,7 +78,7 @@
         "Fréquence : cycles par seconde.",
         "Convertir les ms en s avant f = 1/T."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L4",
@@ -103,7 +103,7 @@
         "λ = c/f.",
         "La source impose la fréquence."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L5",
@@ -127,7 +127,7 @@
         "À petits angles : L ≈ 2Dλ/a.",
         "Largeur de fente et largeur de tache évoluent en sens inverse."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L6",
@@ -151,7 +151,7 @@
         "ω = 2πf.",
         "Phase : position dans le cycle."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L7",
@@ -174,7 +174,7 @@
         "L stocke une énergie magnétique.",
         "LC idéal : échange sans perte."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L8",
@@ -199,7 +199,7 @@
         "Préfixes : convertir avant de calculer.",
         "f₀ est l’inverse de T₀."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L9",
@@ -221,7 +221,7 @@
         "Faible amortissement : oscillations décroissantes.",
         "Fort amortissement : retour possible sans oscillation."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L10",
@@ -244,7 +244,7 @@
         "Forcé établi : rythme du générateur.",
         "RLC série : maximum du courant à f₀."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ONDES-L11",
@@ -268,7 +268,7 @@
         "Ieff = Ueff/Z.",
         "À la résonance série : Z = R."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

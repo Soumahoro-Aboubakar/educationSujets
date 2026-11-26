@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-FR-SUJETS-L1",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur le sujet CAFOP 2025.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-SUJETS-L2",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo ciblée.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-SUJETS-L3",
+    "youtubeId": "sFhmJyZQwIU",
+    "couverture": "partielle",
+    "justification": "Réussir un essai : thèse, arguments, exemples.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-SUJETS-L4",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Corrections d’autres examens, sans lien avec le sujet 2021.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-SUJETS-L5",
+    "youtubeId": "zwd1TLrpT88",
+    "couverture": "exacte",
+    "justification": "Leçon sur l’analyse logique : découper la phrase en propositions.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-SUJETS-L6",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur le sujet 2023.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-SUJETS-L7",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur la gestion d’une épreuve de deux heures.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-SUJETS-L8",
+    "youtubeId": "TI-3laL3Rxg",
+    "couverture": "exacte",
+    "justification": "Lumni : une grille d’autoévaluation pour relire sa copie de français.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

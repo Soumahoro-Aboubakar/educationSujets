@@ -30,7 +30,7 @@
         "Division : quotient et reste uniques.",
         "Le reste est positif ou nul et inférieur au diviseur."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L2",
@@ -53,7 +53,7 @@
         "1 n’est pas premier.",
         "La décomposition première est unique à l’ordre près."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L3",
@@ -76,7 +76,7 @@
         "Une division conserve les diviseurs communs.",
         "Euclide s’arrête au reste nul."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L4",
@@ -101,7 +101,7 @@
         "PPCM = produit / PGCD.",
         "Des cycles repartant ensemble se rejoignent au PPCM."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L5",
@@ -124,7 +124,7 @@
         "Remonter les restes d’Euclide.",
         "Une combinaison égale à 1 prouve la coprimalité."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L6",
@@ -147,7 +147,7 @@
         "PGCD(a, b) doit diviser c.",
         "Une solution particulière permet de paramétrer toutes les autres."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L7",
@@ -170,7 +170,7 @@
         "Addition et multiplication conservent la congruence.",
         "Ramener le résultat au reste euclidien."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L8",
@@ -193,7 +193,7 @@
         "Justifier le cycle utilisé.",
         "Réduire l’exposant et conclure avec un reste autorisé."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ESATIC-BAC-ARITH-L9",
@@ -216,7 +216,7 @@
         "Si le PGCD vaut 1, utiliser un inverse.",
         "Sinon contrôler la divisibilité puis réduire tous les coefficients et le module."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

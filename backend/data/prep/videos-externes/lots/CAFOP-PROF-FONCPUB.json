@@ -1,0 +1,195 @@
+{
+  "module": "CAFOP-PROF-FONCPUB",
+  "titre": "Fonction publique et déontologie",
+  "matiere": "ECM et Fonction publique",
+  "resume": "Le statut général de la Fonction publique de 2023 (recrutement, droits, obligations, positions, discipline), la déontologie de l’enseignant et la méthode du cas pratique.",
+  "concours": [
+    "CAFOP — Accès à la formation de professeur de CAFOP"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-PROF-FONCPUB-L1",
+      "titre": "Le statut général de la Fonction publique",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Devenir fonctionnaire",
+      "explication": "À la fin de cette leçon, tu sauras citer le texte en vigueur et dire à qui il s’applique. Aucun prérequis. Le statut général est fixé par la loi n° 2023-892 du 23 novembre 2023. Elle remplace la loi n° 92-570 du 11 septembre 1992, sur laquelle reposent les anciens corrigés. Elle comporte deux titres : l’organisation des emplois, droits et obligations, puis la gestion de la carrière. Selon l’article 1, le statut s’applique aux personnes nommées à titre permanent dans un emploi de l’Administration centrale, de ses services extérieurs ou des établissements publics de l’État, et titularisées après un stage probatoire. Le fonctionnaire appartient à une famille d’emplois, ensemble cohérent de spécialités d’un même domaine (article 3).",
+      "formules": [],
+      "exemples": [
+        "Fonctionnaire ou contractuel ?",
+        "Une nouveauté de 2023"
+      ],
+      "pieges": [
+        "Ne cite plus la loi de 1992 comme texte en vigueur : elle a été remplacée en 2023."
+      ],
+      "aRetenir": [
+        "Loi n° 2023-892 du 23 novembre 2023.",
+        "Nomination permanente et titularisation.",
+        "Mobilité professionnelle (article 15)."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L2",
+      "titre": "Devenir fonctionnaire",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "2/8",
+      "precedente": "Le statut général de la Fonction publique",
+      "suivante": "Les droits du fonctionnaire",
+      "explication": "À la fin de cette leçon, tu sauras énumérer les conditions de recrutement et expliquer le stage probatoire. Prérequis : le champ du statut. Les fonctionnaires sont recrutés par concours ou, à titre dérogatoire, par décret (article 47). Les concours donnent lieu à des listes classant les admis par ordre de mérite. Aucune discrimination n’est permise, notamment en raison de l’ethnie, du sexe, des opinions, de la religion ou du handicap (article 17). Toute personne admise est soumise à un stage probatoire d’un an (article 52). Si les résultats sont probants, elle est titularisée d’office. Sinon, elle peut être autorisée à effectuer une seconde année ; si celle-ci échoue aussi, il est mis fin à son engagement.",
+      "formules": [],
+      "exemples": [
+        "Un stagiaire en difficulté",
+        "La titularisation"
+      ],
+      "pieges": [
+        "La titularisation n’est pas automatique dès la nomination : elle suit un stage probatoire réussi."
+      ],
+      "aRetenir": [
+        "Concours ou décret.",
+        "Cinq conditions, dont la nationalité.",
+        "Stage d’un an, puis titularisation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L3",
+      "titre": "Les droits du fonctionnaire",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "3/8",
+      "precedente": "Devenir fonctionnaire",
+      "suivante": "Les obligations du fonctionnaire",
+      "explication": "À la fin de cette leçon, tu sauras présenter les principaux droits du fonctionnaire et leurs limites. Prérequis : le statut général. L’article 29 énumère aussi les congés de maladie, de maternité et de paternité, les congés parentaux, une visite médicale annuelle à la charge de l’État, la couverture sociale, la formation continue et la promotion.",
+      "formules": [],
+      "exemples": [
+        "Une enseignante agressée",
+        "Une journée de grève"
+      ],
+      "pieges": [
+        "La liberté d’opinion ne permet pas de faire de la propagande politique en classe : l’expression des opinions se fait hors du service."
+      ],
+      "aRetenir": [
+        "Opinion, syndicat, grève encadrée.",
+        "Protection par la collectivité.",
+        "Congé annuel : 30 jours calendaires."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L4",
+      "titre": "Les obligations du fonctionnaire",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "4/8",
+      "precedente": "Les droits du fonctionnaire",
+      "suivante": "Les positions du fonctionnaire",
+      "explication": "À la fin de cette leçon, tu sauras énoncer les obligations du fonctionnaire et reconnaître un manquement. Prérequis : les droits du fonctionnaire. Selon l’article 38, tout manquement à ces obligations constitue une faute disciplinaire.",
+      "formules": [],
+      "exemples": [
+        "Un cadeau d’un parent",
+        "Des cours payants"
+      ],
+      "pieges": [
+        "Divulguer les notes d’un élève à des personnes étrangères au service viole la discrétion professionnelle, même sans intention de nuire."
+      ],
+      "aRetenir": [
+        "Loyauté, intégrité, dévouement.",
+        "Pas de dons, pas de cumul.",
+        "Secret, discrétion, réserve, obéissance."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L5",
+      "titre": "Les positions du fonctionnaire",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "5/8",
+      "precedente": "Les obligations du fonctionnaire",
+      "suivante": "La discipline et les sanctions",
+      "explication": "À la fin de cette leçon, tu sauras nommer les quatre positions et distinguer détachement et disponibilité. Prérequis : la titularisation. Selon l’article 53, tout fonctionnaire est dans l’une des positions suivantes : activité, détachement, disponibilité, sous les drapeaux. La disponibilité n’est accordée que dans quelques cas (article 63) : maladie ou accident grave du conjoint ou d’un enfant (un an, renouvelable), suivre un conjoint fonctionnaire affecté ailleurs ou à l’étranger, suivre un conjoint non fonctionnaire ou convenances personnelles (un an, renouvelable une seule fois).",
+      "formules": [],
+      "exemples": [
+        "Un député",
+        "Une année pour un projet personnel"
+      ],
+      "pieges": [
+        "Le corrigé de 2004, fondé sur la loi de 1992, ne vaut plus pour les durées : applique l’article 63 de la loi de 2023."
+      ],
+      "aRetenir": [
+        "Quatre positions (article 53).",
+        "Détachement : droits conservés.",
+        "Disponibilité : ni salaire ni avancement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L6",
+      "titre": "La discipline et les sanctions",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "6/8",
+      "precedente": "Les positions du fonctionnaire",
+      "suivante": "Déontologie de l’enseignant",
+      "explication": "À la fin de cette leçon, tu sauras classer une sanction dans son degré et décrire les garanties du fonctionnaire. Prérequis : les obligations. La décision de sanction doit être motivée. Les sanctions du premier degré relèvent du président de l’institution, du ministre technique, du préfet ou du directeur d’établissement public. Celles du second degré relèvent du ministre chargé de la Fonction publique, après communication du dossier au fonctionnaire et avis du Conseil de discipline ; la révocation est prononcée par ce ministre (article 101). En cas de faute grave, le fonctionnaire peut être suspendu immédiatement (article 102). Il perd sa rémunération mais garde ses prestations familiales. Sa situation doit être réglée dans un délai de trois mois ; à défaut, il retrouve l’intégralité de sa rémunération, sauf poursuites pénales.",
+      "formules": [],
+      "exemples": [
+        "Classer une sanction",
+        "Faute et procès pénal"
+      ],
+      "pieges": [
+        "Le blâme et l’avertissement sont du premier degré ; ne les présente pas comme des sanctions graves exigeant le Conseil de discipline."
+      ],
+      "aRetenir": [
+        "Deux degrés de sanctions.",
+        "Second degré : avis du Conseil de discipline.",
+        "Suspension : situation réglée en trois mois."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L7",
+      "titre": "Déontologie de l’enseignant",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "7/8",
+      "precedente": "La discipline et les sanctions",
+      "suivante": "Méthode du cas pratique",
+      "explication": "À la fin de cette leçon, tu sauras appliquer les obligations du statut à la vie de l’école. Prérequis : les obligations du fonctionnaire. Les obligations générales du statut prennent une forme concrète pour l’enseignant et pour le formateur de CAFOP, qui doit les transmettre aux futurs maîtres.",
+      "formules": [],
+      "exemples": [
+        "Une rumeur dans le village",
+        "Exemplarité du formateur"
+      ],
+      "pieges": [
+        "Accepter un « petit cadeau » d’un parent pour une meilleure note n’est pas une politesse : c’est une violation de l’article 34."
+      ],
+      "aRetenir": [
+        "Neutralité, intégrité, assiduité.",
+        "Discrétion sur la vie des élèves.",
+        "Protection de l’élève."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-FONCPUB-L8",
+      "titre": "Méthode du cas pratique",
+      "module": "Fonction publique et déontologie (ECM et Fonction publique)",
+      "position": "8/8",
+      "precedente": "Déontologie de l’enseignant",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras résoudre un cas pratique de fonction publique comme à l’épreuve. Prérequis : toutes les leçons du module. L’épreuve d’ECM et Fonction publique de 2004 (2 heures, coefficient 2) comportait trois questions de connaissances et un cas pratique en sept questions sur la situation d’un fonctionnaire. Pour chaque question, suis quatre étapes.",
+      "formules": [],
+      "exemples": [
+        "Un cas d’absences répétées",
+        "Une demande de disponibilité"
+      ],
+      "pieges": [
+        "Ne recopie pas les durées du corrigé de 2004 : elles se fondaient sur la loi de 1992, aujourd’hui remplacée."
+      ],
+      "aRetenir": [
+        "Qualifier, citer la règle, appliquer, conclure.",
+        "Citer les articles de la loi de 2023.",
+        "Préciser autorité, procédure et durée."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

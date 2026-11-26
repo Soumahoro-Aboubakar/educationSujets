@@ -29,7 +29,7 @@
         "Parties : demandeur et défendeur au civil.",
         "Une demande doit encore être examinée au fond."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-ORGJUD-L2",
@@ -52,7 +52,7 @@
         "Impartialité : pas de parti pris.",
         "Contradiction et motivation rendent le procès contrôlable."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-ORGJUD-L3",
@@ -75,7 +75,7 @@
         "Droit commun sous réserve des compétences spéciales.",
         "Vérifier matière puis territoire."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-ORGJUD-L4",
@@ -98,7 +98,7 @@
         "Cassation : contrôle juridique.",
         "Toujours vérifier ouverture et délai du recours."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-ORGJUD-L5",
@@ -121,7 +121,7 @@
         "Parquet : action publique et réquisitions.",
         "Avocat général : magistrat du parquet."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-ORGJUD-L6",
@@ -144,7 +144,7 @@
         "Avocat : conseil et défense.",
         "Commissaire de justice : signification et exécution."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-ORGJUD-L7",
@@ -167,7 +167,7 @@
         "Vérifier le texte de compétence.",
         "Distinguer institution prévue et implantation effective."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "DROIT-ORGJUD-L8",
@@ -190,7 +190,7 @@
         "Juges nationaux en première instance et en appel.",
         "CCJA : en cas de cassation, évocation et jugement au fond."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

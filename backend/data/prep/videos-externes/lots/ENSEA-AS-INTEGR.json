@@ -28,7 +28,7 @@
         "Sur un intervalle, toutes les primitives diffèrent d’une constante.",
         "Une valeur imposée détermine cette constante."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L2",
@@ -51,7 +51,7 @@
         "Repérer u et u′.",
         "Ajuster les facteurs constants et vérifier."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L3",
@@ -76,7 +76,7 @@
         "Calcul : primitive à la borne haute moins à la borne basse.",
         "Une aire géométrique est positive ou nulle."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L4",
@@ -101,7 +101,7 @@
         "Chasles : découper aux bornes.",
         "Encadrer une fonction permet d’encadrer son intégrale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L5",
@@ -126,7 +126,7 @@
         "Une borne de f borne aussi sa moyenne.",
         "La dérivée de ∫ₐˣ f(t) dt est f(x)."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L6",
@@ -151,7 +151,7 @@
         "Choisir u et v′.",
         "Évaluer [uv] puis soustraire la nouvelle intégrale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L7",
@@ -176,7 +176,7 @@
         "Remplacer dx par du/α.",
         "Transformer les deux bornes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L8",
@@ -201,7 +201,7 @@
         "y′ = ay donne Ce^(ax).",
         "La condition initiale fixe C."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L9",
@@ -226,7 +226,7 @@
         "Soustraire l’équilibre pour obtenir z′ = az.",
         "Traiter a = 0 séparément."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-INTEGR-L10",
@@ -249,7 +249,7 @@
         "Calculer y′ puis y″.",
         "Substituer et simplifier tous les termes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

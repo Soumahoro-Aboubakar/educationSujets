@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-PSYCHOTECH",
+  "titre": "Réussir le test psychotechnique",
+  "matiere": "Test psychotechnique",
+  "resume": "Le questionnaire de personnalité du 2ᵉ tour : son format, l’échelle de A à E, la feuille de réponses, la cohérence des réponses et la gestion du temps.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-PSYCHOTECH-L1",
+      "titre": "Ce qu’est le test du 2ᵉ tour",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "L’échelle de réponse de A à E",
+      "explication": "À la fin de cette leçon, tu sauras décrire le test psychotechnique du CAFOP-IA et ce qui le distingue d’une épreuve écrite. Aucun prérequis. Les candidats admis au 1ᵉʳ tour passent un test psychotechnique. Dans les cahiers officiels des sessions 2022 et 2025, il s’agit d’un questionnaire de personnalité : environ 180 affirmations sur la manière de travailler, de s’organiser, de vivre avec les autres et de réagir aux difficultés. Pour chaque affirmation, le candidat indique à quel point elle le décrit. Il n’y a ni calcul, ni texte à analyser, ni réponse juste à trouver dans un corrigé. Le questionnaire dresse un profil ; la grille de lecture utilisée par le jury n’est pas publiée.",
+      "formules": [],
+      "exemples": [
+        "Une affirmation du même genre (exemple original)",
+        "Ce que ce n’est pas"
+      ],
+      "pieges": [
+        "Croire qu’il existe une « bonne » réponse à apprendre par cœur. Le questionnaire est fait pour décrire, pas pour noter des connaissances."
+      ],
+      "aRetenir": [
+        "2ᵉ tour : questionnaire de personnalité.",
+        "Environ 180 affirmations.",
+        "Pas de bonne réponse universelle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PSYCHOTECH-L2",
+      "titre": "L’échelle de réponse de A à E",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "2/8",
+      "precedente": "Ce qu’est le test du 2ᵉ tour",
+      "suivante": "Remplir la feuille de réponses",
+      "explication": "À la fin de cette leçon, tu sauras choisir le degré qui correspond à ta conduite réelle. Prérequis : la nature du test.",
+      "formules": [],
+      "exemples": [
+        "Choisir avec des faits",
+        "Ne pas abuser du milieu"
+      ],
+      "pieges": [
+        "Choisir E partout où l’affirmation semble « positive » : c’est souvent incohérent et peu crédible."
+      ],
+      "aRetenir": [
+        "A, B : non.",
+        "C : selon les situations.",
+        "D, E : oui, de plus en plus nettement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PSYCHOTECH-L3",
+      "titre": "Remplir la feuille de réponses",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "3/8",
+      "precedente": "L’échelle de réponse de A à E",
+      "suivante": "Ce qu’explorent les affirmations",
+      "explication": "À la fin de cette leçon, tu sauras remplir sans erreur la feuille de réponses à lecture optique. Aucun prérequis.",
+      "formules": [],
+      "exemples": [
+        "Marquer correctement",
+        "Éviter le décalage"
+      ],
+      "pieges": [
+        "Noircir deux cases sur une même ligne rend la réponse illisible pour la machine."
+      ],
+      "aRetenir": [
+        "Crayon à papier, case entièrement noircie.",
+        "Une case par affirmation.",
+        "Vérifier les numéros et les lignes vides."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PSYCHOTECH-L4",
+      "titre": "Ce qu’explorent les affirmations",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "4/8",
+      "precedente": "Remplir la feuille de réponses",
+      "suivante": "Répondre sincèrement et rester cohérent",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître les grands thèmes abordés par un questionnaire de personnalité. Aucun prérequis. Les affirmations du cahier portent sur la vie au travail. On peut les regrouper en grands thèmes, comme dans la plupart des questionnaires de ce type. Ce regroupement aide à comprendre le test ; ce n’est pas la grille officielle du jury.",
+      "formules": [],
+      "exemples": [
+        "Un thème, plusieurs affirmations",
+        "Le lien avec le métier"
+      ],
+      "pieges": [
+        "Penser qu’un seul trait compte : le profil se lit sur l’ensemble des réponses."
+      ],
+      "aRetenir": [
+        "Organisation, relations, stress.",
+        "Énergie, ouverture, influence.",
+        "Le profil se lit sur l’ensemble."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PSYCHOTECH-L5",
+      "titre": "Répondre sincèrement et rester cohérent",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "5/8",
+      "precedente": "Ce qu’explorent les affirmations",
+      "suivante": "Mieux se connaître avant le test",
+      "explication": "À la fin de cette leçon, tu sauras pourquoi la sincérité protège ta cohérence et reconnaître deux affirmations de sens opposé. Prérequis : les thèmes du questionnaire. Un même trait revient sous plusieurs formes. Certaines affirmations vont dans le même sens, d’autres en sens inverse. Si tu te décris très ponctuel, tu ne peux pas aussi te reconnaître pleinement dans une affirmation qui dit que tu arrives souvent en retard.",
+      "formules": [],
+      "exemples": [
+        "Une incohérence",
+        "Une réponse cohérente"
+      ],
+      "pieges": [
+        "Vouloir paraître parfait : personne n’a la note maximale dans tous les domaines, et un profil « trop beau » paraît peu crédible."
+      ],
+      "aRetenir": [
+        "Plusieurs affirmations par trait.",
+        "Certaines sont en sens inverse.",
+        "Sincérité = cohérence."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PSYCHOTECH-L6",
+      "titre": "Mieux se connaître avant le test",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "6/8",
+      "precedente": "Répondre sincèrement et rester cohérent",
+      "suivante": "Gérer le temps et la concentration",
+      "explication": "À la fin de cette leçon, tu sauras préparer le test en observant tes propres conduites. Aucun prérequis. On ne « révise » pas un questionnaire de personnalité, mais on peut s’y préparer en réfléchissant à sa façon d’agir : à l’école, en famille, dans une association, au travail.",
+      "formules": [],
+      "exemples": [
+        "Un carnet d’observation",
+        "Lien avec le métier visé"
+      ],
+      "pieges": [
+        "Apprendre par cœur des « réponses idéales » trouvées en ligne : elles ne correspondent pas à ta vraie conduite et rendent tes réponses inco…"
+      ],
+      "aRetenir": [
+        "Pas de révision par cœur.",
+        "Observer ses conduites.",
+        "Connaître ses points forts et ses progrès."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PSYCHOTECH-L7",
+      "titre": "Gérer le temps et la concentration",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "7/8",
+      "precedente": "Mieux se connaître avant le test",
+      "suivante": "Le jour du test : la méthode complète",
+      "explication": "À la fin de cette leçon, tu sauras garder un rythme régulier sur un questionnaire long. Prérequis : la feuille de réponses. Avec environ 180 affirmations, la régularité compte. La durée exacte du test n’est pas publiée : écoute l’annonce le jour même et calcule ton rythme.",
+      "formules": [
+        "Temps par affirmation = durée totale ÷ nombre d’affirmations"
+      ],
+      "exemples": [
+        "Répondre à la première impression réfléchie",
+        "Faire des points de contrôle"
+      ],
+      "pieges": [
+        "Ralentir sur les premières affirmations puis bâcler les dernières : la fatigue augmente les erreurs de décalage."
+      ],
+      "aRetenir": [
+        "Rythme régulier.",
+        "Points de contrôle.",
+        "Aucune ligne vide."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PSYCHOTECH-L8",
+      "titre": "Le jour du test : la méthode complète",
+      "module": "Réussir le test psychotechnique (Test psychotechnique)",
+      "position": "8/8",
+      "precedente": "Gérer le temps et la concentration",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras te présenter au test et le passer dans de bonnes conditions. Prérequis : les leçons précédentes.",
+      "formules": [],
+      "exemples": [
+        "Une hésitation",
+        "Une erreur de marquage"
+      ],
+      "pieges": [
+        "Arriver sans crayon à papier : un stylo ne permet pas de corriger proprement une case."
+      ],
+      "aRetenir": [
+        "Matériel prêt la veille.",
+        "Consignes lues en entier.",
+        "Sincérité et vérification."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

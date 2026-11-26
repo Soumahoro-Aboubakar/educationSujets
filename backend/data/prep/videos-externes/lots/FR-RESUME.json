@@ -9,7 +9,8 @@
     "ENS — Éducateurs",
     "INPHB — Concours bacheliers",
     "ESATIC — Concours bacheliers (Licence 1)",
-    "INFAS — Auxiliaires de santé"
+    "INFAS — Auxiliaires de santé",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
   ],
   "lecons": [
     {
@@ -33,7 +34,7 @@
         "Réduire le texte en conservant son sens.",
         "Séparer résumé et discussion si les deux sont demandés."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "FR-RESUME-L2",
@@ -56,7 +57,7 @@
         "Formuler la thèse ou l’idée directrice.",
         "Garder les raisons et les précisions indispensables."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "FR-RESUME-L3",
@@ -78,7 +79,7 @@
         "Opposition : contraste ; concession : fait admis malgré une réserve.",
         "Conserver les relations quand on raccourcit."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "FR-RESUME-L4",
@@ -101,7 +102,7 @@
         "Une phrase par mouvement.",
         "Garder l’ordre et distinguer les voix."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "FR-RESUME-L5",
@@ -124,7 +125,7 @@
         "Éliminer les répétitions.",
         "Conserver les limites et conditions."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "FR-RESUME-L6",
@@ -147,7 +148,7 @@
         "Garder le point de vue.",
         "Éviter les formules de commentaire extérieur."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "FR-RESUME-L7",
@@ -169,7 +170,7 @@
         "Appliquer la convention annoncée.",
         "Recompter et indiquer le total réel."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "FR-RESUME-L8",
@@ -192,7 +193,7 @@
         "Reformuler en conservant tous les mouvements.",
         "Vérifier le sens avant le dernier comptage."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

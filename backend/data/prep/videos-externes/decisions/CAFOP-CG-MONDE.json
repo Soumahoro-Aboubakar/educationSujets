@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-CG-MONDE-L1",
+    "youtubeId": "l2Hc1UL9FZQ",
+    "couverture": "partielle",
+    "justification": "Histoire des grands empires africains, dont le Ghana, le Mali et le Songhaï.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-MONDE-L2",
+    "youtubeId": "4pCVBBCwe44",
+    "couverture": "exacte",
+    "justification": "Le commerce triangulaire, cours complet de 4ᵉ.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-MONDE-L3",
+    "youtubeId": "6BEJFQrPGQE",
+    "couverture": "partielle",
+    "justification": "Comment l’Europe s’est partagé l’Afrique (conférence de Berlin) ; les indépendances sont dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-MONDE-L4",
+    "youtubeId": "3ZBnMj6BV0I",
+    "couverture": "exacte",
+    "justification": "RTI : deux minutes pour comprendre l’Union africaine, héritière de l’OUA.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-MONDE-L5",
+    "youtubeId": "fr2G3eeaurg",
+    "couverture": "exacte",
+    "justification": "Cours de 3ᵉ sur l’intégration régionale : UEMOA et CEDEAO.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-MONDE-L6",
+    "youtubeId": "qGmXfqW_kfo",
+    "couverture": "exacte",
+    "justification": "Les institutions spécialisées de l’ONU : UNESCO, OMS, OIT…",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-MONDE-L7",
+    "youtubeId": "WXXbNo-dV7M",
+    "couverture": "partielle",
+    "justification": "Lucy, fossile découvert en Éthiopie : l’Afrique berceau de l’humanité.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-MONDE-L8",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

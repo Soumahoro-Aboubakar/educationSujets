@@ -1,0 +1,199 @@
+{
+  "module": "CAFOP-MATH-SUJETS",
+  "titre": "Sujets de mathématiques corrigés",
+  "matiere": "Mathématiques",
+  "resume": "Des exercices complets des sujets CAFOP-IA 2017-2021, résolus pas à pas : problèmes, systèmes, radicaux, repère, Thalès, pyramide réduite et statistiques.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-SUJETS-L1",
+      "titre": "Sujet 2017 : le marchand de volailles",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Sujet 2020 : la sortie de recollection",
+      "explication": "À la fin de cette leçon, tu sauras résoudre un problème de partage avec une seule inconnue, comme au concours 2017. Prérequis : les modules Équations et problèmes et Proportionnalité. Énoncé (2017, exercice 1). Un marchand vend ensemble un poulet, un canard, une pintade et un dindon pour 46 800 F. Le poulet coûte le tiers du canard ; la pintade coûte 1 800 F de plus que le poulet ; le dindon est cinq fois plus cher que la pintade. Calcule le prix de chaque volaille.",
+      "formules": [],
+      "exemples": [
+        "Résolution",
+        "Réponse et vérification"
+      ],
+      "pieges": [
+        "Traduire « le poulet est le tiers du canard » par canard = x ÷ 3 : c’est le canard qui vaut le triple du poulet."
+      ],
+      "aRetenir": [
+        "Inconnue = poulet.",
+        "10x + 10 800 = 46 800.",
+        "Vérifier le total."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L2",
+      "titre": "Sujet 2020 : la sortie de recollection",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "2/8",
+      "precedente": "Sujet 2017 : le marchand de volailles",
+      "suivante": "Sujet 2020 : calculs avec radicaux et puissances",
+      "explication": "À la fin de cette leçon, tu sauras traduire un problème concret par un système de deux équations et le résoudre. Prérequis : les systèmes d’équations (module Algèbre et statistiques du BEPC). Énoncé (2020, exercice 2). Une communauté de 40 personnes organise une sortie. Un adulte paie 900 F, un adolescent 500 F. Les organisateurs encaissent 31 200 F. Combien y a-t-il d’adultes et d’adolescents ?",
+      "formules": [
+        "x + y = 40 et 900x + 500y = 31 200"
+      ],
+      "exemples": [
+        "Résolution par substitution",
+        "Réponse et vérification"
+      ],
+      "pieges": [
+        "Inverser les inconnues dans la réponse : précise toujours ce que représentent x et y."
+      ],
+      "aRetenir": [
+        "Deux inconnues, deux informations.",
+        "Système puis substitution.",
+        "28 adultes, 12 adolescents."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L3",
+      "titre": "Sujet 2020 : calculs avec radicaux et puissances",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "3/8",
+      "precedente": "Sujet 2020 : la sortie de recollection",
+      "suivante": "Sujet 2017 : triangle rectangle et fonction affine",
+      "explication": "À la fin de cette leçon, tu sauras simplifier une somme de radicaux et un calcul avec puissances de 10. Prérequis : le module Nombres et opérations. Énoncé (2020, exercice 1). Calcule A = −4√63 − 2√28 + 2√112 et B = (7,2 × 10⁻⁶ × 18 × 10⁷) ÷ (192 × (10⁻¹⁰)²).",
+      "formules": [],
+      "exemples": [
+        "Calcul de A",
+        "Calcul de B"
+      ],
+      "pieges": [
+        "Additionner les nombres sous les racines : √63 + √28 n’est pas √91."
+      ],
+      "aRetenir": [
+        "Même radical : √7.",
+        "A = −8√7.",
+        "B = 6,75 × 10²⁰."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L4",
+      "titre": "Sujet 2017 : triangle rectangle et fonction affine",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "4/8",
+      "precedente": "Sujet 2020 : calculs avec radicaux et puissances",
+      "suivante": "Sujet 2020 : Thalès dans un triangle",
+      "explication": "À la fin de cette leçon, tu sauras prouver qu’un triangle est rectangle à partir de coordonnées et déterminer une fonction affine. Prérequis : le module Géométrie du BEPC. Énoncé (2017, exercice 3). Dans un repère orthonormé : A(−4 ; 5), B(2 ; −3), C(−1 ; 6). Justifie que ABC est rectangle et précise le sommet de l’angle droit. Puis détermine f(x) = ax + b avec f(−4) = 5 et f(−1) = 6. Fonction affine. a = (6 − 5) ÷ (−1 − (−4)) = 1 ÷ 3 = 1/3. Puis f(−1) = −1/3 + b = 6, donc b = 19/3 : f(x) = x/3 + 19/3.",
+      "formules": [],
+      "exemples": [
+        "Les longueurs au carré",
+        "Conclusion"
+      ],
+      "pieges": [
+        "Calculer les longueurs sans les élever au carré : la réciproque de Pythagore compare des carrés."
+      ],
+      "aRetenir": [
+        "Calculer AB², AC², BC².",
+        "Comparer avec la somme des deux autres.",
+        "f(x) = x/3 + 19/3."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L5",
+      "titre": "Sujet 2020 : Thalès dans un triangle",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "5/8",
+      "precedente": "Sujet 2017 : triangle rectangle et fonction affine",
+      "suivante": "Sujet 2019 : la pyramide réduite",
+      "explication": "À la fin de cette leçon, tu sauras rédiger un exercice de Thalès complet. Prérequis : Thalès (modules Mesures et Géométrie). Énoncé (2020, exercice 3). Les points C, P, A sont alignés, ainsi que C, M, B, et (MP) est parallèle à (BA). On donne PC = 3, MP = 4 et AB = 12. Justifie que CP/CA = CM/CB, que MP/BA = 1/3, puis calcule CA et AP.",
+      "formules": [],
+      "exemples": [
+        "Rapports de Thalès",
+        "Longueurs"
+      ],
+      "pieges": [
+        "Écrire CP/CA = MP/AB sans citer les hypothèses (alignement et parallélisme) : la justification est incomplète."
+      ],
+      "aRetenir": [
+        "Citer les hypothèses.",
+        "MP/BA = 1/3.",
+        "CA = 9, AP = 6."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L6",
+      "titre": "Sujet 2019 : la pyramide réduite",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "6/8",
+      "precedente": "Sujet 2020 : Thalès dans un triangle",
+      "suivante": "Sujet 2020 : la série de notes",
+      "explication": "À la fin de cette leçon, tu sauras utiliser un coefficient de réduction pour calculer un volume. Prérequis : les solides (module Géométrie du BEPC). Énoncé (2019, exercice 4). SABCD est une pyramide régulière de hauteur SO = 4,5 cm et de volume 20,25 cm³. Un plan parallèle à la base coupe [SO] en I, avec SI = 3 cm. Justifie que le coefficient de réduction vaut 2/3, puis calcule le volume de la petite pyramide.",
+      "formules": [],
+      "exemples": [
+        "Coefficient de réduction",
+        "Volume réduit"
+      ],
+      "pieges": [
+        "Multiplier le volume par k au lieu de k³ : on trouverait 13,5 cm³, ce qui est faux."
+      ],
+      "aRetenir": [
+        "k = SI ÷ SO = 2/3.",
+        "Volume × k³ = 8/27.",
+        "V = 6 cm³."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L7",
+      "titre": "Sujet 2020 : la série de notes",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "7/8",
+      "precedente": "Sujet 2019 : la pyramide réduite",
+      "suivante": "Bilan : réussir l’épreuve complète",
+      "explication": "À la fin de cette leçon, tu sauras traiter une série statistique complète : effectifs, mode, moyenne, diagramme circulaire. Prérequis : la leçon de statistiques du module Algèbre. Énoncé (2020, exercice 4). Vingt notes : 12, 12, 11, 14, 15, 12, 12, 11, 13, 15, 13, 12, 12, 11, 12, 14, 11, 12, 12, 14.",
+      "formules": [],
+      "exemples": [
+        "Mode et moyenne",
+        "Diagramme circulaire"
+      ],
+      "pieges": [
+        "Confondre le mode (valeur la plus fréquente) et la moyenne."
+      ],
+      "aRetenir": [
+        "Tableau des effectifs.",
+        "Mode 12, moyenne 12,5.",
+        "Angle = effectif ÷ total × 360°."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L8",
+      "titre": "Bilan : réussir l’épreuve complète",
+      "module": "Sujets de mathématiques corrigés (Mathématiques)",
+      "position": "8/8",
+      "precedente": "Sujet 2020 : la série de notes",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras organiser tes deux heures et présenter ta copie. Prérequis : les leçons du module. Les sujets IA récents comptent quatre exercices, souvent notés 4, 6, 5 et 5 points (2020) ou 4, 6, 6 et 4 points (2019). Un QCM ouvre souvent l’épreuve.",
+      "formules": [],
+      "exemples": [
+        "Une réponse bien présentée",
+        "Une réponse insuffisante"
+      ],
+      "pieges": [
+        "Recopier au propre un calcul faux sans le vérifier : un contrôle rapide (total, ordre de grandeur) évite bien des erreurs."
+      ],
+      "aRetenir": [
+        "Lire, choisir l’ordre.",
+        "Justifier chaque étape.",
+        "Relire calculs et unités."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

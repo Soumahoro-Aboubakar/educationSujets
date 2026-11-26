@@ -1,0 +1,243 @@
+{
+  "module": "CAFOP-FR-ORTHO",
+  "titre": "Orthographe grammaticale et accords",
+  "matiere": "Français",
+  "resume": "Accorder le verbe, le nom, l’adjectif et le participe passé, choisir les bons homophones et corriger un paragraphe comme au concours.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-FR-ORTHO-L1",
+      "titre": "Trouver le sujet et accorder le verbe",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Accorder avec un sujet difficile à repérer",
+      "explication": "À la fin de cette leçon, tu sauras repérer le sujet d’un verbe conjugué et choisir sa terminaison au présent. Aucun prérequis. Pour repérer le verbe conjugué, essaie de changer le temps de la phrase. Dans « Le directeur ferme le portail », on peut dire « Le directeur fermait le portail ». Cherche ensuite qui est-ce qui ferme ? C’est « le directeur », le sujet. Le sujet peut être un nom propre, un pronom ou un groupe de mots. Le pronom de remplacement te donne la personne et le nombre. Pour un verbe en -er comme « écouter », « elle écoute » et « ils écoutent » se prononcent de la même façon. Vérifie donc la terminaison à l’écrit, même quand l’oreille ne signale aucune différence.",
+      "formules": [],
+      "exemples": [
+        "Un sujet singulier",
+        "Type concours — un nom pluriel dans le groupe sujet"
+      ],
+      "pieges": [
+        "Dans « Le vendeur range les mangues », « les mangues » répond à « il range quoi ? ». Le sujet « le vendeur » commande la forme « range »."
+      ],
+      "aRetenir": [
+        "Changer le temps aide à trouver le verbe conjugué.",
+        "Trouve le sujet entier et son noyau.",
+        "Vérifie la terminaison à l’aide du pronom sujet."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L2",
+      "titre": "Accorder avec un sujet difficile à repérer",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "2/10",
+      "precedente": "Trouver le sujet et accorder le verbe",
+      "suivante": "Former le pluriel des noms",
+      "explication": "À la fin de cette leçon, tu sauras accorder le verbe avec un sujet éloigné, inversé, collectif ou coordonné. Prérequis : savoir repérer le verbe conjugué et son sujet. Avec deux sujets coordonnés, moi entraîne « nous » et toi entraîne « vous » en l’absence de « moi ». Sans « moi » ni « toi », des sujets comme « Aya et Koffi » correspondent à « ils ». À l’examen, choisis d’abord la personne, puis la terminaison du temps demandé. Un nom collectif désigne plusieurs êtres ou objets comme un ensemble. Avec « la troupe de danseurs », le singulier convient si l’on parle de la troupe en bloc. Selon le contexte, un collectif suivi d’un complément peut s’accorder avec ce complément lorsque l’action concerne surtout ses membres. Avec la plupart de, suis le nombre du complément : « La plupart des élèves répondent. »",
+      "formules": [],
+      "exemples": [
+        "Un sujet inversé",
+        "Type concours — deux personnes grammaticales"
+      ],
+      "pieges": [
+        "Dans « Où se trouvent les registres de la classe ? », « où » demande un lieu. Le sujet « les registres de la classe » est placé après le ve…"
+      ],
+      "aRetenir": [
+        "Écarte une incise et replace un sujet inversé devant son verbe.",
+        "Avec un collectif, vérifie le sens et la construction.",
+        "Transforme les sujets coordonnés en pronom pluriel."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L3",
+      "titre": "Former le pluriel des noms",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "3/10",
+      "precedente": "Accorder avec un sujet difficile à repérer",
+      "suivante": "Accorder l’adjectif, y compris la couleur",
+      "explication": "À la fin de cette leçon, tu sauras mettre au pluriel des noms simples et vérifier le pluriel de noms composés. Prérequis : distinguer le singulier du pluriel. Sept noms en -ou prennent un x au pluriel. Ce sont bijou, caillou, chou, genou, hibou, joujou et pou. Un nom composé réunit plusieurs éléments. Dans « un coffre-fort », « fort » est un adjectif qui décrit le coffre, d’où « des coffres-forts ». Dans « un arc-en-ciel », « en ciel » reste fixe, d’où « des arcs-en-ciel ». Le verbe reste invariable quand il entre dans un nom composé à trait d’union. Pour certains composés, le dictionnaire admet plusieurs pluriels. On trouve « des pare-brise » en orthographe traditionnelle et « des pare-brises » selon les rectifications de 1990. Le premier élément « pare », issu du verbe « parer », reste fixe dans les deux graphies.",
+      "formules": [],
+      "exemples": [
+        "Deux noms, une finale",
+        "Type concours — un composé"
+      ],
+      "pieges": [
+        "Dans « des pommes de terre », le complément « de terre » conserve sa forme. La marque du pluriel se place sur « pommes »."
+      ],
+      "aRetenir": [
+        "Le pluriel en s est le plus courant.",
+        "Apprends les modèles en -aux et en -x ainsi que leurs exceptions.",
+        "Vérifie quels éléments d’un nom composé varient."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L4",
+      "titre": "Accorder l’adjectif, y compris la couleur",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "4/10",
+      "precedente": "Former le pluriel des noms",
+      "suivante": "Accorder le participe passé avec être ou avoir",
+      "explication": "À la fin de cette leçon, tu sauras accorder un adjectif simple ou composé et reconnaître une couleur invariable. Prérequis : savoir déterminer le genre et le nombre d’un nom. L’adjectif précise un nom ou un pronom. Il s’accorde généralement avec lui en genre et en nombre. Il peut être placé à côté du nom, comme dans « des tables solides », ou après un verbe comme « être » ou « sembler » : « Les tables semblent solides. » Cherche toujours le mot décrit. Hors des couleurs, deux adjectifs qui qualifient chacun le nom s’accordent tous les deux : « des sauces aigres-douces », à la fois aigres et douces. Un adverbe demeure invariable : « des personnes haut placées ». Ici, « haut » signifie « hautement » et seul « placées » varie.",
+      "formules": [],
+      "exemples": [
+        "Derrière le verbe",
+        "Type concours — deux couleurs, deux accords"
+      ],
+      "pieges": [
+        "« Des cahiers oranges » est une erreur si « orange » indique la couleur. Écris « des cahiers orange », sur le modèle du nom du fruit employ…"
+      ],
+      "aRetenir": [
+        "L’adjectif s’accorde généralement avec le nom décrit.",
+        "Une nuance composée reste invariable.",
+        "Dans un adjectif composé, repère les éléments qui peuvent varier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L5",
+      "titre": "Accorder le participe passé avec être ou avoir",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "5/10",
+      "precedente": "Accorder l’adjectif, y compris la couleur",
+      "suivante": "Accorder le participe des verbes pronominaux",
+      "explication": "À la fin de cette leçon, tu sauras choisir l’accord d’un participe passé dans une phrase avec être ou avoir et repérer un COD placé avant. Prérequis : savoir trouver le sujet et reconnaître le genre et le nombre d’un nom. Dans « elle est arrivée » et « elle a fermé la porte », le verbe conjugué comporte un auxiliaire (« est », « a ») et un participe passé (« arrivée », « fermé »). Commence par identifier l’auxiliaire. Avec être, hors verbes pronominaux, le participe s’accorde avec le sujet, y compris à la voix passive. Avec avoir, cherche le complément d’objet direct, ou COD. Il désigne, par exemple, ce que l’on ferme dans « elle a fermé la porte ». Il répond ici à « elle a fermé quoi ? ». Il peut être repris par « le », « la », « l’ », « les » ou par « que ». Regarde ensuite sa place par rapport au participe.",
+      "formules": [],
+      "exemples": [
+        "Avec être",
+        "Type concours — retrouver le mot repris"
+      ],
+      "pieges": [
+        "Dans « Les candidates ont parlé à la directrice », le complément est introduit par « à ». Il est indirect. Le participe « parlé » garde sa …"
+      ],
+      "aRetenir": [
+        "Avec être, règle générale : accorder avec le sujet.",
+        "Avec avoir, chercher le COD et vérifier sa place.",
+        "Identifier le nom repris par un pronom COD."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L6",
+      "titre": "Accorder le participe des verbes pronominaux",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "6/10",
+      "precedente": "Accorder le participe passé avec être ou avoir",
+      "suivante": "Accorder un participe suivi d’un infinitif",
+      "explication": "À la fin de cette leçon, tu sauras expliquer l’accord d’un participe pronominal en repérant le rôle de « se » ou le COD qui le précède. Prérequis : savoir distinguer un COD d’un complément d’objet indirect. Un verbe pronominal s’emploie avec un pronom comme « se ». Il prend l’auxiliaire être aux temps composés. Quand le verbe s’emploie aussi sans « se », compare les deux constructions. On lave quelqu’un, mais on parle à quelqu’un. Le pronom a donc un rôle différent dans « se laver » et « se parler ». Certains verbes, comme « s’enfuir » et « se souvenir », s’emploient seulement à la forme pronominale. Le participe s’accorde généralement avec le sujet : « Elles se sont souvenues de la date. » L’accord se fait aussi avec le sujet quand la construction a un sens passif : « Les places se sont vendues » signifie qu’elles ont été vendues.",
+      "formules": [],
+      "exemples": [
+        "Se voir",
+        "Type concours — déplacer le COD"
+      ],
+      "pieges": [
+        "Dans « Les semaines se sont succédé », on succède à quelque chose. « Se » est indirect et il n’y a pas de COD : écris « succédé »."
+      ],
+      "aRetenir": [
+        "L’auxiliaire être accompagne les verbes pronominaux aux temps composés.",
+        "Un pronom indirect ne commande pas l’accord.",
+        "Repère les verbes uniquement pronominaux et les emplois de sens passif."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L7",
+      "titre": "Accorder un participe suivi d’un infinitif",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "7/10",
+      "precedente": "Accorder le participe des verbes pronominaux",
+      "suivante": "Distinguer les homophones les plus courants",
+      "explication": "À la fin de cette leçon, tu sauras décider si un participe suivi d’un infinitif s’accorde et reconnaître le cas de « fait ». Prérequis : repérer un COD et reconnaître un verbe à l’infinitif. Avec avoir, quand un infinitif suit le participe passé, repère d’abord le mot placé avant et demande qui accomplit l’action de l’infinitif ? Si ce mot est le COD du verbe conjugué et désigne la personne ou la chose qui accomplit l’action, le participe s’accorde. S’il est COD de l’infinitif, le participe reste invariable. La règle de fait immédiatement suivi d’un infinitif vaut aussi dans une construction pronominale : « Elles se sont fait applaudir. » Pour « laissé » suivi d’un infinitif, les rectifications de 1990 admettent l’invariabilité. L’orthographe traditionnelle conserve la possibilité de l’accord selon la construction : « La fille qu’on a laissée partir » ou « La fille qu’on a laissé partir…",
+      "formules": [],
+      "exemples": [
+        "Qui court ?",
+        "Type concours — qui lit, qu’est-ce qui est lu ?"
+      ],
+      "pieges": [
+        "La présence de « que » devant « j’ai entendu » ne suffit pas. Dans « La cloche que j’ai entendu réparer », la cloche est ce qu’on répare, d…"
+      ],
+      "aRetenir": [
+        "Vérifie qui accomplit l’action de l’infinitif.",
+        "Si le mot placé avant est COD de l’infinitif, garde le participe invariable.",
+        "Écris toujours « fait » devant l’infinitif qu’il introduit directement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L8",
+      "titre": "Distinguer les homophones les plus courants",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "8/10",
+      "precedente": "Accorder un participe suivi d’un infinitif",
+      "suivante": "Choisir l’homophone grâce à sa fonction",
+      "explication": "À la fin de cette leçon, tu sauras choisir entre a et à, et et est, son et sont, ce et se, ces et ses, on et ont. Prérequis : reconnaître un verbe conjugué et un déterminant. Des homophones se prononcent de la même façon et peuvent s’écrire différemment. Pour choisir, fais un test dans la phrase. Quand tu suspectes un verbe, change le temps. Pour un déterminant, regarde le nom qu’il introduit et vérifie s’il indique la possession ou s’il désigne ce dont on parle.",
+      "formules": [],
+      "exemples": [
+        "Changer le temps",
+        "Type concours — deux fonctions dans la même phrase"
+      ],
+      "pieges": [
+        "« Ce lève » ne convient pas dans « Le gardien se lève ». On reconnaît « se lever » en changeant le sujet : « Je me lève »."
+      ],
+      "aRetenir": [
+        "Change le temps pour reconnaître a, est, sont et ont.",
+        "Vérifie le sens de possession pour son et ses.",
+        "Distingue ce qui désigne de « se », qui accompagne le verbe pronominal."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L9",
+      "titre": "Choisir l’homophone grâce à sa fonction",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "9/10",
+      "precedente": "Distinguer les homophones les plus courants",
+      "suivante": "Bilan méthode — corriger un paragraphe comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras choisir entre leur et leurs, ou et où, quel et qu’elle, la et l’a et là, peu et peut. Prérequis : utiliser un test de remplacement dans une phrase. Essaie le test dans la phrase entière. Dans « Quel jour choisit-elle ? », « quel » accompagne « jour », masculin singulier. Dans « Le jour qu’elle choisit », « elle » est sujet de « choisit » : « le jour qu’il choisit » confirme l’écriture en deux éléments.",
+      "formules": [],
+      "exemples": [
+        "Leur devant un nom ou devant un verbe",
+        "Type concours — enchaîner trois tests"
+      ],
+      "pieges": [
+        "Dans « Elles portent leur uniforme », « uniforme » est singulier. Le nombre de personnes qui possèdent l’uniforme ne suffit pas à faire écr…"
+      ],
+      "aRetenir": [
+        "Vérifie si « leur » introduit un nom ou complète un verbe.",
+        "Teste « qu’elle » avec « qu’il » et « l’a » avec « l’avait ».",
+        "Lis le contexte pour distinguer choix, lieu et quantité."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-ORTHO-L10",
+      "titre": "Bilan méthode — corriger un paragraphe comme au concours",
+      "module": "Orthographe grammaticale et accords (Français)",
+      "position": "10/10",
+      "precedente": "Choisir l’homophone grâce à sa fonction",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras corriger un paragraphe fautif et justifier tes choix par trois relectures ciblées. Prérequis : savoir vérifier les accords, les participes passés et les homophones. En français, le sujet CAFOP I.O. de 2003 demandait de réécrire un paragraphe sur une forge en corrigeant la syntaxe, l’orthographe et la ponctuation. Commence par lire tout le passage et repérer ce qu’il décrit. Puis traite les difficultés une à une.",
+      "formules": [],
+      "exemples": [
+        "Une phrase à corriger",
+        "Type concours — réécrire un paragraphe"
+      ],
+      "pieges": [
+        "Dans « Les cahiers des élèves, sont sur la table », le groupe sujet va jusqu’à « élèves ». Supprime la virgule qui sépare ce groupe de « so…"
+      ],
+      "aRetenir": [
+        "Délimite les phrases en tenant compte du sens.",
+        "Vérifie les accords et teste les homophones.",
+        "Relis la version copiée, ponctuation comprise."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

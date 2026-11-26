@@ -31,7 +31,7 @@
         "Choisir selon sa compréhension et ses arguments.",
         "Répondre à une question précise."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L2",
@@ -54,7 +54,7 @@
         "Respecter toutes les limites.",
         "Examiner les mots de portée."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L3",
@@ -77,7 +77,7 @@
         "Chercher une difficulté réelle.",
         "Formuler une question qui guidera le devoir."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L4",
@@ -100,7 +100,7 @@
         "Commenter ce que montre l’exemple.",
         "Examiner une limite sans caricaturer."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L5",
@@ -123,7 +123,7 @@
         "Donner une fonction à chaque partie.",
         "Vérifier la couverture du sujet."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L6",
@@ -146,7 +146,7 @@
         "Expliquer la difficulté.",
         "Annoncer le plan réellement suivi."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L7",
@@ -169,7 +169,7 @@
         "Relier l’exemple à l’argument.",
         "Faire progresser la réponse par les transitions."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L8",
@@ -192,7 +192,7 @@
         "Formuler le résultat de la démonstration.",
         "Garder une ouverture seulement si elle est utile."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-OG-L9",
@@ -215,7 +215,7 @@
         "Finir le raisonnement et la conclusion.",
         "Relire la cohérence puis la langue."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

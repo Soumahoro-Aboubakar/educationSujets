@@ -1,0 +1,219 @@
+{
+  "module": "CAFOP-FR-VOCAB",
+  "titre": "Vocabulaire et sens des mots",
+  "matiere": "Français",
+  "resume": "Choisir un mot précis, comprendre comment il est formé et expliquer le sens d’une expression ou d’une figure de style dans un texte.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-FR-VOCAB-L1",
+      "titre": "Trouver un synonyme ou un contraire",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Retrouver le sens d’un mot dans sa phrase",
+      "explication": "À la fin de cette leçon, tu sauras remplacer un mot par un synonyme ou donner son contraire dans une phrase. Aucun prérequis. Un synonyme a un sens proche du mot de départ. Un antonyme exprime un sens opposé. Demande-toi d’abord ce que le mot veut dire dans la phrase, puis choisis un mot de la même classe grammaticale. Un adjectif se remplace généralement par un autre adjectif. On peut former certains contraires avec un préfixe, un élément placé au début du mot. Dans « imprudent », im- exprime une opposition à « prudent ». Dans « dénouer », dé- indique l’action inverse de « nouer ». Le contraire de « lourd », lui, a une autre forme.",
+      "formules": [],
+      "exemples": [
+        "Un synonyme courant",
+        "Type concours — Donner un contraire adapté"
+      ],
+      "pieges": [
+        "Ajouter in- à tous les mots donne parfois une forme qui n’existe pas. Le contraire de « heureux » est « malheureux »."
+      ],
+      "aRetenir": [
+        "Synonyme : sens proche.",
+        "Antonyme : sens opposé dans le contexte.",
+        "Vérifier le mot, sa classe grammaticale et son accord."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L2",
+      "titre": "Retrouver le sens d’un mot dans sa phrase",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "2/9",
+      "precedente": "Trouver un synonyme ou un contraire",
+      "suivante": "Distinguer homonymes et paronymes",
+      "explication": "À la fin de cette leçon, tu sauras choisir le sens d’un mot à l’aide d’un indice du texte. Prérequis : savoir essayer un remplacement dans une phrase. Un mot peut avoir plusieurs sens. Le contexte comprend la phrase où il apparaît et les phrases voisines. Les verbes, les compléments et le sujet du passage orientent ton choix. Même un mot très courant peut prendre un sens que tu emploies moins souvent.",
+      "formules": [],
+      "exemples": [
+        "Le prix de la craie",
+        "Type concours — Choisir un nom précis"
+      ],
+      "pieges": [
+        "Dans « le prix du meilleur lecteur », la somme à payer vient parfois à l’esprit en premier. L’expression désigne ici une récompense."
+      ],
+      "aRetenir": [
+        "Un mot peut avoir plusieurs sens.",
+        "Repérer un indice de sens dans le passage.",
+        "Remplacer par un mot ou un groupe de mots précis."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L3",
+      "titre": "Distinguer homonymes et paronymes",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "3/9",
+      "precedente": "Retrouver le sens d’un mot dans sa phrase",
+      "suivante": "Décomposer un mot et reconnaître sa famille",
+      "explication": "À la fin de cette leçon, tu sauras distinguer deux mots de même prononciation ou de forme proche et choisir celui qui convient à la phrase. Prérequis : savoir repérer un indice de sens. Deux homonymes ont des sens différents et une prononciation ou une graphie identique, parfois les deux. Ceux qui se prononcent de la même façon sont des homophones. Deux paronymes se ressemblent par leur forme et ont des sens différents. Une petite différence suffit à changer le mot.",
+      "formules": [],
+      "exemples": [
+        "Une tasse sur la table",
+        "Type concours — Choisir entre deux paronymes"
+      ],
+      "pieges": [
+        "« Éruption » et « irruption » se ressemblent. Un volcan entre en éruption. Une personne fait irruption lorsqu’elle entre brusquement."
+      ],
+      "aRetenir": [
+        "Homophones : même prononciation.",
+        "Paronymes : forme proche, sens différents.",
+        "Le contexte aide à choisir le mot juste."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L4",
+      "titre": "Décomposer un mot et reconnaître sa famille",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "4/9",
+      "precedente": "Distinguer homonymes et paronymes",
+      "suivante": "Nommer une action ou une qualité",
+      "explication": "À la fin de cette leçon, tu sauras repérer le radical, le préfixe et le suffixe d’un mot simple et vérifier que deux mots appartiennent à la même famille. Prérequis : savoir établir un lien de sens entre deux mots. Dans une famille de mots, on retrouve une base commune et un lien de sens. Le radical porte le sens de base. Le préfixe se place avant le radical et lui ajoute une idée. Le suffixe se place après et peut changer la classe grammaticale. Par exemple, le suffixe -eur permet de former un nom de personne dans « vendeur ». Compare plusieurs mots pour isoler le radical. Il peut varier légèrement, comme « lav- » dans « laver » et « lavage », ou « boi- » et « buv- » dans les formes « je bois » et « nous buvons ». Dans un exercice de décomposition, indique seulement les éléments que tu peux justifier par la forme et le sens.",
+      "formules": [],
+      "exemples": [
+        "La famille de « laver »",
+        "Type concours — Décomposer et donner un contraire"
+      ],
+      "pieges": [
+        "« Lait » et « laitue » commencent par les mêmes lettres. « Laitue » désigne une plante, tandis que « laitage » se rattache au lait par la f…"
+      ],
+      "aRetenir": [
+        "Famille : radical commun et lien de sens.",
+        "Préfixe avant la base, suffixe après la base.",
+        "Vérifier ce que chaque élément apporte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L5",
+      "titre": "Nommer une action ou une qualité",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "5/9",
+      "precedente": "Décomposer un mot et reconnaître sa famille",
+      "suivante": "Expliquer le sens propre et le sens figuré",
+      "explication": "À la fin de cette leçon, tu sauras transformer une action ou une qualité en groupe nominal en conservant les informations utiles. Prérequis : reconnaître un nom, un verbe et un adjectif. La nominalisation consiste à exprimer par un nom ce qu’une phrase présente par un verbe ou un adjectif. Le résultat est souvent un groupe formé d’un déterminant, du nom et d’un complément. Le nom peut désigner l’action, le résultat, l’état ou la qualité. La consigne et la phrase indiquent le sens à garder.",
+      "formules": [],
+      "exemples": [
+        "De la phrase au groupe nominal",
+        "Type concours — Conserver qui fait quoi"
+      ],
+      "pieges": [
+        "Les noms d’une même famille peuvent avoir des rôles différents. Dans « surveiller l’entrée », « la surveillance » désigne l’action et « le …"
+      ],
+      "aRetenir": [
+        "Transformer un verbe ou un adjectif en nom.",
+        "Garder l’action, le résultat ou la qualité visés.",
+        "Vérifier les compléments et le rôle des personnes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L6",
+      "titre": "Expliquer le sens propre et le sens figuré",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "6/9",
+      "precedente": "Nommer une action ou une qualité",
+      "suivante": "Choisir un registre de langue",
+      "explication": "À la fin de cette leçon, tu sauras dire si une expression est employée au sens propre ou figuré et en proposer une explication liée au texte. Prérequis : savoir chercher un indice dans les phrases voisines. Au sens propre, un mot est employé dans son sens premier ou littéral. Au sens figuré, le mot ou le groupe de mots évoque autre chose à travers une image. Dans « une pluie de questions », la quantité de questions rappelle une pluie abondante. L’image aide à comprendre l’idée.",
+      "formules": [],
+      "exemples": [
+        "Une réponse qui arrive trop tôt",
+        "Type concours — Expliquer l’expression du texte"
+      ],
+      "pieges": [
+        "Une définition mot à mot peut faire perdre l’idée. Dans « mettre la main à la pâte » au sens figuré, l’expression entière signifie « partic…"
+      ],
+      "aRetenir": [
+        "Sens propre : emploi littéral.",
+        "Sens figuré : emploi imagé.",
+        "Reformuler l’expression à partir des indices."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L7",
+      "titre": "Choisir un registre de langue",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "7/9",
+      "precedente": "Expliquer le sens propre et le sens figuré",
+      "suivante": "Reconnaître cinq figures de style",
+      "explication": "À la fin de cette leçon, tu sauras distinguer les registres familier, courant et soutenu et reformuler une phrase dans le registre demandé. Prérequis : savoir reformuler une phrase en gardant son idée. Le registre est la manière de s’exprimer selon la situation, le destinataire et l’effet recherché. Pour le repérer, observe le vocabulaire et les tournures. À l’oral ou à l’écrit, on peut passer d’un registre à un autre en fonction de la personne à qui l’on s’adresse. Dans une réponse de vocabulaire, le registre courant aide souvent à expliquer clairement l’expression. Si on te demande de conserver le sens, garde la même action, la même personne et les détails nécessaires. Pour un message adressé à une direction d’école, pense aussi à la formule de politesse.",
+      "formules": [],
+      "exemples": [
+        "Deux façons de parler d’un livre",
+        "Type concours — Reformuler au registre courant"
+      ],
+      "pieges": [
+        "Une phrase longue peut rester courante. Une seule tournure peut suffire à marquer un registre : « J’ai la trouille » est familier, même si …"
+      ],
+      "aRetenir": [
+        "Familier : usage détendu.",
+        "Courant : expression neutre.",
+        "Soutenu : vocabulaire ou tournures recherchés."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L8",
+      "titre": "Reconnaître cinq figures de style",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "8/9",
+      "precedente": "Choisir un registre de langue",
+      "suivante": "Bilan méthode — Répondre comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras nommer cinq figures de style et justifier ton choix en relevant un indice. Prérequis : savoir expliquer un emploi au sens figuré. Une figure de style est une manière de formuler une idée pour produire un effet. Elle peut faire imaginer une scène, accentuer une impression ou mettre en relief une opposition. Observe les mots qui produisent cet effet. Pour justifier ta réponse, nomme la figure puis explique le rôle des mots. Si l’on demande l’effet, précise ce que la figure fait comprendre ou ressentir. La cour comparée à une ruche, par exemple, paraît pleine d’activité.",
+      "formules": [],
+      "exemples": [
+        "Avec ou sans outil de comparaison",
+        "Type concours — Justifier la figure"
+      ],
+      "pieges": [
+        "« Comme la pluie reprend, on ferme les fenêtres » exprime une cause : « comme » y signifie « puisque ». Vérifie qu’il relie bien deux éléme…"
+      ],
+      "aRetenir": [
+        "Comparaison et métaphore : repérer le rapprochement.",
+        "Personnification : chercher le trait humain.",
+        "Hyperbole et antithèse : distinguer exagération et opposition."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-VOCAB-L9",
+      "titre": "Bilan méthode — Répondre comme au concours",
+      "module": "Vocabulaire et sens des mots (Français)",
+      "position": "9/9",
+      "precedente": "Reconnaître cinq figures de style",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras traiter plusieurs consignes de vocabulaire sur un extrait et vérifier chaque réponse à l’aide du texte. Prérequis : avoir travaillé le sens en contexte, la formation des mots et les figures de style. Dans les annales, plusieurs demandes peuvent porter sur le même passage. Repère le verbe de chaque consigne et le nombre de réponses attendu. Une réponse courte suffit souvent : un mot pour un synonyme, une phrase pour une explication, le nom du procédé et un indice pour une figure à justifier.",
+      "formules": [],
+      "exemples": [
+        "Un remplacement à vérifier",
+        "Type concours — Trois demandes sur un extrait"
+      ],
+      "pieges": [
+        "« Le texte utilise une image » reste trop vague si l’on demande de nommer la figure. Écris son nom précis et relève le mot ou le groupe de …"
+      ],
+      "aRetenir": [
+        "Identifier chaque opération demandée.",
+        "Vérifier les réponses dans le texte.",
+        "Citer un indice précis quand il faut justifier."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

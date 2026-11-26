@@ -1,0 +1,199 @@
+{
+  "module": "CAFOP-MATH-ALGEBRE",
+  "titre": "Algèbre et statistiques du BEPC",
+  "matiere": "Mathématiques",
+  "resume": "Les notions de 3ᵉ des sujets CAFOP-IA récents : intervalles, inéquations et systèmes, fonctions affines, radicaux, identités remarquables et statistiques.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L1",
+      "titre": "Intervalles et encadrements",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Résoudre une inéquation",
+      "explication": "À la fin de cette leçon, tu sauras écrire un ensemble de réels sous forme d’intervalle, calculer son amplitude et encadrer une différence. Prérequis : comparer des nombres relatifs. L’amplitude d’un intervalle borné est sa longueur : b − a. Pour encadrer x − y, on encadre −y en multipliant l’encadrement de y par −1, ce qui inverse les inégalités, puis on additionne membre à membre.",
+      "formules": [],
+      "exemples": [
+        "Amplitude (CAFOP 2025)",
+        "Encadrer x − y (CAFOP 2024)"
+      ],
+      "pieges": [
+        "Soustraire les encadrements membre à membre (−2 − 2 < x − y < −1 − 4) donne un résultat faux. On passe toujours par −y."
+      ],
+      "aRetenir": [
+        "Intervalle ouvert ou fermé selon les bornes.",
+        "Amplitude = b − a.",
+        "Encadrer −y avant d’additionner."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L2",
+      "titre": "Résoudre une inéquation",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "2/8",
+      "precedente": "Intervalles et encadrements",
+      "suivante": "Systèmes d’inéquations",
+      "explication": "À la fin de cette leçon, tu sauras résoudre une inéquation du premier degré et écrire ses solutions en intervalle. Prérequis : les intervalles. On isole x comme dans une équation. Une seule règle change : quand on multiplie ou divise les deux membres par un nombre négatif, on inverse le sens de l’inégalité.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2025)",
+        "Comme au concours (2026)"
+      ],
+      "pieges": [
+        "Oublier d’inverser le sens en divisant par −2 : on écrirait x < 1/2, ce qui est faux."
+      ],
+      "aRetenir": [
+        "Isoler x.",
+        "Diviser par un négatif : inverser.",
+        "Écrire l’intervalle."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L3",
+      "titre": "Systèmes d’inéquations",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "3/8",
+      "precedente": "Résoudre une inéquation",
+      "suivante": "Systèmes de deux équations",
+      "explication": "À la fin de cette leçon, tu sauras résoudre un système d’inéquations à une inconnue et comprendre la résolution graphique à deux inconnues. Prérequis : résoudre une inéquation. Pour un système d’inéquations à une inconnue, on résout chaque inéquation, puis on prend l’intersection des deux ensembles : les x qui vérifient les deux à la fois. Pour un système à deux inconnues (x et y), on trace chaque droite frontière, puis on hachure le demi-plan qui ne convient pas. On teste un point simple, souvent O(0 ; 0) : s’il vérifie l’inéquation, son demi-plan convient. La solution est la partie non hachurée.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2026)",
+        "Tester l’origine (CAFOP 2021)"
+      ],
+      "pieges": [
+        "Prendre la réunion au lieu de l’intersection : un x qui ne vérifie qu’une inéquation n’est pas solution du système."
+      ],
+      "aRetenir": [
+        "Résoudre chaque inéquation.",
+        "Prendre l’intersection.",
+        "Graphique : tester O(0 ; 0)."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L4",
+      "titre": "Systèmes de deux équations",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "4/8",
+      "precedente": "Systèmes d’inéquations",
+      "suivante": "Fonctions affines et droites",
+      "explication": "À la fin de cette leçon, tu sauras résoudre un système de deux équations à deux inconnues et vérifier ta solution. Prérequis : résoudre une équation du premier degré. Substitution : on exprime une inconnue en fonction de l’autre dans une équation, puis on remplace dans l’autre. Combinaison : on multiplie les équations pour que l’addition fasse disparaître une inconnue.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Vérifier"
+      ],
+      "pieges": [
+        "Vérifier une seule équation : un couple peut convenir à l’une et pas à l’autre."
+      ],
+      "aRetenir": [
+        "Substitution ou combinaison.",
+        "Trouver x et y.",
+        "Vérifier dans les deux équations."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L5",
+      "titre": "Fonctions affines et droites",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "5/8",
+      "precedente": "Systèmes de deux équations",
+      "suivante": "Radicaux et dénominateur rationnel",
+      "explication": "À la fin de cette leçon, tu sauras déterminer une fonction affine à partir de deux valeurs et reconnaître des droites parallèles. Prérequis : les systèmes d’équations. Les droites d’équations y = ax + b et y = ax + c ont le même coefficient directeur a : elles sont parallèles (confondues si b = c).",
+      "formules": [
+        "f(x) = ax + b avec a = [f(x₂) − f(x₁)] ÷ (x₂ − x₁)"
+      ],
+      "exemples": [
+        "Comme au concours (2024)",
+        "Comme au concours (2023)"
+      ],
+      "pieges": [
+        "Inverser l’ordre dans le calcul de a : le numérateur et le dénominateur doivent être pris dans le même ordre."
+      ],
+      "aRetenir": [
+        "f(x) = ax + b.",
+        "a = variation de f ÷ variation de x.",
+        "Même a : droites parallèles."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L6",
+      "titre": "Radicaux et dénominateur rationnel",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "6/8",
+      "precedente": "Fonctions affines et droites",
+      "suivante": "Développer et factoriser",
+      "explication": "À la fin de cette leçon, tu sauras simplifier une racine carrée et rendre rationnel le dénominateur d’une fraction. Prérequis : les identités remarquables. Pour simplifier √n, on fait apparaître un carré : √45 = √(9 × 5) = 3√5. Pour comparer 3√5 et 7, on compare leurs carrés : 45 < 49, donc 3√5 < 7. Pour rendre rationnel le dénominateur de c ÷ (a − √b), on multiplie en haut et en bas par la quantité conjuguée a + √b : (a − √b)(a + √b) = a² − b.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2023)",
+        "Comme au concours (2021)"
+      ],
+      "pieges": [
+        "√(a + b) n’est pas égal à √a + √b : √(9 + 16) = 5, alors que √9 + √16 = 7."
+      ],
+      "aRetenir": [
+        "Faire apparaître un carré.",
+        "Comparer des radicaux par leurs carrés.",
+        "Quantité conjuguée au dénominateur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L7",
+      "titre": "Développer et factoriser",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "7/8",
+      "precedente": "Radicaux et dénominateur rationnel",
+      "suivante": "Statistiques : effectifs cumulés, moyenne, médiane",
+      "explication": "À la fin de cette leçon, tu sauras développer, factoriser et calculer une expression pour une valeur donnée. Prérequis : les identités remarquables. Pour calculer une expression pour une valeur donnée, choisis la forme la plus simple : la forme développée 9 − x² se calcule plus vite que la forme factorisée.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2026)",
+        "Comme au concours (2025)"
+      ],
+      "pieges": [
+        "Oublier les parenthèses en distribuant le signe moins : −2x(x + 3) = −2x² − 6x, et non −2x² + 6x."
+      ],
+      "aRetenir": [
+        "Facteur commun.",
+        "Différence de deux carrés.",
+        "Choisir la forme la plus pratique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L8",
+      "titre": "Statistiques : effectifs cumulés, moyenne, médiane",
+      "module": "Algèbre et statistiques du BEPC (Mathématiques)",
+      "position": "8/8",
+      "precedente": "Développer et factoriser",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras compléter un tableau d’effectifs cumulés et calculer moyenne, médiane et pourcentage. Prérequis : multiplier et additionner. Pourcentage : les notes de l’intervalle ]11 ; 15] concernent 2 + 3 + 1 + 3 = 9 élèves sur 20, soit 9 ÷ 20 × 100 = 45 %.",
+      "formules": [],
+      "exemples": [
+        "Moyenne pondérée",
+        "Médiane"
+      ],
+      "pieges": [
+        "Calculer la moyenne en additionnant seulement les notes différentes (5 + 7 + … + 15) et en divisant par 20 : il faut pondérer par les effec…"
+      ],
+      "aRetenir": [
+        "Effectifs cumulés.",
+        "Moyenne pondérée.",
+        "Médiane : ordonner, puis prendre le centre."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

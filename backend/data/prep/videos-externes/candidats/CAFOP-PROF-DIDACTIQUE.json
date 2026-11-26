@@ -1,0 +1,569 @@
+{
+ "CAFOP-PROF-DIDACTIQUE-L1": {
+  "titre": "De la pédagogie à la didactique",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 255 vues"
+   },
+   {
+    "id": "vBhOj3iVXMs",
+    "titre": "Pédagogie et didactique",
+    "chaine": "SKILL4PROF",
+    "duree": "2:46",
+    "sec": 166,
+    "vues": "15 602 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "39 485 vues"
+   },
+   {
+    "id": "8ivqnkDPI0g",
+    "titre": "Comprendre la didactique et la pédagogie en 10 minutes ! (concours enseignants)",
+    "chaine": "Français lycéen",
+    "duree": "7:18",
+    "sec": 438,
+    "vues": "21 731 vues"
+   },
+   {
+    "id": "zjii9D0z2dw",
+    "titre": "Les méthodes pédagogiques pour diversifier sa façon d'enseigner",
+    "chaine": "Education Voyageuse",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "158 628 vues"
+   },
+   {
+    "id": "QlthTzF0UF4",
+    "titre": "Comprendre la différence entre les concepts :Education, Enseignement, Pédagogie et Didactique",
+    "chaine": "تربية مبسطة Education simplifiée",
+    "duree": "14:36",
+    "sec": 876,
+    "vues": "21 543 vues"
+   },
+   {
+    "id": "U3r9CgcpaQ0",
+    "titre": "Pédagogie ou Didactique : de quoi parle-t-on ? Quelles sont les différences entre ces deux termes ?",
+    "chaine": "Education Voyageuse",
+    "duree": "12:30",
+    "sec": 750,
+    "vues": "28 518 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 420 vues"
+   }
+  ]
+ },
+ "CAFOP-PROF-DIDACTIQUE-L2": {
+  "titre": "Formuler des objectifs et viser des compétences",
+  "candidats": [
+   {
+    "id": "eSB0K1KTQus",
+    "titre": "Pourquoi et comment rédiger un objectif pédagogique ?",
+    "chaine": "L'école des formateurs",
+    "duree": "8:21",
+    "sec": 501,
+    "vues": "10 271 vues"
+   },
+   {
+    "id": "LEJ8V1IL-6M",
+    "titre": "comment rédiger un objectif? qu'est ce qu'un objectif d'apprentissage?",
+    "chaine": "Professeurs de français",
+    "duree": "6:54",
+    "sec": 414,
+    "vues": "1 467 vues"
+   },
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 252 vues"
+   },
+   {
+    "id": "DFtjKDG8Vek",
+    "titre": "La formulation des objectifs pédagogiques",
+    "chaine": "Les petites capsules de M2a Consulting",
+    "duree": "4:29",
+    "sec": 269,
+    "vues": "3 032 vues"
+   },
+   {
+    "id": "fjfI2C0yi-E",
+    "titre": "Rédiger des objectifs pédagogiques",
+    "chaine": "MMC Formations",
+    "duree": "6:35",
+    "sec": 395,
+    "vues": "4 925 vues"
+   },
+   {
+    "id": "F2FfMLm_yCU",
+    "titre": "Module 1 - Leçon 3 - Définir les Objectifs d'Apprentissage",
+    "chaine": "Katalogueio",
+    "duree": "8:17",
+    "sec": 497,
+    "vues": "618 vues"
+   },
+   {
+    "id": "qDjAjS-0j0M",
+    "titre": "COMMENT BÂTIR L OBJECTIF OPÉRATIONNEL ?",
+    "chaine": "PÉDAGOGIE AVEC BILFRED",
+    "duree": "5:55",
+    "sec": 355,
+    "vues": "1 570 vues"
+   },
+   {
+    "id": "pBLj8Uxotk8",
+    "titre": "Les objectifs pédagogiques : explications claires",
+    "chaine": "devenir formateur - coach",
+    "duree": "11:43",
+    "sec": 703,
+    "vues": "5 008 vues"
+   },
+   {
+    "id": "GHZCcYyQoDw",
+    "titre": "L'approche par compétence",
+    "chaine": "Idées MG",
+    "duree": "4:37",
+    "sec": 277,
+    "vues": "70 097 vues"
+   },
+   {
+    "id": "BUxwMBXSHUs",
+    "titre": "La Pédagogie Par Objectifs vs L’Approche Par Compétences",
+    "chaine": "Français lycéen",
+    "duree": "5:51",
+    "sec": 351,
+    "vues": "10 773 vues"
+   }
+  ]
+ },
+ "CAFOP-PROF-DIDACTIQUE-L3": {
+  "titre": "Construire une fiche de préparation",
+  "candidats": [
+   {
+    "id": "HGvuHePq3bs",
+    "titre": "Fiche pédagogique : le document essentiel pour préparer et planifier chacun de ses cours",
+    "chaine": "Education Voyageuse",
+    "duree": "10:36",
+    "sec": 636,
+    "vues": "77 706 vues"
+   },
+   {
+    "id": "u14Kt9eCEZ0",
+    "titre": "COMMENT FAIRE UNE FICHE DE PRÉPARATION",
+    "chaine": "Grand François Tv",
+    "duree": "14:01",
+    "sec": 841,
+    "vues": "7 177 vues"
+   },
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 252 vues"
+   },
+   {
+    "id": "U-xqKoq1nuw",
+    "titre": "Comment concevoir une fiche pédagogique ? | Guide pratique pour les enseignants",
+    "chaine": "Miss Frenchy",
+    "duree": "6:36",
+    "sec": 396,
+    "vues": "653 vues"
+   },
+   {
+    "id": "51SISlvEReg",
+    "titre": "Comment faire une fiche pédagogique grâce à l'IA",
+    "chaine": "Pape Sylla",
+    "duree": "12:58",
+    "sec": 778,
+    "vues": "268 vues"
+   },
+   {
+    "id": "INlk_FjB5SI",
+    "titre": "Comment élaborer une fiche pédagogique pour l’activité de lecture ?",
+    "chaine": "Rim académie",
+    "duree": "6:42",
+    "sec": 402,
+    "vues": "699 vues"
+   },
+   {
+    "id": "Ut81pO49_8M",
+    "titre": "comment 🤔 préparer une fiche pédagogique 📄",
+    "chaine": "La classe de madame Samira",
+    "duree": "8:16",
+    "sec": 496,
+    "vues": "173 738 vues"
+   },
+   {
+    "id": "pVQkRjE9ZsI",
+    "titre": "Comment élaborer une fiche pédagogique de langue ?",
+    "chaine": "Rim académie",
+    "duree": "2:31",
+    "sec": 151,
+    "vues": "470 vues"
+   },
+   {
+    "id": "YKJhfnYqoXQ",
+    "titre": "DIDACTIQUE GENERALE LECON 1 FICHE DE PREPARATION AVEC Mr JULES 4eme ET 5eme PEDA",
+    "chaine": "CS NYOTA",
+    "duree": "14:21",
+    "sec": 861,
+    "vues": "58 353 vues"
+   },
+   {
+    "id": "zyykFDyjk_Y",
+    "titre": "Comment élaborer une fiche pédagogique pour l'activité orale",
+    "chaine": "Rim académie",
+    "duree": "5:35",
+    "sec": 335,
+    "vues": "383 vues"
+   }
+  ]
+ },
+ "CAFOP-PROF-DIDACTIQUE-L4": {
+  "titre": "Didactique de la lecture",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 252 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 419 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "39 519 vues"
+   },
+   {
+    "id": "SwVzwaFkqnE",
+    "titre": "Enseignement apprentissage de la dissertation 1. Analyse du sujet par le Professeur Maugust MULOMBA",
+    "chaine": "ADEF RDCONGO",
+    "duree": "14:54",
+    "sec": 894,
+    "vues": "19 768 vues"
+   },
+   {
+    "id": "6DX0mekA_oQ",
+    "titre": "Didactique de la lecture",
+    "chaine": "Fawzi Alouene",
+    "duree": "5:02",
+    "sec": 302,
+    "vues": "60 vues"
+   },
+   {
+    "id": "zjii9D0z2dw",
+    "titre": "Les méthodes pédagogiques pour diversifier sa façon d'enseigner",
+    "chaine": "Education Voyageuse",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "158 628 vues"
+   },
+   {
+    "id": "utxeeZq_oIM",
+    "titre": "01 Comment se developpe la pensée",
+    "chaine": "ENSET STUDIO",
+    "duree": "2:30",
+    "sec": 150,
+    "vues": "440 vues"
+   },
+   {
+    "id": "rQlxbKuFovQ",
+    "titre": "INTRODUCTION A LA DIDACTIQUE 1 🎓 Cours n°9 : Enseignement et apprentissage",
+    "chaine": "Zakarya MAHFOUD",
+    "duree": "13:14",
+    "sec": 794,
+    "vues": "1 186 vues"
+   },
+   {
+    "id": "8ivqnkDPI0g",
+    "titre": "Comprendre la didactique et la pédagogie en 10 minutes ! (concours enseignants)",
+    "chaine": "Français lycéen",
+    "duree": "7:18",
+    "sec": 438,
+    "vues": "21 731 vues"
+   },
+   {
+    "id": "YKJhfnYqoXQ",
+    "titre": "DIDACTIQUE GENERALE LECON 1 FICHE DE PREPARATION AVEC Mr JULES 4eme ET 5eme PEDA",
+    "chaine": "CS NYOTA",
+    "duree": "14:21",
+    "sec": 861,
+    "vues": "58 353 vues"
+   }
+  ]
+ },
+ "CAFOP-PROF-DIDACTIQUE-L5": {
+  "titre": "Didactique des mathématiques",
+  "candidats": []
+ },
+ "CAFOP-PROF-DIDACTIQUE-L6": {
+  "titre": "Activités d’éveil et démarche d’investigation",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 255 vues"
+   },
+   {
+    "id": "hfYbekJ4wM8",
+    "titre": "La démarche d'investigation au D1, expliquée en 6min40s",
+    "chaine": "melissa johnen",
+    "duree": "6:17",
+    "sec": 377,
+    "vues": "148 vues"
+   },
+   {
+    "id": "sYNChld_Al4",
+    "titre": "Les domaines d'investigation de la didactique",
+    "chaine": "Rim académie",
+    "duree": "3:00",
+    "sec": 180,
+    "vues": "1 001 vues"
+   },
+   {
+    "id": "s3xzUVP-WBg",
+    "titre": "Pourquoi choisir la démarche d'investigation ?",
+    "chaine": "dfie Lyon",
+    "duree": "0:52",
+    "sec": 52,
+    "vues": "986 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 420 vues"
+   },
+   {
+    "id": "y2kkL_dyLz0",
+    "titre": "La démarche d'investigation 💯📚",
+    "chaine": "LSN LEARN SCIENCE",
+    "duree": "13:53",
+    "sec": 833,
+    "vues": "995 vues"
+   },
+   {
+    "id": "ALfrGJXHb_8",
+    "titre": "Aider votre enfant à apprendre grâce à la psychopédagogie positive",
+    "chaine": "Éduquer différemment",
+    "duree": "8:31",
+    "sec": 511,
+    "vues": "4 636 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "39 485 vues"
+   },
+   {
+    "id": "HSxdtbBLTWg",
+    "titre": "Domaines d'investigation de la didactique (préparation au concours d'enseignements français)",
+    "chaine": "Fofo français",
+    "duree": "6:02",
+    "sec": 362,
+    "vues": "5 910 vues"
+   },
+   {
+    "id": "Cb68Tihg51w",
+    "titre": "La démarche d'Investigation expliquée aux élèves",
+    "chaine": "Les CM1 de l'école Jean Jaurès d'Outreau",
+    "duree": "2:06",
+    "sec": 126,
+    "vues": "1 174 vues"
+   }
+  ]
+ },
+ "CAFOP-PROF-DIDACTIQUE-L7": {
+  "titre": "Classes nombreuses et classes à plusieurs niveaux",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 252 vues"
+   },
+   {
+    "id": "DoTSyRvjoAU",
+    "titre": "Gérer une classe à plusieurs niveaux - Plan de travail - autonomie - différenciation",
+    "chaine": "Editions Retz",
+    "duree": "1:45",
+    "sec": 105,
+    "vues": "59 954 vues"
+   },
+   {
+    "id": "zjii9D0z2dw",
+    "titre": "Les méthodes pédagogiques pour diversifier sa façon d'enseigner",
+    "chaine": "Education Voyageuse",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "158 628 vues"
+   },
+   {
+    "id": "2rTtpLgHwVg",
+    "titre": "Que sait-on des classes multiniveaux ?",
+    "chaine": "Graines de livres",
+    "duree": "6:08",
+    "sec": 368,
+    "vues": "493 vues"
+   },
+   {
+    "id": "bmrRRdqfvu8",
+    "titre": "5 CONSEILS : Comment gérer une classe multi-niveaux ? 📓",
+    "chaine": "La maitresse du dimanche",
+    "duree": "10:19",
+    "sec": 619,
+    "vues": "11 035 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "39 519 vues"
+   },
+   {
+    "id": "MqpCruGbLjc",
+    "titre": "CM1-CM2 : Au coeur d'une classe à double niveau - La Maison des maternelles #LMDM",
+    "chaine": "La Maison des Maternelles - France Télévisions",
+    "duree": "4:36",
+    "sec": 276,
+    "vues": "19 239 vues"
+   },
+   {
+    "id": "7MtGPDklg8c",
+    "titre": "#ToutSavoirEn1MinuteSurLEcole N°15 les classes multiniveaux",
+    "chaine": "ju cr",
+    "duree": "1:23",
+    "sec": 83,
+    "vues": "308 vues"
+   },
+   {
+    "id": "lufkW636-40",
+    "titre": "Enseigner et apprendre dans des classes à degrés multiples. Volet 1",
+    "chaine": "Haute École Pédagogique BEJUNE",
+    "duree": "3:23",
+    "sec": 203,
+    "vues": "292 vues"
+   },
+   {
+    "id": "_YghbHK1w4k",
+    "titre": "Enseigner dans un groupe multi-niveaux, ça a des avantages avec une bonne stratégie.",
+    "chaine": "Amélio - Apprendre en s'amusant.",
+    "duree": "2:42",
+    "sec": 162,
+    "vues": "325 vues"
+   }
+  ]
+ },
+ "CAFOP-PROF-DIDACTIQUE-L8": {
+  "titre": "Former les élèves-maîtres",
+  "candidats": [
+   {
+    "id": "2jqfTBta_5Q",
+    "titre": "Psychopédagogie - Cours1: Définitions",
+    "chaine": "Héraut du Mont Parnasse",
+    "duree": "14:05",
+    "sec": 845,
+    "vues": "12 252 vues"
+   },
+   {
+    "id": "HxjhKqdv5F4",
+    "titre": "Les trois piliers de l'acte pédagogique selon Philippe Meirieu",
+    "chaine": "Ceméa France",
+    "duree": "3:34",
+    "sec": 214,
+    "vues": "39 519 vues"
+   },
+   {
+    "id": "2MmGfxrR1g0",
+    "titre": "Isabelle Dostie | Maître en psychopédagogie",
+    "chaine": "Mérici Collégial Privé",
+    "duree": "2:06",
+    "sec": 126,
+    "vues": "1 644 vues"
+   },
+   {
+    "id": "0GUol-QtAGY",
+    "titre": "Psychopédagogie : définition, exemples... (expliquée en 2 minutes)",
+    "chaine": "le Savoir Partagé",
+    "duree": "2:18",
+    "sec": 138,
+    "vues": "2 419 vues"
+   },
+   {
+    "id": "s2Q_ONDgHkg",
+    "titre": "Cours de Psychopedagogie Presentation // Universite Espoir",
+    "chaine": "D ConstantTV",
+    "duree": "9:29",
+    "sec": 569,
+    "vues": "1 044 vues"
+   },
+   {
+    "id": "72m5cWg_XyY",
+    "titre": "La psychopédagogie vue par Psychopedia Formations",
+    "chaine": "PsychoPedia Formations",
+    "duree": "5:36",
+    "sec": 336,
+    "vues": "47 425 vues"
+   },
+   {
+    "id": "zjii9D0z2dw",
+    "titre": "Les méthodes pédagogiques pour diversifier sa façon d'enseigner",
+    "chaine": "Education Voyageuse",
+    "duree": "8:11",
+    "sec": 491,
+    "vues": "158 628 vues"
+   },
+   {
+    "id": "QeWzLFitQzE",
+    "titre": "La Psychopédagogie : Comprendre pour Mieux Apprendre",
+    "chaine": "RM Sciences",
+    "duree": "13:51",
+    "sec": 831,
+    "vues": "179 vues"
+   }
+  ]
+ }
+}

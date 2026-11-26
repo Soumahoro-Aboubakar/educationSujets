@@ -1,0 +1,182 @@
+{
+  "module": "CAFOP-PROF-DIDACTIQUE",
+  "lecons": [
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L1",
+      "requetes": [
+        "site:youtube.com/watch \"pédagogie\" \"didactique\" \"triangle\"",
+        "pédagogie didactique différence explication simple youtube",
+        "\"-pveSRbz_oI\" durée",
+        "\"Le jargon des profs\" \"didactique\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=-pveSRbz_oI",
+          "titre": "Le jargon des profs, épisode 3 \"didactique et pédagogie: quelle différence ?\"",
+          "chaine": "H@ppy Prof",
+          "dureeVue": "2:57",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule distingue pédagogie et didactique et relie cette distinction à la préparation des cours, sans couverture vérifiée du triangle enseignant–élève–savoir."
+        }
+      ],
+      "justification": "Présentation courte et directement centrée sur la distinction principale de la leçon ; durée relevée sur sa copie institutionnelle PodEduc. Le contexte français ne modifie pas ces notions pédagogiques générales."
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L2",
+      "requetes": [
+        "site:youtube.com/watch objectif opérationnel conditions critère compétence",
+        "objectif opérationnel conditions critère réussite compétence vidéo youtube",
+        "site:youtube.com \"objectif opérationnel\"",
+        "site:youtube.com formuler objectifs pédagogiques conditions critères exemples",
+        "\"objectif opérationnel\" \"vidéo\" \"minutes\"",
+        "\"Comment élaborer des objectifs pédagogiques\" \"durée\"",
+        "site:youtube.com objectifs pédagogiques verbe action conditions réussite",
+        "rédiger objectif pédagogique vidéo 3 minutes",
+        "\"Comment élaborer des objectifs pédagogiques\" mediacoach vidéo",
+        "\"bRnLfJ7bkHI\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=bRnLfJ7bkHI",
+          "titre": "Comment élaborer des objectifs pédagogiques - Formation des formateurs",
+          "chaine": "mediacoach",
+          "dureeVue": "4:49",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Daniel P. Baril présente une méthode de formulation d’objectifs pédagogiques observables et mesurables, mais la distinction avec une compétence mobilisée en situation reste à compléter."
+        }
+      ],
+      "justification": "L’extrait répond à la formulation d’objectifs du côté de l’apprenant ; la durée de 4:49 apparaît dans un résultat référençant le même titre et la même chaîne. Il constitue un complément partiel, dans un contexte de formation de formateurs."
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L3",
+      "requetes": [
+        "site:youtube.com/watch construire fiche préparation séance primaire",
+        "fiche préparation pédagogique primaire étapes vidéo youtube",
+        "site:youtube.com \"fiche de préparation\" \"primaire\"",
+        "\"Comment élaborer une fiche pédagogique\" vidéo durée",
+        "\"fiche de préparation\" \"youtube\" \"minutes\"",
+        "\"V_aj77uWbyA\"",
+        "site:youtube.com \"fiche\" \"préparation\" \"H@ppy\"",
+        "construire fiche préparation séance vidéo 5 minutes",
+        "\"Comment élaborer une fiche pédagogique?\" \"Langue et didactique\"",
+        "\"Comment élaborer une fiche pédagogique\" \"min\"",
+        "\"V_aj77uWbyA\" vidéo durée"
+      ],
+      "candidats": [],
+      "justification": "Des tutoriels sur l’élaboration d’une fiche pédagogique ont été trouvés, mais les informations accessibles ne permettent pas de vérifier ensemble leur durée maximale de 15 minutes et la progression rappel–recherche–synthèse–application–évaluation. Aucun candidat suffisamment vérifié n’est retenu."
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L4",
+      "requetes": [
+        "site:youtube.com/watch méthodes lecture syllabique globale mixte",
+        "méthodes lecture syllabique globale mixte explication youtube",
+        "site:youtube.com \"lecture\" \"syllabique\" \"globale\" \"méthodes\"",
+        "\"Méthodes de lecture : où en sommes-nous\" minutes",
+        "\"Méthodes de lecture\" \"Nana\" \"durée\"",
+        "\"Xl8-z1plSO4\"",
+        "site:youtube.com \"lire\" \"décoder\" \"comprendre\" \"Canopé\"",
+        "méthodes lecture définitions limites vidéo Nana",
+        "\"Méthodes de lecture : où en sommes-nous aujourd'hui ?\" \"vidéo\" durée",
+        "\"Méthodes de lecture\" \"Nana et ses amis\" \"min\"",
+        "\"Xl8-z1plSO4\" durée vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les résultats comprennent des présentations des méthodes de lecture, mais leur durée et leur traitement conjoint du décodage, de la compréhension et de la conscience phonologique n’ont pas pu être suffisamment vérifiés. Je ne retiens pas de vidéo sur la seule proximité du titre."
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L5",
+      "requetes": [
+        "mathématiques concret imagé abstrait méthode Singapour youtube",
+        "site:youtube.com \"concret\" \"imagé\" \"abstrait\"",
+        "méthode Singapour concret imagé abstrait explication simple vidéo",
+        "site:youtube.com méthode Singapour 5 minutes",
+        "\"Les principes d’un enseignement efficace\" \"Lee\" durée",
+        "\"concret imagé abstrait\" \"vidéo\"",
+        "site:youtube.com \"Singapour\" \"concret\" \"expliquée\"",
+        "site:youtube.com \"Singapour\" \"manipulation\" \"abstraction\"",
+        "site:youtube.com \"Manipuler pour apprendre\"",
+        "méthode Singapour explication vidéo 3 minutes concret",
+        "site:youtube.com méthode Singapour Monica Neagoy Le Monde",
+        "\"Comment faire aimer les maths\" \"Monde\" durée",
+        "\"xNKzpppWCFM\" \"minutes\"",
+        "\"Comment faire aimer les maths\" \"3\" \"vidéo\""
+      ],
+      "candidats": [],
+      "justification": "La présentation de Monica Neagoy publiée par Le Monde correspond bien à la manipulation, à la recherche de l’élève et à la valorisation de l’erreur, mais sa durée n’a pas pu être vérifiée. Les autres ressources détaillées repérées comprennent notamment un webinaire d’une heure, exclu."
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L6",
+      "requetes": [
+        "site:youtube.com démarche investigation explication simple primaire",
+        "site:youtube.com \"démarche d'investigation\" \"primaire\"",
+        "site:youtube.com démarche investigation étapes hypothèses expérience conclusion",
+        "\"La démarche d'investigation scientifique\" \"Le Prof SVT\" durée",
+        "\"CEA\" \"démarche scientifique\" \"durée\"",
+        "\"59wYmEoccF8\"",
+        "\"démarche scientifique\" \"CEA\" \"04:\"",
+        "\"La démarche scientifique\" \"CEA\" \"3:55\"",
+        "\"59wYmEoccF8\" durée vidéo"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=59wYmEoccF8",
+          "titre": "[Comment ça marche ?] La démarche scientifique",
+          "chaine": "CEA",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’animation explique la construction et la vérification d’hypothèses à travers l’exemple du géocentrisme et de l’héliocentrisme, mais ne montre pas la conduite d’une activité d’éveil au primaire."
+        }
+      ],
+      "justification": "Source scientifique institutionnelle présentant les principes nécessaires à la démarche d’investigation. Une page référençant cette vidéo annonce environ quatre minutes ; la durée exacte n’était pas affichée."
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L7",
+      "requetes": [
+        "site:youtube.com classes nombreuses multigrades organisation",
+        "site:youtube.com \"classe multigrade\"",
+        "site:youtube.com \"classe à double niveau\" \"organiser\"",
+        "gestion classe multigrade IFADEM vidéo youtube",
+        "classes grands effectifs pédagogie groupes tutorat youtube vidéo",
+        "\"classes multigrades\" \"vidéo\"",
+        "site:youtube.com/watch \"IKm0jH4kZlw\"",
+        "\"L’expérience du Niger\" \"travail en groupe\" vidéo",
+        "site:youtube.com \"multiniveaux\" \"organiser\"",
+        "organiser classe multiniveau vidéo 5 minutes",
+        "site:youtube.com \"Plan de travail et table\" \"autonomie\"",
+        "\"Plan de travail et table d’appui\" youtube"
+      ],
+      "candidats": [],
+      "justification": "Une expérience nigérienne de travail en groupes avec élèves tuteurs a été repérée dans une publication UNESCO, mais sa durée n’a pas pu être vérifiée. Les autres résultats concernent surtout la gestion générale de classe ou des ressources sans URL YouTube canonique vérifiée."
+    },
+    {
+      "code": "CAFOP-PROF-DIDACTIQUE-L8",
+      "requetes": [
+        "site:youtube.com entretien conseil stagiaire enseignant",
+        "site:youtube.com \"CAFOP\" \"encadrement\"",
+        "site:youtube.com \"entretien de conseil\" enseignant",
+        "formation maîtres entretien conseil observation classe vidéo youtube",
+        "\"PSEM\" \"L'entretien conseil\" vidéo durée",
+        "\"P5xeYnh7s2Y\"",
+        "\"Postures et gestes professionnels du conseil\" durée",
+        "\"PSEM II\" \"entretien\" \"minutes\"",
+        "site:youtube.com \"Accueillir un professeur stagiaire\"",
+        "\"Accueillir un professeur stagiaire\" \"partie 2\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=h4rfKtbQN0U",
+          "titre": "Accueillir un professeur stagiaire partie 2",
+          "chaine": "H@ppy Prof",
+          "dureeVue": "4:47",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule aborde l’accompagnement d’un professeur stagiaire par son tuteur dans un contexte français, sans couverture vérifiée des leçons modèles et d’essai propres à la formation CAFOP."
+        }
+      ],
+      "justification": "Complément court destiné aux enseignants qui accompagnent un stagiaire ; durée confirmée sur sa copie institutionnelle PodEduc. Les conseils de tutorat sont transférables, mais les modalités françaises de formation ne constituent pas le cadre des CAFOP ivoiriens."
+    }
+  ]
+}

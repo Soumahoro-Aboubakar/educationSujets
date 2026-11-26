@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-FR-ESSAI-L1",
+    "youtubeId": "cwZKgtYPp0g",
+    "couverture": "partielle",
+    "justification": "Présentation du concours CAFOP-IA et de ses épreuves.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ESSAI-L2",
+    "youtubeId": "_4YNdh2hvlU",
+    "couverture": "partielle",
+    "justification": "Comprendre une consigne : repérer le verbe et la tâche demandée.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ESSAI-L3",
+    "youtubeId": "LHTfFSUVviE",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs, niveau 3ᵉ : méthodologie du sujet d’argumentation (trouver des arguments).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ESSAI-L4",
+    "youtubeId": "PdfGBtUp_4U",
+    "couverture": "partielle",
+    "justification": "Thèse, argument et exemple : illustrer un argument.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ESSAI-L5",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur le plan d’un essai court.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ESSAI-L6",
+    "youtubeId": "8tFhypbADvk",
+    "couverture": "partielle",
+    "justification": "Les adverbes et connecteurs de relation logique.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ESSAI-L7",
+    "youtubeId": "q_wF8QJaKt4",
+    "couverture": "partielle",
+    "justification": "Écrire avec fluidité : phrases claires et enchaînées.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-ESSAI-L8",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur un essai complet minuté.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

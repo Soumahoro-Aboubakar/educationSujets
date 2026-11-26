@@ -1,0 +1,219 @@
+{
+  "module": "CAFOP-FR-GRAM",
+  "titre": "Grammaire : classes, fonctions et phrase",
+  "matiere": "Français",
+  "resume": "Reconnaître la nature et la fonction des mots et des groupes, choisir un pronom relatif, ponctuer et analyser une phrase comme au concours.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-FR-GRAM-L1",
+      "titre": "Reconnaître la nature d’un mot",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Trouver le sujet, le COD, le COI et le COS",
+      "explication": "À la fin de cette leçon, tu sauras nommer la classe d’un mot dans une phrase et justifier ton choix par un indice. Aucun prérequis. La nature d’un mot est sa classe grammaticale. Pour l’identifier, observe comment le mot est employé. Certains mots changent de forme selon le genre, le nombre, la personne ou le temps. Dans « la petite fille lit », on peut passer à « les petites filles lisent ». Les mots invariables, comme « vite » ou « avec », gardent la même forme.",
+      "formules": [],
+      "exemples": [
+        "Reconnaître un déterminant",
+        "Un même mot dans deux contextes"
+      ],
+      "pieges": [
+        "Le mot « ferme » change de classe selon son emploi. Dans « la ferme », c’est un nom. Dans « elle ferme la porte », c’est un verbe. Observe …"
+      ],
+      "aRetenir": [
+        "Nature et classe grammaticale désignent la même chose.",
+        "Utilise le contexte pour départager les mots de même forme.",
+        "Repère le noyau pour nommer un groupe."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L2",
+      "titre": "Trouver le sujet, le COD, le COI et le COS",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "2/9",
+      "precedente": "Reconnaître la nature d’un mot",
+      "suivante": "Distinguer attributs et circonstances",
+      "explication": "À la fin de cette leçon, tu sauras identifier le sujet et les compléments d’objet d’un verbe. Prérequis : savoir repérer un verbe et reconnaître un groupe nominal. La fonction indique le rôle d’un mot ou d’un groupe. Commence par repérer le verbe conjugué. Le sujet commande son accord. Pour vérifier, remplace le groupe par « il », « elle », « ils » ou « elles » quand c’est possible. Le sujet peut suivre le verbe, par exemple dans une question avec inversion. Dans « Aya parle à son frère », « à son frère » devient « lui » dans « Aya lui parle ». Le pronom s’emploie sans préposition et garde la fonction du groupe « à son frère ». Dans « Aya lit un livre », « un livre » devient « le » dans « Aya le lit ».",
+      "formules": [],
+      "exemples": [
+        "Un sujet et un COD",
+        "Deux compléments du même verbe"
+      ],
+      "pieges": [
+        "Un groupe introduit par « à » peut indiquer le temps. Dans « Aya lit à midi », « à midi » répond à la question « quand ? » et situe la lect…"
+      ],
+      "aRetenir": [
+        "Le sujet commande l’accord du verbe.",
+        "Vérifie comment le verbe construit son complément.",
+        "Avec deux objets, repère le complément second."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L3",
+      "titre": "Distinguer attributs et circonstances",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "3/9",
+      "precedente": "Trouver le sujet, le COD, le COI et le COS",
+      "suivante": "Analyser les expansions du nom",
+      "explication": "À la fin de cette leçon, tu sauras distinguer un attribut du sujet, un attribut du COD et un complément circonstanciel. Prérequis : savoir identifier le sujet et le COD. L’attribut du sujet indique une qualité, un état ou une identité du sujet. Il se rencontre notamment après « être », « sembler », « devenir » ou « rester ». Dans « Les rues restent calmes », « calmes » décrit les rues et s’accorde avec « les rues ». L’attribut du COD caractérise le COD. Avec « trouver », « juger » ou « rendre », le verbe peut relier un COD à un état ou à une qualité. Dans « Le soleil rend la salle chaude », « la salle » est COD et « chaude » indique l’état de la salle. En remplaçant le COD par « la », on obtient « Le soleil la rend chaude ».",
+      "formules": [],
+      "exemples": [
+        "Un attribut et un lieu",
+        "Deux emplois du même adjectif"
+      ],
+      "pieges": [
+        "Dans « Les cahiers sont rangés par les élèves », « sont » fait partie de la forme passive « sont rangés ». La présence de « être » ne suffi…"
+      ],
+      "aRetenir": [
+        "L’attribut du sujet caractérise le sujet.",
+        "L’attribut du COD caractérise le COD et peut rester après son remplacement par un pronom.",
+        "Le complément circonstanciel indique le cadre ou les conditions de l’action."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L4",
+      "titre": "Analyser les expansions du nom",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "4/9",
+      "precedente": "Distinguer attributs et circonstances",
+      "suivante": "Choisir le pronom relatif",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître une épithète, un complément du nom et une apposition, puis les rattacher au nom qu’ils précisent. Prérequis : savoir repérer un nom et un adjectif. Le noyau du groupe nominal est le nom autour duquel s’organisent les autres éléments. Dans « le vieux pont du village », « pont » est le noyau. Pour analyser une expansion, demande-toi ce qu’elle précise, puis nomme sa fonction par rapport à ce noyau. Pour reconnaître une apposition nominale détachée, vérifie si les deux groupes désignent la même personne ou la même chose. Les virgules aident à repérer le groupe détaché. Pour un complément du nom, repère le lien exprimé par la préposition, comme le lieu dans « l’école de Bouaké » ou le contenu dans « une boîte de craies ».",
+      "formules": [],
+      "exemples": [
+        "Deux précisions dans un groupe",
+        "L’analyse à plusieurs niveaux"
+      ],
+      "pieges": [
+        "Dans « Elle lit le cahier de Yao », « de Yao » dépend de « cahier ». La préposition « de » ne suffit pas pour en faire un COI de « lit »."
+      ],
+      "aRetenir": [
+        "Repérer le nom noyau.",
+        "Distinguer l’adjectif épithète du groupe complément du nom.",
+        "Vérifier ce que renomme le groupe en apposition."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L5",
+      "titre": "Choisir le pronom relatif",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "5/9",
+      "precedente": "Analyser les expansions du nom",
+      "suivante": "De la phrase simple à la phrase complexe",
+      "explication": "À la fin de cette leçon, tu sauras choisir un pronom relatif et justifier sa fonction dans la proposition. Prérequis : savoir reconnaître un sujet, un COD et un complément construit avec une préposition. Un pronom relatif introduit une proposition qui précise souvent un nom ou un pronom appelé antécédent. Il remplit aussi une fonction à l’intérieur de la relative. Pour la trouver, sépare les deux idées et remets l’antécédent dans la seconde. « Dont » peut aussi reprendre un complément du nom. Dans « l’élève dont je connais le frère », on retrouve « je connais le frère de l’élève ». Le groupe « le frère » est COD, tandis que « dont » reprend le complément du nom « frère ».",
+      "formules": [],
+      "exemples": [
+        "Sujet ou COD ?",
+        "Une forme composée au féminin pluriel"
+      ],
+      "pieges": [
+        "Un nom de lieu n’impose pas « où ». Dans « l’école que tu visites », on visite l’école. Le pronom reprend donc un COD."
+      ],
+      "aRetenir": [
+        "Repérer l’antécédent du relatif.",
+        "Rétablir la construction de la proposition.",
+        "Vérifier la fonction du relatif et sa forme."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L6",
+      "titre": "De la phrase simple à la phrase complexe",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "6/9",
+      "precedente": "Choisir le pronom relatif",
+      "suivante": "Analyser les propositions subordonnées",
+      "explication": "À la fin de cette leçon, tu sauras distinguer phrase simple et phrase complexe, puis reconnaître une juxtaposition ou une coordination. Prérequis : savoir repérer un verbe conjugué. Dans les phrases verbales étudiées ici, repère d’abord les verbes conjugués. Une proposition s’organise autour d’un verbe. Une phrase simple contient une proposition. Une phrase complexe en contient plusieurs. À un temps composé, l’auxiliaire et le participe forment ensemble un seul noyau verbal. Une proposition indépendante ne dépend d’aucune autre et ne gouverne aucune subordonnée. Dans un lien de subordination, on appelle principale la proposition dont dépend une subordonnée lorsqu’elle ne dépend elle-même d’aucune autre. Le type et la forme décrivent d’autres aspects de la phrase. Ainsi, « Aya ne part pas » est déclarative et négative. « Aya part-elle ? » est interrogative et affirmative.",
+      "formules": [],
+      "exemples": [
+        "Un seul noyau verbal",
+        "Trois propositions indépendantes"
+      ],
+      "pieges": [
+        "Dans « Aya et Koffi ont fini », « et » relie deux noms dans le sujet. « Ont fini » est une seule forme verbale conjuguée. La phrase reste s…"
+      ],
+      "aRetenir": [
+        "Compter une seule fois chaque verbe à un temps composé.",
+        "Repérer le lien entre les propositions.",
+        "Distinguer la structure, le type et la forme."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L7",
+      "titre": "Analyser les propositions subordonnées",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "7/9",
+      "precedente": "De la phrase simple à la phrase complexe",
+      "suivante": "Ponctuer la phrase et lire ses limites",
+      "explication": "À la fin de cette leçon, tu sauras délimiter une principale et ses subordonnées, puis identifier chaque subordonnée et sa fonction. Prérequis : savoir repérer les verbes conjugués et les pronoms relatifs. Repère les verbes conjugués et les mots qui introduisent les propositions. Pour chaque subordonnée, cherche ce qui la rattache au reste de la phrase. Elle peut préciser un nom, compléter un verbe ou indiquer dans quelles circonstances se déroule l’action. Dans une relative, le pronom relatif a une fonction à l’intérieur de sa proposition. Dans une complétive comme « il dit que le car arrive », « que » est une conjonction de subordination. Elle introduit la proposition, où « le car » est sujet et « arrive » est le verbe. C’est toute la proposition qui est COD de « dit ».",
+      "formules": [],
+      "exemples": [
+        "Une subordonnée placée en tête",
+        "Une relative à l’intérieur d’une complétive"
+      ],
+      "pieges": [
+        "Une seule conjonction de coordination peut relier deux relatives. Dans « le livre que Yao lit et dont il parle », « que Yao lit » et « dont…"
+      ],
+      "aRetenir": [
+        "Délimiter les propositions autour des verbes.",
+        "Relier chaque subordonnée à ce qu’elle complète.",
+        "Vérifier si une proposition en contient une autre."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L8",
+      "titre": "Ponctuer la phrase et lire ses limites",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "8/9",
+      "precedente": "Analyser les propositions subordonnées",
+      "suivante": "Analyser une phrase comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras choisir un signe pour séparer des propositions, détacher un groupe ou rapporter une question. Prérequis : savoir repérer le sujet et les limites d’une proposition. La ponctuation indique comment les groupes de mots et les propositions s’organisent. Lis d’abord la phrase pour trouver le rapport entre les idées. Un point sépare des phrases. Le point-virgule peut séparer deux propositions indépendantes dont les idées restent liées.",
+      "formules": [],
+      "exemples": [
+        "Détacher un groupe",
+        "Rapporter une question de deux façons"
+      ],
+      "pieges": [
+        "Dans « Les élèves du cours moyen lisent », « Les élèves du cours moyen » est le sujet entier. La longueur du sujet ne justifie pas une virg…"
+      ],
+      "aRetenir": [
+        "Lire la phrase avant de choisir les signes.",
+        "Éviter de séparer le sujet de son verbe.",
+        "Délimiter les paroles et leur ponctuation."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-GRAM-L9",
+      "titre": "Analyser une phrase comme au concours",
+      "module": "Grammaire : classes, fonctions et phrase (Français)",
+      "position": "9/9",
+      "precedente": "Ponctuer la phrase et lire ses limites",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras donner la nature et la fonction des éléments demandés, puis délimiter les propositions. Prérequis : savoir identifier les classes, les fonctions et les principaux liens entre propositions. Si la consigne demande la nature et la fonction, réponds pour chaque élément désigné. Analyse exactement les mots demandés. La fonction du groupe entier peut différer de celle d’un mot du groupe. « Les élèves sérieux » peut être sujet, tandis que « sérieux » est épithète du nom « élèves ».",
+      "formules": [],
+      "exemples": [
+        "Le mot et le groupe",
+        "Corrigé type concours"
+      ],
+      "pieges": [
+        "Dans « Aya ferme la porte et la nettoie », le premier « la » accompagne « porte ». Le second reprend « la porte » et dépend de « nettoie ».…"
+      ],
+      "aRetenir": [
+        "Répondre sur le mot ou le groupe exact.",
+        "Donner sa nature, sa fonction et son support.",
+        "Délimiter chaque proposition et expliquer son lien avec les autres."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

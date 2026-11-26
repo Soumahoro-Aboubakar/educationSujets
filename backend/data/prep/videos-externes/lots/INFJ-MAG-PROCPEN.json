@@ -28,7 +28,7 @@
         "Soupçon et culpabilité ne se confondent pas.",
         "Défense et séparation des fonctions sont des garanties."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L2",
@@ -51,7 +51,7 @@
         "Action civile : réparation du dommage.",
         "Victime et ministère public ont des rôles distincts."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L3",
@@ -74,7 +74,7 @@
         "Parquet : apprécier la suite selon le droit.",
         "Classement et acquittement sont distincts."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L4",
@@ -97,7 +97,7 @@
         "Flagrance : critères légaux précis.",
         "Garde à vue : fondement, droits, durée et contrôle."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L5",
@@ -120,7 +120,7 @@
         "À charge et à décharge.",
         "Pouvoirs limités par la saisine et les textes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L6",
@@ -143,7 +143,7 @@
         "Contrôle judiciaire et détention : exceptions encadrées.",
         "Une mesure préventive n’est pas une condamnation."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L7",
@@ -166,7 +166,7 @@
         "Relaxe : correctionnel ou contraventionnel.",
         "Acquittement : criminel ; réquisitions distinctes du jugement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L8",
@@ -189,7 +189,7 @@
         "Vérifier ouverture, délai et effets.",
         "Partie civile et parquet n’ont pas des droits identiques."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCPEN-L9",
@@ -212,7 +212,7 @@
         "Prescription : calcul et événements à vérifier.",
         "Accord ou retrait de plainte : pas d’effet général automatique."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

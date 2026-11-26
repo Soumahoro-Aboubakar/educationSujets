@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L1",
+    "youtubeId": "-pveSRbz_oI",
+    "couverture": "exacte",
+    "justification": "Didactique et pédagogie : quelle différence ?",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L2",
+    "youtubeId": "bRnLfJ7bkHI",
+    "couverture": "exacte",
+    "justification": "Élaborer des objectifs pédagogiques.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L3",
+    "youtubeId": "HGvuHePq3bs",
+    "couverture": "exacte",
+    "justification": "La fiche pédagogique : préparer et organiser une séance.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L4",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur la didactique de la lecture parmi les candidats.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L5",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucun candidat.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L6",
+    "youtubeId": "hfYbekJ4wM8",
+    "couverture": "exacte",
+    "justification": "La démarche d’investigation expliquée en 6 minutes.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L7",
+    "youtubeId": "DoTSyRvjoAU",
+    "couverture": "partielle",
+    "justification": "Gérer une classe à plusieurs niveaux : plan de travail et autonomie.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-PROF-DIDACTIQUE-L8",
+    "youtubeId": "h4rfKtbQN0U",
+    "couverture": "partielle",
+    "justification": "Accueillir et accompagner un enseignant stagiaire.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

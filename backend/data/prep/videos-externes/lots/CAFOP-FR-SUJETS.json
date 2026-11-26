@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-FR-SUJETS",
+  "titre": "Sujets de français corrigés",
+  "matiere": "Français",
+  "resume": "Trois épreuves officielles du CAFOP-IA (2021, 2023, 2025) traitées question par question : compréhension, vocabulaire, structure et syntaxe, essai et gestion du temps.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-FR-SUJETS-L1",
+      "titre": "Sujet 2025 : la compréhension",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Sujet 2025 : vocabulaire et syntaxe",
+      "explication": "À la fin de cette leçon, tu sauras répondre aux questions de compréhension du sujet 2025. Prérequis : le module Étude de texte. Le texte (2025) : d’après Anne Jellema et Elaine Unterhalter, l’éducation « n’est pas une panacée » : seule, elle ne supprime pas les privations dont souffrent les femmes, mais elle donne aux filles confiance dans leurs aptitudes et leurs droits. La pauvreté explique que beaucoup de filles ne soient pas scolarisées : plus l’éducation coûte cher, moins les familles investissent dans celle des filles. Q3. Titre : « L’éducation, une chance pour les filles » ou « Instruire les filles malgré la pauvreté ».",
+      "formules": [],
+      "exemples": [
+        "Q1. Relève deux raisons de la non-scolarisation des filles",
+        "Q2. Énumère deux discriminations dont les femmes sont victimes"
+      ],
+      "pieges": [
+        "Donner une seule raison quand la question en demande deux."
+      ],
+      "aRetenir": [
+        "Relever = citer.",
+        "Énumérer = lister.",
+        "Titre = idée générale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L2",
+      "titre": "Sujet 2025 : vocabulaire et syntaxe",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "2/8",
+      "precedente": "Sujet 2025 : la compréhension",
+      "suivante": "Sujet 2025 : l’essai",
+      "explication": "À la fin de cette leçon, tu sauras traiter les questions de vocabulaire et de syntaxe du sujet 2025. Prérequis : les modules Vocabulaire, Grammaire et Conjugaison.",
+      "formules": [],
+      "exemples": [
+        "Vocabulaire",
+        "Analyse logique",
+        "Voix et temps"
+      ],
+      "pieges": [
+        "Prendre « scolarisée » pour un adjectif attribut sans voir la voix passive : ici, on peut retrouver l’agent (« par leurs familles »)."
+      ],
+      "aRetenir": [
+        "Panacée : remède universel.",
+        "Une proposition par verbe conjugué.",
+        "Passif : être + participe passé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L3",
+      "titre": "Sujet 2025 : l’essai",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "3/8",
+      "precedente": "Sujet 2025 : vocabulaire et syntaxe",
+      "suivante": "Sujet 2021 : compréhension et vocabulaire",
+      "explication": "À la fin de cette leçon, tu sauras construire l’essai du sujet 2025. Prérequis : le module Rédiger l’essai. Consigne : « L’éducation donne aux filles et aux femmes une confiance dans leurs aptitudes et droits. » Étaye cette assertion dans un développement structuré d’une dizaine de lignes.",
+      "formules": [],
+      "exemples": [
+        "Un paragraphe rédigé",
+        "Un exemple pour les droits"
+      ],
+      "pieges": [
+        "Reprendre mot pour mot les phrases du texte : il faut des exemples personnels."
+      ],
+      "aRetenir": [
+        "Étayer = soutenir.",
+        "Deux arguments illustrés.",
+        "Une dizaine de lignes."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L4",
+      "titre": "Sujet 2021 : compréhension et vocabulaire",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "4/8",
+      "precedente": "Sujet 2025 : l’essai",
+      "suivante": "Sujet 2021 : analyse logique et essai",
+      "explication": "À la fin de cette leçon, tu sauras traiter la compréhension et le vocabulaire du sujet 2021. Prérequis : la méthode du sujet 2025. Le texte (2021), de la Banque mondiale : trois mois après son apparition, la Covid-19 a privé d’école environ 80 % des élèves du monde ; elle aggrave une crise des apprentissages et touche davantage les enfants défavorisés.",
+      "formules": [],
+      "exemples": [
+        "Compréhension",
+        "Vocabulaire"
+      ],
+      "pieges": [
+        "Donner « école » comme mot de la famille d’« éducation » : il n’a pas le même radical."
+      ],
+      "aRetenir": [
+        "Titre : la menace sur l’éducation.",
+        "Expliquer avec ses mots.",
+        "Antonyme de même nature."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L5",
+      "titre": "Sujet 2021 : analyse logique et essai",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "5/8",
+      "precedente": "Sujet 2021 : compréhension et vocabulaire",
+      "suivante": "Sujet 2023 : préparer l’avenir",
+      "explication": "À la fin de cette leçon, tu sauras faire l’analyse logique de la phrase du sujet 2021 et préparer son essai. Prérequis : les propositions subordonnées (module Grammaire). Essai 2021 : « Dis les mesures que doit prendre le maître dans sa classe pour lutter efficacement contre la Covid-19 » (8 à 12 lignes). Mesures possibles : lavage des mains, espacement des tables-bancs, aération de la salle, explication des gestes barrières, signalement d’un élève malade.",
+      "formules": [],
+      "exemples": [
+        "Analyse logique",
+        "Début d’essai"
+      ],
+      "pieges": [
+        "Classer « si nous n’agissons pas » en complétive : « si » introduit ici une condition, c’est une circonstancielle."
+      ],
+      "aRetenir": [
+        "Compter les verbes conjugués.",
+        "Relative et circonstancielle de condition.",
+        "Essai : mesures du maître."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L6",
+      "titre": "Sujet 2023 : préparer l’avenir",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "6/8",
+      "precedente": "Sujet 2021 : analyse logique et essai",
+      "suivante": "Gérer les deux heures de l’épreuve",
+      "explication": "À la fin de cette leçon, tu sauras traiter la compréhension et la grammaire du sujet 2023. Prérequis : les leçons précédentes. Le texte (2023), de Robert Tadet : il faut préparer l’avenir de nos enfants, « une promesse à remplir » ; le bonheur demande de l’effort, comme le cultivateur qui « a travaillé au soleil » avant de se reposer à l’ombre.",
+      "formules": [],
+      "exemples": [
+        "Compréhension",
+        "Nature et fonction"
+      ],
+      "pieges": [
+        "Répondre par une opinion personnelle à une question de compréhension : la réponse doit venir du texte."
+      ],
+      "aRetenir": [
+        "Réponses tirées du texte.",
+        "Nature et fonction.",
+        "Titre : l’effort prépare l’avenir."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L7",
+      "titre": "Gérer les deux heures de l’épreuve",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "7/8",
+      "precedente": "Sujet 2023 : préparer l’avenir",
+      "suivante": "Bilan : ta grille d’autocorrection",
+      "explication": "À la fin de cette leçon, tu sauras répartir ton temps selon le barème. Prérequis : la structure des sujets étudiés.",
+      "formules": [],
+      "exemples": [
+        "Commencer par ce que l’on maîtrise",
+        "Présenter la copie"
+      ],
+      "pieges": [
+        "Passer 50 minutes sur la compréhension et bâcler l’essai."
+      ],
+      "aRetenir": [
+        "Barème : 5, 3, 6, 6.",
+        "Plus d’une heure pour syntaxe et essai.",
+        "Numéroter clairement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L8",
+      "titre": "Bilan : ta grille d’autocorrection",
+      "module": "Sujets de français corrigés (Français)",
+      "position": "8/8",
+      "precedente": "Gérer les deux heures de l’épreuve",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras vérifier ta copie avec une grille avant de la rendre. Prérequis : les sujets étudiés.",
+      "formules": [],
+      "exemples": [
+        "Une erreur repérée à la relecture",
+        "Une réponse complétée"
+      ],
+      "pieges": [
+        "Rendre la copie en avance sans relire."
+      ],
+      "aRetenir": [
+        "Tout est numéroté.",
+        "Nombre d’éléments respecté.",
+        "Nature et fonction ; accords relus."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

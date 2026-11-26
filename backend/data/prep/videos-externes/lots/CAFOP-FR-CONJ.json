@@ -1,0 +1,247 @@
+{
+  "module": "CAFOP-FR-CONJ",
+  "titre": "Conjugaison et emploi des temps",
+  "matiere": "Français",
+  "resume": "Reconnaître les formes verbales, choisir le temps et le mode qui conviennent, puis réécrire une phrase à la voix passive ou au discours indirect.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-FR-CONJ-L1",
+      "titre": "Retrouver le groupe et le radical",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Conjuguer au présent et à l’impératif",
+      "explication": "À la fin de cette leçon, tu sauras classer un verbe dans son groupe et séparer le radical de la terminaison dans une forme conjuguée simple. Aucun prérequis. L’infinitif est la forme sous laquelle tu cherches le verbe dans le dictionnaire. Dans « nous cherchons », l’infinitif est « chercher ». Le radical est la base du verbe. La terminaison varie selon la personne, le temps et le mode. Dans « cherchons », on distingue « cherch- » et « -ons ». Certains verbes ont plusieurs radicaux. Au présent, « je prends » et « nous prenons » font apparaître « prend- » et « pren- ». Les auxiliaires « être » et « avoir » ont des formes à mémoriser à part.",
+      "formules": [],
+      "exemples": [
+        "Identifier un verbe régulier",
+        "Type concours · départager deux verbes en -ir"
+      ],
+      "pieges": [
+        "« Aller » se termine en -er et appartient au troisième groupe. Compare au présent « je vais » et « nous allons »."
+      ],
+      "aRetenir": [
+        "Partir de l’infinitif.",
+        "Vérifier -issons pour les verbes en -ir.",
+        "Comparer les formes pour repérer un changement de radical."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L2",
+      "titre": "Conjuguer au présent et à l’impératif",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "2/10",
+      "precedente": "Retrouver le groupe et le radical",
+      "suivante": "Construire le passé composé",
+      "explication": "À la fin de cette leçon, tu sauras conjuguer un verbe courant au présent de l’indicatif et transformer une phrase simple en consigne à l’impératif. Prérequis : retrouver l’infinitif et le groupe du verbe. Le présent peut exprimer une action en cours (« Je lis en ce moment »), une habitude (« Je lis chaque soir ») ou une vérité générale (« Deux et deux font quatre »). Au troisième groupe, vérifie le modèle du verbe : « tu prends », « tu pars », « tu peux ». L’impératif présent sert notamment à donner un ordre ou un conseil. On l’emploie aux personnes correspondant à « tu », « nous » et « vous », sans pronom sujet. Pour le premier groupe, la forme correspondant à « tu » se termine par -e. Elle prend un -s devant « en » ou « y » si ce pronom dépend de l’impératif : « Parles-en à Awa. » « Aller » suit ce modèle avec « Va » et « Vas-y ». Avec « finir », on écrit « Finis », « Finissons », « F…",
+      "formules": [],
+      "exemples": [
+        "Donner une consigne",
+        "Type concours · vérifier le radical et le mode"
+      ],
+      "pieges": [
+        "« Finis ton exercice » garde le -s : « finir » est du deuxième groupe. La terminaison -e du premier groupe correspond à un autre modèle."
+      ],
+      "aRetenir": [
+        "Au présent, identifier la personne et le modèle.",
+        "À l’impératif, écrire la forme sans pronom sujet.",
+        "Vérifier la terminaison du singulier devant en ou y."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L3",
+      "titre": "Construire le passé composé",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "3/10",
+      "precedente": "Conjuguer au présent et à l’impératif",
+      "suivante": "Raconter à l’imparfait et au passé simple",
+      "explication": "À la fin de cette leçon, tu sauras choisir l’auxiliaire du passé composé et écrire le participe passé dans les constructions courantes. Prérequis : connaître la notion de sujet et le présent de « être » et « avoir ». Le passé composé présente souvent un fait achevé : « Hier, le comité a distribué les livres. » La plupart des verbes se conjuguent avec « avoir ». Des verbes comme « aller » et « arriver » se conjuguent avec « être ». Les verbes pronominaux, comme « se lever », se conjuguent aussi avec « être ». Le complément d’objet direct ou COD répond souvent à « qui ? » ou « quoi ? » après le verbe, sans préposition. Dans « Elle est sortie », « sortir » se construit sans COD. Dans « Elle a sorti les cahiers », il a un COD et prend « avoir ». Avec certains verbes pronominaux, l’accord dépend du rôle de « se ». Dans « Elles se sont lavées », « se » est COD et représente « elles », d’où l’…",
+      "formules": [
+        "Passé composé = auxiliaire avoir ou être au présent + participe passé."
+      ],
+      "exemples": [
+        "Deux auxiliaires dans la même phrase",
+        "Type concours · accorder un verbe pronominal"
+      ],
+      "pieges": [
+        "Un verbe qui exprime un déplacement peut se conjuguer avec « avoir » : « Elles ont couru. » Apprends l’auxiliaire avec le verbe et sa const…"
+      ],
+      "aRetenir": [
+        "Passé composé : auxiliaire au présent et participe passé.",
+        "Vérifier l’auxiliaire demandé par la construction.",
+        "Chercher avec quel mot le participe s’accorde."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L4",
+      "titre": "Raconter à l’imparfait et au passé simple",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "4/10",
+      "precedente": "Construire le passé composé",
+      "suivante": "Distinguer futur simple et futur antérieur",
+      "explication": "À la fin de cette leçon, tu sauras distinguer l’arrière-plan d’un récit de ses événements principaux et justifier le choix de l’imparfait ou du passé simple. Prérequis : identifier un verbe conjugué et son sujet. Dans un récit au passé, l’imparfait sert souvent à décrire le cadre, à évoquer une habitude ou à présenter une action en cours. Le passé simple présente des événements dans leur ensemble. Une suite de verbes au passé simple fait souvent avancer le récit écrit. Pour justifier le temps, lis ce qui se passe autour du verbe. Demande-toi si l’action est déjà en cours quand un autre fait survient, ou si elle est racontée du début à la fin. Un événement au passé simple peut durer longtemps : « Elle enseigna trente ans dans cette école. »",
+      "formules": [],
+      "exemples": [
+        "Décrire puis raconter",
+        "Type concours · justifier trois choix"
+      ],
+      "pieges": [
+        "« Elle finit » peut être un présent ou un passé simple. Le temps du récit permet de trancher quand la forme est identique."
+      ],
+      "aRetenir": [
+        "Imparfait : cadre, habitude ou action en cours.",
+        "Passé simple : événements dans le récit écrit.",
+        "Justifier le choix par le contexte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L5",
+      "titre": "Distinguer futur simple et futur antérieur",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "5/10",
+      "precedente": "Raconter à l’imparfait et au passé simple",
+      "suivante": "Exprimer une hypothèse au conditionnel",
+      "explication": "À la fin de cette leçon, tu sauras conjuguer au futur simple et placer au futur antérieur une action achevée avant un repère futur. Prérequis : repérer le sujet et former un temps avec un auxiliaire. Le futur simple situe généralement un fait à venir. Les terminaisons sont -ai, -as, -a, -ons, -ez, -ont. Pour beaucoup de verbes, on part de l’infinitif. Les verbes en -re réguliers à ce temps perdent le -e final : « vendre » donne « je vendrai ». Certaines bases sont à apprendre. Le futur antérieur indique souvent qu’un fait sera achevé au moment d’un autre fait futur ou à une date future donnée. Dans « À midi, la classe aura terminé », midi sert de repère. Pour un sujet composé, la première personne l’emporte si le sujet inclut « moi ». Sans première personne, « toi » associé à une troisième personne donne « vous ».",
+      "formules": [
+        "Futur antérieur = auxiliaire au futur simple + participe passé."
+      ],
+      "exemples": [
+        "Deux étapes à venir",
+        "Type concours · repérer le sujet composé"
+      ],
+      "pieges": [
+        "« Elle aura les clés » est au futur simple de « avoir ». Dans « elle aura rendu les clés », le participe « rendu » forme avec « aura » un f…"
+      ],
+      "aRetenir": [
+        "Futur simple : base du futur et terminaison de la personne.",
+        "Futur antérieur : auxiliaire au futur et participe.",
+        "Situer ce qui sera achevé avant le repère futur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L6",
+      "titre": "Exprimer une hypothèse au conditionnel",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "6/10",
+      "precedente": "Distinguer futur simple et futur antérieur",
+      "suivante": "Choisir entre indicatif et subjonctif",
+      "explication": "À la fin de cette leçon, tu sauras former le conditionnel présent et le conditionnel passé et les employer dans une phrase exprimant une hypothèse. Prérequis : connaître la base du futur et la formation des temps composés. Dans une phrase d’hypothèse, « si » introduit la condition. Si l’hypothèse est exprimée à l’imparfait, le résultat attendu peut être au conditionnel présent : « Si le car passait, nous le prendrions. » Pour une condition passée qui ne s’est pas réalisée, le plus-que-parfait peut s’associer au conditionnel passé : « Si le car était passé, nous l’aurions pris. » « Était passé » contient un auxiliaire à l’imparfait et un participe. Le conditionnel sert aussi à demander quelque chose avec politesse (« Pourriez-vous patienter ? ») ou à présenter un fait comme futur par rapport à des paroles passées (« Il a dit qu’il viendrait »).",
+      "formules": [],
+      "exemples": [
+        "Faire une demande",
+        "Type concours · réécrire au conditionnel passé"
+      ],
+      "pieges": [
+        "Dans une hypothèse, écris « Si j’avais le temps, je lirais ». « Si j’aurais le temps » emploie à tort le conditionnel pour la condition."
+      ],
+      "aRetenir": [
+        "Conditionnel présent : base du futur et terminaisons de l’imparfait.",
+        "Conditionnel passé : auxiliaire au conditionnel présent et participe.",
+        "Dans l’hypothèse, repérer la proposition introduite par si."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L7",
+      "titre": "Choisir entre indicatif et subjonctif",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "7/10",
+      "precedente": "Exprimer une hypothèse au conditionnel",
+      "suivante": "Rapporter des paroles et accorder les temps",
+      "explication": "À la fin de cette leçon, tu sauras choisir le mode dans une subordonnée courante et reconnaître un subjonctif imparfait à la troisième personne du singulier. Prérequis : repérer le verbe principal et le verbe introduit par « que » ou « qui ». Au subjonctif présent, les terminaisons habituelles sont -e, -es, -e, -ions, -iez, -ent. Pour beaucoup de verbes, pars de la forme avec « ils » à l’indicatif présent et retire -ent. À partir de « ils finissent », on forme « que je finisse ». Pour « nous » et « vous », la base suit souvent celle de « nous » à l’indicatif. Ainsi, « ils prennent » donne « que je prenne », tandis que « nous prenons » donne « que nous prenions ». Parmi les formes à apprendre figurent « que je sois », « que j’aie », « que je fasse » et « que je puisse ». L’imparfait du subjonctif se rencontre surtout dans les textes littéraires. À la troisième personne du singulier, repè…",
+      "formules": [],
+      "exemples": [
+        "Lire la construction",
+        "Type concours · reconnaître un mode dans une relative"
+      ],
+      "pieges": [
+        "La présence de « que » ne suffit pas pour choisir. « Je vois que tu viens » est à l’indicatif et « Je veux que tu viennes » au subjonctif."
+      ],
+      "aRetenir": [
+        "Lire la construction qui introduit la subordonnée.",
+        "Former le subjonctif présent et connaître les formes fréquentes.",
+        "Identifier les marques du subjonctif imparfait dans un texte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L8",
+      "titre": "Rapporter des paroles et accorder les temps",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "8/10",
+      "precedente": "Choisir entre indicatif et subjonctif",
+      "suivante": "Passer de l’actif au passif en gardant le temps",
+      "explication": "À la fin de cette leçon, tu sauras transformer des paroles au discours indirect en adaptant les pronoms, les temps et les repères temporels. Prérequis : identifier le présent, l’imparfait, le passé composé et le conditionnel. Au discours direct, on cite les paroles, généralement entre guillemets. Au discours indirect, on les intègre à la phrase. Une déclaration s’introduit souvent par « que ». Une question à laquelle on répond par oui ou non s’introduit par « si ». Un ordre peut se rapporter avec « de » et un infinitif. Ce choix forme la concordance des temps. Avec un verbe introducteur au présent, le temps des paroles est généralement conservé. Après un verbe au passé, une vérité générale peut rester au présent. Vérifie aussi la personne qui parle et son destinataire. Si la date de référence change, « hier » peut devenir « la veille » et « demain », « le lendemain ».",
+      "formules": [],
+      "exemples": [
+        "Rapporter un ordre",
+        "Type concours · passer deux faits à l’indirect"
+      ],
+      "pieges": [
+        "Dans une question indirecte, l’ordre redevient généralement sujet puis verbe : « Où va-t-il ? » donne « Elle demande où il va. »"
+      ],
+      "aRetenir": [
+        "Retrouver qui parle et à qui.",
+        "Situer chaque fait avant, pendant ou après les paroles.",
+        "Adapter les temps, les pronoms et les repères temporels."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L9",
+      "titre": "Passer de l’actif au passif en gardant le temps",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "9/10",
+      "precedente": "Rapporter des paroles et accorder les temps",
+      "suivante": "Bilan méthode · comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras transformer une phrase active en phrase passive et revenir à l’actif en conservant le temps. Prérequis : reconnaître le COD et former les principaux temps de l’indicatif. À la voix active, le sujet fait l’action dans les exemples de cette leçon. À la voix passive, le COD de la phrase active devient sujet. Conjugue « être » au temps du verbe actif. Ajoute le participe passé du verbe de départ et accorde-le avec le nouveau sujet. Le sujet de départ devient souvent le complément d’agent introduit par « par ». Quand le sujet actif est « on », le complément d’agent est en général omis. Pour revenir à l’actif, le complément d’agent devient sujet et le sujet passif redevient COD. Si aucun agent n’est indiqué, « on » convient souvent. Garde les autres compléments à une place naturelle. Dans cette transformation usuelle, il faut un COD au départ : « Aya télépho…",
+      "formules": [],
+      "exemples": [
+        "Passer du passif à l’actif",
+        "Type concours · transformer avec on"
+      ],
+      "pieges": [
+        "« Les copies sont corrigées » est au présent de la voix passive. La présence du participe « corrigées » peut faire croire à un passé compos…"
+      ],
+      "aRetenir": [
+        "Identifier le COD et le temps avant de réécrire.",
+        "Conjuguer être au même temps avec le nouveau sujet.",
+        "Accorder le participe et conserver les autres compléments."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L10",
+      "titre": "Bilan méthode · comme au concours",
+      "module": "Conjugaison et emploi des temps (Français)",
+      "position": "10/10",
+      "precedente": "Passer de l’actif au passif en gardant le temps",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras traiter deux consignes de réécriture à partir d’une même phrase et justifier chaque forme obtenue. Prérequis : savoir changer le temps, le mode ou la voix d’un verbe et rapporter des paroles.",
+      "formules": [],
+      "exemples": [
+        "Une consigne de réécriture",
+        "Type concours · deux transformations indépendantes"
+      ],
+      "pieges": [
+        "Si les consignes a et b portent chacune sur la phrase de départ, applique b à cette phrase. Réutiliser ta réponse à a risque de changer le …"
+      ],
+      "aRetenir": [
+        "Repartir de la phrase donnée pour chaque consigne indépendante.",
+        "Identifier le temps avant de transformer.",
+        "Relire l’accord et justifier par les mots de la phrase."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

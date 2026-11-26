@@ -1,0 +1,225 @@
+{
+  "module": "CAFOP-MATH-ARITH",
+  "titre": "Divisibilité, PGCD et PPCM",
+  "matiere": "Mathématiques",
+  "resume": "Trouver les diviseurs, justifier une divisibilité sans poser de division et résoudre des problèmes de restes, de partage et de rendez-vous périodiques.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-ARITH-L1",
+      "titre": "Énumérer les diviseurs d’un nombre",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Appliquer les critères de divisibilité",
+      "explication": "À la fin de cette leçon, tu sauras dresser la liste complète des diviseurs positifs d’un entier. Prérequis : connaître les tables de multiplication. Quand un entier positif s’écrit comme le produit de deux entiers positifs, chacun des deux facteurs est un diviseur du produit. Le produit est un multiple de chacun des facteurs. Tu peux passer d’une formulation à l’autre en gardant la même égalité de départ.",
+      "formules": [],
+      "exemples": [
+        "Les diviseurs de 12",
+        "Type concours — une liste complète"
+      ],
+      "pieges": [
+        "Commencer à 2 fait oublier 1. La première paire fournit aussi le nombre lui-même."
+      ],
+      "aRetenir": [
+        "Lire les mots multiple et diviseur dans le bon sens.",
+        "Commencer par la paire avec 1.",
+        "Ranger les diviseurs trouvés et supprimer les doublons."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L2",
+      "titre": "Appliquer les critères de divisibilité",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "2/9",
+      "precedente": "Énumérer les diviseurs d’un nombre",
+      "suivante": "Combiner les critères sans opérer",
+      "explication": "À la fin de cette leçon, tu sauras tester la divisibilité d’un entier par 2, 3, 4, 5, 9, 10 et 25 sans poser les divisions. Prérequis : repérer les chiffres d’un entier. Un critère de divisibilité est un test qui permet de décider si un nombre est divisible par un autre. Lis le diviseur demandé avant de choisir ce que tu observes dans le nombre. Pour 4 et 25, seules les dizaines et les unités comptent, car les centaines complètes sont des multiples de 100 et 100 est divisible par ces deux nombres. Le groupe final 00 représente 0, qui est un multiple de tout entier positif. Pour un nombre à un seul chiffre, lis-le comme s’il commençait par 0.",
+      "formules": [],
+      "exemples": [
+        "Deux tests sur 735",
+        "Type concours — tous les critères sur 2 475"
+      ],
+      "pieges": [
+        "Un chiffre des unités pair suffit pour le test de 2. Le test de 4 porte sur les deux derniers chiffres."
+      ],
+      "aRetenir": [
+        "Observer le dernier chiffre pour 2, 5 et 10.",
+        "Examiner les deux derniers chiffres pour 4 et 25.",
+        "Additionner les chiffres pour 3 et 9."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L3",
+      "titre": "Combiner les critères sans opérer",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "3/9",
+      "precedente": "Appliquer les critères de divisibilité",
+      "suivante": "Contrôler une division euclidienne",
+      "explication": "À la fin de cette leçon, tu sauras justifier une divisibilité par 15, 36 ou 45 sans effectuer la division demandée. Prérequis : savoir appliquer les critères de la leçon précédente. Deux entiers sont premiers entre eux quand leur seul diviseur commun est 1. Un nombre divisible par deux facteurs premiers entre eux est divisible par leur produit. Dans une justification, écris les deux tests séparément, puis relie-les à cette règle.",
+      "formules": [],
+      "exemples": [
+        "Tester 150 pour 15",
+        "Type concours — 2 340 est-il divisible par 45 ?"
+      ],
+      "pieges": [
+        "3 et 6 ont 3 en commun. Le nombre 6 est divisible par chacun de ces facteurs, et pourtant 18 dépasse 6. L’hypothèse « premiers entre eux » …"
+      ],
+      "aRetenir": [
+        "Décomposer le diviseur demandé.",
+        "Vérifier que les deux facteurs sont premiers entre eux.",
+        "Justifier séparément les deux tests avant de conclure."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L4",
+      "titre": "Contrôler une division euclidienne",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "4/9",
+      "precedente": "Combiner les critères sans opérer",
+      "suivante": "Décomposer en facteurs premiers",
+      "explication": "À la fin de cette leçon, tu sauras trouver un quotient entier et un reste, puis vérifier leur validité. Prérequis : savoir multiplier et soustraire des entiers. Pour diviser a par d, cherche le plus grand multiple de d qui ne dépasse pas a. Son coefficient est le quotient. Soustrais ensuite ce multiple à a pour trouver le reste. Si le reste vaut 0, le dividende est un multiple de d. Une égalité bien calculée est une première vérification. Si le reste atteint ou dépasse le diviseur, tu peux encore prendre au moins un groupe entier. Augmente le quotient et ajuste le reste.",
+      "formules": [
+        "a = d × q + r, avec 0 ≤ r < d."
+      ],
+      "exemples": [
+        "Des cahiers par paquets",
+        "Type concours — contrôler la division de 247 par 18"
+      ],
+      "pieges": [
+        "La comparaison se fait entre le reste et le diviseur. Dans l’exemple, le reste peut être égal au quotient."
+      ],
+      "aRetenir": [
+        "Repérer le plus grand multiple qui convient.",
+        "Soustraire pour obtenir le reste.",
+        "Vérifier que le reste est strictement inférieur au diviseur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L5",
+      "titre": "Décomposer en facteurs premiers",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "5/9",
+      "precedente": "Contrôler une division euclidienne",
+      "suivante": "Calculer le PGCD avec Euclide",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître un nombre premier et écrire un entier comme produit de facteurs premiers. Prérequis : savoir chercher des diviseurs et utiliser les critères simples. Un nombre premier a exactement deux diviseurs positifs, 1 et lui-même. Le nombre 1 n’a qu’un seul diviseur positif. Pour tester un entier supérieur à 1, il suffit d’essayer les nombres premiers jusqu’à sa racine carrée, car dans toute paire de facteurs au moins l’un des facteurs est inférieur ou égal à cette racine.",
+      "formules": [
+        "p² = p × p et p³ = p × p × p."
+      ],
+      "exemples": [
+        "Décomposer 18",
+        "Type concours — décomposer 252"
+      ],
+      "pieges": [
+        "Arrêter la décomposition avec un quotient composé donne une écriture incomplète. Continue aussi longtemps qu’un facteur peut être décomposé."
+      ],
+      "aRetenir": [
+        "Un nombre premier a exactement deux diviseurs positifs.",
+        "Décomposer le quotient jusqu’à 1.",
+        "Regrouper les facteurs répétés en puissances."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L6",
+      "titre": "Calculer le PGCD avec Euclide",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "6/9",
+      "precedente": "Décomposer en facteurs premiers",
+      "suivante": "Trouver le premier multiple commun",
+      "explication": "À la fin de cette leçon, tu sauras calculer un PGCD par les diviseurs communs ou par l’algorithme d’Euclide. Prérequis : savoir trouver les restes d’une division euclidienne. Le plus grand commun diviseur, ou PGCD, de deux entiers positifs est le plus grand entier qui divise les deux. Pour de petits nombres, énumère leurs diviseurs et compare les listes. Si les nombres sont plus grands, les divisions successives donnent la réponse plus vite. La méthode fonctionne parce qu’un diviseur commun à a et d divise aussi r = a − d × q. Dans l’autre sens, un diviseur commun à d et r divise aussi a = d × q + r. À chaque étape, tu gardes donc exactement les mêmes diviseurs communs.",
+      "formules": [],
+      "exemples": [
+        "Lister les diviseurs communs",
+        "Type concours — PGCD de 252 et 198"
+      ],
+      "pieges": [
+        "La ligne où le reste devient 0 indique que le calcul est terminé. Sur cette ligne, relève le diviseur."
+      ],
+      "aRetenir": [
+        "Chercher le plus grand des diviseurs communs.",
+        "Reporter le diviseur et le reste à chaque étape.",
+        "Lire le PGCD dans le dernier diviseur."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L7",
+      "titre": "Trouver le premier multiple commun",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "7/9",
+      "precedente": "Calculer le PGCD avec Euclide",
+      "suivante": "Partager et carreler sans reste",
+      "explication": "À la fin de cette leçon, tu sauras calculer un PPCM et l’utiliser pour prévoir une première rencontre après un départ commun. Prérequis : savoir décomposer un nombre et calculer un PGCD. Le plus petit commun multiple, ou PPCM, est le plus petit entier strictement positif qui est multiple des deux nombres. Pour de petits nombres, énumère les multiples positifs de l’un et vérifie à partir de quand l’autre divise aussi le résultat. Avec les facteurs premiers, prends tous les facteurs qui figurent dans au moins une des deux décompositions, chacun avec le plus grand exposant rencontré. Le produit contient ainsi toutes les puissances nécessaires pour être divisible par les deux nombres, avec les plus petits exposants possibles.",
+      "formules": [
+        "PPCM(a, b) = (a × b) ÷ PGCD(a, b)."
+      ],
+      "exemples": [
+        "Par les multiples",
+        "Type concours — deux bus à Bouaké"
+      ],
+      "pieges": [
+        "Le produit des deux nombres donne toujours un multiple commun. Vérifie la minimalité avant de le retenir comme PPCM."
+      ],
+      "aRetenir": [
+        "Chercher un multiple commun strictement positif.",
+        "Retenir les plus grands exposants des facteurs premiers.",
+        "Convertir un délai en heure si la question le demande."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L8",
+      "titre": "Partager et carreler sans reste",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "8/9",
+      "precedente": "Trouver le premier multiple commun",
+      "suivante": "Bilan méthode — raisonner comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras utiliser le PGCD pour maximiser un nombre de lots identiques ou la taille d’un carreau carré. Prérequis : savoir calculer un PGCD et convertir des mètres en centimètres. Si la consigne impose une dimension dans un intervalle, calcule le PGCD, liste ses diviseurs et garde ceux qui respectent les bornes. Pour découper plus de deux longueurs, calcule d’abord le PGCD de deux longueurs, puis le PGCD de ce résultat et de la suivante.",
+      "formules": [],
+      "exemples": [
+        "Préparer des bouquets à Daloa",
+        "Type concours — carreler une salle de classe"
+      ],
+      "pieges": [
+        "Le nombre de bouquets et le nombre de fleurs par bouquet sont deux résultats distincts. Relis la question pour choisir celui que tu dois do…"
+      ],
+      "aRetenir": [
+        "Exprimer les longueurs dans la même unité.",
+        "Identifier la taille ou le nombre à maximiser.",
+        "Calculer les quantités demandées après le PGCD."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-ARITH-L9",
+      "titre": "Bilan méthode — raisonner comme au concours",
+      "module": "Divisibilité, PGCD et PPCM (Mathématiques)",
+      "position": "9/9",
+      "precedente": "Partager et carreler sans reste",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras choisir une méthode, écrire sa justification et contrôler ta réponse comme au concours. Prérequis : maîtriser les critères, le PGCD, le PPCM et la condition sur le reste.",
+      "formules": [],
+      "exemples": [
+        "Justifier une première coïncidence",
+        "Type concours — deux restes imposés"
+      ],
+      "pieges": [
+        "Un diviseur des différences peut encore être trop petit pour les restes. Le contrôle doit porter sur le plus grand des restes."
+      ],
+      "aRetenir": [
+        "Traduire chaque contrainte au brouillon.",
+        "Expliquer la méthode et garder les calculs utiles.",
+        "Contrôler les bornes, les restes et les unités."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

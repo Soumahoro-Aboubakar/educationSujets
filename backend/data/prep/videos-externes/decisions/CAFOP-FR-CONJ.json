@@ -1,0 +1,92 @@
+[
+  {
+    "code": "CAFOP-FR-CONJ-L1",
+    "youtubeId": "cvfp1mWiV6Q",
+    "couverture": "partielle",
+    "justification": "L’infinitif et les trois groupes de verbes ; le radical est repris dans le texte.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L2",
+    "youtubeId": "cp1_6GazIn8",
+    "couverture": "partielle",
+    "justification": "L’impératif présent en 3 minutes (formes, absence de sujet, -s des verbes en -er) ; le présent est dans le texte.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L3",
+    "youtubeId": "Y_q0bMHk5lM",
+    "couverture": "exacte",
+    "justification": "Le passé composé : auxiliaire être ou avoir et participe passé.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L4",
+    "youtubeId": "HlmkAlJ_5nI",
+    "couverture": "exacte",
+    "justification": "Valeurs de l’imparfait (décor, habitude) et du passé simple (actions qui font avancer le récit).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L5",
+    "youtubeId": "ZeIDINfl_L8",
+    "couverture": "partielle",
+    "justification": "Formation et emploi du futur antérieur (action accomplie avant une autre action future).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L6",
+    "youtubeId": "yPpHUAvxH9Y",
+    "couverture": "partielle",
+    "justification": "Exprimer la condition et l’hypothèse, dont le conditionnel après « si » + imparfait ou plus-que-parfait.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L7",
+    "youtubeId": "yRnFqJps_DY",
+    "couverture": "exacte",
+    "justification": "Choisir entre indicatif et subjonctif après un verbe de volonté, de constat ou un « pour que ».",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L8",
+    "youtubeId": "zBvsXpl5njc",
+    "couverture": "exacte",
+    "justification": "Discours direct et indirect : transformation des pronoms, des temps et des repères.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L9",
+    "youtubeId": "4roDP8UjOVw",
+    "couverture": "exacte",
+    "justification": "Voix active et voix passive en 3 minutes : être + participe passé, temps de l’auxiliaire.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-CONJ-L10",
+    "youtubeId": "h0O8SVkEqUU",
+    "couverture": "partielle",
+    "justification": "La réécriture (changement de temps, de personne, de voix), exercice proche des transformations du concours.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  }
+]

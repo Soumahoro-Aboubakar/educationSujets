@@ -1,0 +1,194 @@
+{
+  "module": "CAFOP-PROF-PSYCHO",
+  "titre": "Psychopédagogie de l’enfant et didactique",
+  "matiere": "Psychopédagogie",
+  "resume": "Développement de l’enfant, théories de l’apprentissage, méthodes et transfert, évaluation, école et société, formation des maîtres, et méthode de l’épreuve sur texte.",
+  "concours": [
+    "CAFOP — Accès à la formation de professeur de CAFOP"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-PROF-PSYCHO-L1",
+      "titre": "Les stades du développement selon Piaget",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "Vygotski, Bruner et le rôle des autres",
+      "explication": "À la fin de cette leçon, tu sauras situer un élève du primaire dans les stades de Piaget et en tirer une conséquence pour la classe. Aucun prérequis. Les âges sont indicatifs : l’ordre des stades est constant, mais le rythme varie selon les enfants et leur milieu.",
+      "formules": [],
+      "exemples": [
+        "La conservation",
+        "Conséquence pour le maître"
+      ],
+      "pieges": [
+        "Les stades ne sont pas des âges stricts : un élève de 8 ans peut encore avoir besoin du concret dans un domaine nouveau."
+      ],
+      "aRetenir": [
+        "Quatre stades, ordre constant.",
+        "Primaire : opérations concrètes.",
+        "Manipuler avant d’abstraire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L2",
+      "titre": "Vygotski, Bruner et le rôle des autres",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "2/8",
+      "precedente": "Les stades du développement selon Piaget",
+      "suivante": "Trois théories de l’apprentissage",
+      "explication": "À la fin de cette leçon, tu sauras définir la zone proximale de développement et l’étayage, et les utiliser pour organiser l’aide. Prérequis : les stades de Piaget. Pour Vygotski, l’enfant apprend d’abord avec les autres, puis seul. La zone proximale de développement (ZPD) sépare ce que l’enfant réussit seul de ce qu’il réussit avec l’aide d’un adulte ou d’un camarade plus avancé. L’enseignement efficace vise cette zone : ni trop facile, ni hors de portée. Bruner appelle étayage l’ensemble des aides de l’adulte : susciter l’intérêt, simplifier la tâche, maintenir l’orientation, signaler les éléments importants, montrer un modèle. L’aide est ensuite retirée progressivement pour que l’élève devienne autonome.",
+      "formules": [],
+      "exemples": [
+        "Lire un problème",
+        "Le travail en groupe"
+      ],
+      "pieges": [
+        "Faire la tâche à la place de l’élève n’est pas de l’étayage : il ne construit rien."
+      ],
+      "aRetenir": [
+        "ZPD : réussir avec aide.",
+        "Étayage : aides de l’adulte (Bruner).",
+        "Retirer l’aide progressivement."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L3",
+      "titre": "Trois théories de l’apprentissage",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "3/8",
+      "precedente": "Vygotski, Bruner et le rôle des autres",
+      "suivante": "Une tête bien faite : former au transfert",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître une pratique de classe béhavioriste, constructiviste ou socioconstructiviste. Prérequis : Piaget et Vygotski.",
+      "formules": [],
+      "exemples": [
+        "Une séance de tables de multiplication",
+        "Une situation-problème"
+      ],
+      "pieges": [
+        "La répétition n’est pas à rejeter : elle sert à automatiser ce qui a d’abord été compris."
+      ],
+      "aRetenir": [
+        "Béhaviorisme : renforcement.",
+        "Constructivisme : action et recherche.",
+        "Socioconstructivisme : interactions."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L4",
+      "titre": "Une tête bien faite : former au transfert",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "4/8",
+      "precedente": "Trois théories de l’apprentissage",
+      "suivante": "Évaluer pour faire apprendre",
+      "explication": "À la fin de cette leçon, tu sauras expliquer pourquoi l’accumulation de connaissances ne suffit pas et comment enseigner pour le transfert. Aucun prérequis. Le sujet de 2004 critiquait l’accumulation de connaissances inutiles et la préparation de l’enfant à des actes prédéterminés dans un monde qui change. Il reprenait l’idée de Montaigne : mieux vaut « une tête bien faite que bien pleine ». Former, c’est développer le jugement, la souplesse intellectuelle et l’autonomie. Le transfert est la capacité à utiliser une connaissance dans une situation nouvelle. Il se prépare : varier les situations, faire expliciter la démarche, demander à l’élève de dire quand et pourquoi une règle s’applique.",
+      "formules": [],
+      "exemples": [
+        "Sans transfert",
+        "Comme au concours (2004)"
+      ],
+      "pieges": [
+        "Multiplier les exercices identiques à l’exemple du cours entraîne la répétition, pas le transfert."
+      ],
+      "aRetenir": [
+        "Tête bien faite plutôt que bien pleine.",
+        "Transfert : situation nouvelle.",
+        "Varier les situations, expliciter."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L5",
+      "titre": "Évaluer pour faire apprendre",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "5/8",
+      "precedente": "Une tête bien faite : former au transfert",
+      "suivante": "L’école face aux médias et à l’éducation permanente",
+      "explication": "À la fin de cette leçon, tu sauras distinguer les trois fonctions de l’évaluation et utiliser l’erreur pour remédier. Aucun prérequis. Dans la pédagogie de l’erreur, l’erreur n’est pas une faute à punir mais un indice du raisonnement de l’élève. Le maître cherche son origine (consigne mal comprise, règle mal appliquée, connaissance manquante) puis propose une remédiation ciblée.",
+      "formules": [],
+      "exemples": [
+        "Une erreur instructive",
+        "Une évaluation formative"
+      ],
+      "pieges": [
+        "Noter chaque exercice d’entraînement transforme l’évaluation formative en sommative et décourage l’essai."
+      ],
+      "aRetenir": [
+        "Diagnostique, formative, sommative.",
+        "L’erreur informe sur le raisonnement.",
+        "Remédiation ciblée."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L6",
+      "titre": "L’école face aux médias et à l’éducation permanente",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "6/8",
+      "precedente": "Évaluer pour faire apprendre",
+      "suivante": "Observer et conseiller un élève-maître",
+      "explication": "À la fin de cette leçon, tu sauras analyser la place de l’école quand elle n’est plus la seule source de savoir. Aucun prérequis. Le sujet de 2005 s’appuyait sur un texte de Lê Thành Khôi (*L’industrie de l’enseignement*, 1967). Télévision, radio, cinéma et presse forment une école parallèle. Ils éveillent l’attention, l’imagination et l’ouverture au monde, mais peuvent aussi donner à l’enfant des informations inadaptées à son âge et une maturation désordonnée. L’éducation permanente considère qu’on apprend tout au long de la vie. L’école doit donc moins tout transmettre qu’apprendre à apprendre : chercher l’information, la trier, la critiquer, travailler en autonomie.",
+      "formules": [],
+      "exemples": [
+        "Exploiter la télévision",
+        "Apprendre à apprendre"
+      ],
+      "pieges": [
+        "Opposer simplement la télévision et le livre est trop pauvre : l’analyse attendue pèse les apports et les risques de chaque support."
+      ],
+      "aRetenir": [
+        "Médias : école parallèle.",
+        "Éducation permanente.",
+        "Apprendre à apprendre."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L7",
+      "titre": "Observer et conseiller un élève-maître",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "7/8",
+      "precedente": "L’école face aux médias et à l’éducation permanente",
+      "suivante": "Méthode de l’épreuve : un texte, trois questions",
+      "explication": "À la fin de cette leçon, tu sauras analyser une prestation pédagogique et formuler un conseil utile à un stagiaire. Prérequis : les méthodes et l’évaluation. Le professeur de CAFOP observe les prestations des élèves-maîtres. Une analyse rigoureuse suit trois temps : décrire ce qui s’est passé, interpréter avec des notions de psychopédagogie, proposer des pistes concrètes.",
+      "formules": [],
+      "exemples": [
+        "Un conseil inutile",
+        "Un conseil utile"
+      ],
+      "pieges": [
+        "Juger la personne du stagiaire plutôt que sa pratique décourage et ne fait pas progresser."
+      ],
+      "aRetenir": [
+        "Décrire, interpréter, proposer.",
+        "Partir des faits.",
+        "Conseil précis et réalisable."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-PROF-PSYCHO-L8",
+      "titre": "Méthode de l’épreuve : un texte, trois questions",
+      "module": "Psychopédagogie de l’enfant et didactique (Psychopédagogie)",
+      "position": "8/8",
+      "precedente": "Observer et conseiller un élève-maître",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras organiser tes trois heures pour l’épreuve de psychopédagogie. Prérequis : les leçons précédentes. Les sujets de 2004 et 2005 suivent le même modèle : un texte puis trois questions ouvertes, en 3 heures. Les questions vont du texte vers la pratique : dégager les idées, expliquer une phrase avec des exemples, discuter ou appliquer à une situation de formation.",
+      "formules": [],
+      "exemples": [
+        "Un exemple bien choisi"
+      ],
+      "pieges": [
+        "Recopier le texte avec d’autres mots n’est pas l’expliquer : il faut en dégager le sens et les enjeux pédagogiques."
+      ],
+      "aRetenir": [
+        "Texte + trois questions, 3 heures.",
+        "Idées, explication, discussion.",
+        "Exemples concrets de la classe."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

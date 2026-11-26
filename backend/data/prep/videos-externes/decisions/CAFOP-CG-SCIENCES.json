@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-CG-SCIENCES-L1",
+    "youtubeId": "FtXBvEIKZVk",
+    "couverture": "exacte",
+    "justification": "Les cinq classes de vertébrés et leurs caractères.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-SCIENCES-L2",
+    "youtubeId": "9i_XVXj6hm8",
+    "couverture": "exacte",
+    "justification": "La pollinisation : définition et types.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-SCIENCES-L3",
+    "youtubeId": "d6lGWuYI3f0",
+    "couverture": "partielle",
+    "justification": "Comment une graine devient une plante : la germination.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-SCIENCES-L4",
+    "youtubeId": "-JfMV5jmvjY",
+    "couverture": "exacte",
+    "justification": "La photosynthèse expliquée simplement.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-SCIENCES-L5",
+    "youtubeId": "WKMS9c5KeLM",
+    "couverture": "partielle",
+    "justification": "La chaîne alimentaire : producteurs et consommateurs.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-SCIENCES-L6",
+    "youtubeId": "aXCD350q9lI",
+    "couverture": "exacte",
+    "justification": "Le sang et ses cellules en 6 minutes.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-SCIENCES-L7",
+    "youtubeId": "IL3Uo-FSKxg",
+    "couverture": "partielle",
+    "justification": "À quoi sert un vaccin : mémoire immunitaire.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-SCIENCES-L8",
+    "youtubeId": "tWyKUOjgO10",
+    "couverture": "partielle",
+    "justification": "Paul Olivier : le circuit électrique simple et son schéma ; tension et puissance sont dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

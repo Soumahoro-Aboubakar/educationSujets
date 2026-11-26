@@ -28,7 +28,7 @@
         "Recevabilité et bien-fondé sont distincts.",
         "Textes généraux et spéciaux à articuler."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCCIV-L2",
@@ -51,7 +51,7 @@
         "Le représentant doit être habilité.",
         "Ces conditions ne prouvent pas encore le fond."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCCIV-L3",
@@ -74,7 +74,7 @@
         "Territoire : quel ressort ?",
         "Vérifier les règles et exceptions de la demande."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCCIV-L4",
@@ -97,7 +97,7 @@
         "Notification et signification portent l’acte à connaissance.",
         "Échanger les pièces et arguments."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCCIV-L5",
@@ -120,7 +120,7 @@
         "Preuve : établir le fait pertinent.",
         "Distinguer obligation alléguée et libération alléguée."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCCIV-L6",
@@ -143,7 +143,7 @@
         "Exception : procédure.",
         "Non-recevoir : recevabilité ; calendrier à vérifier."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCCIV-L7",
@@ -166,7 +166,7 @@
         "Mesure provisoire et fond sont distincts.",
         "Examiner chaque demande séparément."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-PROCCIV-L8",
@@ -189,7 +189,7 @@
         "Vérifier ouverture, point de départ et délai.",
         "Pas d’effet suspensif supposé sans texte."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

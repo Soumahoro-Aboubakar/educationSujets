@@ -27,7 +27,7 @@
         "Contamination et infection sont distinctes.",
         "Les antibiotiques ne traitent pas les virus."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFAS-AUX-HYGIENE-L2",
@@ -52,7 +52,7 @@
         "Transmission directe ou par un intermédiaire.",
         "Infectieux ne signifie pas toujours contagieux."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFAS-AUX-HYGIENE-L3",
@@ -74,7 +74,7 @@
         "Nettoyer, désinfecter et stériliser diffèrent.",
         "Gants et hygiène des mains se complètent."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFAS-AUX-HYGIENE-L4",
@@ -97,7 +97,7 @@
         "Séparer cru et prêt à manger.",
         "Assainissement : protection collective."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFAS-AUX-HYGIENE-L5",
@@ -119,7 +119,7 @@
         "Prévenir les piqûres réduit le risque.",
         "Les moyens de prévention peuvent se compléter."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFAS-AUX-HYGIENE-L6",
@@ -141,7 +141,7 @@
         "Atteinte notamment des lymphocytes CD4.",
         "Connaître les voies réelles évite les fausses croyances."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFAS-AUX-HYGIENE-L7",
@@ -163,7 +163,7 @@
         "Protection parfois progressive et rappels possibles.",
         "Calendrier à vérifier dans les sources nationales actuelles."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFAS-AUX-HYGIENE-L8",
@@ -186,7 +186,7 @@
         "Surveiller selon lieu, temps et population.",
         "Prévenir, dépister et traiter se complètent."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

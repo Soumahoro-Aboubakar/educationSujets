@@ -1,0 +1,168 @@
+{
+  "module": "CAFOP-FR-ESSAI",
+  "lecons": [
+    {
+      "code": "CAFOP-FR-ESSAI-L1",
+      "requetes": [
+        "\"Ce que demande l’essai du CAFOP\" YouTube",
+        "site:youtube.com CAFOP français essai méthodologie durée",
+        "CAFOP essai français méthodologie youtube",
+        "site:youtube.com \"CAFOP\" \"ESSAI\" français méthodologie",
+        "site:youtube.com \"CAFOP\" français essai explication simple"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo suffisamment ciblée n’a été trouvée sur la place de l’essai dans l’épreuve du CAFOP, son barème et son lien avec le texte support."
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L2",
+      "requetes": [
+        "site:youtube.com \"Analyser la consigne\" essai",
+        "site:youtube.com/watch analyser sujet argumentation consigne étayer",
+        "site:youtube.com \"Analyser\" \"consigne\" essai cours",
+        "site:youtube.com \"Analyser la consigne\" rédaction",
+        "site:youtube.com \"consigne\" \"étayer\"",
+        "site:youtube.com \"analyser une consigne\"",
+        "\"DELF B2 - Comment analyser les consignes\" vidéo durée",
+        "site:youtube.com \"Analyser la consigne\" \"en 5 minutes\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=WmiYpsjkCCI",
+          "titre": "DELF B2 - Comment analyser les consignes ?",
+          "chaine": "Aliança Francesa Rio de Janeiro",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule enseigne à décoder une consigne et à éviter le hors-sujet, mais son cadre DELF B2 ne traite pas explicitement la distinction entre étayer et discuter au CAFOP."
+        }
+      ],
+      "justification": "La capsule d’une Alliance française correspond directement au décodage des consignes et constitue la piste la plus pertinente trouvée. Sa durée totale n’était pas affichée dans les résultats consultables."
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L3",
+      "requetes": [
+        "site:youtube.com \"Trouver des arguments\" français",
+        "trouver arguments brouillon méthode youtube",
+        "site:youtube.com \"Trouver des arguments\" méthode",
+        "site:youtube.com \"trouver des idées\" \"argumentation\"",
+        "\"uVT2KULifLk\"",
+        "DELF B2 DALF C1 TCF trouver idées rapidement Alexis QQOQCP vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=uVT2KULifLk",
+          "titre": "DELF B2 / DALF C1 / TCF : Comment trouver des idées rapidement ?",
+          "chaine": "Advanced French with Alexis",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo applique la méthode QQOQCP à un sujet d’examen pour faire émerger rapidement des idées sous plusieurs angles, conformément au questionnement proposé dans la leçon."
+        }
+      ],
+      "justification": "La démonstration par questions successives correspond précisément à la recherche d’arguments variés au brouillon. La durée totale n’a toutefois pas pu être relevée."
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L4",
+      "requetes": [
+        "site:youtube.com \"Illustrer\" \"exemples\" argumentation cours",
+        "site:youtube.com/watch argument exemple distinguer choisir rédaction",
+        "argument exemple illustration français youtube",
+        "site:youtube.com \"Thèse, argument, exemple\"",
+        "site:youtube.com \"Illustrer par des exemples\"",
+        "site:youtube.com \"illustrer\" \"argument\" cours explication simple",
+        "\"Thèse, argument, exemple\" \"L’atelier du français\"",
+        "Thèse argument exemple atelier français vidéo 2021 4 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=PdfGBtUp_4U",
+          "titre": "Thèse, argument, exemple - DISSERTATION #3 - Leçon de français (C1/C2) - Cours de méthode",
+          "chaine": "L'atelier du français | Paris",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo distingue thèse, argument et exemple et aide à associer un exemple à une idée, sans développer les précautions propres aux exemples ivoiriens et aux statistiques inventées."
+        }
+      ],
+      "justification": "Cette ressource est également utilisée dans une séance pédagogique de troisième consacrée à l’association des arguments et des exemples, ce qui confirme son intérêt malgré l’étiquette C1/C2. Sa durée totale n’était pas disponible."
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L5",
+      "requetes": [
+        "site:youtube.com/watch \"Construire le plan\" \"dix lignes\"",
+        "\"Construire le plan d’une dizaine de lignes\" YouTube",
+        "site:youtube.com/watch essai CAFOP introduction développement conclusion",
+        "site:youtube.com \"plan\" \"texte argumentatif\" \"court\"",
+        "site:youtube.com \"texte argumentatif\" \"plan simple\" français",
+        "site:youtube.com \"plan\" \"dix\" \"essai\"",
+        "site:youtube.com essai CAFOP dix lignes corrigé 2025"
+      ],
+      "candidats": [],
+      "justification": "Les vidéos trouvées portent sur des plans argumentatifs généraux sans établir la répartition d’un essai d’une dizaine de lignes. Aucune ne correspond suffisamment à l’introduction très brève, aux deux arguments illustrés et à la conclusion attendus."
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L6",
+      "requetes": [
+        "site:youtube.com/watch \"Relier les idées\"",
+        "site:youtube.com \"connecteurs logiques\" \"5 minutes\"",
+        "connecteurs logiques français cours youtube",
+        "site:youtube.com \"connecteurs logiques\" \"Les Bons Profs\"",
+        "site:youtube.com \"Les connecteurs logiques en français\"",
+        "site:youtube.com \"connecteurs\" \"Bien écrire\"",
+        "\"Adverbes de relation logique et de liaison\"",
+        "Adverbes relation logique liaison Katia Nugnes durée vidéo",
+        "site:youtube.com \"connecteurs logiques\" \"explication simple\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=8tFhypbADvk",
+          "titre": "Adverbes de relation logique et de liaison (adv.7/11)",
+          "chaine": "Bien écrire - Katia Nugnes",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette leçon explique les adverbes qui établissent des relations logiques entre les phrases, mais se limite à cette catégorie grammaticale parmi les connecteurs utiles à l’essai."
+        }
+      ],
+      "justification": "Le sujet est ciblé et présenté par une professeure certifiée de français, avec une portée plus restreinte que l’ensemble des liens étudiés dans la leçon. La durée totale n’a pas pu être relevée."
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L7",
+      "requetes": [
+        "site:youtube.com/watch \"Rédiger proprement\"",
+        "rédiger phrases courtes claires français youtube",
+        "site:youtube.com \"phrases courtes\" rédaction",
+        "site:youtube.com \"rédiger\" \"phrases\" \"Bien écrire\"",
+        "site:youtube.com \"phrases\" \"claires\" \"rédaction\"",
+        "\"5 maladresses\" \"Ta coach de français\"",
+        "Améliorer sa rédaction Ta coach français 2025 durée 10"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=tHhg6Fsg_MQ",
+          "titre": "Améliorer sa rédaction 💪🏻✍️ | Spécial bac français 2025",
+          "chaine": "Ta coach de français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo montre comment corriger les maladresses de syntaxe, les mélanges de temps et les phrases interminables, sans traiter spécifiquement toutes les conventions de l’essai du CAFOP."
+        }
+      ],
+      "justification": "Les corrections annoncées correspondent directement à l’objectif de phrases claires et correctement construites. Les chapitres sont visibles jusqu’à 8:20, mais la durée totale n’est pas affichée."
+    },
+    {
+      "code": "CAFOP-FR-ESSAI-L8",
+      "requetes": [
+        "site:youtube.com/watch \"essai complet\" \"25 minutes\"",
+        "\"Bilan : un essai complet en 25 minutes\" YouTube",
+        "site:youtube.com \"essai\" \"gérer son temps\"",
+        "site:youtube.com \"relecture\" \"rédaction\" conseils",
+        "site:youtube.com \"essai\" \"relecture\" \"temps\" français",
+        "site:youtube.com essai CAFOP temps brouillon relecture",
+        "site:youtube.com essai CAFOP dix lignes corrigé 2025"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo trouvée ne combine un essai CAFOP complet, la gestion des 25 minutes, le contrôle du nombre de lignes et la relecture finale. Les conseils généraux de rédaction ou de gestion du temps seraient trop éloignés de ce bilan."
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "module": "CAFOP-MATH-SUJETS",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-SUJETS-L1",
+      "requetes": [
+        "\"Sujet 2017 : le marchand de volailles\"",
+        "site:youtube.com \"CAFOP\" \"2017\" \"volailles\"",
+        "site:youtube.com marchand volailles équation explication simple",
+        "site:youtube.com problème partage mise en équation prix explication simple",
+        "site:youtube.com mise en équation problème partage cours exemple 5 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=N1MYS76Xaxo",
+          "titre": "Mettre un problème en équation",
+          "chaine": "Les Math Experts (Par Nicole Nasrallah)",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le choix de l’inconnue, la traduction de l’énoncé, la résolution et la vérification, sans reprendre le problème précis des volailles."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=gcjmE9GfKrk",
+          "titre": "Calculer la part de chacun - Mise en équation et résolution de problème",
+          "chaine": "Faire aimer les mathématiques",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Un partage entre cinq personnes illustre la traduction de plusieurs montants en fonction d’une seule inconnue, mais ne traite pas les rapports multiplicatifs du sujet."
+        }
+      ],
+      "justification": "Le premier candidat présente une démarche complète, avec une vérification explicitement annoncée ; son dernier chapitre commence à 5:25, mais la durée totale n’est pas affichée. Aucune correction vidéo du problème exact des volailles n’a été trouvée."
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L2",
+      "requetes": [
+        "\"Sujet 2020 : la sortie de recollection\"",
+        "site:youtube.com \"CAFOP\" \"2020\" \"recollection\"",
+        "site:youtube.com système équations problème adultes adolescents exemple",
+        "\"Résoudre un problème de Tarif adulte et enfant\" jaicompris",
+        "\"NTDcFqbUNCU\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=NTDcFqbUNCU",
+          "titre": "Résoudre un problème de Tarif adulte et enfant à l'aide d'un Système d'équations 💥 (seconde)",
+          "chaine": "jaicompris Maths",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Un problème de groupe avec deux tarifs est traduit en système de deux équations puis résolu par substitution, exactement selon la méthode de la leçon."
+        }
+      ],
+      "justification": "La structure du problème et la méthode correspondent directement à la sortie de recollection, avec d’autres nombres et des tarifs en euros. La durée totale n’a pas pu être vérifiée."
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L3",
+      "requetes": [
+        "\"Sujet 2020 : calculs avec radicaux et puissances\"",
+        "site:youtube.com \"Sujet 2020\" \"radicaux\" \"CAFOP\"",
+        "site:youtube.com simplifier somme racines carrées exemple Yvan Monka",
+        "site:youtube.com calcul puissances de 10 quotient exemple",
+        "\"Réduire une somme de racines carrées en un seul radical\" \"Maths CRPE\"",
+        "site:youtube.com \"Calculer avec les puissances de 10\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=6TXDLazaqko",
+          "titre": "Réduire une somme de racines carrées en un seul radical | Maths CRPE",
+          "chaine": "MATHS-CRPE",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo détaille l’extraction des facteurs carrés et le regroupement des radicaux identiques, ce qui correspond au calcul de A, sans traiter les puissances de dix."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=4oYWhOmLJgs",
+          "titre": "Comment calculer des puissances de 10 sans calculatrice",
+          "chaine": "Le papillon matheux",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Les règles du produit, du quotient et de la puissance d’une puissance de dix correspondent aux opérations nécessaires au calcul de B."
+        }
+      ],
+      "justification": "Les deux candidats couvrent séparément les deux calculs de la leçon ; le premier reprend aussi son piège principal sur l’addition des racines. Leurs durées totales n’étaient pas disponibles dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L4",
+      "requetes": [
+        "\"Sujet 2017 : triangle rectangle et fonction affine\"",
+        "site:youtube.com \"Sujet 2017\" \"triangle rectangle\" \"CAFOP\"",
+        "site:youtube.com démontrer triangle rectangle coordonnées repère exemple",
+        "site:youtube.com déterminer fonction affine deux images exemple",
+        "site:youtube.com \"CAFOP 2017\" mathématiques corrigé",
+        "\"CAFOP 2017 mathématiques Exercice 3 corrigé\"",
+        "\"OWKaMlUlu2w\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=OWKaMlUlu2w",
+          "titre": "CAFOP 2017 mathématiques Exercice 3 corrigé",
+          "chaine": "Maths en prépa avec Hans Amble",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La correction annoncée porte sur l’exercice 3 du CAFOP 2017, précisément celui qui associe triangle rectangle dans un repère et détermination d’une fonction affine."
+        }
+      ],
+      "justification": "C’est la correspondance la plus précise trouvée : même concours, même session et même exercice. La page vidéo n’a toutefois pas permis de vérifier sa durée totale."
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L5",
+      "requetes": [
+        "\"Sujet 2020 : Thalès dans un triangle\"",
+        "site:youtube.com \"Sujet 2020\" \"Thalès\" \"CAFOP\"",
+        "site:youtube.com Thalès triangle calculer longueur explication simple",
+        "site:youtube.com Thalès rédiger exercice exemple",
+        "\"Déterminer une longueur grâce au théorème de Thalès\" Lelivrescolaire durée",
+        "\"BhI3NU4g3b4\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=BhI3NU4g3b4",
+          "titre": "Déterminer une longueur grâce au théorème de Thalès",
+          "chaine": "Éditions Lelivrescolaire.fr",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo déroule la vérification des hypothèses, l’écriture des rapports et le produit en croix, sans reprendre les données du CAFOP ni confirmer le calcul final d’AP par différence."
+        }
+      ],
+      "justification": "Le déroulé correspond à la rédaction attendue et insiste sur les conditions d’application, point essentiel de la leçon. Le dernier chapitre annoncé commence à 3:04 ; la durée totale reste inconnue."
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L6",
+      "requetes": [
+        "\"Sujet 2019 : la pyramide réduite\"",
+        "site:youtube.com \"Sujet 2019\" \"pyramide\" CAFOP",
+        "site:youtube.com pyramide réduction volume coefficient cube exemple",
+        "site:youtube.com volume pyramide réduite cours 5 minutes",
+        "site:youtube.com \"pyramide\" \"réduction\" \"volume\" \"3ème\"",
+        "\"XvVSP869qT4\" \"minutes\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=XvVSP869qT4",
+          "titre": "✅ SECTION DE PYRAMIDE - CALCUL DU VOLUME D'UNE PYRAMIDE ET PYRAMIDE RÉDUITE. section de cône réduit",
+          "chaine": "Professeur Raoul",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo annonce le calcul du volume d’une pyramide réduite par une section parallèle, avec un périmètre plus large que le seul calcul par coefficient de réduction."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=8J6BMRDMyp8",
+          "titre": "Exercice: Réduction de volume, contenance d'un cône",
+          "chaine": "MathsEnVideo 3ème",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’exercice explique explicitement la multiplication du volume par le coefficient de réduction au cube, mais utilise un cône plutôt qu’une pyramide."
+        }
+      ],
+      "justification": "Le premier candidat conserve le solide et la situation de section de la leçon ; le second cible explicitement la règle k³. Les durées totales n’ont pas pu être vérifiées."
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L7",
+      "requetes": [
+        "\"Sujet 2020 : la série de notes\"",
+        "site:youtube.com statistiques effectifs mode moyenne diagramme circulaire exercice corrigé",
+        "site:youtube.com statistiques diagramme circulaire explication simple",
+        "\"statistiques\" \"mode\" \"moyenne\" \"diagramme\" site:youtube.com"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=EG4qV51Sxk4",
+          "titre": "Les bases des statistiques – Niveau 3°",
+          "chaine": "La Formule Magique",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente effectifs, mode, moyenne et diagramme circulaire au niveau collège, mais la construction des secteurs avec la formule des angles n’est pas confirmée."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=JhgKiPB-FAs",
+          "titre": "Statistique 6ème 5ème maths | Représentation graphique diagramme circulaire",
+          "chaine": "Yannick Sayer",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Un exemple simple explique pas à pas le passage des données au diagramme circulaire, sans couvrir le mode et la moyenne de la série."
+        }
+      ],
+      "justification": "Le premier candidat rassemble le plus de notions demandées dans une présentation pour débutants ; sa conclusion est annoncée à 4:47, sans durée totale affichée. Le second complète spécifiquement la représentation circulaire."
+    },
+    {
+      "code": "CAFOP-MATH-SUJETS-L8",
+      "requetes": [
+        "\"Bilan : réussir l’épreuve complète\" CAFOP",
+        "site:youtube.com CAFOP mathématiques conseils gérer temps épreuve",
+        "site:youtube.com mathématiques examen bien rédiger copie gérer temps conseils"
+      ],
+      "candidats": [],
+      "justification": "Les résultats trouvés concernent surtout les formalités des copies françaises ou la rédaction au lycée. Aucun ne couvre suffisamment l’organisation d’une épreuve CAFOP de deux heures, le choix des exercices et la vérification finale."
+    }
+  ]
+}

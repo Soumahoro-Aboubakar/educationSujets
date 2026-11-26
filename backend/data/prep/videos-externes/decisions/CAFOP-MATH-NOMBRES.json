@@ -1,0 +1,92 @@
+[
+  {
+    "code": "CAFOP-MATH-NOMBRES-L1",
+    "youtubeId": "odj60Ff-CTc",
+    "couverture": "partielle",
+    "justification": "Comparer et ranger des nombres décimaux.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L2",
+    "youtubeId": "xPYAI9thItk",
+    "couverture": "exacte",
+    "justification": "Hedacademy : priorités des opérations et parenthèses.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L3",
+    "youtubeId": "3rXse_lbAKk",
+    "couverture": "exacte",
+    "justification": "Yvan Monka, niveau 3ᵉ : revoir les calculs sur les nombres relatifs.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L4",
+    "youtubeId": "ZorNhzRGwq4",
+    "couverture": "partielle",
+    "justification": "Comparer des fractions en les mettant au même dénominateur ; la simplification est dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L5",
+    "youtubeId": "Z86gfJOKgBg",
+    "couverture": "exacte",
+    "justification": "Yvan Monka, niveau 3ᵉ : effectuer des calculs de fractions.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L6",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur la recherche de chiffres inconnus d’un nombre.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L7",
+    "youtubeId": "WvMgAdWhUf4",
+    "couverture": "partielle",
+    "justification": "Écriture scientifique d’un nombre ; les règles des puissances sont dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L8",
+    "youtubeId": "pxfvAV7Jyhs",
+    "couverture": "exacte",
+    "justification": "Hedacademy : simplifier une racine carrée en faisant apparaître un carré.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L9",
+    "youtubeId": "12eL9LBY02U",
+    "couverture": "partielle",
+    "justification": "Factoriser avec les identités remarquables ; le développement est dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-NOMBRES-L10",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo de méthode adaptée.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

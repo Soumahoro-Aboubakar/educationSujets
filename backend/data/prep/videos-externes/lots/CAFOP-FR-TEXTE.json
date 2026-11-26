@@ -1,0 +1,220 @@
+{
+  "module": "CAFOP-FR-TEXTE",
+  "titre": "Étude de texte",
+  "matiere": "Français",
+  "resume": "Comprendre un texte, lui donner un titre, justifier ses réponses et rédiger un court essai dans le temps de l’épreuve de français du CAFOP.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-FR-TEXTE-L1",
+      "titre": "Lire et dégager l’idée générale",
+      "module": "Étude de texte (Français)",
+      "position": "1/9",
+      "precedente": null,
+      "suivante": "Suivre les mouvements du texte",
+      "explication": "À la fin de cette leçon, tu sauras nommer le thème d’un texte et formuler son idée générale en une phrase. Aucun prérequis. À la première lecture, va jusqu’au bout. Repère les mots qui reviennent ou qui désignent la même réalité. Si la source est indiquée, regarde qui signe le texte. Essaie ensuite de dire de quoi il parle avec quelques mots. C’est le thème. À la seconde lecture, demande-toi ce que le texte dit de ce thème. Compare le début et la fin, puis écris une phrase qui rend compte de l’ensemble. C’est l’idée générale. Dans un texte qui cherche à convaincre, la position défendue par l’auteur s’appelle la thèse.",
+      "formules": [],
+      "exemples": [
+        "Une idée en une phrase",
+        "Comme au concours · lire jusqu’au bout"
+      ],
+      "pieges": [
+        "S’arrêter à la première phrase peut faire oublier la réserve qui suit. Dans le second exemple, l’ouverture des écoles ne suffit pas."
+      ],
+      "aRetenir": [
+        "Lire le passage entier.",
+        "Nommer le thème en quelques mots.",
+        "Dire ce que le texte en affirme en une phrase."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L2",
+      "titre": "Suivre les mouvements du texte",
+      "module": "Étude de texte (Français)",
+      "position": "2/9",
+      "precedente": "Lire et dégager l’idée générale",
+      "suivante": "Proposer un titre et le justifier",
+      "explication": "À la fin de cette leçon, tu sauras découper un texte court en mouvements et donner le rôle de chacun. Prérequis : distinguer le thème et l’idée générale (L1). Un mouvement est une étape dans la progression du texte. Un auteur peut présenter une situation, montrer une difficulté, puis proposer une solution. Un récit peut partir d’une situation ordinaire, introduire un événement et finir par en montrer les effets. Un changement de paragraphe, de moment ou de point de vue peut te guider. Plusieurs paragraphes peuvent toutefois développer le même argument. À l’inverse, deux phrases d’un même paragraphe peuvent remplir des rôles différents.",
+      "formules": [],
+      "exemples": [
+        "Du problème à la solution",
+        "Comme au concours · suivre un raisonnement"
+      ],
+      "pieges": [
+        "Découper à chaque retour à la ligne peut séparer un argument de l’exemple qui l’illustre. Demande-toi si l’auteur a commencé une nouvelle é…"
+      ],
+      "aRetenir": [
+        "Repérer les changements de rôle.",
+        "Nommer chaque étape avec précision.",
+        "Relire les étapes dans l’ordre du texte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L3",
+      "titre": "Proposer un titre et le justifier",
+      "module": "Étude de texte (Français)",
+      "position": "3/9",
+      "precedente": "Suivre les mouvements du texte",
+      "suivante": "Répondre en citant le bon passage",
+      "explication": "À la fin de cette leçon, tu sauras proposer un titre court et le justifier par deux passages distincts. Prérequis : savoir formuler l’idée générale (L1). La proposition d’un titre revient dans huit des neuf annales de français étudiées ici. Pars de l’idée générale et garde les mots qui désignent le sujet et l’angle choisi. Un groupe nominal suffit souvent. Si plusieurs titres sont possibles, choisis celui que tu pourras défendre avec le texte. Si la consigne dit justifiez, donne le titre, puis montre son lien avec les indices du texte. Avec deux exemples demandés, choisis deux éléments qui apportent chacun une preuve. Tu peux reprendre quelques mots entre guillemets et expliquer leur rapport avec le titre.",
+      "formules": [],
+      "exemples": [
+        "Un titre plus précis",
+        "Comme au concours · deux preuves distinctes"
+      ],
+      "pieges": [
+        "Deux formulations du même détail ne font qu’une preuve. Cherche un deuxième passage qui apporte une information différente."
+      ],
+      "aRetenir": [
+        "Partir de l’idée générale.",
+        "Écrire un titre bref et précis.",
+        "Fournir le nombre de preuves demandé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L4",
+      "titre": "Répondre en citant le bon passage",
+      "module": "Étude de texte (Français)",
+      "position": "4/9",
+      "precedente": "Proposer un titre et le justifier",
+      "suivante": "Reformuler sans déformer",
+      "explication": "À la fin de cette leçon, tu sauras répondre à une question de compréhension et choisir la citation qui justifie ta réponse. Prérequis : savoir repérer les étapes d’un texte (L2). Repère à qui ou à quoi renvoie la question. Avec « Selon l’auteur, pourquoi… ? », cherche d’abord ce qui explique le fait dans le passage. Parfois la réponse est explicite et figure dans une phrase. Parfois tu dois faire une déduction en rapprochant plusieurs indices. Rédige la réponse demandée avant de recopier les quelques mots utiles. Relis la citation mot à mot et vérifie qu’elle se rapporte à la bonne personne ou à la bonne cause. Si la consigne demande uniquement de relever deux expressions, présente directement les deux extraits.",
+      "formules": [],
+      "exemples": [
+        "Une cause clairement donnée",
+        "Comme au concours · une déduction appuyée"
+      ],
+      "pieges": [
+        "Recopier un passage qui parle du même thème ne suffit pas. Une phrase qui décrit le changement peut laisser sa cause sans réponse."
+      ],
+      "aRetenir": [
+        "Lire le verbe et le nombre demandé.",
+        "Choisir l’extrait qui prouve la réponse.",
+        "Distinguer ce que le texte dit de ce qu’il permet de déduire."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L5",
+      "titre": "Reformuler sans déformer",
+      "module": "Étude de texte (Français)",
+      "position": "5/9",
+      "precedente": "Répondre en citant le bon passage",
+      "suivante": "Lire les connecteurs en contexte",
+      "explication": "À la fin de cette leçon, tu sauras expliquer une expression en contexte et reformuler une phrase en gardant ses nuances. Prérequis : savoir repérer le passage utile (L4). Reformuler, c’est exprimer la même idée avec ses propres mots. Lis la phrase entière et les phrases voisines. Une expression imagée peut décrire une situation très concrète. Cherche ce que l’image fait comprendre dans ce passage, puis exprime-le simplement.",
+      "formules": [],
+      "exemples": [
+        "Expliquer une image",
+        "Comme au concours · garder la condition"
+      ],
+      "pieges": [
+        "Remplacer « peut » par « va » transforme une possibilité en certitude. Une phrase fluide peut être infidèle au texte."
+      ],
+      "aRetenir": [
+        "Lire autour de l’expression.",
+        "Changer les mots ou la construction.",
+        "Garder les limites et les nuances."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L6",
+      "titre": "Lire les connecteurs en contexte",
+      "module": "Étude de texte (Français)",
+      "position": "6/9",
+      "precedente": "Reformuler sans déformer",
+      "suivante": "Reconnaître le type et l’intention",
+      "explication": "À la fin de cette leçon, tu sauras nommer le lien signalé par un connecteur et montrer quelles idées il relie. Prérequis : savoir découper un texte en étapes (L2). Un connecteur est un mot ou un groupe de mots qui aide à comprendre le rapport entre deux idées. Lis ce qui précède et ce qui suit. Identifie la relation avant d’apprendre les étiquettes. Un repère comme « ensuite » peut aussi indiquer l’ordre des événements ou des étapes. La concession admet un fait qui pourrait affaiblir une position, tout en maintenant cette position. Dans « Certes, le trajet est long, mais les enfants tiennent à venir », le texte reconnaît la difficulté et souligne ensuite que la volonté de venir demeure.",
+      "formules": [],
+      "exemples": [
+        "La même cause, deux formulations",
+        "Comme au concours · lire les deux phrases"
+      ],
+      "pieges": [
+        "Un connecteur ne garde pas toujours le même rôle. Avec « ainsi », vérifie si la suite illustre l’idée ou en donne un résultat."
+      ],
+      "aRetenir": [
+        "Lire les idées de part et d’autre.",
+        "Distinguer la raison, le résultat et le contraste.",
+        "Vérifier la valeur du mot dans son contexte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L7",
+      "titre": "Reconnaître le type et l’intention",
+      "module": "Étude de texte (Français)",
+      "position": "7/9",
+      "precedente": "Lire les connecteurs en contexte",
+      "suivante": "Construire un essai de six ou huit lignes",
+      "explication": "À la fin de cette leçon, tu sauras identifier le type dominant d’un passage et justifier l’intention de l’auteur par un indice. Prérequis : savoir dégager l’idée générale et suivre les mouvements (L1 et L2). Le type correspond à la manière dont le passage est construit. L’intention correspond à ce que l’auteur cherche à obtenir chez le lecteur. Utilise un verbe et précise son objet, par exemple « convaincre le lecteur de l’utilité des échanges entre écoles ». Un auteur peut combiner plusieurs types. Pour reconnaître le type dominant, demande-toi à quoi servent les autres passages. Une histoire peut illustrer une raison dans un texte argumentatif. Une courte description peut aider à imaginer la scène d’un récit.",
+      "formules": [],
+      "exemples": [
+        "Un passage descriptif",
+        "Comme au concours · une anecdote au service d’une idée"
+      ],
+      "pieges": [
+        "Le mot « hier » peut introduire un exemple dans une argumentation. Vérifie ce que le texte fait de cet événement avant de conclure à un réc…"
+      ],
+      "aRetenir": [
+        "Repérer ce que fait principalement le passage.",
+        "Nommer l’intention en précisant son objet.",
+        "Justifier le choix par un indice."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L8",
+      "titre": "Construire un essai de six ou huit lignes",
+      "module": "Étude de texte (Français)",
+      "position": "8/9",
+      "precedente": "Reconnaître le type et l’intention",
+      "suivante": "Bilan méthode · comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras construire une courte réponse argumentée et vérifier qu’elle respecte le nombre de lignes demandé. Prérequis : savoir répondre directement à une question (L4). Repère le verbe de consigne, le sujet exact et l’exemple éventuellement imposé. Si l’on te demande de montrer comment l’école renforce l’unité en Côte d’Ivoire, réponds à ce lien précis. Ta réponse doit expliquer comment une action de l’école peut rapprocher les élèves. Sur ta copie, compte les lignes réellement occupées, même si ta dernière phrase se termine au milieu d’une ligne. Six lignes au plus fixe un maximum. En huit lignes demande de tenir en huit lignes. Fais un brouillon bref, puis ajuste la longueur en retirant les répétitions ou en précisant ton explication.",
+      "formules": [],
+      "exemples": [
+        "Passer de l’avis à l’argument",
+        "Comme au concours · six lignes au plus"
+      ],
+      "pieges": [
+        "Une phrase peut occuper plusieurs lignes. Compte les lignes après la rédaction et garde le temps de raccourcir une répétition."
+      ],
+      "aRetenir": [
+        "Répondre dès la première phrase.",
+        "Relier une raison et un exemple à la réponse.",
+        "Compter les lignes réellement écrites."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-FR-TEXTE-L9",
+      "titre": "Bilan méthode · comme au concours",
+      "module": "Étude de texte (Français)",
+      "position": "9/9",
+      "precedente": "Construire un essai de six ou huit lignes",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras répartir le temps de l’épreuve et traiter un mini-sujet en vérifiant chaque demande. Prérequis : savoir lire, justifier et rédiger une réponse courte (L1 à L8). Lis la durée et vérifie les pages distribuées. Regarde les consignes et le barème, s’il figure sur le sujet. Plusieurs annales étudiées indiquent deux heures. Le tableau propose une répartition pour cette durée et pour un sujet qui comporte un essai. Ajuste-la à ton sujet. Si une question te bloque, garde son numéro, laisse la place nécessaire sur la copie et avance. En fin d’épreuve, compare chaque réponse à son verbe de consigne. Vérifie les numéros, le nombre de preuves, les mots cités, les accords et les lignes de l’essai.",
+      "formules": [],
+      "exemples": [
+        "Échauffement corrigé · deux demandes",
+        "Mini-sujet corrigé · cinq minutes"
+      ],
+      "pieges": [
+        "Consacrer trop de temps à un seul titre risque de te faire manquer l’essai ou la relecture. Reviens sur le titre si tu as le temps de l’amé…"
+      ],
+      "aRetenir": [
+        "Relever les horaires à respecter.",
+        "Revenir sur les questions laissées en attente.",
+        "Relire chaque réponse à partir de la consigne."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

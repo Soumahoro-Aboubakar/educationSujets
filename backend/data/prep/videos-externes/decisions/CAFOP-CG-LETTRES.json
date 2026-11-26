@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-CG-LETTRES-L1",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-LETTRES-L2",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur les écrivains ivoiriens parmi les candidats.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-LETTRES-L3",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement un quiz de littérature africaine.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-LETTRES-L4",
+    "youtubeId": "R7IbyAflLds",
+    "couverture": "exacte",
+    "justification": "Les Bons Profs : la versification (syllabes, strophes, rimes).",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-LETTRES-L5",
+    "youtubeId": "G_D73zjfq2I",
+    "couverture": "exacte",
+    "justification": "Leçon sur la négritude : origine et fondateurs.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-LETTRES-L6",
+    "youtubeId": "NPD3M4osGnI",
+    "couverture": "exacte",
+    "justification": "La drummologie expliquée par une enseignante ivoirienne.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-LETTRES-L7",
+    "youtubeId": "IlL0bH1YfnY",
+    "couverture": "exacte",
+    "justification": "Le mélange des couleurs primaires et secondaires.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-LETTRES-L8",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo sur le cinéma africain parmi les candidats.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

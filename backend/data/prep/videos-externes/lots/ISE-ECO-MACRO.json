@@ -30,7 +30,7 @@
         "Moyenne et marginale sont distinctes.",
         "Une fonction de comportement dépend d’hypothèses."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L2",
@@ -55,7 +55,7 @@
         "Actualiser compare présent et futur.",
         "Taux, risque et débouchés interviennent ensemble."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L3",
@@ -78,7 +78,7 @@
         "Distinguer salaire nominal et réel.",
         "Examiner les hypothèses avant de conclure sur l’emploi."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L4",
@@ -101,7 +101,7 @@
         "Un équilibre peut être de sous-emploi.",
         "Identifier la contrainte avant de choisir la politique."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L5",
@@ -126,7 +126,7 @@
         "Isoler Y étape par étape.",
         "Distinguer dépenses publiques et impôts."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L6",
@@ -151,7 +151,7 @@
         "Déficit : flux ; dette : stock.",
         "Évaluer utilité, financement et soutenabilité."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L7",
@@ -174,7 +174,7 @@
         "IS : biens ; LM : monnaie.",
         "Les politiques interagissent sous des hypothèses précises."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L8",
@@ -197,7 +197,7 @@
         "Comparatif : renoncement relatif.",
         "Discuter les conditions et la répartition des gains."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L9",
@@ -220,7 +220,7 @@
         "Courant, capital et financier sont distincts.",
         "Toujours annoncer la convention de signe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L10",
@@ -243,7 +243,7 @@
         "Dépréciation : effets sur ventes, achats et dette.",
         "Examiner financement et soutenabilité externes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L11",
@@ -268,7 +268,7 @@
         "Accumulation et productivité se complètent.",
         "Les théories précisent les mécanismes et leurs limites."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L12",
@@ -291,7 +291,7 @@
         "IDH : santé, éducation et revenu.",
         "Associer revenu, accès effectif et durabilité."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L13",
@@ -314,7 +314,7 @@
         "Relier gains attendus et conditions de réalisation.",
         "Examiner dépendances et effets distributifs."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ISE-ECO-MACRO-L14",
@@ -337,7 +337,7 @@
         "Argumenter par mécanismes et conditions.",
         "Vérifier les faits et les références mobilisés."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

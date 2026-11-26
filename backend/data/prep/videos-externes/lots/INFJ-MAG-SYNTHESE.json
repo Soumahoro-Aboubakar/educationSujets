@@ -27,7 +27,7 @@
         "Distinguer argumentation et restitution de dossier.",
         "Appliquer le format de la session."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-SYNTHESE-L2",
@@ -50,7 +50,7 @@
         "Distinguer constat, avis et projet.",
         "Ne pas attribuer une portée absente du document."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-SYNTHESE-L3",
@@ -72,7 +72,7 @@
         "Sélectionner selon la commande.",
         "Noter l’idée, sa limite et sa référence."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-SYNTHESE-L4",
@@ -95,7 +95,7 @@
         "Faire apparaître compléments et tensions.",
         "Conserver les attributions et les limites."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-SYNTHESE-L5",
@@ -118,7 +118,7 @@
         "Choisir des titres informatifs.",
         "Vérifier la couverture sans apport personnel."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-SYNTHESE-L6",
@@ -141,7 +141,7 @@
         "Attribuer constats, opinions et projets.",
         "Respecter les conventions de présentation de l’épreuve."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-SYNTHESE-L7",
@@ -164,7 +164,7 @@
         "Distinguer faits, opinions et règles.",
         "Vérifier le cadre et ne pas inventer de référence."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-SYNTHESE-L8",
@@ -187,7 +187,7 @@
         "Vérifier source et portée de chaque phrase.",
         "Respecter le format et garder un temps de relecture."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

@@ -1,0 +1,197 @@
+{
+  "module": "CAFOP-CG-LETTRES",
+  "titre": "Littérature, arts et cinéma",
+  "matiere": "Culture générale",
+  "resume": "Les auteurs et œuvres les plus demandés au CAFOP, la versification, la négritude, les instruments, les couleurs et le cinéma africain.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-CG-LETTRES-L1",
+      "titre": "Réussir les questions auteur – œuvre",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "1/8",
+      "precedente": null,
+      "suivante": "La littérature ivoirienne",
+      "explication": "À la fin de cette leçon, tu sauras comment mémoriser et restituer les associations entre auteurs, œuvres et personnages. Aucun prérequis. Dans 12 des 14 sujets de culture générale analysés, on demande d’associer un auteur à son œuvre ou un personnage à son roman. Les questions prennent trois formes : donner l’auteur d’un titre, retrouver le roman d’un personnage, compléter un tableau roman – personnage – auteur.",
+      "formules": [],
+      "exemples": [
+        "Un triplet",
+        "Comme au concours (1999)"
+      ],
+      "pieges": [
+        "Ne confonds pas l’auteur et le personnage : Samba Diallo est le héros de L’Aventure ambiguë, écrit par Cheikh Hamidou Kane."
+      ],
+      "aRetenir": [
+        "Apprendre par triplets.",
+        "Ajouter le pays.",
+        "Orthographier les titres."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L2",
+      "titre": "La littérature ivoirienne",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "2/8",
+      "precedente": "Réussir les questions auteur – œuvre",
+      "suivante": "La littérature africaine",
+      "explication": "À la fin de cette leçon, tu sauras citer au moins une œuvre de cinq écrivains ivoiriens. Prérequis : la méthode des triplets.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1993)",
+        "Roman et histoire"
+      ],
+      "pieges": [
+        "« Silence, on développe » et « La Carte d’identité » sont tous deux d’Adiaffi : ne les attribue pas à deux auteurs différents."
+      ],
+      "aRetenir": [
+        "Dadié : Climbié.",
+        "Kourouma : Les Soleils des Indépendances.",
+        "Adiaffi : La Carte d’identité."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L3",
+      "titre": "La littérature africaine",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "3/8",
+      "precedente": "La littérature ivoirienne",
+      "suivante": "Versification et genres",
+      "explication": "À la fin de cette leçon, tu sauras associer six œuvres majeures à leur auteur et à son pays. Prérequis : la méthode des triplets.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1993)",
+        "Le Nobel"
+      ],
+      "pieges": [
+        "Wole Soyinka est nigérian, comme Chinua Achebe ; Achebe n’a pas reçu le prix Nobel."
+      ],
+      "aRetenir": [
+        "Kane : L’Aventure ambiguë (Samba Diallo).",
+        "Oyono : Le Vieux Nègre et la Médaille (Meka).",
+        "Soyinka : Nobel 1986."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L4",
+      "titre": "Versification et genres",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "4/8",
+      "precedente": "La littérature africaine",
+      "suivante": "La négritude",
+      "explication": "À la fin de cette leçon, tu sauras définir l’alexandrin, le quatrain, le tercet et le sonnet. Aucun prérequis. En poésie, on mesure un vers en comptant ses syllabes. Un groupe de vers forme une strophe. Les rimes peuvent être plates (AABB), croisées (ABAB) ou embrassées (ABBA).",
+      "formules": [],
+      "exemples": [
+        "Compter un alexandrin",
+        "Comme au concours (1993)"
+      ],
+      "pieges": [
+        "Le corrigé de 1993 parle de deux hémistiches « de dix pieds chacun » : c’est faux. L’alexandrin compte 12 syllabes, soit deux hémistiches d…"
+      ],
+      "aRetenir": [
+        "Alexandrin : 12 syllabes (6 + 6).",
+        "Quatrain : 4 vers ; tercet : 3 vers.",
+        "Sonnet : 14 vers."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L5",
+      "titre": "La négritude",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "5/8",
+      "precedente": "Versification et genres",
+      "suivante": "Instruments de musique et drummologie",
+      "explication": "À la fin de cette leçon, tu sauras présenter la négritude et citer ses trois fondateurs. Prérequis : la littérature africaine. La négritude est un mouvement littéraire et culturel né dans les années 1930 à Paris, chez des étudiants noirs venus d’Afrique et des Antilles. Il revendique la fierté des cultures noires face au mépris colonial.",
+      "formules": [],
+      "exemples": [
+        "Le mot",
+        "Senghor"
+      ],
+      "pieges": [
+        "Aimé Césaire n’est pas africain : il est martiniquais. C’est aussi l’auteur de la pièce Une saison au Congo, citée au concours de 1999."
+      ],
+      "aRetenir": [
+        "Années 1930, Paris.",
+        "Senghor, Césaire, Damas.",
+        "Fierté des cultures noires."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L6",
+      "titre": "Instruments de musique et drummologie",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "6/8",
+      "precedente": "La négritude",
+      "suivante": "Couleurs et arts plastiques",
+      "explication": "À la fin de cette leçon, tu sauras classer un instrument parmi les cordes, les vents et les percussions, et définir la drummologie. Aucun prérequis. La drummologie est l’étude des tambours parleurs et des messages qu’ils transmettent. Elle a été fondée par l’anthropologue ivoirien Georges Niangoran-Bouah. Chez les Akan, le tambour parleur s’appelle l’attoungblan.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (2003)",
+        "Le balafon"
+      ],
+      "pieges": [
+        "Le balafon n’est pas un instrument à cordes : on frappe ses lames."
+      ],
+      "aRetenir": [
+        "Cordes, vents, percussions.",
+        "Drummologie : Georges Niangoran-Bouah.",
+        "Kora : cordes ; balafon : percussion."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L7",
+      "titre": "Couleurs et arts plastiques",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "7/8",
+      "precedente": "Instruments de musique et drummologie",
+      "suivante": "Cinéma africain et ivoirien",
+      "explication": "À la fin de cette leçon, tu sauras citer les couleurs primaires et secondaires et prévoir le résultat d’un mélange. Aucun prérequis. En peinture, les couleurs primaires ne s’obtiennent par aucun mélange : jaune, rouge, bleu. Mélangées deux à deux, elles donnent les couleurs secondaires.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1999)",
+        "L’arc-en-ciel"
+      ],
+      "pieges": [
+        "Le vert n’est pas une couleur primaire en peinture : on l’obtient avec du jaune et du bleu."
+      ],
+      "aRetenir": [
+        "Primaires : jaune, rouge, bleu.",
+        "Secondaires : orange, vert, violet.",
+        "Artiste crée ; artisan fabrique."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-CG-LETTRES-L8",
+      "titre": "Cinéma africain et ivoirien",
+      "module": "Littérature, arts et cinéma (Culture générale)",
+      "position": "8/8",
+      "precedente": "Couleurs et arts plastiques",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras présenter le FESPACO et citer des films ivoiriens primés. Aucun prérequis. Le cinéma est appelé le septième art. Le FESPACO (Festival panafricain du cinéma et de la télévision de Ouagadougou) a lieu au Burkina Faso. Sa plus haute récompense est l’Étalon de Yennenga.",
+      "formules": [],
+      "exemples": [
+        "Comme au concours (1997)",
+        "Comme au concours (1993)"
+      ],
+      "pieges": [
+        "Le FESPACO se tient à Ouagadougou, au Burkina Faso, et non à Abidjan."
+      ],
+      "aRetenir": [
+        "Cinéma : septième art.",
+        "FESPACO : Ouagadougou.",
+        "Djéli (1981), Au nom du Christ (1993)."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

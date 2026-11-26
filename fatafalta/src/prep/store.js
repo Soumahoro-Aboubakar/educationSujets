@@ -57,7 +57,11 @@ let videosRequest = null;
  * sur l'appareil) : clé d'action → résolveurs. Rien n'est noté côté client pour ces exercices.
  */
 const waiters = new Map();
+// Corrections reçues après la fin de l'attente : gardées pour « Réessayer la correction ».
+const recent = new Map();
 const settle = (cle, result) => {
+  recent.set(cle, result);
+  if (recent.size > 50) recent.delete(recent.keys().next().value);
   const list = waiters.get(cle);
   if (!list) return;
   waiters.delete(cle);
@@ -485,6 +489,7 @@ const usePrep = create((set, get) => ({
    * connexion) : la réponse reste en file et sera corrigée à la prochaine synchronisation.
    */
   awaitResult: (cle, delai = 8000) => new Promise((resolve) => {
+    if (recent.has(cle)) { resolve(recent.get(cle)); return; }
     const timer = setTimeout(() => {
       const list = (waiters.get(cle) || []).filter((r) => r !== done);
       if (list.length) waiters.set(cle, list); else waiters.delete(cle);
@@ -492,7 +497,7 @@ const usePrep = create((set, get) => ({
     }, delai);
     function done(result) { clearTimeout(timer); resolve(result); }
     waiters.set(cle, [...(waiters.get(cle) || []), done]);
-    if (get().online === false) get().flush();
+    get().flush();
   }),
 
   useIA: () => { set({ essai: { ...get().essai, ia: get().essai.ia + 1 } }); get().persist(); },

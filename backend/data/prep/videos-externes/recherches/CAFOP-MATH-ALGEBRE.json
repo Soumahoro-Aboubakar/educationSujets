@@ -1,0 +1,233 @@
+{
+  "module": "CAFOP-MATH-ALGEBRE",
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L1",
+      "requetes": [
+        "site:youtube.com/watch \"Intervalles et encadrements\"",
+        "site:youtube.com/watch encadrer différence x y explication simple",
+        "intervalles encadrements cours youtube amplitude",
+        "\"encadrer\" \"différence\" youtube",
+        "Intervalles encadrements explication simple youtube amplitude différence",
+        "Notion intervalles Labouche vidéo durée 2022"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=_0_GH4qt-cg",
+          "titre": "Notion d'intervalles",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente les intervalles ouverts et fermés, les crochets et le calcul de l’amplitude, mais ne couvre pas l’encadrement d’une différence."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=kIAvK41QHM8",
+          "titre": "comment encadrer une différence ?Astuces Maths Alami",
+          "chaine": "Mohamed Alami(Astuces Maths)",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette explication cible l’encadrement d’une différence, en complément de la partie consacrée aux intervalles."
+        }
+      ],
+      "justification": "Le premier candidat correspond précisément aux notions d’intervalle et d’amplitude ; le second cible l’autre objectif de la leçon. Les durées totales ne sont pas exposées dans les résultats consultés."
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L2",
+      "requetes": [
+        "site:youtube.com/watch résoudre une inéquation premier degré cours 5 minutes",
+        "site:youtube.com/watch \"Résoudre une inéquation\" \"Yvan Monka\"",
+        "Résoudre une inéquation (1) Seconde Yvan Monka durée vidéo",
+        "Résoudre une inéquation exemple youtube en 5 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ycYfb8aHssY",
+          "titre": "Résoudre une inéquation (1) - Seconde",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Deux exemples expliquent comment isoler x, traiter une division par un nombre négatif et exprimer les solutions sous forme d’intervalle."
+        }
+      ],
+      "justification": "Les exemples correspondent à la résolution d’inéquations du premier degré et à l’écriture des solutions attendues au CAFOP. La durée totale n’a pas pu être relevée."
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L3",
+      "requetes": [
+        "site:youtube.com \"Systèmes d’inéquations\" cours",
+        "site:youtube.com système inéquations une inconnue explication simple",
+        "site:youtube.com/watch résoudre graphiquement système inéquations deux inconnues",
+        "\"système\" \"inéquations\" \"une inconnue\" youtube cours",
+        "Systèmes d’inéquations cours youtube intersection demi plans"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=HuWxbFw8c9Y",
+          "titre": "2nde Système d'inéquations",
+          "chaine": "Roman",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’exercice explique la résolution séparée des inéquations à une inconnue puis l’intersection des intervalles solutions."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=bn8MTe3QgK0",
+          "titre": "Inéquation à deux inconnues - Résolution graphique",
+          "chaine": "20/20",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo traite des exemples de résolution graphique d’inéquations à deux inconnues, utiles pour comprendre les demi-plans."
+        }
+      ],
+      "justification": "Le premier candidat explique explicitement l’intersection, point central de la leçon ; le second complète la dimension graphique sans couvrir à lui seul tout un système. Les durées totales restent inconnues."
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L4",
+      "requetes": [
+        "site:youtube.com/watch \"Systèmes de deux équations\"",
+        "site:youtube.com/watch système équations substitution combinaison explication simple",
+        "Résoudre système substitution Yvan Monka youtube",
+        "Résoudre un système par combinaisons linéaires Yvan Monka"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=24VsDZK6bN0",
+          "titre": "Résoudre un système par substitution (1) - Seconde",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Un exemple guidé montre comment isoler une inconnue puis remplacer son expression dans l’autre équation."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=UPIz65G4f48",
+          "titre": "Résoudre un système par combinaisons linéaires (2) - Seconde",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique l’élimination d’une inconnue par combinaison linéaire des deux équations."
+        }
+      ],
+      "justification": "Ces deux capsules ciblent séparément les deux méthodes demandées, avec un niveau accessible après les équations du premier degré. Les durées totales n’ont pas pu être relevées."
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L5",
+      "requetes": [
+        "Fonctions affines et droites youtube",
+        "fonction affine deux valeurs explication simple youtube",
+        "site:youtube.com/watch \"droites parallèles\" \"coefficient directeur\"",
+        "Fonctions affines et droites cours youtube en 5 minutes",
+        "Déterminer une fonction affine par calcul Yvan Monka"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=ssA9Sa3yksM",
+          "titre": "Déterminer une fonction affine avec le taux d'accroissement (1) - Seconde",
+          "chaine": "Yvan Monka",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo détermine une fonction affine par le taux d’accroissement, correspondant directement à la formule du coefficient directeur de la leçon."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=rG8gupVllyg",
+          "titre": "Déterminer une fonction affine avec deux points de sa droite représentative",
+          "chaine": "Jean-Yves Labouche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Deux méthodes et deux exemples montrent comment retrouver l’expression d’une fonction affine à partir de deux points puis vérifier les résultats."
+        }
+      ],
+      "justification": "Le premier candidat cible exactement le calcul de a à partir de deux valeurs, sans détour par un cours général sur les fonctions. Le parallélisme reste à compléter et les durées totales sont inconnues."
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L6",
+      "requetes": [
+        "Radicaux et dénominateur rationnel youtube",
+        "racines carrées quantité conjuguée cours exemple youtube",
+        "Rendre rationnel dénominateur Yvan Monka youtube",
+        "Radicaux dénominateur rationnel explication simple youtube quantité conjuguée",
+        "Simplifier des racines carrées Yvan Monka seconde"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=wU5mY2pRmZE",
+          "titre": "Rendre rationnel le dénominateur d’une fraction comportant des racines carrées",
+          "chaine": "Máthēma",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "L’explication introduit la quantité conjuguée puis son utilisation pour supprimer les racines carrées du dénominateur."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=U9V--p7BibQ",
+          "titre": "Quantité conjuguée et racine carrée. Seconde.",
+          "chaine": "KIFFELESMATHS : L'école de maths en ligne",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Plusieurs exemples corrigés expliquent comment écrire une fraction sans racine au dénominateur grâce à la quantité conjuguée."
+        }
+      ],
+      "justification": "Le premier candidat annonce une progression de la notion de conjugué vers le calcul, adaptée aux débutants. Ces vidéos ne couvrent pas toute la simplification et la comparaison des radicaux ; leurs durées totales ne sont pas affichées."
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L7",
+      "requetes": [
+        "Développer et factoriser youtube",
+        "développer factoriser identités remarquables en 5 minutes youtube",
+        "Développer factoriser cours 3ème 5 minutes youtube",
+        "Développer et factoriser explication simple youtube facteur commun différence carrés"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=2_MbqCErtDs",
+          "titre": "Développer et factoriser une expression littérale 5ème, 4ème, 3ème Fée des Maths Cours, Exercices",
+          "chaine": "Pass Education FR",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule explique le développement et la factorisation d’expressions littérales avec des exercices interactifs accessibles aux débutants."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=pmyQtkYSFrw",
+          "titre": "Factoriser à l'aide d'une identité remarquable 5ème 4ème 3ème Cours, Exercices Fée des Maths",
+          "chaine": "Pass Education FR",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule complète la factorisation par facteur commun avec l’utilisation d’une identité remarquable."
+        }
+      ],
+      "justification": "Le premier candidat reprend les deux opérations fondamentales ; les descriptions annoncent des capsules de 3 à 5 minutes, sans durée exacte visible. Le choix de la forme la plus pratique pour une substitution numérique reste à compléter."
+    },
+    {
+      "code": "CAFOP-MATH-ALGEBRE-L8",
+      "requetes": [
+        "Statistiques effectifs cumulés moyenne médiane youtube",
+        "statistiques troisième moyenne pondérée médiane cours explication simple youtube",
+        "site:youtube.com/watch \"statistiques\" \"effectifs cumulés\" \"5 minutes\"",
+        "Statistiques effectifs cumulés moyenne médiane cours youtube en 5 minutes",
+        "Tableau effectifs cumulés moyenne médiane MATHS CRPE vidéo durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=weZUwJrQ6IA",
+          "titre": "Tableau effectifs & cumulés : calculer moyenne, médiane et fréquences | Maths CRPE",
+          "chaine": "MATHS-CRPE",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "Un tableau statistique sert à expliquer les effectifs cumulés, la moyenne pondérée, la médiane et les fréquences, correspondant aux calculs de la leçon."
+        }
+      ],
+      "justification": "Le programme annoncé réunit les principaux objectifs de la leçon dans un même exercice, avec des méthodes mathématiques identiques pour le CAFOP. La durée totale n’a pas pu être vérifiée."
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+const { mc, qcm, vf, glisser, ordre, relier, classer, entourer, numerique, b, lecon } = require('../dsl');
+
+// Culture générale du CAFOP-IA récent (1 h, coefficient 2). Sujets officiels DECO lus le 22/11/2026 :
+// 2021 (6adf40cc…), 2023 (6adf4d46…, cahier commun), 2024 (6adf4d50…), 2025 (6adf4d7f…).
+// Faits stables uniquement : aucun titulaire actuel d'une fonction n'est enseigné.
+
+const DOC = { 2021: '6adf40ccecb585bf0e4f3361', 2023: '6adf4d46ecb585bf0e4f42ab', 2024: '6adf4d50ecb585bf0e4f42c7', 2025: '6adf4d7fecb585bf0e4f4305' };
+const annale = (annee, epreuve) => ({ type: 'annale', organisme: 'CAFOP', annee, epreuve: `IA, Culture générale, ${epreuve}`, documentId: DOC[annee] });
+const original = { type: 'original', inspireDe: 'Culture générale CAFOP-IA 2021-2025' };
+
+const rappels = {
+  'CGIA-ARTS': mc('Arts, culture et sport', 'Rythmes : zouglou (Côte d’Ivoire), rumba (RD Congo), makossa (Cameroun), salsa (Cuba), zouk (Antilles). Joueurs sur le terrain par équipe : football 11, handball 7, volley-ball 6, basket-ball 5. La Côte d’Ivoire a remporté la Coupe d’Afrique des nations en 1992 (au Sénégal), en 2015 (en Guinée équatoriale) et l’édition 2023, disputée chez elle en 2024. Le MASA est un grand marché des arts du spectacle organisé à Abidjan ; le FESPACO, le festival panafricain du cinéma de Ouagadougou.', 'CAN : 1992, 2015, 2023.'),
+  'CGIA-EDHC': mc('EDHC et institutions', 'Sont élus au suffrage universel direct : le président de la République, les députés, les maires et conseillers municipaux. Le président de l’Assemblée nationale est élu par les députés. Sont nommés : le préfet, les inspecteurs, les chefs de circonscription, les directeurs d’administration comme celui de la DECO. Les symboles de l’État sont le drapeau orange-blanc-vert, l’hymne national (L’Abidjanaise), la devise « Union – Discipline – Travail » et les armoiries.', 'Élu par les citoyens, élu par des élus, ou nommé.'),
+  'CGIA-HIST': mc('Repères d’histoire', 'Pour trouver le siècle d’une année, on prend le nombre de centaines et on ajoute 1, sauf pour une année ronde : 1245 → XIIIᵉ siècle ; 1400 → XIVᵉ siècle (dernière année du siècle). Deux pays africains n’ont pas été colonisés au sens strict : l’Éthiopie et le Liberia. Le Ghana s’appelait la Gold Coast (Côte-de-l’Or). Christophe Colomb atteint l’Amérique en 1492. La première école ouverte en Côte d’Ivoire l’a été à Elima en 1887.', 'Siècle = centaines + 1 (sauf années en 00).'),
+  'CGIA-GEO': mc('Géographie de la Côte d’Ivoire', 'Climats : attiéen au sud (quatre saisons), baouléen au centre, soudanien au nord (deux saisons), climat de montagne à l’ouest. Barrages hydroélectriques : Kossou et Taabo sur le Bandama, Buyo et Soubré sur le Sassandra, Ayamé sur la Bia. Chefs-lieux de région : Bouaké (Gbêkê), Agboville (Agnéby-Tiassa), Korhogo (Poro), Adzopé (La Mé). Le chemin de fer Abidjan-Niger dessert notamment Anyama, Azaguié, Agboville, Dimbokro, Bouaké et Tafiré.', 'Sud attiéen, centre baouléen, nord soudanien, ouest montagne.'),
+  'CGIA-LANGUE': mc('Langue en culture générale', 'Les noms en -al font leur pluriel en -aux, sauf bal, carnaval, chacal, festival, récital, régal… Les noms en -ail prennent un s, sauf bail, corail, émail, soupirail, travail, vantail, vitrail qui font -aux. Les noms en -eu prennent un x, sauf bleu, pneu, émeu. Sept noms en -ou prennent un x : bijou, caillou, chou, genou, hibou, joujou, pou. Avec avoir, le participe passé s’accorde avec le COD placé avant le verbe.', 'Retenir les listes d’exceptions.'),
+  'CGIA-SCI': mc('Sciences du quotidien', 'Groupes sanguins : O est donneur universel, AB receveur universel. Maladies virales : sida, Covid-19, grippe, Ebola ; bactériennes : tuberculose, choléra, tétanos, fièvre typhoïde. Changements d’état de l’eau : solide → liquide = fusion ; liquide → solide = solidification ; gaz → liquide = liquéfaction ; liquide → gaz = vaporisation. La force électromotrice d’un générateur se mesure en volts, l’intensité en ampères. La reproduction asexuée des plantes se fait par bouture, marcotte, tubercule ou rejet.', 'O donne à tous ; AB reçoit de tous.'),
+};
+const spec = (notion, extra = {}) => ({ notions: [notion], miniCours: rappels[notion], source: original, ...extra });
+const question = (i, notion, consigne, options, explication) => b.question(qcm({ ...spec(notion), code: `CAFOP-CG-IA-L${i}-Q1`, niveau: 1, consigne, options, bonne: 0, explication }));
+
+const cgIa = {
+  code: 'CAFOP-CG-IA',
+  matiere: 'Culture générale',
+  titre: 'Culture générale des sujets récents',
+  resume: 'Les notions des sujets CAFOP-IA de 2021 à 2025 : arts et sport, EDHC, histoire, géographie ivoirienne, sciences du quotidien et méthode de l’épreuve d’une heure.',
+  notions: [
+    { code: 'CGIA-ARTS', libelle: 'Arts, culture et sport' },
+    { code: 'CGIA-EDHC', libelle: 'EDHC, institutions et sigles' },
+    { code: 'CGIA-HIST', libelle: 'Repères d’histoire' },
+    { code: 'CGIA-GEO', libelle: 'Géographie de la Côte d’Ivoire' },
+    { code: 'CGIA-SCI', libelle: 'Sciences du quotidien' },
+    { code: 'CGIA-LANGUE', libelle: 'Langue : pluriels et accords' },
+  ],
+  lecons: [
+    lecon('CAFOP-CG-IA-L1', 'L’épreuve de culture générale du CAFOP-IA', 4, [
+      b.texte('À la fin de cette leçon, tu sauras comment est construite l’épreuve et comment répartir ton heure. Aucun prérequis.'),
+      b.texte('Dans les sujets officiels de 2021 à 2025, l’épreuve dure **1 heure** et porte le **coefficient 2**. Elle comporte cinq ou six rubriques : **arts-culture-sport**, **littérature**, **histoire**, **géographie**, **sciences** et, depuis 2025, **EDHC** (éducation aux droits de l’homme et à la citoyenneté).'),
+      b.liste(['Relier deux colonnes (œuvre et auteur, personnalité et activité)', 'Entourer la bonne réponse dans une liste', 'Compléter une phrase ou un tableau', 'Donner une définition ou développer un sigle', 'Classer des éléments dans un tableau'], false),
+      b.exemple('Répartir l’heure', 'Avec environ 25 questions, on compte deux minutes par question et on garde cinq minutes pour relire l’orthographe des noms propres.'),
+      b.exemple('Une consigne à respecter', '« Entoure les bonnes réponses » : on entoure, on ne recopie pas la liste. Une réponse mal présentée fait perdre du temps au correcteur.'),
+      b.retenir('Réponds d’abord à ce que tu sais, puis reviens aux questions hésitantes.'),
+      b.piege('Écrire des noms propres mal orthographiés : « Christophe Colombe » ou « Chinua Achébé » peuvent être pénalisés.'),
+      question(1, 'CGIA-EDHC', 'Quelle rubrique est apparue dans le sujet de 2025 ?', ['L’EDHC', 'La dictée', 'Les mathématiques'], 'Le sujet 2025 comporte une rubrique EDHC, éducation aux droits de l’homme et à la citoyenneté.'),
+      b.recap(['1 heure, coefficient 2.', 'Cinq ou six rubriques.', 'Réponses courtes et précises.']),
+    ]),
+    lecon('CAFOP-CG-IA-L2', 'Arts, culture et sport', 5, [
+      b.texte('À la fin de cette leçon, tu sauras répondre aux questions de culture et de sport les plus fréquentes. Aucun prérequis.'),
+      b.tableau(['Rythme', 'Pays d’origine'], [['Zouglou', 'Côte d’Ivoire'], ['Rumba', 'RD Congo'], ['Makossa', 'Cameroun'], ['Salsa', 'Cuba'], ['Zouk', 'Antilles']]),
+      b.tableau(['Sport collectif', 'Joueurs par équipe sur le terrain'], [['Football', '11'], ['Handball', '7'], ['Volley-ball', '6'], ['Basket-ball', '5']]),
+      b.exemple('La CAN (sujets 2021 et 2025)', 'La Côte d’Ivoire a remporté sa première Coupe d’Afrique des nations en 1992, au Sénégal. Elle l’a gagnée de nouveau en 2015 (Guinée équatoriale) et lors de l’édition 2023, organisée en Côte d’Ivoire au début de 2024.'),
+      b.exemple('Personnalités et activités (sujet 2024)', 'Paco Séry : musicien batteur ivoirien ; Alpha Blondy : chanteur de reggae ivoirien ; Pablo Picasso : peintre ; George Weah : ancien footballeur libérien devenu homme politique.'),
+      b.retenir('Taekwondo : Cheick Sallah Cissé a remporté le premier titre olympique de la Côte d’Ivoire, à Rio en 2016 ; Ruth Gbagbi y a obtenu une médaille de bronze.'),
+      b.piege('Confondre le MASA, marché des arts du spectacle d’Abidjan, et le FESPACO, festival du cinéma de Ouagadougou.'),
+      question(2, 'CGIA-ARTS', 'De quel pays vient le zouglou ?', ['La Côte d’Ivoire', 'Le Cameroun', 'Cuba'], 'Le zouglou est né en Côte d’Ivoire. Le makossa vient du Cameroun et la salsa de Cuba.'),
+      b.recap(['Rythmes et pays.', 'Joueurs par sport.', 'CAN : 1992, 2015, 2023.']),
+    ]),
+    lecon('CAFOP-CG-IA-L3', 'EDHC : élus, nommés et symboles', 5, [
+      b.texte('À la fin de cette leçon, tu sauras classer les responsables publics selon leur mode de désignation et citer les symboles de l’État. Prérequis : les institutions ivoiriennes (module CG-INSTIT).'),
+      b.tableau(['Mode de désignation', 'Exemples'], [['Élus au suffrage universel direct', 'Président de la République, députés, maires et conseillers municipaux'], ['Élus au suffrage indirect', 'Président de l’Assemblée nationale (élu par les députés)'], ['Nommés', 'Préfet, inspecteur, chef de circonscription de l’enseignement, directeur de la DECO, président du Conseil économique, social, environnemental et culturel']]),
+      b.texte('Les **symboles de l’État** : le drapeau orange, blanc et vert ; l’hymne national, **L’Abidjanaise** ; la devise **Union – Discipline – Travail** ; les armoiries.'),
+      b.exemple('Comme au concours (2025)', '« Classe selon le mode de désignation : le président de la République, le maire, le préfet de région… » Élus : président de la République, maire, président de l’Assemblée nationale. Nommés : préfet de région, chef de circonscription, président du CESEC.'),
+      b.exemple('Développer des sigles (2024, 2025)', 'CEI : Commission électorale indépendante. HABG : Haute Autorité pour la bonne gouvernance. CESEC : Conseil économique, social, environnemental et culturel. CAFOP : Centre d’animation et de formation pédagogique. BEPC : Brevet d’études du premier cycle.'),
+      b.retenir('Le suffrage direct : les citoyens votent eux-mêmes. Le suffrage indirect : des élus votent.'),
+      b.piege('Classer le préfet parmi les élus : il est nommé par le gouvernement.'),
+      question(3, 'CGIA-EDHC', 'Comment le préfet est-il désigné ?', ['Il est nommé.', 'Il est élu au suffrage universel direct.', 'Il est élu par les maires.'], 'Le préfet représente l’État dans sa circonscription : il est nommé, pas élu.'),
+      b.recap(['Élus directs, indirects, nommés.', 'Symboles : drapeau, hymne, devise, armoiries.', 'Sigles développés mot par mot.']),
+    ]),
+    lecon('CAFOP-CG-IA-L4', 'Repères d’histoire', 5, [
+      b.texte('À la fin de cette leçon, tu sauras trouver le siècle d’une année et citer des repères d’histoire africaine et ivoirienne. Aucun prérequis.'),
+      b.tableau(['Année', 'Siècle', 'Raisonnement'], [['1245', 'XIIIᵉ', '12 centaines + 1'], ['1301', 'XIVᵉ', '13 centaines + 1'], ['1400', 'XIVᵉ', 'Année ronde : dernière année du XIVᵉ'], ['1412', 'XVᵉ', '14 centaines + 1'], ['1701', 'XVIIIᵉ', '17 centaines + 1'], ['1945', 'XXᵉ', '19 centaines + 1']], 'Années du sujet 2024.'),
+      b.exemple('Comme au concours (2024)', '« Cite un pays africain qui n’a pas été colonisé. » L’Éthiopie, qui a résisté à la colonisation (malgré l’occupation italienne de 1936 à 1941), ou le Liberia, fondé par d’anciens esclaves affranchis.'),
+      b.exemple('Comme au concours (2025)', 'L’actuelle République du Ghana s’appelait la Gold Coast, ou Côte-de-l’Or. Christophe Colomb découvre l’Amérique en 1492.'),
+      b.retenir('La première école officielle de Côte d’Ivoire a été ouverte à Elima, en 1887.'),
+      b.piege('Dire que l’an 1400 appartient au XVᵉ siècle : un siècle va de l’année 01 à l’année 00 ; le XVᵉ siècle commence en 1401.'),
+      question(4, 'CGIA-HIST', 'À quel siècle appartient l’année 1701 ?', ['Au XVIIIᵉ siècle', 'Au XVIIᵉ siècle', 'Au XIXᵉ siècle'], '1701 compte 17 centaines ; on ajoute 1 : XVIIIᵉ siècle.'),
+      b.recap(['Siècle = centaines + 1.', 'Années en 00 : fin du siècle.', 'Éthiopie et Liberia ; Gold Coast = Ghana.']),
+    ]),
+    lecon('CAFOP-CG-IA-L5', 'Géographie de la Côte d’Ivoire au concours', 5, [
+      b.texte('À la fin de cette leçon, tu sauras localiser les climats, les barrages et quelques chefs-lieux de région. Prérequis : les fleuves ivoiriens (module CAFOP-CG-CI).'),
+      b.tableau(['Climat', 'Zone'], [['Attiéen (équatorial, quatre saisons)', 'Sud'], ['Baouléen (de transition)', 'Centre'], ['Soudanien (tropical, deux saisons)', 'Nord'], ['De montagne', 'Ouest']]),
+      b.tableau(['Barrage hydroélectrique', 'Fleuve ou rivière'], [['Kossou', 'Bandama'], ['Taabo', 'Bandama'], ['Buyo', 'Sassandra'], ['Soubré', 'Sassandra'], ['Ayamé', 'Bia']]),
+      b.exemple('Comme au concours (2024)', '« Donne les chefs-lieux de ces régions : Gbêkê, Agnéby-Tiassa, Poro, La Mé. » Bouaké, Agboville, Korhogo, Adzopé.'),
+      b.exemple('Le chemin de fer (sujet 2024)', 'La voie ferrée Abidjan-Niger traverse Anyama, Azaguié, Agboville, Dimbokro, Bouaké et Tafiré. Abengourou et Yamoussoukro ne sont pas sur la voie ferrée.'),
+      b.retenir('L’anémomètre mesure la vitesse du vent (sujet 2025) ; la girouette indique sa direction.'),
+      b.piege('Placer le climat soudanien au sud : il correspond au nord, avec deux saisons.'),
+      question(5, 'CGIA-GEO', 'Sur quel fleuve le barrage de Kossou est-il construit ?', ['Le Bandama', 'La Comoé', 'Le Cavally'], 'Kossou, comme Taabo, est un barrage sur le Bandama.'),
+      b.recap(['Climats : sud attiéen, centre baouléen, nord soudanien, ouest montagne.', 'Barrages et fleuves.', 'Chefs-lieux de région.']),
+    ]),
+    lecon('CAFOP-CG-IA-L6', 'Sang, maladies et santé', 5, [
+      b.texte('À la fin de cette leçon, tu sauras expliquer la compatibilité des groupes sanguins et classer des maladies selon leur agent. Prérequis : les cellules du sang (module CAFOP-CG-SCIENCES).'),
+      b.texte('Il existe quatre groupes sanguins : **A, B, AB et O**. Le groupe **O** peut donner à tous les groupes : c’est le **donneur universel**. Le groupe **AB** peut recevoir de tous : c’est le **receveur universel**. A donne à A et AB ; B donne à B et AB.'),
+      b.tableau(['Agent', 'Exemples de maladies'], [['Virus', 'Sida, Covid-19, grippe, Ebola, rougeole'], ['Bactérie', 'Tuberculose, choléra, tétanos, fièvre typhoïde'], ['Parasite', 'Paludisme']]),
+      b.exemple('Comme au concours (2021)', '« Entoure les maladies provoquées par un virus » : sida, Covid-19, grippe, Ebola. La tuberculose, le choléra, le tétanos et la fièvre typhoïde sont dus à des bactéries.'),
+      b.exemple('Maladies du sang (sujet 2025)', 'La drépanocytose, maladie héréditaire des globules rouges, l’hémophilie, trouble de la coagulation, ou la leucémie, cancer des cellules du sang.'),
+      b.retenir('Un antibiotique agit contre les bactéries, pas contre les virus.'),
+      b.piege('Croire que le groupe AB peut donner à tous : il ne donne qu’au groupe AB.'),
+      question(6, 'CGIA-SCI', 'Quel groupe sanguin est donneur universel ?', ['O', 'AB', 'A'], 'Le groupe O peut être donné à tous les groupes ; AB est le receveur universel.'),
+      b.recap(['O : donneur universel ; AB : receveur universel.', 'Virus, bactérie, parasite.', 'Antibiotique : contre les bactéries.']),
+    ]),
+    lecon('CAFOP-CG-IA-L7', 'Matière, électricité et plantes', 4, [
+      b.texte('À la fin de cette leçon, tu sauras nommer les changements d’état de l’eau, les unités électriques et les modes de reproduction asexuée. Aucun prérequis.'),
+      b.tableau(['Passage', 'Nom'], [['Solide → liquide', 'Fusion'], ['Liquide → solide', 'Solidification'], ['Liquide → gaz', 'Vaporisation'], ['Gaz → liquide', 'Liquéfaction (ou condensation)']]),
+      b.texte('Le générateur d’un circuit produit une **force électromotrice**, mesurée en **volts** ; l’**intensité** du courant se mesure en **ampères**.'),
+      b.exemple('Comme au concours (2024)', '« Dis ce qu’est une reproduction asexuée chez les plantes et donne deux exemples. » C’est la formation d’une nouvelle plante sans fleur ni graine, à partir d’un morceau de la plante : bouture de manioc, rejet de bananier, tubercule d’igname.'),
+      b.exemple('Changements d’état (2024)', 'La glace qui fond subit une fusion ; l’eau qui gèle, une solidification ; la buée sur une vitre froide, une liquéfaction.'),
+      b.retenir('Reproduction asexuée : une seule plante parent, pas de graine.'),
+      b.piege('Confondre fusion et vaporisation : la fusion transforme un solide en liquide.'),
+      question(7, 'CGIA-SCI', 'Comment s’appelle le passage de l’eau de l’état solide à l’état liquide ?', ['La fusion', 'La solidification', 'La liquéfaction'], 'Solide vers liquide : fusion. La solidification est le passage inverse ; la liquéfaction fait passer un gaz à l’état liquide.'),
+      b.recap(['Fusion, solidification, vaporisation, liquéfaction.', 'Volts et ampères.', 'Bouture, rejet, tubercule.']),
+    ]),
+    lecon('CAFOP-CG-IA-L8', 'Langue dans l’épreuve de culture générale', 4, [
+      b.texte('À la fin de cette leçon, tu sauras répondre aux questions de langue glissées dans la rubrique littérature. Prérequis : les modules d’orthographe et de grammaire.'),
+      b.tableau(['Singulier', 'Pluriel', 'Règle'], [['Le bail', 'Les baux', 'Exception en -ail'], ['Le bal', 'Les bals', 'Exception en -al'], ['Le festival', 'Les festivals', 'Exception en -al'], ['Le récital', 'Les récitals', 'Exception en -al'], ['Le pneu', 'Les pneus', 'Exception en -eu'], ['Le bijou', 'Les bijoux', 'Exception en -ou']], 'Mots du sujet 2024.'),
+      b.exemple('Participes passés (sujet 2024)', '« Les dix mille francs que la robe m’a coûté » : coûter a ici un complément de prix, pas un COD : coûté reste invariable. « Les humiliations qu’il a subies » : le COD « qu’ », mis pour humiliations, est placé avant : accord au féminin pluriel.'),
+      b.exemple('COD et COI (sujet 2021)', '« L’instituteur enseigne l’histoire à ses élèves » : « l’histoire » est COD, « à ses élèves » est COI (ou COS).'),
+      b.retenir('Les mots en -al font en général -aux, sauf bal, carnaval, chacal, festival, récital, régal…'),
+      b.piege('Écrire « des festivaux » ou « des pneux » : ce sont des exceptions.'),
+      question(8, 'CGIA-LANGUE', 'Quel est le pluriel de « bijou » ?', ['bijoux', 'bijous', 'bijoues'], 'Bijou fait partie des sept noms en -ou qui prennent un x : bijou, caillou, chou, genou, hibou, joujou, pou.'),
+      b.recap(['Exceptions en -al, -ail, -eu, -ou.', 'Participe passé avec avoir : COD placé avant.', 'Coûter, valoir, peser : souvent invariables.']),
+    ]),
+  ],
+  exercices: [
+    relier({ ...spec('CGIA-ARTS', { source: annale(2021, 'I. Arts-culture-sport, question 1') }), code: 'CAFOP-CG-IA-E01', niveau: 1, consigne: 'Relie chaque rythme à son pays ou à sa région d’origine.', paires: [['Zouglou', 'Côte d’Ivoire'], ['Rumba', 'RD Congo'], ['Makossa', 'Cameroun'], ['Salsa', 'Cuba'], ['Zouk', 'Antilles']],
+      explication: '(CAFOP IA 2021, culture générale, arts-culture-sport, question 1) Le zouglou est ivoirien, la rumba congolaise, le makossa camerounais, la salsa cubaine et le zouk antillais.' }),
+    relier({ ...spec('CGIA-ARTS', { source: annale(2021, 'I. Arts-culture-sport, question 3') }), code: 'CAFOP-CG-IA-E02', niveau: 1, consigne: 'Relie chaque sport au nombre de joueurs d’une équipe sur le terrain.', paires: [['Football', '11'], ['Handball', '7'], ['Volley-ball', '6'], ['Basket-ball', '5']],
+      explication: '(CAFOP IA 2021, culture générale, arts-culture-sport, question 3) Football : 11 ; handball : 7 ; volley-ball : 6 ; basket-ball : 5.' }),
+    classer({ ...spec('CGIA-EDHC', { source: annale(2025, 'VI. EDHC, question 1') }), code: 'CAFOP-CG-IA-E03', niveau: 1, consigne: 'Classe chaque responsable selon son mode de désignation.', categories: ['Élu', 'Nommé'],
+      cartes: [['Le président de la République', 0], ['Le maire', 0], ['Le président de l’Assemblée nationale', 0], ['Le préfet de région', 1], ['Le chef de circonscription de l’enseignement préscolaire et primaire', 1], ['Le président du Conseil économique, social, environnemental et culturel', 1]],
+      explication: '(CAFOP IA 2025, culture générale, EDHC, question 1) Le président de la République et le maire sont élus au suffrage universel direct ; le président de l’Assemblée nationale est élu par les députés. Le préfet, le chef de circonscription et le président du CESEC sont nommés.' }),
+    entourer({ ...spec('CGIA-SCI', { source: annale(2021, 'III. Sciences, question 2') }), code: 'CAFOP-CG-IA-E04', niveau: 1, consigne: 'Sélectionne les maladies provoquées par un virus.', elements: [['Sida', true], ['Covid-19', true], ['Grippe', true], ['Ebola', true], ['Tuberculose', false], ['Choléra', false], ['Tétanos', false], ['Fièvre typhoïde', false]],
+      explication: '(CAFOP IA 2021, culture générale, sciences, question 2) Sida, Covid-19, grippe et Ebola sont dus à des virus. Tuberculose, choléra, tétanos et fièvre typhoïde sont causés par des bactéries.' }),
+    qcm({ ...spec('CGIA-SCI', { source: annale(2021, 'III. Sciences, question 1') }), code: 'CAFOP-CG-IA-E05', niveau: 1, consigne: 'Quels sont le donneur universel et le receveur universel ?', options: ['Donneur : O ; receveur : AB', 'Donneur : AB ; receveur : O', 'Donneur : A ; receveur : B', 'Donneur : O ; receveur : O'], bonne: 0,
+      explication: '(CAFOP IA 2021, culture générale, sciences, question 1) Le sang O peut être donné à tous les groupes ; un receveur AB peut recevoir de tous les groupes.' }),
+    relier({ ...spec('CGIA-GEO', { source: annale(2024, 'IV. Géographie, question 3') }), code: 'CAFOP-CG-IA-E06', niveau: 1, consigne: 'Relie chaque climat à sa zone de la Côte d’Ivoire.', paires: [['Climat attiéen', 'Le Sud'], ['Climat baouléen', 'Le Centre'], ['Climat soudanien', 'Le Nord'], ['Climat de montagne', 'L’Ouest']],
+      explication: '(CAFOP IA 2024, culture générale, géographie, question 3) L’attiéen, à quatre saisons, règne au sud ; le baouléen au centre ; le soudanien, à deux saisons, au nord ; le climat de montagne à l’ouest, autour de Man.' }),
+    relier({ ...spec('CGIA-GEO', { source: annale(2024, 'IV. Géographie, question 2') }), code: 'CAFOP-CG-IA-E07', niveau: 2, consigne: 'Relie chaque région à son chef-lieu.', paires: [['Gbêkê', 'Bouaké'], ['Agnéby-Tiassa', 'Agboville'], ['Poro', 'Korhogo'], ['La Mé', 'Adzopé']],
+      explication: '(CAFOP IA 2024, culture générale, géographie, question 2) Bouaké est le chef-lieu du Gbêkê, Agboville celui de l’Agnéby-Tiassa, Korhogo celui du Poro et Adzopé celui de La Mé.' }),
+    classer({ ...spec('CGIA-HIST', { source: annale(2024, 'III. Histoire, question 2') }), code: 'CAFOP-CG-IA-E08', niveau: 2, consigne: 'Classe chaque année dans son siècle.', categories: ['XIIIᵉ siècle', 'XIVᵉ siècle', 'XVᵉ siècle', 'XXᵉ siècle'],
+      cartes: [['1245', 0], ['1301', 1], ['1400', 1], ['1412', 2], ['1945', 3]],
+      explication: '(CAFOP IA 2024, culture générale, histoire, question 2) 1245 : XIIIᵉ. 1301 et 1400 : XIVᵉ (1400 est la dernière année de ce siècle). 1412 : XVᵉ. 1945 : XXᵉ.' }),
+    entourer({ ...spec('CGIA-GEO', { source: annale(2024, 'IV. Géographie, question 4') }), code: 'CAFOP-CG-IA-E09', niveau: 2, consigne: 'Sélectionne les villes traversées par le chemin de fer.', elements: [['Bouaké', true], ['Azaguié', true], ['Tafiré', true], ['Anyama', true], ['Dimbokro', true], ['Abengourou', false], ['Yamoussoukro', false]],
+      explication: '(CAFOP IA 2024, culture générale, géographie, question 4) La ligne Abidjan-Niger passe par Anyama, Azaguié, Agboville, Dimbokro, Bouaké et Tafiré. Abengourou et Yamoussoukro ne sont pas desservies par cette voie ferrée.' }),
+    glisser({ ...spec('CGIA-SCI', { source: annale(2024, 'V. Sciences et technologie, question 3') }), code: 'CAFOP-CG-IA-E10', niveau: 2, consigne: 'Complète avec le nom du changement d’état.', texte: 'Le passage de l’eau de l’état liquide à l’état solide est la {{solidification}}. Le passage de l’état solide à l’état liquide est la {{fusion}}. Le passage de l’état gazeux à l’état liquide est la {{liquéfaction}}.', distracteurs: ['vaporisation', 'sublimation'],
+      explication: '(CAFOP IA 2024, culture générale, sciences, question 3) Liquide → solide : solidification ; solide → liquide : fusion ; gaz → liquide : liquéfaction (on dit aussi condensation).' }),
+    relier({ ...spec('CGIA-ARTS', { source: annale(2024, 'I. Arts-culture-sport, question 1') }), code: 'CAFOP-CG-IA-E11', niveau: 2, consigne: 'Relie chaque personnalité à l’activité qui l’a fait connaître.', paires: [['Paco Séry', 'Musicien'], ['George Weah', 'Politicien'], ['Alpha Blondy', 'Chanteur'], ['Pablo Picasso', 'Peintre']],
+      explication: '(CAFOP IA 2024, culture générale, arts-culture-sport, question 1) Paco Séry est un batteur ivoirien ; George Weah, ancien footballeur, est devenu homme politique au Liberia ; Alpha Blondy est un chanteur de reggae ; Picasso, un peintre.' }),
+    qcm({ ...spec('CGIA-ARTS', { source: annale(2025, 'I. Arts-culture-sport, question 1') }), code: 'CAFOP-CG-IA-E12', niveau: 3, consigne: 'En quelle année et dans quel pays la Côte d’Ivoire a-t-elle remporté sa première Coupe d’Afrique des nations de football ?', options: ['En 1992, au Sénégal', 'En 2015, en Guinée équatoriale', 'En 1992, en Côte d’Ivoire', 'En 1970, au Soudan'], bonne: 0,
+      explication: '(CAFOP IA 2025, culture générale, arts-culture-sport, question 1) Le premier titre date de 1992, au Sénégal. Les Éléphants ont ensuite gagné en 2015 en Guinée équatoriale, puis l’édition 2023 disputée en Côte d’Ivoire.' }),
+    classer({ ...spec('CGIA-LANGUE', { source: annale(2024, 'II. Littérature, question 1') }), code: 'CAFOP-CG-IA-E13', niveau: 3, consigne: 'Classe chaque pluriel : correct ou incorrect.', categories: ['Correct', 'Incorrect'],
+      cartes: [['les baux', 0], ['les bals', 0], ['les festivals', 0], ['les bijoux', 0], ['les récitaux', 1], ['les pneux', 1]],
+      explication: '(CAFOP IA 2024, culture générale, littérature, question 1) Bail fait baux ; bal, festival et récital prennent un s (les récitals) ; bijou prend un x ; pneu prend un s (les pneus).' }),
+    qcm({ ...spec('CGIA-EDHC', { source: annale(2025, 'I. Arts-culture-sport, question 3') }), code: 'CAFOP-CG-IA-E14', niveau: 3, consigne: 'Que signifie le sigle CAFOP ?', options: ['Centre d’animation et de formation pédagogique', 'Collège africain de formation des professeurs', 'Centre d’apprentissage et de formation primaire', 'Comité d’animation des formations pédagogiques'], bonne: 0,
+      explication: '(CAFOP IA 2025, culture générale, question 3) CAFOP signifie Centre d’animation et de formation pédagogique : c’est l’établissement qui forme les instituteurs. Le même sujet demandait aussi MENA, MASA et BEPC.' }),
+  ],
+};
+
+module.exports = [cgIa];

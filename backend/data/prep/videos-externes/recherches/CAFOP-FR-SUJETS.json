@@ -1,0 +1,92 @@
+{
+  "module": "CAFOP-FR-SUJETS",
+  "lecons": [
+    {
+      "code": "CAFOP-FR-SUJETS-L1",
+      "requetes": [
+        "site:youtube.com CAFOP 2025 français compréhension filles corrigé",
+        "site:youtube.com/watch \"CAFOP\" \"2025\" \"compréhension\"",
+        "\"CAFOP\" \"2025\" \"filles\" vidéo correction compréhension"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte suffisamment ciblée n’a été trouvée sur la compréhension du texte de Jellema et Unterhalter. Les résultats pertinents sont des sujets et corrigés écrits."
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L2",
+      "requetes": [
+        "site:youtube.com CAFOP 2025 français vocabulaire syntaxe panacée",
+        "CAFOP 2025 français corrigé youtube",
+        "\"CAFOP\" \"panacée\" syntaxe corrigé vidéo"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo repérée ne traite les questions précises de vocabulaire, d’analyse logique et de transformation passive du sujet 2025 dans le format demandé."
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L3",
+      "requetes": [
+        "site:youtube.com CAFOP 2025 essai éducation filles femmes",
+        "site:youtube.com/watch CAFOP essai méthode",
+        "\"CAFOP\" \"éducation\" \"filles\" essai vidéo",
+        "site:youtube.com/watch \"essai\" \"CAFOP\" éducation exemple"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo courte trouvée ne montre comment étayer cette assertion sur l’éducation des filles dans un développement d’une dizaine de lignes avec des arguments illustrés."
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L4",
+      "requetes": [
+        "site:youtube.com CAFOP 2021 français compréhension vocabulaire Covid",
+        "site:youtube.com/watch \"CAFOP\" \"français\" \"2021\"",
+        "\"CAFOP\" \"2021\" \"Covid\" correction français vidéo"
+      ],
+      "candidats": [],
+      "justification": "Les résultats trouvés ne proposent pas de correction vidéo courte de la compréhension et du vocabulaire du texte de la Banque mondiale. Une vidéo générale sur la Covid-19 ne répondrait pas à cette leçon."
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L5",
+      "requetes": [
+        "site:youtube.com CAFOP 2021 analyse logique essai corrigé",
+        "site:youtube.com/watch \"analyse logique\" \"explication simple\"",
+        "analyse logique propositions cours exemple youtube 5 minutes",
+        "CAFOP 2021 analyse logique si nous agissons essai vidéo"
+      ],
+      "candidats": [],
+      "justification": "Aucune vidéo suffisamment ciblée n’a été trouvée sur l’analyse des subordonnées du sujet et l’essai consacré aux mesures du maître contre la Covid-19. Les vidéos de logique mathématique apparues dans les résultats ont été écartées."
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L6",
+      "requetes": [
+        "site:youtube.com CAFOP 2023 français Robert Tadet corrigé",
+        "site:youtube.com/watch \"CAFOP\" \"2023\" \"français\"",
+        "site:youtube.com/watch \"CAFOP\" \"Robert Tadet\"",
+        "CAFOP 2023 préparer avenir français correction cours vidéo"
+      ],
+      "candidats": [],
+      "justification": "Aucune correction vidéo courte du texte de Robert Tadet n’a été trouvée pour travailler les réponses de compréhension ainsi que la nature et la fonction des mots."
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L7",
+      "requetes": [
+        "site:youtube.com CAFOP français gérer temps deux heures épreuve",
+        "site:youtube.com/watch gérer temps épreuve français concours",
+        "site:youtube.com/watch \"CAFOP\" \"gestion du temps\"",
+        "site:youtube.com/watch \"Gérer les deux heures\" français"
+      ],
+      "candidats": [],
+      "justification": "Les conseils généraux sur les concours repérés ne présentent pas une répartition des deux heures adaptée aux quatre parties et au barème du français au CAFOP. Aucun candidat suffisamment précis n’est retenu."
+    },
+    {
+      "code": "CAFOP-FR-SUJETS-L8",
+      "requetes": [
+        "site:youtube.com français examen grille autocorrection relecture copie conseils",
+        "site:youtube.com/watch relecture copie français autocorrection",
+        "site:youtube.com/watch \"relire\" \"copie\" \"français\"",
+        "relire sa copie examen français grille autocorrection youtube",
+        "site:youtube.com/watch \"épreuve uniforme\" \"Vincent\"",
+        "site:youtube.com/watch \"autocorrection\" \"français\" grille"
+      ],
+      "candidats": [],
+      "justification": "Les ressources pertinentes sur l’autocorrection trouvées sont surtout écrites ou hébergées hors de YouTube. Aucun lien YouTube suffisamment adapté et vérifiable n’a été trouvé pour cette grille de contrôle."
+    }
+  ]
+}

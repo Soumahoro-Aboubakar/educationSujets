@@ -32,7 +32,7 @@
         "Exposant nul : 1 ; exposant négatif : inverse.",
         "Même base et produit : additionner les exposants."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L2",
@@ -55,7 +55,7 @@
         "ln transforme un produit en somme.",
         "ln 1 = 0 et ln e = 1."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L3",
@@ -80,7 +80,7 @@
         "Somme de logarithmes → logarithme du produit.",
         "Aucune règle analogue pour ln(a + b)."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L4",
@@ -104,7 +104,7 @@
         "Soustraire les logarithmes revient à diviser les arguments.",
         "Le logarithme d’un inverse est l’opposé du logarithme."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L5",
@@ -129,7 +129,7 @@
         "Racine carrée → moitié du logarithme.",
         "La base doit être positive pour utiliser ces écritures."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L6",
@@ -152,7 +152,7 @@
         "ln est négatif entre 0 et 1, nul en 1, positif au-delà.",
         "Diviser une inégalité par un négatif inverse son sens."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L7",
@@ -175,7 +175,7 @@
         "Le signe de la dérivée donne les variations sur un intervalle.",
         "Pour dériver une somme, dériver chaque terme."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L8",
@@ -201,7 +201,7 @@
         "Dérivée de ln u : u′/u.",
         "Étudier le signe de f′, puis calculer f au point d’extremum."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L9",
@@ -226,7 +226,7 @@
         "(ln x)/x → 0 en +∞.",
         "x ln x → 0 en 0⁺."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L10",
@@ -251,7 +251,7 @@
         "eˣ existe pour tout réel x et reste positif.",
         "exp est strictement croissante."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L11",
@@ -276,7 +276,7 @@
         "Une différence en exposant devient un quotient.",
         "L’exponentielle d’un opposé est un inverse."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L12",
@@ -301,7 +301,7 @@
         "Dans eᵘ, multiplier par u′.",
         "La positivité de eᵘ simplifie l’étude du signe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L13",
@@ -326,7 +326,7 @@
         "xᵐ/eˣ tend vers 0 en +∞.",
         "Préciser la direction et transformer les produits."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L14",
@@ -349,7 +349,7 @@
         "Utiliser ln et exp comme fonctions réciproques.",
         "Vérifier les solutions dans l’expression initiale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "MATH-LNEXP-L15",
@@ -374,7 +374,7 @@
         "Croiser la condition obtenue avec le domaine.",
         "Un facteur négatif peut inverser le sens ensuite."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

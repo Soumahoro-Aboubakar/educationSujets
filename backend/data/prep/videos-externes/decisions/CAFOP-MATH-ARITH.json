@@ -1,0 +1,83 @@
+[
+  {
+    "code": "CAFOP-MATH-ARITH-L1",
+    "youtubeId": "jteZZBzyai8",
+    "couverture": "exacte",
+    "justification": "Yvan Monka : déterminer tous les diviseurs d’un nombre par paires de facteurs.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L2",
+    "youtubeId": "n0aXMGLusXQ",
+    "couverture": "exacte",
+    "justification": "Hedacademy : les critères de divisibilité par 2, 3, 4, 5, 9, 10.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L3",
+    "youtubeId": "q4_NtLC-iTM",
+    "couverture": "partielle",
+    "justification": "Divisibilité par 15 en combinant deux critères (3 et 5), même raisonnement que 3 780 et 45.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L4",
+    "youtubeId": "3Fr_1_8aTmw",
+    "couverture": "partielle",
+    "justification": "Division euclidienne : dividende = diviseur × quotient + reste, reste inférieur au diviseur.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L5",
+    "youtubeId": "NGrAFTa1TFA",
+    "couverture": "exacte",
+    "justification": "Paul Olivier, niveau 3ᵉ : décomposer un nombre en produit de facteurs premiers.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L6",
+    "youtubeId": "ZICUfgw5vik",
+    "couverture": "exacte",
+    "justification": "Calcul du PGCD par l’algorithme d’Euclide (divisions successives, dernier reste non nul).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L7",
+    "youtubeId": "jcSCkD1-oaw",
+    "couverture": "exacte",
+    "justification": "Alloprof : le PPCM par la liste des multiples et par les facteurs premiers.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L8",
+    "youtubeId": "Y8qDg6USP8E",
+    "couverture": "exacte",
+    "justification": "Problème de partage résolu avec le PGCD (bouquets de fleurs), comme les sujets de carrelage et de bouquets.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-ARITH-L9",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Aucune vidéo de méthode d’arithmétique adaptée : les candidats étaient hors sujet.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

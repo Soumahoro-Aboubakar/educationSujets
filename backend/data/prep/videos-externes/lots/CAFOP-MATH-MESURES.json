@@ -1,0 +1,248 @@
+{
+  "module": "CAFOP-MATH-MESURES",
+  "titre": "Mesures et géométrie",
+  "matiere": "Mathématiques",
+  "resume": "Convertir des mesures, calculer des durées, reconnaître des figures et résoudre des problèmes de périmètre, d’aire et de volume avec les outils du BEPC.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-MESURES-L1",
+      "titre": "Convertir des longueurs, des masses et des capacités",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Convertir des aires et passer des mètres cubes aux litres",
+      "explication": "À la fin de cette leçon, tu sauras convertir une mesure et additionner deux mesures exprimées dans des unités différentes. Prérequis : savoir multiplier et diviser des nombres décimaux par 10, 100 et 1 000. Choisis d’abord la famille de la mesure. Une longueur se mesure avec le mètre, une masse avec le gramme et une capacité avec le litre. Dans chaque ligne, un déplacement vers la droite correspond à une multiplication par 10 et un déplacement vers la gauche à une division par 10. Compte les rangs entre l’unité donnée et l’unité demandée. La tonne (t) s’ajoute aux unités du tableau et vaut 1 000 kg. Pour additionner, convertis les deux mesures vers une unité commune. Choisir la plus petite donne souvent des calculs plus faciles.",
+      "formules": [],
+      "exemples": [
+        "Une corde en centimètres",
+        "Des fournitures à peser"
+      ],
+      "pieges": [
+        "N’additionne pas directement des litres et des centilitres. Pour 2,5 L et 75 cL, le calcul en centilitres donne 250 + 75 = 325 cL."
+      ],
+      "aRetenir": [
+        "Repérer la famille et l’unité demandée.",
+        "Compter les rangs du tableau.",
+        "Convertir avant d’additionner."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L2",
+      "titre": "Convertir des aires et passer des mètres cubes aux litres",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "2/10",
+      "precedente": "Convertir des longueurs, des masses et des capacités",
+      "suivante": "Calculer et comparer des durées",
+      "explication": "À la fin de cette leçon, tu sauras convertir une aire en mètres carrés, en ares ou en hectares et passer des mètres cubes aux litres dans les deux sens. Prérequis : savoir convertir les longueurs et les capacités. Un carré de 1 m de côté mesure aussi 10 dm de côté. Son aire est 10 × 10 = 100 dm². Un cube de même arête mesure 10 dm dans trois directions et son volume est 10 × 10 × 10 = 1 000 dm³. Pour passer des m³ aux L, multiplie par 1 000. Pour revenir des litres aux mètres cubes, divise par 1 000. Les mètres carrés mesurent une surface. Il faut une hauteur ou une profondeur pour en déduire un volume.",
+      "formules": [],
+      "exemples": [
+        "Un jardin en mètres carrés",
+        "De l’eau pour les gourdes"
+      ],
+      "pieges": [
+        "Un hectare correspond au carré d’un hectomètre. On élève le facteur 100 au carré pour passer de l’hectare au mètre carré."
+      ],
+      "aRetenir": [
+        "Utiliser un facteur 100 par rang pour une aire.",
+        "Convertir les ares et les hectares en m² avant d’additionner.",
+        "Multiplier par 1 000 de m³ en L et diviser dans l’autre sens."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L3",
+      "titre": "Calculer et comparer des durées",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "3/10",
+      "precedente": "Convertir des aires et passer des mètres cubes aux litres",
+      "suivante": "Reconnaître les figures et justifier leurs propriétés",
+      "explication": "À la fin de cette leçon, tu sauras calculer une durée entre deux horaires, puis retirer le temps d’une pause. Prérequis : savoir additionner et soustraire des entiers. Un horaire indique quand se produit un événement. Une durée indique combien de temps il s’écoule entre deux événements. Pour soustraire deux horaires du même jour, convertis-les en minutes depuis minuit, puis retire le départ de l’arrivée. Si l’arrivée a lieu le lendemain, compte aussi le passage par minuit.",
+      "formules": [
+        "1 jour = 24 h | 1 h = 60 min | 1 min = 60 s"
+      ],
+      "exemples": [
+        "Une séance en minutes",
+        "Une épreuve à Bouaké"
+      ],
+      "pieges": [
+        "Dans une heure décimale, la partie après la virgule exprime une fraction d’heure. Il faut la multiplier par 60 pour la lire en minutes."
+      ],
+      "aRetenir": [
+        "Distinguer horaire et durée.",
+        "Calculer dans une unité commune.",
+        "Retirer les pauses pour trouver le temps effectif."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L4",
+      "titre": "Reconnaître les figures et justifier leurs propriétés",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "4/10",
+      "precedente": "Calculer et comparer des durées",
+      "suivante": "Calculer le tour et la surface d’une figure",
+      "explication": "À la fin de cette leçon, tu sauras identifier un triangle, un quadrilatère ou un élément du cercle et justifier ta réponse par une propriété. Aucun prérequis. Les trois angles d’un triangle totalisent 180°. Sur un cercle, tous les points sont à la même distance du centre. Un rayon relie le centre à un point du cercle. Un diamètre joint deux points du cercle en passant par le centre et mesure deux rayons. Le disque comprend le cercle et son intérieur.",
+      "formules": [],
+      "exemples": [
+        "Des angles à la base",
+        "La nature la plus précise"
+      ],
+      "pieges": [
+        "Des diagonales perpendiculaires peuvent appartenir à d’autres quadrilatères qu’un losange. Vérifie aussi leur milieu commun si tu veux appl…"
+      ],
+      "aRetenir": [
+        "Distinguer les triangles par leurs côtés et leurs angles.",
+        "Justifier la nature d’un quadrilatère avec les données.",
+        "Diviser le diamètre par deux pour obtenir le rayon."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L5",
+      "titre": "Calculer le tour et la surface d’une figure",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "5/10",
+      "precedente": "Reconnaître les figures et justifier leurs propriétés",
+      "suivante": "Mesurer un trapèze, un losange et un disque",
+      "explication": "À la fin de cette leçon, tu sauras calculer le périmètre et l’aire d’un rectangle, d’un carré et d’un triangle. Prérequis : savoir convertir des longueurs et reconnaître ces figures. Le périmètre mesure le contour de la figure. L’aire mesure la surface qu’elle occupe. Si les dimensions sont en mètres, le périmètre est en mètres et l’aire en mètres carrés. Pour un triangle, choisis un côté comme base. La hauteur correspondante est la distance du sommet opposé à la droite qui porte cette base. Le segment qui matérialise cette hauteur est perpendiculaire à la droite et peut passer à l’extérieur du triangle. Deux triangles identiques peuvent former un parallélogramme de même base et de même hauteur, ce qui explique la division par deux.",
+      "formules": [],
+      "exemples": [
+        "Une parcelle carrée",
+        "Clôturer la cour d’une école"
+      ],
+      "pieges": [
+        "N’utilise un côté du triangle comme hauteur que s’il est perpendiculaire à la base choisie. Un côté oblique peut avoir une longueur très di…"
+      ],
+      "aRetenir": [
+        "Additionner les côtés pour mesurer le bord.",
+        "Exprimer l’aire en unités carrées.",
+        "Vérifier que la hauteur est perpendiculaire à la base."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L6",
+      "titre": "Mesurer un trapèze, un losange et un disque",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "6/10",
+      "precedente": "Calculer le tour et la surface d’une figure",
+      "suivante": "Calculer le volume d’un solide et la capacité d’une cuve",
+      "explication": "À la fin de cette leçon, tu sauras choisir les dimensions utiles pour calculer le périmètre et l’aire d’un trapèze, d’un losange et d’un disque. Prérequis : reconnaître ces figures et distinguer rayon et diamètre. Dans un trapèze, la hauteur est la distance perpendiculaire entre les bases parallèles. Faire la moyenne des deux bases puis multiplier par la hauteur donne l’aire. Dans un losange, les diagonales sont perpendiculaires. Elles forment quatre triangles rectangles dont la réunion donne la formule du tableau. La circonférence est la longueur du cercle. En divisant cette longueur par le diamètre, on obtient le nombre π. Pour calculer une aire de disque, élève le rayon au carré avant de multiplier par π. Garde π si une valeur exacte est demandée. Utilise la valeur approchée ou l’arrondi indiqué dans la consigne pour donner un résultat décimal.",
+      "formules": [],
+      "exemples": [
+        "Un losange à peindre",
+        "Un massif circulaire à Korhogo"
+      ],
+      "pieges": [
+        "En mettant le diamètre au carré dans la formule du disque, tu multiplies l’aire par quatre puisque le diamètre vaut deux rayons."
+      ],
+      "aRetenir": [
+        "Multiplier la moyenne des bases par la hauteur du trapèze.",
+        "Diviser par deux le produit des diagonales du losange.",
+        "Calculer le contour et la surface du disque avec leurs formules."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L7",
+      "titre": "Calculer le volume d’un solide et la capacité d’une cuve",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "7/10",
+      "precedente": "Mesurer un trapèze, un losange et un disque",
+      "suivante": "Utiliser Pythagore dans les deux sens",
+      "explication": "À la fin de cette leçon, tu sauras calculer le volume d’un pavé, d’un cube, d’un prisme droit et d’un cylindre, puis convertir en litres. Prérequis : calculer une aire et convertir des mètres cubes en litres. Dans un prisme droit, les deux bases sont des polygones de même forme et de mêmes dimensions, dans des plans parallèles. Dans un cylindre de révolution, les bases sont deux disques. Dans les deux cas, la hauteur est la distance perpendiculaire entre les bases. Pour un prisme à base triangulaire, commence par calculer l’aire du triangle. La hauteur du triangle sert à calculer cette aire. La hauteur du prisme sert ensuite à calculer le volume. Pour une cuve, relève les dimensions intérieures et choisis la hauteur d’eau si la cuve est partiellement remplie.",
+      "formules": [],
+      "exemples": [
+        "Un cube de 4 cm d’arête",
+        "Une citerne cylindrique"
+      ],
+      "pieges": [
+        "Une formule de volume exige des longueurs dans la même unité. Convertis une hauteur donnée en centimètres avant de la multiplier par une ai…"
+      ],
+      "aRetenir": [
+        "Repérer les bases du solide.",
+        "Multiplier l’aire de base par la hauteur du solide.",
+        "Utiliser les dimensions intérieures pour une capacité."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L8",
+      "titre": "Utiliser Pythagore dans les deux sens",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "8/10",
+      "precedente": "Calculer le volume d’un solide et la capacité d’une cuve",
+      "suivante": "Calculer une longueur et prouver un parallélisme avec Thalès",
+      "explication": "À la fin de cette leçon, tu sauras calculer un côté d’un triangle rectangle et vérifier, à partir de ses trois longueurs, si un triangle est rectangle. Prérequis : savoir repérer l’hypoténuse et calculer un carré et une racine carrée. Si le triangle ABC est rectangle en A, son hypoténuse est [BC], en face de l’angle droit. C’est le côté le plus long. Pour trouver sa longueur, additionne les carrés des deux côtés de l’angle droit. Pour trouver un côté de l’angle droit, soustrais le carré de l’autre côté de celui de l’hypoténuse. Prends ensuite la racine carrée. Pour la réciproque, commence par repérer le côté le plus long. Si son carré est égal à la somme des deux autres carrés, le triangle est rectangle à l’angle opposé au plus grand côté. Si les carrés ne vérifient pas l’égalité, le théorème permet d’exclure un angle droit.",
+      "formules": [
+        "Si ABC est rectangle en A, alors BC² = AB² + AC²."
+      ],
+      "exemples": [
+        "La diagonale d’un rectangle",
+        "Vérifier un angle droit avec des longueurs"
+      ],
+      "pieges": [
+        "L’égalité de Pythagore concerne des carrés. N’oublie pas la racine carrée quand la question demande la longueur elle-même."
+      ],
+      "aRetenir": [
+        "Repérer le plus long côté.",
+        "Calculer ou comparer les carrés.",
+        "Conclure avec une longueur ou la position de l’angle droit."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L9",
+      "titre": "Calculer une longueur et prouver un parallélisme avec Thalès",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "9/10",
+      "precedente": "Utiliser Pythagore dans les deux sens",
+      "suivante": "Bilan méthode comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras calculer une longueur avec Thalès et justifier un parallélisme à partir de rapports égaux. Prérequis : savoir comparer des fractions et calculer une quatrième proportionnelle. Dans un triangle ABC, place M sur [AB] et N sur [AC], chacun entre A et l’autre sommet. Si (MN) et (BC) sont parallèles, les triangles AMN et ABC ont des longueurs proportionnelles. Les côtés qui se correspondent sont AM et AB, AN et AC, puis MN et BC. Pour la réciproque, vérifie d’abord que A, M, B sont alignés dans cet ordre et que A, N, C le sont dans le même ordre pour cette configuration. Si AM/AB = AN/AC, alors les droites (MN) et (BC) sont parallèles. Les rapports utilisent les mêmes unités dans leur numérateur et leur dénominateur.",
+      "formules": [
+        "Si (MN) ∥ (BC), alors AM/AB = AN/AC = MN/BC."
+      ],
+      "exemples": [
+        "Trouver une longueur manquante",
+        "Vérifier que deux traverses sont parallèles"
+      ],
+      "pieges": [
+        "Compare AM à AB, la longueur entière du côté correspondant. MB représente seulement la portion après M."
+      ],
+      "aRetenir": [
+        "Vérifier la position des points.",
+        "Écrire les rapports dans le même sens.",
+        "Choisir le théorème ou sa réciproque selon ce qui est demandé."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-MESURES-L10",
+      "titre": "Bilan méthode comme au concours",
+      "module": "Mesures et géométrie (Mathématiques)",
+      "position": "10/10",
+      "precedente": "Calculer une longueur et prouver un parallélisme avec Thalès",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras résoudre un problème de mesures en plusieurs étapes et justifier le résultat avec l’unité et l’arrondi adaptés. Prérequis : savoir convertir des mesures et calculer un périmètre, une aire et un volume.",
+      "formules": [],
+      "exemples": [
+        "Carreler un petit local",
+        "Prévoir les remplissages d’une citerne"
+      ],
+      "pieges": [
+        "L’arrondi à l’entier le plus proche peut laisser un manque. Pour couvrir un besoin avec des remplissages complets, prends le plus petit ent…"
+      ],
+      "aRetenir": [
+        "Relever la grandeur demandée et harmoniser les unités.",
+        "Écrire le raisonnement dans l’ordre des calculs.",
+        "Contrôler l’unité, l’arrondi et le sens du résultat."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

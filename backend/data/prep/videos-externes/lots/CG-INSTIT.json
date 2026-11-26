@@ -8,7 +8,11 @@
     "INFJ — Greffes — cycle moyen supérieur",
     "ENS — Éducateurs",
     "INPHB — Concours bacheliers",
-    "INFAS — Auxiliaires de santé"
+    "INFAS — Auxiliaires de santé",
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires",
+    "CAFOP — Accès à la formation de professeur de CAFOP"
   ],
   "lecons": [
     {
@@ -32,7 +36,7 @@
         "Droit reconnu et obligation imposée se répondent.",
         "Une sanction n’est pas nécessairement pénale."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CG-INSTIT-L2",
@@ -55,7 +59,7 @@
         "Le règlement doit respecter les normes supérieures.",
         "La jurisprudence aide à interpréter les règles."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CG-INSTIT-L3",
@@ -78,7 +82,7 @@
         "Souveraineté : peuple, élus et référendum.",
         "Lire 2016 avec les révisions de 2020 et 2023."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CG-INSTIT-L4",
@@ -101,7 +105,7 @@
         "Premier ministre : chef du Gouvernement.",
         "Vice-Président : nomination avec accord du Parlement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CG-INSTIT-L5",
@@ -124,7 +128,7 @@
         "Voter la loi, consentir l’impôt, contrôler le Gouvernement.",
         "Sénat : deux tiers élus indirectement, un tiers désigné."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CG-INSTIT-L6",
@@ -147,7 +151,7 @@
         "Cassation : ordre judiciaire ; Conseil d’État : ordre administratif.",
         "Cour des comptes : finances publiques."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CG-INSTIT-L7",
@@ -170,7 +174,7 @@
         "CESEC : rôle consultatif.",
         "Les chefs traditionnels ne remplacent pas les tribunaux."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "CG-INSTIT-L8",
@@ -193,7 +197,7 @@
         "Hymne : L’Abidjanaise.",
         "Drapeau : orange, blanc, vert en bandes verticales."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

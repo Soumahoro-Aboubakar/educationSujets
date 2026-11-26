@@ -1,0 +1,231 @@
+{
+  "module": "CAFOP-FR-CONJ",
+  "lecons": [
+    {
+      "code": "CAFOP-FR-CONJ-L1",
+      "requetes": [
+        "site:youtube.com Retrouver le groupe et le radical verbe",
+        "site:youtube.com groupes verbes radical terminaison explication simple",
+        "youtube les trois groupes verbes radical terminaison cours",
+        "youtube infinitif groupe radical terminaison 3 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=cvfp1mWiV6Q",
+          "titre": "L'infinitif et les 3 groupes de verbes",
+          "chaine": "Touch ABC",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente l’infinitif, sa décomposition en radical et terminaison et le classement des verbes, sans approfondissement confirmé des changements de radical."
+        }
+      ],
+      "justification": "Présentation accessible des bases nécessaires aux débutants, notamment de l’exception « aller ». La durée exacte et le traitement des radicaux variables n’étaient pas disponibles dans les résultats."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L2",
+      "requetes": [
+        "site:youtube.com Conjuguer au présent et à l’impératif",
+        "site:youtube.com impératif présent cours en 5 minutes",
+        "youtube impératif présent en y va vas-y cours",
+        "youtube impératif présent 3 minutes",
+        "youtube présent indicatif trois groupes 5 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=cp1_6GazIn8",
+          "titre": "THE PRESENT IMPERATIVE - Understand everything in 3 minutes",
+          "chaine": "Les rouages du français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette capsule explique la formation de l’impératif des verbes réguliers et irréguliers avec des exemples d’ordres et de conseils, mais ne constitue pas un cours complet sur l’indicatif présent."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=EwlwFVDL4zA",
+          "titre": "THE PRESENT INDICATIVE TENSE - 3rd group - In less than 5 minutes",
+          "chaine": "Les rouages du français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique le présent de l’indicatif des verbes du troisième groupe avec des exemples et une carte mentale, en complément du travail sur l’impératif."
+        }
+      ],
+      "justification": "La première capsule annonce un format de trois minutes et cible directement la transformation en consigne. La seconde complète les modèles difficiles du présent ; les titres sont affichés en anglais par le moteur."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L3",
+      "requetes": [
+        "\"Construire le passé composé\" youtube",
+        "site:youtube.com/watch passé composé auxiliaire être avoir cours simple",
+        "site:youtube.com/watch passé composé accord verbes pronominaux explication",
+        "youtube passé composé cours explication simple 5 minutes",
+        "\"LE PASSÉ COMPOSÉ\" \"Les rouages du français\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=Y_q0bMHk5lM",
+          "titre": "LE PASSÉ COMPOSÉ - Tout comprendre en 5 minutes",
+          "chaine": "Les rouages du français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo présente la construction auxiliaire au présent et participe passé, le choix entre être et avoir et les accords courants, sans traitement confirmé des accords pronominaux complexes."
+        }
+      ],
+      "justification": "Le format annoncé de cinq minutes convient à une première compréhension de la construction. Il faudra compléter les cas où l’accord dépend de la fonction de « se »."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L4",
+      "requetes": [
+        "site:youtube.com/watch imparfait passé simple valeurs cours",
+        "youtube imparfait passé simple explication simple en 5 minutes",
+        "\"Raconter à l’imparfait et au passé simple\"",
+        "youtube valeurs imparfait passé simple 3 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=oGIYKNBSPI8",
+          "titre": "Imparfait ou passé simple expliqué simplement - Grammaire française avec Lalilo",
+          "chaine": "Lalilo",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La capsule compare l’emploi des deux temps dans un récit avec des exemples et des exercices, sans traitement confirmé du piège associant systématiquement passé simple et action courte."
+        }
+      ],
+      "justification": "La description annonce une courte explication destinée aux débutants, centrée sur le choix entre les deux temps. La durée exacte n’était pas affichée."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L5",
+      "requetes": [
+        "site:youtube.com/watch futur simple futur antérieur explication",
+        "youtube \"Distinguer futur simple et futur antérieur\"",
+        "youtube futur simple futur antérieur Un cours de 5 minutes",
+        "youtube futur antérieur 3 minutes",
+        "youtube futur antérieur Tout en français formation usage KsJPdVsRALs"
+      ],
+      "candidats": [],
+      "justification": "Les résultats pertinents présentent les deux futurs ou la formation du futur antérieur, mais leur durée maximale de quinze minutes n’a pas pu être établie. Les cours explicitement proposés en direct ont été écartés."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L6",
+      "requetes": [
+        "site:youtube.com/watch conditionnel présent passé hypothèse si",
+        "youtube conditionnel hypothèse explication simple en 5 minutes",
+        "\"Exprimer une hypothèse au conditionnel\" youtube",
+        "youtube conditionnel présent passé 5 minutes cours",
+        "\"12 minutes pour comprendre le conditionnel\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=3nXzXzAWK2s",
+          "titre": "12 minutes pour comprendre le conditionnel",
+          "chaine": "Français Authentique",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La vidéo explique les hypothèses et les conditions, la formation du conditionnel présent et passé et l’emploi de politesse, qui constituent le cœur de la leçon."
+        }
+      ],
+      "justification": "Le découpage confirme la présence des deux temps et des constructions hypothétiques. Le format annoncé de douze minutes est retenu faute de capsule plus courte dont la couverture soit aussi bien documentée ; la durée exacte reste inconnue."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L7",
+      "requetes": [
+        "site:youtube.com/watch choisir indicatif subjonctif cours",
+        "youtube indicatif subjonctif explication simple en 5 minutes",
+        "\"Choisir entre indicatif et subjonctif\" youtube",
+        "site:youtube.com \"subjonctif imparfait\" \"Un Cours\"",
+        "\"Indicatif ou subjonctif\" \"Petit Café\" durée"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=PotmR1CA2Qw",
+          "titre": "Indicatif ou subjonctif ?",
+          "chaine": "Petit Café Français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo explique comment choisir entre indicatif et subjonctif, mais le traitement de la formation du subjonctif et de son imparfait n’est pas confirmé."
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=6exSpE3090M",
+          "titre": "Conjuguer le SUBJONCTIF... comme Wejdene (ou presque...)",
+          "chaine": "Un Cours de 5 Minutes",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "Cette explication annoncée en cinq minutes présente le repérage du subjonctif et sa conjugaison au présent, sans couvrir le subjonctif imparfait demandé dans la leçon."
+        }
+      ],
+      "justification": "Le premier candidat cible le choix du mode et place sa conclusion à 6:08, sans durée totale affichée. Le second complète la conjugaison ; aucun des deux ne couvre l’ensemble de la leçon."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L8",
+      "requetes": [
+        "site:youtube.com/watch discours indirect concordance temps cours",
+        "youtube discours direct indirect cours 5 minutes",
+        "\"Rapporter des paroles et accorder les temps\"",
+        "\"w-OU9wFhYcc\" durée",
+        "\"Discours DIRECT et INDIRECT en français : Leçon complète\" \"11\""
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=w-OU9wFhYcc",
+          "titre": "Discours DIRECT et INDIRECT en français : Leçon complète",
+          "chaine": "Parlez-vous FRENCH : Learn French Online",
+          "dureeVue": "10:34",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La leçon détaille le passage au discours indirect selon le type de phrase et les modifications des temps, des pronoms et des repères de lieu et de temps."
+        }
+      ],
+      "justification": "Le plan publié correspond directement aux transformations attendues dans le module. La durée de 10:34 a été relevée dans un résultat secondaire référençant cette vidéo."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L9",
+      "requetes": [
+        "site:youtube.com/watch voix active passive garder temps cours",
+        "youtube voix active passive Un cours de 5 minutes",
+        "\"Passer de l’actif au passif en gardant le temps\"",
+        "site:youtube.com \"voix active\" \"voix passive\" \"Les Bons Profs\"",
+        "youtube voix active passive 3 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=4roDP8UjOVw",
+          "titre": "Everything You Need to Know About ACTIVE and PASSIVE VOICE - In 3 minutes",
+          "chaine": "Les rouages du français",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "exacte",
+          "pourquoi": "La capsule explique le passage d’une voix à l’autre, les temps verbaux et le complément d’agent, avec une carte mentale récapitulative."
+        }
+      ],
+      "justification": "Le contenu annoncé cible précisément la transformation et la gestion du temps verbal dans un format de trois minutes. Le titre est affiché en anglais par le moteur et la durée exacte n’est pas disponible."
+    },
+    {
+      "code": "CAFOP-FR-CONJ-L10",
+      "requetes": [
+        "site:youtube.com/watch réécriture méthode brevet changement temps voix",
+        "youtube réécriture méthode consignes indépendantes concours CAFOP",
+        "\"Bilan méthode\" \"comme au concours\" conjugaison",
+        "\"La réécriture - français - 3ème\" durée",
+        "youtube La réécriture français 3ème L Antiseche 6 minutes"
+      ],
+      "candidats": [
+        {
+          "url": "https://www.youtube.com/watch?v=h0O8SVkEqUU",
+          "titre": "La réécriture - français - 3ème",
+          "chaine": "L'Antiseche",
+          "dureeVue": "inconnue",
+          "langue": "français",
+          "couverture": "partielle",
+          "pourquoi": "La vidéo enseigne une méthode de réécriture avec des changements de personne puis de temps et de personne, mais n’aborde pas explicitement deux consignes indépendantes de concours."
+        }
+      ],
+      "justification": "Les exemples corrigés et le récapitulatif à 5:44 apportent une méthode transférable au CAFOP. Le cadre est celui du brevet français et ne reproduit pas exactement le bilan du module."
+    }
+  ]
+}

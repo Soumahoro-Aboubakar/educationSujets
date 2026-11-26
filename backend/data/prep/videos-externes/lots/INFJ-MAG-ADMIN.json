@@ -29,7 +29,7 @@
         "Intérêt général distinct de l’intérêt personnel.",
         "Les pouvoirs administratifs restent encadrés."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L2",
@@ -52,7 +52,7 @@
         "Préfets et sous-préfets : représentants territoriaux.",
         "Hiérarchie : relation interne à l’organisation."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L3",
@@ -75,7 +75,7 @@
         "Autonomie dans les compétences attribuées.",
         "Tutelle légale distincte de la hiérarchie."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L4",
@@ -98,7 +98,7 @@
         "Égalité : pas de favoritisme.",
         "Adaptation : évolution encadrée des modalités."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L5",
@@ -121,7 +121,7 @@
         "Judiciaire : infraction et recherche des auteurs.",
         "Restriction : compétence, nécessité, proportion."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L6",
@@ -144,7 +144,7 @@
         "Réglementaire et individuel : portées différentes.",
         "Choix discrétionnaire toujours soumis à la légalité."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L7",
@@ -167,7 +167,7 @@
         "Marché public : passation et exécution encadrées.",
         "Difficulté économique et impossibilité sont distinctes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L8",
@@ -190,7 +190,7 @@
         "Pour faute : manquement, préjudice, causalité.",
         "Annulation et indemnisation sont distinctes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L9",
@@ -213,7 +213,7 @@
         "Recours préalable écrit : gracieux ou hiérarchique.",
         "Reconstituer les délais et vérifier les règles spéciales."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "INFJ-MAG-ADMIN-L10",
@@ -236,7 +236,7 @@
         "Référé : constat ou mesure utile dans ses limites.",
         "Urgence, compétence et objet de la demande à distinguer."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

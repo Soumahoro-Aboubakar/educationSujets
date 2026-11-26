@@ -1,0 +1,151 @@
+const { mc, qcm, vf, glisser, ordre, relier, classer, entourer, numerique, b, lecon } = require('../dsl');
+
+// Géométrie du CAFOP-IA récent (programme de 3ᵉ). Sujets officiels DECO lus le 22/11/2026 :
+// 2021 (6adf4d1e…), 2023 (6adf4d46…), 2024 (6adf4d76…), 2025 (6adf4d8e…), 2026 (6adf4da5…).
+
+const DOC = { 2021: '6adf4d1eecb585bf0e4f4258', 2023: '6adf4d46ecb585bf0e4f42ab', 2024: '6adf4d76ecb585bf0e4f42e9', 2025: '6adf4d8eecb585bf0e4f4333', 2026: '6adf4da5ecb585bf0e4f4367' };
+const annale = (annee, epreuve) => ({ type: 'annale', organisme: 'CAFOP', annee, epreuve: `IA, Mathématiques, ${epreuve}`, documentId: DOC[annee] });
+const original = { type: 'original', inspireDe: 'Mathématiques CAFOP-IA 2021-2026 (géométrie de 3ᵉ)' };
+
+const rappels = {
+  'GEO-VECT': mc('Vecteurs', 'Deux vecteurs sont égaux s’ils ont même direction, même sens et même longueur. ABCD est un parallélogramme si et seulement si AB = DC (en vecteurs). La relation de Chasles s’écrit AB + BC = AC. Dans un parallélogramme ABCD, AB + AD = AC. Si B est le milieu de [AC], alors AB = BC. Le vecteur opposé de CB est BC : AB = −CB.', 'Chasles : le point du milieu se « simplifie ».'),
+  'GEO-REPERE': mc('Calculer dans un repère', 'Dans un repère, le vecteur AB a pour coordonnées (xB − xA ; yB − yA). Le milieu de [AB] a pour coordonnées la demi-somme des abscisses et la demi-somme des ordonnées. Dans un repère orthonormé, AB = √[(xB − xA)² + (yB − yA)²]. Deux droites y = ax + b et y = a′x + b′ sont parallèles si a = a′, perpendiculaires si a × a′ = −1.', 'Coordonnées de AB : arrivée moins départ.'),
+  'GEO-TRIGO': mc('Trigonométrie', 'Dans un triangle rectangle, pour un angle aigu : cosinus = côté adjacent ÷ hypoténuse ; sinus = côté opposé ÷ hypoténuse ; tangente = côté opposé ÷ côté adjacent. Valeurs utiles : cos 60° = sin 30° = 1/2 ; cos 30° = sin 60° = √3/2 ; tan 45° = 1. Deux angles qui ont la même tangente dans deux triangles rectangles sont égaux.', 'SOH-CAH-TOA.'),
+  'GEO-ANGLES': mc('Angles inscrits et Thalès', 'Un angle inscrit a son sommet sur le cercle. Deux angles inscrits qui interceptent le même arc ont la même mesure. Un angle inscrit mesure la moitié de l’angle au centre qui intercepte le même arc. Thalès : si (MN) est parallèle à (BC), avec M sur (AB) et N sur (AC), alors AM/AB = AN/AC = MN/BC. Réciproque : si AM/AB = AN/AC et les points sont dans le même ordre, alors (MN) est parallèle à (BC).', 'Même arc, même mesure ; angle au centre = double.'),
+  'GEO-ESPACE': mc('Solides', 'Volume d’un pavé : L × l × h ; d’un cube : a³. Volume d’une pyramide ou d’un cône : (aire de la base × hauteur) ÷ 3. Volume d’une boule : 4/3 × π × r³. La diagonale d’une face d’un cube d’arête a mesure a√2 ; la grande diagonale du cube mesure a√3. L’aire d’un triangle équilatéral de côté c vaut c² × √3 ÷ 4.', 'Pyramide et cône : diviser par 3.'),
+};
+const spec = (notion, extra = {}) => ({ notions: [notion], miniCours: rappels[notion], source: original, ...extra });
+const question = (i, notion, consigne, options, explication) => b.question(qcm({ ...spec(notion), code: `CAFOP-MATH-GEOMETRIE-L${i}-Q1`, niveau: 1, consigne, options, bonne: 0, explication }));
+
+const geometrie = {
+  code: 'CAFOP-MATH-GEOMETRIE',
+  matiere: 'Mathématiques',
+  titre: 'Géométrie du BEPC',
+  resume: 'Vecteurs, repère, droites, trigonométrie, angles inscrits, Thalès et solides : la géométrie de 3ᵉ des sujets CAFOP-IA récents, avec la méthode du QCM.',
+  notions: [
+    { code: 'GEO-VECT', libelle: 'Vecteurs' },
+    { code: 'GEO-REPERE', libelle: 'Repère et droites' },
+    { code: 'GEO-TRIGO', libelle: 'Trigonométrie' },
+    { code: 'GEO-ANGLES', libelle: 'Angles inscrits et Thalès' },
+    { code: 'GEO-ESPACE', libelle: 'Géométrie dans l’espace' },
+  ],
+  lecons: [
+    lecon('CAFOP-MATH-GEOMETRIE-L1', 'Vecteurs et relation de Chasles', 5, [
+      b.texte('À la fin de cette leçon, tu sauras utiliser l’égalité de vecteurs, le parallélogramme et la relation de Chasles. Aucun prérequis.'),
+      b.texte('Un vecteur est défini par une **direction**, un **sens** et une **longueur**. ABCD est un **parallélogramme** si et seulement si les vecteurs AB et DC sont égaux. La **relation de Chasles** permet d’enchaîner les vecteurs : AB + BC = AC.'),
+      b.exemple('Comme au concours (2023)', 'ABCD est un parallélogramme : AD = BC (vecteurs), donc AB + AD = AB + BC = AC.'),
+      b.exemple('Comme au concours (2024)', 'B est le milieu de [AC] : AB = BC (vecteurs). Or BC = −CB, donc AB = −CB.'),
+      b.retenir('Dans le parallélogramme ABCD, attention à l’ordre des lettres : AB = DC, et non AB = CD.'),
+      b.piege('AB + AD = BD est faux : la somme de deux vecteurs de même origine donne la diagonale issue de cette origine, AC.'),
+      question(1, 'GEO-VECT', 'Selon la relation de Chasles, AB + BC = …', ['AC', 'CA', 'BB'], 'Le point B, arrivée du premier vecteur et départ du second, disparaît : AB + BC = AC.'),
+      b.recap(['Direction, sens, longueur.', 'Parallélogramme ABCD : AB = DC.', 'Chasles : AB + BC = AC.']),
+    ]),
+    lecon('CAFOP-MATH-GEOMETRIE-L2', 'Calculer dans un repère', 5, [
+      b.texte('À la fin de cette leçon, tu sauras calculer les coordonnées d’un vecteur, d’un milieu et une distance. Prérequis : les vecteurs.'),
+      b.tableau(['Calcul', 'Formule'], [['Vecteur AB', '(xB − xA ; yB − yA)'], ['Milieu I de [AB]', '((xA + xB) ÷ 2 ; (yA + yB) ÷ 2)'], ['Distance AB (repère orthonormé)', '√[(xB − xA)² + (yB − yA)²]']]),
+      b.exemple('Comme au concours (2025)', 'A(1/2 ; 3/2) et B(3/2 ; 9/2). Milieu : ((1/2 + 3/2) ÷ 2 ; (3/2 + 9/2) ÷ 2) = (2 ÷ 2 ; 6 ÷ 2) = (1 ; 3).'),
+      b.exemple('Une distance', 'A(1 ; 2) et B(4 ; 6) : AB = √(3² + 4²) = √25 = 5.'),
+      b.retenir('Pour un vecteur : arrivée moins départ. Pour un milieu : demi-somme.'),
+      b.piege('Calculer xA − xB au lieu de xB − xA : on obtient le vecteur BA, opposé de AB.'),
+      question(2, 'GEO-REPERE', 'Quelles sont les coordonnées du vecteur AB avec A(2 ; 1) et B(5 ; 3) ?', ['(3 ; 2)', '(−3 ; −2)', '(7 ; 4)'], 'Arrivée moins départ : (5 − 2 ; 3 − 1) = (3 ; 2).'),
+      b.recap(['Vecteur : arrivée − départ.', 'Milieu : demi-sommes.', 'Distance : racine de la somme des carrés.']),
+    ]),
+    lecon('CAFOP-MATH-GEOMETRIE-L3', 'Droites parallèles et perpendiculaires', 4, [
+      b.texte('À la fin de cette leçon, tu sauras reconnaître à leurs équations deux droites parallèles ou perpendiculaires. Prérequis : les fonctions affines.'),
+      b.texte('Pour des droites d’équations y = ax + b et y = a′x + b′ : elles sont **parallèles** si a = a′ ; dans un repère orthonormé, elles sont **perpendiculaires** si a × a′ = −1.'),
+      b.exemple('Comme au concours (2024)', '(D₁) : y = ax + b et (D₂) : y = ax + c ont le même coefficient a : elles sont parallèles.'),
+      b.exemple('Perpendiculaires', 'y = 2x + 1 et y = −x/2 + 3 : 2 × (−1/2) = −1. Les droites sont perpendiculaires.'),
+      b.retenir('On compare les coefficients directeurs ; les ordonnées à l’origine ne comptent pas pour le parallélisme.'),
+      b.piege('Croire que deux droites de coefficients opposés (2 et −2) sont perpendiculaires : le produit vaut −4, pas −1.'),
+      question(3, 'GEO-REPERE', 'y = 3x − 1 et y = 3x + 4 sont…', ['parallèles', 'perpendiculaires', 'confondues'], 'Même coefficient directeur 3 et ordonnées à l’origine différentes : les droites sont parallèles et distinctes.'),
+      b.recap(['Parallèles : a = a′.', 'Perpendiculaires : a × a′ = −1.', 'b ne compte pas pour la direction.']),
+    ]),
+    lecon('CAFOP-MATH-GEOMETRIE-L4', 'Trigonométrie dans le triangle rectangle', 6, [
+      b.texte('À la fin de cette leçon, tu sauras calculer le cosinus, le sinus ou la tangente d’un angle aigu et t’en servir pour trouver une longueur. Prérequis : Pythagore.'),
+      b.tableau(['Rapport', 'Formule'], [['Cosinus', 'côté adjacent ÷ hypoténuse'], ['Sinus', 'côté opposé ÷ hypoténuse'], ['Tangente', 'côté opposé ÷ côté adjacent']]),
+      b.exemple('Comme au concours (2026)', 'Le triangle BEP est rectangle en E, avec BE = 60 et EP = 30. Pythagore : BP² = 60² + 30² = 4 500, donc BP = √4 500 = 30√5. Tangente : tan(EBP) = EP ÷ BE = 30 ÷ 60 = 1/2.'),
+      b.exemple('Réutiliser une tangente', 'Si l’angle KBH est le même que l’angle EBP, alors tan(KBH) = 1/2. Dans le triangle rectangle BKH : KH ÷ BK = 1/2, donc KH = BK ÷ 2.'),
+      b.retenir('Moyen mnémotechnique : SOH-CAH-TOA (sinus = opposé/hypoténuse, cosinus = adjacent/hypoténuse, tangente = opposé/adjacent).'),
+      b.piege('Le côté « adjacent » dépend de l’angle choisi : c’est le côté de l’angle droit qui touche cet angle.'),
+      question(4, 'GEO-TRIGO', 'Dans un triangle rectangle, la tangente d’un angle aigu est égale à…', ['côté opposé ÷ côté adjacent', 'côté adjacent ÷ hypoténuse', 'hypoténuse ÷ côté opposé'], 'tan = opposé ÷ adjacent ; adjacent ÷ hypoténuse est le cosinus.'),
+      b.recap(['cos, sin, tan.', 'Identifier l’hypoténuse et le côté adjacent.', 'SOH-CAH-TOA.']),
+    ]),
+    lecon('CAFOP-MATH-GEOMETRIE-L5', 'Thalès dans les sujets du concours', 5, [
+      b.texte('À la fin de cette leçon, tu sauras appliquer la propriété de Thalès et sa réciproque pour calculer une longueur ou démontrer un parallélisme. Prérequis : la proportionnalité.'),
+      b.texte('Si les points O, A, E sont alignés, ainsi que O, B, F, et si (AB) est parallèle à (EF), alors **OA/OE = OB/OF = AB/EF**. Réciproquement, si OA/OE = OB/OF et si les points sont dans le même ordre, alors (AB) est parallèle à (EF).'),
+      b.exemple('Comme au concours (2025)', 'OA = 30, OE = 50 et (AB) // (EF) : OB/OF = 30/50 = 3/5. Avec OB = 36 : OF = 5 × 36 ÷ 3 = 60 cm.'),
+      b.exemple('Démontrer un parallélisme', 'OK/OA = 2/5 et OG/OB = 2/5, et les points G, O, B et K, O, A sont dans le même ordre : d’après la réciproque, (KG) est parallèle à (AB).'),
+      b.retenir('Écris toujours les rapports dans le même ordre : petit triangle sur grand triangle.'),
+      b.piege('Utiliser la réciproque sans vérifier l’ordre des points : l’égalité des rapports ne suffit pas.'),
+      question(5, 'GEO-ANGLES', 'Pour conclure au parallélisme par la réciproque de Thalès, il faut aussi vérifier…', ['l’ordre des points sur les deux droites', 'que le triangle est rectangle', 'que les longueurs sont entières'], 'La réciproque exige l’égalité des rapports et le même ordre des points sur les deux droites.'),
+      b.recap(['OA/OE = OB/OF = AB/EF.', 'Même ordre dans les rapports.', 'Réciproque : rapports égaux + ordre.']),
+    ]),
+    lecon('CAFOP-MATH-GEOMETRIE-L6', 'Angles inscrits et angle au centre', 4, [
+      b.texte('À la fin de cette leçon, tu sauras comparer des angles inscrits et un angle au centre. Prérequis : le vocabulaire du cercle.'),
+      b.texte('Un **angle inscrit** a son sommet sur le cercle et ses côtés coupent le cercle. Un **angle au centre** a son sommet au centre O. Deux propriétés : deux angles inscrits qui **interceptent le même arc** ont **la même mesure** ; un angle inscrit mesure **la moitié** de l’angle au centre qui intercepte le même arc.'),
+      b.exemple('Comme au concours (2024)', 'Les angles BAC et BDC sont inscrits dans un cercle et interceptent le même arc BC : mes BAC = mes BDC.'),
+      b.exemple('Angle au centre', 'Si l’angle au centre BOC mesure 80°, tout angle inscrit qui intercepte l’arc BC mesure 40°.'),
+      b.retenir('Un angle inscrit qui intercepte un demi-cercle est droit : c’est le cas du triangle inscrit dont un côté est un diamètre.'),
+      b.piege('Doubler au lieu de diviser : l’angle inscrit est la moitié de l’angle au centre, pas le double.'),
+      question(6, 'GEO-ANGLES', 'Un angle au centre mesure 120°. Combien mesure un angle inscrit qui intercepte le même arc ?', ['60°', '240°', '120°'], 'L’angle inscrit vaut la moitié de l’angle au centre : 120 ÷ 2 = 60°.'),
+      b.recap(['Même arc : même mesure.', 'Inscrit = moitié du centre.', 'Demi-cercle : angle droit.']),
+    ]),
+    lecon('CAFOP-MATH-GEOMETRIE-L7', 'Solides : cube, pyramide, cône, boule', 6, [
+      b.texte('À la fin de cette leçon, tu sauras calculer le volume d’un solide usuel et des longueurs dans un cube. Prérequis : aires et Pythagore.'),
+      b.tableau(['Solide', 'Volume'], [['Pavé', 'L × l × h'], ['Cube d’arête a', 'a³'], ['Pyramide ou cône', '(aire de la base × hauteur) ÷ 3'], ['Cylindre', 'aire de la base × hauteur'], ['Boule de rayon r', '4/3 × π × r³']]),
+      b.exemple('Comme au concours (2024)', 'Pyramide de base carrée de côté 4 et de hauteur 6 : V = (4 × 4 × 6) ÷ 3 = 96 ÷ 3 = 32.'),
+      b.exemple('Comme au concours (2021)', 'Cube ABCDEFGH d’arête 6 cm. [AC], [CH] et [AH] sont des diagonales de faces, de longueur 6√2 cm : le triangle ACH est équilatéral. Son aire vaut (6√2)² × √3 ÷ 4 = 72 × √3 ÷ 4 = 18√3 cm².'),
+      b.retenir('Diagonale d’une face d’un cube d’arête a : a√2 ; grande diagonale : a√3.'),
+      b.piege('Oublier de diviser par 3 pour une pyramide ou un cône.'),
+      question(7, 'GEO-ESPACE', 'Quel est le volume d’un cône dont la base a une aire de 30 cm² et la hauteur 10 cm ?', ['100 cm³', '300 cm³', '30 cm³'], 'V = (30 × 10) ÷ 3 = 100 cm³. Oublier la division par 3 donnerait 300 cm³.'),
+      b.recap(['Pyramide et cône : ÷ 3.', 'Cube : a√2, a√3.', 'Triangle équilatéral : c²√3 ÷ 4.']),
+    ]),
+    lecon('CAFOP-MATH-GEOMETRIE-L8', 'Bilan : réussir le QCM de l’exercice 1', 5, [
+      b.texte('À la fin de cette leçon, tu sauras traiter efficacement le QCM qui ouvre l’épreuve de mathématiques. Prérequis : les leçons d’algèbre et de géométrie.'),
+      b.texte('Depuis plusieurs sessions, l’exercice 1 est un **QCM d’environ 9 questions** (4 points en 2023 et 2024). Pour chaque ligne, une seule proposition est vraie ; on écrit sur la copie le numéro suivi de la lettre, par exemple « 1-A ». Les calculs se font au brouillon.'),
+      b.liste(['Lire les trois propositions avant de calculer', 'Tester les propositions quand c’est plus rapide que de résoudre (solution d’une équation, couple solution d’un système)', 'Éliminer les propositions impossibles (signe, ordre de grandeur, unité)', 'Ne pas dépasser deux minutes par question', 'Reporter clairement « numéro-lettre » sur la copie'], true),
+      b.exemple('Tester plutôt que résoudre (2024)', 'Pour « 5 − 3x = 2 a pour solution 1 ; −7/3 ; 2 », on remplace : 5 − 3 × 1 = 2. La réponse est 1, sans résoudre.'),
+      b.exemple('Éliminer par le signe (2023)', 'Pour 3 ÷ (1 − √3), le dénominateur est négatif, donc le résultat aussi : on écarte d’emblée les propositions positives.'),
+      b.retenir('Le QCM se traite vite : garde du temps pour les exercices rédigés, qui rapportent la majorité des points.'),
+      b.piege('Écrire seulement la lettre sans le numéro de la question : la réponse ne peut pas être corrigée.'),
+      question(8, 'GEO-VECT', 'Pour vérifier qu’un couple est solution d’un système dans un QCM, le plus rapide est souvent de…', ['le remplacer dans les deux équations', 'tracer les deux droites', 'calculer un déterminant'], 'Remplacer x et y dans les deux équations permet de trancher en quelques secondes entre les propositions.'),
+      b.recap(['Une seule bonne réponse par ligne.', 'Tester, éliminer.', 'Noter « numéro-lettre ».']),
+    ]),
+  ],
+  exercices: [
+    qcm({ ...spec('GEO-REPERE', { source: annale(2024, 'exercice 1, question 2 (QCM)') }), code: 'CAFOP-MATH-GEOMETRIE-E01', niveau: 1, consigne: 'Dans un repère, A(xA ; yA) et B(xB ; yB). Quelles sont les coordonnées du vecteur AB ?', options: ['(xB − xA ; yB − yA)', '(xA + xB ; yA + yB)', '(xA − xB ; yA − yB)'], bonne: 0,
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 2) Les coordonnées d’un vecteur s’obtiennent par « arrivée moins départ ». La somme sert au milieu (après division par 2) ; xA − xB donne le vecteur BA.' }),
+    qcm({ ...spec('GEO-VECT', { source: annale(2023, 'exercice 1, ligne 4 (QCM)') }), code: 'CAFOP-MATH-GEOMETRIE-E02', niveau: 1, consigne: 'ABCD est un parallélogramme. Quelle égalité de vecteurs est vraie ?', options: ['AB + AD = AC', 'AB + AD = BD', 'AB + AD = BC'], bonne: 0,
+      explication: '(CAFOP IA 2023, mathématiques, exercice 1, ligne 4) Dans le parallélogramme, AD = BC, donc AB + AD = AB + BC = AC d’après Chasles.' }),
+    numerique({ ...spec('GEO-ESPACE', { source: annale(2024, 'exercice 1, question 6 (QCM)') }), code: 'CAFOP-MATH-GEOMETRIE-E03', niveau: 1, consigne: 'Calcule le volume d’une pyramide de base carrée de côté 4 et de hauteur 6.', valeur: 32, tolerance: { type: 'abs', valeur: 0 }, calcul: ['Aire de la base : 4 × 4 = 16', 'V = 16 × 6 ÷ 3 = 32'],
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 6) Volume d’une pyramide : aire de la base × hauteur ÷ 3 = 16 × 6 ÷ 3 = 32. Sans la division par 3, on obtiendrait 96.' }),
+    qcm({ ...spec('GEO-ANGLES', { source: annale(2024, 'exercice 1, question 4 (QCM)') }), code: 'CAFOP-MATH-GEOMETRIE-E04', niveau: 1, consigne: 'Les angles BAC et BDC sont inscrits dans un cercle de centre O et interceptent le même arc. Que peut-on dire ?', options: ['mes BAC = mes BDC', 'mes BAC = 2 mes BDC', 'mes BAC = ½ mes BDC'], bonne: 0,
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 4) Deux angles inscrits qui interceptent le même arc ont la même mesure. Le rapport ½ concerne un angle inscrit et l’angle au centre.' }),
+    relier({ ...spec('GEO-TRIGO'), code: 'CAFOP-MATH-GEOMETRIE-E05', niveau: 1, consigne: 'Le triangle ABC est rectangle en A. Relie chaque rapport trigonométrique de l’angle B à sa formule.', paires: [['cos B', 'AB ÷ BC'], ['sin B', 'AC ÷ BC'], ['tan B', 'AC ÷ AB']],
+      explication: 'L’hypoténuse est [BC]. Pour l’angle B, le côté adjacent est [AB] et le côté opposé [AC]. cos = adjacent ÷ hypoténuse, sin = opposé ÷ hypoténuse, tan = opposé ÷ adjacent.' }),
+    qcm({ ...spec('GEO-REPERE', { source: annale(2024, 'exercice 1, question 5 (QCM)') }), code: 'CAFOP-MATH-GEOMETRIE-E06', niveau: 1, consigne: 'Les droites (D₁) : y = ax + b et (D₂) : y = ax + c, avec b ≠ c, sont…', options: ['parallèles', 'perpendiculaires', 'sécantes'], bonne: 0,
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 5) Elles ont le même coefficient directeur a : elles sont parallèles, et distinctes car b ≠ c.' }),
+    qcm({ ...spec('GEO-VECT', { source: annale(2024, 'exercice 1, question 9 (QCM)') }), code: 'CAFOP-MATH-GEOMETRIE-E07', niveau: 2, consigne: 'B est le milieu du segment [AC]. Quelle égalité de vecteurs est vraie ?', options: ['AB = −CB', 'BA = ½ AC', 'CA = 2 BC'], bonne: 0,
+      explication: '(CAFOP IA 2024, mathématiques, exercice 1, question 9) B milieu de [AC] donne AB = BC, et BC = −CB, d’où AB = −CB. BA = −½ AC (sens opposé) et CA = 2 BA = −2 BC.' }),
+    glisser({ ...spec('GEO-REPERE', { source: annale(2025, 'exercice 1 (QCM, milieu)') }), code: 'CAFOP-MATH-GEOMETRIE-E08', niveau: 2, consigne: 'A(1/2 ; 3/2) et B(3/2 ; 9/2). Complète les coordonnées du milieu I de [AB].', texte: 'L’abscisse de I vaut {{1}} et son ordonnée vaut {{3}}.', distracteurs: ['2', '6', '1,5'],
+      explication: '(CAFOP IA 2025, mathématiques, exercice 1) Abscisse : (1/2 + 3/2) ÷ 2 = 2 ÷ 2 = 1. Ordonnée : (3/2 + 9/2) ÷ 2 = 6 ÷ 2 = 3. Oublier la division par 2 donnerait 2 et 6.' }),
+    numerique({ ...spec('GEO-ANGLES', { source: annale(2025, 'exercice 2') }), code: 'CAFOP-MATH-GEOMETRIE-E09', niveau: 2, consigne: 'O, A, E sont alignés, ainsi que O, B, F, et (AB) est parallèle à (EF). OA = 30 cm, OE = 50 cm et OB = 36 cm. Calcule OF en centimètres.', valeur: 60, unite: 'cm', tolerance: { type: 'abs', valeur: 0 },
+      calcul: ['Thalès : OB/OF = OA/OE = 30/50 = 3/5', 'OF = 5 × OB ÷ 3 = 5 × 36 ÷ 3 = 60 cm'],
+      explication: '(CAFOP IA 2025, mathématiques, exercice 2) D’après la propriété de Thalès, OB/OF = OA/OE = 3/5. Donc OF = 36 × 5 ÷ 3 = 60 cm.' }),
+    numerique({ ...spec('GEO-TRIGO', { source: annale(2026, 'exercice 4, question 2 a') }), code: 'CAFOP-MATH-GEOMETRIE-E10', niveau: 2, consigne: 'Le triangle BEP est rectangle en E, avec BE = 60 et EP = 30. Calcule tan(EBP).', valeur: 0.5, decimales: 1, tolerance: { type: 'abs', valeur: 0 },
+      calcul: ['Pour l’angle B : côté opposé EP = 30, côté adjacent BE = 60', 'tan(EBP) = 30 ÷ 60 = 0,5'],
+      explication: '(CAFOP IA 2026, mathématiques, exercice 4) La tangente vaut côté opposé ÷ côté adjacent = EP ÷ BE = 30 ÷ 60 = 1/2.' }),
+    numerique({ ...spec('GEO-TRIGO', { source: annale(2026, 'exercice 4, question 1') }), code: 'CAFOP-MATH-GEOMETRIE-E11', niveau: 2, consigne: 'Dans le même triangle BEP rectangle en E (BE = 60, EP = 30), BP s’écrit k√5. Donne k.', valeur: 30, tolerance: { type: 'abs', valeur: 0 },
+      calcul: ['BP² = 60² + 30² = 3 600 + 900 = 4 500', '4 500 = 900 × 5, donc BP = 30√5'],
+      explication: '(CAFOP IA 2026, mathématiques, exercice 4) Pythagore donne BP² = 4 500 = 900 × 5. Comme √900 = 30, BP = 30√5 : k = 30.' }),
+    numerique({ ...spec('GEO-ESPACE', { source: annale(2021, 'exercice 3') }), code: 'CAFOP-MATH-GEOMETRIE-E12', niveau: 3, consigne: 'ABCDEFGH est un cube de 6 cm d’arête. Le triangle ACH est formé de trois diagonales de faces. Son aire vaut k√3 cm². Donne k.', valeur: 18, tolerance: { type: 'abs', valeur: 0 },
+      calcul: ['AC = CH = AH = 6√2 cm (diagonales de faces)', 'Triangle équilatéral : aire = c² × √3 ÷ 4', '(6√2)² = 72 ; 72 ÷ 4 = 18, donc aire = 18√3 cm²'],
+      explication: '(CAFOP IA 2021, mathématiques, exercice 3) Les trois côtés sont des diagonales de faces carrées de 6 cm, donc égaux à 6√2 : le triangle est équilatéral. Aire : 72 × √3 ÷ 4 = 18√3 cm².' }),
+    qcm({ ...spec('GEO-ANGLES'), code: 'CAFOP-MATH-GEOMETRIE-E13', niveau: 3, consigne: 'Dans le triangle OAB, K est sur [OA] et G sur [OB]. OK = 12, OA = 30, OG = 14 et OB = 35. Peut-on affirmer que (KG) est parallèle à (AB) ?', options: ['Oui, car OK/OA = OG/OB = 2/5 et les points sont dans le même ordre.', 'Non, car OK et OG sont différents.', 'Oui, car OK + OG = 26.', 'Non, car OA/OB n’est pas un nombre entier.'], bonne: 0,
+      explication: 'OK/OA = 12/30 = 2/5 et OG/OB = 14/35 = 2/5. Les rapports sont égaux et K, G sont du même côté de O que A et B : la réciproque de Thalès s’applique.' }),
+    vf({ ...spec('GEO-ESPACE'), code: 'CAFOP-MATH-GEOMETRIE-E14', niveau: 3, consigne: 'Juge chaque affirmation sur un cube d’arête 5 cm.', affirmations: [['Son volume est 125 cm³.', true], ['La diagonale d’une face mesure 5√2 cm.', true], ['La grande diagonale du cube mesure 5√2 cm.', false], ['Une pyramide de même base et de même hauteur a un volume de 125 cm³.', false]],
+      explication: 'Volume : 5³ = 125 cm³. Diagonale de face : 5√2 cm ; grande diagonale : 5√3 cm. La pyramide de même base et de même hauteur a un volume trois fois plus petit : 125 ÷ 3 ≈ 41,7 cm³.' }),
+  ],
+};
+
+module.exports = [geometrie];

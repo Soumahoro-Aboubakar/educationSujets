@@ -30,7 +30,7 @@
         "a + ib correspond au point (a ; b).",
         "L’égalité se vérifie partie par partie."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L2",
@@ -54,7 +54,7 @@
         "Addition : regrouper les deux parties.",
         "Produit : développer puis utiliser i² = −1."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L3",
@@ -78,7 +78,7 @@
         "Conjuguer : remplacer b par −b.",
         "Pour un quotient, conjuguer le dénominateur en haut et en bas."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L4",
@@ -103,7 +103,7 @@
         "AB = |b − a|.",
         "|z − a| = R décrit un cercle."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L5",
@@ -126,7 +126,7 @@
         "cos : horizontal ; sin : vertical.",
         "Retenir les angles usuels et utiliser les symétries."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L6",
@@ -151,7 +151,7 @@
         "Forme exponentielle : r e^(iθ).",
         "Arguments définis à un nombre entier de tours près."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L7",
@@ -177,7 +177,7 @@
         "Quotient : modules divisés, angles soustraits.",
         "Puissance : rⁿ et nθ."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L8",
@@ -202,7 +202,7 @@
         "Identifier les parties et le module.",
         "Garder les deux racines opposées si w ≠ 0."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L9",
@@ -227,7 +227,7 @@
         "Trouver δ tel que δ² = Δ.",
         "Utiliser les deux signes puis vérifier."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L10",
@@ -252,7 +252,7 @@
         "Angles : (θ + 2kπ)/n.",
         "n racines distinctes sur un cercle si w ≠ 0."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ENSEA-AS-COMPLEXES-L11",
@@ -275,7 +275,7 @@
         "Similitude : chercher le centre fixe.",
         "Multiplier par a change l’échelle et la direction."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

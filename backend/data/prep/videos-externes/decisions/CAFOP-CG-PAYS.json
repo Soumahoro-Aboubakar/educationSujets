@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-CG-PAYS-L1",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz sur la Côte d’Ivoire.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-PAYS-L2",
+    "youtubeId": "6Jf-fZHINM4",
+    "couverture": "exacte",
+    "justification": "Les capitales des pays d’Afrique de l’Ouest.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-PAYS-L3",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Le seul candidat était en anglais.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-PAYS-L4",
+    "youtubeId": "xhfd3mx3VAY",
+    "couverture": "partielle",
+    "justification": "Les plus longs fleuves d’Afrique (Nil, Congo, Niger…).",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-PAYS-L5",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-PAYS-L6",
+    "youtubeId": "h_YkcmbRR4Q",
+    "couverture": "exacte",
+    "justification": "Pays, continents et océans.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-PAYS-L7",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-CG-PAYS-L8",
+    "youtubeId": null,
+    "couverture": "partielle",
+    "justification": "Seulement des quiz.",
+    "source": "aucun candidat satisfaisant",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

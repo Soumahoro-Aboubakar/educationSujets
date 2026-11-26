@@ -1,0 +1,253 @@
+{
+  "module": "CAFOP-MATH-PROP",
+  "titre": "Proportionnalité et pourcentages",
+  "matiere": "Mathématiques",
+  "resume": "Utiliser un tableau de proportionnalité pour calculer des prix et des taux, lire une échelle, comparer des rythmes et résoudre des problèmes de partage ou d’intérêts simples.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-PROP-L1",
+      "titre": "Lire et compléter un tableau de proportionnalité",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Calculer une part ou un taux",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître un tableau de proportionnalité, trouver son coefficient et compléter une case. Prérequis : savoir multiplier et diviser. Deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre. Ce nombre est le coefficient de proportionnalité. Dans un tableau, chaque colonne associe deux valeurs. Pour trouver le coefficient qui permet de descendre de la première ligne à la seconde, divise la valeur du bas par celle du haut, si celle-ci est non nulle. Le passage par l’unité consiste à calculer d’abord le prix d’un kilogramme, d’un cahier ou d’une autre unité. Si tu connais le prix pour une quantité et que tu en cherches une autre, la règle de trois réunit les deux opérations : prix connu × quantité voulue ÷ quantité connue.",
+      "formules": [],
+      "exemples": [
+        "Acheter du riz au marché",
+        "Calculer le prix de ramettes"
+      ],
+      "pieges": [
+        "Si le prix comprend des frais fixes, doubler la quantité ne double généralement pas le prix total. Vérifie la proportionnalité avant d’appl…"
+      ],
+      "aRetenir": [
+        "Associe les deux valeurs de chaque colonne.",
+        "Cherche un coefficient commun.",
+        "Passe par l’unité pour compléter le tableau."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L2",
+      "titre": "Calculer une part ou un taux",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "2/10",
+      "precedente": "Lire et compléter un tableau de proportionnalité",
+      "suivante": "Appliquer une variation et retrouver le prix initial",
+      "explication": "À la fin de cette leçon, tu sauras calculer une part en pourcentage, trouver le taux que représente une part et retrouver un total. Prérequis : savoir diviser et lire une fraction. Un pourcentage exprime une proportion pour cent. Par exemple, 15 % se lit « quinze pour cent » et correspond à 15/100, soit 0,15. Dans un problème, repère le total de référence : c’est la quantité qui représente 100 %. La part est la quantité que tu compares à ce total.",
+      "formules": [],
+      "exemples": [
+        "Prévoir une dépense",
+        "Lire un résultat de classe"
+      ],
+      "pieges": [
+        "Inverser la part et le total change le sens du calcul. Si tu calcules le taux de réussite, divise l’effectif des élèves qui ont réussi par …"
+      ],
+      "aRetenir": [
+        "Le total de référence représente 100 %.",
+        "Pour trouver la part, multiplie le total par le taux en décimal.",
+        "Pour trouver le taux, prépare le quotient part ÷ total."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L3",
+      "titre": "Appliquer une variation et retrouver le prix initial",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "3/10",
+      "precedente": "Calculer une part ou un taux",
+      "suivante": "Calculer des évolutions successives",
+      "explication": "À la fin de cette leçon, tu sauras calculer un prix après une hausse ou une remise et retrouver le prix avant la variation. Prérequis : savoir écrire un pourcentage sous forme décimale. Une hausse ajoute une fraction du prix de départ. Une remise en retire une fraction. Le coefficient multiplicateur permet de calculer le prix final en une opération. Pour retrouver le prix initial à partir du prix final, effectue l’opération inverse : divise par le même coefficient, s’il est non nul.",
+      "formules": [
+        "Prix final = prix initial × coefficient. Prix initial = prix final ÷ coefficient si le coefficient est non nul."
+      ],
+      "exemples": [
+        "Une réduction sur un sac",
+        "Retrouver un prix avant une hausse"
+      ],
+      "pieges": [
+        "Retirer 5 % du prix affiché après une hausse de 5 % revient à prendre le prix final comme base. La hausse avait été calculée sur le prix in…"
+      ],
+      "aRetenir": [
+        "Choisis le signe selon la variation.",
+        "Multiplie pour aller du prix initial au prix final.",
+        "Divise pour revenir au prix initial."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L4",
+      "titre": "Calculer des évolutions successives",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "4/10",
+      "precedente": "Appliquer une variation et retrouver le prix initial",
+      "suivante": "Utiliser l’échelle d’un plan ou d’une carte",
+      "explication": "À la fin de cette leçon, tu sauras calculer la valeur après deux variations successives et déterminer le taux global. Prérequis : savoir calculer un coefficient multiplicateur. Après une première variation, la nouvelle valeur devient la base de la seconde. Tu peux calculer chaque valeur intermédiaire ou multiplier directement les deux coefficients pour obtenir le coefficient global. Compare ensuite ce coefficient à 1 pour déterminer la hausse ou la baisse par rapport au départ.",
+      "formules": [
+        "Coefficient global = premier coefficient × deuxième coefficient. Taux global en pourcentage = (coefficient global − 1) × 100."
+      ],
+      "exemples": [
+        "Deux variations opposées",
+        "Deux hausses de production"
+      ],
+      "pieges": [
+        "Dans une hausse suivie d’une baisse du même taux, additionner les taux donne zéro. Ce calcul oublie que la baisse s’applique à une base dev…"
+      ],
+      "aRetenir": [
+        "Calcule un coefficient par variation.",
+        "Multiplie les coefficients successifs.",
+        "Compare le coefficient global à 1."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L5",
+      "titre": "Utiliser l’échelle d’un plan ou d’une carte",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "5/10",
+      "precedente": "Calculer des évolutions successives",
+      "suivante": "Calculer et convertir une vitesse moyenne",
+      "explication": "À la fin de cette leçon, tu sauras passer d’une longueur dessinée à une longueur réelle, faire le calcul inverse et retrouver une échelle. Prérequis : savoir convertir les kilomètres, les mètres et les centimètres. L’échelle d’un dessin est le rapport de la longueur dessinée à la longueur réelle, exprimées dans la même unité. À l’échelle 1/N, 1 cm sur le plan représente N cm en réalité. Le dénominateur N indique combien de fois la longueur réelle est plus grande que la longueur dessinée lorsque N est supérieur à 1.",
+      "formules": [],
+      "exemples": [
+        "Mesurer une cour sur un plan",
+        "Reporter une distance sur une carte"
+      ],
+      "pieges": [
+        "Une longueur et une aire ne se convertissent pas avec le même facteur. La multiplication par N s’applique ici aux longueurs."
+      ],
+      "aRetenir": [
+        "Mets les deux longueurs dans la même unité.",
+        "Multiplie par N pour aller vers le réel.",
+        "Divise par N pour aller vers le dessin."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L6",
+      "titre": "Calculer et convertir une vitesse moyenne",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "6/10",
+      "precedente": "Utiliser l’échelle d’un plan ou d’une carte",
+      "suivante": "Calculer un débit ou un rendement de travail",
+      "explication": "À la fin de cette leçon, tu sauras calculer une vitesse moyenne sur plusieurs étapes et convertir des km/h en m/s dans les deux sens. Prérequis : savoir convertir des durées et diviser des nombres décimaux. La vitesse moyenne est la distance totale divisée par la durée correspondante. Pour obtenir des km/h, utilise des kilomètres et des heures. Pour obtenir des m/s, utilise des mètres et des secondes. Si l’énoncé demande une moyenne sur tout le trajet, compte les arrêts entre le départ et l’arrivée dans la durée totale. Pour convertir une vitesse, pars de 1 km = 1 000 m et de 1 h = 3 600 s. En une seconde, un trajet de 1 000 m réparti sur 3 600 secondes représente 1 000 ÷ 3 600 m. Tu peux donc diviser par 3,6 pour passer des km/h aux m/s, ou multiplier par 3,6 dans l’autre sens.",
+      "formules": [
+        "Vitesse moyenne = distance totale ÷ durée totale. Distance = vitesse moyenne × durée. Durée = distance ÷ vitesse moyenne si la vitesse est …"
+      ],
+      "exemples": [
+        "Convertir une vitesse",
+        "Inclure un arrêt"
+      ],
+      "pieges": [
+        "Faire la moyenne des vitesses des étapes sans tenir compte des durées peut donner un résultat faux, notamment quand une étape dure beaucoup…"
+      ],
+      "aRetenir": [
+        "Vitesse moyenne égale distance totale divisée par durée totale.",
+        "Des km/h aux m/s, divise par 3,6.",
+        "Des m/s aux km/h, multiplie par 3,6."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L7",
+      "titre": "Calculer un débit ou un rendement de travail",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "7/10",
+      "precedente": "Calculer et convertir une vitesse moyenne",
+      "suivante": "Partager une somme proportionnellement",
+      "explication": "À la fin de cette leçon, tu sauras calculer un débit, la production par personne et la durée d’un travail effectué à plusieurs. Prérequis : savoir passer par l’unité et mettre les durées dans la même unité. Un débit indique le volume qui s’écoule par unité de temps, par exemple en L/min. Un rendement de travail, au sens de productivité, indique la quantité produite par unité de temps. Pour trouver la production par personne et par jour dans une équipe où chacun travaille au même rythme, divise la production totale par le nombre de personnes puis par le nombre de jours. Si des personnes ou des machines travaillent ensemble sans modifier leur rythme, additionne leurs productions pour une même unité de temps. Si une machine rejoint l’équipe en cours de travail, calcule ce qui est déjà produit. Divise ensuite la quantité restante par le nouveau rythme pour trouver la durée de la seconde pha…",
+      "formules": [
+        "À rythme constant, quantité produite = rythme × durée. Durée = quantité à produire ÷ rythme si le rythme est positif."
+      ],
+      "exemples": [
+        "Remplir une réserve d’eau",
+        "Trier le cacao à deux équipes"
+      ],
+      "pieges": [
+        "Additionner les durées nécessaires à chacun pour réaliser la même tâche ne donne pas la durée du travail commun. Additionne des quantités p…"
+      ],
+      "aRetenir": [
+        "Calcule d’abord la production par unité de temps.",
+        "Additionne les rythmes simultanés dans la même unité.",
+        "Adapte le calcul si le nombre de personnes ou de machines change."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L8",
+      "titre": "Partager une somme proportionnellement",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "8/10",
+      "precedente": "Calculer un débit ou un rendement de travail",
+      "suivante": "Calculer des intérêts simples",
+      "explication": "À la fin de cette leçon, tu sauras répartir une somme selon des poids donnés et vérifier le montant distribué. Prérequis : savoir diviser une somme et calculer une fraction d’un total. Dans un partage proportionnel, chaque bénéficiaire reçoit un nombre de parts indiqué par un poids : des points de mérite, une contribution ou un autre critère fixé par le problème. Si deux poids sont dans un rapport de deux à un, le premier bénéficiaire reçoit deux fois la somme reçue par le second.",
+      "formules": [],
+      "exemples": [
+        "Un héritage dans un problème de calcul",
+        "Une prime répartie au mérite"
+      ],
+      "pieges": [
+        "Diviser par le nombre de personnes donne un partage égal. Pour un partage selon des poids différents, le diviseur est la somme des poids."
+      ],
+      "aRetenir": [
+        "Repère le poids de chaque bénéficiaire.",
+        "Divise par la somme des poids.",
+        "Vérifie que les montants obtenus reconstituent le total."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L9",
+      "titre": "Calculer des intérêts simples",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "9/10",
+      "precedente": "Partager une somme proportionnellement",
+      "suivante": "Bilan méthode — résoudre un problème comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras calculer un intérêt simple sur plusieurs mois, puis déterminer le montant final. Prérequis : savoir prendre un pourcentage d’une somme et convertir des mois en années. Le capital est la somme de départ. L’intérêt est le montant gagné sur un placement ou dû en plus du capital dans un emprunt. Dans un calcul à intérêts simples, le taux s’applique au capital de départ pendant toute la durée. Si le taux est annuel et que la durée est donnée en mois, divise le nombre de mois par 12. Si deux placements rapportent au même taux annuel, les intérêts sont proportionnels aux capitaux quand les durées sont égales. Quand les durées diffèrent, chaque intérêt est proportionnel au produit du capital par la durée, avec la même unité de temps pour les deux placements.",
+      "formules": [
+        "Intérêt simple = capital × taux annuel en décimal × durée en années. Montant final = capital + intérêt."
+      ],
+      "exemples": [
+        "Placer un capital pendant un an",
+        "Calculer l’intérêt sur neuf mois"
+      ],
+      "pieges": [
+        "Multiplier directement par le nombre de mois revient à traiter chaque mois comme une année lorsque le taux est annuel."
+      ],
+      "aRetenir": [
+        "Applique le taux au capital de départ.",
+        "Pour un taux annuel, exprime la durée en années.",
+        "Ajoute l’intérêt au capital seulement pour obtenir le montant final."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROP-L10",
+      "titre": "Bilan méthode — résoudre un problème comme au concours",
+      "module": "Proportionnalité et pourcentages (Mathématiques)",
+      "position": "10/10",
+      "precedente": "Calculer des intérêts simples",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras choisir une méthode de calcul, justifier tes étapes et contrôler une réponse comme au concours. Prérequis : avoir étudié les pourcentages, les échelles et les rythmes.",
+      "formules": [],
+      "exemples": [
+        "Rédiger un calcul inverse",
+        "Enchaîner échelle et vitesse"
+      ],
+      "pieges": [
+        "Une distance correcte ou un temps de roulage correct peut n’être qu’une étape. Relis la question finale avant de rendre ta copie."
+      ],
+      "aRetenir": [
+        "Identifie la grandeur et l’unité demandées.",
+        "Justifie les étapes qui relient les données à la réponse.",
+        "Contrôle le résultat et conclus par une phrase."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

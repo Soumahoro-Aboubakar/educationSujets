@@ -1,0 +1,83 @@
+[
+  {
+    "code": "CAFOP-FR-GRAM-L1",
+    "youtubeId": "yl8ROX7Ltzg",
+    "couverture": "exacte",
+    "justification": "Les classes grammaticales (nature des mots) en 5 minutes.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L2",
+    "youtubeId": "lJSkCPwHAFw",
+    "couverture": "partielle",
+    "justification": "COD et COI ; le COS est expliqué dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L3",
+    "youtubeId": "rPU_ehACEM8",
+    "couverture": "partielle",
+    "justification": "Trouver l’attribut du sujet ; les compléments circonstanciels sont dans le texte.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L4",
+    "youtubeId": "Wt676-VZfBU",
+    "couverture": "exacte",
+    "justification": "Les expansions du nom : épithète, complément du nom, relative, apposition.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L5",
+    "youtubeId": "ZV8U856rM30",
+    "couverture": "exacte",
+    "justification": "Choisir le pronom relatif : qui, que, dont, où, lequel.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L6",
+    "youtubeId": "vKHinbuTLd0",
+    "couverture": "exacte",
+    "justification": "Phrase simple ou phrase complexe : compter les verbes conjugués.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L7",
+    "youtubeId": "pGQ1nFbzfmY",
+    "couverture": "exacte",
+    "justification": "Identifier les subordonnées relatives, complétives et circonstancielles.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L8",
+    "youtubeId": "Q2mm033jcNg",
+    "couverture": "partielle",
+    "justification": "Les signes de ponctuation et leur rôle.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-FR-GRAM-L9",
+    "youtubeId": "lH59b0i93LY",
+    "couverture": "exacte",
+    "justification": "Comment analyser une phrase : propositions, nature et fonction.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]

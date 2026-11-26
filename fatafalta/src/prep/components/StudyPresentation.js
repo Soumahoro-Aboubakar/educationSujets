@@ -31,7 +31,7 @@ export const useResultAnnouncement = (message) => {
   }, [message]);
 };
 
-export const CorrectorNote = ({ title, children, correct, color, style }) => {
+export const CorrectorNote = ({ title, children, correct, color, style, icon: Icon }) => {
   const { colors, brand } = useTheme();
   const { styles } = useStyles();
   const ink = color || (correct ? colors.success : colors.error);
@@ -39,7 +39,7 @@ export const CorrectorNote = ({ title, children, correct, color, style }) => {
     <View style={[styles.note, style]}>
       <CopyMargin color={ink} />
       <View style={styles.noteHead}>
-        {correct ? <Check size={21} color={colors.success} strokeWidth={2.2} /> : <X size={20} color={ink} />}
+        {Icon ? <Icon size={20} color={ink} strokeWidth={2} /> : correct ? <Check size={21} color={colors.success} strokeWidth={2.2} /> : <X size={20} color={ink} />}
         <Text style={[styles.hand, { color: brand.burgundy }]}>{title}</Text>
       </View>
       {children}

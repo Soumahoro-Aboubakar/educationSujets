@@ -28,7 +28,7 @@
         "Choisir implique un renoncement.",
         "Décrire et recommander sont deux démarches distinctes."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L2",
@@ -50,7 +50,7 @@
         "La production comprend des services.",
         "Distinguer la prestation et son paiement."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L3",
@@ -73,7 +73,7 @@
         "Équilibre : offre = demande.",
         "Un prix d’équilibre n’est pas une garantie d’accès pour tous."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L4",
@@ -99,7 +99,7 @@
         "Valeur = prix × quantité.",
         "Pourcentage : préciser la base."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L5",
@@ -122,7 +122,7 @@
         "La carte mobilise un dépôt.",
         "L’inflation réduit le pouvoir d’achat d’une somme fixe."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L6",
@@ -145,7 +145,7 @@
         "Principal remboursé : destruction monétaire.",
         "La banque gère risque et liquidité."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L7",
@@ -170,7 +170,7 @@
         "Un retrait change la forme monétaire.",
         "Distinguer monnaie détenue et contreparties bancaires."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L8",
@@ -193,7 +193,7 @@
         "Action : propriété ; obligation : dette.",
         "Primaire : émission ; secondaire : revente."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L9",
@@ -218,7 +218,7 @@
         "Taux et liquidité orientent le crédit.",
         "Effets soumis au contexte et aux délais."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     },
     {
       "code": "ECO-MONNAIE-L10",
@@ -241,7 +241,7 @@
         "Politique monétaire commune.",
         "Besoin de réponses aux chocs différents."
       ],
-      "dejaDecidee": false
+      "dejaDecidee": true
     }
   ]
 }

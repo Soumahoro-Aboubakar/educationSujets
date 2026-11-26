@@ -1,0 +1,247 @@
+{
+  "module": "CAFOP-MATH-PROBLEMES",
+  "titre": "Équations et problèmes",
+  "matiere": "Mathématiques",
+  "resume": "Résoudre des équations et des inéquations, traduire un problème, puis traiter des suites, des statistiques et des tirages en justifiant ses réponses.",
+  "concours": [
+    "CAFOP — Concours direct d’entrée au CAFOP",
+    "CAFOP — Concours exceptionnel d’instituteurs contractuels (2019)",
+    "CAFOP — Ancien concours d’entrée des instituteurs ordinaires"
+  ],
+  "lecons": [
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L1",
+      "titre": "Isoler l’inconnue dans une équation",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "1/10",
+      "precedente": null,
+      "suivante": "Résoudre une inéquation et lire sa borne",
+      "explication": "À la fin de cette leçon, tu sauras résoudre une équation du premier degré et vérifier la valeur trouvée. Prérequis : effectuer les quatre opérations sur des nombres relatifs. Une équation est une égalité qui contient une inconnue. Ses deux membres sont les expressions situées de part et d’autre du signe =. Résoudre l’équation, c’est trouver les valeurs de l’inconnue qui rendent les deux membres égaux. Au premier degré, après simplification, la lettre apparaît seulement à la puissance 1. S’il reste seulement une égalité entre nombres, décide si elle est vraie ou fausse. Une égalité vraie signifie que toutes les valeurs de départ conviennent. Une égalité fausse signifie que l’équation n’a aucune solution.",
+      "formules": [],
+      "exemples": [
+        "Application simple",
+        "Type concours avec des parenthèses"
+      ],
+      "pieges": [
+        "Dans 3(x − 2), le facteur 3 multiplie aussi −2. Écrire 3x − 2 à cette étape fausse tout le calcul."
+      ],
+      "aRetenir": [
+        "Simplifier chacun des deux membres.",
+        "Isoler l’inconnue par des opérations identiques des deux côtés.",
+        "Vérifier dans l’équation initiale."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L2",
+      "titre": "Résoudre une inéquation et lire sa borne",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "2/10",
+      "precedente": "Isoler l’inconnue dans une équation",
+      "suivante": "Mettre en équation des âges et des partages",
+      "explication": "À la fin de cette leçon, tu sauras résoudre une inéquation simple et repérer un maximum entier. Prérequis : savoir isoler une inconnue dans une équation. Une inéquation impose une comparaison. « Au plus » ou « ne dépasse pas » inclut l’égalité et se traduit par ≤. « Au moins » se traduit par ≥. « Strictement inférieur » ou « strictement supérieur » exclut l’égalité. Une inéquation peut avoir plusieurs solutions. Quand l’inconnue compte des objets, cherche un entier positif ou nul. Pour obtenir un maximum, vérifie que l’entier choisi est permis et que l’entier suivant dépasse la limite. Cette vérification confirme la réponse lorsque la résolution donne une borne supérieure.",
+      "formules": [],
+      "exemples": [
+        "Application simple",
+        "Type concours avec un budget"
+      ],
+      "pieges": [
+        "Évite d’arrondir une borne à l’entier le plus proche. Dans le problème du budget, ce réflexe conduirait à choisir six cahiers et à dépasser…"
+      ],
+      "aRetenir": [
+        "Traduire le seuil avec le bon signe.",
+        "Inverser le sens après une multiplication ou une division par un nombre négatif.",
+        "Vérifier la borne dans le contexte."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L3",
+      "titre": "Mettre en équation des âges et des partages",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "3/10",
+      "precedente": "Résoudre une inéquation et lire sa borne",
+      "suivante": "Résoudre un système par substitution",
+      "explication": "À la fin de cette leçon, tu sauras exprimer des âges ou des parts en fonction d’une inconnue et former l’équation du problème. Prérequis : résoudre une équation du premier degré et calculer avec des fractions simples. Choisis une quantité qui permet d’exprimer facilement les autres, puis donne-lui un nom. Pour les âges, précise si l’on parle d’aujourd’hui ou d’une autre date. Pour un partage, précise si la fraction porte sur le total ou sur ce qu’il reste après une distribution. Écris ensuite l’égalité donnée par l’énoncé. Dans un partage complet, la somme des parts est égale au total. Dans un problème d’âges, chaque relation doit comparer les âges à la date indiquée. Vérifie la somme ou la relation d’âges avant de conclure.",
+      "formules": [],
+      "exemples": [
+        "Application simple avec un partage",
+        "Type concours avec deux dates"
+      ],
+      "pieges": [
+        "Si Adjoua a 3x ans aujourd’hui, son âge dans quatre ans s’écrit 3x + 4. Écrire 3(x + 4) ajouterait quatre ans trois fois."
+      ],
+      "aRetenir": [
+        "Nommer l’inconnue et son unité.",
+        "Exprimer les quantités à la bonne date ou à partir du bon total.",
+        "Vérifier puis répondre à la question posée."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L4",
+      "titre": "Résoudre un système par substitution",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "4/10",
+      "precedente": "Mettre en équation des âges et des partages",
+      "suivante": "Résoudre un système par combinaison",
+      "explication": "À la fin de cette leçon, tu sauras résoudre un système de deux équations à deux inconnues par substitution. Prérequis : exprimer une inconnue en fonction d’une autre et développer une parenthèse. Un système regroupe des conditions à vérifier en même temps. Sa solution est un couple de valeurs, une pour chaque inconnue. Dans un problème d’achats, le nombre total d’objets peut donner une équation et la somme payée une autre. Entoure au brouillon l’expression que tu substitues. Si un coefficient multipliait la lettre remplacée, il multiplie toute l’expression. Dans un achat, utilise la même unité monétaire pour les deux prix et le total.",
+      "formules": [],
+      "exemples": [
+        "Application simple",
+        "Type concours avec deux prix unitaires"
+      ],
+      "pieges": [
+        "Dans le total des achats, 200(18 − x) s’écrit 3 600 − 200x. Oublier de multiplier x par 200 change le coût."
+      ],
+      "aRetenir": [
+        "Écrire une équation par condition.",
+        "Substituer avec les parenthèses nécessaires.",
+        "Vérifier les deux équations avec le couple obtenu."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L5",
+      "titre": "Résoudre un système par combinaison",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "5/10",
+      "precedente": "Résoudre un système par substitution",
+      "suivante": "Retrouver les dimensions d’un rectangle",
+      "explication": "À la fin de cette leçon, tu sauras choisir des multiplicateurs et combiner deux équations pour éliminer une inconnue. Prérequis : savoir ce qu’est une solution d’un système et calculer avec des nombres signés. Traite les deux lignes comme des égalités. Tu peux multiplier tous les termes d’une ligne, y compris son second membre, par un même nombre non nul. Cherche ainsi à obtenir des coefficients égaux ou opposés pour l’une des inconnues. Résous l’équation obtenue, puis garde une des équations initiales pour retrouver l’autre inconnue. La combinaison a utilisé deux conditions à la fois, et la ligne obtenue ne contient qu’une partie de l’information.",
+      "formules": [],
+      "exemples": [
+        "Application simple par addition",
+        "Type concours avec deux achats"
+      ],
+      "pieges": [
+        "Quand tu multiplies une ligne, multiplie aussi le nombre après le signe =. En soustrayant, applique l’opération à tous les termes des deux …"
+      ],
+      "aRetenir": [
+        "Rendre égaux ou opposés les coefficients choisis.",
+        "Combiner les deux membres de chaque équation.",
+        "Retrouver la seconde inconnue puis vérifier."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L6",
+      "titre": "Retrouver les dimensions d’un rectangle",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "6/10",
+      "precedente": "Résoudre un système par combinaison",
+      "suivante": "Reconnaître et prolonger une suite",
+      "explication": "À la fin de cette leçon, tu sauras retrouver les dimensions d’un rectangle à partir de son périmètre et d’une variation d’aire. Prérequis : connaître le périmètre et l’aire d’un rectangle et savoir développer un produit de parenthèses. Le demi-périmètre donne L + l. Écris séparément les dimensions finales et calcule leur produit. Si l’aire augmente, la différence aire finale − aire initiale est positive. Si elle diminue, cette différence est négative. Le terme L × l se retrouve dans les deux produits et s’annule lors de la soustraction.",
+      "formules": [
+        "Périmètre = 2 × (L + l). Aire initiale = L × l."
+      ],
+      "exemples": [
+        "Application simple avec le demi-périmètre",
+        "Type concours avec une variation d’aire"
+      ],
+      "pieges": [
+        "Au développement, le produit de la diminution et de l’augmentation compte aussi. Dans l’exemple, (−2) × 2 donne −4 m² dans la différence de…"
+      ],
+      "aRetenir": [
+        "Passer du périmètre au demi-périmètre.",
+        "Calculer la différence dans l’ordre final moins initial.",
+        "Contrôler les dimensions avec le périmètre et les aires."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L7",
+      "titre": "Reconnaître et prolonger une suite",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "7/10",
+      "precedente": "Retrouver les dimensions d’un rectangle",
+      "suivante": "Calculer moyenne, médiane et fréquence",
+      "explication": "À la fin de cette leçon, tu sauras reconnaître une suite arithmétique ou géométrique et calculer un terme de rang donné. Prérequis : connaître les puissances entières positives et convertir un pourcentage en fraction ou en nombre décimal. Une suite est une liste ordonnée de nombres appelés termes. Le rang indique la place d’un terme selon le point de départ donné. Une suite arithmétique ajoute toujours le même nombre, sa raison r. Une suite géométrique multiplie toujours par le même nombre, sa raison q. Sur une liste de valeurs, compare plusieurs écarts ou, si les termes précédents sont non nuls, plusieurs quotients. Si le départ est au rang 0, il faut n passages pour atteindre le rang n. Une hausse de t % multiplie par 1 + t/100. Une baisse de t % multiplie par 1 − t/100. Si le taux reste le même à chaque étape, le coefficient multiplicateur reste le même.",
+      "formules": [],
+      "exemples": [
+        "Application simple avec un ajout constant",
+        "Type concours avec une hausse annuelle"
+      ],
+      "pieges": [
+        "Lors d’une hausse répétée, le pourcentage s’applique à la valeur de l’année précédente. Reconduire chaque année l’augmentation calculée sur…"
+      ],
+      "aRetenir": [
+        "Reconnaître une différence constante dans une suite arithmétique.",
+        "Reconnaître un facteur constant dans une suite géométrique.",
+        "Compter les passages avant de calculer un terme."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L8",
+      "titre": "Calculer moyenne, médiane et fréquence",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "8/10",
+      "precedente": "Reconnaître et prolonger une suite",
+      "suivante": "Calculer une probabilité de tirage",
+      "explication": "À la fin de cette leçon, tu sauras calculer une moyenne, une médiane et une fréquence à partir d’une liste ou d’un tableau d’effectifs. Prérequis : additionner, diviser et ranger des nombres par ordre croissant. L’effectif d’une valeur indique combien de fois elle apparaît. L’effectif total N est le nombre d’observations. Une fréquence est la part d’une valeur ou d’un groupe dans ce total. Pour la donner en pourcentage, multiplie la fréquence par 100. Pour trouver une médiane dans un tableau, additionne les effectifs dans l’ordre croissant des valeurs. Ces effectifs cumulés indiquent jusqu’à quel rang s’étend chaque valeur. Pour un effectif total pair N, cherche les rangs N/2 et N/2 + 1.",
+      "formules": [],
+      "exemples": [
+        "Application simple avec cinq valeurs",
+        "Type concours avec un tableau d’effectifs"
+      ],
+      "pieges": [
+        "Dans un tableau, diviser par le nombre de valeurs différentes revient à traiter les groupes comme s’ils avaient le même effectif. Pour calc…"
+      ],
+      "aRetenir": [
+        "Additionner les effectifs pour trouver le total.",
+        "Pondérer la moyenne par les répétitions.",
+        "Ordonner les valeurs avant de chercher la médiane."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L9",
+      "titre": "Calculer une probabilité de tirage",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "9/10",
+      "precedente": "Calculer moyenne, médiane et fréquence",
+      "suivante": "Bilan méthode – rédiger comme au concours",
+      "explication": "À la fin de cette leçon, tu sauras calculer une probabilité de tirage et traiter la demande « au moins un » avec l’événement contraire. Prérequis : multiplier et simplifier des fractions. Une issue est un résultat possible d’une expérience. Un événement regroupe les issues qui répondent à une condition. Au tirage d’une bille, si chaque bille a la même chance de sortir, sa couleur est d’autant plus probable qu’il y a de billes de cette couleur. Lors de tirages successifs sans remise, garde en tête les objets déjà sortis. Pour compter les issues d’une branche, multiplie les nombres de choix à chaque étape. Avec remise, l’objet tiré retourne dans le lot et le nombre total d’objets disponibles reste le même. Pour « au moins un », il est souvent plus rapide de calculer la probabilité de « aucun ».",
+      "formules": [
+        "Probabilité = nombre d’issues favorables ÷ nombre total d’issues, si les issues sont équiprobables."
+      ],
+      "exemples": [
+        "Application simple avec un tirage",
+        "Type concours avec deux tirages sans remise"
+      ],
+      "pieges": [
+        "Sans remise, le deuxième tirage se fait parmi les objets qui restent. Dans le dernier exemple, après une bille jaune, il reste trois jaunes…"
+      ],
+      "aRetenir": [
+        "Décrire les issues et l’événement.",
+        "Tenir compte de la remise à chaque tirage.",
+        "Utiliser « aucun » pour calculer « au moins un »."
+      ],
+      "dejaDecidee": false
+    },
+    {
+      "code": "CAFOP-MATH-PROBLEMES-L10",
+      "titre": "Bilan méthode – rédiger comme au concours",
+      "module": "Équations et problèmes (Mathématiques)",
+      "position": "10/10",
+      "precedente": "Calculer une probabilité de tirage",
+      "suivante": null,
+      "explication": "À la fin de cette leçon, tu sauras rédiger une solution complète, du choix de l’inconnue à la phrase de réponse vérifiée. Prérequis : savoir mettre un problème en équation ou en inéquation et isoler une inconnue. Lis d’abord la question pour repérer ce qu’il faut rendre. On peut te demander une valeur, un couple, une borne ou une probabilité. Au brouillon, note les données utiles et les contraintes. Sur la copie, indique ce que représente chaque lettre et pourquoi l’opération choisie traduit l’énoncé. Pour une comparaison de tarifs, écris les deux coûts pour la même quantité et garde le sens de la comparaison demandé. Pour un seuil entier, contrôle l’entier choisi et son voisin du côté de la borne.",
+      "formules": [],
+      "exemples": [
+        "Application simple avec une réponse rédigée",
+        "Type concours avec un seuil strict"
+      ],
+      "pieges": [
+        "Une copie qui donne seulement une valeur laisse le lecteur deviner d’où elle vient. Dans un problème de seuil, vérifie aussi si l’égalité e…"
+      ],
+      "aRetenir": [
+        "Nommer, traduire et justifier.",
+        "Vérifier le résultat dans le contexte de départ.",
+        "Répondre à toute la question avec les unités utiles."
+      ],
+      "dejaDecidee": false
+    }
+  ]
+}

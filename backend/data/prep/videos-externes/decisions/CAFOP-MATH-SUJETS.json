@@ -1,0 +1,74 @@
+[
+  {
+    "code": "CAFOP-MATH-SUJETS-L1",
+    "youtubeId": "gcjmE9GfKrk",
+    "couverture": "partielle",
+    "justification": "Calculer la part de chacun par une mise en équation, comme le problème des volailles de 2017.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-SUJETS-L2",
+    "youtubeId": "NTDcFqbUNCU",
+    "couverture": "exacte",
+    "justification": "Problème de tarifs adulte et enfant résolu par un système, identique à la sortie de recollection de 2020.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-SUJETS-L3",
+    "youtubeId": "6TXDLazaqko",
+    "couverture": "partielle",
+    "justification": "Réduire une somme de racines carrées en un seul radical, comme A = −4√63 − 2√28 + 2√112.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-SUJETS-L4",
+    "youtubeId": "OWKaMlUlu2w",
+    "couverture": "partielle",
+    "justification": "Correction vidéo d’un exercice de mathématiques du concours CAFOP 2017.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-SUJETS-L5",
+    "youtubeId": "BhI3NU4g3b4",
+    "couverture": "partielle",
+    "justification": "Déterminer une longueur grâce au théorème de Thalès.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-SUJETS-L6",
+    "youtubeId": "XvVSP869qT4",
+    "couverture": "exacte",
+    "justification": "Section d’une pyramide par un plan parallèle à la base et volume de la pyramide réduite.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-SUJETS-L7",
+    "youtubeId": "EG4qV51Sxk4",
+    "couverture": "partielle",
+    "justification": "Bases des statistiques de 3ᵉ : effectifs, mode, moyenne.",
+    "source": "recherche ChatGPT (rechercher.js) vérifiée et relue par Claude",
+    "recherchePar": "chatgpt",
+    "ecartes": []
+  },
+  {
+    "code": "CAFOP-MATH-SUJETS-L8",
+    "youtubeId": "mTm3gt_zYUQ",
+    "couverture": "partielle",
+    "justification": "Yvan Monka : l’essentiel des mathématiques de 3ᵉ et des conseils pour l’épreuve.",
+    "source": "recherche YouTube (chercher-youtube.js) relue par Claude",
+    "recherchePar": "claude",
+    "ecartes": []
+  }
+]
