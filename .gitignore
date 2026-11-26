@@ -84,5 +84,19 @@ fatafalta-promo/out/
 fatafalta-promo/*.mp4
 fatafalta-promo/*.mov
 fatafalta-promo/*.webm
+# Vidéos rangées par jour (fatafalta-promo/videos/AAAA-MM/AAAA-MM-JJ/…) : médias hors de Git,
+# seuls README.md, _modele-fiche.md et les fiche.md sont versionnés.
+fatafalta-promo/videos/**/*.mp4
+fatafalta-promo/videos/**/*.mov
+fatafalta-promo/videos/**/*.webm
+fatafalta-promo/videos/**/*.m4v
+fatafalta-promo/videos/**/*.wav
+fatafalta-promo/videos/**/*.mp3
+fatafalta-promo/videos/**/*.m4a
+fatafalta-promo/videos/**/*.aac
+fatafalta-promo/videos/**/*.png
+fatafalta-promo/videos/**/*.jpg
+fatafalta-promo/videos/**/*.jpeg
+fatafalta-promo/videos/**/*.webp
 fatafalta-promo/assets/_generated/
 *.wav

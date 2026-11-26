@@ -1,0 +1,1136 @@
+[
+ {
+  "id": 1,
+  "text": "Tu prépares un concours ? Le BAC, le BEPC, le CAFOP, l'INFAS ou une grande école ? Tu passes des heures à chercher les bons sujets pour t'entraîner ?",
+  "file": "voice/s1.mp3",
+  "duration": 9.624,
+  "words": [
+   {
+    "w": "Tu",
+    "start": 0.096,
+    "end": 0.18
+   },
+   {
+    "w": "prépares",
+    "start": 0.18,
+    "end": 0.577
+   },
+   {
+    "w": "un",
+    "start": 0.577,
+    "end": 0.649
+   },
+   {
+    "w": "concours",
+    "start": 0.649,
+    "end": 1.31
+   },
+   {
+    "w": "Le",
+    "start": 1.683,
+    "end": 1.851
+   },
+   {
+    "w": "BAC",
+    "start": 1.851,
+    "end": 2.212
+   },
+   {
+    "w": "le",
+    "start": 2.5,
+    "end": 2.608
+   },
+   {
+    "w": "B.E.P.C.",
+    "start": 2.608,
+    "end": 3.305
+   },
+   {
+    "w": "le",
+    "start": 3.618,
+    "end": 3.69
+   },
+   {
+    "w": "Cafop",
+    "start": 3.69,
+    "end": 4.195
+   },
+   {
+    "w": "l'Infass",
+    "start": 4.459,
+    "end": 5.048
+   },
+   {
+    "w": "ou",
+    "start": 5.385,
+    "end": 5.421
+   },
+   {
+    "w": "une",
+    "start": 5.421,
+    "end": 5.505
+   },
+   {
+    "w": "grande",
+    "start": 5.505,
+    "end": 5.721
+   },
+   {
+    "w": "école",
+    "start": 5.721,
+    "end": 6.238
+   },
+   {
+    "w": "Tu",
+    "start": 6.611,
+    "end": 6.707
+   },
+   {
+    "w": "passes",
+    "start": 6.707,
+    "end": 6.935
+   },
+   {
+    "w": "des",
+    "start": 6.935,
+    "end": 7.067
+   },
+   {
+    "w": "heures",
+    "start": 7.067,
+    "end": 7.464
+   },
+   {
+    "w": "à",
+    "start": 7.56,
+    "end": 7.608
+   },
+   {
+    "w": "chercher",
+    "start": 7.608,
+    "end": 7.969
+   },
+   {
+    "w": "les",
+    "start": 7.969,
+    "end": 8.065
+   },
+   {
+    "w": "bons",
+    "start": 8.065,
+    "end": 8.209
+   },
+   {
+    "w": "sujets",
+    "start": 8.209,
+    "end": 8.558
+   },
+   {
+    "w": "pour",
+    "start": 8.558,
+    "end": 8.714
+   },
+   {
+    "w": "t'entraîner",
+    "start": 8.714,
+    "end": 9.291
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "text": "Et si tout ce dont tu avais besoin était réuni au même endroit ? Découvre Fatafalta, ta plateforme de préparation aux concours et examens en Côte d'Ivoire !",
+  "file": "voice/s2.mp3",
+  "duration": 8.28,
+  "words": [
+   {
+    "w": "Et",
+    "start": 0.084,
+    "end": 0.168
+   },
+   {
+    "w": "si",
+    "start": 0.168,
+    "end": 0.337
+   },
+   {
+    "w": "tout",
+    "start": 0.337,
+    "end": 0.493
+   },
+   {
+    "w": "ce",
+    "start": 0.493,
+    "end": 0.613
+   },
+   {
+    "w": "dont",
+    "start": 0.613,
+    "end": 0.745
+   },
+   {
+    "w": "tu",
+    "start": 0.745,
+    "end": 0.901
+   },
+   {
+    "w": "avais",
+    "start": 0.901,
+    "end": 1.058
+   },
+   {
+    "w": "besoin",
+    "start": 1.058,
+    "end": 1.526
+   },
+   {
+    "w": "était",
+    "start": 1.538,
+    "end": 1.731
+   },
+   {
+    "w": "réuni",
+    "start": 1.731,
+    "end": 2.188
+   },
+   {
+    "w": "au",
+    "start": 2.2,
+    "end": 2.248
+   },
+   {
+    "w": "même",
+    "start": 2.248,
+    "end": 2.428
+   },
+   {
+    "w": "endroit",
+    "start": 2.428,
+    "end": 2.861
+   },
+   {
+    "w": "Découvre",
+    "start": 3.221,
+    "end": 3.762
+   },
+   {
+    "w": "Fatafalta",
+    "start": 3.762,
+    "end": 4.519
+   },
+   {
+    "w": "ta",
+    "start": 4.892,
+    "end": 4.988
+   },
+   {
+    "w": "plateforme",
+    "start": 4.988,
+    "end": 5.445
+   },
+   {
+    "w": "de",
+    "start": 5.445,
+    "end": 5.517
+   },
+   {
+    "w": "préparation",
+    "start": 5.517,
+    "end": 6.094
+   },
+   {
+    "w": "aux",
+    "start": 6.094,
+    "end": 6.166
+   },
+   {
+    "w": "concours",
+    "start": 6.166,
+    "end": 6.587
+   },
+   {
+    "w": "et",
+    "start": 6.587,
+    "end": 6.635
+   },
+   {
+    "w": "examens",
+    "start": 6.635,
+    "end": 7.067
+   },
+   {
+    "w": "en",
+    "start": 7.079,
+    "end": 7.175
+   },
+   {
+    "w": "Côte",
+    "start": 7.176,
+    "end": 7.356
+   },
+   {
+    "w": "d'Ivoire",
+    "start": 7.356,
+    "end": 7.945
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "text": "Tous les concours de Côte d'Ivoire, au même endroit : ENA, INPHB, ESATIC, INFJ, ENSEA, ENS, CAFOP… Plus de mille cent anciens sujets, avec les corrigés disponibles, sur ordinateur comme sur ton téléphone.",
+  "file": "voice/s3.mp3",
+  "duration": 14.232,
+  "words": [
+   {
+    "w": "Tous",
+    "start": 0.084,
+    "end": 0.168
+   },
+   {
+    "w": "les",
+    "start": 0.168,
+    "end": 0.264
+   },
+   {
+    "w": "concours",
+    "start": 0.264,
+    "end": 0.601
+   },
+   {
+    "w": "de",
+    "start": 0.601,
+    "end": 0.685
+   },
+   {
+    "w": "Côte",
+    "start": 0.685,
+    "end": 0.841
+   },
+   {
+    "w": "d'Ivoire",
+    "start": 0.841,
+    "end": 1.334
+   },
+   {
+    "w": "au",
+    "start": 1.575,
+    "end": 1.599
+   },
+   {
+    "w": "même",
+    "start": 1.599,
+    "end": 1.779
+   },
+   {
+    "w": "endroit",
+    "start": 1.779,
+    "end": 2.151
+   },
+   {
+    "w": "Éna",
+    "start": 2.488,
+    "end": 2.825
+   },
+   {
+    "w": "I.N.P.H.B.",
+    "start": 3.101,
+    "end": 3.978
+   },
+   {
+    "w": "Ésatic",
+    "start": 4.279,
+    "end": 4.82
+   },
+   {
+    "w": "I.N.F.J.",
+    "start": 5.12,
+    "end": 5.757
+   },
+   {
+    "w": "ENSEA",
+    "start": 6.082,
+    "end": 6.538
+   },
+   {
+    "w": "E.N.S.",
+    "start": 6.779,
+    "end": 7.344
+   },
+   {
+    "w": "Cafop",
+    "start": 7.56,
+    "end": 8.089
+   },
+   {
+    "w": "Plus",
+    "start": 8.415,
+    "end": 8.668
+   },
+   {
+    "w": "de",
+    "start": 8.668,
+    "end": 8.788
+   },
+   {
+    "w": "mille",
+    "start": 8.788,
+    "end": 8.98
+   },
+   {
+    "w": "cent",
+    "start": 8.98,
+    "end": 9.161
+   },
+   {
+    "w": "anciens",
+    "start": 9.161,
+    "end": 9.449
+   },
+   {
+    "w": "sujets",
+    "start": 9.449,
+    "end": 9.918
+   },
+   {
+    "w": "avec",
+    "start": 10.206,
+    "end": 10.447
+   },
+   {
+    "w": "les",
+    "start": 10.447,
+    "end": 10.519
+   },
+   {
+    "w": "corrigés",
+    "start": 10.519,
+    "end": 10.867
+   },
+   {
+    "w": "disponibles",
+    "start": 10.867,
+    "end": 11.516
+   },
+   {
+    "w": "sur",
+    "start": 11.829,
+    "end": 12.021
+   },
+   {
+    "w": "ordinateur",
+    "start": 12.021,
+    "end": 12.742
+   },
+   {
+    "w": "comme",
+    "start": 12.742,
+    "end": 12.935
+   },
+   {
+    "w": "sur",
+    "start": 12.935,
+    "end": 13.079
+   },
+   {
+    "w": "ton",
+    "start": 13.079,
+    "end": 13.199
+   },
+   {
+    "w": "téléphone",
+    "start": 13.199,
+    "end": 13.908
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "text": "Mais Fatafalta, ce n'est pas seulement une bibliothèque de sujets. C'est une préparation pas à pas : chaque leçon est courte, avec sa vidéo explicative. Tu préfères lire ? Le cours complet est juste en dessous.",
+  "file": "voice/s4.mp3",
+  "duration": 12.312,
+  "words": [
+   {
+    "w": "Mais",
+    "start": 0.096,
+    "end": 0.288
+   },
+   {
+    "w": "Fatafalta",
+    "start": 0.288,
+    "end": 1.082
+   },
+   {
+    "w": "ce",
+    "start": 1.454,
+    "end": 1.562
+   },
+   {
+    "w": "n'est",
+    "start": 1.562,
+    "end": 1.671
+   },
+   {
+    "w": "pas",
+    "start": 1.671,
+    "end": 1.791
+   },
+   {
+    "w": "seulement",
+    "start": 1.791,
+    "end": 2.163
+   },
+   {
+    "w": "une",
+    "start": 2.163,
+    "end": 2.272
+   },
+   {
+    "w": "bibliothèque",
+    "start": 2.272,
+    "end": 2.788
+   },
+   {
+    "w": "de",
+    "start": 2.788,
+    "end": 2.885
+   },
+   {
+    "w": "sujets",
+    "start": 2.885,
+    "end": 3.377
+   },
+   {
+    "w": "C'est",
+    "start": 3.738,
+    "end": 3.894
+   },
+   {
+    "w": "une",
+    "start": 3.894,
+    "end": 4.074
+   },
+   {
+    "w": "préparation",
+    "start": 4.074,
+    "end": 4.663
+   },
+   {
+    "w": "pas",
+    "start": 4.663,
+    "end": 4.796
+   },
+   {
+    "w": "à",
+    "start": 4.796,
+    "end": 4.928
+   },
+   {
+    "w": "pas",
+    "start": 4.928,
+    "end": 5.168
+   },
+   {
+    "w": "chaque",
+    "start": 5.505,
+    "end": 5.733
+   },
+   {
+    "w": "leçon",
+    "start": 5.733,
+    "end": 6.034
+   },
+   {
+    "w": "est",
+    "start": 6.034,
+    "end": 6.118
+   },
+   {
+    "w": "courte",
+    "start": 6.118,
+    "end": 6.538
+   },
+   {
+    "w": "avec",
+    "start": 6.839,
+    "end": 7.019
+   },
+   {
+    "w": "sa",
+    "start": 7.019,
+    "end": 7.127
+   },
+   {
+    "w": "vidéo",
+    "start": 7.127,
+    "end": 7.512
+   },
+   {
+    "w": "explicative",
+    "start": 7.512,
+    "end": 8.377
+   },
+   {
+    "w": "Tu",
+    "start": 8.738,
+    "end": 8.846
+   },
+   {
+    "w": "préfères",
+    "start": 8.846,
+    "end": 9.267
+   },
+   {
+    "w": "lire",
+    "start": 9.267,
+    "end": 9.736
+   },
+   {
+    "w": "Le",
+    "start": 10.108,
+    "end": 10.264
+   },
+   {
+    "w": "cours",
+    "start": 10.264,
+    "end": 10.529
+   },
+   {
+    "w": "complet",
+    "start": 10.529,
+    "end": 10.998
+   },
+   {
+    "w": "est",
+    "start": 11.01,
+    "end": 11.142
+   },
+   {
+    "w": "juste",
+    "start": 11.142,
+    "end": 11.418
+   },
+   {
+    "w": "en",
+    "start": 11.418,
+    "end": 11.478
+   },
+   {
+    "w": "dessous",
+    "start": 11.478,
+    "end": 11.971
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "text": "Ensuite, tu t'exerces : chaque réponse est corrigée aussitôt. Ton plan du jour te dit quoi travailler, tu suis ta progression, et tu vois ton rang parmi les candidats de ton concours.",
+  "file": "voice/s5.mp3",
+  "duration": 9.936,
+  "words": [
+   {
+    "w": "Ensuite",
+    "start": 0.084,
+    "end": 0.661
+   },
+   {
+    "w": "tu",
+    "start": 0.889,
+    "end": 1.01
+   },
+   {
+    "w": "t'exerces",
+    "start": 1.01,
+    "end": 1.647
+   },
+   {
+    "w": "chaque",
+    "start": 1.959,
+    "end": 2.224
+   },
+   {
+    "w": "réponse",
+    "start": 2.224,
+    "end": 2.644
+   },
+   {
+    "w": "est",
+    "start": 2.644,
+    "end": 2.692
+   },
+   {
+    "w": "corrigée",
+    "start": 2.692,
+    "end": 3.077
+   },
+   {
+    "w": "aussitôt",
+    "start": 3.077,
+    "end": 3.642
+   },
+   {
+    "w": "Ton",
+    "start": 4.002,
+    "end": 4.135
+   },
+   {
+    "w": "plan",
+    "start": 4.135,
+    "end": 4.315
+   },
+   {
+    "w": "du",
+    "start": 4.315,
+    "end": 4.435
+   },
+   {
+    "w": "jour",
+    "start": 4.435,
+    "end": 4.772
+   },
+   {
+    "w": "te",
+    "start": 4.772,
+    "end": 4.904
+   },
+   {
+    "w": "dit",
+    "start": 4.904,
+    "end": 5.024
+   },
+   {
+    "w": "quoi",
+    "start": 5.024,
+    "end": 5.18
+   },
+   {
+    "w": "travailler",
+    "start": 5.18,
+    "end": 5.733
+   },
+   {
+    "w": "tu",
+    "start": 6.034,
+    "end": 6.142
+   },
+   {
+    "w": "suis",
+    "start": 6.142,
+    "end": 6.262
+   },
+   {
+    "w": "ta",
+    "start": 6.262,
+    "end": 6.358
+   },
+   {
+    "w": "progression",
+    "start": 6.358,
+    "end": 7.031
+   },
+   {
+    "w": "et",
+    "start": 7.404,
+    "end": 7.464
+   },
+   {
+    "w": "tu",
+    "start": 7.464,
+    "end": 7.584
+   },
+   {
+    "w": "vois",
+    "start": 7.584,
+    "end": 7.692
+   },
+   {
+    "w": "ton",
+    "start": 7.692,
+    "end": 7.837
+   },
+   {
+    "w": "rang",
+    "start": 7.837,
+    "end": 8.005
+   },
+   {
+    "w": "parmi",
+    "start": 8.005,
+    "end": 8.281
+   },
+   {
+    "w": "les",
+    "start": 8.281,
+    "end": 8.365
+   },
+   {
+    "w": "candidats",
+    "start": 8.365,
+    "end": 8.762
+   },
+   {
+    "w": "de",
+    "start": 8.762,
+    "end": 8.858
+   },
+   {
+    "w": "ton",
+    "start": 8.858,
+    "end": 8.966
+   },
+   {
+    "w": "concours",
+    "start": 8.966,
+    "end": 9.591
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "text": "Et pour te mettre dans les conditions de l'examen, passe des concours blancs chronométrés, notés sur vingt.",
+  "file": "voice/s6.mp3",
+  "duration": 5.304,
+  "words": [
+   {
+    "w": "Et",
+    "start": 0.084,
+    "end": 0.168
+   },
+   {
+    "w": "pour",
+    "start": 0.168,
+    "end": 0.312
+   },
+   {
+    "w": "te",
+    "start": 0.312,
+    "end": 0.421
+   },
+   {
+    "w": "mettre",
+    "start": 0.421,
+    "end": 0.721
+   },
+   {
+    "w": "dans",
+    "start": 0.721,
+    "end": 0.829
+   },
+   {
+    "w": "les",
+    "start": 0.829,
+    "end": 0.913
+   },
+   {
+    "w": "conditions",
+    "start": 0.913,
+    "end": 1.358
+   },
+   {
+    "w": "de",
+    "start": 1.358,
+    "end": 1.442
+   },
+   {
+    "w": "l'examen",
+    "start": 1.442,
+    "end": 1.995
+   },
+   {
+    "w": "passe",
+    "start": 2.356,
+    "end": 2.536
+   },
+   {
+    "w": "des",
+    "start": 2.536,
+    "end": 2.632
+   },
+   {
+    "w": "concours",
+    "start": 2.632,
+    "end": 3.017
+   },
+   {
+    "w": "blancs",
+    "start": 3.017,
+    "end": 3.185
+   },
+   {
+    "w": "chronométrés",
+    "start": 3.185,
+    "end": 3.894
+   },
+   {
+    "w": "notés",
+    "start": 4.231,
+    "end": 4.459
+   },
+   {
+    "w": "sur",
+    "start": 4.459,
+    "end": 4.651
+   },
+   {
+    "w": "vingt",
+    "start": 4.651,
+    "end": 4.964
+   }
+  ]
+ },
+ {
+  "id": 7,
+  "text": "Derrière chaque concours, il y a un rêve. Un métier. Un avenir à construire. Chaque jour de préparation te rapproche de ce que tu veux devenir.",
+  "file": "voice/s7.mp3",
+  "duration": 9.192,
+  "words": [
+   {
+    "w": "Derrière",
+    "start": 0.084,
+    "end": 0.481
+   },
+   {
+    "w": "chaque",
+    "start": 0.481,
+    "end": 0.661
+   },
+   {
+    "w": "concours",
+    "start": 0.661,
+    "end": 1.214
+   },
+   {
+    "w": "il",
+    "start": 1.526,
+    "end": 1.599
+   },
+   {
+    "w": "y",
+    "start": 1.599,
+    "end": 1.695
+   },
+   {
+    "w": "a",
+    "start": 1.695,
+    "end": 1.755
+   },
+   {
+    "w": "un",
+    "start": 1.755,
+    "end": 1.839
+   },
+   {
+    "w": "rêve",
+    "start": 1.839,
+    "end": 2.344
+   },
+   {
+    "w": "Un",
+    "start": 2.67,
+    "end": 2.874
+   },
+   {
+    "w": "métier",
+    "start": 2.874,
+    "end": 3.487
+   },
+   {
+    "w": "Un",
+    "start": 3.846,
+    "end": 3.954
+   },
+   {
+    "w": "avenir",
+    "start": 3.954,
+    "end": 4.411
+   },
+   {
+    "w": "à",
+    "start": 4.411,
+    "end": 4.459
+   },
+   {
+    "w": "construire",
+    "start": 4.459,
+    "end": 5.264
+   },
+   {
+    "w": "Chaque",
+    "start": 5.625,
+    "end": 5.877
+   },
+   {
+    "w": "jour",
+    "start": 5.877,
+    "end": 6.106
+   },
+   {
+    "w": "de",
+    "start": 6.106,
+    "end": 6.19
+   },
+   {
+    "w": "préparation",
+    "start": 6.19,
+    "end": 6.947
+   },
+   {
+    "w": "te",
+    "start": 6.959,
+    "end": 7.079
+   },
+   {
+    "w": "rapproche",
+    "start": 7.079,
+    "end": 7.596
+   },
+   {
+    "w": "de",
+    "start": 7.608,
+    "end": 7.752
+   },
+   {
+    "w": "ce",
+    "start": 7.752,
+    "end": 7.873
+   },
+   {
+    "w": "que",
+    "start": 7.873,
+    "end": 7.969
+   },
+   {
+    "w": "tu",
+    "start": 7.969,
+    "end": 8.101
+   },
+   {
+    "w": "veux",
+    "start": 8.101,
+    "end": 8.209
+   },
+   {
+    "w": "devenir",
+    "start": 8.209,
+    "end": 8.858
+   }
+  ]
+ },
+ {
+  "id": 8,
+  "text": "Ne laisse pas ta préparation au hasard. Rejoins Fatafalta : inscris-toi gratuitement sur fatafalta.com. Fatafalta : prépare aujourd'hui les réussites de demain !",
+  "file": "voice/s8.mp3",
+  "duration": 9.096,
+  "words": [
+   {
+    "w": "Ne",
+    "start": 0.096,
+    "end": 0.24
+   },
+   {
+    "w": "laisse",
+    "start": 0.24,
+    "end": 0.445
+   },
+   {
+    "w": "pas",
+    "start": 0.445,
+    "end": 0.577
+   },
+   {
+    "w": "ta",
+    "start": 0.577,
+    "end": 0.685
+   },
+   {
+    "w": "préparation",
+    "start": 0.685,
+    "end": 1.334
+   },
+   {
+    "w": "au",
+    "start": 1.334,
+    "end": 1.418
+   },
+   {
+    "w": "hasard",
+    "start": 1.418,
+    "end": 2.007
+   },
+   {
+    "w": "Rejoins",
+    "start": 2.368,
+    "end": 2.752
+   },
+   {
+    "w": "Fatafalta",
+    "start": 2.752,
+    "end": 3.462
+   },
+   {
+    "w": "inscris-toi",
+    "start": 3.774,
+    "end": 4.195
+   },
+   {
+    "w": "gratuitement",
+    "start": 4.195,
+    "end": 4.724
+   },
+   {
+    "w": "sur",
+    "start": 4.724,
+    "end": 4.892
+   },
+   {
+    "w": "fatafalta",
+    "start": 4.892,
+    "end": 5.541
+   },
+   {
+    "w": "point",
+    "start": 5.541,
+    "end": 5.781
+   },
+   {
+    "w": "com.",
+    "start": 5.781,
+    "end": 5.949
+   },
+   {
+    "w": "Fatafalta",
+    "start": 5.949,
+    "end": 6.647
+   },
+   {
+    "w": "prépare",
+    "start": 7.007,
+    "end": 7.332
+   },
+   {
+    "w": "aujourd'hui",
+    "start": 7.332,
+    "end": 7.728
+   },
+   {
+    "w": "les",
+    "start": 7.728,
+    "end": 7.824
+   },
+   {
+    "w": "réussites",
+    "start": 7.824,
+    "end": 8.257
+   },
+   {
+    "w": "de",
+    "start": 8.257,
+    "end": 8.365
+   },
+   {
+    "w": "demain",
+    "start": 8.365,
+    "end": 8.75
+   }
+  ]
+ }
+]
