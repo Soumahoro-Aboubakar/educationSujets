@@ -15,7 +15,8 @@ const Document = require('../models/Document');
 const Structure = require('../models/Structure');
 const catalog = require('../services/dynamicCatalogService');
 const { buildSeoCatalog, getSeoCatalog } = require('../services/seoCatalogService');
-const { notifyCatalogChange, submitIndexNow } = require('../services/seoNotifier');
+const { notifyCatalogChange } = require('../services/seoNotifier');
+const { toPath } = require('../services/seo/urlPolicy');
 
 test.before(async () => {
   if (skip) return;
@@ -83,12 +84,14 @@ test('a catalogue change invalidates the cached feed', { skip }, async () => {
   assert.equal((await getSeoCatalog()).organismes[0].documents.length, before.organismes[0].documents.length + 1);
 });
 
-test('IndexNow stays silent without a key and never submits foreign hosts', async () => {
-  delete process.env.INDEXNOW_KEY;
-  assert.equal(await submitIndexNow(['https://fatafalta.com/sujets']), null);
-  process.env.INDEXNOW_KEY = 'a1b2c3d4e5f6a7b8';
-  assert.equal(await submitIndexNow(['https://example.com/page']), null);
-  delete process.env.INDEXNOW_KEY;
+test('only public Fatafalta pages can ever be submitted', () => {
+  assert.equal(toPath('https://fatafalta.com/sujets'), '/sujets');
+  assert.equal(toPath('https://fatafalta.com/sujets/ensea/'), '/sujets/ensea');
+  ['https://example.com/page', 'http://fatafalta.com/sujets', 'https://fatafalta.com.evil.com/x', 'https://user:pw@fatafalta.com/sujets',
+    'https://fatafalta.com/compte', 'https://fatafalta.com/dashboard/x', 'https://fatafalta.com/api/documents', 'https://fatafalta.com/sujets?o=1',
+    'https://fatafalta.com/a.pdf', 'https://fatafalta.com/%E0%A4%A', 'https://fatafalta.com/x#y', 'javascript:alert(1)', 42].forEach((url) => {
+    assert.equal(toPath(url), null, String(url));
+  });
 });
 
 test('the SEO feed states the public download rule computed by the server', { skip }, async () => {

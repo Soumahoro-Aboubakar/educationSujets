@@ -437,6 +437,72 @@ const writePage = async (pagePath, html) => {
   if (!target.startsWith(BUILD_DIR)) throw new Error(`Chemin hors du dossier de build : ${pagePath}`);
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, html);
+  if (!pagePath.endsWith('.html')) pageFingerprints.set(pagePath, contentFingerprint(html));
+};
+
+// ── Empreintes, lastmod et manifeste d'indexation ──────────────────────────────────────────
+
+/*
+ * Empreinte du contenu « significatif » d'une page, au sens de Google : titre, description, canonique,
+ * consigne robots, données structurées et contenu principal (<main>). L'en-tête, le pied de page et les
+ * fichiers JavaScript/CSS du build n'y entrent pas : les modifier ne change ni lastmod ni IndexNow.
+ */
+const pageFingerprints = new Map();
+const contentFingerprint = (html) => {
+  const head = html.split('</head>')[0];
+  const parts = [
+    ...(head.match(/<title>[\s\S]*?<\/title>/g) || []),
+    ...(head.match(/<meta[^>]+name="(?:description|robots)"[^>]*>/g) || []),
+    ...(head.match(/<link[^>]+rel="canonical"[^>]*>/g) || []),
+    ...(html.match(/<script type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g) || []),
+    ...(html.match(/<main[\s\S]*?<\/main>/g) || []),
+  ];
+  // Normalisation : classes CSS et espaces ne sont pas du contenu (un changement de style ≠ changement).
+  const normalized = parts.join('\n').replace(/\sclass="[^"]*"/g, '').replace(/\s+/g, ' ').trim();
+  return createHash('sha256').update(normalized).digest('hex').slice(0, 24);
+};
+const FINGERPRINT_VERSION = 1; // à incrémenter si l'algorithme change : le backend repart d'une base neuve
+
+const SITEMAP_CHUNK = 45000; // limite du protocole : 50 000 URL et 50 Mo par fichier
+const iso = (value) => {
+  const date = value ? new Date(value) : null;
+  return date && !Number.isNaN(date.getTime()) ? date.toISOString() : null;
+};
+
+/*
+ * Manifeste de la version en ligne (avant ce déploiement). PRERENDER_PREVIOUS_MANIFEST=off le désactive,
+ * PRERENDER_PREVIOUS_MANIFEST_FILE le lit sur disque (tests). Absent ou illisible : null.
+ */
+const loadPreviousManifest = async () => {
+  if (process.env.PRERENDER_PREVIOUS_MANIFEST === 'off') return null;
+  try {
+    if (process.env.PRERENDER_PREVIOUS_MANIFEST_FILE) return JSON.parse(await readFile(process.env.PRERENDER_PREVIOUS_MANIFEST_FILE, 'utf8'));
+    if (process.env.PRERENDER_FEED_FILE) return null; // build de test : jamais d'appel réseau
+    const res = await fetch(`${SITE_URL}/seo-manifest.json`, { headers: { 'User-Agent': 'fatafalta-prerender' }, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const manifest = await res.json();
+    return manifest?.version === 1 && manifest.pages ? manifest : null;
+  } catch (error) {
+    console.warn(`[prerender] Manifeste en ligne illisible (${error.message}) : lastmod tiré des seules données.`);
+    return null;
+  }
+};
+
+/*
+ * lastmod exact : empreinte inchangée → date précédente conservée ; page nouvelle ou modifiée → date des
+ * données si elle est plus récente que la précédente, sinon l'heure du build. Sans manifeste précédent,
+ * seules les dates des données servent (jamais une date inventée).
+ */
+const resolveLastmod = (entry, hash, previous, builtAt) => {
+  const data = iso(entry.lastmod);
+  if (!previous || previous.fp !== FINGERPRINT_VERSION) return data;
+  const before = previous.pages[entry.path];
+  if (before && before.h === hash) return before.m || data;
+  // Absente d'une version précédente incomplète (catalogue ou préparation manquants) : rien ne prouve
+  // un changement, seule la date des données vaut.
+  if (!before && previous.complete === false) return data;
+  if (data && (!before?.m || data > before.m)) return data;
+  return builtAt;
 };
 
 const sitemapXml = (entries) => `<?xml version="1.0" encoding="UTF-8"?>
@@ -444,6 +510,52 @@ const sitemapXml = (entries) => `<?xml version="1.0" encoding="UTF-8"?>
 ${entries.map(({ path: entryPath, lastmod }) => `  <url><loc>${escapeHtml(absoluteUrl(entryPath))}</loc>${lastmod ? `<lastmod>${new Date(lastmod).toISOString()}</lastmod>` : ''}</url>`).join('\n')}
 </urlset>
 `;
+
+const sitemapIndexXml = (files) => `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${files.map(({ name, lastmod }) => `  <sitemap><loc>${escapeHtml(absoluteUrl(`/${name}`))}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</sitemap>`).join('\n')}
+</sitemapindex>
+`;
+
+/** Sitemaps par catégorie (index dans sitemap.xml), manifeste et identifiant de build. */
+const writeSitemapsAndManifest = async (entries, { complete }) => {
+  const builtAt = new Date().toISOString();
+  const previous = await loadPreviousManifest();
+  const pages = {};
+  const resolved = entries.map((entry) => {
+    const hash = pageFingerprints.get(entry.path);
+    if (!hash) throw new Error(`Page sans empreinte : ${entry.path}`);
+    const lastmod = resolveLastmod(entry, hash, previous, builtAt);
+    pages[entry.path] = { h: hash, m: lastmod, c: entry.category, ...(entry.inSitemap === false ? { s: 0 } : {}) };
+    return { ...entry, lastmod };
+  });
+
+  const files = [];
+  for (const category of ['pages', 'concours', 'sujets', 'preparations']) {
+    const inCategory = resolved.filter((entry) => entry.category === category && entry.inSitemap !== false);
+    for (let start = 0, part = 1; start < inCategory.length; start += SITEMAP_CHUNK, part += 1) {
+      const chunk = inCategory.slice(start, start + SITEMAP_CHUNK);
+      const name = `sitemap-${category}${part > 1 ? `-${part}` : ''}.xml`;
+      const xml = sitemapXml(chunk);
+      // lastmod d'une entrée d'index = dernière modification de CE fichier (ajout, retrait ou date d'une
+      // page) : contenu identique → date précédente conservée ; modifié → heure du build.
+      const fileHash = createHash('sha256').update(xml).digest('hex').slice(0, 24);
+      const before = previous?.sitemaps?.[name];
+      const lastmod = before?.h === fileHash ? before.m : previous?.sitemaps ? builtAt : chunk.map((entry) => entry.lastmod).filter(Boolean).sort().pop() || null;
+      await writeFile(path.join(BUILD_DIR, name), xml);
+      files.push({ name, category, lastmod, h: fileHash });
+    }
+  }
+  await writeFile(path.join(BUILD_DIR, 'sitemap.xml'), sitemapIndexXml(files));
+
+  const manifestBody = JSON.stringify(pages);
+  const contentHash = createHash('sha256').update(manifestBody).digest('hex').slice(0, 16);
+  const buildId = `${builtAt.replace(/[^0-9]/g, '').slice(0, 14)}-${contentHash}`;
+  const commit = (process.env.CF_PAGES_COMMIT_SHA || '').slice(0, 12) || null;
+  await writeFile(path.join(BUILD_DIR, 'seo-manifest.json'), JSON.stringify({ version: 1, fp: FINGERPRINT_VERSION, complete, buildId, builtAt, site: SITE_URL, commit, sitemaps: Object.fromEntries(files.map((file) => [file.name, { h: file.h, m: file.lastmod }])), pages }));
+  await writeFile(path.join(BUILD_DIR, 'seo-build.json'), JSON.stringify({ version: 1, fp: FINGERPRINT_VERSION, complete, buildId, builtAt, commit, contentHash, pages: resolved.length, sitemaps: files.map((file) => file.name) }));
+  return { files, count: resolved.filter((entry) => entry.inSitemap !== false).length, previous: Boolean(previous) };
+};
 
 const robotsTxt = () => `# Fatafalta — règles d'exploration.
 # Pages publiques (accueil, catalogue des sujets, fiches, préparation, abonnement) : ouvertes à tous les
@@ -492,6 +604,10 @@ const headersFile = () => `# Généré par scripts/prerender.mjs — ne pas modi
 
 /sw.js
   Cache-Control: no-cache
+
+/seo-*.json
+  Cache-Control: no-cache
+  X-Robots-Tag: noindex
 
 /app
   X-Robots-Tag: noindex
@@ -578,19 +694,19 @@ const main = async () => {
 
   const home = { ...PAGES_SEO.home };
   await writePage('/', pageFromTemplate(template, { seo: home, body: homeHtml(organismes, prep), extraHead: verificationTags() }));
-  sitemap.push({ path: '/', lastmod: feed?.updatedAt });
+  sitemap.push({ path: '/', lastmod: feed?.updatedAt, category: 'pages' });
 
   await writePage('/abonnement', pageFromTemplate(template, {
     seo: PAGES_SEO.subscribe,
     body: simplePageHtml('Préparez vos concours avec tous les sujets.', PAGES_SEO.subscribe.description, { path: '/sujets', label: 'Parcourir les sujets' }),
   }));
-  sitemap.push({ path: '/abonnement' });
+  sitemap.push({ path: '/abonnement', category: 'pages' });
 
   await writePage('/informations-legales', pageFromTemplate(template, { seo: LEGAL_HUB_SEO, body: legalHubHtml() }));
-  sitemap.push({ path: '/informations-legales' });
+  sitemap.push({ path: '/informations-legales', category: 'pages' });
   for (const doc of LEGAL_DOCUMENTS) {
     await writePage(`/${doc.slug}`, pageFromTemplate(template, { seo: legalSeo(doc), body: legalPageHtml(doc) }));
-    sitemap.push({ path: `/${doc.slug}` });
+    sitemap.push({ path: `/${doc.slug}`, category: 'pages' });
   }
 
   await writeFile(path.join(BUILD_DIR, '404.html'), pageFromTemplate(template, {
@@ -610,7 +726,7 @@ const main = async () => {
       })),
     }),
   }));
-  sitemap.push({ path: CATALOG_ROOT, lastmod: feed?.updatedAt });
+  sitemap.push({ path: CATALOG_ROOT, lastmod: feed?.updatedAt, category: 'pages' });
 
   let catalogPages = 0;
   let documentPages = 0;
@@ -623,7 +739,7 @@ const main = async () => {
         seo: catalogSeo({ text, path: page.path, crumbs }),
         body: catalogPageHtml({ text, crumbs: [{ label: 'Organismes', path: CATALOG_ROOT }, ...page.trail], items: page.items || [] }),
       }));
-      if (page.inSitemap !== false) sitemap.push({ path: page.path, lastmod: page.lastmod });
+      sitemap.push({ path: page.path, lastmod: page.lastmod, category: 'concours', inSitemap: page.inSitemap !== false });
       catalogPages += 1;
     }
     for (const document of organisme.documents) {
@@ -632,7 +748,7 @@ const main = async () => {
         seo: documentSeo(document, context),
         body: documentPageHtml(document, context, levels, feed?.accessPolicy),
       }));
-      sitemap.push({ path: documentPath(document._id), lastmod: document.updatedAt || document.dateAjout });
+      sitemap.push({ path: documentPath(document._id), lastmod: document.updatedAt || document.dateAjout, category: 'sujets' });
       documentPages += 1;
     }
   }
@@ -640,10 +756,10 @@ const main = async () => {
   // Préparation : accueil et page publique de chaque programme.
   if (prep?.catalogue?.length) {
     await writePage(PREP_ROOT, pageFromTemplate(template, { seo: prepHomeSeo(prep.catalogue), body: prepHomeHtml(prep.catalogue) }));
-    sitemap.push({ path: PREP_ROOT });
+    sitemap.push({ path: PREP_ROOT, category: 'preparations' });
     for (const data of prep.programmes) {
       await writePage(programmePath(data.programme.code), pageFromTemplate(template, { seo: programmeSeo(data), body: programmeHtml(data) }));
-      sitemap.push({ path: programmePath(data.programme.code) });
+      sitemap.push({ path: programmePath(data.programme.code), lastmod: data.programme.updatedAt || null, category: 'preparations' });
     }
   }
   const prepRendered = Boolean(prep?.catalogue?.length);
@@ -651,8 +767,8 @@ const main = async () => {
   await writeFile(path.join(BUILD_DIR, '_headers'), headersFile());
 
   const unique = [...new Map(sitemap.map((entry) => [entry.path, entry])).values()];
-  if (unique.length > 50000) throw new Error('Plus de 50 000 adresses : découper le sitemap (index de sitemaps).');
-  await writeFile(path.join(BUILD_DIR, 'sitemap.xml'), sitemapXml(unique));
+  // Manifeste « incomplet » (catalogue ou préparation absents) : le backend n'en déduit aucune suppression.
+  const sitemaps = await writeSitemapsAndManifest(unique, { complete: Boolean(feed) && prepRendered });
   await writeFile(path.join(BUILD_DIR, 'robots.txt'), robotsTxt());
   await writeFile(path.join(BUILD_DIR, 'llms.txt'), llmsTxt({ organismes, prep, accessPolicy: feed?.accessPolicy }));
 
@@ -664,7 +780,7 @@ const main = async () => {
     await writeFile(path.join(BUILD_DIR, `${indexNowKey}.txt`), indexNowKey);
   }
 
-  console.log(`[prerender] ${SITE_URL} : ${organismes.length} organisme(s), ${catalogPages} page(s) de catalogue, ${documentPages} fiche(s), ${prepRendered ? `${prep.programmes.length} programme(s) de préparation` : 'préparation non pré-rendue'}, ${unique.length} adresse(s) dans le sitemap.${feed ? '' : ' (hors ligne : pages fixes uniquement)'}`);
+  console.log(`[prerender] ${SITE_URL} : ${organismes.length} organisme(s), ${catalogPages} page(s) de catalogue, ${documentPages} fiche(s), ${prepRendered ? `${prep.programmes.length} programme(s) de préparation` : 'préparation non pré-rendue'}, ${sitemaps.count} adresse(s) dans ${sitemaps.files.length} sitemap(s)${sitemaps.previous ? '' : ' (lastmod : dates des données seules)'}.${feed ? '' : ' (hors ligne : pages fixes uniquement)'}`);
 };
 
 main().catch((error) => {

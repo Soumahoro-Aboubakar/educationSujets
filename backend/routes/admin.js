@@ -30,6 +30,20 @@ router.put('/app-releases/:platform', [param('platform').isIn(['android', 'ios']
 // Provenance des visiteurs (ChatGPT, Google, Facebook, WhatsApp…).
 router.get('/traffic', require('../controllers/trafficController').report);
 
+// Référencement et indexation (IndexNow, sitemaps, Search Console). Voir docs/seo-indexation.md.
+const seoAdmin = require('../controllers/seoAdminController');
+const seoUrl = [body('url').isString().isLength({ min: 1, max: 600 }), validate];
+router.get('/seo', seoAdmin.overview);
+router.get('/seo/pages', seoAdmin.pages);
+router.get('/seo/rapport.csv', seoAdmin.report);
+router.post('/seo/reconstruction', seoAdmin.rebuild);
+router.post('/seo/verification', seoAdmin.check);
+router.post('/seo/retraits/confirmer', seoAdmin.confirmRemovals);
+router.post('/seo/indexnow', seoUrl, seoAdmin.submitUrl);
+router.post('/seo/echecs/relancer', seoAdmin.retryFailed);
+router.post('/seo/google/inspection', seoUrl, seoAdmin.inspect);
+router.post('/seo/google/sitemap', seoAdmin.submitSitemap);
+
 const idParam = [param('id').isMongoId(), validate];
 
 router.get('/stats', controller.getStats);

@@ -1,5 +1,7 @@
 # Référencement de Fatafalta (SEO technique, recherche IA, suivi)
 
+> **Mise à jour du 26 novembre 2026** : le site est sur Cloudflare Pages (`fatafalta.com`). L'indexation automatique (IndexNow, sitemaps par catégorie, `lastmod`, Search Console, tableau de bord) est décrite dans [seo-indexation.md](seo-indexation.md), qui fait foi ; les mentions de Render et de `fatafalta.onrender.com` ci-dessous sont historiques.
+
 État au 9 octobre 2026. Site : https://fatafalta.onrender.com (site statique Render) · API : https://educationsujets.onrender.com (service web Render).
 Le domaine `fatafalta.com` cité dans le README ne résout pas (aucun DNS) : le domaine canonique est donc `fatafalta.onrender.com`, réglable en une variable (`REACT_APP_SITE_URL` / `SITE_URL`) le jour d'une bascule.
 

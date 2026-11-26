@@ -88,11 +88,24 @@ test.after(async () => {
   await rm(dir, { recursive: true, force: true });
 });
 
-const sitemapPaths = async () => [...(await read('sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc.replace(SITE, '') || '/');
+// sitemap.xml est un index : les adresses sont dans les sitemaps par catégorie qu'il liste.
+const childSitemaps = async () => [...(await read('sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc.replace(`${SITE}/`, ''));
+const allSitemapXml = async () => (await Promise.all((await childSitemaps()).map(read))).join('\n');
+const sitemapPaths = async () => [...(await allSitemapXml()).matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc.replace(SITE, '') || '/');
+
+test('sitemap index lists one sitemap per category, each a valid urlset', async () => {
+  const index = await read('sitemap.xml');
+  assert.match(index, /^<\?xml version="1.0" encoding="UTF-8"\?>\n<sitemapindex xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9">/);
+  assert.deepEqual(await childSitemaps(), ['sitemap-pages.xml', 'sitemap-concours.xml', 'sitemap-sujets.xml', 'sitemap-preparations.xml']);
+  for (const name of await childSitemaps()) {
+    assert.match(await read(name), /^<\?xml version="1.0" encoding="UTF-8"\?>\n<urlset xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9">/);
+  }
+  assert.ok((await read('sitemap-sujets.xml')).includes('/sujets/document/d1'));
+  assert.ok(!(await read('sitemap-pages.xml')).includes('/sujets/document/'));
+});
 
 test('sitemap lists public pages only, each served by its own file', async () => {
-  const xml = await read('sitemap.xml');
-  assert.match(xml, /^<\?xml version="1.0" encoding="UTF-8"\?>\n<urlset xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9">/);
+  const xml = await allSitemapXml();
   const paths = await sitemapPaths();
   assert.equal(new Set(paths).size, paths.length, 'aucun doublon');
   ['/', '/sujets', '/abonnement', '/sujets/ensea', '/sujets/ensea/2024', '/sujets/ensea/2024/mathematiques',
@@ -101,7 +114,7 @@ test('sitemap lists public pages only, each served by its own file', async () =>
   });
   // Matière à un seul sujet : servie mais hors sitemap ; parcours sans sujet : aucune page.
   assert.ok(!paths.includes('/sujets/ensea/2023/francais'));
-  assert.ok(!paths.some((entry) => /compte|dashboard|login|register|recherche|vide/.test(entry)));
+  assert.deepEqual(paths.filter((entry) => /^\/(compte|dashboard|login|register|recherche)(\/|$)|vide/.test(entry)), []);
   await Promise.all(paths.map((entry) => access(path.join(dir, pageFile(entry)))));
   await access(path.join(dir, pageFile('/sujets/ensea/2023/francais')));
   assert.match(xml, /<loc>https:\/\/fatafalta.com\/sujets\/document\/d1<\/loc><lastmod>2026-09-02T00:00:00.000Z<\/lastmod>/);
@@ -176,6 +189,7 @@ test('Cloudflare Pages: app routes rewritten to the shell, never over a pre-rend
   const redirects = await read('_redirects');
   const rules = redirects.split('\n').filter((line) => line && !line.startsWith('#')).map((line) => line.split(/\s+/));
   rules.forEach(([, target, status]) => { assert.equal(target, '/app'); assert.equal(status, '200'); });
+  assert.ok(!rules.some(([source]) => /seo-|sitemap/.test(source)), 'fichiers SEO jamais réécrits');
   const sources = rules.map(([source]) => source);
   ['/login', '/register', '/compte', '/compte/*', '/preparation/:programme/:module/lecon/:lecon'].forEach((route) => assert.ok(sources.includes(route), route));
   const covers = (rule, urlPath) => new RegExp(`^${rule.replace(/\*/g, '.*').replace(/:[a-z]+/g, '[^/]+')}$`).test(urlPath);
@@ -185,6 +199,61 @@ test('Cloudflare Pages: app routes rewritten to the shell, never over a pre-rend
   const headers = await read('_headers');
   assert.match(headers, /\/static\/\*\n  Cache-Control: public, max-age=31536000, immutable/);
   assert.match(headers, /\/app\n  X-Robots-Tag: noindex/);
+  assert.match(headers, /\/seo-\*\.json\n  Cache-Control: no-cache\n  X-Robots-Tag: noindex/);
+});
+
+test('indexing manifest: every sitemap URL fingerprinted, private pages absent, build id published', async () => {
+  const manifest = JSON.parse(await read('seo-manifest.json'));
+  const build = JSON.parse(await read('seo-build.json'));
+  assert.equal(manifest.version, 1);
+  assert.equal(build.buildId, manifest.buildId);
+  for (const urlPath of await sitemapPaths()) assert.match(manifest.pages[urlPath]?.h || '', /^[0-9a-f]{24}$/, urlPath);
+  // Servie et indexable mais hors sitemap : suivie quand même (s: 0).
+  assert.equal(manifest.pages['/sujets/ensea/2023/francais'].s, 0);
+  assert.ok(!Object.keys(manifest.pages).some((p) => /^\/(compte|dashboard|login|register|recherche|app|404)(\/|$)/.test(p)));
+  // Sans manifeste précédent : lastmod = date des données, jamais l'heure du build.
+  assert.equal(manifest.pages['/sujets/document/d1'].m, '2026-09-02T00:00:00.000Z');
+  assert.equal(manifest.pages['/abonnement'].m, null);
+});
+
+test('lastmod: kept when content is unchanged, build time when it changes', async () => {
+  const again = await mkdtemp(path.join(os.tmpdir(), 'prerender-again-'));
+  try {
+    const previous = JSON.parse(await read('seo-manifest.json'));
+    previous.pages['/abonnement'].m = '2026-10-10T10:00:00.000Z'; // inchangée → conservée
+    assert.equal(previous.fp, 1);
+    assert.equal(previous.complete, true);
+    previous.pages['/sujets/document/d2'].h = 'ffffffffffffffffffffffff'; // « modifiée » → heure du build
+    previous.pages['/sujets/document/d2'].m = '2026-10-01T00:00:00.000Z';
+    await writeFile(path.join(again, 'previous.json'), JSON.stringify(previous));
+    await writeFile(path.join(again, 'index.html'), TEMPLATE);
+    await writeFile(path.join(again, 'feed.json'), JSON.stringify({ success: true, data: FEED }));
+    await writeFile(path.join(again, 'prep.json'), JSON.stringify(PREP));
+    const before = new Date().toISOString();
+    await run(process.execPath, ['--no-warnings', SCRIPT], {
+      env: { ...process.env, PRERENDER_BUILD_DIR: again, PRERENDER_FEED_FILE: path.join(again, 'feed.json'), PRERENDER_PREP_FILE: path.join(again, 'prep.json'), PRERENDER_PREVIOUS_MANIFEST_FILE: path.join(again, 'previous.json'), REACT_APP_SITE_URL: SITE },
+    });
+    const next = JSON.parse(await readFile(path.join(again, 'seo-manifest.json'), 'utf8'));
+    assert.equal(next.pages['/abonnement'].m, '2026-10-10T10:00:00.000Z');
+    assert.ok(next.pages['/sujets/document/d2'].m >= before, 'page modifiée datée du build');
+    assert.equal(next.pages['/sujets/document/d1'].h, previous.pages['/sujets/document/d1'].h, 'empreinte stable entre deux builds');
+    assert.notEqual(next.buildId, previous.buildId);
+
+    // Version précédente incomplète : une page qui y manquait n'est pas « nouvelle ».
+    const incomplete = { ...previous, complete: false, pages: { ...previous.pages } };
+    delete incomplete.pages['/sujets/document/d1'];
+    delete incomplete.pages['/abonnement'];
+    await writeFile(path.join(again, 'previous.json'), JSON.stringify(incomplete));
+    await writeFile(path.join(again, 'index.html'), TEMPLATE);
+    await run(process.execPath, ['--no-warnings', SCRIPT], {
+      env: { ...process.env, PRERENDER_BUILD_DIR: again, PRERENDER_FEED_FILE: path.join(again, 'feed.json'), PRERENDER_PREP_FILE: path.join(again, 'prep.json'), PRERENDER_PREVIOUS_MANIFEST_FILE: path.join(again, 'previous.json'), REACT_APP_SITE_URL: SITE },
+    });
+    const third = JSON.parse(await readFile(path.join(again, 'seo-manifest.json'), 'utf8'));
+    assert.equal(third.pages['/sujets/document/d1'].m, '2026-09-02T00:00:00.000Z', 'date des données');
+    assert.equal(third.pages['/abonnement'].m, null, 'aucune date inventée');
+  } finally {
+    await rm(again, { recursive: true, force: true });
+  }
 });
 
 test('llms.txt: factual map generated from the catalogue', async () => {

@@ -9,7 +9,7 @@ const scope = req => ({ ...req.query, includeUnpublished: req.query.scope === 'a
 const catalogRevision = async () => (await Revision.findById('catalog').lean())?.revision || 0;
 exports.patchCatalog = kind => asyncHandler(async (req, res) => {
   const data = await require('../services/catalogLifecycleService').patch(kind, req.params.id, req.body, req.user._id);
-  if (req.body.status || data.status === 'published') seo.notifyCatalogChange();
+  if (req.body.status || data.status === 'published') seo.notifyCatalogChange([], `catalogue:${kind}`);
   sendSuccess(res, { data, meta: { revision: await catalogRevision() } });
 });
 
@@ -30,11 +30,13 @@ exports.listParcoursTypes = asyncHandler(async (req, res) => {
 
 exports.createParcoursType = asyncHandler(async (req, res) => {
   const data = await service.createParcoursType({ organismeId: req.params.organismeId, nom: req.body.nom, isDefault: req.body.isDefault !== false, status: req.body.status });
+  seo.notifyCatalogChange([], 'catalogue:parcours');
   sendSuccess(res, { statusCode: 201, data, message: 'Type de parcours cree' });
 });
 
 exports.createOrganisme = asyncHandler(async (req, res) => {
   const organisme = await service.createOrganisme(req.body);
+  seo.notifyCatalogChange([], 'catalogue:organisme');
   sendSuccess(res, { statusCode: 201, data: organisme, message: 'Organisme cree' });
 });
 
@@ -49,6 +51,7 @@ exports.getStructure = asyncHandler(async (req, res) => {
 
 exports.saveStructure = asyncHandler(async (req, res) => {
   const structure = await service.saveStructure(req.params.organismeId, req.body.niveaux);
+  seo.notifyCatalogChange([], 'catalogue:structure');
   sendSuccess(res, { data: structure, message: 'Structure enregistree' });
 });
 
@@ -59,6 +62,7 @@ exports.listNoeuds = asyncHandler(async (req, res) => {
 
 exports.upsertNoeud = asyncHandler(async (req, res) => {
   const noeud = await service.upsertNoeud(req.body);
+  seo.notifyCatalogChange([], 'catalogue:noeud');
   sendSuccess(res, { data: noeud, message: 'Noeud existant ou cree' });
 });
 
@@ -69,6 +73,7 @@ exports.listMatieres = asyncHandler(async (req, res) => {
 
 exports.upsertMatiere = asyncHandler(async (req, res) => {
   const matiere = await service.upsertMatiere(req.body);
+  seo.notifyCatalogChange([], 'catalogue:matiere');
   sendSuccess(res, { data: matiere, message: 'Matiere existante ou creee' });
 });
 

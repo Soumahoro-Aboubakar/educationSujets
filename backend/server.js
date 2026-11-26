@@ -134,6 +134,8 @@ const startServer = async () => {
   require('./services/payments/reconciler').startPaymentReconciler();
   // Rappels quotidiens (notifications web) : inactifs sans clés VAPID.
   require('./services/pushService').startReminderScheduler();
+  // Indexation : reconstruction du site, IndexNow, Search Console (file persistante en base).
+  require('./services/seo/indexingService').start();
 
   try {
     const startTrashPurgeCron = require('./scripts/trashCron');

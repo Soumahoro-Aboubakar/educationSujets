@@ -39,12 +39,12 @@ exports.validate = asyncHandler(async (req, res) => {
 });
 exports.publish = asyncHandler(async (req, res) => {
   const data = await service.publish(req.body || {}, actor(req));
-  seo.notifyCatalogChange();
+  seo.notifyCatalogChange([], 'preparation');
   res.json({ success: true, data });
 });
 exports.archive = asyncHandler(async (req, res) => {
   const data = await service.publish({ expectedGeneration: req.body?.expectedGeneration, removals: [req.params] }, actor(req));
-  seo.notifyCatalogChange();
+  seo.notifyCatalogChange([], 'preparation');
   res.json({ success: true, data });
 });
 exports.remove = asyncHandler(async (req, res) => {

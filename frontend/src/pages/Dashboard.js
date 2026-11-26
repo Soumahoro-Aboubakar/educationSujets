@@ -5,7 +5,7 @@ import {
   CheckCircle, BarChart3, Menu, X, Eye, Trash2, Clock, 
   MapPin, BookOpen, Layers, Briefcase, Calendar, GraduationCap, User, Building2,
   AlertTriangle, FileSearch, Image as ImageIcon, Link as LinkIcon,
-  Users, CreditCard, Gift, Activity, FolderCog, Wallet, Download, RefreshCw, Compass
+  Users, CreditCard, Gift, Activity, FolderCog, Wallet, Download, RefreshCw, Compass, Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -23,6 +23,7 @@ import AdminPrepContent from '../components/admin/AdminPrepContent';
 import AdminOrganismeLogos from '../components/admin/AdminOrganismeLogos';
 import AdminAppReleases from '../components/admin/AdminAppReleases';
 import AdminTraffic from '../components/admin/AdminTraffic';
+import AdminSeo from '../components/admin/AdminSeo';
 import YearIssuesPanel from '../components/admin/YearIssuesPanel';
 import AdminFreeDownloads from '../components/admin/AdminFreeDownloads';
 import DynamicStructureSelector from '../components/DynamicStructureSelector';
@@ -272,6 +273,7 @@ const Dashboard = () => {
     ...(user?.role === 'admin' ? [
       { id: 'platform', label: 'Activité plateforme', icon: Activity },
       { id: 'traffic', label: 'Provenance des visiteurs', icon: Compass },
+      { id: 'seo', label: 'SEO et indexation', icon: Globe },
       { id: 'users', label: 'Utilisateurs', icon: Users },
       { id: 'payments', label: 'Paiements', icon: CreditCard },
       { id: 'free-downloads', label: 'Téléchargements gratuits', icon: Download },
@@ -1287,6 +1289,7 @@ const Dashboard = () => {
           {user?.role === 'admin' && activeTab === 'organisme-logos' && <AdminOrganismeLogos />}
           {user?.role === 'admin' && activeTab === 'app-releases' && <AdminAppReleases />}
           {user?.role === 'admin' && activeTab === 'traffic' && <AdminTraffic />}
+          {user?.role === 'admin' && activeTab === 'seo' && <AdminSeo />}
           {(user?.role === 'admin' || user?.role === 'sub-admin') && activeTab === 'year-issues' && <YearIssuesPanel />}
           {user?.role === 'admin' && activeTab === 'platform' && <AdminOverview />}
           {user?.role === 'admin' && activeTab === 'users' && <AdminUsers />}
