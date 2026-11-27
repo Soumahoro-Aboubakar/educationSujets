@@ -85,8 +85,8 @@ const DocumentDetailScreen = () => {
   // La liste fournit `correction` ; le détail fournit `dynamicCorrection`.
   const correction = getCorrection(document) || getCorrection(initialDocument);
   const access = useDocumentAccess(navigation);
-  const subjectDownload = useDownload(document, { onAccessDenied: access.deny });
-  const correctionDownload = useDownload(correction, { onAccessDenied: access.deny });
+  const subjectDownload = useDownload(document, { onAccessDenied: access.deny, navigation });
+  const correctionDownload = useDownload(correction, { onAccessDenied: access.deny, navigation });
   const {
     enabled: promptEnabled,
     setEnabled: setPromptEnabled,

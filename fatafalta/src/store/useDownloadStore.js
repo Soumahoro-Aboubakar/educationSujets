@@ -121,12 +121,17 @@ const useDownloadStore = create((set, get) => ({
       },
     }));
 
+    // Les événements de progression arrivent du natif de façon asynchrone : le dernier (« 100 % ») peut
+    // être reçu APRÈS la fin du téléchargement et remettait le document en « Téléchargement… 100 % »
+    // (bouton « Ouvrir » jamais affiché). Une fois terminé, plus aucun événement n'est pris en compte.
+    let finished = false;
     try {
       const downloadResumable = FileSystem.createDownloadResumable(
         downloadUrl,
         localUri,
         {},
         (downloadProgress) => {
+          if (finished || !get().activeDownloads[documentId]?.downloading) return;
           const { totalBytesWritten, totalBytesExpectedToWrite } = downloadProgress;
           const progress = totalBytesExpectedToWrite > 0 && Number.isFinite(totalBytesWritten)
             ? Math.max(0, Math.min(1, totalBytesWritten / totalBytesExpectedToWrite))
@@ -142,6 +147,7 @@ const useDownloadStore = create((set, get) => ({
       );
 
       const result = await downloadResumable.downloadAsync();
+      finished = true;
 
       if (result?.uri && result.status >= 200 && result.status < 300) {
         const newDownloads = {
@@ -167,6 +173,7 @@ const useDownloadStore = create((set, get) => ({
 
       throw new Error('Download failed — no URI returned');
     } catch (error) {
+      finished = true;
       set((state) => {
         const updated = { ...state.activeDownloads };
         delete updated[documentId];

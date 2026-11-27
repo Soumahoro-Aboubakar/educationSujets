@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
 import DocumentDetailScreen from '../screens/DocumentDetailScreen';
+import PdfViewerScreen from '../screens/PdfViewerScreen';
 import DownloadsScreen from '../screens/DownloadsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LegalScreen from '../screens/legal/LegalScreen';
@@ -86,6 +87,7 @@ const RootNavigator = () => {
       <Stack.Screen name="DynamicCatalog" component={DynamicCatalogScreen} options={push} />
       <Stack.Screen name="ContestDocuments" component={ContestDocumentsScreen} options={push} />
       <Stack.Screen name="DocumentDetail" component={DocumentDetailScreen} options={push} />
+      <Stack.Screen name="PdfViewer" component={PdfViewerScreen} options={push} />
       <Stack.Screen name="BulkDownload" component={BulkDownloadScreen} options={push} />
 
       {/* ── Moi : compte, téléchargements, réglages, administration ── */}

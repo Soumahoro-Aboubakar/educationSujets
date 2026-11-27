@@ -70,7 +70,7 @@ const DownloadsScreen = () => {
     });
   }, [documents, query]);
 
-  const open = (item) => runFile(() => openDownloadedFile(item.document, { getLocalUri, removeDownload }));
+  const open = (item) => runFile(() => openDownloadedFile(item.document, { getLocalUri, removeDownload, navigation }));
   const share = (item) => runFile(() => shareDownloadedFile(item.document, { getLocalUri }));
   const remove = (item) => {
     Alert.alert(

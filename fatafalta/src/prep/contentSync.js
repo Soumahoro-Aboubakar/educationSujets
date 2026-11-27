@@ -127,7 +127,9 @@ export const syncContent = ({ programmes = [], busy = [], force = false } = {}) 
         } catch (error) {
           // 401/403 (pas de droits) ou réseau : le module reste à sa révision précédente ou indisponible.
           // 401 : identité de préparation refusée (jeton périmé) ; 403 : pas de droit d'étude.
-          if (error?.response?.status === 401) { identityRejected = true; break; }
+          // 401 ou 403 PREP_OWNER (identité d'un compte déconnecté) : identité à rétablir, pas un
+          // verrou d'abonnement.
+          if (error?.response?.status === 401 || error?.response?.data?.code === 'PREP_OWNER') { identityRejected = true; break; }
           if (error?.response?.status === 403) { locked = true; break; }
           // Coupure réseau : on garde ce qui est déjà arrivé, la suite viendra au prochain passage.
           if (!error?.response) { offline = true; break; }

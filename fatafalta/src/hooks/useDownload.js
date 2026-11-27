@@ -10,7 +10,7 @@ import { getErrorCode } from '../services/billing';
 import { useRefreshAccount } from './useAccount';
 import useDownloadStore from '../store/useDownloadStore';
 
-export const openDownloadedFile = async (document, { getLocalUri, removeDownload }) => {
+export const openDownloadedFile = async (document, { getLocalUri, removeDownload, navigation }) => {
   const documentId = document?._id;
   if (!documentId) return;
 
@@ -35,6 +35,9 @@ export const openDownloadedFile = async (document, { getLocalUri, removeDownload
         flags: 1,
         type: document.mimeType || '*/*',
       });
+    } else if (navigation && /\.pdf$/i.test(localUri) && Platform.OS === 'ios') {
+      // iOS : lecture directe dans l'application (la feuille de partage obligeait à choisir « Aperçu »).
+      navigation.navigate('PdfViewer', { document, uri: localUri });
     } else {
       await Sharing.shareAsync(localUri, {
         UTI: document.mimeType || 'application/pdf',
@@ -86,7 +89,7 @@ export const shareDownloadedFile = async (document, { getLocalUri }) => {
 // Refus d'accès décidés par le serveur : présentés par l'écran (feuille d'accès), pas par une alerte.
 const ACCESS_CODES = ['AUTH_REQUIRED', 'SUBSCRIPTION_REQUIRED', 'DAILY_LIMIT_REACHED', 'ACCOUNT_DISABLED'];
 
-export const useDownload = (document, { onAccessDenied } = {}) => {
+export const useDownload = (document, { onAccessDenied, openWhenDone = true, navigation } = {}) => {
   const [runDownload, isInitializing] = useAsyncAction();
   const [runFile, isFilePending] = useAsyncAction();
   const refreshAccount = useRefreshAccount(['entitlements', 'download-quota']);
@@ -110,6 +113,9 @@ export const useDownload = (document, { onAccessDenied } = {}) => {
 
       const fileName = document.originalFileName || document.file;
       await startDownload(id, url, document, fileName);
+      // Téléchargement terminé : le fichier s'ouvre tout de suite (sans bloquer le bouton, qui affiche
+      // désormais « Ouvrir »). Si l'utilisateur ferme le lecteur, il le rouvre avec ce bouton.
+      if (openWhenDone) openDownloadedFile(document, { getLocalUri, removeDownload, navigation });
     } catch (error) {
       const code = getErrorCode(error);
       if (onAccessDenied && ACCESS_CODES.includes(code)) {
@@ -124,12 +130,12 @@ export const useDownload = (document, { onAccessDenied } = {}) => {
       // Le quota du jour a pu évoluer.
       refreshAccount();
     }
-  }), [runDownload, id, document, isCurrentlyDownloading, startDownload, onAccessDenied, refreshAccount]);
+  }), [runDownload, id, document, isCurrentlyDownloading, startDownload, onAccessDenied, refreshAccount, openWhenDone, getLocalUri, removeDownload, navigation]);
 
   const handleOpen = useCallback(() => runFile(async () => {
     if (!id || !downloaded) return;
-    await openDownloadedFile(document, { getLocalUri, removeDownload });
-  }), [runFile, id, downloaded, getLocalUri, document, removeDownload]);
+    await openDownloadedFile(document, { getLocalUri, removeDownload, navigation });
+  }), [runFile, id, downloaded, getLocalUri, document, removeDownload, navigation]);
 
   const handleShare = useCallback(() => runFile(async () => {
     if (!id || !downloaded) return;

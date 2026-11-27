@@ -30,6 +30,15 @@ let counter = 0;
 const newKey = () => `${Date.now().toString(36)}-${(counter += 1).toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 
 let refreshingIdentity = false;
+/**
+ * Le serveur refuse l'identité de préparation de cet appareil : jeton invalide (401) ou identité
+ * rattachée à un compte qui n'est pas celui connecté (403 PREP_OWNER, après une déconnexion).
+ */
+export const isIdentityRefused = (error) => {
+  const status = error?.response?.status;
+  const code = error?.response?.data?.code;
+  return status === 401 || (status === 403 && code === 'PREP_OWNER');
+};
 const PERSISTED = ['identite', 'sequence', 'rejets', 'essai', 'droitsServeur', 'programme', 'programmesSuivis', 'candidatsSuivis', 'progressions', 'queue', 'prefs', 'enCours', 'sessions', 'derniereDate', 'onboarding', 'videos'];
 
 // versions : version choisie par cours de langue { [codeModule]: 'en' } ; « fr » par défaut.
@@ -358,6 +367,7 @@ const usePrep = create((set, get) => ({
     const batch = s.queue.slice(0, 200);
     inFlight = new Set(batch.map((a) => a.cle));
     let retryLater = false;
+    let recoverIdentity = false;
     try {
       const out = await prepApi.sync(batch);
       // Acquittement individuel (lot 5) : appliquée, doublon, refus définitif ou conflit → retirée ;
@@ -390,9 +400,27 @@ const usePrep = create((set, get) => ({
     } catch (error) {
       // Une réponse du serveur (même un refus) prouve que l'appareil est en ligne.
       if (!error?.response) set({ online: false });
+      else {
+        set({ online: true });
+        recoverIdentity = isIdentityRefused(error);
+      }
     } finally {
       inFlight = new Set();
       flushing = false;
+    }
+    // Identité refusée : typiquement celle d'un compte dont on s'est déconnecté (PREP_OWNER). Sans
+    // ce rétablissement, aucune réponse n'était corrigée et l'app affichait « Connexion internet
+    // requise » alors que la connexion fonctionnait. L'appareil repasse sur son identité invitée
+    // (le serveur conserve les jours d'essai déjà utilisés), puis la file est renvoyée.
+    if (recoverIdentity && !refreshingIdentity) {
+      refreshingIdentity = true;
+      try {
+        await get().resetIdentity();
+      } catch (error) {
+        // Hors ligne entre-temps : nouvel essai à la prochaine synchronisation.
+      } finally {
+        refreshingIdentity = false;
+      }
     }
   },
 

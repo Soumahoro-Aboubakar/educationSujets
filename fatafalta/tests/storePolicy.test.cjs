@@ -128,3 +128,23 @@ test('feuille d’accès d’un sujet : « Voir mon abonnement » seulement si l
   // L'action est celle de tous les autres boutons « Voir mon abonnement ».
   assert.match(read('src/hooks/useDocumentAccess.js'), /useOpenSubscription\(navigation\)/);
 });
+
+test('téléchargement : un événement de progression tardif ne remet jamais le document en « Téléchargement… 100 % »', () => {
+  const store = read('src/store/useDownloadStore.js');
+  assert.match(store, /if \(finished \|\| !get\(\)\.activeDownloads\[documentId\]\?\.downloading\) return;/);
+  assert.match(store, /await downloadResumable\.downloadAsync\(\);\n\s*finished = true;/);
+  // Fin du téléchargement : ouverture automatique ; sur iOS, lecteur PDF intégré.
+  const hook = read('src/hooks/useDownload.js');
+  assert.match(hook, /if \(openWhenDone\) openDownloadedFile\(document, \{ getLocalUri, removeDownload, navigation \}\);/);
+  assert.match(hook, /navigation\.navigate\('PdfViewer', \{ document, uri: localUri \}\)/);
+});
+
+test('préparation : une identité refusée (compte déconnecté, PREP_OWNER) est rétablie au lieu d’afficher « Connexion internet requise »', () => {
+  const store = read('src/prep/store.js');
+  assert.match(store, /return status === 401 \|\| \(status === 403 && code === 'PREP_OWNER'\);/);
+  // Échec de la file : réponse du serveur = en ligne ; identité refusée → identité invitée puis renvoi.
+  assert.match(store, /recoverIdentity = isIdentityRefused\(error\);/);
+  assert.match(store, /if \(recoverIdentity && !refreshingIdentity\) \{[\s\S]*?await get\(\)\.resetIdentity\(\);/);
+  // Téléchargement des modules : PREP_OWNER n'est pas un verrou d'abonnement.
+  assert.match(read('src/prep/contentSync.js'), /error\?\.response\?\.data\?\.code === 'PREP_OWNER'\) \{ identityRejected = true; break; \}/);
+});
